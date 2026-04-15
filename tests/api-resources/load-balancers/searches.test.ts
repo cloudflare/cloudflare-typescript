@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { LoadBalancers } from 'cloudflare/resources/load-balancers/load-balancers';
+import { BaseSearches } from 'cloudflare/resources/load-balancers/searches';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource searches', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSearches],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [LoadBalancers],
+});
+
+const runTests = (client: PartialCloudflare<{ loadBalancers: { searches: BaseSearches } }>) => {
   // TODO: investigate broken test
   test.skip('list: only required params', async () => {
     const responsePromise = client.loadBalancers.searches.list({
@@ -33,4 +51,7 @@ describe('resource searches', () => {
       references: '*',
     });
   });
-});
+};
+describe('resource searches', () => runTests(client));
+describe('resource searches (tree shakable, base)', () => runTests(partialClient));
+describe('resource searches (tree shakable, subresource)', () => runTests(parentPartialClient));

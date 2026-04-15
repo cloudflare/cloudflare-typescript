@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Domain extends APIResource {
+export class BaseDomain extends APIResource {
+  static override readonly _key: readonly ['radar', 'ranking', 'domain'] = Object.freeze([
+    'radar',
+    'ranking',
+    'domain',
+  ] as const);
+
   /**
    * Retrieves domain rank details. Cloudflare provides an ordered rank for the top
    * 100 domains, but for the remainder it only provides ranking buckets like top 200
@@ -31,6 +37,7 @@ export class Domain extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Domain extends BaseDomain {}
 
 export interface DomainGetResponse {
   details_0: DomainGetResponse.Details0;

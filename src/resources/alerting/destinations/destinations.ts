@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as EligibleAPI from './eligible';
-import { Eligible, EligibleGetParams, EligibleGetResponse } from './eligible';
+import { BaseEligible, Eligible, EligibleGetParams, EligibleGetResponse } from './eligible';
 import * as PagerdutyAPI from './pagerduty';
 import {
+  BasePagerdutyResource,
   PagerdutiesSinglePage,
   Pagerduty,
   PagerdutyCreateParams,
@@ -18,6 +19,7 @@ import {
 } from './pagerduty';
 import * as WebhooksAPI from './webhooks';
 import {
+  BaseWebhooks,
   WebhookCreateParams,
   WebhookCreateResponse,
   WebhookDeleteParams,
@@ -30,24 +32,35 @@ import {
   WebhooksSinglePage,
 } from './webhooks';
 
-export class Destinations extends APIResource {
+export class BaseDestinations extends APIResource {
+  static override readonly _key: readonly ['alerting', 'destinations'] = Object.freeze([
+    'alerting',
+    'destinations',
+  ] as const);
+}
+export class Destinations extends BaseDestinations {
   eligible: EligibleAPI.Eligible = new EligibleAPI.Eligible(this._client);
   pagerduty: PagerdutyAPI.PagerdutyResource = new PagerdutyAPI.PagerdutyResource(this._client);
   webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
 }
 
 Destinations.Eligible = Eligible;
+Destinations.BaseEligible = BaseEligible;
 Destinations.PagerdutyResource = PagerdutyResource;
+Destinations.BasePagerdutyResource = BasePagerdutyResource;
+Destinations.BaseWebhooks = BaseWebhooks;
 
 export declare namespace Destinations {
   export {
     Eligible as Eligible,
+    BaseEligible as BaseEligible,
     type EligibleGetResponse as EligibleGetResponse,
     type EligibleGetParams as EligibleGetParams,
   };
 
   export {
     PagerdutyResource as PagerdutyResource,
+    BasePagerdutyResource as BasePagerdutyResource,
     type Pagerduty as Pagerduty,
     type PagerdutyCreateResponse as PagerdutyCreateResponse,
     type PagerdutyDeleteResponse as PagerdutyDeleteResponse,
@@ -61,6 +74,7 @@ export declare namespace Destinations {
 
   export {
     type Webhooks as Webhooks,
+    BaseWebhooks as BaseWebhooks,
     type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookUpdateResponse as WebhookUpdateResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,

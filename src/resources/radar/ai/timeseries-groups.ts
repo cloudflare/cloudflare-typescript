@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TimeseriesGroups extends APIResource {
+export class BaseTimeseriesGroups extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai', 'timeseriesGroups'] = Object.freeze([
+    'radar',
+    'ai',
+    'timeseriesGroups',
+  ] as const);
+
   /**
    * Retrieves an aggregated summary of AI bots HTTP requests grouped by the
    * specified dimension.
@@ -89,6 +95,7 @@ export class TimeseriesGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TimeseriesGroups extends BaseTimeseriesGroups {}
 
 export interface TimeseriesGroupSummaryResponse {
   /**

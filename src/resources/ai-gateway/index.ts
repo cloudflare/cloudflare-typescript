@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AIGateway } from './ai-gateway';
+export { AIGateway, BaseAIGateway } from './ai-gateway';
 export {
   Datasets,
+  BaseDatasets,
   type DatasetCreateResponse,
   type DatasetUpdateResponse,
   type DatasetListResponse,
@@ -17,6 +18,7 @@ export {
 } from './datasets';
 export {
   DynamicRouting,
+  BaseDynamicRouting,
   type DynamicRoutingCreateResponse,
   type DynamicRoutingUpdateResponse,
   type DynamicRoutingListResponse,
@@ -40,12 +42,14 @@ export {
 } from './dynamic-routing';
 export {
   EvaluationTypes,
+  BaseEvaluationTypes,
   type EvaluationTypeListResponse,
   type EvaluationTypeListParams,
   type EvaluationTypeListResponsesV4PagePaginationArray,
 } from './evaluation-types';
 export {
   Evaluations,
+  BaseEvaluations,
   type EvaluationCreateResponse,
   type EvaluationListResponse,
   type EvaluationDeleteResponse,
@@ -58,6 +62,7 @@ export {
 } from './evaluations';
 export {
   Logs,
+  BaseLogs,
   type LogListResponse,
   type LogDeleteResponse,
   type LogEditResponse,
@@ -74,10 +79,11 @@ export {
 } from './logs';
 export {
   ProviderConfigs,
+  BaseProviderConfigs,
   type ProviderConfigCreateResponse,
   type ProviderConfigListResponse,
   type ProviderConfigCreateParams,
   type ProviderConfigListParams,
   type ProviderConfigListResponsesV4PagePaginationArray,
 } from './provider-configs';
-export { URLs, type URLGetResponse, type URLGetParams } from './urls';
+export { URLs, BaseURLs, type URLGetResponse, type URLGetParams } from './urls';

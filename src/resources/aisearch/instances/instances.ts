@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ItemsAPI from './items';
-import { Items } from './items';
+import { BaseItems, Items } from './items';
 import * as JobsAPI from './jobs';
 import {
+  BaseJobs,
   JobCreateParams,
   JobCreateResponse,
   JobGetParams,
@@ -26,9 +27,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Instances extends APIResource {
-  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
-  jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
+export class BaseInstances extends APIResource {
+  static override readonly _key: readonly ['aiSearch', 'instances'] = Object.freeze([
+    'aiSearch',
+    'instances',
+  ] as const);
 
   /**
    * Create a new instances.
@@ -42,7 +45,7 @@ export class Instances extends APIResource {
    * ```
    */
   create(params: InstanceCreateParams, options?: RequestOptions): APIPromise<InstanceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/ai-search/instances`, {
         body,
@@ -64,10 +67,10 @@ export class Instances extends APIResource {
    */
   update(
     id: string,
-    params: InstanceUpdateParams,
+    params: InstanceUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstanceUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/ai-search/instances/${id}`, {
         body,
@@ -90,10 +93,10 @@ export class Instances extends APIResource {
    * ```
    */
   list(
-    params: InstanceListParams,
+    params: InstanceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-search/instances`,
       V4PagePaginationArray<InstanceListResponse>,
@@ -114,10 +117,10 @@ export class Instances extends APIResource {
    */
   delete(
     id: string,
-    params: InstanceDeleteParams,
+    params: InstanceDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstanceDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/ai-search/instances/${id}`, options) as APIPromise<{
         result: InstanceDeleteResponse;
@@ -146,7 +149,7 @@ export class Instances extends APIResource {
     params: InstanceChatCompletionsParams,
     options?: RequestOptions,
   ): APIPromise<InstanceChatCompletionsResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/ai-search/instances/${id}/chat/completions`, {
       body,
       ...options,
@@ -164,8 +167,12 @@ export class Instances extends APIResource {
    * );
    * ```
    */
-  read(id: string, params: InstanceReadParams, options?: RequestOptions): APIPromise<InstanceReadResponse> {
-    const { account_id } = params;
+  read(
+    id: string,
+    params: InstanceReadParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InstanceReadResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/ai-search/instances/${id}`, options) as APIPromise<{
         result: InstanceReadResponse;
@@ -187,10 +194,10 @@ export class Instances extends APIResource {
    */
   search(
     id: string,
-    params: InstanceSearchParams,
+    params: InstanceSearchParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstanceSearchResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/ai-search/instances/${id}/search`, {
         body,
@@ -212,16 +219,20 @@ export class Instances extends APIResource {
    */
   stats(
     id: string,
-    params: InstanceStatsParams,
+    params: InstanceStatsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstanceStatsResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/ai-search/instances/${id}/stats`, options) as APIPromise<{
         result: InstanceStatsResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Instances extends BaseInstances {
+  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
+  jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
 }
 
 export type InstanceListResponsesV4PagePaginationArray = V4PagePaginationArray<InstanceListResponse>;
@@ -2370,7 +2381,7 @@ export interface InstanceCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -2820,7 +2831,7 @@ export interface InstanceUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -3310,7 +3321,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -3334,14 +3345,14 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
 }
 
 export interface InstanceDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InstanceChatCompletionsParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -3521,14 +3532,14 @@ export namespace InstanceChatCompletionsParams {
 }
 
 export interface InstanceReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InstanceSearchParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -3672,11 +3683,13 @@ export namespace InstanceSearchParams {
 }
 
 export interface InstanceStatsParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Instances.Items = Items;
+Instances.BaseItems = BaseItems;
 Instances.Jobs = Jobs;
+Instances.BaseJobs = BaseJobs;
 
 export declare namespace Instances {
   export {
@@ -3699,10 +3712,11 @@ export declare namespace Instances {
     type InstanceStatsParams as InstanceStatsParams,
   };
 
-  export { Items as Items };
+  export { Items as Items, BaseItems as BaseItems };
 
   export {
     Jobs as Jobs,
+    BaseJobs as BaseJobs,
     type JobCreateResponse as JobCreateResponse,
     type JobListResponse as JobListResponse,
     type JobGetResponse as JobGetResponse,

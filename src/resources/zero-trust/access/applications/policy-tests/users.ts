@@ -9,7 +9,10 @@ import {
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Users extends APIResource {
+export class BaseUsers extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications', 'policyTests', 'users'] =
+    Object.freeze(['zeroTrust', 'access', 'applications', 'policyTests', 'users'] as const);
+
   /**
    * Fetches a single page of user results from an Access policy test.
    *
@@ -26,10 +29,10 @@ export class Users extends APIResource {
    */
   list(
     policyTestID: string,
-    params: UserListParams,
+    params: UserListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/policy-tests/${policyTestID}/users`,
       V4PagePaginationArray<UserListResponse>,
@@ -37,6 +40,7 @@ export class Users extends APIResource {
     );
   }
 }
+export class Users extends BaseUsers {}
 
 export type UserListResponsesV4PagePaginationArray = V4PagePaginationArray<UserListResponse>;
 
@@ -66,7 +70,7 @@ export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter users by their policy evaluation status.

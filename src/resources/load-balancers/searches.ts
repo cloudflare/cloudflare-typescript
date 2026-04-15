@@ -5,7 +5,12 @@ import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../.
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Searches extends APIResource {
+export class BaseSearches extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'searches'] = Object.freeze([
+    'loadBalancers',
+    'searches',
+  ] as const);
+
   /**
    * Search for Load Balancing resources.
    *
@@ -20,10 +25,10 @@ export class Searches extends APIResource {
    * ```
    */
   list(
-    params: SearchListParams,
+    params: SearchListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SearchListResponsesV4PagePagination, SearchListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/load_balancers/search`,
       V4PagePagination<SearchListResponse>,
@@ -31,6 +36,7 @@ export class Searches extends APIResource {
     );
   }
 }
+export class Searches extends BaseSearches {}
 
 export type SearchListResponsesV4PagePagination = V4PagePagination<SearchListResponse>;
 
@@ -74,7 +80,7 @@ export interface SearchListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search query term.

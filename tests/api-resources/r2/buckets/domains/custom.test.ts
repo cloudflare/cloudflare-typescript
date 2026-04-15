@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseCustom } from 'cloudflare/resources/r2/buckets/domains/custom';
+import { Domains } from 'cloudflare/resources/r2/buckets/domains/domains';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource custom', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCustom],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Domains],
+});
+
+const runTests = (client: PartialCloudflare<{ r2: { buckets: { domains: { custom: BaseCustom } } } }>) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.r2.buckets.domains.custom.create('example-bucket', {
@@ -135,4 +153,7 @@ describe('resource custom', () => {
       jurisdiction: 'default',
     });
   });
-});
+};
+describe('resource custom', () => runTests(client));
+describe('resource custom (tree shakable, base)', () => runTests(partialClient));
+describe('resource custom (tree shakable, subresource)', () => runTests(parentPartialClient));

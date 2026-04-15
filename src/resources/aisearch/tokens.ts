@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Tokens extends APIResource {
+export class BaseTokens extends APIResource {
+  static override readonly _key: readonly ['aiSearch', 'tokens'] = Object.freeze([
+    'aiSearch',
+    'tokens',
+  ] as const);
+
   /**
    * Create a new tokens.
    *
@@ -21,7 +26,7 @@ export class Tokens extends APIResource {
    * ```
    */
   create(params: TokenCreateParams, options?: RequestOptions): APIPromise<TokenCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/ai-search/tokens`, { body, ...options }) as APIPromise<{
         result: TokenCreateResponse;
@@ -46,7 +51,7 @@ export class Tokens extends APIResource {
    * ```
    */
   update(id: string, params: TokenUpdateParams, options?: RequestOptions): APIPromise<TokenUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/ai-search/tokens/${id}`, {
         body,
@@ -69,10 +74,10 @@ export class Tokens extends APIResource {
    * ```
    */
   list(
-    params: TokenListParams,
+    params: TokenListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-search/tokens`,
       V4PagePaginationArray<TokenListResponse>,
@@ -91,8 +96,12 @@ export class Tokens extends APIResource {
    * );
    * ```
    */
-  delete(id: string, params: TokenDeleteParams, options?: RequestOptions): APIPromise<TokenDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    id: string,
+    params: TokenDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/ai-search/tokens/${id}`, options) as APIPromise<{
         result: TokenDeleteResponse;
@@ -111,8 +120,12 @@ export class Tokens extends APIResource {
    * );
    * ```
    */
-  read(id: string, params: TokenReadParams, options?: RequestOptions): APIPromise<TokenReadResponse> {
-    const { account_id } = params;
+  read(
+    id: string,
+    params: TokenReadParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenReadResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/ai-search/tokens/${id}`, options) as APIPromise<{
         result: TokenReadResponse;
@@ -120,6 +133,7 @@ export class Tokens extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Tokens extends BaseTokens {}
 
 export type TokenListResponsesV4PagePaginationArray = V4PagePaginationArray<TokenListResponse>;
 
@@ -227,7 +241,7 @@ export interface TokenCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -249,7 +263,7 @@ export interface TokenUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -271,7 +285,7 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Order By Column Name
@@ -285,11 +299,11 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 }
 
 export interface TokenDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TokenReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Tokens {

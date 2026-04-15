@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CertificatePack } from './certificate-pack/index';
-export { CustomHostnames } from './custom-hostnames';
+export { CertificatePack, BaseCertificatePack } from './certificate-pack/index';
+export { CustomHostnames, BaseCustomHostnames } from './custom-hostnames';
 export {
   FallbackOrigin,
+  BaseFallbackOrigin,
   type FallbackOriginUpdateResponse,
   type FallbackOriginDeleteResponse,
   type FallbackOriginGetResponse,

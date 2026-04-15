@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class DEXTests extends APIResource {
+export class BaseDEXTests extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'dexTests'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'dexTests',
+  ] as const);
+
   /**
    * Create a DEX test.
    *
@@ -30,7 +36,7 @@ export class DEXTests extends APIResource {
    * ```
    */
   create(params: DEXTestCreateParams, options?: RequestOptions): APIPromise<DEXTestCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dex/devices/dex_tests`, {
         body,
@@ -65,7 +71,7 @@ export class DEXTests extends APIResource {
     params: DEXTestUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DEXTestUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dex/devices/dex_tests/${dexTestID}`, {
         body,
@@ -88,10 +94,10 @@ export class DEXTests extends APIResource {
    * ```
    */
   list(
-    params: DEXTestListParams,
+    params: DEXTestListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/devices/dex_tests`,
       V4PagePaginationArray<DEXTestListResponse>,
@@ -114,10 +120,10 @@ export class DEXTests extends APIResource {
    */
   delete(
     dexTestID: string,
-    params: DEXTestDeleteParams,
+    params: DEXTestDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DEXTestDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/dex/devices/dex_tests/${dexTestID}`,
@@ -137,8 +143,12 @@ export class DEXTests extends APIResource {
    * );
    * ```
    */
-  get(dexTestID: string, params: DEXTestGetParams, options?: RequestOptions): APIPromise<DEXTestGetResponse> {
-    const { account_id } = params;
+  get(
+    dexTestID: string,
+    params: DEXTestGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DEXTestGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/dex/devices/dex_tests/${dexTestID}`,
@@ -147,6 +157,7 @@ export class DEXTests extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DEXTests extends BaseDEXTests {}
 
 export type DEXTestListResponsesV4PagePaginationArray = V4PagePaginationArray<DEXTestListResponse>;
 
@@ -640,7 +651,7 @@ export interface DEXTestCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -723,7 +734,7 @@ export interface DEXTestUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -806,7 +817,7 @@ export interface DEXTestListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by test type
@@ -820,11 +831,11 @@ export interface DEXTestListParams extends V4PagePaginationArrayParams {
 }
 
 export interface DEXTestDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DEXTestGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace DEXTests {

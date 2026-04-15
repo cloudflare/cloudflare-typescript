@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Apps extends APIResource {
+export class BaseApps extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'apps'] = Object.freeze([
+    'realtimeKit',
+    'apps',
+  ] as const);
+
   /**
    * Fetch all apps for your account
    *
@@ -16,8 +21,8 @@ export class Apps extends APIResource {
    * });
    * ```
    */
-  get(params: AppGetParams, options?: RequestOptions): APIPromise<AppGetResponse> {
-    const { account_id } = params;
+  get(params: AppGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<AppGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/apps`, options);
   }
 
@@ -33,10 +38,11 @@ export class Apps extends APIResource {
    * ```
    */
   post(params: AppPostParams, options?: RequestOptions): APIPromise<AppPostResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/realtime/kit/apps`, { body, ...options });
   }
 }
+export class Apps extends BaseApps {}
 
 export interface AppGetResponse {
   data?: Array<AppGetResponse.Data>;
@@ -80,14 +86,14 @@ export interface AppGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AppPostParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

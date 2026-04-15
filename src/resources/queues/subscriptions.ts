@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Subscriptions extends APIResource {
+export class BaseSubscriptions extends APIResource {
+  static override readonly _key: readonly ['queues', 'subscriptions'] = Object.freeze([
+    'queues',
+    'subscriptions',
+  ] as const);
+
   /**
    * Create a new event subscription for a queue
    *
@@ -18,8 +23,11 @@ export class Subscriptions extends APIResource {
    *   });
    * ```
    */
-  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<SubscriptionCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: SubscriptionCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/event_subscriptions/subscriptions`, {
         body,
@@ -45,7 +53,7 @@ export class Subscriptions extends APIResource {
     params: SubscriptionUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SubscriptionUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionID}`, {
         body,
@@ -68,10 +76,10 @@ export class Subscriptions extends APIResource {
    * ```
    */
   list(
-    params: SubscriptionListParams,
+    params: SubscriptionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SubscriptionListResponsesV4PagePaginationArray, SubscriptionListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/event_subscriptions/subscriptions`,
       V4PagePaginationArray<SubscriptionListResponse>,
@@ -93,10 +101,10 @@ export class Subscriptions extends APIResource {
    */
   delete(
     subscriptionID: string,
-    params: SubscriptionDeleteParams,
+    params: SubscriptionDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubscriptionDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionID}`,
@@ -118,10 +126,10 @@ export class Subscriptions extends APIResource {
    */
   get(
     subscriptionID: string,
-    params: SubscriptionGetParams,
+    params: SubscriptionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubscriptionGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionID}`,
@@ -130,6 +138,7 @@ export class Subscriptions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Subscriptions extends BaseSubscriptions {}
 
 export type SubscriptionListResponsesV4PagePaginationArray = V4PagePaginationArray<SubscriptionListResponse>;
 
@@ -827,7 +836,7 @@ export interface SubscriptionCreateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Destination configuration for the subscription
@@ -955,7 +964,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Destination configuration for the subscription
@@ -999,7 +1008,7 @@ export interface SubscriptionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Sort direction
@@ -1016,14 +1025,14 @@ export interface SubscriptionDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SubscriptionGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subscriptions {

@@ -5,7 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class BotManagement extends APIResource {
+export class BaseBotManagement extends APIResource {
+  static override readonly _key: readonly ['botManagement'] = Object.freeze(['botManagement'] as const);
+
   /**
    * Updates the Bot Management configuration for a zone.
    *
@@ -82,10 +84,10 @@ export class BotManagement extends APIResource {
    * ```
    */
   update(
-    params: BotManagementUpdateParams,
+    params: BotManagementUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BotManagementUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/bot_management`, { body, ...options }) as APIPromise<{
         result: BotManagementUpdateResponse;
@@ -103,8 +105,11 @@ export class BotManagement extends APIResource {
    * });
    * ```
    */
-  get(params: BotManagementGetParams, options?: RequestOptions): APIPromise<BotManagementGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: BotManagementGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BotManagementGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/bot_management`, options) as APIPromise<{
         result: BotManagementGetResponse;
@@ -112,6 +117,7 @@ export class BotManagement extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class BotManagement extends BaseBotManagement {}
 
 export interface BotFightModeConfiguration {
   /**
@@ -682,7 +688,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -723,7 +729,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -783,7 +789,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -849,7 +855,7 @@ export declare namespace BotManagementUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Enable rule to block AI Scrapers and Crawlers. Please note the value
@@ -905,7 +911,7 @@ export interface BotManagementGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace BotManagement {

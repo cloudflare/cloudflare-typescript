@@ -6,7 +6,13 @@ import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../.
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'rules'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'rules',
+  ] as const);
+
   /**
    * Create a DEX Rule
    *
@@ -20,7 +26,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: RequestOptions): APIPromise<RuleCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dex/rules`, { body, ...options }) as APIPromise<{
         result: RuleCreateResponse;
@@ -40,7 +46,7 @@ export class Rules extends APIResource {
    * ```
    */
   update(ruleID: string, params: RuleUpdateParams, options?: RequestOptions): APIPromise<RuleUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/dex/rules/${ruleID}`, {
         body,
@@ -70,7 +76,7 @@ export class Rules extends APIResource {
     params: RuleListParams,
     options?: RequestOptions,
   ): PagePromise<RuleListResponsesV4PagePagination, RuleListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/rules`,
       V4PagePagination<RuleListResponse>,
@@ -91,10 +97,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleID: string,
-    params: RuleDeleteParams,
+    params: RuleDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RuleDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/dex/rules/${ruleID}`, options) as APIPromise<{
         result: RuleDeleteResponse | null;
@@ -113,8 +119,12 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<RuleGetResponse> {
-    const { account_id } = params;
+  get(
+    ruleID: string,
+    params: RuleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RuleGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dex/rules/${ruleID}`, options) as APIPromise<{
         result: RuleGetResponse;
@@ -122,6 +132,7 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Rules extends BaseRules {}
 
 export type RuleListResponsesV4PagePagination = V4PagePagination<RuleListResponse>;
 
@@ -369,7 +380,7 @@ export interface RuleCreateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The wirefilter expression to match.
@@ -391,7 +402,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -413,7 +424,7 @@ export interface RuleListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter results by rule name
@@ -435,14 +446,14 @@ export interface RuleDeleteParams {
   /**
    * unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleGetParams {
   /**
    * unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Rules {

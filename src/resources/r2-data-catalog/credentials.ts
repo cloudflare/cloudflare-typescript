@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Credentials extends APIResource {
+export class BaseCredentials extends APIResource {
+  static override readonly _key: readonly ['r2DataCatalog', 'credentials'] = Object.freeze([
+    'r2DataCatalog',
+    'credentials',
+  ] as const);
+
   /**
    * Store authentication credentials for a catalog. These credentials are used to
    * authenticate with R2 storage when performing catalog operations.
@@ -27,7 +32,7 @@ export class Credentials extends APIResource {
     params: CredentialCreateParams,
     options?: RequestOptions,
   ): APIPromise<CredentialCreateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/r2-catalog/${bucketName}/credential`, {
         body,
@@ -36,6 +41,7 @@ export class Credentials extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Credentials extends BaseCredentials {}
 
 export type CredentialCreateResponse = unknown;
 
@@ -43,7 +49,7 @@ export interface CredentialCreateParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Provides the Cloudflare API token for accessing R2.

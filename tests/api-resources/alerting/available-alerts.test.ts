@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Alerting } from 'cloudflare/resources/alerting/alerting';
+import { BaseAvailableAlerts } from 'cloudflare/resources/alerting/available-alerts';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource availableAlerts', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAvailableAlerts],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Alerting],
+});
+
+const runTests = (client: PartialCloudflare<{ alerting: { availableAlerts: BaseAvailableAlerts } }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.alerting.availableAlerts.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -27,4 +45,7 @@ describe('resource availableAlerts', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource availableAlerts', () => runTests(client));
+describe('resource availableAlerts (tree shakable, base)', () => runTests(partialClient));
+describe('resource availableAlerts (tree shakable, subresource)', () => runTests(parentPartialClient));

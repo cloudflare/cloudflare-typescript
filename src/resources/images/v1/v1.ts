@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as BlobsAPI from './blobs';
-import { BlobGetParams, Blobs } from './blobs';
+import { BaseBlobs, BlobGetParams, Blobs } from './blobs';
 import * as KeysAPI from './keys';
 import {
+  BaseKeys,
   Key,
   KeyDeleteParams,
   KeyDeleteResponse,
@@ -15,9 +16,10 @@ import {
   Keys,
 } from './keys';
 import * as StatsAPI from './stats';
-import { Stat, StatGetParams, Stats } from './stats';
+import { BaseStats, Stat, StatGetParams, Stats } from './stats';
 import * as VariantsAPI from './variants';
 import {
+  BaseVariants,
   Variant,
   VariantCreateParams,
   VariantCreateResponse,
@@ -37,11 +39,8 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class V1 extends APIResource {
-  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
-  stats: StatsAPI.Stats = new StatsAPI.Stats(this._client);
-  variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
-  blobs: BlobsAPI.Blobs = new BlobsAPI.Blobs(this._client);
+export class BaseV1 extends APIResource {
+  static override readonly _key: readonly ['images', 'v1'] = Object.freeze(['images', 'v1'] as const);
 
   /**
    * Upload an image with up to 10 Megabytes using a single HTTP POST
@@ -55,8 +54,8 @@ export class V1 extends APIResource {
    * });
    * ```
    */
-  create(params: V1CreateParams, options?: RequestOptions): APIPromise<Image> {
-    const { account_id, ...body } = params;
+  create(params: V1CreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Image> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/images/v1`,
@@ -72,10 +71,10 @@ export class V1 extends APIResource {
    * @deprecated
    */
   list(
-    params: V1ListParams,
+    params: V1ListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/images/v1`,
       V4PagePagination<V1ListResponse>,
@@ -94,8 +93,12 @@ export class V1 extends APIResource {
    * });
    * ```
    */
-  delete(imageID: string, params: V1DeleteParams, options?: RequestOptions): APIPromise<V1DeleteResponse> {
-    const { account_id } = params;
+  delete(
+    imageID: string,
+    params: V1DeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<V1DeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/images/v1/${imageID}`, options) as APIPromise<{
         result: V1DeleteResponse;
@@ -115,7 +118,7 @@ export class V1 extends APIResource {
    * ```
    */
   edit(imageID: string, params: V1EditParams, options?: RequestOptions): APIPromise<Image> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/images/v1/${imageID}`, {
         body,
@@ -134,14 +137,24 @@ export class V1 extends APIResource {
    * });
    * ```
    */
-  get(imageID: string, params: V1GetParams, options?: RequestOptions): APIPromise<Image> {
-    const { account_id } = params;
+  get(
+    imageID: string,
+    params: V1GetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Image> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/images/v1/${imageID}`, options) as APIPromise<{
         result: Image;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class V1 extends BaseV1 {
+  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
+  stats: StatsAPI.Stats = new StatsAPI.Stats(this._client);
+  variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
+  blobs: BlobsAPI.Blobs = new BlobsAPI.Blobs(this._client);
 }
 
 export type V1ListResponsesV4PagePagination = V4PagePagination<V1ListResponse>;
@@ -195,7 +208,7 @@ export interface V1CreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional custom unique identifier for your image.
@@ -235,7 +248,7 @@ export interface V1ListParams extends V4PagePaginationParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Internal user ID set within the creator field. Setting to empty
@@ -248,14 +261,14 @@ export interface V1DeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface V1EditParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Can set the creator field with an internal user ID.
@@ -280,13 +293,17 @@ export interface V1GetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 V1.Keys = Keys;
+V1.BaseKeys = BaseKeys;
 V1.Stats = Stats;
+V1.BaseStats = BaseStats;
 V1.Variants = Variants;
+V1.BaseVariants = BaseVariants;
 V1.Blobs = Blobs;
+V1.BaseBlobs = BaseBlobs;
 
 export declare namespace V1 {
   export {
@@ -303,6 +320,7 @@ export declare namespace V1 {
 
   export {
     Keys as Keys,
+    BaseKeys as BaseKeys,
     type Key as Key,
     type KeyUpdateResponse as KeyUpdateResponse,
     type KeyListResponse as KeyListResponse,
@@ -312,10 +330,11 @@ export declare namespace V1 {
     type KeyDeleteParams as KeyDeleteParams,
   };
 
-  export { Stats as Stats, type Stat as Stat, type StatGetParams as StatGetParams };
+  export { Stats as Stats, BaseStats as BaseStats, type Stat as Stat, type StatGetParams as StatGetParams };
 
   export {
     Variants as Variants,
+    BaseVariants as BaseVariants,
     type Variant as Variant,
     type VariantCreateResponse as VariantCreateResponse,
     type VariantDeleteResponse as VariantDeleteResponse,
@@ -328,5 +347,5 @@ export declare namespace V1 {
     type VariantGetParams as VariantGetParams,
   };
 
-  export { Blobs as Blobs, type BlobGetParams as BlobGetParams };
+  export { Blobs as Blobs, BaseBlobs as BaseBlobs, type BlobGetParams as BlobGetParams };
 }

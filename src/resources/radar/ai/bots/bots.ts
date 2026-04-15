@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as SummaryAPI from './summary';
-import { Summary, SummaryUserAgentParams, SummaryUserAgentResponse } from './summary';
+import { BaseSummary, Summary, SummaryUserAgentParams, SummaryUserAgentResponse } from './summary';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Bots extends APIResource {
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+export class BaseBots extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai', 'bots'] = Object.freeze([
+    'radar',
+    'ai',
+    'bots',
+  ] as const);
 
   /**
    * Retrieves an aggregated summary of AI bots HTTP requests grouped by the
@@ -88,6 +92,9 @@ export class Bots extends APIResource {
       }) as APIPromise<{ result: BotTimeseriesGroupsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Bots extends BaseBots {
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
 }
 
 export interface BotSummaryV2Response {
@@ -866,6 +873,7 @@ export interface BotTimeseriesGroupsParams {
 }
 
 Bots.Summary = Summary;
+Bots.BaseSummary = BaseSummary;
 
 export declare namespace Bots {
   export {
@@ -879,6 +887,7 @@ export declare namespace Bots {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryUserAgentResponse as SummaryUserAgentResponse,
     type SummaryUserAgentParams as SummaryUserAgentParams,
   };

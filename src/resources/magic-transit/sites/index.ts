@@ -2,6 +2,7 @@
 
 export {
   ACLs,
+  BaseACLs,
   type ACL,
   type ACLConfiguration,
   type AllowedProtocol,
@@ -16,6 +17,7 @@ export {
 } from './acls';
 export {
   LANs,
+  BaseLANs,
   type DHCPRelay,
   type DHCPServer,
   type LAN,
@@ -32,6 +34,7 @@ export {
 } from './lans';
 export {
   Sites,
+  BaseSites,
   type Site,
   type SiteLocation,
   type SiteCreateParams,
@@ -44,6 +47,7 @@ export {
 } from './sites';
 export {
   WANs,
+  BaseWANs,
   type WAN,
   type WANStaticAddressing,
   type WANCreateParams,

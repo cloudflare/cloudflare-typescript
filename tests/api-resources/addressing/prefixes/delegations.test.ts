@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseDelegations } from 'cloudflare/resources/addressing/prefixes/delegations';
+import { Prefixes } from 'cloudflare/resources/addressing/prefixes/prefixes';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource delegations', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDelegations],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Prefixes],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ addressing: { prefixes: { delegations: BaseDelegations } } }>,
+) => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.prefixes.delegations.create(
       '2af39739cc4e3b5910c918468bb89828',
@@ -74,4 +94,7 @@ describe('resource delegations', () => {
       prefix_id: '2af39739cc4e3b5910c918468bb89828',
     });
   });
-});
+};
+describe('resource delegations', () => runTests(client));
+describe('resource delegations (tree shakable, base)', () => runTests(partialClient));
+describe('resource delegations (tree shakable, subresource)', () => runTests(parentPartialClient));

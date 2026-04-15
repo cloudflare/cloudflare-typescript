@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryBotClassParams,
   SummaryBotClassResponse,
@@ -11,6 +12,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupBotClassParams,
   TimeseriesGroupBotClassResponse,
   TimeseriesGroupCompromisedParams,
@@ -21,11 +23,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class LeakedCredentials extends APIResource {
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+export class BaseLeakedCredentials extends APIResource {
+  static override readonly _key: readonly ['radar', 'leakedCredentials'] = Object.freeze([
+    'radar',
+    'leakedCredentials',
+  ] as const);
 
   /**
    * Retrieves an aggregated summary of HTTP authentication requests grouped by the
@@ -76,6 +78,12 @@ export class LeakedCredentials extends APIResource {
       }) as APIPromise<{ result: LeakedCredentialTimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class LeakedCredentials extends BaseLeakedCredentials {
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
 }
 
 export interface LeakedCredentialSummaryV2Response {
@@ -510,7 +518,9 @@ export interface LeakedCredentialTimeseriesGroupsV2Params {
 }
 
 LeakedCredentials.Summary = Summary;
+LeakedCredentials.BaseSummary = BaseSummary;
 LeakedCredentials.TimeseriesGroups = TimeseriesGroups;
+LeakedCredentials.BaseTimeseriesGroups = BaseTimeseriesGroups;
 
 export declare namespace LeakedCredentials {
   export {
@@ -522,6 +532,7 @@ export declare namespace LeakedCredentials {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryBotClassResponse as SummaryBotClassResponse,
     type SummaryCompromisedResponse as SummaryCompromisedResponse,
     type SummaryBotClassParams as SummaryBotClassParams,
@@ -530,6 +541,7 @@ export declare namespace LeakedCredentials {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupBotClassResponse as TimeseriesGroupBotClassResponse,
     type TimeseriesGroupCompromisedResponse as TimeseriesGroupCompromisedResponse,
     type TimeseriesGroupBotClassParams as TimeseriesGroupBotClassParams,

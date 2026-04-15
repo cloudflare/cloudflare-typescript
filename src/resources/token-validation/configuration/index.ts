@@ -2,6 +2,7 @@
 
 export {
   Configuration,
+  BaseConfiguration,
   type TokenConfig,
   type ConfigurationDeleteResponse,
   type ConfigurationEditResponse,
@@ -12,4 +13,9 @@ export {
   type ConfigurationGetParams,
   type TokenConfigsV4PagePaginationArray,
 } from './configuration';
-export { Credentials, type CredentialUpdateResponse, type CredentialUpdateParams } from './credentials';
+export {
+  Credentials,
+  BaseCredentials,
+  type CredentialUpdateResponse,
+  type CredentialUpdateParams,
+} from './credentials';

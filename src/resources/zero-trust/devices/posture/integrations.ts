@@ -6,7 +6,11 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Integrations extends APIResource {
+export class BaseIntegrations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'posture', 'integrations'] = Object.freeze(
+    ['zeroTrust', 'devices', 'posture', 'integrations'] as const,
+  );
+
   /**
    * Create a new device posture integration.
    *
@@ -31,7 +35,7 @@ export class Integrations extends APIResource {
    * ```
    */
   create(params: IntegrationCreateParams, options?: RequestOptions): APIPromise<Integration | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/posture/integration`, {
         body,
@@ -54,10 +58,10 @@ export class Integrations extends APIResource {
    * ```
    */
   list(
-    params: IntegrationListParams,
+    params: IntegrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IntegrationsSinglePage, Integration> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/posture/integration`,
       SinglePage<Integration>,
@@ -79,10 +83,10 @@ export class Integrations extends APIResource {
    */
   delete(
     integrationID: string,
-    params: IntegrationDeleteParams,
+    params: IntegrationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IntegrationDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/devices/posture/integration/${integrationID}`,
@@ -108,7 +112,7 @@ export class Integrations extends APIResource {
     params: IntegrationEditParams,
     options?: RequestOptions,
   ): APIPromise<Integration | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/devices/posture/integration/${integrationID}`, {
         body,
@@ -131,10 +135,10 @@ export class Integrations extends APIResource {
    */
   get(
     integrationID: string,
-    params: IntegrationGetParams,
+    params: IntegrationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Integration | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/devices/posture/integration/${integrationID}`,
@@ -143,6 +147,7 @@ export class Integrations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Integrations extends BaseIntegrations {}
 
 export type IntegrationsSinglePage = SinglePage<Integration>;
 
@@ -210,7 +215,7 @@ export interface IntegrationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object containing third-party integration
@@ -404,18 +409,18 @@ export namespace IntegrationCreateParams {
 }
 
 export interface IntegrationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object containing third-party integration
@@ -609,7 +614,7 @@ export namespace IntegrationEditParams {
 }
 
 export interface IntegrationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Integrations {

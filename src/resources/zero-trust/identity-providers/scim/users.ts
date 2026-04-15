@@ -11,7 +11,11 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Users extends APIResource {
+export class BaseUsers extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'identityProviders', 'scim', 'users'] = Object.freeze(
+    ['zeroTrust', 'identityProviders', 'scim', 'users'] as const,
+  );
+
   /**
    * Lists SCIM User resources synced to Cloudflare via the System for Cross-domain
    * Identity Management (SCIM).
@@ -29,10 +33,10 @@ export class Users extends APIResource {
    */
   list(
     identityProviderID: string,
-    params: UserListParams,
+    params: UserListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AccessUsersV4PagePaginationArray, UsersAPI.AccessUser> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/identity_providers/${identityProviderID}/scim/users`,
       V4PagePaginationArray<UsersAPI.AccessUser>,
@@ -40,12 +44,13 @@ export class Users extends APIResource {
     );
   }
 }
+export class Users extends BaseUsers {}
 
 export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The unique Cloudflare-generated Id of the SCIM User resource; also

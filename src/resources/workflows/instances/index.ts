@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Events, type EventCreateResponse, type EventCreateParams } from './events';
+export { Events, BaseEvents, type EventCreateResponse, type EventCreateParams } from './events';
 export {
   Instances,
+  BaseInstances,
   type InstanceCreateResponse,
   type InstanceListResponse,
   type InstanceBulkResponse,
@@ -14,4 +15,4 @@ export {
   type InstanceListResponsesV4PagePaginationArray,
   type InstanceBulkResponsesSinglePage,
 } from './instances';
-export { Status, type StatusEditResponse, type StatusEditParams } from './status';
+export { Status, BaseStatus, type StatusEditResponse, type StatusEditParams } from './status';

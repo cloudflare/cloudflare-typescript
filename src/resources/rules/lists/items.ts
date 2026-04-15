@@ -11,7 +11,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Items extends APIResource {
+export class BaseItems extends APIResource {
+  static override readonly _key: readonly ['rules', 'lists', 'items'] = Object.freeze([
+    'rules',
+    'lists',
+    'items',
+  ] as const);
+
   /**
    * Appends new items to the list.
    *
@@ -33,7 +39,7 @@ export class Items extends APIResource {
    * ```
    */
   create(listID: string, params: ItemCreateParams, options?: RequestOptions): APIPromise<ItemCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/rules/lists/${listID}/items`, {
         body: body,
@@ -64,7 +70,7 @@ export class Items extends APIResource {
    * ```
    */
   update(listID: string, params: ItemUpdateParams, options?: RequestOptions): APIPromise<ItemUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/rules/lists/${listID}/items`, {
         body: body,
@@ -89,10 +95,10 @@ export class Items extends APIResource {
    */
   list(
     listID: string,
-    params: ItemListParams,
+    params: ItemListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ItemListResponsesCursorPaginationAfter, ItemListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/rules/lists/${listID}/items`,
       CursorPaginationAfter<ItemListResponse>,
@@ -118,7 +124,7 @@ export class Items extends APIResource {
    * ```
    */
   delete(listID: string, params: ItemDeleteParams, options?: RequestOptions): APIPromise<ItemDeleteResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/rules/lists/${listID}/items`, {
         body,
@@ -142,7 +148,7 @@ export class Items extends APIResource {
    * ```
    */
   get(itemID: string, params: ItemGetParams, options?: RequestOptions): APIPromise<ItemGetResponse> {
-    const { account_id, list_id } = params;
+    const { account_id = this._client.accountID, list_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/rules/lists/${list_id}/items/${itemID}`,
@@ -151,6 +157,7 @@ export class Items extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Items extends BaseItems {}
 
 export type ItemListResponsesCursorPaginationAfter = CursorPaginationAfter<ItemListResponse>;
 
@@ -432,7 +439,7 @@ export interface ItemCreateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -500,7 +507,7 @@ export interface ItemUpdateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -568,7 +575,7 @@ export interface ItemListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Amount of results to include in each paginated response. A
@@ -588,7 +595,7 @@ export interface ItemDeleteParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -609,7 +616,7 @@ export interface ItemGetParams {
   /**
    * The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The unique ID of the list.

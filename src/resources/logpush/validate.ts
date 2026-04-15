@@ -6,7 +6,12 @@ import { CloudflareError } from '../../core/error';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Validate extends APIResource {
+export class BaseValidate extends APIResource {
+  static override readonly _key: readonly ['logpush', 'validate'] = Object.freeze([
+    'logpush',
+    'validate',
+  ] as const);
+
   /**
    * Validates destination.
    *
@@ -22,7 +27,11 @@ export class Validate extends APIResource {
     params: ValidateDestinationParams,
     options?: RequestOptions,
   ): APIPromise<ValidateDestinationResponse | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -63,7 +72,11 @@ export class Validate extends APIResource {
     params: ValidateDestinationExistsParams,
     options?: RequestOptions,
   ): APIPromise<ValidateDestinationExistsResponse | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -101,7 +114,11 @@ export class Validate extends APIResource {
    * ```
    */
   origin(params: ValidateOriginParams, options?: RequestOptions): APIPromise<ValidateOriginResponse | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -126,6 +143,7 @@ export class Validate extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Validate extends BaseValidate {}
 
 export interface ValidateDestinationResponse {
   message?: string;

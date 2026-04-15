@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CloudflareSourceAPI from './cloudflare-source';
-import { CloudflareSource, CloudflareSourceUpdateParams } from './cloudflare-source';
+import { BaseCloudflareSource, CloudflareSource, CloudflareSourceUpdateParams } from './cloudflare-source';
 import * as WARPAPI from './warp';
 import {
+  BaseWARP,
   Subnet,
   SubnetsV4PagePaginationArray,
   WARP,
@@ -22,11 +23,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Subnets extends APIResource {
-  warp: WARPAPI.WARP = new WARPAPI.WARP(this._client);
-  cloudflareSource: CloudflareSourceAPI.CloudflareSource = new CloudflareSourceAPI.CloudflareSource(
-    this._client,
-  );
+export class BaseSubnets extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'subnets'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'subnets',
+  ] as const);
 
   /**
    * Lists and filters subnets in an account.
@@ -42,10 +44,10 @@ export class Subnets extends APIResource {
    * ```
    */
   list(
-    params: SubnetListParams,
+    params: SubnetListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SubnetsV4PagePaginationArray, WARPAPI.Subnet> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/zerotrust/subnets`,
       V4PagePaginationArray<WARPAPI.Subnet>,
@@ -53,12 +55,18 @@ export class Subnets extends APIResource {
     );
   }
 }
+export class Subnets extends BaseSubnets {
+  warp: WARPAPI.WARP = new WARPAPI.WARP(this._client);
+  cloudflareSource: CloudflareSourceAPI.CloudflareSource = new CloudflareSourceAPI.CloudflareSource(
+    this._client,
+  );
+}
 
 export interface SubnetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If set, only include subnets in the given address family - `v4` or
@@ -113,13 +121,16 @@ export interface SubnetListParams extends V4PagePaginationArrayParams {
 }
 
 Subnets.WARP = WARP;
+Subnets.BaseWARP = BaseWARP;
 Subnets.CloudflareSource = CloudflareSource;
+Subnets.BaseCloudflareSource = BaseCloudflareSource;
 
 export declare namespace Subnets {
   export { type SubnetListParams as SubnetListParams };
 
   export {
     WARP as WARP,
+    BaseWARP as BaseWARP,
     type Subnet as Subnet,
     type WARPDeleteResponse as WARPDeleteResponse,
     type WARPCreateParams as WARPCreateParams,
@@ -130,6 +141,7 @@ export declare namespace Subnets {
 
   export {
     CloudflareSource as CloudflareSource,
+    BaseCloudflareSource as BaseCloudflareSource,
     type CloudflareSourceUpdateParams as CloudflareSourceUpdateParams,
   };
 }

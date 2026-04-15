@@ -2,10 +2,11 @@
 
 export {
   Origin,
+  BaseOrigin,
   type OriginSummaryResponse,
   type OriginTimeseriesGroupsResponse,
   type OriginSummaryParams,
   type OriginTimeseriesGroupsParams,
 } from './origin';
-export { PostQuantum } from './post-quantum';
-export { TLS, type TLSSupportResponse, type TLSSupportParams } from './tls';
+export { PostQuantum, BasePostQuantum } from './post-quantum';
+export { TLS, BaseTLS, type TLSSupportResponse, type TLSSupportParams } from './tls';

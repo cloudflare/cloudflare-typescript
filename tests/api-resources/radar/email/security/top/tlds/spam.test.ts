@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseSpam } from 'cloudflare/resources/radar/email/security/top/tlds/spam';
+import { TLDs } from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource spam', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSpam],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [TLDs],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { email: { security: { top: { tlds: { spam: BaseSpam } } } } } }>,
+) => {
   test('get', async () => {
     const responsePromise = client.radar.email.security.top.tlds.spam.get('SPAM');
     const rawResponse = await responsePromise.asResponse();
@@ -43,4 +63,7 @@ describe('resource spam', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource spam', () => runTests(client));
+describe('resource spam (tree shakable, base)', () => runTests(partialClient));
+describe('resource spam (tree shakable, subresource)', () => runTests(parentPartialClient));

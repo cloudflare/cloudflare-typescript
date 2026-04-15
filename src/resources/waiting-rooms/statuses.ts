@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Statuses extends APIResource {
+export class BaseStatuses extends APIResource {
+  static override readonly _key: readonly ['waitingRooms', 'statuses'] = Object.freeze([
+    'waitingRooms',
+    'statuses',
+  ] as const);
+
   /**
    * Fetches the status of a configured waiting room. Response fields include:
    *
@@ -37,10 +42,10 @@ export class Statuses extends APIResource {
    */
   get(
     waitingRoomID: string,
-    params: StatusGetParams,
+    params: StatusGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StatusGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/status`, options) as APIPromise<{
         result: StatusGetResponse;
@@ -48,6 +53,7 @@ export class Statuses extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Statuses extends BaseStatuses {}
 
 export interface StatusGetResponse {
   estimated_queued_users?: number;
@@ -65,7 +71,7 @@ export interface StatusGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Statuses {

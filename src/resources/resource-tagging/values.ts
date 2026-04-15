@@ -5,17 +5,22 @@ import { CursorPaginationAfter, type CursorPaginationAfterParams, PagePromise } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Values extends APIResource {
+export class BaseValues extends APIResource {
+  static override readonly _key: readonly ['resourceTagging', 'values'] = Object.freeze([
+    'resourceTagging',
+    'values',
+  ] as const);
+
   /**
    * Lists all distinct values for a given tag key, optionally filtered by resource
    * type.
    */
   list(
     tagKey: string,
-    params: ValueListParams,
+    params: ValueListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ValueListResponsesCursorPaginationAfter, ValueListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/tags/values/${tagKey}`,
       CursorPaginationAfter<ValueListResponse>,
@@ -23,6 +28,7 @@ export class Values extends APIResource {
     );
   }
 }
+export class Values extends BaseValues {}
 
 export type ValueListResponsesCursorPaginationAfter = CursorPaginationAfter<ValueListResponse>;
 
@@ -32,7 +38,7 @@ export interface ValueListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by resource type.

@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DNSSECResource extends APIResource {
+export class BaseDNSSECResource extends APIResource {
+  static override readonly _key: readonly ['dns', 'dnssec'] = Object.freeze(['dns', 'dnssec'] as const);
+
   /**
    * Delete DNSSEC.
    *
@@ -16,8 +18,11 @@ export class DNSSECResource extends APIResource {
    * });
    * ```
    */
-  delete(params: DNSSECDeleteParams, options?: RequestOptions): APIPromise<DNSSECDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    params: DNSSECDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DNSSECDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/dnssec`, options) as APIPromise<{
         result: DNSSECDeleteResponse;
@@ -35,8 +40,8 @@ export class DNSSECResource extends APIResource {
    * });
    * ```
    */
-  edit(params: DNSSECEditParams, options?: RequestOptions): APIPromise<DNSSEC> {
-    const { zone_id, ...body } = params;
+  edit(params: DNSSECEditParams | null | undefined = {}, options?: RequestOptions): APIPromise<DNSSEC> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.patch(path`/zones/${zone_id}/dnssec`, { body, ...options }) as APIPromise<{
         result: DNSSEC;
@@ -54,13 +59,14 @@ export class DNSSECResource extends APIResource {
    * });
    * ```
    */
-  get(params: DNSSECGetParams, options?: RequestOptions): APIPromise<DNSSEC> {
-    const { zone_id } = params;
+  get(params: DNSSECGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<DNSSEC> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/dnssec`, options) as APIPromise<{ result: DNSSEC }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DNSSECResource extends BaseDNSSECResource {}
 
 export interface DNSSEC {
   /**
@@ -161,14 +167,14 @@ export interface DNSSECDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DNSSECEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If true, multi-signer DNSSEC is enabled on the zone, allowing
@@ -217,7 +223,7 @@ export interface DNSSECGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace DNSSECResource {

@@ -7,7 +7,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Policies extends APIResource {
+export class BasePolicies extends APIResource {
+  static override readonly _key: readonly ['pageShield', 'policies'] = Object.freeze([
+    'pageShield',
+    'policies',
+  ] as const);
+
   /**
    * Create a Page Shield policy.
    *
@@ -25,7 +30,7 @@ export class Policies extends APIResource {
    * ```
    */
   create(params: PolicyCreateParams, options?: RequestOptions): APIPromise<PolicyCreateResponse | null> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/page_shield/policies`, { body, ...options }) as APIPromise<{
         result: PolicyCreateResponse | null;
@@ -49,7 +54,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PolicyUpdateResponse | null> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/page_shield/policies/${policyID}`, {
         body,
@@ -72,10 +77,10 @@ export class Policies extends APIResource {
    * ```
    */
   list(
-    params: PolicyListParams,
+    params: PolicyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/page_shield/policies`,
       SinglePage<PolicyListResponse>,
@@ -94,8 +99,12 @@ export class Policies extends APIResource {
    * );
    * ```
    */
-  delete(policyID: string, params: PolicyDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { zone_id } = params;
+  delete(
+    policyID: string,
+    params: PolicyDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/page_shield/policies/${policyID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -115,10 +124,10 @@ export class Policies extends APIResource {
    */
   get(
     policyID: string,
-    params: PolicyGetParams,
+    params: PolicyGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PolicyGetResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/page_shield/policies/${policyID}`, options) as APIPromise<{
         result: PolicyGetResponse | null;
@@ -126,6 +135,7 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Policies extends BasePolicies {}
 
 export type PolicyListResponsesSinglePage = SinglePage<PolicyListResponse>;
 
@@ -293,7 +303,7 @@ export interface PolicyCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to take if the expression matches
@@ -326,7 +336,7 @@ export interface PolicyUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to take if the expression matches
@@ -359,21 +369,21 @@ export interface PolicyListParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Policies {

@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class TimeseriesGroups extends APIResource {
+export class BaseTimeseriesGroups extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer3', 'timeseriesGroups'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer3',
+    'timeseriesGroups',
+  ] as const);
+
   /**
    * Retrieves the distribution of layer 3 attacks by bitrate over time.
    *
@@ -124,6 +131,7 @@ export class TimeseriesGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TimeseriesGroups extends BaseTimeseriesGroups {}
 
 export interface TimeseriesGroupBitrateResponse {
   /**

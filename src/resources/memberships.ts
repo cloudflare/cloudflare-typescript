@@ -8,7 +8,9 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class Memberships extends APIResource {
+export class BaseMemberships extends APIResource {
+  static override readonly _key: readonly ['memberships'] = Object.freeze(['memberships'] as const);
+
   /**
    * Accept or reject this account invitation.
    *
@@ -86,6 +88,7 @@ export class Memberships extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Memberships extends BaseMemberships {}
 
 export type MembershipsV4PagePaginationArray = V4PagePaginationArray<Membership>;
 

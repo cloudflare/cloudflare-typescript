@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as IssueTypesAPI from './issue-types';
 import {
+  BaseIssueTypes,
   IssueTypeGetParams,
   IssueTypeGetResponse,
   IssueTypeGetResponsesSinglePage,
@@ -10,6 +11,7 @@ import {
 } from './issue-types';
 import * as IssuesAPI from './issues';
 import {
+  BaseIssues,
   IssueClassParams,
   IssueClassResponse,
   IssueDismissParams,
@@ -26,17 +28,26 @@ import {
   SeverityQueryParam,
 } from './issues';
 
-export class AttackSurfaceReport extends APIResource {
+export class BaseAttackSurfaceReport extends APIResource {
+  static override readonly _key: readonly ['intel', 'attackSurfaceReport'] = Object.freeze([
+    'intel',
+    'attackSurfaceReport',
+  ] as const);
+}
+export class AttackSurfaceReport extends BaseAttackSurfaceReport {
   issueTypes: IssueTypesAPI.IssueTypes = new IssueTypesAPI.IssueTypes(this._client);
   issues: IssuesAPI.Issues = new IssuesAPI.Issues(this._client);
 }
 
 AttackSurfaceReport.IssueTypes = IssueTypes;
+AttackSurfaceReport.BaseIssueTypes = BaseIssueTypes;
 AttackSurfaceReport.Issues = Issues;
+AttackSurfaceReport.BaseIssues = BaseIssues;
 
 export declare namespace AttackSurfaceReport {
   export {
     IssueTypes as IssueTypes,
+    BaseIssueTypes as BaseIssueTypes,
     type IssueTypeGetResponse as IssueTypeGetResponse,
     type IssueTypeGetResponsesSinglePage as IssueTypeGetResponsesSinglePage,
     type IssueTypeGetParams as IssueTypeGetParams,
@@ -44,6 +55,7 @@ export declare namespace AttackSurfaceReport {
 
   export {
     Issues as Issues,
+    BaseIssues as BaseIssues,
     type IssueType as IssueType,
     type SeverityQueryParam as SeverityQueryParam,
     type IssueListResponse as IssueListResponse,

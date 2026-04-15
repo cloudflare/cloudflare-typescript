@@ -2,6 +2,7 @@
 
 export {
   Routing,
+  BaseRouting,
   type RoutingSummaryV2Response,
   type RoutingTimeseriesGroupsV2Response,
   type RoutingSummaryV2Params,
@@ -9,6 +10,7 @@ export {
 } from './routing';
 export {
   Summary,
+  BaseSummary,
   type SummaryARCResponse,
   type SummaryDKIMResponse,
   type SummaryDMARCResponse,
@@ -24,6 +26,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupARCResponse,
   type TimeseriesGroupDKIMResponse,
   type TimeseriesGroupDMARCResponse,

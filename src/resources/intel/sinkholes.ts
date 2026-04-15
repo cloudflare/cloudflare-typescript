@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Sinkholes extends APIResource {
+export class BaseSinkholes extends APIResource {
+  static override readonly _key: readonly ['intel', 'sinkholes'] = Object.freeze([
+    'intel',
+    'sinkholes',
+  ] as const);
+
   /**
    * List sinkholes owned by this account
    *
@@ -19,8 +24,11 @@ export class Sinkholes extends APIResource {
    * }
    * ```
    */
-  list(params: SinkholeListParams, options?: RequestOptions): PagePromise<SinkholesSinglePage, Sinkhole> {
-    const { account_id } = params;
+  list(
+    params: SinkholeListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<SinkholesSinglePage, Sinkhole> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/intel/sinkholes`,
       SinglePage<Sinkhole>,
@@ -28,6 +36,7 @@ export class Sinkholes extends APIResource {
     );
   }
 }
+export class Sinkholes extends BaseSinkholes {}
 
 export type SinkholesSinglePage = SinglePage<Sinkhole>;
 
@@ -72,7 +81,7 @@ export interface SinkholeListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Sinkholes {

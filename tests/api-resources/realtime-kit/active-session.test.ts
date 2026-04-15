@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseActiveSession } from 'cloudflare/resources/realtime-kit/active-session';
+import { RealtimeKit } from 'cloudflare/resources/realtime-kit/realtime-kit';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource activeSession', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseActiveSession],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [RealtimeKit],
+});
+
+const runTests = (client: PartialCloudflare<{ realtimeKit: { activeSession: BaseActiveSession } }>) => {
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('createPoll: only required params', async () => {
     const responsePromise = client.realtimeKit.activeSession.createPoll('meeting_id', {
@@ -110,4 +128,7 @@ describe('resource activeSession', () => {
       participant_ids: ['string'],
     });
   });
-});
+};
+describe('resource activeSession', () => runTests(client));
+describe('resource activeSession (tree shakable, base)', () => runTests(partialClient));
+describe('resource activeSession (tree shakable, subresource)', () => runTests(parentPartialClient));

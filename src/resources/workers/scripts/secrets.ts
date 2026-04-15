@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Secrets extends APIResource {
+export class BaseSecrets extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'secrets'] = Object.freeze([
+    'workers',
+    'scripts',
+    'secrets',
+  ] as const);
+
   /**
    * Add a secret to a script.
    *
@@ -28,7 +34,7 @@ export class Secrets extends APIResource {
     params: SecretUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SecretUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/workers/scripts/${scriptName}/secrets`, {
         body,
@@ -53,10 +59,10 @@ export class Secrets extends APIResource {
    */
   list(
     scriptName: string,
-    params: SecretListParams,
+    params: SecretListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SecretListResponsesSinglePage, SecretListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/scripts/${scriptName}/secrets`,
       SinglePage<SecretListResponse>,
@@ -83,7 +89,7 @@ export class Secrets extends APIResource {
     params: SecretDeleteParams,
     options?: RequestOptions,
   ): APIPromise<SecretDeleteResponse | null> {
-    const { account_id, script_name, url_encoded } = params;
+    const { account_id = this._client.accountID, script_name, url_encoded } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/scripts/${script_name}/secrets/${secretName}`,
@@ -107,7 +113,7 @@ export class Secrets extends APIResource {
    * ```
    */
   get(secretName: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
-    const { account_id, script_name, ...query } = params;
+    const { account_id = this._client.accountID, script_name, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/workers/scripts/${script_name}/secrets/${secretName}`, {
         query,
@@ -116,6 +122,7 @@ export class Secrets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Secrets extends BaseSecrets {}
 
 export type SecretListResponsesSinglePage = SinglePage<SecretListResponse>;
 
@@ -289,7 +296,7 @@ export declare namespace SecretUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A JavaScript variable name for the binding.
@@ -311,7 +318,7 @@ export declare namespace SecretUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Algorithm-specific key parameters.
@@ -362,14 +369,14 @@ export interface SecretListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SecretDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the script, used in URLs and route configuration.
@@ -386,7 +393,7 @@ export interface SecretGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the script, used in URLs and route configuration.

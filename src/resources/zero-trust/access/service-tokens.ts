@@ -11,7 +11,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ServiceTokens extends APIResource {
+export class BaseServiceTokens extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'serviceTokens'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'serviceTokens',
+  ] as const);
+
   /**
    * Generates a new service token. **Note:** This is the only time you can get the
    * Client Secret. If you lose the Client Secret, you will have to rotate the Client
@@ -27,7 +33,11 @@ export class ServiceTokens extends APIResource {
    * ```
    */
   create(params: ServiceTokenCreateParams, options?: RequestOptions): APIPromise<ServiceTokenCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -69,7 +79,11 @@ export class ServiceTokens extends APIResource {
     params: ServiceTokenUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ServiceToken> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -111,7 +125,11 @@ export class ServiceTokens extends APIResource {
     params: ServiceTokenListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ServiceTokensV4PagePaginationArray, ServiceToken> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -152,7 +170,8 @@ export class ServiceTokens extends APIResource {
     params: ServiceTokenDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ServiceToken> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -194,7 +213,8 @@ export class ServiceTokens extends APIResource {
     params: ServiceTokenGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ServiceToken> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -233,10 +253,10 @@ export class ServiceTokens extends APIResource {
    */
   refresh(
     serviceTokenID: string,
-    params: ServiceTokenRefreshParams,
+    params: ServiceTokenRefreshParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ServiceToken> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/access/service_tokens/${serviceTokenID}/refresh`,
@@ -259,10 +279,10 @@ export class ServiceTokens extends APIResource {
    */
   rotate(
     serviceTokenID: string,
-    params: ServiceTokenRotateParams,
+    params: ServiceTokenRotateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ServiceTokenRotateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/access/service_tokens/${serviceTokenID}/rotate`, {
         body,
@@ -271,6 +291,7 @@ export class ServiceTokens extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ServiceTokens extends BaseServiceTokens {}
 
 export type ServiceTokensV4PagePaginationArray = V4PagePaginationArray<ServiceToken>;
 
@@ -501,14 +522,14 @@ export interface ServiceTokenRefreshParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceTokenRotateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The expiration of the previous `client_secret`. If not provided, it

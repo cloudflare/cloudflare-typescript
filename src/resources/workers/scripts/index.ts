@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Assets } from './assets/index';
-export { Content, type ContentUpdateParams, type ContentGetParams } from './content';
+export { Assets, BaseAssets } from './assets/index';
+export { Content, BaseContent, type ContentUpdateParams, type ContentGetParams } from './content';
 export {
   Deployments,
+  BaseDeployments,
   type Deployment,
   type DeploymentListResponse,
   type DeploymentDeleteResponse,
@@ -14,6 +15,7 @@ export {
 } from './deployments';
 export {
   Schedules,
+  BaseSchedules,
   type ScheduleUpdateResponse,
   type ScheduleGetResponse,
   type ScheduleUpdateParams,
@@ -21,6 +23,7 @@ export {
 } from './schedules';
 export {
   ScriptAndVersionSettings,
+  BaseScriptAndVersionSettings,
   type ScriptAndVersionSettingEditResponse,
   type ScriptAndVersionSettingGetResponse,
   type ScriptAndVersionSettingEditParams,
@@ -28,6 +31,7 @@ export {
 } from './script-and-version-settings';
 export {
   Scripts,
+  BaseScripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
@@ -44,6 +48,7 @@ export {
 } from './scripts';
 export {
   Secrets,
+  BaseSecrets,
   type SecretUpdateResponse,
   type SecretListResponse,
   type SecretDeleteResponse,
@@ -54,9 +59,10 @@ export {
   type SecretGetParams,
   type SecretListResponsesSinglePage,
 } from './secrets';
-export { Settings, type SettingEditParams, type SettingGetParams } from './settings';
+export { Settings, BaseSettings, type SettingEditParams, type SettingGetParams } from './settings';
 export {
   Subdomain,
+  BaseSubdomain,
   type SubdomainCreateResponse,
   type SubdomainDeleteResponse,
   type SubdomainGetResponse,
@@ -66,6 +72,7 @@ export {
 } from './subdomain';
 export {
   Tail,
+  BaseTail,
   type ConsumerScript,
   type TailCreateResponse,
   type TailDeleteResponse,
@@ -76,6 +83,7 @@ export {
 } from './tail';
 export {
   Versions,
+  BaseVersions,
   type VersionCreateResponse,
   type VersionListResponse,
   type VersionGetResponse,

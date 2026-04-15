@@ -9,7 +9,12 @@ import { path } from '../../internal/utils/path';
 /**
  * @deprecated Use DNS settings API instead.
  */
-export class CustomNameservers extends APIResource {
+export class BaseCustomNameservers extends APIResource {
+  static override readonly _key: readonly ['zones', 'customNameservers'] = Object.freeze([
+    'zones',
+    'customNameservers',
+  ] as const);
+
   /**
    * Set metadata for account-level custom nameservers on a zone.
    *
@@ -23,10 +28,10 @@ export class CustomNameservers extends APIResource {
    * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/put/) instead.
    */
   update(
-    params: CustomNameserverUpdateParams,
+    params: CustomNameserverUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomNameserverUpdateResponsesSinglePage, CustomNameserverUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/custom_ns`,
       SinglePage<CustomNameserverUpdateResponse>,
@@ -42,11 +47,18 @@ export class CustomNameservers extends APIResource {
    *
    * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/get/) instead.
    */
-  get(params: CustomNameserverGetParams, options?: RequestOptions): APIPromise<CustomNameserverGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: CustomNameserverGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomNameserverGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.get(path`/zones/${zone_id}/custom_ns`, options);
   }
 }
+/**
+ * @deprecated Use DNS settings API instead.
+ */
+export class CustomNameservers extends BaseCustomNameservers {}
 
 export type CustomNameserverUpdateResponsesSinglePage = SinglePage<CustomNameserverUpdateResponse>;
 
@@ -138,7 +150,7 @@ export interface CustomNameserverUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether zone uses account-level custom nameservers.
@@ -155,7 +167,7 @@ export interface CustomNameserverGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace CustomNameservers {

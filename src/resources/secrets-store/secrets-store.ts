@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 import * as QuotaAPI from './quota';
-import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
+import { BaseQuota, Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import * as StoresAPI from './stores/stores';
 import {
+  BaseStores,
   StoreCreateParams,
   StoreCreateResponse,
   StoreDeleteParams,
@@ -15,17 +16,23 @@ import {
   Stores,
 } from './stores/stores';
 
-export class SecretsStore extends APIResource {
+export class BaseSecretsStore extends APIResource {
+  static override readonly _key: readonly ['secretsStore'] = Object.freeze(['secretsStore'] as const);
+}
+export class SecretsStore extends BaseSecretsStore {
   stores: StoresAPI.Stores = new StoresAPI.Stores(this._client);
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 }
 
 SecretsStore.Stores = Stores;
+SecretsStore.BaseStores = BaseStores;
 SecretsStore.Quota = Quota;
+SecretsStore.BaseQuota = BaseQuota;
 
 export declare namespace SecretsStore {
   export {
     Stores as Stores,
+    BaseStores as BaseStores,
     type StoreCreateResponse as StoreCreateResponse,
     type StoreListResponse as StoreListResponse,
     type StoreDeleteResponse as StoreDeleteResponse,
@@ -35,5 +42,10 @@ export declare namespace SecretsStore {
     type StoreDeleteParams as StoreDeleteParams,
   };
 
-  export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
+  export {
+    Quota as Quota,
+    BaseQuota as BaseQuota,
+    type QuotaGetResponse as QuotaGetResponse,
+    type QuotaGetParams as QuotaGetParams,
+  };
 }

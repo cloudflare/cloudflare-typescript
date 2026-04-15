@@ -7,7 +7,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CfInterconnects extends APIResource {
+export class BaseCfInterconnects extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'cfInterconnects'] = Object.freeze([
+    'magicTransit',
+    'cfInterconnects',
+  ] as const);
+
   /**
    * Updates a specific interconnect associated with an account. Use
    * `?validate_only=true` as an optional query parameter to only run validation
@@ -27,7 +32,11 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CfInterconnectUpdateResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    const {
+      account_id = this._client.accountID,
+      'x-magic-new-hc-target': xMagicNewHcTarget,
+      ...body
+    } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectID}`, {
         body,
@@ -55,8 +64,11 @@ export class CfInterconnects extends APIResource {
    *   });
    * ```
    */
-  list(params: CfInterconnectListParams, options?: RequestOptions): APIPromise<CfInterconnectListResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+  list(
+    params: CfInterconnectListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CfInterconnectListResponse> {
+    const { account_id = this._client.accountID, 'x-magic-new-hc-target': xMagicNewHcTarget } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/cf_interconnects`, {
         ...options,
@@ -90,7 +102,7 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectBulkUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CfInterconnectBulkUpdateResponse> {
-    const { account_id, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    const { account_id = this._client.accountID, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/cf_interconnects`, {
         body: body,
@@ -121,10 +133,10 @@ export class CfInterconnects extends APIResource {
    */
   get(
     cfInterconnectID: string,
-    params: CfInterconnectGetParams,
+    params: CfInterconnectGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CfInterconnectGetResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    const { account_id = this._client.accountID, 'x-magic-new-hc-target': xMagicNewHcTarget } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectID}`, {
         ...options,
@@ -140,6 +152,7 @@ export class CfInterconnects extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CfInterconnects extends BaseCfInterconnects {}
 
 export interface CfInterconnectUpdateResponse {
   modified?: boolean;
@@ -513,7 +526,7 @@ export interface CfInterconnectUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
@@ -587,7 +600,7 @@ export interface CfInterconnectListParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -600,7 +613,7 @@ export interface CfInterconnectBulkUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -618,7 +631,7 @@ export interface CfInterconnectGetParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be

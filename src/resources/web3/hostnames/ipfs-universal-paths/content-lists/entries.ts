@@ -5,7 +5,15 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Entries extends APIResource {
+export class BaseEntries extends APIResource {
+  static override readonly _key: readonly [
+    'web3',
+    'hostnames',
+    'ipfsUniversalPaths',
+    'contentLists',
+    'entries',
+  ] = Object.freeze(['web3', 'hostnames', 'ipfsUniversalPaths', 'contentLists', 'entries'] as const);
+
   /**
    * Create IPFS Universal Path Gateway Content List Entry
    *
@@ -28,7 +36,7 @@ export class Entries extends APIResource {
     params: EntryCreateParams,
     options?: RequestOptions,
   ): APIPromise<EntryCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
@@ -60,7 +68,7 @@ export class Entries extends APIResource {
     params: EntryUpdateParams,
     options?: RequestOptions,
   ): APIPromise<EntryUpdateResponse> {
-    const { zone_id, identifier, ...body } = params;
+    const { zone_id = this._client.zoneID, identifier, ...body } = params;
     return (
       this._client.put(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
@@ -83,10 +91,10 @@ export class Entries extends APIResource {
    */
   list(
     identifier: string,
-    params: EntryListParams,
+    params: EntryListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EntryListResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
@@ -115,7 +123,7 @@ export class Entries extends APIResource {
     params: EntryDeleteParams,
     options?: RequestOptions,
   ): APIPromise<EntryDeleteResponse | null> {
-    const { zone_id, identifier } = params;
+    const { zone_id = this._client.zoneID, identifier } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
@@ -144,7 +152,7 @@ export class Entries extends APIResource {
     params: EntryGetParams,
     options?: RequestOptions,
   ): APIPromise<EntryGetResponse> {
-    const { zone_id, identifier } = params;
+    const { zone_id = this._client.zoneID, identifier } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
@@ -153,6 +161,7 @@ export class Entries extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Entries extends BaseEntries {}
 
 /**
  * Specify a content list entry to block.
@@ -290,7 +299,7 @@ export interface EntryCreateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Specify the CID or content path of content to block.
@@ -312,7 +321,7 @@ export interface EntryUpdateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param: Specify the identifier of the hostname.
@@ -339,14 +348,14 @@ export interface EntryListParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface EntryDeleteParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Specify the identifier of the hostname.
@@ -358,7 +367,7 @@ export interface EntryGetParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Specify the identifier of the hostname.

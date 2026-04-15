@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { RiskScoring } from 'cloudflare/resources/zero-trust/risk-scoring/risk-scoring';
+import { BaseSummary } from 'cloudflare/resources/zero-trust/risk-scoring/summary';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource summary', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSummary],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [RiskScoring],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { riskScoring: { summary: BaseSummary } } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.summary.get({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -23,4 +41,7 @@ describe('resource summary', () => {
   test('get: required and optional params', async () => {
     const response = await client.zeroTrust.riskScoring.summary.get({ account_id: 'account_id' });
   });
-});
+};
+describe('resource summary', () => runTests(client));
+describe('resource summary (tree shakable, base)', () => runTests(partialClient));
+describe('resource summary (tree shakable, subresource)', () => runTests(parentPartialClient));

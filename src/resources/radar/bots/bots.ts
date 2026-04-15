@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as WebCrawlersAPI from './web-crawlers';
 import {
+  BaseWebCrawlers,
   WebCrawlerSummaryParams,
   WebCrawlerSummaryResponse,
   WebCrawlerTimeseriesGroupsParams,
@@ -13,8 +14,8 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Bots extends APIResource {
-  webCrawlers: WebCrawlersAPI.WebCrawlers = new WebCrawlersAPI.WebCrawlers(this._client);
+export class BaseBots extends APIResource {
+  static override readonly _key: readonly ['radar', 'bots'] = Object.freeze(['radar', 'bots'] as const);
 
   /**
    * Retrieves a list of bots.
@@ -113,6 +114,9 @@ export class Bots extends APIResource {
       }) as APIPromise<{ result: BotTimeseriesGroupsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Bots extends BaseBots {
+  webCrawlers: WebCrawlersAPI.WebCrawlers = new WebCrawlersAPI.WebCrawlers(this._client);
 }
 
 export interface BotListResponse {
@@ -983,6 +987,7 @@ export interface BotTimeseriesGroupsParams {
 }
 
 Bots.WebCrawlers = WebCrawlers;
+Bots.BaseWebCrawlers = BaseWebCrawlers;
 
 export declare namespace Bots {
   export {
@@ -1000,6 +1005,7 @@ export declare namespace Bots {
 
   export {
     WebCrawlers as WebCrawlers,
+    BaseWebCrawlers as BaseWebCrawlers,
     type WebCrawlerSummaryResponse as WebCrawlerSummaryResponse,
     type WebCrawlerTimeseriesGroupsResponse as WebCrawlerTimeseriesGroupsResponse,
     type WebCrawlerSummaryParams as WebCrawlerSummaryParams,

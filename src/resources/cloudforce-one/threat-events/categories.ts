@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Categories extends APIResource {
+export class BaseCategories extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'categories'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'categories',
+  ] as const);
+
   /**
    * Creates a new category
    *
@@ -22,7 +28,7 @@ export class Categories extends APIResource {
    * ```
    */
   create(params: CategoryCreateParams, options?: RequestOptions): APIPromise<CategoryCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/categories/create`, {
       body,
       ...options,
@@ -40,8 +46,11 @@ export class Categories extends APIResource {
    *   });
    * ```
    */
-  list(params: CategoryListParams, options?: RequestOptions): APIPromise<CategoryListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: CategoryListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CategoryListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/categories`, {
       query,
       ...options,
@@ -62,10 +71,10 @@ export class Categories extends APIResource {
    */
   delete(
     categoryID: string,
-    params: CategoryDeleteParams,
+    params: CategoryDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CategoryDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/cloudforce-one/events/categories/${categoryID}`,
       options,
@@ -86,10 +95,10 @@ export class Categories extends APIResource {
    */
   edit(
     categoryID: string,
-    params: CategoryEditParams,
+    params: CategoryEditParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CategoryEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.patch(path`/accounts/${account_id}/cloudforce-one/events/categories/${categoryID}`, {
       body,
       ...options,
@@ -110,16 +119,17 @@ export class Categories extends APIResource {
    */
   get(
     categoryID: string,
-    params: CategoryGetParams,
+    params: CategoryGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CategoryGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/cloudforce-one/events/categories/${categoryID}`,
       options,
     );
   }
 }
+export class Categories extends BaseCategories {}
 
 export interface CategoryCreateResponse {
   killChain: number;
@@ -189,7 +199,7 @@ export interface CategoryCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -221,7 +231,7 @@ export interface CategoryListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Array of dataset IDs to query categories from. If not provided,
@@ -234,14 +244,14 @@ export interface CategoryDeleteParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CategoryEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -273,7 +283,7 @@ export interface CategoryGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Categories {

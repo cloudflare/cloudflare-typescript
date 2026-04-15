@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class FallbackOrigin extends APIResource {
+export class BaseFallbackOrigin extends APIResource {
+  static override readonly _key: readonly ['customHostnames', 'fallbackOrigin'] = Object.freeze([
+    'customHostnames',
+    'fallbackOrigin',
+  ] as const);
+
   /**
    * Updates the fallback origin configuration for custom hostnames on a zone. Sets
    * the default origin server for custom hostname traffic.
@@ -23,7 +28,7 @@ export class FallbackOrigin extends APIResource {
     params: FallbackOriginUpdateParams,
     options?: RequestOptions,
   ): APIPromise<FallbackOriginUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/custom_hostnames/fallback_origin`, {
         body,
@@ -45,10 +50,10 @@ export class FallbackOrigin extends APIResource {
    * ```
    */
   delete(
-    params: FallbackOriginDeleteParams,
+    params: FallbackOriginDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FallbackOriginDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as APIPromise<{
         result: FallbackOriginDeleteResponse;
@@ -69,8 +74,11 @@ export class FallbackOrigin extends APIResource {
    *   });
    * ```
    */
-  get(params: FallbackOriginGetParams, options?: RequestOptions): APIPromise<FallbackOriginGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: FallbackOriginGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FallbackOriginGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as APIPromise<{
         result: FallbackOriginGetResponse;
@@ -78,6 +86,7 @@ export class FallbackOrigin extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class FallbackOrigin extends BaseFallbackOrigin {}
 
 export interface FallbackOriginUpdateResponse {
   /**
@@ -185,7 +194,7 @@ export interface FallbackOriginUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Your origin hostname that requests to your custom hostnames will be
@@ -198,14 +207,14 @@ export interface FallbackOriginDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface FallbackOriginGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace FallbackOrigin {

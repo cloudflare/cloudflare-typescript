@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as HostnameAssociationsAPI from './hostname-associations';
 import {
+  BaseHostnameAssociations,
   HostnameAssociation,
   HostnameAssociationGetParams,
   HostnameAssociationGetResponse,
@@ -12,16 +13,23 @@ import {
   TLSHostnameAssociation,
 } from './hostname-associations';
 
-export class CertificateAuthorities extends APIResource {
+export class BaseCertificateAuthorities extends APIResource {
+  static override readonly _key: readonly ['certificateAuthorities'] = Object.freeze([
+    'certificateAuthorities',
+  ] as const);
+}
+export class CertificateAuthorities extends BaseCertificateAuthorities {
   hostnameAssociations: HostnameAssociationsAPI.HostnameAssociations =
     new HostnameAssociationsAPI.HostnameAssociations(this._client);
 }
 
 CertificateAuthorities.HostnameAssociations = HostnameAssociations;
+CertificateAuthorities.BaseHostnameAssociations = BaseHostnameAssociations;
 
 export declare namespace CertificateAuthorities {
   export {
     HostnameAssociations as HostnameAssociations,
+    BaseHostnameAssociations as BaseHostnameAssociations,
     type HostnameAssociation as HostnameAssociation,
     type TLSHostnameAssociation as TLSHostnameAssociation,
     type HostnameAssociationUpdateResponse as HostnameAssociationUpdateResponse,

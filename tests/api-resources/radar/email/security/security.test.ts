@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Email } from 'cloudflare/resources/radar/email/email';
+import { BaseSecurity } from 'cloudflare/resources/radar/email/security/security';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource security', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSecurity],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Email],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { email: { security: BaseSecurity } } }>) => {
   test('summaryV2', async () => {
     const responsePromise = client.radar.email.security.summaryV2('SPAM');
     const rawResponse = await responsePromise.asResponse();
@@ -77,4 +95,7 @@ describe('resource security', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource security', () => runTests(client));
+describe('resource security (tree shakable, base)', () => runTests(partialClient));
+describe('resource security (tree shakable, subresource)', () => runTests(parentPartialClient));

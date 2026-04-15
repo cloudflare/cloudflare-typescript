@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Analytics } from './analytics/index';
-export { DNS } from './dns';
+export { Analytics, BaseAnalytics } from './analytics/index';
+export { DNS, BaseDNS } from './dns';
 export {
   DNSSECResource,
+  BaseDNSSECResource,
   type DNSSEC,
   type DNSSECDeleteResponse,
   type DNSSECDeleteParams,
@@ -12,6 +13,7 @@ export {
 } from './dnssec';
 export {
   Records,
+  BaseRecords,
   type ARecord,
   type AAAARecord,
   type BatchPatch,
@@ -61,6 +63,6 @@ export {
   type RecordResponsesV4PagePaginationArray,
   type RecordResponsesSinglePage,
 } from './records';
-export { Settings } from './settings/index';
-export { Usage } from './usage/index';
-export { ZoneTransfers } from './zone-transfers/index';
+export { Settings, BaseSettings } from './settings/index';
+export { Usage, BaseUsage } from './usage/index';
+export { ZoneTransfers, BaseZoneTransfers } from './zone-transfers/index';

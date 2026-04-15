@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as LatestAPI from './latest';
-import { Latest, LatestListParams, LatestListResponse } from './latest';
+import { BaseLatest, Latest, LatestListParams, LatestListResponse } from './latest';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Snapshots extends APIResource {
-  latest: LatestAPI.Latest = new LatestAPI.Latest(this._client);
+export class BaseSnapshots extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'connectors', 'snapshots'] = Object.freeze([
+    'magicTransit',
+    'connectors',
+    'snapshots',
+  ] as const);
 
   /**
    * List Snapshots
@@ -31,7 +35,7 @@ export class Snapshots extends APIResource {
     params: SnapshotListParams,
     options?: RequestOptions,
   ): APIPromise<SnapshotListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/magic/connectors/${connectorID}/telemetry/snapshots`, {
         query,
@@ -57,7 +61,7 @@ export class Snapshots extends APIResource {
     params: SnapshotGetParams,
     options?: RequestOptions,
   ): APIPromise<SnapshotGetResponse> {
-    const { account_id, connector_id } = params;
+    const { account_id = this._client.accountID, connector_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/connectors/${connector_id}/telemetry/snapshots/${snapshotT}`,
@@ -65,6 +69,9 @@ export class Snapshots extends APIResource {
       ) as APIPromise<{ result: SnapshotGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Snapshots extends BaseSnapshots {
+  latest: LatestAPI.Latest = new LatestAPI.Latest(this._client);
 }
 
 export interface SnapshotListResponse {
@@ -1354,7 +1361,7 @@ export interface SnapshotListParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1381,12 +1388,13 @@ export interface SnapshotGetParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   connector_id: string;
 }
 
 Snapshots.Latest = Latest;
+Snapshots.BaseLatest = BaseLatest;
 
 export declare namespace Snapshots {
   export {
@@ -1398,6 +1406,7 @@ export declare namespace Snapshots {
 
   export {
     Latest as Latest,
+    BaseLatest as BaseLatest,
     type LatestListResponse as LatestListResponse,
     type LatestListParams as LatestListParams,
   };

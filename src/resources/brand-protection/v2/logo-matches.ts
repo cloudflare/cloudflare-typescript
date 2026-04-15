@@ -5,18 +5,25 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class LogoMatches extends APIResource {
+export class BaseLogoMatches extends APIResource {
+  static override readonly _key: readonly ['brandProtection', 'v2', 'logoMatches'] = Object.freeze([
+    'brandProtection',
+    'v2',
+    'logoMatches',
+  ] as const);
+
   /**
    * Get paginated list of logo matches for a specific brand protection logo query
    */
   get(params: LogoMatchGetParams, options?: RequestOptions): APIPromise<LogoMatchGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/matches`, {
       query,
       ...options,
     });
   }
 }
+export class LogoMatches extends BaseLogoMatches {}
 
 export interface LogoMatchGetResponse {
   matches: Array<LogoMatchGetResponse.Match>;
@@ -50,7 +57,7 @@ export interface LogoMatchGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

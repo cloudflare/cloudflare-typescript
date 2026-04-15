@@ -2,15 +2,17 @@
 
 export {
   AccountSettings,
+  BaseAccountSettings,
   type AccountSettingUpdateResponse,
   type AccountSettingGetResponse,
   type AccountSettingUpdateParams,
   type AccountSettingGetParams,
 } from './account-settings';
-export { Assets } from './assets/index';
-export { Beta } from './beta/index';
+export { Assets, BaseAssets } from './assets/index';
+export { Beta, BaseBeta } from './beta/index';
 export {
   Domains,
+  BaseDomains,
   type DomainUpdateResponse,
   type DomainListResponse,
   type DomainDeleteResponse,
@@ -21,9 +23,10 @@ export {
   type DomainGetParams,
   type DomainListResponsesSinglePage,
 } from './domains';
-export { Observability } from './observability/index';
+export { Observability, BaseObservability } from './observability/index';
 export {
   Routes,
+  BaseRoutes,
   type RouteCreateResponse,
   type RouteUpdateResponse,
   type RouteListResponse,
@@ -38,6 +41,7 @@ export {
 } from './routes';
 export {
   Scripts,
+  BaseScripts,
   type Script,
   type ScriptSetting,
   type ScriptUpdateResponse,
@@ -54,10 +58,11 @@ export {
 } from './scripts/index';
 export {
   Subdomains,
+  BaseSubdomains,
   type SubdomainUpdateResponse,
   type SubdomainGetResponse,
   type SubdomainUpdateParams,
   type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomains';
-export { Workers } from './workers';
+export { Workers, BaseWorkers } from './workers';

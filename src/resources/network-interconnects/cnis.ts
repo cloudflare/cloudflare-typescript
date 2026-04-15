@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CNIs extends APIResource {
+export class BaseCNIs extends APIResource {
+  static override readonly _key: readonly ['networkInterconnects', 'cnis'] = Object.freeze([
+    'networkInterconnects',
+    'cnis',
+  ] as const);
+
   /**
    * Create a new CNI object
    *
@@ -25,7 +30,7 @@ export class CNIs extends APIResource {
    * ```
    */
   create(params: CNICreateParams, options?: RequestOptions): APIPromise<CNICreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cni/cnis`, { body, ...options });
   }
 
@@ -53,7 +58,7 @@ export class CNIs extends APIResource {
    * ```
    */
   update(cni: string, params: CNIUpdateParams, options?: RequestOptions): APIPromise<CNIUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.put(path`/accounts/${account_id}/cni/cnis/${cni}`, { body, ...options });
   }
 
@@ -67,8 +72,8 @@ export class CNIs extends APIResource {
    * });
    * ```
    */
-  list(params: CNIListParams, options?: RequestOptions): APIPromise<CNIListResponse> {
-    const { account_id, ...query } = params;
+  list(params: CNIListParams | null | undefined = {}, options?: RequestOptions): APIPromise<CNIListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/cnis`, { query, ...options });
   }
 
@@ -83,8 +88,12 @@ export class CNIs extends APIResource {
    * );
    * ```
    */
-  delete(cni: string, params: CNIDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    cni: string,
+    params: CNIDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/cni/cnis/${cni}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -102,11 +111,16 @@ export class CNIs extends APIResource {
    * );
    * ```
    */
-  get(cni: string, params: CNIGetParams, options?: RequestOptions): APIPromise<CNIGetResponse> {
-    const { account_id } = params;
+  get(
+    cni: string,
+    params: CNIGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CNIGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/cnis/${cni}`, options);
   }
 }
+export class CNIs extends BaseCNIs {}
 
 export interface CNICreateResponse {
   id: string;
@@ -416,7 +430,7 @@ export interface CNICreateParams {
   /**
    * Path param: Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Customer account tag
@@ -487,7 +501,7 @@ export interface CNIUpdateParams {
   /**
    * Path param: Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -575,7 +589,7 @@ export interface CNIListParams {
   /**
    * Path param: Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -603,14 +617,14 @@ export interface CNIDeleteParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CNIGetParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace CNIs {

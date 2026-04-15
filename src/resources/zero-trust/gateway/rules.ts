@@ -7,7 +7,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'rules'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'rules',
+  ] as const);
+
   /**
    * Create a new Zero Trust Gateway rule.
    *
@@ -22,7 +28,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: RequestOptions): APIPromise<GatewayRule> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/rules`, { body, ...options }) as APIPromise<{
         result: GatewayRule;
@@ -47,7 +53,7 @@ export class Rules extends APIResource {
    * ```
    */
   update(ruleID: string, params: RuleUpdateParams, options?: RequestOptions): APIPromise<GatewayRule> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/gateway/rules/${ruleID}`, {
         body,
@@ -69,8 +75,11 @@ export class Rules extends APIResource {
    * }
    * ```
    */
-  list(params: RuleListParams, options?: RequestOptions): PagePromise<GatewayRulesSinglePage, GatewayRule> {
-    const { account_id } = params;
+  list(
+    params: RuleListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<GatewayRulesSinglePage, GatewayRule> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/rules`,
       SinglePage<GatewayRule>,
@@ -89,8 +98,12 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  delete(ruleID: string, params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    ruleID: string,
+    params: RuleDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RuleDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/gateway/rules/${ruleID}`, options) as APIPromise<{
         result: RuleDeleteResponse;
@@ -110,8 +123,12 @@ export class Rules extends APIResource {
    *   );
    * ```
    */
-  get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<GatewayRule> {
-    const { account_id } = params;
+  get(
+    ruleID: string,
+    params: RuleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<GatewayRule> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/rules/${ruleID}`, options) as APIPromise<{
         result: GatewayRule;
@@ -134,10 +151,10 @@ export class Rules extends APIResource {
    * ```
    */
   listTenant(
-    params: RuleListTenantParams,
+    params: RuleListTenantParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<GatewayRulesSinglePage, GatewayRule> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/rules/tenant`,
       SinglePage<GatewayRule>,
@@ -161,10 +178,10 @@ export class Rules extends APIResource {
    */
   resetExpiration(
     ruleID: string,
-    params: RuleResetExpirationParams,
+    params: RuleResetExpirationParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<GatewayRule> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/gateway/rules/${ruleID}/reset_expiration`,
@@ -173,6 +190,7 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Rules extends BaseRules {}
 
 export type GatewayRulesSinglePage = SinglePage<GatewayRule>;
 
@@ -1551,7 +1569,7 @@ export interface RuleCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the action to perform when the associated traffic, identity,
@@ -1679,7 +1697,7 @@ export interface RuleUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the action to perform when the associated traffic, identity,
@@ -1804,23 +1822,23 @@ export namespace RuleUpdateParams {
 }
 
 export interface RuleListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleListTenantParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleResetExpirationParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Rules {

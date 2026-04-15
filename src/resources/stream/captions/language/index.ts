@@ -2,10 +2,11 @@
 
 export {
   Language,
+  BaseLanguage,
   type LanguageDeleteResponse,
   type LanguageCreateParams,
   type LanguageUpdateParams,
   type LanguageDeleteParams,
   type LanguageGetParams,
 } from './language';
-export { Vtt, type VttGetResponse, type VttGetParams } from './vtt';
+export { Vtt, BaseVtt, type VttGetResponse, type VttGetParams } from './vtt';

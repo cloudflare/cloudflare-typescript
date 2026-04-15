@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { ResourceSharing } from 'cloudflare/resources/resource-sharing/resource-sharing';
+import { BaseResources } from 'cloudflare/resources/resource-sharing/resources';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource resources', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseResources],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ResourceSharing],
+});
+
+const runTests = (client: PartialCloudflare<{ resourceSharing: { resources: BaseResources } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.resourceSharing.resources.create('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -123,4 +141,7 @@ describe('resource resources', () => {
       share_id: '3fd85f74b32742f1bff64a85009dda07',
     });
   });
-});
+};
+describe('resource resources', () => runTests(client));
+describe('resource resources (tree shakable, base)', () => runTests(partialClient));
+describe('resource resources (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -5,7 +5,14 @@ import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../.
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Devices extends APIResource {
+export class BaseDevices extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'commands', 'devices'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'commands',
+    'devices',
+  ] as const);
+
   /**
    * List devices with WARP client support for remote captures which have been
    * connected in the last 1 hour.
@@ -28,7 +35,7 @@ export class Devices extends APIResource {
     params: DeviceListParams,
     options?: RequestOptions,
   ): PagePromise<DeviceListResponsesV4PagePagination, DeviceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/commands/devices`,
       V4PagePagination<DeviceListResponse>,
@@ -36,6 +43,7 @@ export class Devices extends APIResource {
     );
   }
 }
+export class Devices extends BaseDevices {}
 
 export type DeviceListResponsesV4PagePagination = V4PagePagination<DeviceListResponse>;
 
@@ -105,7 +113,7 @@ export interface DeviceListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter devices by name or email

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as MaintenanceConfigsAPI from './maintenance-configs';
 import {
+  BaseMaintenanceConfigs,
   MaintenanceConfigGetParams,
   MaintenanceConfigGetResponse,
   MaintenanceConfigUpdateParams,
@@ -13,10 +14,12 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Tables extends APIResource {
-  maintenanceConfigs: MaintenanceConfigsAPI.MaintenanceConfigs = new MaintenanceConfigsAPI.MaintenanceConfigs(
-    this._client,
-  );
+export class BaseTables extends APIResource {
+  static override readonly _key: readonly ['r2DataCatalog', 'namespaces', 'tables'] = Object.freeze([
+    'r2DataCatalog',
+    'namespaces',
+    'tables',
+  ] as const);
 
   /**
    * Returns a list of tables in the specified namespace within an R2 catalog.
@@ -35,7 +38,7 @@ export class Tables extends APIResource {
    * ```
    */
   list(namespace: string, params: TableListParams, options?: RequestOptions): APIPromise<TableListResponse> {
-    const { account_id, bucket_name, ...query } = params;
+    const { account_id = this._client.accountID, bucket_name, ...query } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/r2-catalog/${bucket_name}/namespaces/${namespace}/tables`,
@@ -43,6 +46,11 @@ export class Tables extends APIResource {
       ) as APIPromise<{ result: TableListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Tables extends BaseTables {
+  maintenanceConfigs: MaintenanceConfigsAPI.MaintenanceConfigs = new MaintenanceConfigsAPI.MaintenanceConfigs(
+    this._client,
+  );
 }
 
 /**
@@ -148,7 +156,7 @@ export interface TableListParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Specifies the R2 bucket name.
@@ -182,12 +190,14 @@ export interface TableListParams {
 }
 
 Tables.MaintenanceConfigs = MaintenanceConfigs;
+Tables.BaseMaintenanceConfigs = BaseMaintenanceConfigs;
 
 export declare namespace Tables {
   export { type TableListResponse as TableListResponse, type TableListParams as TableListParams };
 
   export {
     MaintenanceConfigs as MaintenanceConfigs,
+    BaseMaintenanceConfigs as BaseMaintenanceConfigs,
     type MaintenanceConfigUpdateResponse as MaintenanceConfigUpdateResponse,
     type MaintenanceConfigGetResponse as MaintenanceConfigGetResponse,
     type MaintenanceConfigUpdateParams as MaintenanceConfigUpdateParams,

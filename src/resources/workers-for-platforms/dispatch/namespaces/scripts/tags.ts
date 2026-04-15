@@ -6,7 +6,15 @@ import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Tags extends APIResource {
+export class BaseTags extends APIResource {
+  static override readonly _key: readonly [
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+    'scripts',
+    'tags',
+  ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'tags'] as const);
+
   /**
    * Put script tags for a script uploaded to a Workers for Platforms namespace.
    *
@@ -30,7 +38,7 @@ export class Tags extends APIResource {
     params: TagUpdateParams,
     options?: RequestOptions,
   ): PagePromise<TagUpdateResponsesSinglePage, TagUpdateResponse> {
-    const { account_id, dispatch_namespace, body } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/tags`,
       SinglePage<TagUpdateResponse>,
@@ -60,7 +68,7 @@ export class Tags extends APIResource {
     params: TagListParams,
     options?: RequestOptions,
   ): PagePromise<TagListResponsesSinglePage, TagListResponse> {
-    const { account_id, dispatch_namespace } = params;
+    const { account_id = this._client.accountID, dispatch_namespace } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/tags`,
       SinglePage<TagListResponse>,
@@ -89,7 +97,7 @@ export class Tags extends APIResource {
     params: TagDeleteParams,
     options?: RequestOptions,
   ): APIPromise<TagDeleteResponse | null> {
-    const { account_id, dispatch_namespace, script_name } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, script_name } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/tags/${tag}`,
@@ -98,6 +106,7 @@ export class Tags extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Tags extends BaseTags {}
 
 export type TagUpdateResponsesSinglePage = SinglePage<TagUpdateResponse>;
 
@@ -113,7 +122,7 @@ export interface TagUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -130,7 +139,7 @@ export interface TagListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.
@@ -142,7 +151,7 @@ export interface TagDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.

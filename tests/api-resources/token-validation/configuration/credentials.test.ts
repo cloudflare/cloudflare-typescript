@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Configuration } from 'cloudflare/resources/token-validation/configuration/configuration';
+import { BaseCredentials } from 'cloudflare/resources/token-validation/configuration/credentials';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource credentials', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCredentials],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Configuration],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ tokenValidation: { configuration: { credentials: BaseCredentials } } }>,
+) => {
   test('update: only required params', async () => {
     const responsePromise = client.tokenValidation.configuration.credentials.update(
       '4a7ee8d3-dd63-4ceb-9d5f-c27831854ce7',
@@ -53,4 +73,7 @@ describe('resource credentials', () => {
       },
     );
   });
-});
+};
+describe('resource credentials', () => runTests(client));
+describe('resource credentials (tree shakable, base)', () => runTests(partialClient));
+describe('resource credentials (tree shakable, subresource)', () => runTests(parentPartialClient));

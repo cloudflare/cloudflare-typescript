@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Status extends APIResource {
+export class BaseStatus extends APIResource {
+  static override readonly _key: readonly ['workflows', 'instances', 'status'] = Object.freeze([
+    'workflows',
+    'instances',
+    'status',
+  ] as const);
+
   /**
    * Changes the execution status of a workflow instance (e.g., pause, resume,
    * terminate).
@@ -15,7 +21,7 @@ export class Status extends APIResource {
     params: StatusEditParams,
     options?: RequestOptions,
   ): APIPromise<StatusEditResponse> {
-    const { account_id, workflow_name, ...body } = params;
+    const { account_id = this._client.accountID, workflow_name, ...body } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/workflows/${workflow_name}/instances/${instanceID}/status`,
@@ -24,6 +30,7 @@ export class Status extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Status extends BaseStatus {}
 
 export interface StatusEditResponse {
   status:
@@ -46,7 +53,7 @@ export interface StatusEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param

@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ContentScanning } from './content-scanning';
+export { ContentScanning, BaseContentScanning } from './content-scanning';
 export {
   Payloads,
+  BasePayloads,
   type PayloadCreateResponse,
   type PayloadListResponse,
   type PayloadDeleteResponse,
@@ -13,4 +14,4 @@ export {
   type PayloadListResponsesSinglePage,
   type PayloadDeleteResponsesSinglePage,
 } from './payloads';
-export { Settings, type SettingGetResponse, type SettingGetParams } from './settings';
+export { Settings, BaseSettings, type SettingGetResponse, type SettingGetParams } from './settings';

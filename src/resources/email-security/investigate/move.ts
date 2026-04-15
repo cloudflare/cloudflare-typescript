@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Move extends APIResource {
+export class BaseMove extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'investigate', 'move'] = Object.freeze([
+    'emailSecurity',
+    'investigate',
+    'move',
+  ] as const);
+
   /**
    * Moves a single email message to a different folder or changes its quarantine
    * status.
@@ -28,7 +34,7 @@ export class Move extends APIResource {
     params: MoveCreateParams,
     options?: RequestOptions,
   ): APIPromise<MoveCreateResponse> {
-    const { account_id, submission, ...body } = params;
+    const { account_id = this._client.accountID, submission, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/investigate/${postfixID}/move`, {
         query: { submission },
@@ -58,7 +64,7 @@ export class Move extends APIResource {
     params: MoveBulkParams,
     options?: RequestOptions,
   ): PagePromise<MoveBulkResponsesSinglePage, MoveBulkResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/investigate/move`,
       SinglePage<MoveBulkResponse>,
@@ -66,6 +72,7 @@ export class Move extends APIResource {
     );
   }
 }
+export class Move extends BaseMove {}
 
 export type MoveBulkResponsesSinglePage = SinglePage<MoveBulkResponse>;
 
@@ -129,7 +136,7 @@ export interface MoveCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -152,7 +159,7 @@ export interface MoveBulkParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

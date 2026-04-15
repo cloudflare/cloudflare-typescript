@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class SSO extends APIResource {
+export class BaseSSO extends APIResource {
+  static override readonly _key: readonly ['iam', 'sso'] = Object.freeze(['iam', 'sso'] as const);
+
   /**
    * Initialize new SSO connector
    *
@@ -19,7 +21,7 @@ export class SSO extends APIResource {
    * ```
    */
   create(params: SSOCreateParams, options?: RequestOptions): APIPromise<SSOCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/sso_connectors`, { body, ...options }) as APIPromise<{
         result: SSOCreateResponse;
@@ -40,10 +42,10 @@ export class SSO extends APIResource {
    */
   update(
     ssoConnectorID: string,
-    params: SSOUpdateParams,
+    params: SSOUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SSOUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/sso_connectors/${ssoConnectorID}`, {
         body,
@@ -66,10 +68,10 @@ export class SSO extends APIResource {
    * ```
    */
   list(
-    params: SSOListParams,
+    params: SSOListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SSOListResponsesSinglePage, SSOListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/sso_connectors`,
       SinglePage<SSOListResponse>,
@@ -90,10 +92,10 @@ export class SSO extends APIResource {
    */
   delete(
     ssoConnectorID: string,
-    params: SSODeleteParams,
+    params: SSODeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SSODeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/sso_connectors/${ssoConnectorID}`,
@@ -115,10 +117,10 @@ export class SSO extends APIResource {
    */
   beginVerification(
     ssoConnectorID: string,
-    params: SSOBeginVerificationParams,
+    params: SSOBeginVerificationParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SSOBeginVerificationResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.post(
       path`/accounts/${account_id}/sso_connectors/${ssoConnectorID}/begin_verification`,
       options,
@@ -136,8 +138,12 @@ export class SSO extends APIResource {
    * );
    * ```
    */
-  get(ssoConnectorID: string, params: SSOGetParams, options?: RequestOptions): APIPromise<SSOGetResponse> {
-    const { account_id } = params;
+  get(
+    ssoConnectorID: string,
+    params: SSOGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SSOGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/sso_connectors/${ssoConnectorID}`,
@@ -146,6 +152,7 @@ export class SSO extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SSO extends BaseSSO {}
 
 export type SSOListResponsesSinglePage = SinglePage<SSOListResponse>;
 
@@ -377,7 +384,7 @@ export interface SSOCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Email domain of the new SSO connector
@@ -400,7 +407,7 @@ export interface SSOUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: SSO Connector enabled state
@@ -418,28 +425,28 @@ export interface SSOListParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SSODeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SSOBeginVerificationParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SSOGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace SSO {

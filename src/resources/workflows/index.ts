@@ -2,6 +2,7 @@
 
 export {
   Instances,
+  BaseInstances,
   type InstanceCreateResponse,
   type InstanceListResponse,
   type InstanceBulkResponse,
@@ -15,10 +16,11 @@ export {
 } from './instances/index';
 export {
   Versions,
+  BaseVersions,
   type VersionListResponse,
   type VersionGetResponse,
   type VersionListParams,
   type VersionGetParams,
   type VersionListResponsesV4PagePaginationArray,
 } from './versions';
-export { Workflows } from './workflows';
+export { Workflows, BaseWorkflows } from './workflows';

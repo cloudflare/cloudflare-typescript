@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Detections extends APIResource {
+export class BaseDetections extends APIResource {
+  static override readonly _key: readonly ['leakedCredentialChecks', 'detections'] = Object.freeze([
+    'leakedCredentialChecks',
+    'detections',
+  ] as const);
+
   /**
    * Create user-defined detection pattern for Leaked Credential Checks.
    *
@@ -18,8 +23,11 @@ export class Detections extends APIResource {
    *   });
    * ```
    */
-  create(params: DetectionCreateParams, options?: RequestOptions): APIPromise<DetectionCreateResponse> {
-    const { zone_id, ...body } = params;
+  create(
+    params: DetectionCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DetectionCreateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/leaked-credential-checks/detections`, {
         body,
@@ -45,7 +53,7 @@ export class Detections extends APIResource {
     params: DetectionUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DetectionUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/leaked-credential-checks/detections/${detectionID}`, {
         body,
@@ -68,10 +76,10 @@ export class Detections extends APIResource {
    * ```
    */
   list(
-    params: DetectionListParams,
+    params: DetectionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DetectionListResponsesSinglePage, DetectionListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/leaked-credential-checks/detections`,
       SinglePage<DetectionListResponse>,
@@ -93,10 +101,10 @@ export class Detections extends APIResource {
    */
   delete(
     detectionID: string,
-    params: DetectionDeleteParams,
+    params: DetectionDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DetectionDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/leaked-credential-checks/detections/${detectionID}`,
@@ -119,10 +127,10 @@ export class Detections extends APIResource {
    */
   get(
     detectionID: string,
-    params: DetectionGetParams,
+    params: DetectionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DetectionGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/leaked-credential-checks/detections/${detectionID}`,
@@ -131,6 +139,7 @@ export class Detections extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Detections extends BaseDetections {}
 
 export type DetectionListResponsesSinglePage = SinglePage<DetectionListResponse>;
 
@@ -224,7 +233,7 @@ export interface DetectionCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Defines ehe ruleset expression to use in matching the password in a
@@ -243,7 +252,7 @@ export interface DetectionUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Defines ehe ruleset expression to use in matching the password in a
@@ -262,21 +271,21 @@ export interface DetectionListParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DetectionDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DetectionGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Detections {

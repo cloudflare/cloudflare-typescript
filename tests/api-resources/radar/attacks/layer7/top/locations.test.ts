@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseLocations } from 'cloudflare/resources/radar/attacks/layer7/top/locations';
+import { Top } from 'cloudflare/resources/radar/attacks/layer7/top/top';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource locations', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLocations],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Top],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { attacks: { layer7: { top: { locations: BaseLocations } } } } }>,
+) => {
   test('origin', async () => {
     const responsePromise = client.radar.attacks.layer7.top.locations.origin();
     const rawResponse = await responsePromise.asResponse();
@@ -72,4 +92,7 @@ describe('resource locations', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource locations', () => runTests(client));
+describe('resource locations (tree shakable, base)', () => runTests(partialClient));
+describe('resource locations (tree shakable, subresource)', () => runTests(parentPartialClient));

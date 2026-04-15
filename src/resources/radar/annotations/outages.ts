@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Outages extends APIResource {
+export class BaseOutages extends APIResource {
+  static override readonly _key: readonly ['radar', 'annotations', 'outages'] = Object.freeze([
+    'radar',
+    'annotations',
+    'outages',
+  ] as const);
+
   /**
    * Retrieves the latest Internet outages and anomalies.
    *
@@ -44,6 +50,7 @@ export class Outages extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Outages extends BaseOutages {}
 
 export interface OutageGetResponse {
   annotations: Array<OutageGetResponse.Annotation>;

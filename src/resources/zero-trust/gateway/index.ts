@@ -1,16 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AppTypes, type AppType, type AppTypeListParams, type AppTypesSinglePage } from './app-types';
+export {
+  AppTypes,
+  BaseAppTypes,
+  type AppType,
+  type AppTypeListParams,
+  type AppTypesSinglePage,
+} from './app-types';
 export {
   AuditSSHSettings,
+  BaseAuditSSHSettings,
   type GatewaySettings,
   type AuditSSHSettingUpdateParams,
   type AuditSSHSettingGetParams,
   type AuditSSHSettingRotateSeedParams,
 } from './audit-ssh-settings';
-export { Categories, type Category, type CategoryListParams, type CategoriesSinglePage } from './categories';
+export {
+  Categories,
+  BaseCategories,
+  type Category,
+  type CategoryListParams,
+  type CategoriesSinglePage,
+} from './categories';
 export {
   Certificates,
+  BaseCertificates,
   type CertificateCreateResponse,
   type CertificateListResponse,
   type CertificateDeleteResponse,
@@ -27,6 +41,7 @@ export {
 } from './certificates';
 export {
   Configurations,
+  BaseConfigurations,
   type ActivityLogSettings,
   type AntiVirusSettings,
   type BlockPageSettings,
@@ -48,6 +63,7 @@ export {
 } from './configurations/index';
 export {
   Gateway,
+  BaseGateway,
   type GatewayCreateResponse,
   type GatewayListResponse,
   type GatewayCreateParams,
@@ -55,6 +71,7 @@ export {
 } from './gateway';
 export {
   Lists,
+  BaseLists,
   type GatewayItem,
   type GatewayList,
   type ListCreateResponse,
@@ -69,6 +86,7 @@ export {
 } from './lists/index';
 export {
   Locations,
+  BaseLocations,
   type DOHEndpoint,
   type DOTEndpoint,
   type Endpoint,
@@ -85,9 +103,16 @@ export {
   type LocationGetParams,
   type LocationsSinglePage,
 } from './locations';
-export { Logging, type LoggingSetting, type LoggingUpdateParams, type LoggingGetParams } from './logging';
+export {
+  Logging,
+  BaseLogging,
+  type LoggingSetting,
+  type LoggingUpdateParams,
+  type LoggingGetParams,
+} from './logging';
 export {
   Pacfiles,
+  BasePacfiles,
   type PacfileCreateResponse,
   type PacfileUpdateResponse,
   type PacfileListResponse,
@@ -102,6 +127,7 @@ export {
 } from './pacfiles';
 export {
   ProxyEndpoints,
+  BaseProxyEndpoints,
   type GatewayIPs,
   type ProxyEndpoint,
   type ProxyEndpointDeleteResponse,
@@ -114,6 +140,7 @@ export {
 } from './proxy-endpoints';
 export {
   Rules,
+  BaseRules,
   type DNSResolverSettingsV4,
   type DNSResolverSettingsV6,
   type GatewayFilter,

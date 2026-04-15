@@ -7,7 +7,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Prioritize extends APIResource {
+export class BasePrioritize extends APIResource {
+  static override readonly _key: readonly ['customCertificates', 'prioritize'] = Object.freeze([
+    'customCertificates',
+    'prioritize',
+  ] as const);
+
   /**
    * If a zone has multiple SSL certificates, you can set the order in which they
    * should be used during a request. The higher priority will break ties across
@@ -30,7 +35,7 @@ export class Prioritize extends APIResource {
     params: PrioritizeUpdateParams,
     options?: RequestOptions,
   ): PagePromise<CustomCertificatesSinglePage, CustomCertificatesAPI.CustomCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/custom_certificates/prioritize`,
       SinglePage<CustomCertificatesAPI.CustomCertificate>,
@@ -38,12 +43,13 @@ export class Prioritize extends APIResource {
     );
   }
 }
+export class Prioritize extends BasePrioritize {}
 
 export interface PrioritizeUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Array of ordered certificates.

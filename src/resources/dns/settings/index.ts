@@ -2,14 +2,16 @@
 
 export {
   Account,
+  BaseAccount,
   type AccountEditResponse,
   type AccountGetResponse,
   type AccountEditParams,
   type AccountGetParams,
 } from './account/index';
-export { Settings } from './settings';
+export { Settings, BaseSettings } from './settings';
 export {
   Zone,
+  BaseZone,
   type ZoneEditResponse,
   type ZoneGetResponse,
   type ZoneEditParams,

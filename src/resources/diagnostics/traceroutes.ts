@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Traceroutes extends APIResource {
+export class BaseTraceroutes extends APIResource {
+  static override readonly _key: readonly ['diagnostics', 'traceroutes'] = Object.freeze([
+    'diagnostics',
+    'traceroutes',
+  ] as const);
+
   /**
    * Run traceroutes from Cloudflare colos.
    *
@@ -26,7 +31,7 @@ export class Traceroutes extends APIResource {
     params: TracerouteCreateParams,
     options?: RequestOptions,
   ): PagePromise<TraceroutesSinglePage, Traceroute> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/diagnostics/traceroute`,
       SinglePage<Traceroute>,
@@ -34,6 +39,7 @@ export class Traceroutes extends APIResource {
     );
   }
 }
+export class Traceroutes extends BaseTraceroutes {}
 
 export type TraceroutesSinglePage = SinglePage<Traceroute>;
 
@@ -165,7 +171,7 @@ export interface TracerouteCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Subscriptions extends APIResource {
+export class BaseSubscriptions extends APIResource {
+  static override readonly _key: readonly ['zones', 'subscriptions'] = Object.freeze([
+    'zones',
+    'subscriptions',
+  ] as const);
+
   /**
    * Create a zone subscription, either plan or add-ons.
    *
@@ -18,8 +23,11 @@ export class Subscriptions extends APIResource {
    *   });
    * ```
    */
-  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<SubscriptionCreateResponse> {
-    const { zone_id, ...body } = params;
+  create(
+    params: SubscriptionCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionCreateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/subscription`, { body, ...options }) as APIPromise<{
         result: SubscriptionCreateResponse;
@@ -38,8 +46,11 @@ export class Subscriptions extends APIResource {
    *   });
    * ```
    */
-  update(params: SubscriptionUpdateParams, options?: RequestOptions): APIPromise<SubscriptionUpdateResponse> {
-    const { zone_id, ...body } = params;
+  update(
+    params: SubscriptionUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionUpdateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/subscription`, { body, ...options }) as APIPromise<{
         result: SubscriptionUpdateResponse;
@@ -57,8 +68,11 @@ export class Subscriptions extends APIResource {
    * });
    * ```
    */
-  get(params: SubscriptionGetParams, options?: RequestOptions): APIPromise<SubscriptionGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SubscriptionGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SubscriptionGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/subscription`, options) as APIPromise<{
         result: SubscriptionGetResponse;
@@ -66,6 +80,7 @@ export class Subscriptions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Subscriptions extends BaseSubscriptions {}
 
 export interface SubscriptionCreateResponse {
   /**
@@ -200,7 +215,7 @@ export interface SubscriptionCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -217,7 +232,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -234,7 +249,7 @@ export interface SubscriptionGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Subscriptions {

@@ -5,7 +5,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Submissions extends APIResource {
+export class BaseSubmissions extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'submissions'] = Object.freeze([
+    'emailSecurity',
+    'submissions',
+  ] as const);
+
   /**
    * This endpoint returns information for submissions to made to reclassify emails.
    *
@@ -20,10 +25,10 @@ export class Submissions extends APIResource {
    * ```
    */
   list(
-    params: SubmissionListParams,
+    params: SubmissionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/submissions`,
       V4PagePaginationArray<SubmissionListResponse>,
@@ -31,6 +36,7 @@ export class Submissions extends APIResource {
     );
   }
 }
+export class Submissions extends BaseSubmissions {}
 
 export type SubmissionListResponsesV4PagePaginationArray = V4PagePaginationArray<SubmissionListResponse>;
 
@@ -123,7 +129,7 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

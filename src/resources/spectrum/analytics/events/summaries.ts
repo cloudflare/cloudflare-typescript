@@ -6,12 +6,22 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Summaries extends APIResource {
+export class BaseSummaries extends APIResource {
+  static override readonly _key: readonly ['spectrum', 'analytics', 'events', 'summaries'] = Object.freeze([
+    'spectrum',
+    'analytics',
+    'events',
+    'summaries',
+  ] as const);
+
   /**
    * Retrieves a list of summarised aggregate metrics over a given time period.
    */
-  get(params: SummaryGetParams, options?: RequestOptions): APIPromise<SummaryGetResponse> {
-    const { zone_id, ...query } = params;
+  get(
+    params: SummaryGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/spectrum/analytics/events/summary`, {
         query,
@@ -20,6 +30,7 @@ export class Summaries extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summaries extends BaseSummaries {}
 
 export interface SummaryGetResponse {
   /**
@@ -152,7 +163,7 @@ export interface SummaryGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Can be used to break down the data by given attributes. Options

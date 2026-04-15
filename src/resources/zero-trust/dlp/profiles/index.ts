@@ -2,6 +2,7 @@
 
 export {
   Custom,
+  BaseCustom,
   type CustomProfile,
   type Pattern,
   type CustomDeleteResponse,
@@ -12,6 +13,7 @@ export {
 } from './custom';
 export {
   Predefined,
+  BasePredefined,
   type PredefinedProfile,
   type PredefinedDeleteResponse,
   type PredefinedUpdateParams,
@@ -20,6 +22,7 @@ export {
 } from './predefined';
 export {
   Profiles,
+  BaseProfiles,
   type ContextAwareness,
   type Profile,
   type SkipConfiguration,

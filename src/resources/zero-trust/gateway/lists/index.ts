@@ -1,8 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Items, type ItemListResponse, type ItemListParams, type ItemListResponsesSinglePage } from './items';
+export {
+  Items,
+  BaseItems,
+  type ItemListResponse,
+  type ItemListParams,
+  type ItemListResponsesSinglePage,
+} from './items';
 export {
   Lists,
+  BaseLists,
   type GatewayItem,
   type GatewayList,
   type ListCreateResponse,

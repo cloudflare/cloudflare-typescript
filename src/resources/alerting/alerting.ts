@@ -2,11 +2,23 @@
 
 import { APIResource } from '../../core/resource';
 import * as AvailableAlertsAPI from './available-alerts';
-import { AvailableAlertListParams, AvailableAlertListResponse, AvailableAlerts } from './available-alerts';
+import {
+  AvailableAlertListParams,
+  AvailableAlertListResponse,
+  AvailableAlerts,
+  BaseAvailableAlerts,
+} from './available-alerts';
 import * as HistoryAPI from './history';
-import { HistoriesV4PagePaginationArray, History, HistoryListParams, HistoryResource } from './history';
+import {
+  BaseHistoryResource,
+  HistoriesV4PagePaginationArray,
+  History,
+  HistoryListParams,
+  HistoryResource,
+} from './history';
 import * as PoliciesAPI from './policies';
 import {
+  BasePolicies,
   Mechanism,
   Policies,
   PoliciesSinglePage,
@@ -23,6 +35,7 @@ import {
 } from './policies';
 import * as SilencesAPI from './silences';
 import {
+  BaseSilences,
   SilenceCreateParams,
   SilenceCreateResponse,
   SilenceDeleteParams,
@@ -38,9 +51,12 @@ import {
   Silences,
 } from './silences';
 import * as DestinationsAPI from './destinations/destinations';
-import { Destinations } from './destinations/destinations';
+import { BaseDestinations, Destinations } from './destinations/destinations';
 
-export class Alerting extends APIResource {
+export class BaseAlerting extends APIResource {
+  static override readonly _key: readonly ['alerting'] = Object.freeze(['alerting'] as const);
+}
+export class Alerting extends BaseAlerting {
   availableAlerts: AvailableAlertsAPI.AvailableAlerts = new AvailableAlertsAPI.AvailableAlerts(this._client);
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
   history: HistoryAPI.HistoryResource = new HistoryAPI.HistoryResource(this._client);
@@ -49,22 +65,29 @@ export class Alerting extends APIResource {
 }
 
 Alerting.AvailableAlerts = AvailableAlerts;
+Alerting.BaseAvailableAlerts = BaseAvailableAlerts;
 Alerting.Destinations = Destinations;
+Alerting.BaseDestinations = BaseDestinations;
 Alerting.HistoryResource = HistoryResource;
+Alerting.BaseHistoryResource = BaseHistoryResource;
 Alerting.Policies = Policies;
+Alerting.BasePolicies = BasePolicies;
 Alerting.Silences = Silences;
+Alerting.BaseSilences = BaseSilences;
 
 export declare namespace Alerting {
   export {
     AvailableAlerts as AvailableAlerts,
+    BaseAvailableAlerts as BaseAvailableAlerts,
     type AvailableAlertListResponse as AvailableAlertListResponse,
     type AvailableAlertListParams as AvailableAlertListParams,
   };
 
-  export { Destinations as Destinations };
+  export { Destinations as Destinations, BaseDestinations as BaseDestinations };
 
   export {
     HistoryResource as HistoryResource,
+    BaseHistoryResource as BaseHistoryResource,
     type History as History,
     type HistoriesV4PagePaginationArray as HistoriesV4PagePaginationArray,
     type HistoryListParams as HistoryListParams,
@@ -72,6 +95,7 @@ export declare namespace Alerting {
 
   export {
     Policies as Policies,
+    BasePolicies as BasePolicies,
     type Mechanism as Mechanism,
     type Policy as Policy,
     type PolicyFilter as PolicyFilter,
@@ -88,6 +112,7 @@ export declare namespace Alerting {
 
   export {
     Silences as Silences,
+    BaseSilences as BaseSilences,
     type SilenceCreateResponse as SilenceCreateResponse,
     type SilenceUpdateResponse as SilenceUpdateResponse,
     type SilenceListResponse as SilenceListResponse,

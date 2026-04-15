@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Bytimes extends APIResource {
+export class BaseBytimes extends APIResource {
+  static override readonly _key: readonly ['dns', 'analytics', 'reports', 'bytimes'] = Object.freeze([
+    'dns',
+    'analytics',
+    'reports',
+    'bytimes',
+  ] as const);
+
   /**
    * Retrieves a list of aggregate metrics grouped by time interval.
    *
@@ -21,8 +28,8 @@ export class Bytimes extends APIResource {
    *   });
    * ```
    */
-  get(params: BytimeGetParams, options?: RequestOptions): APIPromise<ByTime> {
-    const { zone_id, ...query } = params;
+  get(params: BytimeGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<ByTime> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/dns_analytics/report/bytime`, {
         query,
@@ -31,6 +38,7 @@ export class Bytimes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Bytimes extends BaseBytimes {}
 
 export interface ByTime {
   /**
@@ -149,7 +157,7 @@ export interface BytimeGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.

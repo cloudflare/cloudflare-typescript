@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Telemetry extends APIResource {
+export class BaseTelemetry extends APIResource {
+  static override readonly _key: readonly ['workers', 'observability', 'telemetry'] = Object.freeze([
+    'workers',
+    'observability',
+    'telemetry',
+  ] as const);
+
   /**
    * List all the keys in your telemetry events.
    *
@@ -21,10 +27,10 @@ export class Telemetry extends APIResource {
    * ```
    */
   keys(
-    params: TelemetryKeysParams,
+    params: TelemetryKeysParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TelemetryKeysResponsesSinglePage, TelemetryKeysResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/observability/telemetry/keys`,
       SinglePage<TelemetryKeysResponse>,
@@ -46,7 +52,7 @@ export class Telemetry extends APIResource {
    * ```
    */
   query(params: TelemetryQueryParams, options?: RequestOptions): APIPromise<TelemetryQueryResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/observability/telemetry/query`, {
         body,
@@ -78,7 +84,7 @@ export class Telemetry extends APIResource {
     params: TelemetryValuesParams,
     options?: RequestOptions,
   ): PagePromise<TelemetryValuesResponsesSinglePage, TelemetryValuesResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/observability/telemetry/values`,
       SinglePage<TelemetryValuesResponse>,
@@ -86,6 +92,7 @@ export class Telemetry extends APIResource {
     );
   }
 }
+export class Telemetry extends BaseTelemetry {}
 
 export type TelemetryKeysResponsesSinglePage = SinglePage<TelemetryKeysResponse>;
 
@@ -1104,7 +1111,7 @@ export interface TelemetryKeysParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Leave this empty to use the default datasets
@@ -1241,7 +1248,7 @@ export interface TelemetryQueryParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Unique identifier for the query to execute
@@ -1554,7 +1561,7 @@ export interface TelemetryValuesParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Leave this empty to use the default datasets

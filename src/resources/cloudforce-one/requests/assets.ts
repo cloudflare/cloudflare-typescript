@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Assets extends APIResource {
+export class BaseAssets extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'requests', 'assets'] = Object.freeze([
+    'cloudforceOne',
+    'requests',
+    'assets',
+  ] as const);
+
   /**
    * Lists assets attached to a Cloudforce One intelligence request.
    *
@@ -30,7 +36,7 @@ export class Assets extends APIResource {
     params: AssetCreateParams,
     options?: RequestOptions,
   ): PagePromise<AssetCreateResponsesSinglePage, AssetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/cloudforce-one/requests/${requestID}/asset`,
       SinglePage<AssetCreateResponse>,
@@ -58,7 +64,7 @@ export class Assets extends APIResource {
     params: AssetUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AssetUpdateResponse> {
-    const { account_id, request_id, ...body } = params;
+    const { account_id = this._client.accountID, request_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/cloudforce-one/requests/${request_id}/asset/${assetID}`, {
         body,
@@ -87,7 +93,7 @@ export class Assets extends APIResource {
     params: AssetDeleteParams,
     options?: RequestOptions,
   ): APIPromise<AssetDeleteResponse> {
-    const { account_id, request_id } = params;
+    const { account_id = this._client.accountID, request_id } = params;
     return this._client.delete(
       path`/accounts/${account_id}/cloudforce-one/requests/${request_id}/asset/${assetID}`,
       options,
@@ -116,7 +122,7 @@ export class Assets extends APIResource {
     params: AssetGetParams,
     options?: RequestOptions,
   ): PagePromise<AssetGetResponsesSinglePage, AssetGetResponse> {
-    const { account_id, request_id } = params;
+    const { account_id = this._client.accountID, request_id } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/cloudforce-one/requests/${request_id}/asset/${assetID}`,
       SinglePage<AssetGetResponse>,
@@ -124,6 +130,7 @@ export class Assets extends APIResource {
     );
   }
 }
+export class Assets extends BaseAssets {}
 
 export type AssetCreateResponsesSinglePage = SinglePage<AssetCreateResponse>;
 
@@ -259,7 +266,7 @@ export interface AssetCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Page number of results.
@@ -276,7 +283,7 @@ export interface AssetUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: UUID.
@@ -293,7 +300,7 @@ export interface AssetDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * UUID.
@@ -305,7 +312,7 @@ export interface AssetGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * UUID.

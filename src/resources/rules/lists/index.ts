@@ -2,11 +2,13 @@
 
 export {
   BulkOperations,
+  BaseBulkOperations,
   type BulkOperationGetResponse,
   type BulkOperationGetParams,
 } from './bulk-operations';
 export {
   Items,
+  BaseItems,
   type ListCursor,
   type ListItem,
   type ItemCreateResponse,
@@ -23,6 +25,7 @@ export {
 } from './items';
 export {
   Lists,
+  BaseLists,
   type Hostname,
   type ListsList,
   type Redirect,

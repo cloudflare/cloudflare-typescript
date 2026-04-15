@@ -2,6 +2,7 @@
 
 export {
   CatalogSyncs,
+  BaseCatalogSyncs,
   type CatalogSyncCreateResponse,
   type CatalogSyncUpdateResponse,
   type CatalogSyncListResponse,
@@ -20,6 +21,7 @@ export {
 } from './catalog-syncs/index';
 export {
   CloudIntegrations,
+  BaseCloudIntegrations,
   type CloudIntegrationCreateResponse,
   type CloudIntegrationUpdateResponse,
   type CloudIntegrationListResponse,
@@ -40,9 +42,10 @@ export {
   type CloudIntegrationInitialSetupParams,
   type CloudIntegrationListResponsesSinglePage,
 } from './cloud-integrations';
-export { MagicCloudNetworking } from './magic-cloud-networking';
+export { MagicCloudNetworking, BaseMagicCloudNetworking } from './magic-cloud-networking';
 export {
   OnRamps,
+  BaseOnRamps,
   type OnRampCreateResponse,
   type OnRampUpdateResponse,
   type OnRampListResponse,
@@ -64,6 +67,7 @@ export {
 } from './on-ramps/index';
 export {
   Resources,
+  BaseResources,
   type ResourceListResponse,
   type ResourceGetResponse,
   type ResourcePolicyPreviewResponse,

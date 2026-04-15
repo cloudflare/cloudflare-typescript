@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Jobs extends APIResource {
+export class BaseJobs extends APIResource {
+  static override readonly _key: readonly ['aiSearch', 'instances', 'jobs'] = Object.freeze([
+    'aiSearch',
+    'instances',
+    'jobs',
+  ] as const);
+
   /**
    * Creates a new indexing job for an AI Search instance.
    *
@@ -22,8 +28,12 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  create(id: string, params: JobCreateParams, options?: RequestOptions): APIPromise<JobCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    id: string,
+    params: JobCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/ai-search/instances/${id}/jobs`, {
         body,
@@ -48,10 +58,10 @@ export class Jobs extends APIResource {
    */
   list(
     id: string,
-    params: JobListParams,
+    params: JobListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-search/instances/${id}/jobs`,
       V4PagePaginationArray<JobListResponse>,
@@ -74,7 +84,7 @@ export class Jobs extends APIResource {
    * ```
    */
   get(jobID: string, params: JobGetParams, options?: RequestOptions): APIPromise<JobGetResponse> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountID, id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/ai-search/instances/${id}/jobs/${jobID}`,
@@ -98,7 +108,7 @@ export class Jobs extends APIResource {
    * ```
    */
   logs(jobID: string, params: JobLogsParams, options?: RequestOptions): APIPromise<JobLogsResponse> {
-    const { account_id, id, ...query } = params;
+    const { account_id = this._client.accountID, id, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/ai-search/instances/${id}/jobs/${jobID}/logs`, {
         query,
@@ -107,6 +117,7 @@ export class Jobs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Jobs extends BaseJobs {}
 
 export type JobListResponsesV4PagePaginationArray = V4PagePaginationArray<JobListResponse>;
 
@@ -176,7 +187,7 @@ export interface JobCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -188,11 +199,11 @@ export interface JobListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobGetParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
@@ -204,7 +215,7 @@ export interface JobLogsParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: AI Search instance ID. Lowercase alphanumeric, hyphens, and

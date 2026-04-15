@@ -6,23 +6,27 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class CustomCertificate extends APIResource {
+export class BaseCustomCertificate extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'configurations', 'customCertificate'] =
+    Object.freeze(['zeroTrust', 'gateway', 'configurations', 'customCertificate'] as const);
+
   /**
    * Retrieve the current Zero Trust certificate configuration.
    *
    * @deprecated
    */
   get(
-    params: CustomCertificateGetParams,
+    params: CustomCertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConfigurationsAPI.CustomCertificateSettings | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/gateway/configuration/custom_certificate`, options);
   }
 }
+export class CustomCertificate extends BaseCustomCertificate {}
 
 export interface CustomCertificateGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace CustomCertificate {

@@ -9,7 +9,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Registrations extends APIResource {
+export class BaseRegistrations extends APIResource {
+  static override readonly _key: readonly ['registrar', 'registrations'] = Object.freeze([
+    'registrar',
+    'registrations',
+  ] as const);
+
   /**
    * Starts a domain registration workflow. This is a billable operation — successful
    * registration charges the account's default payment method. All successful domain
@@ -77,7 +82,7 @@ export class Registrations extends APIResource {
     params: RegistrationCreateParams,
     options?: RequestOptions,
   ): APIPromise<RegistrarAPI.WorkflowStatus> {
-    const { account_id, Prefer, ...body } = params;
+    const { account_id = this._client.accountID, Prefer, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/registrar/registrations`, {
         body,
@@ -106,10 +111,10 @@ export class Registrations extends APIResource {
    * ```
    */
   list(
-    params: RegistrationListParams,
+    params: RegistrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RegistrationsCursorPagination, RegistrarAPI.Registration> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/registrar/registrations`,
       CursorPagination<RegistrarAPI.Registration>,
@@ -144,7 +149,7 @@ export class Registrations extends APIResource {
     params: RegistrationEditParams,
     options?: RequestOptions,
   ): APIPromise<RegistrarAPI.WorkflowStatus> {
-    const { account_id, Prefer, ...body } = params;
+    const { account_id = this._client.accountID, Prefer, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/registrar/registrations/${domainName}`, {
         body,
@@ -175,10 +180,10 @@ export class Registrations extends APIResource {
    */
   get(
     domainName: string,
-    params: RegistrationGetParams,
+    params: RegistrationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegistrarAPI.Registration> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/registrar/registrations/${domainName}`,
@@ -187,12 +192,13 @@ export class Registrations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Registrations extends BaseRegistrations {}
 
 export interface RegistrationCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Fully qualified domain name (FQDN) including the extension (e.g.,
@@ -375,7 +381,7 @@ export interface RegistrationListParams extends CursorPaginationParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Sort direction for results. Defaults to ascending order.
@@ -393,7 +399,7 @@ export interface RegistrationEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Enable or disable automatic renewal. Setting this field to `true`
@@ -414,7 +420,7 @@ export interface RegistrationGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Registrations {

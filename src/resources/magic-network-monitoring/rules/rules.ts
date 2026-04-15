@@ -2,14 +2,17 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AdvertisementsAPI from './advertisements';
-import { Advertisement, AdvertisementEditParams, Advertisements } from './advertisements';
+import { Advertisement, AdvertisementEditParams, Advertisements, BaseAdvertisements } from './advertisements';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Rules extends APIResource {
-  advertisements: AdvertisementsAPI.Advertisements = new AdvertisementsAPI.Advertisements(this._client);
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['magicNetworkMonitoring', 'rules'] = Object.freeze([
+    'magicNetworkMonitoring',
+    'rules',
+  ] as const);
 
   /**
    * Create network monitoring rules for account. Currently only supports creating a
@@ -28,7 +31,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: RequestOptions): APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/mnm/rules`, { body, ...options }) as APIPromise<{
         result: MagicNetworkMonitoringRule | null;
@@ -52,7 +55,7 @@ export class Rules extends APIResource {
    * ```
    */
   update(params: RuleUpdateParams, options?: RequestOptions): APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/mnm/rules`, { body, ...options }) as APIPromise<{
         result: MagicNetworkMonitoringRule | null;
@@ -74,10 +77,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params: RuleListParams,
+    params: RuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MagicNetworkMonitoringRulesSinglePage, MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/mnm/rules`,
       SinglePage<MagicNetworkMonitoringRule | null>,
@@ -99,10 +102,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleID: string,
-    params: RuleDeleteParams,
+    params: RuleDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/mnm/rules/${ruleID}`, options) as APIPromise<{
         result: MagicNetworkMonitoringRule | null;
@@ -133,7 +136,7 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: RequestOptions,
   ): APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/mnm/rules/${ruleID}`, {
         body,
@@ -156,16 +159,19 @@ export class Rules extends APIResource {
    */
   get(
     ruleID: string,
-    params: RuleGetParams,
+    params: RuleGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/mnm/rules/${ruleID}`, options) as APIPromise<{
         result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Rules extends BaseRules {
+  advertisements: AdvertisementsAPI.Advertisements = new AdvertisementsAPI.Advertisements(this._client);
 }
 
 export type MagicNetworkMonitoringRulesSinglePage = SinglePage<MagicNetworkMonitoringRule | null>;
@@ -237,7 +243,7 @@ export interface RuleCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Toggle on if you would like Cloudflare to automatically advertise
@@ -305,7 +311,7 @@ export interface RuleUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Toggle on if you would like Cloudflare to automatically advertise
@@ -370,18 +376,18 @@ export interface RuleUpdateParams {
 }
 
 export interface RuleListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Toggle on if you would like Cloudflare to automatically advertise
@@ -446,10 +452,11 @@ export interface RuleEditParams {
 }
 
 export interface RuleGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Rules.Advertisements = Advertisements;
+Rules.BaseAdvertisements = BaseAdvertisements;
 
 export declare namespace Rules {
   export {
@@ -465,6 +472,7 @@ export declare namespace Rules {
 
   export {
     Advertisements as Advertisements,
+    BaseAdvertisements as BaseAdvertisements,
     type Advertisement as Advertisement,
     type AdvertisementEditParams as AdvertisementEditParams,
   };

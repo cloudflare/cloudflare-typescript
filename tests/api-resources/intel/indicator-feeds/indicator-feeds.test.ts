@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Intel } from 'cloudflare/resources/intel/intel';
+import { BaseIndicatorFeeds } from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource indicatorFeeds', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseIndicatorFeeds],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Intel],
+});
+
+const runTests = (client: PartialCloudflare<{ intel: { indicatorFeeds: BaseIndicatorFeeds } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.intel.indicatorFeeds.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -110,4 +128,7 @@ describe('resource indicatorFeeds', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource indicatorFeeds', () => runTests(client));
+describe('resource indicatorFeeds (tree shakable, base)', () => runTests(partialClient));
+describe('resource indicatorFeeds (tree shakable, subresource)', () => runTests(parentPartialClient));

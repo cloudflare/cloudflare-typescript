@@ -2,6 +2,7 @@
 
 export {
   Configs,
+  BaseConfigs,
   type ConfigDeleteResponse,
   type ConfigCreateParams,
   type ConfigUpdateParams,
@@ -10,4 +11,4 @@ export {
   type ConfigEditParams,
   type ConfigGetParams,
 } from './configs';
-export { HyperdriveResource } from './hyperdrive';
+export { HyperdriveResource, BaseHyperdriveResource } from './hyperdrive';

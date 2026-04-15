@@ -6,7 +6,11 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Page extends APIResource {
+export class BasePage extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'devtools', 'browser', 'page'] = Object.freeze(
+    ['browserRendering', 'devtools', 'browser', 'page'] as const,
+  );
+
   /**
    * Establishes a WebSocket connection to a specific Chrome DevTools target or page.
    *
@@ -22,19 +26,20 @@ export class Page extends APIResource {
    * ```
    */
   get(targetID: string, params: PageGetParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, session_id } = params;
+    const { account_id = this._client.accountID, session_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${session_id}/page/${targetID}`,
       { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
     );
   }
 }
+export class Page extends BasePage {}
 
 export interface PageGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Browser session ID.

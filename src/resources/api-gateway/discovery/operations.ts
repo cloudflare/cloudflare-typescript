@@ -12,7 +12,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Operations extends APIResource {
+export class BaseOperations extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'discovery', 'operations'] = Object.freeze([
+    'apiGateway',
+    'discovery',
+    'operations',
+  ] as const);
+
   /**
    * Retrieve the most up to date view of discovered operations
    *
@@ -27,10 +33,10 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params: OperationListParams,
+    params: OperationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/discovery/operations`,
       V4PagePaginationArray<DiscoveryAPI.DiscoveryOperation>,
@@ -54,7 +60,7 @@ export class Operations extends APIResource {
    * ```
    */
   bulkEdit(params: OperationBulkEditParams, options?: RequestOptions): APIPromise<OperationBulkEditResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/api_gateway/discovery/operations`, {
         body: body,
@@ -80,7 +86,7 @@ export class Operations extends APIResource {
     params: OperationEditParams,
     options?: RequestOptions,
   ): APIPromise<OperationEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/api_gateway/discovery/operations/${operationID}`, {
         body,
@@ -89,6 +95,7 @@ export class Operations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Operations extends BaseOperations {}
 
 export type OperationBulkEditResponse = { [key: string]: OperationBulkEditResponse.item };
 
@@ -122,7 +129,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: When `true`, only return API Discovery results that are not saved
@@ -182,7 +189,7 @@ export interface OperationBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -209,7 +216,7 @@ export interface OperationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Mark state of operation in API Discovery

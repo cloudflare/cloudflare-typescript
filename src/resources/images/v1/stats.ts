@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Stats extends APIResource {
+export class BaseStats extends APIResource {
+  static override readonly _key: readonly ['images', 'v1', 'stats'] = Object.freeze([
+    'images',
+    'v1',
+    'stats',
+  ] as const);
+
   /**
    * Fetch image statistics details for Cloudflare Images. The returned statistics
    * detail storage usage, including the current image count vs this account's
@@ -18,13 +24,14 @@ export class Stats extends APIResource {
    * });
    * ```
    */
-  get(params: StatGetParams, options?: RequestOptions): APIPromise<Stat> {
-    const { account_id } = params;
+  get(params: StatGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Stat> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/images/v1/stats`, options) as APIPromise<{ result: Stat }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Stats extends BaseStats {}
 
 export interface Stat {
   count?: Stat.Count;
@@ -48,7 +55,7 @@ export interface StatGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Stats {

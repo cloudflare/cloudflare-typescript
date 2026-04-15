@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Failover extends APIResource {
+export class BaseFailover extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'warpConnector', 'failover'] =
+    Object.freeze(['zeroTrust', 'tunnels', 'warpConnector', 'failover'] as const);
+
   /**
    * Triggers a manual failover for a specific WARP Connector Tunnel, setting the
    * specified client as the active connector. The tunnel must be configured for high
@@ -28,7 +31,7 @@ export class Failover extends APIResource {
     params: FailoverUpdateParams,
     options?: RequestOptions,
   ): APIPromise<FailoverUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/warp_connector/${tunnelID}/failover`, {
         body,
@@ -37,6 +40,7 @@ export class Failover extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Failover extends BaseFailover {}
 
 export type FailoverUpdateResponse = unknown;
 
@@ -44,7 +48,7 @@ export interface FailoverUpdateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: UUID of the Cloudflare Tunnel connector.

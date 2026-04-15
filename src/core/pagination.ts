@@ -3,7 +3,7 @@
 import { CloudflareError } from './error';
 import { FinalRequestOptions } from '../internal/request-options';
 import { defaultParseResponse } from '../internal/parse';
-import { type Cloudflare } from '../client';
+import { type BaseCloudflare } from '../client';
 import { APIPromise } from './api-promise';
 import { type APIResponseProps } from '../internal/parse';
 import { maybeObj } from '../internal/utils/values';
@@ -11,13 +11,13 @@ import { maybeObj } from '../internal/utils/values';
 export type PageRequestOptions = Pick<FinalRequestOptions, 'query' | 'headers' | 'body' | 'path' | 'method'>;
 
 export abstract class AbstractPage<Item> implements AsyncIterable<Item> {
-  #client: Cloudflare;
+  #client: BaseCloudflare;
   protected options: FinalRequestOptions;
 
   protected response: Response;
   protected body: unknown;
 
-  constructor(client: Cloudflare, response: Response, body: unknown, options: FinalRequestOptions) {
+  constructor(client: BaseCloudflare, response: Response, body: unknown, options: FinalRequestOptions) {
     this.#client = client;
     this.options = options;
     this.response = response;
@@ -80,7 +80,7 @@ export class PagePromise<
   implements AsyncIterable<Item>
 {
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     request: Promise<APIResponseProps>,
     Page: new (...args: ConstructorParameters<typeof AbstractPage>) => PageClass,
   ) {
@@ -137,7 +137,7 @@ export class V4PagePagination<Item> extends AbstractPage<Item> implements V4Page
   result_info: V4PagePaginationResponse.ResultInfo;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     response: Response,
     body: V4PagePaginationResponse<Item>,
     options: FinalRequestOptions,
@@ -195,7 +195,7 @@ export class V4PagePaginationArray<Item>
   result_info: V4PagePaginationArrayResponse.ResultInfo;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     response: Response,
     body: V4PagePaginationArrayResponse<Item>,
     options: FinalRequestOptions,
@@ -252,7 +252,7 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
   result_info: CursorPaginationResponse.ResultInfo;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     response: Response,
     body: CursorPaginationResponse<Item>,
     options: FinalRequestOptions,
@@ -314,7 +314,7 @@ export class CursorPaginationAfter<Item>
   result_info: CursorPaginationAfterResponse.ResultInfo;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     response: Response,
     body: CursorPaginationAfterResponse<Item>,
     options: FinalRequestOptions,
@@ -376,7 +376,7 @@ export class CursorLimitPagination<Item>
   result_info: CursorLimitPaginationResponse.ResultInfo;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     response: Response,
     body: CursorLimitPaginationResponse<Item>,
     options: FinalRequestOptions,
@@ -415,7 +415,7 @@ export class SinglePage<Item> extends AbstractPage<Item> implements SinglePageRe
   result: Array<Item>;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     response: Response,
     body: SinglePageResponse<Item>,
     options: FinalRequestOptions,

@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class RayID extends APIResource {
+export class BaseRayID extends APIResource {
+  static override readonly _key: readonly ['logs', 'RayID'] = Object.freeze(['logs', 'RayID'] as const);
+
   /**
    * The `/rayids` api route allows lookups by specific rayid. The rayids route will
    * return zero, one, or more records (ray ids are not unique).
@@ -18,11 +20,16 @@ export class RayID extends APIResource {
    * );
    * ```
    */
-  get(RayID: string, params: RayIDGetParams, options?: RequestOptions): APIPromise<RayIDGetResponse> {
-    const { zone_id, ...query } = params;
+  get(
+    RayID: string,
+    params: RayIDGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RayIDGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.get(path`/zones/${zone_id}/logs/rayids/${RayID}`, { query, ...options });
   }
 }
+export class RayID extends BaseRayID {}
 
 export type RayIDGetResponse = string | unknown;
 
@@ -30,7 +37,7 @@ export interface RayIDGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The `/received` route by default returns a limited set of fields,

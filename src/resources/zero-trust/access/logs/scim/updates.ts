@@ -9,7 +9,15 @@ import {
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Updates extends APIResource {
+export class BaseUpdates extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'logs', 'scim', 'updates'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'logs',
+    'scim',
+    'updates',
+  ] as const);
+
   /**
    * Lists Access SCIM update logs that maintain a record of updates made to User and
    * Group resources synced to Cloudflare via the System for Cross-domain Identity
@@ -35,7 +43,7 @@ export class Updates extends APIResource {
     params: UpdateListParams,
     options?: RequestOptions,
   ): PagePromise<UpdateListResponsesV4PagePaginationArray, UpdateListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/logs/scim/updates`,
       V4PagePaginationArray<UpdateListResponse>,
@@ -43,6 +51,7 @@ export class Updates extends APIResource {
     );
   }
 }
+export class Updates extends BaseUpdates {}
 
 export type UpdateListResponsesV4PagePaginationArray = V4PagePaginationArray<UpdateListResponse>;
 
@@ -105,7 +114,7 @@ export interface UpdateListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The unique Id of the IdP that has SCIM enabled.

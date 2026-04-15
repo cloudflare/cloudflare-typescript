@@ -2,6 +2,7 @@
 
 export {
   DEXTests,
+  BaseDEXTests,
   type SchemaData,
   type SchemaHTTP,
   type DEXTestCreateResponse,
@@ -18,15 +19,22 @@ export {
 } from './dex-tests';
 export {
   Devices,
+  BaseDevices,
   type Device,
   type DeviceGetResponse,
   type DeviceListParams,
   type DeviceGetParams,
   type DevicesSinglePage,
 } from './devices';
-export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
+export {
+  FleetStatus,
+  BaseFleetStatus,
+  type FleetStatusGetResponse,
+  type FleetStatusGetParams,
+} from './fleet-status';
 export {
   IPProfiles,
+  BaseIPProfiles,
   type IPProfile,
   type IPProfileDeleteResponse,
   type IPProfileCreateParams,
@@ -38,6 +46,7 @@ export {
 } from './ip-profiles';
 export {
   Networks,
+  BaseNetworks,
   type DeviceNetwork,
   type NetworkCreateParams,
   type NetworkUpdateParams,
@@ -48,6 +57,7 @@ export {
 } from './networks';
 export {
   OverrideCodes,
+  BaseOverrideCodes,
   type OverrideCodeListResponse,
   type OverrideCodeGetResponse,
   type OverrideCodeListParams,
@@ -56,6 +66,7 @@ export {
 } from './override-codes';
 export {
   Policies,
+  BasePolicies,
   type DevicePolicyCertificates,
   type FallbackDomain,
   type FallbackDomainPolicy,
@@ -69,6 +80,7 @@ export {
 } from './policies/index';
 export {
   Posture,
+  BasePosture,
   type CarbonblackInput,
   type ClientCertificateInput,
   type CrowdstrikeInput,
@@ -97,6 +109,7 @@ export {
 } from './posture/index';
 export {
   Registrations,
+  BaseRegistrations,
   type RegistrationListResponse,
   type RegistrationDeleteResponse,
   type RegistrationBulkDeleteResponse,
@@ -111,17 +124,18 @@ export {
   type RegistrationUnrevokeParams,
   type RegistrationListResponsesCursorPagination,
 } from './registrations';
-export { Resilience } from './resilience/index';
-export { Revoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
+export { Resilience, BaseResilience } from './resilience/index';
+export { Revoke, BaseRevoke, type RevokeCreateResponse, type RevokeCreateParams } from './revoke';
 export {
   Settings,
+  BaseSettings,
   type DeviceSettings,
   type SettingUpdateParams,
   type SettingDeleteParams,
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';
-export { Unrevoke, type UnrevokeCreateResponse, type UnrevokeCreateParams } from './unrevoke';
+export { Unrevoke, BaseUnrevoke, type UnrevokeCreateResponse, type UnrevokeCreateParams } from './unrevoke';
 export {
   type DeviceListResponse,
   type DeviceDeleteResponse,

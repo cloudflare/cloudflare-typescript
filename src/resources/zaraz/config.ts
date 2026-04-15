@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Config extends APIResource {
+export class BaseConfig extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'config'] = Object.freeze(['zaraz', 'config'] as const);
+
   /**
    * Updates Zaraz configuration for a zone.
    *
@@ -31,7 +33,7 @@ export class Config extends APIResource {
    * ```
    */
   update(params: ConfigUpdateParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/settings/zaraz/config`, { body, ...options }) as APIPromise<{
         result: Configuration;
@@ -51,8 +53,8 @@ export class Config extends APIResource {
    * });
    * ```
    */
-  get(params: ConfigGetParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { zone_id } = params;
+  get(params: ConfigGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Configuration> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/settings/zaraz/config`, options) as APIPromise<{
         result: Configuration;
@@ -60,6 +62,7 @@ export class Config extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Config extends BaseConfig {}
 
 /**
  * Zaraz configuration.
@@ -755,7 +758,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Data layer compatibility mode enabled.
@@ -1447,7 +1450,7 @@ export interface ConfigGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Config {

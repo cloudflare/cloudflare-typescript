@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseHealth } from 'cloudflare/resources/load-balancers/pools/health';
+import { Pools } from 'cloudflare/resources/load-balancers/pools/pools';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource health', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseHealth],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Pools],
+});
+
+const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: { health: BaseHealth } } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.loadBalancers.pools.health.create('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -62,4 +80,7 @@ describe('resource health', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource health', () => runTests(client));
+describe('resource health (tree shakable, base)', () => runTests(partialClient));
+describe('resource health (tree shakable, subresource)', () => runTests(parentPartialClient));

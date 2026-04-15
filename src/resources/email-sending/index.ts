@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { EmailSending } from './email-sending';
+export { EmailSending, BaseEmailSending } from './email-sending';
 export {
   Subdomains,
+  BaseSubdomains,
   type SubdomainCreateResponse,
   type SubdomainListResponse,
   type SubdomainDeleteResponse,

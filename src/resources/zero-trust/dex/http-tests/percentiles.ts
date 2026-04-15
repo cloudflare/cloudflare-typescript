@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Percentiles extends APIResource {
+export class BasePercentiles extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'httpTests', 'percentiles'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'httpTests',
+    'percentiles',
+  ] as const);
+
   /**
    * Get percentiles for an http test for a given time period between 1 hour and 7
    * days.
@@ -29,7 +36,7 @@ export class Percentiles extends APIResource {
     params: PercentileGetParams,
     options?: RequestOptions,
   ): APIPromise<HTTPDetailsPercentiles> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/http-tests/${testID}/percentiles`, {
         query,
@@ -38,6 +45,7 @@ export class Percentiles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Percentiles extends BasePercentiles {}
 
 export interface HTTPDetailsPercentiles {
   dnsResponseTimeMs?: DEXAPI.Percentiles;
@@ -78,7 +86,7 @@ export interface PercentileGetParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format

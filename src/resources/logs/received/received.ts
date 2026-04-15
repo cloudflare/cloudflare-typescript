@@ -2,13 +2,13 @@
 
 import { APIResource } from '../../../core/resource';
 import * as FieldsAPI from './fields';
-import { FieldGetParams, FieldGetResponse, Fields } from './fields';
+import { BaseFields, FieldGetParams, FieldGetResponse, Fields } from './fields';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Received extends APIResource {
-  fields: FieldsAPI.Fields = new FieldsAPI.Fields(this._client);
+export class BaseReceived extends APIResource {
+  static override readonly _key: readonly ['logs', 'received'] = Object.freeze(['logs', 'received'] as const);
 
   /**
    * The `/received` api route allows customers to retrieve their edge HTTP logs. The
@@ -29,9 +29,12 @@ export class Received extends APIResource {
    * ```
    */
   get(params: ReceivedGetParams, options?: RequestOptions): APIPromise<ReceivedGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params;
     return this._client.get(path`/zones/${zone_id}/logs/received`, { query, ...options });
   }
+}
+export class Received extends BaseReceived {
+  fields: FieldsAPI.Fields = new FieldsAPI.Fields(this._client);
 }
 
 export type ReceivedGetResponse = string | unknown;
@@ -40,7 +43,7 @@ export interface ReceivedGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Sets the (exclusive) end of the requested time frame. This can be a
@@ -105,12 +108,14 @@ export interface ReceivedGetParams {
 }
 
 Received.Fields = Fields;
+Received.BaseFields = BaseFields;
 
 export declare namespace Received {
   export { type ReceivedGetResponse as ReceivedGetResponse, type ReceivedGetParams as ReceivedGetParams };
 
   export {
     Fields as Fields,
+    BaseFields as BaseFields,
     type FieldGetResponse as FieldGetResponse,
     type FieldGetParams as FieldGetParams,
   };

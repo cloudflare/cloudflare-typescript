@@ -9,16 +9,23 @@ import {
   ActiveSessionListResponse,
   ActiveSessionListResponsesSinglePage,
   ActiveSessions,
+  BaseActiveSessions,
 } from './active-sessions';
 import * as FailedLoginsAPI from './failed-logins';
 import {
+  BaseFailedLogins,
   FailedLoginListParams,
   FailedLoginListResponse,
   FailedLoginListResponsesSinglePage,
   FailedLogins,
 } from './failed-logins';
 import * as LastSeenIdentityAPI from './last-seen-identity';
-import { Identity, LastSeenIdentity, LastSeenIdentityGetParams } from './last-seen-identity';
+import {
+  BaseLastSeenIdentity,
+  Identity,
+  LastSeenIdentity,
+  LastSeenIdentityGetParams,
+} from './last-seen-identity';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
@@ -28,12 +35,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Users extends APIResource {
-  activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);
-  lastSeenIdentity: LastSeenIdentityAPI.LastSeenIdentity = new LastSeenIdentityAPI.LastSeenIdentity(
-    this._client,
-  );
-  failedLogins: FailedLoginsAPI.FailedLogins = new FailedLoginsAPI.FailedLogins(this._client);
+export class BaseUsers extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'users'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'users',
+  ] as const);
 
   /**
    * Creates a new user.
@@ -47,7 +54,7 @@ export class Users extends APIResource {
    * ```
    */
   create(params: UserCreateParams, options?: RequestOptions): APIPromise<UserCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/access/users`, { body, ...options }) as APIPromise<{
         result: UserCreateResponse;
@@ -72,7 +79,7 @@ export class Users extends APIResource {
    * ```
    */
   update(userID: string, params: UserUpdateParams, options?: RequestOptions): APIPromise<UserUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/access/users/${userID}`, {
         body,
@@ -95,10 +102,10 @@ export class Users extends APIResource {
    * ```
    */
   list(
-    params: UserListParams,
+    params: UserListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/users`,
       V4PagePaginationArray<UserListResponse>,
@@ -120,10 +127,10 @@ export class Users extends APIResource {
    */
   delete(
     userID: string,
-    params: UserDeleteParams,
+    params: UserDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<UserDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/access/users/${userID}`, options) as APIPromise<{
         result: UserDeleteResponse | null;
@@ -142,14 +149,25 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  get(userID: string, params: UserGetParams, options?: RequestOptions): APIPromise<UserGetResponse> {
-    const { account_id } = params;
+  get(
+    userID: string,
+    params: UserGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UserGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/users/${userID}`, options) as APIPromise<{
         result: UserGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Users extends BaseUsers {
+  activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);
+  lastSeenIdentity: LastSeenIdentityAPI.LastSeenIdentity = new LastSeenIdentityAPI.LastSeenIdentity(
+    this._client,
+  );
+  failedLogins: FailedLoginsAPI.FailedLogins = new FailedLoginsAPI.FailedLogins(this._client);
 }
 
 export type UserListResponsesV4PagePaginationArray = V4PagePaginationArray<UserListResponse>;
@@ -435,7 +453,7 @@ export interface UserCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The email of the user.
@@ -452,7 +470,7 @@ export interface UserUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The email of the user.
@@ -469,7 +487,7 @@ export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The email of the user.
@@ -491,19 +509,22 @@ export interface UserDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface UserGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Users.ActiveSessions = ActiveSessions;
+Users.BaseActiveSessions = BaseActiveSessions;
 Users.LastSeenIdentity = LastSeenIdentity;
+Users.BaseLastSeenIdentity = BaseLastSeenIdentity;
 Users.FailedLogins = FailedLogins;
+Users.BaseFailedLogins = BaseFailedLogins;
 
 export declare namespace Users {
   export {
@@ -523,6 +544,7 @@ export declare namespace Users {
 
   export {
     ActiveSessions as ActiveSessions,
+    BaseActiveSessions as BaseActiveSessions,
     type ActiveSessionListResponse as ActiveSessionListResponse,
     type ActiveSessionGetResponse as ActiveSessionGetResponse,
     type ActiveSessionListResponsesSinglePage as ActiveSessionListResponsesSinglePage,
@@ -532,12 +554,14 @@ export declare namespace Users {
 
   export {
     LastSeenIdentity as LastSeenIdentity,
+    BaseLastSeenIdentity as BaseLastSeenIdentity,
     type Identity as Identity,
     type LastSeenIdentityGetParams as LastSeenIdentityGetParams,
   };
 
   export {
     FailedLogins as FailedLogins,
+    BaseFailedLogins as BaseFailedLogins,
     type FailedLoginListResponse as FailedLoginListResponse,
     type FailedLoginListResponsesSinglePage as FailedLoginListResponsesSinglePage,
     type FailedLoginListParams as FailedLoginListParams,

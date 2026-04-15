@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Links extends APIResource {
+export class BaseLinks extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'links'] = Object.freeze([
+    'browserRendering',
+    'links',
+  ] as const);
+
   /**
    * Get links from a web page.
    *
@@ -18,7 +23,7 @@ export class Links extends APIResource {
    * ```
    */
   create(params: LinkCreateParams, options?: RequestOptions): APIPromise<LinkCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/links`, {
         query: { cacheTTL },
@@ -28,6 +33,7 @@ export class Links extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Links extends BaseLinks {}
 
 export type LinkCreateResponse = Array<string>;
 
@@ -38,7 +44,7 @@ export declare namespace LinkCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -312,7 +318,7 @@ export declare namespace LinkCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.

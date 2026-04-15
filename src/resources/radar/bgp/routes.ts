@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Routes extends APIResource {
+export class BaseRoutes extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp', 'routes'] = Object.freeze([
+    'radar',
+    'bgp',
+    'routes',
+  ] as const);
+
   /**
    * Retrieves all ASes in the current global routing tables with routing statistics.
    *
@@ -101,6 +107,7 @@ export class Routes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Routes extends BaseRoutes {}
 
 export interface RouteAsesResponse {
   asns: Array<RouteAsesResponse.ASN>;

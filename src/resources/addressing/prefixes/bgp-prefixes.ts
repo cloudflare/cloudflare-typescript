@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class BGPPrefixes extends APIResource {
+export class BaseBGPPrefixes extends APIResource {
+  static override readonly _key: readonly ['addressing', 'prefixes', 'bgpPrefixes'] = Object.freeze([
+    'addressing',
+    'prefixes',
+    'bgpPrefixes',
+  ] as const);
+
   /**
    * Create a BGP prefix, controlling the BGP advertisement status of a specific
    * subnet. When created, BGP prefixes are initially withdrawn, and can be
@@ -25,7 +31,7 @@ export class BGPPrefixes extends APIResource {
    * ```
    */
   create(prefixID: string, params: BGPPrefixCreateParams, options?: RequestOptions): APIPromise<BGPPrefix> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/addressing/prefixes/${prefixID}/bgp/prefixes`, {
         body,
@@ -53,10 +59,10 @@ export class BGPPrefixes extends APIResource {
    */
   list(
     prefixID: string,
-    params: BGPPrefixListParams,
+    params: BGPPrefixListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<BGPPrefixesSinglePage, BGPPrefix> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/prefixes/${prefixID}/bgp/prefixes`,
       SinglePage<BGPPrefix>,
@@ -81,7 +87,7 @@ export class BGPPrefixes extends APIResource {
    * ```
    */
   edit(bgpPrefixID: string, params: BGPPrefixEditParams, options?: RequestOptions): APIPromise<BGPPrefix> {
-    const { account_id, prefix_id, ...body } = params;
+    const { account_id = this._client.accountID, prefix_id, ...body } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/addressing/prefixes/${prefix_id}/bgp/prefixes/${bgpPrefixID}`,
@@ -106,7 +112,7 @@ export class BGPPrefixes extends APIResource {
    * ```
    */
   get(bgpPrefixID: string, params: BGPPrefixGetParams, options?: RequestOptions): APIPromise<BGPPrefix> {
-    const { account_id, prefix_id } = params;
+    const { account_id = this._client.accountID, prefix_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/addressing/prefixes/${prefix_id}/bgp/prefixes/${bgpPrefixID}`,
@@ -115,6 +121,7 @@ export class BGPPrefixes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class BGPPrefixes extends BaseBGPPrefixes {}
 
 export type BGPPrefixesSinglePage = SinglePage<BGPPrefix>;
 
@@ -202,7 +209,7 @@ export interface BGPPrefixCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -214,14 +221,14 @@ export interface BGPPrefixListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BGPPrefixEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier of an IP Prefix.
@@ -259,7 +266,7 @@ export interface BGPPrefixGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier of an IP Prefix.

@@ -2,6 +2,7 @@
 
 export {
   CatalogSyncs,
+  BaseCatalogSyncs,
   type CatalogSyncCreateResponse,
   type CatalogSyncUpdateResponse,
   type CatalogSyncListResponse,
@@ -20,6 +21,7 @@ export {
 } from './catalog-syncs';
 export {
   PrebuiltPolicies,
+  BasePrebuiltPolicies,
   type PrebuiltPolicyListResponse,
   type PrebuiltPolicyListParams,
   type PrebuiltPolicyListResponsesSinglePage,

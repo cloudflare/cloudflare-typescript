@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as ProfilesAPI from './profiles';
 import * as CustomAPI from './custom';
 import {
+  BaseCustom,
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
@@ -15,6 +16,7 @@ import {
 } from './custom';
 import * as PredefinedAPI from './predefined';
 import {
+  BasePredefined,
   Predefined,
   PredefinedDeleteParams,
   PredefinedDeleteResponse,
@@ -27,9 +29,12 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Profiles extends APIResource {
-  custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
-  predefined: PredefinedAPI.Predefined = new PredefinedAPI.Predefined(this._client);
+export class BaseProfiles extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'profiles'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'profiles',
+  ] as const);
 
   /**
    * Lists all DLP profiles in an account.
@@ -44,8 +49,11 @@ export class Profiles extends APIResource {
    * }
    * ```
    */
-  list(params: ProfileListParams, options?: RequestOptions): PagePromise<ProfilesSinglePage, Profile> {
-    const { account_id, ...query } = params;
+  list(
+    params: ProfileListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ProfilesSinglePage, Profile> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/dlp/profiles`, SinglePage<Profile>, {
       query,
       ...options,
@@ -63,14 +71,22 @@ export class Profiles extends APIResource {
    * );
    * ```
    */
-  get(profileID: string, params: ProfileGetParams, options?: RequestOptions): APIPromise<Profile> {
-    const { account_id } = params;
+  get(
+    profileID: string,
+    params: ProfileGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Profile> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/profiles/${profileID}`, options) as APIPromise<{
         result: Profile;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Profiles extends BaseProfiles {
+  custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
+  predefined: PredefinedAPI.Predefined = new PredefinedAPI.Predefined(this._client);
 }
 
 export type ProfilesSinglePage = SinglePage<Profile>;
@@ -1007,7 +1023,7 @@ export interface ProfileListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Return all profiles, including those that current account does not
@@ -1017,11 +1033,13 @@ export interface ProfileListParams {
 }
 
 export interface ProfileGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Profiles.Custom = Custom;
+Profiles.BaseCustom = BaseCustom;
 Profiles.Predefined = Predefined;
+Profiles.BasePredefined = BasePredefined;
 
 export declare namespace Profiles {
   export {
@@ -1035,6 +1053,7 @@ export declare namespace Profiles {
 
   export {
     Custom as Custom,
+    BaseCustom as BaseCustom,
     type CustomAPICustomProfile as CustomProfile,
     type Pattern as Pattern,
     type CustomDeleteResponse as CustomDeleteResponse,
@@ -1046,6 +1065,7 @@ export declare namespace Profiles {
 
   export {
     Predefined as Predefined,
+    BasePredefined as BasePredefined,
     type PredefinedAPIPredefinedProfile as PredefinedProfile,
     type PredefinedDeleteResponse as PredefinedDeleteResponse,
     type PredefinedUpdateParams as PredefinedUpdateParams,

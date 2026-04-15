@@ -2,6 +2,7 @@
 
 export {
   CertificatePacks,
+  BaseCertificatePacks,
   type Host,
   type RequestValidity,
   type Status,
@@ -18,4 +19,4 @@ export {
   type CertificatePackGetParams,
   type CertificatePackListResponsesV4PagePaginationArray,
 } from './certificate-packs';
-export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
+export { Quota, BaseQuota, type QuotaGetResponse, type QuotaGetParams } from './quota';

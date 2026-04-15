@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Variants extends APIResource {
+export class BaseVariants extends APIResource {
+  static override readonly _key: readonly ['cache', 'variants'] = Object.freeze([
+    'cache',
+    'variants',
+  ] as const);
+
   /**
    * Variant support enables caching variants of images with certain file extensions
    * in addition to the original. This only applies when the origin server sends the
@@ -20,8 +25,11 @@ export class Variants extends APIResource {
    * });
    * ```
    */
-  delete(params: VariantDeleteParams, options?: RequestOptions): APIPromise<VariantDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    params: VariantDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<VariantDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/cache/variants`, options) as APIPromise<{
         result: VariantDeleteResponse;
@@ -45,7 +53,7 @@ export class Variants extends APIResource {
    * ```
    */
   edit(params: VariantEditParams, options?: RequestOptions): APIPromise<VariantEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/variants`, { body, ...options }) as APIPromise<{
         result: VariantEditResponse;
@@ -67,8 +75,11 @@ export class Variants extends APIResource {
    * });
    * ```
    */
-  get(params: VariantGetParams, options?: RequestOptions): APIPromise<VariantGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: VariantGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<VariantGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/cache/variants`, options) as APIPromise<{
         result: VariantGetResponse;
@@ -76,6 +87,7 @@ export class Variants extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Variants extends BaseVariants {}
 
 /**
  * Variant support enables caching variants of images with certain file extensions
@@ -307,14 +319,14 @@ export interface VariantDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Value of the zone setting.
@@ -399,7 +411,7 @@ export interface VariantGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Variants {

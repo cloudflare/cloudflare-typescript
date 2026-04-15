@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AvailableAlerts extends APIResource {
+export class BaseAvailableAlerts extends APIResource {
+  static override readonly _key: readonly ['alerting', 'availableAlerts'] = Object.freeze([
+    'alerting',
+    'availableAlerts',
+  ] as const);
+
   /**
    * Gets a list of all alert types for which an account is eligible.
    *
@@ -17,8 +22,11 @@ export class AvailableAlerts extends APIResource {
    *   });
    * ```
    */
-  list(params: AvailableAlertListParams, options?: RequestOptions): APIPromise<AvailableAlertListResponse> {
-    const { account_id } = params;
+  list(
+    params: AvailableAlertListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AvailableAlertListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/alerting/v3/available_alerts`, options) as APIPromise<{
         result: AvailableAlertListResponse;
@@ -26,6 +34,7 @@ export class AvailableAlerts extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AvailableAlerts extends BaseAvailableAlerts {}
 
 export type AvailableAlertListResponse = { [key: string]: Array<AvailableAlertListResponse.Item> };
 
@@ -58,7 +67,7 @@ export interface AvailableAlertListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AvailableAlerts {

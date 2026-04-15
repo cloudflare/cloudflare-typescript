@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { NetFlows } from 'cloudflare/resources/radar/netflows/netflows';
+import { BaseTop } from 'cloudflare/resources/radar/netflows/top';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource top', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTop],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [NetFlows],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { netFlows: { top: BaseTop } } }>) => {
   test('ases', async () => {
     const responsePromise = client.radar.netFlows.top.ases();
     const rawResponse = await responsePromise.asResponse();
@@ -72,4 +90,7 @@ describe('resource top', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource top', () => runTests(client));
+describe('resource top (tree shakable, base)', () => runTests(partialClient));
+describe('resource top (tree shakable, subresource)', () => runTests(parentPartialClient));

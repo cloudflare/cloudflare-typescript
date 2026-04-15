@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Domains extends APIResource {
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['workers', 'domains'] = Object.freeze([
+    'workers',
+    'domains',
+  ] as const);
+
   /**
    * Attaches a domain that routes traffic to a Worker.
    *
@@ -20,7 +25,7 @@ export class Domains extends APIResource {
    * ```
    */
   update(params: DomainUpdateParams, options?: RequestOptions): APIPromise<DomainUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/workers/domains`, { body, ...options }) as APIPromise<{
         result: DomainUpdateResponse;
@@ -42,10 +47,10 @@ export class Domains extends APIResource {
    * ```
    */
   list(
-    params: DomainListParams,
+    params: DomainListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/domains`,
       SinglePage<DomainListResponse>,
@@ -67,10 +72,10 @@ export class Domains extends APIResource {
    */
   delete(
     domainID: string,
-    params: DomainDeleteParams,
+    params: DomainDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DomainDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/workers/domains/${domainID}`, options);
   }
 
@@ -85,8 +90,12 @@ export class Domains extends APIResource {
    * );
    * ```
    */
-  get(domainID: string, params: DomainGetParams, options?: RequestOptions): APIPromise<DomainGetResponse> {
-    const { account_id } = params;
+  get(
+    domainID: string,
+    params: DomainGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DomainGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/workers/domains/${domainID}`, options) as APIPromise<{
         result: DomainGetResponse;
@@ -94,6 +103,7 @@ export class Domains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Domains extends BaseDomains {}
 
 export type DomainListResponsesSinglePage = SinglePage<DomainListResponse>;
 
@@ -263,7 +273,7 @@ export interface DomainUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Hostname of the domain. Can be either the zone apex or a subdomain
@@ -297,7 +307,7 @@ export interface DomainListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Worker environment associated with the domain.
@@ -329,14 +339,14 @@ export interface DomainDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Domains {

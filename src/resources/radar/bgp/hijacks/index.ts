@@ -2,8 +2,9 @@
 
 export {
   Events,
+  BaseEvents,
   type EventListResponse,
   type EventListParams,
   type EventListResponsesV4PagePagination,
 } from './events';
-export { Hijacks } from './hijacks';
+export { Hijacks, BaseHijacks } from './hijacks';

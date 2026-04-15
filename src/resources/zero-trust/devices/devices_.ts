@@ -6,7 +6,13 @@ import { CursorPagination, type CursorPaginationParams, PagePromise } from '../.
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Devices extends APIResource {
+export class BaseDevices extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'devices'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'devices',
+  ] as const);
+
   /**
    * Lists WARP devices.
    *
@@ -21,10 +27,10 @@ export class Devices extends APIResource {
    * ```
    */
   list(
-    params: DeviceListParams,
+    params: DeviceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DeviceListResponsesCursorPagination, DeviceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/physical-devices`,
       CursorPagination<DeviceListResponse>,
@@ -46,10 +52,10 @@ export class Devices extends APIResource {
    */
   delete(
     deviceID: string,
-    params: DeviceDeleteParams,
+    params: DeviceDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DeviceDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/devices/physical-devices/${deviceID}`,
@@ -69,8 +75,12 @@ export class Devices extends APIResource {
    * );
    * ```
    */
-  get(deviceID: string, params: DeviceGetParams, options?: RequestOptions): APIPromise<DeviceGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    deviceID: string,
+    params: DeviceGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DeviceGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/physical-devices/${deviceID}`, {
         query,
@@ -93,10 +103,10 @@ export class Devices extends APIResource {
    */
   revoke(
     deviceID: string,
-    params: DeviceRevokeParams,
+    params: DeviceRevokeParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DeviceRevokeResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/devices/physical-devices/${deviceID}/revoke`,
@@ -105,6 +115,7 @@ export class Devices extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Devices extends BaseDevices {}
 
 export type DeviceListResponsesCursorPagination = CursorPagination<DeviceListResponse>;
 
@@ -454,7 +465,7 @@ export interface DeviceListParams extends CursorPaginationParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by a one or more device IDs.
@@ -524,14 +535,14 @@ export namespace DeviceListParams {
 }
 
 export interface DeviceDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DeviceGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Comma-separated list of additional information that should be
@@ -542,7 +553,7 @@ export interface DeviceGetParams {
 }
 
 export interface DeviceRevokeParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Devices {

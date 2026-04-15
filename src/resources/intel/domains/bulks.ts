@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Bulks extends APIResource {
+export class BaseBulks extends APIResource {
+  static override readonly _key: readonly ['intel', 'domains', 'bulks'] = Object.freeze([
+    'intel',
+    'domains',
+    'bulks',
+  ] as const);
+
   /**
    * Same as summary.
    *
@@ -16,8 +22,11 @@ export class Bulks extends APIResource {
    * });
    * ```
    */
-  get(params: BulkGetParams, options?: RequestOptions): APIPromise<BulkGetResponse | null> {
-    const { account_id, ...query } = params;
+  get(
+    params: BulkGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BulkGetResponse | null> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/domain/bulk`, { query, ...options }) as APIPromise<{
         result: BulkGetResponse | null;
@@ -25,6 +34,7 @@ export class Bulks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Bulks extends BaseBulks {}
 
 export type BulkGetResponse = Array<BulkGetResponse.BulkGetResponseItem>;
 
@@ -130,7 +140,7 @@ export interface BulkGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Accepts multiple values like

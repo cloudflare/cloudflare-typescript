@@ -6,7 +6,11 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'certificates', 'settings'] = Object.freeze(
+    ['zeroTrust', 'access', 'certificates', 'settings'] as const,
+  );
+
   /**
    * Updates an mTLS certificate's hostname settings.
    *
@@ -33,7 +37,11 @@ export class Settings extends APIResource {
     params: SettingUpdateParams,
     options?: RequestOptions,
   ): PagePromise<CertificateSettingsSinglePage, CertificateSettings> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -74,7 +82,8 @@ export class Settings extends APIResource {
     params: SettingGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CertificateSettingsSinglePage, CertificateSettings> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -98,6 +107,7 @@ export class Settings extends APIResource {
     );
   }
 }
+export class Settings extends BaseSettings {}
 
 export type CertificateSettingsSinglePage = SinglePage<CertificateSettings>;
 

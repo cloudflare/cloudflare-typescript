@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Widgets extends APIResource {
+export class BaseWidgets extends APIResource {
+  static override readonly _key: readonly ['turnstile', 'widgets'] = Object.freeze([
+    'turnstile',
+    'widgets',
+  ] as const);
+
   /**
    * Lists challenge widgets.
    *
@@ -25,7 +30,7 @@ export class Widgets extends APIResource {
    * ```
    */
   create(params: WidgetCreateParams, options?: RequestOptions): APIPromise<Widget> {
-    const { account_id, direction, filter, order, page, per_page, ...body } = params;
+    const { account_id = this._client.accountID, direction, filter, order, page, per_page, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/challenges/widgets`, {
         query: { direction, filter, order, page, per_page },
@@ -56,7 +61,7 @@ export class Widgets extends APIResource {
    * ```
    */
   update(sitekey: string, params: WidgetUpdateParams, options?: RequestOptions): APIPromise<Widget> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/challenges/widgets/${sitekey}`, {
         body,
@@ -79,10 +84,10 @@ export class Widgets extends APIResource {
    * ```
    */
   list(
-    params: WidgetListParams,
+    params: WidgetListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/challenges/widgets`,
       V4PagePaginationArray<WidgetListResponse>,
@@ -101,8 +106,12 @@ export class Widgets extends APIResource {
    * );
    * ```
    */
-  delete(sitekey: string, params: WidgetDeleteParams, options?: RequestOptions): APIPromise<Widget> {
-    const { account_id } = params;
+  delete(
+    sitekey: string,
+    params: WidgetDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Widget> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/challenges/widgets/${sitekey}`,
@@ -122,8 +131,12 @@ export class Widgets extends APIResource {
    * );
    * ```
    */
-  get(sitekey: string, params: WidgetGetParams, options?: RequestOptions): APIPromise<Widget> {
-    const { account_id } = params;
+  get(
+    sitekey: string,
+    params: WidgetGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Widget> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as APIPromise<{
         result: Widget;
@@ -150,7 +163,7 @@ export class Widgets extends APIResource {
     params: WidgetRotateSecretParams,
     options?: RequestOptions,
   ): APIPromise<Widget> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, {
         body,
@@ -159,6 +172,7 @@ export class Widgets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Widgets extends BaseWidgets {}
 
 export type WidgetListResponsesV4PagePaginationArray = V4PagePaginationArray<WidgetListResponse>;
 
@@ -305,7 +319,7 @@ export interface WidgetCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -392,7 +406,7 @@ export interface WidgetUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -445,7 +459,7 @@ export interface WidgetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order widgets.
@@ -476,21 +490,21 @@ export interface WidgetDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WidgetGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WidgetRotateSecretParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If `invalidate_immediately` is set to `false`, the previous secret

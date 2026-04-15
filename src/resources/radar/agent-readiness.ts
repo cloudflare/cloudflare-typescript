@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AgentReadiness extends APIResource {
+export class BaseAgentReadiness extends APIResource {
+  static override readonly _key: readonly ['radar', 'agentReadiness'] = Object.freeze([
+    'radar',
+    'agentReadiness',
+  ] as const);
+
   /**
    * Returns a summary of AI agent readiness scores across scanned domains, grouped
    * by the specified dimension. Data is sourced from weekly bulk scans. All values
@@ -31,6 +36,7 @@ export class AgentReadiness extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AgentReadiness extends BaseAgentReadiness {}
 
 export interface AgentReadinessSummaryResponse {
   meta: AgentReadinessSummaryResponse.Meta;

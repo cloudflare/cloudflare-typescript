@@ -2,18 +2,21 @@
 
 export {
   Hosts,
+  BaseHosts,
   type HostListResponse,
   type HostListParams,
   type HostListResponsesV4PagePaginationArray,
 } from './hosts';
 export {
   Operations,
+  BaseOperations,
   type OperationListResponse,
   type OperationListParams,
   type OperationListResponsesV4PagePaginationArray,
 } from './operations';
 export {
   UserSchemas,
+  BaseUserSchemas,
   type Message,
   type OldPublicSchema,
   type UserSchemaCreateResponse,

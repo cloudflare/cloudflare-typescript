@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Accounts } from 'cloudflare/resources/accounts/accounts';
+import { BaseTokens } from 'cloudflare/resources/accounts/tokens/tokens';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tokens', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTokens],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Accounts],
+});
+
+const runTests = (client: PartialCloudflare<{ accounts: { tokens: BaseTokens } }>) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.accounts.tokens.create({
@@ -204,4 +222,7 @@ describe('resource tokens', () => {
   test.skip('verify: required and optional params', async () => {
     const response = await client.accounts.tokens.verify({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
-});
+};
+describe('resource tokens', () => runTests(client));
+describe('resource tokens (tree shakable, base)', () => runTests(partialClient));
+describe('resource tokens (tree shakable, subresource)', () => runTests(parentPartialClient));

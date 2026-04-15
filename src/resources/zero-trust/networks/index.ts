@@ -2,6 +2,7 @@
 
 export {
   HostnameRoutes,
+  BaseHostnameRoutes,
   type HostnameRoute,
   type HostnameRouteCreateParams,
   type HostnameRouteListParams,
@@ -10,9 +11,10 @@ export {
   type HostnameRouteGetParams,
   type HostnameRoutesV4PagePaginationArray,
 } from './hostname-routes';
-export { Networks } from './networks';
+export { Networks, BaseNetworks } from './networks';
 export {
   Routes,
+  BaseRoutes,
   type NetworkRoute,
   type Route,
   type Teamnet,
@@ -23,9 +25,10 @@ export {
   type RouteGetParams,
   type TeamnetsV4PagePaginationArray,
 } from './routes/index';
-export { Subnets, type SubnetListParams } from './subnets/index';
+export { Subnets, BaseSubnets, type SubnetListParams } from './subnets/index';
 export {
   VirtualNetworks,
+  BaseVirtualNetworks,
   type VirtualNetwork,
   type VirtualNetworkCreateParams,
   type VirtualNetworkListParams,

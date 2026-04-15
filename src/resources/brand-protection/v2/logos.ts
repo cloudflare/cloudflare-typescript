@@ -5,12 +5,18 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Logos extends APIResource {
+export class BaseLogos extends APIResource {
+  static override readonly _key: readonly ['brandProtection', 'v2', 'logos'] = Object.freeze([
+    'brandProtection',
+    'v2',
+    'logos',
+  ] as const);
+
   /**
    * Create a new saved brand protection logo query for visual similarity matching
    */
   create(params: LogoCreateParams, options?: RequestOptions): APIPromise<LogoCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/queries`, {
       body,
       ...options,
@@ -23,10 +29,10 @@ export class Logos extends APIResource {
    */
   delete(
     queryID: string,
-    params: LogoDeleteParams,
+    params: LogoDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LogoDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/queries/${queryID}`,
       options,
@@ -38,14 +44,15 @@ export class Logos extends APIResource {
    * id to get a single query. Set download=true to include base64-encoded image
    * data.
    */
-  get(params: LogoGetParams, options?: RequestOptions): APIPromise<LogoGetResponse> {
-    const { account_id, ...query } = params;
+  get(params: LogoGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<LogoGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/queries`, {
       query,
       ...options,
     });
   }
 }
+export class Logos extends BaseLogos {}
 
 export interface LogoCreateResponse {
   message: string;
@@ -91,7 +98,7 @@ export interface LogoCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Base64 encoded image data. Can include data URI prefix (e.g.,
@@ -117,14 +124,14 @@ export interface LogoCreateParams {
 }
 
 export interface LogoDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LogoGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optional query ID to retrieve a specific logo query

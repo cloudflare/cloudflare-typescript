@@ -8,7 +8,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Members extends APIResource {
+export class BaseMembers extends APIResource {
+  static override readonly _key: readonly ['accounts', 'members'] = Object.freeze([
+    'accounts',
+    'members',
+  ] as const);
+
   /**
    * Add a user to the list of members for this account.
    *
@@ -22,7 +27,7 @@ export class Members extends APIResource {
    * ```
    */
   create(params: MemberCreateParams, options?: RequestOptions): APIPromise<Shared.Member> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/members`, { body, ...options }) as APIPromise<{
         result: Shared.Member;
@@ -42,7 +47,7 @@ export class Members extends APIResource {
    * ```
    */
   update(memberID: string, params: MemberUpdateParams, options?: RequestOptions): APIPromise<Shared.Member> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/members/${memberID}`, {
         body,
@@ -65,10 +70,10 @@ export class Members extends APIResource {
    * ```
    */
   list(
-    params: MemberListParams,
+    params: MemberListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MembersV4PagePaginationArray, Shared.Member> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/members`,
       V4PagePaginationArray<Shared.Member>,
@@ -89,10 +94,10 @@ export class Members extends APIResource {
    */
   delete(
     memberID: string,
-    params: MemberDeleteParams,
+    params: MemberDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MemberDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/members/${memberID}`, options) as APIPromise<{
         result: MemberDeleteResponse | null;
@@ -111,8 +116,12 @@ export class Members extends APIResource {
    * );
    * ```
    */
-  get(memberID: string, params: MemberGetParams, options?: RequestOptions): APIPromise<Shared.Member> {
-    const { account_id } = params;
+  get(
+    memberID: string,
+    params: MemberGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Member> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/members/${memberID}`, options) as APIPromise<{
         result: Shared.Member;
@@ -120,6 +129,7 @@ export class Members extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Members extends BaseMembers {}
 
 /**
  * Whether the user is a member of the organization or has an invitation pending.
@@ -142,7 +152,7 @@ export declare namespace MemberCreateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The contact email address of the user.
@@ -166,7 +176,7 @@ export declare namespace MemberCreateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The contact email address of the user.
@@ -237,7 +247,7 @@ export declare namespace MemberUpdateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Roles assigned to this member.
@@ -249,7 +259,7 @@ export declare namespace MemberUpdateParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Array of policies associated with this member.
@@ -303,7 +313,7 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -325,14 +335,14 @@ export interface MemberDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MemberGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Members {

@@ -5,7 +5,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class EvaluationTypes extends APIResource {
+export class BaseEvaluationTypes extends APIResource {
+  static override readonly _key: readonly ['aiGateway', 'evaluationTypes'] = Object.freeze([
+    'aiGateway',
+    'evaluationTypes',
+  ] as const);
+
   /**
    * List Evaluators
    *
@@ -20,10 +25,10 @@ export class EvaluationTypes extends APIResource {
    * ```
    */
   list(
-    params: EvaluationTypeListParams,
+    params: EvaluationTypeListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EvaluationTypeListResponsesV4PagePaginationArray, EvaluationTypeListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-gateway/evaluation-types`,
       V4PagePaginationArray<EvaluationTypeListResponse>,
@@ -31,6 +36,7 @@ export class EvaluationTypes extends APIResource {
     );
   }
 }
+export class EvaluationTypes extends BaseEvaluationTypes {}
 
 export type EvaluationTypeListResponsesV4PagePaginationArray =
   V4PagePaginationArray<EvaluationTypeListResponse>;
@@ -57,7 +63,7 @@ export interface EvaluationTypeListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

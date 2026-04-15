@@ -5,7 +5,10 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Advertisements extends APIResource {
+export class BaseAdvertisements extends APIResource {
+  static override readonly _key: readonly ['magicNetworkMonitoring', 'rules', 'advertisements'] =
+    Object.freeze(['magicNetworkMonitoring', 'rules', 'advertisements'] as const);
+
   /**
    * Update advertisement for rule.
    *
@@ -26,7 +29,7 @@ export class Advertisements extends APIResource {
     params: AdvertisementEditParams,
     options?: RequestOptions,
   ): APIPromise<Advertisement | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/mnm/rules/${ruleID}/advertisement`, {
         body: body,
@@ -35,6 +38,7 @@ export class Advertisements extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Advertisements extends BaseAdvertisements {}
 
 export interface Advertisement {
   /**
@@ -49,7 +53,7 @@ export interface AdvertisementEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

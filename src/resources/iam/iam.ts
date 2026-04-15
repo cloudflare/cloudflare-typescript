@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
+  BasePermissionGroups,
   PermissionGroupGetParams,
   PermissionGroupGetResponse,
   PermissionGroupListParams,
@@ -12,6 +13,7 @@ import {
 } from './permission-groups';
 import * as ResourceGroupsAPI from './resource-groups';
 import {
+  BaseResourceGroups,
   ResourceGroupCreateParams,
   ResourceGroupCreateResponse,
   ResourceGroupDeleteParams,
@@ -27,6 +29,7 @@ import {
 } from './resource-groups';
 import * as SSOAPI from './sso';
 import {
+  BaseSSO,
   SSO,
   SSOBeginVerificationParams,
   SSOBeginVerificationResponse,
@@ -44,6 +47,7 @@ import {
 } from './sso';
 import * as UserGroupsAPI from './user-groups/user-groups';
 import {
+  BaseUserGroups,
   UserGroupCreateParams,
   UserGroupCreateResponse,
   UserGroupDeleteParams,
@@ -58,7 +62,10 @@ import {
   UserGroups,
 } from './user-groups/user-groups';
 
-export class IAM extends APIResource {
+export class BaseIAM extends APIResource {
+  static override readonly _key: readonly ['iam'] = Object.freeze(['iam'] as const);
+}
+export class IAM extends BaseIAM {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
     this._client,
   );
@@ -68,13 +75,18 @@ export class IAM extends APIResource {
 }
 
 IAM.PermissionGroups = PermissionGroups;
+IAM.BasePermissionGroups = BasePermissionGroups;
 IAM.ResourceGroups = ResourceGroups;
+IAM.BaseResourceGroups = BaseResourceGroups;
 IAM.UserGroups = UserGroups;
+IAM.BaseUserGroups = BaseUserGroups;
 IAM.SSO = SSO;
+IAM.BaseSSO = BaseSSO;
 
 export declare namespace IAM {
   export {
     PermissionGroups as PermissionGroups,
+    BasePermissionGroups as BasePermissionGroups,
     type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupGetResponse as PermissionGroupGetResponse,
     type PermissionGroupListResponsesV4PagePaginationArray as PermissionGroupListResponsesV4PagePaginationArray,
@@ -84,6 +96,7 @@ export declare namespace IAM {
 
   export {
     ResourceGroups as ResourceGroups,
+    BaseResourceGroups as BaseResourceGroups,
     type ResourceGroupCreateResponse as ResourceGroupCreateResponse,
     type ResourceGroupUpdateResponse as ResourceGroupUpdateResponse,
     type ResourceGroupListResponse as ResourceGroupListResponse,
@@ -99,6 +112,7 @@ export declare namespace IAM {
 
   export {
     UserGroups as UserGroups,
+    BaseUserGroups as BaseUserGroups,
     type UserGroupCreateResponse as UserGroupCreateResponse,
     type UserGroupUpdateResponse as UserGroupUpdateResponse,
     type UserGroupListResponse as UserGroupListResponse,
@@ -114,6 +128,7 @@ export declare namespace IAM {
 
   export {
     SSO as SSO,
+    BaseSSO as BaseSSO,
     type SSOCreateResponse as SSOCreateResponse,
     type SSOUpdateResponse as SSOUpdateResponse,
     type SSOListResponse as SSOListResponse,

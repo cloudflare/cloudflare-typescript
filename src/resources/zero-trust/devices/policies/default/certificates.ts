@@ -6,7 +6,10 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Certificates extends APIResource {
+export class BaseCertificates extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies', 'default', 'certificates'] =
+    Object.freeze(['zeroTrust', 'devices', 'policies', 'default', 'certificates'] as const);
+
   /**
    * Enable Zero Trust Clients to provision a certificate, containing a x509 subject,
    * and referenced by Access device posture policies when the client visits MTLS
@@ -27,7 +30,7 @@ export class Certificates extends APIResource {
     params: CertificateEditParams,
     options?: RequestOptions,
   ): APIPromise<PoliciesAPI.DevicePolicyCertificates | null> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/devices/policy/certificates`, {
         body,
@@ -48,10 +51,10 @@ export class Certificates extends APIResource {
    * ```
    */
   get(
-    params: CertificateGetParams,
+    params: CertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PoliciesAPI.DevicePolicyCertificates | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/devices/policy/certificates`, options) as APIPromise<{
         result: PoliciesAPI.DevicePolicyCertificates | null;
@@ -59,12 +62,13 @@ export class Certificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Certificates extends BaseCertificates {}
 
 export interface CertificateEditParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The current status of the device policy certificate provisioning
@@ -74,7 +78,7 @@ export interface CertificateEditParams {
 }
 
 export interface CertificateGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Certificates {

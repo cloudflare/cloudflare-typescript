@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AllowPolicies extends APIResource {
+export class BaseAllowPolicies extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'settings', 'allowPolicies'] = Object.freeze([
+    'emailSecurity',
+    'settings',
+    'allowPolicies',
+  ] as const);
+
   /**
    * Creates a new email allow policy that permits specific senders, domains, or
    * patterns to bypass security scanning.
@@ -31,7 +37,7 @@ export class AllowPolicies extends APIResource {
    * ```
    */
   create(params: AllowPolicyCreateParams, options?: RequestOptions): APIPromise<AllowPolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/settings/allow_policies`, {
         body,
@@ -54,10 +60,10 @@ export class AllowPolicies extends APIResource {
    * ```
    */
   list(
-    params: AllowPolicyListParams,
+    params: AllowPolicyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AllowPolicyListResponsesV4PagePaginationArray, AllowPolicyListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/settings/allow_policies`,
       V4PagePaginationArray<AllowPolicyListResponse>,
@@ -80,10 +86,10 @@ export class AllowPolicies extends APIResource {
    */
   delete(
     policyID: number,
-    params: AllowPolicyDeleteParams,
+    params: AllowPolicyDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AllowPolicyDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/email-security/settings/allow_policies/${policyID}`,
@@ -110,7 +116,7 @@ export class AllowPolicies extends APIResource {
     params: AllowPolicyEditParams,
     options?: RequestOptions,
   ): APIPromise<AllowPolicyEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/email-security/settings/allow_policies/${policyID}`, {
         body,
@@ -134,10 +140,10 @@ export class AllowPolicies extends APIResource {
    */
   get(
     policyID: number,
-    params: AllowPolicyGetParams,
+    params: AllowPolicyGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AllowPolicyGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/settings/allow_policies/${policyID}`,
@@ -146,6 +152,7 @@ export class AllowPolicies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AllowPolicies extends BaseAllowPolicies {}
 
 export type AllowPolicyListResponsesV4PagePaginationArray = V4PagePaginationArray<AllowPolicyListResponse>;
 
@@ -388,7 +395,7 @@ export interface AllowPolicyCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Messages from this sender will be exempted from Spam, Spoof and Bulk
@@ -454,7 +461,7 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -523,14 +530,14 @@ export interface AllowPolicyDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AllowPolicyEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -581,7 +588,7 @@ export interface AllowPolicyGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AllowPolicies {

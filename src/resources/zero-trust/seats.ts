@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Seats extends APIResource {
+export class BaseSeats extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'seats'] = Object.freeze([
+    'zeroTrust',
+    'seats',
+  ] as const);
+
   /**
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
@@ -28,7 +33,7 @@ export class Seats extends APIResource {
    * ```
    */
   edit(params: SeatEditParams, options?: RequestOptions): PagePromise<SeatsSinglePage, Seat> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(path`/accounts/${account_id}/access/seats`, SinglePage<Seat>, {
       body: body,
       method: 'patch',
@@ -36,6 +41,7 @@ export class Seats extends APIResource {
     });
   }
 }
+export class Seats extends BaseSeats {}
 
 export type SeatsSinglePage = SinglePage<Seat>;
 
@@ -64,7 +70,7 @@ export interface SeatEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

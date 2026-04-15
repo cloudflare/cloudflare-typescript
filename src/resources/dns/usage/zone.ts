@@ -2,4 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 
-export class Zone extends APIResource {}
+export class BaseZone extends APIResource {
+  static override readonly _key: readonly ['dns', 'usage', 'zone'] = Object.freeze([
+    'dns',
+    'usage',
+    'zone',
+  ] as const);
+}
+export class Zone extends BaseZone {}

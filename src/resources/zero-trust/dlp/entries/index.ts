@@ -2,6 +2,7 @@
 
 export {
   Custom,
+  BaseCustom,
   type CustomCreateResponse,
   type CustomUpdateResponse,
   type CustomListResponse,
@@ -16,6 +17,7 @@ export {
 } from './custom';
 export {
   Entries,
+  BaseEntries,
   type EntryCreateResponse,
   type EntryUpdateResponse,
   type EntryListResponse,
@@ -30,6 +32,7 @@ export {
 } from './entries';
 export {
   Integration,
+  BaseIntegration,
   type IntegrationCreateResponse,
   type IntegrationUpdateResponse,
   type IntegrationListResponse,
@@ -44,6 +47,7 @@ export {
 } from './integration';
 export {
   Predefined,
+  BasePredefined,
   type PredefinedCreateResponse,
   type PredefinedUpdateResponse,
   type PredefinedListResponse,

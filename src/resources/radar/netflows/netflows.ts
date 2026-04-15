@@ -2,13 +2,23 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TopAPI from './top';
-import { Top, TopAsesParams, TopAsesResponse, TopLocationsParams, TopLocationsResponse } from './top';
+import {
+  BaseTop,
+  Top,
+  TopAsesParams,
+  TopAsesResponse,
+  TopLocationsParams,
+  TopLocationsResponse,
+} from './top';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class NetFlows extends APIResource {
-  top: TopAPI.Top = new TopAPI.Top(this._client);
+export class BaseNetFlows extends APIResource {
+  static override readonly _key: readonly ['radar', 'netFlows'] = Object.freeze([
+    'radar',
+    'netFlows',
+  ] as const);
 
   /**
    * Retrieves the distribution of network traffic (NetFlows) by HTTP vs other
@@ -91,6 +101,9 @@ export class NetFlows extends APIResource {
       }) as APIPromise<{ result: NetFlowsTimeseriesGroupsResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class NetFlows extends BaseNetFlows {
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 }
 
 export interface NetFlowsSummaryResponse {
@@ -935,6 +948,7 @@ export interface NetFlowsTimeseriesGroupsParams {
 }
 
 NetFlows.Top = Top;
+NetFlows.BaseTop = BaseTop;
 
 export declare namespace NetFlows {
   export {
@@ -950,6 +964,7 @@ export declare namespace NetFlows {
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopAsesResponse as TopAsesResponse,
     type TopLocationsResponse as TopLocationsResponse,
     type TopAsesParams as TopAsesParams,

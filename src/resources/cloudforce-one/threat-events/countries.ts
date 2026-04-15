@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Countries extends APIResource {
+export class BaseCountries extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'countries'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'countries',
+  ] as const);
+
   /**
    * Retrieves countries information for all countries
    *
@@ -17,11 +23,15 @@ export class Countries extends APIResource {
    *   });
    * ```
    */
-  list(params: CountryListParams, options?: RequestOptions): APIPromise<CountryListResponse> {
-    const { account_id } = params;
+  list(
+    params: CountryListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CountryListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/countries`, options);
   }
 }
+export class Countries extends BaseCountries {}
 
 export type CountryListResponse = Array<CountryListResponse.CountryListResponseItem>;
 
@@ -45,7 +55,7 @@ export interface CountryListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Countries {

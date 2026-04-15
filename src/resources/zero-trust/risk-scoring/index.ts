@@ -2,6 +2,7 @@
 
 export {
   Behaviours,
+  BaseBehaviours,
   type BehaviourUpdateResponse,
   type BehaviourGetResponse,
   type BehaviourUpdateParams,
@@ -9,6 +10,7 @@ export {
 } from './behaviours';
 export {
   Integrations,
+  BaseIntegrations,
   type IntegrationCreateResponse,
   type IntegrationUpdateResponse,
   type IntegrationListResponse,
@@ -23,9 +25,10 @@ export {
 } from './integrations/index';
 export {
   RiskScoring,
+  BaseRiskScoring,
   type RiskScoringGetResponse,
   type RiskScoringResetResponse,
   type RiskScoringGetParams,
   type RiskScoringResetParams,
 } from './risk-scoring';
-export { Summary, type SummaryGetResponse, type SummaryGetParams } from './summary';
+export { Summary, BaseSummary, type SummaryGetResponse, type SummaryGetParams } from './summary';

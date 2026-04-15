@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as CloudflaredAPI from './cloudflared/cloudflared';
 import {
+  BaseCloudflared,
   Cloudflared,
   CloudflaredCreateParams,
   CloudflaredDeleteParams,
@@ -13,6 +14,7 @@ import {
 } from './cloudflared/cloudflared';
 import * as WARPConnectorAPI from './warp-connector/warp-connector';
 import {
+  BaseWARPConnector,
   WARPConnector,
   WARPConnectorCreateParams,
   WARPConnectorCreateResponse,
@@ -34,9 +36,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tunnels extends APIResource {
-  cloudflared: CloudflaredAPI.Cloudflared = new CloudflaredAPI.Cloudflared(this._client);
-  warpConnector: WARPConnectorAPI.WARPConnector = new WARPConnectorAPI.WARPConnector(this._client);
+export class BaseTunnels extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels'] = Object.freeze([
+    'zeroTrust',
+    'tunnels',
+  ] as const);
 
   /**
    * Lists and filters all types of Tunnels in an account.
@@ -52,16 +56,20 @@ export class Tunnels extends APIResource {
    * ```
    */
   list(
-    params: TunnelListParams,
+    params: TunnelListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/tunnels`,
       V4PagePaginationArray<TunnelListResponse>,
       { query, ...options },
     );
   }
+}
+export class Tunnels extends BaseTunnels {
+  cloudflared: CloudflaredAPI.Cloudflared = new CloudflaredAPI.Cloudflared(this._client);
+  warpConnector: WARPConnectorAPI.WARPConnector = new WARPConnectorAPI.WARPConnector(this._client);
 }
 
 export type TunnelListResponsesV4PagePaginationArray = V4PagePaginationArray<TunnelListResponse>;
@@ -212,7 +220,7 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -272,7 +280,9 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
 }
 
 Tunnels.Cloudflared = Cloudflared;
+Tunnels.BaseCloudflared = BaseCloudflared;
 Tunnels.WARPConnector = WARPConnector;
+Tunnels.BaseWARPConnector = BaseWARPConnector;
 
 export declare namespace Tunnels {
   export {
@@ -284,6 +294,7 @@ export declare namespace Tunnels {
 
   export {
     Cloudflared as Cloudflared,
+    BaseCloudflared as BaseCloudflared,
     type CloudflaredCreateParams as CloudflaredCreateParams,
     type CloudflaredListParams as CloudflaredListParams,
     type CloudflaredDeleteParams as CloudflaredDeleteParams,
@@ -293,6 +304,7 @@ export declare namespace Tunnels {
 
   export {
     WARPConnector as WARPConnector,
+    BaseWARPConnector as BaseWARPConnector,
     type WARPConnectorCreateResponse as WARPConnectorCreateResponse,
     type WARPConnectorListResponse as WARPConnectorListResponse,
     type WARPConnectorDeleteResponse as WARPConnectorDeleteResponse,

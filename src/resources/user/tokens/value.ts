@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Value extends APIResource {
+export class BaseValue extends APIResource {
+  static override readonly _key: readonly ['user', 'tokens', 'value'] = Object.freeze([
+    'user',
+    'tokens',
+    'value',
+  ] as const);
+
   /**
    * Roll the token secret.
    *
@@ -31,6 +37,7 @@ export class Value extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Value extends BaseValue {}
 
 export interface ValueUpdateParams {
   body: unknown;

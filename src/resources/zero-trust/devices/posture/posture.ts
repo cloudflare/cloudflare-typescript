@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as IntegrationsAPI from './integrations';
 import {
+  BaseIntegrations,
   Integration,
   IntegrationCreateParams,
   IntegrationDeleteParams,
@@ -18,8 +19,12 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Posture extends APIResource {
-  integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
+export class BasePosture extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'posture'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'posture',
+  ] as const);
 
   /**
    * Creates a new device posture rule.
@@ -35,7 +40,7 @@ export class Posture extends APIResource {
    * ```
    */
   create(params: PostureCreateParams, options?: RequestOptions): APIPromise<DevicePostureRule | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/posture`, { body, ...options }) as APIPromise<{
         result: DevicePostureRule | null;
@@ -64,7 +69,7 @@ export class Posture extends APIResource {
     params: PostureUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DevicePostureRule | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/devices/posture/${ruleID}`, {
         body,
@@ -87,10 +92,10 @@ export class Posture extends APIResource {
    * ```
    */
   list(
-    params: PostureListParams,
+    params: PostureListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DevicePostureRulesSinglePage, DevicePostureRule> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/posture`,
       SinglePage<DevicePostureRule>,
@@ -112,10 +117,10 @@ export class Posture extends APIResource {
    */
   delete(
     ruleID: string,
-    params: PostureDeleteParams,
+    params: PostureDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PostureDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/devices/posture/${ruleID}`, options) as APIPromise<{
         result: PostureDeleteResponse | null;
@@ -137,16 +142,19 @@ export class Posture extends APIResource {
    */
   get(
     ruleID: string,
-    params: PostureGetParams,
+    params: PostureGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DevicePostureRule | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/posture/${ruleID}`, options) as APIPromise<{
         result: DevicePostureRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Posture extends BasePosture {
+  integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
 }
 
 export type DevicePostureRulesSinglePage = SinglePage<DevicePostureRule>;
@@ -1161,7 +1169,7 @@ export interface PostureCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the device posture rule.
@@ -1228,7 +1236,7 @@ export interface PostureUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the device posture rule.
@@ -1292,18 +1300,19 @@ export interface PostureUpdateParams {
 }
 
 export interface PostureListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PostureDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PostureGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Posture.Integrations = Integrations;
+Posture.BaseIntegrations = BaseIntegrations;
 
 export declare namespace Posture {
   export {
@@ -1336,6 +1345,7 @@ export declare namespace Posture {
 
   export {
     Integrations as Integrations,
+    BaseIntegrations as BaseIntegrations,
     type Integration as Integration,
     type IntegrationDeleteResponse as IntegrationDeleteResponse,
     type IntegrationsSinglePage as IntegrationsSinglePage,

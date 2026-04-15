@@ -2,9 +2,10 @@
 
 export {
   MaintenanceConfigs,
+  BaseMaintenanceConfigs,
   type MaintenanceConfigUpdateResponse,
   type MaintenanceConfigGetResponse,
   type MaintenanceConfigUpdateParams,
   type MaintenanceConfigGetParams,
 } from './maintenance-configs';
-export { Tables, type TableListResponse, type TableListParams } from './tables';
+export { Tables, BaseTables, type TableListResponse, type TableListParams } from './tables';

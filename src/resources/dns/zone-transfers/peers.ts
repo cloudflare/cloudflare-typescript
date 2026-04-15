@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Peers extends APIResource {
+export class BasePeers extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'peers'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'peers',
+  ] as const);
+
   /**
    * Create Peer.
    *
@@ -19,7 +25,7 @@ export class Peers extends APIResource {
    * ```
    */
   create(params: PeerCreateParams, options?: RequestOptions): APIPromise<Peer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/secondary_dns/peers`, {
         body,
@@ -43,7 +49,7 @@ export class Peers extends APIResource {
    * ```
    */
   update(peerID: string, params: PeerUpdateParams, options?: RequestOptions): APIPromise<Peer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/secondary_dns/peers/${peerID}`, {
         body,
@@ -65,8 +71,11 @@ export class Peers extends APIResource {
    * }
    * ```
    */
-  list(params: PeerListParams, options?: RequestOptions): PagePromise<PeersSinglePage, Peer> {
-    const { account_id } = params;
+  list(
+    params: PeerListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PeersSinglePage, Peer> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/secondary_dns/peers`,
       SinglePage<Peer>,
@@ -85,8 +94,12 @@ export class Peers extends APIResource {
    * );
    * ```
    */
-  delete(peerID: string, params: PeerDeleteParams, options?: RequestOptions): APIPromise<PeerDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    peerID: string,
+    params: PeerDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PeerDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/secondary_dns/peers/${peerID}`,
@@ -106,8 +119,12 @@ export class Peers extends APIResource {
    * );
    * ```
    */
-  get(peerID: string, params: PeerGetParams, options?: RequestOptions): APIPromise<Peer> {
-    const { account_id } = params;
+  get(
+    peerID: string,
+    params: PeerGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Peer> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/secondary_dns/peers/${peerID}`, options) as APIPromise<{
         result: Peer;
@@ -115,6 +132,7 @@ export class Peers extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Peers extends BasePeers {}
 
 export type PeersSinglePage = SinglePage<Peer>;
 
@@ -161,7 +179,7 @@ export interface PeerCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the peer.
@@ -173,7 +191,7 @@ export interface PeerUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the peer.
@@ -208,15 +226,15 @@ export interface PeerUpdateParams {
 }
 
 export interface PeerListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PeerDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PeerGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Peers {

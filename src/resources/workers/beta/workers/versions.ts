@@ -11,7 +11,14 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Versions extends APIResource {
+export class BaseVersions extends APIResource {
+  static override readonly _key: readonly ['workers', 'beta', 'workers', 'versions'] = Object.freeze([
+    'workers',
+    'beta',
+    'workers',
+    'versions',
+  ] as const);
+
   /**
    * Create a new version.
    *
@@ -25,7 +32,7 @@ export class Versions extends APIResource {
    * ```
    */
   create(workerID: string, params: VersionCreateParams, options?: RequestOptions): APIPromise<Version> {
-    const { account_id, deploy, ...body } = params;
+    const { account_id = this._client.accountID, deploy, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/workers/${workerID}/versions`, {
         query: { deploy },
@@ -51,10 +58,10 @@ export class Versions extends APIResource {
    */
   list(
     workerID: string,
-    params: VersionListParams,
+    params: VersionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<VersionsV4PagePaginationArray, Version> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/workers/${workerID}/versions`,
       V4PagePaginationArray<Version>,
@@ -82,7 +89,7 @@ export class Versions extends APIResource {
     params: VersionDeleteParams,
     options?: RequestOptions,
   ): APIPromise<VersionDeleteResponse> {
-    const { account_id, worker_id } = params;
+    const { account_id = this._client.accountID, worker_id } = params;
     return this._client.delete(
       path`/accounts/${account_id}/workers/workers/${worker_id}/versions/${versionID}`,
       options,
@@ -105,7 +112,7 @@ export class Versions extends APIResource {
    * ```
    */
   get(versionID: string, params: VersionGetParams, options?: RequestOptions): APIPromise<Version> {
-    const { account_id, worker_id, ...query } = params;
+    const { account_id = this._client.accountID, worker_id, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/workers/workers/${worker_id}/versions/${versionID}`, {
         query,
@@ -114,6 +121,7 @@ export class Versions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Versions extends BaseVersions {}
 
 export type VersionsV4PagePaginationArray = V4PagePaginationArray<Version>;
 
@@ -1295,7 +1303,7 @@ export interface VersionCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If true, a deployment will be created that sends 100% of traffic to
@@ -2426,14 +2434,14 @@ export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier for the Worker, which can be ID or name.
@@ -2445,7 +2453,7 @@ export interface VersionGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier for the Worker, which can be ID or name.

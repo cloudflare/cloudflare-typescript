@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class UserAgents extends APIResource {
+export class BaseUserAgents extends APIResource {
+  static override readonly _key: readonly ['radar', 'robotsTXT', 'top', 'userAgents'] = Object.freeze([
+    'radar',
+    'robotsTXT',
+    'top',
+    'userAgents',
+  ] as const);
+
   /**
    * Retrieves the top user agents on robots.txt files.
    *
@@ -25,6 +32,7 @@ export class UserAgents extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class UserAgents extends BaseUserAgents {}
 
 export interface UserAgentDirectiveResponse {
   /**

@@ -2,4 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 
-export class Insights extends APIResource {}
+export class BaseInsights extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'insights'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'insights',
+  ] as const);
+}
+export class Insights extends BaseInsights {}

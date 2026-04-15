@@ -5,12 +5,22 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ASN extends APIResource {
+export class BaseASN extends APIResource {
+  static override readonly _key: readonly ['botnetFeed', 'configs', 'asn'] = Object.freeze([
+    'botnetFeed',
+    'configs',
+    'asn',
+  ] as const);
+
   /**
    * Delete an ASN from botnet threat feed for a given user.
    */
-  delete(asnID: number, params: ASNDeleteParams, options?: RequestOptions): APIPromise<ASNDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    asnID: number,
+    params: ASNDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ASNDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/botnet_feed/configs/asn/${asnID}`,
@@ -22,8 +32,8 @@ export class ASN extends APIResource {
   /**
    * Gets a list of all ASNs registered for a user for the DDoS Botnet Feed API.
    */
-  get(params: ASNGetParams, options?: RequestOptions): APIPromise<ASNGetResponse> {
-    const { account_id } = params;
+  get(params: ASNGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<ASNGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/botnet_feed/configs/asn`, options) as APIPromise<{
         result: ASNGetResponse;
@@ -31,6 +41,7 @@ export class ASN extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ASN extends BaseASN {}
 
 export interface ASNDeleteResponse {
   asn?: number;
@@ -44,14 +55,14 @@ export interface ASNDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ASNGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ASN {

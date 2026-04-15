@@ -1,15 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AssetUpload, type AssetUploadCreateResponse, type AssetUploadCreateParams } from './asset-upload';
+export {
+  AssetUpload,
+  BaseAssetUpload,
+  type AssetUploadCreateResponse,
+  type AssetUploadCreateParams,
+} from './asset-upload';
 export {
   Bindings,
+  BaseBindings,
   type BindingGetResponse,
   type BindingGetParams,
   type BindingGetResponsesSinglePage,
 } from './bindings';
-export { Content, type ContentUpdateParams, type ContentGetParams } from './content';
+export { Content, BaseContent, type ContentUpdateParams, type ContentGetParams } from './content';
 export {
   Scripts,
+  BaseScripts,
   type Script,
   type ScriptUpdateResponse,
   type ScriptDeleteResponse,
@@ -19,6 +26,7 @@ export {
 } from './scripts';
 export {
   Secrets,
+  BaseSecrets,
   type SecretUpdateResponse,
   type SecretListResponse,
   type SecretDeleteResponse,
@@ -31,6 +39,7 @@ export {
 } from './secrets';
 export {
   Settings,
+  BaseSettings,
   type SettingEditResponse,
   type SettingGetResponse,
   type SettingEditParams,
@@ -38,6 +47,7 @@ export {
 } from './settings';
 export {
   Tags,
+  BaseTags,
   type TagUpdateResponse,
   type TagListResponse,
   type TagDeleteResponse,

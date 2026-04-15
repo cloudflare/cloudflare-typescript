@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Metadata extends APIResource {
+export class BaseMetadata extends APIResource {
+  static override readonly _key: readonly ['kv', 'namespaces', 'metadata'] = Object.freeze([
+    'kv',
+    'namespaces',
+    'metadata',
+  ] as const);
+
   /**
    * Returns the metadata associated with the given key in the given namespace. Use
    * URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key
@@ -23,7 +29,7 @@ export class Metadata extends APIResource {
    * ```
    */
   get(keyName: string, params: MetadataGetParams, options?: RequestOptions): APIPromise<MetadataGetResponse> {
-    const { account_id, namespace_id } = params;
+    const { account_id = this._client.accountID, namespace_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/metadata/${keyName}`,
@@ -32,6 +38,7 @@ export class Metadata extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Metadata extends BaseMetadata {}
 
 /**
  * Arbitrary JSON that is associated with a key.
@@ -42,7 +49,7 @@ export interface MetadataGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Namespace identifier tag.

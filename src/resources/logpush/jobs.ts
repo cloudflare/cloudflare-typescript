@@ -7,7 +7,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Jobs extends APIResource {
+export class BaseJobs extends APIResource {
+  static override readonly _key: readonly ['logpush', 'jobs'] = Object.freeze(['logpush', 'jobs'] as const);
+
   /**
    * Creates a new Logpush job for an account or zone.
    *
@@ -41,7 +43,11 @@ export class Jobs extends APIResource {
    * ```
    */
   create(params: JobCreateParams, options?: RequestOptions): APIPromise<LogpushJob | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -97,7 +103,11 @@ export class Jobs extends APIResource {
    * ```
    */
   update(jobID: number, params: JobUpdateParams, options?: RequestOptions): APIPromise<LogpushJob | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -139,7 +149,8 @@ export class Jobs extends APIResource {
     params: JobListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LogpushJobsSinglePage, LogpushJob | null> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -178,7 +189,8 @@ export class Jobs extends APIResource {
     params: JobDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<JobDeleteResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -218,7 +230,8 @@ export class Jobs extends APIResource {
     params: JobGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LogpushJob | null> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -243,6 +256,7 @@ export class Jobs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Jobs extends BaseJobs {}
 
 export type LogpushJobsSinglePage = SinglePage<LogpushJob | null>;
 

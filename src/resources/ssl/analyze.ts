@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Analyze extends APIResource {
+export class BaseAnalyze extends APIResource {
+  static override readonly _key: readonly ['ssl', 'analyze'] = Object.freeze(['ssl', 'analyze'] as const);
+
   /**
    * Returns the set of hostnames, the signature algorithm, and the expiration date
    * of the certificate.
@@ -18,8 +20,11 @@ export class Analyze extends APIResource {
    * });
    * ```
    */
-  create(params: AnalyzeCreateParams, options?: RequestOptions): APIPromise<AnalyzeCreateResponse> {
-    const { zone_id, ...body } = params;
+  create(
+    params: AnalyzeCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AnalyzeCreateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/ssl/analyze`, { body, ...options }) as APIPromise<{
         result: AnalyzeCreateResponse;
@@ -27,6 +32,7 @@ export class Analyze extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Analyze extends BaseAnalyze {}
 
 export type AnalyzeCreateResponse = unknown;
 
@@ -34,7 +40,7 @@ export interface AnalyzeCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A ubiquitous bundle has the highest probability of being verified

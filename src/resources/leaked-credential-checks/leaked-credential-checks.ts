@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as DetectionsAPI from './detections';
 import {
+  BaseDetections,
   DetectionCreateParams,
   DetectionCreateResponse,
   DetectionDeleteParams,
@@ -20,8 +21,10 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class LeakedCredentialChecks extends APIResource {
-  detections: DetectionsAPI.Detections = new DetectionsAPI.Detections(this._client);
+export class BaseLeakedCredentialChecks extends APIResource {
+  static override readonly _key: readonly ['leakedCredentialChecks'] = Object.freeze([
+    'leakedCredentialChecks',
+  ] as const);
 
   /**
    * Updates the current status of Leaked Credential Checks.
@@ -35,10 +38,10 @@ export class LeakedCredentialChecks extends APIResource {
    * ```
    */
   create(
-    params: LeakedCredentialCheckCreateParams,
+    params: LeakedCredentialCheckCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LeakedCredentialCheckCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/leaked-credential-checks`, {
         body,
@@ -59,16 +62,19 @@ export class LeakedCredentialChecks extends APIResource {
    * ```
    */
   get(
-    params: LeakedCredentialCheckGetParams,
+    params: LeakedCredentialCheckGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LeakedCredentialCheckGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/leaked-credential-checks`, options) as APIPromise<{
         result: LeakedCredentialCheckGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class LeakedCredentialChecks extends BaseLeakedCredentialChecks {
+  detections: DetectionsAPI.Detections = new DetectionsAPI.Detections(this._client);
 }
 
 /**
@@ -95,7 +101,7 @@ export interface LeakedCredentialCheckCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Determines whether or not Leaked Credential Checks are enabled.
@@ -107,10 +113,11 @@ export interface LeakedCredentialCheckGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 LeakedCredentialChecks.Detections = Detections;
+LeakedCredentialChecks.BaseDetections = BaseDetections;
 
 export declare namespace LeakedCredentialChecks {
   export {
@@ -122,6 +129,7 @@ export declare namespace LeakedCredentialChecks {
 
   export {
     Detections as Detections,
+    BaseDetections as BaseDetections,
     type DetectionCreateResponse as DetectionCreateResponse,
     type DetectionUpdateResponse as DetectionUpdateResponse,
     type DetectionListResponse as DetectionListResponse,

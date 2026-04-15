@@ -5,15 +5,20 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class HostnameAssociations extends APIResource {
+export class BaseHostnameAssociations extends APIResource {
+  static override readonly _key: readonly ['certificateAuthorities', 'hostnameAssociations'] = Object.freeze([
+    'certificateAuthorities',
+    'hostnameAssociations',
+  ] as const);
+
   /**
    * Replace Hostname Associations
    */
   update(
-    params: HostnameAssociationUpdateParams,
+    params: HostnameAssociationUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameAssociationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         body,
@@ -26,10 +31,10 @@ export class HostnameAssociations extends APIResource {
    * List Hostname Associations
    */
   get(
-    params: HostnameAssociationGetParams,
+    params: HostnameAssociationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameAssociationGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
@@ -38,6 +43,7 @@ export class HostnameAssociations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class HostnameAssociations extends BaseHostnameAssociations {}
 
 export type HostnameAssociation = string;
 
@@ -66,7 +72,7 @@ export interface HostnameAssociationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -85,7 +91,7 @@ export interface HostnameAssociationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The UUID to match against for a certificate that was uploaded to

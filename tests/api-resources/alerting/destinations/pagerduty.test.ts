@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Destinations } from 'cloudflare/resources/alerting/destinations/destinations';
+import { BasePagerdutyResource } from 'cloudflare/resources/alerting/destinations/pagerduty';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource pagerduty', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePagerdutyResource],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Destinations],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ alerting: { destinations: { pagerduty: BasePagerdutyResource } } }>,
+) => {
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4285
   test.skip('create: only required params', async () => {
     const responsePromise = client.alerting.destinations.pagerduty.create({
@@ -88,4 +108,7 @@ describe('resource pagerduty', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource pagerduty', () => runTests(client));
+describe('resource pagerduty (tree shakable, base)', () => runTests(partialClient));
+describe('resource pagerduty (tree shakable, subresource)', () => runTests(parentPartialClient));

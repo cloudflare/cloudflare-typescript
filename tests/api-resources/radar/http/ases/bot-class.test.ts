@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Ases } from 'cloudflare/resources/radar/http/ases/ases';
+import { BaseBotClass } from 'cloudflare/resources/radar/http/ases/bot-class';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource botClass', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseBotClass],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Ases],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { http: { ases: { botClass: BaseBotClass } } } }>) => {
   test('get', async () => {
     const responsePromise = client.radar.http.ases.botClass.get('LIKELY_AUTOMATED');
     const rawResponse = await responsePromise.asResponse();
@@ -48,4 +66,7 @@ describe('resource botClass', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource botClass', () => runTests(client));
+describe('resource botClass (tree shakable, base)', () => runTests(partialClient));
+describe('resource botClass (tree shakable, subresource)', () => runTests(parentPartialClient));

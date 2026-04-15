@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Videos extends APIResource {
+export class BaseVideos extends APIResource {
+  static override readonly _key: readonly ['stream', 'videos'] = Object.freeze(['stream', 'videos'] as const);
+
   /**
    * Returns information about an account's storage use.
    *
@@ -17,10 +19,10 @@ export class Videos extends APIResource {
    * ```
    */
   storageUsage(
-    params: VideoStorageUsageParams,
+    params: VideoStorageUsageParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<VideoStorageUsageResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/storage-usage`, {
         query,
@@ -29,6 +31,7 @@ export class Videos extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Videos extends BaseVideos {}
 
 export interface VideoStorageUsageResponse {
   /**
@@ -57,7 +60,7 @@ export interface VideoStorageUsageParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A user-defined identifier for the media creator.

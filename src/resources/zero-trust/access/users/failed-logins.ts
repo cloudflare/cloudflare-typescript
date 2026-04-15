@@ -5,7 +5,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class FailedLogins extends APIResource {
+export class BaseFailedLogins extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'users', 'failedLogins'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'users',
+    'failedLogins',
+  ] as const);
+
   /**
    * Get all failed login attempts for a single user.
    *
@@ -22,10 +29,10 @@ export class FailedLogins extends APIResource {
    */
   list(
     userID: string,
-    params: FailedLoginListParams,
+    params: FailedLoginListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<FailedLoginListResponsesSinglePage, FailedLoginListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/users/${userID}/failed_logins`,
       SinglePage<FailedLoginListResponse>,
@@ -33,6 +40,7 @@ export class FailedLogins extends APIResource {
     );
   }
 }
+export class FailedLogins extends BaseFailedLogins {}
 
 export type FailedLoginListResponsesSinglePage = SinglePage<FailedLoginListResponse>;
 
@@ -46,7 +54,7 @@ export interface FailedLoginListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace FailedLogins {

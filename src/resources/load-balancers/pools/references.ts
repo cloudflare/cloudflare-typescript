@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class References extends APIResource {
+export class BaseReferences extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'pools', 'references'] = Object.freeze([
+    'loadBalancers',
+    'pools',
+    'references',
+  ] as const);
+
   /**
    * Get the list of resources that reference the provided pool.
    *
@@ -22,10 +28,10 @@ export class References extends APIResource {
    */
   get(
     poolID: string,
-    params: ReferenceGetParams,
+    params: ReferenceGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ReferenceGetResponsesSinglePage, ReferenceGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/load_balancers/pools/${poolID}/references`,
       SinglePage<ReferenceGetResponse>,
@@ -33,6 +39,7 @@ export class References extends APIResource {
     );
   }
 }
+export class References extends BaseReferences {}
 
 export type ReferenceGetResponsesSinglePage = SinglePage<ReferenceGetResponse>;
 
@@ -50,7 +57,7 @@ export interface ReferenceGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace References {

@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Status extends APIResource {
+export class BaseStatus extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'outgoing', 'status'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'outgoing',
+    'status',
+  ] as const);
+
   /**
    * Get primary zone transfer status.
    *
@@ -18,8 +25,11 @@ export class Status extends APIResource {
    *   });
    * ```
    */
-  get(params: StatusGetParams, options?: RequestOptions): APIPromise<OutgoingAPI.EnableTransfer> {
-    const { zone_id } = params;
+  get(
+    params: StatusGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OutgoingAPI.EnableTransfer> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/secondary_dns/outgoing/status`, options) as APIPromise<{
         result: OutgoingAPI.EnableTransfer;
@@ -27,9 +37,10 @@ export class Status extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Status extends BaseStatus {}
 
 export interface StatusGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Status {

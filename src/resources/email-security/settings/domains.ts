@@ -11,7 +11,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Domains extends APIResource {
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'settings', 'domains'] = Object.freeze([
+    'emailSecurity',
+    'settings',
+    'domains',
+  ] as const);
+
   /**
    * Lists, searches, and sorts an account’s email domains.
    *
@@ -26,10 +32,10 @@ export class Domains extends APIResource {
    * ```
    */
   list(
-    params: DomainListParams,
+    params: DomainListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DomainListResponsesV4PagePaginationArray, DomainListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/settings/domains`,
       V4PagePaginationArray<DomainListResponse>,
@@ -50,10 +56,10 @@ export class Domains extends APIResource {
    */
   delete(
     domainID: number,
-    params: DomainDeleteParams,
+    params: DomainDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DomainDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/email-security/settings/domains/${domainID}`,
@@ -77,10 +83,10 @@ export class Domains extends APIResource {
    * ```
    */
   bulkDelete(
-    params: DomainBulkDeleteParams,
+    params: DomainBulkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/settings/domains`,
       SinglePage<DomainBulkDeleteResponse>,
@@ -101,7 +107,7 @@ export class Domains extends APIResource {
    * ```
    */
   edit(domainID: number, params: DomainEditParams, options?: RequestOptions): APIPromise<DomainEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/email-security/settings/domains/${domainID}`, {
         body,
@@ -121,8 +127,12 @@ export class Domains extends APIResource {
    *   });
    * ```
    */
-  get(domainID: number, params: DomainGetParams, options?: RequestOptions): APIPromise<DomainGetResponse> {
-    const { account_id } = params;
+  get(
+    domainID: number,
+    params: DomainGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DomainGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/settings/domains/${domainID}`,
@@ -131,6 +141,7 @@ export class Domains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Domains extends BaseDomains {}
 
 export type DomainListResponsesV4PagePaginationArray = V4PagePaginationArray<DomainListResponse>;
 
@@ -376,7 +387,7 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filters response to domains with the currently active delivery
@@ -422,21 +433,21 @@ export interface DomainDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainBulkDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -509,7 +520,7 @@ export interface DomainGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Domains {

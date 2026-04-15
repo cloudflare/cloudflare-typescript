@@ -2,8 +2,9 @@
 
 export {
   ContentLists,
+  BaseContentLists,
   type ContentList,
   type ContentListUpdateParams,
   type ContentListGetParams,
 } from './content-lists/index';
-export { IPFSUniversalPaths } from './ipfs-universal-paths';
+export { IPFSUniversalPaths, BaseIPFSUniversalPaths } from './ipfs-universal-paths';

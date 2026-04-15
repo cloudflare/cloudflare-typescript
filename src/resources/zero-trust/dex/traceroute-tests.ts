@@ -7,7 +7,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TracerouteTests extends APIResource {
+export class BaseTracerouteTests extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'tracerouteTests'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'tracerouteTests',
+  ] as const);
+
   /**
    * Get test details and aggregate performance metrics for an traceroute test for a
    * given time period between 1 hour and 7 days.
@@ -27,7 +33,7 @@ export class TracerouteTests extends APIResource {
    * ```
    */
   get(testID: string, params: TracerouteTestGetParams, options?: RequestOptions): APIPromise<Traceroute> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/traceroute-tests/${testID}`, {
         query,
@@ -59,7 +65,7 @@ export class TracerouteTests extends APIResource {
     params: TracerouteTestNetworkPathParams,
     options?: RequestOptions,
   ): APIPromise<DEXAPI.NetworkPathResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/traceroute-tests/${testID}/network-path`, {
         query,
@@ -90,7 +96,7 @@ export class TracerouteTests extends APIResource {
     params: TracerouteTestPercentilesParams,
     options?: RequestOptions,
   ): APIPromise<TracerouteTestPercentilesResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/traceroute-tests/${testID}/percentiles`, {
         query,
@@ -99,6 +105,7 @@ export class TracerouteTests extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TracerouteTests extends BaseTracerouteTests {}
 
 export interface Traceroute {
   /**
@@ -285,7 +292,7 @@ export interface TracerouteTestGetParams {
   /**
    * Path param: Unique identifier linked to an account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for aggregate metrics in ISO ms
@@ -319,7 +326,7 @@ export interface TracerouteTestNetworkPathParams {
   /**
    * Path param: unique identifier linked to an account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Device to filter tracroute result runs to
@@ -346,7 +353,7 @@ export interface TracerouteTestPercentilesParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format

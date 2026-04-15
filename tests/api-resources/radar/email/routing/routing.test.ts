@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Email } from 'cloudflare/resources/radar/email/email';
+import { BaseRouting } from 'cloudflare/resources/radar/email/routing/routing';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource routing', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRouting],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Email],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { email: { routing: BaseRouting } } }>) => {
   test('summaryV2', async () => {
     const responsePromise = client.radar.email.routing.summaryV2('IP_VERSION');
     const rawResponse = await responsePromise.asResponse();
@@ -79,4 +97,7 @@ describe('resource routing', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource routing', () => runTests(client));
+describe('resource routing (tree shakable, base)', () => runTests(partialClient));
+describe('resource routing (tree shakable, subresource)', () => runTests(parentPartialClient));

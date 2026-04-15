@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class IQI extends APIResource {
+export class BaseIQI extends APIResource {
+  static override readonly _key: readonly ['radar', 'quality', 'iqi'] = Object.freeze([
+    'radar',
+    'quality',
+    'iqi',
+  ] as const);
+
   /**
    * Retrieves a summary (percentiles) of bandwidth, latency, or DNS response time
    * from the Radar Internet Quality Index (IQI).
@@ -47,6 +53,7 @@ export class IQI extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IQI extends BaseIQI {}
 
 export interface IQISummaryResponse {
   /**

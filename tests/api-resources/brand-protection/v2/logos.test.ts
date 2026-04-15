@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseLogos } from 'cloudflare/resources/brand-protection/v2/logos';
+import { V2 } from 'cloudflare/resources/brand-protection/v2/v2';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource logos', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLogos],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [V2],
+});
+
+const runTests = (client: PartialCloudflare<{ brandProtection: { v2: { logos: BaseLogos } } }>) => {
   // HTTP 401 error from prism
   test.skip('create: only required params', async () => {
     const responsePromise = client.brandProtection.v2.logos.create({
@@ -74,4 +92,7 @@ describe('resource logos', () => {
       download: 'download',
     });
   });
-});
+};
+describe('resource logos', () => runTests(client));
+describe('resource logos (tree shakable, base)', () => runTests(partialClient));
+describe('resource logos (tree shakable, subresource)', () => runTests(parentPartialClient));

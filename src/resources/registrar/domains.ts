@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Domains extends APIResource {
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['registrar', 'domains'] = Object.freeze([
+    'registrar',
+    'domains',
+  ] as const);
+
   /**
    * Update individual domain.
    *
@@ -17,7 +22,7 @@ export class Domains extends APIResource {
     params: DomainUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DomainUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
@@ -31,8 +36,11 @@ export class Domains extends APIResource {
    *
    * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
-  list(params: DomainListParams, options?: RequestOptions): PagePromise<DomainsSinglePage, Domain> {
-    const { account_id } = params;
+  list(
+    params: DomainListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<DomainsSinglePage, Domain> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/registrar/domains`,
       SinglePage<Domain>,
@@ -47,10 +55,10 @@ export class Domains extends APIResource {
    */
   get(
     domainName: string,
-    params: DomainGetParams,
+    params: DomainGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DomainGetResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/registrar/domains/${domainName}`, options) as APIPromise<{
         result: DomainGetResponse | null;
@@ -58,6 +66,7 @@ export class Domains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Domains extends BaseDomains {}
 
 export type DomainsSinglePage = SinglePage<Domain>;
 
@@ -242,7 +251,7 @@ export interface DomainUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Auto-renew controls whether subscription is automatically renewed
@@ -265,14 +274,14 @@ export interface DomainListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Domains {

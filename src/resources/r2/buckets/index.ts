@@ -2,6 +2,7 @@
 
 export {
   Buckets,
+  BaseBuckets,
   type Bucket,
   type BucketListResponse,
   type BucketDeleteResponse,
@@ -13,6 +14,7 @@ export {
 } from './buckets';
 export {
   CORS,
+  BaseCORS,
   type CORSUpdateResponse,
   type CORSDeleteResponse,
   type CORSGetResponse,
@@ -20,9 +22,10 @@ export {
   type CORSDeleteParams,
   type CORSGetParams,
 } from './cors';
-export { Domains } from './domains/index';
+export { Domains, BaseDomains } from './domains/index';
 export {
   EventNotifications,
+  BaseEventNotifications,
   type EventNotificationUpdateResponse,
   type EventNotificationListResponse,
   type EventNotificationDeleteResponse,
@@ -34,6 +37,7 @@ export {
 } from './event-notifications';
 export {
   Lifecycle,
+  BaseLifecycle,
   type LifecycleUpdateResponse,
   type LifecycleGetResponse,
   type LifecycleUpdateParams,
@@ -41,14 +45,16 @@ export {
 } from './lifecycle';
 export {
   Locks,
+  BaseLocks,
   type LockUpdateResponse,
   type LockGetResponse,
   type LockUpdateParams,
   type LockGetParams,
 } from './locks';
-export { Metrics, type MetricListResponse, type MetricListParams } from './metrics';
+export { Metrics, BaseMetrics, type MetricListResponse, type MetricListParams } from './metrics';
 export {
   SippyResource,
+  BaseSippyResource,
   type Provider,
   type Sippy,
   type SippyDeleteResponse,

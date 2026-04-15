@@ -2,6 +2,7 @@
 
 export {
   Layer3,
+  BaseLayer3,
   type Layer3SummaryV2Response,
   type Layer3TimeseriesResponse,
   type Layer3TimeseriesGroupsV2Response,
@@ -11,6 +12,7 @@ export {
 } from './layer3';
 export {
   Summary,
+  BaseSummary,
   type SummaryBitrateResponse,
   type SummaryDurationResponse,
   type SummaryIndustryResponse,
@@ -28,6 +30,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupBitrateResponse,
   type TimeseriesGroupDurationResponse,
   type TimeseriesGroupIndustryResponse,
@@ -45,6 +48,7 @@ export {
 } from './timeseries-groups';
 export {
   Top,
+  BaseTop,
   type TopAttacksResponse,
   type TopIndustryResponse,
   type TopVerticalResponse,

@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AuditLogs, type AuditLogListParams } from './audit-logs';
-export { Billing } from './billing/index';
-export { Invites, type Invite, type InviteEditParams, type InvitesSinglePage } from './invites';
+export { AuditLogs, BaseAuditLogs, type AuditLogListParams } from './audit-logs';
+export { Billing, BaseBilling } from './billing/index';
+export { Invites, BaseInvites, type Invite, type InviteEditParams, type InvitesSinglePage } from './invites';
 export {
   Organizations,
+  BaseOrganizations,
   type Organization,
   type OrganizationDeleteResponse,
   type OrganizationGetResponse,
@@ -13,12 +14,14 @@ export {
 } from './organizations';
 export {
   Subscriptions,
+  BaseSubscriptions,
   type SubscriptionUpdateResponse,
   type SubscriptionDeleteResponse,
   type SubscriptionUpdateParams,
 } from './subscriptions';
 export {
   Tokens,
+  BaseTokens,
   type TokenCreateResponse,
   type TokenDeleteResponse,
   type TokenVerifyResponse,
@@ -26,4 +29,4 @@ export {
   type TokenUpdateParams,
   type TokenListParams,
 } from './tokens/index';
-export { User } from './user';
+export { User, BaseUser } from './user';

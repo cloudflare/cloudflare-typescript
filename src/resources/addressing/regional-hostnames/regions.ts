@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Regions extends APIResource {
+export class BaseRegions extends APIResource {
+  static override readonly _key: readonly ['addressing', 'regionalHostnames', 'regions'] = Object.freeze([
+    'addressing',
+    'regionalHostnames',
+    'regions',
+  ] as const);
+
   /**
    * List all Regional Services regions available for use by this account.
    *
@@ -20,10 +26,10 @@ export class Regions extends APIResource {
    * ```
    */
   list(
-    params: RegionListParams,
+    params: RegionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RegionListResponsesSinglePage, RegionListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/regional_hostnames/regions`,
       SinglePage<RegionListResponse>,
@@ -31,6 +37,7 @@ export class Regions extends APIResource {
     );
   }
 }
+export class Regions extends BaseRegions {}
 
 export type RegionListResponsesSinglePage = SinglePage<RegionListResponse>;
 
@@ -50,7 +57,7 @@ export interface RegionListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Regions {

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseASPA } from 'cloudflare/resources/radar/bgp/rpki/aspa';
+import { RPKI } from 'cloudflare/resources/radar/bgp/rpki/rpki';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource aspa', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseASPA],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [RPKI],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { bgp: { rpki: { aspa: BaseASPA } } } }>) => {
   test('changes', async () => {
     const responsePromise = client.radar.bgp.rpki.aspa.changes();
     const rawResponse = await responsePromise.asResponse();
@@ -90,4 +108,7 @@ describe('resource aspa', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource aspa', () => runTests(client));
+describe('resource aspa (tree shakable, base)', () => runTests(partialClient));
+describe('resource aspa (tree shakable, subresource)', () => runTests(parentPartialClient));

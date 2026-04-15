@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as ConfigsAPI from './configs';
 import {
+  BaseConfigs,
   ConfigCreateParams,
   ConfigDeleteParams,
   ConfigDeleteResponse,
@@ -14,7 +15,10 @@ import {
 } from './configs';
 import { SinglePage } from '../../core/pagination';
 
-export class HyperdriveResource extends APIResource {
+export class BaseHyperdriveResource extends APIResource {
+  static override readonly _key: readonly ['hyperdrive'] = Object.freeze(['hyperdrive'] as const);
+}
+export class HyperdriveResource extends BaseHyperdriveResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
 
@@ -291,12 +295,14 @@ export namespace Hyperdrive {
 }
 
 HyperdriveResource.Configs = Configs;
+HyperdriveResource.BaseConfigs = BaseConfigs;
 
 export declare namespace HyperdriveResource {
   export { type Configuration as Configuration, type Hyperdrive as Hyperdrive };
 
   export {
     Configs as Configs,
+    BaseConfigs as BaseConfigs,
     type ConfigDeleteResponse as ConfigDeleteResponse,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,

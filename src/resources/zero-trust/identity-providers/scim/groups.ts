@@ -11,7 +11,10 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Groups extends APIResource {
+export class BaseGroups extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'identityProviders', 'scim', 'groups'] =
+    Object.freeze(['zeroTrust', 'identityProviders', 'scim', 'groups'] as const);
+
   /**
    * Lists SCIM Group resources synced to Cloudflare via the System for Cross-domain
    * Identity Management (SCIM).
@@ -29,10 +32,10 @@ export class Groups extends APIResource {
    */
   list(
     identityProviderID: string,
-    params: GroupListParams,
+    params: GroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ZeroTrustGroupsV4PagePaginationArray, GroupsAPI.ZeroTrustGroup> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/identity_providers/${identityProviderID}/scim/groups`,
       V4PagePaginationArray<GroupsAPI.ZeroTrustGroup>,
@@ -40,12 +43,13 @@ export class Groups extends APIResource {
     );
   }
 }
+export class Groups extends BaseGroups {}
 
 export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The unique Cloudflare-generated Id of the SCIM Group resource; also

@@ -2,6 +2,7 @@
 
 export {
   Pages,
+  BasePages,
   type PageListResponse,
   type PageListParams,
   type PageTrendParams,
@@ -9,6 +10,7 @@ export {
 } from './pages';
 export {
   Tests,
+  BaseTests,
   type Test,
   type TestDeleteResponse,
   type TestCreateParams,

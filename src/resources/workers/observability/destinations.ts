@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Destinations extends APIResource {
+export class BaseDestinations extends APIResource {
+  static override readonly _key: readonly ['workers', 'observability', 'destinations'] = Object.freeze([
+    'workers',
+    'observability',
+    'destinations',
+  ] as const);
+
   /**
    * Create a new Workers Observability Telemetry Destination.
    *
@@ -27,7 +33,7 @@ export class Destinations extends APIResource {
    * ```
    */
   create(params: DestinationCreateParams, options?: RequestOptions): APIPromise<DestinationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/observability/destinations`, {
         body,
@@ -61,7 +67,7 @@ export class Destinations extends APIResource {
     params: DestinationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DestinationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/workers/observability/destinations/${slug}`, {
         body,
@@ -84,10 +90,10 @@ export class Destinations extends APIResource {
    * ```
    */
   list(
-    params: DestinationListParams,
+    params: DestinationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DestinationListResponsesSinglePage, DestinationListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/observability/destinations`,
       SinglePage<DestinationListResponse>,
@@ -109,10 +115,10 @@ export class Destinations extends APIResource {
    */
   delete(
     slug: string,
-    params: DestinationDeleteParams,
+    params: DestinationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DestinationDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/observability/destinations/${slug}`,
@@ -121,6 +127,7 @@ export class Destinations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Destinations extends BaseDestinations {}
 
 export type DestinationListResponsesSinglePage = SinglePage<DestinationListResponse>;
 
@@ -244,7 +251,7 @@ export interface DestinationCreateParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -283,7 +290,7 @@ export interface DestinationUpdateParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -310,7 +317,7 @@ export interface DestinationListParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -337,7 +344,7 @@ export interface DestinationDeleteParams {
   /**
    * Your Cloudflare account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Destinations {

@@ -2,9 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as HostsAPI from './hosts';
-import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
+import {
+  BaseHosts,
+  HostListParams,
+  HostListResponse,
+  HostListResponsesV4PagePaginationArray,
+  Hosts,
+} from './hosts';
 import * as OperationsAPI from './operations';
 import {
+  BaseOperations,
   OperationListParams,
   OperationListResponse,
   OperationListResponsesV4PagePaginationArray,
@@ -24,9 +31,11 @@ import { path } from '../../../internal/utils/path';
 /**
  * @deprecated Please use the [Schema Validation](https://developers.cloudflare.com/api/resources/schema_validation/) APIs instead
  */
-export class UserSchemas extends APIResource {
-  operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
-  hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
+export class BaseUserSchemas extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'userSchemas'] = Object.freeze([
+    'apiGateway',
+    'userSchemas',
+  ] as const);
 
   /**
    * Upload a schema to a zone
@@ -34,7 +43,7 @@ export class UserSchemas extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   create(params: UserSchemaCreateParams, options?: RequestOptions): APIPromise<UserSchemaCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(
         path`/zones/${zone_id}/api_gateway/user_schemas`,
@@ -50,10 +59,10 @@ export class UserSchemas extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
-    params: UserSchemaListParams,
+    params: UserSchemaListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/user_schemas`,
       V4PagePaginationArray<OldPublicSchema>,
@@ -69,10 +78,10 @@ export class UserSchemas extends APIResource {
    */
   delete(
     schemaID: string,
-    params: UserSchemaDeleteParams,
+    params: UserSchemaDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<UserSchemaDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/api_gateway/user_schemas/${schemaID}`, options);
   }
 
@@ -87,7 +96,7 @@ export class UserSchemas extends APIResource {
     params: UserSchemaEditParams,
     options?: RequestOptions,
   ): APIPromise<OldPublicSchema> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/api_gateway/user_schemas/${schemaID}`, {
         body,
@@ -102,8 +111,12 @@ export class UserSchemas extends APIResource {
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
-  get(schemaID: string, params: UserSchemaGetParams, options?: RequestOptions): APIPromise<OldPublicSchema> {
-    const { zone_id, ...query } = params;
+  get(
+    schemaID: string,
+    params: UserSchemaGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OldPublicSchema> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/user_schemas/${schemaID}`, {
         query,
@@ -111,6 +124,13 @@ export class UserSchemas extends APIResource {
       }) as APIPromise<{ result: OldPublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+/**
+ * @deprecated Please use the [Schema Validation](https://developers.cloudflare.com/api/resources/schema_validation/) APIs instead
+ */
+export class UserSchemas extends BaseUserSchemas {
+  operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
+  hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
 }
 
 export type OldPublicSchemasV4PagePaginationArray = V4PagePaginationArray<OldPublicSchema>;
@@ -216,7 +236,7 @@ export interface UserSchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Schema file bytes
@@ -243,7 +263,7 @@ export interface UserSchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -260,14 +280,14 @@ export interface UserSchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface UserSchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -279,7 +299,7 @@ export interface UserSchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -288,7 +308,9 @@ export interface UserSchemaGetParams {
 }
 
 UserSchemas.Operations = Operations;
+UserSchemas.BaseOperations = BaseOperations;
 UserSchemas.Hosts = Hosts;
+UserSchemas.BaseHosts = BaseHosts;
 
 export declare namespace UserSchemas {
   export {
@@ -306,6 +328,7 @@ export declare namespace UserSchemas {
 
   export {
     Operations as Operations,
+    BaseOperations as BaseOperations,
     type OperationListResponse as OperationListResponse,
     type OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
     type OperationListParams as OperationListParams,
@@ -313,6 +336,7 @@ export declare namespace UserSchemas {
 
   export {
     Hosts as Hosts,
+    BaseHosts as BaseHosts,
     type HostListResponse as HostListResponse,
     type HostListResponsesV4PagePaginationArray as HostListResponsesV4PagePaginationArray,
     type HostListParams as HostListParams,

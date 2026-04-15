@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IncomingResource extends APIResource {
+export class BaseIncomingResource extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'incoming'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'incoming',
+  ] as const);
+
   /**
    * Create secondary zone configuration for incoming zone transfers.
    *
@@ -24,7 +30,7 @@ export class IncomingResource extends APIResource {
    * ```
    */
   create(params: IncomingCreateParams, options?: RequestOptions): APIPromise<IncomingCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as APIPromise<{
         result: IncomingCreateResponse;
@@ -50,7 +56,7 @@ export class IncomingResource extends APIResource {
    * ```
    */
   update(params: IncomingUpdateParams, options?: RequestOptions): APIPromise<IncomingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as APIPromise<{
         result: IncomingUpdateResponse;
@@ -69,8 +75,11 @@ export class IncomingResource extends APIResource {
    *   });
    * ```
    */
-  delete(params: IncomingDeleteParams, options?: RequestOptions): APIPromise<IncomingDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    params: IncomingDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IncomingDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/secondary_dns/incoming`, options) as APIPromise<{
         result: IncomingDeleteResponse;
@@ -89,8 +98,11 @@ export class IncomingResource extends APIResource {
    *   });
    * ```
    */
-  get(params: IncomingGetParams, options?: RequestOptions): APIPromise<IncomingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: IncomingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IncomingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/secondary_dns/incoming`, options) as APIPromise<{
         result: IncomingGetResponse;
@@ -98,6 +110,7 @@ export class IncomingResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IncomingResource extends BaseIncomingResource {}
 
 export interface Incoming {
   id?: string;
@@ -267,7 +280,7 @@ export interface IncomingCreateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often should a secondary zone auto refresh regardless of DNS
@@ -290,7 +303,7 @@ export interface IncomingUpdateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often should a secondary zone auto refresh regardless of DNS
@@ -310,11 +323,11 @@ export interface IncomingUpdateParams {
 }
 
 export interface IncomingDeleteParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface IncomingGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace IncomingResource {

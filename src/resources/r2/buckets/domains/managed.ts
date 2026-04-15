@@ -6,7 +6,14 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Managed extends APIResource {
+export class BaseManaged extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'domains', 'managed'] = Object.freeze([
+    'r2',
+    'buckets',
+    'domains',
+    'managed',
+  ] as const);
+
   /**
    * Updates state of public access over the bucket's R2-managed (r2.dev) domain.
    *
@@ -27,7 +34,7 @@ export class Managed extends APIResource {
     params: ManagedUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ManagedUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         body,
@@ -58,10 +65,10 @@ export class Managed extends APIResource {
    */
   list(
     bucketName: string,
-    params: ManagedListParams,
+    params: ManagedListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ManagedListResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         ...options,
@@ -77,6 +84,7 @@ export class Managed extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Managed extends BaseManaged {}
 
 export interface ManagedUpdateResponse {
   /**
@@ -116,7 +124,7 @@ export interface ManagedUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether to enable public bucket access at the r2.dev domain.
@@ -134,7 +142,7 @@ export interface ManagedListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

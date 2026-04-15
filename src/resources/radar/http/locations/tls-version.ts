@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class TLSVersion extends APIResource {
+export class BaseTLSVersion extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'locations', 'tlsVersion'] = Object.freeze([
+    'radar',
+    'http',
+    'locations',
+    'tlsVersion',
+  ] as const);
+
   /**
    * Retrieves the top locations, by HTTP requests, of the requested TLS protocol
    * version.
@@ -31,6 +38,7 @@ export class TLSVersion extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TLSVersion extends BaseTLSVersion {}
 
 export interface TLSVersionGetResponse {
   /**

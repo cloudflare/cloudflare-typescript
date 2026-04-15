@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as CustomAPI from './custom/custom';
 import {
+  BaseCustom,
   Custom,
   CustomCreateParams,
   CustomDeleteParams,
@@ -12,6 +13,7 @@ import {
 } from './custom/custom';
 import * as DefaultAPI from './default/default';
 import {
+  BaseDefault,
   Default,
   DefaultEditParams,
   DefaultEditResponse,
@@ -20,7 +22,14 @@ import {
 } from './default/default';
 import { SinglePage } from '../../../../core/pagination';
 
-export class Policies extends APIResource {
+export class BasePolicies extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'policies',
+  ] as const);
+}
+export class Policies extends BasePolicies {
   default: DefaultAPI.Default = new DefaultAPI.Default(this._client);
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
 }
@@ -367,7 +376,9 @@ export namespace SplitTunnelIncludeParam {
 }
 
 Policies.Default = Default;
+Policies.BaseDefault = BaseDefault;
 Policies.Custom = Custom;
+Policies.BaseCustom = BaseCustom;
 
 export declare namespace Policies {
   export {
@@ -381,6 +392,7 @@ export declare namespace Policies {
 
   export {
     Default as Default,
+    BaseDefault as BaseDefault,
     type DefaultEditResponse as DefaultEditResponse,
     type DefaultGetResponse as DefaultGetResponse,
     type DefaultEditParams as DefaultEditParams,
@@ -389,6 +401,7 @@ export declare namespace Policies {
 
   export {
     Custom as Custom,
+    BaseCustom as BaseCustom,
     type CustomCreateParams as CustomCreateParams,
     type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,

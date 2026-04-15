@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 import * as AvailabilitiesAPI from './availabilities';
-import { Availabilities, Availability, AvailabilityListParams } from './availabilities';
+import { Availabilities, Availability, AvailabilityListParams, BaseAvailabilities } from './availabilities';
 import * as ScheduleAPI from './schedule';
 import {
+  BaseScheduleResource,
   Schedule,
   ScheduleCreateParams,
   ScheduleCreateResponse,
@@ -15,6 +16,7 @@ import {
 } from './schedule';
 import * as PagesAPI from './pages/pages';
 import {
+  BasePages,
   PageListParams,
   PageListResponse,
   PageListResponsesSinglePage,
@@ -22,7 +24,10 @@ import {
   Pages,
 } from './pages/pages';
 
-export class Speed extends APIResource {
+export class BaseSpeed extends APIResource {
+  static override readonly _key: readonly ['speed'] = Object.freeze(['speed'] as const);
+}
+export class Speed extends BaseSpeed {
   schedule: ScheduleAPI.ScheduleResource = new ScheduleAPI.ScheduleResource(this._client);
   availabilities: AvailabilitiesAPI.Availabilities = new AvailabilitiesAPI.Availabilities(this._client);
   pages: PagesAPI.Pages = new PagesAPI.Pages(this._client);
@@ -185,8 +190,11 @@ export interface Trend {
 }
 
 Speed.ScheduleResource = ScheduleResource;
+Speed.BaseScheduleResource = BaseScheduleResource;
 Speed.Availabilities = Availabilities;
+Speed.BaseAvailabilities = BaseAvailabilities;
 Speed.Pages = Pages;
+Speed.BasePages = BasePages;
 
 export declare namespace Speed {
   export {
@@ -197,6 +205,7 @@ export declare namespace Speed {
 
   export {
     ScheduleResource as ScheduleResource,
+    BaseScheduleResource as BaseScheduleResource,
     type Schedule as Schedule,
     type ScheduleCreateResponse as ScheduleCreateResponse,
     type ScheduleDeleteResponse as ScheduleDeleteResponse,
@@ -207,12 +216,14 @@ export declare namespace Speed {
 
   export {
     Availabilities as Availabilities,
+    BaseAvailabilities as BaseAvailabilities,
     type Availability as Availability,
     type AvailabilityListParams as AvailabilityListParams,
   };
 
   export {
     Pages as Pages,
+    BasePages as BasePages,
     type PageListResponse as PageListResponse,
     type PageListResponsesSinglePage as PageListResponsesSinglePage,
     type PageListParams as PageListParams,

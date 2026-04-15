@@ -2,13 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TablesAPI from './tables/tables';
-import { TableListParams, TableListResponse, Tables } from './tables/tables';
+import { BaseTables, TableListParams, TableListResponse, Tables } from './tables/tables';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Namespaces extends APIResource {
-  tables: TablesAPI.Tables = new TablesAPI.Tables(this._client);
+export class BaseNamespaces extends APIResource {
+  static override readonly _key: readonly ['r2DataCatalog', 'namespaces'] = Object.freeze([
+    'r2DataCatalog',
+    'namespaces',
+  ] as const);
 
   /**
    * Returns a list of namespaces in the specified R2 catalog. Supports hierarchical
@@ -25,10 +28,10 @@ export class Namespaces extends APIResource {
    */
   list(
     bucketName: string,
-    params: NamespaceListParams,
+    params: NamespaceListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<NamespaceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2-catalog/${bucketName}/namespaces`, {
         query,
@@ -36,6 +39,9 @@ export class Namespaces extends APIResource {
       }) as APIPromise<{ result: NamespaceListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Namespaces extends BaseNamespaces {
+  tables: TablesAPI.Tables = new TablesAPI.Tables(this._client);
 }
 
 /**
@@ -98,7 +104,7 @@ export interface NamespaceListParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Maximum number of namespaces to return per page. Defaults to 100,
@@ -133,6 +139,7 @@ export interface NamespaceListParams {
 }
 
 Namespaces.Tables = Tables;
+Namespaces.BaseTables = BaseTables;
 
 export declare namespace Namespaces {
   export {
@@ -142,6 +149,7 @@ export declare namespace Namespaces {
 
   export {
     Tables as Tables,
+    BaseTables as BaseTables,
     type TableListResponse as TableListResponse,
     type TableListParams as TableListParams,
   };

@@ -7,7 +7,10 @@ import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Includes extends APIResource {
+export class BaseIncludes extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies', 'default', 'includes'] =
+    Object.freeze(['zeroTrust', 'devices', 'policies', 'default', 'includes'] as const);
+
   /**
    * Sets the list of routes included in the WARP client's tunnel.
    *
@@ -28,7 +31,7 @@ export class Includes extends APIResource {
     params: IncludeUpdateParams,
     options?: RequestOptions,
   ): PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/include`,
       SinglePage<PoliciesAPI.SplitTunnelInclude>,
@@ -50,10 +53,10 @@ export class Includes extends APIResource {
    * ```
    */
   get(
-    params: IncludeGetParams,
+    params: IncludeGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/include`,
       SinglePage<PoliciesAPI.SplitTunnelInclude>,
@@ -61,12 +64,13 @@ export class Includes extends APIResource {
     );
   }
 }
+export class Includes extends BaseIncludes {}
 
 export interface IncludeUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -75,7 +79,7 @@ export interface IncludeUpdateParams {
 }
 
 export interface IncludeGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Includes {

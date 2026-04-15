@@ -6,14 +6,20 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Bookmarks extends APIResource {
+export class BaseBookmarks extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'bookmarks'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'bookmarks',
+  ] as const);
+
   /**
    * Create a new Bookmark application.
    *
    * @deprecated
    */
   create(bookmarkID: string, params: BookmarkCreateParams, options?: RequestOptions): APIPromise<Bookmark> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, {
         body: body,
@@ -28,7 +34,7 @@ export class Bookmarks extends APIResource {
    * @deprecated
    */
   update(bookmarkID: string, params: BookmarkUpdateParams, options?: RequestOptions): APIPromise<Bookmark> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, {
         body: body,
@@ -42,8 +48,11 @@ export class Bookmarks extends APIResource {
    *
    * @deprecated
    */
-  list(params: BookmarkListParams, options?: RequestOptions): PagePromise<BookmarksSinglePage, Bookmark> {
-    const { account_id } = params;
+  list(
+    params: BookmarkListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<BookmarksSinglePage, Bookmark> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/bookmarks`,
       SinglePage<Bookmark>,
@@ -58,10 +67,10 @@ export class Bookmarks extends APIResource {
    */
   delete(
     bookmarkID: string,
-    params: BookmarkDeleteParams,
+    params: BookmarkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BookmarkDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`,
@@ -75,8 +84,12 @@ export class Bookmarks extends APIResource {
    *
    * @deprecated
    */
-  get(bookmarkID: string, params: BookmarkGetParams, options?: RequestOptions): APIPromise<Bookmark> {
-    const { account_id } = params;
+  get(
+    bookmarkID: string,
+    params: BookmarkGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Bookmark> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/bookmarks/${bookmarkID}`, options) as APIPromise<{
         result: Bookmark;
@@ -84,6 +97,7 @@ export class Bookmarks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Bookmarks extends BaseBookmarks {}
 
 export type BookmarksSinglePage = SinglePage<Bookmark>;
 
@@ -125,7 +139,7 @@ export interface BookmarkCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -137,7 +151,7 @@ export interface BookmarkUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -146,15 +160,15 @@ export interface BookmarkUpdateParams {
 }
 
 export interface BookmarkListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BookmarkDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BookmarkGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Bookmarks {

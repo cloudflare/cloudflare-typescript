@@ -2,4 +2,8 @@
 
 import { APIResource } from '../../../../core/resource';
 
-export class Health extends APIResource {}
+export class BaseHealth extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'datasets', 'health'] =
+    Object.freeze(['cloudforceOne', 'threatEvents', 'datasets', 'health'] as const);
+}
+export class Health extends BaseHealth {}

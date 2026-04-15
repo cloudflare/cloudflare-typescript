@@ -2,6 +2,7 @@
 
 export {
   AdvertisementStatus,
+  BaseAdvertisementStatus,
   type AdvertisementStatusEditResponse,
   type AdvertisementStatusGetResponse,
   type AdvertisementStatusEditParams,
@@ -9,6 +10,7 @@ export {
 } from './advertisement-status';
 export {
   BGPPrefixes,
+  BaseBGPPrefixes,
   type BGPPrefix,
   type BGPPrefixCreateParams,
   type BGPPrefixListParams,
@@ -18,6 +20,7 @@ export {
 } from './bgp-prefixes';
 export {
   Delegations,
+  BaseDelegations,
   type DelegationDeleteResponse,
   type DelegationCreateParams,
   type DelegationListParams,
@@ -26,6 +29,7 @@ export {
 } from './delegations';
 export {
   Prefixes,
+  BasePrefixes,
   type Prefix,
   type PrefixDeleteResponse,
   type PrefixCreateParams,
@@ -37,6 +41,7 @@ export {
 } from './prefixes';
 export {
   ServiceBindings,
+  BaseServiceBindings,
   type ServiceBinding,
   type ServiceBindingDeleteResponse,
   type ServiceBindingCreateParams,

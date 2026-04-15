@@ -2,13 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as FullAPI from './full';
-import { Full, FullGetParams } from './full';
+import { BaseFull, Full, FullGetParams } from './full';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Configs extends APIResource {
-  full: FullAPI.Full = new FullAPI.Full(this._client);
+export class BaseConfigs extends APIResource {
+  static override readonly _key: readonly ['magicNetworkMonitoring', 'configs'] = Object.freeze([
+    'magicNetworkMonitoring',
+    'configs',
+  ] as const);
 
   /**
    * Create a new network monitoring configuration.
@@ -24,7 +27,7 @@ export class Configs extends APIResource {
    * ```
    */
   create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/mnm/config`, { body, ...options }) as APIPromise<{
         result: Configuration;
@@ -47,7 +50,7 @@ export class Configs extends APIResource {
    * ```
    */
   update(params: ConfigUpdateParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/mnm/config`, { body, ...options }) as APIPromise<{
         result: Configuration;
@@ -66,8 +69,11 @@ export class Configs extends APIResource {
    *   });
    * ```
    */
-  delete(params: ConfigDeleteParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { account_id } = params;
+  delete(
+    params: ConfigDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Configuration> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/mnm/config`, options) as APIPromise<{
         result: Configuration;
@@ -86,8 +92,11 @@ export class Configs extends APIResource {
    *   });
    * ```
    */
-  edit(params: ConfigEditParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { account_id, ...body } = params;
+  edit(
+    params: ConfigEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Configuration> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/mnm/config`, { body, ...options }) as APIPromise<{
         result: Configuration;
@@ -106,14 +115,17 @@ export class Configs extends APIResource {
    *   });
    * ```
    */
-  get(params: ConfigGetParams, options?: RequestOptions): APIPromise<Configuration> {
-    const { account_id } = params;
+  get(params: ConfigGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Configuration> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/mnm/config`, options) as APIPromise<{
         result: Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Configs extends BaseConfigs {
+  full: FullAPI.Full = new FullAPI.Full(this._client);
 }
 
 export interface Configuration {
@@ -160,7 +172,7 @@ export interface ConfigCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Fallback sampling rate of flow messages being sent in packets per
@@ -211,7 +223,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Fallback sampling rate of flow messages being sent in packets per
@@ -259,14 +271,14 @@ export namespace ConfigUpdateParams {
 }
 
 export interface ConfigDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Fallback sampling rate of flow messages being sent in packets per
@@ -314,10 +326,11 @@ export namespace ConfigEditParams {
 }
 
 export interface ConfigGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Configs.Full = Full;
+Configs.BaseFull = BaseFull;
 
 export declare namespace Configs {
   export {
@@ -329,5 +342,5 @@ export declare namespace Configs {
     type ConfigGetParams as ConfigGetParams,
   };
 
-  export { Full as Full, type FullGetParams as FullGetParams };
+  export { Full as Full, BaseFull as BaseFull, type FullGetParams as FullGetParams };
 }

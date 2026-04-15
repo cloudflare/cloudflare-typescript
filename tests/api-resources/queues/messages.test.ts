@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseMessages } from 'cloudflare/resources/queues/messages';
+import { Queues } from 'cloudflare/resources/queues/queues';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource messages', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMessages],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Queues],
+});
+
+const runTests = (client: PartialCloudflare<{ queues: { messages: BaseMessages } }>) => {
   test('ack: only required params', async () => {
     const responsePromise = client.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -110,4 +128,7 @@ describe('resource messages', () => {
       delay_seconds: 0,
     });
   });
-});
+};
+describe('resource messages', () => runTests(client));
+describe('resource messages (tree shakable, base)', () => runTests(partialClient));
+describe('resource messages (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class EndpointHealthchecks extends APIResource {
+export class BaseEndpointHealthchecks extends APIResource {
+  static override readonly _key: readonly ['diagnostics', 'endpointHealthchecks'] = Object.freeze([
+    'diagnostics',
+    'endpointHealthchecks',
+  ] as const);
+
   /**
    * Create Endpoint Health Check.
    *
@@ -23,7 +28,7 @@ export class EndpointHealthchecks extends APIResource {
     params: EndpointHealthcheckCreateParams,
     options?: RequestOptions,
   ): APIPromise<EndpointHealthcheckCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/diagnostics/endpoint-healthchecks`, {
         body,
@@ -53,7 +58,7 @@ export class EndpointHealthchecks extends APIResource {
     params: EndpointHealthcheckUpdateParams,
     options?: RequestOptions,
   ): APIPromise<EndpointHealthcheckUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/diagnostics/endpoint-healthchecks/${id}`, {
         body,
@@ -74,10 +79,10 @@ export class EndpointHealthchecks extends APIResource {
    * ```
    */
   list(
-    params: EndpointHealthcheckListParams,
+    params: EndpointHealthcheckListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EndpointHealthcheckListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/diagnostics/endpoint-healthchecks`,
@@ -100,10 +105,10 @@ export class EndpointHealthchecks extends APIResource {
    */
   delete(
     id: string,
-    params: EndpointHealthcheckDeleteParams,
+    params: EndpointHealthcheckDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EndpointHealthcheckDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/diagnostics/endpoint-healthchecks/${id}`,
       options,
@@ -124,10 +129,10 @@ export class EndpointHealthchecks extends APIResource {
    */
   get(
     id: string,
-    params: EndpointHealthcheckGetParams,
+    params: EndpointHealthcheckGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EndpointHealthcheckGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/diagnostics/endpoint-healthchecks/${id}`,
@@ -136,6 +141,7 @@ export class EndpointHealthchecks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class EndpointHealthchecks extends BaseEndpointHealthchecks {}
 
 export interface EndpointHealthcheck {
   /**
@@ -291,7 +297,7 @@ export interface EndpointHealthcheckCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: type of check to perform
@@ -313,7 +319,7 @@ export interface EndpointHealthcheckUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: type of check to perform
@@ -335,21 +341,21 @@ export interface EndpointHealthcheckListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EndpointHealthcheckDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EndpointHealthcheckGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace EndpointHealthchecks {

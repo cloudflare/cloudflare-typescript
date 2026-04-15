@@ -7,7 +7,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Copy extends APIResource {
+export class BaseCopy extends APIResource {
+  static override readonly _key: readonly ['stream', 'copy'] = Object.freeze(['stream', 'copy'] as const);
+
   /**
    * Uploads a video to Stream from a provided URL.
    *
@@ -18,8 +20,11 @@ export class Copy extends APIResource {
    * });
    * ```
    */
-  create(params: CopyCreateParams, options?: RequestOptions): APIPromise<StreamAPI.Video> {
-    const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;
+  create(
+    params: CopyCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<StreamAPI.Video> {
+    const { account_id = this._client.accountID, 'Upload-Creator': uploadCreator, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/stream/copy`, {
         body,
@@ -32,12 +37,13 @@ export class Copy extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Copy extends BaseCopy {}
 
 export interface CopyCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Lists the origins allowed to display the video. Enter allowed origin

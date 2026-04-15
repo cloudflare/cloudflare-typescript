@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class WANs extends APIResource {
+export class BaseWANs extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'sites', 'wans'] = Object.freeze([
+    'magicTransit',
+    'sites',
+    'wans',
+  ] as const);
+
   /**
    * Creates a new Site WAN.
    *
@@ -29,7 +35,7 @@ export class WANs extends APIResource {
     params: WANCreateParams,
     options?: RequestOptions,
   ): PagePromise<WANsSinglePage, WAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/sites/${siteID}/wans`,
       SinglePage<WAN>,
@@ -52,7 +58,7 @@ export class WANs extends APIResource {
    * ```
    */
   update(wanID: string, params: WANUpdateParams, options?: RequestOptions): APIPromise<WAN> {
-    const { account_id, site_id, ...body } = params;
+    const { account_id = this._client.accountID, site_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/sites/${site_id}/wans/${wanID}`, {
         body,
@@ -75,8 +81,12 @@ export class WANs extends APIResource {
    * }
    * ```
    */
-  list(siteID: string, params: WANListParams, options?: RequestOptions): PagePromise<WANsSinglePage, WAN> {
-    const { account_id } = params;
+  list(
+    siteID: string,
+    params: WANListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<WANsSinglePage, WAN> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/sites/${siteID}/wans`,
       SinglePage<WAN>,
@@ -99,7 +109,7 @@ export class WANs extends APIResource {
    * ```
    */
   delete(wanID: string, params: WANDeleteParams, options?: RequestOptions): APIPromise<WAN> {
-    const { account_id, site_id } = params;
+    const { account_id = this._client.accountID, site_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/magic/sites/${site_id}/wans/${wanID}`,
@@ -123,7 +133,7 @@ export class WANs extends APIResource {
    * ```
    */
   edit(wanID: string, params: WANEditParams, options?: RequestOptions): APIPromise<WAN> {
-    const { account_id, site_id, ...body } = params;
+    const { account_id = this._client.accountID, site_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/sites/${site_id}/wans/${wanID}`, {
         body,
@@ -147,7 +157,7 @@ export class WANs extends APIResource {
    * ```
    */
   get(wanID: string, params: WANGetParams, options?: RequestOptions): APIPromise<WAN> {
-    const { account_id, site_id } = params;
+    const { account_id = this._client.accountID, site_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/sites/${site_id}/wans/${wanID}`,
@@ -156,6 +166,7 @@ export class WANs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class WANs extends BaseWANs {}
 
 export type WANsSinglePage = SinglePage<WAN>;
 
@@ -243,7 +254,7 @@ export interface WANCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -276,7 +287,7 @@ export interface WANUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier
@@ -314,14 +325,14 @@ export interface WANListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WANDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier
@@ -333,7 +344,7 @@ export interface WANEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier
@@ -371,7 +382,7 @@ export interface WANGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier

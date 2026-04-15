@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Database } from 'cloudflare/resources/d1/database/database';
+import { BaseTimeTravel } from 'cloudflare/resources/d1/database/time-travel';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource timeTravel', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTimeTravel],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Database],
+});
+
+const runTests = (client: PartialCloudflare<{ d1: { database: { timeTravel: BaseTimeTravel } } }>) => {
   test('getBookmark: only required params', async () => {
     const responsePromise = client.d1.database.timeTravel.getBookmark(
       'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
@@ -50,4 +68,7 @@ describe('resource timeTravel', () => {
       timestamp: '2024-01-15T12:00:00Z',
     });
   });
-});
+};
+describe('resource timeTravel', () => runTests(client));
+describe('resource timeTravel (tree shakable, base)', () => runTests(partialClient));
+describe('resource timeTravel (tree shakable, subresource)', () => runTests(parentPartialClient));

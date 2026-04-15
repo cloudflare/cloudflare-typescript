@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Presets extends APIResource {
+export class BasePresets extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'presets'] = Object.freeze([
+    'realtimeKit',
+    'presets',
+  ] as const);
+
   /**
    * Creates a preset belonging to the current App
    *
@@ -31,7 +36,7 @@ export class Presets extends APIResource {
     params: PresetCreateParams,
     options?: RequestOptions,
   ): APIPromise<PresetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/realtime/kit/${appID}/presets`, {
       body,
       ...options,
@@ -57,7 +62,7 @@ export class Presets extends APIResource {
     params: PresetUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PresetUpdateResponse> {
-    const { account_id, app_id, ...body } = params;
+    const { account_id = this._client.accountID, app_id, ...body } = params;
     return this._client.patch(path`/accounts/${account_id}/realtime/kit/${app_id}/presets/${presetID}`, {
       body,
       ...options,
@@ -83,7 +88,7 @@ export class Presets extends APIResource {
     params: PresetDeleteParams,
     options?: RequestOptions,
   ): APIPromise<PresetDeleteResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.delete(
       path`/accounts/${account_id}/realtime/kit/${app_id}/presets/${presetID}`,
       options,
@@ -101,8 +106,12 @@ export class Presets extends APIResource {
    * );
    * ```
    */
-  get(appID: string, params: PresetGetParams, options?: RequestOptions): APIPromise<PresetGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    appID: string,
+    params: PresetGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PresetGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${appID}/presets`, {
       query,
       ...options,
@@ -129,13 +138,14 @@ export class Presets extends APIResource {
     params: PresetGetPresetByIDParams,
     options?: RequestOptions,
   ): APIPromise<PresetGetPresetByIDResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/presets/${presetID}`,
       options,
     );
   }
 }
+export class Presets extends BasePresets {}
 
 export interface PresetCreateResponse {
   /**
@@ -1908,7 +1918,7 @@ export interface PresetCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -2331,7 +2341,7 @@ export interface PresetUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -2739,7 +2749,7 @@ export interface PresetDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -2751,7 +2761,7 @@ export interface PresetGetParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The page number from which you want your page search results to be
@@ -2769,7 +2779,7 @@ export interface PresetGetPresetByIDParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.

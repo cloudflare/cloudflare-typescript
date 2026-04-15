@@ -2,6 +2,7 @@
 
 export {
   Consumers,
+  BaseConsumers,
   type Consumer,
   type ConsumerDeleteResponse,
   type ConsumerCreateParams,
@@ -13,6 +14,7 @@ export {
 } from './consumers';
 export {
   Messages,
+  BaseMessages,
   type MessageAckResponse,
   type MessageBulkPushResponse,
   type MessagePullResponse,
@@ -22,10 +24,17 @@ export {
   type MessagePullParams,
   type MessagePushParams,
 } from './messages';
-export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
-export { Queues } from './queues';
+export {
+  Purge,
+  BasePurge,
+  type PurgeStatusResponse,
+  type PurgeStartParams,
+  type PurgeStatusParams,
+} from './purge';
+export { Queues, BaseQueues } from './queues';
 export {
   Subscriptions,
+  BaseSubscriptions,
   type SubscriptionCreateResponse,
   type SubscriptionUpdateResponse,
   type SubscriptionListResponse,

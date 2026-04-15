@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Eligible extends APIResource {
+export class BaseEligible extends APIResource {
+  static override readonly _key: readonly ['alerting', 'destinations', 'eligible'] = Object.freeze([
+    'alerting',
+    'destinations',
+    'eligible',
+  ] as const);
+
   /**
    * Get a list of all delivery mechanism types for which an account is eligible.
    *
@@ -17,8 +23,11 @@ export class Eligible extends APIResource {
    *   });
    * ```
    */
-  get(params: EligibleGetParams, options?: RequestOptions): APIPromise<EligibleGetResponse> {
-    const { account_id } = params;
+  get(
+    params: EligibleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EligibleGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/alerting/v3/destinations/eligible`,
@@ -27,6 +36,7 @@ export class Eligible extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Eligible extends BaseEligible {}
 
 export type EligibleGetResponse = { [key: string]: Array<EligibleGetResponse.Item> };
 
@@ -54,7 +64,7 @@ export interface EligibleGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Eligible {

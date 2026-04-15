@@ -8,7 +8,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DirectUpload extends APIResource {
+export class BaseDirectUpload extends APIResource {
+  static override readonly _key: readonly ['stream', 'directUpload'] = Object.freeze([
+    'stream',
+    'directUpload',
+  ] as const);
+
   /**
    * Creates a direct upload that allows video uploads without an API key.
    *
@@ -22,7 +27,7 @@ export class DirectUpload extends APIResource {
    * ```
    */
   create(params: DirectUploadCreateParams, options?: RequestOptions): APIPromise<DirectUploadCreateResponse> {
-    const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;
+    const { account_id = this._client.accountID, 'Upload-Creator': uploadCreator, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/direct_upload`, {
         body,
@@ -35,6 +40,7 @@ export class DirectUpload extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DirectUpload extends BaseDirectUpload {}
 
 export interface DirectUploadCreateResponse {
   /**
@@ -62,7 +68,7 @@ export interface DirectUploadCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The maximum duration in seconds for a video upload. Can be set for a

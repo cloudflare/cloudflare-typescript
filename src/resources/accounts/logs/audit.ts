@@ -9,7 +9,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Audit extends APIResource {
+export class BaseAudit extends APIResource {
+  static override readonly _key: readonly ['accounts', 'logs', 'audit'] = Object.freeze([
+    'accounts',
+    'logs',
+    'audit',
+  ] as const);
+
   /**
    * Gets a list of audit logs for an account.
    *
@@ -31,7 +37,7 @@ export class Audit extends APIResource {
     params: AuditListParams,
     options?: RequestOptions,
   ): PagePromise<AuditListResponsesCursorPaginationAfter, AuditListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/logs/audit`,
       CursorPaginationAfter<AuditListResponse>,
@@ -39,6 +45,7 @@ export class Audit extends APIResource {
     );
   }
 }
+export class Audit extends BaseAudit {}
 
 export type AuditListResponsesCursorPaginationAfter = CursorPaginationAfter<AuditListResponse>;
 
@@ -237,7 +244,7 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The unique id that identifies the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Limits the returned results to logs older than the specified date.

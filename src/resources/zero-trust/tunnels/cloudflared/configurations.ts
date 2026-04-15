@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Configurations extends APIResource {
+export class BaseConfigurations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'cloudflared', 'configurations'] =
+    Object.freeze(['zeroTrust', 'tunnels', 'cloudflared', 'configurations'] as const);
+
   /**
    * Adds or updates the configuration for a remotely-managed tunnel.
    *
@@ -23,7 +26,7 @@ export class Configurations extends APIResource {
     params: ConfigurationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ConfigurationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}/configurations`, {
         body,
@@ -46,10 +49,10 @@ export class Configurations extends APIResource {
    */
   get(
     tunnelID: string,
-    params: ConfigurationGetParams,
+    params: ConfigurationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConfigurationGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/cfd_tunnel/${tunnelID}/configurations`,
@@ -58,6 +61,7 @@ export class Configurations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Configurations extends BaseConfigurations {}
 
 /**
  * Cloudflare Tunnel configuration
@@ -689,7 +693,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The tunnel configuration and ingress rules.
@@ -980,7 +984,7 @@ export interface ConfigurationGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Configurations {

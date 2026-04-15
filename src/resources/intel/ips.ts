@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class IPs extends APIResource {
+export class BaseIPs extends APIResource {
+  static override readonly _key: readonly ['intel', 'ips'] = Object.freeze(['intel', 'ips'] as const);
+
   /**
    * Gets the geolocation, ASN, infrastructure type of the ASN, and any security
    * threat categories of an IP address. **Must provide ip query parameters.** For
@@ -18,8 +20,11 @@ export class IPs extends APIResource {
    * });
    * ```
    */
-  get(params: IPGetParams, options?: RequestOptions): APIPromise<IPGetResponse | null> {
-    const { account_id, ...query } = params;
+  get(
+    params: IPGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IPGetResponse | null> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/ip`, { query, ...options }) as APIPromise<{
         result: IPGetResponse | null;
@@ -27,6 +32,7 @@ export class IPs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IPs extends BaseIPs {}
 
 export interface IP {
   /**
@@ -75,7 +81,7 @@ export interface IPGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

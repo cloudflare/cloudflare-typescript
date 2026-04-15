@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Metrics extends APIResource {
+export class BaseMetrics extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'metrics'] = Object.freeze([
+    'r2',
+    'buckets',
+    'metrics',
+  ] as const);
+
   /**
    * Get Storage/Object Count Metrics across all buckets in your account. Note that
    * Account-Level Metrics may not immediately reflect the latest data.
@@ -17,8 +23,11 @@ export class Metrics extends APIResource {
    * });
    * ```
    */
-  list(params: MetricListParams, options?: RequestOptions): APIPromise<MetricListResponse> {
-    const { account_id } = params;
+  list(
+    params: MetricListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<MetricListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/metrics`, options) as APIPromise<{
         result: MetricListResponse;
@@ -26,6 +35,7 @@ export class Metrics extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Metrics extends BaseMetrics {}
 
 /**
  * Metrics based on the class they belong to.
@@ -162,7 +172,7 @@ export interface MetricListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Metrics {

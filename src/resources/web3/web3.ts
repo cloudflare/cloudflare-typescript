@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as HostnamesAPI from './hostnames/hostnames';
 import {
+  BaseHostnames,
   Hostname,
   HostnameCreateParams,
   HostnameDeleteParams,
@@ -14,15 +15,20 @@ import {
   HostnamesSinglePage,
 } from './hostnames/hostnames';
 
-export class Web3 extends APIResource {
+export class BaseWeb3 extends APIResource {
+  static override readonly _key: readonly ['web3'] = Object.freeze(['web3'] as const);
+}
+export class Web3 extends BaseWeb3 {
   hostnames: HostnamesAPI.Hostnames = new HostnamesAPI.Hostnames(this._client);
 }
 
 Web3.Hostnames = Hostnames;
+Web3.BaseHostnames = BaseHostnames;
 
 export declare namespace Web3 {
   export {
     Hostnames as Hostnames,
+    BaseHostnames as BaseHostnames,
     type Hostname as Hostname,
     type HostnameDeleteResponse as HostnameDeleteResponse,
     type HostnamesSinglePage as HostnamesSinglePage,

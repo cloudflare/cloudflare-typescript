@@ -8,7 +8,13 @@ import {
 } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class History extends APIResource {
+export class BaseHistory extends APIResource {
+  static override readonly _key: readonly ['user', 'billing', 'history'] = Object.freeze([
+    'user',
+    'billing',
+    'history',
+  ] as const);
+
   /**
    * Accesses your billing history object.
    *
@@ -24,6 +30,7 @@ export class History extends APIResource {
     });
   }
 }
+export class History extends BaseHistory {}
 
 export type BillingHistoriesV4PagePaginationArray = V4PagePaginationArray<BillingHistory>;
 

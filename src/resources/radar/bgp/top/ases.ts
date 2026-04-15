@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Ases extends APIResource {
+export class BaseAses extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp', 'top', 'ases'] = Object.freeze([
+    'radar',
+    'bgp',
+    'top',
+    'ases',
+  ] as const);
+
   /**
    * Retrieves the top autonomous systems by BGP updates (announcements only).
    *
@@ -40,6 +47,7 @@ export class Ases extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Ases extends BaseAses {}
 
 export interface AseGetResponse {
   meta: AseGetResponse.Meta;

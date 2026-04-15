@@ -4,20 +4,28 @@ import { APIResource } from '../../../../../core/resource';
 import * as PoliciesAPI from '../policies';
 import { SettingsPoliciesSinglePage } from '../policies';
 import * as ExcludesAPI from './excludes';
-import { ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
+import { BaseExcludes, ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
-import { FallbackDomainGetParams, FallbackDomainUpdateParams, FallbackDomains } from './fallback-domains';
+import {
+  BaseFallbackDomains,
+  FallbackDomainGetParams,
+  FallbackDomainUpdateParams,
+  FallbackDomains,
+} from './fallback-domains';
 import * as IncludesAPI from './includes';
-import { IncludeGetParams, IncludeUpdateParams, Includes } from './includes';
+import { BaseIncludes, IncludeGetParams, IncludeUpdateParams, Includes } from './includes';
 import { APIPromise } from '../../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Custom extends APIResource {
-  excludes: ExcludesAPI.Excludes = new ExcludesAPI.Excludes(this._client);
-  includes: IncludesAPI.Includes = new IncludesAPI.Includes(this._client);
-  fallbackDomains: FallbackDomainsAPI.FallbackDomains = new FallbackDomainsAPI.FallbackDomains(this._client);
+export class BaseCustom extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies', 'custom'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'policies',
+    'custom',
+  ] as const);
 
   /**
    * Creates a device settings profile to be applied to certain devices matching the
@@ -38,7 +46,7 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: RequestOptions,
   ): APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/policy`, { body, ...options }) as APIPromise<{
         result: PoliciesAPI.SettingsPolicy | null;
@@ -60,10 +68,10 @@ export class Custom extends APIResource {
    * ```
    */
   list(
-    params: CustomListParams,
+    params: CustomListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policies`,
       SinglePage<PoliciesAPI.SettingsPolicy>,
@@ -88,10 +96,10 @@ export class Custom extends APIResource {
    */
   delete(
     policyID: string,
-    params: CustomDeleteParams,
+    params: CustomDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/${policyID}`,
       SinglePage<PoliciesAPI.SettingsPolicy>,
@@ -116,7 +124,7 @@ export class Custom extends APIResource {
     params: CustomEditParams,
     options?: RequestOptions,
   ): APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/devices/policy/${policyID}`, {
         body,
@@ -139,10 +147,10 @@ export class Custom extends APIResource {
    */
   get(
     policyID: string,
-    params: CustomGetParams,
+    params: CustomGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/policy/${policyID}`, options) as APIPromise<{
         result: PoliciesAPI.SettingsPolicy | null;
@@ -150,12 +158,17 @@ export class Custom extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Custom extends BaseCustom {
+  excludes: ExcludesAPI.Excludes = new ExcludesAPI.Excludes(this._client);
+  includes: IncludesAPI.Includes = new IncludesAPI.Includes(this._client);
+  fallbackDomains: FallbackDomainsAPI.FallbackDomains = new FallbackDomainsAPI.FallbackDomains(this._client);
+}
 
 export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The wirefilter expression to match devices. Available values:
@@ -300,18 +313,18 @@ export namespace CustomCreateParams {
 }
 
 export interface CustomListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -456,12 +469,15 @@ export namespace CustomEditParams {
 }
 
 export interface CustomGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Custom.Excludes = Excludes;
+Custom.BaseExcludes = BaseExcludes;
 Custom.Includes = Includes;
+Custom.BaseIncludes = BaseIncludes;
 Custom.FallbackDomains = FallbackDomains;
+Custom.BaseFallbackDomains = BaseFallbackDomains;
 
 export declare namespace Custom {
   export {
@@ -474,18 +490,21 @@ export declare namespace Custom {
 
   export {
     Excludes as Excludes,
+    BaseExcludes as BaseExcludes,
     type ExcludeUpdateParams as ExcludeUpdateParams,
     type ExcludeGetParams as ExcludeGetParams,
   };
 
   export {
     Includes as Includes,
+    BaseIncludes as BaseIncludes,
     type IncludeUpdateParams as IncludeUpdateParams,
     type IncludeGetParams as IncludeGetParams,
   };
 
   export {
     FallbackDomains as FallbackDomains,
+    BaseFallbackDomains as BaseFallbackDomains,
     type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
     type FallbackDomainGetParams as FallbackDomainGetParams,
   };

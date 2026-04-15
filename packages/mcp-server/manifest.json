@@ -23,7 +23,9 @@
         "CLOUDFLARE_API_TOKEN": "${user_config.CLOUDFLARE_API_TOKEN}",
         "CLOUDFLARE_API_KEY": "${user_config.CLOUDFLARE_API_KEY}",
         "CLOUDFLARE_EMAIL": "${user_config.CLOUDFLARE_EMAIL}",
-        "CLOUDFLARE_API_USER_SERVICE_KEY": "${user_config.CLOUDFLARE_API_USER_SERVICE_KEY}"
+        "CLOUDFLARE_API_USER_SERVICE_KEY": "${user_config.CLOUDFLARE_API_USER_SERVICE_KEY}",
+        "CLOUDFLARE_ACCOUNT_ID": "${user_config.CLOUDFLARE_ACCOUNT_ID}",
+        "CLOUDFLARE_ZONE_ID": "${user_config.CLOUDFLARE_ZONE_ID}"
       }
     }
   },
@@ -49,6 +51,18 @@
     "CLOUDFLARE_API_USER_SERVICE_KEY": {
       "title": "user_service_key",
       "description": "Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).",
+      "required": false,
+      "type": "string"
+    },
+    "CLOUDFLARE_ACCOUNT_ID": {
+      "title": "account_id",
+      "description": "Sets an account ID to be used with all account-scoped requests.",
+      "required": false,
+      "type": "string"
+    },
+    "CLOUDFLARE_ZONE_ID": {
+      "title": "zone_id",
+      "description": "Sets a zone ID to be used with all zone-scoped requests.",
       "required": false,
       "type": "string"
     }

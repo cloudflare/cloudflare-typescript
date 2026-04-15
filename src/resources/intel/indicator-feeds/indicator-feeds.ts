@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as DownloadsAPI from './downloads';
-import { Downloads } from './downloads';
+import { BaseDownloads, Downloads } from './downloads';
 import * as PermissionsAPI from './permissions';
 import {
+  BasePermissions,
   PermissionCreateParams,
   PermissionCreateResponse,
   PermissionDeleteParams,
@@ -14,17 +15,18 @@ import {
   Permissions,
 } from './permissions';
 import * as SnapshotsAPI from './snapshots';
-import { SnapshotUpdateParams, SnapshotUpdateResponse, Snapshots } from './snapshots';
+import { BaseSnapshots, SnapshotUpdateParams, SnapshotUpdateResponse, Snapshots } from './snapshots';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IndicatorFeeds extends APIResource {
-  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
-  permissions: PermissionsAPI.Permissions = new PermissionsAPI.Permissions(this._client);
-  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
+export class BaseIndicatorFeeds extends APIResource {
+  static override readonly _key: readonly ['intel', 'indicatorFeeds'] = Object.freeze([
+    'intel',
+    'indicatorFeeds',
+  ] as const);
 
   /**
    * Creates a new custom threat indicator feed for sharing threat intelligence data.
@@ -38,10 +40,10 @@ export class IndicatorFeeds extends APIResource {
    * ```
    */
   create(
-    params: IndicatorFeedCreateParams,
+    params: IndicatorFeedCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IndicatorFeedCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/intel/indicator-feeds`, {
         body,
@@ -66,7 +68,7 @@ export class IndicatorFeeds extends APIResource {
     params: IndicatorFeedUpdateParams,
     options?: RequestOptions,
   ): APIPromise<IndicatorFeedUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/intel/indicator-feeds/${feedID}`, {
         body,
@@ -89,10 +91,10 @@ export class IndicatorFeeds extends APIResource {
    * ```
    */
   list(
-    params: IndicatorFeedListParams,
+    params: IndicatorFeedListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/intel/indicator-feeds`,
       SinglePage<IndicatorFeedListResponse>,
@@ -111,8 +113,12 @@ export class IndicatorFeeds extends APIResource {
    * );
    * ```
    */
-  data(feedID: number, params: IndicatorFeedDataParams, options?: RequestOptions): APIPromise<string> {
-    const { account_id } = params;
+  data(
+    feedID: number,
+    params: IndicatorFeedDataParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/intel/indicator-feeds/${feedID}/data`, {
       ...options,
       headers: buildHeaders([{ Accept: 'text/csv' }, options?.headers]),
@@ -132,16 +138,21 @@ export class IndicatorFeeds extends APIResource {
    */
   get(
     feedID: number,
-    params: IndicatorFeedGetParams,
+    params: IndicatorFeedGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IndicatorFeedGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/indicator-feeds/${feedID}`, options) as APIPromise<{
         result: IndicatorFeedGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class IndicatorFeeds extends BaseIndicatorFeeds {
+  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
+  permissions: PermissionsAPI.Permissions = new PermissionsAPI.Permissions(this._client);
+  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
 }
 
 export type IndicatorFeedListResponsesSinglePage = SinglePage<IndicatorFeedListResponse>;
@@ -335,7 +346,7 @@ export interface IndicatorFeedCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The description of the example test
@@ -352,7 +363,7 @@ export interface IndicatorFeedUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The new description of the feed
@@ -384,26 +395,29 @@ export interface IndicatorFeedListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IndicatorFeedDataParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IndicatorFeedGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 IndicatorFeeds.Snapshots = Snapshots;
+IndicatorFeeds.BaseSnapshots = BaseSnapshots;
 IndicatorFeeds.Permissions = Permissions;
+IndicatorFeeds.BasePermissions = BasePermissions;
 IndicatorFeeds.Downloads = Downloads;
+IndicatorFeeds.BaseDownloads = BaseDownloads;
 
 export declare namespace IndicatorFeeds {
   export {
@@ -422,12 +436,14 @@ export declare namespace IndicatorFeeds {
 
   export {
     Snapshots as Snapshots,
+    BaseSnapshots as BaseSnapshots,
     type SnapshotUpdateResponse as SnapshotUpdateResponse,
     type SnapshotUpdateParams as SnapshotUpdateParams,
   };
 
   export {
     Permissions as Permissions,
+    BasePermissions as BasePermissions,
     type PermissionCreateResponse as PermissionCreateResponse,
     type PermissionListResponse as PermissionListResponse,
     type PermissionDeleteResponse as PermissionDeleteResponse,
@@ -436,5 +452,5 @@ export declare namespace IndicatorFeeds {
     type PermissionDeleteParams as PermissionDeleteParams,
   };
 
-  export { Downloads as Downloads };
+  export { Downloads as Downloads, BaseDownloads as BaseDownloads };
 }

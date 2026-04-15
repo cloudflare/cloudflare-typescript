@@ -2,8 +2,9 @@
 
 export {
   Events,
+  BaseEvents,
   type EventListResponse,
   type EventListParams,
   type EventListResponsesV4PagePagination,
 } from './events';
-export { Leaks } from './leaks';
+export { Leaks, BaseLeaks } from './leaks';

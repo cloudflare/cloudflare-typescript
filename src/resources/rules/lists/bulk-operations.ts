@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class BulkOperations extends APIResource {
+export class BaseBulkOperations extends APIResource {
+  static override readonly _key: readonly ['rules', 'lists', 'bulkOperations'] = Object.freeze([
+    'rules',
+    'lists',
+    'bulkOperations',
+  ] as const);
+
   /**
    * Gets the current status of an asynchronous operation on a list.
    *
@@ -24,10 +30,10 @@ export class BulkOperations extends APIResource {
    */
   get(
     operationID: string,
-    params: BulkOperationGetParams,
+    params: BulkOperationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BulkOperationGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/rules/lists/bulk_operations/${operationID}`,
@@ -36,6 +42,7 @@ export class BulkOperations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class BulkOperations extends BaseBulkOperations {}
 
 export type BulkOperationGetResponse =
   | BulkOperationGetResponse.ListsBulkOperationPendingOrRunning
@@ -99,7 +106,7 @@ export interface BulkOperationGetParams {
   /**
    * The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace BulkOperations {

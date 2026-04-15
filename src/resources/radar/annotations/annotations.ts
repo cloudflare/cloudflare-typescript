@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OutagesAPI from './outages';
 import {
+  BaseOutages,
   OutageGetParams,
   OutageGetResponse,
   OutageLocationsParams,
@@ -12,8 +13,11 @@ import {
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Annotations extends APIResource {
-  outages: OutagesAPI.Outages = new OutagesAPI.Outages(this._client);
+export class BaseAnnotations extends APIResource {
+  static override readonly _key: readonly ['radar', 'annotations'] = Object.freeze([
+    'radar',
+    'annotations',
+  ] as const);
 
   /**
    * Retrieves the latest annotations.
@@ -33,6 +37,9 @@ export class Annotations extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Annotations extends BaseAnnotations {
+  outages: OutagesAPI.Outages = new OutagesAPI.Outages(this._client);
 }
 
 export interface AnnotationListResponse {
@@ -193,6 +200,7 @@ export interface AnnotationListParams {
 }
 
 Annotations.Outages = Outages;
+Annotations.BaseOutages = BaseOutages;
 
 export declare namespace Annotations {
   export {
@@ -202,6 +210,7 @@ export declare namespace Annotations {
 
   export {
     Outages as Outages,
+    BaseOutages as BaseOutages,
     type OutageGetResponse as OutageGetResponse,
     type OutageLocationsResponse as OutageLocationsResponse,
     type OutageGetParams as OutageGetParams,

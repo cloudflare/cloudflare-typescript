@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Upload extends APIResource {
+export class BaseUpload extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'assets', 'upload'] = Object.freeze([
+    'workers',
+    'scripts',
+    'assets',
+    'upload',
+  ] as const);
+
   /**
    * Start uploading a collection of assets for use in a Worker version. To learn
    * more about the direct uploads of assets, see
@@ -28,7 +35,7 @@ export class Upload extends APIResource {
     params: UploadCreateParams,
     options?: RequestOptions,
   ): APIPromise<UploadCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/assets-upload-session`, {
         body,
@@ -37,6 +44,7 @@ export class Upload extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Upload extends BaseUpload {}
 
 export interface UploadCreateResponse {
   /**
@@ -54,7 +62,7 @@ export interface UploadCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A manifest ([path]: {hash, size}) map of files to upload. As an

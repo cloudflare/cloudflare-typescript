@@ -2,10 +2,11 @@
 
 export {
   ASN,
+  BaseASN,
   type ASNDayReportResponse,
   type ASNFullReportResponse,
   type ASNDayReportParams,
   type ASNFullReportParams,
 } from './asn';
-export { BotnetFeed } from './botnet-feed';
-export { Configs } from './configs/index';
+export { BotnetFeed, BaseBotnetFeed } from './botnet-feed';
+export { Configs, BaseConfigs } from './configs/index';

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ReverseDNS extends APIResource {
+export class BaseReverseDNS extends APIResource {
+  static override readonly _key: readonly ['dnsFirewall', 'reverseDNS'] = Object.freeze([
+    'dnsFirewall',
+    'reverseDNS',
+  ] as const);
+
   /**
    * Update reverse DNS configuration (PTR records) for a DNS Firewall cluster
    *
@@ -22,7 +27,7 @@ export class ReverseDNS extends APIResource {
     params: ReverseDNSEditParams,
     options?: RequestOptions,
   ): APIPromise<ReverseDNSEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}/reverse_dns`, {
         body,
@@ -44,10 +49,10 @@ export class ReverseDNS extends APIResource {
    */
   get(
     dnsFirewallID: string,
-    params: ReverseDNSGetParams,
+    params: ReverseDNSGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ReverseDNSGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}/reverse_dns`,
@@ -56,6 +61,7 @@ export class ReverseDNS extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ReverseDNS extends BaseReverseDNS {}
 
 export interface ReverseDNSEditResponse {
   /**
@@ -75,7 +81,7 @@ export interface ReverseDNSEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Map of cluster IP addresses to PTR record contents
@@ -87,7 +93,7 @@ export interface ReverseDNSGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ReverseDNS {

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { DEX } from 'cloudflare/resources/zero-trust/dex/dex';
+import { BaseTracerouteTests } from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tracerouteTests', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTracerouteTests],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [DEX],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { dex: { tracerouteTests: BaseTracerouteTests } } }>,
+) => {
   test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.tracerouteTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
@@ -99,4 +119,7 @@ describe('resource tracerouteTests', () => {
       },
     );
   });
-});
+};
+describe('resource tracerouteTests', () => runTests(client));
+describe('resource tracerouteTests (tree shakable, base)', () => runTests(partialClient));
+describe('resource tracerouteTests (tree shakable, subresource)', () => runTests(parentPartialClient));

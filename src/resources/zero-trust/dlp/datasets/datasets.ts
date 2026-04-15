@@ -2,9 +2,16 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as UploadAPI from './upload';
-import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
+import {
+  BaseUpload,
+  NewVersion,
+  Upload as UploadAPIUpload,
+  UploadCreateParams,
+  UploadEditParams,
+} from './upload';
 import * as VersionsAPI from './versions/versions';
 import {
+  BaseVersions,
   VersionCreateParams,
   VersionCreateResponse,
   VersionCreateResponsesSinglePage,
@@ -16,9 +23,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Datasets extends APIResource {
-  upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
-  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
+export class BaseDatasets extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'datasets'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'datasets',
+  ] as const);
 
   /**
    * Creates a new DLP (Data Loss Prevention) dataset for storing custom detection
@@ -35,7 +45,7 @@ export class Datasets extends APIResource {
    * ```
    */
   create(params: DatasetCreateParams, options?: RequestOptions): APIPromise<DatasetCreation> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as APIPromise<{
         result: DatasetCreation;
@@ -56,7 +66,7 @@ export class Datasets extends APIResource {
    * ```
    */
   update(datasetID: string, params: DatasetUpdateParams, options?: RequestOptions): APIPromise<Dataset> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, {
         body,
@@ -79,8 +89,11 @@ export class Datasets extends APIResource {
    * }
    * ```
    */
-  list(params: DatasetListParams, options?: RequestOptions): PagePromise<DatasetsSinglePage, Dataset> {
-    const { account_id } = params;
+  list(
+    params: DatasetListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<DatasetsSinglePage, Dataset> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/dlp/datasets`, SinglePage<Dataset>, options);
   }
 
@@ -95,8 +108,12 @@ export class Datasets extends APIResource {
    * );
    * ```
    */
-  delete(datasetID: string, params: DatasetDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    datasetID: string,
+    params: DatasetDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -114,14 +131,22 @@ export class Datasets extends APIResource {
    * );
    * ```
    */
-  get(datasetID: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<Dataset> {
-    const { account_id } = params;
+  get(
+    datasetID: string,
+    params: DatasetGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Dataset> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/datasets/${datasetID}`, options) as APIPromise<{
         result: Dataset;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Datasets extends BaseDatasets {
+  upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 }
 
 export type DatasetsSinglePage = SinglePage<Dataset>;
@@ -209,7 +234,7 @@ export interface DatasetCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -251,7 +276,7 @@ export interface DatasetUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Determines if the words should be matched in a case-sensitive
@@ -273,19 +298,21 @@ export interface DatasetUpdateParams {
 }
 
 export interface DatasetListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Datasets.Upload = UploadAPIUpload;
+Datasets.BaseUpload = BaseUpload;
 Datasets.Versions = Versions;
+Datasets.BaseVersions = BaseVersions;
 
 export declare namespace Datasets {
   export {
@@ -302,6 +329,7 @@ export declare namespace Datasets {
 
   export {
     UploadAPIUpload as Upload,
+    BaseUpload as BaseUpload,
     type NewVersion as NewVersion,
     type UploadCreateParams as UploadCreateParams,
     type UploadEditParams as UploadEditParams,
@@ -309,6 +337,7 @@ export declare namespace Datasets {
 
   export {
     Versions as Versions,
+    BaseVersions as BaseVersions,
     type VersionCreateResponse as VersionCreateResponse,
     type VersionCreateResponsesSinglePage as VersionCreateResponsesSinglePage,
     type VersionCreateParams as VersionCreateParams,

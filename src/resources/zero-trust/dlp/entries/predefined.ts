@@ -7,7 +7,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Predefined extends APIResource {
+export class BasePredefined extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'entries', 'predefined'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'entries',
+    'predefined',
+  ] as const);
+
   /**
    * Predefined entries can't be created, this will update an existing predefined
    * entry. This is needed for our generated terraform API.
@@ -23,7 +30,7 @@ export class Predefined extends APIResource {
    * ```
    */
   create(params: PredefinedCreateParams, options?: RequestOptions): APIPromise<PredefinedCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/entries/predefined`, {
         body,
@@ -49,7 +56,7 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PredefinedUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/entries/predefined/${entryID}`, {
         body,
@@ -72,10 +79,10 @@ export class Predefined extends APIResource {
    * ```
    */
   list(
-    params: PredefinedListParams,
+    params: PredefinedListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dlp/entries`,
       SinglePage<PredefinedListResponse>,
@@ -98,10 +105,10 @@ export class Predefined extends APIResource {
    */
   delete(
     entryID: string,
-    params: PredefinedDeleteParams,
+    params: PredefinedDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PredefinedDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/dlp/entries/predefined/${entryID}`,
@@ -124,10 +131,10 @@ export class Predefined extends APIResource {
    */
   get(
     entryID: string,
-    params: PredefinedGetParams,
+    params: PredefinedGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PredefinedGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/entries/${entryID}`, options) as APIPromise<{
         result: PredefinedGetResponse;
@@ -135,6 +142,7 @@ export class Predefined extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Predefined extends BasePredefined {}
 
 export type PredefinedListResponsesSinglePage = SinglePage<PredefinedListResponse>;
 
@@ -620,7 +628,7 @@ export interface PredefinedCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -643,7 +651,7 @@ export interface PredefinedUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -652,15 +660,15 @@ export interface PredefinedUpdateParams {
 }
 
 export interface PredefinedListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Predefined {

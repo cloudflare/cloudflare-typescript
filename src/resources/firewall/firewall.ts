@@ -18,11 +18,13 @@ import {
   AccessRuleListResponse,
   AccessRuleListResponsesV4PagePaginationArray,
   AccessRules,
+  BaseAccessRules,
   CountryConfiguration,
   IPV6Configuration,
 } from './access-rules';
 import * as LockdownsAPI from './lockdowns';
 import {
+  BaseLockdowns,
   Configuration,
   Lockdown,
   LockdownCIDRConfiguration,
@@ -39,6 +41,7 @@ import {
 } from './lockdowns';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   DeletedFilter,
   FirewallRule,
   FirewallRulesSinglePage,
@@ -57,6 +60,7 @@ import {
 } from './rules';
 import * as UARulesAPI from './ua-rules';
 import {
+  BaseUARules,
   UARuleCreateParams,
   UARuleCreateResponse,
   UARuleDeleteParams,
@@ -71,9 +75,12 @@ import {
   UARules,
 } from './ua-rules';
 import * as WAFAPI from './waf/waf';
-import { WAF } from './waf/waf';
+import { BaseWAF, WAF } from './waf/waf';
 
-export class Firewall extends APIResource {
+export class BaseFirewall extends APIResource {
+  static override readonly _key: readonly ['firewall'] = Object.freeze(['firewall'] as const);
+}
+export class Firewall extends BaseFirewall {
   lockdowns: LockdownsAPI.Lockdowns = new LockdownsAPI.Lockdowns(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
   accessRules: AccessRulesAPI.AccessRules = new AccessRulesAPI.AccessRules(this._client);
@@ -82,14 +89,20 @@ export class Firewall extends APIResource {
 }
 
 Firewall.Lockdowns = Lockdowns;
+Firewall.BaseLockdowns = BaseLockdowns;
 Firewall.Rules = Rules;
+Firewall.BaseRules = BaseRules;
 Firewall.AccessRules = AccessRules;
+Firewall.BaseAccessRules = BaseAccessRules;
 Firewall.UARules = UARules;
+Firewall.BaseUARules = BaseUARules;
 Firewall.WAF = WAF;
+Firewall.BaseWAF = BaseWAF;
 
 export declare namespace Firewall {
   export {
     Lockdowns as Lockdowns,
+    BaseLockdowns as BaseLockdowns,
     type Configuration as Configuration,
     type Lockdown as Lockdown,
     type LockdownCIDRConfiguration as LockdownCIDRConfiguration,
@@ -106,6 +119,7 @@ export declare namespace Firewall {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type DeletedFilter as DeletedFilter,
     type FirewallRule as FirewallRule,
     type Product as Product,
@@ -124,6 +138,7 @@ export declare namespace Firewall {
 
   export {
     AccessRules as AccessRules,
+    BaseAccessRules as BaseAccessRules,
     type AccessRuleCIDRConfiguration as AccessRuleCIDRConfiguration,
     type AccessRuleIPConfiguration as AccessRuleIPConfiguration,
     type ASNConfiguration as ASNConfiguration,
@@ -144,6 +159,7 @@ export declare namespace Firewall {
 
   export {
     UARules as UARules,
+    BaseUARules as BaseUARules,
     type UARuleCreateResponse as UARuleCreateResponse,
     type UARuleUpdateResponse as UARuleUpdateResponse,
     type UARuleListResponse as UARuleListResponse,
@@ -157,5 +173,5 @@ export declare namespace Firewall {
     type UARuleGetParams as UARuleGetParams,
   };
 
-  export { WAF as WAF };
+  export { WAF as WAF, BaseWAF as BaseWAF };
 }

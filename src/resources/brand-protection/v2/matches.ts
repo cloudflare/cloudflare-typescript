@@ -5,20 +5,27 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Matches extends APIResource {
+export class BaseMatches extends APIResource {
+  static override readonly _key: readonly ['brandProtection', 'v2', 'matches'] = Object.freeze([
+    'brandProtection',
+    'v2',
+    'matches',
+  ] as const);
+
   /**
    * Get paginated list of domain matches for one or more brand protection queries.
    * When multiple query_ids are provided (comma-separated), matches are deduplicated
    * across queries and each match includes a matched_queries array.
    */
   get(params: MatchGetParams, options?: RequestOptions): APIPromise<MatchGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/domain/matches`, {
       query,
       ...options,
     });
   }
 }
+export class Matches extends BaseMatches {}
 
 export interface MatchGetResponse {
   matches: Array<MatchGetResponse.Match>;
@@ -68,7 +75,7 @@ export interface MatchGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Query ID or comma-separated list of Query IDs. When multiple IDs

@@ -8,7 +8,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Assets extends APIResource {
+export class BaseAssets extends APIResource {
+  static override readonly _key: readonly ['customPages', 'assets'] = Object.freeze([
+    'customPages',
+    'assets',
+  ] as const);
+
   /**
    * Creates a new custom asset.
    *
@@ -23,7 +28,11 @@ export class Assets extends APIResource {
    * ```
    */
   create(params: AssetCreateParams, options?: RequestOptions): APIPromise<AssetCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -68,7 +77,11 @@ export class Assets extends APIResource {
     params: AssetUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AssetUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -110,7 +123,11 @@ export class Assets extends APIResource {
     params: AssetListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AssetListResponsesV4PagePaginationArray, AssetListResponse> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -150,7 +167,8 @@ export class Assets extends APIResource {
     params: AssetDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -189,7 +207,8 @@ export class Assets extends APIResource {
     params: AssetGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AssetGetResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -214,6 +233,7 @@ export class Assets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Assets extends BaseAssets {}
 
 export type AssetListResponsesV4PagePaginationArray = V4PagePaginationArray<AssetListResponse>;
 

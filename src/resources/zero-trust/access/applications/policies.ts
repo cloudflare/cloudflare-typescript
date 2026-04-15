@@ -13,7 +13,11 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Policies extends APIResource {
+export class BasePolicies extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications', 'policies'] = Object.freeze(
+    ['zeroTrust', 'access', 'applications', 'policies'] as const,
+  );
+
   /**
    * Creates a policy applying exclusive to a single application that defines the
    * users or groups who can reach it. We recommend creating a reusable policy
@@ -34,7 +38,11 @@ export class Policies extends APIResource {
     params: PolicyCreateParams,
     options?: RequestOptions,
   ): APIPromise<PolicyCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -80,7 +88,12 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PolicyUpdateResponse> {
-    const { app_id, account_id, zone_id, ...body } = params;
+    const {
+      app_id,
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -125,7 +138,11 @@ export class Policies extends APIResource {
     params: PolicyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -170,7 +187,11 @@ export class Policies extends APIResource {
     params: PolicyDeleteParams,
     options?: RequestOptions,
   ): APIPromise<PolicyDeleteResponse> {
-    const { app_id, account_id, zone_id } = params;
+    const {
+      app_id,
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -212,7 +233,11 @@ export class Policies extends APIResource {
    * ```
    */
   get(policyID: string, params: PolicyGetParams, options?: RequestOptions): APIPromise<PolicyGetResponse> {
-    const { app_id, account_id, zone_id } = params;
+    const {
+      app_id,
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -237,6 +262,7 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Policies extends BasePolicies {}
 
 export type PolicyListResponsesV4PagePaginationArray = V4PagePaginationArray<PolicyListResponse>;
 

@@ -2,6 +2,7 @@
 
 export {
   AccessRules,
+  BaseAccessRules,
   type AccessRuleCIDRConfiguration,
   type AccessRuleIPConfiguration,
   type ASNConfiguration,
@@ -19,9 +20,10 @@ export {
   type AccessRuleGetParams,
   type AccessRuleListResponsesV4PagePaginationArray,
 } from './access-rules';
-export { Firewall } from './firewall';
+export { Firewall, BaseFirewall } from './firewall';
 export {
   Lockdowns,
+  BaseLockdowns,
   type Configuration,
   type Lockdown,
   type LockdownCIDRConfiguration,
@@ -37,6 +39,7 @@ export {
 } from './lockdowns';
 export {
   Rules,
+  BaseRules,
   type DeletedFilter,
   type FirewallRule,
   type Product,
@@ -54,6 +57,7 @@ export {
 } from './rules';
 export {
   UARules,
+  BaseUARules,
   type UARuleCreateResponse,
   type UARuleUpdateResponse,
   type UARuleListResponse,
@@ -66,4 +70,4 @@ export {
   type UARuleGetParams,
   type UARuleListResponsesV4PagePaginationArray,
 } from './ua-rules';
-export { WAF } from './waf/index';
+export { WAF, BaseWAF } from './waf/index';

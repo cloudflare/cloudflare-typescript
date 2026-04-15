@@ -2,6 +2,7 @@
 
 export {
   Layer7,
+  BaseLayer7,
   type Layer7SummaryV2Response,
   type Layer7TimeseriesResponse,
   type Layer7TimeseriesGroupsV2Response,
@@ -11,6 +12,7 @@ export {
 } from './layer7';
 export {
   Summary,
+  BaseSummary,
   type SummaryHTTPMethodResponse,
   type SummaryHTTPVersionResponse,
   type SummaryIndustryResponse,
@@ -28,6 +30,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupHTTPMethodResponse,
   type TimeseriesGroupHTTPVersionResponse,
   type TimeseriesGroupIndustryResponse,
@@ -45,6 +48,7 @@ export {
 } from './timeseries-groups';
 export {
   Top,
+  BaseTop,
   type TopAttacksResponse,
   type TopIndustryResponse,
   type TopVerticalResponse,

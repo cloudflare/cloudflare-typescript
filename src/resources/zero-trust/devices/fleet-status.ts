@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class FleetStatus extends APIResource {
+export class BaseFleetStatus extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'fleetStatus'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'fleetStatus',
+  ] as const);
+
   /**
    * Get the live status of a latest device given device_id from the device_state
    * table
@@ -27,13 +33,14 @@ export class FleetStatus extends APIResource {
     params: FleetStatusGetParams,
     options?: RequestOptions,
   ): APIPromise<FleetStatusGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/dex/devices/${deviceID}/fleet-status/live`, {
       query,
       ...options,
     });
   }
 }
+export class FleetStatus extends BaseFleetStatus {}
 
 export interface FleetStatusGetResponse {
   /**
@@ -320,7 +327,7 @@ export interface FleetStatusGetParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Number of minutes before current time

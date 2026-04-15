@@ -7,7 +7,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Custom extends APIResource {
+export class BaseCustom extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'profiles', 'custom'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'profiles',
+    'custom',
+  ] as const);
+
   /**
    * Creates a DLP custom profile.
    *
@@ -21,7 +28,7 @@ export class Custom extends APIResource {
    * ```
    */
   create(params: CustomCreateParams, options?: RequestOptions): APIPromise<ProfilesAPI.Profile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/profiles/custom`, {
         body,
@@ -47,7 +54,7 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ProfilesAPI.Profile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/profiles/custom/${profileID}`, {
         body,
@@ -70,10 +77,10 @@ export class Custom extends APIResource {
    */
   delete(
     profileID: string,
-    params: CustomDeleteParams,
+    params: CustomDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/dlp/profiles/custom/${profileID}`,
@@ -94,8 +101,12 @@ export class Custom extends APIResource {
    *   );
    * ```
    */
-  get(profileID: string, params: CustomGetParams, options?: RequestOptions): APIPromise<ProfilesAPI.Profile> {
-    const { account_id } = params;
+  get(
+    profileID: string,
+    params: CustomGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ProfilesAPI.Profile> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/dlp/profiles/custom/${profileID}`,
@@ -104,6 +115,7 @@ export class Custom extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Custom extends BaseCustom {}
 
 export interface CustomProfile {
   /**
@@ -496,7 +508,7 @@ export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -601,7 +613,7 @@ export interface CustomUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -709,11 +721,11 @@ export namespace CustomUpdateParams {
 }
 
 export interface CustomDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Custom {

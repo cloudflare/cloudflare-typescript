@@ -2,6 +2,7 @@
 
 export {
   Apps,
+  BaseApps,
   type AppCreateResponse,
   type AppUpdateResponse,
   type AppListResponse,
@@ -16,6 +17,7 @@ export {
 } from './apps';
 export {
   CfInterconnects,
+  BaseCfInterconnects,
   type CfInterconnectUpdateResponse,
   type CfInterconnectListResponse,
   type CfInterconnectBulkUpdateResponse,
@@ -27,6 +29,7 @@ export {
 } from './cf-interconnects';
 export {
   Connectors,
+  BaseConnectors,
   type ConnectorCreateResponse,
   type ConnectorUpdateResponse,
   type ConnectorListResponse,
@@ -43,6 +46,7 @@ export {
 } from './connectors/index';
 export {
   GRETunnels,
+  BaseGRETunnels,
   type GRETunnelCreateResponse,
   type GRETunnelUpdateResponse,
   type GRETunnelListResponse,
@@ -58,6 +62,7 @@ export {
 } from './gre-tunnels';
 export {
   IPSECTunnels,
+  BaseIPSECTunnels,
   type PSKMetadata,
   type IPSECTunnelCreateResponse,
   type IPSECTunnelUpdateResponse,
@@ -74,9 +79,10 @@ export {
   type IPSECTunnelGetParams,
   type IPSECTunnelPSKGenerateParams,
 } from './ipsec-tunnels';
-export { MagicTransit } from './magic-transit';
+export { MagicTransit, BaseMagicTransit } from './magic-transit';
 export {
   PCAPs,
+  BasePCAPs,
   type PCAP,
   type PCAPFilter,
   type PCAPCreateResponse,
@@ -90,6 +96,7 @@ export {
 } from './pcaps/index';
 export {
   Routes,
+  BaseRoutes,
   type Scope,
   type RouteCreateResponse,
   type RouteUpdateResponse,
@@ -108,6 +115,7 @@ export {
 } from './routes';
 export {
   Sites,
+  BaseSites,
   type Site,
   type SiteLocation,
   type SiteCreateParams,

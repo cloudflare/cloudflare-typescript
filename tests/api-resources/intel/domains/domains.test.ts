@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Intel } from 'cloudflare/resources/intel/intel';
+import { BaseDomains } from 'cloudflare/resources/intel/domains/domains';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource domains', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDomains],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Intel],
+});
+
+const runTests = (client: PartialCloudflare<{ intel: { domains: BaseDomains } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.intel.domains.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -27,4 +45,7 @@ describe('resource domains', () => {
       skip_dns: true,
     });
   });
-});
+};
+describe('resource domains', () => runTests(client));
+describe('resource domains (tree shakable, base)', () => runTests(partialClient));
+describe('resource domains (tree shakable, subresource)', () => runTests(parentPartialClient));

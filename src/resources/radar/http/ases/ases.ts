@@ -2,33 +2,40 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as BotClassAPI from './bot-class';
-import { BotClass, BotClassGetParams, BotClassGetResponse } from './bot-class';
+import { BaseBotClass, BotClass, BotClassGetParams, BotClassGetResponse } from './bot-class';
 import * as BrowserFamilyAPI from './browser-family';
-import { BrowserFamily, BrowserFamilyGetParams, BrowserFamilyGetResponse } from './browser-family';
+import {
+  BaseBrowserFamily,
+  BrowserFamily,
+  BrowserFamilyGetParams,
+  BrowserFamilyGetResponse,
+} from './browser-family';
 import * as DeviceTypeAPI from './device-type';
-import { DeviceType, DeviceTypeGetParams, DeviceTypeGetResponse } from './device-type';
+import { BaseDeviceType, DeviceType, DeviceTypeGetParams, DeviceTypeGetResponse } from './device-type';
 import * as HTTPMethodAPI from './http-method';
-import { HTTPMethod, HTTPMethodGetParams, HTTPMethodGetResponse } from './http-method';
+import { BaseHTTPMethod, HTTPMethod, HTTPMethodGetParams, HTTPMethodGetResponse } from './http-method';
 import * as HTTPProtocolAPI from './http-protocol';
-import { HTTPProtocol, HTTPProtocolGetParams, HTTPProtocolGetResponse } from './http-protocol';
+import {
+  BaseHTTPProtocol,
+  HTTPProtocol,
+  HTTPProtocolGetParams,
+  HTTPProtocolGetResponse,
+} from './http-protocol';
 import * as IPVersionAPI from './ip-version';
-import { IPVersion, IPVersionGetParams, IPVersionGetResponse } from './ip-version';
+import { BaseIPVersion, IPVersion, IPVersionGetParams, IPVersionGetResponse } from './ip-version';
 import * as OSAPI from './os';
-import { OS, OSGetParams, OSGetResponse } from './os';
+import { BaseOS, OS, OSGetParams, OSGetResponse } from './os';
 import * as TLSVersionAPI from './tls-version';
-import { TLSVersion, TLSVersionGetParams, TLSVersionGetResponse } from './tls-version';
+import { BaseTLSVersion, TLSVersion, TLSVersionGetParams, TLSVersionGetResponse } from './tls-version';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Ases extends APIResource {
-  botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);
-  deviceType: DeviceTypeAPI.DeviceType = new DeviceTypeAPI.DeviceType(this._client);
-  httpProtocol: HTTPProtocolAPI.HTTPProtocol = new HTTPProtocolAPI.HTTPProtocol(this._client);
-  httpMethod: HTTPMethodAPI.HTTPMethod = new HTTPMethodAPI.HTTPMethod(this._client);
-  ipVersion: IPVersionAPI.IPVersion = new IPVersionAPI.IPVersion(this._client);
-  os: OSAPI.OS = new OSAPI.OS(this._client);
-  tlsVersion: TLSVersionAPI.TLSVersion = new TLSVersionAPI.TLSVersion(this._client);
-  browserFamily: BrowserFamilyAPI.BrowserFamily = new BrowserFamilyAPI.BrowserFamily(this._client);
+export class BaseAses extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'ases'] = Object.freeze([
+    'radar',
+    'http',
+    'ases',
+  ] as const);
 
   /**
    * Retrieves the top autonomous systems by HTTP requests.
@@ -45,6 +52,16 @@ export class Ases extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Ases extends BaseAses {
+  botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);
+  deviceType: DeviceTypeAPI.DeviceType = new DeviceTypeAPI.DeviceType(this._client);
+  httpProtocol: HTTPProtocolAPI.HTTPProtocol = new HTTPProtocolAPI.HTTPProtocol(this._client);
+  httpMethod: HTTPMethodAPI.HTTPMethod = new HTTPMethodAPI.HTTPMethod(this._client);
+  ipVersion: IPVersionAPI.IPVersion = new IPVersionAPI.IPVersion(this._client);
+  os: OSAPI.OS = new OSAPI.OS(this._client);
+  tlsVersion: TLSVersionAPI.TLSVersion = new TLSVersionAPI.TLSVersion(this._client);
+  browserFamily: BrowserFamilyAPI.BrowserFamily = new BrowserFamilyAPI.BrowserFamily(this._client);
 }
 
 export interface AseGetResponse {
@@ -292,57 +309,72 @@ export interface AseGetParams {
 }
 
 Ases.BotClass = BotClass;
+Ases.BaseBotClass = BaseBotClass;
 Ases.DeviceType = DeviceType;
+Ases.BaseDeviceType = BaseDeviceType;
 Ases.HTTPProtocol = HTTPProtocol;
+Ases.BaseHTTPProtocol = BaseHTTPProtocol;
 Ases.HTTPMethod = HTTPMethod;
+Ases.BaseHTTPMethod = BaseHTTPMethod;
 Ases.IPVersion = IPVersion;
+Ases.BaseIPVersion = BaseIPVersion;
 Ases.OS = OS;
+Ases.BaseOS = BaseOS;
 Ases.TLSVersion = TLSVersion;
+Ases.BaseTLSVersion = BaseTLSVersion;
 Ases.BrowserFamily = BrowserFamily;
+Ases.BaseBrowserFamily = BaseBrowserFamily;
 
 export declare namespace Ases {
   export { type AseGetResponse as AseGetResponse, type AseGetParams as AseGetParams };
 
   export {
     BotClass as BotClass,
+    BaseBotClass as BaseBotClass,
     type BotClassGetResponse as BotClassGetResponse,
     type BotClassGetParams as BotClassGetParams,
   };
 
   export {
     DeviceType as DeviceType,
+    BaseDeviceType as BaseDeviceType,
     type DeviceTypeGetResponse as DeviceTypeGetResponse,
     type DeviceTypeGetParams as DeviceTypeGetParams,
   };
 
   export {
     HTTPProtocol as HTTPProtocol,
+    BaseHTTPProtocol as BaseHTTPProtocol,
     type HTTPProtocolGetResponse as HTTPProtocolGetResponse,
     type HTTPProtocolGetParams as HTTPProtocolGetParams,
   };
 
   export {
     HTTPMethod as HTTPMethod,
+    BaseHTTPMethod as BaseHTTPMethod,
     type HTTPMethodGetResponse as HTTPMethodGetResponse,
     type HTTPMethodGetParams as HTTPMethodGetParams,
   };
 
   export {
     IPVersion as IPVersion,
+    BaseIPVersion as BaseIPVersion,
     type IPVersionGetResponse as IPVersionGetResponse,
     type IPVersionGetParams as IPVersionGetParams,
   };
 
-  export { OS as OS, type OSGetResponse as OSGetResponse, type OSGetParams as OSGetParams };
+  export { OS as OS, BaseOS as BaseOS, type OSGetResponse as OSGetResponse, type OSGetParams as OSGetParams };
 
   export {
     TLSVersion as TLSVersion,
+    BaseTLSVersion as BaseTLSVersion,
     type TLSVersionGetResponse as TLSVersionGetResponse,
     type TLSVersionGetParams as TLSVersionGetParams,
   };
 
   export {
     BrowserFamily as BrowserFamily,
+    BaseBrowserFamily as BaseBrowserFamily,
     type BrowserFamilyGetResponse as BrowserFamilyGetResponse,
     type BrowserFamilyGetParams as BrowserFamilyGetParams,
   };

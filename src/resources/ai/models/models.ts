@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as SchemaAPI from './schema';
-import { Schema, SchemaGetParams, SchemaGetResponse } from './schema';
+import { BaseSchema, Schema, SchemaGetParams, SchemaGetResponse } from './schema';
 import {
   PagePromise,
   V4PagePaginationArray,
@@ -11,23 +11,26 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Models extends APIResource {
-  schema: SchemaAPI.Schema = new SchemaAPI.Schema(this._client);
+export class BaseModels extends APIResource {
+  static override readonly _key: readonly ['ai', 'models'] = Object.freeze(['ai', 'models'] as const);
 
   /**
    * Searches Workers AI models by name or description.
    */
   list(
-    params: ModelListParams,
+    params: ModelListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ModelListResponsesV4PagePaginationArray, ModelListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/models/search`,
       V4PagePaginationArray<ModelListResponse>,
       { query, ...options },
     );
   }
+}
+export class Models extends BaseModels {
+  schema: SchemaAPI.Schema = new SchemaAPI.Schema(this._client);
 }
 
 export type ModelListResponsesV4PagePaginationArray = V4PagePaginationArray<ModelListResponse>;
@@ -38,7 +41,7 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by Author
@@ -67,6 +70,7 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
 }
 
 Models.Schema = Schema;
+Models.BaseSchema = BaseSchema;
 
 export declare namespace Models {
   export {
@@ -77,6 +81,7 @@ export declare namespace Models {
 
   export {
     Schema as Schema,
+    BaseSchema as BaseSchema,
     type SchemaGetResponse as SchemaGetResponse,
     type SchemaGetParams as SchemaGetParams,
   };

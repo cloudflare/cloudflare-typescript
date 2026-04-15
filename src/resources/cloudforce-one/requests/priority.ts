@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class PriorityResource extends APIResource {
+export class BasePriorityResource extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'requests', 'priority'] = Object.freeze([
+    'cloudforceOne',
+    'requests',
+    'priority',
+  ] as const);
+
   /**
    * Creates a new priority intelligence request in Cloudforce One.
    *
@@ -23,7 +29,7 @@ export class PriorityResource extends APIResource {
    * ```
    */
   create(params: PriorityCreateParams, options?: RequestOptions): APIPromise<Priority> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/cloudforce-one/requests/priority/new`, {
         body,
@@ -55,7 +61,7 @@ export class PriorityResource extends APIResource {
     params: PriorityUpdateParams,
     options?: RequestOptions,
   ): APIPromise<RequestsAPI.Item> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/cloudforce-one/requests/priority/${priorityID}`, {
         body,
@@ -78,10 +84,10 @@ export class PriorityResource extends APIResource {
    */
   delete(
     priorityID: string,
-    params: PriorityDeleteParams,
+    params: PriorityDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PriorityDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/cloudforce-one/requests/priority/${priorityID}`,
       options,
@@ -100,8 +106,12 @@ export class PriorityResource extends APIResource {
    *   );
    * ```
    */
-  get(priorityID: string, params: PriorityGetParams, options?: RequestOptions): APIPromise<RequestsAPI.Item> {
-    const { account_id } = params;
+  get(
+    priorityID: string,
+    params: PriorityGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RequestsAPI.Item> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/cloudforce-one/requests/priority/${priorityID}`,
@@ -121,8 +131,11 @@ export class PriorityResource extends APIResource {
    *   });
    * ```
    */
-  quota(params: PriorityQuotaParams, options?: RequestOptions): APIPromise<RequestsAPI.Quota> {
-    const { account_id } = params;
+  quota(
+    params: PriorityQuotaParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RequestsAPI.Quota> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/cloudforce-one/requests/priority/quota`,
@@ -131,6 +144,7 @@ export class PriorityResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class PriorityResource extends BasePriorityResource {}
 
 export type Label = string;
 
@@ -244,7 +258,7 @@ export interface PriorityCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of labels.
@@ -271,7 +285,7 @@ export interface PriorityUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of labels.
@@ -298,21 +312,21 @@ export interface PriorityDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PriorityGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PriorityQuotaParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace PriorityResource {

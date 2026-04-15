@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as HealthAPI from './health';
-import { Health } from './health';
+import { BaseHealth, Health } from './health';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Datasets extends APIResource {
-  health: HealthAPI.Health = new HealthAPI.Health(this._client);
+export class BaseDatasets extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'datasets'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'datasets',
+  ] as const);
 
   /**
    * Creates a dataset
@@ -24,7 +28,7 @@ export class Datasets extends APIResource {
    * ```
    */
   create(params: DatasetCreateParams, options?: RequestOptions): APIPromise<DatasetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/dataset/create`, {
       body,
       ...options,
@@ -42,8 +46,11 @@ export class Datasets extends APIResource {
    *   });
    * ```
    */
-  list(params: DatasetListParams, options?: RequestOptions): APIPromise<DatasetListResponse> {
-    const { account_id } = params;
+  list(
+    params: DatasetListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DatasetListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/dataset`, options);
   }
 
@@ -68,7 +75,7 @@ export class Datasets extends APIResource {
     params: DatasetEditParams,
     options?: RequestOptions,
   ): APIPromise<DatasetEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.patch(path`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetID}`, {
       body,
       ...options,
@@ -87,8 +94,12 @@ export class Datasets extends APIResource {
    *   );
    * ```
    */
-  get(datasetID: string, params: DatasetGetParams, options?: RequestOptions): APIPromise<DatasetGetResponse> {
-    const { account_id } = params;
+  get(
+    datasetID: string,
+    params: DatasetGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DatasetGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetID}`,
       options,
@@ -109,12 +120,15 @@ export class Datasets extends APIResource {
    * ```
    */
   raw(eventID: string, params: DatasetRawParams, options?: RequestOptions): APIPromise<DatasetRawResponse> {
-    const { account_id, dataset_id } = params;
+    const { account_id = this._client.accountID, dataset_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/cloudforce-one/events/raw/${dataset_id}/${eventID}`,
       options,
     );
   }
+}
+export class Datasets extends BaseDatasets {
+  health: HealthAPI.Health = new HealthAPI.Health(this._client);
 }
 
 export interface DatasetCreateResponse {
@@ -171,7 +185,7 @@ export interface DatasetCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If true, then anyone can search the dataset. If false, then its
@@ -189,14 +203,14 @@ export interface DatasetListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If true, then anyone can search the dataset. If false, then its
@@ -214,14 +228,14 @@ export interface DatasetGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatasetRawParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Dataset ID.
@@ -230,6 +244,7 @@ export interface DatasetRawParams {
 }
 
 Datasets.Health = Health;
+Datasets.BaseHealth = BaseHealth;
 
 export declare namespace Datasets {
   export {
@@ -245,5 +260,5 @@ export declare namespace Datasets {
     type DatasetRawParams as DatasetRawParams,
   };
 
-  export { Health as Health };
+  export { Health as Health, BaseHealth as BaseHealth };
 }

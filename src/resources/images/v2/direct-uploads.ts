@@ -6,7 +6,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class DirectUploads extends APIResource {
+export class BaseDirectUploads extends APIResource {
+  static override readonly _key: readonly ['images', 'v2', 'directUploads'] = Object.freeze([
+    'images',
+    'v2',
+    'directUploads',
+  ] as const);
+
   /**
    * Direct uploads allow users to upload images without API keys. A common use case
    * are web apps, client-side applications, or mobile devices where users upload
@@ -24,8 +30,11 @@ export class DirectUploads extends APIResource {
    *   });
    * ```
    */
-  create(params: DirectUploadCreateParams, options?: RequestOptions): APIPromise<DirectUploadCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: DirectUploadCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DirectUploadCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/images/v2/direct_upload`,
@@ -34,6 +43,7 @@ export class DirectUploads extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DirectUploads extends BaseDirectUploads {}
 
 export interface DirectUploadCreateResponse {
   /**
@@ -52,7 +62,7 @@ export interface DirectUploadCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Optional Image Custom ID. Up to 1024 chars. Can include any number

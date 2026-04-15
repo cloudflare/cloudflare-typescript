@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class IPs extends APIResource {
+export class BaseIPs extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp', 'ips'] = Object.freeze([
+    'radar',
+    'bgp',
+    'ips',
+  ] as const);
+
   /**
    * Retrieves time series data for the announced IP space count, represented as the
    * number of IPv4 /24s and IPv6 /48s, for a given ASN.
@@ -25,6 +31,7 @@ export class IPs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IPs extends BaseIPs {}
 
 export interface IPTimeseriesResponse {
   /**

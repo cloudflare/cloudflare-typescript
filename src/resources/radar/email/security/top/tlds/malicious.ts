@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../../internal/request-options';
 import { path } from '../../../../../../internal/utils/path';
 
-export class Malicious extends APIResource {
+export class BaseMalicious extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security', 'top', 'tlds', 'malicious'] =
+    Object.freeze(['radar', 'email', 'security', 'top', 'tlds', 'malicious'] as const);
+
   /**
    * Retrieves the top TLDs by emails classified as malicious or not.
    *
@@ -30,6 +33,7 @@ export class Malicious extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Malicious extends BaseMalicious {}
 
 export interface MaliciousGetResponse {
   /**

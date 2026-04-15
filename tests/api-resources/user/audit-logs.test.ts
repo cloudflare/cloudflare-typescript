@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAuditLogs } from 'cloudflare/resources/user/audit-logs';
+import { User } from 'cloudflare/resources/user/user';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource auditLogs', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAuditLogs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [User],
+});
+
+const runTests = (client: PartialCloudflare<{ user: { auditLogs: BaseAuditLogs } }>) => {
   test('list', async () => {
     const responsePromise = client.user.auditLogs.list();
     const rawResponse = await responsePromise.asResponse();
@@ -41,4 +59,7 @@ describe('resource auditLogs', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource auditLogs', () => runTests(client));
+describe('resource auditLogs (tree shakable, base)', () => runTests(partialClient));
+describe('resource auditLogs (tree shakable, subresource)', () => runTests(parentPartialClient));

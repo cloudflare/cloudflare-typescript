@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Policies extends APIResource {
+export class BasePolicies extends APIResource {
+  static override readonly _key: readonly ['alerting', 'policies'] = Object.freeze([
+    'alerting',
+    'policies',
+  ] as const);
+
   /**
    * Creates a new Notification policy.
    *
@@ -22,7 +27,7 @@ export class Policies extends APIResource {
    * ```
    */
   create(params: PolicyCreateParams, options?: RequestOptions): APIPromise<PolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/alerting/v3/policies`, {
         body,
@@ -47,7 +52,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PolicyUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/alerting/v3/policies/${policyID}`, {
         body,
@@ -69,8 +74,11 @@ export class Policies extends APIResource {
    * }
    * ```
    */
-  list(params: PolicyListParams, options?: RequestOptions): PagePromise<PoliciesSinglePage, Policy> {
-    const { account_id } = params;
+  list(
+    params: PolicyListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PoliciesSinglePage, Policy> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/alerting/v3/policies`,
       SinglePage<Policy>,
@@ -91,10 +99,10 @@ export class Policies extends APIResource {
    */
   delete(
     policyID: string,
-    params: PolicyDeleteParams,
+    params: PolicyDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PolicyDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/alerting/v3/policies/${policyID}`, options);
   }
 
@@ -109,8 +117,12 @@ export class Policies extends APIResource {
    * );
    * ```
    */
-  get(policyID: string, params: PolicyGetParams, options?: RequestOptions): APIPromise<Policy> {
-    const { account_id } = params;
+  get(
+    policyID: string,
+    params: PolicyGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Policy> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/alerting/v3/policies/${policyID}`,
@@ -119,6 +131,7 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Policies extends BasePolicies {}
 
 export type PoliciesSinglePage = SinglePage<Policy>;
 
@@ -828,7 +841,7 @@ export interface PolicyCreateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Refers to which event will trigger a Notification dispatch. You can
@@ -945,7 +958,7 @@ export interface PolicyUpdateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Optional specification of how often to re-alert from the same
@@ -1062,21 +1075,21 @@ export interface PolicyListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Policies {

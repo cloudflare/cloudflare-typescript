@@ -15,11 +15,15 @@ import {
   AppUpdateParams,
   AppUpdateResponse,
   Apps,
+  BaseApps,
 } from './apps';
 import * as AnalyticsAPI from './analytics/analytics';
-import { Analytics } from './analytics/analytics';
+import { Analytics, BaseAnalytics } from './analytics/analytics';
 
-export class Spectrum extends APIResource {
+export class BaseSpectrum extends APIResource {
+  static override readonly _key: readonly ['spectrum'] = Object.freeze(['spectrum'] as const);
+}
+export class Spectrum extends BaseSpectrum {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
 }
@@ -187,7 +191,9 @@ export type OriginPort = number | string;
 export type OriginPortParam = number | string;
 
 Spectrum.Analytics = Analytics;
+Spectrum.BaseAnalytics = BaseAnalytics;
 Spectrum.Apps = Apps;
+Spectrum.BaseApps = BaseApps;
 
 export declare namespace Spectrum {
   export {
@@ -197,10 +203,11 @@ export declare namespace Spectrum {
     type OriginPort as OriginPort,
   };
 
-  export { Analytics as Analytics };
+  export { Analytics as Analytics, BaseAnalytics as BaseAnalytics };
 
   export {
     Apps as Apps,
+    BaseApps as BaseApps,
     type AppCreateResponse as AppCreateResponse,
     type AppUpdateResponse as AppUpdateResponse,
     type AppListResponse as AppListResponse,

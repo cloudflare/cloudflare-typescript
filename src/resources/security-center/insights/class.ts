@@ -2,4 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 
-export class Class extends APIResource {}
+export class BaseClass extends APIResource {
+  static override readonly _key: readonly ['securityCenter', 'insights', 'class'] = Object.freeze([
+    'securityCenter',
+    'insights',
+    'class',
+  ] as const);
+}
+export class Class extends BaseClass {}

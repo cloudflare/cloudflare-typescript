@@ -2,4 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 
-export class Crons extends APIResource {}
+export class BaseCrons extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'crons'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'crons',
+  ] as const);
+}
+export class Crons extends BaseCrons {}

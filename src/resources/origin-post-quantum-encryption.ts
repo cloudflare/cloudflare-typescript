@@ -5,7 +5,11 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class OriginPostQuantumEncryption extends APIResource {
+export class BaseOriginPostQuantumEncryption extends APIResource {
+  static override readonly _key: readonly ['originPostQuantumEncryption'] = Object.freeze([
+    'originPostQuantumEncryption',
+  ] as const);
+
   /**
    * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when
    * connecting to your origin. Preferred instructs Cloudflare to opportunistically
@@ -18,7 +22,7 @@ export class OriginPostQuantumEncryption extends APIResource {
     params: OriginPostQuantumEncryptionUpdateParams,
     options?: RequestOptions,
   ): APIPromise<OriginPostQuantumEncryptionUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/cache/origin_post_quantum_encryption`, {
         body,
@@ -36,10 +40,10 @@ export class OriginPostQuantumEncryption extends APIResource {
    * means that PQ algorithms are not advertised.
    */
   get(
-    params: OriginPostQuantumEncryptionGetParams,
+    params: OriginPostQuantumEncryptionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OriginPostQuantumEncryptionGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/cache/origin_post_quantum_encryption`, options) as APIPromise<{
         result: OriginPostQuantumEncryptionGetResponse;
@@ -47,6 +51,7 @@ export class OriginPostQuantumEncryption extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class OriginPostQuantumEncryption extends BaseOriginPostQuantumEncryption {}
 
 export interface OriginPostQuantumEncryptionUpdateResponse {
   /**
@@ -96,7 +101,7 @@ export interface OriginPostQuantumEncryptionUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Value of the Origin Post Quantum Encryption Setting.
@@ -108,7 +113,7 @@ export interface OriginPostQuantumEncryptionGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace OriginPostQuantumEncryption {

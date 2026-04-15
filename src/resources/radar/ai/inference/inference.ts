@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryModelParams,
   SummaryModelResponse,
@@ -10,16 +11,17 @@ import {
   SummaryTaskResponse,
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups/timeseries-groups';
-import { TimeseriesGroups } from './timeseries-groups/timeseries-groups';
+import { BaseTimeseriesGroups, TimeseriesGroups } from './timeseries-groups/timeseries-groups';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Inference extends APIResource {
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+export class BaseInference extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai', 'inference'] = Object.freeze([
+    'radar',
+    'ai',
+    'inference',
+  ] as const);
 
   /**
    * Retrieves an aggregated summary of unique accounts using Workers AI inference
@@ -68,6 +70,12 @@ export class Inference extends APIResource {
       }) as APIPromise<{ result: InferenceTimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Inference extends BaseInference {
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
 }
 
 export interface InferenceSummaryV2Response {
@@ -469,7 +477,9 @@ export interface InferenceTimeseriesGroupsV2Params {
 }
 
 Inference.Summary = Summary;
+Inference.BaseSummary = BaseSummary;
 Inference.TimeseriesGroups = TimeseriesGroups;
+Inference.BaseTimeseriesGroups = BaseTimeseriesGroups;
 
 export declare namespace Inference {
   export {
@@ -481,11 +491,12 @@ export declare namespace Inference {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryModelResponse as SummaryModelResponse,
     type SummaryTaskResponse as SummaryTaskResponse,
     type SummaryModelParams as SummaryModelParams,
     type SummaryTaskParams as SummaryTaskParams,
   };
 
-  export { TimeseriesGroups as TimeseriesGroups };
+  export { TimeseriesGroups as TimeseriesGroups, BaseTimeseriesGroups as BaseTimeseriesGroups };
 }

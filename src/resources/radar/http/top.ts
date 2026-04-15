@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Top extends APIResource {
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'top'] = Object.freeze([
+    'radar',
+    'http',
+    'top',
+  ] as const);
+
   /**
    * Retrieves the top user agents by HTTP requests.
    *
@@ -37,6 +43,7 @@ export class Top extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Top extends BaseTop {}
 
 export interface TopBrowserResponse {
   /**

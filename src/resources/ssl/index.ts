@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Analyze, type AnalyzeCreateResponse, type AnalyzeCreateParams } from './analyze';
+export { Analyze, BaseAnalyze, type AnalyzeCreateResponse, type AnalyzeCreateParams } from './analyze';
 export {
   CertificatePacks,
+  BaseCertificatePacks,
   type Host,
   type RequestValidity,
   type Status,
@@ -21,13 +22,15 @@ export {
 } from './certificate-packs/index';
 export {
   Recommendations,
+  BaseRecommendations,
   type RecommendationGetResponse,
   type RecommendationGetParams,
 } from './recommendations';
-export { SSL } from './ssl';
-export { Universal } from './universal/index';
+export { SSL, BaseSSL } from './ssl';
+export { Universal, BaseUniversal } from './universal/index';
 export {
   VerificationResource,
+  BaseVerificationResource,
   type Verification,
   type VerificationEditResponse,
   type VerificationGetResponse,

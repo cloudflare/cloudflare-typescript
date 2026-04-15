@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CacheReserveResource extends APIResource {
+export class BaseCacheReserveResource extends APIResource {
+  static override readonly _key: readonly ['cache', 'cacheReserve'] = Object.freeze([
+    'cache',
+    'cacheReserve',
+  ] as const);
+
   /**
    * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
@@ -21,7 +26,7 @@ export class CacheReserveResource extends APIResource {
    * ```
    */
   clear(params: CacheReserveClearParams, options?: RequestOptions): APIPromise<CacheReserveClearResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/cache/cache_reserve_clear`, {
         body: body,
@@ -47,7 +52,7 @@ export class CacheReserveResource extends APIResource {
    * ```
    */
   edit(params: CacheReserveEditParams, options?: RequestOptions): APIPromise<CacheReserveEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/cache_reserve`, { body, ...options }) as APIPromise<{
         result: CacheReserveEditResponse;
@@ -70,8 +75,11 @@ export class CacheReserveResource extends APIResource {
    * });
    * ```
    */
-  get(params: CacheReserveGetParams, options?: RequestOptions): APIPromise<CacheReserveGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: CacheReserveGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CacheReserveGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/cache/cache_reserve`, options) as APIPromise<{
         result: CacheReserveGetResponse;
@@ -92,8 +100,11 @@ export class CacheReserveResource extends APIResource {
    * });
    * ```
    */
-  status(params: CacheReserveStatusParams, options?: RequestOptions): APIPromise<CacheReserveStatusResponse> {
-    const { zone_id } = params;
+  status(
+    params: CacheReserveStatusParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CacheReserveStatusResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/cache/cache_reserve_clear`, options) as APIPromise<{
         result: CacheReserveStatusResponse;
@@ -101,6 +112,7 @@ export class CacheReserveResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CacheReserveResource extends BaseCacheReserveResource {}
 
 /**
  * The identifier of the caching setting.
@@ -231,7 +243,7 @@ export interface CacheReserveClearParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -243,7 +255,7 @@ export interface CacheReserveEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Value of the Cache Reserve zone setting.
@@ -255,14 +267,14 @@ export interface CacheReserveGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CacheReserveStatusParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace CacheReserveResource {

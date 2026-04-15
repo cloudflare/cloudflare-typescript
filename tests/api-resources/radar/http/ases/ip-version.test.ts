@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Ases } from 'cloudflare/resources/radar/http/ases/ases';
+import { BaseIPVersion } from 'cloudflare/resources/radar/http/ases/ip-version';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource ipVersion', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseIPVersion],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Ases],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { http: { ases: { ipVersion: BaseIPVersion } } } }>) => {
   test('get', async () => {
     const responsePromise = client.radar.http.ases.ipVersion.get('IPv4');
     const rawResponse = await responsePromise.asResponse();
@@ -48,4 +66,7 @@ describe('resource ipVersion', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource ipVersion', () => runTests(client));
+describe('resource ipVersion (tree shakable, base)', () => runTests(partialClient));
+describe('resource ipVersion (tree shakable, subresource)', () => runTests(parentPartialClient));

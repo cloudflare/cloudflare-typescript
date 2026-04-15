@@ -2,14 +2,18 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ResourcesAPI from './resources/resources';
-import { Resources } from './resources/resources';
+import { BaseResources, Resources } from './resources/resources';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class User extends APIResource {
-  resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
+export class BaseUser extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'labels', 'user'] = Object.freeze([
+    'apiGateway',
+    'labels',
+    'user',
+  ] as const);
 
   /**
    * Update all fields on a label
@@ -23,7 +27,7 @@ export class User extends APIResource {
    * ```
    */
   update(name: string, params: UserUpdateParams, options?: RequestOptions): APIPromise<UserUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/api_gateway/labels/user/${name}`, {
         body,
@@ -43,8 +47,12 @@ export class User extends APIResource {
    * );
    * ```
    */
-  delete(name: string, params: UserDeleteParams, options?: RequestOptions): APIPromise<UserDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    name: string,
+    params: UserDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UserDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/api_gateway/labels/user/${name}`, options) as APIPromise<{
         result: UserDeleteResponse;
@@ -72,7 +80,7 @@ export class User extends APIResource {
     params: UserBulkCreateParams,
     options?: RequestOptions,
   ): PagePromise<UserBulkCreateResponsesSinglePage, UserBulkCreateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/labels/user`,
       SinglePage<UserBulkCreateResponse>,
@@ -94,10 +102,10 @@ export class User extends APIResource {
    * ```
    */
   bulkDelete(
-    params: UserBulkDeleteParams,
+    params: UserBulkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<UserBulkDeleteResponsesSinglePage, UserBulkDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/labels/user`,
       SinglePage<UserBulkDeleteResponse>,
@@ -117,7 +125,7 @@ export class User extends APIResource {
    * ```
    */
   edit(name: string, params: UserEditParams, options?: RequestOptions): APIPromise<UserEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/api_gateway/labels/user/${name}`, {
         body,
@@ -137,8 +145,12 @@ export class User extends APIResource {
    * );
    * ```
    */
-  get(name: string, params: UserGetParams, options?: RequestOptions): APIPromise<UserGetResponse> {
-    const { zone_id, ...query } = params;
+  get(
+    name: string,
+    params: UserGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UserGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/labels/user/${name}`, {
         query,
@@ -146,6 +158,9 @@ export class User extends APIResource {
       }) as APIPromise<{ result: UserGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class User extends BaseUser {
+  resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
 }
 
 export type UserBulkCreateResponsesSinglePage = SinglePage<UserBulkCreateResponse>;
@@ -323,7 +338,7 @@ export interface UserUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The description of the label
@@ -340,14 +355,14 @@ export interface UserDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface UserBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -378,14 +393,14 @@ export interface UserBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface UserEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The description of the label
@@ -402,7 +417,7 @@ export interface UserGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Include `mapped_resources` for each label
@@ -411,6 +426,7 @@ export interface UserGetParams {
 }
 
 User.Resources = Resources;
+User.BaseResources = BaseResources;
 
 export declare namespace User {
   export {
@@ -430,5 +446,5 @@ export declare namespace User {
     type UserGetParams as UserGetParams,
   };
 
-  export { Resources as Resources };
+  export { Resources as Resources, BaseResources as BaseResources };
 }

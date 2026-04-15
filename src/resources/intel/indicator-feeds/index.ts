@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Downloads } from './downloads';
+export { Downloads, BaseDownloads } from './downloads';
 export {
   IndicatorFeeds,
+  BaseIndicatorFeeds,
   type IndicatorFeedCreateResponse,
   type IndicatorFeedUpdateResponse,
   type IndicatorFeedListResponse,
@@ -17,6 +18,7 @@ export {
 } from './indicator-feeds';
 export {
   Permissions,
+  BasePermissions,
   type PermissionCreateResponse,
   type PermissionListResponse,
   type PermissionDeleteResponse,
@@ -24,4 +26,9 @@ export {
   type PermissionListParams,
   type PermissionDeleteParams,
 } from './permissions';
-export { Snapshots, type SnapshotUpdateResponse, type SnapshotUpdateParams } from './snapshots';
+export {
+  Snapshots,
+  BaseSnapshots,
+  type SnapshotUpdateResponse,
+  type SnapshotUpdateParams,
+} from './snapshots';

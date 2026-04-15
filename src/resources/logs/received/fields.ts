@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Fields extends APIResource {
+export class BaseFields extends APIResource {
+  static override readonly _key: readonly ['logs', 'received', 'fields'] = Object.freeze([
+    'logs',
+    'received',
+    'fields',
+  ] as const);
+
   /**
    * Lists all fields available. The response is json object with key-value pairs,
    * where keys are field names, and values are descriptions.
@@ -17,11 +23,15 @@ export class Fields extends APIResource {
    * });
    * ```
    */
-  get(params: FieldGetParams, options?: RequestOptions): APIPromise<FieldGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: FieldGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FieldGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.get(path`/zones/${zone_id}/logs/received/fields`, options);
   }
 }
+export class Fields extends BaseFields {}
 
 export interface FieldGetResponse {
   key?: string;
@@ -31,7 +41,7 @@ export interface FieldGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Fields {

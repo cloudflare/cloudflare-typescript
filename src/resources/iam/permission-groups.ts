@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class PermissionGroups extends APIResource {
+export class BasePermissionGroups extends APIResource {
+  static override readonly _key: readonly ['iam', 'permissionGroups'] = Object.freeze([
+    'iam',
+    'permissionGroups',
+  ] as const);
+
   /**
    * List all the permissions groups for an account.
    *
@@ -21,10 +26,10 @@ export class PermissionGroups extends APIResource {
    * ```
    */
   list(
-    params: PermissionGroupListParams,
+    params: PermissionGroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PermissionGroupListResponsesV4PagePaginationArray, PermissionGroupListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/iam/permission_groups`,
       V4PagePaginationArray<PermissionGroupListResponse>,
@@ -46,10 +51,10 @@ export class PermissionGroups extends APIResource {
    */
   get(
     permissionGroupID: string,
-    params: PermissionGroupGetParams,
+    params: PermissionGroupGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PermissionGroupGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/iam/permission_groups/${permissionGroupID}`,
@@ -58,6 +63,7 @@ export class PermissionGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class PermissionGroups extends BasePermissionGroups {}
 
 export type PermissionGroupListResponsesV4PagePaginationArray =
   V4PagePaginationArray<PermissionGroupListResponse>;
@@ -130,7 +136,7 @@ export interface PermissionGroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the permission group to be fetched.
@@ -152,7 +158,7 @@ export interface PermissionGroupGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace PermissionGroups {

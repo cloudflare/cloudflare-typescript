@@ -3,13 +3,23 @@
 import { APIResource } from '../../../../core/resource';
 import * as DEXAPI from '../dex';
 import * as PercentilesAPI from './percentiles';
-import { HTTPDetailsPercentiles, PercentileGetParams, Percentiles, TestStatOverTime } from './percentiles';
+import {
+  BasePercentiles,
+  HTTPDetailsPercentiles,
+  PercentileGetParams,
+  Percentiles,
+  TestStatOverTime,
+} from './percentiles';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class HTTPTests extends APIResource {
-  percentiles: PercentilesAPI.Percentiles = new PercentilesAPI.Percentiles(this._client);
+export class BaseHTTPTests extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'httpTests'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'httpTests',
+  ] as const);
 
   /**
    * Get test details and aggregate performance metrics for an http test for a given
@@ -30,7 +40,7 @@ export class HTTPTests extends APIResource {
    * ```
    */
   get(testID: string, params: HTTPTestGetParams, options?: RequestOptions): APIPromise<HTTPDetails> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/http-tests/${testID}`, {
         query,
@@ -38,6 +48,9 @@ export class HTTPTests extends APIResource {
       }) as APIPromise<{ result: HTTPDetails }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class HTTPTests extends BaseHTTPTests {
+  percentiles: PercentilesAPI.Percentiles = new PercentilesAPI.Percentiles(this._client);
 }
 
 export interface HTTPDetails {
@@ -196,7 +209,7 @@ export interface HTTPTestGetParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for aggregate metrics in ISO ms
@@ -227,12 +240,14 @@ export interface HTTPTestGetParams {
 }
 
 HTTPTests.Percentiles = Percentiles;
+HTTPTests.BasePercentiles = BasePercentiles;
 
 export declare namespace HTTPTests {
   export { type HTTPDetails as HTTPDetails, type HTTPTestGetParams as HTTPTestGetParams };
 
   export {
     Percentiles as Percentiles,
+    BasePercentiles as BasePercentiles,
     type HTTPDetailsPercentiles as HTTPDetailsPercentiles,
     type TestStatOverTime as TestStatOverTime,
     type PercentileGetParams as PercentileGetParams,

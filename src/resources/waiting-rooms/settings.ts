@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['waitingRooms', 'settings'] = Object.freeze([
+    'waitingRooms',
+    'settings',
+  ] as const);
+
   /**
    * Fully updates zone-level Waiting Room settings, replacing the existing
    * configuration.
@@ -17,8 +22,11 @@ export class Settings extends APIResource {
    * });
    * ```
    */
-  update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
-    const { zone_id, ...body } = params;
+  update(
+    params: SettingUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingUpdateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/waiting_rooms/settings`, { body, ...options }) as APIPromise<{
         result: SettingUpdateResponse;
@@ -36,8 +44,11 @@ export class Settings extends APIResource {
    * });
    * ```
    */
-  edit(params: SettingEditParams, options?: RequestOptions): APIPromise<SettingEditResponse> {
-    const { zone_id, ...body } = params;
+  edit(
+    params: SettingEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingEditResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.patch(path`/zones/${zone_id}/waiting_rooms/settings`, { body, ...options }) as APIPromise<{
         result: SettingEditResponse;
@@ -56,8 +67,11 @@ export class Settings extends APIResource {
    * });
    * ```
    */
-  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/waiting_rooms/settings`, options) as APIPromise<{
         result: SettingGetResponse;
@@ -65,6 +79,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 export interface Setting {
   /**
@@ -106,7 +121,7 @@ export interface SettingUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether to allow verified search engine crawlers to bypass all
@@ -121,7 +136,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether to allow verified search engine crawlers to bypass all
@@ -136,7 +151,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Settings {

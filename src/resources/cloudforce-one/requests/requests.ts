@@ -14,9 +14,11 @@ import {
   AssetUpdateParams,
   AssetUpdateResponse,
   Assets,
+  BaseAssets,
 } from './assets';
 import * as MessageAPI from './message';
 import {
+  BaseMessageResource,
   Message as MessageAPIMessage,
   MessageCreateParams,
   MessageDeleteParams,
@@ -28,6 +30,7 @@ import {
 } from './message';
 import * as PriorityAPI from './priority';
 import {
+  BasePriorityResource,
   Label,
   Priority,
   PriorityCreateParams,
@@ -44,10 +47,11 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Requests extends APIResource {
-  message: MessageAPI.MessageResource = new MessageAPI.MessageResource(this._client);
-  priority: PriorityAPI.PriorityResource = new PriorityAPI.PriorityResource(this._client);
-  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
+export class BaseRequests extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'requests'] = Object.freeze([
+    'cloudforceOne',
+    'requests',
+  ] as const);
 
   /**
    * Creating a request adds the request into the Cloudforce One queue for analysis.
@@ -61,8 +65,8 @@ export class Requests extends APIResource {
    * });
    * ```
    */
-  create(params: RequestCreateParams, options?: RequestOptions): APIPromise<Item> {
-    const { account_id, ...body } = params;
+  create(params: RequestCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Item> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/cloudforce-one/requests/new`, {
         body,
@@ -85,7 +89,7 @@ export class Requests extends APIResource {
    * ```
    */
   update(requestID: string, params: RequestUpdateParams, options?: RequestOptions): APIPromise<Item> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/cloudforce-one/requests/${requestID}`, {
         body,
@@ -112,7 +116,7 @@ export class Requests extends APIResource {
    * ```
    */
   list(params: RequestListParams, options?: RequestOptions): PagePromise<ListItemsSinglePage, ListItem> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/cloudforce-one/requests`,
       SinglePage<ListItem>,
@@ -133,10 +137,10 @@ export class Requests extends APIResource {
    */
   delete(
     requestID: string,
-    params: RequestDeleteParams,
+    params: RequestDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RequestDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/cloudforce-one/requests/${requestID}`, options);
   }
 
@@ -152,8 +156,11 @@ export class Requests extends APIResource {
    *   });
    * ```
    */
-  constants(params: RequestConstantsParams, options?: RequestOptions): APIPromise<RequestConstants> {
-    const { account_id } = params;
+  constants(
+    params: RequestConstantsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RequestConstants> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/cloudforce-one/requests/constants`,
@@ -173,8 +180,12 @@ export class Requests extends APIResource {
    * );
    * ```
    */
-  get(requestID: string, params: RequestGetParams, options?: RequestOptions): APIPromise<Item> {
-    const { account_id } = params;
+  get(
+    requestID: string,
+    params: RequestGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Item> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/cloudforce-one/requests/${requestID}`,
@@ -193,8 +204,8 @@ export class Requests extends APIResource {
    * });
    * ```
    */
-  quota(params: RequestQuotaParams, options?: RequestOptions): APIPromise<Quota> {
-    const { account_id } = params;
+  quota(params: RequestQuotaParams | null | undefined = {}, options?: RequestOptions): APIPromise<Quota> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/cloudforce-one/requests/quota`, options) as APIPromise<{
         result: Quota;
@@ -216,16 +227,21 @@ export class Requests extends APIResource {
    * ```
    */
   types(
-    params: RequestTypesParams,
+    params: RequestTypesParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RequestTypesResponsesSinglePage, RequestTypesResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/cloudforce-one/requests/types`,
       SinglePage<RequestTypesResponse>,
       options,
     );
   }
+}
+export class Requests extends BaseRequests {
+  message: MessageAPI.MessageResource = new MessageAPI.MessageResource(this._client);
+  priority: PriorityAPI.PriorityResource = new PriorityAPI.PriorityResource(this._client);
+  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
 }
 
 export type ListItemsSinglePage = SinglePage<ListItem>;
@@ -432,7 +448,7 @@ export interface RequestCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Request content.
@@ -464,7 +480,7 @@ export interface RequestUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Request content.
@@ -496,7 +512,7 @@ export interface RequestListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Page number of results.
@@ -553,40 +569,43 @@ export interface RequestDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RequestConstantsParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RequestGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RequestQuotaParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RequestTypesParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Requests.MessageResource = MessageResource;
+Requests.BaseMessageResource = BaseMessageResource;
 Requests.PriorityResource = PriorityResource;
+Requests.BasePriorityResource = BasePriorityResource;
 Requests.Assets = Assets;
+Requests.BaseAssets = BaseAssets;
 
 export declare namespace Requests {
   export {
@@ -611,6 +630,7 @@ export declare namespace Requests {
 
   export {
     MessageResource as MessageResource,
+    BaseMessageResource as BaseMessageResource,
     type MessageAPIMessage as Message,
     type MessageDeleteResponse as MessageDeleteResponse,
     type MessagesSinglePage as MessagesSinglePage,
@@ -622,6 +642,7 @@ export declare namespace Requests {
 
   export {
     PriorityResource as PriorityResource,
+    BasePriorityResource as BasePriorityResource,
     type Label as Label,
     type Priority as Priority,
     type PriorityEdit as PriorityEdit,
@@ -635,6 +656,7 @@ export declare namespace Requests {
 
   export {
     Assets as Assets,
+    BaseAssets as BaseAssets,
     type AssetCreateResponse as AssetCreateResponse,
     type AssetUpdateResponse as AssetUpdateResponse,
     type AssetDeleteResponse as AssetDeleteResponse,

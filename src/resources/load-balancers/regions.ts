@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Regions extends APIResource {
+export class BaseRegions extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'regions'] = Object.freeze([
+    'loadBalancers',
+    'regions',
+  ] as const);
+
   /**
    * List all region mappings.
    *
@@ -16,8 +21,11 @@ export class Regions extends APIResource {
    * });
    * ```
    */
-  list(params: RegionListParams, options?: RequestOptions): APIPromise<RegionListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: RegionListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RegionListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/load_balancers/regions`, {
         query,
@@ -52,10 +60,10 @@ export class Regions extends APIResource {
       | 'SAS'
       | 'SEAS'
       | 'NEAS',
-    params: RegionGetParams,
+    params: RegionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegionGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/load_balancers/regions/${regionID}`,
@@ -64,6 +72,7 @@ export class Regions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Regions extends BaseRegions {}
 
 export type RegionListResponse = unknown | string | null;
 
@@ -76,7 +85,7 @@ export interface RegionListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Two-letter alpha-2 country code followed in ISO 3166-1.
@@ -98,7 +107,7 @@ export interface RegionGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Regions {

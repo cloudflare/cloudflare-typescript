@@ -5,13 +5,25 @@ import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import * as TailAPI from '../../../../workers/scripts/tail';
 import * as AssetUploadAPI from './asset-upload';
-import { AssetUpload, AssetUploadCreateParams, AssetUploadCreateResponse } from './asset-upload';
+import {
+  AssetUpload,
+  AssetUploadCreateParams,
+  AssetUploadCreateResponse,
+  BaseAssetUpload,
+} from './asset-upload';
 import * as BindingsAPI from './bindings';
-import { BindingGetParams, BindingGetResponse, BindingGetResponsesSinglePage, Bindings } from './bindings';
+import {
+  BaseBindings,
+  BindingGetParams,
+  BindingGetResponse,
+  BindingGetResponsesSinglePage,
+  Bindings,
+} from './bindings';
 import * as ContentAPI from './content';
-import { Content, ContentGetParams, ContentUpdateParams } from './content';
+import { BaseContent, Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as SecretsAPI from './secrets';
 import {
+  BaseSecrets,
   SecretDeleteParams,
   SecretDeleteResponse,
   SecretGetParams,
@@ -25,6 +37,7 @@ import {
 } from './secrets';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   SettingEditParams,
   SettingEditResponse,
   SettingGetParams,
@@ -33,6 +46,7 @@ import {
 } from './settings';
 import * as TagsAPI from './tags';
 import {
+  BaseTags,
   TagDeleteParams,
   TagDeleteResponse,
   TagListParams,
@@ -50,13 +64,9 @@ import { RequestOptions } from '../../../../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../../../../internal/uploads';
 import { path } from '../../../../../internal/utils/path';
 
-export class Scripts extends APIResource {
-  assetUpload: AssetUploadAPI.AssetUpload = new AssetUploadAPI.AssetUpload(this._client);
-  content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
-  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
-  tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
+export class BaseScripts extends APIResource {
+  static override readonly _key: readonly ['workersForPlatforms', 'dispatch', 'namespaces', 'scripts'] =
+    Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts'] as const);
 
   /**
    * Upload a worker module to a Workers for Platforms namespace. You can find more
@@ -81,7 +91,7 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ScriptUpdateResponse> {
-    const { account_id, dispatch_namespace, bindings_inherit, ...body } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}`,
@@ -119,7 +129,7 @@ export class Scripts extends APIResource {
     params: ScriptDeleteParams,
     options?: RequestOptions,
   ): APIPromise<ScriptDeleteResponse | null> {
-    const { account_id, dispatch_namespace, force } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, force } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}`,
@@ -144,7 +154,7 @@ export class Scripts extends APIResource {
    * ```
    */
   get(scriptName: string, params: ScriptGetParams, options?: RequestOptions): APIPromise<Script> {
-    const { account_id, dispatch_namespace } = params;
+    const { account_id = this._client.accountID, dispatch_namespace } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}`,
@@ -152,6 +162,14 @@ export class Scripts extends APIResource {
       ) as APIPromise<{ result: Script }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Scripts extends BaseScripts {
+  assetUpload: AssetUploadAPI.AssetUpload = new AssetUploadAPI.AssetUpload(this._client);
+  content: ContentAPI.Content = new ContentAPI.Content(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
+  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
+  tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 }
 
 /**
@@ -606,7 +624,7 @@ export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -1827,7 +1845,7 @@ export interface ScriptDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -1846,7 +1864,7 @@ export interface ScriptGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.
@@ -1855,11 +1873,17 @@ export interface ScriptGetParams {
 }
 
 Scripts.AssetUpload = AssetUpload;
+Scripts.BaseAssetUpload = BaseAssetUpload;
 Scripts.Content = Content;
+Scripts.BaseContent = BaseContent;
 Scripts.Settings = Settings;
+Scripts.BaseSettings = BaseSettings;
 Scripts.Bindings = Bindings;
+Scripts.BaseBindings = BaseBindings;
 Scripts.Secrets = Secrets;
+Scripts.BaseSecrets = BaseSecrets;
 Scripts.Tags = Tags;
+Scripts.BaseTags = BaseTags;
 
 export declare namespace Scripts {
   export {
@@ -1873,18 +1897,21 @@ export declare namespace Scripts {
 
   export {
     AssetUpload as AssetUpload,
+    BaseAssetUpload as BaseAssetUpload,
     type AssetUploadCreateResponse as AssetUploadCreateResponse,
     type AssetUploadCreateParams as AssetUploadCreateParams,
   };
 
   export {
     Content as Content,
+    BaseContent as BaseContent,
     type ContentUpdateParams as ContentUpdateParams,
     type ContentGetParams as ContentGetParams,
   };
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingEditResponse as SettingEditResponse,
     type SettingGetResponse as SettingGetResponse,
     type SettingEditParams as SettingEditParams,
@@ -1893,6 +1920,7 @@ export declare namespace Scripts {
 
   export {
     Bindings as Bindings,
+    BaseBindings as BaseBindings,
     type BindingGetResponse as BindingGetResponse,
     type BindingGetResponsesSinglePage as BindingGetResponsesSinglePage,
     type BindingGetParams as BindingGetParams,
@@ -1900,6 +1928,7 @@ export declare namespace Scripts {
 
   export {
     Secrets as Secrets,
+    BaseSecrets as BaseSecrets,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
@@ -1913,6 +1942,7 @@ export declare namespace Scripts {
 
   export {
     Tags as Tags,
+    BaseTags as BaseTags,
     type TagUpdateResponse as TagUpdateResponse,
     type TagListResponse as TagListResponse,
     type TagDeleteResponse as TagDeleteResponse,

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Slots extends APIResource {
+export class BaseSlots extends APIResource {
+  static override readonly _key: readonly ['networkInterconnects', 'slots'] = Object.freeze([
+    'networkInterconnects',
+    'slots',
+  ] as const);
+
   /**
    * Retrieve a list of all slots matching the specified parameters
    *
@@ -16,8 +21,11 @@ export class Slots extends APIResource {
    * });
    * ```
    */
-  list(params: SlotListParams, options?: RequestOptions): APIPromise<SlotListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: SlotListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SlotListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/slots`, { query, ...options });
   }
 
@@ -32,11 +40,16 @@ export class Slots extends APIResource {
    * );
    * ```
    */
-  get(slot: string, params: SlotGetParams, options?: RequestOptions): APIPromise<SlotGetResponse> {
-    const { account_id } = params;
+  get(
+    slot: string,
+    params: SlotGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SlotGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/slots/${slot}`, options);
   }
 }
+export class Slots extends BaseSlots {}
 
 export interface SlotListResponse {
   items: Array<SlotListResponse.Item>;
@@ -112,7 +125,7 @@ export interface SlotListParams {
   /**
    * Path param: Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If specified, only show slots with the given text in their address
@@ -151,7 +164,7 @@ export interface SlotGetParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Slots {

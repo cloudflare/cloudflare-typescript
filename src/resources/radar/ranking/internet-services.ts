@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class InternetServices extends APIResource {
+export class BaseInternetServices extends APIResource {
+  static override readonly _key: readonly ['radar', 'ranking', 'internetServices'] = Object.freeze([
+    'radar',
+    'ranking',
+    'internetServices',
+  ] as const);
+
   /**
    * Retrieves the list of Internet services categories.
    *
@@ -66,6 +72,7 @@ export class InternetServices extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class InternetServices extends BaseInternetServices {}
 
 export interface InternetServiceCategoriesResponse {
   categories_0: Array<InternetServiceCategoriesResponse.Categories0>;

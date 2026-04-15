@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Export extends APIResource {
+export class BaseExport extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'export'] = Object.freeze(['zaraz', 'export'] as const);
+
   /**
    * Exports full current published Zaraz configuration for a zone, secret variables
    * included.
@@ -18,17 +20,21 @@ export class Export extends APIResource {
    * });
    * ```
    */
-  get(params: ExportGetParams, options?: RequestOptions): APIPromise<ConfigAPI.Configuration> {
-    const { zone_id } = params;
+  get(
+    params: ExportGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigAPI.Configuration> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.get(path`/zones/${zone_id}/settings/zaraz/export`, options);
   }
 }
+export class Export extends BaseExport {}
 
 export interface ExportGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Export {

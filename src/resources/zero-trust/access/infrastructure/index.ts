@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Infrastructure } from './infrastructure';
+export { Infrastructure, BaseInfrastructure } from './infrastructure';
 export {
   Targets,
+  BaseTargets,
   type TargetCreateResponse,
   type TargetUpdateResponse,
   type TargetListResponse,

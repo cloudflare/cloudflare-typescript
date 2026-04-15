@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { SchemaValidation } from 'cloudflare/resources/schema-validation/schema-validation';
+import { BaseSchemas } from 'cloudflare/resources/schema-validation/schemas';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource schemas', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSchemas],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [SchemaValidation],
+});
+
+const runTests = (client: PartialCloudflare<{ schemaValidation: { schemas: BaseSchemas } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.schemaValidation.schemas.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -117,4 +135,7 @@ describe('resource schemas', () => {
       omit_source: true,
     });
   });
-});
+};
+describe('resource schemas', () => runTests(client));
+describe('resource schemas (tree shakable, base)', () => runTests(partialClient));
+describe('resource schemas (tree shakable, subresource)', () => runTests(parentPartialClient));

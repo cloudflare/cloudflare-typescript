@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Crawl extends APIResource {
+export class BaseCrawl extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'crawl'] = Object.freeze([
+    'browserRendering',
+    'crawl',
+  ] as const);
+
   /**
    * Starts a crawl job for the provided URL and its children. Check available
    * options like `gotoOptions` and `waitFor*` to control page load behaviour.
@@ -19,7 +24,7 @@ export class Crawl extends APIResource {
    * ```
    */
   create(params: CrawlCreateParams, options?: RequestOptions): APIPromise<CrawlCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/crawl`, {
         query: { cacheTTL },
@@ -43,10 +48,10 @@ export class Crawl extends APIResource {
    */
   delete(
     jobID: string,
-    params: CrawlDeleteParams,
+    params: CrawlDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CrawlDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/browser-rendering/crawl/${jobID}`,
@@ -65,8 +70,12 @@ export class Crawl extends APIResource {
    * });
    * ```
    */
-  get(jobID: string, params: CrawlGetParams, options?: RequestOptions): APIPromise<CrawlGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    jobID: string,
+    params: CrawlGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CrawlGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/browser-rendering/crawl/${jobID}`, {
         query,
@@ -75,6 +84,7 @@ export class Crawl extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Crawl extends BaseCrawl {}
 
 /**
  * Crawl job ID.
@@ -193,7 +203,7 @@ export declare namespace CrawlCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -586,7 +596,7 @@ export declare namespace CrawlCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Whether to render the page or fetch static content. True by default.
@@ -741,14 +751,14 @@ export interface CrawlDeleteParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CrawlGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Cache TTL default is 5s. Set to 0 to disable.

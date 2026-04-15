@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAudit } from 'cloudflare/resources/accounts/logs/audit';
+import { Logs } from 'cloudflare/resources/accounts/logs/logs';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource audit', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAudit],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Logs],
+});
+
+const runTests = (client: PartialCloudflare<{ accounts: { logs: { audit: BaseAudit } } }>) => {
   // TODO:investigate broken test
   test.skip('list: only required params', async () => {
     const responsePromise = client.accounts.logs.audit.list({
@@ -58,4 +76,7 @@ describe('resource audit', () => {
       zone_name: { not: ['example.com'] },
     });
   });
-});
+};
+describe('resource audit', () => runTests(client));
+describe('resource audit (tree shakable, base)', () => runTests(partialClient));
+describe('resource audit (tree shakable, subresource)', () => runTests(parentPartialClient));

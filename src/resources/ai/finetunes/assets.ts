@@ -7,22 +7,29 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Assets extends APIResource {
+export class BaseAssets extends APIResource {
+  static override readonly _key: readonly ['ai', 'finetunes', 'assets'] = Object.freeze([
+    'ai',
+    'finetunes',
+    'assets',
+  ] as const);
+
   /**
    * Uploads training data assets for a Workers AI fine-tuning job.
    */
   create(
     finetuneID: string,
-    params: AssetCreateParams,
+    params: AssetCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AssetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.post(
       path`/accounts/${account_id}/ai/finetunes/${finetuneID}/finetune-assets`,
       multipartFormRequestOptions({ body, ...options }, this._client),
     );
   }
 }
+export class Assets extends BaseAssets {}
 
 export interface AssetCreateResponse {
   success: boolean;
@@ -32,7 +39,7 @@ export interface AssetCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

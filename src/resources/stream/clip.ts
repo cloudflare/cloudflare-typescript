@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ClipResource extends APIResource {
+export class BaseClipResource extends APIResource {
+  static override readonly _key: readonly ['stream', 'clip'] = Object.freeze(['stream', 'clip'] as const);
+
   /**
    * Clips a video based on the specified start and end times provided in seconds.
    *
@@ -21,7 +23,7 @@ export class ClipResource extends APIResource {
    * ```
    */
   create(params: ClipCreateParams, options?: RequestOptions): APIPromise<StreamAPI.Video> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/clip`, { body, ...options }) as APIPromise<{
         result: StreamAPI.Video;
@@ -29,6 +31,7 @@ export class ClipResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ClipResource extends BaseClipResource {}
 
 export interface Clip {
   /**
@@ -136,7 +139,7 @@ export interface ClipCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The unique video identifier (UID).

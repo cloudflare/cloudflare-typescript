@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AttackSurfaceReport } from 'cloudflare/resources/intel/attack-surface-report/attack-surface-report';
+import { BaseIssues } from 'cloudflare/resources/intel/attack-surface-report/issues';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource issues', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseIssues],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AttackSurfaceReport],
+});
+
+const runTests = (client: PartialCloudflare<{ intel: { attackSurfaceReport: { issues: BaseIssues } } }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.intel.attackSurfaceReport.issues.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -150,4 +168,7 @@ describe('resource issues', () => {
       'subject~neq': ['example.com'],
     });
   });
-});
+};
+describe('resource issues', () => runTests(client));
+describe('resource issues (tree shakable, base)', () => runTests(partialClient));
+describe('resource issues (tree shakable, subresource)', () => runTests(parentPartialClient));

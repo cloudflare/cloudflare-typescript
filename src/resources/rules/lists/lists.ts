@@ -2,9 +2,15 @@
 
 import { APIResource } from '../../../core/resource';
 import * as BulkOperationsAPI from './bulk-operations';
-import { BulkOperationGetParams, BulkOperationGetResponse, BulkOperations } from './bulk-operations';
+import {
+  BaseBulkOperations,
+  BulkOperationGetParams,
+  BulkOperationGetResponse,
+  BulkOperations,
+} from './bulk-operations';
 import * as ItemsAPI from './items';
 import {
+  BaseItems,
   ItemCreateParams,
   ItemCreateResponse,
   ItemDeleteParams,
@@ -25,9 +31,8 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Lists extends APIResource {
-  bulkOperations: BulkOperationsAPI.BulkOperations = new BulkOperationsAPI.BulkOperations(this._client);
-  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
+export class BaseLists extends APIResource {
+  static override readonly _key: readonly ['rules', 'lists'] = Object.freeze(['rules', 'lists'] as const);
 
   /**
    * Creates a new list of the specified kind.
@@ -42,7 +47,7 @@ export class Lists extends APIResource {
    * ```
    */
   create(params: ListCreateParams, options?: RequestOptions): APIPromise<ListCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/rules/lists`, { body, ...options }) as APIPromise<{
         result: ListCreateResponse;
@@ -62,7 +67,7 @@ export class Lists extends APIResource {
    * ```
    */
   update(listID: string, params: ListUpdateParams, options?: RequestOptions): APIPromise<ListUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/rules/lists/${listID}`, {
         body,
@@ -84,8 +89,11 @@ export class Lists extends APIResource {
    * }
    * ```
    */
-  list(params: ListListParams, options?: RequestOptions): PagePromise<ListsListsSinglePage, ListsList> {
-    const { account_id } = params;
+  list(
+    params: ListListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ListsListsSinglePage, ListsList> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/rules/lists`, SinglePage<ListsList>, options);
   }
 
@@ -100,8 +108,12 @@ export class Lists extends APIResource {
    * );
    * ```
    */
-  delete(listID: string, params: ListDeleteParams, options?: RequestOptions): APIPromise<ListDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    listID: string,
+    params: ListDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ListDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/rules/lists/${listID}`, options) as APIPromise<{
         result: ListDeleteResponse;
@@ -120,14 +132,22 @@ export class Lists extends APIResource {
    * );
    * ```
    */
-  get(listID: string, params: ListGetParams, options?: RequestOptions): APIPromise<ListGetResponse> {
-    const { account_id } = params;
+  get(
+    listID: string,
+    params: ListGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ListGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/rules/lists/${listID}`, options) as APIPromise<{
         result: ListGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Lists extends BaseLists {
+  bulkOperations: BulkOperationsAPI.BulkOperations = new BulkOperationsAPI.BulkOperations(this._client);
+  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 }
 
 export type ListsListsSinglePage = SinglePage<ListsList>;
@@ -383,7 +403,7 @@ export interface ListCreateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The type of the list. Each type supports specific list items (IP
@@ -407,7 +427,7 @@ export interface ListUpdateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An informative summary of the list.
@@ -419,25 +439,27 @@ export interface ListListParams {
   /**
    * The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ListDeleteParams {
   /**
    * The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ListGetParams {
   /**
    * The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Lists.BulkOperations = BulkOperations;
+Lists.BaseBulkOperations = BaseBulkOperations;
 Lists.Items = Items;
+Lists.BaseItems = BaseItems;
 
 export declare namespace Lists {
   export {
@@ -458,12 +480,14 @@ export declare namespace Lists {
 
   export {
     BulkOperations as BulkOperations,
+    BaseBulkOperations as BaseBulkOperations,
     type BulkOperationGetResponse as BulkOperationGetResponse,
     type BulkOperationGetParams as BulkOperationGetParams,
   };
 
   export {
     Items as Items,
+    BaseItems as BaseItems,
     type ListCursor as ListCursor,
     type ListItem as ListItem,
     type ItemCreateResponse as ItemCreateResponse,

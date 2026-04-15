@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Logs } from 'cloudflare/resources/logs/logs';
+import { BaseReceived } from 'cloudflare/resources/logs/received/received';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource received', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseReceived],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Logs],
+});
+
+const runTests = (client: PartialCloudflare<{ logs: { received: BaseReceived } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.logs.received.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -34,4 +52,7 @@ describe('resource received', () => {
       timestamps: 'unixnano',
     });
   });
-});
+};
+describe('resource received', () => runTests(client));
+describe('resource received (tree shakable, base)', () => runTests(partialClient));
+describe('resource received (tree shakable, subresource)', () => runTests(parentPartialClient));

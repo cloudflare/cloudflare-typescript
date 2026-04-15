@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ResourceGroups extends APIResource {
+export class BaseResourceGroups extends APIResource {
+  static override readonly _key: readonly ['iam', 'resourceGroups'] = Object.freeze([
+    'iam',
+    'resourceGroups',
+  ] as const);
+
   /**
    * Create a new Resource Group under the specified account.
    *
@@ -31,7 +36,7 @@ export class ResourceGroups extends APIResource {
     params: ResourceGroupCreateParams,
     options?: RequestOptions,
   ): APIPromise<ResourceGroupCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/iam/resource_groups`, {
         body,
@@ -57,7 +62,7 @@ export class ResourceGroups extends APIResource {
     params: ResourceGroupUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ResourceGroupUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`, {
         body,
@@ -80,10 +85,10 @@ export class ResourceGroups extends APIResource {
    * ```
    */
   list(
-    params: ResourceGroupListParams,
+    params: ResourceGroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ResourceGroupListResponsesSinglePage, ResourceGroupListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/iam/resource_groups`,
       SinglePage<ResourceGroupListResponse>,
@@ -105,10 +110,10 @@ export class ResourceGroups extends APIResource {
    */
   delete(
     resourceGroupID: string,
-    params: ResourceGroupDeleteParams,
+    params: ResourceGroupDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResourceGroupDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`,
@@ -130,10 +135,10 @@ export class ResourceGroups extends APIResource {
    */
   get(
     resourceGroupID: string,
-    params: ResourceGroupGetParams,
+    params: ResourceGroupGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResourceGroupGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/iam/resource_groups/${resourceGroupID}`,
@@ -142,6 +147,7 @@ export class ResourceGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ResourceGroups extends BaseResourceGroups {}
 
 export type ResourceGroupListResponsesSinglePage = SinglePage<ResourceGroupListResponse>;
 
@@ -420,7 +426,7 @@ export interface ResourceGroupCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the resource group
@@ -471,7 +477,7 @@ export interface ResourceGroupUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the resource group
@@ -522,7 +528,7 @@ export interface ResourceGroupListParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the resource group to be fetched.
@@ -539,14 +545,14 @@ export interface ResourceGroupDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ResourceGroupGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ResourceGroups {

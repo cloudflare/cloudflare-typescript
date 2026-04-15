@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as CNIsAPI from './cnis';
 import {
+  BaseCNIs,
   CNICreateParams,
   CNICreateResponse,
   CNIDeleteParams,
@@ -16,6 +17,7 @@ import {
 } from './cnis';
 import * as InterconnectsAPI from './interconnects';
 import {
+  BaseInterconnects,
   InterconnectCreateParams,
   InterconnectCreateResponse,
   InterconnectDeleteParams,
@@ -30,6 +32,7 @@ import {
 } from './interconnects';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   SettingGetParams,
   SettingGetResponse,
   SettingUpdateParams,
@@ -37,9 +40,14 @@ import {
   Settings,
 } from './settings';
 import * as SlotsAPI from './slots';
-import { SlotGetParams, SlotGetResponse, SlotListParams, SlotListResponse, Slots } from './slots';
+import { BaseSlots, SlotGetParams, SlotGetResponse, SlotListParams, SlotListResponse, Slots } from './slots';
 
-export class NetworkInterconnects extends APIResource {
+export class BaseNetworkInterconnects extends APIResource {
+  static override readonly _key: readonly ['networkInterconnects'] = Object.freeze([
+    'networkInterconnects',
+  ] as const);
+}
+export class NetworkInterconnects extends BaseNetworkInterconnects {
   cnis: CNIsAPI.CNIs = new CNIsAPI.CNIs(this._client);
   interconnects: InterconnectsAPI.Interconnects = new InterconnectsAPI.Interconnects(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -47,13 +55,18 @@ export class NetworkInterconnects extends APIResource {
 }
 
 NetworkInterconnects.CNIs = CNIs;
+NetworkInterconnects.BaseCNIs = BaseCNIs;
 NetworkInterconnects.Interconnects = Interconnects;
+NetworkInterconnects.BaseInterconnects = BaseInterconnects;
 NetworkInterconnects.Settings = Settings;
+NetworkInterconnects.BaseSettings = BaseSettings;
 NetworkInterconnects.Slots = Slots;
+NetworkInterconnects.BaseSlots = BaseSlots;
 
 export declare namespace NetworkInterconnects {
   export {
     CNIs as CNIs,
+    BaseCNIs as BaseCNIs,
     type CNICreateResponse as CNICreateResponse,
     type CNIUpdateResponse as CNIUpdateResponse,
     type CNIListResponse as CNIListResponse,
@@ -67,6 +80,7 @@ export declare namespace NetworkInterconnects {
 
   export {
     Interconnects as Interconnects,
+    BaseInterconnects as BaseInterconnects,
     type InterconnectCreateResponse as InterconnectCreateResponse,
     type InterconnectListResponse as InterconnectListResponse,
     type InterconnectGetResponse as InterconnectGetResponse,
@@ -81,6 +95,7 @@ export declare namespace NetworkInterconnects {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingUpdateResponse as SettingUpdateResponse,
     type SettingGetResponse as SettingGetResponse,
     type SettingUpdateParams as SettingUpdateParams,
@@ -89,6 +104,7 @@ export declare namespace NetworkInterconnects {
 
   export {
     Slots as Slots,
+    BaseSlots as BaseSlots,
     type SlotListResponse as SlotListResponse,
     type SlotGetResponse as SlotGetResponse,
     type SlotListParams as SlotListParams,

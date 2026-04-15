@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Top } from 'cloudflare/resources/radar/robots-txt/top/top';
+import { BaseUserAgents } from 'cloudflare/resources/radar/robots-txt/top/user-agents';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource userAgents', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseUserAgents],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Top],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { robotsTXT: { top: { userAgents: BaseUserAgents } } } }>,
+) => {
   test('directive', async () => {
     const responsePromise = client.radar.robotsTXT.top.userAgents.directive();
     const rawResponse = await responsePromise.asResponse();
@@ -37,4 +57,7 @@ describe('resource userAgents', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource userAgents', () => runTests(client));
+describe('resource userAgents (tree shakable, base)', () => runTests(partialClient));
+describe('resource userAgents (tree shakable, subresource)', () => runTests(parentPartialClient));

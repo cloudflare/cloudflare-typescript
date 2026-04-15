@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class SmartRouting extends APIResource {
+export class BaseSmartRouting extends APIResource {
+  static override readonly _key: readonly ['argo', 'smartRouting'] = Object.freeze([
+    'argo',
+    'smartRouting',
+  ] as const);
+
   /**
    * Configures the value of the Argo Smart Routing enablement setting.
    *
@@ -18,7 +23,7 @@ export class SmartRouting extends APIResource {
    * ```
    */
   edit(params: SmartRoutingEditParams, options?: RequestOptions): APIPromise<SmartRoutingEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/argo/smart_routing`, { body, ...options }) as APIPromise<{
         result: SmartRoutingEditResponse;
@@ -36,8 +41,11 @@ export class SmartRouting extends APIResource {
    * });
    * ```
    */
-  get(params: SmartRoutingGetParams, options?: RequestOptions): APIPromise<SmartRoutingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SmartRoutingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SmartRoutingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/argo/smart_routing`, options) as APIPromise<{
         result: SmartRoutingGetResponse;
@@ -45,6 +53,7 @@ export class SmartRouting extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SmartRouting extends BaseSmartRouting {}
 
 export interface SmartRoutingEditResponse {
   /**
@@ -94,7 +103,7 @@ export interface SmartRoutingEditParams {
   /**
    * Path param: Specifies the zone associated with the API call.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Specifies the enablement value of Argo Smart Routing.
@@ -106,7 +115,7 @@ export interface SmartRoutingGetParams {
   /**
    * Specifies the zone associated with the API call.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace SmartRouting {

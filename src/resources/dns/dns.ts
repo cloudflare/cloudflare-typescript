@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as DNSSECAPI from './dnssec';
 import {
+  BaseDNSSECResource,
   DNSSEC,
   DNSSECDeleteParams,
   DNSSECDeleteResponse,
@@ -14,6 +15,7 @@ import * as RecordsAPI from './records';
 import {
   AAAARecord,
   ARecord,
+  BaseRecords,
   BatchPatch,
   BatchPut,
   CAARecord,
@@ -63,15 +65,18 @@ import {
   URIRecord,
 } from './records';
 import * as AnalyticsAPI from './analytics/analytics';
-import { Analytics } from './analytics/analytics';
+import { Analytics, BaseAnalytics } from './analytics/analytics';
 import * as SettingsAPI from './settings/settings';
-import { Settings } from './settings/settings';
+import { BaseSettings, Settings } from './settings/settings';
 import * as UsageAPI from './usage/usage';
-import { Usage } from './usage/usage';
+import { BaseUsage, Usage } from './usage/usage';
 import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
-import { ZoneTransfers } from './zone-transfers/zone-transfers';
+import { BaseZoneTransfers, ZoneTransfers } from './zone-transfers/zone-transfers';
 
-export class DNS extends APIResource {
+export class BaseDNS extends APIResource {
+  static override readonly _key: readonly ['dns'] = Object.freeze(['dns'] as const);
+}
+export class DNS extends BaseDNS {
   dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
@@ -81,15 +86,22 @@ export class DNS extends APIResource {
 }
 
 DNS.DNSSECResource = DNSSECResource;
+DNS.BaseDNSSECResource = BaseDNSSECResource;
 DNS.Records = Records;
+DNS.BaseRecords = BaseRecords;
 DNS.Usage = Usage;
+DNS.BaseUsage = BaseUsage;
 DNS.Settings = Settings;
+DNS.BaseSettings = BaseSettings;
 DNS.Analytics = Analytics;
+DNS.BaseAnalytics = BaseAnalytics;
 DNS.ZoneTransfers = ZoneTransfers;
+DNS.BaseZoneTransfers = BaseZoneTransfers;
 
 export declare namespace DNS {
   export {
     DNSSECResource as DNSSECResource,
+    BaseDNSSECResource as BaseDNSSECResource,
     type DNSSEC as DNSSEC,
     type DNSSECDeleteResponse as DNSSECDeleteResponse,
     type DNSSECDeleteParams as DNSSECDeleteParams,
@@ -99,6 +111,7 @@ export declare namespace DNS {
 
   export {
     Records as Records,
+    BaseRecords as BaseRecords,
     type ARecord as ARecord,
     type AAAARecord as AAAARecord,
     type BatchPatch as BatchPatch,
@@ -149,11 +162,11 @@ export declare namespace DNS {
     type RecordScanTriggerParams as RecordScanTriggerParams,
   };
 
-  export { Usage as Usage };
+  export { Usage as Usage, BaseUsage as BaseUsage };
 
-  export { Settings as Settings };
+  export { Settings as Settings, BaseSettings as BaseSettings };
 
-  export { Analytics as Analytics };
+  export { Analytics as Analytics, BaseAnalytics as BaseAnalytics };
 
-  export { ZoneTransfers as ZoneTransfers };
+  export { ZoneTransfers as ZoneTransfers, BaseZoneTransfers as BaseZoneTransfers };
 }

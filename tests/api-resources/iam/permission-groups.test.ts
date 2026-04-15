@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { IAM } from 'cloudflare/resources/iam/iam';
+import { BasePermissionGroups } from 'cloudflare/resources/iam/permission-groups';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource permissionGroups', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePermissionGroups],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [IAM],
+});
+
+const runTests = (client: PartialCloudflare<{ iam: { permissionGroups: BasePermissionGroups } }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.iam.permissionGroups.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -51,4 +69,7 @@ describe('resource permissionGroups', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource permissionGroups', () => runTests(client));
+describe('resource permissionGroups (tree shakable, base)', () => runTests(partialClient));
+describe('resource permissionGroups (tree shakable, subresource)', () => runTests(parentPartialClient));

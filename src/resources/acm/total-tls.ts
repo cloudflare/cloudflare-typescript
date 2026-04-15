@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class TotalTLS extends APIResource {
+export class BaseTotalTLS extends APIResource {
+  static override readonly _key: readonly ['acm', 'totalTLS'] = Object.freeze(['acm', 'totalTLS'] as const);
+
   /**
    * Set Total TLS Settings or disable the feature for a Zone.
    *
@@ -18,7 +20,7 @@ export class TotalTLS extends APIResource {
    * ```
    */
   update(params: TotalTLSUpdateParams, options?: RequestOptions): APIPromise<TotalTLSUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as APIPromise<{
         result: TotalTLSUpdateResponse;
@@ -38,7 +40,7 @@ export class TotalTLS extends APIResource {
    * ```
    */
   edit(params: TotalTLSEditParams, options?: RequestOptions): APIPromise<TotalTLSEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as APIPromise<{
         result: TotalTLSEditResponse;
@@ -56,8 +58,11 @@ export class TotalTLS extends APIResource {
    * });
    * ```
    */
-  get(params: TotalTLSGetParams, options?: RequestOptions): APIPromise<TotalTLSGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: TotalTLSGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TotalTLSGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/acm/total_tls`, options) as APIPromise<{
         result: TotalTLSGetResponse;
@@ -65,6 +70,7 @@ export class TotalTLS extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TotalTLS extends BaseTotalTLS {}
 
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
@@ -134,7 +140,7 @@ export interface TotalTLSUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If enabled, Total TLS will order a hostname specific TLS certificate
@@ -153,7 +159,7 @@ export interface TotalTLSEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If enabled, Total TLS will order a hostname specific TLS certificate
@@ -172,7 +178,7 @@ export interface TotalTLSGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace TotalTLS {

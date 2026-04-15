@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as ConnectionsAPI from './connections';
 import {
+  BaseConnections,
   Connection,
   ConnectionGetParams,
   ConnectionListParams,
@@ -11,6 +12,7 @@ import {
 } from './connections';
 import * as CookiesAPI from './cookies';
 import {
+  BaseCookies,
   CookieGetParams,
   CookieGetResponse,
   CookieListParams,
@@ -20,6 +22,7 @@ import {
 } from './cookies';
 import * as PoliciesAPI from './policies';
 import {
+  BasePolicies,
   Policies,
   Policy,
   PolicyCreateParams,
@@ -35,6 +38,7 @@ import {
 } from './policies';
 import * as ScriptsAPI from './scripts';
 import {
+  BaseScripts,
   Script,
   ScriptGetParams,
   ScriptGetResponse,
@@ -46,11 +50,8 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class PageShield extends APIResource {
-  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
-  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
-  scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
-  cookies: CookiesAPI.Cookies = new CookiesAPI.Cookies(this._client);
+export class BasePageShield extends APIResource {
+  static override readonly _key: readonly ['pageShield'] = Object.freeze(['pageShield'] as const);
 
   /**
    * Updates Page Shield settings.
@@ -62,8 +63,11 @@ export class PageShield extends APIResource {
    * });
    * ```
    */
-  update(params: PageShieldUpdateParams, options?: RequestOptions): APIPromise<PageShieldUpdateResponse> {
-    const { zone_id, ...body } = params;
+  update(
+    params: PageShieldUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PageShieldUpdateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/page_shield`, { body, ...options }) as APIPromise<{
         result: PageShieldUpdateResponse;
@@ -81,12 +85,21 @@ export class PageShield extends APIResource {
    * });
    * ```
    */
-  get(params: PageShieldGetParams, options?: RequestOptions): APIPromise<Setting | null> {
-    const { zone_id } = params;
+  get(
+    params: PageShieldGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Setting | null> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/page_shield`, options) as APIPromise<{ result: Setting | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class PageShield extends BasePageShield {
+  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
+  scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
+  cookies: CookiesAPI.Cookies = new CookiesAPI.Cookies(this._client);
 }
 
 export interface Setting {
@@ -139,7 +152,7 @@ export interface PageShieldUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When true, indicates that Page Shield is enabled.
@@ -163,13 +176,17 @@ export interface PageShieldGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 PageShield.Policies = Policies;
+PageShield.BasePolicies = BasePolicies;
 PageShield.Connections = Connections;
+PageShield.BaseConnections = BaseConnections;
 PageShield.Scripts = Scripts;
+PageShield.BaseScripts = BaseScripts;
 PageShield.Cookies = Cookies;
+PageShield.BaseCookies = BaseCookies;
 
 export declare namespace PageShield {
   export {
@@ -181,6 +198,7 @@ export declare namespace PageShield {
 
   export {
     Policies as Policies,
+    BasePolicies as BasePolicies,
     type Policy as Policy,
     type PolicyCreateResponse as PolicyCreateResponse,
     type PolicyUpdateResponse as PolicyUpdateResponse,
@@ -196,6 +214,7 @@ export declare namespace PageShield {
 
   export {
     Connections as Connections,
+    BaseConnections as BaseConnections,
     type Connection as Connection,
     type ConnectionsSinglePage as ConnectionsSinglePage,
     type ConnectionListParams as ConnectionListParams,
@@ -204,6 +223,7 @@ export declare namespace PageShield {
 
   export {
     Scripts as Scripts,
+    BaseScripts as BaseScripts,
     type Script as Script,
     type ScriptGetResponse as ScriptGetResponse,
     type ScriptsSinglePage as ScriptsSinglePage,
@@ -213,6 +233,7 @@ export declare namespace PageShield {
 
   export {
     Cookies as Cookies,
+    BaseCookies as BaseCookies,
     type CookieListResponse as CookieListResponse,
     type CookieGetResponse as CookieGetResponse,
     type CookieListResponsesSinglePage as CookieListResponsesSinglePage,

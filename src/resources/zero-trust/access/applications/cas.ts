@@ -11,7 +11,14 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class CAs extends APIResource {
+export class BaseCAs extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications', 'cas'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'applications',
+    'cas',
+  ] as const);
+
   /**
    * Generates a new short-lived certificate CA and public key.
    *
@@ -29,7 +36,8 @@ export class CAs extends APIResource {
     params: CACreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CA> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -71,7 +79,11 @@ export class CAs extends APIResource {
     params: CAListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CAsV4PagePaginationArray, CA> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -112,7 +124,8 @@ export class CAs extends APIResource {
     params: CADeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CADeleteResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -150,7 +163,8 @@ export class CAs extends APIResource {
    * ```
    */
   get(appID: string, params: CAGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<CA> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -175,6 +189,7 @@ export class CAs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CAs extends BaseCAs {}
 
 export type CAsV4PagePaginationArray = V4PagePaginationArray<CA>;
 

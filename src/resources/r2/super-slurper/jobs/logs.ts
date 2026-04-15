@@ -5,7 +5,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Logs extends APIResource {
+export class BaseLogs extends APIResource {
+  static override readonly _key: readonly ['r2', 'superSlurper', 'jobs', 'logs'] = Object.freeze([
+    'r2',
+    'superSlurper',
+    'jobs',
+    'logs',
+  ] as const);
+
   /**
    * Gets log entries for an R2 Super Slurper migration job, showing migration status
    * changes, errors, etc.
@@ -23,10 +30,10 @@ export class Logs extends APIResource {
    */
   list(
     jobID: string,
-    params: LogListParams,
+    params: LogListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LogListResponsesSinglePage, LogListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/slurper/jobs/${jobID}/logs`,
       SinglePage<LogListResponse>,
@@ -34,6 +41,7 @@ export class Logs extends APIResource {
     );
   }
 }
+export class Logs extends BaseLogs {}
 
 export type LogListResponsesSinglePage = SinglePage<LogListResponse>;
 
@@ -68,7 +76,7 @@ export interface LogListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['originTLSClientAuth', 'settings'] = Object.freeze([
+    'originTLSClientAuth',
+    'settings',
+  ] as const);
+
   /**
    * Enable or disable zone-level authenticated origin pulls. 'enabled' should be set
    * true either before/after the certificate is uploaded to see the certificate in
@@ -21,7 +26,7 @@ export class Settings extends APIResource {
    * ```
    */
   update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/origin_tls_client_auth/settings`, {
         body,
@@ -42,8 +47,11 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/origin_tls_client_auth/settings`, options) as APIPromise<{
         result: SettingGetResponse;
@@ -51,6 +59,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 export interface SettingUpdateResponse {
   /**
@@ -70,7 +79,7 @@ export interface SettingUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Indicates whether zone-level authenticated origin pulls is enabled.
@@ -82,7 +91,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Settings {

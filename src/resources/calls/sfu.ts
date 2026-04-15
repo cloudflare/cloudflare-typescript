@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class SFU extends APIResource {
+export class BaseSFU extends APIResource {
+  static override readonly _key: readonly ['calls', 'sfu'] = Object.freeze(['calls', 'sfu'] as const);
+
   /**
    * Creates a new Cloudflare calls app. An app is an unique enviroment where each
    * Session can access all Tracks within the app.
@@ -18,8 +20,11 @@ export class SFU extends APIResource {
    * });
    * ```
    */
-  create(params: SFUCreateParams, options?: RequestOptions): APIPromise<SFUCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: SFUCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SFUCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/calls/apps`, { body, ...options }) as APIPromise<{
         result: SFUCreateResponse;
@@ -39,7 +44,7 @@ export class SFU extends APIResource {
    * ```
    */
   update(appID: string, params: SFUUpdateParams, options?: RequestOptions): APIPromise<SFUUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/calls/apps/${appID}`, {
         body,
@@ -62,10 +67,10 @@ export class SFU extends APIResource {
    * ```
    */
   list(
-    params: SFUListParams,
+    params: SFUListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SFUListResponsesSinglePage, SFUListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/calls/apps`,
       SinglePage<SFUListResponse>,
@@ -84,8 +89,12 @@ export class SFU extends APIResource {
    * );
    * ```
    */
-  delete(appID: string, params: SFUDeleteParams, options?: RequestOptions): APIPromise<SFUDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    appID: string,
+    params: SFUDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SFUDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/calls/apps/${appID}`, options) as APIPromise<{
         result: SFUDeleteResponse;
@@ -104,8 +113,12 @@ export class SFU extends APIResource {
    * );
    * ```
    */
-  get(appID: string, params: SFUGetParams, options?: RequestOptions): APIPromise<SFUGetResponse> {
-    const { account_id } = params;
+  get(
+    appID: string,
+    params: SFUGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SFUGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/calls/apps/${appID}`, options) as APIPromise<{
         result: SFUGetResponse;
@@ -113,6 +126,7 @@ export class SFU extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SFU extends BaseSFU {}
 
 export type SFUListResponsesSinglePage = SinglePage<SFUListResponse>;
 
@@ -235,7 +249,7 @@ export interface SFUCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of Calls app, not shown to end users.
@@ -247,7 +261,7 @@ export interface SFUUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of Calls app, not shown to end users.
@@ -259,21 +273,21 @@ export interface SFUListParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SFUDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SFUGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace SFU {

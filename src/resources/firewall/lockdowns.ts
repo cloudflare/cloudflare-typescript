@@ -7,7 +7,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Lockdowns extends APIResource {
+export class BaseLockdowns extends APIResource {
+  static override readonly _key: readonly ['firewall', 'lockdowns'] = Object.freeze([
+    'firewall',
+    'lockdowns',
+  ] as const);
+
   /**
    * Creates a new Zone Lockdown rule.
    *
@@ -21,7 +26,7 @@ export class Lockdowns extends APIResource {
    * ```
    */
   create(params: LockdownCreateParams, options?: RequestOptions): APIPromise<Lockdown> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/firewall/lockdowns`, { body, ...options }) as APIPromise<{
         result: Lockdown;
@@ -45,7 +50,7 @@ export class Lockdowns extends APIResource {
    * ```
    */
   update(lockDownsID: string, params: LockdownUpdateParams, options?: RequestOptions): APIPromise<Lockdown> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/firewall/lockdowns/${lockDownsID}`, {
         body,
@@ -69,10 +74,10 @@ export class Lockdowns extends APIResource {
    * ```
    */
   list(
-    params: LockdownListParams,
+    params: LockdownListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LockdownsV4PagePaginationArray, Lockdown> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/firewall/lockdowns`,
       V4PagePaginationArray<Lockdown>,
@@ -93,10 +98,10 @@ export class Lockdowns extends APIResource {
    */
   delete(
     lockDownsID: string,
-    params: LockdownDeleteParams,
+    params: LockdownDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LockdownDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/firewall/lockdowns/${lockDownsID}`, options) as APIPromise<{
         result: LockdownDeleteResponse;
@@ -115,8 +120,12 @@ export class Lockdowns extends APIResource {
    * );
    * ```
    */
-  get(lockDownsID: string, params: LockdownGetParams, options?: RequestOptions): APIPromise<Lockdown> {
-    const { zone_id } = params;
+  get(
+    lockDownsID: string,
+    params: LockdownGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Lockdown> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/firewall/lockdowns/${lockDownsID}`, options) as APIPromise<{
         result: Lockdown;
@@ -124,6 +133,7 @@ export class Lockdowns extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Lockdowns extends BaseLockdowns {}
 
 export type LockdownsV4PagePaginationArray = V4PagePaginationArray<Lockdown>;
 
@@ -249,7 +259,7 @@ export interface LockdownCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A list of IP addresses or CIDR ranges that will be allowed to access
@@ -288,7 +298,7 @@ export interface LockdownUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A list of IP addresses or CIDR ranges that will be allowed to access
@@ -309,7 +319,7 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The timestamp of when the rule was created.
@@ -363,14 +373,14 @@ export interface LockdownDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LockdownGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Lockdowns {

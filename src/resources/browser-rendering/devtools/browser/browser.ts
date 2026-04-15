@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as PageAPI from './page';
-import { Page, PageGetParams } from './page';
+import { BasePage, Page, PageGetParams } from './page';
 import * as TargetsAPI from './targets';
 import {
+  BaseTargets,
   TargetActivateParams,
   TargetActivateResponse,
   TargetCreateParams,
@@ -20,9 +21,12 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Browser extends APIResource {
-  page: PageAPI.Page = new PageAPI.Page(this._client);
-  targets: TargetsAPI.Targets = new TargetsAPI.Targets(this._client);
+export class BaseBrowser extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'devtools', 'browser'] = Object.freeze([
+    'browserRendering',
+    'devtools',
+    'browser',
+  ] as const);
 
   /**
    * Get a browser session ID.
@@ -35,8 +39,11 @@ export class Browser extends APIResource {
    *   });
    * ```
    */
-  create(params: BrowserCreateParams, options?: RequestOptions): APIPromise<BrowserCreateResponse> {
-    const { account_id, keep_alive, lab, recording, targets } = params;
+  create(
+    params: BrowserCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BrowserCreateResponse> {
+    const { account_id = this._client.accountID, keep_alive, lab, recording, targets } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query: { keep_alive, lab, recording, targets },
       ...options,
@@ -57,10 +64,10 @@ export class Browser extends APIResource {
    */
   delete(
     sessionID: string,
-    params: BrowserDeleteParams,
+    params: BrowserDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BrowserDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`,
       options,
@@ -78,8 +85,12 @@ export class Browser extends APIResource {
    * );
    * ```
    */
-  connect(sessionID: string, params: BrowserConnectParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, ...query } = params;
+  connect(
+    sessionID: string,
+    params: BrowserConnectParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}`, {
       query,
       ...options,
@@ -97,8 +108,8 @@ export class Browser extends APIResource {
    * });
    * ```
    */
-  launch(params: BrowserLaunchParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, ...query } = params;
+  launch(params: BrowserLaunchParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query,
       ...options,
@@ -121,10 +132,10 @@ export class Browser extends APIResource {
    */
   protocol(
     sessionID: string,
-    params: BrowserProtocolParams,
+    params: BrowserProtocolParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BrowserProtocolResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/protocol`,
       options,
@@ -145,15 +156,19 @@ export class Browser extends APIResource {
    */
   version(
     sessionID: string,
-    params: BrowserVersionParams,
+    params: BrowserVersionParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BrowserVersionResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/version`,
       options,
     );
   }
+}
+export class Browser extends BaseBrowser {
+  page: PageAPI.Page = new PageAPI.Page(this._client);
+  targets: TargetsAPI.Targets = new TargetsAPI.Targets(this._client);
 }
 
 export interface BrowserCreateResponse {
@@ -269,7 +284,7 @@ export interface BrowserCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Keep-alive time in milliseconds.
@@ -296,14 +311,14 @@ export interface BrowserDeleteParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BrowserConnectParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Keep-alive time in ms (only valid when acquiring new session).
@@ -325,7 +340,7 @@ export interface BrowserLaunchParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Keep-alive time in ms (only valid when acquiring new session).
@@ -347,18 +362,20 @@ export interface BrowserProtocolParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BrowserVersionParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Browser.Page = Page;
+Browser.BasePage = BasePage;
 Browser.Targets = Targets;
+Browser.BaseTargets = BaseTargets;
 
 export declare namespace Browser {
   export {
@@ -374,10 +391,11 @@ export declare namespace Browser {
     type BrowserVersionParams as BrowserVersionParams,
   };
 
-  export { Page as Page, type PageGetParams as PageGetParams };
+  export { Page as Page, BasePage as BasePage, type PageGetParams as PageGetParams };
 
   export {
     Targets as Targets,
+    BaseTargets as BaseTargets,
     type TargetCreateResponse as TargetCreateResponse,
     type TargetListResponse as TargetListResponse,
     type TargetActivateResponse as TargetActivateResponse,

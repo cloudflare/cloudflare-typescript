@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Zaraz } from 'cloudflare/resources/zaraz/zaraz';
+import { BaseHistory } from 'cloudflare/resources/zaraz/history/history';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource history', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseHistory],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Zaraz],
+});
+
+const runTests = (client: PartialCloudflare<{ zaraz: { history: BaseHistory } }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.zaraz.history.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -50,4 +68,7 @@ describe('resource history', () => {
       sortOrder: 'DESC',
     });
   });
-});
+};
+describe('resource history', () => runTests(client));
+describe('resource history (tree shakable, base)', () => runTests(partialClient));
+describe('resource history (tree shakable, subresource)', () => runTests(parentPartialClient));

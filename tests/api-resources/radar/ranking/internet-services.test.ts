@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseInternetServices } from 'cloudflare/resources/radar/ranking/internet-services';
+import { Ranking } from 'cloudflare/resources/radar/ranking/ranking';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource internetServices', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseInternetServices],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Ranking],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { ranking: { internetServices: BaseInternetServices } } }>,
+) => {
   test('categories', async () => {
     const responsePromise = client.radar.ranking.internetServices.categories();
     const rawResponse = await responsePromise.asResponse();
@@ -90,4 +110,7 @@ describe('resource internetServices', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource internetServices', () => runTests(client));
+describe('resource internetServices (tree shakable, base)', () => runTests(partialClient));
+describe('resource internetServices (tree shakable, subresource)', () => runTests(parentPartialClient));

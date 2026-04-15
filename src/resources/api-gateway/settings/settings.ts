@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SchemaValidationAPI from './schema-validation';
 import {
+  BaseSchemaValidation,
   SchemaValidation,
   SchemaValidationEditParams,
   SchemaValidationGetParams,
@@ -12,7 +13,16 @@ import {
 /**
  * @deprecated Please use the [Schema Validation Settings](https://developers.cloudflare.com/api/resources/schema_validation/subresources/settings/) APIs instead
  */
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'settings'] = Object.freeze([
+    'apiGateway',
+    'settings',
+  ] as const);
+}
+/**
+ * @deprecated Please use the [Schema Validation Settings](https://developers.cloudflare.com/api/resources/schema_validation/subresources/settings/) APIs instead
+ */
+export class Settings extends BaseSettings {
   schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
     this._client,
   );
@@ -43,12 +53,14 @@ export interface Settings {
 }
 
 Settings.SchemaValidation = SchemaValidation;
+Settings.BaseSchemaValidation = BaseSchemaValidation;
 
 export declare namespace Settings {
   export { type Settings as Settings };
 
   export {
     SchemaValidation as SchemaValidation,
+    BaseSchemaValidation as BaseSchemaValidation,
     type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
     type SchemaValidationEditParams as SchemaValidationEditParams,
     type SchemaValidationGetParams as SchemaValidationGetParams,

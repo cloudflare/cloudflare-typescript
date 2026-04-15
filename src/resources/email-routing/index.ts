@@ -2,6 +2,7 @@
 
 export {
   Addresses,
+  BaseAddresses,
   type Address,
   type AddressCreateParams,
   type AddressListParams,
@@ -11,6 +12,7 @@ export {
 } from './addresses';
 export {
   DNS,
+  BaseDNS,
   type DNSRecord,
   type DNSGetResponse,
   type DNSCreateParams,
@@ -19,9 +21,10 @@ export {
   type DNSGetParams,
   type DNSRecordsSinglePage,
 } from './dns';
-export { EmailRouting } from './email-routing';
+export { EmailRouting, BaseEmailRouting } from './email-routing';
 export {
   Rules,
+  BaseRules,
   type Action,
   type EmailRoutingRule,
   type Matcher,

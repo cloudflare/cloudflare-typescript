@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ConnectivitySettings extends APIResource {
+export class BaseConnectivitySettings extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'connectivitySettings'] = Object.freeze([
+    'zeroTrust',
+    'connectivitySettings',
+  ] as const);
+
   /**
    * Updates the Zero Trust Connectivity Settings for the given account.
    *
@@ -18,10 +23,10 @@ export class ConnectivitySettings extends APIResource {
    * ```
    */
   edit(
-    params: ConnectivitySettingEditParams,
+    params: ConnectivitySettingEditParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConnectivitySettingEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/zerotrust/connectivity_settings`, {
         body,
@@ -42,10 +47,10 @@ export class ConnectivitySettings extends APIResource {
    * ```
    */
   get(
-    params: ConnectivitySettingGetParams,
+    params: ConnectivitySettingGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConnectivitySettingGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/zerotrust/connectivity_settings`, options) as APIPromise<{
         result: ConnectivitySettingGetResponse;
@@ -53,6 +58,7 @@ export class ConnectivitySettings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ConnectivitySettings extends BaseConnectivitySettings {}
 
 export interface ConnectivitySettingEditResponse {
   /**
@@ -82,7 +88,7 @@ export interface ConnectivitySettingEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A flag to enable the ICMP proxy for the account network.
@@ -99,7 +105,7 @@ export interface ConnectivitySettingGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ConnectivitySettings {

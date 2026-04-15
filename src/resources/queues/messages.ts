@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Messages extends APIResource {
+export class BaseMessages extends APIResource {
+  static override readonly _key: readonly ['queues', 'messages'] = Object.freeze([
+    'queues',
+    'messages',
+  ] as const);
+
   /**
    * Acknowledge + Retry messages from a Queue
    *
@@ -18,8 +23,12 @@ export class Messages extends APIResource {
    * );
    * ```
    */
-  ack(queueID: string, params: MessageAckParams, options?: RequestOptions): APIPromise<MessageAckResponse> {
-    const { account_id, ...body } = params;
+  ack(
+    queueID: string,
+    params: MessageAckParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<MessageAckResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/ack`, {
         body,
@@ -41,10 +50,10 @@ export class Messages extends APIResource {
    */
   bulkPush(
     queueID: string,
-    params: MessageBulkPushParams,
+    params: MessageBulkPushParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MessageBulkPushResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/batch`, {
       body,
       ...options,
@@ -64,10 +73,10 @@ export class Messages extends APIResource {
    */
   pull(
     queueID: string,
-    params: MessagePullParams,
+    params: MessagePullParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MessagePullResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/pull`, {
         body,
@@ -89,13 +98,14 @@ export class Messages extends APIResource {
    */
   push(
     queueID: string,
-    params: MessagePushParams,
+    params: MessagePushParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MessagePushResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages`, { body, ...options });
   }
 }
+export class Messages extends BaseMessages {}
 
 export interface MessageAckResponse {
   /**
@@ -169,7 +179,7 @@ export interface MessageAckParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -210,7 +220,7 @@ export interface MessageBulkPushParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The number of seconds to wait for attempting to deliver this batch
@@ -254,7 +264,7 @@ export interface MessagePullParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The maximum number of messages to include in a batch.
@@ -275,7 +285,7 @@ export declare namespace MessagePushParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -298,7 +308,7 @@ export declare namespace MessagePushParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param

@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Phases } from './phases/index';
+export { Phases, BasePhases } from './phases/index';
 export {
   Rules,
+  BaseRules,
   type BlockRule,
   type CompressResponseRule,
   type DDoSDynamicRule,
@@ -22,5 +23,5 @@ export {
   type SetConfigRule,
   type SkipRule,
 } from './rules';
-export { Rulesets } from './rulesets';
-export { Versions } from './versions';
+export { Rulesets, BaseRulesets } from './rulesets';
+export { Versions, BaseVersions } from './versions';

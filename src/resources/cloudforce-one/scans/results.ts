@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Results extends APIResource {
+export class BaseResults extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'scans', 'results'] = Object.freeze([
+    'cloudforceOne',
+    'scans',
+    'results',
+  ] as const);
+
   /**
    * Get the Latest Scan Result
    *
@@ -17,8 +23,12 @@ export class Results extends APIResource {
    * );
    * ```
    */
-  get(configID: string, params: ResultGetParams, options?: RequestOptions): APIPromise<ResultGetResponse> {
-    const { account_id } = params;
+  get(
+    configID: string,
+    params: ResultGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ResultGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/cloudforce-one/scans/results/${configID}`,
@@ -27,6 +37,7 @@ export class Results extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Results extends BaseResults {}
 
 export interface ScanResult {
   number?: number;
@@ -44,7 +55,7 @@ export interface ResultGetParams {
   /**
    * Defines the Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Results {

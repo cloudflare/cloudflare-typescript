@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Networks extends APIResource {
+export class BaseNetworks extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'networks'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'networks',
+  ] as const);
+
   /**
    * Creates a new device managed network.
    *
@@ -22,7 +28,7 @@ export class Networks extends APIResource {
    * ```
    */
   create(params: NetworkCreateParams, options?: RequestOptions): APIPromise<DeviceNetwork | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/networks`, { body, ...options }) as APIPromise<{
         result: DeviceNetwork | null;
@@ -47,7 +53,7 @@ export class Networks extends APIResource {
     params: NetworkUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DeviceNetwork | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/devices/networks/${networkID}`, {
         body,
@@ -70,10 +76,10 @@ export class Networks extends APIResource {
    * ```
    */
   list(
-    params: NetworkListParams,
+    params: NetworkListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/networks`,
       SinglePage<DeviceNetwork>,
@@ -98,10 +104,10 @@ export class Networks extends APIResource {
    */
   delete(
     networkID: string,
-    params: NetworkDeleteParams,
+    params: NetworkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/networks/${networkID}`,
       SinglePage<DeviceNetwork>,
@@ -123,10 +129,10 @@ export class Networks extends APIResource {
    */
   get(
     networkID: string,
-    params: NetworkGetParams,
+    params: NetworkGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DeviceNetwork | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/networks/${networkID}`, options) as APIPromise<{
         result: DeviceNetwork | null;
@@ -134,6 +140,7 @@ export class Networks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Networks extends BaseNetworks {}
 
 export type DeviceNetworksSinglePage = SinglePage<DeviceNetwork>;
 
@@ -185,7 +192,7 @@ export interface NetworkCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object containing information for the WARP client
@@ -229,7 +236,7 @@ export interface NetworkUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The configuration object containing information for the WARP client
@@ -270,15 +277,15 @@ export namespace NetworkUpdateParams {
 }
 
 export interface NetworkListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NetworkDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NetworkGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Networks {

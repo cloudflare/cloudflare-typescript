@@ -7,7 +7,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class UARules extends APIResource {
+export class BaseUARules extends APIResource {
+  static override readonly _key: readonly ['firewall', 'uaRules'] = Object.freeze([
+    'firewall',
+    'uaRules',
+  ] as const);
+
   /**
    * Creates a new User Agent Blocking rule in a zone.
    *
@@ -21,7 +26,7 @@ export class UARules extends APIResource {
    * ```
    */
   create(params: UARuleCreateParams, options?: RequestOptions): APIPromise<UARuleCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/firewall/ua_rules`, { body, ...options }) as APIPromise<{
         result: UARuleCreateResponse;
@@ -49,7 +54,7 @@ export class UARules extends APIResource {
     params: UARuleUpdateParams,
     options?: RequestOptions,
   ): APIPromise<UARuleUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/firewall/ua_rules/${uaRuleID}`, {
         body,
@@ -73,10 +78,10 @@ export class UARules extends APIResource {
    * ```
    */
   list(
-    params: UARuleListParams,
+    params: UARuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/firewall/ua_rules`,
       V4PagePaginationArray<UARuleListResponse>,
@@ -97,10 +102,10 @@ export class UARules extends APIResource {
    */
   delete(
     uaRuleID: string,
-    params: UARuleDeleteParams,
+    params: UARuleDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<UARuleDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/firewall/ua_rules/${uaRuleID}`, options) as APIPromise<{
         result: UARuleDeleteResponse;
@@ -119,8 +124,12 @@ export class UARules extends APIResource {
    * );
    * ```
    */
-  get(uaRuleID: string, params: UARuleGetParams, options?: RequestOptions): APIPromise<UARuleGetResponse> {
-    const { zone_id } = params;
+  get(
+    uaRuleID: string,
+    params: UARuleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UARuleGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/firewall/ua_rules/${uaRuleID}`, options) as APIPromise<{
         result: UARuleGetResponse;
@@ -128,6 +137,7 @@ export class UARules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class UARules extends BaseUARules {}
 
 export type UARuleListResponsesV4PagePaginationArray = V4PagePaginationArray<UARuleListResponse>;
 
@@ -365,7 +375,7 @@ export interface UARuleCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -408,7 +418,7 @@ export interface UARuleUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The rule configuration.
@@ -441,7 +451,7 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A string to search for in the description of existing rules.
@@ -463,14 +473,14 @@ export interface UARuleDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface UARuleGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace UARules {

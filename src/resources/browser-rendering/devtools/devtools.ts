@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SessionAPI from './session';
 import {
+  BaseSession,
   Session,
   SessionGetParams,
   SessionGetResponse,
@@ -11,6 +12,7 @@ import {
 } from './session';
 import * as BrowserAPI from './browser/browser';
 import {
+  BaseBrowser,
   Browser,
   BrowserConnectParams,
   BrowserCreateParams,
@@ -24,17 +26,26 @@ import {
   BrowserVersionResponse,
 } from './browser/browser';
 
-export class Devtools extends APIResource {
+export class BaseDevtools extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'devtools'] = Object.freeze([
+    'browserRendering',
+    'devtools',
+  ] as const);
+}
+export class Devtools extends BaseDevtools {
   session: SessionAPI.Session = new SessionAPI.Session(this._client);
   browser: BrowserAPI.Browser = new BrowserAPI.Browser(this._client);
 }
 
 Devtools.Session = Session;
+Devtools.BaseSession = BaseSession;
 Devtools.Browser = Browser;
+Devtools.BaseBrowser = BaseBrowser;
 
 export declare namespace Devtools {
   export {
     Session as Session,
+    BaseSession as BaseSession,
     type SessionListResponse as SessionListResponse,
     type SessionGetResponse as SessionGetResponse,
     type SessionListParams as SessionListParams,
@@ -43,6 +54,7 @@ export declare namespace Devtools {
 
   export {
     Browser as Browser,
+    BaseBrowser as BaseBrowser,
     type BrowserCreateResponse as BrowserCreateResponse,
     type BrowserDeleteResponse as BrowserDeleteResponse,
     type BrowserProtocolResponse as BrowserProtocolResponse,

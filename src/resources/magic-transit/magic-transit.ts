@@ -15,9 +15,11 @@ import {
   AppUpdateParams,
   AppUpdateResponse,
   Apps,
+  BaseApps,
 } from './apps';
 import * as CfInterconnectsAPI from './cf-interconnects';
 import {
+  BaseCfInterconnects,
   CfInterconnectBulkUpdateParams,
   CfInterconnectBulkUpdateResponse,
   CfInterconnectGetParams,
@@ -30,6 +32,7 @@ import {
 } from './cf-interconnects';
 import * as GRETunnelsAPI from './gre-tunnels';
 import {
+  BaseGRETunnels,
   GRETunnelBulkUpdateParams,
   GRETunnelBulkUpdateResponse,
   GRETunnelCreateParams,
@@ -46,6 +49,7 @@ import {
 } from './gre-tunnels';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import {
+  BaseIPSECTunnels,
   IPSECTunnelBulkUpdateParams,
   IPSECTunnelBulkUpdateResponse,
   IPSECTunnelCreateParams,
@@ -65,6 +69,7 @@ import {
 } from './ipsec-tunnels';
 import * as RoutesAPI from './routes';
 import {
+  BaseRoutes,
   RouteBulkUpdateParams,
   RouteBulkUpdateResponse,
   RouteCreateParams,
@@ -84,6 +89,7 @@ import {
 } from './routes';
 import * as ConnectorsAPI from './connectors/connectors';
 import {
+  BaseConnectors,
   ConnectorCreateParams,
   ConnectorCreateResponse,
   ConnectorDeleteParams,
@@ -101,6 +107,7 @@ import {
 } from './connectors/connectors';
 import * as PCAPsAPI from './pcaps/pcaps';
 import {
+  BasePCAPs,
   PCAP,
   PCAPCreateParams,
   PCAPCreateResponse,
@@ -115,6 +122,7 @@ import {
 } from './pcaps/pcaps';
 import * as SitesAPI from './sites/sites';
 import {
+  BaseSites,
   Site,
   SiteCreateParams,
   SiteDeleteParams,
@@ -127,7 +135,10 @@ import {
   SitesSinglePage,
 } from './sites/sites';
 
-export class MagicTransit extends APIResource {
+export class BaseMagicTransit extends APIResource {
+  static override readonly _key: readonly ['magicTransit'] = Object.freeze(['magicTransit'] as const);
+}
+export class MagicTransit extends BaseMagicTransit {
   apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
   cfInterconnects: CfInterconnectsAPI.CfInterconnects = new CfInterconnectsAPI.CfInterconnects(this._client);
   greTunnels: GRETunnelsAPI.GRETunnels = new GRETunnelsAPI.GRETunnels(this._client);
@@ -256,13 +267,21 @@ export type HealthCheckType = 'reply' | 'request';
 export type HealthCheckTypeParam = 'reply' | 'request';
 
 MagicTransit.Apps = Apps;
+MagicTransit.BaseApps = BaseApps;
 MagicTransit.CfInterconnects = CfInterconnects;
+MagicTransit.BaseCfInterconnects = BaseCfInterconnects;
 MagicTransit.GRETunnels = GRETunnels;
+MagicTransit.BaseGRETunnels = BaseGRETunnels;
 MagicTransit.IPSECTunnels = IPSECTunnels;
+MagicTransit.BaseIPSECTunnels = BaseIPSECTunnels;
 MagicTransit.Routes = Routes;
+MagicTransit.BaseRoutes = BaseRoutes;
 MagicTransit.Sites = Sites;
+MagicTransit.BaseSites = BaseSites;
 MagicTransit.Connectors = Connectors;
+MagicTransit.BaseConnectors = BaseConnectors;
 MagicTransit.PCAPs = PCAPs;
+MagicTransit.BasePCAPs = BasePCAPs;
 
 export declare namespace MagicTransit {
   export {
@@ -273,6 +292,7 @@ export declare namespace MagicTransit {
 
   export {
     Apps as Apps,
+    BaseApps as BaseApps,
     type AppCreateResponse as AppCreateResponse,
     type AppUpdateResponse as AppUpdateResponse,
     type AppListResponse as AppListResponse,
@@ -288,6 +308,7 @@ export declare namespace MagicTransit {
 
   export {
     CfInterconnects as CfInterconnects,
+    BaseCfInterconnects as BaseCfInterconnects,
     type CfInterconnectUpdateResponse as CfInterconnectUpdateResponse,
     type CfInterconnectListResponse as CfInterconnectListResponse,
     type CfInterconnectBulkUpdateResponse as CfInterconnectBulkUpdateResponse,
@@ -300,6 +321,7 @@ export declare namespace MagicTransit {
 
   export {
     GRETunnels as GRETunnels,
+    BaseGRETunnels as BaseGRETunnels,
     type GRETunnelCreateResponse as GRETunnelCreateResponse,
     type GRETunnelUpdateResponse as GRETunnelUpdateResponse,
     type GRETunnelListResponse as GRETunnelListResponse,
@@ -316,6 +338,7 @@ export declare namespace MagicTransit {
 
   export {
     IPSECTunnels as IPSECTunnels,
+    BaseIPSECTunnels as BaseIPSECTunnels,
     type PSKMetadata as PSKMetadata,
     type IPSECTunnelCreateResponse as IPSECTunnelCreateResponse,
     type IPSECTunnelUpdateResponse as IPSECTunnelUpdateResponse,
@@ -335,6 +358,7 @@ export declare namespace MagicTransit {
 
   export {
     Routes as Routes,
+    BaseRoutes as BaseRoutes,
     type Scope as Scope,
     type RouteCreateResponse as RouteCreateResponse,
     type RouteUpdateResponse as RouteUpdateResponse,
@@ -354,6 +378,7 @@ export declare namespace MagicTransit {
 
   export {
     Sites as Sites,
+    BaseSites as BaseSites,
     type Site as Site,
     type SiteLocation as SiteLocation,
     type SitesSinglePage as SitesSinglePage,
@@ -367,6 +392,7 @@ export declare namespace MagicTransit {
 
   export {
     Connectors as Connectors,
+    BaseConnectors as BaseConnectors,
     type ConnectorCreateResponse as ConnectorCreateResponse,
     type ConnectorUpdateResponse as ConnectorUpdateResponse,
     type ConnectorListResponse as ConnectorListResponse,
@@ -384,6 +410,7 @@ export declare namespace MagicTransit {
 
   export {
     PCAPs as PCAPs,
+    BasePCAPs as BasePCAPs,
     type PCAP as PCAP,
     type PCAPFilter as PCAPFilter,
     type PCAPCreateResponse as PCAPCreateResponse,

@@ -2,6 +2,7 @@
 
 export {
   Indexes,
+  BaseIndexes,
   type CreateIndex,
   type IndexDeleteVectorsByID,
   type IndexDimensionConfiguration,
@@ -31,6 +32,7 @@ export {
 } from './indexes';
 export {
   MetadataIndex,
+  BaseMetadataIndex,
   type MetadataIndexCreateResponse,
   type MetadataIndexListResponse,
   type MetadataIndexDeleteResponse,

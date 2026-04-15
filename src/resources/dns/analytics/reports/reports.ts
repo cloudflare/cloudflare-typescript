@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as BytimesAPI from './bytimes';
-import { ByTime, BytimeGetParams, Bytimes } from './bytimes';
+import { BaseBytimes, ByTime, BytimeGetParams, Bytimes } from './bytimes';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Reports extends APIResource {
-  bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
+export class BaseReports extends APIResource {
+  static override readonly _key: readonly ['dns', 'analytics', 'reports'] = Object.freeze([
+    'dns',
+    'analytics',
+    'reports',
+  ] as const);
 
   /**
    * Retrieves a list of summarised aggregate metrics over a given time period.
@@ -24,14 +28,17 @@ export class Reports extends APIResource {
    * });
    * ```
    */
-  get(params: ReportGetParams, options?: RequestOptions): APIPromise<Report> {
-    const { zone_id, ...query } = params;
+  get(params: ReportGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Report> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/dns_analytics/report`, { query, ...options }) as APIPromise<{
         result: Report;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Reports extends BaseReports {
+  bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
 }
 
 export interface Report {
@@ -129,7 +136,7 @@ export interface ReportGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.
@@ -169,9 +176,15 @@ export interface ReportGetParams {
 }
 
 Reports.Bytimes = Bytimes;
+Reports.BaseBytimes = BaseBytimes;
 
 export declare namespace Reports {
   export { type Report as Report, type ReportGetParams as ReportGetParams };
 
-  export { Bytimes as Bytimes, type ByTime as ByTime, type BytimeGetParams as BytimeGetParams };
+  export {
+    Bytimes as Bytimes,
+    BaseBytimes as BaseBytimes,
+    type ByTime as ByTime,
+    type BytimeGetParams as BytimeGetParams,
+  };
 }

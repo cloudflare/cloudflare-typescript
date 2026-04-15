@@ -2,6 +2,7 @@
 
 export {
   ActiveSessions,
+  BaseActiveSessions,
   type ActiveSessionListResponse,
   type ActiveSessionGetResponse,
   type ActiveSessionListParams,
@@ -10,13 +11,20 @@ export {
 } from './active-sessions';
 export {
   FailedLogins,
+  BaseFailedLogins,
   type FailedLoginListResponse,
   type FailedLoginListParams,
   type FailedLoginListResponsesSinglePage,
 } from './failed-logins';
-export { LastSeenIdentity, type Identity, type LastSeenIdentityGetParams } from './last-seen-identity';
+export {
+  LastSeenIdentity,
+  BaseLastSeenIdentity,
+  type Identity,
+  type LastSeenIdentityGetParams,
+} from './last-seen-identity';
 export {
   Users,
+  BaseUsers,
   type AccessUser,
   type UserCreateResponse,
   type UserUpdateResponse,

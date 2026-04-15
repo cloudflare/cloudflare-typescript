@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Download extends APIResource {
+export class BaseDownload extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'pcaps', 'download'] = Object.freeze([
+    'magicTransit',
+    'pcaps',
+    'download',
+  ] as const);
+
   /**
    * Download PCAP information into a file. Response is a binary PCAP file.
    *
@@ -22,8 +28,12 @@ export class Download extends APIResource {
    * console.log(content);
    * ```
    */
-  get(pcapID: string, params: DownloadGetParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id } = params;
+  get(
+    pcapID: string,
+    params: DownloadGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/pcaps/${pcapID}/download`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/vnd.tcpdump.pcap' }, options?.headers]),
@@ -31,12 +41,13 @@ export class Download extends APIResource {
     });
   }
 }
+export class Download extends BaseDownload {}
 
 export interface DownloadGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Download {

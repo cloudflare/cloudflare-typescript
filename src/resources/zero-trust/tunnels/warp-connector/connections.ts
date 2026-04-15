@@ -5,7 +5,10 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Connections extends APIResource {
+export class BaseConnections extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'warpConnector', 'connections'] =
+    Object.freeze(['zeroTrust', 'tunnels', 'warpConnector', 'connections'] as const);
+
   /**
    * Fetches connection details for a WARP Connector Tunnel.
    *
@@ -22,10 +25,10 @@ export class Connections extends APIResource {
    */
   get(
     tunnelID: string,
-    params: ConnectionGetParams,
+    params: ConnectionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ConnectionGetResponsesSinglePage, ConnectionGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/warp_connector/${tunnelID}/connections`,
       SinglePage<ConnectionGetResponse>,
@@ -33,6 +36,7 @@ export class Connections extends APIResource {
     );
   }
 }
+export class Connections extends BaseConnections {}
 
 export type ConnectionGetResponsesSinglePage = SinglePage<ConnectionGetResponse>;
 
@@ -114,7 +118,7 @@ export interface ConnectionGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Connections {

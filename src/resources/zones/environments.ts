@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Environments extends APIResource {
+export class BaseEnvironments extends APIResource {
+  static override readonly _key: readonly ['zones', 'environments'] = Object.freeze([
+    'zones',
+    'environments',
+  ] as const);
+
   /**
    * Create zone environments
    *
@@ -28,7 +33,7 @@ export class Environments extends APIResource {
    * ```
    */
   create(params: EnvironmentCreateParams, options?: RequestOptions): APIPromise<EnvironmentCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/environments`, { body, ...options }) as APIPromise<{
         result: EnvironmentCreateResponse;
@@ -57,7 +62,7 @@ export class Environments extends APIResource {
    * ```
    */
   update(params: EnvironmentUpdateParams, options?: RequestOptions): APIPromise<EnvironmentUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/environments`, { body, ...options }) as APIPromise<{
         result: EnvironmentUpdateResponse;
@@ -75,8 +80,11 @@ export class Environments extends APIResource {
    * });
    * ```
    */
-  list(params: EnvironmentListParams, options?: RequestOptions): APIPromise<EnvironmentListResponse> {
-    const { zone_id } = params;
+  list(
+    params: EnvironmentListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EnvironmentListResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/environments`, options) as APIPromise<{
         result: EnvironmentListResponse;
@@ -97,10 +105,10 @@ export class Environments extends APIResource {
    */
   delete(
     environmentID: string,
-    params: EnvironmentDeleteParams,
+    params: EnvironmentDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EnvironmentDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/environments/${environmentID}`, options) as APIPromise<{
         result: EnvironmentDeleteResponse;
@@ -129,7 +137,7 @@ export class Environments extends APIResource {
    * ```
    */
   edit(params: EnvironmentEditParams, options?: RequestOptions): APIPromise<EnvironmentEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/environments`, { body, ...options }) as APIPromise<{
         result: EnvironmentEditResponse;
@@ -150,10 +158,10 @@ export class Environments extends APIResource {
    */
   rollback(
     environmentID: string,
-    params: EnvironmentRollbackParams,
+    params: EnvironmentRollbackParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EnvironmentRollbackResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.post(
         path`/zones/${zone_id}/environments/${environmentID}/rollback`,
@@ -162,6 +170,7 @@ export class Environments extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Environments extends BaseEnvironments {}
 
 export interface EnvironmentCreateResponse {
   environments: Array<EnvironmentCreateResponse.Environment>;
@@ -299,7 +308,7 @@ export interface EnvironmentCreateParams {
   /**
    * Path param: Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -329,7 +338,7 @@ export interface EnvironmentUpdateParams {
   /**
    * Path param: Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -359,21 +368,21 @@ export interface EnvironmentListParams {
   /**
    * Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface EnvironmentDeleteParams {
   /**
    * Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface EnvironmentEditParams {
   /**
    * Path param: Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -403,7 +412,7 @@ export interface EnvironmentRollbackParams {
   /**
    * Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Environments {

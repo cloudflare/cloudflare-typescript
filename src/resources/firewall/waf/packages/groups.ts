@@ -10,7 +10,14 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Groups extends APIResource {
+export class BaseGroups extends APIResource {
+  static override readonly _key: readonly ['firewall', 'waf', 'packages', 'groups'] = Object.freeze([
+    'firewall',
+    'waf',
+    'packages',
+    'groups',
+  ] as const);
+
   /**
    * Fetches the WAF rule groups in a WAF package.
    *
@@ -21,10 +28,10 @@ export class Groups extends APIResource {
    */
   list(
     packageID: string,
-    params: GroupListParams,
+    params: GroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<GroupsV4PagePaginationArray, Group> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/firewall/waf/packages/${packageID}/groups`,
       V4PagePaginationArray<Group>,
@@ -42,7 +49,7 @@ export class Groups extends APIResource {
    * @deprecated
    */
   edit(groupID: string, params: GroupEditParams, options?: RequestOptions): APIPromise<GroupEditResponse> {
-    const { zone_id, package_id, ...body } = params;
+    const { zone_id = this._client.zoneID, package_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/firewall/waf/packages/${package_id}/groups/${groupID}`, {
         body,
@@ -60,7 +67,7 @@ export class Groups extends APIResource {
    * @deprecated
    */
   get(groupID: string, params: GroupGetParams, options?: RequestOptions): APIPromise<GroupGetResponse> {
-    const { zone_id, package_id } = params;
+    const { zone_id = this._client.zoneID, package_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/firewall/waf/packages/${package_id}/groups/${groupID}`,
@@ -69,6 +76,7 @@ export class Groups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Groups extends BaseGroups {}
 
 export type GroupsV4PagePaginationArray = V4PagePaginationArray<Group>;
 
@@ -124,7 +132,7 @@ export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Defines the direction used to sort returned rule groups.
@@ -164,7 +172,7 @@ export interface GroupEditParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param: Defines the unique identifier of a WAF package.
@@ -182,7 +190,7 @@ export interface GroupGetParams {
   /**
    * Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Defines the unique identifier of a WAF package.

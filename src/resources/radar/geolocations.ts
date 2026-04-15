@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Geolocations extends APIResource {
+export class BaseGeolocations extends APIResource {
+  static override readonly _key: readonly ['radar', 'geolocations'] = Object.freeze([
+    'radar',
+    'geolocations',
+  ] as const);
+
   /**
    * Retrieves a list of geolocations. Geolocation names can be localized by sending
    * an `Accept-Language` HTTP header with a BCP 47 language tag (e.g.,
@@ -53,6 +58,7 @@ export class Geolocations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Geolocations extends BaseGeolocations {}
 
 export interface GeolocationListResponse {
   geolocations: Array<GeolocationListResponse.Geolocation>;

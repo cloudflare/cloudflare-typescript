@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Services extends APIResource {
+export class BaseServices extends APIResource {
+  static override readonly _key: readonly ['addressing', 'services'] = Object.freeze([
+    'addressing',
+    'services',
+  ] as const);
+
   /**
    * Bring-Your-Own IP (BYOIP) prefixes onboarded to Cloudflare must be bound to a
    * service running on the Cloudflare network to enable a Cloudflare product on the
@@ -23,10 +28,10 @@ export class Services extends APIResource {
    * ```
    */
   list(
-    params: ServiceListParams,
+    params: ServiceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ServiceListResponsesSinglePage, ServiceListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/services`,
       SinglePage<ServiceListResponse>,
@@ -34,6 +39,7 @@ export class Services extends APIResource {
     );
   }
 }
+export class Services extends BaseServices {}
 
 export type ServiceListResponsesSinglePage = SinglePage<ServiceListResponse>;
 
@@ -54,7 +60,7 @@ export interface ServiceListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Services {

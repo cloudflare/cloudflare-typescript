@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AppTypes extends APIResource {
+export class BaseAppTypes extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'appTypes'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'appTypes',
+  ] as const);
+
   /**
    * List all application and application type mappings.
    *
@@ -19,8 +25,11 @@ export class AppTypes extends APIResource {
    * }
    * ```
    */
-  list(params: AppTypeListParams, options?: RequestOptions): PagePromise<AppTypesSinglePage, AppType> {
-    const { account_id } = params;
+  list(
+    params: AppTypeListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AppTypesSinglePage, AppType> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/app_types`,
       SinglePage<AppType>,
@@ -28,6 +37,7 @@ export class AppTypes extends APIResource {
     );
   }
 }
+export class AppTypes extends BaseAppTypes {}
 
 export type AppTypesSinglePage = SinglePage<AppType>;
 
@@ -79,7 +89,7 @@ export interface AppTypeListParams {
   /**
    * Provide the identifier string.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AppTypes {

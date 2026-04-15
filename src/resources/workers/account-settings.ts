@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AccountSettings extends APIResource {
+export class BaseAccountSettings extends APIResource {
+  static override readonly _key: readonly ['workers', 'accountSettings'] = Object.freeze([
+    'workers',
+    'accountSettings',
+  ] as const);
+
   /**
    * Creates Worker account settings for an account.
    *
@@ -18,10 +23,10 @@ export class AccountSettings extends APIResource {
    * ```
    */
   update(
-    params: AccountSettingUpdateParams,
+    params: AccountSettingUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AccountSettingUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/workers/account-settings`, {
         body,
@@ -41,8 +46,11 @@ export class AccountSettings extends APIResource {
    *   });
    * ```
    */
-  get(params: AccountSettingGetParams, options?: RequestOptions): APIPromise<AccountSettingGetResponse> {
-    const { account_id } = params;
+  get(
+    params: AccountSettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountSettingGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/workers/account-settings`, options) as APIPromise<{
         result: AccountSettingGetResponse;
@@ -50,6 +58,7 @@ export class AccountSettings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AccountSettings extends BaseAccountSettings {}
 
 export interface AccountSettingUpdateResponse {
   default_usage_model?: string;
@@ -67,7 +76,7 @@ export interface AccountSettingUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -84,7 +93,7 @@ export interface AccountSettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AccountSettings {

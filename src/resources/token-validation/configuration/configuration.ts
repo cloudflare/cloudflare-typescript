@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CredentialsAPI from './credentials';
 import {
+  BaseCredentials,
   CredentialUpdateParams,
   CredentialUpdateResponse,
   Credentials as CredentialsAPICredentials,
@@ -16,8 +17,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Configuration extends APIResource {
-  credentials: CredentialsAPI.Credentials = new CredentialsAPI.Credentials(this._client);
+export class BaseConfiguration extends APIResource {
+  static override readonly _key: readonly ['tokenValidation', 'configuration'] = Object.freeze([
+    'tokenValidation',
+    'configuration',
+  ] as const);
 
   /**
    * Create a new Token Validation configuration
@@ -51,7 +55,7 @@ export class Configuration extends APIResource {
    * ```
    */
   create(params: ConfigurationCreateParams, options?: RequestOptions): APIPromise<TokenConfig> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/token_validation/config`, { body, ...options }) as APIPromise<{
         result: TokenConfig;
@@ -73,10 +77,10 @@ export class Configuration extends APIResource {
    * ```
    */
   list(
-    params: ConfigurationListParams,
+    params: ConfigurationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TokenConfigsV4PagePaginationArray, TokenConfig> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/token_validation/config`,
       V4PagePaginationArray<TokenConfig>,
@@ -98,10 +102,10 @@ export class Configuration extends APIResource {
    */
   delete(
     configID: string,
-    params: ConfigurationDeleteParams,
+    params: ConfigurationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConfigurationDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/token_validation/config/${configID}`,
@@ -127,7 +131,7 @@ export class Configuration extends APIResource {
     params: ConfigurationEditParams,
     options?: RequestOptions,
   ): APIPromise<ConfigurationEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/token_validation/config/${configID}`, {
         body,
@@ -148,14 +152,21 @@ export class Configuration extends APIResource {
    *   );
    * ```
    */
-  get(configID: string, params: ConfigurationGetParams, options?: RequestOptions): APIPromise<TokenConfig> {
-    const { zone_id } = params;
+  get(
+    configID: string,
+    params: ConfigurationGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenConfig> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/token_validation/config/${configID}`, options) as APIPromise<{
         result: TokenConfig;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Configuration extends BaseConfiguration {
+  credentials: CredentialsAPI.Credentials = new CredentialsAPI.Credentials(this._client);
 }
 
 export type TokenConfigsV4PagePaginationArray = V4PagePaginationArray<TokenConfig>;
@@ -317,7 +328,7 @@ export interface ConfigurationCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -461,21 +472,21 @@ export interface ConfigurationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ConfigurationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ConfigurationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -497,10 +508,11 @@ export interface ConfigurationGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Configuration.Credentials = CredentialsAPICredentials;
+Configuration.BaseCredentials = BaseCredentials;
 
 export declare namespace Configuration {
   export {
@@ -517,6 +529,7 @@ export declare namespace Configuration {
 
   export {
     CredentialsAPICredentials as Credentials,
+    BaseCredentials as BaseCredentials,
     type CredentialUpdateResponse as CredentialUpdateResponse,
     type CredentialUpdateParams as CredentialUpdateParams,
   };

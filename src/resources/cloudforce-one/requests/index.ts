@@ -2,6 +2,7 @@
 
 export {
   Assets,
+  BaseAssets,
   type AssetCreateResponse,
   type AssetUpdateResponse,
   type AssetDeleteResponse,
@@ -15,6 +16,7 @@ export {
 } from './assets';
 export {
   MessageResource,
+  BaseMessageResource,
   type Message,
   type MessageDeleteResponse,
   type MessageCreateParams,
@@ -25,6 +27,7 @@ export {
 } from './message';
 export {
   PriorityResource,
+  BasePriorityResource,
   type Label,
   type Priority,
   type PriorityEdit,
@@ -37,6 +40,7 @@ export {
 } from './priority';
 export {
   Requests,
+  BaseRequests,
   type Item,
   type ListItem,
   type Quota,

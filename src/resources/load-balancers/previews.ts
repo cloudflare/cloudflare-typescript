@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Previews extends APIResource {
+export class BasePreviews extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'previews'] = Object.freeze([
+    'loadBalancers',
+    'previews',
+  ] as const);
+
   /**
    * Get the result of a previous preview operation using the provided preview_id.
    *
@@ -17,8 +22,12 @@ export class Previews extends APIResource {
    * );
    * ```
    */
-  get(previewID: string, params: PreviewGetParams, options?: RequestOptions): APIPromise<PreviewGetResponse> {
-    const { account_id } = params;
+  get(
+    previewID: string,
+    params: PreviewGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PreviewGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/load_balancers/preview/${previewID}`,
@@ -27,6 +36,7 @@ export class Previews extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Previews extends BasePreviews {}
 
 /**
  * Resulting health data from a preview operation.
@@ -60,7 +70,7 @@ export interface PreviewGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Previews {

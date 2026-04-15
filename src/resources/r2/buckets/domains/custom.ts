@@ -6,7 +6,14 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Custom extends APIResource {
+export class BaseCustom extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'domains', 'custom'] = Object.freeze([
+    'r2',
+    'buckets',
+    'domains',
+    'custom',
+  ] as const);
+
   /**
    * Register a new custom domain for an existing R2 bucket.
    *
@@ -29,7 +36,7 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: RequestOptions,
   ): APIPromise<CustomCreateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         body,
@@ -66,7 +73,7 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CustomUpdateResponse> {
-    const { account_id, bucket_name, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, bucket_name, jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucket_name}/domains/custom/${domain}`, {
         body,
@@ -96,10 +103,10 @@ export class Custom extends APIResource {
    */
   list(
     bucketName: string,
-    params: CustomListParams,
+    params: CustomListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomListResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         ...options,
@@ -135,7 +142,7 @@ export class Custom extends APIResource {
     params: CustomDeleteParams,
     options?: RequestOptions,
   ): APIPromise<CustomDeleteResponse> {
-    const { account_id, bucket_name, jurisdiction } = params;
+    const { account_id = this._client.accountID, bucket_name, jurisdiction } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucket_name}/domains/custom/${domain}`, {
         ...options,
@@ -166,7 +173,7 @@ export class Custom extends APIResource {
    * ```
    */
   get(domain: string, params: CustomGetParams, options?: RequestOptions): APIPromise<CustomGetResponse> {
-    const { account_id, bucket_name, jurisdiction } = params;
+    const { account_id = this._client.accountID, bucket_name, jurisdiction } = params;
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucket_name}/domains/custom/${domain}`, {
         ...options,
@@ -182,6 +189,7 @@ export class Custom extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Custom extends BaseCustom {}
 
 export interface CustomCreateResponse {
   /**
@@ -348,7 +356,7 @@ export interface CustomCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the custom domain to be added.
@@ -389,7 +397,7 @@ export interface CustomUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the bucket.
@@ -425,7 +433,7 @@ export interface CustomListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -438,7 +446,7 @@ export interface CustomDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the bucket.
@@ -456,7 +464,7 @@ export interface CustomGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the bucket.

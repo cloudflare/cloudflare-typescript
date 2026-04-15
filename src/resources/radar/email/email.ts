@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as RoutingAPI from './routing/routing';
 import {
+  BaseRouting,
   Routing,
   RoutingSummaryV2Params,
   RoutingSummaryV2Response,
@@ -11,6 +12,7 @@ import {
 } from './routing/routing';
 import * as SecurityAPI from './security/security';
 import {
+  BaseSecurity,
   Security,
   SecuritySummaryV2Params,
   SecuritySummaryV2Response,
@@ -18,7 +20,10 @@ import {
   SecurityTimeseriesGroupsV2Response,
 } from './security/security';
 
-export class Email extends APIResource {
+export class BaseEmail extends APIResource {
+  static override readonly _key: readonly ['radar', 'email'] = Object.freeze(['radar', 'email'] as const);
+}
+export class Email extends BaseEmail {
   routing: RoutingAPI.Routing = new RoutingAPI.Routing(this._client);
   security: SecurityAPI.Security = new SecurityAPI.Security(this._client);
 }
@@ -49,13 +54,16 @@ export interface RadarEmailSummary {
 }
 
 Email.Routing = Routing;
+Email.BaseRouting = BaseRouting;
 Email.Security = Security;
+Email.BaseSecurity = BaseSecurity;
 
 export declare namespace Email {
   export { type RadarEmailSeries as RadarEmailSeries, type RadarEmailSummary as RadarEmailSummary };
 
   export {
     Routing as Routing,
+    BaseRouting as BaseRouting,
     type RoutingSummaryV2Response as RoutingSummaryV2Response,
     type RoutingTimeseriesGroupsV2Response as RoutingTimeseriesGroupsV2Response,
     type RoutingSummaryV2Params as RoutingSummaryV2Params,
@@ -64,6 +72,7 @@ export declare namespace Email {
 
   export {
     Security as Security,
+    BaseSecurity as BaseSecurity,
     type SecuritySummaryV2Response as SecuritySummaryV2Response,
     type SecurityTimeseriesGroupsV2Response as SecurityTimeseriesGroupsV2Response,
     type SecuritySummaryV2Params as SecuritySummaryV2Params,

@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as Shared from '../../../shared';
 import * as GroupsAPI from './groups';
 import {
+  BaseGroups,
   Group,
   GroupEditParams,
   GroupEditResponse,
@@ -16,6 +17,7 @@ import {
 import * as RulesAPI from './rules';
 import {
   AllowedModesAnomaly,
+  BaseRules,
   RuleEditParams,
   RuleEditResponse,
   RuleGetParams,
@@ -35,9 +37,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Packages extends APIResource {
-  groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
-  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+export class BasePackages extends APIResource {
+  static override readonly _key: readonly ['firewall', 'waf', 'packages'] = Object.freeze([
+    'firewall',
+    'waf',
+    'packages',
+  ] as const);
 
   /**
    * Fetches WAF packages for a zone.
@@ -48,10 +53,10 @@ export class Packages extends APIResource {
    * @deprecated
    */
   list(
-    params: PackageListParams,
+    params: PackageListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/firewall/waf/packages`,
       V4PagePaginationArray<PackageListResponse>,
@@ -67,10 +72,18 @@ export class Packages extends APIResource {
    *
    * @deprecated
    */
-  get(packageID: string, params: PackageGetParams, options?: RequestOptions): APIPromise<PackageGetResponse> {
-    const { zone_id } = params;
+  get(
+    packageID: string,
+    params: PackageGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PackageGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.get(path`/zones/${zone_id}/firewall/waf/packages/${packageID}`, options);
   }
+}
+export class Packages extends BasePackages {
+  groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
+  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
 export type PackageListResponsesV4PagePaginationArray = V4PagePaginationArray<PackageListResponse>;
@@ -102,7 +115,7 @@ export interface PackageListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned packages.
@@ -130,11 +143,13 @@ export interface PackageGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Packages.Groups = Groups;
+Packages.BaseGroups = BaseGroups;
 Packages.Rules = Rules;
+Packages.BaseRules = BaseRules;
 
 export declare namespace Packages {
   export {
@@ -147,6 +162,7 @@ export declare namespace Packages {
 
   export {
     Groups as Groups,
+    BaseGroups as BaseGroups,
     type Group as Group,
     type GroupEditResponse as GroupEditResponse,
     type GroupGetResponse as GroupGetResponse,
@@ -158,6 +174,7 @@ export declare namespace Packages {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type AllowedModesAnomaly as AllowedModesAnomaly,
     type WAFRuleGroup as WAFRuleGroup,
     type RuleListResponse as RuleListResponse,

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Miscategorizations extends APIResource {
+export class BaseMiscategorizations extends APIResource {
+  static override readonly _key: readonly ['intel', 'miscategorizations'] = Object.freeze([
+    'intel',
+    'miscategorizations',
+  ] as const);
+
   /**
    * Allows you to submit requests to change a domain’s category.
    *
@@ -18,13 +23,14 @@ export class Miscategorizations extends APIResource {
    * ```
    */
   create(
-    params: MiscategorizationCreateParams,
+    params: MiscategorizationCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MiscategorizationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/intel/miscategorization`, { body, ...options });
   }
 }
+export class Miscategorizations extends BaseMiscategorizations {}
 
 export interface MiscategorizationCreateResponse {
   errors: Array<MiscategorizationCreateResponse.Error>;
@@ -75,7 +81,7 @@ export interface MiscategorizationCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Content category IDs to add.

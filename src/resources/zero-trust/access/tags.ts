@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tags extends APIResource {
+export class BaseTags extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'tags'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'tags',
+  ] as const);
+
   /**
    * Create a tag
    *
@@ -21,8 +27,8 @@ export class Tags extends APIResource {
    * });
    * ```
    */
-  create(params: TagCreateParams, options?: RequestOptions): APIPromise<Tag> {
-    const { account_id, ...body } = params;
+  create(params: TagCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Tag> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/access/tags`, { body, ...options }) as APIPromise<{
         result: Tag;
@@ -45,7 +51,7 @@ export class Tags extends APIResource {
    * ```
    */
   update(tagName: string, params: TagUpdateParams, options?: RequestOptions): APIPromise<Tag> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/access/tags/${tagName}`, {
         body,
@@ -67,8 +73,11 @@ export class Tags extends APIResource {
    * }
    * ```
    */
-  list(params: TagListParams, options?: RequestOptions): PagePromise<TagsV4PagePaginationArray, Tag> {
-    const { account_id, ...query } = params;
+  list(
+    params: TagListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<TagsV4PagePaginationArray, Tag> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/access/tags`, V4PagePaginationArray<Tag>, {
       query,
       ...options,
@@ -86,8 +95,12 @@ export class Tags extends APIResource {
    * );
    * ```
    */
-  delete(tagName: string, params: TagDeleteParams, options?: RequestOptions): APIPromise<TagDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    tagName: string,
+    params: TagDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TagDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/access/tags/${tagName}`, options) as APIPromise<{
         result: TagDeleteResponse;
@@ -106,8 +119,12 @@ export class Tags extends APIResource {
    * );
    * ```
    */
-  get(tagName: string, params: TagGetParams, options?: RequestOptions): APIPromise<Tag> {
-    const { account_id } = params;
+  get(
+    tagName: string,
+    params: TagGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Tag> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/tags/${tagName}`, options) as APIPromise<{
         result: Tag;
@@ -115,6 +132,7 @@ export class Tags extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Tags extends BaseTags {}
 
 export type TagsV4PagePaginationArray = V4PagePaginationArray<Tag>;
 
@@ -139,7 +157,7 @@ export interface TagCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the tag
@@ -151,7 +169,7 @@ export interface TagUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the tag
@@ -163,21 +181,21 @@ export interface TagListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TagDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TagGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Tags {

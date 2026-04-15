@@ -11,7 +11,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Services extends APIResource {
+export class BaseServices extends APIResource {
+  static override readonly _key: readonly ['connectivity', 'directory', 'services'] = Object.freeze([
+    'connectivity',
+    'directory',
+    'services',
+  ] as const);
+
   /**
    * Create Workers VPC connectivity service
    *
@@ -32,7 +38,7 @@ export class Services extends APIResource {
    * ```
    */
   create(params: ServiceCreateParams, options?: RequestOptions): APIPromise<ServiceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/connectivity/directory/services`, {
         body,
@@ -68,7 +74,7 @@ export class Services extends APIResource {
     params: ServiceUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ServiceUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/connectivity/directory/services/${serviceID}`, {
         body,
@@ -91,10 +97,10 @@ export class Services extends APIResource {
    * ```
    */
   list(
-    params: ServiceListParams,
+    params: ServiceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ServiceListResponsesV4PagePaginationArray, ServiceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/connectivity/directory/services`,
       V4PagePaginationArray<ServiceListResponse>,
@@ -113,8 +119,12 @@ export class Services extends APIResource {
    * );
    * ```
    */
-  delete(serviceID: string, params: ServiceDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    serviceID: string,
+    params: ServiceDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/connectivity/directory/services/${serviceID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -133,8 +143,12 @@ export class Services extends APIResource {
    *   );
    * ```
    */
-  get(serviceID: string, params: ServiceGetParams, options?: RequestOptions): APIPromise<ServiceGetResponse> {
-    const { account_id } = params;
+  get(
+    serviceID: string,
+    params: ServiceGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ServiceGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/connectivity/directory/services/${serviceID}`,
@@ -143,6 +157,7 @@ export class Services extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Services extends BaseServices {}
 
 export type ServiceListResponsesV4PagePaginationArray = V4PagePaginationArray<ServiceListResponse>;
 
@@ -971,7 +986,7 @@ export declare namespace ServiceCreateParams {
     /**
      * Path param: Account identifier
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1084,7 +1099,7 @@ export declare namespace ServiceCreateParams {
     /**
      * Path param: Account identifier
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1203,7 +1218,7 @@ export declare namespace ServiceUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1316,7 +1331,7 @@ export declare namespace ServiceUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1430,7 +1445,7 @@ export interface ServiceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1439,11 +1454,11 @@ export interface ServiceListParams extends V4PagePaginationArrayParams {
 }
 
 export interface ServiceDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Services {

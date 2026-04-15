@@ -12,7 +12,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Groups extends APIResource {
+export class BaseGroups extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'groups'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'groups',
+  ] as const);
+
   /**
    * Creates a new Access group.
    *
@@ -30,7 +36,11 @@ export class Groups extends APIResource {
    * ```
    */
   create(params: GroupCreateParams, options?: RequestOptions): APIPromise<GroupCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -81,7 +91,11 @@ export class Groups extends APIResource {
     params: GroupUpdateParams,
     options?: RequestOptions,
   ): APIPromise<GroupUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -123,7 +137,11 @@ export class Groups extends APIResource {
     params: GroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<GroupListResponsesV4PagePaginationArray, GroupListResponse> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -163,7 +181,8 @@ export class Groups extends APIResource {
     params: GroupDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<GroupDeleteResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -204,7 +223,8 @@ export class Groups extends APIResource {
     params: GroupGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<GroupGetResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -229,6 +249,7 @@ export class Groups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Groups extends BaseGroups {}
 
 export type GroupListResponsesV4PagePaginationArray = V4PagePaginationArray<GroupListResponse>;
 

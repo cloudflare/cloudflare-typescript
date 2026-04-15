@@ -4,13 +4,17 @@ import { APIResource } from '../../../../core/resource';
 import * as TestsAPI from './tests';
 import * as DEXAPI from '../dex';
 import * as UniqueDevicesAPI from './unique-devices';
-import { UniqueDeviceListParams, UniqueDevices } from './unique-devices';
+import { BaseUniqueDevices, UniqueDeviceListParams, UniqueDevices } from './unique-devices';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Tests extends APIResource {
-  uniqueDevices: UniqueDevicesAPI.UniqueDevices = new UniqueDevicesAPI.UniqueDevices(this._client);
+export class BaseTests extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'tests'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'tests',
+  ] as const);
 
   /**
    * List DEX tests with overview metrics
@@ -25,14 +29,20 @@ export class Tests extends APIResource {
    * }
    * ```
    */
-  list(params: TestListParams, options?: RequestOptions): PagePromise<TestsV4PagePagination, Tests> {
-    const { account_id, ...query } = params;
+  list(
+    params: TestListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<TestsV4PagePagination, Tests> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/tests/overview`,
       V4PagePagination<Tests>,
       { query, ...options },
     );
   }
+}
+export class Tests extends BaseTests {
+  uniqueDevices: UniqueDevicesAPI.UniqueDevices = new UniqueDevicesAPI.UniqueDevices(this._client);
 }
 
 export type TestsV4PagePagination = V4PagePagination<Tests>;
@@ -298,7 +308,7 @@ export interface TestListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
@@ -329,6 +339,8 @@ export interface TestListParams extends V4PagePaginationParams {
   testName?: string;
 }
 
+Tests.BaseUniqueDevices = BaseUniqueDevices;
+
 export declare namespace Tests {
   export {
     type AggregateTimePeriod as AggregateTimePeriod,
@@ -337,5 +349,9 @@ export declare namespace Tests {
     type TestListParams as TestListParams,
   };
 
-  export { type UniqueDevices as UniqueDevices, type UniqueDeviceListParams as UniqueDeviceListParams };
+  export {
+    type UniqueDevices as UniqueDevices,
+    BaseUniqueDevices as BaseUniqueDevices,
+    type UniqueDeviceListParams as UniqueDeviceListParams,
+  };
 }

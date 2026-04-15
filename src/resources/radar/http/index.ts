@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Ases, type AseGetResponse, type AseGetParams } from './ases/index';
+export { Ases, BaseAses, type AseGetResponse, type AseGetParams } from './ases/index';
 export {
   HTTP,
+  BaseHTTP,
   type HTTPSummaryV2Response,
   type HTTPTimeseriesResponse,
   type HTTPTimeseriesGroupsV2Response,
@@ -10,9 +11,15 @@ export {
   type HTTPTimeseriesParams,
   type HTTPTimeseriesGroupsV2Params,
 } from './http';
-export { Locations, type LocationGetResponse, type LocationGetParams } from './locations/index';
+export {
+  Locations,
+  BaseLocations,
+  type LocationGetResponse,
+  type LocationGetParams,
+} from './locations/index';
 export {
   Summary,
+  BaseSummary,
   type SummaryBotClassResponse,
   type SummaryDeviceTypeResponse,
   type SummaryHTTPProtocolResponse,
@@ -32,6 +39,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupBotClassResponse,
   type TimeseriesGroupBrowserResponse,
   type TimeseriesGroupBrowserFamilyResponse,
@@ -55,6 +63,7 @@ export {
 } from './timeseries-groups';
 export {
   Top,
+  BaseTop,
   type TopBrowserResponse,
   type TopBrowserFamilyResponse,
   type TopBrowserParams,

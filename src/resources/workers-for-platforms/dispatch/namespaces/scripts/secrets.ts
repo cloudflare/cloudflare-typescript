@@ -6,7 +6,15 @@ import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Secrets extends APIResource {
+export class BaseSecrets extends APIResource {
+  static override readonly _key: readonly [
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+    'scripts',
+    'secrets',
+  ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'secrets'] as const);
+
   /**
    * Add a secret to a script uploaded to a Workers for Platforms namespace.
    *
@@ -30,7 +38,7 @@ export class Secrets extends APIResource {
     params: SecretUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SecretUpdateResponse> {
-    const { account_id, dispatch_namespace, ...body } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/secrets`,
@@ -61,7 +69,7 @@ export class Secrets extends APIResource {
     params: SecretListParams,
     options?: RequestOptions,
   ): PagePromise<SecretListResponsesSinglePage, SecretListResponse> {
-    const { account_id, dispatch_namespace } = params;
+    const { account_id = this._client.accountID, dispatch_namespace } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/secrets`,
       SinglePage<SecretListResponse>,
@@ -90,7 +98,7 @@ export class Secrets extends APIResource {
     params: SecretDeleteParams,
     options?: RequestOptions,
   ): APIPromise<SecretDeleteResponse | null> {
-    const { account_id, dispatch_namespace, script_name, url_encoded } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, script_name, url_encoded } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/secrets/${secretName}`,
@@ -117,7 +125,7 @@ export class Secrets extends APIResource {
    * ```
    */
   get(secretName: string, params: SecretGetParams, options?: RequestOptions): APIPromise<SecretGetResponse> {
-    const { account_id, dispatch_namespace, script_name, ...query } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, script_name, ...query } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${script_name}/secrets/${secretName}`,
@@ -126,6 +134,7 @@ export class Secrets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Secrets extends BaseSecrets {}
 
 export type SecretListResponsesSinglePage = SinglePage<SecretListResponse>;
 
@@ -299,7 +308,7 @@ export declare namespace SecretUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -326,7 +335,7 @@ export declare namespace SecretUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -382,7 +391,7 @@ export interface SecretListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.
@@ -394,7 +403,7 @@ export interface SecretDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -416,7 +425,7 @@ export interface SecretGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.

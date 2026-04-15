@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { MagicNetworkMonitoring } from 'cloudflare/resources/magic-network-monitoring/magic-network-monitoring';
+import { BaseConfigs } from 'cloudflare/resources/magic-network-monitoring/configs/configs';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource configs', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseConfigs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [MagicNetworkMonitoring],
+});
+
+const runTests = (client: PartialCloudflare<{ magicNetworkMonitoring: { configs: BaseConfigs } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.configs.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
@@ -137,4 +155,7 @@ describe('resource configs', () => {
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
   });
-});
+};
+describe('resource configs', () => runTests(client));
+describe('resource configs (tree shakable, base)', () => runTests(partialClient));
+describe('resource configs (tree shakable, subresource)', () => runTests(parentPartialClient));

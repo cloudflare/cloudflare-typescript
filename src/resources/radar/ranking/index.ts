@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Domain, type DomainGetResponse, type DomainGetParams } from './domain';
+export { Domain, BaseDomain, type DomainGetResponse, type DomainGetParams } from './domain';
 export {
   InternetServices,
+  BaseInternetServices,
   type InternetServiceCategoriesResponse,
   type InternetServiceTimeseriesGroupsResponse,
   type InternetServiceTopResponse,
@@ -12,6 +13,7 @@ export {
 } from './internet-services';
 export {
   Ranking,
+  BaseRanking,
   type RankingTimeseriesGroupsResponse,
   type RankingTopResponse,
   type RankingTimeseriesGroupsParams,

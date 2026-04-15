@@ -6,7 +6,9 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Embed extends APIResource {
+export class BaseEmbed extends APIResource {
+  static override readonly _key: readonly ['stream', 'embed'] = Object.freeze(['stream', 'embed'] as const);
+
   /**
    * Fetches an HTML code snippet to embed a video in a web page delivered through
    * Cloudflare. On success, returns an HTML fragment for use on web pages to display
@@ -20,14 +22,19 @@ export class Embed extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: EmbedGetParams, options?: RequestOptions): APIPromise<string> {
-    const { account_id } = params;
+  get(
+    identifier: string,
+    params: EmbedGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/stream/${identifier}/embed`, {
       ...options,
       headers: buildHeaders([{ Accept: 'text/html' }, options?.headers]),
     });
   }
 }
+export class Embed extends BaseEmbed {}
 
 export type EmbedGetResponse = string;
 
@@ -35,7 +42,7 @@ export interface EmbedGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Embed {

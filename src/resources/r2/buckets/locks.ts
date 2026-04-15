@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Locks extends APIResource {
+export class BaseLocks extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'locks'] = Object.freeze([
+    'r2',
+    'buckets',
+    'locks',
+  ] as const);
+
   /**
    * Set lock rules for a bucket.
    *
@@ -23,7 +29,7 @@ export class Locks extends APIResource {
     params: LockUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LockUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/lock`, {
         body,
@@ -51,8 +57,12 @@ export class Locks extends APIResource {
    * );
    * ```
    */
-  get(bucketName: string, params: LockGetParams, options?: RequestOptions): APIPromise<LockGetResponse> {
-    const { account_id, jurisdiction } = params;
+  get(
+    bucketName: string,
+    params: LockGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LockGetResponse> {
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/lock`, {
         ...options,
@@ -68,6 +78,7 @@ export class Locks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Locks extends BaseLocks {}
 
 export type LockUpdateResponse = unknown;
 
@@ -134,7 +145,7 @@ export interface LockUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -207,7 +218,7 @@ export interface LockGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

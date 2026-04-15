@@ -2,8 +2,9 @@
 
 export {
   Settings,
+  BaseSettings,
   type UniversalSSLSettings,
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';
-export { Universal } from './universal';
+export { Universal, BaseUniversal } from './universal';

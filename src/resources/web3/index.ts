@@ -2,6 +2,7 @@
 
 export {
   Hostnames,
+  BaseHostnames,
   type Hostname,
   type HostnameDeleteResponse,
   type HostnameCreateParams,
@@ -11,4 +12,4 @@ export {
   type HostnameGetParams,
   type HostnamesSinglePage,
 } from './hostnames/index';
-export { Web3 } from './web3';
+export { Web3, BaseWeb3 } from './web3';

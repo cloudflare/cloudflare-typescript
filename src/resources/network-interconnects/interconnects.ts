@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Interconnects extends APIResource {
+export class BaseInterconnects extends APIResource {
+  static override readonly _key: readonly ['networkInterconnects', 'interconnects'] = Object.freeze([
+    'networkInterconnects',
+    'interconnects',
+  ] as const);
+
   /**
    * Create a new interconnect
    *
@@ -22,7 +27,7 @@ export class Interconnects extends APIResource {
    * ```
    */
   create(params: InterconnectCreateParams, options?: RequestOptions): APIPromise<InterconnectCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cni/interconnects`, { body, ...options });
   }
 
@@ -37,8 +42,11 @@ export class Interconnects extends APIResource {
    *   });
    * ```
    */
-  list(params: InterconnectListParams, options?: RequestOptions): APIPromise<InterconnectListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: InterconnectListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InterconnectListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/interconnects`, { query, ...options });
   }
 
@@ -53,8 +61,12 @@ export class Interconnects extends APIResource {
    * );
    * ```
    */
-  delete(icon: string, params: InterconnectDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    icon: string,
+    params: InterconnectDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/cni/interconnects/${icon}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -75,10 +87,10 @@ export class Interconnects extends APIResource {
    */
   get(
     icon: string,
-    params: InterconnectGetParams,
+    params: InterconnectGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InterconnectGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/interconnects/${icon}`, options);
   }
 
@@ -93,8 +105,12 @@ export class Interconnects extends APIResource {
    * );
    * ```
    */
-  loa(icon: string, params: InterconnectLOAParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  loa(
+    icon: string,
+    params: InterconnectLOAParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/interconnects/${icon}/loa`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -115,13 +131,14 @@ export class Interconnects extends APIResource {
    */
   status(
     icon: string,
-    params: InterconnectStatusParams,
+    params: InterconnectStatusParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InterconnectStatusResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cni/interconnects/${icon}/status`, options);
   }
 }
+export class Interconnects extends BaseInterconnects {}
 
 export type InterconnectCreateResponse =
   | InterconnectCreateResponse.NscInterconnectPhysicalBody
@@ -327,7 +344,7 @@ export declare namespace InterconnectCreateParams {
     /**
      * Path param: Customer account tag
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -354,7 +371,7 @@ export declare namespace InterconnectCreateParams {
     /**
      * Path param: Customer account tag
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -394,7 +411,7 @@ export interface InterconnectListParams {
   /**
    * Path param: Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -421,28 +438,28 @@ export interface InterconnectDeleteParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InterconnectGetParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InterconnectLOAParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface InterconnectStatusParams {
   /**
    * Customer account tag
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Interconnects {

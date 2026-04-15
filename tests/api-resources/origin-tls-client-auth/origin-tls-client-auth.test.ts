@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseOriginTLSClientAuth } from 'cloudflare/resources/origin-tls-client-auth/origin-tls-client-auth';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +11,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource originTLSClientAuth', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseOriginTLSClientAuth],
+});
+
+const runTests = (client: PartialCloudflare<{ originTLSClientAuth: BaseOriginTLSClientAuth }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.originTLSClientAuth.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -88,4 +98,6 @@ describe('resource originTLSClientAuth', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource originTLSClientAuth', () => runTests(client));
+describe('resource originTLSClientAuth (tree shakable, base)', () => runTests(partialClient));

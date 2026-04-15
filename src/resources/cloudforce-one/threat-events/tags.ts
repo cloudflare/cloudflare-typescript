@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tags extends APIResource {
+export class BaseTags extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'tags'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'tags',
+  ] as const);
+
   /**
    * Creates a new tag to be used accross threat events.
    *
@@ -19,13 +25,14 @@ export class Tags extends APIResource {
    * ```
    */
   create(params: TagCreateParams, options?: RequestOptions): APIPromise<TagCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/tags/create`, {
       body,
       ...options,
     });
   }
 }
+export class Tags extends BaseTags {}
 
 export interface TagCreateResponse {
   uuid: string;
@@ -69,7 +76,7 @@ export interface TagCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

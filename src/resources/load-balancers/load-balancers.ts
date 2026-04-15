@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as LoadBalancersAPI from './load-balancers';
 import * as MonitorGroupsAPI from './monitor-groups';
 import {
+  BaseMonitorGroups,
   MonitorGroup,
   MonitorGroupCreateParams,
   MonitorGroupDeleteParams,
@@ -15,11 +16,19 @@ import {
   MonitorGroupsSinglePage,
 } from './monitor-groups';
 import * as PreviewsAPI from './previews';
-import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
+import { BasePreviews, PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
-import { RegionGetParams, RegionGetResponse, RegionListParams, RegionListResponse, Regions } from './regions';
+import {
+  BaseRegions,
+  RegionGetParams,
+  RegionGetResponse,
+  RegionListParams,
+  RegionListResponse,
+  Regions,
+} from './regions';
 import * as SearchesAPI from './searches';
 import {
+  BaseSearches,
   SearchListParams,
   SearchListResponse,
   SearchListResponsesV4PagePagination,
@@ -27,6 +36,7 @@ import {
 } from './searches';
 import * as MonitorsAPI from './monitors/monitors';
 import {
+  BaseMonitors,
   Monitor,
   MonitorCreateParams,
   MonitorDeleteParams,
@@ -40,6 +50,7 @@ import {
 } from './monitors/monitors';
 import * as PoolsAPI from './pools/pools';
 import {
+  BasePools,
   Pool,
   PoolBulkEditParams,
   PoolCreateParams,
@@ -57,13 +68,8 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class LoadBalancers extends APIResource {
-  monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
-  monitorGroups: MonitorGroupsAPI.MonitorGroups = new MonitorGroupsAPI.MonitorGroups(this._client);
-  pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
-  previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
-  regions: RegionsAPI.Regions = new RegionsAPI.Regions(this._client);
-  searches: SearchesAPI.Searches = new SearchesAPI.Searches(this._client);
+export class BaseLoadBalancers extends APIResource {
+  static override readonly _key: readonly ['loadBalancers'] = Object.freeze(['loadBalancers'] as const);
 
   /**
    * Create a new load balancer.
@@ -83,7 +89,7 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   create(params: LoadBalancerCreateParams, options?: RequestOptions): APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/load_balancers`, { body, ...options }) as APIPromise<{
         result: LoadBalancer;
@@ -116,7 +122,7 @@ export class LoadBalancers extends APIResource {
     params: LoadBalancerUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, {
         body,
@@ -139,10 +145,10 @@ export class LoadBalancers extends APIResource {
    * ```
    */
   list(
-    params: LoadBalancerListParams,
+    params: LoadBalancerListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LoadBalancersSinglePage, LoadBalancer> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/load_balancers`, SinglePage<LoadBalancer>, options);
   }
 
@@ -159,10 +165,10 @@ export class LoadBalancers extends APIResource {
    */
   delete(
     loadBalancerID: string,
-    params: LoadBalancerDeleteParams,
+    params: LoadBalancerDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LoadBalancerDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, options) as APIPromise<{
         result: LoadBalancerDeleteResponse;
@@ -186,7 +192,7 @@ export class LoadBalancers extends APIResource {
     params: LoadBalancerEditParams,
     options?: RequestOptions,
   ): APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, {
         body,
@@ -208,16 +214,24 @@ export class LoadBalancers extends APIResource {
    */
   get(
     loadBalancerID: string,
-    params: LoadBalancerGetParams,
+    params: LoadBalancerGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LoadBalancer> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, options) as APIPromise<{
         result: LoadBalancer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class LoadBalancers extends BaseLoadBalancers {
+  monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);
+  monitorGroups: MonitorGroupsAPI.MonitorGroups = new MonitorGroupsAPI.MonitorGroups(this._client);
+  pools: PoolsAPI.Pools = new PoolsAPI.Pools(this._client);
+  previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
+  regions: RegionsAPI.Regions = new RegionsAPI.Regions(this._client);
+  searches: SearchesAPI.Searches = new SearchesAPI.Searches(this._client);
 }
 
 export type LoadBalancersSinglePage = SinglePage<LoadBalancer>;
@@ -1627,7 +1641,7 @@ export interface LoadBalancerCreateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -1801,7 +1815,7 @@ export interface LoadBalancerUpdateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -1977,18 +1991,18 @@ export interface LoadBalancerUpdateParams {
 }
 
 export interface LoadBalancerListParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LoadBalancerDeleteParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LoadBalancerEditParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Controls features that modify the routing of requests to pools and
@@ -2159,15 +2173,21 @@ export interface LoadBalancerEditParams {
 }
 
 export interface LoadBalancerGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 LoadBalancers.Monitors = Monitors;
+LoadBalancers.BaseMonitors = BaseMonitors;
 LoadBalancers.MonitorGroups = MonitorGroups;
+LoadBalancers.BaseMonitorGroups = BaseMonitorGroups;
 LoadBalancers.Pools = Pools;
+LoadBalancers.BasePools = BasePools;
 LoadBalancers.Previews = Previews;
+LoadBalancers.BasePreviews = BasePreviews;
 LoadBalancers.Regions = Regions;
+LoadBalancers.BaseRegions = BaseRegions;
 LoadBalancers.Searches = Searches;
+LoadBalancers.BaseSearches = BaseSearches;
 
 export declare namespace LoadBalancers {
   export {
@@ -2200,6 +2220,7 @@ export declare namespace LoadBalancers {
 
   export {
     Monitors as Monitors,
+    BaseMonitors as BaseMonitors,
     type Monitor as Monitor,
     type MonitorDeleteResponse as MonitorDeleteResponse,
     type MonitorsSinglePage as MonitorsSinglePage,
@@ -2213,6 +2234,7 @@ export declare namespace LoadBalancers {
 
   export {
     MonitorGroups as MonitorGroups,
+    BaseMonitorGroups as BaseMonitorGroups,
     type MonitorGroup as MonitorGroup,
     type MonitorGroupsSinglePage as MonitorGroupsSinglePage,
     type MonitorGroupCreateParams as MonitorGroupCreateParams,
@@ -2225,6 +2247,7 @@ export declare namespace LoadBalancers {
 
   export {
     Pools as Pools,
+    BasePools as BasePools,
     type Pool as Pool,
     type PoolDeleteResponse as PoolDeleteResponse,
     type PoolsSinglePage as PoolsSinglePage,
@@ -2239,12 +2262,14 @@ export declare namespace LoadBalancers {
 
   export {
     Previews as Previews,
+    BasePreviews as BasePreviews,
     type PreviewGetResponse as PreviewGetResponse,
     type PreviewGetParams as PreviewGetParams,
   };
 
   export {
     Regions as Regions,
+    BaseRegions as BaseRegions,
     type RegionListResponse as RegionListResponse,
     type RegionGetResponse as RegionGetResponse,
     type RegionListParams as RegionListParams,
@@ -2253,6 +2278,7 @@ export declare namespace LoadBalancers {
 
   export {
     Searches as Searches,
+    BaseSearches as BaseSearches,
     type SearchListResponse as SearchListResponse,
     type SearchListResponsesV4PagePagination as SearchListResponsesV4PagePagination,
     type SearchListParams as SearchListParams,

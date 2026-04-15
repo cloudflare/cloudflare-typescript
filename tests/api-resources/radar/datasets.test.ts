@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseDatasets } from 'cloudflare/resources/radar/datasets';
+import { Radar } from 'cloudflare/resources/radar/radar';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource datasets', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDatasets],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Radar],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { datasets: BaseDatasets } }>) => {
   test('list', async () => {
     const responsePromise = client.radar.datasets.list();
     const rawResponse = await responsePromise.asResponse();
@@ -61,4 +79,7 @@ describe('resource datasets', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource datasets', () => runTests(client));
+describe('resource datasets (tree shakable, base)', () => runTests(partialClient));
+describe('resource datasets (tree shakable, subresource)', () => runTests(parentPartialClient));

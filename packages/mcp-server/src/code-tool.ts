@@ -78,6 +78,8 @@ export function codeTool(): McpTool {
           CLOUDFLARE_API_KEY: readEnv('CLOUDFLARE_API_KEY'),
           CLOUDFLARE_EMAIL: readEnv('CLOUDFLARE_EMAIL'),
           CLOUDFLARE_API_USER_SERVICE_KEY: readEnv('CLOUDFLARE_API_USER_SERVICE_KEY'),
+          CLOUDFLARE_ACCOUNT_ID: readEnv('CLOUDFLARE_ACCOUNT_ID'),
+          CLOUDFLARE_ZONE_ID: readEnv('CLOUDFLARE_ZONE_ID'),
           CLOUDFLARE_BASE_URL: readEnv('CLOUDFLARE_BASE_URL'),
         }),
       },

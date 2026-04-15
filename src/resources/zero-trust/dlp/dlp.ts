@@ -2,11 +2,12 @@
 
 import { APIResource } from '../../../core/resource';
 import * as LimitsAPI from './limits';
-import { LimitListParams, LimitListResponse, Limits } from './limits';
+import { BaseLimits, LimitListParams, LimitListResponse, Limits } from './limits';
 import * as PatternsAPI from './patterns';
-import { PatternValidateParams, PatternValidateResponse, Patterns } from './patterns';
+import { BasePatterns, PatternValidateParams, PatternValidateResponse, Patterns } from './patterns';
 import * as PayloadLogsAPI from './payload-logs';
 import {
+  BasePayloadLogs,
   PayloadLogGetParams,
   PayloadLogGetResponse,
   PayloadLogUpdateParams,
@@ -15,6 +16,7 @@ import {
 } from './payload-logs';
 import * as DatasetsAPI from './datasets/datasets';
 import {
+  BaseDatasets,
   Dataset,
   DatasetArray,
   DatasetCreateParams,
@@ -27,9 +29,10 @@ import {
   DatasetsSinglePage,
 } from './datasets/datasets';
 import * as EmailAPI from './email/email';
-import { Email } from './email/email';
+import { BaseEmail, Email } from './email/email';
 import * as EntriesAPI from './entries/entries';
 import {
+  BaseEntries,
   Entries,
   EntryCreateParams,
   EntryCreateResponse,
@@ -45,6 +48,7 @@ import {
 } from './entries/entries';
 import * as ProfilesAPI from './profiles/profiles';
 import {
+  BaseProfiles,
   ContextAwareness,
   Profile,
   ProfileGetParams,
@@ -54,7 +58,10 @@ import {
   SkipConfiguration,
 } from './profiles/profiles';
 
-export class DLP extends APIResource {
+export class BaseDLP extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp'] = Object.freeze(['zeroTrust', 'dlp'] as const);
+}
+export class DLP extends BaseDLP {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   patterns: PatternsAPI.Patterns = new PatternsAPI.Patterns(this._client);
   payloadLogs: PayloadLogsAPI.PayloadLogs = new PayloadLogsAPI.PayloadLogs(this._client);
@@ -65,16 +72,24 @@ export class DLP extends APIResource {
 }
 
 DLP.Datasets = Datasets;
+DLP.BaseDatasets = BaseDatasets;
 DLP.Patterns = Patterns;
+DLP.BasePatterns = BasePatterns;
 DLP.PayloadLogs = PayloadLogs;
+DLP.BasePayloadLogs = BasePayloadLogs;
 DLP.Email = Email;
+DLP.BaseEmail = BaseEmail;
 DLP.Profiles = Profiles;
+DLP.BaseProfiles = BaseProfiles;
 DLP.Limits = Limits;
+DLP.BaseLimits = BaseLimits;
 DLP.Entries = Entries;
+DLP.BaseEntries = BaseEntries;
 
 export declare namespace DLP {
   export {
     Datasets as Datasets,
+    BaseDatasets as BaseDatasets,
     type Dataset as Dataset,
     type DatasetArray as DatasetArray,
     type DatasetCreation as DatasetCreation,
@@ -88,22 +103,25 @@ export declare namespace DLP {
 
   export {
     Patterns as Patterns,
+    BasePatterns as BasePatterns,
     type PatternValidateResponse as PatternValidateResponse,
     type PatternValidateParams as PatternValidateParams,
   };
 
   export {
     PayloadLogs as PayloadLogs,
+    BasePayloadLogs as BasePayloadLogs,
     type PayloadLogUpdateResponse as PayloadLogUpdateResponse,
     type PayloadLogGetResponse as PayloadLogGetResponse,
     type PayloadLogUpdateParams as PayloadLogUpdateParams,
     type PayloadLogGetParams as PayloadLogGetParams,
   };
 
-  export { Email as Email };
+  export { Email as Email, BaseEmail as BaseEmail };
 
   export {
     Profiles as Profiles,
+    BaseProfiles as BaseProfiles,
     type ContextAwareness as ContextAwareness,
     type Profile as Profile,
     type SkipConfiguration as SkipConfiguration,
@@ -114,12 +132,14 @@ export declare namespace DLP {
 
   export {
     Limits as Limits,
+    BaseLimits as BaseLimits,
     type LimitListResponse as LimitListResponse,
     type LimitListParams as LimitListParams,
   };
 
   export {
     Entries as Entries,
+    BaseEntries as BaseEntries,
     type EntryCreateResponse as EntryCreateResponse,
     type EntryUpdateResponse as EntryUpdateResponse,
     type EntryListResponse as EntryListResponse,

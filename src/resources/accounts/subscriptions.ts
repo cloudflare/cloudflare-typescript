@@ -8,7 +8,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Subscriptions extends APIResource {
+export class BaseSubscriptions extends APIResource {
+  static override readonly _key: readonly ['accounts', 'subscriptions'] = Object.freeze([
+    'accounts',
+    'subscriptions',
+  ] as const);
+
   /**
    * Creates an account subscription.
    *
@@ -20,8 +25,11 @@ export class Subscriptions extends APIResource {
    *   });
    * ```
    */
-  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<Shared.Subscription> {
-    const { account_id, ...body } = params;
+  create(
+    params: SubscriptionCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Subscription> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/subscriptions`, { body, ...options }) as APIPromise<{
         result: Shared.Subscription;
@@ -46,7 +54,7 @@ export class Subscriptions extends APIResource {
     params: SubscriptionUpdateParams,
     options?: RequestOptions,
   ): APIPromise<Shared.Subscription> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`, {
         body,
@@ -69,10 +77,10 @@ export class Subscriptions extends APIResource {
    */
   delete(
     subscriptionIdentifier: string,
-    params: SubscriptionDeleteParams,
+    params: SubscriptionDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubscriptionDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`,
@@ -95,10 +103,10 @@ export class Subscriptions extends APIResource {
    * ```
    */
   get(
-    params: SubscriptionGetParams,
+    params: SubscriptionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/subscriptions`,
       SinglePage<Shared.Subscription>,
@@ -106,6 +114,7 @@ export class Subscriptions extends APIResource {
     );
   }
 }
+export class Subscriptions extends BaseSubscriptions {}
 
 export interface SubscriptionDeleteResponse {
   /**
@@ -118,7 +127,7 @@ export interface SubscriptionCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -135,7 +144,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -152,14 +161,14 @@ export interface SubscriptionDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SubscriptionGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subscriptions {

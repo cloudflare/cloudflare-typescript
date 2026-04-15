@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as HostnameCertificatesAPI from './hostname-certificates';
 import {
+  BaseHostnameCertificates,
   Certificate,
   HostnameCertificateCreateParams,
   HostnameCertificateCreateResponse,
@@ -18,6 +19,7 @@ import {
 import * as HostnamesAPI from './hostnames';
 import {
   AuthenticatedOriginPull,
+  BaseHostnames,
   HostnameGetParams,
   HostnameUpdateParams,
   HostnameUpdateResponse,
@@ -26,6 +28,7 @@ import {
 } from './hostnames';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   SettingGetParams,
   SettingGetResponse,
   SettingUpdateParams,
@@ -34,6 +37,7 @@ import {
 } from './settings';
 import * as ZoneCertificatesAPI from './zone-certificates';
 import {
+  BaseZoneCertificates,
   ZoneAuthenticatedOriginPull,
   ZoneCertificateCreateParams,
   ZoneCertificateCreateResponse,
@@ -51,14 +55,10 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class OriginTLSClientAuth extends APIResource {
-  zoneCertificates: ZoneCertificatesAPI.ZoneCertificates = new ZoneCertificatesAPI.ZoneCertificates(
-    this._client,
-  );
-  hostnames: HostnamesAPI.Hostnames = new HostnamesAPI.Hostnames(this._client);
-  hostnameCertificates: HostnameCertificatesAPI.HostnameCertificates =
-    new HostnameCertificatesAPI.HostnameCertificates(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+export class BaseOriginTLSClientAuth extends APIResource {
+  static override readonly _key: readonly ['originTLSClientAuth'] = Object.freeze([
+    'originTLSClientAuth',
+  ] as const);
 
   /**
    * Upload your own certificate you want Cloudflare to use for edge-to-origin
@@ -73,7 +73,7 @@ export class OriginTLSClientAuth extends APIResource {
     params: OriginTLSClientAuthCreateParams,
     options?: RequestOptions,
   ): APIPromise<OriginTLSClientAuthCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as APIPromise<{
         result: OriginTLSClientAuthCreateResponse;
@@ -88,10 +88,10 @@ export class OriginTLSClientAuth extends APIResource {
    * @deprecated Use zone_certificates.list for zone-level certificates. This method will be removed in a future major version.
    */
   list(
-    params: OriginTLSClientAuthListParams,
+    params: OriginTLSClientAuthListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/origin_tls_client_auth`,
       SinglePage<OriginTLSClientAuthListResponse>,
@@ -106,10 +106,10 @@ export class OriginTLSClientAuth extends APIResource {
    */
   delete(
     certificateID: string,
-    params: OriginTLSClientAuthDeleteParams,
+    params: OriginTLSClientAuthDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OriginTLSClientAuthDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/origin_tls_client_auth/${certificateID}`,
@@ -126,10 +126,10 @@ export class OriginTLSClientAuth extends APIResource {
    */
   get(
     certificateID: string,
-    params: OriginTLSClientAuthGetParams,
+    params: OriginTLSClientAuthGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OriginTLSClientAuthGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/origin_tls_client_auth/${certificateID}`,
@@ -137,6 +137,15 @@ export class OriginTLSClientAuth extends APIResource {
       ) as APIPromise<{ result: OriginTLSClientAuthGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class OriginTLSClientAuth extends BaseOriginTLSClientAuth {
+  zoneCertificates: ZoneCertificatesAPI.ZoneCertificates = new ZoneCertificatesAPI.ZoneCertificates(
+    this._client,
+  );
+  hostnames: HostnamesAPI.Hostnames = new HostnamesAPI.Hostnames(this._client);
+  hostnameCertificates: HostnameCertificatesAPI.HostnameCertificates =
+    new HostnameCertificatesAPI.HostnameCertificates(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
 export type OriginTLSClientAuthListResponsesSinglePage = SinglePage<OriginTLSClientAuthListResponse>;
@@ -233,7 +242,7 @@ export interface OriginTLSClientAuthCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's leaf certificate.
@@ -250,27 +259,31 @@ export interface OriginTLSClientAuthListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OriginTLSClientAuthDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OriginTLSClientAuthGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 OriginTLSClientAuth.ZoneCertificates = ZoneCertificates;
+OriginTLSClientAuth.BaseZoneCertificates = BaseZoneCertificates;
 OriginTLSClientAuth.Hostnames = Hostnames;
+OriginTLSClientAuth.BaseHostnames = BaseHostnames;
 OriginTLSClientAuth.HostnameCertificates = HostnameCertificates;
+OriginTLSClientAuth.BaseHostnameCertificates = BaseHostnameCertificates;
 OriginTLSClientAuth.Settings = Settings;
+OriginTLSClientAuth.BaseSettings = BaseSettings;
 
 export declare namespace OriginTLSClientAuth {
   export {
@@ -287,6 +300,7 @@ export declare namespace OriginTLSClientAuth {
 
   export {
     ZoneCertificates as ZoneCertificates,
+    BaseZoneCertificates as BaseZoneCertificates,
     type ZoneAuthenticatedOriginPull as ZoneAuthenticatedOriginPull,
     type ZoneCertificateCreateResponse as ZoneCertificateCreateResponse,
     type ZoneCertificateListResponse as ZoneCertificateListResponse,
@@ -301,6 +315,7 @@ export declare namespace OriginTLSClientAuth {
 
   export {
     Hostnames as Hostnames,
+    BaseHostnames as BaseHostnames,
     type AuthenticatedOriginPull as AuthenticatedOriginPull,
     type HostnameUpdateResponse as HostnameUpdateResponse,
     type HostnameUpdateResponsesSinglePage as HostnameUpdateResponsesSinglePage,
@@ -310,6 +325,7 @@ export declare namespace OriginTLSClientAuth {
 
   export {
     HostnameCertificates as HostnameCertificates,
+    BaseHostnameCertificates as BaseHostnameCertificates,
     type Certificate as Certificate,
     type HostnameCertificateCreateResponse as HostnameCertificateCreateResponse,
     type HostnameCertificateListResponse as HostnameCertificateListResponse,
@@ -324,6 +340,7 @@ export declare namespace OriginTLSClientAuth {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingUpdateResponse as SettingUpdateResponse,
     type SettingGetResponse as SettingGetResponse,
     type SettingUpdateParams as SettingUpdateParams,

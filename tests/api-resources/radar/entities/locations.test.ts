@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Entities } from 'cloudflare/resources/radar/entities/entities';
+import { BaseLocations } from 'cloudflare/resources/radar/entities/locations';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource locations', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLocations],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Entities],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { entities: { locations: BaseLocations } } }>) => {
   test('list', async () => {
     const responsePromise = client.radar.entities.locations.list();
     const rawResponse = await responsePromise.asResponse();
@@ -55,4 +73,7 @@ describe('resource locations', () => {
       client.radar.entities.locations.get('US', { format: 'JSON' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource locations', () => runTests(client));
+describe('resource locations (tree shakable, base)', () => runTests(partialClient));
+describe('resource locations (tree shakable, subresource)', () => runTests(parentPartialClient));

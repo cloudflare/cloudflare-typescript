@@ -8,16 +8,16 @@ import {
   AuthorityGetResponse,
   AuthorityListParams,
   AuthorityListResponse,
+  BaseAuthorities,
 } from './authorities';
 import * as LogsAPI from './logs';
-import { LogGetParams, LogGetResponse, LogListParams, LogListResponse, Logs } from './logs';
+import { BaseLogs, LogGetParams, LogGetResponse, LogListParams, LogListResponse, Logs } from './logs';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CT extends APIResource {
-  authorities: AuthoritiesAPI.Authorities = new AuthoritiesAPI.Authorities(this._client);
-  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+export class BaseCT extends APIResource {
+  static override readonly _key: readonly ['radar', 'ct'] = Object.freeze(['radar', 'ct'] as const);
 
   /**
    * Retrieves an aggregated summary of certificates grouped by the specified
@@ -109,6 +109,10 @@ export class CT extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class CT extends BaseCT {
+  authorities: AuthoritiesAPI.Authorities = new AuthoritiesAPI.Authorities(this._client);
+  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 }
 
 export interface CTSummaryResponse {
@@ -1083,7 +1087,9 @@ export interface CTTimeseriesGroupsParams {
 }
 
 CT.Authorities = Authorities;
+CT.BaseAuthorities = BaseAuthorities;
 CT.Logs = Logs;
+CT.BaseLogs = BaseLogs;
 
 export declare namespace CT {
   export {
@@ -1097,6 +1103,7 @@ export declare namespace CT {
 
   export {
     Authorities as Authorities,
+    BaseAuthorities as BaseAuthorities,
     type AuthorityListResponse as AuthorityListResponse,
     type AuthorityGetResponse as AuthorityGetResponse,
     type AuthorityListParams as AuthorityListParams,
@@ -1105,6 +1112,7 @@ export declare namespace CT {
 
   export {
     Logs as Logs,
+    BaseLogs as BaseLogs,
     type LogListResponse as LogListResponse,
     type LogGetResponse as LogGetResponse,
     type LogListParams as LogListParams,

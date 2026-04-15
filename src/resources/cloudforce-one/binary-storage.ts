@@ -8,7 +8,12 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class BinaryStorage extends APIResource {
+export class BaseBinaryStorage extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'binaryStorage'] = Object.freeze([
+    'cloudforceOne',
+    'binaryStorage',
+  ] as const);
+
   /**
    * Posts a file to Binary Storage
    *
@@ -25,7 +30,7 @@ export class BinaryStorage extends APIResource {
     params: BinaryStorageCreateParams,
     options?: RequestOptions,
   ): APIPromise<BinaryStorageCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(
       path`/accounts/${account_id}/cloudforce-one/binary`,
       multipartFormRequestOptions({ body, ...options }, this._client),
@@ -42,14 +47,19 @@ export class BinaryStorage extends APIResource {
    * });
    * ```
    */
-  get(hash: string, params: BinaryStorageGetParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  get(
+    hash: string,
+    params: BinaryStorageGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/binary/${hash}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 }
+export class BinaryStorage extends BaseBinaryStorage {}
 
 export interface BinaryStorageCreateResponse {
   content_type: string;
@@ -65,7 +75,7 @@ export interface BinaryStorageCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The binary file content to upload.
@@ -77,7 +87,7 @@ export interface BinaryStorageGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace BinaryStorage {

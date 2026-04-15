@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Summary extends APIResource {
+export class BaseSummary extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'summary'] = Object.freeze([
+    'radar',
+    'http',
+    'summary',
+  ] as const);
+
   /**
    * Retrieves the distribution of bot-generated HTTP requests to genuine human
    * traffic, as classified by Cloudflare. Visit
@@ -138,6 +144,7 @@ export class Summary extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summary extends BaseSummary {}
 
 export interface SummaryBotClassResponse {
   /**

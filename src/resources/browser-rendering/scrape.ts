@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Scrape extends APIResource {
+export class BaseScrape extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'scrape'] = Object.freeze([
+    'browserRendering',
+    'scrape',
+  ] as const);
+
   /**
    * Get meta attributes like height, width, text and others of selected elements.
    *
@@ -21,7 +26,7 @@ export class Scrape extends APIResource {
    * ```
    */
   create(params: ScrapeCreateParams, options?: RequestOptions): APIPromise<ScrapeCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/scrape`, {
         query: { cacheTTL },
@@ -31,6 +36,7 @@ export class Scrape extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Scrape extends BaseScrape {}
 
 export type ScrapeCreateResponse = Array<ScrapeCreateResponse.ScrapeCreateResponseItem>;
 
@@ -102,7 +108,7 @@ export declare namespace ScrapeCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -375,7 +381,7 @@ export declare namespace ScrapeCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param

@@ -6,12 +6,18 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TLS extends APIResource {
+export class BaseTLS extends APIResource {
+  static override readonly _key: readonly ['hostnames', 'settings', 'tls'] = Object.freeze([
+    'hostnames',
+    'settings',
+    'tls',
+  ] as const);
+
   /**
    * Update the tls setting value for the hostname.
    */
   update(hostname: string, params: TLSUpdateParams, options?: RequestOptions): APIPromise<Setting> {
-    const { zone_id, setting_id, ...body } = params;
+    const { zone_id = this._client.zoneID, setting_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/hostnames/settings/${setting_id}/${hostname}`, {
         body,
@@ -24,7 +30,7 @@ export class TLS extends APIResource {
    * Delete the tls setting value for the hostname.
    */
   delete(hostname: string, params: TLSDeleteParams, options?: RequestOptions): APIPromise<TLSDeleteResponse> {
-    const { zone_id, setting_id } = params;
+    const { zone_id = this._client.zoneID, setting_id } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/hostnames/settings/${setting_id}/${hostname}`,
@@ -38,10 +44,10 @@ export class TLS extends APIResource {
    */
   get(
     settingID: 'ciphers' | 'min_tls_version' | 'http2',
-    params: TLSGetParams,
+    params: TLSGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TLSGetResponsesSinglePage, TLSGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/hostnames/settings/${settingID}`,
       SinglePage<TLSGetResponse>,
@@ -49,6 +55,7 @@ export class TLS extends APIResource {
     );
   }
 }
+export class TLS extends BaseTLS {}
 
 export type TLSGetResponsesSinglePage = SinglePage<TLSGetResponse>;
 
@@ -187,7 +194,7 @@ export interface TLSUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param: The TLS Setting name. The value type depends on the setting:
@@ -218,7 +225,7 @@ export interface TLSDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * The TLS Setting name. The value type depends on the setting:
@@ -236,7 +243,7 @@ export interface TLSGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace TLS {

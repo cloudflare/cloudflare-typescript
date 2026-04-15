@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Publish extends APIResource {
+export class BasePublish extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'publish'] = Object.freeze(['zaraz', 'publish'] as const);
+
   /**
    * Publish current Zaraz preview configuration for a zone.
    *
@@ -16,8 +18,11 @@ export class Publish extends APIResource {
    * });
    * ```
    */
-  create(params: PublishCreateParams, options?: RequestOptions): APIPromise<PublishCreateResponse> {
-    const { zone_id, body } = params;
+  create(
+    params: PublishCreateParams | null | undefined = undefined,
+    options?: RequestOptions,
+  ): APIPromise<PublishCreateResponse> {
+    const { zone_id = this._client.zoneID, body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/settings/zaraz/publish`, {
         body: body,
@@ -26,6 +31,7 @@ export class Publish extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Publish extends BasePublish {}
 
 export type PublishCreateResponse = string;
 
@@ -33,7 +39,7 @@ export interface PublishCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zaraz configuration description.

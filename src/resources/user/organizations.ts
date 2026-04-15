@@ -8,7 +8,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Organizations extends APIResource {
+export class BaseOrganizations extends APIResource {
+  static override readonly _key: readonly ['user', 'organizations'] = Object.freeze([
+    'user',
+    'organizations',
+  ] as const);
+
   /**
    * Lists organizations the user is associated with.
    *
@@ -46,6 +51,7 @@ export class Organizations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Organizations extends BaseOrganizations {}
 
 export type OrganizationsV4PagePaginationArray = V4PagePaginationArray<Organization>;
 

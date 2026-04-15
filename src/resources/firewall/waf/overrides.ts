@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Overrides extends APIResource {
+export class BaseOverrides extends APIResource {
+  static override readonly _key: readonly ['firewall', 'waf', 'overrides'] = Object.freeze([
+    'firewall',
+    'waf',
+    'overrides',
+  ] as const);
+
   /**
    * Creates a URI-based WAF override for a zone.
    *
@@ -20,7 +26,7 @@ export class Overrides extends APIResource {
    * @deprecated
    */
   create(params: OverrideCreateParams, options?: RequestOptions): APIPromise<Override> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/firewall/waf/overrides`, { body, ...options }) as APIPromise<{
         result: Override;
@@ -37,7 +43,7 @@ export class Overrides extends APIResource {
    * @deprecated
    */
   update(overridesID: string, params: OverrideUpdateParams, options?: RequestOptions): APIPromise<Override> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, {
         body,
@@ -55,10 +61,10 @@ export class Overrides extends APIResource {
    * @deprecated
    */
   list(
-    params: OverrideListParams,
+    params: OverrideListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OverridesV4PagePaginationArray, Override> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/firewall/waf/overrides`,
       V4PagePaginationArray<Override>,
@@ -76,10 +82,10 @@ export class Overrides extends APIResource {
    */
   delete(
     overridesID: string,
-    params: OverrideDeleteParams,
+    params: OverrideDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OverrideDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`,
@@ -96,8 +102,12 @@ export class Overrides extends APIResource {
    *
    * @deprecated
    */
-  get(overridesID: string, params: OverrideGetParams, options?: RequestOptions): APIPromise<Override> {
-    const { zone_id } = params;
+  get(
+    overridesID: string,
+    params: OverrideGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Override> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/firewall/waf/overrides/${overridesID}`, options) as APIPromise<{
         result: Override;
@@ -105,6 +115,7 @@ export class Overrides extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Overrides extends BaseOverrides {}
 
 export type OverridesV4PagePaginationArray = V4PagePaginationArray<Override>;
 
@@ -258,7 +269,7 @@ export interface OverrideCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The URLs to include in the current WAF override. You can use
@@ -272,7 +283,7 @@ export interface OverrideUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Defines an identifier.
@@ -306,21 +317,21 @@ export interface OverrideListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OverrideDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OverrideGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Overrides {

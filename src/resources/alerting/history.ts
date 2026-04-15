@@ -5,7 +5,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class HistoryResource extends APIResource {
+export class BaseHistoryResource extends APIResource {
+  static override readonly _key: readonly ['alerting', 'history'] = Object.freeze([
+    'alerting',
+    'history',
+  ] as const);
+
   /**
    * Gets a list of history records for notifications sent to an account. The records
    * are displayed for last `x` number of days based on the zone plan (free = 30, pro
@@ -22,10 +27,10 @@ export class HistoryResource extends APIResource {
    * ```
    */
   list(
-    params: HistoryListParams,
+    params: HistoryListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HistoriesV4PagePaginationArray, History> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/alerting/v3/history`,
       V4PagePaginationArray<History>,
@@ -33,6 +38,7 @@ export class HistoryResource extends APIResource {
     );
   }
 }
+export class HistoryResource extends BaseHistoryResource {}
 
 export type HistoriesV4PagePaginationArray = V4PagePaginationArray<History>;
 
@@ -88,7 +94,7 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Limit the returned results to history records older than the

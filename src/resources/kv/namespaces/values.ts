@@ -8,7 +8,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Values extends APIResource {
+export class BaseValues extends APIResource {
+  static override readonly _key: readonly ['kv', 'namespaces', 'values'] = Object.freeze([
+    'kv',
+    'namespaces',
+    'values',
+  ] as const);
+
   /**
    * Write a value identified by a key. Use URL-encoding to use special characters
    * (for example, `:`, `!`, `%`) in the key name. Body should be the value to be
@@ -36,7 +42,7 @@ export class Values extends APIResource {
     params: ValueUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ValueUpdateResponse | null> {
-    const { account_id, namespace_id, expiration, expiration_ttl, ...body } = params;
+    const { account_id = this._client.accountID, namespace_id, expiration, expiration_ttl, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/values/${keyName}`,
@@ -68,7 +74,7 @@ export class Values extends APIResource {
     params: ValueDeleteParams,
     options?: RequestOptions,
   ): APIPromise<ValueDeleteResponse | null> {
-    const { account_id, namespace_id } = params;
+    const { account_id = this._client.accountID, namespace_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/values/${keyName}`,
@@ -99,7 +105,7 @@ export class Values extends APIResource {
    * ```
    */
   get(keyName: string, params: ValueGetParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id, namespace_id } = params;
+    const { account_id = this._client.accountID, namespace_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/storage/kv/namespaces/${namespace_id}/values/${keyName}`,
       {
@@ -110,6 +116,7 @@ export class Values extends APIResource {
     );
   }
 }
+export class Values extends BaseValues {}
 
 export interface ValueUpdateResponse {}
 
@@ -119,7 +126,7 @@ export interface ValueUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Namespace identifier tag.
@@ -152,7 +159,7 @@ export interface ValueDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Namespace identifier tag.
@@ -164,7 +171,7 @@ export interface ValueGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Namespace identifier tag.

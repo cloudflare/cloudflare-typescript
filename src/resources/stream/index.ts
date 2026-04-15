@@ -2,6 +2,7 @@
 
 export {
   AudioTracks,
+  BaseAudioTracks,
   type Audio,
   type AudioTrackDeleteResponse,
   type AudioTrackGetResponse,
@@ -10,16 +11,24 @@ export {
   type AudioTrackEditParams,
   type AudioTrackGetParams,
 } from './audio-tracks';
-export { Captions, type Caption, type CaptionGetParams, type CaptionsSinglePage } from './captions/index';
-export { ClipResource, type Clip, type ClipCreateParams } from './clip';
-export { Copy, type CopyCreateParams } from './copy';
+export {
+  Captions,
+  BaseCaptions,
+  type Caption,
+  type CaptionGetParams,
+  type CaptionsSinglePage,
+} from './captions/index';
+export { ClipResource, BaseClipResource, type Clip, type ClipCreateParams } from './clip';
+export { Copy, BaseCopy, type CopyCreateParams } from './copy';
 export {
   DirectUpload,
+  BaseDirectUpload,
   type DirectUploadCreateResponse,
   type DirectUploadCreateParams,
 } from './direct-upload';
 export {
   Downloads,
+  BaseDownloads,
   type DownloadCreateResponse,
   type DownloadDeleteResponse,
   type DownloadGetResponse,
@@ -27,9 +36,10 @@ export {
   type DownloadDeleteParams,
   type DownloadGetParams,
 } from './downloads';
-export { Embed, type EmbedGetResponse, type EmbedGetParams } from './embed';
+export { Embed, BaseEmbed, type EmbedGetResponse, type EmbedGetParams } from './embed';
 export {
   Keys,
+  BaseKeys,
   type KeyDeleteResponse,
   type KeyGetResponse,
   type KeyCreateParams,
@@ -39,6 +49,7 @@ export {
 } from './keys';
 export {
   LiveInputs,
+  BaseLiveInputs,
   type LiveInput,
   type LiveInputListResponse,
   type LiveInputCreateParams,
@@ -47,11 +58,12 @@ export {
   type LiveInputDeleteParams,
   type LiveInputGetParams,
 } from './live-inputs/index';
-export { Stream } from './stream';
-export { Token, type TokenCreateResponse, type TokenCreateParams } from './token';
-export { Videos, type VideoStorageUsageResponse, type VideoStorageUsageParams } from './videos';
+export { Stream, BaseStream } from './stream';
+export { Token, BaseToken, type TokenCreateResponse, type TokenCreateParams } from './token';
+export { Videos, BaseVideos, type VideoStorageUsageResponse, type VideoStorageUsageParams } from './videos';
 export {
   Watermarks,
+  BaseWatermarks,
   type Watermark,
   type WatermarkDeleteResponse,
   type WatermarkCreateParams,
@@ -62,6 +74,7 @@ export {
 } from './watermarks';
 export {
   Webhooks,
+  BaseWebhooks,
   type WebhookUpdateResponse,
   type WebhookDeleteResponse,
   type WebhookGetResponse,

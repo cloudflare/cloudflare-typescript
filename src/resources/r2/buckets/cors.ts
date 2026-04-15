@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CORS extends APIResource {
+export class BaseCORS extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'cors'] = Object.freeze([
+    'r2',
+    'buckets',
+    'cors',
+  ] as const);
+
   /**
    * Set the CORS policy for a bucket.
    *
@@ -23,7 +29,7 @@ export class CORS extends APIResource {
     params: CORSUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CORSUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         body,
@@ -53,10 +59,10 @@ export class CORS extends APIResource {
    */
   delete(
     bucketName: string,
-    params: CORSDeleteParams,
+    params: CORSDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CORSDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         ...options,
@@ -83,8 +89,12 @@ export class CORS extends APIResource {
    * );
    * ```
    */
-  get(bucketName: string, params: CORSGetParams, options?: RequestOptions): APIPromise<CORSGetResponse> {
-    const { account_id, jurisdiction } = params;
+  get(
+    bucketName: string,
+    params: CORSGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CORSGetResponse> {
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         ...options,
@@ -100,6 +110,7 @@ export class CORS extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CORS extends BaseCORS {}
 
 export type CORSUpdateResponse = unknown;
 
@@ -169,7 +180,7 @@ export interface CORSUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -243,7 +254,7 @@ export interface CORSDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -256,7 +267,7 @@ export interface CORSGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

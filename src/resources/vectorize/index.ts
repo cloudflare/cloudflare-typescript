@@ -2,6 +2,7 @@
 
 export {
   Indexes,
+  BaseIndexes,
   type CreateIndex,
   type IndexDeleteVectorsByID,
   type IndexDimensionConfiguration,
@@ -29,4 +30,4 @@ export {
   type IndexUpsertParams,
   type CreateIndicesSinglePage,
 } from './indexes/index';
-export { Vectorize } from './vectorize';
+export { Vectorize, BaseVectorize } from './vectorize';

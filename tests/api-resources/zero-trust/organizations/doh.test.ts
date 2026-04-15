@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseDOH } from 'cloudflare/resources/zero-trust/organizations/doh';
+import { Organizations } from 'cloudflare/resources/zero-trust/organizations/organizations';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource doh', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDOH],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Organizations],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { organizations: { doh: BaseDOH } } }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.organizations.doh.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -48,4 +66,7 @@ describe('resource doh', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource doh', () => runTests(client));
+describe('resource doh (tree shakable, base)', () => runTests(partialClient));
+describe('resource doh (tree shakable, subresource)', () => runTests(parentPartialClient));

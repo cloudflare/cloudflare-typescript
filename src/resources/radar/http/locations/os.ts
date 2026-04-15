@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class OS extends APIResource {
+export class BaseOS extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'locations', 'os'] = Object.freeze([
+    'radar',
+    'http',
+    'locations',
+    'os',
+  ] as const);
+
   /**
    * Retrieves the top locations, by HTTP requests, of the requested operating
    * system.
@@ -29,6 +36,7 @@ export class OS extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class OS extends BaseOS {}
 
 export interface OSGetResponse {
   /**

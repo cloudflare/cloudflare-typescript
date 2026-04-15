@@ -7,7 +7,9 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Apps extends APIResource {
+export class BaseApps extends APIResource {
+  static override readonly _key: readonly ['spectrum', 'apps'] = Object.freeze(['spectrum', 'apps'] as const);
+
   /**
    * Creates a new Spectrum application from a configuration using a name for the
    * origin.
@@ -23,7 +25,7 @@ export class Apps extends APIResource {
    * ```
    */
   create(params: AppCreateParams, options?: RequestOptions): APIPromise<AppCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/spectrum/apps`, { body, ...options }) as APIPromise<{
         result: AppCreateResponse;
@@ -49,7 +51,7 @@ export class Apps extends APIResource {
    * ```
    */
   update(appID: string, params: AppUpdateParams, options?: RequestOptions): APIPromise<AppUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/spectrum/apps/${appID}`, { body, ...options }) as APIPromise<{
         result: AppUpdateResponse;
@@ -61,10 +63,10 @@ export class Apps extends APIResource {
    * Retrieves a list of currently existing Spectrum applications inside a zone.
    */
   list(
-    params: AppListParams,
+    params: AppListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AppListResponsesV4PagePaginationArray, AppListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/spectrum/apps`,
       V4PagePaginationArray<AppListResponse>,
@@ -77,10 +79,10 @@ export class Apps extends APIResource {
    */
   delete(
     appID: string,
-    params: AppDeleteParams,
+    params: AppDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AppDeleteResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/spectrum/apps/${appID}`, options) as APIPromise<{
         result: AppDeleteResponse | null;
@@ -91,8 +93,12 @@ export class Apps extends APIResource {
   /**
    * Gets the application configuration of a specific application inside a zone.
    */
-  get(appID: string, params: AppGetParams, options?: RequestOptions): APIPromise<AppGetResponse> {
-    const { zone_id } = params;
+  get(
+    appID: string,
+    params: AppGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AppGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/spectrum/apps/${appID}`, options) as APIPromise<{
         result: AppGetResponse;
@@ -100,6 +106,7 @@ export class Apps extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Apps extends BaseApps {}
 
 export type AppListResponsesV4PagePaginationArray = V4PagePaginationArray<AppListResponse>;
 
@@ -627,7 +634,7 @@ export declare namespace AppCreateParams {
     /**
      * Path param: Zone identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: The name and type of DNS record for the Spectrum application.
@@ -706,7 +713,7 @@ export declare namespace AppCreateParams {
     /**
      * Path param: Zone identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: The name and type of DNS record for the Spectrum application.
@@ -737,7 +744,7 @@ export declare namespace AppUpdateParams {
     /**
      * Path param: Zone identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: The name and type of DNS record for the Spectrum application.
@@ -816,7 +823,7 @@ export declare namespace AppUpdateParams {
     /**
      * Path param: Zone identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: The name and type of DNS record for the Spectrum application.
@@ -842,7 +849,7 @@ export interface AppListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Zone identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Sets the direction by which results are ordered.
@@ -859,14 +866,14 @@ export interface AppDeleteParams {
   /**
    * Zone identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface AppGetParams {
   /**
    * Zone identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Apps {

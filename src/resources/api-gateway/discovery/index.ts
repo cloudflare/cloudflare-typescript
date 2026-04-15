@@ -2,6 +2,7 @@
 
 export {
   Discovery,
+  BaseDiscovery,
   type DiscoveryOperation,
   type DiscoveryGetResponse,
   type DiscoveryGetParams,
@@ -9,6 +10,7 @@ export {
 } from './discovery';
 export {
   Operations,
+  BaseOperations,
   type OperationBulkEditResponse,
   type OperationEditResponse,
   type OperationListParams,

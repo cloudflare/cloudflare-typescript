@@ -2,8 +2,9 @@
 
 export {
   SchemaValidation,
+  BaseSchemaValidation,
   type SchemaValidationUpdateParams,
   type SchemaValidationEditParams,
   type SchemaValidationGetParams,
 } from './schema-validation';
-export { Settings } from './settings';
+export { Settings, BaseSettings } from './settings';

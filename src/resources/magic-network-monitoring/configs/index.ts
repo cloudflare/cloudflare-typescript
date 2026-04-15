@@ -2,6 +2,7 @@
 
 export {
   Configs,
+  BaseConfigs,
   type Configuration,
   type ConfigCreateParams,
   type ConfigUpdateParams,
@@ -9,4 +10,4 @@ export {
   type ConfigEditParams,
   type ConfigGetParams,
 } from './configs';
-export { Full, type FullGetParams } from './full';
+export { Full, BaseFull, type FullGetParams } from './full';

@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Schedules extends APIResource {
+export class BaseSchedules extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'schedules'] = Object.freeze([
+    'workers',
+    'scripts',
+    'schedules',
+  ] as const);
+
   /**
    * Updates Cron Triggers for a Worker.
    *
@@ -26,7 +32,7 @@ export class Schedules extends APIResource {
     params: ScheduleUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ScheduleUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/workers/scripts/${scriptName}/schedules`, {
         body: body,
@@ -48,10 +54,10 @@ export class Schedules extends APIResource {
    */
   get(
     scriptName: string,
-    params: ScheduleGetParams,
+    params: ScheduleGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ScheduleGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/schedules`,
@@ -60,6 +66,7 @@ export class Schedules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Schedules extends BaseSchedules {}
 
 export interface ScheduleUpdateResponse {
   schedules: Array<ScheduleUpdateResponse.Schedule>;
@@ -93,7 +100,7 @@ export interface ScheduleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -111,7 +118,7 @@ export interface ScheduleGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Schedules {

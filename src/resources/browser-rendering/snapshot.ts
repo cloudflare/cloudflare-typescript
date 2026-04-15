@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Snapshot extends APIResource {
+export class BaseSnapshot extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'snapshot'] = Object.freeze([
+    'browserRendering',
+    'snapshot',
+  ] as const);
+
   /**
    * Returns the page's HTML content and screenshot. Control page loading with
    * `gotoOptions` and `waitFor*` options. Customize screenshots with `viewport`,
@@ -21,7 +26,7 @@ export class Snapshot extends APIResource {
    * ```
    */
   create(params: SnapshotCreateParams, options?: RequestOptions): APIPromise<SnapshotCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/snapshot`, {
         query: { cacheTTL },
@@ -31,6 +36,7 @@ export class Snapshot extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Snapshot extends BaseSnapshot {}
 
 export interface SnapshotCreateResponse {
   /**
@@ -51,7 +57,7 @@ export declare namespace SnapshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -352,7 +358,7 @@ export declare namespace SnapshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.

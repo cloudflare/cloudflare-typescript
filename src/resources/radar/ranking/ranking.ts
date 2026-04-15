@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as DomainAPI from './domain';
-import { Domain, DomainGetParams, DomainGetResponse } from './domain';
+import { BaseDomain, Domain, DomainGetParams, DomainGetResponse } from './domain';
 import * as InternetServicesAPI from './internet-services';
 import {
+  BaseInternetServices,
   InternetServiceCategoriesParams,
   InternetServiceCategoriesResponse,
   InternetServiceTimeseriesGroupsParams,
@@ -16,11 +17,8 @@ import {
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Ranking extends APIResource {
-  domain: DomainAPI.Domain = new DomainAPI.Domain(this._client);
-  internetServices: InternetServicesAPI.InternetServices = new InternetServicesAPI.InternetServices(
-    this._client,
-  );
+export class BaseRanking extends APIResource {
+  static override readonly _key: readonly ['radar', 'ranking'] = Object.freeze(['radar', 'ranking'] as const);
 
   /**
    * Retrieves domains rank over time.
@@ -63,6 +61,12 @@ export class Ranking extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Ranking extends BaseRanking {
+  domain: DomainAPI.Domain = new DomainAPI.Domain(this._client);
+  internetServices: InternetServicesAPI.InternetServices = new InternetServicesAPI.InternetServices(
+    this._client,
+  );
 }
 
 export interface RankingTimeseriesGroupsResponse {
@@ -445,7 +449,9 @@ export interface RankingTopParams {
 }
 
 Ranking.Domain = Domain;
+Ranking.BaseDomain = BaseDomain;
 Ranking.InternetServices = InternetServices;
+Ranking.BaseInternetServices = BaseInternetServices;
 
 export declare namespace Ranking {
   export {
@@ -457,12 +463,14 @@ export declare namespace Ranking {
 
   export {
     Domain as Domain,
+    BaseDomain as BaseDomain,
     type DomainGetResponse as DomainGetResponse,
     type DomainGetParams as DomainGetParams,
   };
 
   export {
     InternetServices as InternetServices,
+    BaseInternetServices as BaseInternetServices,
     type InternetServiceCategoriesResponse as InternetServiceCategoriesResponse,
     type InternetServiceTimeseriesGroupsResponse as InternetServiceTimeseriesGroupsResponse,
     type InternetServiceTopResponse as InternetServiceTopResponse,

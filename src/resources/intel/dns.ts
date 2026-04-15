@@ -5,7 +5,9 @@ import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../.
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DNS extends APIResource {
+export class BaseDNS extends APIResource {
+  static override readonly _key: readonly ['intel', 'dns'] = Object.freeze(['intel', 'dns'] as const);
+
   /**
    * Gets a list of all the domains that have resolved to a specific IP address.
    *
@@ -19,14 +21,18 @@ export class DNS extends APIResource {
    * }
    * ```
    */
-  list(params: DNSListParams, options?: RequestOptions): PagePromise<DNSV4PagePagination, DNS> {
-    const { account_id, ...query } = params;
+  list(
+    params: DNSListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<DNSV4PagePagination, DNS> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/intel/dns`, V4PagePagination<DNS>, {
       query,
       ...options,
     });
   }
 }
+export class DNS extends BaseDNS {}
 
 export type DNSV4PagePagination = V4PagePagination<DNS>;
 
@@ -75,7 +81,7 @@ export interface DNSListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

@@ -5,13 +5,18 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class DCVDelegation extends APIResource {
+export class BaseDCVDelegation extends APIResource {
+  static override readonly _key: readonly ['dcvDelegation'] = Object.freeze(['dcvDelegation'] as const);
+
   /**
    * Retrieve the account and zone specific unique identifier used as part of the
    * CNAME target for DCV Delegation.
    */
-  get(params: DCVDelegationGetParams, options?: RequestOptions): APIPromise<DCVDelegationUUID> {
-    const { zone_id } = params;
+  get(
+    params: DCVDelegationGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DCVDelegationUUID> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/dcv_delegation/uuid`, options) as APIPromise<{
         result: DCVDelegationUUID;
@@ -19,6 +24,7 @@ export class DCVDelegation extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DCVDelegation extends BaseDCVDelegation {}
 
 export interface DCVDelegationUUID {
   /**
@@ -31,7 +37,7 @@ export interface DCVDelegationGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace DCVDelegation {

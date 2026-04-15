@@ -10,7 +10,10 @@ import {
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Portals extends APIResource {
+export class BasePortals extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'aiControls', 'mcp', 'portals'] =
+    Object.freeze(['zeroTrust', 'access', 'aiControls', 'mcp', 'portals'] as const);
+
   /**
    * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
    *
@@ -28,7 +31,7 @@ export class Portals extends APIResource {
    * ```
    */
   create(params: PortalCreateParams, options?: RequestOptions): APIPromise<PortalCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/access/ai-controls/mcp/portals`, {
         body,
@@ -49,8 +52,12 @@ export class Portals extends APIResource {
    *   );
    * ```
    */
-  update(id: string, params: PortalUpdateParams, options?: RequestOptions): APIPromise<PortalUpdateResponse> {
-    const { account_id, ...body } = params;
+  update(
+    id: string,
+    params: PortalUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PortalUpdateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/access/ai-controls/mcp/portals/${id}`, {
         body,
@@ -73,10 +80,10 @@ export class Portals extends APIResource {
    * ```
    */
   list(
-    params: PortalListParams,
+    params: PortalListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PortalListResponsesV4PagePaginationArray, PortalListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/ai-controls/mcp/portals`,
       V4PagePaginationArray<PortalListResponse>,
@@ -96,8 +103,12 @@ export class Portals extends APIResource {
    *   );
    * ```
    */
-  delete(id: string, params: PortalDeleteParams, options?: RequestOptions): APIPromise<PortalDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    id: string,
+    params: PortalDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PortalDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/access/ai-controls/mcp/portals/${id}`,
@@ -118,8 +129,12 @@ export class Portals extends APIResource {
    *   );
    * ```
    */
-  read(id: string, params: PortalReadParams, options?: RequestOptions): APIPromise<PortalReadResponse> {
-    const { account_id } = params;
+  read(
+    id: string,
+    params: PortalReadParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PortalReadResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/access/ai-controls/mcp/portals/${id}`,
@@ -128,6 +143,7 @@ export class Portals extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Portals extends BasePortals {}
 
 export type PortalListResponsesV4PagePaginationArray = V4PagePaginationArray<PortalListResponse>;
 
@@ -582,7 +598,7 @@ export interface PortalCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: portal id
@@ -663,7 +679,7 @@ export interface PortalUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Allow remote code execution in Dynamic Workers (beta)
@@ -739,7 +755,7 @@ export interface PortalListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id, name, hostname
@@ -748,11 +764,11 @@ export interface PortalListParams extends V4PagePaginationArrayParams {
 }
 
 export interface PortalDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PortalReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Portals {

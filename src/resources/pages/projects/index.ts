@@ -2,6 +2,7 @@
 
 export {
   Deployments,
+  BaseDeployments,
   type DeploymentDeleteResponse,
   type DeploymentCreateParams,
   type DeploymentListParams,
@@ -12,6 +13,7 @@ export {
 } from './deployments/index';
 export {
   Domains,
+  BaseDomains,
   type DomainCreateResponse,
   type DomainListResponse,
   type DomainDeleteResponse,
@@ -26,6 +28,7 @@ export {
 } from './domains';
 export {
   Projects,
+  BaseProjects,
   type Deployment,
   type Project,
   type Stage,

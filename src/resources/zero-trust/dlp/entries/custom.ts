@@ -7,7 +7,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Custom extends APIResource {
+export class BaseCustom extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'entries', 'custom'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'entries',
+    'custom',
+  ] as const);
+
   /**
    * Creates a DLP custom entry.
    *
@@ -23,7 +30,7 @@ export class Custom extends APIResource {
    * ```
    */
   create(params: CustomCreateParams, options?: RequestOptions): APIPromise<CustomCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/entries`, { body, ...options }) as APIPromise<{
         result: CustomCreateResponse;
@@ -53,7 +60,7 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CustomUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/entries/custom/${entryID}`, {
         body,
@@ -76,10 +83,10 @@ export class Custom extends APIResource {
    * ```
    */
   list(
-    params: CustomListParams,
+    params: CustomListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomListResponsesSinglePage, CustomListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dlp/entries`,
       SinglePage<CustomListResponse>,
@@ -101,10 +108,10 @@ export class Custom extends APIResource {
    */
   delete(
     entryID: string,
-    params: CustomDeleteParams,
+    params: CustomDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/dlp/entries/${entryID}`, options) as APIPromise<{
         result: CustomDeleteResponse | null;
@@ -124,8 +131,12 @@ export class Custom extends APIResource {
    *   );
    * ```
    */
-  get(entryID: string, params: CustomGetParams, options?: RequestOptions): APIPromise<CustomGetResponse> {
-    const { account_id } = params;
+  get(
+    entryID: string,
+    params: CustomGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/entries/${entryID}`, options) as APIPromise<{
         result: CustomGetResponse;
@@ -133,6 +144,7 @@ export class Custom extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Custom extends BaseCustom {}
 
 export type CustomListResponsesSinglePage = SinglePage<CustomListResponse>;
 
@@ -586,7 +598,7 @@ export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -618,7 +630,7 @@ export interface CustomUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -642,15 +654,15 @@ export interface CustomUpdateParams {
 }
 
 export interface CustomListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Custom {

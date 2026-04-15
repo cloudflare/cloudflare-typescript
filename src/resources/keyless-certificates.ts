@@ -7,7 +7,11 @@ import { PagePromise, SinglePage } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class KeylessCertificates extends APIResource {
+export class BaseKeylessCertificates extends APIResource {
+  static override readonly _key: readonly ['keylessCertificates'] = Object.freeze([
+    'keylessCertificates',
+  ] as const);
+
   /**
    * Creates a Keyless SSL configuration that allows SSL/TLS termination without
    * exposing private keys to Cloudflare. Keys remain on your infrastructure.
@@ -25,7 +29,7 @@ export class KeylessCertificates extends APIResource {
    * ```
    */
   create(params: KeylessCertificateCreateParams, options?: RequestOptions): APIPromise<KeylessCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as APIPromise<{
         result: KeylessCertificate;
@@ -47,10 +51,10 @@ export class KeylessCertificates extends APIResource {
    * ```
    */
   list(
-    params: KeylessCertificateListParams,
+    params: KeylessCertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<KeylessCertificatesSinglePage, KeylessCertificate> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/keyless_certificates`,
       SinglePage<KeylessCertificate>,
@@ -73,10 +77,10 @@ export class KeylessCertificates extends APIResource {
    */
   delete(
     keylessCertificateID: string,
-    params: KeylessCertificateDeleteParams,
+    params: KeylessCertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KeylessCertificateDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/keyless_certificates/${keylessCertificateID}`,
@@ -103,7 +107,7 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateEditParams,
     options?: RequestOptions,
   ): APIPromise<KeylessCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/keyless_certificates/${keylessCertificateID}`, {
         body,
@@ -126,10 +130,10 @@ export class KeylessCertificates extends APIResource {
    */
   get(
     keylessCertificateID: string,
-    params: KeylessCertificateGetParams,
+    params: KeylessCertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KeylessCertificate> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/keyless_certificates/${keylessCertificateID}`,
@@ -138,6 +142,7 @@ export class KeylessCertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class KeylessCertificates extends BaseKeylessCertificates {}
 
 export type KeylessCertificatesSinglePage = SinglePage<KeylessCertificate>;
 
@@ -236,7 +241,7 @@ export interface KeylessCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's SSL certificate or SSL certificate and intermediate(s).
@@ -277,21 +282,21 @@ export interface KeylessCertificateListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface KeylessCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface KeylessCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * @deprecated Body param: Whether or not the Keyless SSL is on or off.
@@ -324,7 +329,7 @@ export interface KeylessCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace KeylessCertificates {

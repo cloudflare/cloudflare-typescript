@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SecretsAPI from './secrets';
 import {
+  BaseSecrets,
   SecretBulkDeleteParams,
   SecretBulkDeleteResponse,
   SecretCreateParams,
@@ -30,8 +31,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Stores extends APIResource {
-  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
+export class BaseStores extends APIResource {
+  static override readonly _key: readonly ['secretsStore', 'stores'] = Object.freeze([
+    'secretsStore',
+    'stores',
+  ] as const);
 
   /**
    * Creates a store in the account
@@ -45,7 +49,7 @@ export class Stores extends APIResource {
    * ```
    */
   create(params: StoreCreateParams, options?: RequestOptions): APIPromise<StoreCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/secrets_store/stores`, {
         body,
@@ -68,10 +72,10 @@ export class Stores extends APIResource {
    * ```
    */
   list(
-    params: StoreListParams,
+    params: StoreListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<StoreListResponsesV4PagePaginationArray, StoreListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/secrets_store/stores`,
       V4PagePaginationArray<StoreListResponse>,
@@ -92,10 +96,10 @@ export class Stores extends APIResource {
    */
   delete(
     storeID: string,
-    params: StoreDeleteParams,
+    params: StoreDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StoreDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/secrets_store/stores/${storeID}`,
@@ -103,6 +107,9 @@ export class Stores extends APIResource {
       ) as APIPromise<{ result: StoreDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Stores extends BaseStores {
+  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
 }
 
 export type StoreListResponsesV4PagePaginationArray = V4PagePaginationArray<StoreListResponse>;
@@ -170,7 +177,7 @@ export interface StoreCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the store
@@ -182,7 +189,7 @@ export interface StoreListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to sort objects
@@ -199,10 +206,11 @@ export interface StoreDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Stores.Secrets = Secrets;
+Stores.BaseSecrets = BaseSecrets;
 
 export declare namespace Stores {
   export {
@@ -217,6 +225,7 @@ export declare namespace Stores {
 
   export {
     Secrets as Secrets,
+    BaseSecrets as BaseSecrets,
     type SecretCreateResponse as SecretCreateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,

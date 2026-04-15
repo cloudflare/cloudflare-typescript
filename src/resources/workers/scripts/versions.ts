@@ -8,7 +8,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Versions extends APIResource {
+export class BaseVersions extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'versions'] = Object.freeze([
+    'workers',
+    'scripts',
+    'versions',
+  ] as const);
+
   /**
    * Upload a Worker Version without deploying to Cloudflare's network. You can find
    * more about the multipart metadata on our docs:
@@ -31,7 +37,7 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: RequestOptions,
   ): APIPromise<VersionCreateResponse> {
-    const { account_id, bindings_inherit, ...body } = params;
+    const { account_id = this._client.accountID, bindings_inherit, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
@@ -56,10 +62,10 @@ export class Versions extends APIResource {
    */
   list(
     scriptName: string,
-    params: VersionListParams,
+    params: VersionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
       V4PagePagination<VersionListResponse>,
@@ -82,7 +88,7 @@ export class Versions extends APIResource {
    * ```
    */
   get(versionID: string, params: VersionGetParams, options?: RequestOptions): APIPromise<VersionGetResponse> {
-    const { account_id, script_name } = params;
+    const { account_id = this._client.accountID, script_name } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${script_name}/versions/${versionID}`,
@@ -91,6 +97,7 @@ export class Versions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Versions extends BaseVersions {}
 
 export type VersionListResponsesV4PagePagination = V4PagePagination<VersionListResponse>;
 
@@ -2046,7 +2053,7 @@ export interface VersionCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -2942,7 +2949,7 @@ export interface VersionListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Only return versions that can be used in a deployment. Ignores
@@ -2955,7 +2962,7 @@ export interface VersionGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the script.

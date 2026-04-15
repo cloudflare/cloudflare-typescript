@@ -8,7 +8,10 @@ import { CloudflareError } from '../../../../core/error';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class UserPolicyChecks extends APIResource {
+export class BaseUserPolicyChecks extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications', 'userPolicyChecks'] =
+    Object.freeze(['zeroTrust', 'access', 'applications', 'userPolicyChecks'] as const);
+
   /**
    * Tests if a specific user has permission to access an application.
    *
@@ -26,7 +29,8 @@ export class UserPolicyChecks extends APIResource {
     params: UserPolicyCheckListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<UserPolicyCheckListResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -51,6 +55,7 @@ export class UserPolicyChecks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class UserPolicyChecks extends BaseUserPolicyChecks {}
 
 export interface UserPolicyCheckGeo {
   country?: string;

@@ -2,15 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CustomCertificateAPI from './custom-certificate';
-import { CustomCertificate, CustomCertificateGetParams } from './custom-certificate';
+import { BaseCustomCertificate, CustomCertificate, CustomCertificateGetParams } from './custom-certificate';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Configurations extends APIResource {
-  customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(
-    this._client,
-  );
+export class BaseConfigurations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'configurations'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'configurations',
+  ] as const);
 
   /**
    * Update the current Zero Trust account configuration.
@@ -24,10 +26,10 @@ export class Configurations extends APIResource {
    * ```
    */
   update(
-    params: ConfigurationUpdateParams,
+    params: ConfigurationUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConfigurationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/gateway/configuration`, {
         body,
@@ -51,8 +53,11 @@ export class Configurations extends APIResource {
    *   });
    * ```
    */
-  edit(params: ConfigurationEditParams, options?: RequestOptions): APIPromise<ConfigurationEditResponse> {
-    const { account_id, ...body } = params;
+  edit(
+    params: ConfigurationEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigurationEditResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/gateway/configuration`, {
         body,
@@ -72,14 +77,22 @@ export class Configurations extends APIResource {
    *   });
    * ```
    */
-  get(params: ConfigurationGetParams, options?: RequestOptions): APIPromise<ConfigurationGetResponse> {
-    const { account_id } = params;
+  get(
+    params: ConfigurationGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigurationGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/configuration`, options) as APIPromise<{
         result: ConfigurationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Configurations extends BaseConfigurations {
+  customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(
+    this._client,
+  );
 }
 
 /**
@@ -875,7 +888,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify account settings.
@@ -887,7 +900,7 @@ export interface ConfigurationEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify account settings.
@@ -896,10 +909,11 @@ export interface ConfigurationEditParams {
 }
 
 export interface ConfigurationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Configurations.CustomCertificate = CustomCertificate;
+Configurations.BaseCustomCertificate = BaseCustomCertificate;
 
 export declare namespace Configurations {
   export {
@@ -925,6 +939,7 @@ export declare namespace Configurations {
 
   export {
     CustomCertificate as CustomCertificate,
+    BaseCustomCertificate as BaseCustomCertificate,
     type CustomCertificateGetParams as CustomCertificateGetParams,
   };
 }

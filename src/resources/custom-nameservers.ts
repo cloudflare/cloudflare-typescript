@@ -6,7 +6,11 @@ import { PagePromise, SinglePage } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class CustomNameservers extends APIResource {
+export class BaseCustomNameservers extends APIResource {
+  static override readonly _key: readonly ['customNameservers'] = Object.freeze([
+    'customNameservers',
+  ] as const);
+
   /**
    * Add Account Custom Nameserver
    *
@@ -20,7 +24,7 @@ export class CustomNameservers extends APIResource {
    * ```
    */
   create(params: CustomNameserverCreateParams, options?: RequestOptions): APIPromise<CustomNameserver> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/custom_ns`, { body, ...options }) as APIPromise<{
         result: CustomNameserver;
@@ -44,10 +48,10 @@ export class CustomNameservers extends APIResource {
    */
   delete(
     customNSID: string,
-    params: CustomNameserverDeleteParams,
+    params: CustomNameserverDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomNameserverDeleteResponsesSinglePage, CustomNameserverDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/custom_ns/${customNSID}`,
       SinglePage<CustomNameserverDeleteResponse>,
@@ -69,10 +73,10 @@ export class CustomNameservers extends APIResource {
    * ```
    */
   get(
-    params: CustomNameserverGetParams,
+    params: CustomNameserverGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomNameserversSinglePage, CustomNameserver> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/custom_ns`,
       SinglePage<CustomNameserver>,
@@ -80,6 +84,7 @@ export class CustomNameservers extends APIResource {
     );
   }
 }
+export class CustomNameservers extends BaseCustomNameservers {}
 
 export type CustomNameserverDeleteResponsesSinglePage = SinglePage<CustomNameserverDeleteResponse>;
 
@@ -138,7 +143,7 @@ export interface CustomNameserverCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The FQDN of the name server.
@@ -155,14 +160,14 @@ export interface CustomNameserverDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomNameserverGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace CustomNameservers {

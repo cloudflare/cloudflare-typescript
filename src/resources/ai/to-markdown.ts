@@ -7,15 +7,17 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class ToMarkdown extends APIResource {
+export class BaseToMarkdown extends APIResource {
+  static override readonly _key: readonly ['ai', 'toMarkdown'] = Object.freeze(['ai', 'toMarkdown'] as const);
+
   /**
    * Lists all file formats supported for conversion to Markdown.
    */
   supported(
-    params: ToMarkdownSupportedParams,
+    params: ToMarkdownSupportedParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ToMarkdownSupportedResponsesSinglePage, ToMarkdownSupportedResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/tomarkdown/supported`,
       SinglePage<ToMarkdownSupportedResponse>,
@@ -30,7 +32,7 @@ export class ToMarkdown extends APIResource {
     params: ToMarkdownTransformParams,
     options?: RequestOptions,
   ): PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
-    const { account_id, file } = params;
+    const { account_id = this._client.accountID, file } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/tomarkdown`,
       SinglePage<ToMarkdownTransformResponse>,
@@ -38,6 +40,7 @@ export class ToMarkdown extends APIResource {
     );
   }
 }
+export class ToMarkdown extends BaseToMarkdown {}
 
 export type ToMarkdownSupportedResponsesSinglePage = SinglePage<ToMarkdownSupportedResponse>;
 
@@ -62,14 +65,14 @@ export interface ToMarkdownTransformResponse {
 }
 
 export interface ToMarkdownSupportedParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ToMarkdownTransformParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

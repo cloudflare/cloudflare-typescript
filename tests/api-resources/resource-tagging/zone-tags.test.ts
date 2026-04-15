@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { ResourceTagging } from 'cloudflare/resources/resource-tagging/resource-tagging';
+import { BaseZoneTags } from 'cloudflare/resources/resource-tagging/zone-tags';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource zoneTags', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseZoneTags],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ResourceTagging],
+});
+
+const runTests = (client: PartialCloudflare<{ resourceTagging: { zoneTags: BaseZoneTags } }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.resourceTagging.zoneTags.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -77,4 +95,7 @@ describe('resource zoneTags', () => {
       access_application_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     });
   });
-});
+};
+describe('resource zoneTags', () => runTests(client));
+describe('resource zoneTags (tree shakable, base)', () => runTests(partialClient));
+describe('resource zoneTags (tree shakable, subresource)', () => runTests(parentPartialClient));

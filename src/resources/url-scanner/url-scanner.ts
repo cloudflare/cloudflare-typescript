@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 import * as ResponsesAPI from './responses';
-import { ResponseGetParams, ResponseGetResponse, Responses } from './responses';
+import { BaseResponses, ResponseGetParams, ResponseGetResponse, Responses } from './responses';
 import * as ScansAPI from './scans';
 import {
+  BaseScans,
   ScanBulkCreateParams,
   ScanBulkCreateResponse,
   ScanCreateParams,
@@ -21,7 +22,10 @@ import {
   Scans,
 } from './scans';
 
-export class URLScanner extends APIResource {
+export class BaseURLScanner extends APIResource {
+  static override readonly _key: readonly ['urlScanner'] = Object.freeze(['urlScanner'] as const);
+}
+export class URLScanner extends BaseURLScanner {
   responses: ResponsesAPI.Responses = new ResponsesAPI.Responses(this._client);
   scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
 }
@@ -63,19 +67,23 @@ export namespace URLScannerTask {
 }
 
 URLScanner.Responses = Responses;
+URLScanner.BaseResponses = BaseResponses;
 URLScanner.Scans = Scans;
+URLScanner.BaseScans = BaseScans;
 
 export declare namespace URLScanner {
   export { type URLScannerDomain as URLScannerDomain, type URLScannerTask as URLScannerTask };
 
   export {
     Responses as Responses,
+    BaseResponses as BaseResponses,
     type ResponseGetResponse as ResponseGetResponse,
     type ResponseGetParams as ResponseGetParams,
   };
 
   export {
     Scans as Scans,
+    BaseScans as BaseScans,
     type ScanCreateResponse as ScanCreateResponse,
     type ScanListResponse as ScanListResponse,
     type ScanBulkCreateResponse as ScanBulkCreateResponse,

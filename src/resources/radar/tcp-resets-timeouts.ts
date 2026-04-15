@@ -4,7 +4,12 @@ import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class TCPResetsTimeouts extends APIResource {
+export class BaseTCPResetsTimeouts extends APIResource {
+  static override readonly _key: readonly ['radar', 'tcpResetsTimeouts'] = Object.freeze([
+    'radar',
+    'tcpResetsTimeouts',
+  ] as const);
+
   /**
    * Retrieves the distribution of connection stage by TCP connections terminated
    * within the first 10 packets by a reset or timeout.
@@ -47,6 +52,7 @@ export class TCPResetsTimeouts extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TCPResetsTimeouts extends BaseTCPResetsTimeouts {}
 
 export interface TCPResetsTimeoutSummaryResponse {
   /**

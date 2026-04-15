@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Datasets } from 'cloudflare/resources/zero-trust/dlp/datasets/datasets';
+import { BaseVersions } from 'cloudflare/resources/zero-trust/dlp/datasets/versions/versions';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource versions', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseVersions],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Datasets],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { dlp: { datasets: { versions: BaseVersions } } } }>,
+) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.datasets.versions.create(0, {
@@ -39,4 +59,7 @@ describe('resource versions', () => {
       ],
     });
   });
-});
+};
+describe('resource versions', () => runTests(client));
+describe('resource versions (tree shakable, base)', () => runTests(partialClient));
+describe('resource versions (tree shakable, subresource)', () => runTests(parentPartialClient));

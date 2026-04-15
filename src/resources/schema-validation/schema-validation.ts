@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as SchemasAPI from './schemas';
 import {
+  BaseSchemas,
   PublicSchema,
   PublicSchemasV4PagePaginationArray,
   SchemaCreateParams,
@@ -15,6 +16,7 @@ import {
 } from './schemas';
 import * as SettingsAPI from './settings/settings';
 import {
+  BaseSettings,
   SettingEditParams,
   SettingEditResponse,
   SettingGetParams,
@@ -24,17 +26,23 @@ import {
   Settings,
 } from './settings/settings';
 
-export class SchemaValidation extends APIResource {
+export class BaseSchemaValidation extends APIResource {
+  static override readonly _key: readonly ['schemaValidation'] = Object.freeze(['schemaValidation'] as const);
+}
+export class SchemaValidation extends BaseSchemaValidation {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
 SchemaValidation.Schemas = Schemas;
+SchemaValidation.BaseSchemas = BaseSchemas;
 SchemaValidation.Settings = Settings;
+SchemaValidation.BaseSettings = BaseSettings;
 
 export declare namespace SchemaValidation {
   export {
     Schemas as Schemas,
+    BaseSchemas as BaseSchemas,
     type PublicSchema as PublicSchema,
     type SchemaDeleteResponse as SchemaDeleteResponse,
     type PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
@@ -47,6 +55,7 @@ export declare namespace SchemaValidation {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingUpdateResponse as SettingUpdateResponse,
     type SettingEditResponse as SettingEditResponse,
     type SettingGetResponse as SettingGetResponse,

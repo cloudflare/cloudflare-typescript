@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as PreviewsAPI from './previews';
 import {
+  BasePreviews,
   PreviewCreateParams,
   PreviewDeleteParams,
   PreviewDeleteResponse,
@@ -14,8 +15,8 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Healthchecks extends APIResource {
-  previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
+export class BaseHealthchecks extends APIResource {
+  static override readonly _key: readonly ['healthchecks'] = Object.freeze(['healthchecks'] as const);
 
   /**
    * Create a new health check.
@@ -30,7 +31,7 @@ export class Healthchecks extends APIResource {
    * ```
    */
   create(params: HealthcheckCreateParams, options?: RequestOptions): APIPromise<Healthcheck> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/healthchecks`, { body, ...options }) as APIPromise<{
         result: Healthcheck;
@@ -58,7 +59,7 @@ export class Healthchecks extends APIResource {
     params: HealthcheckUpdateParams,
     options?: RequestOptions,
   ): APIPromise<Healthcheck> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/healthchecks/${healthcheckID}`, {
         body,
@@ -81,10 +82,10 @@ export class Healthchecks extends APIResource {
    * ```
    */
   list(
-    params: HealthcheckListParams,
+    params: HealthcheckListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HealthchecksV4PagePaginationArray, Healthcheck> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/healthchecks`, V4PagePaginationArray<Healthcheck>, {
       query,
       ...options,
@@ -104,10 +105,10 @@ export class Healthchecks extends APIResource {
    */
   delete(
     healthcheckID: string,
-    params: HealthcheckDeleteParams,
+    params: HealthcheckDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HealthcheckDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/healthchecks/${healthcheckID}`, options) as APIPromise<{
         result: HealthcheckDeleteResponse;
@@ -135,7 +136,7 @@ export class Healthchecks extends APIResource {
     params: HealthcheckEditParams,
     options?: RequestOptions,
   ): APIPromise<Healthcheck> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/healthchecks/${healthcheckID}`, {
         body,
@@ -157,16 +158,19 @@ export class Healthchecks extends APIResource {
    */
   get(
     healthcheckID: string,
-    params: HealthcheckGetParams,
+    params: HealthcheckGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Healthcheck> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/healthchecks/${healthcheckID}`, options) as APIPromise<{
         result: Healthcheck;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Healthchecks extends BaseHealthchecks {
+  previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
 }
 
 export type HealthchecksV4PagePaginationArray = V4PagePaginationArray<Healthcheck>;
@@ -525,7 +529,7 @@ export interface HealthcheckCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -606,7 +610,7 @@ export interface HealthcheckUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -687,21 +691,21 @@ export interface HealthcheckListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HealthcheckDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HealthcheckEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -782,10 +786,11 @@ export interface HealthcheckGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Healthchecks.Previews = Previews;
+Healthchecks.BasePreviews = BasePreviews;
 
 export declare namespace Healthchecks {
   export {
@@ -806,6 +811,7 @@ export declare namespace Healthchecks {
 
   export {
     Previews as Previews,
+    BasePreviews as BasePreviews,
     type PreviewDeleteResponse as PreviewDeleteResponse,
     type PreviewCreateParams as PreviewCreateParams,
     type PreviewDeleteParams as PreviewDeleteParams,

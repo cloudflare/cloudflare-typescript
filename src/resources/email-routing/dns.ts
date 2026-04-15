@@ -8,7 +8,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DNS extends APIResource {
+export class BaseDNS extends APIResource {
+  static override readonly _key: readonly ['emailRouting', 'dns'] = Object.freeze([
+    'emailRouting',
+    'dns',
+  ] as const);
+
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    *
@@ -19,8 +24,11 @@ export class DNS extends APIResource {
    * });
    * ```
    */
-  create(params: DNSCreateParams, options?: RequestOptions): APIPromise<EmailRoutingAPI.Settings> {
-    const { zone_id, ...body } = params;
+  create(
+    params: DNSCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EmailRoutingAPI.Settings> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as APIPromise<{
         result: EmailRoutingAPI.Settings;
@@ -42,8 +50,11 @@ export class DNS extends APIResource {
    * }
    * ```
    */
-  delete(params: DNSDeleteParams, options?: RequestOptions): PagePromise<DNSRecordsSinglePage, DNSRecord> {
-    const { zone_id } = params;
+  delete(
+    params: DNSDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<DNSRecordsSinglePage, DNSRecord> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/email/routing/dns`, SinglePage<DNSRecord>, {
       method: 'delete',
       ...options,
@@ -60,8 +71,11 @@ export class DNS extends APIResource {
    * });
    * ```
    */
-  edit(params: DNSEditParams, options?: RequestOptions): APIPromise<EmailRoutingAPI.Settings> {
-    const { zone_id, ...body } = params;
+  edit(
+    params: DNSEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EmailRoutingAPI.Settings> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.patch(path`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as APIPromise<{
         result: EmailRoutingAPI.Settings;
@@ -79,11 +93,12 @@ export class DNS extends APIResource {
    * });
    * ```
    */
-  get(params: DNSGetParams, options?: RequestOptions): APIPromise<DNSGetResponse> {
-    const { zone_id, ...query } = params;
+  get(params: DNSGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<DNSGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.get(path`/zones/${zone_id}/email/routing/dns`, { query, ...options });
   }
 }
+export class DNS extends BaseDNS {}
 
 export type DNSRecordsSinglePage = SinglePage<DNSRecord>;
 
@@ -316,7 +331,7 @@ export interface DNSCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Domain of your zone.
@@ -328,14 +343,14 @@ export interface DNSDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DNSEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Domain of your zone.
@@ -347,7 +362,7 @@ export interface DNSGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Domain of your zone.

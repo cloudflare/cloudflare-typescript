@@ -4,7 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as ProjectsAPI from '../projects';
 import { DeploymentsV4PagePaginationArray } from '../projects';
 import * as HistoryAPI from './history/history';
-import { History } from './history/history';
+import { BaseHistory, History } from './history/history';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
@@ -16,8 +16,12 @@ import { RequestOptions } from '../../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../../internal/uploads';
 import { path } from '../../../../internal/utils/path';
 
-export class Deployments extends APIResource {
-  history: HistoryAPI.History = new HistoryAPI.History(this._client);
+export class BaseDeployments extends APIResource {
+  static override readonly _key: readonly ['pages', 'projects', 'deployments'] = Object.freeze([
+    'pages',
+    'projects',
+    'deployments',
+  ] as const);
 
   /**
    * Start a new deployment from production. The repository and account must have
@@ -37,7 +41,7 @@ export class Deployments extends APIResource {
     params: DeploymentCreateParams,
     options?: RequestOptions,
   ): APIPromise<ProjectsAPI.Deployment> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/pages/projects/${projectName}/deployments`,
@@ -62,10 +66,10 @@ export class Deployments extends APIResource {
    */
   list(
     projectName: string,
-    params: DeploymentListParams,
+    params: DeploymentListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DeploymentsV4PagePaginationArray, ProjectsAPI.Deployment> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pages/projects/${projectName}/deployments`,
       V4PagePaginationArray<ProjectsAPI.Deployment>,
@@ -93,7 +97,7 @@ export class Deployments extends APIResource {
     params: DeploymentDeleteParams,
     options?: RequestOptions,
   ): APIPromise<DeploymentDeleteResponse | null> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/pages/projects/${project_name}/deployments/${deploymentID}`,
@@ -122,7 +126,7 @@ export class Deployments extends APIResource {
     params: DeploymentGetParams,
     options?: RequestOptions,
   ): APIPromise<ProjectsAPI.Deployment> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/pages/projects/${project_name}/deployments/${deploymentID}`,
@@ -151,7 +155,7 @@ export class Deployments extends APIResource {
     params: DeploymentRetryParams,
     options?: RequestOptions,
   ): APIPromise<ProjectsAPI.Deployment> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/pages/projects/${project_name}/deployments/${deploymentID}/retry`,
@@ -181,7 +185,7 @@ export class Deployments extends APIResource {
     params: DeploymentRollbackParams,
     options?: RequestOptions,
   ): APIPromise<ProjectsAPI.Deployment> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/pages/projects/${project_name}/deployments/${deploymentID}/rollback`,
@@ -190,6 +194,9 @@ export class Deployments extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Deployments extends BaseDeployments {
+  history: HistoryAPI.History = new HistoryAPI.History(this._client);
+}
 
 export type DeploymentDeleteResponse = unknown;
 
@@ -197,7 +204,7 @@ export interface DeploymentCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Headers configuration file for the deployment.
@@ -276,7 +283,7 @@ export interface DeploymentListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: What type of deployments to fetch.
@@ -288,7 +295,7 @@ export interface DeploymentDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.
@@ -300,7 +307,7 @@ export interface DeploymentGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.
@@ -312,7 +319,7 @@ export interface DeploymentRetryParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.
@@ -324,7 +331,7 @@ export interface DeploymentRollbackParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.
@@ -333,6 +340,7 @@ export interface DeploymentRollbackParams {
 }
 
 Deployments.History = History;
+Deployments.BaseHistory = BaseHistory;
 
 export declare namespace Deployments {
   export {
@@ -345,7 +353,7 @@ export declare namespace Deployments {
     type DeploymentRollbackParams as DeploymentRollbackParams,
   };
 
-  export { History as History };
+  export { History as History, BaseHistory as BaseHistory };
 }
 
 export { type DeploymentsV4PagePaginationArray };

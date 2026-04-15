@@ -2,6 +2,7 @@
 
 export {
   Jobs,
+  BaseJobs,
   type JobCreateResponse,
   type JobListResponse,
   type JobAbortResponse,
@@ -20,4 +21,10 @@ export {
   type JobResumeParams,
   type JobListResponsesSinglePage,
 } from './jobs';
-export { Logs, type LogListResponse, type LogListParams, type LogListResponsesSinglePage } from './logs';
+export {
+  Logs,
+  BaseLogs,
+  type LogListResponse,
+  type LogListParams,
+  type LogListResponsesSinglePage,
+} from './logs';

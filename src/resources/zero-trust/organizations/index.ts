@@ -2,6 +2,7 @@
 
 export {
   DOH,
+  BaseDOH,
   type DOHUpdateResponse,
   type DOHGetResponse,
   type DOHUpdateParams,
@@ -9,6 +10,7 @@ export {
 } from './doh';
 export {
   Organizations,
+  BaseOrganizations,
   type LoginDesign,
   type Organization,
   type OrganizationRevokeUsersResponse,

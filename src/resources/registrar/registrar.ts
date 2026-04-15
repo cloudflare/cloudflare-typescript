@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as DomainsAPI from './domains';
 import {
+  BaseDomains,
   Domain as DomainsAPIDomain,
   DomainGetParams,
   DomainGetResponse,
@@ -13,9 +14,14 @@ import {
   DomainsSinglePage,
 } from './domains';
 import * as RegistrationStatusAPI from './registration-status';
-import { RegistrationStatus, RegistrationStatusGetParams } from './registration-status';
+import {
+  BaseRegistrationStatus,
+  RegistrationStatus,
+  RegistrationStatusGetParams,
+} from './registration-status';
 import * as RegistrationsAPI from './registrations';
 import {
+  BaseRegistrations,
   RegistrationCreateParams,
   RegistrationEditParams,
   RegistrationGetParams,
@@ -23,19 +29,14 @@ import {
   Registrations,
 } from './registrations';
 import * as UpdateStatusAPI from './update-status';
-import { UpdateStatus, UpdateStatusGetParams } from './update-status';
+import { BaseUpdateStatus, UpdateStatus, UpdateStatusGetParams } from './update-status';
 import { APIPromise } from '../../core/api-promise';
 import { CursorPagination } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Registrar extends APIResource {
-  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
-  registrationStatus: RegistrationStatusAPI.RegistrationStatus = new RegistrationStatusAPI.RegistrationStatus(
-    this._client,
-  );
-  updateStatus: UpdateStatusAPI.UpdateStatus = new UpdateStatusAPI.UpdateStatus(this._client);
+export class BaseRegistrar extends APIResource {
+  static override readonly _key: readonly ['registrar'] = Object.freeze(['registrar'] as const);
 
   /**
    * Performs real-time, authoritative availability checks directly against domain
@@ -101,7 +102,7 @@ export class Registrar extends APIResource {
    * ```
    */
   check(params: RegistrarCheckParams, options?: RequestOptions): APIPromise<RegistrarCheckResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/registrar/domain-check`, {
         body,
@@ -153,7 +154,7 @@ export class Registrar extends APIResource {
    * ```
    */
   search(params: RegistrarSearchParams, options?: RequestOptions): APIPromise<RegistrarSearchResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/registrar/domain-search`, {
         query,
@@ -161,6 +162,14 @@ export class Registrar extends APIResource {
       }) as APIPromise<{ result: RegistrarSearchResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Registrar extends BaseRegistrar {
+  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
+  registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
+  registrationStatus: RegistrationStatusAPI.RegistrationStatus = new RegistrationStatusAPI.RegistrationStatus(
+    this._client,
+  );
+  updateStatus: UpdateStatusAPI.UpdateStatus = new UpdateStatusAPI.UpdateStatus(this._client);
 }
 
 export type RegistrationsCursorPagination = CursorPagination<Registration>;
@@ -565,7 +574,7 @@ export interface RegistrarCheckParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of fully qualified domain names (FQDNs) to check for
@@ -585,7 +594,7 @@ export interface RegistrarSearchParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The search term to find domain suggestions. Accepts keywords,
@@ -612,9 +621,13 @@ export interface RegistrarSearchParams {
 }
 
 Registrar.Domains = Domains;
+Registrar.BaseDomains = BaseDomains;
 Registrar.Registrations = Registrations;
+Registrar.BaseRegistrations = BaseRegistrations;
 Registrar.RegistrationStatus = RegistrationStatus;
+Registrar.BaseRegistrationStatus = BaseRegistrationStatus;
 Registrar.UpdateStatus = UpdateStatus;
+Registrar.BaseUpdateStatus = BaseUpdateStatus;
 
 export declare namespace Registrar {
   export {
@@ -628,6 +641,7 @@ export declare namespace Registrar {
 
   export {
     Domains as Domains,
+    BaseDomains as BaseDomains,
     type DomainsAPIDomain as Domain,
     type DomainUpdateResponse as DomainUpdateResponse,
     type DomainGetResponse as DomainGetResponse,
@@ -639,6 +653,7 @@ export declare namespace Registrar {
 
   export {
     Registrations as Registrations,
+    BaseRegistrations as BaseRegistrations,
     type RegistrationCreateParams as RegistrationCreateParams,
     type RegistrationListParams as RegistrationListParams,
     type RegistrationEditParams as RegistrationEditParams,
@@ -647,8 +662,13 @@ export declare namespace Registrar {
 
   export {
     RegistrationStatus as RegistrationStatus,
+    BaseRegistrationStatus as BaseRegistrationStatus,
     type RegistrationStatusGetParams as RegistrationStatusGetParams,
   };
 
-  export { UpdateStatus as UpdateStatus, type UpdateStatusGetParams as UpdateStatusGetParams };
+  export {
+    UpdateStatus as UpdateStatus,
+    BaseUpdateStatus as BaseUpdateStatus,
+    type UpdateStatusGetParams as UpdateStatusGetParams,
+  };
 }

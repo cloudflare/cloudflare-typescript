@@ -2,6 +2,7 @@
 
 export {
   Health,
+  BaseHealth,
   type HealthCreateResponse,
   type HealthGetResponse,
   type HealthCreateParams,
@@ -9,6 +10,7 @@ export {
 } from './health';
 export {
   Pools,
+  BasePools,
   type Pool,
   type PoolDeleteResponse,
   type PoolCreateParams,
@@ -22,6 +24,7 @@ export {
 } from './pools';
 export {
   References,
+  BaseReferences,
   type ReferenceGetResponse,
   type ReferenceGetParams,
   type ReferenceGetResponsesSinglePage,

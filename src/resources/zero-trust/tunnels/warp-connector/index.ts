@@ -2,15 +2,17 @@
 
 export {
   Connections,
+  BaseConnections,
   type ConnectionGetResponse,
   type ConnectionGetParams,
   type ConnectionGetResponsesSinglePage,
 } from './connections';
-export { Connectors, type ConnectorGetResponse, type ConnectorGetParams } from './connectors';
-export { Failover, type FailoverUpdateResponse, type FailoverUpdateParams } from './failover';
-export { Token, type TokenGetResponse, type TokenGetParams } from './token';
+export { Connectors, BaseConnectors, type ConnectorGetResponse, type ConnectorGetParams } from './connectors';
+export { Failover, BaseFailover, type FailoverUpdateResponse, type FailoverUpdateParams } from './failover';
+export { Token, BaseToken, type TokenGetResponse, type TokenGetParams } from './token';
 export {
   WARPConnector,
+  BaseWARPConnector,
   type WARPConnectorCreateResponse,
   type WARPConnectorListResponse,
   type WARPConnectorDeleteResponse,

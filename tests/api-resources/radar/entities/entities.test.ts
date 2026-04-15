@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Radar } from 'cloudflare/resources/radar/radar';
+import { BaseEntities } from 'cloudflare/resources/radar/entities/entities';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource entities', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseEntities],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Radar],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { entities: BaseEntities } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.radar.entities.get({ ip: '8.8.8.8' });
     const rawResponse = await responsePromise.asResponse();
@@ -23,4 +41,7 @@ describe('resource entities', () => {
   test('get: required and optional params', async () => {
     const response = await client.radar.entities.get({ ip: '8.8.8.8', format: 'JSON' });
   });
-});
+};
+describe('resource entities', () => runTests(client));
+describe('resource entities (tree shakable, base)', () => runTests(partialClient));
+describe('resource entities (tree shakable, subresource)', () => runTests(parentPartialClient));

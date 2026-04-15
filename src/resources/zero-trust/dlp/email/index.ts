@@ -2,14 +2,16 @@
 
 export {
   AccountMapping,
+  BaseAccountMapping,
   type AccountMappingCreateResponse,
   type AccountMappingGetResponse,
   type AccountMappingCreateParams,
   type AccountMappingGetParams,
 } from './account-mapping';
-export { Email } from './email';
+export { Email, BaseEmail } from './email';
 export {
   Rules,
+  BaseRules,
   type RuleCreateResponse,
   type RuleUpdateResponse,
   type RuleListResponse,

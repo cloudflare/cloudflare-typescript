@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'settings'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'settings',
+  ] as const);
+
   /**
    * Updates the current device settings for a Zero Trust account.
    *
@@ -17,8 +23,11 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
-    const { account_id, ...body } = params;
+  update(
+    params: SettingUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DeviceSettings | null> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/devices/settings`, { body, ...options }) as APIPromise<{
         result: DeviceSettings | null;
@@ -37,8 +46,11 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  delete(params: SettingDeleteParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
-    const { account_id } = params;
+  delete(
+    params: SettingDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DeviceSettings | null> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/devices/settings`, options) as APIPromise<{
         result: DeviceSettings | null;
@@ -57,8 +69,11 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  edit(params: SettingEditParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
-    const { account_id, ...body } = params;
+  edit(
+    params: SettingEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DeviceSettings | null> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/devices/settings`, { body, ...options }) as APIPromise<{
         result: DeviceSettings | null;
@@ -77,8 +92,11 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  get(params: SettingGetParams, options?: RequestOptions): APIPromise<DeviceSettings | null> {
-    const { account_id } = params;
+  get(
+    params: SettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DeviceSettings | null> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/settings`, options) as APIPromise<{
         result: DeviceSettings | null;
@@ -86,6 +104,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 export interface DeviceSettings {
   /**
@@ -145,7 +164,7 @@ export interface SettingUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sets the time limit, in seconds, that a user can use an override
@@ -203,14 +222,14 @@ export interface SettingUpdateParams {
 }
 
 export interface SettingDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SettingEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sets the time limit, in seconds, that a user can use an override
@@ -268,7 +287,7 @@ export interface SettingEditParams {
 }
 
 export interface SettingGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Settings {

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as ConfigAPI from './config';
 import {
+  BaseConfig,
   Config,
   ConfigCreateParams,
   ConfigCreateResponse,
@@ -15,19 +16,28 @@ import {
   ConfigListResponsesSinglePage,
 } from './config';
 import * as ResultsAPI from './results';
-import { ResultGetParams, ResultGetResponse, Results, ScanResult } from './results';
+import { BaseResults, ResultGetParams, ResultGetResponse, Results, ScanResult } from './results';
 
-export class Scans extends APIResource {
+export class BaseScans extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'scans'] = Object.freeze([
+    'cloudforceOne',
+    'scans',
+  ] as const);
+}
+export class Scans extends BaseScans {
   results: ResultsAPI.Results = new ResultsAPI.Results(this._client);
   config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
 }
 
 Scans.Results = Results;
+Scans.BaseResults = BaseResults;
 Scans.Config = Config;
+Scans.BaseConfig = BaseConfig;
 
 export declare namespace Scans {
   export {
     Results as Results,
+    BaseResults as BaseResults,
     type ScanResult as ScanResult,
     type ResultGetResponse as ResultGetResponse,
     type ResultGetParams as ResultGetParams,
@@ -35,6 +45,7 @@ export declare namespace Scans {
 
   export {
     Config as Config,
+    BaseConfig as BaseConfig,
     type ConfigCreateResponse as ConfigCreateResponse,
     type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,

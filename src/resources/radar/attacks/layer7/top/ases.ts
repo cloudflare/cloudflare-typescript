@@ -4,7 +4,15 @@ import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 
-export class Ases extends APIResource {
+export class BaseAses extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer7', 'top', 'ases'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer7',
+    'top',
+    'ases',
+  ] as const);
+
   /**
    * Retrieves the top origin autonomous systems of layer 7 attacks. Values are
    * percentages of the total layer 7 attacks, with the origin autonomous systems
@@ -27,6 +35,7 @@ export class Ases extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Ases extends BaseAses {}
 
 export interface AseOriginResponse {
   /**

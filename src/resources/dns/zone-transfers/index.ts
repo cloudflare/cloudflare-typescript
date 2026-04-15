@@ -2,6 +2,7 @@
 
 export {
   ACLs,
+  BaseACLs,
   type ACL,
   type ACLDeleteResponse,
   type ACLCreateParams,
@@ -11,9 +12,15 @@ export {
   type ACLGetParams,
   type ACLsSinglePage,
 } from './acls';
-export { ForceAXFRResource, type ForceAXFR, type ForceAXFRCreateParams } from './force-axfr';
+export {
+  ForceAXFRResource,
+  BaseForceAXFRResource,
+  type ForceAXFR,
+  type ForceAXFRCreateParams,
+} from './force-axfr';
 export {
   IncomingResource,
+  BaseIncomingResource,
   type Incoming,
   type IncomingCreateResponse,
   type IncomingUpdateResponse,
@@ -26,6 +33,7 @@ export {
 } from './incoming';
 export {
   OutgoingResource,
+  BaseOutgoingResource,
   type DisableTransfer,
   type EnableTransfer,
   type Outgoing,
@@ -45,6 +53,7 @@ export {
 } from './outgoing/index';
 export {
   Peers,
+  BasePeers,
   type Peer,
   type PeerDeleteResponse,
   type PeerCreateParams,
@@ -56,6 +65,7 @@ export {
 } from './peers';
 export {
   TSIGs,
+  BaseTSIGs,
   type TSIG,
   type TSIGDeleteResponse,
   type TSIGCreateParams,
@@ -65,4 +75,4 @@ export {
   type TSIGGetParams,
   type TSIGsSinglePage,
 } from './tsigs';
-export { ZoneTransfers } from './zone-transfers';
+export { ZoneTransfers, BaseZoneTransfers } from './zone-transfers';

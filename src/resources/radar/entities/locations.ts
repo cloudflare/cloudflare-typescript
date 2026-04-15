@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Locations extends APIResource {
+export class BaseLocations extends APIResource {
+  static override readonly _key: readonly ['radar', 'entities', 'locations'] = Object.freeze([
+    'radar',
+    'entities',
+    'locations',
+  ] as const);
+
   /**
    * Retrieves a list of locations.
    *
@@ -50,6 +56,7 @@ export class Locations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Locations extends BaseLocations {}
 
 export interface LocationListResponse {
   locations: Array<LocationListResponse.Location>;

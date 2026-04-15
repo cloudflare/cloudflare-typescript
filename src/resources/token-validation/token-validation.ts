@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   RuleBulkCreateParams,
   RuleBulkEditParams,
   RuleCreateParams,
@@ -18,6 +19,7 @@ import {
 } from './rules';
 import * as ConfigurationAPI from './configuration/configuration';
 import {
+  BaseConfiguration,
   Configuration,
   ConfigurationCreateParams,
   ConfigurationDeleteParams,
@@ -30,17 +32,23 @@ import {
   TokenConfigsV4PagePaginationArray,
 } from './configuration/configuration';
 
-export class TokenValidation extends APIResource {
+export class BaseTokenValidation extends APIResource {
+  static override readonly _key: readonly ['tokenValidation'] = Object.freeze(['tokenValidation'] as const);
+}
+export class TokenValidation extends BaseTokenValidation {
   configuration: ConfigurationAPI.Configuration = new ConfigurationAPI.Configuration(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
 TokenValidation.Configuration = Configuration;
+TokenValidation.BaseConfiguration = BaseConfiguration;
 TokenValidation.Rules = Rules;
+TokenValidation.BaseRules = BaseRules;
 
 export declare namespace TokenValidation {
   export {
     Configuration as Configuration,
+    BaseConfiguration as BaseConfiguration,
     type TokenConfig as TokenConfig,
     type ConfigurationDeleteResponse as ConfigurationDeleteResponse,
     type ConfigurationEditResponse as ConfigurationEditResponse,
@@ -54,6 +62,7 @@ export declare namespace TokenValidation {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type TokenValidationRule as TokenValidationRule,
     type RuleDeleteResponse as RuleDeleteResponse,
     type TokenValidationRulesV4PagePaginationArray as TokenValidationRulesV4PagePaginationArray,

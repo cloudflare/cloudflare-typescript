@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseVersions } from 'cloudflare/resources/workflows/versions';
+import { Workflows } from 'cloudflare/resources/workflows/workflows';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource versions', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseVersions],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Workflows],
+});
+
+const runTests = (client: PartialCloudflare<{ workflows: { versions: BaseVersions } }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.workflows.versions.list('x', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -48,4 +66,7 @@ describe('resource versions', () => {
       workflow_name: 'x',
     });
   });
-});
+};
+describe('resource versions', () => runTests(client));
+describe('resource versions (tree shakable, base)', () => runTests(partialClient));
+describe('resource versions (tree shakable, subresource)', () => runTests(parentPartialClient));

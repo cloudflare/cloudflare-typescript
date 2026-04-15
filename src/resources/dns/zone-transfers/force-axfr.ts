@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ForceAXFRResource extends APIResource {
+export class BaseForceAXFRResource extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'forceAXFR'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'forceAXFR',
+  ] as const);
+
   /**
    * Sends AXFR zone transfer request to primary nameserver(s).
    *
@@ -19,7 +25,7 @@ export class ForceAXFRResource extends APIResource {
    * ```
    */
   create(params: ForceAXFRCreateParams, options?: RequestOptions): APIPromise<ForceAXFR> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/secondary_dns/force_axfr`, {
         body: body,
@@ -28,6 +34,7 @@ export class ForceAXFRResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ForceAXFRResource extends BaseForceAXFRResource {}
 
 /**
  * When force_axfr query parameter is set to true, the response is a simple string.
@@ -38,7 +45,7 @@ export interface ForceAXFRCreateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param

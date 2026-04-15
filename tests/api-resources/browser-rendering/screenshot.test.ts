@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BrowserRendering } from 'cloudflare/resources/browser-rendering/browser-rendering';
+import { BaseScreenshot } from 'cloudflare/resources/browser-rendering/screenshot';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource screenshot', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseScreenshot],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BrowserRendering],
+});
+
+const runTests = (client: PartialCloudflare<{ browserRendering: { screenshot: BaseScreenshot } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.browserRendering.screenshot.create({
       account_id: 'account_id',
@@ -108,4 +126,7 @@ describe('resource screenshot', () => {
       waitForTimeout: 120000,
     });
   });
-});
+};
+describe('resource screenshot', () => runTests(client));
+describe('resource screenshot (tree shakable, base)', () => runTests(partialClient));
+describe('resource screenshot (tree shakable, subresource)', () => runTests(parentPartialClient));

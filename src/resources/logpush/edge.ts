@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Edge extends APIResource {
+export class BaseEdge extends APIResource {
+  static override readonly _key: readonly ['logpush', 'edge'] = Object.freeze(['logpush', 'edge'] as const);
+
   /**
    * Creates a new Instant Logs job for a zone.
    *
@@ -17,8 +19,11 @@ export class Edge extends APIResource {
    * });
    * ```
    */
-  create(params: EdgeCreateParams, options?: RequestOptions): APIPromise<InstantLogpushJob | null> {
-    const { zone_id, ...body } = params;
+  create(
+    params: EdgeCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<InstantLogpushJob | null> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/logpush/edge/jobs`, { body, ...options }) as APIPromise<{
         result: InstantLogpushJob | null;
@@ -40,10 +45,10 @@ export class Edge extends APIResource {
    * ```
    */
   get(
-    params: EdgeGetParams,
+    params: EdgeGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/logpush/edge/jobs`,
       SinglePage<InstantLogpushJob | null>,
@@ -51,6 +56,7 @@ export class Edge extends APIResource {
     );
   }
 }
+export class Edge extends BaseEdge {}
 
 export type InstantLogpushJobsSinglePage = SinglePage<InstantLogpushJob | null>;
 
@@ -86,7 +92,7 @@ export interface EdgeCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Comma-separated list of fields.
@@ -109,7 +115,7 @@ export interface EdgeGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Edge {

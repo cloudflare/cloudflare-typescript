@@ -6,7 +6,13 @@ import { CloudflareError } from '../../../core/error';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Fields extends APIResource {
+export class BaseFields extends APIResource {
+  static override readonly _key: readonly ['logpush', 'datasets', 'fields'] = Object.freeze([
+    'logpush',
+    'datasets',
+    'fields',
+  ] as const);
+
   /**
    * Lists all fields available for a dataset. The response result is. an object with
    * key-value pairs, where keys are field names, and values are descriptions.
@@ -56,7 +62,8 @@ export class Fields extends APIResource {
     params: FieldGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FieldGetResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -81,6 +88,7 @@ export class Fields extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Fields extends BaseFields {}
 
 export type FieldGetResponse = unknown;
 

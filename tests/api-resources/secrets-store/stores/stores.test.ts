@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { SecretsStore } from 'cloudflare/resources/secrets-store/secrets-store';
+import { BaseStores } from 'cloudflare/resources/secrets-store/stores/stores';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource stores', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseStores],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [SecretsStore],
+});
+
+const runTests = (client: PartialCloudflare<{ secretsStore: { stores: BaseStores } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.secretsStore.stores.create({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
@@ -71,4 +89,7 @@ describe('resource stores', () => {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource stores', () => runTests(client));
+describe('resource stores (tree shakable, base)', () => runTests(partialClient));
+describe('resource stores (tree shakable, subresource)', () => runTests(parentPartialClient));

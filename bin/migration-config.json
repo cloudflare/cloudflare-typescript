@@ -2,6 +2,7 @@
   "pkg": "cloudflare",
   "githubRepo": "https://github.com/cloudflare/cloudflare-typescript",
   "clientClass": "Cloudflare",
+  "baseClientClass": "BaseCloudflare",
   "methods": [
     {
       "base": "customHostnames.certificatePack.certificates",
@@ -80,7 +81,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -154,7 +155,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -228,7 +229,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -302,7 +303,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -376,7 +377,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -413,7 +414,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -450,7 +451,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -561,7 +562,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -598,7 +599,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -635,7 +636,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -672,7 +673,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -709,7 +710,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -746,7 +747,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -783,7 +784,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -820,7 +821,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -857,7 +858,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -894,7 +895,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -931,7 +932,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1005,7 +1006,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1042,7 +1043,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1116,7 +1117,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1153,7 +1154,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1227,7 +1228,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1264,7 +1265,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1301,7 +1302,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1375,7 +1376,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1412,7 +1413,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1486,7 +1487,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1560,7 +1561,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1634,7 +1635,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1708,7 +1709,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1782,7 +1783,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1856,7 +1857,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1898,7 +1899,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1935,7 +1936,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -1972,7 +1973,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2009,7 +2010,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2046,7 +2047,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2083,7 +2084,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2120,7 +2121,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2157,7 +2158,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2194,7 +2195,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2231,7 +2232,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2268,7 +2269,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2305,7 +2306,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2416,7 +2417,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2453,7 +2454,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2527,7 +2528,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2564,7 +2565,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2601,7 +2602,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2675,7 +2676,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2712,7 +2713,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2786,7 +2787,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2823,7 +2824,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2860,7 +2861,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -2944,7 +2945,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3018,7 +3019,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3055,7 +3056,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3166,7 +3167,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3240,7 +3241,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3277,7 +3278,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3351,7 +3352,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3393,7 +3394,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3435,7 +3436,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3509,7 +3510,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3551,7 +3552,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3699,7 +3700,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3736,7 +3737,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3773,7 +3774,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -3810,7 +3811,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4020,7 +4021,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4094,7 +4095,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4168,7 +4169,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4205,7 +4206,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4279,7 +4280,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4358,7 +4359,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4437,7 +4438,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4479,7 +4480,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4516,7 +4517,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4558,7 +4559,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4706,7 +4707,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4743,7 +4744,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4780,7 +4781,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4817,7 +4818,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4854,7 +4855,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4891,7 +4892,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4933,7 +4934,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -4970,7 +4971,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5007,7 +5008,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5044,7 +5045,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5081,7 +5082,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5118,7 +5119,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5192,7 +5193,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5266,7 +5267,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5377,7 +5378,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5414,7 +5415,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5488,7 +5489,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5525,7 +5526,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5562,7 +5563,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5599,7 +5600,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5673,7 +5674,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5747,7 +5748,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5821,7 +5822,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5858,7 +5859,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5895,7 +5896,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5932,7 +5933,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -5969,7 +5970,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6006,7 +6007,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6043,7 +6044,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6080,7 +6081,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6117,7 +6118,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6191,7 +6192,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6228,7 +6229,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6265,7 +6266,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6302,7 +6303,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6376,7 +6377,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6487,7 +6488,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6529,7 +6530,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6566,7 +6567,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6603,7 +6604,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6640,7 +6641,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6677,7 +6678,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6714,7 +6715,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6793,7 +6794,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6830,7 +6831,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6867,7 +6868,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6904,7 +6905,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -6978,7 +6979,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7015,7 +7016,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7052,7 +7053,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7089,7 +7090,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7126,7 +7127,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7163,7 +7164,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7200,7 +7201,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7237,7 +7238,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"
@@ -7348,7 +7349,7 @@
         },
         {
           "type": "params",
-          "maybeOverload": false
+          "maybeOverload": true
         },
         {
           "type": "options"

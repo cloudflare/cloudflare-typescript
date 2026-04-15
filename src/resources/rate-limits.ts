@@ -9,7 +9,9 @@ import { path } from '../internal/utils/path';
 /**
  * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
  */
-export class RateLimits extends APIResource {
+export class BaseRateLimits extends APIResource {
+  static override readonly _key: readonly ['rateLimits'] = Object.freeze(['rateLimits'] as const);
+
   /**
    * Creates a new rate limit for a zone. Refer to the object definition for a list
    * of required attributes.
@@ -17,7 +19,7 @@ export class RateLimits extends APIResource {
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   create(params: RateLimitCreateParams, options?: RequestOptions): APIPromise<RateLimit> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/rate_limits`, { body, ...options }) as APIPromise<{
         result: RateLimit;
@@ -31,10 +33,10 @@ export class RateLimits extends APIResource {
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   list(
-    params: RateLimitListParams,
+    params: RateLimitListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RateLimitsV4PagePaginationArray, RateLimit> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/rate_limits`, V4PagePaginationArray<RateLimit>, {
       query,
       ...options,
@@ -48,10 +50,10 @@ export class RateLimits extends APIResource {
    */
   delete(
     rateLimitID: string,
-    params: RateLimitDeleteParams,
+    params: RateLimitDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RateLimitDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/rate_limits/${rateLimitID}`, options) as APIPromise<{
         result: RateLimitDeleteResponse;
@@ -65,7 +67,7 @@ export class RateLimits extends APIResource {
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   edit(rateLimitID: string, params: RateLimitEditParams, options?: RequestOptions): APIPromise<RateLimit> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/rate_limits/${rateLimitID}`, {
         body,
@@ -79,8 +81,12 @@ export class RateLimits extends APIResource {
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
-  get(rateLimitID: string, params: RateLimitGetParams, options?: RequestOptions): APIPromise<RateLimit> {
-    const { zone_id } = params;
+  get(
+    rateLimitID: string,
+    params: RateLimitGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RateLimit> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/rate_limits/${rateLimitID}`, options) as APIPromise<{
         result: RateLimit;
@@ -88,6 +94,10 @@ export class RateLimits extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+/**
+ * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
+ */
+export class RateLimits extends BaseRateLimits {}
 
 export type RateLimitsV4PagePaginationArray = V4PagePaginationArray<RateLimit>;
 
@@ -462,7 +472,7 @@ export interface RateLimitCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to perform when the threshold of matched traffic within
@@ -615,21 +625,21 @@ export interface RateLimitListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RateLimitDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RateLimitEditParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to perform when the threshold of matched traffic within
@@ -782,7 +792,7 @@ export interface RateLimitGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace RateLimits {

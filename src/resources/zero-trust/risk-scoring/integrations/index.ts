@@ -2,6 +2,7 @@
 
 export {
   Integrations,
+  BaseIntegrations,
   type IntegrationCreateResponse,
   type IntegrationUpdateResponse,
   type IntegrationListResponse,
@@ -14,4 +15,4 @@ export {
   type IntegrationGetParams,
   type IntegrationListResponsesSinglePage,
 } from './integrations';
-export { References, type ReferenceGetResponse, type ReferenceGetParams } from './references';
+export { References, BaseReferences, type ReferenceGetResponse, type ReferenceGetParams } from './references';

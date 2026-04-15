@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class EventTags extends APIResource {
+export class BaseEventTags extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'eventTags'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'eventTags',
+  ] as const);
+
   /**
    * Adds a tag to an event
    *
@@ -23,7 +29,7 @@ export class EventTags extends APIResource {
     params: EventTagCreateParams,
     options?: RequestOptions,
   ): APIPromise<EventTagCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/cloudforce-one/events/event_tag/${eventID}/create`, {
         body,
@@ -46,10 +52,10 @@ export class EventTags extends APIResource {
    */
   delete(
     eventID: string,
-    params: EventTagDeleteParams,
+    params: EventTagDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EventTagDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/cloudforce-one/events/event_tag/${eventID}`,
@@ -58,6 +64,7 @@ export class EventTags extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class EventTags extends BaseEventTags {}
 
 export interface EventTagCreateResponse {
   success: boolean;
@@ -71,7 +78,7 @@ export interface EventTagCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -83,7 +90,7 @@ export interface EventTagDeleteParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace EventTags {

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { NetworkInterconnects } from 'cloudflare/resources/network-interconnects/network-interconnects';
+import { BaseSlots } from 'cloudflare/resources/network-interconnects/slots';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource slots', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSlots],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [NetworkInterconnects],
+});
+
+const runTests = (client: PartialCloudflare<{ networkInterconnects: { slots: BaseSlots } }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.networkInterconnects.slots.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -50,4 +68,7 @@ describe('resource slots', () => {
       account_id: 'account_id',
     });
   });
-});
+};
+describe('resource slots', () => runTests(client));
+describe('resource slots (tree shakable, base)', () => runTests(partialClient));
+describe('resource slots (tree shakable, subresource)', () => runTests(parentPartialClient));

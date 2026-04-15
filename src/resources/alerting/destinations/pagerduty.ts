@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class PagerdutyResource extends APIResource {
+export class BasePagerdutyResource extends APIResource {
+  static override readonly _key: readonly ['alerting', 'destinations', 'pagerduty'] = Object.freeze([
+    'alerting',
+    'destinations',
+    'pagerduty',
+  ] as const);
+
   /**
    * Creates a new token for integrating with PagerDuty.
    *
@@ -18,8 +24,11 @@ export class PagerdutyResource extends APIResource {
    *   });
    * ```
    */
-  create(params: PagerdutyCreateParams, options?: RequestOptions): APIPromise<PagerdutyCreateResponse> {
-    const { account_id } = params;
+  create(
+    params: PagerdutyCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PagerdutyCreateResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect`,
@@ -39,8 +48,11 @@ export class PagerdutyResource extends APIResource {
    *   });
    * ```
    */
-  delete(params: PagerdutyDeleteParams, options?: RequestOptions): APIPromise<PagerdutyDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    params: PagerdutyDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PagerdutyDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/alerting/v3/destinations/pagerduty`, options);
   }
 
@@ -57,8 +69,11 @@ export class PagerdutyResource extends APIResource {
    * }
    * ```
    */
-  get(params: PagerdutyGetParams, options?: RequestOptions): PagePromise<PagerdutiesSinglePage, Pagerduty> {
-    const { account_id } = params;
+  get(
+    params: PagerdutyGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PagerdutiesSinglePage, Pagerduty> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
       SinglePage<Pagerduty>,
@@ -80,10 +95,10 @@ export class PagerdutyResource extends APIResource {
    */
   link(
     tokenID: string,
-    params: PagerdutyLinkParams,
+    params: PagerdutyLinkParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PagerdutyLinkResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect/${tokenID}`,
@@ -92,6 +107,7 @@ export class PagerdutyResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class PagerdutyResource extends BasePagerdutyResource {}
 
 export type PagerdutiesSinglePage = SinglePage<Pagerduty>;
 
@@ -150,28 +166,28 @@ export interface PagerdutyCreateParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PagerdutyDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PagerdutyGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PagerdutyLinkParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace PagerdutyResource {

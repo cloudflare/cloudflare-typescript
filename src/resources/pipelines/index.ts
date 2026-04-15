@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Pipelines } from './pipelines';
+export { Pipelines, BasePipelines } from './pipelines';
 export {
   Sinks,
+  BaseSinks,
   type SinkCreateResponse,
   type SinkListResponse,
   type SinkDeleteResponse,
@@ -15,6 +16,7 @@ export {
 } from './sinks';
 export {
   Streams,
+  BaseStreams,
   type StreamCreateResponse,
   type StreamUpdateResponse,
   type StreamListResponse,

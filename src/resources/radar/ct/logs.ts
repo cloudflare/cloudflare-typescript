@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Logs extends APIResource {
+export class BaseLogs extends APIResource {
+  static override readonly _key: readonly ['radar', 'ct', 'logs'] = Object.freeze([
+    'radar',
+    'ct',
+    'logs',
+  ] as const);
+
   /**
    * Retrieves a list of certificate logs.
    *
@@ -40,6 +46,7 @@ export class Logs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Logs extends BaseLogs {}
 
 export interface LogListResponse {
   certificateLogs: Array<LogListResponse.CertificateLog>;

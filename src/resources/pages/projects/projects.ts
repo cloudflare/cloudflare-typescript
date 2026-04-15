@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as DomainsAPI from './domains';
 import {
+  BaseDomains,
   DomainCreateParams,
   DomainCreateResponse,
   DomainDeleteParams,
@@ -18,6 +19,7 @@ import {
 } from './domains';
 import * as DeploymentsAPI from './deployments/deployments';
 import {
+  BaseDeployments,
   DeploymentCreateParams,
   DeploymentDeleteParams,
   DeploymentDeleteResponse,
@@ -36,9 +38,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Projects extends APIResource {
-  deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
-  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
+export class BaseProjects extends APIResource {
+  static override readonly _key: readonly ['pages', 'projects'] = Object.freeze([
+    'pages',
+    'projects',
+  ] as const);
 
   /**
    * Create a new project.
@@ -53,7 +57,7 @@ export class Projects extends APIResource {
    * ```
    */
   create(params: ProjectCreateParams, options?: RequestOptions): APIPromise<Project> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pages/projects`, { body, ...options }) as APIPromise<{
         result: Project;
@@ -75,10 +79,10 @@ export class Projects extends APIResource {
    * ```
    */
   list(
-    params: ProjectListParams,
+    params: ProjectListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ProjectsV4PagePaginationArray, Project> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pages/projects`,
       V4PagePaginationArray<Project>,
@@ -99,10 +103,10 @@ export class Projects extends APIResource {
    */
   delete(
     projectName: string,
-    params: ProjectDeleteParams,
+    params: ProjectDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ProjectDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/pages/projects/${projectName}`,
@@ -124,7 +128,7 @@ export class Projects extends APIResource {
    * ```
    */
   edit(projectName: string, params: ProjectEditParams, options?: RequestOptions): APIPromise<Project> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/pages/projects/${projectName}`, {
         body,
@@ -144,8 +148,12 @@ export class Projects extends APIResource {
    * );
    * ```
    */
-  get(projectName: string, params: ProjectGetParams, options?: RequestOptions): APIPromise<Project> {
-    const { account_id } = params;
+  get(
+    projectName: string,
+    params: ProjectGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Project> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/pages/projects/${projectName}`, options) as APIPromise<{
         result: Project;
@@ -167,10 +175,10 @@ export class Projects extends APIResource {
    */
   purgeBuildCache(
     projectName: string,
-    params: ProjectPurgeBuildCacheParams,
+    params: ProjectPurgeBuildCacheParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ProjectPurgeBuildCacheResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
@@ -178,6 +186,10 @@ export class Projects extends APIResource {
       ) as APIPromise<{ result: ProjectPurgeBuildCacheResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Projects extends BaseProjects {
+  deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
+  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
 }
 
 export type ProjectsV4PagePaginationArray = V4PagePaginationArray<Project>;
@@ -1283,7 +1295,7 @@ export interface ProjectCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the project.
@@ -2020,21 +2032,21 @@ export interface ProjectListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProjectDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProjectEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Configs for the project build process.
@@ -2771,18 +2783,20 @@ export interface ProjectGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProjectPurgeBuildCacheParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Projects.Deployments = Deployments;
+Projects.BaseDeployments = BaseDeployments;
 Projects.Domains = Domains;
+Projects.BaseDomains = BaseDomains;
 
 export declare namespace Projects {
   export {
@@ -2802,6 +2816,7 @@ export declare namespace Projects {
 
   export {
     Deployments as Deployments,
+    BaseDeployments as BaseDeployments,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
@@ -2813,6 +2828,7 @@ export declare namespace Projects {
 
   export {
     Domains as Domains,
+    BaseDomains as BaseDomains,
     type DomainCreateResponse as DomainCreateResponse,
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,

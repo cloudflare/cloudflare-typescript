@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Behaviours extends APIResource {
+export class BaseBehaviours extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'riskScoring', 'behaviours'] = Object.freeze([
+    'zeroTrust',
+    'riskScoring',
+    'behaviours',
+  ] as const);
+
   /**
    * Updates risk score behavior configurations, defining weights and thresholds for
    * risk calculation.
@@ -22,7 +28,7 @@ export class Behaviours extends APIResource {
    * ```
    */
   update(params: BehaviourUpdateParams, options?: RequestOptions): APIPromise<BehaviourUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/zt_risk_scoring/behaviors`, {
         body,
@@ -43,8 +49,11 @@ export class Behaviours extends APIResource {
    *   });
    * ```
    */
-  get(params: BehaviourGetParams, options?: RequestOptions): APIPromise<BehaviourGetResponse> {
-    const { account_id } = params;
+  get(
+    params: BehaviourGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BehaviourGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/zt_risk_scoring/behaviors`, options) as APIPromise<{
         result: BehaviourGetResponse;
@@ -52,6 +61,7 @@ export class Behaviours extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Behaviours extends BaseBehaviours {}
 
 export interface BehaviourUpdateResponse {
   behaviors: { [key: string]: BehaviourUpdateResponse.Behaviors };
@@ -85,7 +95,7 @@ export interface BehaviourUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -102,7 +112,7 @@ export namespace BehaviourUpdateParams {
 }
 
 export interface BehaviourGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Behaviours {

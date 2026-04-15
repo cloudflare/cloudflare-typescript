@@ -6,7 +6,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Snapshots extends APIResource {
+export class BaseSnapshots extends APIResource {
+  static override readonly _key: readonly ['intel', 'indicatorFeeds', 'snapshots'] = Object.freeze([
+    'intel',
+    'indicatorFeeds',
+    'snapshots',
+  ] as const);
+
   /**
    * Revises the raw data entries in a custom threat indicator feed.
    *
@@ -23,7 +29,7 @@ export class Snapshots extends APIResource {
     params: SnapshotUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SnapshotUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/intel/indicator-feeds/${feedID}/snapshot`,
@@ -32,6 +38,7 @@ export class Snapshots extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Snapshots extends BaseSnapshots {}
 
 export interface SnapshotUpdateResponse {
   /**
@@ -54,7 +61,7 @@ export interface SnapshotUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The file to upload

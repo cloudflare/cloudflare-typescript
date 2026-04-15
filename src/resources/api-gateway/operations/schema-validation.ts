@@ -8,7 +8,13 @@ import { path } from '../../../internal/utils/path';
 /**
  * @deprecated Please use the [Schema Validation Operations Settings](https://developers.cloudflare.com/api/resources/schema_validation/subresources/settings/subresources/operations/) APIs instead
  */
-export class SchemaValidation extends APIResource {
+export class BaseSchemaValidation extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'operations', 'schemaValidation'] = Object.freeze([
+    'apiGateway',
+    'operations',
+    'schemaValidation',
+  ] as const);
+
   /**
    * Updates operation-level schema validation settings on the zone
    *
@@ -19,7 +25,7 @@ export class SchemaValidation extends APIResource {
     params: SchemaValidationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SchemaValidationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return this._client.put(path`/zones/${zone_id}/api_gateway/operations/${operationID}/schema_validation`, {
       body,
       ...options,
@@ -32,7 +38,7 @@ export class SchemaValidation extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   edit(params: SchemaValidationEditParams, options?: RequestOptions): APIPromise<SettingsMultipleRequest> {
-    const { zone_id, settings_multiple_request } = params;
+    const { zone_id = this._client.zoneID, settings_multiple_request } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/api_gateway/operations/schema_validation`, {
         body: settings_multiple_request,
@@ -48,16 +54,20 @@ export class SchemaValidation extends APIResource {
    */
   get(
     operationID: string,
-    params: SchemaValidationGetParams,
+    params: SchemaValidationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SchemaValidationGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.get(
       path`/zones/${zone_id}/api_gateway/operations/${operationID}/schema_validation`,
       options,
     );
   }
 }
+/**
+ * @deprecated Please use the [Schema Validation Operations Settings](https://developers.cloudflare.com/api/resources/schema_validation/subresources/settings/subresources/operations/) APIs instead
+ */
+export class SchemaValidation extends BaseSchemaValidation {}
 
 export type SettingsMultipleRequest = { [key: string]: SettingsMultipleRequest.item };
 
@@ -143,7 +153,7 @@ export interface SchemaValidationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set, this applies a mitigation action to this operation
@@ -162,7 +172,7 @@ export interface SchemaValidationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -174,7 +184,7 @@ export interface SchemaValidationGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace SchemaValidation {

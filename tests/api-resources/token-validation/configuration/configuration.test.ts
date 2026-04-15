@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { TokenValidation } from 'cloudflare/resources/token-validation/token-validation';
+import { BaseConfiguration } from 'cloudflare/resources/token-validation/configuration/configuration';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource configuration', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseConfiguration],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [TokenValidation],
+});
+
+const runTests = (client: PartialCloudflare<{ tokenValidation: { configuration: BaseConfiguration } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.tokenValidation.configuration.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -143,4 +161,7 @@ describe('resource configuration', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource configuration', () => runTests(client));
+describe('resource configuration (tree shakable, base)', () => runTests(partialClient));
+describe('resource configuration (tree shakable, subresource)', () => runTests(parentPartialClient));

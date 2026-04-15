@@ -2,6 +2,7 @@
 
 export {
   RegionalHostnames,
+  BaseRegionalHostnames,
   type RegionalHostnameCreateResponse,
   type RegionalHostnameListResponse,
   type RegionalHostnameDeleteResponse,
@@ -16,6 +17,7 @@ export {
 } from './regional-hostnames';
 export {
   Regions,
+  BaseRegions,
   type RegionListResponse,
   type RegionListParams,
   type RegionListResponsesSinglePage,

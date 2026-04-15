@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as EventsAPI from './events/events';
 import {
+  BaseEvents,
   EventGetParams,
   EventGetResponse,
   EventListParams,
@@ -11,6 +12,7 @@ import {
 } from './events/events';
 import * as SnapshotsAPI from './snapshots/snapshots';
 import {
+  BaseSnapshots,
   SnapshotGetParams,
   SnapshotGetResponse,
   SnapshotListParams,
@@ -22,9 +24,11 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Connectors extends APIResource {
-  events: EventsAPI.Events = new EventsAPI.Events(this._client);
-  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
+export class BaseConnectors extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'connectors'] = Object.freeze([
+    'magicTransit',
+    'connectors',
+  ] as const);
 
   /**
    * Add a connector to your account
@@ -39,7 +43,7 @@ export class Connectors extends APIResource {
    * ```
    */
   create(params: ConnectorCreateParams, options?: RequestOptions): APIPromise<ConnectorCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/connectors`, { body, ...options }) as APIPromise<{
         result: ConnectorCreateResponse;
@@ -64,7 +68,7 @@ export class Connectors extends APIResource {
     params: ConnectorUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ConnectorUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/connectors/${connectorID}`, {
         body,
@@ -87,10 +91,10 @@ export class Connectors extends APIResource {
    * ```
    */
   list(
-    params: ConnectorListParams,
+    params: ConnectorListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/connectors`,
       SinglePage<ConnectorListResponse>,
@@ -112,10 +116,10 @@ export class Connectors extends APIResource {
    */
   delete(
     connectorID: string,
-    params: ConnectorDeleteParams,
+    params: ConnectorDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConnectorDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/magic/connectors/${connectorID}`,
@@ -140,7 +144,7 @@ export class Connectors extends APIResource {
     params: ConnectorEditParams,
     options?: RequestOptions,
   ): APIPromise<ConnectorEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/connectors/${connectorID}`, {
         body,
@@ -162,16 +166,20 @@ export class Connectors extends APIResource {
    */
   get(
     connectorID: string,
-    params: ConnectorGetParams,
+    params: ConnectorGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConnectorGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/connectors/${connectorID}`, options) as APIPromise<{
         result: ConnectorGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Connectors extends BaseConnectors {
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
 }
 
 export type ConnectorListResponsesSinglePage = SinglePage<ConnectorListResponse>;
@@ -444,7 +452,7 @@ export interface ConnectorCreateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Exactly one of id, serial_number, or provision_license must be
@@ -510,7 +518,7 @@ export interface ConnectorUpdateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -559,21 +567,21 @@ export interface ConnectorListParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConnectorDeleteParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConnectorEditParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -622,11 +630,13 @@ export interface ConnectorGetParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Connectors.Events = Events;
+Connectors.BaseEvents = BaseEvents;
 Connectors.Snapshots = Snapshots;
+Connectors.BaseSnapshots = BaseSnapshots;
 
 export declare namespace Connectors {
   export {
@@ -647,6 +657,7 @@ export declare namespace Connectors {
 
   export {
     Events as Events,
+    BaseEvents as BaseEvents,
     type EventListResponse as EventListResponse,
     type EventGetResponse as EventGetResponse,
     type EventListParams as EventListParams,
@@ -655,6 +666,7 @@ export declare namespace Connectors {
 
   export {
     Snapshots as Snapshots,
+    BaseSnapshots as BaseSnapshots,
     type SnapshotListResponse as SnapshotListResponse,
     type SnapshotGetResponse as SnapshotGetResponse,
     type SnapshotListParams as SnapshotListParams,

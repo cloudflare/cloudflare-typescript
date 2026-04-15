@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Radar } from 'cloudflare/resources/radar/radar';
+import { BaseDNS } from 'cloudflare/resources/radar/dns/dns';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource dns', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDNS],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Radar],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { dns: BaseDNS } }>) => {
   test('summaryV2', async () => {
     const responsePromise = client.radar.dns.summaryV2('AS');
     const rawResponse = await responsePromise.asResponse();
@@ -141,4 +159,7 @@ describe('resource dns', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource dns', () => runTests(client));
+describe('resource dns (tree shakable, base)', () => runTests(partialClient));
+describe('resource dns (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as MarkdownForAgentsAPI from './markdown-for-agents';
 import {
+  BaseMarkdownForAgents,
   MarkdownForAgentSummaryParams,
   MarkdownForAgentSummaryResponse,
   MarkdownForAgentTimeseriesParams,
@@ -11,6 +12,7 @@ import {
 } from './markdown-for-agents';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupSummaryParams,
   TimeseriesGroupSummaryResponse,
   TimeseriesGroupTimeseriesGroupsParams,
@@ -23,6 +25,7 @@ import {
 } from './timeseries-groups';
 import * as ToMarkdownAPI from './to-markdown';
 import {
+  BaseToMarkdown,
   ToMarkdown,
   ToMarkdownCreateParams,
   ToMarkdownCreateResponse,
@@ -30,6 +33,7 @@ import {
 } from './to-markdown';
 import * as BotsAPI from './bots/bots';
 import {
+  BaseBots,
   BotSummaryV2Params,
   BotSummaryV2Response,
   BotTimeseriesGroupsParams,
@@ -40,6 +44,7 @@ import {
 } from './bots/bots';
 import * as InferenceAPI from './inference/inference';
 import {
+  BaseInference,
   Inference,
   InferenceSummaryV2Params,
   InferenceSummaryV2Response,
@@ -47,7 +52,10 @@ import {
   InferenceTimeseriesGroupsV2Response,
 } from './inference/inference';
 
-export class AI extends APIResource {
+export class BaseAI extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai'] = Object.freeze(['radar', 'ai'] as const);
+}
+export class AI extends BaseAI {
   toMarkdown: ToMarkdownAPI.ToMarkdown = new ToMarkdownAPI.ToMarkdown(this._client);
   inference: InferenceAPI.Inference = new InferenceAPI.Inference(this._client);
   bots: BotsAPI.Bots = new BotsAPI.Bots(this._client);
@@ -60,14 +68,20 @@ export class AI extends APIResource {
 }
 
 AI.ToMarkdown = ToMarkdown;
+AI.BaseToMarkdown = BaseToMarkdown;
 AI.Inference = Inference;
+AI.BaseInference = BaseInference;
 AI.Bots = Bots;
+AI.BaseBots = BaseBots;
 AI.TimeseriesGroups = TimeseriesGroups;
+AI.BaseTimeseriesGroups = BaseTimeseriesGroups;
 AI.MarkdownForAgents = MarkdownForAgents;
+AI.BaseMarkdownForAgents = BaseMarkdownForAgents;
 
 export declare namespace AI {
   export {
     ToMarkdown as ToMarkdown,
+    BaseToMarkdown as BaseToMarkdown,
     type ToMarkdownCreateResponse as ToMarkdownCreateResponse,
     type ToMarkdownCreateResponsesSinglePage as ToMarkdownCreateResponsesSinglePage,
     type ToMarkdownCreateParams as ToMarkdownCreateParams,
@@ -75,6 +89,7 @@ export declare namespace AI {
 
   export {
     Inference as Inference,
+    BaseInference as BaseInference,
     type InferenceSummaryV2Response as InferenceSummaryV2Response,
     type InferenceTimeseriesGroupsV2Response as InferenceTimeseriesGroupsV2Response,
     type InferenceSummaryV2Params as InferenceSummaryV2Params,
@@ -83,6 +98,7 @@ export declare namespace AI {
 
   export {
     Bots as Bots,
+    BaseBots as BaseBots,
     type BotSummaryV2Response as BotSummaryV2Response,
     type BotTimeseriesResponse as BotTimeseriesResponse,
     type BotTimeseriesGroupsResponse as BotTimeseriesGroupsResponse,
@@ -93,6 +109,7 @@ export declare namespace AI {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupSummaryResponse as TimeseriesGroupSummaryResponse,
     type TimeseriesGroupTimeseriesResponse as TimeseriesGroupTimeseriesResponse,
     type TimeseriesGroupTimeseriesGroupsResponse as TimeseriesGroupTimeseriesGroupsResponse,
@@ -105,6 +122,7 @@ export declare namespace AI {
 
   export {
     MarkdownForAgents as MarkdownForAgents,
+    BaseMarkdownForAgents as BaseMarkdownForAgents,
     type MarkdownForAgentSummaryResponse as MarkdownForAgentSummaryResponse,
     type MarkdownForAgentTimeseriesResponse as MarkdownForAgentTimeseriesResponse,
     type MarkdownForAgentSummaryParams as MarkdownForAgentSummaryParams,

@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as LatestAPI from './latest';
-import { Latest, LatestListParams, LatestListResponse } from './latest';
+import { BaseLatest, Latest, LatestListParams, LatestListResponse } from './latest';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Events extends APIResource {
-  latest: LatestAPI.Latest = new LatestAPI.Latest(this._client);
+export class BaseEvents extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'connectors', 'events'] = Object.freeze([
+    'magicTransit',
+    'connectors',
+    'events',
+  ] as const);
 
   /**
    * List Events
@@ -31,7 +35,7 @@ export class Events extends APIResource {
     params: EventListParams,
     options?: RequestOptions,
   ): APIPromise<EventListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/magic/connectors/${connectorID}/telemetry/events`, {
         query,
@@ -54,7 +58,7 @@ export class Events extends APIResource {
    * ```
    */
   get(eventN: number, params: EventGetParams, options?: RequestOptions): APIPromise<EventGetResponse> {
-    const { account_id, connector_id, event_t } = params;
+    const { account_id = this._client.accountID, connector_id, event_t } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/connectors/${connector_id}/telemetry/events/${event_t}.${eventN}`,
@@ -62,6 +66,9 @@ export class Events extends APIResource {
       ) as APIPromise<{ result: EventGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Events extends BaseEvents {
+  latest: LatestAPI.Latest = new LatestAPI.Latest(this._client);
 }
 
 export interface EventListResponse {
@@ -257,7 +264,7 @@ export interface EventListParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -289,7 +296,7 @@ export interface EventGetParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   connector_id: string;
 
@@ -297,6 +304,7 @@ export interface EventGetParams {
 }
 
 Events.Latest = Latest;
+Events.BaseLatest = BaseLatest;
 
 export declare namespace Events {
   export {
@@ -308,6 +316,7 @@ export declare namespace Events {
 
   export {
     Latest as Latest,
+    BaseLatest as BaseLatest,
     type LatestListResponse as LatestListResponse,
     type LatestListParams as LatestListParams,
   };

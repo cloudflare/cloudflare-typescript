@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Zone extends APIResource {
+export class BaseZone extends APIResource {
+  static override readonly _key: readonly ['dns', 'settings', 'zone'] = Object.freeze([
+    'dns',
+    'settings',
+    'zone',
+  ] as const);
+
   /**
    * Update DNS settings for a zone
    *
@@ -16,8 +22,11 @@ export class Zone extends APIResource {
    * });
    * ```
    */
-  edit(params: ZoneEditParams, options?: RequestOptions): APIPromise<ZoneEditResponse> {
-    const { zone_id, ...body } = params;
+  edit(
+    params: ZoneEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ZoneEditResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.patch(path`/zones/${zone_id}/dns_settings`, { body, ...options }) as APIPromise<{
         result: ZoneEditResponse;
@@ -35,8 +44,8 @@ export class Zone extends APIResource {
    * });
    * ```
    */
-  get(params: ZoneGetParams, options?: RequestOptions): APIPromise<ZoneGetResponse> {
-    const { zone_id } = params;
+  get(params: ZoneGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<ZoneGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/dns_settings`, options) as APIPromise<{
         result: ZoneGetResponse;
@@ -44,6 +53,7 @@ export class Zone extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Zone extends BaseZone {}
 
 export interface ZoneEditResponse {
   /**
@@ -295,7 +305,7 @@ export interface ZoneEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether to flatten all CNAME records in the zone. Note that, due to
@@ -424,7 +434,7 @@ export interface ZoneGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Zone {

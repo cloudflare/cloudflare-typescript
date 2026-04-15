@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryDNSSECParams,
   SummaryDNSSECResponse,
@@ -19,6 +20,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupDNSSECParams,
   TimeseriesGroupDNSSECResponse,
   TimeseriesGroupEdnsParams,
@@ -35,6 +37,7 @@ import {
 } from './timeseries-groups';
 import * as TopAPI from './top';
 import {
+  BaseTop,
   Top,
   TopDNSSECParams,
   TopDNSSECResponse,
@@ -49,12 +52,8 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AS112 extends APIResource {
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
-  top: TopAPI.Top = new TopAPI.Top(this._client);
+export class BaseAS112 extends APIResource {
+  static override readonly _key: readonly ['radar', 'as112'] = Object.freeze(['radar', 'as112'] as const);
 
   /**
    * Retrieves the distribution of AS112 queries by the specified dimension.
@@ -118,6 +117,13 @@ export class AS112 extends APIResource {
       }) as APIPromise<{ result: AS112TimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class AS112 extends BaseAS112 {
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 }
 
 export interface AS112SummaryV2Response {
@@ -1066,8 +1072,11 @@ export interface AS112TimeseriesGroupsV2Params {
 }
 
 AS112.Summary = Summary;
+AS112.BaseSummary = BaseSummary;
 AS112.TimeseriesGroups = TimeseriesGroups;
+AS112.BaseTimeseriesGroups = BaseTimeseriesGroups;
 AS112.Top = Top;
+AS112.BaseTop = BaseTop;
 
 export declare namespace AS112 {
   export {
@@ -1081,6 +1090,7 @@ export declare namespace AS112 {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryDNSSECResponse as SummaryDNSSECResponse,
     type SummaryEdnsResponse as SummaryEdnsResponse,
     type SummaryIPVersionResponse as SummaryIPVersionResponse,
@@ -1097,6 +1107,7 @@ export declare namespace AS112 {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupDNSSECResponse as TimeseriesGroupDNSSECResponse,
     type TimeseriesGroupEdnsResponse as TimeseriesGroupEdnsResponse,
     type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
@@ -1113,6 +1124,7 @@ export declare namespace AS112 {
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopDNSSECResponse as TopDNSSECResponse,
     type TopEdnsResponse as TopEdnsResponse,
     type TopIPVersionResponse as TopIPVersionResponse,

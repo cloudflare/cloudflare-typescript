@@ -2,9 +2,15 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as IPsAPI from './ips';
-import { IPGetParams, IPs } from './ips';
+import { BaseIPs, IPGetParams, IPs } from './ips';
 import * as NetworksAPI from './networks';
-import { NetworkCreateParams, NetworkDeleteParams, NetworkEditParams, Networks } from './networks';
+import {
+  BaseNetworks,
+  NetworkCreateParams,
+  NetworkDeleteParams,
+  NetworkEditParams,
+  Networks,
+} from './networks';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
@@ -14,9 +20,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Routes extends APIResource {
-  ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
-  networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
+export class BaseRoutes extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'routes'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'routes',
+  ] as const);
 
   /**
    * Routes a private network through a Cloudflare Tunnel.
@@ -33,7 +42,7 @@ export class Routes extends APIResource {
    * ```
    */
   create(params: RouteCreateParams, options?: RequestOptions): APIPromise<Route> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/teamnet/routes`, { body, ...options }) as APIPromise<{
         result: Route;
@@ -55,10 +64,10 @@ export class Routes extends APIResource {
    * ```
    */
   list(
-    params: RouteListParams,
+    params: RouteListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TeamnetsV4PagePaginationArray, Teamnet> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/teamnet/routes`,
       V4PagePaginationArray<Teamnet>,
@@ -77,8 +86,12 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  delete(routeID: string, params: RouteDeleteParams, options?: RequestOptions): APIPromise<Route> {
-    const { account_id } = params;
+  delete(
+    routeID: string,
+    params: RouteDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Route> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/teamnet/routes/${routeID}`, options) as APIPromise<{
         result: Route;
@@ -99,7 +112,7 @@ export class Routes extends APIResource {
    * ```
    */
   edit(routeID: string, params: RouteEditParams, options?: RequestOptions): APIPromise<Route> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/teamnet/routes/${routeID}`, {
         body,
@@ -119,14 +132,22 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  get(routeID: string, params: RouteGetParams, options?: RequestOptions): APIPromise<Route> {
-    const { account_id } = params;
+  get(
+    routeID: string,
+    params: RouteGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Route> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/teamnet/routes/${routeID}`, options) as APIPromise<{
         result: Route;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Routes extends BaseRoutes {
+  ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
+  networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
 }
 
 export type TeamnetsV4PagePaginationArray = V4PagePaginationArray<Teamnet>;
@@ -264,7 +285,7 @@ export interface RouteCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The private IPv4 or IPv6 range connected by the route, in CIDR
@@ -292,7 +313,7 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optional remark describing the route.
@@ -346,14 +367,14 @@ export interface RouteDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RouteEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Optional remark describing the route.
@@ -381,11 +402,13 @@ export interface RouteGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Routes.IPs = IPs;
+Routes.BaseIPs = BaseIPs;
 Routes.Networks = Networks;
+Routes.BaseNetworks = BaseNetworks;
 
 export declare namespace Routes {
   export {
@@ -400,10 +423,11 @@ export declare namespace Routes {
     type RouteGetParams as RouteGetParams,
   };
 
-  export { IPs as IPs, type IPGetParams as IPGetParams };
+  export { IPs as IPs, BaseIPs as BaseIPs, type IPGetParams as IPGetParams };
 
   export {
     Networks as Networks,
+    BaseNetworks as BaseNetworks,
     type NetworkCreateParams as NetworkCreateParams,
     type NetworkDeleteParams as NetworkDeleteParams,
     type NetworkEditParams as NetworkEditParams,

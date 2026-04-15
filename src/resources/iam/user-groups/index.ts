@@ -2,6 +2,7 @@
 
 export {
   Members,
+  BaseMembers,
   type MemberCreateResponse,
   type MemberUpdateResponse,
   type MemberListResponse,
@@ -15,6 +16,7 @@ export {
 } from './members';
 export {
   UserGroups,
+  BaseUserGroups,
   type UserGroupCreateResponse,
   type UserGroupUpdateResponse,
   type UserGroupListResponse,

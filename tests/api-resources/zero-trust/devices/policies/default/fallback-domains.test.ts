@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Default } from 'cloudflare/resources/zero-trust/devices/policies/default/default';
+import { BaseFallbackDomains } from 'cloudflare/resources/zero-trust/devices/policies/default/fallback-domains';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,25 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource fallbackDomains', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseFallbackDomains],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Default],
+});
+
+const runTests = (
+  client: PartialCloudflare<{
+    zeroTrust: { devices: { policies: { default: { fallbackDomains: BaseFallbackDomains } } } };
+  }>,
+) => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.fallbackDomains.update({
       account_id: '699d98642c564d2e855e9661899b7252',
@@ -54,4 +76,7 @@ describe('resource fallbackDomains', () => {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
-});
+};
+describe('resource fallbackDomains', () => runTests(client));
+describe('resource fallbackDomains (tree shakable, base)', () => runTests(partialClient));
+describe('resource fallbackDomains (tree shakable, subresource)', () => runTests(parentPartialClient));

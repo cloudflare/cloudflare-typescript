@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class ASPA extends APIResource {
+export class BaseASPA extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp', 'rpki', 'aspa'] = Object.freeze([
+    'radar',
+    'bgp',
+    'rpki',
+    'aspa',
+  ] as const);
+
   /**
    * Retrieves ASPA (Autonomous System Provider Authorization) changes over time.
    * Returns daily aggregated changes including additions, removals, and
@@ -70,6 +77,7 @@ export class ASPA extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ASPA extends BaseASPA {}
 
 export interface ASPAChangesResponse {
   asnInfo: ASPAChangesResponse.ASNInfo;

@@ -11,7 +11,12 @@ import {
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['tokenValidation', 'rules'] = Object.freeze([
+    'tokenValidation',
+    'rules',
+  ] as const);
+
   /**
    * Create a token validation rule.
    *
@@ -32,7 +37,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: RequestOptions): APIPromise<TokenValidationRule> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/token_validation/rules`, { body, ...options }) as APIPromise<{
         result: TokenValidationRule;
@@ -54,10 +59,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params: RuleListParams,
+    params: RuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TokenValidationRulesV4PagePaginationArray, TokenValidationRule> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/token_validation/rules`,
       V4PagePaginationArray<TokenValidationRule>,
@@ -76,8 +81,12 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  delete(ruleID: string, params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    ruleID: string,
+    params: RuleDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RuleDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/token_validation/rules/${ruleID}`, options) as APIPromise<{
         result: RuleDeleteResponse;
@@ -118,7 +127,7 @@ export class Rules extends APIResource {
     params: RuleBulkCreateParams,
     options?: RequestOptions,
   ): PagePromise<TokenValidationRulesSinglePage, TokenValidationRule> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/token_validation/rules/bulk`,
       SinglePage<TokenValidationRule>,
@@ -152,7 +161,7 @@ export class Rules extends APIResource {
     params: RuleBulkEditParams,
     options?: RequestOptions,
   ): PagePromise<TokenValidationRulesSinglePage, TokenValidationRule> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/token_validation/rules/bulk`,
       SinglePage<TokenValidationRule>,
@@ -173,7 +182,7 @@ export class Rules extends APIResource {
    * ```
    */
   edit(ruleID: string, params: RuleEditParams, options?: RequestOptions): APIPromise<TokenValidationRule> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/token_validation/rules/${ruleID}`, {
         body,
@@ -194,8 +203,12 @@ export class Rules extends APIResource {
    *   );
    * ```
    */
-  get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<TokenValidationRule> {
-    const { zone_id } = params;
+  get(
+    ruleID: string,
+    params: RuleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenValidationRule> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/token_validation/rules/${ruleID}`, options) as APIPromise<{
         result: TokenValidationRule;
@@ -203,6 +216,7 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Rules extends BaseRules {}
 
 export type TokenValidationRulesV4PagePaginationArray = V4PagePaginationArray<TokenValidationRule>;
 
@@ -302,7 +316,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Action to take on requests that match operations included in
@@ -383,7 +397,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Select rules with these IDs.
@@ -426,14 +440,14 @@ export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RuleBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -526,7 +540,7 @@ export interface RuleBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -653,7 +667,7 @@ export interface RuleEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Action to take on requests that match operations included in
@@ -766,7 +780,7 @@ export interface RuleGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Rules {

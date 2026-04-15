@@ -5,12 +5,17 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['snippets', 'rules'] = Object.freeze([
+    'snippets',
+    'rules',
+  ] as const);
+
   /**
    * Updates all snippet rules belonging to the zone.
    */
   update(params: RuleUpdateParams, options?: RequestOptions): APIPromise<RuleUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/snippets/snippet_rules`, { body, ...options }) as APIPromise<{
         result: RuleUpdateResponse;
@@ -21,8 +26,11 @@ export class Rules extends APIResource {
   /**
    * Fetches all snippet rules belonging to the zone.
    */
-  list(params: RuleListParams, options?: RequestOptions): APIPromise<RuleListResponse> {
-    const { zone_id } = params;
+  list(
+    params: RuleListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RuleListResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/snippets/snippet_rules`, options) as APIPromise<{
         result: RuleListResponse;
@@ -33,8 +41,11 @@ export class Rules extends APIResource {
   /**
    * Deletes all snippet rules belonging to the zone.
    */
-  delete(params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    params: RuleDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RuleDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/snippets/snippet_rules`, options) as APIPromise<{
         result: RuleDeleteResponse;
@@ -42,6 +53,7 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Rules extends BaseRules {}
 
 /**
  * Contain the response result.
@@ -62,7 +74,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Lists snippet rules.
@@ -101,14 +113,14 @@ export interface RuleListParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RuleDeleteParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Rules {

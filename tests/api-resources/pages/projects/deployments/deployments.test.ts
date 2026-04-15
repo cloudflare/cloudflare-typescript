@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Projects } from 'cloudflare/resources/pages/projects/projects';
+import { BaseDeployments } from 'cloudflare/resources/pages/projects/deployments/deployments';
+
 import Cloudflare, { toFile } from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource deployments', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDeployments],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Projects],
+});
+
+const runTests = (client: PartialCloudflare<{ pages: { projects: { deployments: BaseDeployments } } }>) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.pages.projects.deployments.create('this-is-my-project-01', {
@@ -148,4 +166,7 @@ describe('resource deployments', () => {
       project_name: 'this-is-my-project-01',
     });
   });
-});
+};
+describe('resource deployments', () => runTests(client));
+describe('resource deployments (tree shakable, base)', () => runTests(partialClient));
+describe('resource deployments (tree shakable, subresource)', () => runTests(parentPartialClient));

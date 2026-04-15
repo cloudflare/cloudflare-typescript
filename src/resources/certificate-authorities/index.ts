@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CertificateAuthorities } from './certificate-authorities';
+export { CertificateAuthorities, BaseCertificateAuthorities } from './certificate-authorities';
 export {
   HostnameAssociations,
+  BaseHostnameAssociations,
   type HostnameAssociation,
   type TLSHostnameAssociation,
   type HostnameAssociationUpdateResponse,

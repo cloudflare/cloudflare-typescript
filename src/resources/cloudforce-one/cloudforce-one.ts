@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as BinaryStorageAPI from './binary-storage';
 import {
+  BaseBinaryStorage,
   BinaryStorage,
   BinaryStorageCreateParams,
   BinaryStorageCreateResponse,
@@ -10,6 +11,7 @@ import {
 } from './binary-storage';
 import * as RequestsAPI from './requests/requests';
 import {
+  BaseRequests,
   Item,
   ListItem,
   ListItemsSinglePage,
@@ -30,9 +32,10 @@ import {
   Requests,
 } from './requests/requests';
 import * as ScansAPI from './scans/scans';
-import { Scans } from './scans/scans';
+import { BaseScans, Scans } from './scans/scans';
 import * as ThreatEventsAPI from './threat-events/threat-events';
 import {
+  BaseThreatEvents,
   ThreatEventBulkCreateParams,
   ThreatEventBulkCreateResponse,
   ThreatEventCreateParams,
@@ -46,7 +49,10 @@ import {
   ThreatEvents,
 } from './threat-events/threat-events';
 
-export class CloudforceOne extends APIResource {
+export class BaseCloudforceOne extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne'] = Object.freeze(['cloudforceOne'] as const);
+}
+export class CloudforceOne extends BaseCloudforceOne {
   scans: ScansAPI.Scans = new ScansAPI.Scans(this._client);
   binaryStorage: BinaryStorageAPI.BinaryStorage = new BinaryStorageAPI.BinaryStorage(this._client);
   requests: RequestsAPI.Requests = new RequestsAPI.Requests(this._client);
@@ -54,15 +60,20 @@ export class CloudforceOne extends APIResource {
 }
 
 CloudforceOne.Scans = Scans;
+CloudforceOne.BaseScans = BaseScans;
 CloudforceOne.BinaryStorage = BinaryStorage;
+CloudforceOne.BaseBinaryStorage = BaseBinaryStorage;
 CloudforceOne.Requests = Requests;
+CloudforceOne.BaseRequests = BaseRequests;
 CloudforceOne.ThreatEvents = ThreatEvents;
+CloudforceOne.BaseThreatEvents = BaseThreatEvents;
 
 export declare namespace CloudforceOne {
-  export { Scans as Scans };
+  export { Scans as Scans, BaseScans as BaseScans };
 
   export {
     BinaryStorage as BinaryStorage,
+    BaseBinaryStorage as BaseBinaryStorage,
     type BinaryStorageCreateResponse as BinaryStorageCreateResponse,
     type BinaryStorageCreateParams as BinaryStorageCreateParams,
     type BinaryStorageGetParams as BinaryStorageGetParams,
@@ -70,6 +81,7 @@ export declare namespace CloudforceOne {
 
   export {
     Requests as Requests,
+    BaseRequests as BaseRequests,
     type Item as Item,
     type ListItem as ListItem,
     type Quota as Quota,
@@ -91,6 +103,7 @@ export declare namespace CloudforceOne {
 
   export {
     ThreatEvents as ThreatEvents,
+    BaseThreatEvents as BaseThreatEvents,
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
     type ThreatEventListResponse as ThreatEventListResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Stream } from 'cloudflare/resources/stream/stream';
+import { BaseWatermarks } from 'cloudflare/resources/stream/watermarks';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource watermarks', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseWatermarks],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Stream],
+});
+
+const runTests = (client: PartialCloudflare<{ stream: { watermarks: BaseWatermarks } }>) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.stream.watermarks.create({
@@ -88,4 +106,7 @@ describe('resource watermarks', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource watermarks', () => runTests(client));
+describe('resource watermarks (tree shakable, base)', () => runTests(partialClient));
+describe('resource watermarks (tree shakable, subresource)', () => runTests(parentPartialClient));

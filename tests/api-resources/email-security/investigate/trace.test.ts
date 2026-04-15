@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Investigate } from 'cloudflare/resources/email-security/investigate/investigate';
+import { BaseTrace } from 'cloudflare/resources/email-security/investigate/trace';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource trace', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTrace],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Investigate],
+});
+
+const runTests = (client: PartialCloudflare<{ emailSecurity: { investigate: { trace: BaseTrace } } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.emailSecurity.investigate.trace.get('4Njp3P0STMz2c02Q', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -28,4 +46,7 @@ describe('resource trace', () => {
       submission: true,
     });
   });
-});
+};
+describe('resource trace', () => runTests(client));
+describe('resource trace (tree shakable, base)', () => runTests(partialClient));
+describe('resource trace (tree shakable, subresource)', () => runTests(parentPartialClient));

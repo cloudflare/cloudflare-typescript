@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryBotClassParams,
   SummaryBotClassResponse,
@@ -23,6 +24,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupBotClassParams,
   TimeseriesGroupBotClassResponse,
   TimeseriesGroupBrowserFamilyParams,
@@ -47,6 +49,7 @@ import {
 } from './timeseries-groups';
 import * as TopAPI from './top';
 import {
+  BaseTop,
   Top,
   TopBrowserFamilyParams,
   TopBrowserFamilyResponse,
@@ -54,21 +57,15 @@ import {
   TopBrowserResponse,
 } from './top';
 import * as AsesAPI from './ases/ases';
-import { AseGetParams, AseGetResponse, Ases } from './ases/ases';
+import { AseGetParams, AseGetResponse, Ases, BaseAses } from './ases/ases';
 import * as LocationsAPI from './locations/locations';
-import { LocationGetParams, LocationGetResponse, Locations } from './locations/locations';
+import { BaseLocations, LocationGetParams, LocationGetResponse, Locations } from './locations/locations';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class HTTP extends APIResource {
-  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
-  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
-  top: TopAPI.Top = new TopAPI.Top(this._client);
+export class BaseHTTP extends APIResource {
+  static override readonly _key: readonly ['radar', 'http'] = Object.freeze(['radar', 'http'] as const);
 
   /**
    * Retrieves the distribution of HTTP requests by the specified dimension.
@@ -157,6 +154,15 @@ export class HTTP extends APIResource {
       }) as APIPromise<{ result: HTTPTimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class HTTP extends BaseHTTP {
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 }
 
 export interface HTTPSummaryV2Response {
@@ -903,10 +909,15 @@ export interface HTTPTimeseriesGroupsV2Params {
 }
 
 HTTP.Locations = Locations;
+HTTP.BaseLocations = BaseLocations;
 HTTP.Ases = Ases;
+HTTP.BaseAses = BaseAses;
 HTTP.Summary = Summary;
+HTTP.BaseSummary = BaseSummary;
 HTTP.TimeseriesGroups = TimeseriesGroups;
+HTTP.BaseTimeseriesGroups = BaseTimeseriesGroups;
 HTTP.Top = Top;
+HTTP.BaseTop = BaseTop;
 
 export declare namespace HTTP {
   export {
@@ -920,14 +931,21 @@ export declare namespace HTTP {
 
   export {
     Locations as Locations,
+    BaseLocations as BaseLocations,
     type LocationGetResponse as LocationGetResponse,
     type LocationGetParams as LocationGetParams,
   };
 
-  export { Ases as Ases, type AseGetResponse as AseGetResponse, type AseGetParams as AseGetParams };
+  export {
+    Ases as Ases,
+    BaseAses as BaseAses,
+    type AseGetResponse as AseGetResponse,
+    type AseGetParams as AseGetParams,
+  };
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryBotClassResponse as SummaryBotClassResponse,
     type SummaryDeviceTypeResponse as SummaryDeviceTypeResponse,
     type SummaryHTTPProtocolResponse as SummaryHTTPProtocolResponse,
@@ -948,6 +966,7 @@ export declare namespace HTTP {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupBotClassResponse as TimeseriesGroupBotClassResponse,
     type TimeseriesGroupBrowserResponse as TimeseriesGroupBrowserResponse,
     type TimeseriesGroupBrowserFamilyResponse as TimeseriesGroupBrowserFamilyResponse,
@@ -972,6 +991,7 @@ export declare namespace HTTP {
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopBrowserResponse as TopBrowserResponse,
     type TopBrowserFamilyResponse as TopBrowserFamilyResponse,
     type TopBrowserParams as TopBrowserParams,

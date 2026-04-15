@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { CustomCertificates } from 'cloudflare/resources/custom-certificates/custom-certificates';
+import { BasePrioritize } from 'cloudflare/resources/custom-certificates/prioritize';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource prioritize', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePrioritize],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [CustomCertificates],
+});
+
+const runTests = (client: PartialCloudflare<{ customCertificates: { prioritize: BasePrioritize } }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.customCertificates.prioritize.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -32,4 +50,7 @@ describe('resource prioritize', () => {
       ],
     });
   });
-});
+};
+describe('resource prioritize', () => runTests(client));
+describe('resource prioritize (tree shakable, base)', () => runTests(partialClient));
+describe('resource prioritize (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -6,7 +6,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class CloudflareSource extends APIResource {
+export class BaseCloudflareSource extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'subnets', 'cloudflareSource'] =
+    Object.freeze(['zeroTrust', 'networks', 'subnets', 'cloudflareSource'] as const);
+
   /**
    * Updates the Cloudflare Source subnet of the given address family
    *
@@ -24,7 +27,7 @@ export class CloudflareSource extends APIResource {
     params: CloudflareSourceUpdateParams,
     options?: RequestOptions,
   ): APIPromise<WARPAPI.Subnet> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/zerotrust/subnets/cloudflare_source/${addressFamily}`, {
         body,
@@ -33,12 +36,13 @@ export class CloudflareSource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CloudflareSource extends BaseCloudflareSource {}
 
 export interface CloudflareSourceUpdateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the subnet.

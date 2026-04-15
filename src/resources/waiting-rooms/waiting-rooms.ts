@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 import * as PageAPI from './page';
-import { Page, PagePreviewParams, PagePreviewResponse } from './page';
+import { BasePage, Page, PagePreviewParams, PagePreviewResponse } from './page';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   RuleCreateParams,
   RuleDeleteParams,
   RuleEditParams,
@@ -16,6 +17,7 @@ import {
 } from './rules';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   Setting,
   SettingEditParams,
   SettingEditResponse,
@@ -26,9 +28,10 @@ import {
   Settings,
 } from './settings';
 import * as StatusesAPI from './statuses';
-import { StatusGetParams, StatusGetResponse, Statuses } from './statuses';
+import { BaseStatuses, StatusGetParams, StatusGetResponse, Statuses } from './statuses';
 import * as EventsAPI from './events/events';
 import {
+  BaseEvents,
   Event,
   EventCreateParams,
   EventDeleteParams,
@@ -44,12 +47,8 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class WaitingRooms extends APIResource {
-  page: PageAPI.Page = new PageAPI.Page(this._client);
-  events: EventsAPI.Events = new EventsAPI.Events(this._client);
-  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
-  statuses: StatusesAPI.Statuses = new StatusesAPI.Statuses(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+export class BaseWaitingRooms extends APIResource {
+  static override readonly _key: readonly ['waitingRooms'] = Object.freeze(['waitingRooms'] as const);
 
   /**
    * Creates a new waiting room.
@@ -66,7 +65,7 @@ export class WaitingRooms extends APIResource {
    * ```
    */
   create(params: WaitingRoomCreateParams, options?: RequestOptions): APIPromise<WaitingRoom> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/waiting_rooms`, { body, ...options }) as APIPromise<{
         result: WaitingRoom;
@@ -96,7 +95,7 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomUpdateParams,
     options?: RequestOptions,
   ): APIPromise<WaitingRoom> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, {
         body,
@@ -118,10 +117,10 @@ export class WaitingRooms extends APIResource {
    */
   delete(
     waitingRoomID: string,
-    params: WaitingRoomDeleteParams,
+    params: WaitingRoomDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WaitingRoomDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, options) as APIPromise<{
         result: WaitingRoomDeleteResponse;
@@ -151,7 +150,7 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomEditParams,
     options?: RequestOptions,
   ): APIPromise<WaitingRoom> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, {
         body,
@@ -173,16 +172,23 @@ export class WaitingRooms extends APIResource {
    */
   get(
     waitingRoomID: string,
-    params: WaitingRoomGetParams,
+    params: WaitingRoomGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WaitingRoom> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}`, options) as APIPromise<{
         result: WaitingRoom;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class WaitingRooms extends BaseWaitingRooms {
+  page: PageAPI.Page = new PageAPI.Page(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+  statuses: StatusesAPI.Statuses = new StatusesAPI.Statuses(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
 export interface AdditionalRoutes {
@@ -1043,7 +1049,7 @@ export interface WaitingRoomCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The host name to which the waiting room will be applied (no
@@ -1429,7 +1435,7 @@ export interface WaitingRoomUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The host name to which the waiting room will be applied (no
@@ -1815,14 +1821,14 @@ export interface WaitingRoomDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface WaitingRoomEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The host name to which the waiting room will be applied (no
@@ -2208,14 +2214,19 @@ export interface WaitingRoomGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 WaitingRooms.Page = Page;
+WaitingRooms.BasePage = BasePage;
 WaitingRooms.Events = Events;
+WaitingRooms.BaseEvents = BaseEvents;
 WaitingRooms.Rules = Rules;
+WaitingRooms.BaseRules = BaseRules;
 WaitingRooms.Statuses = Statuses;
+WaitingRooms.BaseStatuses = BaseStatuses;
 WaitingRooms.Settings = Settings;
+WaitingRooms.BaseSettings = BaseSettings;
 
 export declare namespace WaitingRooms {
   export {
@@ -2233,12 +2244,14 @@ export declare namespace WaitingRooms {
 
   export {
     Page as Page,
+    BasePage as BasePage,
     type PagePreviewResponse as PagePreviewResponse,
     type PagePreviewParams as PagePreviewParams,
   };
 
   export {
     Events as Events,
+    BaseEvents as BaseEvents,
     type Event as Event,
     type EventDeleteResponse as EventDeleteResponse,
     type EventsV4PagePaginationArray as EventsV4PagePaginationArray,
@@ -2252,6 +2265,7 @@ export declare namespace WaitingRooms {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type WaitingRoomRule as WaitingRoomRule,
     type WaitingRoomRulesSinglePage as WaitingRoomRulesSinglePage,
     type RuleCreateParams as RuleCreateParams,
@@ -2263,12 +2277,14 @@ export declare namespace WaitingRooms {
 
   export {
     Statuses as Statuses,
+    BaseStatuses as BaseStatuses,
     type StatusGetResponse as StatusGetResponse,
     type StatusGetParams as StatusGetParams,
   };
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type Setting as Setting,
     type SettingUpdateResponse as SettingUpdateResponse,
     type SettingEditResponse as SettingEditResponse,

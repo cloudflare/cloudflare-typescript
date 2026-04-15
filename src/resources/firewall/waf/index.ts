@@ -2,6 +2,7 @@
 
 export {
   Overrides,
+  BaseOverrides,
   type Override,
   type OverrideURL,
   type RewriteAction,
@@ -16,10 +17,11 @@ export {
 } from './overrides';
 export {
   Packages,
+  BasePackages,
   type PackageListResponse,
   type PackageGetResponse,
   type PackageListParams,
   type PackageGetParams,
   type PackageListResponsesV4PagePaginationArray,
 } from './packages/index';
-export { WAF } from './waf';
+export { WAF, BaseWAF } from './waf';

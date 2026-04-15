@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../../internal/request-options';
 import { path } from '../../../../../../internal/utils/path';
 
-export class Spam extends APIResource {
+export class BaseSpam extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security', 'top', 'tlds', 'spam'] =
+    Object.freeze(['radar', 'email', 'security', 'top', 'tlds', 'spam'] as const);
+
   /**
    * Retrieves the top TLDs by emails classified as spam or not.
    *
@@ -30,6 +33,7 @@ export class Spam extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Spam extends BaseSpam {}
 
 export interface SpamGetResponse {
   /**

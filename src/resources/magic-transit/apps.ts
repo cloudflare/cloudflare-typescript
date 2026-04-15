@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Apps extends APIResource {
+export class BaseApps extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'apps'] = Object.freeze([
+    'magicTransit',
+    'apps',
+  ] as const);
+
   /**
    * Creates a new App for an account
    *
@@ -20,7 +25,7 @@ export class Apps extends APIResource {
    * ```
    */
   create(params: AppCreateParams, options?: RequestOptions): APIPromise<AppCreateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/apps`, { body, ...options }) as APIPromise<{
         result: AppCreateResponse | null;
@@ -44,7 +49,7 @@ export class Apps extends APIResource {
     params: AppUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AppUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/apps/${accountAppID}`, {
         body,
@@ -67,10 +72,10 @@ export class Apps extends APIResource {
    * ```
    */
   list(
-    params: AppListParams,
+    params: AppListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AppListResponsesSinglePage, AppListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/apps`,
       SinglePage<AppListResponse>,
@@ -91,10 +96,10 @@ export class Apps extends APIResource {
    */
   delete(
     accountAppID: string,
-    params: AppDeleteParams,
+    params: AppDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AppDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/magic/apps/${accountAppID}`, options) as APIPromise<{
         result: AppDeleteResponse | null;
@@ -118,7 +123,7 @@ export class Apps extends APIResource {
     params: AppEditParams,
     options?: RequestOptions,
   ): APIPromise<AppEditResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/apps/${accountAppID}`, {
         body,
@@ -127,6 +132,7 @@ export class Apps extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Apps extends BaseApps {}
 
 export type AppListResponsesSinglePage = SinglePage<AppListResponse>;
 
@@ -363,7 +369,7 @@ export interface AppCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Display name for the app.
@@ -397,7 +403,7 @@ export interface AppUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: FQDNs to associate with traffic decisions.
@@ -431,21 +437,21 @@ export interface AppListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AppDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AppEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: FQDNs to associate with traffic decisions.

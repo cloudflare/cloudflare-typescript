@@ -2,6 +2,7 @@
 
 export {
   Bots,
+  BaseBots,
   type BotListResponse,
   type BotGetResponse,
   type BotSummaryResponse,
@@ -15,6 +16,7 @@ export {
 } from './bots';
 export {
   WebCrawlers,
+  BaseWebCrawlers,
   type WebCrawlerSummaryResponse,
   type WebCrawlerTimeseriesGroupsResponse,
   type WebCrawlerSummaryParams,

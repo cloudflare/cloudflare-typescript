@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Permissions extends APIResource {
+export class BasePermissions extends APIResource {
+  static override readonly _key: readonly ['intel', 'indicatorFeeds', 'permissions'] = Object.freeze([
+    'intel',
+    'indicatorFeeds',
+    'permissions',
+  ] as const);
+
   /**
    * Grants access permissions for a custom threat indicator feed to other accounts.
    *
@@ -17,8 +23,11 @@ export class Permissions extends APIResource {
    *   });
    * ```
    */
-  create(params: PermissionCreateParams, options?: RequestOptions): APIPromise<PermissionCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: PermissionCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PermissionCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/intel/indicator-feeds/permissions/add`, {
         body,
@@ -38,8 +47,11 @@ export class Permissions extends APIResource {
    *   });
    * ```
    */
-  list(params: PermissionListParams, options?: RequestOptions): APIPromise<PermissionListResponse> {
-    const { account_id } = params;
+  list(
+    params: PermissionListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PermissionListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/intel/indicator-feeds/permissions/view`,
@@ -59,8 +71,11 @@ export class Permissions extends APIResource {
    *   });
    * ```
    */
-  delete(params: PermissionDeleteParams, options?: RequestOptions): APIPromise<PermissionDeleteResponse> {
-    const { account_id, ...body } = params;
+  delete(
+    params: PermissionDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PermissionDeleteResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/intel/indicator-feeds/permissions/remove`, {
         body,
@@ -69,6 +84,7 @@ export class Permissions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Permissions extends BasePermissions {}
 
 export interface PermissionCreateResponse {
   /**
@@ -124,7 +140,7 @@ export interface PermissionCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The Cloudflare account tag of the account to change permissions on
@@ -141,14 +157,14 @@ export interface PermissionListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PermissionDeleteParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The Cloudflare account tag of the account to change permissions on

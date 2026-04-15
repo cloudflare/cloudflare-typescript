@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryCacheHitParams,
   SummaryCacheHitResponse,
@@ -27,6 +28,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupCacheHitParams,
   TimeseriesGroupCacheHitResponse,
   TimeseriesGroupDNSSECAwareParams,
@@ -50,17 +52,20 @@ import {
   TimeseriesGroups,
 } from './timeseries-groups';
 import * as TopAPI from './top';
-import { Top, TopAsesParams, TopAsesResponse, TopLocationsParams, TopLocationsResponse } from './top';
+import {
+  BaseTop,
+  Top,
+  TopAsesParams,
+  TopAsesResponse,
+  TopLocationsParams,
+  TopLocationsResponse,
+} from './top';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class DNS extends APIResource {
-  top: TopAPI.Top = new TopAPI.Top(this._client);
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+export class BaseDNS extends APIResource {
+  static override readonly _key: readonly ['radar', 'dns'] = Object.freeze(['radar', 'dns'] as const);
 
   /**
    * Retrieves the distribution of DNS queries by the specified dimension.
@@ -149,6 +154,13 @@ export class DNS extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class DNS extends BaseDNS {
+  top: TopAPI.Top = new TopAPI.Top(this._client);
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
 }
 
 export interface DNSSummaryV2Response {
@@ -1268,8 +1280,11 @@ export interface DNSTimeseriesGroupsV2Params {
 }
 
 DNS.Top = Top;
+DNS.BaseTop = BaseTop;
 DNS.Summary = Summary;
+DNS.BaseSummary = BaseSummary;
 DNS.TimeseriesGroups = TimeseriesGroups;
+DNS.BaseTimeseriesGroups = BaseTimeseriesGroups;
 
 export declare namespace DNS {
   export {
@@ -1283,6 +1298,7 @@ export declare namespace DNS {
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopAsesResponse as TopAsesResponse,
     type TopLocationsResponse as TopLocationsResponse,
     type TopAsesParams as TopAsesParams,
@@ -1291,6 +1307,7 @@ export declare namespace DNS {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryCacheHitResponse as SummaryCacheHitResponse,
     type SummaryDNSSECResponse as SummaryDNSSECResponse,
     type SummaryDNSSECAwareResponse as SummaryDNSSECAwareResponse,
@@ -1315,6 +1332,7 @@ export declare namespace DNS {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupCacheHitResponse as TimeseriesGroupCacheHitResponse,
     type TimeseriesGroupDNSSECResponse as TimeseriesGroupDNSSECResponse,
     type TimeseriesGroupDNSSECAwareResponse as TimeseriesGroupDNSSECAwareResponse,

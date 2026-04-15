@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class VerificationResource extends APIResource {
+export class BaseVerificationResource extends APIResource {
+  static override readonly _key: readonly ['ssl', 'verification'] = Object.freeze([
+    'ssl',
+    'verification',
+  ] as const);
+
   /**
    * Edit SSL validation method for a certificate pack. A PATCH request will request
    * an immediate validation check on any certificate, and return the updated status.
@@ -29,7 +34,7 @@ export class VerificationResource extends APIResource {
     params: VerificationEditParams,
     options?: RequestOptions,
   ): APIPromise<VerificationEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/ssl/verification/${certificatePackID}`, {
         body,
@@ -48,8 +53,11 @@ export class VerificationResource extends APIResource {
    * });
    * ```
    */
-  get(params: VerificationGetParams, options?: RequestOptions): APIPromise<VerificationGetResponse> {
-    const { zone_id, ...query } = params;
+  get(
+    params: VerificationGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<VerificationGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/ssl/verification`, { query, ...options }) as APIPromise<{
         result: VerificationGetResponse;
@@ -57,6 +65,7 @@ export class VerificationResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class VerificationResource extends BaseVerificationResource {}
 
 export interface Verification {
   /**
@@ -143,7 +152,7 @@ export interface VerificationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Desired validation method.
@@ -155,7 +164,7 @@ export interface VerificationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Immediately retry SSL Verification.

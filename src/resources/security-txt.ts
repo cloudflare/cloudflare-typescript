@@ -5,7 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class SecurityTXT extends APIResource {
+export class BaseSecurityTXT extends APIResource {
+  static override readonly _key: readonly ['securityTXT'] = Object.freeze(['securityTXT'] as const);
+
   /**
    * Updates the security.txt file configuration for a zone, which provides security
    * researchers with vulnerability reporting information.
@@ -17,8 +19,11 @@ export class SecurityTXT extends APIResource {
    * });
    * ```
    */
-  update(params: SecurityTXTUpdateParams, options?: RequestOptions): APIPromise<SecurityTXTUpdateResponse> {
-    const { zone_id, ...body } = params;
+  update(
+    params: SecurityTXTUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SecurityTXTUpdateResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return this._client.put(path`/zones/${zone_id}/security-center/securitytxt`, { body, ...options });
   }
 
@@ -33,8 +38,11 @@ export class SecurityTXT extends APIResource {
    * });
    * ```
    */
-  delete(params: SecurityTXTDeleteParams, options?: RequestOptions): APIPromise<SecurityTXTDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    params: SecurityTXTDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SecurityTXTDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/security-center/securitytxt`, options);
   }
 
@@ -49,8 +57,11 @@ export class SecurityTXT extends APIResource {
    * });
    * ```
    */
-  get(params: SecurityTXTGetParams, options?: RequestOptions): APIPromise<SecurityTXTGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SecurityTXTGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SecurityTXTGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/security-center/securitytxt`, options) as APIPromise<{
         result: SecurityTXTGetResponse;
@@ -58,6 +69,7 @@ export class SecurityTXT extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SecurityTXT extends BaseSecurityTXT {}
 
 export interface SecurityTXTUpdateResponse {
   errors: Array<SecurityTXTUpdateResponse.Error>;
@@ -173,7 +185,7 @@ export interface SecurityTXTUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -225,14 +237,14 @@ export interface SecurityTXTDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SecurityTXTGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace SecurityTXT {

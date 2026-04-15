@@ -2,6 +2,7 @@
 
 export {
   Groups,
+  BaseGroups,
   type Group,
   type GroupEditResponse,
   type GroupGetResponse,
@@ -12,6 +13,7 @@ export {
 } from './groups';
 export {
   Packages,
+  BasePackages,
   type PackageListResponse,
   type PackageGetResponse,
   type PackageListParams,
@@ -20,6 +22,7 @@ export {
 } from './packages';
 export {
   Rules,
+  BaseRules,
   type AllowedModesAnomaly,
   type WAFRuleGroup,
   type RuleListResponse,

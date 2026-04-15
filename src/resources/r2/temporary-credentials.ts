@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class TemporaryCredentials extends APIResource {
+export class BaseTemporaryCredentials extends APIResource {
+  static override readonly _key: readonly ['r2', 'temporaryCredentials'] = Object.freeze([
+    'r2',
+    'temporaryCredentials',
+  ] as const);
+
   /**
    * Creates temporary access credentials on a bucket that can be optionally scoped
    * to prefixes or objects.
@@ -26,7 +31,7 @@ export class TemporaryCredentials extends APIResource {
     params: TemporaryCredentialCreateParams,
     options?: RequestOptions,
   ): APIPromise<TemporaryCredentialCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/r2/temp-access-credentials`, {
         body,
@@ -35,6 +40,7 @@ export class TemporaryCredentials extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TemporaryCredentials extends BaseTemporaryCredentials {}
 
 export interface TemporaryCredential {
   /**
@@ -89,7 +95,7 @@ export interface TemporaryCredentialCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the R2 bucket.

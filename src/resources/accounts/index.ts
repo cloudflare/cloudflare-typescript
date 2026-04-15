@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Accounts } from './accounts';
-export { Logs } from './logs/index';
+export { Accounts, BaseAccounts } from './accounts';
+export { Logs, BaseLogs } from './logs/index';
 export {
   Members,
+  BaseMembers,
   type Status,
   type MemberDeleteResponse,
   type MemberCreateParams,
@@ -12,9 +13,10 @@ export {
   type MemberDeleteParams,
   type MemberGetParams,
 } from './members';
-export { Roles, type RoleListParams, type RoleGetParams } from './roles';
+export { Roles, BaseRoles, type RoleListParams, type RoleGetParams } from './roles';
 export {
   Subscriptions,
+  BaseSubscriptions,
   type SubscriptionDeleteResponse,
   type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
@@ -23,6 +25,7 @@ export {
 } from './subscriptions';
 export {
   Tokens,
+  BaseTokens,
   type TokenCreateResponse,
   type TokenDeleteResponse,
   type TokenVerifyResponse,

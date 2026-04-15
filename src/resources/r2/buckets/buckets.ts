@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CORSAPI from './cors';
 import {
+  BaseCORS,
   CORS,
   CORSDeleteParams,
   CORSDeleteResponse,
@@ -13,6 +14,7 @@ import {
 } from './cors';
 import * as EventNotificationsAPI from './event-notifications';
 import {
+  BaseEventNotifications,
   EventNotificationDeleteParams,
   EventNotificationDeleteResponse,
   EventNotificationGetParams,
@@ -25,6 +27,7 @@ import {
 } from './event-notifications';
 import * as LifecycleAPI from './lifecycle';
 import {
+  BaseLifecycle,
   Lifecycle,
   LifecycleGetParams,
   LifecycleGetResponse,
@@ -32,11 +35,19 @@ import {
   LifecycleUpdateResponse,
 } from './lifecycle';
 import * as LocksAPI from './locks';
-import { LockGetParams, LockGetResponse, LockUpdateParams, LockUpdateResponse, Locks } from './locks';
+import {
+  BaseLocks,
+  LockGetParams,
+  LockGetResponse,
+  LockUpdateParams,
+  LockUpdateResponse,
+  Locks,
+} from './locks';
 import * as MetricsAPI from './metrics';
-import { MetricListParams, MetricListResponse, Metrics } from './metrics';
+import { BaseMetrics, MetricListParams, MetricListResponse, Metrics } from './metrics';
 import * as SippyAPI from './sippy';
 import {
+  BaseSippyResource,
   Provider,
   Sippy,
   SippyDeleteParams,
@@ -46,22 +57,14 @@ import {
   SippyUpdateParams,
 } from './sippy';
 import * as DomainsAPI from './domains/domains';
-import { Domains } from './domains/domains';
+import { BaseDomains, Domains } from './domains/domains';
 import { APIPromise } from '../../../core/api-promise';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Buckets extends APIResource {
-  lifecycle: LifecycleAPI.Lifecycle = new LifecycleAPI.Lifecycle(this._client);
-  cors: CORSAPI.CORS = new CORSAPI.CORS(this._client);
-  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
-    this._client,
-  );
-  locks: LocksAPI.Locks = new LocksAPI.Locks(this._client);
-  metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
-  sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
+export class BaseBuckets extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets'] = Object.freeze(['r2', 'buckets'] as const);
 
   /**
    * Creates a new R2 bucket.
@@ -75,7 +78,7 @@ export class Buckets extends APIResource {
    * ```
    */
   create(params: BucketCreateParams, options?: RequestOptions): APIPromise<Bucket> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/r2/buckets`, {
         body,
@@ -102,8 +105,11 @@ export class Buckets extends APIResource {
    * });
    * ```
    */
-  list(params: BucketListParams, options?: RequestOptions): APIPromise<BucketListResponse> {
-    const { account_id, jurisdiction, ...query } = params;
+  list(
+    params: BucketListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BucketListResponse> {
+    const { account_id = this._client.accountID, jurisdiction, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets`, {
         query,
@@ -133,10 +139,10 @@ export class Buckets extends APIResource {
    */
   delete(
     bucketName: string,
-    params: BucketDeleteParams,
+    params: BucketDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BucketDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
@@ -167,7 +173,7 @@ export class Buckets extends APIResource {
    * ```
    */
   edit(bucketName: string, params: BucketEditParams, options?: RequestOptions): APIPromise<Bucket> {
-    const { account_id, storage_class, jurisdiction } = params;
+    const { account_id = this._client.accountID, storage_class, jurisdiction } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
@@ -195,8 +201,12 @@ export class Buckets extends APIResource {
    * );
    * ```
    */
-  get(bucketName: string, params: BucketGetParams, options?: RequestOptions): APIPromise<Bucket> {
-    const { account_id, jurisdiction } = params;
+  get(
+    bucketName: string,
+    params: BucketGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Bucket> {
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
@@ -211,6 +221,17 @@ export class Buckets extends APIResource {
       }) as APIPromise<{ result: Bucket }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Buckets extends BaseBuckets {
+  lifecycle: LifecycleAPI.Lifecycle = new LifecycleAPI.Lifecycle(this._client);
+  cors: CORSAPI.CORS = new CORSAPI.CORS(this._client);
+  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
+  eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
+    this._client,
+  );
+  locks: LocksAPI.Locks = new LocksAPI.Locks(this._client);
+  metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
+  sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
 }
 
 /**
@@ -253,7 +274,7 @@ export interface BucketCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the bucket.
@@ -282,7 +303,7 @@ export interface BucketListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Pagination cursor received during the last List Buckets call. R2
@@ -328,7 +349,7 @@ export interface BucketDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -341,7 +362,7 @@ export interface BucketEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Storage class for newly uploaded objects, unless specified
@@ -360,7 +381,7 @@ export interface BucketGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -370,12 +391,19 @@ export interface BucketGetParams {
 }
 
 Buckets.Lifecycle = Lifecycle;
+Buckets.BaseLifecycle = BaseLifecycle;
 Buckets.CORS = CORS;
+Buckets.BaseCORS = BaseCORS;
 Buckets.Domains = Domains;
+Buckets.BaseDomains = BaseDomains;
 Buckets.EventNotifications = EventNotifications;
+Buckets.BaseEventNotifications = BaseEventNotifications;
 Buckets.Locks = Locks;
+Buckets.BaseLocks = BaseLocks;
 Buckets.Metrics = Metrics;
+Buckets.BaseMetrics = BaseMetrics;
 Buckets.SippyResource = SippyResource;
+Buckets.BaseSippyResource = BaseSippyResource;
 
 export declare namespace Buckets {
   export {
@@ -391,6 +419,7 @@ export declare namespace Buckets {
 
   export {
     Lifecycle as Lifecycle,
+    BaseLifecycle as BaseLifecycle,
     type LifecycleUpdateResponse as LifecycleUpdateResponse,
     type LifecycleGetResponse as LifecycleGetResponse,
     type LifecycleUpdateParams as LifecycleUpdateParams,
@@ -399,6 +428,7 @@ export declare namespace Buckets {
 
   export {
     CORS as CORS,
+    BaseCORS as BaseCORS,
     type CORSUpdateResponse as CORSUpdateResponse,
     type CORSDeleteResponse as CORSDeleteResponse,
     type CORSGetResponse as CORSGetResponse,
@@ -407,10 +437,11 @@ export declare namespace Buckets {
     type CORSGetParams as CORSGetParams,
   };
 
-  export { Domains as Domains };
+  export { Domains as Domains, BaseDomains as BaseDomains };
 
   export {
     EventNotifications as EventNotifications,
+    BaseEventNotifications as BaseEventNotifications,
     type EventNotificationUpdateResponse as EventNotificationUpdateResponse,
     type EventNotificationListResponse as EventNotificationListResponse,
     type EventNotificationDeleteResponse as EventNotificationDeleteResponse,
@@ -423,6 +454,7 @@ export declare namespace Buckets {
 
   export {
     Locks as Locks,
+    BaseLocks as BaseLocks,
     type LockUpdateResponse as LockUpdateResponse,
     type LockGetResponse as LockGetResponse,
     type LockUpdateParams as LockUpdateParams,
@@ -431,12 +463,14 @@ export declare namespace Buckets {
 
   export {
     Metrics as Metrics,
+    BaseMetrics as BaseMetrics,
     type MetricListResponse as MetricListResponse,
     type MetricListParams as MetricListParams,
   };
 
   export {
     SippyResource as SippyResource,
+    BaseSippyResource as BaseSippyResource,
     type Provider as Provider,
     type Sippy as Sippy,
     type SippyDeleteResponse as SippyDeleteResponse,

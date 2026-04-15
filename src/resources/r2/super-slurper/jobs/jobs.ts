@@ -3,14 +3,18 @@
 import { APIResource } from '../../../../core/resource';
 import * as SippyAPI from '../../buckets/sippy';
 import * as LogsAPI from './logs';
-import { LogListParams, LogListResponse, LogListResponsesSinglePage, Logs } from './logs';
+import { BaseLogs, LogListParams, LogListResponse, LogListResponsesSinglePage, Logs } from './logs';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Jobs extends APIResource {
-  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+export class BaseJobs extends APIResource {
+  static override readonly _key: readonly ['r2', 'superSlurper', 'jobs'] = Object.freeze([
+    'r2',
+    'superSlurper',
+    'jobs',
+  ] as const);
 
   /**
    * Creates a new R2 Super Slurper migration job to transfer objects from a source
@@ -23,8 +27,11 @@ export class Jobs extends APIResource {
    * });
    * ```
    */
-  create(params: JobCreateParams, options?: RequestOptions): APIPromise<JobCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: JobCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/slurper/jobs`, { body, ...options }) as APIPromise<{
         result: JobCreateResponse;
@@ -46,10 +53,10 @@ export class Jobs extends APIResource {
    * ```
    */
   list(
-    params: JobListParams,
+    params: JobListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<JobListResponsesSinglePage, JobListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/slurper/jobs`, SinglePage<JobListResponse>, {
       query,
       ...options,
@@ -68,8 +75,12 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  abort(jobID: string, params: JobAbortParams, options?: RequestOptions): APIPromise<JobAbortResponse> {
-    const { account_id } = params;
+  abort(
+    jobID: string,
+    params: JobAbortParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobAbortResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/slurper/jobs/${jobID}/abort`, options) as APIPromise<{
         result: JobAbortResponse;
@@ -89,8 +100,11 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  abortAll(params: JobAbortAllParams, options?: RequestOptions): APIPromise<JobAbortAllResponse> {
-    const { account_id } = params;
+  abortAll(
+    params: JobAbortAllParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobAbortAllResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/slurper/jobs/abortAll`, options) as APIPromise<{
         result: JobAbortAllResponse;
@@ -110,8 +124,12 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  get(jobID: string, params: JobGetParams, options?: RequestOptions): APIPromise<JobGetResponse> {
-    const { account_id } = params;
+  get(
+    jobID: string,
+    params: JobGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/slurper/jobs/${jobID}`, options) as APIPromise<{
         result: JobGetResponse;
@@ -131,8 +149,12 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  pause(jobID: string, params: JobPauseParams, options?: RequestOptions): APIPromise<JobPauseResponse> {
-    const { account_id } = params;
+  pause(
+    jobID: string,
+    params: JobPauseParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobPauseResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/slurper/jobs/${jobID}/pause`, options) as APIPromise<{
         result: JobPauseResponse;
@@ -153,10 +175,10 @@ export class Jobs extends APIResource {
    */
   progress(
     jobID: string,
-    params: JobProgressParams,
+    params: JobProgressParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<JobProgressResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/slurper/jobs/${jobID}/progress`, options) as APIPromise<{
         result: JobProgressResponse;
@@ -176,14 +198,21 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  resume(jobID: string, params: JobResumeParams, options?: RequestOptions): APIPromise<JobResumeResponse> {
-    const { account_id } = params;
+  resume(
+    jobID: string,
+    params: JobResumeParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<JobResumeResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/slurper/jobs/${jobID}/resume`, options) as APIPromise<{
         result: JobResumeResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Jobs extends BaseJobs {
+  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 }
 
 export type JobListResponsesSinglePage = SinglePage<JobListResponse>;
@@ -346,7 +375,7 @@ export interface JobCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -457,7 +486,7 @@ export interface JobListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -471,30 +500,31 @@ export interface JobListParams {
 }
 
 export interface JobAbortParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobAbortAllParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobPauseParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobProgressParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobResumeParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Jobs.Logs = Logs;
+Jobs.BaseLogs = BaseLogs;
 
 export declare namespace Jobs {
   export {
@@ -519,6 +549,7 @@ export declare namespace Jobs {
 
   export {
     Logs as Logs,
+    BaseLogs as BaseLogs,
     type LogListResponse as LogListResponse,
     type LogListResponsesSinglePage as LogListResponsesSinglePage,
     type LogListParams as LogListParams,

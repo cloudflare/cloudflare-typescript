@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AIGateway } from 'cloudflare/resources/ai-gateway/ai-gateway';
+import { BaseDynamicRouting } from 'cloudflare/resources/ai-gateway/dynamic-routing';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource dynamicRouting', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDynamicRouting],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AIGateway],
+});
+
+const runTests = (client: PartialCloudflare<{ aiGateway: { dynamicRouting: BaseDynamicRouting } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.aiGateway.dynamicRouting.create('54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
@@ -250,4 +268,7 @@ describe('resource dynamicRouting', () => {
       gateway_id: '54442216',
     });
   });
-});
+};
+describe('resource dynamicRouting', () => runTests(client));
+describe('resource dynamicRouting (tree shakable, base)', () => runTests(partialClient));
+describe('resource dynamicRouting (tree shakable, subresource)', () => runTests(parentPartialClient));

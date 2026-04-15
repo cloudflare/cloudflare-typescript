@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class TLS extends APIResource {
+export class BaseTLS extends APIResource {
+  static override readonly _key: readonly ['radar', 'postQuantum', 'tls'] = Object.freeze([
+    'radar',
+    'postQuantum',
+    'tls',
+  ] as const);
+
   /**
    * Tests whether a hostname or IP address supports Post-Quantum (PQ) TLS key
    * exchange. Returns information about the negotiated key exchange algorithm and
@@ -25,6 +31,7 @@ export class TLS extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TLS extends BaseTLS {}
 
 export interface TLSSupportResponse {
   /**

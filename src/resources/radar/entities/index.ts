@@ -2,6 +2,7 @@
 
 export {
   ASNs,
+  BaseASNs,
   type ASNListResponse,
   type ASNAsSetResponse,
   type ASNBotnetThreatFeedResponse,
@@ -15,9 +16,10 @@ export {
   type ASNIPParams,
   type ASNRelParams,
 } from './asns';
-export { Entities, type EntityGetResponse, type EntityGetParams } from './entities';
+export { Entities, BaseEntities, type EntityGetResponse, type EntityGetParams } from './entities';
 export {
   Locations,
+  BaseLocations,
   type LocationListResponse,
   type LocationGetResponse,
   type LocationListParams,

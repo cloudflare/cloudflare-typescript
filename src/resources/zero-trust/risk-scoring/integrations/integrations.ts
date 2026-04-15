@@ -2,14 +2,18 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ReferencesAPI from './references';
-import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
+import { BaseReferences, ReferenceGetParams, ReferenceGetResponse, References } from './references';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Integrations extends APIResource {
-  references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
+export class BaseIntegrations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'riskScoring', 'integrations'] = Object.freeze([
+    'zeroTrust',
+    'riskScoring',
+    'integrations',
+  ] as const);
 
   /**
    * Creates a new Zero Trust risk score integration, connecting external risk
@@ -26,7 +30,7 @@ export class Integrations extends APIResource {
    * ```
    */
   create(params: IntegrationCreateParams, options?: RequestOptions): APIPromise<IntegrationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/zt_risk_scoring/integrations`, {
         body,
@@ -57,7 +61,7 @@ export class Integrations extends APIResource {
     params: IntegrationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<IntegrationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationID}`, {
         body,
@@ -80,10 +84,10 @@ export class Integrations extends APIResource {
    * ```
    */
   list(
-    params: IntegrationListParams,
+    params: IntegrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/zt_risk_scoring/integrations`,
       SinglePage<IntegrationListResponse>,
@@ -106,10 +110,10 @@ export class Integrations extends APIResource {
    */
   delete(
     integrationID: string,
-    params: IntegrationDeleteParams,
+    params: IntegrationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IntegrationDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationID}`,
@@ -132,10 +136,10 @@ export class Integrations extends APIResource {
    */
   get(
     integrationID: string,
-    params: IntegrationGetParams,
+    params: IntegrationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IntegrationGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationID}`,
@@ -143,6 +147,9 @@ export class Integrations extends APIResource {
       ) as APIPromise<{ result: IntegrationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Integrations extends BaseIntegrations {
+  references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
 }
 
 export type IntegrationListResponsesSinglePage = SinglePage<IntegrationListResponse>;
@@ -325,7 +332,7 @@ export interface IntegrationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -349,7 +356,7 @@ export interface IntegrationUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether this integration is enabled. If disabled, no risk changes
@@ -371,18 +378,19 @@ export interface IntegrationUpdateParams {
 }
 
 export interface IntegrationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Integrations.References = References;
+Integrations.BaseReferences = BaseReferences;
 
 export declare namespace Integrations {
   export {
@@ -401,6 +409,7 @@ export declare namespace Integrations {
 
   export {
     References as References,
+    BaseReferences as BaseReferences,
     type ReferenceGetResponse as ReferenceGetResponse,
     type ReferenceGetParams as ReferenceGetParams,
   };

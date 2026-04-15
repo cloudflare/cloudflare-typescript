@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Certificates extends APIResource {
+export class BaseCertificates extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'certificates'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'certificates',
+  ] as const);
+
   /**
    * Create a new Zero Trust certificate.
    *
@@ -18,8 +24,11 @@ export class Certificates extends APIResource {
    *   });
    * ```
    */
-  create(params: CertificateCreateParams, options?: RequestOptions): APIPromise<CertificateCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: CertificateCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CertificateCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/gateway/certificates`, {
         body,
@@ -42,10 +51,10 @@ export class Certificates extends APIResource {
    * ```
    */
   list(
-    params: CertificateListParams,
+    params: CertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CertificateListResponsesSinglePage, CertificateListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/certificates`,
       SinglePage<CertificateListResponse>,
@@ -68,10 +77,10 @@ export class Certificates extends APIResource {
    */
   delete(
     certificateID: string,
-    params: CertificateDeleteParams,
+    params: CertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CertificateDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/gateway/certificates/${certificateID}`,
@@ -100,7 +109,7 @@ export class Certificates extends APIResource {
     params: CertificateActivateParams,
     options?: RequestOptions,
   ): APIPromise<CertificateActivateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/certificates/${certificateID}/activate`, {
         body: body,
@@ -129,7 +138,7 @@ export class Certificates extends APIResource {
     params: CertificateDeactivateParams,
     options?: RequestOptions,
   ): APIPromise<CertificateDeactivateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/certificates/${certificateID}/deactivate`, {
         body: body,
@@ -152,10 +161,10 @@ export class Certificates extends APIResource {
    */
   get(
     certificateID: string,
-    params: CertificateGetParams,
+    params: CertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CertificateGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/gateway/certificates/${certificateID}`,
@@ -164,6 +173,7 @@ export class Certificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Certificates extends BaseCertificates {}
 
 export type CertificateListResponsesSinglePage = SinglePage<CertificateListResponse>;
 
@@ -495,7 +505,7 @@ export interface CertificateCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sets the certificate validity period in days (range: 1-10,950 days /
@@ -508,18 +518,18 @@ export interface CertificateCreateParams {
 }
 
 export interface CertificateListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CertificateDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CertificateActivateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -531,7 +541,7 @@ export interface CertificateDeactivateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -540,7 +550,7 @@ export interface CertificateDeactivateParams {
 }
 
 export interface CertificateGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Certificates {

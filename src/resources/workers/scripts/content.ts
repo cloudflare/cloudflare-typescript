@@ -9,7 +9,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Content extends APIResource {
+export class BaseContent extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'content'] = Object.freeze([
+    'workers',
+    'scripts',
+    'content',
+  ] as const);
+
   /**
    * Put script content without touching config or metadata.
    *
@@ -30,7 +36,7 @@ export class Content extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ScriptsAPI.Script> {
     const {
-      account_id,
+      account_id = this._client.accountID,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
       ...body
@@ -72,8 +78,12 @@ export class Content extends APIResource {
    * console.log(data);
    * ```
    */
-  get(scriptName: string, params: ContentGetParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id } = params;
+  get(
+    scriptName: string,
+    params: ContentGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/workers/scripts/${scriptName}/content/v2`, {
       ...options,
       headers: buildHeaders([{ Accept: 'string' }, options?.headers]),
@@ -81,12 +91,13 @@ export class Content extends APIResource {
     });
   }
 }
+export class Content extends BaseContent {}
 
 export interface ContentUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -141,7 +152,7 @@ export interface ContentGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Content {

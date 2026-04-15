@@ -2,6 +2,7 @@
 
 export {
   LiveInputs,
+  BaseLiveInputs,
   type LiveInput,
   type LiveInputListResponse,
   type LiveInputCreateParams,
@@ -12,6 +13,7 @@ export {
 } from './live-inputs';
 export {
   Outputs,
+  BaseOutputs,
   type Output,
   type OutputCreateParams,
   type OutputUpdateParams,

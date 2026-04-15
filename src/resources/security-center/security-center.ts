@@ -2,14 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as InsightsAPI from './insights/insights';
-import { Insights } from './insights/insights';
+import { BaseInsights, Insights } from './insights/insights';
 
-export class SecurityCenter extends APIResource {
+export class BaseSecurityCenter extends APIResource {
+  static override readonly _key: readonly ['securityCenter'] = Object.freeze(['securityCenter'] as const);
+}
+export class SecurityCenter extends BaseSecurityCenter {
   insights: InsightsAPI.Insights = new InsightsAPI.Insights(this._client);
 }
 
 SecurityCenter.Insights = Insights;
+SecurityCenter.BaseInsights = BaseInsights;
 
 export declare namespace SecurityCenter {
-  export { Insights as Insights };
+  export { Insights as Insights, BaseInsights as BaseInsights };
 }

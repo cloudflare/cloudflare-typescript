@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class IPs extends APIResource {
+export class BaseIPs extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'routes', 'ips'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'routes',
+    'ips',
+  ] as const);
+
   /**
    * Fetches routes that contain the given IP address.
    *
@@ -19,8 +26,12 @@ export class IPs extends APIResource {
    *   );
    * ```
    */
-  get(ip: string, params: IPGetParams, options?: RequestOptions): APIPromise<RoutesAPI.Teamnet> {
-    const { account_id, ...query } = params;
+  get(
+    ip: string,
+    params: IPGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RoutesAPI.Teamnet> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/teamnet/routes/ip/${ip}`, {
         query,
@@ -29,12 +40,13 @@ export class IPs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IPs extends BaseIPs {}
 
 export interface IPGetParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: When the virtual_network_id parameter is not provided the request

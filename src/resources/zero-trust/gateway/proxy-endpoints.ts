@@ -7,7 +7,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ProxyEndpoints extends APIResource {
+export class BaseProxyEndpoints extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'proxyEndpoints'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'proxyEndpoints',
+  ] as const);
+
   /**
    * Create a new Zero Trust Gateway proxy endpoint.
    *
@@ -21,7 +27,7 @@ export class ProxyEndpoints extends APIResource {
    * ```
    */
   create(params: ProxyEndpointCreateParams, options?: RequestOptions): APIPromise<ProxyEndpoint> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/proxy_endpoints`, {
         body,
@@ -44,10 +50,10 @@ export class ProxyEndpoints extends APIResource {
    * ```
    */
   list(
-    params: ProxyEndpointListParams,
+    params: ProxyEndpointListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/proxy_endpoints`,
       SinglePage<ProxyEndpoint>,
@@ -69,10 +75,10 @@ export class ProxyEndpoints extends APIResource {
    */
   delete(
     proxyEndpointID: string,
-    params: ProxyEndpointDeleteParams,
+    params: ProxyEndpointDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ProxyEndpointDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointID}`,
@@ -98,7 +104,7 @@ export class ProxyEndpoints extends APIResource {
     params: ProxyEndpointEditParams,
     options?: RequestOptions,
   ): APIPromise<ProxyEndpoint> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointID}`, {
         body,
@@ -121,10 +127,10 @@ export class ProxyEndpoints extends APIResource {
    */
   get(
     proxyEndpointID: string,
-    params: ProxyEndpointGetParams,
+    params: ProxyEndpointGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ProxyEndpoint> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointID}`,
@@ -133,6 +139,7 @@ export class ProxyEndpoints extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ProxyEndpoints extends BaseProxyEndpoints {}
 
 export type ProxyEndpointsSinglePage = SinglePage<ProxyEndpoint>;
 
@@ -216,7 +223,7 @@ export declare namespace ProxyEndpointCreateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Specify the name of the proxy endpoint.
@@ -233,7 +240,7 @@ export declare namespace ProxyEndpointCreateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The proxy endpoint kind
@@ -248,18 +255,18 @@ export declare namespace ProxyEndpointCreateParams {
 }
 
 export interface ProxyEndpointListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProxyEndpointDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ProxyEndpointEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the list of CIDRs to restrict ingress connections.
@@ -273,7 +280,7 @@ export interface ProxyEndpointEditParams {
 }
 
 export interface ProxyEndpointGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ProxyEndpoints {

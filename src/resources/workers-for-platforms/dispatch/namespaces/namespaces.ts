@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as ScriptsAPI from './scripts/scripts';
 import {
+  BaseScripts,
   Script,
   ScriptDeleteParams,
   ScriptDeleteResponse,
@@ -16,8 +17,12 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Namespaces extends APIResource {
-  scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
+export class BaseNamespaces extends APIResource {
+  static override readonly _key: readonly ['workersForPlatforms', 'dispatch', 'namespaces'] = Object.freeze([
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+  ] as const);
 
   /**
    * Create a new Workers for Platforms namespace.
@@ -30,8 +35,11 @@ export class Namespaces extends APIResource {
    *   );
    * ```
    */
-  create(params: NamespaceCreateParams, options?: RequestOptions): APIPromise<NamespaceCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: NamespaceCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<NamespaceCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/workers/dispatch/namespaces`, {
         body,
@@ -54,10 +62,10 @@ export class Namespaces extends APIResource {
    * ```
    */
   list(
-    params: NamespaceListParams,
+    params: NamespaceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/dispatch/namespaces`,
       SinglePage<NamespaceListResponse>,
@@ -79,10 +87,10 @@ export class Namespaces extends APIResource {
    */
   delete(
     dispatchNamespace: string,
-    params: NamespaceDeleteParams,
+    params: NamespaceDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<NamespaceDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`,
@@ -105,10 +113,10 @@ export class Namespaces extends APIResource {
    */
   get(
     dispatchNamespace: string,
-    params: NamespaceGetParams,
+    params: NamespaceGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<NamespaceGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`,
@@ -116,6 +124,9 @@ export class Namespaces extends APIResource {
       ) as APIPromise<{ result: NamespaceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Namespaces extends BaseNamespaces {
+  scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
 }
 
 export type NamespaceListResponsesSinglePage = SinglePage<NamespaceListResponse>;
@@ -264,7 +275,7 @@ export interface NamespaceCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the dispatch namespace.
@@ -276,24 +287,25 @@ export interface NamespaceListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NamespaceDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NamespaceGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Namespaces.Scripts = Scripts;
+Namespaces.BaseScripts = BaseScripts;
 
 export declare namespace Namespaces {
   export {
@@ -310,6 +322,7 @@ export declare namespace Namespaces {
 
   export {
     Scripts as Scripts,
+    BaseScripts as BaseScripts,
     type Script as Script,
     type ScriptUpdateResponse as ScriptUpdateResponse,
     type ScriptDeleteResponse as ScriptDeleteResponse,

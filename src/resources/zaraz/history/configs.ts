@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Configs extends APIResource {
+export class BaseConfigs extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'history', 'configs'] = Object.freeze([
+    'zaraz',
+    'history',
+    'configs',
+  ] as const);
+
   /**
    * Gets a history of published Zaraz configurations by ID(s) for a zone.
    *
@@ -19,7 +25,7 @@ export class Configs extends APIResource {
    * ```
    */
   get(params: ConfigGetParams, options?: RequestOptions): APIPromise<ConfigGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params;
     return (
       this._client.get(path`/zones/${zone_id}/settings/zaraz/history/configs`, {
         query,
@@ -28,6 +34,7 @@ export class Configs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Configs extends BaseConfigs {}
 
 /**
  * Object where keys are numeric configuration IDs.
@@ -67,7 +74,7 @@ export interface ConfigGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Comma separated list of Zaraz configuration IDs.

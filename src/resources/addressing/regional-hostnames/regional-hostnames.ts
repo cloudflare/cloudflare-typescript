@@ -2,14 +2,23 @@
 
 import { APIResource } from '../../../core/resource';
 import * as RegionsAPI from './regions';
-import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
+import {
+  BaseRegions,
+  RegionListParams,
+  RegionListResponse,
+  RegionListResponsesSinglePage,
+  Regions,
+} from './regions';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class RegionalHostnames extends APIResource {
-  regions: RegionsAPI.Regions = new RegionsAPI.Regions(this._client);
+export class BaseRegionalHostnames extends APIResource {
+  static override readonly _key: readonly ['addressing', 'regionalHostnames'] = Object.freeze([
+    'addressing',
+    'regionalHostnames',
+  ] as const);
 
   /**
    * Create a new Regional Hostname entry. Cloudflare will only use data centers that
@@ -31,7 +40,7 @@ export class RegionalHostnames extends APIResource {
     params: RegionalHostnameCreateParams,
     options?: RequestOptions,
   ): APIPromise<RegionalHostnameCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/addressing/regional_hostnames`, {
         body,
@@ -54,10 +63,10 @@ export class RegionalHostnames extends APIResource {
    * ```
    */
   list(
-    params: RegionalHostnameListParams,
+    params: RegionalHostnameListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RegionalHostnameListResponsesSinglePage, RegionalHostnameListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/addressing/regional_hostnames`,
       SinglePage<RegionalHostnameListResponse>,
@@ -79,10 +88,10 @@ export class RegionalHostnames extends APIResource {
    */
   delete(
     hostname: string,
-    params: RegionalHostnameDeleteParams,
+    params: RegionalHostnameDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegionalHostnameDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/addressing/regional_hostnames/${hostname}`, options);
   }
 
@@ -107,7 +116,7 @@ export class RegionalHostnames extends APIResource {
     params: RegionalHostnameEditParams,
     options?: RequestOptions,
   ): APIPromise<RegionalHostnameEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/addressing/regional_hostnames/${hostname}`, {
         body,
@@ -130,10 +139,10 @@ export class RegionalHostnames extends APIResource {
    */
   get(
     hostname: string,
-    params: RegionalHostnameGetParams,
+    params: RegionalHostnameGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegionalHostnameGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/addressing/regional_hostnames/${hostname}`,
@@ -141,6 +150,9 @@ export class RegionalHostnames extends APIResource {
       ) as APIPromise<{ result: RegionalHostnameGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class RegionalHostnames extends BaseRegionalHostnames {
+  regions: RegionsAPI.Regions = new RegionsAPI.Regions(this._client);
 }
 
 export type RegionalHostnameListResponsesSinglePage = SinglePage<RegionalHostnameListResponse>;
@@ -286,7 +298,7 @@ export interface RegionalHostnameCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: DNS hostname to be regionalized, must be a subdomain of the zone.
@@ -309,21 +321,21 @@ export interface RegionalHostnameListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RegionalHostnameDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RegionalHostnameEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Identifying key for the region
@@ -335,10 +347,11 @@ export interface RegionalHostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 RegionalHostnames.Regions = Regions;
+RegionalHostnames.BaseRegions = BaseRegions;
 
 export declare namespace RegionalHostnames {
   export {
@@ -357,6 +370,7 @@ export declare namespace RegionalHostnames {
 
   export {
     Regions as Regions,
+    BaseRegions as BaseRegions,
     type RegionListResponse as RegionListResponse,
     type RegionListResponsesSinglePage as RegionListResponsesSinglePage,
     type RegionListParams as RegionListParams,

@@ -2,6 +2,7 @@
 
 export {
   PolicyTests,
+  BasePolicyTests,
   type PolicyTestCreateResponse,
   type PolicyTestGetResponse,
   type PolicyTestCreateParams,
@@ -9,6 +10,7 @@ export {
 } from './policy-tests';
 export {
   Users,
+  BaseUsers,
   type UserListResponse,
   type UserListParams,
   type UserListResponsesV4PagePaginationArray,

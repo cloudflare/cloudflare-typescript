@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Health extends APIResource {
+export class BaseHealth extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'pools', 'health'] = Object.freeze([
+    'loadBalancers',
+    'pools',
+    'health',
+  ] as const);
+
   /**
    * Preview pool health using provided monitor details. The returned preview_id can
    * be used in the preview endpoint to retrieve the results.
@@ -24,7 +30,7 @@ export class Health extends APIResource {
     params: HealthCreateParams,
     options?: RequestOptions,
   ): APIPromise<HealthCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/load_balancers/pools/${poolID}/preview`, {
         body,
@@ -44,8 +50,12 @@ export class Health extends APIResource {
    * );
    * ```
    */
-  get(poolID: string, params: HealthGetParams, options?: RequestOptions): APIPromise<HealthGetResponse> {
-    const { account_id } = params;
+  get(
+    poolID: string,
+    params: HealthGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<HealthGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/load_balancers/pools/${poolID}/health`,
@@ -54,6 +64,7 @@ export class Health extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Health extends BaseHealth {}
 
 export interface HealthCreateResponse {
   /**
@@ -128,7 +139,7 @@ export interface HealthCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -234,7 +245,7 @@ export interface HealthGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Health {

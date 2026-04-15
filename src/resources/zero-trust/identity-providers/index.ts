@@ -2,6 +2,7 @@
 
 export {
   IdentityProviders,
+  BaseIdentityProviders,
   type AzureAD,
   type GenericOAuthConfig,
   type IdentityProvider,
@@ -16,4 +17,4 @@ export {
   type IdentityProviderGetParams,
   type IdentityProviderListResponsesV4PagePaginationArray,
 } from './identity-providers';
-export { SCIM } from './scim/index';
+export { SCIM, BaseSCIM } from './scim/index';

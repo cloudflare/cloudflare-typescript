@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../../internal/request-options';
 import { path } from '../../../../../../internal/utils/path';
 
-export class Spoof extends APIResource {
+export class BaseSpoof extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security', 'top', 'tlds', 'spoof'] =
+    Object.freeze(['radar', 'email', 'security', 'top', 'tlds', 'spoof'] as const);
+
   /**
    * Retrieves the top TLDs by emails classified as spoof or not.
    *
@@ -30,6 +33,7 @@ export class Spoof extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Spoof extends BaseSpoof {}
 
 export interface SpoofGetResponse {
   /**

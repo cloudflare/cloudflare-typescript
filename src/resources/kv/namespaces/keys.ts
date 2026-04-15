@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Keys extends APIResource {
+export class BaseKeys extends APIResource {
+  static override readonly _key: readonly ['kv', 'namespaces', 'keys'] = Object.freeze([
+    'kv',
+    'namespaces',
+    'keys',
+  ] as const);
+
   /**
    * Lists a namespace's keys.
    *
@@ -27,10 +33,10 @@ export class Keys extends APIResource {
    */
   list(
     namespaceID: string,
-    params: KeyListParams,
+    params: KeyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<KeysCursorLimitPagination, Key> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}/keys`,
       CursorLimitPagination<Key>,
@@ -49,7 +55,7 @@ export class Keys extends APIResource {
     params: KeyBulkDeleteParams,
     options?: RequestOptions,
   ): APIPromise<KeyBulkDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}/bulk/delete`, {
         body: body,
@@ -70,7 +76,7 @@ export class Keys extends APIResource {
     params: KeyBulkGetParams,
     options?: RequestOptions,
   ): APIPromise<KeyBulkGetResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}/bulk/get`, {
         body,
@@ -94,7 +100,7 @@ export class Keys extends APIResource {
     params: KeyBulkUpdateParams,
     options?: RequestOptions,
   ): APIPromise<KeyBulkUpdateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/storage/kv/namespaces/${namespaceID}/bulk`, {
         body: body,
@@ -103,6 +109,7 @@ export class Keys extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Keys extends BaseKeys {}
 
 export type KeysCursorLimitPagination = CursorLimitPagination<Key>;
 
@@ -197,7 +204,7 @@ export interface KeyListParams extends CursorLimitPaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filters returned keys by a name prefix. Exact matches and any key
@@ -210,7 +217,7 @@ export interface KeyBulkDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -222,7 +229,7 @@ export interface KeyBulkGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Array of keys to retrieve (maximum of 100).
@@ -244,7 +251,7 @@ export interface KeyBulkUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

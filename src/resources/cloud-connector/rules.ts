@@ -5,15 +5,20 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['cloudConnector', 'rules'] = Object.freeze([
+    'cloudConnector',
+    'rules',
+  ] as const);
+
   /**
    * Put Rules
    */
   update(
-    params: RuleUpdateParams,
+    params: RuleUpdateParams | null | undefined = undefined,
     options?: RequestOptions,
   ): PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
-    const { zone_id, rules } = params;
+    const { zone_id = this._client.zoneID, rules } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/cloud_connector/rules`,
       SinglePage<RuleUpdateResponse>,
@@ -25,10 +30,10 @@ export class Rules extends APIResource {
    * Rules
    */
   list(
-    params: RuleListParams,
+    params: RuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/cloud_connector/rules`,
       SinglePage<RuleListResponse>,
@@ -36,6 +41,7 @@ export class Rules extends APIResource {
     );
   }
 }
+export class Rules extends BaseRules {}
 
 export type RuleUpdateResponsesSinglePage = SinglePage<RuleUpdateResponse>;
 
@@ -109,7 +115,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -155,7 +161,7 @@ export interface RuleListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Rules {

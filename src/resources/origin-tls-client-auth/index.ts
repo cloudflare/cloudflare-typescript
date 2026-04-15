@@ -2,6 +2,7 @@
 
 export {
   HostnameCertificates,
+  BaseHostnameCertificates,
   type Certificate,
   type HostnameCertificateCreateResponse,
   type HostnameCertificateListResponse,
@@ -15,15 +16,17 @@ export {
 } from './hostname-certificates';
 export {
   Hostnames,
+  BaseHostnames,
   type AuthenticatedOriginPull,
   type HostnameUpdateResponse,
   type HostnameUpdateParams,
   type HostnameGetParams,
   type HostnameUpdateResponsesSinglePage,
 } from './hostnames';
-export { OriginTLSClientAuth } from './origin-tls-client-auth';
+export { OriginTLSClientAuth, BaseOriginTLSClientAuth } from './origin-tls-client-auth';
 export {
   Settings,
+  BaseSettings,
   type SettingUpdateResponse,
   type SettingGetResponse,
   type SettingUpdateParams,
@@ -31,6 +34,7 @@ export {
 } from './settings';
 export {
   ZoneCertificates,
+  BaseZoneCertificates,
   type ZoneAuthenticatedOriginPull,
   type ZoneCertificateCreateResponse,
   type ZoneCertificateListResponse,

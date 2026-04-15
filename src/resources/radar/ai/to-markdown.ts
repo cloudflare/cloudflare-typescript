@@ -7,7 +7,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class ToMarkdown extends APIResource {
+export class BaseToMarkdown extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai', 'toMarkdown'] = Object.freeze([
+    'radar',
+    'ai',
+    'toMarkdown',
+  ] as const);
+
   /**
    * Converts uploaded files into Markdown format using Workers AI.
    *
@@ -17,7 +23,7 @@ export class ToMarkdown extends APIResource {
     params: ToMarkdownCreateParams,
     options?: RequestOptions,
   ): PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/tomarkdown`,
       SinglePage<ToMarkdownCreateResponse>,
@@ -25,6 +31,7 @@ export class ToMarkdown extends APIResource {
     );
   }
 }
+export class ToMarkdown extends BaseToMarkdown {}
 
 export type ToMarkdownCreateResponsesSinglePage = SinglePage<ToMarkdownCreateResponse>;
 
@@ -44,7 +51,7 @@ export interface ToMarkdownCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

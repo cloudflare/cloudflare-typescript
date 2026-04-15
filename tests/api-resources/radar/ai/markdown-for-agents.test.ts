@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AI } from 'cloudflare/resources/radar/ai/ai';
+import { BaseMarkdownForAgents } from 'cloudflare/resources/radar/ai/markdown-for-agents';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource markdownForAgents', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMarkdownForAgents],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AI],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { ai: { markdownForAgents: BaseMarkdownForAgents } } }>,
+) => {
   test('summary', async () => {
     const responsePromise = client.radar.ai.markdownForAgents.summary();
     const rawResponse = await responsePromise.asResponse();
@@ -63,4 +83,7 @@ describe('resource markdownForAgents', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource markdownForAgents', () => runTests(client));
+describe('resource markdownForAgents (tree shakable, base)', () => runTests(partialClient));
+describe('resource markdownForAgents (tree shakable, subresource)', () => runTests(parentPartialClient));

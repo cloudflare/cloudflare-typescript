@@ -2,9 +2,10 @@
 
 export {
   Top,
+  BaseTop,
   type TopBotsResponse,
   type TopCategoriesResponse,
   type TopBotsParams,
   type TopCategoriesParams,
 } from './top';
-export { VerifiedBots } from './verified-bots';
+export { VerifiedBots, BaseVerifiedBots } from './verified-bots';

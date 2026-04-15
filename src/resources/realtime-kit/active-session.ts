@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ActiveSession extends APIResource {
+export class BaseActiveSession extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'activeSession'] = Object.freeze([
+    'realtimeKit',
+    'activeSession',
+  ] as const);
+
   /**
    * Creates a new poll in an active session for the given meeting ID.
    *
@@ -28,7 +33,7 @@ export class ActiveSession extends APIResource {
     params: ActiveSessionCreatePollParams,
     options?: RequestOptions,
   ): APIPromise<ActiveSessionCreatePollResponse> {
-    const { account_id, app_id, ...body } = params;
+    const { account_id = this._client.accountID, app_id, ...body } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/active-session/poll`,
       { body, ...options },
@@ -55,7 +60,7 @@ export class ActiveSession extends APIResource {
     params: ActiveSessionGetActiveSessionParams,
     options?: RequestOptions,
   ): APIPromise<ActiveSessionGetActiveSessionResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/active-session`,
       options,
@@ -82,7 +87,7 @@ export class ActiveSession extends APIResource {
     params: ActiveSessionKickAllParticipantsParams,
     options?: RequestOptions,
   ): APIPromise<ActiveSessionKickAllParticipantsResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/active-session/kick-all`,
       options,
@@ -112,13 +117,14 @@ export class ActiveSession extends APIResource {
     params: ActiveSessionKickParticipantsParams,
     options?: RequestOptions,
   ): APIPromise<ActiveSessionKickParticipantsResponse> {
-    const { account_id, app_id, ...body } = params;
+    const { account_id = this._client.accountID, app_id, ...body } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/active-session/kick`,
       { body, ...options },
     );
   }
 }
+export class ActiveSession extends BaseActiveSession {}
 
 export interface ActiveSessionCreatePollResponse {
   data?: ActiveSessionCreatePollResponse.Data;
@@ -326,7 +332,7 @@ export interface ActiveSessionCreatePollParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -358,7 +364,7 @@ export interface ActiveSessionGetActiveSessionParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -370,7 +376,7 @@ export interface ActiveSessionKickAllParticipantsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -382,7 +388,7 @@ export interface ActiveSessionKickParticipantsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.

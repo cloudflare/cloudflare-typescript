@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Radar } from 'cloudflare/resources/radar/radar';
+import { BaseLeakedCredentials } from 'cloudflare/resources/radar/leaked-credentials/leaked-credentials';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource leakedCredentials', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLeakedCredentials],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Radar],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { leakedCredentials: BaseLeakedCredentials } }>) => {
   test('summaryV2', async () => {
     const responsePromise = client.radar.leakedCredentials.summaryV2('COMPROMISED');
     const rawResponse = await responsePromise.asResponse();
@@ -79,4 +97,7 @@ describe('resource leakedCredentials', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource leakedCredentials', () => runTests(client));
+describe('resource leakedCredentials (tree shakable, base)', () => runTests(partialClient));
+describe('resource leakedCredentials (tree shakable, subresource)', () => runTests(parentPartialClient));

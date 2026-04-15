@@ -5,6 +5,7 @@ import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
 import * as FallbackOriginAPI from './fallback-origin';
 import {
+  BaseFallbackOrigin,
   FallbackOrigin,
   FallbackOriginDeleteParams,
   FallbackOriginDeleteResponse,
@@ -14,15 +15,14 @@ import {
   FallbackOriginUpdateResponse,
 } from './fallback-origin';
 import * as CertificatePackAPI from './certificate-pack/certificate-pack';
-import { CertificatePack } from './certificate-pack/certificate-pack';
+import { BaseCertificatePack, CertificatePack } from './certificate-pack/certificate-pack';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CustomHostnames extends APIResource {
-  fallbackOrigin: FallbackOriginAPI.FallbackOrigin = new FallbackOriginAPI.FallbackOrigin(this._client);
-  certificatePack: CertificatePackAPI.CertificatePack = new CertificatePackAPI.CertificatePack(this._client);
+export class BaseCustomHostnames extends APIResource {
+  static override readonly _key: readonly ['customHostnames'] = Object.freeze(['customHostnames'] as const);
 
   /**
    * Add a new custom hostname and request that an SSL certificate be issued for it.
@@ -48,7 +48,7 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameCreateParams,
     options?: RequestOptions,
   ): APIPromise<CustomHostnameCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/custom_hostnames`, { body, ...options }) as APIPromise<{
         result: CustomHostnameCreateResponse;
@@ -70,10 +70,10 @@ export class CustomHostnames extends APIResource {
    * ```
    */
   list(
-    params: CustomHostnameListParams,
+    params: CustomHostnameListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/custom_hostnames`,
       V4PagePaginationArray<CustomHostnameListResponse>,
@@ -95,10 +95,10 @@ export class CustomHostnames extends APIResource {
    */
   delete(
     customHostnameID: string,
-    params: CustomHostnameDeleteParams,
+    params: CustomHostnameDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomHostnameDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/custom_hostnames/${customHostnameID}`, options);
   }
 
@@ -124,7 +124,7 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameEditParams,
     options?: RequestOptions,
   ): APIPromise<CustomHostnameEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/custom_hostnames/${customHostnameID}`, {
         body,
@@ -147,16 +147,20 @@ export class CustomHostnames extends APIResource {
    */
   get(
     customHostnameID: string,
-    params: CustomHostnameGetParams,
+    params: CustomHostnameGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomHostnameGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/custom_hostnames/${customHostnameID}`, options) as APIPromise<{
         result: CustomHostnameGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class CustomHostnames extends BaseCustomHostnames {
+  fallbackOrigin: FallbackOriginAPI.FallbackOrigin = new FallbackOriginAPI.FallbackOrigin(this._client);
+  certificatePack: CertificatePackAPI.CertificatePack = new CertificatePackAPI.CertificatePack(this._client);
 }
 
 export type CustomHostnameListResponsesV4PagePaginationArray =
@@ -2046,7 +2050,7 @@ export interface CustomHostnameCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The custom hostname that will point to your hostname via CNAME.
@@ -2181,7 +2185,7 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Hostname ID to match against. This ID was generated and returned
@@ -2288,14 +2292,14 @@ export interface CustomHostnameDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomHostnameEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Unique key/value metadata for this hostname. These are per-hostname
@@ -2440,11 +2444,13 @@ export interface CustomHostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomHostnames.FallbackOrigin = FallbackOrigin;
+CustomHostnames.BaseFallbackOrigin = BaseFallbackOrigin;
 CustomHostnames.CertificatePack = CertificatePack;
+CustomHostnames.BaseCertificatePack = BaseCertificatePack;
 
 export declare namespace CustomHostnames {
   export {
@@ -2467,6 +2473,7 @@ export declare namespace CustomHostnames {
 
   export {
     FallbackOrigin as FallbackOrigin,
+    BaseFallbackOrigin as BaseFallbackOrigin,
     type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,
     type FallbackOriginDeleteResponse as FallbackOriginDeleteResponse,
     type FallbackOriginGetResponse as FallbackOriginGetResponse,
@@ -2475,5 +2482,5 @@ export declare namespace CustomHostnames {
     type FallbackOriginGetParams as FallbackOriginGetParams,
   };
 
-  export { CertificatePack as CertificatePack };
+  export { CertificatePack as CertificatePack, BaseCertificatePack as BaseCertificatePack };
 }

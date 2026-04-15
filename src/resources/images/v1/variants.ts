@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Variants extends APIResource {
+export class BaseVariants extends APIResource {
+  static override readonly _key: readonly ['images', 'v1', 'variants'] = Object.freeze([
+    'images',
+    'v1',
+    'variants',
+  ] as const);
+
   /**
    * Specify variants that allow you to resize images for different use cases.
    *
@@ -24,7 +30,7 @@ export class Variants extends APIResource {
    * ```
    */
   create(params: VariantCreateParams, options?: RequestOptions): APIPromise<VariantCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/images/v1/variants`, {
         body,
@@ -43,8 +49,8 @@ export class Variants extends APIResource {
    * });
    * ```
    */
-  list(params: VariantListParams, options?: RequestOptions): APIPromise<Variant> {
-    const { account_id } = params;
+  list(params: VariantListParams | null | undefined = {}, options?: RequestOptions): APIPromise<Variant> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/images/v1/variants`, options) as APIPromise<{
         result: Variant;
@@ -65,10 +71,10 @@ export class Variants extends APIResource {
    */
   delete(
     variantID: string,
-    params: VariantDeleteParams,
+    params: VariantDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<VariantDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/images/v1/variants/${variantID}`,
@@ -101,7 +107,7 @@ export class Variants extends APIResource {
     params: VariantEditParams,
     options?: RequestOptions,
   ): APIPromise<VariantEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/images/v1/variants/${variantID}`, {
         body,
@@ -121,8 +127,12 @@ export class Variants extends APIResource {
    * );
    * ```
    */
-  get(variantID: string, params: VariantGetParams, options?: RequestOptions): APIPromise<VariantGetResponse> {
-    const { account_id } = params;
+  get(
+    variantID: string,
+    params: VariantGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<VariantGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/images/v1/variants/${variantID}`, options) as APIPromise<{
         result: VariantGetResponse;
@@ -130,6 +140,7 @@ export class Variants extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Variants extends BaseVariants {}
 
 export interface Variant {
   variants?: Variant.Variants;
@@ -339,7 +350,7 @@ export interface VariantCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -390,21 +401,21 @@ export interface VariantListParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VariantDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Allows you to define image resizing sizes for different use cases.
@@ -450,7 +461,7 @@ export interface VariantGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Variants {

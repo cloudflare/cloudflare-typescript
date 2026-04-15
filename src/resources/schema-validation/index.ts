@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { SchemaValidation } from './schema-validation';
+export { SchemaValidation, BaseSchemaValidation } from './schema-validation';
 export {
   Schemas,
+  BaseSchemas,
   type PublicSchema,
   type SchemaDeleteResponse,
   type SchemaCreateParams,
@@ -14,6 +15,7 @@ export {
 } from './schemas';
 export {
   Settings,
+  BaseSettings,
   type SettingUpdateResponse,
   type SettingEditResponse,
   type SettingGetResponse,

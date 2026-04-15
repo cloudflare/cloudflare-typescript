@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseSeats } from 'cloudflare/resources/zero-trust/seats';
+import { ZeroTrust } from 'cloudflare/resources/zero-trust/zero-trust';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource seats', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSeats],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ZeroTrust],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { seats: BaseSeats } }>) => {
   // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
     const responsePromise = client.zeroTrust.seats.edit({
@@ -43,4 +61,7 @@ describe('resource seats', () => {
       ],
     });
   });
-});
+};
+describe('resource seats', () => runTests(client));
+describe('resource seats (tree shakable, base)', () => runTests(partialClient));
+describe('resource seats (tree shakable, subresource)', () => runTests(parentPartialClient));

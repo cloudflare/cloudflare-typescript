@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tokens extends APIResource {
+export class BaseTokens extends APIResource {
+  static override readonly _key: readonly ['magicNetworkMonitoring', 'vpcFlows', 'tokens'] = Object.freeze([
+    'magicNetworkMonitoring',
+    'vpcFlows',
+    'tokens',
+  ] as const);
+
   /**
    * Generate authentication token for VPC flow logs export.
    *
@@ -17,8 +23,11 @@ export class Tokens extends APIResource {
    *   );
    * ```
    */
-  create(params: TokenCreateParams, options?: RequestOptions): APIPromise<TokenCreateResponse> {
-    const { account_id } = params;
+  create(
+    params: TokenCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenCreateResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/mnm/vpc-flows/token`, options) as APIPromise<{
         result: TokenCreateResponse;
@@ -26,6 +35,7 @@ export class Tokens extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Tokens extends BaseTokens {}
 
 /**
  * Authentication token to be used for VPC Flows export authentication.
@@ -33,7 +43,7 @@ export class Tokens extends APIResource {
 export type TokenCreateResponse = string;
 
 export interface TokenCreateParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Tokens {

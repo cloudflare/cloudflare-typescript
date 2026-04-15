@@ -2,6 +2,7 @@
 
 export {
   CatchAlls,
+  BaseCatchAlls,
   type CatchAllAction,
   type CatchAllMatcher,
   type CatchAllUpdateResponse,
@@ -11,6 +12,7 @@ export {
 } from './catch-alls';
 export {
   Rules,
+  BaseRules,
   type Action,
   type EmailRoutingRule,
   type Matcher,

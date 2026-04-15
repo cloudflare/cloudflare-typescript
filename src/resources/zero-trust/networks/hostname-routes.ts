@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class HostnameRoutes extends APIResource {
+export class BaseHostnameRoutes extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'hostnameRoutes'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'hostnameRoutes',
+  ] as const);
+
   /**
    * Create a hostname route.
    *
@@ -22,8 +28,11 @@ export class HostnameRoutes extends APIResource {
    *   });
    * ```
    */
-  create(params: HostnameRouteCreateParams, options?: RequestOptions): APIPromise<HostnameRoute> {
-    const { account_id, ...body } = params;
+  create(
+    params: HostnameRouteCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<HostnameRoute> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/zerotrust/routes/hostname`, {
         body,
@@ -46,10 +55,10 @@ export class HostnameRoutes extends APIResource {
    * ```
    */
   list(
-    params: HostnameRouteListParams,
+    params: HostnameRouteListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HostnameRoutesV4PagePaginationArray, HostnameRoute> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/zerotrust/routes/hostname`,
       V4PagePaginationArray<HostnameRoute>,
@@ -71,10 +80,10 @@ export class HostnameRoutes extends APIResource {
    */
   delete(
     hostnameRouteID: string,
-    params: HostnameRouteDeleteParams,
+    params: HostnameRouteDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameRoute> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/zerotrust/routes/hostname/${hostnameRouteID}`,
@@ -100,7 +109,7 @@ export class HostnameRoutes extends APIResource {
     params: HostnameRouteEditParams,
     options?: RequestOptions,
   ): APIPromise<HostnameRoute> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/zerotrust/routes/hostname/${hostnameRouteID}`, {
         body,
@@ -123,10 +132,10 @@ export class HostnameRoutes extends APIResource {
    */
   get(
     hostnameRouteID: string,
-    params: HostnameRouteGetParams,
+    params: HostnameRouteGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameRoute> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/zerotrust/routes/hostname/${hostnameRouteID}`,
@@ -135,6 +144,7 @@ export class HostnameRoutes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class HostnameRoutes extends BaseHostnameRoutes {}
 
 export type HostnameRoutesV4PagePaginationArray = V4PagePaginationArray<HostnameRoute>;
 
@@ -180,7 +190,7 @@ export interface HostnameRouteCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the hostname route.
@@ -202,7 +212,7 @@ export interface HostnameRouteListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The hostname route ID.
@@ -242,14 +252,14 @@ export interface HostnameRouteDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface HostnameRouteEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the hostname route.
@@ -271,7 +281,7 @@ export interface HostnameRouteGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace HostnameRoutes {

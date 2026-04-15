@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Registrar } from 'cloudflare/resources/registrar/registrar';
+import { BaseRegistrationStatus } from 'cloudflare/resources/registrar/registration-status';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource registrationStatus', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRegistrationStatus],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Registrar],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ registrar: { registrationStatus: BaseRegistrationStatus } }>,
+) => {
   test('get: only required params', async () => {
     const responsePromise = client.registrar.registrationStatus.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -27,4 +47,7 @@ describe('resource registrationStatus', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource registrationStatus', () => runTests(client));
+describe('resource registrationStatus (tree shakable, base)', () => runTests(partialClient));
+describe('resource registrationStatus (tree shakable, subresource)', () => runTests(parentPartialClient));

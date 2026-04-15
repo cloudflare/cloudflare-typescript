@@ -5,12 +5,20 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Matches extends APIResource {
+export class BaseMatches extends APIResource {
+  static override readonly _key: readonly ['brandProtection', 'matches'] = Object.freeze([
+    'brandProtection',
+    'matches',
+  ] as const);
+
   /**
    * Return matches as CSV for string queries based on ID
    */
-  download(params: MatchDownloadParams, options?: RequestOptions): APIPromise<MatchDownloadResponse> {
-    const { account_id, ...query } = params;
+  download(
+    params: MatchDownloadParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<MatchDownloadResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/brand-protection/matches/download`, {
       query,
       ...options,
@@ -20,11 +28,15 @@ export class Matches extends APIResource {
   /**
    * Return matches for string queries based on ID
    */
-  get(params: MatchGetParams, options?: RequestOptions): APIPromise<MatchGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    params: MatchGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<MatchGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/brand-protection/matches`, { query, ...options });
   }
 }
+export class Matches extends BaseMatches {}
 
 export interface MatchDownloadResponse {
   matches?: Array<{ [key: string]: unknown }>;
@@ -42,7 +54,7 @@ export interface MatchDownloadParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -69,7 +81,7 @@ export interface MatchGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

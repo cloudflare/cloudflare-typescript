@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseNetworkPath } from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/network-path';
+import { TracerouteTestResults } from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/traceroute-test-results';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,25 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource networkPath', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseNetworkPath],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [TracerouteTestResults],
+});
+
+const runTests = (
+  client: PartialCloudflare<{
+    zeroTrust: { dex: { tracerouteTestResults: { networkPath: BaseNetworkPath } } };
+  }>,
+) => {
   test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.tracerouteTestResults.networkPath.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -29,4 +51,7 @@ describe('resource networkPath', () => {
       { account_id: '01a7362d577a6c3019a474fd6f485823' },
     );
   });
-});
+};
+describe('resource networkPath', () => runTests(client));
+describe('resource networkPath (tree shakable, base)', () => runTests(partialClient));
+describe('resource networkPath (tree shakable, subresource)', () => runTests(parentPartialClient));

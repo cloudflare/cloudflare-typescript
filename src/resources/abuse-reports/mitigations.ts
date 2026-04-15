@@ -10,16 +10,21 @@ import {
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Mitigations extends APIResource {
+export class BaseMitigations extends APIResource {
+  static override readonly _key: readonly ['abuseReports', 'mitigations'] = Object.freeze([
+    'abuseReports',
+    'mitigations',
+  ] as const);
+
   /**
    * List mitigations done to remediate the abuse report.
    */
   list(
     reportID: string,
-    params: MitigationListParams,
+    params: MitigationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MitigationListResponsesV4PagePagination, MitigationListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/abuse-reports/${reportID}/mitigations`,
       V4PagePagination<MitigationListResponse>,
@@ -35,7 +40,7 @@ export class Mitigations extends APIResource {
     params: MitigationReviewParams,
     options?: RequestOptions,
   ): PagePromise<MitigationReviewResponsesSinglePage, MitigationReviewResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/abuse-reports/${reportID}/mitigations/appeal`,
       SinglePage<MitigationReviewResponse>,
@@ -43,6 +48,7 @@ export class Mitigations extends APIResource {
     );
   }
 }
+export class Mitigations extends BaseMitigations {}
 
 export type MitigationListResponsesV4PagePagination = V4PagePagination<MitigationListResponse>;
 
@@ -126,7 +132,7 @@ export interface MitigationListParams extends V4PagePaginationParams {
   /**
    * Path param: Cloudflare Account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Returns mitigation that were dispatched after the given date
@@ -180,7 +186,7 @@ export interface MitigationReviewParams {
   /**
    * Path param: Cloudflare Account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of mitigations to appeal.

@@ -7,7 +7,11 @@ import { CloudflareError } from '../../../../core/error';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications', 'settings'] = Object.freeze(
+    ['zeroTrust', 'access', 'applications', 'settings'] as const,
+  );
+
   /**
    * Updates Access application settings.
    *
@@ -25,7 +29,11 @@ export class Settings extends APIResource {
     params: SettingUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SettingUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -67,7 +75,11 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: RequestOptions,
   ): APIPromise<SettingEditResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -92,6 +104,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 export interface SettingUpdateResponse {
   /**

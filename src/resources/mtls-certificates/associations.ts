@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Associations extends APIResource {
+export class BaseAssociations extends APIResource {
+  static override readonly _key: readonly ['mtlsCertificates', 'associations'] = Object.freeze([
+    'mtlsCertificates',
+    'associations',
+  ] as const);
+
   /**
    * Lists all active associations between the certificate and Cloudflare services.
    *
@@ -22,10 +27,10 @@ export class Associations extends APIResource {
    */
   get(
     mtlsCertificateID: string,
-    params: AssociationGetParams,
+    params: AssociationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CertificateAsssociationsSinglePage, CertificateAsssociation> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}/associations`,
       SinglePage<CertificateAsssociation>,
@@ -33,6 +38,7 @@ export class Associations extends APIResource {
     );
   }
 }
+export class Associations extends BaseAssociations {}
 
 export type CertificateAsssociationsSinglePage = SinglePage<CertificateAsssociation>;
 
@@ -52,7 +58,7 @@ export interface AssociationGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Associations {

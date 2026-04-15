@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ResourcesAPI from './resources/resources';
-import { Resources } from './resources/resources';
+import { BaseResources, Resources } from './resources/resources';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Managed extends APIResource {
-  resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
+export class BaseManaged extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'labels', 'managed'] = Object.freeze([
+    'apiGateway',
+    'labels',
+    'managed',
+  ] as const);
 
   /**
    * Retrieve managed label
@@ -21,8 +25,12 @@ export class Managed extends APIResource {
    * );
    * ```
    */
-  get(name: string, params: ManagedGetParams, options?: RequestOptions): APIPromise<ManagedGetResponse> {
-    const { zone_id, ...query } = params;
+  get(
+    name: string,
+    params: ManagedGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ManagedGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/labels/managed/${name}`, {
         query,
@@ -30,6 +38,9 @@ export class Managed extends APIResource {
       }) as APIPromise<{ result: ManagedGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Managed extends BaseManaged {
+  resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
 }
 
 export interface ManagedGetResponse {
@@ -68,7 +79,7 @@ export interface ManagedGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Include `mapped_resources` for each label
@@ -77,9 +88,10 @@ export interface ManagedGetParams {
 }
 
 Managed.Resources = Resources;
+Managed.BaseResources = BaseResources;
 
 export declare namespace Managed {
   export { type ManagedGetResponse as ManagedGetResponse, type ManagedGetParams as ManagedGetParams };
 
-  export { Resources as Resources };
+  export { Resources as Resources, BaseResources as BaseResources };
 }

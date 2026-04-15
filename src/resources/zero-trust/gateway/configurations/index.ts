@@ -2,6 +2,7 @@
 
 export {
   Configurations,
+  BaseConfigurations,
   type ActivityLogSettings,
   type AntiVirusSettings,
   type BlockPageSettings,
@@ -21,4 +22,8 @@ export {
   type ConfigurationEditParams,
   type ConfigurationGetParams,
 } from './configurations';
-export { CustomCertificate, type CustomCertificateGetParams } from './custom-certificate';
+export {
+  CustomCertificate,
+  BaseCustomCertificate,
+  type CustomCertificateGetParams,
+} from './custom-certificate';

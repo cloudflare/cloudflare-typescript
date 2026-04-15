@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Routes extends APIResource {
+export class BaseRoutes extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'routes'] = Object.freeze([
+    'magicTransit',
+    'routes',
+  ] as const);
+
   /**
    * Creates a new Magic static route. Use `?validate_only=true` as an optional query
    * parameter to run validation only without persisting changes.
@@ -22,7 +27,7 @@ export class Routes extends APIResource {
    * ```
    */
   create(params: RouteCreateParams, options?: RequestOptions): APIPromise<RouteCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/routes`, { body, ...options }) as APIPromise<{
         result: RouteCreateResponse;
@@ -52,7 +57,7 @@ export class Routes extends APIResource {
     params: RouteUpdateParams,
     options?: RequestOptions,
   ): APIPromise<RouteUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/routes/${routeID}`, {
         body,
@@ -71,8 +76,11 @@ export class Routes extends APIResource {
    * });
    * ```
    */
-  list(params: RouteListParams, options?: RequestOptions): APIPromise<RouteListResponse> {
-    const { account_id } = params;
+  list(
+    params: RouteListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RouteListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/routes`, options) as APIPromise<{
         result: RouteListResponse;
@@ -93,10 +101,10 @@ export class Routes extends APIResource {
    */
   delete(
     routeID: string,
-    params: RouteDeleteParams,
+    params: RouteDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RouteDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/magic/routes/${routeID}`, options) as APIPromise<{
         result: RouteDeleteResponse;
@@ -126,7 +134,7 @@ export class Routes extends APIResource {
    * ```
    */
   bulkUpdate(params: RouteBulkUpdateParams, options?: RequestOptions): APIPromise<RouteBulkUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/routes`, { body, ...options }) as APIPromise<{
         result: RouteBulkUpdateResponse;
@@ -144,8 +152,11 @@ export class Routes extends APIResource {
    * });
    * ```
    */
-  empty(params: RouteEmptyParams, options?: RequestOptions): APIPromise<RouteEmptyResponse> {
-    const { account_id } = params;
+  empty(
+    params: RouteEmptyParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RouteEmptyResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/magic/routes`, options) as APIPromise<{
         result: RouteEmptyResponse;
@@ -164,8 +175,12 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  get(routeID: string, params: RouteGetParams, options?: RequestOptions): APIPromise<RouteGetResponse> {
-    const { account_id } = params;
+  get(
+    routeID: string,
+    params: RouteGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RouteGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/routes/${routeID}`, options) as APIPromise<{
         result: RouteGetResponse;
@@ -173,6 +188,7 @@ export class Routes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Routes extends BaseRoutes {}
 
 /**
  * Used only for ECMP routes.
@@ -581,7 +597,7 @@ export interface RouteCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The next-hop IP Address for the static route.
@@ -618,7 +634,7 @@ export interface RouteUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The next-hop IP Address for the static route.
@@ -655,21 +671,21 @@ export interface RouteListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RouteDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RouteBulkUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -720,14 +736,14 @@ export interface RouteEmptyParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RouteGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Routes {

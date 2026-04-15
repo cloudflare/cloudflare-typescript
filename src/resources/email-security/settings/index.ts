@@ -2,6 +2,7 @@
 
 export {
   AllowPolicies,
+  BaseAllowPolicies,
   type AllowPolicyCreateResponse,
   type AllowPolicyListResponse,
   type AllowPolicyDeleteResponse,
@@ -16,6 +17,7 @@ export {
 } from './allow-policies';
 export {
   BlockSenders,
+  BaseBlockSenders,
   type BlockSenderCreateResponse,
   type BlockSenderListResponse,
   type BlockSenderDeleteResponse,
@@ -30,6 +32,7 @@ export {
 } from './block-senders';
 export {
   Domains,
+  BaseDomains,
   type DomainListResponse,
   type DomainDeleteResponse,
   type DomainBulkDeleteResponse,
@@ -45,6 +48,7 @@ export {
 } from './domains';
 export {
   ImpersonationRegistry,
+  BaseImpersonationRegistry,
   type ImpersonationRegistryCreateResponse,
   type ImpersonationRegistryListResponse,
   type ImpersonationRegistryDeleteResponse,
@@ -57,9 +61,10 @@ export {
   type ImpersonationRegistryGetParams,
   type ImpersonationRegistryListResponsesV4PagePaginationArray,
 } from './impersonation-registry';
-export { Settings } from './settings';
+export { Settings, BaseSettings } from './settings';
 export {
   TrustedDomains,
+  BaseTrustedDomains,
   type TrustedDomainCreateResponse,
   type TrustedDomainListResponse,
   type TrustedDomainDeleteResponse,

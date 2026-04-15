@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Addressing } from 'cloudflare/resources/addressing/addressing';
+import { BasePrefixes } from 'cloudflare/resources/addressing/prefixes/prefixes';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource prefixes', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePrefixes],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Addressing],
+});
+
+const runTests = (client: PartialCloudflare<{ addressing: { prefixes: BasePrefixes } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.addressing.prefixes.create({
       account_id: '258def64c72dae45f3e4c8516e2111f2',
@@ -112,4 +130,7 @@ describe('resource prefixes', () => {
       account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
-});
+};
+describe('resource prefixes', () => runTests(client));
+describe('resource prefixes (tree shakable, base)', () => runTests(partialClient));
+describe('resource prefixes (tree shakable, subresource)', () => runTests(parentPartialClient));

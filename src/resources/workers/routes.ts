@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Routes extends APIResource {
+export class BaseRoutes extends APIResource {
+  static override readonly _key: readonly ['workers', 'routes'] = Object.freeze([
+    'workers',
+    'routes',
+  ] as const);
+
   /**
    * Creates a route that maps a URL pattern to a Worker.
    *
@@ -19,7 +24,7 @@ export class Routes extends APIResource {
    * ```
    */
   create(params: RouteCreateParams, options?: RequestOptions): APIPromise<RouteCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/workers/routes`, { body, ...options }) as APIPromise<{
         result: RouteCreateResponse;
@@ -46,7 +51,7 @@ export class Routes extends APIResource {
     params: RouteUpdateParams,
     options?: RequestOptions,
   ): APIPromise<RouteUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/workers/routes/${routeID}`, {
         body,
@@ -69,10 +74,10 @@ export class Routes extends APIResource {
    * ```
    */
   list(
-    params: RouteListParams,
+    params: RouteListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RouteListResponsesSinglePage, RouteListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/workers/routes`,
       SinglePage<RouteListResponse>,
@@ -93,10 +98,10 @@ export class Routes extends APIResource {
    */
   delete(
     routeID: string,
-    params: RouteDeleteParams,
+    params: RouteDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RouteDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/workers/routes/${routeID}`, options) as APIPromise<{
         result: RouteDeleteResponse;
@@ -115,8 +120,12 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  get(routeID: string, params: RouteGetParams, options?: RequestOptions): APIPromise<RouteGetResponse> {
-    const { zone_id } = params;
+  get(
+    routeID: string,
+    params: RouteGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RouteGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/workers/routes/${routeID}`, options) as APIPromise<{
         result: RouteGetResponse;
@@ -124,6 +133,7 @@ export class Routes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Routes extends BaseRoutes {}
 
 export type RouteListResponsesSinglePage = SinglePage<RouteListResponse>;
 
@@ -210,7 +220,7 @@ export interface RouteCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Pattern to match incoming requests against.
@@ -228,7 +238,7 @@ export interface RouteUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Pattern to match incoming requests against.
@@ -246,21 +256,21 @@ export interface RouteListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RouteDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RouteGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Routes {

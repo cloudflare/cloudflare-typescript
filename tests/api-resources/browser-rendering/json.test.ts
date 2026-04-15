@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BrowserRendering } from 'cloudflare/resources/browser-rendering/browser-rendering';
+import { BaseJson } from 'cloudflare/resources/browser-rendering/json';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource json', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseJson],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BrowserRendering],
+});
+
+const runTests = (client: PartialCloudflare<{ browserRendering: { json: BaseJson } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.browserRendering.json.create({
       account_id: 'account_id',
@@ -95,4 +113,7 @@ describe('resource json', () => {
       waitForTimeout: 120000,
     });
   });
-});
+};
+describe('resource json', () => runTests(client));
+describe('resource json (tree shakable, base)', () => runTests(partialClient));
+describe('resource json (tree shakable, subresource)', () => runTests(parentPartialClient));

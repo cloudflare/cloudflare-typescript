@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TimeTravel extends APIResource {
+export class BaseTimeTravel extends APIResource {
+  static override readonly _key: readonly ['d1', 'database', 'timeTravel'] = Object.freeze([
+    'd1',
+    'database',
+    'timeTravel',
+  ] as const);
+
   /**
    * Retrieves the current bookmark, or the nearest bookmark at or before a provided
    * timestamp. Bookmarks can be used with the restore endpoint to revert the
@@ -22,10 +28,10 @@ export class TimeTravel extends APIResource {
    */
   getBookmark(
     databaseID: string,
-    params: TimeTravelGetBookmarkParams,
+    params: TimeTravelGetBookmarkParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TimeTravelGetBookmarkResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/d1/database/${databaseID}/time_travel/bookmark`, {
         query,
@@ -49,10 +55,10 @@ export class TimeTravel extends APIResource {
    */
   restore(
     databaseID: string,
-    params: TimeTravelRestoreParams,
+    params: TimeTravelRestoreParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TimeTravelRestoreResponse> {
-    const { account_id, bookmark, timestamp } = params;
+    const { account_id = this._client.accountID, bookmark, timestamp } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/d1/database/${databaseID}/time_travel/restore`, {
         query: { bookmark, timestamp },
@@ -61,6 +67,7 @@ export class TimeTravel extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TimeTravel extends BaseTimeTravel {}
 
 export interface TimeTravelGetBookmarkResponse {
   /**
@@ -96,7 +103,7 @@ export interface TimeTravelGetBookmarkParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: An optional ISO 8601 timestamp. If provided, returns the nearest
@@ -110,7 +117,7 @@ export interface TimeTravelRestoreParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A bookmark to restore the database to. Required if `timestamp` is

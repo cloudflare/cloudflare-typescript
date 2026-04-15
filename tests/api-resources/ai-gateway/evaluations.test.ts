@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AIGateway } from 'cloudflare/resources/ai-gateway/ai-gateway';
+import { BaseEvaluations } from 'cloudflare/resources/ai-gateway/evaluations';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource evaluations', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseEvaluations],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AIGateway],
+});
+
+const runTests = (client: PartialCloudflare<{ aiGateway: { evaluations: BaseEvaluations } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.aiGateway.evaluations.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
@@ -99,4 +117,7 @@ describe('resource evaluations', () => {
       gateway_id: 'my-gateway',
     });
   });
-});
+};
+describe('resource evaluations', () => runTests(client));
+describe('resource evaluations (tree shakable, base)', () => runTests(partialClient));
+describe('resource evaluations (tree shakable, subresource)', () => runTests(parentPartialClient));

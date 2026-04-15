@@ -3,13 +3,13 @@
 import { APIResource } from '../../../core/resource';
 import * as Shared from '../../shared';
 import * as SubnetsAPI from './subnets';
-import { SubnetGetParams, SubnetGetResponse, Subnets } from './subnets';
+import { BaseSubnets, SubnetGetParams, SubnetGetResponse, Subnets } from './subnets';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ASN extends APIResource {
-  subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
+export class BaseASN extends APIResource {
+  static override readonly _key: readonly ['intel', 'asn'] = Object.freeze(['intel', 'asn'] as const);
 
   /**
    * Gets an overview of the Autonomous System Number (ASN) and a list of subnets for
@@ -22,8 +22,12 @@ export class ASN extends APIResource {
    * });
    * ```
    */
-  get(asn: Shared.ASNParam, params: ASNGetParams, options?: RequestOptions): APIPromise<Shared.ASN> {
-    const { account_id } = params;
+  get(
+    asn: Shared.ASNParam,
+    params: ASNGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.ASN> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/asn/${asn}`, options) as APIPromise<{
         result: Shared.ASN;
@@ -31,21 +35,26 @@ export class ASN extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ASN extends BaseASN {
+  subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
+}
 
 export interface ASNGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ASN.Subnets = Subnets;
+ASN.BaseSubnets = BaseSubnets;
 
 export declare namespace ASN {
   export { type ASNGetParams as ASNGetParams };
 
   export {
     Subnets as Subnets,
+    BaseSubnets as BaseSubnets,
     type SubnetGetResponse as SubnetGetResponse,
     type SubnetGetParams as SubnetGetParams,
   };

@@ -2,6 +2,7 @@
 
 export {
   Keys,
+  BaseKeys,
   type Key,
   type KeyBulkDeleteResponse,
   type KeyBulkGetResponse,
@@ -12,9 +13,10 @@ export {
   type KeyBulkUpdateParams,
   type KeysCursorLimitPagination,
 } from './keys';
-export { Metadata, type MetadataGetResponse, type MetadataGetParams } from './metadata';
+export { Metadata, BaseMetadata, type MetadataGetResponse, type MetadataGetParams } from './metadata';
 export {
   Namespaces,
+  BaseNamespaces,
   type Namespace,
   type NamespaceDeleteResponse,
   type NamespaceBulkDeleteResponse,
@@ -32,6 +34,7 @@ export {
 } from './namespaces';
 export {
   Values,
+  BaseValues,
   type ValueUpdateResponse,
   type ValueDeleteResponse,
   type ValueUpdateParams,

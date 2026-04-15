@@ -2,16 +2,17 @@
 
 import { APIResource } from '../../../core/resource';
 import * as IPFSUniversalPathsAPI from './ipfs-universal-paths/ipfs-universal-paths';
-import { IPFSUniversalPaths } from './ipfs-universal-paths/ipfs-universal-paths';
+import { BaseIPFSUniversalPaths, IPFSUniversalPaths } from './ipfs-universal-paths/ipfs-universal-paths';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Hostnames extends APIResource {
-  ipfsUniversalPaths: IPFSUniversalPathsAPI.IPFSUniversalPaths = new IPFSUniversalPathsAPI.IPFSUniversalPaths(
-    this._client,
-  );
+export class BaseHostnames extends APIResource {
+  static override readonly _key: readonly ['web3', 'hostnames'] = Object.freeze([
+    'web3',
+    'hostnames',
+  ] as const);
 
   /**
    * Create Web3 Hostname
@@ -26,7 +27,7 @@ export class Hostnames extends APIResource {
    * ```
    */
   create(params: HostnameCreateParams, options?: RequestOptions): APIPromise<Hostname> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/web3/hostnames`, { body, ...options }) as APIPromise<{
         result: Hostname;
@@ -47,8 +48,11 @@ export class Hostnames extends APIResource {
    * }
    * ```
    */
-  list(params: HostnameListParams, options?: RequestOptions): PagePromise<HostnamesSinglePage, Hostname> {
-    const { zone_id } = params;
+  list(
+    params: HostnameListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<HostnamesSinglePage, Hostname> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/web3/hostnames`, SinglePage<Hostname>, options);
   }
 
@@ -65,10 +69,10 @@ export class Hostnames extends APIResource {
    */
   delete(
     identifier: string,
-    params: HostnameDeleteParams,
+    params: HostnameDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameDeleteResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/web3/hostnames/${identifier}`, options) as APIPromise<{
         result: HostnameDeleteResponse | null;
@@ -88,7 +92,7 @@ export class Hostnames extends APIResource {
    * ```
    */
   edit(identifier: string, params: HostnameEditParams, options?: RequestOptions): APIPromise<Hostname> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/web3/hostnames/${identifier}`, {
         body,
@@ -108,14 +112,23 @@ export class Hostnames extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: HostnameGetParams, options?: RequestOptions): APIPromise<Hostname> {
-    const { zone_id } = params;
+  get(
+    identifier: string,
+    params: HostnameGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Hostname> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/web3/hostnames/${identifier}`, options) as APIPromise<{
         result: Hostname;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Hostnames extends BaseHostnames {
+  ipfsUniversalPaths: IPFSUniversalPathsAPI.IPFSUniversalPaths = new IPFSUniversalPathsAPI.IPFSUniversalPaths(
+    this._client,
+  );
 }
 
 export type HostnamesSinglePage = SinglePage<Hostname>;
@@ -167,7 +180,7 @@ export interface HostnameCreateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Specify the hostname that points to the target gateway via CNAME.
@@ -194,21 +207,21 @@ export interface HostnameListParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HostnameDeleteParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HostnameEditParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Specify an optional description of the hostname.
@@ -225,10 +238,11 @@ export interface HostnameGetParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Hostnames.IPFSUniversalPaths = IPFSUniversalPaths;
+Hostnames.BaseIPFSUniversalPaths = BaseIPFSUniversalPaths;
 
 export declare namespace Hostnames {
   export {
@@ -242,5 +256,5 @@ export declare namespace Hostnames {
     type HostnameGetParams as HostnameGetParams,
   };
 
-  export { IPFSUniversalPaths as IPFSUniversalPaths };
+  export { IPFSUniversalPaths as IPFSUniversalPaths, BaseIPFSUniversalPaths as BaseIPFSUniversalPaths };
 }

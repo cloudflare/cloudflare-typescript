@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Traces extends APIResource {
+export class BaseTraces extends APIResource {
+  static override readonly _key: readonly ['requestTracers', 'traces'] = Object.freeze([
+    'requestTracers',
+    'traces',
+  ] as const);
+
   /**
    * Request Trace
    *
@@ -33,7 +38,7 @@ export class Traces extends APIResource {
    * ```
    */
   create(params: TraceCreateParams, options?: RequestOptions): APIPromise<TraceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/request-tracer/trace`, {
         body,
@@ -42,6 +47,7 @@ export class Traces extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Traces extends BaseTraces {}
 
 export type Trace = Array<TraceItem>;
 
@@ -113,7 +119,7 @@ export interface TraceCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: HTTP Method of tracing request

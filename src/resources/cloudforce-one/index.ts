@@ -2,13 +2,15 @@
 
 export {
   BinaryStorage,
+  BaseBinaryStorage,
   type BinaryStorageCreateResponse,
   type BinaryStorageCreateParams,
   type BinaryStorageGetParams,
 } from './binary-storage';
-export { CloudforceOne } from './cloudforce-one';
+export { CloudforceOne, BaseCloudforceOne } from './cloudforce-one';
 export {
   Requests,
+  BaseRequests,
   type Item,
   type ListItem,
   type Quota,
@@ -27,9 +29,10 @@ export {
   type ListItemsSinglePage,
   type RequestTypesResponsesSinglePage,
 } from './requests/index';
-export { Scans } from './scans/index';
+export { Scans, BaseScans } from './scans/index';
 export {
   ThreatEvents,
+  BaseThreatEvents,
   type ThreatEventCreateResponse,
   type ThreatEventListResponse,
   type ThreatEventBulkCreateResponse,

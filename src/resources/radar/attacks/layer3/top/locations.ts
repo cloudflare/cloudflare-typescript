@@ -4,7 +4,15 @@ import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 
-export class Locations extends APIResource {
+export class BaseLocations extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer3', 'top', 'locations'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer3',
+    'top',
+    'locations',
+  ] as const);
+
   /**
    * Retrieves the origin locations of layer 3 attacks.
    *
@@ -45,6 +53,7 @@ export class Locations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Locations extends BaseLocations {}
 
 export interface LocationOriginResponse {
   /**

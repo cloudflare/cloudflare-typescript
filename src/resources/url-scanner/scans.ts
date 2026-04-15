@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Scans extends APIResource {
+export class BaseScans extends APIResource {
+  static override readonly _key: readonly ['urlScanner', 'scans'] = Object.freeze([
+    'urlScanner',
+    'scans',
+  ] as const);
+
   /**
    * Submit a URL to scan. Check limits at
    * https://developers.cloudflare.com/security-center/investigate/scan-limits/.
@@ -20,7 +25,7 @@ export class Scans extends APIResource {
    * ```
    */
   create(params: ScanCreateParams, options?: RequestOptions): APIPromise<ScanCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/urlscanner/v2/scan`, { body, ...options });
   }
 
@@ -41,8 +46,11 @@ export class Scans extends APIResource {
    * });
    * ```
    */
-  list(params: ScanListParams, options?: RequestOptions): APIPromise<ScanListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: ScanListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ScanListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/urlscanner/v2/search`, { query, ...options });
   }
 
@@ -59,8 +67,11 @@ export class Scans extends APIResource {
    * });
    * ```
    */
-  bulkCreate(params: ScanBulkCreateParams, options?: RequestOptions): APIPromise<ScanBulkCreateResponse> {
-    const { account_id, body } = params;
+  bulkCreate(
+    params: ScanBulkCreateParams | null | undefined = undefined,
+    options?: RequestOptions,
+  ): APIPromise<ScanBulkCreateResponse> {
+    const { account_id = this._client.accountID, body } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/urlscanner/v2/bulk`, { body: body, ...options });
   }
 
@@ -76,8 +87,12 @@ export class Scans extends APIResource {
    * );
    * ```
    */
-  dom(scanID: string, params: ScanDOMParams, options?: RequestOptions): APIPromise<string> {
-    const { account_id } = params;
+  dom(
+    scanID: string,
+    params: ScanDOMParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/urlscanner/v2/dom/${scanID}`, {
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
@@ -95,8 +110,12 @@ export class Scans extends APIResource {
    * );
    * ```
    */
-  get(scanID: string, params: ScanGetParams, options?: RequestOptions): APIPromise<ScanGetResponse> {
-    const { account_id } = params;
+  get(
+    scanID: string,
+    params: ScanGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ScanGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/urlscanner/v2/result/${scanID}`, options);
   }
 
@@ -112,8 +131,12 @@ export class Scans extends APIResource {
    * );
    * ```
    */
-  har(scanID: string, params: ScanHARParams, options?: RequestOptions): APIPromise<ScanHARResponse> {
-    const { account_id } = params;
+  har(
+    scanID: string,
+    params: ScanHARParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ScanHARResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/urlscanner/v2/har/${scanID}`, options);
   }
 
@@ -131,8 +154,12 @@ export class Scans extends APIResource {
    * console.log(content);
    * ```
    */
-  screenshot(scanID: string, params: ScanScreenshotParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id, ...query } = params;
+  screenshot(
+    scanID: string,
+    params: ScanScreenshotParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/urlscanner/v2/screenshots/${scanID}.png`, {
       query,
       ...options,
@@ -141,6 +168,7 @@ export class Scans extends APIResource {
     });
   }
 }
+export class Scans extends BaseScans {}
 
 export interface ScanCreateResponse {
   /**
@@ -2420,7 +2448,7 @@ export interface ScanCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -2666,7 +2694,7 @@ export interface ScanListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter scans
@@ -2683,7 +2711,7 @@ export interface ScanBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of urls to scan (up to a 100).
@@ -2729,28 +2757,28 @@ export interface ScanDOMParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScanGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScanHARParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScanScreenshotParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Target device type.

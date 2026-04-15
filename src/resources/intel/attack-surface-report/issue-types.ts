@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IssueTypes extends APIResource {
+export class BaseIssueTypes extends APIResource {
+  static override readonly _key: readonly ['intel', 'attackSurfaceReport', 'issueTypes'] = Object.freeze([
+    'intel',
+    'attackSurfaceReport',
+    'issueTypes',
+  ] as const);
+
   /**
    * Lists all available issue types in Security Center, describing categories of
    * security issues.
@@ -21,10 +27,10 @@ export class IssueTypes extends APIResource {
    * ```
    */
   get(
-    params: IssueTypeGetParams,
+    params: IssueTypeGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IssueTypeGetResponsesSinglePage, IssueTypeGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/intel/attack-surface-report/issue-types`,
       SinglePage<IssueTypeGetResponse>,
@@ -32,6 +38,7 @@ export class IssueTypes extends APIResource {
     );
   }
 }
+export class IssueTypes extends BaseIssueTypes {}
 
 export type IssueTypeGetResponsesSinglePage = SinglePage<IssueTypeGetResponse>;
 
@@ -41,7 +48,7 @@ export interface IssueTypeGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace IssueTypes {

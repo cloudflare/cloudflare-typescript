@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Operations extends APIResource {
+export class BaseOperations extends APIResource {
+  static override readonly _key: readonly ['schemaValidation', 'settings', 'operations'] = Object.freeze([
+    'schemaValidation',
+    'settings',
+    'operations',
+  ] as const);
+
   /**
    * Fully updates schema validation settings for a specific API operation.
    *
@@ -31,7 +37,7 @@ export class Operations extends APIResource {
     params: OperationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<OperationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/schema_validation/settings/operations/${operationID}`, {
         body,
@@ -54,10 +60,10 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params: OperationListParams,
+    params: OperationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/schema_validation/settings/operations`,
       V4PagePaginationArray<OperationListResponse>,
@@ -80,10 +86,10 @@ export class Operations extends APIResource {
    */
   delete(
     operationID: string,
-    params: OperationDeleteParams,
+    params: OperationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OperationDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/schema_validation/settings/operations/${operationID}`,
@@ -111,7 +117,7 @@ export class Operations extends APIResource {
    * ```
    */
   bulkEdit(params: OperationBulkEditParams, options?: RequestOptions): APIPromise<OperationBulkEditResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/schema_validation/settings/operations`, {
         body: body,
@@ -135,10 +141,10 @@ export class Operations extends APIResource {
    */
   get(
     operationID: string,
-    params: OperationGetParams,
+    params: OperationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OperationGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/schema_validation/settings/operations/${operationID}`,
@@ -147,6 +153,7 @@ export class Operations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Operations extends BaseOperations {}
 
 export type OperationListResponsesV4PagePaginationArray = V4PagePaginationArray<OperationListResponse>;
 
@@ -244,7 +251,7 @@ export interface OperationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: When set, this applies a mitigation action to this operation
@@ -263,21 +270,21 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -305,7 +312,7 @@ export interface OperationGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Operations {

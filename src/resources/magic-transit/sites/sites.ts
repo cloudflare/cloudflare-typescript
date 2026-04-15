@@ -14,10 +14,12 @@ import {
   ACLs,
   ACLsSinglePage,
   AllowedProtocol,
+  BaseACLs,
   Subnet,
 } from './acls';
 import * as LANsAPI from './lans';
 import {
+  BaseLANs,
   DHCPRelay,
   DHCPServer,
   LAN,
@@ -35,6 +37,7 @@ import {
 } from './lans';
 import * as WANsAPI from './wans';
 import {
+  BaseWANs,
   WAN,
   WANCreateParams,
   WANDeleteParams,
@@ -52,10 +55,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Sites extends APIResource {
-  acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
-  lans: LANsAPI.LANs = new LANsAPI.LANs(this._client);
-  wans: WANsAPI.WANs = new WANsAPI.WANs(this._client);
+export class BaseSites extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'sites'] = Object.freeze([
+    'magicTransit',
+    'sites',
+  ] as const);
 
   /**
    * Creates a new Site
@@ -69,7 +73,7 @@ export class Sites extends APIResource {
    * ```
    */
   create(params: SiteCreateParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/sites`, { body, ...options }) as APIPromise<{
         result: Site;
@@ -89,7 +93,7 @@ export class Sites extends APIResource {
    * ```
    */
   update(siteID: string, params: SiteUpdateParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/sites/${siteID}`, {
         body,
@@ -113,8 +117,11 @@ export class Sites extends APIResource {
    * }
    * ```
    */
-  list(params: SiteListParams, options?: RequestOptions): PagePromise<SitesSinglePage, Site> {
-    const { account_id, ...query } = params;
+  list(
+    params: SiteListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<SitesSinglePage, Site> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/magic/sites`, SinglePage<Site>, {
       query,
       ...options,
@@ -132,8 +139,12 @@ export class Sites extends APIResource {
    * );
    * ```
    */
-  delete(siteID: string, params: SiteDeleteParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id } = params;
+  delete(
+    siteID: string,
+    params: SiteDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Site> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/magic/sites/${siteID}`, options) as APIPromise<{
         result: Site;
@@ -153,7 +164,7 @@ export class Sites extends APIResource {
    * ```
    */
   edit(siteID: string, params: SiteEditParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/sites/${siteID}`, {
         body,
@@ -173,8 +184,12 @@ export class Sites extends APIResource {
    * );
    * ```
    */
-  get(siteID: string, params: SiteGetParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+  get(
+    siteID: string,
+    params: SiteGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Site> {
+    const { account_id = this._client.accountID, 'x-magic-new-hc-target': xMagicNewHcTarget } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/sites/${siteID}`, {
         ...options,
@@ -189,6 +204,11 @@ export class Sites extends APIResource {
       }) as APIPromise<{ result: Site }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Sites extends BaseSites {
+  acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
+  lans: LANsAPI.LANs = new LANsAPI.LANs(this._client);
+  wans: WANsAPI.WANs = new WANsAPI.WANs(this._client);
 }
 
 export type SitesSinglePage = SinglePage<Site>;
@@ -262,7 +282,7 @@ export interface SiteCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the site.
@@ -301,7 +321,7 @@ export interface SiteUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Magic Connector identifier tag.
@@ -334,7 +354,7 @@ export interface SiteListParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Identifier
@@ -346,14 +366,14 @@ export interface SiteDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SiteEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Magic Connector identifier tag.
@@ -386,7 +406,7 @@ export interface SiteGetParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -396,8 +416,11 @@ export interface SiteGetParams {
 }
 
 Sites.ACLs = ACLs;
+Sites.BaseACLs = BaseACLs;
 Sites.LANs = LANs;
+Sites.BaseLANs = BaseLANs;
 Sites.WANs = WANs;
+Sites.BaseWANs = BaseWANs;
 
 export declare namespace Sites {
   export {
@@ -414,6 +437,7 @@ export declare namespace Sites {
 
   export {
     ACLs as ACLs,
+    BaseACLs as BaseACLs,
     type ACL as ACL,
     type ACLConfiguration as ACLConfiguration,
     type AllowedProtocol as AllowedProtocol,
@@ -429,6 +453,7 @@ export declare namespace Sites {
 
   export {
     LANs as LANs,
+    BaseLANs as BaseLANs,
     type DHCPRelay as DHCPRelay,
     type DHCPServer as DHCPServer,
     type LAN as LAN,
@@ -446,6 +471,7 @@ export declare namespace Sites {
 
   export {
     WANs as WANs,
+    BaseWANs as BaseWANs,
     type WAN as WAN,
     type WANStaticAddressing as WANStaticAddressing,
     type WANsSinglePage as WANsSinglePage,

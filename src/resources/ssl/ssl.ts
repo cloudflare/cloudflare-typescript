@@ -2,11 +2,17 @@
 
 import { APIResource } from '../../core/resource';
 import * as AnalyzeAPI from './analyze';
-import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse } from './analyze';
+import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse, BaseAnalyze } from './analyze';
 import * as RecommendationsAPI from './recommendations';
-import { RecommendationGetParams, RecommendationGetResponse, Recommendations } from './recommendations';
+import {
+  BaseRecommendations,
+  RecommendationGetParams,
+  RecommendationGetResponse,
+  Recommendations,
+} from './recommendations';
 import * as VerificationAPI from './verification';
 import {
+  BaseVerificationResource,
   Verification,
   VerificationEditParams,
   VerificationEditResponse,
@@ -16,6 +22,7 @@ import {
 } from './verification';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
 import {
+  BaseCertificatePacks,
   CertificatePackCreateParams,
   CertificatePackCreateResponse,
   CertificatePackDeleteParams,
@@ -34,9 +41,12 @@ import {
   ValidationMethod,
 } from './certificate-packs/certificate-packs';
 import * as UniversalAPI from './universal/universal';
-import { Universal } from './universal/universal';
+import { BaseUniversal, Universal } from './universal/universal';
 
-export class SSL extends APIResource {
+export class BaseSSL extends APIResource {
+  static override readonly _key: readonly ['ssl'] = Object.freeze(['ssl'] as const);
+}
+export class SSL extends BaseSSL {
   analyze: AnalyzeAPI.Analyze = new AnalyzeAPI.Analyze(this._client);
   certificatePacks: CertificatePacksAPI.CertificatePacks = new CertificatePacksAPI.CertificatePacks(
     this._client,
@@ -47,20 +57,27 @@ export class SSL extends APIResource {
 }
 
 SSL.Analyze = Analyze;
+SSL.BaseAnalyze = BaseAnalyze;
 SSL.CertificatePacks = CertificatePacks;
+SSL.BaseCertificatePacks = BaseCertificatePacks;
 SSL.Recommendations = Recommendations;
+SSL.BaseRecommendations = BaseRecommendations;
 SSL.Universal = Universal;
+SSL.BaseUniversal = BaseUniversal;
 SSL.VerificationResource = VerificationResource;
+SSL.BaseVerificationResource = BaseVerificationResource;
 
 export declare namespace SSL {
   export {
     Analyze as Analyze,
+    BaseAnalyze as BaseAnalyze,
     type AnalyzeCreateResponse as AnalyzeCreateResponse,
     type AnalyzeCreateParams as AnalyzeCreateParams,
   };
 
   export {
     CertificatePacks as CertificatePacks,
+    BaseCertificatePacks as BaseCertificatePacks,
     type Host as Host,
     type RequestValidity as RequestValidity,
     type Status as Status,
@@ -80,14 +97,16 @@ export declare namespace SSL {
 
   export {
     Recommendations as Recommendations,
+    BaseRecommendations as BaseRecommendations,
     type RecommendationGetResponse as RecommendationGetResponse,
     type RecommendationGetParams as RecommendationGetParams,
   };
 
-  export { Universal as Universal };
+  export { Universal as Universal, BaseUniversal as BaseUniversal };
 
   export {
     VerificationResource as VerificationResource,
+    BaseVerificationResource as BaseVerificationResource,
     type Verification as Verification,
     type VerificationEditResponse as VerificationEditResponse,
     type VerificationGetResponse as VerificationGetResponse,

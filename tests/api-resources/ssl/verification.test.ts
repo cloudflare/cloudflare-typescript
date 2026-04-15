@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { SSL } from 'cloudflare/resources/ssl/ssl';
+import { BaseVerificationResource } from 'cloudflare/resources/ssl/verification';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource verification', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseVerificationResource],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [SSL],
+});
+
+const runTests = (client: PartialCloudflare<{ ssl: { verification: BaseVerificationResource } }>) => {
   test('edit: only required params', async () => {
     const responsePromise = client.ssl.verification.edit('a77f8bd7-3b47-46b4-a6f1-75cf98109948', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -47,4 +65,7 @@ describe('resource verification', () => {
       retry: true,
     });
   });
-});
+};
+describe('resource verification', () => runTests(client));
+describe('resource verification (tree shakable, base)', () => runTests(partialClient));
+describe('resource verification (tree shakable, subresource)', () => runTests(parentPartialClient));

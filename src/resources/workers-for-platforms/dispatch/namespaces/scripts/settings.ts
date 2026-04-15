@@ -8,7 +8,15 @@ import { RequestOptions } from '../../../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../../../internal/uploads';
 import { path } from '../../../../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly [
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+    'scripts',
+    'settings',
+  ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'settings'] as const);
+
   /**
    * Patch script metadata, such as bindings.
    *
@@ -29,7 +37,7 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: RequestOptions,
   ): APIPromise<SettingEditResponse> {
-    const { account_id, dispatch_namespace, ...body } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, ...body } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/settings`,
@@ -58,7 +66,7 @@ export class Settings extends APIResource {
     params: SettingGetParams,
     options?: RequestOptions,
   ): APIPromise<SettingGetResponse> {
-    const { account_id, dispatch_namespace } = params;
+    const { account_id = this._client.accountID, dispatch_namespace } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/settings`,
@@ -67,6 +75,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 /**
  * Script and version settings for Workers for Platforms namespace scripts. Same as
@@ -2186,7 +2195,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -3304,7 +3313,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.

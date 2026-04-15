@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as LabelsAPI from './labels';
 import {
+  BaseLabels,
   LabelBulkCreateParams,
   LabelBulkCreateResponse,
   LabelBulkCreateResponsesSinglePage,
@@ -22,6 +23,7 @@ import {
 } from './labels';
 import * as SchemaValidationAPI from './schema-validation';
 import {
+  BaseSchemaValidation,
   SchemaValidation,
   SchemaValidationEditParams,
   SchemaValidationGetParams,
@@ -41,11 +43,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Operations extends APIResource {
-  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
-  schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
-    this._client,
-  );
+export class BaseOperations extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'operations'] = Object.freeze([
+    'apiGateway',
+    'operations',
+  ] as const);
 
   /**
    * Add one operation to a zone. Endpoints can contain path variables. Host, method,
@@ -67,7 +69,7 @@ export class Operations extends APIResource {
    * ```
    */
   create(params: OperationCreateParams, options?: RequestOptions): APIPromise<OperationCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/api_gateway/operations/item`, {
         body,
@@ -91,10 +93,10 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params: OperationListParams,
+    params: OperationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/operations`,
       V4PagePaginationArray<OperationListResponse>,
@@ -116,10 +118,10 @@ export class Operations extends APIResource {
    */
   delete(
     operationID: string,
-    params: OperationDeleteParams,
+    params: OperationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OperationDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/api_gateway/operations/${operationID}`, options);
   }
 
@@ -153,7 +155,7 @@ export class Operations extends APIResource {
     params: OperationBulkCreateParams,
     options?: RequestOptions,
   ): PagePromise<OperationBulkCreateResponsesSinglePage, OperationBulkCreateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/operations`,
       SinglePage<OperationBulkCreateResponse>,
@@ -174,10 +176,10 @@ export class Operations extends APIResource {
    * ```
    */
   bulkDelete(
-    params: OperationBulkDeleteParams,
+    params: OperationBulkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OperationBulkDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/api_gateway/operations`, options);
   }
 
@@ -195,10 +197,10 @@ export class Operations extends APIResource {
    */
   get(
     operationID: string,
-    params: OperationGetParams,
+    params: OperationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OperationGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/operations/${operationID}`, {
         query,
@@ -206,6 +208,12 @@ export class Operations extends APIResource {
       }) as APIPromise<{ result: OperationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Operations extends BaseOperations {
+  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
+  schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
+    this._client,
+  );
 }
 
 export type OperationListResponsesV4PagePaginationArray = V4PagePaginationArray<OperationListResponse>;
@@ -1369,7 +1377,7 @@ export interface OperationCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The endpoint which can contain path parameter templates in curly
@@ -1395,7 +1403,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -1435,14 +1443,14 @@ export interface OperationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -1476,14 +1484,14 @@ export interface OperationBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Add feature(s) to the results. The feature name that is given here
@@ -1494,7 +1502,9 @@ export interface OperationGetParams {
 }
 
 Operations.Labels = Labels;
+Operations.BaseLabels = BaseLabels;
 Operations.SchemaValidation = SchemaValidation;
+Operations.BaseSchemaValidation = BaseSchemaValidation;
 
 export declare namespace Operations {
   export {
@@ -1517,6 +1527,7 @@ export declare namespace Operations {
 
   export {
     Labels as Labels,
+    BaseLabels as BaseLabels,
     type LabelCreateResponse as LabelCreateResponse,
     type LabelUpdateResponse as LabelUpdateResponse,
     type LabelDeleteResponse as LabelDeleteResponse,
@@ -1536,6 +1547,7 @@ export declare namespace Operations {
 
   export {
     SchemaValidation as SchemaValidation,
+    BaseSchemaValidation as BaseSchemaValidation,
     type SettingsMultipleRequest as SettingsMultipleRequest,
     type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
     type SchemaValidationGetResponse as SchemaValidationGetResponse,

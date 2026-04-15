@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tail extends APIResource {
+export class BaseTail extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'tail'] = Object.freeze([
+    'workers',
+    'scripts',
+    'tail',
+  ] as const);
+
   /**
    * Starts a tail that receives logs and exception from a Worker.
    *
@@ -25,7 +31,7 @@ export class Tail extends APIResource {
     params: TailCreateParams,
     options?: RequestOptions,
   ): APIPromise<TailCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/tails`, {
         body: body,
@@ -49,7 +55,7 @@ export class Tail extends APIResource {
    * ```
    */
   delete(id: string, params: TailDeleteParams, options?: RequestOptions): APIPromise<TailDeleteResponse> {
-    const { account_id, script_name } = params;
+    const { account_id = this._client.accountID, script_name } = params;
     return this._client.delete(
       path`/accounts/${account_id}/workers/scripts/${script_name}/tails/${id}`,
       options,
@@ -67,8 +73,12 @@ export class Tail extends APIResource {
    * );
    * ```
    */
-  get(scriptName: string, params: TailGetParams, options?: RequestOptions): APIPromise<TailGetResponse> {
-    const { account_id } = params;
+  get(
+    scriptName: string,
+    params: TailGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TailGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
@@ -77,6 +87,7 @@ export class Tail extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Tail extends BaseTail {}
 
 /**
  * A reference to a script that will consume logs from the attached Worker.
@@ -189,7 +200,7 @@ export interface TailCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -201,7 +212,7 @@ export interface TailDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the script, used in URLs and route configuration.
@@ -213,7 +224,7 @@ export interface TailGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Tail {

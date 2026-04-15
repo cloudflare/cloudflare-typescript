@@ -5,15 +5,21 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Public extends APIResource {
+export class BasePublic extends APIResource {
+  static override readonly _key: readonly ['ai', 'finetunes', 'public'] = Object.freeze([
+    'ai',
+    'finetunes',
+    'public',
+  ] as const);
+
   /**
    * Lists publicly available fine-tuned models that can be used with Workers AI.
    */
   list(
-    params: PublicListParams,
+    params: PublicListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PublicListResponsesSinglePage, PublicListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai/finetunes/public`,
       SinglePage<PublicListResponse>,
@@ -21,6 +27,7 @@ export class Public extends APIResource {
     );
   }
 }
+export class Public extends BasePublic {}
 
 export type PublicListResponsesSinglePage = SinglePage<PublicListResponse>;
 
@@ -44,7 +51,7 @@ export interface PublicListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Pagination Limit

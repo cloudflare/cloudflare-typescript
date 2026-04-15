@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Operation extends APIResource {
+export class BaseOperation extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'labels', 'user', 'resources', 'operation'] =
+    Object.freeze(['apiGateway', 'labels', 'user', 'resources', 'operation'] as const);
+
   /**
    * Replace all operations(s) attached to a user label
    *
@@ -32,7 +35,7 @@ export class Operation extends APIResource {
     params: OperationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<OperationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/api_gateway/labels/user/${name}/resources/operation`, {
         body,
@@ -41,6 +44,7 @@ export class Operation extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Operation extends BaseOperation {}
 
 export interface OperationUpdateResponse {
   created_at: string;
@@ -78,7 +82,7 @@ export interface OperationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Operation IDs selector

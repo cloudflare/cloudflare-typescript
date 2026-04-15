@@ -3,13 +3,22 @@
 import { APIResource } from '../../../../../core/resource';
 import * as UpdatesAPI from './updates';
 import {
+  BaseUpdates,
   UpdateListParams,
   UpdateListResponse,
   UpdateListResponsesV4PagePaginationArray,
   Updates,
 } from './updates';
 
-export class SCIM extends APIResource {
+export class BaseSCIM extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'logs', 'scim'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'logs',
+    'scim',
+  ] as const);
+}
+export class SCIM extends BaseSCIM {
   updates: UpdatesAPI.Updates = new UpdatesAPI.Updates(this._client);
 }
 
@@ -58,12 +67,14 @@ export interface AccessRequest {
 }
 
 SCIM.Updates = Updates;
+SCIM.BaseUpdates = BaseUpdates;
 
 export declare namespace SCIM {
   export { type AccessRequest as AccessRequest };
 
   export {
     Updates as Updates,
+    BaseUpdates as BaseUpdates,
     type UpdateListResponse as UpdateListResponse,
     type UpdateListResponsesV4PagePaginationArray as UpdateListResponsesV4PagePaginationArray,
     type UpdateListParams as UpdateListParams,

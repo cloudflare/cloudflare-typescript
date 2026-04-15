@@ -6,7 +6,12 @@ import { AuditLogsV4PagePaginationArray } from '../shared';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 
-export class AuditLogs extends APIResource {
+export class BaseAuditLogs extends APIResource {
+  static override readonly _key: readonly ['user', 'auditLogs'] = Object.freeze([
+    'user',
+    'auditLogs',
+  ] as const);
+
   /**
    * Gets a list of audit logs for a user account. Can be filtered by who made the
    * change, on which zone, and the timeframe of the change.
@@ -29,6 +34,7 @@ export class AuditLogs extends APIResource {
     });
   }
 }
+export class AuditLogs extends BaseAuditLogs {}
 
 export interface AuditLogListParams extends V4PagePaginationArrayParams {
   /**

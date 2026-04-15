@@ -1,19 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { ASN, type ASNGetParams } from './asn/index';
-export { AttackSurfaceReport } from './attack-surface-report/index';
-export { DNS, type DNSListParams, type DNSV4PagePagination } from './dns';
+export { ASN, BaseASN, type ASNGetParams } from './asn/index';
+export { AttackSurfaceReport, BaseAttackSurfaceReport } from './attack-surface-report/index';
+export { DNS, BaseDNS, type DNSListParams, type DNSV4PagePagination } from './dns';
 export {
   DomainHistoryResource,
+  BaseDomainHistoryResource,
   type DomainHistory,
   type DomainHistoryGetResponse,
   type DomainHistoryGetParams,
 } from './domain-history';
-export { Domains, type Domain, type DomainGetParams } from './domains/index';
-export { IPLists, type IPList } from './ip-lists';
-export { IPs, type IP, type IPGetResponse, type IPGetParams } from './ips';
+export { Domains, BaseDomains, type Domain, type DomainGetParams } from './domains/index';
+export { IPLists, BaseIPLists, type IPList } from './ip-lists';
+export { IPs, BaseIPs, type IP, type IPGetResponse, type IPGetParams } from './ips';
 export {
   IndicatorFeeds,
+  BaseIndicatorFeeds,
   type IndicatorFeedCreateResponse,
   type IndicatorFeedUpdateResponse,
   type IndicatorFeedListResponse,
@@ -26,11 +28,18 @@ export {
   type IndicatorFeedGetParams,
   type IndicatorFeedListResponsesSinglePage,
 } from './indicator-feeds/index';
-export { Intel } from './intel';
+export { Intel, BaseIntel } from './intel';
 export {
   Miscategorizations,
+  BaseMiscategorizations,
   type MiscategorizationCreateResponse,
   type MiscategorizationCreateParams,
 } from './miscategorizations';
-export { Sinkholes, type Sinkhole, type SinkholeListParams, type SinkholesSinglePage } from './sinkholes';
-export { Whois, type WhoisGetResponse, type WhoisGetParams } from './whois';
+export {
+  Sinkholes,
+  BaseSinkholes,
+  type Sinkhole,
+  type SinkholeListParams,
+  type SinkholesSinglePage,
+} from './sinkholes';
+export { Whois, BaseWhois, type WhoisGetResponse, type WhoisGetParams } from './whois';

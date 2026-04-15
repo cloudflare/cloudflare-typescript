@@ -2,12 +2,23 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as TopAPI from './top';
-import { Top, TopAsesParams, TopAsesResponse, TopLocationsParams, TopLocationsResponse } from './top';
+import {
+  BaseTop,
+  Top,
+  TopAsesParams,
+  TopAsesResponse,
+  TopLocationsParams,
+  TopLocationsResponse,
+} from './top';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Speed extends APIResource {
-  top: TopAPI.Top = new TopAPI.Top(this._client);
+export class BaseSpeed extends APIResource {
+  static override readonly _key: readonly ['radar', 'quality', 'speed'] = Object.freeze([
+    'radar',
+    'quality',
+    'speed',
+  ] as const);
 
   /**
    * Retrieves a histogram from the previous 90 days of Cloudflare Speed Test data,
@@ -49,6 +60,9 @@ export class Speed extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Speed extends BaseSpeed {
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 }
 
 export interface SpeedHistogramResponse {
@@ -427,6 +441,7 @@ export interface SpeedSummaryParams {
 }
 
 Speed.Top = Top;
+Speed.BaseTop = BaseTop;
 
 export declare namespace Speed {
   export {
@@ -438,6 +453,7 @@ export declare namespace Speed {
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopAsesResponse as TopAsesResponse,
     type TopLocationsResponse as TopLocationsResponse,
     type TopAsesParams as TopAsesParams,

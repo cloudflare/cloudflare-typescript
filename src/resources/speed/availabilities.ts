@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Availabilities extends APIResource {
+export class BaseAvailabilities extends APIResource {
+  static override readonly _key: readonly ['speed', 'availabilities'] = Object.freeze([
+    'speed',
+    'availabilities',
+  ] as const);
+
   /**
    * Retrieves quota for all plans, as well as the current zone quota.
    *
@@ -17,8 +22,11 @@ export class Availabilities extends APIResource {
    * );
    * ```
    */
-  list(params: AvailabilityListParams, options?: RequestOptions): APIPromise<Availability> {
-    const { zone_id } = params;
+  list(
+    params: AvailabilityListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Availability> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/speed_api/availabilities`, options) as APIPromise<{
         result: Availability;
@@ -26,6 +34,7 @@ export class Availabilities extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Availabilities extends BaseAvailabilities {}
 
 export interface Availability {
   quota?: Availability.Quota;
@@ -136,7 +145,7 @@ export interface AvailabilityListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Availabilities {

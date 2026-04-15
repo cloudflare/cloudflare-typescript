@@ -12,7 +12,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Policies extends APIResource {
+export class BasePolicies extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'policies'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'policies',
+  ] as const);
+
   /**
    * Creates a new Access reusable policy.
    *
@@ -34,7 +40,7 @@ export class Policies extends APIResource {
    * ```
    */
   create(params: PolicyCreateParams, options?: RequestOptions): APIPromise<PolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/access/policies`, { body, ...options }) as APIPromise<{
         result: PolicyCreateResponse;
@@ -70,7 +76,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PolicyUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/access/policies/${policyID}`, {
         body,
@@ -93,10 +99,10 @@ export class Policies extends APIResource {
    * ```
    */
   list(
-    params: PolicyListParams,
+    params: PolicyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/policies`,
       V4PagePaginationArray<PolicyListResponse>,
@@ -118,10 +124,10 @@ export class Policies extends APIResource {
    */
   delete(
     policyID: string,
-    params: PolicyDeleteParams,
+    params: PolicyDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PolicyDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/access/policies/${policyID}`, options) as APIPromise<{
         result: PolicyDeleteResponse;
@@ -140,8 +146,12 @@ export class Policies extends APIResource {
    * );
    * ```
    */
-  get(policyID: string, params: PolicyGetParams, options?: RequestOptions): APIPromise<PolicyGetResponse> {
-    const { account_id } = params;
+  get(
+    policyID: string,
+    params: PolicyGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PolicyGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/policies/${policyID}`, options) as APIPromise<{
         result: PolicyGetResponse;
@@ -149,6 +159,7 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Policies extends BasePolicies {}
 
 export type PolicyListResponsesV4PagePaginationArray = V4PagePaginationArray<PolicyListResponse>;
 
@@ -876,7 +887,7 @@ export interface PolicyCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The action Access will take if a user matches this policy.
@@ -1012,7 +1023,7 @@ export interface PolicyUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The action Access will take if a user matches this policy.
@@ -1148,21 +1159,21 @@ export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Policies {

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAddressSpaces } from 'cloudflare/resources/magic-cloud-networking/on-ramps/address-spaces';
+import { OnRamps } from 'cloudflare/resources/magic-cloud-networking/on-ramps/on-ramps';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource addressSpaces', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAddressSpaces],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [OnRamps],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ magicCloudNetworking: { onRamps: { addressSpaces: BaseAddressSpaces } } }>,
+) => {
   test('update: only required params', async () => {
     const responsePromise = client.magicCloudNetworking.onRamps.addressSpaces.update({
       account_id: 'account_id',
@@ -69,4 +89,7 @@ describe('resource addressSpaces', () => {
       prefixes: ['192.168.0.0/16'],
     });
   });
-});
+};
+describe('resource addressSpaces', () => runTests(client));
+describe('resource addressSpaces (tree shakable, base)', () => runTests(partialClient));
+describe('resource addressSpaces (tree shakable, subresource)', () => runTests(parentPartialClient));

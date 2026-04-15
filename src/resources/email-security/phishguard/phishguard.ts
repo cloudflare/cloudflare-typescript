@@ -2,17 +2,31 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ReportsAPI from './reports';
-import { ReportListParams, ReportListResponse, ReportListResponsesSinglePage, Reports } from './reports';
+import {
+  BaseReports,
+  ReportListParams,
+  ReportListResponse,
+  ReportListResponsesSinglePage,
+  Reports,
+} from './reports';
 
-export class Phishguard extends APIResource {
+export class BasePhishguard extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'phishguard'] = Object.freeze([
+    'emailSecurity',
+    'phishguard',
+  ] as const);
+}
+export class Phishguard extends BasePhishguard {
   reports: ReportsAPI.Reports = new ReportsAPI.Reports(this._client);
 }
 
 Phishguard.Reports = Reports;
+Phishguard.BaseReports = BaseReports;
 
 export declare namespace Phishguard {
   export {
     Reports as Reports,
+    BaseReports as BaseReports,
     type ReportListResponse as ReportListResponse,
     type ReportListResponsesSinglePage as ReportListResponsesSinglePage,
     type ReportListParams as ReportListParams,

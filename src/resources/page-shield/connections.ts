@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Connections extends APIResource {
+export class BaseConnections extends APIResource {
+  static override readonly _key: readonly ['pageShield', 'connections'] = Object.freeze([
+    'pageShield',
+    'connections',
+  ] as const);
+
   /**
    * Lists all connections detected by Page Shield.
    *
@@ -21,10 +26,10 @@ export class Connections extends APIResource {
    * ```
    */
   list(
-    params: ConnectionListParams,
+    params: ConnectionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ConnectionsSinglePage, Connection> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/page_shield/connections`, SinglePage<Connection>, {
       query,
       ...options,
@@ -44,10 +49,10 @@ export class Connections extends APIResource {
    */
   get(
     connectionID: string,
-    params: ConnectionGetParams,
+    params: ConnectionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Connection | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/page_shield/connections/${connectionID}`,
@@ -56,6 +61,7 @@ export class Connections extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Connections extends BaseConnections {}
 
 export type ConnectionsSinglePage = SinglePage<Connection>;
 
@@ -94,7 +100,7 @@ export interface ConnectionListParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned connections.
@@ -182,7 +188,7 @@ export interface ConnectionGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Connections {

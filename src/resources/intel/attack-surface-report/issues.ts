@@ -7,7 +7,13 @@ import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../.
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Issues extends APIResource {
+export class BaseIssues extends APIResource {
+  static override readonly _key: readonly ['intel', 'attackSurfaceReport', 'issues'] = Object.freeze([
+    'intel',
+    'attackSurfaceReport',
+    'issues',
+  ] as const);
+
   /**
    * Lists all Security Center issues for the account, showing active security
    * problems requiring attention.
@@ -15,10 +21,10 @@ export class Issues extends APIResource {
    * @deprecated
    */
   list(
-    params: IssueListParams,
+    params: IssueListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IssueListResponsesV4PagePagination, IssueListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/intel/attack-surface-report/issues`,
       V4PagePagination<IssueListResponse>,
@@ -31,8 +37,11 @@ export class Issues extends APIResource {
    *
    * @deprecated
    */
-  class(params: IssueClassParams, options?: RequestOptions): APIPromise<IssueClassResponse> {
-    const { account_id, ...query } = params;
+  class(
+    params: IssueClassParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IssueClassResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/attack-surface-report/issues/class`, {
         query,
@@ -52,7 +61,7 @@ export class Issues extends APIResource {
     params: IssueDismissParams,
     options?: RequestOptions,
   ): APIPromise<IssueDismissResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.put(path`/accounts/${account_id}/intel/attack-surface-report/${issueID}/dismiss`, {
       body,
       ...options,
@@ -64,8 +73,11 @@ export class Issues extends APIResource {
    *
    * @deprecated
    */
-  severity(params: IssueSeverityParams, options?: RequestOptions): APIPromise<IssueSeverityResponse> {
-    const { account_id, ...query } = params;
+  severity(
+    params: IssueSeverityParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IssueSeverityResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/attack-surface-report/issues/severity`, {
         query,
@@ -79,8 +91,11 @@ export class Issues extends APIResource {
    *
    * @deprecated
    */
-  type(params: IssueTypeParams, options?: RequestOptions): APIPromise<IssueTypeResponse> {
-    const { account_id, ...query } = params;
+  type(
+    params: IssueTypeParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IssueTypeResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/attack-surface-report/issues/type`, {
         query,
@@ -89,6 +104,7 @@ export class Issues extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Issues extends BaseIssues {}
 
 export type IssueListResponsesV4PagePagination = V4PagePagination<IssueListResponse>;
 
@@ -264,7 +280,7 @@ export interface IssueListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -326,7 +342,7 @@ export interface IssueClassParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -388,7 +404,7 @@ export interface IssueDismissParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -400,7 +416,7 @@ export interface IssueSeverityParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -462,7 +478,7 @@ export interface IssueTypeParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

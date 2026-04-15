@@ -2,6 +2,7 @@
 
 export {
   Applications,
+  BaseApplications,
   type AllowedHeaders,
   type AllowedIdPs,
   type AllowedMethods,
@@ -37,6 +38,7 @@ export {
 } from './applications';
 export {
   CAs,
+  BaseCAs,
   type CA,
   type CADeleteResponse,
   type CACreateParams,
@@ -47,6 +49,7 @@ export {
 } from './cas';
 export {
   Policies,
+  BasePolicies,
   type AccessDevicePostureRule,
   type AccessRule,
   type AnyValidServiceTokenRule,
@@ -81,6 +84,7 @@ export {
 } from './policies';
 export {
   PolicyTests,
+  BasePolicyTests,
   type PolicyTestCreateResponse,
   type PolicyTestGetResponse,
   type PolicyTestCreateParams,
@@ -88,6 +92,7 @@ export {
 } from './policy-tests/index';
 export {
   Settings,
+  BaseSettings,
   type SettingUpdateResponse,
   type SettingEditResponse,
   type SettingUpdateParams,
@@ -95,6 +100,7 @@ export {
 } from './settings';
 export {
   UserPolicyChecks,
+  BaseUserPolicyChecks,
   type UserPolicyCheckGeo,
   type UserPolicyCheckListResponse,
   type UserPolicyCheckListParams,

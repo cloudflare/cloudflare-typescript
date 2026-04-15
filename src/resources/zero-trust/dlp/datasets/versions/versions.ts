@@ -2,13 +2,18 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as EntriesAPI from './entries';
-import { Entries, EntryCreateParams, EntryCreateResponse } from './entries';
+import { BaseEntries, Entries, EntryCreateParams, EntryCreateResponse } from './entries';
 import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Versions extends APIResource {
-  entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
+export class BaseVersions extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'datasets', 'versions'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'datasets',
+    'versions',
+  ] as const);
 
   /**
    * This is used for multi-column EDMv2 datasets. The EDMv2 format can only be
@@ -37,13 +42,16 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: RequestOptions,
   ): PagePromise<VersionCreateResponsesSinglePage, VersionCreateResponse> {
-    const { account_id, dataset_id, body } = params;
+    const { account_id = this._client.accountID, dataset_id, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/dlp/datasets/${dataset_id}/versions/${version}`,
       SinglePage<VersionCreateResponse>,
       { body: body, method: 'post', ...options },
     );
   }
+}
+export class Versions extends BaseVersions {
+  entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
 }
 
 export type VersionCreateResponsesSinglePage = SinglePage<VersionCreateResponse>;
@@ -62,7 +70,7 @@ export interface VersionCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param
@@ -94,6 +102,7 @@ export namespace VersionCreateParams {
 }
 
 Versions.Entries = Entries;
+Versions.BaseEntries = BaseEntries;
 
 export declare namespace Versions {
   export {
@@ -104,6 +113,7 @@ export declare namespace Versions {
 
   export {
     Entries as Entries,
+    BaseEntries as BaseEntries,
     type EntryCreateResponse as EntryCreateResponse,
     type EntryCreateParams as EntryCreateParams,
   };

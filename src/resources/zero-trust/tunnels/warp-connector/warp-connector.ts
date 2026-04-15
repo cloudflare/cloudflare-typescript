@@ -3,17 +3,18 @@
 import { APIResource } from '../../../../core/resource';
 import * as ConnectionsAPI from './connections';
 import {
+  BaseConnections,
   ConnectionGetParams,
   ConnectionGetResponse,
   ConnectionGetResponsesSinglePage,
   Connections,
 } from './connections';
 import * as ConnectorsAPI from './connectors';
-import { ConnectorGetParams, ConnectorGetResponse, Connectors } from './connectors';
+import { BaseConnectors, ConnectorGetParams, ConnectorGetResponse, Connectors } from './connectors';
 import * as FailoverAPI from './failover';
-import { Failover, FailoverUpdateParams, FailoverUpdateResponse } from './failover';
+import { BaseFailover, Failover, FailoverUpdateParams, FailoverUpdateResponse } from './failover';
 import * as TokenAPI from './token';
-import { Token, TokenGetParams, TokenGetResponse } from './token';
+import { BaseToken, Token, TokenGetParams, TokenGetResponse } from './token';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
@@ -23,11 +24,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class WARPConnector extends APIResource {
-  token: TokenAPI.Token = new TokenAPI.Token(this._client);
-  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
-  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
-  failover: FailoverAPI.Failover = new FailoverAPI.Failover(this._client);
+export class BaseWARPConnector extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'warpConnector'] = Object.freeze([
+    'zeroTrust',
+    'tunnels',
+    'warpConnector',
+  ] as const);
 
   /**
    * Creates a new Warp Connector Tunnel in an account.
@@ -45,7 +47,7 @@ export class WARPConnector extends APIResource {
     params: WARPConnectorCreateParams,
     options?: RequestOptions,
   ): APIPromise<WARPConnectorCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/warp_connector`, { body, ...options }) as APIPromise<{
         result: WARPConnectorCreateResponse;
@@ -67,10 +69,10 @@ export class WARPConnector extends APIResource {
    * ```
    */
   list(
-    params: WARPConnectorListParams,
+    params: WARPConnectorListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/warp_connector`,
       V4PagePaginationArray<WARPConnectorListResponse>,
@@ -92,10 +94,10 @@ export class WARPConnector extends APIResource {
    */
   delete(
     tunnelID: string,
-    params: WARPConnectorDeleteParams,
+    params: WARPConnectorDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WARPConnectorDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/warp_connector/${tunnelID}`, options) as APIPromise<{
         result: WARPConnectorDeleteResponse;
@@ -120,7 +122,7 @@ export class WARPConnector extends APIResource {
     params: WARPConnectorEditParams,
     options?: RequestOptions,
   ): APIPromise<WARPConnectorEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/warp_connector/${tunnelID}`, {
         body,
@@ -143,16 +145,22 @@ export class WARPConnector extends APIResource {
    */
   get(
     tunnelID: string,
-    params: WARPConnectorGetParams,
+    params: WARPConnectorGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WARPConnectorGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/warp_connector/${tunnelID}`, options) as APIPromise<{
         result: WARPConnectorGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class WARPConnector extends BaseWARPConnector {
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
+  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
+  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
+  failover: FailoverAPI.Failover = new FailoverAPI.Failover(this._client);
 }
 
 export type WARPConnectorListResponsesV4PagePaginationArray =
@@ -737,7 +745,7 @@ export interface WARPConnectorCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -755,7 +763,7 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -813,14 +821,14 @@ export interface WARPConnectorDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WARPConnectorEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -838,13 +846,17 @@ export interface WARPConnectorGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 WARPConnector.Token = Token;
+WARPConnector.BaseToken = BaseToken;
 WARPConnector.Connections = Connections;
+WARPConnector.BaseConnections = BaseConnections;
 WARPConnector.Connectors = Connectors;
+WARPConnector.BaseConnectors = BaseConnectors;
 WARPConnector.Failover = Failover;
+WARPConnector.BaseFailover = BaseFailover;
 
 export declare namespace WARPConnector {
   export {
@@ -861,10 +873,16 @@ export declare namespace WARPConnector {
     type WARPConnectorGetParams as WARPConnectorGetParams,
   };
 
-  export { Token as Token, type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
+  export {
+    Token as Token,
+    BaseToken as BaseToken,
+    type TokenGetResponse as TokenGetResponse,
+    type TokenGetParams as TokenGetParams,
+  };
 
   export {
     Connections as Connections,
+    BaseConnections as BaseConnections,
     type ConnectionGetResponse as ConnectionGetResponse,
     type ConnectionGetResponsesSinglePage as ConnectionGetResponsesSinglePage,
     type ConnectionGetParams as ConnectionGetParams,
@@ -872,12 +890,14 @@ export declare namespace WARPConnector {
 
   export {
     Connectors as Connectors,
+    BaseConnectors as BaseConnectors,
     type ConnectorGetResponse as ConnectorGetResponse,
     type ConnectorGetParams as ConnectorGetParams,
   };
 
   export {
     Failover as Failover,
+    BaseFailover as BaseFailover,
     type FailoverUpdateResponse as FailoverUpdateResponse,
     type FailoverUpdateParams as FailoverUpdateParams,
   };

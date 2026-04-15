@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Invites extends APIResource {
+export class BaseInvites extends APIResource {
+  static override readonly _key: readonly ['user', 'invites'] = Object.freeze(['user', 'invites'] as const);
+
   /**
    * Lists all invitations associated with my user.
    *
@@ -57,6 +59,7 @@ export class Invites extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Invites extends BaseInvites {}
 
 export type InvitesSinglePage = SinglePage<Invite>;
 

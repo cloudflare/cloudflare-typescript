@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Blobs extends APIResource {
+export class BaseBlobs extends APIResource {
+  static override readonly _key: readonly ['images', 'v1', 'blobs'] = Object.freeze([
+    'images',
+    'v1',
+    'blobs',
+  ] as const);
+
   /**
    * Fetch base image. For most images this will be the originally uploaded file. For
    * larger images it can be a near-lossless version of the original.
@@ -21,8 +27,12 @@ export class Blobs extends APIResource {
    * console.log(content);
    * ```
    */
-  get(imageID: string, params: BlobGetParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id } = params;
+  get(
+    imageID: string,
+    params: BlobGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/images/v1/${imageID}/blob`, {
       ...options,
       headers: buildHeaders([{ Accept: 'image/*' }, options?.headers]),
@@ -30,12 +40,13 @@ export class Blobs extends APIResource {
     });
   }
 }
+export class Blobs extends BaseBlobs {}
 
 export interface BlobGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Blobs {

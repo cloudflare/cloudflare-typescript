@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Plans extends APIResource {
+export class BasePlans extends APIResource {
+  static override readonly _key: readonly ['zones', 'plans'] = Object.freeze(['zones', 'plans'] as const);
+
   /**
    * Lists available plans the zone can subscribe to.
    *
@@ -21,10 +23,10 @@ export class Plans extends APIResource {
    * ```
    */
   list(
-    params: PlanListParams,
+    params: PlanListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/available_plans`,
       SinglePage<AvailableRatePlan>,
@@ -45,10 +47,10 @@ export class Plans extends APIResource {
    */
   get(
     planIdentifier: string,
-    params: PlanGetParams,
+    params: PlanGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AvailableRatePlan> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/available_plans/${planIdentifier}`, options) as APIPromise<{
         result: AvailableRatePlan;
@@ -56,6 +58,7 @@ export class Plans extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Plans extends BasePlans {}
 
 export type AvailableRatePlansSinglePage = SinglePage<AvailableRatePlan>;
 
@@ -115,14 +118,14 @@ export interface PlanListParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PlanGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Plans {
