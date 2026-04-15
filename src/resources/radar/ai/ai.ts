@@ -14,12 +14,7 @@ import {
   TimeseriesGroups,
 } from './timeseries-groups';
 import * as ToMarkdownAPI from './to-markdown';
-import {
-  ToMarkdown,
-  ToMarkdownCreateParams,
-  ToMarkdownCreateResponse,
-  ToMarkdownCreateResponsesSinglePage,
-} from './to-markdown';
+import { ToMarkdown, ToMarkdownCreateParams, ToMarkdownCreateResponse } from './to-markdown';
 import * as BotsAPI from './bots/bots';
 import {
   BotSummaryV2Params,
@@ -49,7 +44,6 @@ export class AI extends APIResource {
 }
 
 AI.ToMarkdown = ToMarkdown;
-AI.ToMarkdownCreateResponsesSinglePage = ToMarkdownCreateResponsesSinglePage;
 AI.Inference = Inference;
 AI.Bots = Bots;
 AI.TimeseriesGroups = TimeseriesGroups;
@@ -58,7 +52,6 @@ export declare namespace AI {
   export {
     ToMarkdown as ToMarkdown,
     type ToMarkdownCreateResponse as ToMarkdownCreateResponse,
-    ToMarkdownCreateResponsesSinglePage as ToMarkdownCreateResponsesSinglePage,
     type ToMarkdownCreateParams as ToMarkdownCreateParams,
   };
 

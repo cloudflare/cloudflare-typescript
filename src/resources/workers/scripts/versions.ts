@@ -31,7 +31,12 @@ export class Versions extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
-        Core.multipartFormRequestOptions({ query: { bindings_inherit }, body, ...options, __multipartSyntax: 'json' }),
+        Core.multipartFormRequestOptions({
+          query: { bindings_inherit },
+          body,
+          ...options,
+          __multipartSyntax: 'json',
+        }),
       ) as Core.APIPromise<{ result: VersionCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
