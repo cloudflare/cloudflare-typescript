@@ -282,6 +282,11 @@ export interface Organization {
   mfa_required_for_all_apps?: boolean;
 
   /**
+   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   */
+  mfa_ssh_piv_key_requirements?: Organization.MfaSSHPivKeyRequirements;
+
+  /**
    * The name of your Zero Trust organization.
    */
   name?: string;
@@ -335,13 +340,63 @@ export namespace Organization {
     /**
      * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'ssh_piv_key'>;
+
+    /**
+     * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
+     * when the AMR claim provided by the IdP the user used to authenticate contains
+     * "mfa". Must be in minutes (m) or hours (h). Minimum: 0m. Maximum: 720h (30
+     * days).
+     */
+    amr_matching_session_duration?: string;
+
+    /**
+     * Specifies a Cloudflare List of required FIDO2 authenticator device AAGUIDs.
+     */
+    required_aaguids?: string;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
      * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
     session_duration?: string;
+  }
+
+  /**
+   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   */
+  export interface MfaSSHPivKeyRequirements {
+    /**
+     * Defines when a PIN is required to use the SSH key. Valid values: `never` (no PIN
+     * required), `once` (PIN required once per session), `always` (PIN required for
+     * each use).
+     */
+    pin_policy?: 'never' | 'once' | 'always';
+
+    /**
+     * Requires the SSH PIV key to be stored on a FIPS 140-2 Level 1 or higher
+     * validated device.
+     */
+    require_fips_device?: boolean;
+
+    /**
+     * Specifies the allowed SSH key sizes in bits. Valid sizes depend on key type.
+     * Ed25519 has a fixed key size and does not accept this parameter.
+     */
+    ssh_key_size?: Array<256 | 384 | 521 | 2048 | 3072 | 4096>;
+
+    /**
+     * Specifies the allowed SSH key types. Valid values are `ecdsa`, `ed25519`, and
+     * `rsa`.
+     */
+    ssh_key_type?: Array<'ecdsa' | 'ed25519' | 'rsa'>;
+
+    /**
+     * Defines when physical touch is required to use the SSH key. Valid values:
+     * `never` (no touch required), `always` (touch required for each use), `cached`
+     * (touch cached for 15 seconds).
+     */
+    touch_policy?: 'never' | 'always' | 'cached';
   }
 }
 
@@ -427,6 +482,12 @@ export interface OrganizationCreateParams {
   mfa_required_for_all_apps?: boolean;
 
   /**
+   * Body param: Configures SSH PIV key requirements for MFA using hardware security
+   * keys.
+   */
+  mfa_ssh_piv_key_requirements?: OrganizationCreateParams.MfaSSHPivKeyRequirements;
+
+  /**
    * Body param: The amount of time that tokens issued for applications will be
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
@@ -463,13 +524,63 @@ export namespace OrganizationCreateParams {
     /**
      * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'ssh_piv_key'>;
+
+    /**
+     * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
+     * when the AMR claim provided by the IdP the user used to authenticate contains
+     * "mfa". Must be in minutes (m) or hours (h). Minimum: 0m. Maximum: 720h (30
+     * days).
+     */
+    amr_matching_session_duration?: string;
+
+    /**
+     * Specifies a Cloudflare List of required FIDO2 authenticator device AAGUIDs.
+     */
+    required_aaguids?: string;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
      * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
     session_duration?: string;
+  }
+
+  /**
+   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   */
+  export interface MfaSSHPivKeyRequirements {
+    /**
+     * Defines when a PIN is required to use the SSH key. Valid values: `never` (no PIN
+     * required), `once` (PIN required once per session), `always` (PIN required for
+     * each use).
+     */
+    pin_policy?: 'never' | 'once' | 'always';
+
+    /**
+     * Requires the SSH PIV key to be stored on a FIPS 140-2 Level 1 or higher
+     * validated device.
+     */
+    require_fips_device?: boolean;
+
+    /**
+     * Specifies the allowed SSH key sizes in bits. Valid sizes depend on key type.
+     * Ed25519 has a fixed key size and does not accept this parameter.
+     */
+    ssh_key_size?: Array<256 | 384 | 521 | 2048 | 3072 | 4096>;
+
+    /**
+     * Specifies the allowed SSH key types. Valid values are `ecdsa`, `ed25519`, and
+     * `rsa`.
+     */
+    ssh_key_type?: Array<'ecdsa' | 'ed25519' | 'rsa'>;
+
+    /**
+     * Defines when physical touch is required to use the SSH key. Valid values:
+     * `never` (no touch required), `always` (touch required for each use), `cached`
+     * (touch cached for 15 seconds).
+     */
+    touch_policy?: 'never' | 'always' | 'cached';
   }
 }
 
@@ -553,6 +664,12 @@ export interface OrganizationUpdateParams {
   mfa_required_for_all_apps?: boolean;
 
   /**
+   * Body param: Configures SSH PIV key requirements for MFA using hardware security
+   * keys.
+   */
+  mfa_ssh_piv_key_requirements?: OrganizationUpdateParams.MfaSSHPivKeyRequirements;
+
+  /**
    * Body param: The name of your Zero Trust organization.
    */
   name?: string;
@@ -607,13 +724,63 @@ export namespace OrganizationUpdateParams {
     /**
      * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'ssh_piv_key'>;
+
+    /**
+     * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
+     * when the AMR claim provided by the IdP the user used to authenticate contains
+     * "mfa". Must be in minutes (m) or hours (h). Minimum: 0m. Maximum: 720h (30
+     * days).
+     */
+    amr_matching_session_duration?: string;
+
+    /**
+     * Specifies a Cloudflare List of required FIDO2 authenticator device AAGUIDs.
+     */
+    required_aaguids?: string;
 
     /**
      * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
      * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
     session_duration?: string;
+  }
+
+  /**
+   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   */
+  export interface MfaSSHPivKeyRequirements {
+    /**
+     * Defines when a PIN is required to use the SSH key. Valid values: `never` (no PIN
+     * required), `once` (PIN required once per session), `always` (PIN required for
+     * each use).
+     */
+    pin_policy?: 'never' | 'once' | 'always';
+
+    /**
+     * Requires the SSH PIV key to be stored on a FIPS 140-2 Level 1 or higher
+     * validated device.
+     */
+    require_fips_device?: boolean;
+
+    /**
+     * Specifies the allowed SSH key sizes in bits. Valid sizes depend on key type.
+     * Ed25519 has a fixed key size and does not accept this parameter.
+     */
+    ssh_key_size?: Array<256 | 384 | 521 | 2048 | 3072 | 4096>;
+
+    /**
+     * Specifies the allowed SSH key types. Valid values are `ecdsa`, `ed25519`, and
+     * `rsa`.
+     */
+    ssh_key_type?: Array<'ecdsa' | 'ed25519' | 'rsa'>;
+
+    /**
+     * Defines when physical touch is required to use the SSH key. Valid values:
+     * `never` (no touch required), `always` (touch required for each use), `cached`
+     * (touch cached for 15 seconds).
+     */
+    touch_policy?: 'never' | 'always' | 'cached';
   }
 }
 

@@ -9,7 +9,8 @@ const client = new Cloudflare({
 });
 
 describe('resource webhooks', () => {
-  test('update: only required params', async () => {
+  // HTTP 422 error from prism
+  test.skip('update: only required params', async () => {
     const responsePromise = client.stream.webhooks.update({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -20,7 +21,8 @@ describe('resource webhooks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // HTTP 422 error from prism
+  test.skip('update: required and optional params', async () => {
     const response = await client.stream.webhooks.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       notification_url: 'https://example.com',

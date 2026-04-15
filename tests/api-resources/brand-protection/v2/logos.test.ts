@@ -9,7 +9,8 @@ const client = new Cloudflare({
 });
 
 describe('resource logos', () => {
-  test('create: only required params', async () => {
+  // HTTP 401 error from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.brandProtection.v2.logos.create({
       account_id: 'x',
       image_data: 'x',
@@ -25,7 +26,8 @@ describe('resource logos', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 401 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.brandProtection.v2.logos.create({
       account_id: 'x',
       image_data: 'x',
@@ -35,7 +37,8 @@ describe('resource logos', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // HTTP 401 error from prism
+  test.skip('delete: only required params', async () => {
     const responsePromise = client.brandProtection.v2.logos.delete('x', { account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,11 +49,13 @@ describe('resource logos', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // HTTP 401 error from prism
+  test.skip('delete: required and optional params', async () => {
     const response = await client.brandProtection.v2.logos.delete('x', { account_id: 'x' });
   });
 
-  test('get: only required params', async () => {
+  // HTTP 401 error from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.brandProtection.v2.logos.get({ account_id: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -61,7 +66,8 @@ describe('resource logos', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // HTTP 401 error from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.brandProtection.v2.logos.get({
       account_id: 'x',
       id: 'id',
