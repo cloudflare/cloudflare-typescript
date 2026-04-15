@@ -19,11 +19,13 @@ import {
   RegistrationCreateParams,
   RegistrationEditParams,
   RegistrationGetParams,
+  RegistrationListParams,
   Registrations,
 } from './registrations';
 import * as UpdateStatusAPI from './update-status';
 import { UpdateStatus, UpdateStatusGetParams } from './update-status';
 import { APIPromise } from '../../core/api-promise';
+import { CursorPagination } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -160,6 +162,8 @@ export class Registrar extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type RegistrationsCursorPagination = CursorPagination<Registration>;
 
 /**
  * A domain registration resource representing the current state of a registered
@@ -636,6 +640,7 @@ export declare namespace Registrar {
   export {
     Registrations as Registrations,
     type RegistrationCreateParams as RegistrationCreateParams,
+    type RegistrationListParams as RegistrationListParams,
     type RegistrationEditParams as RegistrationEditParams,
     type RegistrationGetParams as RegistrationGetParams,
   };
