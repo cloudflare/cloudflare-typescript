@@ -16,7 +16,7 @@ export class Links extends APIResource {
    * ```
    */
   create(params: LinkCreateParams, options?: Core.RequestOptions): Core.APIPromise<LinkCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/links`, {
         query: { cacheTTL },
@@ -36,7 +36,7 @@ export declare namespace LinkCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -310,7 +310,7 @@ export declare namespace LinkCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Crawl extends APIResource {
@@ -17,7 +18,7 @@ export class Crawl extends APIResource {
    * ```
    */
   create(params: CrawlCreateParams, options?: Core.RequestOptions): Core.APIPromise<CrawlCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/crawl`, {
         query: { cacheTTL },
@@ -41,10 +42,19 @@ export class Crawl extends APIResource {
    */
   delete(
     jobId: string,
-    params: CrawlDeleteParams,
+    params?: CrawlDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CrawlDeleteResponse>;
+  delete(jobId: string, options?: Core.RequestOptions): Core.APIPromise<CrawlDeleteResponse>;
+  delete(
+    jobId: string,
+    params: CrawlDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CrawlDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/browser-rendering/crawl/${jobId}`,
@@ -65,10 +75,19 @@ export class Crawl extends APIResource {
    */
   get(
     jobId: string,
-    params: CrawlGetParams,
+    params?: CrawlGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CrawlGetResponse>;
+  get(jobId: string, options?: Core.RequestOptions): Core.APIPromise<CrawlGetResponse>;
+  get(
+    jobId: string,
+    params: CrawlGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CrawlGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/browser-rendering/crawl/${jobId}`, {
         query,
@@ -195,7 +214,7 @@ export declare namespace CrawlCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -588,7 +607,7 @@ export declare namespace CrawlCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Whether to render the page or fetch static content. True by default.
@@ -743,14 +762,14 @@ export interface CrawlDeleteParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CrawlGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Cache TTL default is 5s. Set to 0 to disable.
