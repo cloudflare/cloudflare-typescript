@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
 
@@ -21,10 +22,19 @@ export class Keys extends APIResource {
    */
   list(
     namespaceId: string,
-    params: KeyListParams,
+    params?: KeyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<KeysCursorLimitPagination, Key>;
+  list(namespaceId: string, options?: Core.RequestOptions): Core.PagePromise<KeysCursorLimitPagination, Key>;
+  list(
+    namespaceId: string,
+    params: KeyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<KeysCursorLimitPagination, Key> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(namespaceId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
       KeysCursorLimitPagination,
@@ -43,7 +53,7 @@ export class Keys extends APIResource {
     params: KeyBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyBulkDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk/delete`, {
         body: body,
@@ -64,7 +74,7 @@ export class Keys extends APIResource {
     params: KeyBulkGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyBulkGetResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk/get`, {
         body,
@@ -88,7 +98,7 @@ export class Keys extends APIResource {
     params: KeyBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyBulkUpdateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
         body: body,
@@ -191,7 +201,7 @@ export interface KeyListParams extends CursorLimitPaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filters returned keys by a name prefix. Exact matches and any key
@@ -204,7 +214,7 @@ export interface KeyBulkDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -216,7 +226,7 @@ export interface KeyBulkGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Array of keys to retrieve (maximum of 100).
@@ -238,7 +248,7 @@ export interface KeyBulkUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
