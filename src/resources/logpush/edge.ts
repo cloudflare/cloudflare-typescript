@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -15,8 +16,16 @@ export class Edge extends APIResource {
    * });
    * ```
    */
-  create(params: EdgeCreateParams, options?: Core.RequestOptions): Core.APIPromise<InstantLogpushJob | null> {
-    const { zone_id, ...body } = params;
+  create(params?: EdgeCreateParams, options?: Core.RequestOptions): Core.APIPromise<InstantLogpushJob | null>;
+  create(options?: Core.RequestOptions): Core.APIPromise<InstantLogpushJob | null>;
+  create(
+    params: EdgeCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InstantLogpushJob | null> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/logpush/edge/jobs`, { body, ...options }) as Core.APIPromise<{
         result: InstantLogpushJob | null;
@@ -38,10 +47,20 @@ export class Edge extends APIResource {
    * ```
    */
   get(
-    params: EdgeGetParams,
+    params?: EdgeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null>;
+  get(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null>;
+  get(
+    params: EdgeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstantLogpushJobsSinglePage, InstantLogpushJob | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/logpush/edge/jobs`,
       InstantLogpushJobsSinglePage,
@@ -84,7 +103,7 @@ export interface EdgeCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Comma-separated list of fields.
@@ -107,7 +126,7 @@ export interface EdgeGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Edge.InstantLogpushJobsSinglePage = InstantLogpushJobsSinglePage;

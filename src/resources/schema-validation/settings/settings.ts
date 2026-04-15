@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as OperationsAPI from './operations';
 import {
@@ -35,7 +36,7 @@ export class Settings extends APIResource {
    * ```
    */
   update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SettingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/schema_validation/settings`, {
         body,
@@ -56,8 +57,16 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse> {
-    const { zone_id, ...body } = params;
+  edit(params?: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse>;
+  edit(
+    params: SettingEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingEditResponse> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/settings`, {
         body,
@@ -76,8 +85,16 @@ export class Settings extends APIResource {
    * });
    * ```
    */
-  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
-    const { zone_id } = params;
+  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>;
+  get(
+    params: SettingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/schema_validation/settings`, options) as Core.APIPromise<{
         result: SettingGetResponse;
@@ -156,7 +173,7 @@ export interface SettingUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The default mitigation action used Mitigation actions are as
@@ -182,7 +199,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The default mitigation action used Mitigation actions are as
@@ -208,7 +225,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Settings.Operations = Operations;

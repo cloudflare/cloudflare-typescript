@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Vtt extends APIResource {
@@ -19,10 +20,20 @@ export class Vtt extends APIResource {
   get(
     identifier: string,
     language: string,
-    params: VttGetParams,
+    params?: VttGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string>;
+  get(identifier: string, language: string, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(
+    identifier: string,
+    language: string,
+    params: VttGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<string> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(identifier, language, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/stream/${identifier}/captions/${language}/vtt`, {
       ...options,
       headers: { Accept: 'text/vtt', ...options?.headers },
@@ -36,7 +47,7 @@ export interface VttGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Vtt {

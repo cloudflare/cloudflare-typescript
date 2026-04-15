@@ -1,14 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Queries extends APIResource {
   /**
    * Get all saved brand protection queries for an account
    */
-  get(params: QueryGetParams, options?: Core.RequestOptions): Core.APIPromise<QueryGetResponse> {
-    const { account_id, ...query } = params;
+  get(params?: QueryGetParams, options?: Core.RequestOptions): Core.APIPromise<QueryGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<QueryGetResponse>;
+  get(
+    params: QueryGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueryGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/v2/brand-protection/domain/queries`, {
       query,
       ...options,
@@ -56,7 +65,7 @@ export interface QueryGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

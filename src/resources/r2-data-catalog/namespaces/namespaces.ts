@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as TablesAPI from './tables/tables';
 import { TableListParams, TableListResponse, Tables } from './tables/tables';
@@ -23,10 +24,19 @@ export class Namespaces extends APIResource {
    */
   list(
     bucketName: string,
-    params: NamespaceListParams,
+    params?: NamespaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceListResponse>;
+  list(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceListResponse>;
+  list(
+    bucketName: string,
+    params: NamespaceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2-catalog/${bucketName}/namespaces`, {
         query,
@@ -96,7 +106,7 @@ export interface NamespaceListParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Maximum number of namespaces to return per page. Defaults to 100,

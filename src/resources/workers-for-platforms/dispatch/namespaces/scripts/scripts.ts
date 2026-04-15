@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
@@ -77,7 +78,7 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, bindings_inherit, ...body } = params;
+    const { account_id = this._client.accountId, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
@@ -109,10 +110,24 @@ export class Scripts extends APIResource {
   delete(
     dispatchNamespace: string,
     scriptName: string,
-    params: ScriptDeleteParams,
+    params?: ScriptDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptDeleteResponse | null>;
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptDeleteResponse | null>;
+  delete(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: ScriptDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptDeleteResponse | null> {
-    const { account_id, force } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId, force } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
@@ -137,10 +152,20 @@ export class Scripts extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params: ScriptGetParams,
+    params?: ScriptGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Script>;
+  get(dispatchNamespace: string, scriptName: string, options?: Core.RequestOptions): Core.APIPromise<Script>;
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: ScriptGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Script> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
@@ -602,7 +627,7 @@ export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -1818,7 +1843,7 @@ export interface ScriptDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service
@@ -1832,7 +1857,7 @@ export interface ScriptGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Scripts.AssetUpload = AssetUpload;

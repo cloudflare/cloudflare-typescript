@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Tokens extends APIResource {
@@ -15,8 +16,16 @@ export class Tokens extends APIResource {
    *   );
    * ```
    */
-  create(params: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
-    const { account_id } = params;
+  create(params?: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse>;
+  create(
+    params: TokenCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenCreateResponse> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/vpc-flows/token`, options) as Core.APIPromise<{
         result: TokenCreateResponse;
@@ -31,7 +40,7 @@ export class Tokens extends APIResource {
 export type TokenCreateResponse = string;
 
 export interface TokenCreateParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Tokens {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class IPs extends APIResource {
@@ -25,7 +26,7 @@ export class IPs extends APIResource {
     params: IPUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.put(
       `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
       { body: body, ...options },
@@ -47,10 +48,24 @@ export class IPs extends APIResource {
   delete(
     addressMapId: string,
     ipAddress: string,
-    params: IPDeleteParams,
+    params?: IPDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPDeleteResponse>;
+  delete(
+    addressMapId: string,
+    ipAddress: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPDeleteResponse>;
+  delete(
+    addressMapId: string,
+    ipAddress: string,
+    params: IPDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(addressMapId, ipAddress, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
       options,
@@ -210,7 +225,7 @@ export interface IPUpdateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -222,7 +237,7 @@ export interface IPDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace IPs {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import * as ProfilesAPI from './profiles';
@@ -19,7 +20,7 @@ export class Custom extends APIResource {
    * ```
    */
   create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, {
         body,
@@ -45,7 +46,7 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
         body,
@@ -68,10 +69,19 @@ export class Custom extends APIResource {
    */
   delete(
     profileId: string,
-    params: CustomDeleteParams,
+    params?: CustomDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomDeleteResponse | null>;
+  delete(profileId: string, options?: Core.RequestOptions): Core.APIPromise<CustomDeleteResponse | null>;
+  delete(
+    profileId: string,
+    params: CustomDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(profileId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
@@ -94,10 +104,19 @@ export class Custom extends APIResource {
    */
   get(
     profileId: string,
-    params: CustomGetParams,
+    params?: CustomGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfilesAPI.Profile>;
+  get(profileId: string, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile>;
+  get(
+    profileId: string,
+    params: CustomGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(profileId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
@@ -498,7 +517,7 @@ export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -603,7 +622,7 @@ export interface CustomUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -711,11 +730,11 @@ export namespace CustomUpdateParams {
 }
 
 export interface CustomDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Custom {

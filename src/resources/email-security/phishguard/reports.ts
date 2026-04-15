@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,10 +21,18 @@ export class Reports extends APIResource {
    * ```
    */
   list(
-    params: ReportListParams,
+    params?: ReportListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ReportListResponsesSinglePage, ReportListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ReportListResponsesSinglePage, ReportListResponse>;
+  list(
+    params: ReportListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ReportListResponsesSinglePage, ReportListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/phishguard/reports`,
       ReportListResponsesSinglePage,
@@ -88,7 +97,7 @@ export interface ReportListParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The end of the search date range (RFC3339 format).

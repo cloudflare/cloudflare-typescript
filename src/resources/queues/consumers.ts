@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
@@ -26,7 +27,7 @@ export class Consumers extends APIResource {
     params: ConsumerCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Consumer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/consumers`, {
         body,
@@ -57,7 +58,7 @@ export class Consumers extends APIResource {
     params: ConsumerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Consumer> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, {
         body,
@@ -82,10 +83,19 @@ export class Consumers extends APIResource {
    */
   list(
     queueId: string,
-    params: ConsumerListParams,
+    params?: ConsumerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ConsumersSinglePage, Consumer>;
+  list(queueId: string, options?: Core.RequestOptions): Core.PagePromise<ConsumersSinglePage, Consumer>;
+  list(
+    queueId: string,
+    params: ConsumerListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConsumersSinglePage, Consumer> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/queues/${queueId}/consumers`,
       ConsumersSinglePage,
@@ -108,10 +118,24 @@ export class Consumers extends APIResource {
   delete(
     queueId: string,
     consumerId: string,
-    params: ConsumerDeleteParams,
+    params?: ConsumerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConsumerDeleteResponse>;
+  delete(
+    queueId: string,
+    consumerId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConsumerDeleteResponse>;
+  delete(
+    queueId: string,
+    consumerId: string,
+    params: ConsumerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConsumerDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(queueId, consumerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, options);
   }
 
@@ -130,10 +154,20 @@ export class Consumers extends APIResource {
   get(
     queueId: string,
     consumerId: string,
-    params: ConsumerGetParams,
+    params?: ConsumerGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Consumer>;
+  get(queueId: string, consumerId: string, options?: Core.RequestOptions): Core.APIPromise<Consumer>;
+  get(
+    queueId: string,
+    consumerId: string,
+    params: ConsumerGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Consumer> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(queueId, consumerId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`,
@@ -275,7 +309,7 @@ export declare namespace ConsumerCreateParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Name of a Worker
@@ -334,7 +368,7 @@ export declare namespace ConsumerCreateParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -388,7 +422,7 @@ export declare namespace ConsumerUpdateParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Name of a Worker
@@ -447,7 +481,7 @@ export declare namespace ConsumerUpdateParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -496,21 +530,21 @@ export interface ConsumerListParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConsumerDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConsumerGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Consumers.ConsumersSinglePage = ConsumersSinglePage;

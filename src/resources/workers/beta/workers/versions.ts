@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as WorkersAPI from '../../workers';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -23,7 +24,7 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    const { account_id, deploy, ...body } = params;
+    const { account_id = this._client.accountId, deploy, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/workers/${workerId}/versions`, {
         query: { deploy },
@@ -49,10 +50,22 @@ export class Versions extends APIResource {
    */
   list(
     workerId: string,
-    params: VersionListParams,
+    params?: VersionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionsV4PagePaginationArray, Version>;
+  list(
+    workerId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionsV4PagePaginationArray, Version>;
+  list(
+    workerId: string,
+    params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<VersionsV4PagePaginationArray, Version> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(workerId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/workers/${workerId}/versions`,
       VersionsV4PagePaginationArray,
@@ -76,10 +89,24 @@ export class Versions extends APIResource {
   delete(
     workerId: string,
     versionId: string,
-    params: VersionDeleteParams,
+    params?: VersionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionDeleteResponse>;
+  delete(
+    workerId: string,
+    versionId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionDeleteResponse>;
+  delete(
+    workerId: string,
+    versionId: string,
+    params: VersionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(workerId, versionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/workers/${workerId}/versions/${versionId}`,
       options,
@@ -102,10 +129,20 @@ export class Versions extends APIResource {
   get(
     workerId: string,
     versionId: string,
-    params: VersionGetParams,
+    params?: VersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Version>;
+  get(workerId: string, versionId: string, options?: Core.RequestOptions): Core.APIPromise<Version>;
+  get(
+    workerId: string,
+    versionId: string,
+    params: VersionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(workerId, versionId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/workers/${workerId}/versions/${versionId}`, {
         query,
@@ -1295,7 +1332,7 @@ export interface VersionCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If true, a deployment will be created that sends 100% of traffic to
@@ -2426,21 +2463,21 @@ export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Whether to include the `modules` property of the version in the

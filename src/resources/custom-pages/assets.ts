@@ -21,7 +21,11 @@ export class Assets extends APIResource {
    * ```
    */
   create(params: AssetCreateParams, options?: Core.RequestOptions): Core.APIPromise<AssetCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -66,7 +70,11 @@ export class Assets extends APIResource {
     params: AssetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -118,7 +126,11 @@ export class Assets extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id, ...query } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...query
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -163,7 +175,8 @@ export class Assets extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(assetName, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -211,7 +224,8 @@ export class Assets extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(assetName, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

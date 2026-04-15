@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -16,8 +17,16 @@ export class HostnameRoutes extends APIResource {
    *   });
    * ```
    */
-  create(params: HostnameRouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<HostnameRoute> {
-    const { account_id, ...body } = params;
+  create(params?: HostnameRouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<HostnameRoute>;
+  create(options?: Core.RequestOptions): Core.APIPromise<HostnameRoute>;
+  create(
+    params: HostnameRouteCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameRoute> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/zerotrust/routes/hostname`, {
         body,
@@ -40,10 +49,18 @@ export class HostnameRoutes extends APIResource {
    * ```
    */
   list(
-    params: HostnameRouteListParams,
+    params?: HostnameRouteListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HostnameRoutesV4PagePaginationArray, HostnameRoute>;
+  list(options?: Core.RequestOptions): Core.PagePromise<HostnameRoutesV4PagePaginationArray, HostnameRoute>;
+  list(
+    params: HostnameRouteListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<HostnameRoutesV4PagePaginationArray, HostnameRoute> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/zerotrust/routes/hostname`,
       HostnameRoutesV4PagePaginationArray,
@@ -65,10 +82,19 @@ export class HostnameRoutes extends APIResource {
    */
   delete(
     hostnameRouteId: string,
-    params: HostnameRouteDeleteParams,
+    params?: HostnameRouteDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameRoute>;
+  delete(hostnameRouteId: string, options?: Core.RequestOptions): Core.APIPromise<HostnameRoute>;
+  delete(
+    hostnameRouteId: string,
+    params: HostnameRouteDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameRoute> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(hostnameRouteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/zerotrust/routes/hostname/${hostnameRouteId}`,
@@ -94,7 +120,7 @@ export class HostnameRoutes extends APIResource {
     params: HostnameRouteEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameRoute> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/zerotrust/routes/hostname/${hostnameRouteId}`, {
         body,
@@ -117,10 +143,19 @@ export class HostnameRoutes extends APIResource {
    */
   get(
     hostnameRouteId: string,
-    params: HostnameRouteGetParams,
+    params?: HostnameRouteGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameRoute>;
+  get(hostnameRouteId: string, options?: Core.RequestOptions): Core.APIPromise<HostnameRoute>;
+  get(
+    hostnameRouteId: string,
+    params: HostnameRouteGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameRoute> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(hostnameRouteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/zerotrust/routes/hostname/${hostnameRouteId}`,
@@ -174,7 +209,7 @@ export interface HostnameRouteCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the hostname route.
@@ -196,7 +231,7 @@ export interface HostnameRouteListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The hostname route ID.
@@ -236,14 +271,14 @@ export interface HostnameRouteDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface HostnameRouteEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the hostname route.
@@ -265,7 +300,7 @@ export interface HostnameRouteGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 HostnameRoutes.HostnameRoutesV4PagePaginationArray = HostnameRoutesV4PagePaginationArray;

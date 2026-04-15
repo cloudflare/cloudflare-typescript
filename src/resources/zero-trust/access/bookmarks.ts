@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -15,7 +16,7 @@ export class Bookmarks extends APIResource {
     params: BookmarkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Bookmark> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, {
         body: body,
@@ -34,7 +35,7 @@ export class Bookmarks extends APIResource {
     params: BookmarkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Bookmark> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, {
         body: body,
@@ -49,10 +50,18 @@ export class Bookmarks extends APIResource {
    * @deprecated
    */
   list(
-    params: BookmarkListParams,
+    params?: BookmarkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BookmarksSinglePage, Bookmark>;
+  list(options?: Core.RequestOptions): Core.PagePromise<BookmarksSinglePage, Bookmark>;
+  list(
+    params: BookmarkListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<BookmarksSinglePage, Bookmark> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/access/bookmarks`, BookmarksSinglePage, options);
   }
 
@@ -63,10 +72,19 @@ export class Bookmarks extends APIResource {
    */
   delete(
     bookmarkId: string,
-    params: BookmarkDeleteParams,
+    params?: BookmarkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BookmarkDeleteResponse>;
+  delete(bookmarkId: string, options?: Core.RequestOptions): Core.APIPromise<BookmarkDeleteResponse>;
+  delete(
+    bookmarkId: string,
+    params: BookmarkDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<BookmarkDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(bookmarkId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/access/bookmarks/${bookmarkId}`,
@@ -82,10 +100,19 @@ export class Bookmarks extends APIResource {
    */
   get(
     bookmarkId: string,
-    params: BookmarkGetParams,
+    params?: BookmarkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Bookmark>;
+  get(bookmarkId: string, options?: Core.RequestOptions): Core.APIPromise<Bookmark>;
+  get(
+    bookmarkId: string,
+    params: BookmarkGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Bookmark> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(bookmarkId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, options) as Core.APIPromise<{
         result: Bookmark;
@@ -134,7 +161,7 @@ export interface BookmarkCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -146,7 +173,7 @@ export interface BookmarkUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -155,15 +182,15 @@ export interface BookmarkUpdateParams {
 }
 
 export interface BookmarkListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BookmarkDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BookmarkGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Bookmarks.BookmarksSinglePage = BookmarksSinglePage;

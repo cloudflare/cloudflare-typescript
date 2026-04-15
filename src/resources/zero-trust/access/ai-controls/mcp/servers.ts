@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../../pagination';
 
@@ -23,7 +24,7 @@ export class Servers extends APIResource {
    * ```
    */
   create(params: ServerCreateParams, options?: Core.RequestOptions): Core.APIPromise<ServerCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/ai-controls/mcp/servers`, {
         body,
@@ -46,10 +47,19 @@ export class Servers extends APIResource {
    */
   update(
     id: string,
-    params: ServerUpdateParams,
+    params?: ServerUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerUpdateResponse>;
+  update(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerUpdateResponse>;
+  update(
+    id: string,
+    params: ServerUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerUpdateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update(id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`, {
         body,
@@ -72,10 +82,20 @@ export class Servers extends APIResource {
    * ```
    */
   list(
-    params: ServerListParams,
+    params?: ServerListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse>;
+  list(
+    params: ServerListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/ai-controls/mcp/servers`,
       ServerListResponsesV4PagePaginationArray,
@@ -97,10 +117,19 @@ export class Servers extends APIResource {
    */
   delete(
     id: string,
-    params: ServerDeleteParams,
+    params?: ServerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerDeleteResponse>;
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerDeleteResponse>;
+  delete(
+    id: string,
+    params: ServerDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`,
@@ -123,10 +152,19 @@ export class Servers extends APIResource {
    */
   read(
     id: string,
-    params: ServerReadParams,
+    params?: ServerReadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerReadResponse>;
+  read(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerReadResponse>;
+  read(
+    id: string,
+    params: ServerReadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerReadResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.read(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`,
@@ -149,10 +187,19 @@ export class Servers extends APIResource {
    */
   sync(
     id: string,
-    params: ServerSyncParams,
+    params?: ServerSyncParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServerSyncResponse>;
+  sync(id: string, options?: Core.RequestOptions): Core.APIPromise<ServerSyncResponse>;
+  sync(
+    id: string,
+    params: ServerSyncParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServerSyncResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.sync(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/access/ai-controls/mcp/servers/${id}/sync`,
@@ -475,7 +522,7 @@ export interface ServerCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: server id
@@ -544,7 +591,7 @@ export interface ServerUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -598,7 +645,7 @@ export interface ServerListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id, name
@@ -607,15 +654,15 @@ export interface ServerListParams extends V4PagePaginationArrayParams {
 }
 
 export interface ServerDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServerReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServerSyncParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Servers.ServerListResponsesV4PagePaginationArray = ServerListResponsesV4PagePaginationArray;

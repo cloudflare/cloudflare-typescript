@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import { SinglePage } from '../pagination';
 
@@ -21,7 +22,7 @@ export class CustomNameservers extends APIResource {
     params: CustomNameserverCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserver> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
         result: CustomNameserver;
@@ -45,10 +46,22 @@ export class CustomNameservers extends APIResource {
    */
   delete(
     customNSId: string,
-    params: CustomNameserverDeleteParams,
+    params?: CustomNameserverDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomNameserverDeleteResponsesSinglePage, CustomNameserverDeleteResponse>;
+  delete(
+    customNSId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomNameserverDeleteResponsesSinglePage, CustomNameserverDeleteResponse>;
+  delete(
+    customNSId: string,
+    params: CustomNameserverDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomNameserverDeleteResponsesSinglePage, CustomNameserverDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customNSId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/custom_ns/${customNSId}`,
       CustomNameserverDeleteResponsesSinglePage,
@@ -70,10 +83,18 @@ export class CustomNameservers extends APIResource {
    * ```
    */
   get(
-    params: CustomNameserverGetParams,
+    params?: CustomNameserverGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomNameserversSinglePage, CustomNameserver>;
+  get(options?: Core.RequestOptions): Core.PagePromise<CustomNameserversSinglePage, CustomNameserver>;
+  get(
+    params: CustomNameserverGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomNameserversSinglePage, CustomNameserver> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/custom_ns`, CustomNameserversSinglePage, options);
   }
 }
@@ -135,7 +156,7 @@ export interface CustomNameserverCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The FQDN of the name server.
@@ -152,14 +173,14 @@ export interface CustomNameserverDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomNameserverGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 CustomNameservers.CustomNameserverDeleteResponsesSinglePage = CustomNameserverDeleteResponsesSinglePage;

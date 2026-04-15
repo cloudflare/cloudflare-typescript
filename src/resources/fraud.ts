@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 
 export class Fraud extends APIResource {
@@ -20,8 +21,16 @@ export class Fraud extends APIResource {
    * });
    * ```
    */
-  update(params: FraudUpdateParams, options?: Core.RequestOptions): Core.APIPromise<FraudSettings> {
-    const { zone_id, ...body } = params;
+  update(params?: FraudUpdateParams, options?: Core.RequestOptions): Core.APIPromise<FraudSettings>;
+  update(options?: Core.RequestOptions): Core.APIPromise<FraudSettings>;
+  update(
+    params: FraudUpdateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FraudSettings> {
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/fraud_detection/settings`, {
         body,
@@ -40,8 +49,16 @@ export class Fraud extends APIResource {
    * });
    * ```
    */
-  get(params: FraudGetParams, options?: Core.RequestOptions): Core.APIPromise<FraudSettings> {
-    const { zone_id } = params;
+  get(params?: FraudGetParams, options?: Core.RequestOptions): Core.APIPromise<FraudSettings>;
+  get(options?: Core.RequestOptions): Core.APIPromise<FraudSettings>;
+  get(
+    params: FraudGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FraudSettings> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/fraud_detection/settings`, options) as Core.APIPromise<{
         result: FraudSettings;
@@ -72,7 +89,7 @@ export interface FraudUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether Fraud User Profiles is enabled for the zone.
@@ -95,7 +112,7 @@ export interface FraudGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Fraud {

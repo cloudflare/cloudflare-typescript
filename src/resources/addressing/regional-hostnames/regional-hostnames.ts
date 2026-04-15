@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as RegionsAPI from './regions';
 import { RegionListParams, RegionListResponse, RegionListResponsesSinglePage, Regions } from './regions';
@@ -29,7 +30,7 @@ export class RegionalHostnames extends APIResource {
     params: RegionalHostnameCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalHostnameCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/addressing/regional_hostnames`, {
         body,
@@ -52,10 +53,20 @@ export class RegionalHostnames extends APIResource {
    * ```
    */
   list(
-    params: RegionalHostnameListParams,
+    params?: RegionalHostnameListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RegionalHostnameListResponsesSinglePage, RegionalHostnameListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RegionalHostnameListResponsesSinglePage, RegionalHostnameListResponse>;
+  list(
+    params: RegionalHostnameListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RegionalHostnameListResponsesSinglePage, RegionalHostnameListResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/addressing/regional_hostnames`,
       RegionalHostnameListResponsesSinglePage,
@@ -77,10 +88,19 @@ export class RegionalHostnames extends APIResource {
    */
   delete(
     hostname: string,
-    params: RegionalHostnameDeleteParams,
+    params?: RegionalHostnameDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegionalHostnameDeleteResponse>;
+  delete(hostname: string, options?: Core.RequestOptions): Core.APIPromise<RegionalHostnameDeleteResponse>;
+  delete(
+    hostname: string,
+    params: RegionalHostnameDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalHostnameDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(hostname, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/addressing/regional_hostnames/${hostname}`, options);
   }
 
@@ -105,7 +125,7 @@ export class RegionalHostnames extends APIResource {
     params: RegionalHostnameEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalHostnameEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/addressing/regional_hostnames/${hostname}`, {
         body,
@@ -128,10 +148,19 @@ export class RegionalHostnames extends APIResource {
    */
   get(
     hostname: string,
-    params: RegionalHostnameGetParams,
+    params?: RegionalHostnameGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegionalHostnameGetResponse>;
+  get(hostname: string, options?: Core.RequestOptions): Core.APIPromise<RegionalHostnameGetResponse>;
+  get(
+    hostname: string,
+    params: RegionalHostnameGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalHostnameGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(hostname, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/addressing/regional_hostnames/${hostname}`,
@@ -284,7 +313,7 @@ export interface RegionalHostnameCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: DNS hostname to be regionalized, must be a subdomain of the zone.
@@ -307,21 +336,21 @@ export interface RegionalHostnameListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RegionalHostnameDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RegionalHostnameEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Identifying key for the region
@@ -333,7 +362,7 @@ export interface RegionalHostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 RegionalHostnames.RegionalHostnameListResponsesSinglePage = RegionalHostnameListResponsesSinglePage;

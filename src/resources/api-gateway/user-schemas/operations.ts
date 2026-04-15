@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -13,10 +14,22 @@ export class Operations extends APIResource {
    */
   list(
     schemaId: string,
-    params: OperationListParams,
+    params?: OperationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
+  list(
+    schemaId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
+  list(
+    schemaId: string,
+    params: OperationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas/${schemaId}/operations`,
       OperationListResponsesV4PagePaginationArray,
@@ -333,7 +346,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Filter results to only include endpoints containing this pattern.

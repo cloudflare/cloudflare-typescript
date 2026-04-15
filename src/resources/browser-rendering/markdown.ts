@@ -21,7 +21,7 @@ export class Markdown extends APIResource {
     params: MarkdownCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MarkdownCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/markdown`, {
         query: { cacheTTL },
@@ -44,7 +44,7 @@ export declare namespace MarkdownCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -307,7 +307,7 @@ export declare namespace MarkdownCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either

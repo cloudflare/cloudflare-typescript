@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -25,7 +26,7 @@ export class Services extends APIResource {
    * ```
    */
   create(params: ServiceCreateParams, options?: Core.RequestOptions): Core.APIPromise<ServiceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/connectivity/directory/services`, {
         body,
@@ -61,7 +62,7 @@ export class Services extends APIResource {
     params: ServiceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/connectivity/directory/services/${serviceId}`, {
         body,
@@ -84,10 +85,20 @@ export class Services extends APIResource {
    * ```
    */
   list(
-    params: ServiceListParams,
+    params?: ServiceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceListResponsesV4PagePaginationArray, ServiceListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceListResponsesV4PagePaginationArray, ServiceListResponse>;
+  list(
+    params: ServiceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ServiceListResponsesV4PagePaginationArray, ServiceListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/connectivity/directory/services`,
       ServiceListResponsesV4PagePaginationArray,
@@ -108,10 +119,19 @@ export class Services extends APIResource {
    */
   delete(
     serviceId: string,
-    params: ServiceDeleteParams,
+    params?: ServiceDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(serviceId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    serviceId: string,
+    params: ServiceDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(serviceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/connectivity/directory/services/${serviceId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -132,10 +152,19 @@ export class Services extends APIResource {
    */
   get(
     serviceId: string,
-    params: ServiceGetParams,
+    params?: ServiceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceGetResponse>;
+  get(serviceId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceGetResponse>;
+  get(
+    serviceId: string,
+    params: ServiceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(serviceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/connectivity/directory/services/${serviceId}`,
@@ -972,7 +1001,7 @@ export declare namespace ServiceCreateParams {
     /**
      * Path param: Account identifier
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1085,7 +1114,7 @@ export declare namespace ServiceCreateParams {
     /**
      * Path param: Account identifier
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1204,7 +1233,7 @@ export declare namespace ServiceUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1317,7 +1346,7 @@ export declare namespace ServiceUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -1431,7 +1460,7 @@ export interface ServiceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1440,11 +1469,11 @@ export interface ServiceListParams extends V4PagePaginationArrayParams {
 }
 
 export interface ServiceDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Services.ServiceListResponsesV4PagePaginationArray = ServiceListResponsesV4PagePaginationArray;

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SettingsPoliciesSinglePage } from '../policies';
@@ -35,7 +36,7 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
         result: PoliciesAPI.SettingsPolicy | null;
@@ -57,10 +58,20 @@ export class Custom extends APIResource {
    * ```
    */
   list(
-    params: CustomListParams,
+    params?: CustomListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
+  list(
+    params: CustomListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policies`,
       SettingsPoliciesSinglePage,
@@ -85,10 +96,22 @@ export class Custom extends APIResource {
    */
   delete(
     policyId: string,
-    params: CustomDeleteParams,
+    params?: CustomDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
+  delete(
+    policyId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
+  delete(
+    policyId: string,
+    params: CustomDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/${policyId}`,
       SettingsPoliciesSinglePage,
@@ -113,7 +136,7 @@ export class Custom extends APIResource {
     params: CustomEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
         body,
@@ -136,10 +159,19 @@ export class Custom extends APIResource {
    */
   get(
     policyId: string,
-    params: CustomGetParams,
+    params?: CustomGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null>;
+  get(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PoliciesAPI.SettingsPolicy | null>;
+  get(
+    policyId: string,
+    params: CustomGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
         result: PoliciesAPI.SettingsPolicy | null;
@@ -152,7 +184,7 @@ export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The wirefilter expression to match devices. Available values:
@@ -297,18 +329,18 @@ export namespace CustomCreateParams {
 }
 
 export interface CustomListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -453,7 +485,7 @@ export namespace CustomEditParams {
 }
 
 export interface CustomGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Custom.Excludes = Excludes;

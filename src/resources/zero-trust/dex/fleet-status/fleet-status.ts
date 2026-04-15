@@ -30,7 +30,7 @@ export class FleetStatus extends APIResource {
     params: FleetStatusLiveParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FleetStatusLiveResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/fleet-status/live`, {
         query,
@@ -56,7 +56,7 @@ export class FleetStatus extends APIResource {
     params: FleetStatusOverTimeParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FleetStatusOverTimeResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/fleet-status/over-time`, {
         query,
@@ -149,7 +149,7 @@ export interface FleetStatusLiveParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Number of minutes before current time
@@ -161,7 +161,7 @@ export interface FleetStatusOverTimeParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Time range beginning in ISO format

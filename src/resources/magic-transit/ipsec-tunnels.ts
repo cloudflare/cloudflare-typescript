@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import * as MagicTransitAPI from './magic-transit';
@@ -26,7 +27,11 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelCreateResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    const {
+      account_id = this._client.accountId,
+      'x-magic-new-hc-target': xMagicNewHcTarget,
+      ...body
+    } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels`, {
         body,
@@ -65,7 +70,11 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelUpdateResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    const {
+      account_id = this._client.accountId,
+      'x-magic-new-hc-target': xMagicNewHcTarget,
+      ...body
+    } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, {
         body,
@@ -92,10 +101,18 @@ export class IPSECTunnels extends APIResource {
    * ```
    */
   list(
-    params: IPSECTunnelListParams,
+    params?: IPSECTunnelListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelListResponse>;
+  list(
+    params: IPSECTunnelListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelListResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels`, {
         ...options,
@@ -125,10 +142,19 @@ export class IPSECTunnels extends APIResource {
    */
   delete(
     ipsecTunnelId: string,
-    params: IPSECTunnelDeleteParams,
+    params?: IPSECTunnelDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelDeleteResponse>;
+  delete(ipsecTunnelId: string, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelDeleteResponse>;
+  delete(
+    ipsecTunnelId: string,
+    params: IPSECTunnelDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelDeleteResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(ipsecTunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, {
         ...options,
@@ -160,7 +186,7 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelBulkUpdateResponse> {
-    const { account_id, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    const { account_id = this._client.accountId, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/ipsec_tunnels`, {
         body: body,
@@ -189,10 +215,19 @@ export class IPSECTunnels extends APIResource {
    */
   get(
     ipsecTunnelId: string,
-    params: IPSECTunnelGetParams,
+    params?: IPSECTunnelGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelGetResponse>;
+  get(ipsecTunnelId: string, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelGetResponse>;
+  get(
+    ipsecTunnelId: string,
+    params: IPSECTunnelGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelGetResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.get(ipsecTunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, {
         ...options,
@@ -230,7 +265,7 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelPSKGenerateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}/psk_generate`, {
         body: body,
@@ -1585,7 +1620,7 @@ export interface IPSECTunnelCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The IP address assigned to the Cloudflare side of the IPsec tunnel.
@@ -1771,7 +1806,7 @@ export interface IPSECTunnelUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The IP address assigned to the Cloudflare side of the IPsec tunnel.
@@ -1957,7 +1992,7 @@ export interface IPSECTunnelListParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -1970,7 +2005,7 @@ export interface IPSECTunnelDeleteParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -1983,7 +2018,7 @@ export interface IPSECTunnelBulkUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -2001,7 +2036,7 @@ export interface IPSECTunnelGetParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -2014,7 +2049,7 @@ export interface IPSECTunnelPSKGenerateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as V1API from '../v1/v1';
 import * as DirectUploadsAPI from './direct-uploads';
@@ -63,8 +64,16 @@ export class V2 extends APIResource {
    * });
    * ```
    */
-  list(params: V2ListParams, options?: Core.RequestOptions): Core.APIPromise<V2ListResponse> {
-    const { account_id, ...query } = params;
+  list(params?: V2ListParams, options?: Core.RequestOptions): Core.APIPromise<V2ListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<V2ListResponse>;
+  list(
+    params: V2ListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<V2ListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v2`, { query, ...options }) as Core.APIPromise<{
         result: V2ListResponse;
@@ -87,7 +96,7 @@ export interface V2ListParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Continuation token to fetch next page. Passed as a query param when

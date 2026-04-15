@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as StatusAPI from './status';
 import { Status, StatusGetParams } from './status';
@@ -28,7 +29,7 @@ export class OutgoingResource extends APIResource {
     params: OutgoingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
         result: OutgoingCreateResponse;
@@ -56,7 +57,7 @@ export class OutgoingResource extends APIResource {
     params: OutgoingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
         result: OutgoingUpdateResponse;
@@ -76,10 +77,18 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   delete(
-    params: OutgoingDeleteParams,
+    params?: OutgoingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<OutgoingDeleteResponse>;
+  delete(
+    params: OutgoingDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
         result: OutgoingDeleteResponse;
@@ -101,7 +110,7 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   disable(params: OutgoingDisableParams, options?: Core.RequestOptions): Core.APIPromise<DisableTransfer> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, {
         body: body,
@@ -123,7 +132,7 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   enable(params: OutgoingEnableParams, options?: Core.RequestOptions): Core.APIPromise<EnableTransfer> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, {
         body: body,
@@ -148,7 +157,7 @@ export class OutgoingResource extends APIResource {
     params: OutgoingForceNotifyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingForceNotifyResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, {
         body: body,
@@ -168,8 +177,16 @@ export class OutgoingResource extends APIResource {
    *   });
    * ```
    */
-  get(params: OutgoingGetParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingGetResponse> {
-    const { zone_id } = params;
+  get(params?: OutgoingGetParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<OutgoingGetResponse>;
+  get(
+    params: OutgoingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutgoingGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
         result: OutgoingGetResponse;
@@ -343,7 +360,7 @@ export interface OutgoingCreateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zone name.
@@ -360,7 +377,7 @@ export interface OutgoingUpdateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zone name.
@@ -374,14 +391,14 @@ export interface OutgoingUpdateParams {
 }
 
 export interface OutgoingDeleteParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OutgoingDisableParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -393,7 +410,7 @@ export interface OutgoingEnableParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -405,7 +422,7 @@ export interface OutgoingForceNotifyParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -414,7 +431,7 @@ export interface OutgoingForceNotifyParams {
 }
 
 export interface OutgoingGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 OutgoingResource.Status = Status;

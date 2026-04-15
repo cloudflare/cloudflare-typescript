@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class AvailableAlerts extends APIResource {
@@ -16,10 +17,18 @@ export class AvailableAlerts extends APIResource {
    * ```
    */
   list(
-    params: AvailableAlertListParams,
+    params?: AvailableAlertListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AvailableAlertListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<AvailableAlertListResponse>;
+  list(
+    params: AvailableAlertListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AvailableAlertListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/alerting/v3/available_alerts`, options) as Core.APIPromise<{
         result: AvailableAlertListResponse;
@@ -59,7 +68,7 @@ export interface AvailableAlertListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AvailableAlerts {

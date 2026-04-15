@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../../pagination';
 
@@ -22,7 +23,7 @@ export class Portals extends APIResource {
    * ```
    */
   create(params: PortalCreateParams, options?: Core.RequestOptions): Core.APIPromise<PortalCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/ai-controls/mcp/portals`, {
         body,
@@ -45,10 +46,19 @@ export class Portals extends APIResource {
    */
   update(
     id: string,
-    params: PortalUpdateParams,
+    params?: PortalUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PortalUpdateResponse>;
+  update(id: string, options?: Core.RequestOptions): Core.APIPromise<PortalUpdateResponse>;
+  update(
+    id: string,
+    params: PortalUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PortalUpdateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update(id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/ai-controls/mcp/portals/${id}`, {
         body,
@@ -71,10 +81,20 @@ export class Portals extends APIResource {
    * ```
    */
   list(
-    params: PortalListParams,
+    params?: PortalListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PortalListResponsesV4PagePaginationArray, PortalListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PortalListResponsesV4PagePaginationArray, PortalListResponse>;
+  list(
+    params: PortalListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PortalListResponsesV4PagePaginationArray, PortalListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/ai-controls/mcp/portals`,
       PortalListResponsesV4PagePaginationArray,
@@ -96,10 +116,19 @@ export class Portals extends APIResource {
    */
   delete(
     id: string,
-    params: PortalDeleteParams,
+    params?: PortalDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PortalDeleteResponse>;
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<PortalDeleteResponse>;
+  delete(
+    id: string,
+    params: PortalDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PortalDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/access/ai-controls/mcp/portals/${id}`,
@@ -122,10 +151,19 @@ export class Portals extends APIResource {
    */
   read(
     id: string,
-    params: PortalReadParams,
+    params?: PortalReadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PortalReadResponse>;
+  read(id: string, options?: Core.RequestOptions): Core.APIPromise<PortalReadResponse>;
+  read(
+    id: string,
+    params: PortalReadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PortalReadResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.read(id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/ai-controls/mcp/portals/${id}`,
@@ -588,7 +626,7 @@ export interface PortalCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: portal id
@@ -669,7 +707,7 @@ export interface PortalUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Allow remote code execution in Dynamic Workers (beta)
@@ -745,7 +783,7 @@ export interface PortalListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id, name, hostname
@@ -754,11 +792,11 @@ export interface PortalListParams extends V4PagePaginationArrayParams {
 }
 
 export interface PortalDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PortalReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Portals.PortalListResponsesV4PagePaginationArray = PortalListResponsesV4PagePaginationArray;

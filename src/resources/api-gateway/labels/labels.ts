@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ManagedAPI from './managed/managed';
 import { Managed, ManagedGetParams, ManagedGetResponse } from './managed/managed';
@@ -42,10 +43,20 @@ export class Labels extends APIResource {
    * ```
    */
   list(
-    params: LabelListParams,
+    params?: LabelListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LabelListResponsesV4PagePaginationArray, LabelListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LabelListResponsesV4PagePaginationArray, LabelListResponse>;
+  list(
+    params: LabelListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LabelListResponsesV4PagePaginationArray, LabelListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/labels`,
       LabelListResponsesV4PagePaginationArray,
@@ -92,7 +103,7 @@ export interface LabelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Direction to order results.

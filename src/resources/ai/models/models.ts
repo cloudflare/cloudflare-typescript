@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as SchemaAPI from './schema';
 import { Schema, SchemaGetParams, SchemaGetResponse } from './schema';
@@ -13,10 +14,20 @@ export class Models extends APIResource {
    * Searches Workers AI models by name or description.
    */
   list(
-    params: ModelListParams,
+    params?: ModelListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ModelListResponsesV4PagePaginationArray, ModelListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ModelListResponsesV4PagePaginationArray, ModelListResponse>;
+  list(
+    params: ModelListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ModelListResponsesV4PagePaginationArray, ModelListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/models/search`,
       ModelListResponsesV4PagePaginationArray,
@@ -33,7 +44,7 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by Author

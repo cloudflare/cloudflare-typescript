@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as IPsAPI from './ips';
 import { IPGetParams, IPs } from './ips';
@@ -27,7 +28,7 @@ export class Routes extends APIResource {
    * ```
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/routes`, { body, ...options }) as Core.APIPromise<{
         result: Route;
@@ -49,10 +50,18 @@ export class Routes extends APIResource {
    * ```
    */
   list(
-    params: RouteListParams,
+    params?: RouteListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TeamnetsV4PagePaginationArray, Teamnet>;
+  list(options?: Core.RequestOptions): Core.PagePromise<TeamnetsV4PagePaginationArray, Teamnet>;
+  list(
+    params: RouteListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TeamnetsV4PagePaginationArray, Teamnet> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/teamnet/routes`, TeamnetsV4PagePaginationArray, {
       query,
       ...options,
@@ -70,8 +79,17 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  delete(routeId: string, params: RouteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
-    const { account_id } = params;
+  delete(routeId: string, params?: RouteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Route>;
+  delete(routeId: string, options?: Core.RequestOptions): Core.APIPromise<Route>;
+  delete(
+    routeId: string,
+    params: RouteDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Route> {
+    if (isRequestOptions(params)) {
+      return this.delete(routeId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
         result: Route;
@@ -92,7 +110,7 @@ export class Routes extends APIResource {
    * ```
    */
   edit(routeId: string, params: RouteEditParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/teamnet/routes/${routeId}`, {
         body,
@@ -112,8 +130,17 @@ export class Routes extends APIResource {
    * );
    * ```
    */
-  get(routeId: string, params: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
-    const { account_id } = params;
+  get(routeId: string, params?: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<Route>;
+  get(routeId: string, options?: Core.RequestOptions): Core.APIPromise<Route>;
+  get(
+    routeId: string,
+    params: RouteGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Route> {
+    if (isRequestOptions(params)) {
+      return this.get(routeId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
         result: Route;
@@ -257,7 +284,7 @@ export interface RouteCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The private IPv4 or IPv6 range connected by the route, in CIDR
@@ -285,7 +312,7 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optional remark describing the route.
@@ -339,14 +366,14 @@ export interface RouteDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RouteEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Optional remark describing the route.
@@ -374,7 +401,7 @@ export interface RouteGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Routes.TeamnetsV4PagePaginationArray = TeamnetsV4PagePaginationArray;

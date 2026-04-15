@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as BehavioursAPI from './behaviours';
 import {
@@ -47,10 +48,19 @@ export class RiskScoring extends APIResource {
    */
   get(
     userId: string,
-    params: RiskScoringGetParams,
+    params?: RiskScoringGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RiskScoringGetResponse>;
+  get(userId: string, options?: Core.RequestOptions): Core.APIPromise<RiskScoringGetResponse>;
+  get(
+    userId: string,
+    params: RiskScoringGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RiskScoringGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(userId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options) as Core.APIPromise<{
         result: RiskScoringGetResponse;
@@ -71,10 +81,19 @@ export class RiskScoring extends APIResource {
    */
   reset(
     userId: string,
-    params: RiskScoringResetParams,
+    params?: RiskScoringResetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RiskScoringResetResponse | null>;
+  reset(userId: string, options?: Core.RequestOptions): Core.APIPromise<RiskScoringResetResponse | null>;
+  reset(
+    userId: string,
+    params: RiskScoringResetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RiskScoringResetResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.reset(userId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/zt_risk_scoring/${userId}/reset`,
@@ -113,11 +132,11 @@ export namespace RiskScoringGetResponse {
 export type RiskScoringResetResponse = unknown;
 
 export interface RiskScoringGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RiskScoringResetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 RiskScoring.Behaviours = Behaviours;

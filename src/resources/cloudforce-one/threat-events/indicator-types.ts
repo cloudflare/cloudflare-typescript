@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class IndicatorTypes extends APIResource {
@@ -11,10 +12,18 @@ export class IndicatorTypes extends APIResource {
    * @deprecated
    */
   list(
-    params: IndicatorTypeListParams,
+    params?: IndicatorTypeListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndicatorTypeListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<IndicatorTypeListResponse>;
+  list(
+    params: IndicatorTypeListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndicatorTypeListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/indicatorTypes`, options);
   }
 }
@@ -35,7 +44,7 @@ export interface IndicatorTypeListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace IndicatorTypes {
