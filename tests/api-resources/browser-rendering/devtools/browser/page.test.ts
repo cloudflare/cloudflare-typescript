@@ -9,7 +9,8 @@ const client = new Cloudflare({
 });
 
 describe('resource page', () => {
-  test('get: only required params', async () => {
+  // HTTP 101 error from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.browserRendering.devtools.browser.page.get('target_id', {
       account_id: 'account_id',
       session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -23,7 +24,8 @@ describe('resource page', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // HTTP 101 error from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.browserRendering.devtools.browser.page.get('target_id', {
       account_id: 'account_id',
       session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

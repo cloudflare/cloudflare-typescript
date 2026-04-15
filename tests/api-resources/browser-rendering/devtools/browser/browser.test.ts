@@ -51,7 +51,8 @@ describe('resource browser', () => {
     );
   });
 
-  test('connect: only required params', async () => {
+  // HTTP 101 error from prism
+  test.skip('connect: only required params', async () => {
     const responsePromise = client.browserRendering.devtools.browser.connect(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
@@ -65,7 +66,8 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('connect: required and optional params', async () => {
+  // HTTP 101 error from prism
+  test.skip('connect: required and optional params', async () => {
     const response = await client.browserRendering.devtools.browser.connect(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
@@ -77,7 +79,8 @@ describe('resource browser', () => {
     );
   });
 
-  test('launch: only required params', async () => {
+  // HTTP 101 error from prism
+  test.skip('launch: only required params', async () => {
     const responsePromise = client.browserRendering.devtools.browser.launch({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -88,7 +91,8 @@ describe('resource browser', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('launch: required and optional params', async () => {
+  // HTTP 101 error from prism
+  test.skip('launch: required and optional params', async () => {
     const response = await client.browserRendering.devtools.browser.launch({
       account_id: 'account_id',
       keep_alive: 10000,
