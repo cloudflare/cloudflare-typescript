@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Logos extends APIResource {
@@ -8,7 +9,7 @@ export class Logos extends APIResource {
    * Create a new saved brand protection logo query for visual similarity matching
    */
   create(params: LogoCreateParams, options?: Core.RequestOptions): Core.APIPromise<LogoCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/queries`, {
       body,
       ...options,
@@ -21,10 +22,19 @@ export class Logos extends APIResource {
    */
   delete(
     queryId: string,
-    params: LogoDeleteParams,
+    params?: LogoDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogoDeleteResponse>;
+  delete(queryId: string, options?: Core.RequestOptions): Core.APIPromise<LogoDeleteResponse>;
+  delete(
+    queryId: string,
+    params: LogoDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogoDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(queryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/queries/${queryId}`,
       options,
@@ -36,8 +46,16 @@ export class Logos extends APIResource {
    * id to get a single query. Set download=true to include base64-encoded image
    * data.
    */
-  get(params: LogoGetParams, options?: Core.RequestOptions): Core.APIPromise<LogoGetResponse> {
-    const { account_id, ...query } = params;
+  get(params?: LogoGetParams, options?: Core.RequestOptions): Core.APIPromise<LogoGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<LogoGetResponse>;
+  get(
+    params: LogoGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogoGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/queries`, {
       query,
       ...options,
@@ -89,7 +107,7 @@ export interface LogoCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Base64 encoded image data. Can include data URI prefix (e.g.,
@@ -115,14 +133,14 @@ export interface LogoCreateParams {
 }
 
 export interface LogoDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LogoGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optional query ID to retrieve a specific logo query
