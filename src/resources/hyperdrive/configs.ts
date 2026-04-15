@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as HyperdriveAPI from './hyperdrive';
 import { HyperdrivesSinglePage } from './hyperdrive';
@@ -29,7 +30,7 @@ export class Configs extends APIResource {
     params: ConfigCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/hyperdrive/configs`, {
         body,
@@ -65,7 +66,7 @@ export class Configs extends APIResource {
     params: ConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
@@ -88,10 +89,18 @@ export class Configs extends APIResource {
    * ```
    */
   list(
-    params: ConfigListParams,
+    params?: ConfigListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive>;
+  list(options?: Core.RequestOptions): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive>;
+  list(
+    params: ConfigListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/hyperdrive/configs`,
       HyperdrivesSinglePage,
@@ -112,10 +121,19 @@ export class Configs extends APIResource {
    */
   delete(
     hyperdriveId: string,
-    params: ConfigDeleteParams,
+    params?: ConfigDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigDeleteResponse | null>;
+  delete(hyperdriveId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse | null>;
+  delete(
+    hyperdriveId: string,
+    params: ConfigDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(hyperdriveId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
@@ -141,7 +159,7 @@ export class Configs extends APIResource {
     params: ConfigEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
         body,
@@ -163,10 +181,19 @@ export class Configs extends APIResource {
    */
   get(
     hyperdriveId: string,
-    params: ConfigGetParams,
+    params?: ConfigGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HyperdriveAPI.Hyperdrive>;
+  get(hyperdriveId: string, options?: Core.RequestOptions): Core.APIPromise<HyperdriveAPI.Hyperdrive>;
+  get(
+    hyperdriveId: string,
+    params: ConfigGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(hyperdriveId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
@@ -182,7 +209,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the Hyperdrive configuration. Used to identify the
@@ -378,7 +405,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the Hyperdrive configuration. Used to identify the
@@ -574,21 +601,21 @@ export interface ConfigListParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigDeleteParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -752,7 +779,7 @@ export interface ConfigGetParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Configs {
