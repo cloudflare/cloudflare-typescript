@@ -15,6 +15,7 @@ export { RegistrationStatus, type RegistrationStatusGetParams } from './registra
 export {
   Registrations,
   type RegistrationCreateParams,
+  type RegistrationListParams,
   type RegistrationEditParams,
   type RegistrationGetParams,
 } from './registrations';

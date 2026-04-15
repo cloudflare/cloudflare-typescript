@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as RegistrarAPI from './registrar';
+import { RegistrationsCursorPagination } from './registrar';
 import { APIPromise } from '../../core/api-promise';
+import { CursorPagination, type CursorPaginationParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -83,6 +85,36 @@ export class Registrations extends APIResource {
         headers: buildHeaders([{ ...(Prefer != null ? { Prefer: Prefer } : undefined) }, options?.headers]),
       }) as APIPromise<{ result: RegistrarAPI.WorkflowStatus }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns a paginated list of domain registrations owned by the account.
+   *
+   * This endpoint uses cursor-based pagination. Results are ordered by registration
+   * date by default. To fetch the next page, pass the `cursor` value from the
+   * `result_info` object in the response as the `cursor` query parameter in your
+   * next request. An empty `cursor` string indicates there are no more pages.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const registration of client.registrar.registrations.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    params: RegistrationListParams,
+    options?: RequestOptions,
+  ): PagePromise<RegistrationsCursorPagination, RegistrarAPI.Registration> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/registrar/registrations`,
+      CursorPagination<RegistrarAPI.Registration>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -339,6 +371,24 @@ export namespace RegistrationCreateParams {
   }
 }
 
+export interface RegistrationListParams extends CursorPaginationParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: Sort direction for results. Defaults to ascending order.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Column to sort results by. Defaults to registration date
+   * (`registry_created_at`) when omitted.
+   */
+  sort_by?: 'registry_created_at' | 'registry_expires_at' | 'name';
+}
+
 export interface RegistrationEditParams {
   /**
    * Path param: Identifier
@@ -370,7 +420,10 @@ export interface RegistrationGetParams {
 export declare namespace Registrations {
   export {
     type RegistrationCreateParams as RegistrationCreateParams,
+    type RegistrationListParams as RegistrationListParams,
     type RegistrationEditParams as RegistrationEditParams,
     type RegistrationGetParams as RegistrationGetParams,
   };
 }
+
+export { type RegistrationsCursorPagination };

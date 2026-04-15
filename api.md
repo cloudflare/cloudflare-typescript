@@ -4250,6 +4250,7 @@ Methods:
 Methods:
 
 - <code title="post /accounts/{account_id}/registrar/registrations">client.registrar.registrations.<a href="./src/resources/registrar/registrations.ts">create</a>({ ...params }) -> WorkflowStatus</code>
+- <code title="get /accounts/{account_id}/registrar/registrations">client.registrar.registrations.<a href="./src/resources/registrar/registrations.ts">list</a>({ ...params }) -> RegistrationsCursorPagination</code>
 - <code title="patch /accounts/{account_id}/registrar/registrations/{domain_name}">client.registrar.registrations.<a href="./src/resources/registrar/registrations.ts">edit</a>(domainName, { ...params }) -> WorkflowStatus</code>
 - <code title="get /accounts/{account_id}/registrar/registrations/{domain_name}">client.registrar.registrations.<a href="./src/resources/registrar/registrations.ts">get</a>(domainName, { ...params }) -> Registration</code>
 
