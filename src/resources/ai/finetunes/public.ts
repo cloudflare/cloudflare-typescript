@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -9,10 +10,18 @@ export class Public extends APIResource {
    * Lists publicly available fine-tuned models that can be used with Workers AI.
    */
   list(
-    params: PublicListParams,
+    params?: PublicListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PublicListResponsesSinglePage, PublicListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PublicListResponsesSinglePage, PublicListResponse>;
+  list(
+    params: PublicListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PublicListResponsesSinglePage, PublicListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/finetunes/public`,
       PublicListResponsesSinglePage,
@@ -43,7 +52,7 @@ export interface PublicListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Pagination Limit
