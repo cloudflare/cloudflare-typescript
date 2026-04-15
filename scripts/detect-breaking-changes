@@ -528,6 +528,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/dlp/datasets/versions/entries.test.ts
 	tests/api-resources/zero-trust/dlp/patterns.test.ts
 	tests/api-resources/zero-trust/dlp/payload-logs.test.ts
+	tests/api-resources/zero-trust/dlp/settings.test.ts
 	tests/api-resources/zero-trust/dlp/email/email.test.ts
 	tests/api-resources/zero-trust/dlp/email/account-mapping.test.ts
 	tests/api-resources/zero-trust/dlp/email/rules.test.ts
@@ -589,6 +590,7 @@ TEST_PATHS=(
 	tests/api-resources/vulnerability-scanner/scans.test.ts
 	tests/api-resources/vulnerability-scanner/target-environments.test.ts
 	tests/api-resources/radar/radar.test.ts
+	tests/api-resources/radar/agent-readiness.test.ts
 	tests/api-resources/radar/ai/ai.test.ts
 	tests/api-resources/radar/ai/to-markdown.test.ts
 	tests/api-resources/radar/ai/inference/inference.test.ts
@@ -598,6 +600,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/ai/bots/bots.test.ts
 	tests/api-resources/radar/ai/bots/summary.test.ts
 	tests/api-resources/radar/ai/timeseries-groups.test.ts
+	tests/api-resources/radar/ai/markdown-for-agents.test.ts
 	tests/api-resources/radar/ct/ct.test.ts
 	tests/api-resources/radar/ct/authorities.test.ts
 	tests/api-resources/radar/ct/logs.test.ts
