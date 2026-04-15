@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ItemsAPI from '../rules/lists/items';
 
@@ -29,7 +30,7 @@ export class Environments extends APIResource {
     params: EnvironmentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EnvironmentCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/environments`, { body, ...options }) as Core.APIPromise<{
         result: EnvironmentCreateResponse;
@@ -61,7 +62,7 @@ export class Environments extends APIResource {
     params: EnvironmentUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EnvironmentUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/environments`, { body, ...options }) as Core.APIPromise<{
         result: EnvironmentUpdateResponse;
@@ -80,10 +81,18 @@ export class Environments extends APIResource {
    * ```
    */
   list(
-    params: EnvironmentListParams,
+    params?: EnvironmentListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EnvironmentListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<EnvironmentListResponse>;
+  list(
+    params: EnvironmentListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EnvironmentListResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/environments`, options) as Core.APIPromise<{
         result: EnvironmentListResponse;
@@ -104,10 +113,19 @@ export class Environments extends APIResource {
    */
   delete(
     environmentId: string,
-    params: EnvironmentDeleteParams,
+    params?: EnvironmentDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EnvironmentDeleteResponse>;
+  delete(environmentId: string, options?: Core.RequestOptions): Core.APIPromise<EnvironmentDeleteResponse>;
+  delete(
+    environmentId: string,
+    params: EnvironmentDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EnvironmentDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(environmentId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/environments/${environmentId}`, options) as Core.APIPromise<{
         result: EnvironmentDeleteResponse;
@@ -139,7 +157,7 @@ export class Environments extends APIResource {
     params: EnvironmentEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EnvironmentEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/environments`, { body, ...options }) as Core.APIPromise<{
         result: EnvironmentEditResponse;
@@ -160,10 +178,22 @@ export class Environments extends APIResource {
    */
   rollback(
     environmentId: string,
-    params: EnvironmentRollbackParams,
+    params?: EnvironmentRollbackParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EnvironmentRollbackResponse>;
+  rollback(
+    environmentId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EnvironmentRollbackResponse>;
+  rollback(
+    environmentId: string,
+    params: EnvironmentRollbackParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EnvironmentRollbackResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.rollback(environmentId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.post(
         `/zones/${zone_id}/environments/${environmentId}/rollback`,
@@ -309,7 +339,7 @@ export interface EnvironmentCreateParams {
   /**
    * Path param: Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -339,7 +369,7 @@ export interface EnvironmentUpdateParams {
   /**
    * Path param: Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -369,21 +399,21 @@ export interface EnvironmentListParams {
   /**
    * Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface EnvironmentDeleteParams {
   /**
    * Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface EnvironmentEditParams {
   /**
    * Path param: Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -413,7 +443,7 @@ export interface EnvironmentRollbackParams {
   /**
    * Identifier of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Environments {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -21,10 +22,20 @@ export class CustomNameservers extends APIResource {
    * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/put/) instead.
    */
   update(
-    params: CustomNameserverUpdateParams,
+    params?: CustomNameserverUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomNameserverUpdateResponsesSinglePage, CustomNameserverUpdateResponse>;
+  update(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomNameserverUpdateResponsesSinglePage, CustomNameserverUpdateResponse>;
+  update(
+    params: CustomNameserverUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomNameserverUpdateResponsesSinglePage, CustomNameserverUpdateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/custom_ns`, CustomNameserverUpdateResponsesSinglePage, {
       body,
       method: 'put',
@@ -41,10 +52,18 @@ export class CustomNameservers extends APIResource {
    * @deprecated Use [DNS settings API](https://developers.cloudflare.com/api/resources/dns/subresources/settings/methods/get/) instead.
    */
   get(
-    params: CustomNameserverGetParams,
+    params?: CustomNameserverGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomNameserverGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<CustomNameserverGetResponse>;
+  get(
+    params: CustomNameserverGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.get(`/zones/${zone_id}/custom_ns`, options);
   }
 }
@@ -139,7 +158,7 @@ export interface CustomNameserverUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether zone uses account-level custom nameservers.
@@ -156,7 +175,7 @@ export interface CustomNameserverGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomNameservers.CustomNameserverUpdateResponsesSinglePage = CustomNameserverUpdateResponsesSinglePage;
