@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CredentialsAPI from './credentials';
 import { CredentialCreateParams, CredentialCreateResponse, Credentials } from './credentials';
@@ -35,10 +36,18 @@ export class R2DataCatalog extends APIResource {
    * ```
    */
   list(
-    params: R2DataCatalogListParams,
+    params?: R2DataCatalogListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<R2DataCatalogListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<R2DataCatalogListResponse>;
+  list(
+    params: R2DataCatalogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<R2DataCatalogListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2-catalog`, options) as Core.APIPromise<{
         result: R2DataCatalogListResponse;
@@ -59,10 +68,19 @@ export class R2DataCatalog extends APIResource {
    */
   disable(
     bucketName: string,
-    params: R2DataCatalogDisableParams,
+    params?: R2DataCatalogDisableParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  disable(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  disable(
+    bucketName: string,
+    params: R2DataCatalogDisableParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.disable(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.post(`/accounts/${account_id}/r2-catalog/${bucketName}/disable`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -84,10 +102,19 @@ export class R2DataCatalog extends APIResource {
    */
   enable(
     bucketName: string,
-    params: R2DataCatalogEnableParams,
+    params?: R2DataCatalogEnableParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<R2DataCatalogEnableResponse>;
+  enable(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<R2DataCatalogEnableResponse>;
+  enable(
+    bucketName: string,
+    params: R2DataCatalogEnableParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<R2DataCatalogEnableResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.enable(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/r2-catalog/${bucketName}/enable`,
@@ -110,10 +137,19 @@ export class R2DataCatalog extends APIResource {
    */
   get(
     bucketName: string,
-    params: R2DataCatalogGetParams,
+    params?: R2DataCatalogGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<R2DataCatalogGetResponse>;
+  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<R2DataCatalogGetResponse>;
+  get(
+    bucketName: string,
+    params: R2DataCatalogGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<R2DataCatalogGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2-catalog/${bucketName}`, options) as Core.APIPromise<{
         result: R2DataCatalogGetResponse;
@@ -337,28 +373,28 @@ export interface R2DataCatalogListParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface R2DataCatalogDisableParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface R2DataCatalogEnableParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface R2DataCatalogGetParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 R2DataCatalog.MaintenanceConfigs = MaintenanceConfigs;
