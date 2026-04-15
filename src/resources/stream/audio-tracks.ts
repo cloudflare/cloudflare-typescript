@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class AudioTracks extends APIResource {
@@ -20,10 +21,24 @@ export class AudioTracks extends APIResource {
   delete(
     identifier: string,
     audioIdentifier: string,
-    params: AudioTrackDeleteParams,
+    params?: AudioTrackDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackDeleteResponse>;
+  delete(
+    identifier: string,
+    audioIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackDeleteResponse>;
+  delete(
+    identifier: string,
+    audioIdentifier: string,
+    params: AudioTrackDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AudioTrackDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, audioIdentifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`,
@@ -51,7 +66,7 @@ export class AudioTracks extends APIResource {
     params: AudioTrackCopyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Audio> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
         body,
@@ -80,7 +95,7 @@ export class AudioTracks extends APIResource {
     params: AudioTrackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Audio> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
         body,
@@ -103,10 +118,19 @@ export class AudioTracks extends APIResource {
    */
   get(
     identifier: string,
-    params: AudioTrackGetParams,
+    params?: AudioTrackGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackGetResponse>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<AudioTrackGetResponse>;
+  get(
+    identifier: string,
+    params: AudioTrackGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AudioTrackGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{
         result: AudioTrackGetResponse;
@@ -151,14 +175,14 @@ export interface AudioTrackDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AudioTrackCopyParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A string to uniquely identify the track amongst other audio track
@@ -179,7 +203,7 @@ export interface AudioTrackEditParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Denotes whether the audio track will be played by default in a
@@ -198,7 +222,7 @@ export interface AudioTrackGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AudioTracks {
