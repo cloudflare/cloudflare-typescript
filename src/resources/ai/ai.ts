@@ -15,7 +15,6 @@ import {
   ToMarkdownSupportedResponsesSinglePage,
   ToMarkdownTransformParams,
   ToMarkdownTransformResponse,
-  ToMarkdownTransformResponsesSinglePage,
 } from './to-markdown';
 import * as FinetunesAPI from './finetunes/finetunes';
 import {
@@ -1124,7 +1123,6 @@ AI.Models = Models;
 AI.ModelListResponsesV4PagePaginationArray = ModelListResponsesV4PagePaginationArray;
 AI.ToMarkdown = ToMarkdown;
 AI.ToMarkdownSupportedResponsesSinglePage = ToMarkdownSupportedResponsesSinglePage;
-AI.ToMarkdownTransformResponsesSinglePage = ToMarkdownTransformResponsesSinglePage;
 
 export declare namespace AI {
   export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
@@ -1163,7 +1161,6 @@ export declare namespace AI {
     type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
     ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
-    ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
     type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
     type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };

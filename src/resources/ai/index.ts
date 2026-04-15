@@ -23,7 +23,6 @@ export {
 export { TaskListResponsesSinglePage, Tasks, type TaskListResponse, type TaskListParams } from './tasks';
 export {
   ToMarkdownSupportedResponsesSinglePage,
-  ToMarkdownTransformResponsesSinglePage,
   ToMarkdown,
   type ToMarkdownSupportedResponse,
   type ToMarkdownTransformResponse,

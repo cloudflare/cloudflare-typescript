@@ -35,9 +35,4 @@ export {
   type TimeseriesGroupTimeseriesGroupsParams,
   type TimeseriesGroupUserAgentParams,
 } from './timeseries-groups';
-export {
-  ToMarkdownCreateResponsesSinglePage,
-  ToMarkdown,
-  type ToMarkdownCreateResponse,
-  type ToMarkdownCreateParams,
-} from './to-markdown';
+export { ToMarkdown, type ToMarkdownCreateResponse, type ToMarkdownCreateParams } from './to-markdown';
