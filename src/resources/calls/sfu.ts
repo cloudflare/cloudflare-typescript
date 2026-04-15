@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -16,8 +17,16 @@ export class SFU extends APIResource {
    * });
    * ```
    */
-  create(params: SFUCreateParams, options?: Core.RequestOptions): Core.APIPromise<SFUCreateResponse> {
-    const { account_id, ...body } = params;
+  create(params?: SFUCreateParams, options?: Core.RequestOptions): Core.APIPromise<SFUCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<SFUCreateResponse>;
+  create(
+    params: SFUCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SFUCreateResponse> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/calls/apps`, { body, ...options }) as Core.APIPromise<{
         result: SFUCreateResponse;
@@ -41,7 +50,7 @@ export class SFU extends APIResource {
     params: SFUUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SFUUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/calls/apps/${appId}`, {
         body,
@@ -64,10 +73,18 @@ export class SFU extends APIResource {
    * ```
    */
   list(
-    params: SFUListParams,
+    params?: SFUListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SFUListResponsesSinglePage, SFUListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<SFUListResponsesSinglePage, SFUListResponse>;
+  list(
+    params: SFUListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SFUListResponsesSinglePage, SFUListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, SFUListResponsesSinglePage, options);
   }
 
@@ -84,10 +101,19 @@ export class SFU extends APIResource {
    */
   delete(
     appId: string,
-    params: SFUDeleteParams,
+    params?: SFUDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SFUDeleteResponse>;
+  delete(appId: string, options?: Core.RequestOptions): Core.APIPromise<SFUDeleteResponse>;
+  delete(
+    appId: string,
+    params: SFUDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SFUDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(appId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
         result: SFUDeleteResponse;
@@ -106,8 +132,17 @@ export class SFU extends APIResource {
    * );
    * ```
    */
-  get(appId: string, params: SFUGetParams, options?: Core.RequestOptions): Core.APIPromise<SFUGetResponse> {
-    const { account_id } = params;
+  get(appId: string, params?: SFUGetParams, options?: Core.RequestOptions): Core.APIPromise<SFUGetResponse>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<SFUGetResponse>;
+  get(
+    appId: string,
+    params: SFUGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SFUGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(appId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
         result: SFUGetResponse;
@@ -237,7 +272,7 @@ export interface SFUCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of Calls app, not shown to end users.
@@ -249,7 +284,7 @@ export interface SFUUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of Calls app, not shown to end users.
@@ -261,21 +296,21 @@ export interface SFUListParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SFUDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SFUGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 SFU.SFUListResponsesSinglePage = SFUListResponsesSinglePage;

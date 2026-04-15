@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -15,8 +16,16 @@ export class TURN extends APIResource {
    * });
    * ```
    */
-  create(params: TURNCreateParams, options?: Core.RequestOptions): Core.APIPromise<TURNCreateResponse> {
-    const { account_id, ...body } = params;
+  create(params?: TURNCreateParams, options?: Core.RequestOptions): Core.APIPromise<TURNCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<TURNCreateResponse>;
+  create(
+    params: TURNCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TURNCreateResponse> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/calls/turn_keys`, { body, ...options }) as Core.APIPromise<{
         result: TURNCreateResponse;
@@ -40,7 +49,7 @@ export class TURN extends APIResource {
     params: TURNUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TURNUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/calls/turn_keys/${keyId}`, {
         body,
@@ -63,10 +72,18 @@ export class TURN extends APIResource {
    * ```
    */
   list(
-    params: TURNListParams,
+    params?: TURNListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TURNListResponsesSinglePage, TURNListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<TURNListResponsesSinglePage, TURNListResponse>;
+  list(
+    params: TURNListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TURNListResponsesSinglePage, TURNListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/calls/turn_keys`,
       TURNListResponsesSinglePage,
@@ -87,10 +104,19 @@ export class TURN extends APIResource {
    */
   delete(
     keyId: string,
-    params: TURNDeleteParams,
+    params?: TURNDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TURNDeleteResponse>;
+  delete(keyId: string, options?: Core.RequestOptions): Core.APIPromise<TURNDeleteResponse>;
+  delete(
+    keyId: string,
+    params: TURNDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TURNDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(keyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{
         result: TURNDeleteResponse;
@@ -109,8 +135,17 @@ export class TURN extends APIResource {
    * );
    * ```
    */
-  get(keyId: string, params: TURNGetParams, options?: Core.RequestOptions): Core.APIPromise<TURNGetResponse> {
-    const { account_id } = params;
+  get(keyId: string, params?: TURNGetParams, options?: Core.RequestOptions): Core.APIPromise<TURNGetResponse>;
+  get(keyId: string, options?: Core.RequestOptions): Core.APIPromise<TURNGetResponse>;
+  get(
+    keyId: string,
+    params: TURNGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TURNGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(keyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{
         result: TURNGetResponse;
@@ -240,7 +275,7 @@ export interface TURNCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of a TURN key, not shown to end users.
@@ -252,7 +287,7 @@ export interface TURNUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of a TURN key, not shown to end users.
@@ -264,21 +299,21 @@ export interface TURNListParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TURNDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TURNGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 TURN.TURNListResponsesSinglePage = TURNListResponsesSinglePage;
