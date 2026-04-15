@@ -10,6 +10,11 @@ export {
   type AS112TimeseriesParams,
   type AS112TimeseriesGroupsV2Params,
 } from './as112/index';
+export {
+  AgentReadiness,
+  type AgentReadinessSummaryResponse,
+  type AgentReadinessSummaryParams,
+} from './agent-readiness';
 export { Annotations, type AnnotationListResponse, type AnnotationListParams } from './annotations/index';
 export { Attacks } from './attacks/index';
 export { BGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp/index';

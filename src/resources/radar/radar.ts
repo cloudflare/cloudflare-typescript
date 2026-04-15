@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AgentReadinessAPI from './agent-readiness';
+import {
+  AgentReadiness,
+  AgentReadinessSummaryParams,
+  AgentReadinessSummaryResponse,
+} from './agent-readiness';
 import * as DatasetsAPI from './datasets';
 import {
   DatasetDownloadParams,
@@ -138,6 +144,7 @@ import * as VerifiedBotsAPI from './verified-bots/verified-bots';
 import { VerifiedBots } from './verified-bots/verified-bots';
 
 export class Radar extends APIResource {
+  agentReadiness: AgentReadinessAPI.AgentReadiness = new AgentReadinessAPI.AgentReadiness(this._client);
   ai: AIAPI.AI = new AIAPI.AI(this._client);
   ct: CTAPI.CT = new CTAPI.CT(this._client);
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
@@ -169,6 +176,7 @@ export class Radar extends APIResource {
   );
 }
 
+Radar.AgentReadiness = AgentReadiness;
 Radar.AI = AI;
 Radar.CT = CT;
 Radar.Annotations = Annotations;
@@ -194,6 +202,12 @@ Radar.RobotsTXT = RobotsTXT;
 Radar.LeakedCredentials = LeakedCredentials;
 
 export declare namespace Radar {
+  export {
+    AgentReadiness as AgentReadiness,
+    type AgentReadinessSummaryResponse as AgentReadinessSummaryResponse,
+    type AgentReadinessSummaryParams as AgentReadinessSummaryParams,
+  };
+
   export { AI as AI };
 
   export {

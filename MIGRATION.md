@@ -1323,6 +1323,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.zeroTrust.access.serviceTokens.list()`
 - `client.zeroTrust.access.serviceTokens.delete()`
 - `client.zeroTrust.access.serviceTokens.get()`
+- `client.radar.agentReadiness.summary()`
 - `client.radar.ai.inference.summaryV2()`
 - `client.radar.ai.inference.timeseriesGroupsV2()`
 - `client.radar.ai.inference.summary.model()`
@@ -1337,6 +1338,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.ai.timeseriesGroups.timeseries()`
 - `client.radar.ai.timeseriesGroups.timeseriesGroups()`
 - `client.radar.ai.timeseriesGroups.userAgent()`
+- `client.radar.ai.markdownForAgents.summary()`
+- `client.radar.ai.markdownForAgents.timeseries()`
 - `client.radar.ct.summary()`
 - `client.radar.ct.timeseries()`
 - `client.radar.ct.timeseriesGroups()`
