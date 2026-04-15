@@ -31,7 +31,7 @@ export class Traces extends APIResource {
    * ```
    */
   create(params: TraceCreateParams, options?: Core.RequestOptions): Core.APIPromise<TraceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/request-tracer/trace`, {
         body,
@@ -111,7 +111,7 @@ export interface TraceCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: HTTP Method of tracing request
