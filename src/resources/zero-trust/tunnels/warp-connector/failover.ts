@@ -26,7 +26,7 @@ export class Failover extends APIResource {
     params: FailoverUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FailoverUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/warp_connector/${tunnelId}/failover`, {
         body,
@@ -42,7 +42,7 @@ export interface FailoverUpdateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: UUID of the Cloudflare Tunnel connector.

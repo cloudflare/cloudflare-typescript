@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from '../profiles/custom';
 import { SinglePage } from '../../../../pagination';
@@ -24,7 +25,7 @@ export class Predefined extends APIResource {
     params: PredefinedCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries/predefined`, {
         body,
@@ -50,7 +51,7 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/predefined/${entryId}`, {
         body,
@@ -73,10 +74,20 @@ export class Predefined extends APIResource {
    * ```
    */
   list(
-    params: PredefinedListParams,
+    params?: PredefinedListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse>;
+  list(
+    params: PredefinedListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       PredefinedListResponsesSinglePage,
@@ -99,10 +110,19 @@ export class Predefined extends APIResource {
    */
   delete(
     entryId: string,
-    params: PredefinedDeleteParams,
+    params?: PredefinedDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PredefinedDeleteResponse | null>;
+  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedDeleteResponse | null>;
+  delete(
+    entryId: string,
+    params: PredefinedDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/entries/predefined/${entryId}`,
@@ -125,10 +145,19 @@ export class Predefined extends APIResource {
    */
   get(
     entryId: string,
-    params: PredefinedGetParams,
+    params?: PredefinedGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PredefinedGetResponse>;
+  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedGetResponse>;
+  get(
+    entryId: string,
+    params: PredefinedGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: PredefinedGetResponse;
@@ -621,7 +650,7 @@ export interface PredefinedCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -644,7 +673,7 @@ export interface PredefinedUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -653,15 +682,15 @@ export interface PredefinedUpdateParams {
 }
 
 export interface PredefinedListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Predefined.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;

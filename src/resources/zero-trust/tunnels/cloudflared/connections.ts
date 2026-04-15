@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage } from '../../../../pagination';
 
@@ -22,10 +23,19 @@ export class Connections extends APIResource {
    */
   delete(
     tunnelId: string,
-    params: ConnectionDeleteParams,
+    params?: ConnectionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectionDeleteResponse | null>;
+  delete(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<ConnectionDeleteResponse | null>;
+  delete(
+    tunnelId: string,
+    params: ConnectionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectionDeleteResponse | null> {
-    const { account_id, client_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId, client_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`, {
         query: { client_id },
@@ -50,10 +60,19 @@ export class Connections extends APIResource {
    */
   get(
     tunnelId: string,
-    params: ConnectionGetParams,
+    params?: ConnectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ClientsSinglePage, Client>;
+  get(tunnelId: string, options?: Core.RequestOptions): Core.PagePromise<ClientsSinglePage, Client>;
+  get(
+    tunnelId: string,
+    params: ConnectionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ClientsSinglePage, Client> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
       ClientsSinglePage,
@@ -159,7 +178,7 @@ export interface ConnectionDeleteParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: UUID of the Cloudflare Tunnel connector.
@@ -171,7 +190,7 @@ export interface ConnectionGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Connections.ClientsSinglePage = ClientsSinglePage;

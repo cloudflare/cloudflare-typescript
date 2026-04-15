@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SippyAPI from '../../buckets/sippy';
 import * as LogsAPI from './logs';
@@ -21,8 +22,16 @@ export class Jobs extends APIResource {
    * });
    * ```
    */
-  create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse> {
-    const { account_id, ...body } = params;
+  create(params?: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse>;
+  create(
+    params: JobCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobCreateResponse> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/slurper/jobs`, { body, ...options }) as Core.APIPromise<{
         result: JobCreateResponse;
@@ -44,10 +53,18 @@ export class Jobs extends APIResource {
    * ```
    */
   list(
-    params: JobListParams,
+    params?: JobListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<JobListResponsesSinglePage, JobListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<JobListResponsesSinglePage, JobListResponse>;
+  list(
+    params: JobListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<JobListResponsesSinglePage, JobListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/slurper/jobs`, JobListResponsesSinglePage, {
       query,
       ...options,
@@ -68,10 +85,19 @@ export class Jobs extends APIResource {
    */
   abort(
     jobId: string,
-    params: JobAbortParams,
+    params?: JobAbortParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobAbortResponse>;
+  abort(jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobAbortResponse>;
+  abort(
+    jobId: string,
+    params: JobAbortParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobAbortResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.abort(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/jobs/${jobId}/abort`, options) as Core.APIPromise<{
         result: JobAbortResponse;
@@ -91,8 +117,16 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  abortAll(params: JobAbortAllParams, options?: Core.RequestOptions): Core.APIPromise<JobAbortAllResponse> {
-    const { account_id } = params;
+  abortAll(params?: JobAbortAllParams, options?: Core.RequestOptions): Core.APIPromise<JobAbortAllResponse>;
+  abortAll(options?: Core.RequestOptions): Core.APIPromise<JobAbortAllResponse>;
+  abortAll(
+    params: JobAbortAllParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobAbortAllResponse> {
+    if (isRequestOptions(params)) {
+      return this.abortAll({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/jobs/abortAll`, options) as Core.APIPromise<{
         result: JobAbortAllResponse;
@@ -112,8 +146,17 @@ export class Jobs extends APIResource {
    * );
    * ```
    */
-  get(jobId: string, params: JobGetParams, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse> {
-    const { account_id } = params;
+  get(jobId: string, params?: JobGetParams, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse>;
+  get(jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse>;
+  get(
+    jobId: string,
+    params: JobGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/slurper/jobs/${jobId}`, options) as Core.APIPromise<{
         result: JobGetResponse;
@@ -135,10 +178,19 @@ export class Jobs extends APIResource {
    */
   pause(
     jobId: string,
-    params: JobPauseParams,
+    params?: JobPauseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobPauseResponse>;
+  pause(jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobPauseResponse>;
+  pause(
+    jobId: string,
+    params: JobPauseParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobPauseResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.pause(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/jobs/${jobId}/pause`, options) as Core.APIPromise<{
         result: JobPauseResponse;
@@ -159,10 +211,19 @@ export class Jobs extends APIResource {
    */
   progress(
     jobId: string,
-    params: JobProgressParams,
+    params?: JobProgressParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobProgressResponse>;
+  progress(jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobProgressResponse>;
+  progress(
+    jobId: string,
+    params: JobProgressParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobProgressResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.progress(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/slurper/jobs/${jobId}/progress`, options) as Core.APIPromise<{
         result: JobProgressResponse;
@@ -184,10 +245,19 @@ export class Jobs extends APIResource {
    */
   resume(
     jobId: string,
-    params: JobResumeParams,
+    params?: JobResumeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobResumeResponse>;
+  resume(jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobResumeResponse>;
+  resume(
+    jobId: string,
+    params: JobResumeParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobResumeResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.resume(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/jobs/${jobId}/resume`, options) as Core.APIPromise<{
         result: JobResumeResponse;
@@ -356,7 +426,7 @@ export interface JobCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -467,7 +537,7 @@ export interface JobListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -481,27 +551,27 @@ export interface JobListParams {
 }
 
 export interface JobAbortParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobAbortAllParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobPauseParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobProgressParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface JobResumeParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Jobs.JobListResponsesSinglePage = JobListResponsesSinglePage;

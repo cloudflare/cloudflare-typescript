@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as Shared from '../../../shared';
 import { CloudflareTunnelsV4PagePaginationArray } from '../../../shared';
@@ -52,7 +53,7 @@ export class Cloudflared extends APIResource {
     params: CloudflaredCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.CloudflareTunnel> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cfd_tunnel`, { body, ...options }) as Core.APIPromise<{
         result: Shared.CloudflareTunnel;
@@ -74,10 +75,20 @@ export class Cloudflared extends APIResource {
    * ```
    */
   list(
-    params: CloudflaredListParams,
+    params?: CloudflaredListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CloudflareTunnelsV4PagePaginationArray, Shared.CloudflareTunnel>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CloudflareTunnelsV4PagePaginationArray, Shared.CloudflareTunnel>;
+  list(
+    params: CloudflaredListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CloudflareTunnelsV4PagePaginationArray, Shared.CloudflareTunnel> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cfd_tunnel`,
       CloudflareTunnelsV4PagePaginationArray,
@@ -99,10 +110,19 @@ export class Cloudflared extends APIResource {
    */
   delete(
     tunnelId: string,
-    params: CloudflaredDeleteParams,
+    params?: CloudflaredDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.CloudflareTunnel>;
+  delete(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.CloudflareTunnel>;
+  delete(
+    tunnelId: string,
+    params: CloudflaredDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.CloudflareTunnel> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{
         result: Shared.CloudflareTunnel;
@@ -127,7 +147,7 @@ export class Cloudflared extends APIResource {
     params: CloudflaredEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.CloudflareTunnel> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, {
         body,
@@ -150,10 +170,19 @@ export class Cloudflared extends APIResource {
    */
   get(
     tunnelId: string,
-    params: CloudflaredGetParams,
+    params?: CloudflaredGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.CloudflareTunnel>;
+  get(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.CloudflareTunnel>;
+  get(
+    tunnelId: string,
+    params: CloudflaredGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.CloudflareTunnel> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{
         result: Shared.CloudflareTunnel;
@@ -166,7 +195,7 @@ export interface CloudflaredCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -191,7 +220,7 @@ export interface CloudflaredListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -249,14 +278,14 @@ export interface CloudflaredDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CloudflaredEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -274,7 +303,7 @@ export interface CloudflaredGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Cloudflared.Configurations = Configurations;

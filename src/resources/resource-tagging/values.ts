@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../pagination';
 
@@ -11,10 +12,22 @@ export class Values extends APIResource {
    */
   list(
     tagKey: string,
-    params: ValueListParams,
+    params?: ValueListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ValueListResponsesCursorPaginationAfter, ValueListResponse>;
+  list(
+    tagKey: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ValueListResponsesCursorPaginationAfter, ValueListResponse>;
+  list(
+    tagKey: string,
+    params: ValueListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ValueListResponsesCursorPaginationAfter, ValueListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(tagKey, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/tags/values/${tagKey}`,
       ValueListResponsesCursorPaginationAfter,
@@ -31,7 +44,7 @@ export interface ValueListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by resource type.

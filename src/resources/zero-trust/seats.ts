@@ -27,7 +27,7 @@ export class Seats extends APIResource {
    * ```
    */
   edit(params: SeatEditParams, options?: Core.RequestOptions): Core.PagePromise<SeatsSinglePage, Seat> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/access/seats`, SeatsSinglePage, {
       body: body,
       method: 'patch',
@@ -63,7 +63,7 @@ export interface SeatEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

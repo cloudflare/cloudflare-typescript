@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -17,7 +18,7 @@ export class Streams extends APIResource {
    * ```
    */
   create(params: StreamCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pipelines/v1/streams`, {
         body,
@@ -39,10 +40,19 @@ export class Streams extends APIResource {
    */
   update(
     streamId: string,
-    params: StreamUpdateParams,
+    params?: StreamUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<StreamUpdateResponse>;
+  update(streamId: string, options?: Core.RequestOptions): Core.APIPromise<StreamUpdateResponse>;
+  update(
+    streamId: string,
+    params: StreamUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<StreamUpdateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update(streamId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/pipelines/v1/streams/${streamId}`, {
         body,
@@ -65,10 +75,20 @@ export class Streams extends APIResource {
    * ```
    */
   list(
-    params: StreamListParams,
+    params?: StreamListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<StreamListResponsesV4PagePaginationArray, StreamListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<StreamListResponsesV4PagePaginationArray, StreamListResponse>;
+  list(
+    params: StreamListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<StreamListResponsesV4PagePaginationArray, StreamListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pipelines/v1/streams`,
       StreamListResponsesV4PagePaginationArray,
@@ -89,10 +109,19 @@ export class Streams extends APIResource {
    */
   delete(
     streamId: string,
-    params: StreamDeleteParams,
+    params?: StreamDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<StreamDeleteResponse>;
+  delete(streamId: string, options?: Core.RequestOptions): Core.APIPromise<StreamDeleteResponse>;
+  delete(
+    streamId: string,
+    params: StreamDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<StreamDeleteResponse> {
-    const { account_id, force } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(streamId, {}, params);
+    }
+    const { account_id = this._client.accountId, force } = params;
     return (
       this._client.delete(`/accounts/${account_id}/pipelines/v1/streams/${streamId}`, {
         query: { force },
@@ -114,10 +143,19 @@ export class Streams extends APIResource {
    */
   get(
     streamId: string,
-    params: StreamGetParams,
+    params?: StreamGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<StreamGetResponse>;
+  get(streamId: string, options?: Core.RequestOptions): Core.APIPromise<StreamGetResponse>;
+  get(
+    streamId: string,
+    params: StreamGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<StreamGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(streamId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pipelines/v1/streams/${streamId}`,
@@ -943,7 +981,7 @@ export interface StreamCreateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specifies the name of the Stream.
@@ -1182,7 +1220,7 @@ export interface StreamUpdateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1234,7 +1272,7 @@ export interface StreamListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Specifies the public ID of the pipeline.
@@ -1246,7 +1284,7 @@ export interface StreamDeleteParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Delete stream forcefully, including deleting any dependent
@@ -1259,7 +1297,7 @@ export interface StreamGetParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Streams.StreamListResponsesV4PagePaginationArray = StreamListResponsesV4PagePaginationArray;

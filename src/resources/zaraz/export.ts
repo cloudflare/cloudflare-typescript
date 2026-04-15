@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ConfigAPI from './config';
 
@@ -16,8 +17,16 @@ export class Export extends APIResource {
    * });
    * ```
    */
-  get(params: ExportGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration> {
-    const { zone_id } = params;
+  get(params?: ExportGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration>;
+  get(options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration>;
+  get(
+    params: ExportGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigAPI.Configuration> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.get(`/zones/${zone_id}/settings/zaraz/export`, options);
   }
 }
@@ -26,7 +35,7 @@ export interface ExportGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Export {

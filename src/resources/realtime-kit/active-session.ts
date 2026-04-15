@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ActiveSession extends APIResource {
@@ -27,7 +28,7 @@ export class ActiveSession extends APIResource {
     params: ActiveSessionCreatePollParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActiveSessionCreatePollResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/active-session/poll`,
       { body, ...options },
@@ -50,10 +51,24 @@ export class ActiveSession extends APIResource {
   getActiveSession(
     appId: string,
     meetingId: string,
-    params: ActiveSessionGetActiveSessionParams,
+    params?: ActiveSessionGetActiveSessionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionGetActiveSessionResponse>;
+  getActiveSession(
+    appId: string,
+    meetingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionGetActiveSessionResponse>;
+  getActiveSession(
+    appId: string,
+    meetingId: string,
+    params: ActiveSessionGetActiveSessionParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActiveSessionGetActiveSessionResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getActiveSession(appId, meetingId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/active-session`,
       options,
@@ -76,10 +91,24 @@ export class ActiveSession extends APIResource {
   kickAllParticipants(
     appId: string,
     meetingId: string,
-    params: ActiveSessionKickAllParticipantsParams,
+    params?: ActiveSessionKickAllParticipantsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionKickAllParticipantsResponse>;
+  kickAllParticipants(
+    appId: string,
+    meetingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ActiveSessionKickAllParticipantsResponse>;
+  kickAllParticipants(
+    appId: string,
+    meetingId: string,
+    params: ActiveSessionKickAllParticipantsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActiveSessionKickAllParticipantsResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.kickAllParticipants(appId, meetingId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.post(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/active-session/kick-all`,
       options,
@@ -110,7 +139,7 @@ export class ActiveSession extends APIResource {
     params: ActiveSessionKickParticipantsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActiveSessionKickParticipantsResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/active-session/kick`,
       { body, ...options },
@@ -324,7 +353,7 @@ export interface ActiveSessionCreatePollParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Different options for the question
@@ -351,21 +380,21 @@ export interface ActiveSessionGetActiveSessionParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ActiveSessionKickAllParticipantsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ActiveSessionKickParticipantsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

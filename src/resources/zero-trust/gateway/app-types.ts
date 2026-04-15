@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -19,10 +20,18 @@ export class AppTypes extends APIResource {
    * ```
    */
   list(
-    params: AppTypeListParams,
+    params?: AppTypeListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AppTypesSinglePage, AppType>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AppTypesSinglePage, AppType>;
+  list(
+    params: AppTypeListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AppTypesSinglePage, AppType> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/gateway/app_types`, AppTypesSinglePage, options);
   }
 }
@@ -77,7 +86,7 @@ export interface AppTypeListParams {
   /**
    * Provide the identifier string.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 AppTypes.AppTypesSinglePage = AppTypesSinglePage;

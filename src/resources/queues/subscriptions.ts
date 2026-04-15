@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -17,10 +18,18 @@ export class Subscriptions extends APIResource {
    * ```
    */
   create(
-    params: SubscriptionCreateParams,
+    params?: SubscriptionCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<SubscriptionCreateResponse>;
+  create(
+    params: SubscriptionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/event_subscriptions/subscriptions`, {
         body,
@@ -46,7 +55,7 @@ export class Subscriptions extends APIResource {
     params: SubscriptionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionId}`, {
         body,
@@ -69,10 +78,20 @@ export class Subscriptions extends APIResource {
    * ```
    */
   list(
-    params: SubscriptionListParams,
+    params?: SubscriptionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SubscriptionListResponsesV4PagePaginationArray, SubscriptionListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SubscriptionListResponsesV4PagePaginationArray, SubscriptionListResponse>;
+  list(
+    params: SubscriptionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubscriptionListResponsesV4PagePaginationArray, SubscriptionListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/event_subscriptions/subscriptions`,
       SubscriptionListResponsesV4PagePaginationArray,
@@ -94,10 +113,19 @@ export class Subscriptions extends APIResource {
    */
   delete(
     subscriptionId: string,
-    params: SubscriptionDeleteParams,
+    params?: SubscriptionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionDeleteResponse>;
+  delete(subscriptionId: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionDeleteResponse>;
+  delete(
+    subscriptionId: string,
+    params: SubscriptionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(subscriptionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionId}`,
@@ -119,10 +147,19 @@ export class Subscriptions extends APIResource {
    */
   get(
     subscriptionId: string,
-    params: SubscriptionGetParams,
+    params?: SubscriptionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionGetResponse>;
+  get(subscriptionId: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse>;
+  get(
+    subscriptionId: string,
+    params: SubscriptionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(subscriptionId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/event_subscriptions/subscriptions/${subscriptionId}`,
@@ -828,7 +865,7 @@ export interface SubscriptionCreateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Destination configuration for the subscription
@@ -956,7 +993,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Destination configuration for the subscription
@@ -1000,7 +1037,7 @@ export interface SubscriptionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Sort direction
@@ -1017,14 +1054,14 @@ export interface SubscriptionDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SubscriptionGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Subscriptions.SubscriptionListResponsesV4PagePaginationArray = SubscriptionListResponsesV4PagePaginationArray;

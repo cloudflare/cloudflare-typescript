@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Limits extends APIResource {
@@ -16,8 +17,16 @@ export class Limits extends APIResource {
    * });
    * ```
    */
-  list(params: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<LimitListResponse> {
-    const { account_id } = params;
+  list(params?: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<LimitListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<LimitListResponse>;
+  list(
+    params: LimitListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LimitListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/limits`, options) as Core.APIPromise<{
         result: LimitListResponse;
@@ -61,7 +70,7 @@ export interface LimitListResponse {
 }
 
 export interface LimitListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Limits {

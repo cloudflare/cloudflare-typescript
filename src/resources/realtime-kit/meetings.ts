@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Meetings extends APIResource {
@@ -20,7 +21,7 @@ export class Meetings extends APIResource {
     params: MeetingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/meetings`, { body, ...options });
   }
 
@@ -47,7 +48,7 @@ export class Meetings extends APIResource {
     params: MeetingAddParticipantParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingAddParticipantResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/participants`,
       { body, ...options },
@@ -72,10 +73,26 @@ export class Meetings extends APIResource {
     appId: string,
     meetingId: string,
     participantId: string,
-    params: MeetingDeleteMeetingParticipantParams,
+    params?: MeetingDeleteMeetingParticipantParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingDeleteMeetingParticipantResponse>;
+  deleteMeetingParticipant(
+    appId: string,
+    meetingId: string,
+    participantId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingDeleteMeetingParticipantResponse>;
+  deleteMeetingParticipant(
+    appId: string,
+    meetingId: string,
+    participantId: string,
+    params: MeetingDeleteMeetingParticipantParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingDeleteMeetingParticipantResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.deleteMeetingParticipant(appId, meetingId, participantId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/participants/${participantId}`,
       options,
@@ -103,7 +120,7 @@ export class Meetings extends APIResource {
     params: MeetingEditParticipantParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingEditParticipantResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/participants/${participantId}`,
       { body, ...options },
@@ -123,10 +140,19 @@ export class Meetings extends APIResource {
    */
   get(
     appId: string,
-    params: MeetingGetParams,
+    params?: MeetingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetResponse>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<MeetingGetResponse>;
+  get(
+    appId: string,
+    params: MeetingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(appId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/meetings`, { query, ...options });
   }
 
@@ -146,10 +172,24 @@ export class Meetings extends APIResource {
   getMeetingById(
     appId: string,
     meetingId: string,
-    params: MeetingGetMeetingByIDParams,
+    params?: MeetingGetMeetingByIDParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetMeetingByIDResponse>;
+  getMeetingById(
+    appId: string,
+    meetingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetMeetingByIDResponse>;
+  getMeetingById(
+    appId: string,
+    meetingId: string,
+    params: MeetingGetMeetingByIDParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingGetMeetingByIDResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getMeetingById(appId, meetingId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}`, {
       query,
       ...options,
@@ -174,10 +214,26 @@ export class Meetings extends APIResource {
     appId: string,
     meetingId: string,
     participantId: string,
-    params: MeetingGetMeetingParticipantParams,
+    params?: MeetingGetMeetingParticipantParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetMeetingParticipantResponse>;
+  getMeetingParticipant(
+    appId: string,
+    meetingId: string,
+    participantId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetMeetingParticipantResponse>;
+  getMeetingParticipant(
+    appId: string,
+    meetingId: string,
+    participantId: string,
+    params: MeetingGetMeetingParticipantParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingGetMeetingParticipantResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.getMeetingParticipant(appId, meetingId, participantId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/participants/${participantId}`,
       options,
@@ -200,10 +256,24 @@ export class Meetings extends APIResource {
   getMeetingParticipants(
     appId: string,
     meetingId: string,
-    params: MeetingGetMeetingParticipantsParams,
+    params?: MeetingGetMeetingParticipantsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetMeetingParticipantsResponse>;
+  getMeetingParticipants(
+    appId: string,
+    meetingId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingGetMeetingParticipantsResponse>;
+  getMeetingParticipants(
+    appId: string,
+    meetingId: string,
+    params: MeetingGetMeetingParticipantsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingGetMeetingParticipantsResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.getMeetingParticipants(appId, meetingId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/participants`,
       { query, ...options },
@@ -229,10 +299,26 @@ export class Meetings extends APIResource {
     appId: string,
     meetingId: string,
     participantId: string,
-    params: MeetingRefreshParticipantTokenParams,
+    params?: MeetingRefreshParticipantTokenParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingRefreshParticipantTokenResponse>;
+  refreshParticipantToken(
+    appId: string,
+    meetingId: string,
+    participantId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MeetingRefreshParticipantTokenResponse>;
+  refreshParticipantToken(
+    appId: string,
+    meetingId: string,
+    participantId: string,
+    params: MeetingRefreshParticipantTokenParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingRefreshParticipantTokenResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.refreshParticipantToken(appId, meetingId, participantId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.post(
       `/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}/participants/${participantId}/token`,
       options,
@@ -258,7 +344,7 @@ export class Meetings extends APIResource {
     params: MeetingReplaceMeetingByIDParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingReplaceMeetingByIDResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.put(`/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}`, {
       body,
       ...options,
@@ -284,7 +370,7 @@ export class Meetings extends APIResource {
     params: MeetingUpdateMeetingByIDParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MeetingUpdateMeetingByIDResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/realtime/kit/${appId}/meetings/${meetingId}`, {
       body,
       ...options,
@@ -2077,7 +2163,7 @@ export interface MeetingCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The AI Config allows you to customize the behavior of meeting
@@ -2407,7 +2493,7 @@ export interface MeetingAddParticipantParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A unique participant ID. You must specify a unique ID for the
@@ -2435,14 +2521,14 @@ export interface MeetingDeleteMeetingParticipantParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MeetingEditParticipantParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: (Optional) Name of the participant.
@@ -2464,7 +2550,7 @@ export interface MeetingGetParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The end time range for which you want to retrieve the meetings. The
@@ -2500,7 +2586,7 @@ export interface MeetingGetMeetingByIDParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -2512,14 +2598,14 @@ export interface MeetingGetMeetingParticipantParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MeetingGetMeetingParticipantsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The page number from which you want your page search results to be
@@ -2537,14 +2623,14 @@ export interface MeetingRefreshParticipantTokenParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MeetingReplaceMeetingByIDParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The AI Config allows you to customize the behavior of meeting
@@ -2874,7 +2960,7 @@ export interface MeetingUpdateMeetingByIDParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The AI Config allows you to customize the behavior of meeting

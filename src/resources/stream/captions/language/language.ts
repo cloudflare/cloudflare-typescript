@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CaptionsAPI from '../captions';
 import * as VttAPI from './vtt';
@@ -25,10 +26,24 @@ export class Language extends APIResource {
   create(
     identifier: string,
     language: string,
-    params: LanguageCreateParams,
+    params?: LanguageCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionsAPI.Caption>;
+  create(
+    identifier: string,
+    language: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionsAPI.Caption>;
+  create(
+    identifier: string,
+    language: string,
+    params: LanguageCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionsAPI.Caption> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.create(identifier, language, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}/generate`,
@@ -60,7 +75,7 @@ export class Language extends APIResource {
     params: LanguageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionsAPI.Caption> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
@@ -85,10 +100,24 @@ export class Language extends APIResource {
   delete(
     identifier: string,
     language: string,
-    params: LanguageDeleteParams,
+    params?: LanguageDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LanguageDeleteResponse>;
+  delete(
+    identifier: string,
+    language: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LanguageDeleteResponse>;
+  delete(
+    identifier: string,
+    language: string,
+    params: LanguageDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanguageDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, language, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
@@ -112,10 +141,24 @@ export class Language extends APIResource {
   get(
     identifier: string,
     language: string,
-    params: LanguageGetParams,
+    params?: LanguageGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionsAPI.Caption>;
+  get(
+    identifier: string,
+    language: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionsAPI.Caption>;
+  get(
+    identifier: string,
+    language: string,
+    params: LanguageGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptionsAPI.Caption> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(identifier, language, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
@@ -131,14 +174,14 @@ export interface LanguageCreateParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LanguageUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The WebVTT file containing the caption or subtitle content.
@@ -150,14 +193,14 @@ export interface LanguageDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LanguageGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Language.Vtt = Vtt;

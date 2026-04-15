@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -18,10 +19,22 @@ export class OverrideCodes extends APIResource {
    */
   list(
     deviceId: string,
-    params: OverrideCodeListParams,
+    params?: OverrideCodeListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OverrideCodeListResponsesSinglePage, OverrideCodeListResponse>;
+  list(
+    deviceId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OverrideCodeListResponsesSinglePage, OverrideCodeListResponse>;
+  list(
+    deviceId: string,
+    params: OverrideCodeListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<OverrideCodeListResponsesSinglePage, OverrideCodeListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(deviceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/${deviceId}/override_codes`,
       OverrideCodeListResponsesSinglePage,
@@ -44,10 +57,19 @@ export class OverrideCodes extends APIResource {
    */
   get(
     registrationId: string,
-    params: OverrideCodeGetParams,
+    params?: OverrideCodeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OverrideCodeGetResponse>;
+  get(registrationId: string, options?: Core.RequestOptions): Core.APIPromise<OverrideCodeGetResponse>;
+  get(
+    registrationId: string,
+    params: OverrideCodeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OverrideCodeGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(registrationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/registrations/${registrationId}/override_codes`,
@@ -66,11 +88,11 @@ export interface OverrideCodeGetResponse {
 }
 
 export interface OverrideCodeListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OverrideCodeGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 OverrideCodes.OverrideCodeListResponsesSinglePage = OverrideCodeListResponsesSinglePage;

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -22,7 +23,7 @@ export class CustomTrustStore extends APIResource {
     params: CustomTrustStoreCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomTrustStore> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/acm/custom_trust_store`, { body, ...options }) as Core.APIPromise<{
         result: CustomTrustStore;
@@ -44,10 +45,20 @@ export class CustomTrustStore extends APIResource {
    * ```
    */
   list(
-    params: CustomTrustStoreListParams,
+    params?: CustomTrustStoreListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomTrustStoresV4PagePaginationArray, CustomTrustStore>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomTrustStoresV4PagePaginationArray, CustomTrustStore>;
+  list(
+    params: CustomTrustStoreListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomTrustStoresV4PagePaginationArray, CustomTrustStore> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/acm/custom_trust_store`,
       CustomTrustStoresV4PagePaginationArray,
@@ -70,10 +81,22 @@ export class CustomTrustStore extends APIResource {
    */
   delete(
     customOriginTrustStoreId: string,
-    params: CustomTrustStoreDeleteParams,
+    params?: CustomTrustStoreDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomTrustStoreDeleteResponse>;
+  delete(
+    customOriginTrustStoreId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomTrustStoreDeleteResponse>;
+  delete(
+    customOriginTrustStoreId: string,
+    params: CustomTrustStoreDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomTrustStoreDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customOriginTrustStoreId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/acm/custom_trust_store/${customOriginTrustStoreId}`,
@@ -97,10 +120,19 @@ export class CustomTrustStore extends APIResource {
    */
   get(
     customOriginTrustStoreId: string,
-    params: CustomTrustStoreGetParams,
+    params?: CustomTrustStoreGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomTrustStore>;
+  get(customOriginTrustStoreId: string, options?: Core.RequestOptions): Core.APIPromise<CustomTrustStore>;
+  get(
+    customOriginTrustStoreId: string,
+    params: CustomTrustStoreGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomTrustStore> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(customOriginTrustStoreId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/acm/custom_trust_store/${customOriginTrustStoreId}`,
@@ -165,7 +197,7 @@ export interface CustomTrustStoreCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
@@ -177,7 +209,7 @@ export interface CustomTrustStoreListParams extends V4PagePaginationArrayParams 
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Limit to the number of records returned.
@@ -194,14 +226,14 @@ export interface CustomTrustStoreDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomTrustStoreGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomTrustStore.CustomTrustStoresV4PagePaginationArray = CustomTrustStoresV4PagePaginationArray;

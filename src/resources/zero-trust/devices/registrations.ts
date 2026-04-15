@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
 
@@ -19,10 +20,20 @@ export class Registrations extends APIResource {
    * ```
    */
   list(
-    params: RegistrationListParams,
+    params?: RegistrationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RegistrationListResponsesCursorPagination, RegistrationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RegistrationListResponsesCursorPagination, RegistrationListResponse>;
+  list(
+    params: RegistrationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RegistrationListResponsesCursorPagination, RegistrationListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/registrations`,
       RegistrationListResponsesCursorPagination,
@@ -44,10 +55,22 @@ export class Registrations extends APIResource {
    */
   delete(
     registrationId: string,
-    params: RegistrationDeleteParams,
+    params?: RegistrationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegistrationDeleteResponse | null>;
+  delete(
+    registrationId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegistrationDeleteResponse | null>;
+  delete(
+    registrationId: string,
+    params: RegistrationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrationDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(registrationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/registrations/${registrationId}`,
@@ -72,7 +95,7 @@ export class Registrations extends APIResource {
     params: RegistrationBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrationBulkDeleteResponse | null> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountId, id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/devices/registrations`, {
         query: { id },
@@ -95,10 +118,19 @@ export class Registrations extends APIResource {
    */
   get(
     registrationId: string,
-    params: RegistrationGetParams,
+    params?: RegistrationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RegistrationGetResponse>;
+  get(registrationId: string, options?: Core.RequestOptions): Core.APIPromise<RegistrationGetResponse>;
+  get(
+    registrationId: string,
+    params: RegistrationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrationGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(registrationId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/registrations/${registrationId}`, {
         query,
@@ -123,7 +155,7 @@ export class Registrations extends APIResource {
     params: RegistrationRevokeParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrationRevokeResponse | null> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountId, id } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/registrations/revoke`, {
         query: { id },
@@ -148,7 +180,7 @@ export class Registrations extends APIResource {
     params: RegistrationUnrevokeParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrationUnrevokeResponse | null> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountId, id } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/registrations/unrevoke`, {
         query: { id },
@@ -440,7 +472,7 @@ export interface RegistrationListParams extends CursorPaginationParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by registration ID.
@@ -513,14 +545,14 @@ export namespace RegistrationListParams {
 }
 
 export interface RegistrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RegistrationBulkDeleteParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A list of registration IDs to delete.
@@ -532,7 +564,7 @@ export interface RegistrationGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Comma-separated list of additional information that should be
@@ -545,7 +577,7 @@ export interface RegistrationRevokeParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A list of registration IDs to revoke.
@@ -557,7 +589,7 @@ export interface RegistrationUnrevokeParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A list of registration IDs to unrevoke.

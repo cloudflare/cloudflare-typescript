@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -19,10 +20,20 @@ export class Submissions extends APIResource {
    * ```
    */
   list(
-    params: SubmissionListParams,
+    params?: SubmissionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse>;
+  list(
+    params: SubmissionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/submissions`,
       SubmissionListResponsesV4PagePaginationArray,
@@ -122,7 +133,7 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

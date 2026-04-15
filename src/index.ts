@@ -149,6 +149,16 @@ export interface ClientOptions {
   userServiceKey?: string | null | undefined;
 
   /**
+   * Sets an account ID to be used with all account-scoped requests.
+   */
+  accountId?: string | null | undefined;
+
+  /**
+   * Sets a zone ID to be used with all zone-scoped requests.
+   */
+  zoneId?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['CLOUDFLARE_BASE_URL'].
@@ -215,6 +225,8 @@ export class Cloudflare extends Core.APIClient {
   apiKey: string | null;
   apiEmail: string | null;
   userServiceKey: string | null;
+  accountId: string | null;
+  zoneId: string | null;
 
   private _options: ClientOptions;
 
@@ -225,6 +237,8 @@ export class Cloudflare extends Core.APIClient {
    * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.accountId=process.env['CLOUDFLARE_ACCOUNT_ID'] ?? null]
+   * @param {string | null | undefined} [opts.zoneId=process.env['CLOUDFLARE_ZONE_ID'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -239,6 +253,8 @@ export class Cloudflare extends Core.APIClient {
     apiKey = Core.readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = Core.readEnv('CLOUDFLARE_EMAIL') ?? null,
     userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
+    accountId = Core.readEnv('CLOUDFLARE_ACCOUNT_ID') ?? null,
+    zoneId = Core.readEnv('CLOUDFLARE_ZONE_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
@@ -246,6 +262,8 @@ export class Cloudflare extends Core.APIClient {
       apiKey,
       apiEmail,
       userServiceKey,
+      accountId,
+      zoneId,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
     };
@@ -265,6 +283,8 @@ export class Cloudflare extends Core.APIClient {
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
     this.userServiceKey = userServiceKey;
+    this.accountId = accountId;
+    this.zoneId = zoneId;
   }
 
   accounts: API.Accounts = new API.Accounts(this);

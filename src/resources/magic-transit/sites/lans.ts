@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -25,7 +26,7 @@ export class LANs extends APIResource {
     params: LANCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LANsSinglePage, LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/lans`, LANsSinglePage, {
       body,
       method: 'post',
@@ -51,7 +52,7 @@ export class LANs extends APIResource {
     params: LANUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
@@ -76,10 +77,19 @@ export class LANs extends APIResource {
    */
   list(
     siteId: string,
-    params: LANListParams,
+    params?: LANListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LANsSinglePage, LAN>;
+  list(siteId: string, options?: Core.RequestOptions): Core.PagePromise<LANsSinglePage, LAN>;
+  list(
+    siteId: string,
+    params: LANListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LANsSinglePage, LAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(siteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/sites/${siteId}/lans`,
       LANsSinglePage,
@@ -102,10 +112,20 @@ export class LANs extends APIResource {
   delete(
     siteId: string,
     lanId: string,
-    params: LANDeleteParams,
+    params?: LANDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LAN>;
+  delete(siteId: string, lanId: string, options?: Core.RequestOptions): Core.APIPromise<LAN>;
+  delete(
+    siteId: string,
+    lanId: string,
+    params: LANDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(siteId, lanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
@@ -132,7 +152,7 @@ export class LANs extends APIResource {
     params: LANEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
@@ -156,10 +176,20 @@ export class LANs extends APIResource {
   get(
     siteId: string,
     lanId: string,
-    params: LANGetParams,
+    params?: LANGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LAN>;
+  get(siteId: string, lanId: string, options?: Core.RequestOptions): Core.APIPromise<LAN>;
+  get(
+    siteId: string,
+    lanId: string,
+    params: LANGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(siteId, lanId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
@@ -381,7 +411,7 @@ export interface LANCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -442,7 +472,7 @@ export interface LANUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -497,21 +527,21 @@ export interface LANListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LANDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LANEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -566,7 +596,7 @@ export interface LANGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 LANs.LANsSinglePage = LANsSinglePage;

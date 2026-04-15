@@ -24,7 +24,7 @@ export class TemporaryCredentials extends APIResource {
     params: TemporaryCredentialCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TemporaryCredentialCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/temp-access-credentials`, {
         body,
@@ -87,7 +87,7 @@ export interface TemporaryCredentialCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the R2 bucket.

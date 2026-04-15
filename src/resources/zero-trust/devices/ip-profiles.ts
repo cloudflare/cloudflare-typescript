@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -22,7 +23,7 @@ export class IPProfiles extends APIResource {
    * ```
    */
   create(params: IPProfileCreateParams, options?: Core.RequestOptions): Core.APIPromise<IPProfile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/ip-profiles`, {
         body,
@@ -49,7 +50,7 @@ export class IPProfiles extends APIResource {
     params: IPProfileUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPProfile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/ip-profiles/${profileId}`, {
         body,
@@ -72,10 +73,18 @@ export class IPProfiles extends APIResource {
    * ```
    */
   list(
-    params: IPProfileListParams,
+    params?: IPProfileListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IPProfilesSinglePage, IPProfile>;
+  list(options?: Core.RequestOptions): Core.PagePromise<IPProfilesSinglePage, IPProfile>;
+  list(
+    params: IPProfileListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<IPProfilesSinglePage, IPProfile> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/devices/ip-profiles`, IPProfilesSinglePage, {
       query,
       ...options,
@@ -96,10 +105,19 @@ export class IPProfiles extends APIResource {
    */
   delete(
     profileId: string,
-    params: IPProfileDeleteParams,
+    params?: IPProfileDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPProfileDeleteResponse>;
+  delete(profileId: string, options?: Core.RequestOptions): Core.APIPromise<IPProfileDeleteResponse>;
+  delete(
+    profileId: string,
+    params: IPProfileDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPProfileDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(profileId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/ip-profiles/${profileId}`,
@@ -122,10 +140,19 @@ export class IPProfiles extends APIResource {
    */
   get(
     profileId: string,
-    params: IPProfileGetParams,
+    params?: IPProfileGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPProfile>;
+  get(profileId: string, options?: Core.RequestOptions): Core.APIPromise<IPProfile>;
+  get(
+    profileId: string,
+    params: IPProfileGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPProfile> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(profileId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/ip-profiles/${profileId}`,
@@ -199,7 +226,7 @@ export interface IPProfileCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The wirefilter expression to match registrations. Available values:
@@ -240,7 +267,7 @@ export interface IPProfileUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the Device IP profile.
@@ -281,7 +308,7 @@ export interface IPProfileListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The number of IP profiles to return per page.
@@ -290,11 +317,11 @@ export interface IPProfileListParams {
 }
 
 export interface IPProfileDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IPProfileGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 IPProfiles.IPProfilesSinglePage = IPProfilesSinglePage;

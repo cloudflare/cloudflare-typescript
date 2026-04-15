@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
 import * as EmailRoutingAPI from './email-routing';
@@ -17,8 +18,16 @@ export class DNS extends APIResource {
    * });
    * ```
    */
-  create(params: DNSCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    const { zone_id, ...body } = params;
+  create(params?: DNSCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings>;
+  create(options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings>;
+  create(
+    params: DNSCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EmailRoutingAPI.Settings> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as Core.APIPromise<{
         result: EmailRoutingAPI.Settings;
@@ -41,10 +50,18 @@ export class DNS extends APIResource {
    * ```
    */
   delete(
-    params: DNSDeleteParams,
+    params?: DNSDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSRecordsSinglePage, DNSRecord>;
+  delete(options?: Core.RequestOptions): Core.PagePromise<DNSRecordsSinglePage, DNSRecord>;
+  delete(
+    params: DNSDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DNSRecordsSinglePage, DNSRecord> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(`/zones/${zone_id}/email/routing/dns`, DNSRecordsSinglePage, {
       method: 'delete',
       ...options,
@@ -61,8 +78,16 @@ export class DNS extends APIResource {
    * });
    * ```
    */
-  edit(params: DNSEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    const { zone_id, ...body } = params;
+  edit(params?: DNSEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings>;
+  edit(
+    params: DNSEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EmailRoutingAPI.Settings> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as Core.APIPromise<{
         result: EmailRoutingAPI.Settings;
@@ -80,8 +105,16 @@ export class DNS extends APIResource {
    * });
    * ```
    */
-  get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse> {
-    const { zone_id, ...query } = params;
+  get(params?: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse>;
+  get(
+    params: DNSGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.get(`/zones/${zone_id}/email/routing/dns`, { query, ...options });
   }
 }
@@ -317,7 +350,7 @@ export interface DNSCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Domain of your zone.
@@ -329,14 +362,14 @@ export interface DNSDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DNSEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Domain of your zone.
@@ -348,7 +381,7 @@ export interface DNSGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Domain of your zone.

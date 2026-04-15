@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
@@ -17,7 +18,7 @@ export class Filters extends APIResource {
     params: FilterCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersSinglePage, {
       body: body,
       method: 'post',
@@ -35,7 +36,7 @@ export class Filters extends APIResource {
     params: FilterUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallFilter> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/filters/${filterId}`, { body, ...options }) as Core.APIPromise<{
         result: FirewallFilter;
@@ -50,10 +51,18 @@ export class Filters extends APIResource {
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
-    params: FilterListParams,
+    params?: FilterListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
+  list(options?: Core.RequestOptions): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter>;
+  list(
+    params: FilterListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersV4PagePaginationArray, {
       query,
       ...options,
@@ -67,10 +76,19 @@ export class Filters extends APIResource {
    */
   delete(
     filterId: string,
-    params: FilterDeleteParams,
+    params?: FilterDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterDeleteResponse>;
+  delete(filterId: string, options?: Core.RequestOptions): Core.APIPromise<FilterDeleteResponse>;
+  delete(
+    filterId: string,
+    params: FilterDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FilterDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(filterId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/filters/${filterId}`, options) as Core.APIPromise<{
         result: FilterDeleteResponse;
@@ -87,7 +105,7 @@ export class Filters extends APIResource {
     params: FilterBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FilterBulkDeleteResponse | null> {
-    const { zone_id, id } = params;
+    const { zone_id = this._client.zoneId, id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/filters`, { query: { id }, ...options }) as Core.APIPromise<{
         result: FilterBulkDeleteResponse | null;
@@ -104,7 +122,7 @@ export class Filters extends APIResource {
     params: FilterBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/filters`, FirewallFiltersSinglePage, {
       body: body,
       method: 'put',
@@ -119,10 +137,19 @@ export class Filters extends APIResource {
    */
   get(
     filterId: string,
-    params: FilterGetParams,
+    params?: FilterGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FirewallFilter>;
+  get(filterId: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter>;
+  get(
+    filterId: string,
+    params: FilterGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallFilter> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(filterId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/filters/${filterId}`, options) as Core.APIPromise<{
         result: FirewallFilter;
@@ -208,7 +235,7 @@ export interface FilterCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -220,7 +247,7 @@ export interface FilterUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: An informative summary of the filter.
@@ -248,7 +275,7 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The unique identifier of the filter.
@@ -281,14 +308,14 @@ export interface FilterDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface FilterBulkDeleteParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param
@@ -300,7 +327,7 @@ export interface FilterBulkUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -337,7 +364,7 @@ export interface FilterGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Filters.FirewallFiltersSinglePage = FirewallFiltersSinglePage;

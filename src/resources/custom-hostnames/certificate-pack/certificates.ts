@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
 import * as CustomHostnamesAPI from '../custom-hostnames';
@@ -36,7 +37,7 @@ export class Certificates extends APIResource {
     params: CertificateUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(
         `/zones/${zone_id}/custom_hostnames/${customHostnameId}/certificate_pack/${certificatePackId}/certificates/${certificateId}`,
@@ -66,10 +67,26 @@ export class Certificates extends APIResource {
     customHostnameId: string,
     certificatePackId: string,
     certificateId: string,
-    params: CertificateDeleteParams,
+    params?: CertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    certificatePackId: string,
+    certificateId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    certificatePackId: string,
+    certificateId: string,
+    params: CertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customHostnameId, certificatePackId, certificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(
       `/zones/${zone_id}/custom_hostnames/${customHostnameId}/certificate_pack/${certificatePackId}/certificates/${certificateId}`,
       options,
@@ -455,7 +472,7 @@ export interface CertificateUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If a custom uploaded certificate is used.
@@ -472,7 +489,7 @@ export interface CertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Certificates {

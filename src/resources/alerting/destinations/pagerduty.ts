@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -17,10 +18,18 @@ export class PagerdutyResource extends APIResource {
    * ```
    */
   create(
-    params: PagerdutyCreateParams,
+    params?: PagerdutyCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PagerdutyCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<PagerdutyCreateResponse>;
+  create(
+    params: PagerdutyCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PagerdutyCreateResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect`,
@@ -41,10 +50,18 @@ export class PagerdutyResource extends APIResource {
    * ```
    */
   delete(
-    params: PagerdutyDeleteParams,
+    params?: PagerdutyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PagerdutyDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<PagerdutyDeleteResponse>;
+  delete(
+    params: PagerdutyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PagerdutyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/alerting/v3/destinations/pagerduty`, options);
   }
 
@@ -62,10 +79,18 @@ export class PagerdutyResource extends APIResource {
    * ```
    */
   get(
-    params: PagerdutyGetParams,
+    params?: PagerdutyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PagerdutiesSinglePage, Pagerduty>;
+  get(options?: Core.RequestOptions): Core.PagePromise<PagerdutiesSinglePage, Pagerduty>;
+  get(
+    params: PagerdutyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PagerdutiesSinglePage, Pagerduty> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
       PagerdutiesSinglePage,
@@ -87,10 +112,19 @@ export class PagerdutyResource extends APIResource {
    */
   link(
     tokenId: string,
-    params: PagerdutyLinkParams,
+    params?: PagerdutyLinkParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PagerdutyLinkResponse>;
+  link(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<PagerdutyLinkResponse>;
+  link(
+    tokenId: string,
+    params: PagerdutyLinkParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PagerdutyLinkResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.link(tokenId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect/${tokenId}`,
@@ -157,28 +191,28 @@ export interface PagerdutyCreateParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PagerdutyDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PagerdutyGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PagerdutyLinkParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 PagerdutyResource.PagerdutiesSinglePage = PagerdutiesSinglePage;

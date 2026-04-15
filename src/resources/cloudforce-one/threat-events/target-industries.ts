@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class TargetIndustries extends APIResource {
@@ -16,10 +17,18 @@ export class TargetIndustries extends APIResource {
    * ```
    */
   list(
-    params: TargetIndustryListParams,
+    params?: TargetIndustryListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TargetIndustryListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<TargetIndustryListResponse>;
+  list(
+    params: TargetIndustryListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetIndustryListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/targetIndustries`, {
       query,
       ...options,
@@ -43,7 +52,7 @@ export interface TargetIndustryListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Array of dataset IDs to query target industries from. If not

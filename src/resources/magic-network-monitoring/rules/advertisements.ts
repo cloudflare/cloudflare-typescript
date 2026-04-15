@@ -24,7 +24,7 @@ export class Advertisements extends APIResource {
     params: AdvertisementEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Advertisement | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`, {
         body: body,
@@ -47,7 +47,7 @@ export interface AdvertisementEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

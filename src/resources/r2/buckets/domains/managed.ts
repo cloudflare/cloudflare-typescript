@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Managed extends APIResource {
@@ -24,7 +25,7 @@ export class Managed extends APIResource {
     params: ManagedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         body,
@@ -53,10 +54,19 @@ export class Managed extends APIResource {
    */
   list(
     bucketName: string,
-    params: ManagedListParams,
+    params?: ManagedListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ManagedListResponse>;
+  list(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<ManagedListResponse>;
+  list(
+    bucketName: string,
+    params: ManagedListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedListResponse> {
-    const { account_id, jurisdiction } = params;
+    if (isRequestOptions(params)) {
+      return this.list(bucketName, {}, params);
+    }
+    const { account_id = this._client.accountId, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         ...options,
@@ -109,7 +119,7 @@ export interface ManagedUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether to enable public bucket access at the r2.dev domain.
@@ -127,7 +137,7 @@ export interface ManagedListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

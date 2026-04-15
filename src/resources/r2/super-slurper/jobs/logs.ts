@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage } from '../../../../pagination';
 
@@ -22,10 +23,22 @@ export class Logs extends APIResource {
    */
   list(
     jobId: string,
-    params: LogListParams,
+    params?: LogListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesSinglePage, LogListResponse>;
+  list(
+    jobId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesSinglePage, LogListResponse>;
+  list(
+    jobId: string,
+    params: LogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogListResponsesSinglePage, LogListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list(jobId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/slurper/jobs/${jobId}/logs`,
       LogListResponsesSinglePage,
@@ -67,7 +80,7 @@ export interface LogListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

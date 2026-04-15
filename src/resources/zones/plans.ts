@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -19,10 +20,18 @@ export class Plans extends APIResource {
    * ```
    */
   list(
-    params: PlanListParams,
+    params?: PlanListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan>;
+  list(
+    params: PlanListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/available_plans`,
       AvailableRatePlansSinglePage,
@@ -43,10 +52,19 @@ export class Plans extends APIResource {
    */
   get(
     planIdentifier: string,
-    params: PlanGetParams,
+    params?: PlanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AvailableRatePlan>;
+  get(planIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<AvailableRatePlan>;
+  get(
+    planIdentifier: string,
+    params: PlanGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AvailableRatePlan> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(planIdentifier, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/available_plans/${planIdentifier}`, options) as Core.APIPromise<{
         result: AvailableRatePlan;
@@ -113,14 +131,14 @@ export interface PlanListParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PlanGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Plans.AvailableRatePlansSinglePage = AvailableRatePlansSinglePage;
