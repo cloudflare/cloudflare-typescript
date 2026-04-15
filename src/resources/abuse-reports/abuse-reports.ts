@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as MitigationsAPI from './mitigations';
 import {
@@ -25,7 +26,7 @@ export class AbuseReports extends APIResource {
     params: AbuseReportCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AbuseReportCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/abuse-reports/${reportParam}`, {
         body,
@@ -38,10 +39,20 @@ export class AbuseReports extends APIResource {
    * List the abuse reports for a given account
    */
   list(
-    params: AbuseReportListParams,
+    params?: AbuseReportListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AbuseReportListResponsesV4PagePagination, AbuseReportListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AbuseReportListResponsesV4PagePagination, AbuseReportListResponse>;
+  list(
+    params: AbuseReportListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AbuseReportListResponsesV4PagePagination, AbuseReportListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/abuse-reports`,
       AbuseReportListResponsesV4PagePagination,
@@ -54,10 +65,19 @@ export class AbuseReports extends APIResource {
    */
   get(
     reportParam: string,
-    params: AbuseReportGetParams,
+    params?: AbuseReportGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AbuseReportGetResponse>;
+  get(reportParam: string, options?: Core.RequestOptions): Core.APIPromise<AbuseReportGetResponse>;
+  get(
+    reportParam: string,
+    params: AbuseReportGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AbuseReportGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(reportParam, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/abuse-reports/${reportParam}`, options) as Core.APIPromise<{
         result: AbuseReportGetResponse;
@@ -284,7 +304,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -425,7 +445,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -533,7 +553,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -648,7 +668,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -748,7 +768,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -854,7 +874,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -947,7 +967,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -1094,7 +1114,7 @@ export declare namespace AbuseReportCreateParams {
     /**
      * Path param: Cloudflare Account ID
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The report type for submitted reports.
@@ -1194,7 +1214,7 @@ export interface AbuseReportListParams extends V4PagePaginationParams {
   /**
    * Path param: Cloudflare Account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Returns reports created after the specified date
@@ -1237,7 +1257,7 @@ export interface AbuseReportGetParams {
   /**
    * Cloudflare Account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 AbuseReports.AbuseReportListResponsesV4PagePagination = AbuseReportListResponsesV4PagePagination;
