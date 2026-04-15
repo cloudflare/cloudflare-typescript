@@ -9755,6 +9755,95 @@ Methods:
 
 # AISearch
 
+## Namespaces
+
+Types:
+
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceListResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceChatCompletionsResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceReadResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/namespaces.ts">NamespaceSearchResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/namespaces">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">create</a>({ ...params }) -> NamespaceCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-search/namespaces/{name}">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">update</a>(name, { ...params }) -> NamespaceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespaceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/namespaces/{name}">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">delete</a>(name, { ...params }) -> NamespaceDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/chat/completions">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">chatCompletions</a>(name, { ...params }) -> NamespaceChatCompletionsResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">read</a>(name, { ...params }) -> NamespaceReadResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/search">client.aiSearch.namespaces.<a href="./src/resources/aisearch/namespaces/namespaces.ts">search</a>(name, { ...params }) -> NamespaceSearchResponse</code>
+
+### Instances
+
+Types:
+
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceChatCompletionsResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceReadResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceSearchResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/instances.ts">InstanceStatsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/instances">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">create</a>(name, { ...params }) -> InstanceCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">update</a>(id, { ...params }) -> InstanceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">list</a>(name, { ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">delete</a>(id, { ...params }) -> InstanceDeleteResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/chat/completions">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">chatCompletions</a>(id, { ...params }) -> InstanceChatCompletionsResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">read</a>(id, { ...params }) -> InstanceReadResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/search">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">search</a>(id, { ...params }) -> InstanceSearchResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/stats">client.aiSearch.namespaces.instances.<a href="./src/resources/aisearch/namespaces/instances/instances.ts">stats</a>(id, { ...params }) -> InstanceStatsResponse</code>
+
+#### Jobs
+
+Types:
+
+- <code><a href="./src/resources/aisearch/namespaces/instances/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/jobs.ts">JobUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/jobs.ts">JobListResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/jobs.ts">JobGetResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/jobs.ts">JobLogsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/jobs">client.aiSearch.namespaces.instances.jobs.<a href="./src/resources/aisearch/namespaces/instances/jobs.ts">create</a>(id, { ...params }) -> JobCreateResponse</code>
+- <code title="patch /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/jobs/{job_id}">client.aiSearch.namespaces.instances.jobs.<a href="./src/resources/aisearch/namespaces/instances/jobs.ts">update</a>(jobID, { ...params }) -> JobUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/jobs">client.aiSearch.namespaces.instances.jobs.<a href="./src/resources/aisearch/namespaces/instances/jobs.ts">list</a>(id, { ...params }) -> JobListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/jobs/{job_id}">client.aiSearch.namespaces.instances.jobs.<a href="./src/resources/aisearch/namespaces/instances/jobs.ts">get</a>(jobID, { ...params }) -> JobGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/jobs/{job_id}/logs">client.aiSearch.namespaces.instances.jobs.<a href="./src/resources/aisearch/namespaces/instances/jobs.ts">logs</a>(jobID, { ...params }) -> JobLogsResponse</code>
+
+#### Items
+
+Types:
+
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemListResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemDeleteResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemChunksResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemCreateOrUpdateResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemGetResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemLogsResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemSyncResponse</a></code>
+- <code><a href="./src/resources/aisearch/namespaces/instances/items.ts">ItemUploadResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">list</a>(id, { ...params }) -> ItemListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items/{item_id}">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">delete</a>(itemID, { ...params }) -> ItemDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items/{item_id}/chunks">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">chunks</a>(itemID, { ...params }) -> ItemChunksResponse</code>
+- <code title="put /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">createOrUpdate</a>(id, { ...params }) -> ItemCreateOrUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items/{item_id}/download">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">download</a>(itemID, { ...params }) -> Response</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items/{item_id}">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">get</a>(itemID, { ...params }) -> ItemGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items/{item_id}/logs">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">logs</a>(itemID, { ...params }) -> ItemLogsResponse</code>
+- <code title="patch /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items/{item_id}">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">sync</a>(itemID, { ...params }) -> ItemSyncResponse</code>
+- <code title="post /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/items">client.aiSearch.namespaces.instances.items.<a href="./src/resources/aisearch/namespaces/instances/items.ts">upload</a>(id, { ...params }) -> ItemUploadResponse</code>
+
 ## Instances
 
 Types:
@@ -9778,8 +9867,6 @@ Methods:
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">read</a>(id, { ...params }) -> InstanceReadResponse</code>
 - <code title="post /accounts/{account_id}/ai-search/instances/{id}/search">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">search</a>(id, { ...params }) -> InstanceSearchResponse</code>
 - <code title="get /accounts/{account_id}/ai-search/instances/{id}/stats">client.aiSearch.instances.<a href="./src/resources/aisearch/instances/instances.ts">stats</a>(id, { ...params }) -> InstanceStatsResponse</code>
-
-### Items
 
 ### Jobs
 
