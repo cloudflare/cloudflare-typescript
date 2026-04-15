@@ -52,7 +52,7 @@ export class Page extends APIResource {
    * ```
    */
   preview(params: PagePreviewParams, options?: Core.RequestOptions): Core.APIPromise<PagePreviewResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/waiting_rooms/preview`, { body, ...options }) as Core.APIPromise<{
         result: PagePreviewResponse;
@@ -72,7 +72,7 @@ export interface PagePreviewParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Only available for the Waiting Room Advanced subscription. This is a
