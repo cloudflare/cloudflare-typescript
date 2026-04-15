@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as MagicTransitAPI from './magic-transit';
 
@@ -24,7 +25,11 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectUpdateResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
+    const {
+      account_id = this._client.accountId,
+      'x-magic-new-hc-target': xMagicNewHcTarget,
+      ...body
+    } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`, {
         body,
@@ -51,10 +56,18 @@ export class CfInterconnects extends APIResource {
    * ```
    */
   list(
-    params: CfInterconnectListParams,
+    params?: CfInterconnectListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CfInterconnectListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<CfInterconnectListResponse>;
+  list(
+    params: CfInterconnectListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectListResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/cf_interconnects`, {
         ...options,
@@ -86,7 +99,7 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectBulkUpdateResponse> {
-    const { account_id, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    const { account_id = this._client.accountId, body, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cf_interconnects`, {
         body: body,
@@ -115,10 +128,19 @@ export class CfInterconnects extends APIResource {
    */
   get(
     cfInterconnectId: string,
-    params: CfInterconnectGetParams,
+    params?: CfInterconnectGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CfInterconnectGetResponse>;
+  get(cfInterconnectId: string, options?: Core.RequestOptions): Core.APIPromise<CfInterconnectGetResponse>;
+  get(
+    cfInterconnectId: string,
+    params: CfInterconnectGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectGetResponse> {
-    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+    if (isRequestOptions(params)) {
+      return this.get(cfInterconnectId, {}, params);
+    }
+    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`, {
         ...options,
@@ -505,7 +527,7 @@ export interface CfInterconnectUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
@@ -579,7 +601,7 @@ export interface CfInterconnectListParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
@@ -592,7 +614,7 @@ export interface CfInterconnectBulkUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -610,7 +632,7 @@ export interface CfInterconnectGetParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: If true, the health check target in the response body will be
