@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AccountTagsAPI from './account-tags';
 import {
@@ -41,10 +42,20 @@ export class ResourceTagging extends APIResource {
    * Lists all tagged resources for an account.
    */
   list(
-    params: ResourceTaggingListParams,
+    params?: ResourceTaggingListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceTaggingListResponsesCursorPaginationAfter, ResourceTaggingListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceTaggingListResponsesCursorPaginationAfter, ResourceTaggingListResponse>;
+  list(
+    params: ResourceTaggingListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ResourceTaggingListResponsesCursorPaginationAfter, ResourceTaggingListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/tags/resources`,
       ResourceTaggingListResponsesCursorPaginationAfter,
@@ -975,7 +986,7 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter resources by tag criteria. This parameter can be repeated

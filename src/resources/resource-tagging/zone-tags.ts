@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ZoneTags extends APIResource {
@@ -19,7 +20,7 @@ export class ZoneTags extends APIResource {
    * ```
    */
   update(params: ZoneTagUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneTagUpdateResponse> {
-    const { zone_id, 'If-Match': ifMatch, ...body } = params;
+    const { zone_id = this._client.zoneId, 'If-Match': ifMatch, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/tags`, {
         body,
@@ -32,8 +33,16 @@ export class ZoneTags extends APIResource {
   /**
    * Removes all tags from a specific zone-level resource.
    */
-  delete(params: ZoneTagDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { zone_id, 'If-Match': ifMatch } = params;
+  delete(params?: ZoneTagDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    params: ZoneTagDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId, 'If-Match': ifMatch } = params;
     return this._client.delete(`/zones/${zone_id}/tags`, {
       ...options,
       headers: {
@@ -48,7 +57,7 @@ export class ZoneTags extends APIResource {
    * Retrieves tags for a specific zone-level resource.
    */
   get(params: ZoneTagGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneTagGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/tags`, { query, ...options }) as Core.APIPromise<{
         result: ZoneTagGetResponse;
@@ -1898,7 +1907,7 @@ export declare namespace ZoneTagUpdateParams {
     /**
      * Path param: Zone ID is required only for zone-level resources
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Identifies the unique resource.
@@ -1935,7 +1944,7 @@ export declare namespace ZoneTagUpdateParams {
     /**
      * Path param: Zone ID is required only for zone-level resources
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Access application ID is required only for access_application_policy
@@ -1980,7 +1989,7 @@ export interface ZoneTagDeleteParams {
   /**
    * Path param: Zone ID is required only for zone-level resources
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Header param: ETag value for optimistic concurrency control. When provided, the
@@ -1995,7 +2004,7 @@ export interface ZoneTagGetParams {
   /**
    * Path param: Zone ID is required only for zone-level resources
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The ID of the resource to retrieve tags for.
