@@ -27,7 +27,7 @@ export class Received extends APIResource {
    * ```
    */
   get(params: ReceivedGetParams, options?: Core.RequestOptions): Core.APIPromise<ReceivedGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.get(`/zones/${zone_id}/logs/received`, { query, ...options });
   }
 }
@@ -38,7 +38,7 @@ export interface ReceivedGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Sets the (exclusive) end of the requested time frame. This can be a
