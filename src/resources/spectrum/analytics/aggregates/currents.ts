@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Currents extends APIResource {
@@ -8,8 +9,16 @@ export class Currents extends APIResource {
    * Retrieves analytics aggregated from the last minute of usage on Spectrum
    * applications underneath a given zone.
    */
-  get(params: CurrentGetParams, options?: Core.RequestOptions): Core.APIPromise<CurrentGetResponse> {
-    const { zone_id, ...query } = params;
+  get(params?: CurrentGetParams, options?: Core.RequestOptions): Core.APIPromise<CurrentGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<CurrentGetResponse>;
+  get(
+    params: CurrentGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CurrentGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/spectrum/analytics/aggregate/current`, {
         query,
@@ -54,7 +63,7 @@ export interface CurrentGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Comma-delimited list of Spectrum Application Id(s). If provided,
