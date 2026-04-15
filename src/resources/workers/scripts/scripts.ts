@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
@@ -117,7 +118,7 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id, bindings_inherit, ...body } = params;
+    const { account_id = this._client.accountId, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
@@ -146,10 +147,18 @@ export class Scripts extends APIResource {
    * ```
    */
   list(
-    params: ScriptListParams,
+    params?: ScriptListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse>;
+  list(
+    params: ScriptListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptListResponsesSinglePage, {
       query,
       ...options,
@@ -169,10 +178,19 @@ export class Scripts extends APIResource {
    */
   delete(
     scriptName: string,
-    params: ScriptDeleteParams,
+    params?: ScriptDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptDeleteResponse | null>;
+  delete(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<ScriptDeleteResponse | null>;
+  delete(
+    scriptName: string,
+    params: ScriptDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptDeleteResponse | null> {
-    const { account_id, force } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId, force } = params;
     return (
       this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
         query: { force },
@@ -193,8 +211,17 @@ export class Scripts extends APIResource {
    * );
    * ```
    */
-  get(scriptName: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
-    const { account_id } = params;
+  get(scriptName: string, params?: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<string>;
+  get(
+    scriptName: string,
+    params: ScriptGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string> {
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
       ...options,
       headers: { Accept: 'application/javascript', ...options?.headers },
@@ -211,8 +238,16 @@ export class Scripts extends APIResource {
    * });
    * ```
    */
-  search(params: ScriptSearchParams, options?: Core.RequestOptions): Core.APIPromise<ScriptSearchResponse> {
-    const { account_id, ...query } = params;
+  search(params?: ScriptSearchParams, options?: Core.RequestOptions): Core.APIPromise<ScriptSearchResponse>;
+  search(options?: Core.RequestOptions): Core.APIPromise<ScriptSearchResponse>;
+  search(
+    params: ScriptSearchParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptSearchResponse> {
+    if (isRequestOptions(params)) {
+      return this.search({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/scripts-search`, {
         query,
@@ -1666,7 +1701,7 @@ export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -2902,7 +2937,7 @@ export interface ScriptListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter scripts by tags. Format: comma-separated list of tag:allowed
@@ -2915,7 +2950,7 @@ export interface ScriptDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service
@@ -2929,14 +2964,14 @@ export interface ScriptGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScriptSearchParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Worker ID (also called tag) to search for. Only exact matches are

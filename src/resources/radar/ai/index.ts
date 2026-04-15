@@ -18,6 +18,13 @@ export {
   type InferenceTimeseriesGroupsV2Params,
 } from './inference/index';
 export {
+  MarkdownForAgents,
+  type MarkdownForAgentSummaryResponse,
+  type MarkdownForAgentTimeseriesResponse,
+  type MarkdownForAgentSummaryParams,
+  type MarkdownForAgentTimeseriesParams,
+} from './markdown-for-agents';
+export {
   TimeseriesGroups,
   type TimeseriesGroupSummaryResponse,
   type TimeseriesGroupTimeseriesResponse,
