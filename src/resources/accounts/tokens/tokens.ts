@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
 import { TokensV4PagePaginationArray } from '../../shared';
@@ -45,7 +46,7 @@ export class Tokens extends APIResource {
    * ```
    */
   create(params: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/tokens`, { body, ...options }) as Core.APIPromise<{
         result: TokenCreateResponse;
@@ -82,7 +83,7 @@ export class Tokens extends APIResource {
     params: TokenUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.Token> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
         result: Shared.Token;
@@ -104,10 +105,18 @@ export class Tokens extends APIResource {
    * ```
    */
   list(
-    params: TokenListParams,
+    params?: TokenListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokensV4PagePaginationArray, Shared.Token>;
+  list(options?: Core.RequestOptions): Core.PagePromise<TokensV4PagePaginationArray, Shared.Token>;
+  list(
+    params: TokenListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TokensV4PagePaginationArray, Shared.Token> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/tokens`, TokensV4PagePaginationArray, {
       query,
       ...options,
@@ -127,10 +136,19 @@ export class Tokens extends APIResource {
    */
   delete(
     tokenId: string,
-    params: TokenDeleteParams,
+    params?: TokenDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenDeleteResponse | null>;
+  delete(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null>;
+  delete(
+    tokenId: string,
+    params: TokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(tokenId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/tokens/${tokenId}`, options) as Core.APIPromise<{
         result: TokenDeleteResponse | null;
@@ -149,8 +167,17 @@ export class Tokens extends APIResource {
    * );
    * ```
    */
-  get(tokenId: string, params: TokenGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Token> {
-    const { account_id } = params;
+  get(tokenId: string, params?: TokenGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Token>;
+  get(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.Token>;
+  get(
+    tokenId: string,
+    params: TokenGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.Token> {
+    if (isRequestOptions(params)) {
+      return this.get(tokenId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/tokens/${tokenId}`, options) as Core.APIPromise<{
         result: Shared.Token;
@@ -168,8 +195,16 @@ export class Tokens extends APIResource {
    * });
    * ```
    */
-  verify(params: TokenVerifyParams, options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse> {
-    const { account_id } = params;
+  verify(params?: TokenVerifyParams, options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse>;
+  verify(options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse>;
+  verify(
+    params: TokenVerifyParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenVerifyResponse> {
+    if (isRequestOptions(params)) {
+      return this.verify({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/tokens/verify`, options) as Core.APIPromise<{
         result: TokenVerifyResponse;
@@ -293,7 +328,7 @@ export interface TokenCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Token name.
@@ -352,7 +387,7 @@ export interface TokenUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Token name.
@@ -416,7 +451,7 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -428,21 +463,21 @@ export interface TokenDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TokenGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TokenVerifyParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Tokens.PermissionGroups = PermissionGroups;
