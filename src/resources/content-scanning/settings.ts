@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['contentScanning', 'settings'] = Object.freeze([
+    'contentScanning',
+    'settings',
+  ] as const);
+
   /**
    * Retrieve the current status of Content Scanning.
    *
@@ -16,8 +21,11 @@ export class Settings extends APIResource {
    * });
    * ```
    */
-  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/content-upload-scan/settings`, options) as APIPromise<{
         result: SettingGetResponse;
@@ -25,6 +33,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 /**
  * Defines the status for Content Scanning.
@@ -45,7 +54,7 @@ export interface SettingGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Settings {

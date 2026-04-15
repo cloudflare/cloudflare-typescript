@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Raw extends APIResource {
+export class BaseRaw extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'investigate', 'raw'] = Object.freeze([
+    'emailSecurity',
+    'investigate',
+    'raw',
+  ] as const);
+
   /**
    * Returns the raw eml of any non-benign message.
    *
@@ -17,8 +23,12 @@ export class Raw extends APIResource {
    * );
    * ```
    */
-  get(postfixID: string, params: RawGetParams, options?: RequestOptions): APIPromise<RawGetResponse> {
-    const { account_id } = params;
+  get(
+    postfixID: string,
+    params: RawGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RawGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/investigate/${postfixID}/raw`,
@@ -27,6 +37,7 @@ export class Raw extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Raw extends BaseRaw {}
 
 export interface RawGetResponse {
   /**
@@ -39,7 +50,7 @@ export interface RawGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Raw {

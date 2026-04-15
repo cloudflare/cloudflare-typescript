@@ -6,7 +6,13 @@ import { CursorPagination, type CursorPaginationParams, PagePromise } from '../.
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Registrations extends APIResource {
+export class BaseRegistrations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'registrations'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'registrations',
+  ] as const);
+
   /**
    * Lists WARP registrations.
    *
@@ -21,10 +27,10 @@ export class Registrations extends APIResource {
    * ```
    */
   list(
-    params: RegistrationListParams,
+    params: RegistrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RegistrationListResponsesCursorPagination, RegistrationListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/registrations`,
       CursorPagination<RegistrationListResponse>,
@@ -46,10 +52,10 @@ export class Registrations extends APIResource {
    */
   delete(
     registrationID: string,
-    params: RegistrationDeleteParams,
+    params: RegistrationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegistrationDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/devices/registrations/${registrationID}`,
@@ -74,7 +80,7 @@ export class Registrations extends APIResource {
     params: RegistrationBulkDeleteParams,
     options?: RequestOptions,
   ): APIPromise<RegistrationBulkDeleteResponse | null> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountID, id } = params;
     return (
       this._client.delete(path`/accounts/${account_id}/devices/registrations`, {
         query: { id },
@@ -97,10 +103,10 @@ export class Registrations extends APIResource {
    */
   get(
     registrationID: string,
-    params: RegistrationGetParams,
+    params: RegistrationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegistrationGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/registrations/${registrationID}`, {
         query,
@@ -125,7 +131,7 @@ export class Registrations extends APIResource {
     params: RegistrationRevokeParams,
     options?: RequestOptions,
   ): APIPromise<RegistrationRevokeResponse | null> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountID, id } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/registrations/revoke`, {
         query: { id },
@@ -150,7 +156,7 @@ export class Registrations extends APIResource {
     params: RegistrationUnrevokeParams,
     options?: RequestOptions,
   ): APIPromise<RegistrationUnrevokeResponse | null> {
-    const { account_id, id } = params;
+    const { account_id = this._client.accountID, id } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/registrations/unrevoke`, {
         query: { id },
@@ -159,6 +165,7 @@ export class Registrations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Registrations extends BaseRegistrations {}
 
 export type RegistrationListResponsesCursorPagination = CursorPagination<RegistrationListResponse>;
 
@@ -442,7 +449,7 @@ export interface RegistrationListParams extends CursorPaginationParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by registration ID.
@@ -515,14 +522,14 @@ export namespace RegistrationListParams {
 }
 
 export interface RegistrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RegistrationBulkDeleteParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A list of registration IDs to delete.
@@ -534,7 +541,7 @@ export interface RegistrationGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Comma-separated list of additional information that should be
@@ -547,7 +554,7 @@ export interface RegistrationRevokeParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A list of registration IDs to revoke.
@@ -559,7 +566,7 @@ export interface RegistrationUnrevokeParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A list of registration IDs to unrevoke.

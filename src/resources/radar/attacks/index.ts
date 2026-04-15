@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Attacks } from './attacks';
+export { Attacks, BaseAttacks } from './attacks';
 export {
   Layer3,
+  BaseLayer3,
   type Layer3SummaryV2Response,
   type Layer3TimeseriesResponse,
   type Layer3TimeseriesGroupsV2Response,
@@ -12,6 +13,7 @@ export {
 } from './layer3/index';
 export {
   Layer7,
+  BaseLayer7,
   type Layer7SummaryV2Response,
   type Layer7TimeseriesResponse,
   type Layer7TimeseriesGroupsV2Response,

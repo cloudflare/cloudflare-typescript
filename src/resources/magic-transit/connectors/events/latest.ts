@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Latest extends APIResource {
+export class BaseLatest extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'connectors', 'events', 'latest'] = Object.freeze([
+    'magicTransit',
+    'connectors',
+    'events',
+    'latest',
+  ] as const);
+
   /**
    * Get latest Events
    *
@@ -20,10 +27,10 @@ export class Latest extends APIResource {
    */
   list(
     connectorID: string,
-    params: LatestListParams,
+    params: LatestListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LatestListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/connectors/${connectorID}/telemetry/events/latest`,
@@ -32,6 +39,7 @@ export class Latest extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Latest extends BaseLatest {}
 
 export interface LatestListResponse {
   count: number;
@@ -202,7 +210,7 @@ export interface LatestListParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Latest {

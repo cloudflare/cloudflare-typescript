@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Predefined extends APIResource {
+export class BasePredefined extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'profiles', 'predefined'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'profiles',
+    'predefined',
+  ] as const);
+
   /**
    * This is similar to `update_predefined` but only returns entries that are
    * enabled. This is needed for our terraform API Updates a DLP predefined profile.
@@ -26,7 +33,7 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PredefinedProfile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/profiles/predefined/${profileID}/config`, {
         body,
@@ -50,10 +57,10 @@ export class Predefined extends APIResource {
    */
   delete(
     profileID: string,
-    params: PredefinedDeleteParams,
+    params: PredefinedDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PredefinedDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/dlp/profiles/predefined/${profileID}`,
@@ -77,10 +84,10 @@ export class Predefined extends APIResource {
    */
   get(
     profileID: string,
-    params: PredefinedGetParams,
+    params: PredefinedGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PredefinedProfile> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/dlp/profiles/predefined/${profileID}/config`,
@@ -89,6 +96,7 @@ export class Predefined extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Predefined extends BasePredefined {}
 
 export interface PredefinedProfile {
   /**
@@ -279,7 +287,7 @@ export interface PredefinedUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -321,11 +329,11 @@ export namespace PredefinedUpdateParams {
 }
 
 export interface PredefinedDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PredefinedGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Predefined {

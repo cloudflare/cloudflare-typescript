@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AI } from 'cloudflare/resources/ai/ai';
+import { BaseToMarkdown } from 'cloudflare/resources/ai/to-markdown';
+
 import Cloudflare, { toFile } from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource toMarkdown', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseToMarkdown],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AI],
+});
+
+const runTests = (client: PartialCloudflare<{ ai: { toMarkdown: BaseToMarkdown } }>) => {
   test('supported: only required params', async () => {
     const responsePromise = client.ai.toMarkdown.supported({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -48,4 +66,7 @@ describe('resource toMarkdown', () => {
       file: { files: [await toFile(Buffer.from('# my file contents'), 'README.md')] },
     });
   });
-});
+};
+describe('resource toMarkdown', () => runTests(client));
+describe('resource toMarkdown (tree shakable, base)', () => runTests(partialClient));
+describe('resource toMarkdown (tree shakable, subresource)', () => runTests(parentPartialClient));

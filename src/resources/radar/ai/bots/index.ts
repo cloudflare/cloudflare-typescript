@@ -2,6 +2,7 @@
 
 export {
   Bots,
+  BaseBots,
   type BotSummaryV2Response,
   type BotTimeseriesResponse,
   type BotTimeseriesGroupsResponse,
@@ -9,4 +10,4 @@ export {
   type BotTimeseriesParams,
   type BotTimeseriesGroupsParams,
 } from './bots';
-export { Summary, type SummaryUserAgentResponse, type SummaryUserAgentParams } from './summary';
+export { Summary, BaseSummary, type SummaryUserAgentResponse, type SummaryUserAgentParams } from './summary';

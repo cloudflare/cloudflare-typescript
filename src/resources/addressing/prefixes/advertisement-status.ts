@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AdvertisementStatus extends APIResource {
+export class BaseAdvertisementStatus extends APIResource {
+  static override readonly _key: readonly ['addressing', 'prefixes', 'advertisementStatus'] = Object.freeze([
+    'addressing',
+    'prefixes',
+    'advertisementStatus',
+  ] as const);
+
   /**
    * Advertise or withdraw the BGP route for a prefix.
    *
@@ -19,7 +25,7 @@ export class AdvertisementStatus extends APIResource {
     params: AdvertisementStatusEditParams,
     options?: RequestOptions,
   ): APIPromise<AdvertisementStatusEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/addressing/prefixes/${prefixID}/bgp/status`, {
         body,
@@ -38,10 +44,10 @@ export class AdvertisementStatus extends APIResource {
    */
   get(
     prefixID: string,
-    params: AdvertisementStatusGetParams,
+    params: AdvertisementStatusGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AdvertisementStatusGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/addressing/prefixes/${prefixID}/bgp/status`,
@@ -50,6 +56,7 @@ export class AdvertisementStatus extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AdvertisementStatus extends BaseAdvertisementStatus {}
 
 export interface AdvertisementStatusEditResponse {
   /**
@@ -83,7 +90,7 @@ export interface AdvertisementStatusEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Advertisement status of the prefix. If `true`, the BGP route for the
@@ -96,7 +103,7 @@ export interface AdvertisementStatusGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AdvertisementStatus {

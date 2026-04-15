@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class DeviceType extends APIResource {
+export class BaseDeviceType extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'ases', 'deviceType'] = Object.freeze([
+    'radar',
+    'http',
+    'ases',
+    'deviceType',
+  ] as const);
+
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested device
    * type.
@@ -29,6 +36,7 @@ export class DeviceType extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DeviceType extends BaseDeviceType {}
 
 export interface DeviceTypeGetResponse {
   /**

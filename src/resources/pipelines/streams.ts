@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Streams extends APIResource {
+export class BaseStreams extends APIResource {
+  static override readonly _key: readonly ['pipelines', 'streams'] = Object.freeze([
+    'pipelines',
+    'streams',
+  ] as const);
+
   /**
    * Create a new Stream.
    *
@@ -19,7 +24,7 @@ export class Streams extends APIResource {
    * ```
    */
   create(params: StreamCreateParams, options?: RequestOptions): APIPromise<StreamCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pipelines/v1/streams`, {
         body,
@@ -41,10 +46,10 @@ export class Streams extends APIResource {
    */
   update(
     streamID: string,
-    params: StreamUpdateParams,
+    params: StreamUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StreamUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`, {
         body,
@@ -67,10 +72,10 @@ export class Streams extends APIResource {
    * ```
    */
   list(
-    params: StreamListParams,
+    params: StreamListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<StreamListResponsesV4PagePaginationArray, StreamListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pipelines/v1/streams`,
       V4PagePaginationArray<StreamListResponse>,
@@ -91,10 +96,10 @@ export class Streams extends APIResource {
    */
   delete(
     streamID: string,
-    params: StreamDeleteParams,
+    params: StreamDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StreamDeleteResponse> {
-    const { account_id, force } = params;
+    const { account_id = this._client.accountID, force } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`, {
         query: { force },
@@ -114,8 +119,12 @@ export class Streams extends APIResource {
    * );
    * ```
    */
-  get(streamID: string, params: StreamGetParams, options?: RequestOptions): APIPromise<StreamGetResponse> {
-    const { account_id } = params;
+  get(
+    streamID: string,
+    params: StreamGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<StreamGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/pipelines/v1/streams/${streamID}`,
@@ -124,6 +133,7 @@ export class Streams extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Streams extends BaseStreams {}
 
 export type StreamListResponsesV4PagePaginationArray = V4PagePaginationArray<StreamListResponse>;
 
@@ -941,7 +951,7 @@ export interface StreamCreateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specifies the name of the Stream.
@@ -1180,7 +1190,7 @@ export interface StreamUpdateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1232,7 +1242,7 @@ export interface StreamListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Specifies the public ID of the pipeline.
@@ -1244,7 +1254,7 @@ export interface StreamDeleteParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Delete stream forcefully, including deleting any dependent
@@ -1257,7 +1267,7 @@ export interface StreamGetParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Streams {

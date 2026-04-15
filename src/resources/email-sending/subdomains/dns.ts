@@ -7,7 +7,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class DNS extends APIResource {
+export class BaseDNS extends APIResource {
+  static override readonly _key: readonly ['emailSending', 'subdomains', 'dns'] = Object.freeze([
+    'emailSending',
+    'subdomains',
+    'dns',
+  ] as const);
+
   /**
    * Returns the expected DNS records for a sending subdomain.
    *
@@ -24,10 +30,10 @@ export class DNS extends APIResource {
    */
   get(
     subdomainID: string,
-    params: DNSGetParams,
+    params: DNSGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DNSRecordsSinglePage, DNSAPI.DNSRecord> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/email/sending/subdomains/${subdomainID}/dns`,
       SinglePage<DNSAPI.DNSRecord>,
@@ -35,12 +41,13 @@ export class DNS extends APIResource {
     );
   }
 }
+export class DNS extends BaseDNS {}
 
 export interface DNSGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace DNS {

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BrandProtection } from 'cloudflare/resources/brand-protection/brand-protection';
+import { BaseLogoMatches } from 'cloudflare/resources/brand-protection/logo-matches';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource logoMatches', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLogoMatches],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BrandProtection],
+});
+
+const runTests = (client: PartialCloudflare<{ brandProtection: { logoMatches: BaseLogoMatches } }>) => {
   // TODO: investigate broken test, 401 Unauthorized error
   test.skip('download: only required params', async () => {
     const responsePromise = client.brandProtection.logoMatches.download({ account_id: 'x' });
@@ -52,4 +70,7 @@ describe('resource logoMatches', () => {
       offset: 'offset',
     });
   });
-});
+};
+describe('resource logoMatches', () => runTests(client));
+describe('resource logoMatches (tree shakable, base)', () => runTests(partialClient));
+describe('resource logoMatches (tree shakable, subresource)', () => runTests(parentPartialClient));

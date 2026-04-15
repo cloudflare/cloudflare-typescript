@@ -11,15 +11,22 @@ import {
   AudioTrackGetParams,
   AudioTrackGetResponse,
   AudioTracks,
+  BaseAudioTracks,
 } from './audio-tracks';
 import * as ClipAPI from './clip';
-import { Clip, ClipCreateParams, ClipResource } from './clip';
+import { BaseClipResource, Clip, ClipCreateParams, ClipResource } from './clip';
 import * as CopyAPI from './copy';
-import { Copy, CopyCreateParams } from './copy';
+import { BaseCopy, Copy, CopyCreateParams } from './copy';
 import * as DirectUploadAPI from './direct-upload';
-import { DirectUpload, DirectUploadCreateParams, DirectUploadCreateResponse } from './direct-upload';
+import {
+  BaseDirectUpload,
+  DirectUpload,
+  DirectUploadCreateParams,
+  DirectUploadCreateResponse,
+} from './direct-upload';
 import * as DownloadsAPI from './downloads';
 import {
+  BaseDownloads,
   DownloadCreateParams,
   DownloadCreateResponse,
   DownloadDeleteParams,
@@ -29,9 +36,10 @@ import {
   Downloads,
 } from './downloads';
 import * as EmbedAPI from './embed';
-import { Embed, EmbedGetParams, EmbedGetResponse } from './embed';
+import { BaseEmbed, Embed, EmbedGetParams, EmbedGetResponse } from './embed';
 import * as KeysAPI from './keys';
 import {
+  BaseKeys,
   KeyCreateParams,
   KeyDeleteParams,
   KeyDeleteResponse,
@@ -41,11 +49,12 @@ import {
   Keys,
 } from './keys';
 import * as TokenAPI from './token';
-import { Token, TokenCreateParams, TokenCreateResponse } from './token';
+import { BaseToken, Token, TokenCreateParams, TokenCreateResponse } from './token';
 import * as VideosAPI from './videos';
-import { VideoStorageUsageParams, VideoStorageUsageResponse, Videos } from './videos';
+import { BaseVideos, VideoStorageUsageParams, VideoStorageUsageResponse, Videos } from './videos';
 import * as WatermarksAPI from './watermarks';
 import {
+  BaseWatermarks,
   Watermark,
   WatermarkCreateParams,
   WatermarkDeleteParams,
@@ -57,6 +66,7 @@ import {
 } from './watermarks';
 import * as WebhooksAPI from './webhooks';
 import {
+  BaseWebhooks,
   WebhookDeleteParams,
   WebhookDeleteResponse,
   WebhookGetParams,
@@ -66,9 +76,10 @@ import {
   Webhooks,
 } from './webhooks';
 import * as CaptionsAPI from './captions/captions';
-import { Caption, CaptionGetParams, Captions, CaptionsSinglePage } from './captions/captions';
+import { BaseCaptions, Caption, CaptionGetParams, Captions, CaptionsSinglePage } from './captions/captions';
 import * as LiveInputsAPI from './live-inputs/live-inputs';
 import {
+  BaseLiveInputs,
   LiveInput,
   LiveInputCreateParams,
   LiveInputDeleteParams,
@@ -84,20 +95,8 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Stream extends APIResource {
-  audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
-  videos: VideosAPI.Videos = new VideosAPI.Videos(this._client);
-  clip: ClipAPI.ClipResource = new ClipAPI.ClipResource(this._client);
-  copy: CopyAPI.Copy = new CopyAPI.Copy(this._client);
-  directUpload: DirectUploadAPI.DirectUpload = new DirectUploadAPI.DirectUpload(this._client);
-  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
-  liveInputs: LiveInputsAPI.LiveInputs = new LiveInputsAPI.LiveInputs(this._client);
-  watermarks: WatermarksAPI.Watermarks = new WatermarksAPI.Watermarks(this._client);
-  webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
-  captions: CaptionsAPI.Captions = new CaptionsAPI.Captions(this._client);
-  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
-  embed: EmbedAPI.Embed = new EmbedAPI.Embed(this._client);
-  token: TokenAPI.Token = new TokenAPI.Token(this._client);
+export class BaseStream extends APIResource {
+  static override readonly _key: readonly ['stream'] = Object.freeze(['stream'] as const);
 
   /**
    * Initiates a video upload using the TUS protocol. On success, the server responds
@@ -116,7 +115,7 @@ export class Stream extends APIResource {
    */
   create(params: StreamCreateParams, options?: RequestOptions): APIPromise<void> {
     const {
-      account_id,
+      account_id = this._client.accountID,
       'Tus-Resumable': tusResumable,
       'Upload-Length': uploadLength,
       direct_user,
@@ -153,8 +152,11 @@ export class Stream extends APIResource {
    * }
    * ```
    */
-  list(params: StreamListParams, options?: RequestOptions): PagePromise<VideosSinglePage, Video> {
-    const { account_id, ...query } = params;
+  list(
+    params: StreamListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<VideosSinglePage, Video> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/stream`, SinglePage<Video>, {
       query,
       ...options,
@@ -172,8 +174,12 @@ export class Stream extends APIResource {
    * );
    * ```
    */
-  delete(identifier: string, params: StreamDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    identifier: string,
+    params: StreamDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/stream/${identifier}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -192,7 +198,7 @@ export class Stream extends APIResource {
    * ```
    */
   edit(identifier: string, params: StreamEditParams, options?: RequestOptions): APIPromise<Video> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/${identifier}`, {
         body,
@@ -212,14 +218,33 @@ export class Stream extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: StreamGetParams, options?: RequestOptions): APIPromise<Video> {
-    const { account_id } = params;
+  get(
+    identifier: string,
+    params: StreamGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Video> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/${identifier}`, options) as APIPromise<{
         result: Video;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Stream extends BaseStream {
+  audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
+  videos: VideosAPI.Videos = new VideosAPI.Videos(this._client);
+  clip: ClipAPI.ClipResource = new ClipAPI.ClipResource(this._client);
+  copy: CopyAPI.Copy = new CopyAPI.Copy(this._client);
+  directUpload: DirectUploadAPI.DirectUpload = new DirectUploadAPI.DirectUpload(this._client);
+  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
+  liveInputs: LiveInputsAPI.LiveInputs = new LiveInputsAPI.LiveInputs(this._client);
+  watermarks: WatermarksAPI.Watermarks = new WatermarksAPI.Watermarks(this._client);
+  webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
+  captions: CaptionsAPI.Captions = new CaptionsAPI.Captions(this._client);
+  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
+  embed: EmbedAPI.Embed = new EmbedAPI.Embed(this._client);
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
 }
 
 export type VideosSinglePage = SinglePage<Video>;
@@ -453,7 +478,7 @@ export interface StreamCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Specifies the TUS protocol version. This value must be included in
@@ -492,7 +517,7 @@ export interface StreamListParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by video ID(s). Can be a single ID or a comma-separated list
@@ -583,14 +608,14 @@ export interface StreamDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface StreamEditParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Lists the origins allowed to display the video. Enter allowed origin
@@ -681,21 +706,34 @@ export interface StreamGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Stream.AudioTracks = AudioTracks;
+Stream.BaseAudioTracks = BaseAudioTracks;
 Stream.Videos = Videos;
+Stream.BaseVideos = BaseVideos;
 Stream.ClipResource = ClipResource;
+Stream.BaseClipResource = BaseClipResource;
 Stream.Copy = Copy;
+Stream.BaseCopy = BaseCopy;
 Stream.DirectUpload = DirectUpload;
+Stream.BaseDirectUpload = BaseDirectUpload;
+Stream.BaseKeys = BaseKeys;
 Stream.LiveInputs = LiveInputs;
+Stream.BaseLiveInputs = BaseLiveInputs;
 Stream.Watermarks = Watermarks;
+Stream.BaseWatermarks = BaseWatermarks;
 Stream.Webhooks = Webhooks;
+Stream.BaseWebhooks = BaseWebhooks;
 Stream.Captions = Captions;
+Stream.BaseCaptions = BaseCaptions;
 Stream.Downloads = Downloads;
+Stream.BaseDownloads = BaseDownloads;
 Stream.Embed = Embed;
+Stream.BaseEmbed = BaseEmbed;
 Stream.Token = Token;
+Stream.BaseToken = BaseToken;
 
 export declare namespace Stream {
   export {
@@ -711,6 +749,7 @@ export declare namespace Stream {
 
   export {
     AudioTracks as AudioTracks,
+    BaseAudioTracks as BaseAudioTracks,
     type Audio as Audio,
     type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
     type AudioTrackGetResponse as AudioTrackGetResponse,
@@ -722,22 +761,30 @@ export declare namespace Stream {
 
   export {
     Videos as Videos,
+    BaseVideos as BaseVideos,
     type VideoStorageUsageResponse as VideoStorageUsageResponse,
     type VideoStorageUsageParams as VideoStorageUsageParams,
   };
 
-  export { ClipResource as ClipResource, type Clip as Clip, type ClipCreateParams as ClipCreateParams };
+  export {
+    ClipResource as ClipResource,
+    BaseClipResource as BaseClipResource,
+    type Clip as Clip,
+    type ClipCreateParams as ClipCreateParams,
+  };
 
-  export { Copy as Copy, type CopyCreateParams as CopyCreateParams };
+  export { Copy as Copy, BaseCopy as BaseCopy, type CopyCreateParams as CopyCreateParams };
 
   export {
     DirectUpload as DirectUpload,
+    BaseDirectUpload as BaseDirectUpload,
     type DirectUploadCreateResponse as DirectUploadCreateResponse,
     type DirectUploadCreateParams as DirectUploadCreateParams,
   };
 
   export {
     type Keys as Keys,
+    BaseKeys as BaseKeys,
     type KeyDeleteResponse as KeyDeleteResponse,
     type KeyGetResponse as KeyGetResponse,
     type KeyGetResponsesSinglePage as KeyGetResponsesSinglePage,
@@ -748,6 +795,7 @@ export declare namespace Stream {
 
   export {
     LiveInputs as LiveInputs,
+    BaseLiveInputs as BaseLiveInputs,
     type LiveInput as LiveInput,
     type LiveInputListResponse as LiveInputListResponse,
     type LiveInputCreateParams as LiveInputCreateParams,
@@ -759,6 +807,7 @@ export declare namespace Stream {
 
   export {
     Watermarks as Watermarks,
+    BaseWatermarks as BaseWatermarks,
     type Watermark as Watermark,
     type WatermarkDeleteResponse as WatermarkDeleteResponse,
     type WatermarksSinglePage as WatermarksSinglePage,
@@ -770,6 +819,7 @@ export declare namespace Stream {
 
   export {
     Webhooks as Webhooks,
+    BaseWebhooks as BaseWebhooks,
     type WebhookUpdateResponse as WebhookUpdateResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
     type WebhookGetResponse as WebhookGetResponse,
@@ -780,6 +830,7 @@ export declare namespace Stream {
 
   export {
     Captions as Captions,
+    BaseCaptions as BaseCaptions,
     type Caption as Caption,
     type CaptionsSinglePage as CaptionsSinglePage,
     type CaptionGetParams as CaptionGetParams,
@@ -787,6 +838,7 @@ export declare namespace Stream {
 
   export {
     Downloads as Downloads,
+    BaseDownloads as BaseDownloads,
     type DownloadCreateResponse as DownloadCreateResponse,
     type DownloadDeleteResponse as DownloadDeleteResponse,
     type DownloadGetResponse as DownloadGetResponse,
@@ -795,10 +847,16 @@ export declare namespace Stream {
     type DownloadGetParams as DownloadGetParams,
   };
 
-  export { Embed as Embed, type EmbedGetResponse as EmbedGetResponse, type EmbedGetParams as EmbedGetParams };
+  export {
+    Embed as Embed,
+    BaseEmbed as BaseEmbed,
+    type EmbedGetResponse as EmbedGetResponse,
+    type EmbedGetParams as EmbedGetParams,
+  };
 
   export {
     Token as Token,
+    BaseToken as BaseToken,
     type TokenCreateResponse as TokenCreateResponse,
     type TokenCreateParams as TokenCreateParams,
   };

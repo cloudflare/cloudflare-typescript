@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Summary extends APIResource {
+export class BaseSummary extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer7', 'summary'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer7',
+    'summary',
+  ] as const);
+
   /**
    * Retrieves the distribution of layer 7 attacks by HTTP method.
    *
@@ -118,6 +125,7 @@ export class Summary extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summary extends BaseSummary {}
 
 export interface SummaryHTTPMethodResponse {
   /**

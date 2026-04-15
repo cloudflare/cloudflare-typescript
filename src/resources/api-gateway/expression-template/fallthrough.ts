@@ -5,7 +5,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Fallthrough extends APIResource {
+export class BaseFallthrough extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'expressionTemplate', 'fallthrough'] = Object.freeze(
+    ['apiGateway', 'expressionTemplate', 'fallthrough'] as const,
+  );
+
   /**
    * Creates an expression template fallthrough rule for API Shield. Used for
    * configuring default behavior when no other expression templates match.
@@ -22,7 +26,7 @@ export class Fallthrough extends APIResource {
    * ```
    */
   create(params: FallthroughCreateParams, options?: RequestOptions): APIPromise<FallthroughCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/api_gateway/expression-template/fallthrough`, {
         body,
@@ -31,6 +35,7 @@ export class Fallthrough extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Fallthrough extends BaseFallthrough {}
 
 export interface FallthroughCreateResponse {
   /**
@@ -48,7 +53,7 @@ export interface FallthroughCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: List of hosts to be targeted in the expression

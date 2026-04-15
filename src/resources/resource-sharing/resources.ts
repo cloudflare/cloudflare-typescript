@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Resources extends APIResource {
+export class BaseResources extends APIResource {
+  static override readonly _key: readonly ['resourceSharing', 'resources'] = Object.freeze([
+    'resourceSharing',
+    'resources',
+  ] as const);
+
   /**
    * Adds a resource to an existing share, making it available to share recipients.
    *
@@ -31,7 +36,7 @@ export class Resources extends APIResource {
     params: ResourceCreateParams,
     options?: RequestOptions,
   ): APIPromise<ResourceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/shares/${shareID}/resources`, {
         body,
@@ -62,7 +67,7 @@ export class Resources extends APIResource {
     params: ResourceUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ResourceUpdateResponse> {
-    const { account_id, share_id, ...body } = params;
+    const { account_id = this._client.accountID, share_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/shares/${share_id}/resources/${resourceID}`, {
         body,
@@ -87,10 +92,10 @@ export class Resources extends APIResource {
    */
   list(
     shareID: string,
-    params: ResourceListParams,
+    params: ResourceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/shares/${shareID}/resources`,
       V4PagePaginationArray<ResourceListResponse>,
@@ -119,7 +124,7 @@ export class Resources extends APIResource {
     params: ResourceDeleteParams,
     options?: RequestOptions,
   ): APIPromise<ResourceDeleteResponse> {
-    const { account_id, share_id } = params;
+    const { account_id = this._client.accountID, share_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/shares/${share_id}/resources/${resourceID}`,
@@ -147,7 +152,7 @@ export class Resources extends APIResource {
     params: ResourceGetParams,
     options?: RequestOptions,
   ): APIPromise<ResourceGetResponse> {
-    const { account_id, share_id } = params;
+    const { account_id = this._client.accountID, share_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/shares/${share_id}/resources/${resourceID}`,
@@ -156,6 +161,7 @@ export class Resources extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Resources extends BaseResources {}
 
 export type ResourceListResponsesV4PagePaginationArray = V4PagePaginationArray<ResourceListResponse>;
 
@@ -423,7 +429,7 @@ export interface ResourceCreateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Resource Metadata.
@@ -455,7 +461,7 @@ export interface ResourceUpdateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Share identifier tag.
@@ -472,7 +478,7 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter share resources by resource_type.
@@ -494,7 +500,7 @@ export interface ResourceDeleteParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Share identifier tag.
@@ -506,7 +512,7 @@ export interface ResourceGetParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Share identifier tag.

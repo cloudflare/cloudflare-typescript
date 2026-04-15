@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseLabels } from 'cloudflare/resources/api-gateway/operations/labels';
+import { Operations } from 'cloudflare/resources/api-gateway/operations/operations';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource labels', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLabels],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Operations],
+});
+
+const runTests = (client: PartialCloudflare<{ apiGateway: { operations: { labels: BaseLabels } } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.apiGateway.operations.labels.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -146,4 +164,7 @@ describe('resource labels', () => {
       user: { labels: ['login'] },
     });
   });
-});
+};
+describe('resource labels', () => runTests(client));
+describe('resource labels (tree shakable, base)', () => runTests(partialClient));
+describe('resource labels (tree shakable, subresource)', () => runTests(parentPartialClient));

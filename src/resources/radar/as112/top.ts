@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Top extends APIResource {
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'as112', 'top'] = Object.freeze([
+    'radar',
+    'as112',
+    'top',
+  ] as const);
+
   /**
    * Retrieves the top locations of DNS queries to AS112 with DNSSEC (DNS Security
    * Extensions) support.
@@ -95,6 +101,7 @@ export class Top extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Top extends BaseTop {}
 
 export interface TopDNSSECResponse {
   /**

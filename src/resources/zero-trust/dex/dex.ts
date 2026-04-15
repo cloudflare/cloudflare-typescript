@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ColosAPI from './colos';
-import { ColoListParams, ColoListResponse, ColoListResponsesSinglePage, Colos } from './colos';
+import { BaseColos, ColoListParams, ColoListResponse, ColoListResponsesSinglePage, Colos } from './colos';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   RuleCreateParams,
   RuleCreateResponse,
   RuleDeleteParams,
@@ -20,6 +21,7 @@ import {
 } from './rules';
 import * as TracerouteTestsAPI from './traceroute-tests';
 import {
+  BaseTracerouteTests,
   Traceroute,
   TracerouteTestGetParams,
   TracerouteTestNetworkPathParams,
@@ -28,9 +30,15 @@ import {
   TracerouteTests,
 } from './traceroute-tests';
 import * as WARPChangeEventsAPI from './warp-change-events';
-import { WARPChangeEventGetParams, WARPChangeEventGetResponse, WARPChangeEvents } from './warp-change-events';
+import {
+  BaseWARPChangeEvents,
+  WARPChangeEventGetParams,
+  WARPChangeEventGetResponse,
+  WARPChangeEvents,
+} from './warp-change-events';
 import * as CommandsAPI from './commands/commands';
 import {
+  BaseCommands,
   CommandCreateParams,
   CommandCreateResponse,
   CommandListParams,
@@ -40,6 +48,7 @@ import {
 } from './commands/commands';
 import * as FleetStatusAPI from './fleet-status/fleet-status';
 import {
+  BaseFleetStatus,
   FleetStatus,
   FleetStatusLiveParams,
   FleetStatusLiveResponse,
@@ -48,13 +57,19 @@ import {
   LiveStat,
 } from './fleet-status/fleet-status';
 import * as HTTPTestsAPI from './http-tests/http-tests';
-import { HTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/http-tests';
+import { BaseHTTPTests, HTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/http-tests';
 import * as TestsAPI from './tests/tests';
-import { AggregateTimePeriod, TestListParams, Tests, TestsV4PagePagination } from './tests/tests';
+import { AggregateTimePeriod, BaseTests, TestListParams, Tests, TestsV4PagePagination } from './tests/tests';
 import * as TracerouteTestResultsAPI from './traceroute-test-results/traceroute-test-results';
-import { TracerouteTestResults } from './traceroute-test-results/traceroute-test-results';
+import {
+  BaseTracerouteTestResults,
+  TracerouteTestResults,
+} from './traceroute-test-results/traceroute-test-results';
 
-export class DEX extends APIResource {
+export class BaseDEX extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex'] = Object.freeze(['zeroTrust', 'dex'] as const);
+}
+export class DEX extends BaseDEX {
   warpChangeEvents: WARPChangeEventsAPI.WARPChangeEvents = new WARPChangeEventsAPI.WARPChangeEvents(
     this._client,
   );
@@ -184,13 +199,22 @@ export interface Percentiles {
 }
 
 DEX.WARPChangeEvents = WARPChangeEvents;
+DEX.BaseWARPChangeEvents = BaseWARPChangeEvents;
 DEX.Commands = Commands;
+DEX.BaseCommands = BaseCommands;
 DEX.Colos = Colos;
+DEX.BaseColos = BaseColos;
 DEX.FleetStatus = FleetStatus;
+DEX.BaseFleetStatus = BaseFleetStatus;
 DEX.HTTPTests = HTTPTests;
+DEX.BaseHTTPTests = BaseHTTPTests;
+DEX.BaseTests = BaseTests;
 DEX.TracerouteTestResults = TracerouteTestResults;
+DEX.BaseTracerouteTestResults = BaseTracerouteTestResults;
 DEX.TracerouteTests = TracerouteTests;
+DEX.BaseTracerouteTests = BaseTracerouteTests;
 DEX.Rules = Rules;
+DEX.BaseRules = BaseRules;
 
 export declare namespace DEX {
   export {
@@ -202,12 +226,14 @@ export declare namespace DEX {
 
   export {
     WARPChangeEvents as WARPChangeEvents,
+    BaseWARPChangeEvents as BaseWARPChangeEvents,
     type WARPChangeEventGetResponse as WARPChangeEventGetResponse,
     type WARPChangeEventGetParams as WARPChangeEventGetParams,
   };
 
   export {
     Commands as Commands,
+    BaseCommands as BaseCommands,
     type CommandCreateResponse as CommandCreateResponse,
     type CommandListResponse as CommandListResponse,
     type CommandListResponsesV4PagePagination as CommandListResponsesV4PagePagination,
@@ -217,6 +243,7 @@ export declare namespace DEX {
 
   export {
     Colos as Colos,
+    BaseColos as BaseColos,
     type ColoListResponse as ColoListResponse,
     type ColoListResponsesSinglePage as ColoListResponsesSinglePage,
     type ColoListParams as ColoListParams,
@@ -224,6 +251,7 @@ export declare namespace DEX {
 
   export {
     FleetStatus as FleetStatus,
+    BaseFleetStatus as BaseFleetStatus,
     type LiveStat as LiveStat,
     type FleetStatusLiveResponse as FleetStatusLiveResponse,
     type FleetStatusOverTimeResponse as FleetStatusOverTimeResponse,
@@ -233,21 +261,27 @@ export declare namespace DEX {
 
   export {
     HTTPTests as HTTPTests,
+    BaseHTTPTests as BaseHTTPTests,
     type HTTPDetails as HTTPDetails,
     type HTTPTestGetParams as HTTPTestGetParams,
   };
 
   export {
     type Tests as Tests,
+    BaseTests as BaseTests,
     type AggregateTimePeriod as AggregateTimePeriod,
     type TestsV4PagePagination as TestsV4PagePagination,
     type TestListParams as TestListParams,
   };
 
-  export { TracerouteTestResults as TracerouteTestResults };
+  export {
+    TracerouteTestResults as TracerouteTestResults,
+    BaseTracerouteTestResults as BaseTracerouteTestResults,
+  };
 
   export {
     TracerouteTests as TracerouteTests,
+    BaseTracerouteTests as BaseTracerouteTests,
     type Traceroute as Traceroute,
     type TracerouteTestPercentilesResponse as TracerouteTestPercentilesResponse,
     type TracerouteTestGetParams as TracerouteTestGetParams,
@@ -257,6 +291,7 @@ export declare namespace DEX {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type RuleCreateResponse as RuleCreateResponse,
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,

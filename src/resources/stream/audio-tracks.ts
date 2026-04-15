@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AudioTracks extends APIResource {
+export class BaseAudioTracks extends APIResource {
+  static override readonly _key: readonly ['stream', 'audioTracks'] = Object.freeze([
+    'stream',
+    'audioTracks',
+  ] as const);
+
   /**
    * Deletes additional audio tracks on a video. Deleting a default audio track is
    * not allowed. You must assign another audio track as default prior to deletion.
@@ -26,7 +31,7 @@ export class AudioTracks extends APIResource {
     params: AudioTrackDeleteParams,
     options?: RequestOptions,
   ): APIPromise<AudioTrackDeleteResponse> {
-    const { account_id, identifier } = params;
+    const { account_id = this._client.accountID, identifier } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`,
@@ -50,7 +55,7 @@ export class AudioTracks extends APIResource {
    * ```
    */
   copy(identifier: string, params: AudioTrackCopyParams, options?: RequestOptions): APIPromise<Audio> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
         body,
@@ -76,7 +81,7 @@ export class AudioTracks extends APIResource {
    * ```
    */
   edit(audioIdentifier: string, params: AudioTrackEditParams, options?: RequestOptions): APIPromise<Audio> {
-    const { account_id, identifier, ...body } = params;
+    const { account_id = this._client.accountID, identifier, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
         body,
@@ -99,10 +104,10 @@ export class AudioTracks extends APIResource {
    */
   get(
     identifier: string,
-    params: AudioTrackGetParams,
+    params: AudioTrackGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AudioTrackGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/${identifier}/audio`, options) as APIPromise<{
         result: AudioTrackGetResponse;
@@ -110,6 +115,7 @@ export class AudioTracks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AudioTracks extends BaseAudioTracks {}
 
 export interface Audio {
   /**
@@ -147,7 +153,7 @@ export interface AudioTrackDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * A Cloudflare-generated unique identifier for a media item.
@@ -159,7 +165,7 @@ export interface AudioTrackCopyParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A string to uniquely identify the track amongst other audio track
@@ -180,7 +186,7 @@ export interface AudioTrackEditParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: A Cloudflare-generated unique identifier for a media item.
@@ -204,7 +210,7 @@ export interface AudioTrackGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AudioTracks {

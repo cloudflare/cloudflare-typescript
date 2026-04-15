@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseApps } from 'cloudflare/resources/magic-transit/apps';
+import { MagicTransit } from 'cloudflare/resources/magic-transit/magic-transit';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource apps', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseApps],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [MagicTransit],
+});
+
+const runTests = (client: PartialCloudflare<{ magicTransit: { apps: BaseApps } }>) => {
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9360388260/job/25765690361?pr=482#step:5:7212
   test.skip('create: only required params', async () => {
     const responsePromise = client.magicTransit.apps.create({
@@ -124,4 +142,7 @@ describe('resource apps', () => {
       type: 'Development',
     });
   });
-});
+};
+describe('resource apps', () => runTests(client));
+describe('resource apps (tree shakable, base)', () => runTests(partialClient));
+describe('resource apps (tree shakable, subresource)', () => runTests(parentPartialClient));

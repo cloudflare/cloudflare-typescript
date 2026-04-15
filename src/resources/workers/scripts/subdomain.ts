@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Subdomain extends APIResource {
+export class BaseSubdomain extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'subdomain'] = Object.freeze([
+    'workers',
+    'scripts',
+    'subdomain',
+  ] as const);
+
   /**
    * Enable or disable the Worker on the workers.dev subdomain.
    *
@@ -26,7 +32,7 @@ export class Subdomain extends APIResource {
     params: SubdomainCreateParams,
     options?: RequestOptions,
   ): APIPromise<SubdomainCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`, {
         body,
@@ -49,10 +55,10 @@ export class Subdomain extends APIResource {
    */
   delete(
     scriptName: string,
-    params: SubdomainDeleteParams,
+    params: SubdomainDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubdomainDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`,
@@ -75,10 +81,10 @@ export class Subdomain extends APIResource {
    */
   get(
     scriptName: string,
-    params: SubdomainGetParams,
+    params: SubdomainGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubdomainGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/subdomain`,
@@ -87,6 +93,7 @@ export class Subdomain extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Subdomain extends BaseSubdomain {}
 
 export interface SubdomainCreateResponse {
   /**
@@ -128,7 +135,7 @@ export interface SubdomainCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether the Worker should be available on the workers.dev subdomain.
@@ -146,14 +153,14 @@ export interface SubdomainDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SubdomainGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subdomain {

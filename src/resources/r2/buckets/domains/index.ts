@@ -2,6 +2,7 @@
 
 export {
   Custom,
+  BaseCustom,
   type CustomCreateResponse,
   type CustomUpdateResponse,
   type CustomListResponse,
@@ -13,9 +14,10 @@ export {
   type CustomDeleteParams,
   type CustomGetParams,
 } from './custom';
-export { Domains } from './domains';
+export { Domains, BaseDomains } from './domains';
 export {
   Managed,
+  BaseManaged,
   type ManagedUpdateResponse,
   type ManagedListResponse,
   type ManagedUpdateParams,

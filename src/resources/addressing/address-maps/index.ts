@@ -2,6 +2,7 @@
 
 export {
   Accounts,
+  BaseAccounts,
   type AccountUpdateResponse,
   type AccountDeleteResponse,
   type AccountUpdateParams,
@@ -9,6 +10,7 @@ export {
 } from './accounts';
 export {
   AddressMaps,
+  BaseAddressMaps,
   type AddressMap,
   type Kind,
   type AddressMapCreateResponse,
@@ -23,6 +25,7 @@ export {
 } from './address-maps';
 export {
   IPs,
+  BaseIPs,
   type IPUpdateResponse,
   type IPDeleteResponse,
   type IPUpdateParams,
@@ -30,6 +33,7 @@ export {
 } from './ips';
 export {
   Zones,
+  BaseZones,
   type ZoneUpdateResponse,
   type ZoneDeleteResponse,
   type ZoneUpdateParams,

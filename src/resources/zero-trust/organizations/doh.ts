@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class DOH extends APIResource {
+export class BaseDOH extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'organizations', 'doh'] = Object.freeze([
+    'zeroTrust',
+    'organizations',
+    'doh',
+  ] as const);
+
   /**
    * Updates the DoH settings for your Zero Trust organization.
    *
@@ -16,8 +22,11 @@ export class DOH extends APIResource {
    * );
    * ```
    */
-  update(params: DOHUpdateParams, options?: RequestOptions): APIPromise<DOHUpdateResponse> {
-    const { account_id, ...body } = params;
+  update(
+    params: DOHUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DOHUpdateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/access/organizations/doh`, {
         body,
@@ -36,8 +45,8 @@ export class DOH extends APIResource {
    * });
    * ```
    */
-  get(params: DOHGetParams, options?: RequestOptions): APIPromise<DOHGetResponse> {
-    const { account_id } = params;
+  get(params: DOHGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<DOHGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/organizations/doh`, options) as APIPromise<{
         result: DOHGetResponse;
@@ -45,6 +54,7 @@ export class DOH extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DOH extends BaseDOH {}
 
 export interface DOHUpdateResponse {
   /**
@@ -119,7 +129,7 @@ export interface DOHUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The duration the DoH JWT is valid for. Must be in the format `300ms`
@@ -139,7 +149,7 @@ export interface DOHGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace DOH {

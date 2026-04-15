@@ -9,7 +9,14 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Devices extends APIResource {
+export class BaseDevices extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'fleetStatus', 'devices'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'fleetStatus',
+    'devices',
+  ] as const);
+
   /**
    * List details for devices using WARP
    *
@@ -33,7 +40,7 @@ export class Devices extends APIResource {
     params: DeviceListParams,
     options?: RequestOptions,
   ): PagePromise<DeviceListResponsesV4PagePaginationArray, DeviceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/fleet-status/devices`,
       V4PagePaginationArray<DeviceListResponse>,
@@ -41,6 +48,7 @@ export class Devices extends APIResource {
     );
   }
 }
+export class Devices extends BaseDevices {}
 
 export type DeviceListResponsesV4PagePaginationArray = V4PagePaginationArray<DeviceListResponse>;
 
@@ -329,7 +337,7 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Time range beginning in ISO format

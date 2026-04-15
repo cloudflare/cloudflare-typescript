@@ -2,4 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 
-export class Account extends APIResource {}
+export class BaseAccount extends APIResource {
+  static override readonly _key: readonly ['dns', 'usage', 'account'] = Object.freeze([
+    'dns',
+    'usage',
+    'account',
+  ] as const);
+}
+export class Account extends BaseAccount {}

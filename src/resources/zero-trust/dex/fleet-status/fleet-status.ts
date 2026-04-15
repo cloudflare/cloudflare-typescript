@@ -4,6 +4,7 @@ import { APIResource } from '../../../../core/resource';
 import * as FleetStatusAPI from './fleet-status';
 import * as DevicesAPI from './devices';
 import {
+  BaseDevices,
   DeviceListParams,
   DeviceListResponse,
   DeviceListResponsesV4PagePaginationArray,
@@ -13,8 +14,12 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class FleetStatus extends APIResource {
-  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
+export class BaseFleetStatus extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'fleetStatus'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'fleetStatus',
+  ] as const);
 
   /**
    * List details for live (up to 60 minutes) devices using WARP
@@ -29,7 +34,7 @@ export class FleetStatus extends APIResource {
    * ```
    */
   live(params: FleetStatusLiveParams, options?: RequestOptions): APIPromise<FleetStatusLiveResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/fleet-status/live`, {
         query,
@@ -55,7 +60,7 @@ export class FleetStatus extends APIResource {
     params: FleetStatusOverTimeParams,
     options?: RequestOptions,
   ): APIPromise<FleetStatusOverTimeResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/dex/fleet-status/over-time`, {
         query,
@@ -63,6 +68,9 @@ export class FleetStatus extends APIResource {
       }) as APIPromise<{ result: FleetStatusOverTimeResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class FleetStatus extends BaseFleetStatus {
+  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
 }
 
 export interface LiveStat {
@@ -148,7 +156,7 @@ export interface FleetStatusLiveParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Number of minutes before current time
@@ -160,7 +168,7 @@ export interface FleetStatusOverTimeParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Time range beginning in ISO format
@@ -184,6 +192,7 @@ export interface FleetStatusOverTimeParams {
 }
 
 FleetStatus.Devices = Devices;
+FleetStatus.BaseDevices = BaseDevices;
 
 export declare namespace FleetStatus {
   export {
@@ -196,6 +205,7 @@ export declare namespace FleetStatus {
 
   export {
     Devices as Devices,
+    BaseDevices as BaseDevices,
     type DeviceListResponse as DeviceListResponse,
     type DeviceListResponsesV4PagePaginationArray as DeviceListResponsesV4PagePaginationArray,
     type DeviceListParams as DeviceListParams,

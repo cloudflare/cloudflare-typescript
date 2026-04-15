@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseASNs } from 'cloudflare/resources/radar/entities/asns';
+import { Entities } from 'cloudflare/resources/radar/entities/entities';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource asns', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseASNs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Entities],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { entities: { asns: BaseASNs } } }>) => {
   test('list', async () => {
     const responsePromise = client.radar.entities.asns.list();
     const rawResponse = await responsePromise.asResponse();
@@ -136,4 +154,7 @@ describe('resource asns', () => {
       client.radar.entities.asns.rel(3, { asn2: 0, format: 'JSON' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource asns', () => runTests(client));
+describe('resource asns (tree shakable, base)', () => runTests(partialClient));
+describe('resource asns (tree shakable, subresource)', () => runTests(parentPartialClient));

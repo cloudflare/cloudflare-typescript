@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 import * as ContentAPI from './content';
-import { Content, ContentGetParams } from './content';
+import { BaseContent, Content, ContentGetParams } from './content';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   RuleDeleteParams,
   RuleDeleteResponse,
   RuleListParams,
@@ -20,9 +21,8 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class Snippets extends APIResource {
-  content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+export class BaseSnippets extends APIResource {
+  static override readonly _key: readonly ['snippets'] = Object.freeze(['snippets'] as const);
 
   /**
    * Creates or updates a snippet belonging to the zone.
@@ -32,7 +32,7 @@ export class Snippets extends APIResource {
     params: SnippetUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SnippetUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(
         path`/zones/${zone_id}/snippets/${snippetName}`,
@@ -45,10 +45,10 @@ export class Snippets extends APIResource {
    * Fetches all snippets belonging to the zone.
    */
   list(
-    params: SnippetListParams,
+    params: SnippetListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/snippets`,
       V4PagePaginationArray<SnippetListResponse>,
@@ -61,10 +61,10 @@ export class Snippets extends APIResource {
    */
   delete(
     snippetName: string,
-    params: SnippetDeleteParams,
+    params: SnippetDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SnippetDeleteResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/snippets/${snippetName}`, options) as APIPromise<{
         result: SnippetDeleteResponse | null;
@@ -77,16 +77,20 @@ export class Snippets extends APIResource {
    */
   get(
     snippetName: string,
-    params: SnippetGetParams,
+    params: SnippetGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SnippetGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/snippets/${snippetName}`, options) as APIPromise<{
         result: SnippetGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Snippets extends BaseSnippets {
+  content: ContentAPI.Content = new ContentAPI.Content(this._client);
+  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
 export type SnippetListResponsesV4PagePaginationArray = V4PagePaginationArray<SnippetListResponse>;
@@ -160,7 +164,7 @@ export interface SnippetUpdateParams {
   /**
    * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Provide metadata about the snippet.
@@ -186,25 +190,27 @@ export interface SnippetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SnippetDeleteParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SnippetGetParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Snippets.Content = Content;
+Snippets.BaseContent = BaseContent;
 Snippets.Rules = Rules;
+Snippets.BaseRules = BaseRules;
 
 export declare namespace Snippets {
   export {
@@ -219,10 +225,11 @@ export declare namespace Snippets {
     type SnippetGetParams as SnippetGetParams,
   };
 
-  export { Content as Content, type ContentGetParams as ContentGetParams };
+  export { Content as Content, BaseContent as BaseContent, type ContentGetParams as ContentGetParams };
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,

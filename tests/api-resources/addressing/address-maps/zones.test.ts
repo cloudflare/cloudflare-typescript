@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AddressMaps } from 'cloudflare/resources/addressing/address-maps/address-maps';
+import { BaseZones } from 'cloudflare/resources/addressing/address-maps/zones';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource zones', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseZones],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AddressMaps],
+});
+
+const runTests = (client: PartialCloudflare<{ addressing: { addressMaps: { zones: BaseZones } } }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.addressing.addressMaps.zones.update('055817b111884e0227e1be16a0be6ee0', {
       zone_id: '8ac8489932db6327334c9b6d58544cfe',
@@ -52,4 +70,7 @@ describe('resource zones', () => {
       account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
-});
+};
+describe('resource zones', () => runTests(client));
+describe('resource zones (tree shakable, base)', () => runTests(partialClient));
+describe('resource zones (tree shakable, subresource)', () => runTests(parentPartialClient));

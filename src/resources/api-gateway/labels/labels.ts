@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ManagedAPI from './managed/managed';
-import { Managed, ManagedGetParams, ManagedGetResponse } from './managed/managed';
+import { BaseManaged, Managed, ManagedGetParams, ManagedGetResponse } from './managed/managed';
 import * as UserAPI from './user/user';
 import {
+  BaseUser,
   User,
   UserBulkCreateParams,
   UserBulkCreateResponse,
@@ -29,9 +30,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Labels extends APIResource {
-  user: UserAPI.User = new UserAPI.User(this._client);
-  managed: ManagedAPI.Managed = new ManagedAPI.Managed(this._client);
+export class BaseLabels extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'labels'] = Object.freeze([
+    'apiGateway',
+    'labels',
+  ] as const);
 
   /**
    * Retrieve all labels
@@ -47,16 +50,20 @@ export class Labels extends APIResource {
    * ```
    */
   list(
-    params: LabelListParams,
+    params: LabelListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LabelListResponsesV4PagePaginationArray, LabelListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/labels`,
       V4PagePaginationArray<LabelListResponse>,
       { query, ...options },
     );
   }
+}
+export class Labels extends BaseLabels {
+  user: UserAPI.User = new UserAPI.User(this._client);
+  managed: ManagedAPI.Managed = new ManagedAPI.Managed(this._client);
 }
 
 export type LabelListResponsesV4PagePaginationArray = V4PagePaginationArray<LabelListResponse>;
@@ -97,7 +104,7 @@ export interface LabelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -127,7 +134,9 @@ export interface LabelListParams extends V4PagePaginationArrayParams {
 }
 
 Labels.User = User;
+Labels.BaseUser = BaseUser;
 Labels.Managed = Managed;
+Labels.BaseManaged = BaseManaged;
 
 export declare namespace Labels {
   export {
@@ -138,6 +147,7 @@ export declare namespace Labels {
 
   export {
     User as User,
+    BaseUser as BaseUser,
     type UserUpdateResponse as UserUpdateResponse,
     type UserDeleteResponse as UserDeleteResponse,
     type UserBulkCreateResponse as UserBulkCreateResponse,
@@ -156,6 +166,7 @@ export declare namespace Labels {
 
   export {
     Managed as Managed,
+    BaseManaged as BaseManaged,
     type ManagedGetResponse as ManagedGetResponse,
     type ManagedGetParams as ManagedGetParams,
   };

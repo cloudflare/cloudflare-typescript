@@ -3,7 +3,13 @@
 import { APIResource } from '../../core/resource';
 import * as RulesetsAPI from './rulesets';
 
-export class Rules extends APIResource {}
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['rulesets', 'rules'] = Object.freeze([
+    'rulesets',
+    'rules',
+  ] as const);
+}
+export class Rules extends BaseRules {}
 
 export interface BlockRule {
   /**

@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseMemberships } from 'cloudflare/resources/memberships';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +11,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource memberships', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMemberships],
+});
+
+const runTests = (client: PartialCloudflare<{ memberships: BaseMemberships }>) => {
   test('update: only required params', async () => {
     const responsePromise = client.memberships.update('4536bcfad5faccb111b47003c79917fa', {
       status: 'accepted',
@@ -78,4 +88,6 @@ describe('resource memberships', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource memberships', () => runTests(client));
+describe('resource memberships (tree shakable, base)', () => runTests(partialClient));

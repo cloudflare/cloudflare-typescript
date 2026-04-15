@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Default extends APIResource {
+export class BaseDefault extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'default'] = Object.freeze(['zaraz', 'default'] as const);
+
   /**
    * Gets default Zaraz configuration for a zone.
    *
@@ -17,8 +19,11 @@ export class Default extends APIResource {
    * });
    * ```
    */
-  get(params: DefaultGetParams, options?: RequestOptions): APIPromise<ConfigAPI.Configuration> {
-    const { zone_id } = params;
+  get(
+    params: DefaultGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigAPI.Configuration> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/settings/zaraz/default`, options) as APIPromise<{
         result: ConfigAPI.Configuration;
@@ -26,12 +31,13 @@ export class Default extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Default extends BaseDefault {}
 
 export interface DefaultGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Default {

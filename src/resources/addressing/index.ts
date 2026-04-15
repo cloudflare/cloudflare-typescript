@@ -2,6 +2,7 @@
 
 export {
   AddressMaps,
+  BaseAddressMaps,
   type AddressMap,
   type Kind,
   type AddressMapCreateResponse,
@@ -14,15 +15,17 @@ export {
   type AddressMapGetParams,
   type AddressMapsSinglePage,
 } from './address-maps/index';
-export { Addressing } from './addressing';
+export { Addressing, BaseAddressing } from './addressing';
 export {
   LOADocuments,
+  BaseLOADocuments,
   type LOADocumentCreateResponse,
   type LOADocumentCreateParams,
   type LOADocumentGetParams,
 } from './loa-documents';
 export {
   Prefixes,
+  BasePrefixes,
   type Prefix,
   type PrefixDeleteResponse,
   type PrefixCreateParams,
@@ -34,6 +37,7 @@ export {
 } from './prefixes/index';
 export {
   RegionalHostnames,
+  BaseRegionalHostnames,
   type RegionalHostnameCreateResponse,
   type RegionalHostnameListResponse,
   type RegionalHostnameDeleteResponse,
@@ -48,6 +52,7 @@ export {
 } from './regional-hostnames/index';
 export {
   Services,
+  BaseServices,
   type ServiceListResponse,
   type ServiceListParams,
   type ServiceListResponsesSinglePage,

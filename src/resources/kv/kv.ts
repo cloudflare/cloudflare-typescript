@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as NamespacesAPI from './namespaces/namespaces';
 import {
+  BaseNamespaces,
   Namespace,
   NamespaceBulkDeleteParams,
   NamespaceBulkDeleteResponse,
@@ -20,15 +21,20 @@ import {
   NamespacesV4PagePaginationArray,
 } from './namespaces/namespaces';
 
-export class KV extends APIResource {
+export class BaseKV extends APIResource {
+  static override readonly _key: readonly ['kv'] = Object.freeze(['kv'] as const);
+}
+export class KV extends BaseKV {
   namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
 }
 
 KV.Namespaces = Namespaces;
+KV.BaseNamespaces = BaseNamespaces;
 
 export declare namespace KV {
   export {
     Namespaces as Namespaces,
+    BaseNamespaces as BaseNamespaces,
     type Namespace as Namespace,
     type NamespaceDeleteResponse as NamespaceDeleteResponse,
     type NamespaceBulkDeleteResponse as NamespaceBulkDeleteResponse,

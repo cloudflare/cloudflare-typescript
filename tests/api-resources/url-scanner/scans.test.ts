@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseScans } from 'cloudflare/resources/url-scanner/scans';
+import { URLScanner } from 'cloudflare/resources/url-scanner/url-scanner';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource scans', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseScans],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [URLScanner],
+});
+
+const runTests = (client: PartialCloudflare<{ urlScanner: { scans: BaseScans } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.urlScanner.scans.create({
       account_id: 'account_id',
@@ -149,4 +167,7 @@ describe('resource scans', () => {
       resolution: 'desktop',
     });
   });
-});
+};
+describe('resource scans', () => runTests(client));
+describe('resource scans (tree shakable, base)', () => runTests(partialClient));
+describe('resource scans (tree shakable, subresource)', () => runTests(parentPartialClient));

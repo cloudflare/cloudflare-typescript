@@ -4,7 +4,9 @@ import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class Search extends APIResource {
+export class BaseSearch extends APIResource {
+  static override readonly _key: readonly ['radar', 'search'] = Object.freeze(['radar', 'search'] as const);
+
   /**
    * Searches for locations, autonomous systems, reports, bots, certificate logs,
    * certificate authorities, industries and verticals. Location names can be
@@ -27,6 +29,7 @@ export class Search extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Search extends BaseSearch {}
 
 export interface SearchGlobalResponse {
   search: Array<SearchGlobalResponse.Search>;

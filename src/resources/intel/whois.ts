@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Whois extends APIResource {
+export class BaseWhois extends APIResource {
+  static override readonly _key: readonly ['intel', 'whois'] = Object.freeze(['intel', 'whois'] as const);
+
   /**
    * Retrieves WHOIS registration data for a domain, including registrant and
    * nameserver information.
@@ -17,8 +19,11 @@ export class Whois extends APIResource {
    * });
    * ```
    */
-  get(params: WhoisGetParams, options?: RequestOptions): APIPromise<WhoisGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    params: WhoisGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WhoisGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/whois`, { query, ...options }) as APIPromise<{
         result: WhoisGetResponse;
@@ -26,6 +31,7 @@ export class Whois extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Whois extends BaseWhois {}
 
 export interface Whois {
   created_date?: string;
@@ -227,7 +233,7 @@ export interface WhoisGetParams {
   /**
    * Path param: Use to uniquely identify or reference the resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

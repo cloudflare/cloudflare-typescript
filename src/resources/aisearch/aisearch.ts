@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as TokensAPI from './tokens';
 import {
+  BaseTokens,
   TokenCreateParams,
   TokenCreateResponse,
   TokenDeleteParams,
@@ -18,6 +19,7 @@ import {
 } from './tokens';
 import * as InstancesAPI from './instances/instances';
 import {
+  BaseInstances,
   InstanceChatCompletionsParams,
   InstanceChatCompletionsResponse,
   InstanceCreateParams,
@@ -38,17 +40,23 @@ import {
   Instances,
 } from './instances/instances';
 
-export class AISearch extends APIResource {
+export class BaseAISearch extends APIResource {
+  static override readonly _key: readonly ['aiSearch'] = Object.freeze(['aiSearch'] as const);
+}
+export class AISearch extends BaseAISearch {
   instances: InstancesAPI.Instances = new InstancesAPI.Instances(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 }
 
 AISearch.Instances = Instances;
+AISearch.BaseInstances = BaseInstances;
 AISearch.Tokens = Tokens;
+AISearch.BaseTokens = BaseTokens;
 
 export declare namespace AISearch {
   export {
     Instances as Instances,
+    BaseInstances as BaseInstances,
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceUpdateResponse as InstanceUpdateResponse,
     type InstanceListResponse as InstanceListResponse,
@@ -70,6 +78,7 @@ export declare namespace AISearch {
 
   export {
     Tokens as Tokens,
+    BaseTokens as BaseTokens,
     type TokenCreateResponse as TokenCreateResponse,
     type TokenUpdateResponse as TokenUpdateResponse,
     type TokenListResponse as TokenListResponse,

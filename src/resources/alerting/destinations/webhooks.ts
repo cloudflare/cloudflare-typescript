@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Webhooks extends APIResource {
+export class BaseWebhooks extends APIResource {
+  static override readonly _key: readonly ['alerting', 'destinations', 'webhooks'] = Object.freeze([
+    'alerting',
+    'destinations',
+    'webhooks',
+  ] as const);
+
   /**
    * Creates a new webhook destination.
    *
@@ -21,7 +27,7 @@ export class Webhooks extends APIResource {
    * ```
    */
   create(params: WebhookCreateParams, options?: RequestOptions): APIPromise<WebhookCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/alerting/v3/destinations/webhooks`, {
         body,
@@ -51,7 +57,7 @@ export class Webhooks extends APIResource {
     params: WebhookUpdateParams,
     options?: RequestOptions,
   ): APIPromise<WebhookUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookID}`, {
         body,
@@ -73,8 +79,11 @@ export class Webhooks extends APIResource {
    * }
    * ```
    */
-  list(params: WebhookListParams, options?: RequestOptions): PagePromise<WebhooksSinglePage, Webhooks> {
-    const { account_id } = params;
+  list(
+    params: WebhookListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<WebhooksSinglePage, Webhooks> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/alerting/v3/destinations/webhooks`,
       SinglePage<Webhooks>,
@@ -96,10 +105,10 @@ export class Webhooks extends APIResource {
    */
   delete(
     webhookID: string,
-    params: WebhookDeleteParams,
+    params: WebhookDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WebhookDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookID}`,
       options,
@@ -118,8 +127,12 @@ export class Webhooks extends APIResource {
    *   );
    * ```
    */
-  get(webhookID: string, params: WebhookGetParams, options?: RequestOptions): APIPromise<Webhooks> {
-    const { account_id } = params;
+  get(
+    webhookID: string,
+    params: WebhookGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Webhooks> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookID}`,
@@ -128,6 +141,7 @@ export class Webhooks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Webhooks extends BaseWebhooks {}
 
 export type WebhooksSinglePage = SinglePage<Webhooks>;
 
@@ -214,7 +228,7 @@ export interface WebhookCreateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the webhook destination. This will be included in the
@@ -239,7 +253,7 @@ export interface WebhookUpdateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the webhook destination. This will be included in the
@@ -264,21 +278,21 @@ export interface WebhookListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Webhooks {

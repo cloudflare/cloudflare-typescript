@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as DatabaseAPI from './database/database';
 import {
+  BaseDatabase,
   Database,
   DatabaseCreateParams,
   DatabaseDeleteParams,
@@ -25,7 +26,10 @@ import {
   QueryResultsSinglePage,
 } from './database/database';
 
-export class D1Resource extends APIResource {
+export class BaseD1Resource extends APIResource {
+  static override readonly _key: readonly ['d1'] = Object.freeze(['d1'] as const);
+}
+export class D1Resource extends BaseD1Resource {
   database: DatabaseAPI.Database = new DatabaseAPI.Database(this._client);
 }
 
@@ -84,12 +88,14 @@ export namespace D1 {
 }
 
 D1Resource.Database = Database;
+D1Resource.BaseDatabase = BaseDatabase;
 
 export declare namespace D1Resource {
   export { type D1 as D1 };
 
   export {
     Database as Database,
+    BaseDatabase as BaseDatabase,
     type QueryResult as QueryResult,
     type DatabaseListResponse as DatabaseListResponse,
     type DatabaseDeleteResponse as DatabaseDeleteResponse,

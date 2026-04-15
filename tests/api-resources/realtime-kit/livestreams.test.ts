@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseLivestreams } from 'cloudflare/resources/realtime-kit/livestreams';
+import { RealtimeKit } from 'cloudflare/resources/realtime-kit/realtime-kit';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource livestreams', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLivestreams],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [RealtimeKit],
+});
+
+const runTests = (client: PartialCloudflare<{ realtimeKit: { livestreams: BaseLivestreams } }>) => {
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('createIndependentLivestream: only required params', async () => {
     const responsePromise = client.realtimeKit.livestreams.createIndependentLivestream('app_id', {
@@ -252,4 +270,7 @@ describe('resource livestreams', () => {
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
     );
   });
-});
+};
+describe('resource livestreams', () => runTests(client));
+describe('resource livestreams (tree shakable, base)', () => runTests(partialClient));
+describe('resource livestreams (tree shakable, subresource)', () => runTests(parentPartialClient));

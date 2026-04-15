@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Resources } from './resources/index';
+export { Resources, BaseResources } from './resources/index';
 export {
   User,
+  BaseUser,
   type UserUpdateResponse,
   type UserDeleteResponse,
   type UserBulkCreateResponse,

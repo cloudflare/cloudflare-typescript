@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Applications } from 'cloudflare/resources/zero-trust/access/applications/applications';
+import { BasePolicies } from 'cloudflare/resources/zero-trust/access/applications/policies';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource policies', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePolicies],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Applications],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { access: { applications: { policies: BasePolicies } } } }>,
+) => {
   // TODO: investigate broken test
   test.skip('create', async () => {
     const responsePromise = client.zeroTrust.access.applications.policies.create(
@@ -139,4 +159,7 @@ describe('resource policies', () => {
       { app_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', account_id: 'account_id' },
     );
   });
-});
+};
+describe('resource policies', () => runTests(client));
+describe('resource policies (tree shakable, base)', () => runTests(partialClient));
+describe('resource policies (tree shakable, subresource)', () => runTests(parentPartialClient));

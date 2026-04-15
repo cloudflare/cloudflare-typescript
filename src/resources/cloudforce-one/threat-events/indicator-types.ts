@@ -5,18 +5,26 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IndicatorTypes extends APIResource {
+export class BaseIndicatorTypes extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'indicatorTypes'] = Object.freeze(
+    ['cloudforceOne', 'threatEvents', 'indicatorTypes'] as const,
+  );
+
   /**
    * This Method is deprecated. Please use /events/dataset/:dataset_id/indicatorTypes
    * instead.
    *
    * @deprecated
    */
-  list(params: IndicatorTypeListParams, options?: RequestOptions): APIPromise<IndicatorTypeListResponse> {
-    const { account_id } = params;
+  list(
+    params: IndicatorTypeListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IndicatorTypeListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/indicatorTypes`, options);
   }
 }
+export class IndicatorTypes extends BaseIndicatorTypes {}
 
 export interface IndicatorTypeListResponse {
   items: IndicatorTypeListResponse.Items;
@@ -34,7 +42,7 @@ export interface IndicatorTypeListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace IndicatorTypes {

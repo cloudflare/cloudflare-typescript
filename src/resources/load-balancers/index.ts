@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { LoadBalancers } from './load-balancers';
+export { LoadBalancers, BaseLoadBalancers } from './load-balancers';
 export {
   MonitorGroups,
+  BaseMonitorGroups,
   type MonitorGroup,
   type MonitorGroupCreateParams,
   type MonitorGroupUpdateParams,
@@ -14,6 +15,7 @@ export {
 } from './monitor-groups';
 export {
   Monitors,
+  BaseMonitors,
   type Monitor,
   type MonitorDeleteResponse,
   type MonitorCreateParams,
@@ -26,6 +28,7 @@ export {
 } from './monitors/index';
 export {
   Pools,
+  BasePools,
   type Pool,
   type PoolDeleteResponse,
   type PoolCreateParams,
@@ -37,9 +40,10 @@ export {
   type PoolGetParams,
   type PoolsSinglePage,
 } from './pools/index';
-export { Previews, type PreviewGetResponse, type PreviewGetParams } from './previews';
+export { Previews, BasePreviews, type PreviewGetResponse, type PreviewGetParams } from './previews';
 export {
   Regions,
+  BaseRegions,
   type RegionListResponse,
   type RegionGetResponse,
   type RegionListParams,
@@ -47,6 +51,7 @@ export {
 } from './regions';
 export {
   Searches,
+  BaseSearches,
   type SearchListResponse,
   type SearchListParams,
   type SearchListResponsesV4PagePagination,

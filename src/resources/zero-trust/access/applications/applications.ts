@@ -5,6 +5,7 @@ import * as ApplicationsAPI from './applications';
 import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
 import {
+  BaseCAs,
   CA,
   CACreateParams,
   CADeleteParams,
@@ -21,6 +22,7 @@ import {
   AnyValidServiceTokenRule,
   AuthenticationMethodRule,
   AzureGroupRule,
+  BasePolicies,
   CertificateRule,
   CountryRule,
   DomainRule,
@@ -51,6 +53,7 @@ import {
 } from './policies';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   SettingEditParams,
   SettingEditResponse,
   SettingUpdateParams,
@@ -59,6 +62,7 @@ import {
 } from './settings';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import {
+  BaseUserPolicyChecks,
   UserPolicyCheckGeo,
   UserPolicyCheckListParams,
   UserPolicyCheckListResponse,
@@ -66,6 +70,7 @@ import {
 } from './user-policy-checks';
 import * as PolicyTestsAPI from './policy-tests/policy-tests';
 import {
+  BasePolicyTests,
   PolicyTestCreateParams,
   PolicyTestCreateResponse,
   PolicyTestGetParams,
@@ -82,14 +87,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Applications extends APIResource {
-  cas: CAsAPI.CAs = new CAsAPI.CAs(this._client);
-  userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(
-    this._client,
-  );
-  policies: ApplicationsPoliciesAPI.Policies = new ApplicationsPoliciesAPI.Policies(this._client);
-  policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+export class BaseApplications extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'applications',
+  ] as const);
 
   /**
    * Adds a new application to Access.
@@ -105,7 +108,11 @@ export class Applications extends APIResource {
    * ```
    */
   create(params: ApplicationCreateParams, options?: RequestOptions): APIPromise<ApplicationCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -151,7 +158,11 @@ export class Applications extends APIResource {
     params: ApplicationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ApplicationUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -193,7 +204,11 @@ export class Applications extends APIResource {
     params: ApplicationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ApplicationListResponsesV4PagePaginationArray, ApplicationListResponse> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -234,7 +249,8 @@ export class Applications extends APIResource {
     params: ApplicationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ApplicationDeleteResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -276,7 +292,8 @@ export class Applications extends APIResource {
     params: ApplicationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ApplicationGetResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -318,7 +335,8 @@ export class Applications extends APIResource {
     params: ApplicationRevokeTokensParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ApplicationRevokeTokensResponse | null> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -342,6 +360,15 @@ export class Applications extends APIResource {
       ) as APIPromise<{ result: ApplicationRevokeTokensResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Applications extends BaseApplications {
+  cas: CAsAPI.CAs = new CAsAPI.CAs(this._client);
+  userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(
+    this._client,
+  );
+  policies: ApplicationsPoliciesAPI.Policies = new ApplicationsPoliciesAPI.Policies(this._client);
+  policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
 export type ApplicationListResponsesV4PagePaginationArray = V4PagePaginationArray<ApplicationListResponse>;
@@ -32909,10 +32936,15 @@ export interface ApplicationRevokeTokensParams {
 }
 
 Applications.CAs = CAs;
+Applications.BaseCAs = BaseCAs;
 Applications.UserPolicyChecks = UserPolicyChecks;
+Applications.BaseUserPolicyChecks = BaseUserPolicyChecks;
 Applications.Policies = Policies;
+Applications.BasePolicies = BasePolicies;
 Applications.PolicyTests = PolicyTests;
+Applications.BasePolicyTests = BasePolicyTests;
 Applications.Settings = Settings;
+Applications.BaseSettings = BaseSettings;
 
 export declare namespace Applications {
   export {
@@ -32952,6 +32984,7 @@ export declare namespace Applications {
 
   export {
     CAs as CAs,
+    BaseCAs as BaseCAs,
     type CA as CA,
     type CADeleteResponse as CADeleteResponse,
     type CAsV4PagePaginationArray as CAsV4PagePaginationArray,
@@ -32963,6 +32996,7 @@ export declare namespace Applications {
 
   export {
     UserPolicyChecks as UserPolicyChecks,
+    BaseUserPolicyChecks as BaseUserPolicyChecks,
     type UserPolicyCheckGeo as UserPolicyCheckGeo,
     type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
     type UserPolicyCheckListParams as UserPolicyCheckListParams,
@@ -32970,6 +33004,7 @@ export declare namespace Applications {
 
   export {
     Policies as Policies,
+    BasePolicies as BasePolicies,
     type AccessDevicePostureRule as AccessDevicePostureRule,
     type AccessRule as AccessRule,
     type AnyValidServiceTokenRule as AnyValidServiceTokenRule,
@@ -33005,6 +33040,7 @@ export declare namespace Applications {
 
   export {
     PolicyTests as PolicyTests,
+    BasePolicyTests as BasePolicyTests,
     type PolicyTestCreateResponse as PolicyTestCreateResponse,
     type PolicyTestGetResponse as PolicyTestGetResponse,
     type PolicyTestCreateParams as PolicyTestCreateParams,
@@ -33013,6 +33049,7 @@ export declare namespace Applications {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingUpdateResponse as SettingUpdateResponse,
     type SettingEditResponse as SettingEditResponse,
     type SettingUpdateParams as SettingUpdateParams,

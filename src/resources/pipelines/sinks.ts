@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Sinks extends APIResource {
+export class BaseSinks extends APIResource {
+  static override readonly _key: readonly ['pipelines', 'sinks'] = Object.freeze([
+    'pipelines',
+    'sinks',
+  ] as const);
+
   /**
    * Create a new Sink.
    *
@@ -20,7 +25,7 @@ export class Sinks extends APIResource {
    * ```
    */
   create(params: SinkCreateParams, options?: RequestOptions): APIPromise<SinkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pipelines/v1/sinks`, {
         body,
@@ -43,10 +48,10 @@ export class Sinks extends APIResource {
    * ```
    */
   list(
-    params: SinkListParams,
+    params: SinkListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SinkListResponsesV4PagePaginationArray, SinkListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pipelines/v1/sinks`,
       V4PagePaginationArray<SinkListResponse>,
@@ -65,8 +70,12 @@ export class Sinks extends APIResource {
    * );
    * ```
    */
-  delete(sinkID: string, params: SinkDeleteParams, options?: RequestOptions): APIPromise<SinkDeleteResponse> {
-    const { account_id, force } = params;
+  delete(
+    sinkID: string,
+    params: SinkDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SinkDeleteResponse> {
+    const { account_id = this._client.accountID, force } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/pipelines/v1/sinks/${sinkID}`, {
         query: { force },
@@ -86,8 +95,12 @@ export class Sinks extends APIResource {
    * );
    * ```
    */
-  get(sinkID: string, params: SinkGetParams, options?: RequestOptions): APIPromise<SinkGetResponse> {
-    const { account_id } = params;
+  get(
+    sinkID: string,
+    params: SinkGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SinkGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/pipelines/v1/sinks/${sinkID}`, options) as APIPromise<{
         result: SinkGetResponse;
@@ -95,6 +108,7 @@ export class Sinks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Sinks extends BaseSinks {}
 
 export type SinkListResponsesV4PagePaginationArray = V4PagePaginationArray<SinkListResponse>;
 
@@ -1170,7 +1184,7 @@ export interface SinkCreateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Defines the name of the Sink.
@@ -1538,7 +1552,7 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1550,7 +1564,7 @@ export interface SinkDeleteParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Delete sink forcefully, including deleting any dependent pipelines.
@@ -1562,7 +1576,7 @@ export interface SinkGetParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Sinks {

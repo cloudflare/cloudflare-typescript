@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as ProjectsAPI from './projects/projects';
 import {
+  BaseProjects,
   Deployment,
   Project,
   ProjectCreateParams,
@@ -18,15 +19,20 @@ import {
   Stage,
 } from './projects/projects';
 
-export class Pages extends APIResource {
+export class BasePages extends APIResource {
+  static override readonly _key: readonly ['pages'] = Object.freeze(['pages'] as const);
+}
+export class Pages extends BasePages {
   projects: ProjectsAPI.Projects = new ProjectsAPI.Projects(this._client);
 }
 
 Pages.Projects = Projects;
+Pages.BaseProjects = BaseProjects;
 
 export declare namespace Pages {
   export {
     Projects as Projects,
+    BaseProjects as BaseProjects,
     type Deployment as Deployment,
     type Project as Project,
     type Stage as Stage,

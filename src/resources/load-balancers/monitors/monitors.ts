@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as PreviewsAPI from './previews';
-import { PreviewCreateParams, PreviewCreateResponse, Previews } from './previews';
+import { BasePreviews, PreviewCreateParams, PreviewCreateResponse, Previews } from './previews';
 import * as ReferencesAPI from './references';
 import {
+  BaseReferences,
   ReferenceGetParams,
   ReferenceGetResponse,
   ReferenceGetResponsesSinglePage,
@@ -15,9 +16,11 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Monitors extends APIResource {
-  previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
-  references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
+export class BaseMonitors extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'monitors'] = Object.freeze([
+    'loadBalancers',
+    'monitors',
+  ] as const);
 
   /**
    * Create a configured monitor.
@@ -29,8 +32,8 @@ export class Monitors extends APIResource {
    * });
    * ```
    */
-  create(params: MonitorCreateParams, options?: RequestOptions): APIPromise<Monitor> {
-    const { account_id, ...body } = params;
+  create(params: MonitorCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Monitor> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/load_balancers/monitors`, {
         body,
@@ -51,7 +54,7 @@ export class Monitors extends APIResource {
    * ```
    */
   update(monitorID: string, params: MonitorUpdateParams, options?: RequestOptions): APIPromise<Monitor> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/load_balancers/monitors/${monitorID}`, {
         body,
@@ -73,8 +76,11 @@ export class Monitors extends APIResource {
    * }
    * ```
    */
-  list(params: MonitorListParams, options?: RequestOptions): PagePromise<MonitorsSinglePage, Monitor> {
-    const { account_id } = params;
+  list(
+    params: MonitorListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<MonitorsSinglePage, Monitor> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/load_balancers/monitors`,
       SinglePage<Monitor>,
@@ -95,10 +101,10 @@ export class Monitors extends APIResource {
    */
   delete(
     monitorID: string,
-    params: MonitorDeleteParams,
+    params: MonitorDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MonitorDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/load_balancers/monitors/${monitorID}`,
@@ -119,7 +125,7 @@ export class Monitors extends APIResource {
    * ```
    */
   edit(monitorID: string, params: MonitorEditParams, options?: RequestOptions): APIPromise<Monitor> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/load_balancers/monitors/${monitorID}`, {
         body,
@@ -139,8 +145,12 @@ export class Monitors extends APIResource {
    * );
    * ```
    */
-  get(monitorID: string, params: MonitorGetParams, options?: RequestOptions): APIPromise<Monitor> {
-    const { account_id } = params;
+  get(
+    monitorID: string,
+    params: MonitorGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Monitor> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/load_balancers/monitors/${monitorID}`,
@@ -148,6 +158,10 @@ export class Monitors extends APIResource {
       ) as APIPromise<{ result: Monitor }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Monitors extends BaseMonitors {
+  previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
+  references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
 }
 
 export type MonitorsSinglePage = SinglePage<Monitor>;
@@ -265,7 +279,7 @@ export interface MonitorCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -371,7 +385,7 @@ export interface MonitorUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -477,21 +491,21 @@ export interface MonitorListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MonitorDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MonitorEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -597,11 +611,13 @@ export interface MonitorGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Monitors.Previews = Previews;
+Monitors.BasePreviews = BasePreviews;
 Monitors.References = References;
+Monitors.BaseReferences = BaseReferences;
 
 export declare namespace Monitors {
   export {
@@ -618,12 +634,14 @@ export declare namespace Monitors {
 
   export {
     Previews as Previews,
+    BasePreviews as BasePreviews,
     type PreviewCreateResponse as PreviewCreateResponse,
     type PreviewCreateParams as PreviewCreateParams,
   };
 
   export {
     References as References,
+    BaseReferences as BaseReferences,
     type ReferenceGetResponse as ReferenceGetResponse,
     type ReferenceGetResponsesSinglePage as ReferenceGetResponsesSinglePage,
     type ReferenceGetParams as ReferenceGetParams,

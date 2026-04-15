@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OutputsAPI from './outputs';
 import {
+  BaseOutputs,
   Output,
   OutputCreateParams,
   OutputDeleteParams,
@@ -16,8 +17,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class LiveInputs extends APIResource {
-  outputs: OutputsAPI.Outputs = new OutputsAPI.Outputs(this._client);
+export class BaseLiveInputs extends APIResource {
+  static override readonly _key: readonly ['stream', 'liveInputs'] = Object.freeze([
+    'stream',
+    'liveInputs',
+  ] as const);
 
   /**
    * Creates a live input, and returns credentials that you or your users can use to
@@ -30,8 +34,11 @@ export class LiveInputs extends APIResource {
    * });
    * ```
    */
-  create(params: LiveInputCreateParams, options?: RequestOptions): APIPromise<LiveInput> {
-    const { account_id, ...body } = params;
+  create(
+    params: LiveInputCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LiveInput> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/stream/live_inputs`, {
         body,
@@ -56,7 +63,7 @@ export class LiveInputs extends APIResource {
     params: LiveInputUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LiveInput> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
         body,
@@ -76,8 +83,11 @@ export class LiveInputs extends APIResource {
    * });
    * ```
    */
-  list(params: LiveInputListParams, options?: RequestOptions): APIPromise<LiveInputListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: LiveInputListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LiveInputListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/live_inputs`, {
         query,
@@ -100,10 +110,10 @@ export class LiveInputs extends APIResource {
    */
   delete(
     liveInputIdentifier: string,
-    params: LiveInputDeleteParams,
+    params: LiveInputDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -123,10 +133,10 @@ export class LiveInputs extends APIResource {
    */
   get(
     liveInputIdentifier: string,
-    params: LiveInputGetParams,
+    params: LiveInputGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LiveInput> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`,
@@ -134,6 +144,9 @@ export class LiveInputs extends APIResource {
       ) as APIPromise<{ result: LiveInput }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class LiveInputs extends BaseLiveInputs {
+  outputs: OutputsAPI.Outputs = new OutputsAPI.Outputs(this._client);
 }
 
 /**
@@ -417,7 +430,7 @@ export interface LiveInputCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sets the creator ID asssociated with this live input.
@@ -499,7 +512,7 @@ export interface LiveInputUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sets the creator ID asssociated with this live input.
@@ -581,7 +594,7 @@ export interface LiveInputListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Includes the total number of videos associated with the submitted
@@ -594,17 +607,18 @@ export interface LiveInputDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LiveInputGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 LiveInputs.Outputs = Outputs;
+LiveInputs.BaseOutputs = BaseOutputs;
 
 export declare namespace LiveInputs {
   export {
@@ -619,6 +633,7 @@ export declare namespace LiveInputs {
 
   export {
     Outputs as Outputs,
+    BaseOutputs as BaseOutputs,
     type Output as Output,
     type OutputsSinglePage as OutputsSinglePage,
     type OutputCreateParams as OutputCreateParams,

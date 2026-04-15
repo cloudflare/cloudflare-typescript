@@ -2,6 +2,7 @@
 
 export {
   Database,
+  BaseDatabase,
   type QueryResult,
   type DatabaseListResponse,
   type DatabaseDeleteResponse,
@@ -24,6 +25,7 @@ export {
 } from './database';
 export {
   TimeTravel,
+  BaseTimeTravel,
   type TimeTravelGetBookmarkResponse,
   type TimeTravelRestoreResponse,
   type TimeTravelGetBookmarkParams,

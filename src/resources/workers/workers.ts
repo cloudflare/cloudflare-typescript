@@ -8,9 +8,11 @@ import {
   AccountSettingUpdateParams,
   AccountSettingUpdateResponse,
   AccountSettings,
+  BaseAccountSettings,
 } from './account-settings';
 import * as DomainsAPI from './domains';
 import {
+  BaseDomains,
   DomainDeleteParams,
   DomainDeleteResponse,
   DomainGetParams,
@@ -24,6 +26,7 @@ import {
 } from './domains';
 import * as RoutesAPI from './routes';
 import {
+  BaseRoutes,
   RouteCreateParams,
   RouteCreateResponse,
   RouteDeleteParams,
@@ -39,6 +42,7 @@ import {
 } from './routes';
 import * as SubdomainsAPI from './subdomains';
 import {
+  BaseSubdomains,
   SubdomainDeleteParams,
   SubdomainGetParams,
   SubdomainGetResponse,
@@ -47,13 +51,14 @@ import {
   Subdomains,
 } from './subdomains';
 import * as AssetsAPI from './assets/assets';
-import { Assets } from './assets/assets';
+import { Assets, BaseAssets } from './assets/assets';
 import * as BetaAPI from './beta/beta';
-import { Beta } from './beta/beta';
+import { BaseBeta, Beta } from './beta/beta';
 import * as ObservabilityAPI from './observability/observability';
-import { Observability } from './observability/observability';
+import { BaseObservability, Observability } from './observability/observability';
 import * as ScriptsAPI from './scripts/scripts';
 import {
+  BaseScripts,
   Script,
   ScriptDeleteParams,
   ScriptDeleteResponse,
@@ -70,7 +75,10 @@ import {
   Scripts,
 } from './scripts/scripts';
 
-export class Workers extends APIResource {
+export class BaseWorkers extends APIResource {
+  static override readonly _key: readonly ['workers'] = Object.freeze(['workers'] as const);
+}
+export class Workers extends BaseWorkers {
   beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
@@ -227,13 +235,21 @@ export interface WorkerMetadataParam {
 }
 
 Workers.Beta = Beta;
+Workers.BaseBeta = BaseBeta;
 Workers.Routes = Routes;
+Workers.BaseRoutes = BaseRoutes;
 Workers.Assets = Assets;
+Workers.BaseAssets = BaseAssets;
 Workers.Scripts = Scripts;
+Workers.BaseScripts = BaseScripts;
 Workers.AccountSettings = AccountSettings;
+Workers.BaseAccountSettings = BaseAccountSettings;
 Workers.Domains = Domains;
+Workers.BaseDomains = BaseDomains;
 Workers.Subdomains = Subdomains;
+Workers.BaseSubdomains = BaseSubdomains;
 Workers.Observability = Observability;
+Workers.BaseObservability = BaseObservability;
 
 export declare namespace Workers {
   export {
@@ -242,10 +258,11 @@ export declare namespace Workers {
     type WorkerMetadata as WorkerMetadata,
   };
 
-  export { Beta as Beta };
+  export { Beta as Beta, BaseBeta as BaseBeta };
 
   export {
     Routes as Routes,
+    BaseRoutes as BaseRoutes,
     type RouteCreateResponse as RouteCreateResponse,
     type RouteUpdateResponse as RouteUpdateResponse,
     type RouteListResponse as RouteListResponse,
@@ -259,10 +276,11 @@ export declare namespace Workers {
     type RouteGetParams as RouteGetParams,
   };
 
-  export { Assets as Assets };
+  export { Assets as Assets, BaseAssets as BaseAssets };
 
   export {
     Scripts as Scripts,
+    BaseScripts as BaseScripts,
     type Script as Script,
     type ScriptSetting as ScriptSetting,
     type ScriptUpdateResponse as ScriptUpdateResponse,
@@ -280,6 +298,7 @@ export declare namespace Workers {
 
   export {
     AccountSettings as AccountSettings,
+    BaseAccountSettings as BaseAccountSettings,
     type AccountSettingUpdateResponse as AccountSettingUpdateResponse,
     type AccountSettingGetResponse as AccountSettingGetResponse,
     type AccountSettingUpdateParams as AccountSettingUpdateParams,
@@ -288,6 +307,7 @@ export declare namespace Workers {
 
   export {
     Domains as Domains,
+    BaseDomains as BaseDomains,
     type DomainUpdateResponse as DomainUpdateResponse,
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
@@ -301,6 +321,7 @@ export declare namespace Workers {
 
   export {
     Subdomains as Subdomains,
+    BaseSubdomains as BaseSubdomains,
     type SubdomainUpdateResponse as SubdomainUpdateResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainUpdateParams as SubdomainUpdateParams,
@@ -308,5 +329,5 @@ export declare namespace Workers {
     type SubdomainGetParams as SubdomainGetParams,
   };
 
-  export { Observability as Observability };
+  export { Observability as Observability, BaseObservability as BaseObservability };
 }

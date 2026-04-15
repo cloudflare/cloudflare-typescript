@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as DetailsAPI from './details';
-import { DetailGetParams, DetailGetResponse, Details, EventQuery } from './details';
+import { BaseDetails, DetailGetParams, DetailGetResponse, Details, EventQuery } from './details';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -12,8 +12,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Events extends APIResource {
-  details: DetailsAPI.Details = new DetailsAPI.Details(this._client);
+export class BaseEvents extends APIResource {
+  static override readonly _key: readonly ['waitingRooms', 'events'] = Object.freeze([
+    'waitingRooms',
+    'events',
+  ] as const);
 
   /**
    * Only available for the Waiting Room Advanced subscription. Creates an event for
@@ -37,7 +40,7 @@ export class Events extends APIResource {
    * ```
    */
   create(waitingRoomID: string, params: EventCreateParams, options?: RequestOptions): APIPromise<Event> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/events`, {
         body,
@@ -64,7 +67,7 @@ export class Events extends APIResource {
    * ```
    */
   update(eventID: string, params: EventUpdateParams, options?: RequestOptions): APIPromise<Event> {
-    const { zone_id, waiting_room_id, ...body } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`, {
         body,
@@ -89,10 +92,10 @@ export class Events extends APIResource {
    */
   list(
     waitingRoomID: string,
-    params: EventListParams,
+    params: EventListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EventsV4PagePaginationArray, Event> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/events`,
       V4PagePaginationArray<Event>,
@@ -119,7 +122,7 @@ export class Events extends APIResource {
     params: EventDeleteParams,
     options?: RequestOptions,
   ): APIPromise<EventDeleteResponse> {
-    const { zone_id, waiting_room_id } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`,
@@ -146,7 +149,7 @@ export class Events extends APIResource {
    * ```
    */
   edit(eventID: string, params: EventEditParams, options?: RequestOptions): APIPromise<Event> {
-    const { zone_id, waiting_room_id, ...body } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`, {
         body,
@@ -170,7 +173,7 @@ export class Events extends APIResource {
    * ```
    */
   get(eventID: string, params: EventGetParams, options?: RequestOptions): APIPromise<Event> {
-    const { zone_id, waiting_room_id } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}`,
@@ -178,6 +181,9 @@ export class Events extends APIResource {
       ) as APIPromise<{ result: Event }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Events extends BaseEvents {
+  details: DetailsAPI.Details = new DetailsAPI.Details(this._client);
 }
 
 export type EventsV4PagePaginationArray = V4PagePaginationArray<Event>;
@@ -294,7 +300,7 @@ export interface EventCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: An ISO 8601 timestamp that marks the end of the event.
@@ -403,7 +409,7 @@ export interface EventUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param
@@ -517,14 +523,14 @@ export interface EventListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface EventDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   waiting_room_id: string;
 }
@@ -533,7 +539,7 @@ export interface EventEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param
@@ -647,12 +653,13 @@ export interface EventGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   waiting_room_id: string;
 }
 
 Events.Details = Details;
+Events.BaseDetails = BaseDetails;
 
 export declare namespace Events {
   export {
@@ -669,6 +676,7 @@ export declare namespace Events {
 
   export {
     Details as Details,
+    BaseDetails as BaseDetails,
     type EventQuery as EventQuery,
     type DetailGetResponse as DetailGetResponse,
     type DetailGetParams as DetailGetParams,

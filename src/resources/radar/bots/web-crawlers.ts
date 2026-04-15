@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class WebCrawlers extends APIResource {
+export class BaseWebCrawlers extends APIResource {
+  static override readonly _key: readonly ['radar', 'bots', 'webCrawlers'] = Object.freeze([
+    'radar',
+    'bots',
+    'webCrawlers',
+  ] as const);
+
   /**
    * Retrieves an aggregated summary of HTTP requests from crawlers, grouped by the
    * specified dimension.
@@ -71,6 +77,7 @@ export class WebCrawlers extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class WebCrawlers extends BaseWebCrawlers {}
 
 export interface WebCrawlerSummaryResponse {
   /**

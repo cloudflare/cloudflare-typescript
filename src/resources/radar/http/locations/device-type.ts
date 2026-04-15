@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class DeviceType extends APIResource {
+export class BaseDeviceType extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'locations', 'deviceType'] = Object.freeze([
+    'radar',
+    'http',
+    'locations',
+    'deviceType',
+  ] as const);
+
   /**
    * Retrieves the top locations, by HTTP requests, of the requested device type.
    *
@@ -30,6 +37,7 @@ export class DeviceType extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DeviceType extends BaseDeviceType {}
 
 export interface DeviceTypeGetResponse {
   /**

@@ -7,7 +7,9 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class SiteInfo extends APIResource {
+export class BaseSiteInfo extends APIResource {
+  static override readonly _key: readonly ['rum', 'siteInfo'] = Object.freeze(['rum', 'siteInfo'] as const);
+
   /**
    * Creates a new Web Analytics site.
    *
@@ -18,8 +20,8 @@ export class SiteInfo extends APIResource {
    * });
    * ```
    */
-  create(params: SiteInfoCreateParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id, ...body } = params;
+  create(params: SiteInfoCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Site> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/rum/site_info`, { body, ...options }) as APIPromise<{
         result: Site;
@@ -39,7 +41,7 @@ export class SiteInfo extends APIResource {
    * ```
    */
   update(siteID: string, params: SiteInfoUpdateParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/rum/site_info/${siteID}`, {
         body,
@@ -61,8 +63,11 @@ export class SiteInfo extends APIResource {
    * }
    * ```
    */
-  list(params: SiteInfoListParams, options?: RequestOptions): PagePromise<SitesV4PagePaginationArray, Site> {
-    const { account_id, ...query } = params;
+  list(
+    params: SiteInfoListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<SitesV4PagePaginationArray, Site> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/rum/site_info/list`,
       V4PagePaginationArray<Site>,
@@ -83,10 +88,10 @@ export class SiteInfo extends APIResource {
    */
   delete(
     siteID: string,
-    params: SiteInfoDeleteParams,
+    params: SiteInfoDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SiteInfoDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/rum/site_info/${siteID}`, options) as APIPromise<{
         result: SiteInfoDeleteResponse;
@@ -105,8 +110,12 @@ export class SiteInfo extends APIResource {
    * );
    * ```
    */
-  get(siteID: string, params: SiteInfoGetParams, options?: RequestOptions): APIPromise<Site> {
-    const { account_id } = params;
+  get(
+    siteID: string,
+    params: SiteInfoGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Site> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/rum/site_info/${siteID}`, options) as APIPromise<{
         result: Site;
@@ -114,6 +123,7 @@ export class SiteInfo extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SiteInfo extends BaseSiteInfo {}
 
 export type SitesV4PagePaginationArray = V4PagePaginationArray<Site>;
 
@@ -181,7 +191,7 @@ export interface SiteInfoCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If enabled, the JavaScript snippet is automatically injected for
@@ -204,7 +214,7 @@ export interface SiteInfoUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If enabled, the JavaScript snippet is automatically injected for
@@ -239,7 +249,7 @@ export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The property used to sort the list of results.
@@ -251,14 +261,14 @@ export interface SiteInfoDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SiteInfoGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace SiteInfo {

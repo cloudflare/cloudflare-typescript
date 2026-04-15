@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Access } from 'cloudflare/resources/zero-trust/access/access';
+import { BaseCustomPages } from 'cloudflare/resources/zero-trust/access/custom-pages';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource customPages', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCustomPages],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Access],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { customPages: BaseCustomPages } } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.customPages.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -125,4 +143,7 @@ describe('resource customPages', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource customPages', () => runTests(client));
+describe('resource customPages (tree shakable, base)', () => runTests(partialClient));
+describe('resource customPages (tree shakable, subresource)', () => runTests(parentPartialClient));

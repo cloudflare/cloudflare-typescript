@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class UpdateStatus extends APIResource {
+export class BaseUpdateStatus extends APIResource {
+  static override readonly _key: readonly ['registrar', 'updateStatus'] = Object.freeze([
+    'registrar',
+    'updateStatus',
+  ] as const);
+
   /**
    * Returns the current status of a domain update workflow.
    *
@@ -30,10 +35,10 @@ export class UpdateStatus extends APIResource {
    */
   get(
     domainName: string,
-    params: UpdateStatusGetParams,
+    params: UpdateStatusGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegistrarAPI.WorkflowStatus> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/registrar/registrations/${domainName}/update-status`,
@@ -42,12 +47,13 @@ export class UpdateStatus extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class UpdateStatus extends BaseUpdateStatus {}
 
 export interface UpdateStatusGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace UpdateStatus {

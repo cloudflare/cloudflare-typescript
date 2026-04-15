@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseMetadata } from 'cloudflare/resources/kv/namespaces/metadata';
+import { Namespaces } from 'cloudflare/resources/kv/namespaces/namespaces';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource metadata', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMetadata],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Namespaces],
+});
+
+const runTests = (client: PartialCloudflare<{ kv: { namespaces: { metadata: BaseMetadata } } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.kv.namespaces.metadata.get('My-Key', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -29,4 +47,7 @@ describe('resource metadata', () => {
       namespace_id: '0f2ac74b498b48028cb68387c421e279',
     });
   });
-});
+};
+describe('resource metadata', () => runTests(client));
+describe('resource metadata (tree shakable, base)', () => runTests(partialClient));
+describe('resource metadata (tree shakable, subresource)', () => runTests(parentPartialClient));

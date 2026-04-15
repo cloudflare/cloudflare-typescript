@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as IPsAPI from './ips';
-import { IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips';
+import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips';
 import * as RoutesAPI from './routes';
 import {
+  BaseRoutes,
   RouteAsesParams,
   RouteAsesResponse,
   RouteMoasParams,
@@ -18,23 +19,18 @@ import {
   Routes,
 } from './routes';
 import * as HijacksAPI from './hijacks/hijacks';
-import { Hijacks } from './hijacks/hijacks';
+import { BaseHijacks, Hijacks } from './hijacks/hijacks';
 import * as LeaksAPI from './leaks/leaks';
-import { Leaks } from './leaks/leaks';
+import { BaseLeaks, Leaks } from './leaks/leaks';
 import * as RPKIAPI from './rpki/rpki';
-import { RPKI } from './rpki/rpki';
+import { BaseRPKI, RPKI } from './rpki/rpki';
 import * as TopAPI from './top/top';
-import { Top, TopPrefixesParams, TopPrefixesResponse } from './top/top';
+import { BaseTop, Top, TopPrefixesParams, TopPrefixesResponse } from './top/top';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class BGP extends APIResource {
-  leaks: LeaksAPI.Leaks = new LeaksAPI.Leaks(this._client);
-  top: TopAPI.Top = new TopAPI.Top(this._client);
-  hijacks: HijacksAPI.Hijacks = new HijacksAPI.Hijacks(this._client);
-  routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
-  ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
-  rpki: RPKIAPI.RPKI = new RPKIAPI.RPKI(this._client);
+export class BaseBGP extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp'] = Object.freeze(['radar', 'bgp'] as const);
 
   /**
    * Retrieves BGP updates over time. When requesting updates for an autonomous
@@ -55,6 +51,14 @@ export class BGP extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class BGP extends BaseBGP {
+  leaks: LeaksAPI.Leaks = new LeaksAPI.Leaks(this._client);
+  top: TopAPI.Top = new TopAPI.Top(this._client);
+  hijacks: HijacksAPI.Hijacks = new HijacksAPI.Hijacks(this._client);
+  routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
+  ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
+  rpki: RPKIAPI.RPKI = new RPKIAPI.RPKI(this._client);
 }
 
 export interface BGPTimeseriesResponse {
@@ -214,11 +218,17 @@ export interface BGPTimeseriesParams {
 }
 
 BGP.Leaks = Leaks;
+BGP.BaseLeaks = BaseLeaks;
 BGP.Top = Top;
+BGP.BaseTop = BaseTop;
 BGP.Hijacks = Hijacks;
+BGP.BaseHijacks = BaseHijacks;
 BGP.Routes = Routes;
+BGP.BaseRoutes = BaseRoutes;
 BGP.IPs = IPs;
+BGP.BaseIPs = BaseIPs;
 BGP.RPKI = RPKI;
+BGP.BaseRPKI = BaseRPKI;
 
 export declare namespace BGP {
   export {
@@ -226,18 +236,20 @@ export declare namespace BGP {
     type BGPTimeseriesParams as BGPTimeseriesParams,
   };
 
-  export { Leaks as Leaks };
+  export { Leaks as Leaks, BaseLeaks as BaseLeaks };
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopPrefixesResponse as TopPrefixesResponse,
     type TopPrefixesParams as TopPrefixesParams,
   };
 
-  export { Hijacks as Hijacks };
+  export { Hijacks as Hijacks, BaseHijacks as BaseHijacks };
 
   export {
     Routes as Routes,
+    BaseRoutes as BaseRoutes,
     type RouteAsesResponse as RouteAsesResponse,
     type RouteMoasResponse as RouteMoasResponse,
     type RoutePfx2asResponse as RoutePfx2asResponse,
@@ -252,9 +264,10 @@ export declare namespace BGP {
 
   export {
     IPs as IPs,
+    BaseIPs as BaseIPs,
     type IPTimeseriesResponse as IPTimeseriesResponse,
     type IPTimeseriesParams as IPTimeseriesParams,
   };
 
-  export { RPKI as RPKI };
+  export { RPKI as RPKI, BaseRPKI as BaseRPKI };
 }

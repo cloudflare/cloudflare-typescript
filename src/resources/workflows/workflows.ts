@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as VersionsAPI from './versions';
 import {
+  BaseVersions,
   VersionGetParams,
   VersionGetResponse,
   VersionListParams,
@@ -12,6 +13,7 @@ import {
 } from './versions';
 import * as InstancesAPI from './instances/instances';
 import {
+  BaseInstances,
   InstanceBulkParams,
   InstanceBulkResponse,
   InstanceBulkResponsesSinglePage,
@@ -29,9 +31,8 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Workflows extends APIResource {
-  instances: InstancesAPI.Instances = new InstancesAPI.Instances(this._client);
-  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
+export class BaseWorkflows extends APIResource {
+  static override readonly _key: readonly ['workflows'] = Object.freeze(['workflows'] as const);
 
   /**
    * Creates a new workflow or updates an existing workflow definition.
@@ -41,7 +42,7 @@ export class Workflows extends APIResource {
     params: WorkflowUpdateParams,
     options?: RequestOptions,
   ): APIPromise<WorkflowUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/workflows/${workflowName}`, {
         body,
@@ -54,10 +55,10 @@ export class Workflows extends APIResource {
    * Lists all workflows configured for the account.
    */
   list(
-    params: WorkflowListParams,
+    params: WorkflowListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<WorkflowListResponsesV4PagePaginationArray, WorkflowListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workflows`,
       V4PagePaginationArray<WorkflowListResponse>,
@@ -71,10 +72,10 @@ export class Workflows extends APIResource {
    */
   delete(
     workflowName: string,
-    params: WorkflowDeleteParams,
+    params: WorkflowDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WorkflowDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/workflows/${workflowName}`, options) as APIPromise<{
         result: WorkflowDeleteResponse;
@@ -87,16 +88,20 @@ export class Workflows extends APIResource {
    */
   get(
     workflowName: string,
-    params: WorkflowGetParams,
+    params: WorkflowGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WorkflowGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/workflows/${workflowName}`, options) as APIPromise<{
         result: WorkflowGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Workflows extends BaseWorkflows {
+  instances: InstancesAPI.Instances = new InstancesAPI.Instances(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 }
 
 export type WorkflowListResponsesV4PagePaginationArray = V4PagePaginationArray<WorkflowListResponse>;
@@ -209,7 +214,7 @@ export interface WorkflowUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -237,7 +242,7 @@ export interface WorkflowListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Allows filtering workflows` name.
@@ -246,15 +251,17 @@ export interface WorkflowListParams extends V4PagePaginationArrayParams {
 }
 
 export interface WorkflowDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WorkflowGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Workflows.Instances = InstancesAPIInstances;
+Workflows.BaseInstances = BaseInstances;
 Workflows.Versions = Versions;
+Workflows.BaseVersions = BaseVersions;
 
 export declare namespace Workflows {
   export {
@@ -271,6 +278,7 @@ export declare namespace Workflows {
 
   export {
     InstancesAPIInstances as Instances,
+    BaseInstances as BaseInstances,
     type InstanceCreateResponse as InstanceCreateResponse,
     type InstanceListResponse as InstanceListResponse,
     type InstanceBulkResponse as InstanceBulkResponse,
@@ -285,6 +293,7 @@ export declare namespace Workflows {
 
   export {
     Versions as Versions,
+    BaseVersions as BaseVersions,
     type VersionListResponse as VersionListResponse,
     type VersionGetResponse as VersionGetResponse,
     type VersionListResponsesV4PagePaginationArray as VersionListResponsesV4PagePaginationArray,

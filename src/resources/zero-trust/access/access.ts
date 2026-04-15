@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as BookmarksAPI from './bookmarks';
 import {
+  BaseBookmarks,
   Bookmark,
   BookmarkCreateParams,
   BookmarkDeleteParams,
@@ -15,6 +16,7 @@ import {
 } from './bookmarks';
 import * as CustomPagesAPI from './custom-pages';
 import {
+  BaseCustomPages,
   CustomPage,
   CustomPageCreateParams,
   CustomPageDeleteParams,
@@ -28,6 +30,7 @@ import {
 } from './custom-pages';
 import * as GatewayCAAPI from './gateway-ca';
 import {
+  BaseGatewayCA,
   GatewayCA,
   GatewayCACreateParams,
   GatewayCACreateResponse,
@@ -39,6 +42,7 @@ import {
 } from './gateway-ca';
 import * as GroupsAPI from './groups';
 import {
+  BaseGroups,
   GroupCreateParams,
   GroupCreateResponse,
   GroupDeleteParams,
@@ -55,6 +59,7 @@ import {
 } from './groups';
 import * as KeysAPI from './keys';
 import {
+  BaseKeys,
   KeyGetParams,
   KeyGetResponse,
   KeyRotateParams,
@@ -66,6 +71,7 @@ import {
 import * as PoliciesAPI from './policies';
 import {
   ApprovalGroup,
+  BasePolicies,
   Policies,
   Policy,
   PolicyCreateParams,
@@ -82,6 +88,7 @@ import {
 } from './policies';
 import * as ServiceTokensAPI from './service-tokens';
 import {
+  BaseServiceTokens,
   ServiceToken,
   ServiceTokenCreateParams,
   ServiceTokenCreateResponse,
@@ -97,6 +104,7 @@ import {
 } from './service-tokens';
 import * as TagsAPI from './tags';
 import {
+  BaseTags,
   Tag,
   TagCreateParams,
   TagDeleteParams,
@@ -108,7 +116,7 @@ import {
   TagsV4PagePaginationArray,
 } from './tags';
 import * as AIControlsAPI from './ai-controls/ai-controls';
-import { AIControls } from './ai-controls/ai-controls';
+import { AIControls, BaseAIControls } from './ai-controls/ai-controls';
 import * as ApplicationsAPI from './applications/applications';
 import {
   AllowedHeaders,
@@ -134,6 +142,7 @@ import {
   ApplicationUpdateParams,
   ApplicationUpdateResponse,
   Applications,
+  BaseApplications,
   CORSHeaders,
   Decision,
   OIDCSaaSApp,
@@ -148,6 +157,7 @@ import {
 import * as CertificatesAPI from './certificates/certificates';
 import {
   AssociatedHostnames,
+  BaseCertificates,
   Certificate,
   CertificateCreateParams,
   CertificateDeleteParams,
@@ -159,12 +169,13 @@ import {
   CertificatesV4PagePaginationArray,
 } from './certificates/certificates';
 import * as InfrastructureAPI from './infrastructure/infrastructure';
-import { Infrastructure } from './infrastructure/infrastructure';
+import { BaseInfrastructure, Infrastructure } from './infrastructure/infrastructure';
 import * as LogsAPI from './logs/logs';
-import { Logs } from './logs/logs';
+import { BaseLogs, Logs } from './logs/logs';
 import * as UsersAPI from './users/users';
 import {
   AccessUser,
+  BaseUsers,
   UserCreateParams,
   UserCreateResponse,
   UserDeleteParams,
@@ -179,7 +190,13 @@ import {
   Users,
 } from './users/users';
 
-export class Access extends APIResource {
+export class BaseAccess extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access'] = Object.freeze([
+    'zeroTrust',
+    'access',
+  ] as const);
+}
+export class Access extends BaseAccess {
   aiControls: AIControlsAPI.AIControls = new AIControlsAPI.AIControls(this._client);
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
   infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
@@ -197,25 +214,40 @@ export class Access extends APIResource {
 }
 
 Access.AIControls = AIControls;
+Access.BaseAIControls = BaseAIControls;
 Access.GatewayCA = GatewayCA;
+Access.BaseGatewayCA = BaseGatewayCA;
 Access.Infrastructure = Infrastructure;
+Access.BaseInfrastructure = BaseInfrastructure;
 Access.Applications = Applications;
+Access.BaseApplications = BaseApplications;
 Access.Certificates = Certificates;
+Access.BaseCertificates = BaseCertificates;
 Access.Groups = Groups;
+Access.BaseGroups = BaseGroups;
 Access.ServiceTokens = ServiceTokens;
+Access.BaseServiceTokens = BaseServiceTokens;
 Access.Bookmarks = Bookmarks;
+Access.BaseBookmarks = BaseBookmarks;
 Access.Keys = Keys;
+Access.BaseKeys = BaseKeys;
 Access.Logs = Logs;
+Access.BaseLogs = BaseLogs;
 Access.Users = Users;
+Access.BaseUsers = BaseUsers;
 Access.CustomPages = CustomPages;
+Access.BaseCustomPages = BaseCustomPages;
 Access.Tags = Tags;
+Access.BaseTags = BaseTags;
 Access.Policies = Policies;
+Access.BasePolicies = BasePolicies;
 
 export declare namespace Access {
-  export { AIControls as AIControls };
+  export { AIControls as AIControls, BaseAIControls as BaseAIControls };
 
   export {
     GatewayCA as GatewayCA,
+    BaseGatewayCA as BaseGatewayCA,
     type GatewayCACreateResponse as GatewayCACreateResponse,
     type GatewayCAListResponse as GatewayCAListResponse,
     type GatewayCADeleteResponse as GatewayCADeleteResponse,
@@ -225,10 +257,11 @@ export declare namespace Access {
     type GatewayCADeleteParams as GatewayCADeleteParams,
   };
 
-  export { Infrastructure as Infrastructure };
+  export { Infrastructure as Infrastructure, BaseInfrastructure as BaseInfrastructure };
 
   export {
     Applications as Applications,
+    BaseApplications as BaseApplications,
     type AllowedHeaders as AllowedHeaders,
     type AllowedIdPs as AllowedIdPs,
     type AllowedMethods as AllowedMethods,
@@ -265,6 +298,7 @@ export declare namespace Access {
 
   export {
     Certificates as Certificates,
+    BaseCertificates as BaseCertificates,
     type AssociatedHostnames as AssociatedHostnames,
     type Certificate as Certificate,
     type CertificateDeleteResponse as CertificateDeleteResponse,
@@ -278,6 +312,7 @@ export declare namespace Access {
 
   export {
     Groups as Groups,
+    BaseGroups as BaseGroups,
     type ZeroTrustGroup as ZeroTrustGroup,
     type GroupCreateResponse as GroupCreateResponse,
     type GroupUpdateResponse as GroupUpdateResponse,
@@ -294,6 +329,7 @@ export declare namespace Access {
 
   export {
     ServiceTokens as ServiceTokens,
+    BaseServiceTokens as BaseServiceTokens,
     type ServiceToken as ServiceToken,
     type ServiceTokenCreateResponse as ServiceTokenCreateResponse,
     type ServiceTokenRotateResponse as ServiceTokenRotateResponse,
@@ -309,6 +345,7 @@ export declare namespace Access {
 
   export {
     Bookmarks as Bookmarks,
+    BaseBookmarks as BaseBookmarks,
     type Bookmark as Bookmark,
     type BookmarkDeleteResponse as BookmarkDeleteResponse,
     type BookmarksSinglePage as BookmarksSinglePage,
@@ -321,6 +358,7 @@ export declare namespace Access {
 
   export {
     Keys as Keys,
+    BaseKeys as BaseKeys,
     type KeyUpdateResponse as KeyUpdateResponse,
     type KeyGetResponse as KeyGetResponse,
     type KeyRotateResponse as KeyRotateResponse,
@@ -329,10 +367,11 @@ export declare namespace Access {
     type KeyRotateParams as KeyRotateParams,
   };
 
-  export { Logs as Logs };
+  export { Logs as Logs, BaseLogs as BaseLogs };
 
   export {
     Users as Users,
+    BaseUsers as BaseUsers,
     type AccessUser as AccessUser,
     type UserCreateResponse as UserCreateResponse,
     type UserUpdateResponse as UserUpdateResponse,
@@ -349,6 +388,7 @@ export declare namespace Access {
 
   export {
     CustomPages as CustomPages,
+    BaseCustomPages as BaseCustomPages,
     type CustomPage as CustomPage,
     type CustomPageWithoutHTML as CustomPageWithoutHTML,
     type CustomPageDeleteResponse as CustomPageDeleteResponse,
@@ -362,6 +402,7 @@ export declare namespace Access {
 
   export {
     Tags as Tags,
+    BaseTags as BaseTags,
     type Tag as Tag,
     type TagDeleteResponse as TagDeleteResponse,
     type TagsV4PagePaginationArray as TagsV4PagePaginationArray,
@@ -374,6 +415,7 @@ export declare namespace Access {
 
   export {
     Policies as Policies,
+    BasePolicies as BasePolicies,
     type ApprovalGroup as ApprovalGroup,
     type Policy as Policy,
     type PolicyCreateResponse as PolicyCreateResponse,

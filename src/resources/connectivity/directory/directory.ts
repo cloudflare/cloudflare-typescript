@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as ServicesAPI from './services';
 import {
+  BaseServices,
   ServiceCreateParams,
   ServiceCreateResponse,
   ServiceDeleteParams,
@@ -16,15 +17,23 @@ import {
   Services,
 } from './services';
 
-export class Directory extends APIResource {
+export class BaseDirectory extends APIResource {
+  static override readonly _key: readonly ['connectivity', 'directory'] = Object.freeze([
+    'connectivity',
+    'directory',
+  ] as const);
+}
+export class Directory extends BaseDirectory {
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
 }
 
 Directory.Services = Services;
+Directory.BaseServices = BaseServices;
 
 export declare namespace Directory {
   export {
     Services as Services,
+    BaseServices as BaseServices,
     type ServiceCreateResponse as ServiceCreateResponse,
     type ServiceUpdateResponse as ServiceUpdateResponse,
     type ServiceListResponse as ServiceListResponse,

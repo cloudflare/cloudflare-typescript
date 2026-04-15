@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ActivationCheck extends APIResource {
+export class BaseActivationCheck extends APIResource {
+  static override readonly _key: readonly ['zones', 'activationCheck'] = Object.freeze([
+    'zones',
+    'activationCheck',
+  ] as const);
+
   /**
    * Triggeres a new activation check for a PENDING Zone. This can be triggered every
    * 5 min for paygo/ent customers, every hour for FREE Zones.
@@ -18,10 +23,10 @@ export class ActivationCheck extends APIResource {
    * ```
    */
   trigger(
-    params: ActivationCheckTriggerParams,
+    params: ActivationCheckTriggerParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ActivationCheckTriggerResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/activation_check`, options) as APIPromise<{
         result: ActivationCheckTriggerResponse;
@@ -29,6 +34,7 @@ export class ActivationCheck extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ActivationCheck extends BaseActivationCheck {}
 
 export interface ActivationCheckTriggerResponse {
   /**
@@ -41,7 +47,7 @@ export interface ActivationCheckTriggerParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace ActivationCheck {

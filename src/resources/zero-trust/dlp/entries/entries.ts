@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as CustomAPI from './custom';
 import {
+  BaseCustom,
   Custom,
   CustomCreateParams,
   CustomCreateResponse,
@@ -18,6 +19,7 @@ import {
 } from './custom';
 import * as IntegrationAPI from './integration';
 import {
+  BaseIntegration,
   Integration,
   IntegrationCreateParams,
   IntegrationCreateResponse,
@@ -33,6 +35,7 @@ import {
 } from './integration';
 import * as PredefinedAPI from './predefined';
 import {
+  BasePredefined,
   Predefined,
   PredefinedCreateParams,
   PredefinedCreateResponse,
@@ -52,10 +55,12 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Entries extends APIResource {
-  custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
-  predefined: PredefinedAPI.Predefined = new PredefinedAPI.Predefined(this._client);
-  integration: IntegrationAPI.Integration = new IntegrationAPI.Integration(this._client);
+export class BaseEntries extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'entries'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'entries',
+  ] as const);
 
   /**
    * Creates a DLP custom entry.
@@ -71,7 +76,7 @@ export class Entries extends APIResource {
    * ```
    */
   create(params: EntryCreateParams, options?: RequestOptions): APIPromise<EntryCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/entries`, { body, ...options }) as APIPromise<{
         result: EntryCreateResponse;
@@ -100,7 +105,7 @@ export class Entries extends APIResource {
     params: EntryUpdateParams,
     options?: RequestOptions,
   ): APIPromise<EntryUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/entries/${entryID}`, {
         body,
@@ -123,10 +128,10 @@ export class Entries extends APIResource {
    * ```
    */
   list(
-    params: EntryListParams,
+    params: EntryListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EntryListResponsesSinglePage, EntryListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dlp/entries`,
       SinglePage<EntryListResponse>,
@@ -147,10 +152,10 @@ export class Entries extends APIResource {
    */
   delete(
     entryID: string,
-    params: EntryDeleteParams,
+    params: EntryDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EntryDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/dlp/entries/${entryID}`, options) as APIPromise<{
         result: EntryDeleteResponse | null;
@@ -169,14 +174,23 @@ export class Entries extends APIResource {
    * );
    * ```
    */
-  get(entryID: string, params: EntryGetParams, options?: RequestOptions): APIPromise<EntryGetResponse> {
-    const { account_id } = params;
+  get(
+    entryID: string,
+    params: EntryGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EntryGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/entries/${entryID}`, options) as APIPromise<{
         result: EntryGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Entries extends BaseEntries {
+  custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
+  predefined: PredefinedAPI.Predefined = new PredefinedAPI.Predefined(this._client);
+  integration: IntegrationAPI.Integration = new IntegrationAPI.Integration(this._client);
 }
 
 export type EntryListResponsesSinglePage = SinglePage<EntryListResponse>;
@@ -755,7 +769,7 @@ export interface EntryCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -793,7 +807,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -825,7 +839,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -842,7 +856,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -857,20 +871,23 @@ export declare namespace EntryUpdateParams {
 }
 
 export interface EntryListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EntryDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EntryGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Entries.Custom = Custom;
+Entries.BaseCustom = BaseCustom;
 Entries.Predefined = Predefined;
+Entries.BasePredefined = BasePredefined;
 Entries.Integration = Integration;
+Entries.BaseIntegration = BaseIntegration;
 
 export declare namespace Entries {
   export {
@@ -889,6 +906,7 @@ export declare namespace Entries {
 
   export {
     Custom as Custom,
+    BaseCustom as BaseCustom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
@@ -904,6 +922,7 @@ export declare namespace Entries {
 
   export {
     Predefined as Predefined,
+    BasePredefined as BasePredefined,
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
     type PredefinedListResponse as PredefinedListResponse,
@@ -919,6 +938,7 @@ export declare namespace Entries {
 
   export {
     Integration as Integration,
+    BaseIntegration as BaseIntegration,
     type IntegrationCreateResponse as IntegrationCreateResponse,
     type IntegrationUpdateResponse as IntegrationUpdateResponse,
     type IntegrationListResponse as IntegrationListResponse,

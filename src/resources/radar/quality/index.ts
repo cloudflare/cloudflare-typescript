@@ -2,14 +2,16 @@
 
 export {
   IQI,
+  BaseIQI,
   type IQISummaryResponse,
   type IQITimeseriesGroupsResponse,
   type IQISummaryParams,
   type IQITimeseriesGroupsParams,
 } from './iqi';
-export { Quality } from './quality';
+export { Quality, BaseQuality } from './quality';
 export {
   Speed,
+  BaseSpeed,
   type SpeedHistogramResponse,
   type SpeedSummaryResponse,
   type SpeedHistogramParams,

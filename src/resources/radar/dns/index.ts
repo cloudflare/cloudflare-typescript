@@ -2,6 +2,7 @@
 
 export {
   DNS,
+  BaseDNS,
   type DNSSummaryV2Response,
   type DNSTimeseriesResponse,
   type DNSTimeseriesGroupsV2Response,
@@ -11,6 +12,7 @@ export {
 } from './dns';
 export {
   Summary,
+  BaseSummary,
   type SummaryCacheHitResponse,
   type SummaryDNSSECResponse,
   type SummaryDNSSECAwareResponse,
@@ -34,6 +36,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupCacheHitResponse,
   type TimeseriesGroupDNSSECResponse,
   type TimeseriesGroupDNSSECAwareResponse,
@@ -57,6 +60,7 @@ export {
 } from './timeseries-groups';
 export {
   Top,
+  BaseTop,
   type TopAsesResponse,
   type TopLocationsResponse,
   type TopAsesParams,

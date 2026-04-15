@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class OwnershipResource extends APIResource {
+export class BaseOwnershipResource extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'pcaps', 'ownership'] = Object.freeze([
+    'magicTransit',
+    'pcaps',
+    'ownership',
+  ] as const);
+
   /**
    * Adds an AWS or GCP bucket to use with full packet captures.
    *
@@ -21,7 +27,7 @@ export class OwnershipResource extends APIResource {
    * ```
    */
   create(params: OwnershipCreateParams, options?: RequestOptions): APIPromise<Ownership> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pcaps/ownership`, { body, ...options }) as APIPromise<{
         result: Ownership;
@@ -40,8 +46,12 @@ export class OwnershipResource extends APIResource {
    * );
    * ```
    */
-  delete(ownershipID: string, params: OwnershipDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    ownershipID: string,
+    params: OwnershipDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/pcaps/ownership/${ownershipID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -61,8 +71,11 @@ export class OwnershipResource extends APIResource {
    * }
    * ```
    */
-  get(params: OwnershipGetParams, options?: RequestOptions): PagePromise<OwnershipsSinglePage, Ownership> {
-    const { account_id } = params;
+  get(
+    params: OwnershipGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<OwnershipsSinglePage, Ownership> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pcaps/ownership`,
       SinglePage<Ownership>,
@@ -85,7 +98,7 @@ export class OwnershipResource extends APIResource {
    * ```
    */
   validate(params: OwnershipValidateParams, options?: RequestOptions): APIPromise<Ownership> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pcaps/ownership/validate`, {
         body,
@@ -94,6 +107,7 @@ export class OwnershipResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class OwnershipResource extends BaseOwnershipResource {}
 
 export type OwnershipsSinglePage = SinglePage<Ownership>;
 
@@ -133,7 +147,7 @@ export interface OwnershipCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The full URI for the bucket. This field only applies to `full`
@@ -146,21 +160,21 @@ export interface OwnershipDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OwnershipGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OwnershipValidateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The full URI for the bucket. This field only applies to `full`

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Attacks } from 'cloudflare/resources/radar/attacks/attacks';
+import { BaseLayer7 } from 'cloudflare/resources/radar/attacks/layer7/layer7';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource layer7', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLayer7],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Attacks],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { attacks: { layer7: BaseLayer7 } } }>) => {
   test('summaryV2', async () => {
     const responsePromise = client.radar.attacks.layer7.summaryV2('HTTP_METHOD');
     const rawResponse = await responsePromise.asResponse();
@@ -118,4 +136,7 @@ describe('resource layer7', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource layer7', () => runTests(client));
+describe('resource layer7 (tree shakable, base)', () => runTests(partialClient));
+describe('resource layer7 (tree shakable, subresource)', () => runTests(parentPartialClient));

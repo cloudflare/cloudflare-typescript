@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Annotations } from 'cloudflare/resources/radar/annotations/annotations';
+import { BaseOutages } from 'cloudflare/resources/radar/annotations/outages';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource outages', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseOutages],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Annotations],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { annotations: { outages: BaseOutages } } }>) => {
   test('get', async () => {
     const responsePromise = client.radar.annotations.outages.get();
     const rawResponse = await responsePromise.asResponse();
@@ -66,4 +84,7 @@ describe('resource outages', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource outages', () => runTests(client));
+describe('resource outages (tree shakable, base)', () => runTests(partialClient));
+describe('resource outages (tree shakable, subresource)', () => runTests(parentPartialClient));

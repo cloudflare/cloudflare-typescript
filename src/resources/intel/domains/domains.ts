@@ -2,13 +2,13 @@
 
 import { APIResource } from '../../../core/resource';
 import * as BulksAPI from './bulks';
-import { BulkGetParams, BulkGetResponse, Bulks } from './bulks';
+import { BaseBulks, BulkGetParams, BulkGetResponse, Bulks } from './bulks';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Domains extends APIResource {
-  bulks: BulksAPI.Bulks = new BulksAPI.Bulks(this._client);
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['intel', 'domains'] = Object.freeze(['intel', 'domains'] as const);
 
   /**
    * Gets security details and statistics about a domain.
@@ -20,14 +20,17 @@ export class Domains extends APIResource {
    * });
    * ```
    */
-  get(params: DomainGetParams, options?: RequestOptions): APIPromise<Domain> {
-    const { account_id, ...query } = params;
+  get(params: DomainGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Domain> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/domain`, { query, ...options }) as APIPromise<{
         result: Domain;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Domains extends BaseDomains {
+  bulks: BulksAPI.Bulks = new BulksAPI.Bulks(this._client);
 }
 
 export interface Domain {
@@ -149,7 +152,7 @@ export interface DomainGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -163,9 +166,15 @@ export interface DomainGetParams {
 }
 
 Domains.Bulks = Bulks;
+Domains.BaseBulks = BaseBulks;
 
 export declare namespace Domains {
   export { type Domain as Domain, type DomainGetParams as DomainGetParams };
 
-  export { Bulks as Bulks, type BulkGetResponse as BulkGetResponse, type BulkGetParams as BulkGetParams };
+  export {
+    Bulks as Bulks,
+    BaseBulks as BaseBulks,
+    type BulkGetResponse as BulkGetResponse,
+    type BulkGetParams as BulkGetParams,
+  };
 }

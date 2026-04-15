@@ -10,7 +10,15 @@ import { RequestOptions } from '../../../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../../../internal/uploads';
 import { path } from '../../../../../internal/utils/path';
 
-export class Content extends APIResource {
+export class BaseContent extends APIResource {
+  static override readonly _key: readonly [
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+    'scripts',
+    'content',
+  ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'content'] as const);
+
   /**
    * Put script content for a script uploaded to a Workers for Platforms namespace.
    *
@@ -33,7 +41,7 @@ export class Content extends APIResource {
     options?: RequestOptions,
   ): APIPromise<ScriptsAPI.Script> {
     const {
-      account_id,
+      account_id = this._client.accountID,
       dispatch_namespace,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
@@ -82,19 +90,20 @@ export class Content extends APIResource {
    * ```
    */
   get(scriptName: string, params: ContentGetParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id, dispatch_namespace } = params;
+    const { account_id = this._client.accountID, dispatch_namespace } = params;
     return this._client.get(
       path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/content`,
       { ...options, headers: buildHeaders([{ Accept: 'string' }, options?.headers]), __binaryResponse: true },
     );
   }
 }
+export class Content extends BaseContent {}
 
 export interface ContentUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.
@@ -135,7 +144,7 @@ export interface ContentGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.

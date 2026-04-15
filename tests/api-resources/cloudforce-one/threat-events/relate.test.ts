@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseRelate } from 'cloudflare/resources/cloudforce-one/threat-events/relate';
+import { ThreatEvents } from 'cloudflare/resources/cloudforce-one/threat-events/threat-events';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource relate', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRelate],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ThreatEvents],
+});
+
+const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { relate: BaseRelate } } }>) => {
   // TODO: HTTP 401 from prism
   test.skip('delete: only required params', async () => {
     const responsePromise = client.cloudforceOne.threatEvents.relate.delete('event_id', {
@@ -29,4 +47,7 @@ describe('resource relate', () => {
       account_id: 'account_id',
     });
   });
-});
+};
+describe('resource relate', () => runTests(client));
+describe('resource relate (tree shakable, base)', () => runTests(partialClient));
+describe('resource relate (tree shakable, subresource)', () => runTests(parentPartialClient));

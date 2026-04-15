@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Limits extends APIResource {
+export class BaseLimits extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'limits'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'limits',
+  ] as const);
+
   /**
    * Retrieves current DLP usage limits and quotas for the account, including maximum
    * allowed counts and current usage for custom entries, dataset cells, and document
@@ -18,8 +24,11 @@ export class Limits extends APIResource {
    * });
    * ```
    */
-  list(params: LimitListParams, options?: RequestOptions): APIPromise<LimitListResponse> {
-    const { account_id } = params;
+  list(
+    params: LimitListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LimitListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/limits`, options) as APIPromise<{
         result: LimitListResponse;
@@ -27,6 +36,7 @@ export class Limits extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Limits extends BaseLimits {}
 
 export interface LimitListResponse {
   /**
@@ -63,7 +73,7 @@ export interface LimitListResponse {
 }
 
 export interface LimitListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Limits {

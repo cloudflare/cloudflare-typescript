@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AbuseReports } from 'cloudflare/resources/abuse-reports/abuse-reports';
+import { BaseMitigations } from 'cloudflare/resources/abuse-reports/mitigations';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource mitigations', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMitigations],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AbuseReports],
+});
+
+const runTests = (client: PartialCloudflare<{ abuseReports: { mitigations: BaseMitigations } }>) => {
   // TODO: support api token auth scheme
   test.skip('list: only required params', async () => {
     const responsePromise = client.abuseReports.mitigations.list('report_id', {
@@ -60,4 +78,7 @@ describe('resource mitigations', () => {
       appeals: [{ id: 'id', reason: 'misclassified' }],
     });
   });
-});
+};
+describe('resource mitigations', () => runTests(client));
+describe('resource mitigations (tree shakable, base)', () => runTests(partialClient));
+describe('resource mitigations (tree shakable, subresource)', () => runTests(parentPartialClient));

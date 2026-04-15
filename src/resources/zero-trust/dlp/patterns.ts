@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Patterns extends APIResource {
+export class BasePatterns extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'patterns'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'patterns',
+  ] as const);
+
   /**
    * Validates whether this pattern is a valid regular expression. Rejects it if the
    * regular expression is too complex or can match an unbounded-length string. The
@@ -22,7 +28,7 @@ export class Patterns extends APIResource {
    * ```
    */
   validate(params: PatternValidateParams, options?: RequestOptions): APIPromise<PatternValidateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/patterns/validate`, {
         body,
@@ -31,6 +37,7 @@ export class Patterns extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Patterns extends BasePatterns {}
 
 export interface PatternValidateResponse {
   valid: boolean;
@@ -40,7 +47,7 @@ export interface PatternValidateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

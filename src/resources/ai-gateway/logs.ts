@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Logs extends APIResource {
+export class BaseLogs extends APIResource {
+  static override readonly _key: readonly ['aiGateway', 'logs'] = Object.freeze([
+    'aiGateway',
+    'logs',
+  ] as const);
+
   /**
    * List Gateway Logs
    *
@@ -23,10 +28,10 @@ export class Logs extends APIResource {
    */
   list(
     gatewayID: string,
-    params: LogListParams,
+    params: LogListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/logs`,
       V4PagePaginationArray<LogListResponse>,
@@ -47,10 +52,16 @@ export class Logs extends APIResource {
    */
   delete(
     gatewayID: string,
-    params: LogDeleteParams,
+    params: LogDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LogDeleteResponse> {
-    const { account_id, filters, limit, order_by, order_by_direction } = params;
+    const {
+      account_id = this._client.accountID,
+      filters,
+      limit,
+      order_by,
+      order_by_direction,
+    } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/logs`, {
       query: { filters, limit, order_by, order_by_direction },
       ...options,
@@ -69,7 +80,7 @@ export class Logs extends APIResource {
    * ```
    */
   edit(id: string, params: LogEditParams, options?: RequestOptions): APIPromise<LogEditResponse> {
-    const { account_id, gateway_id, ...body } = params;
+    const { account_id = this._client.accountID, gateway_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/logs/${id}`, {
         body,
@@ -90,7 +101,7 @@ export class Logs extends APIResource {
    * ```
    */
   get(id: string, params: LogGetParams, options?: RequestOptions): APIPromise<LogGetResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/logs/${id}`,
@@ -111,7 +122,7 @@ export class Logs extends APIResource {
    * ```
    */
   request(id: string, params: LogRequestParams, options?: RequestOptions): APIPromise<unknown> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/logs/${id}/request`,
       options,
@@ -133,13 +144,14 @@ export class Logs extends APIResource {
    * ```
    */
   response(id: string, params: LogResponseParams, options?: RequestOptions): APIPromise<unknown> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/logs/${id}/response`,
       options,
     );
   }
 }
+export class Logs extends BaseLogs {}
 
 export type LogListResponsesV4PagePaginationArray = V4PagePaginationArray<LogListResponse>;
 
@@ -249,7 +261,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * @deprecated Query param
@@ -419,7 +431,7 @@ export interface LogDeleteParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -490,7 +502,7 @@ export interface LogEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: gateway id
@@ -514,7 +526,7 @@ export interface LogEditParams {
 }
 
 export interface LogGetParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * gateway id
@@ -523,7 +535,7 @@ export interface LogGetParams {
 }
 
 export interface LogRequestParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * gateway id
@@ -532,7 +544,7 @@ export interface LogRequestParams {
 }
 
 export interface LogResponseParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * gateway id

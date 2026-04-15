@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Top extends APIResource {
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'dns', 'top'] = Object.freeze([
+    'radar',
+    'dns',
+    'top',
+  ] as const);
+
   /**
    * Retrieves the top autonomous systems by DNS queries made to 1.1.1.1 DNS
    * resolver.
@@ -41,6 +47,7 @@ export class Top extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Top extends BaseTop {}
 
 export interface TopAsesResponse {
   /**

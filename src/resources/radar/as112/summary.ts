@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Summary extends APIResource {
+export class BaseSummary extends APIResource {
+  static override readonly _key: readonly ['radar', 'as112', 'summary'] = Object.freeze([
+    'radar',
+    'as112',
+    'summary',
+  ] as const);
+
   /**
    * Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security
    * Extensions) support.
@@ -103,6 +109,7 @@ export class Summary extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summary extends BaseSummary {}
 
 export interface SummaryDNSSECResponse {
   /**

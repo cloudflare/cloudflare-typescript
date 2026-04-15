@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../core/resource';
 import * as LocationsAPI from './locations';
 import {
+  BaseLocations,
   LocationOriginParams,
   LocationOriginResponse,
   LocationTargetParams,
@@ -12,8 +13,13 @@ import {
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 
-export class Top extends APIResource {
-  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer3', 'top'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer3',
+    'top',
+  ] as const);
 
   /**
    * Retrieves the top layer 3 attacks from origin to target location. Values are a
@@ -71,6 +77,9 @@ export class Top extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Top extends BaseTop {
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 }
 
 export interface TopAttacksResponse {
@@ -676,6 +685,7 @@ export interface TopVerticalParams {
 }
 
 Top.Locations = Locations;
+Top.BaseLocations = BaseLocations;
 
 export declare namespace Top {
   export {
@@ -689,6 +699,7 @@ export declare namespace Top {
 
   export {
     Locations as Locations,
+    BaseLocations as BaseLocations,
     type LocationOriginResponse as LocationOriginResponse,
     type LocationTargetResponse as LocationTargetResponse,
     type LocationOriginParams as LocationOriginParams,

@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ACLs extends APIResource {
+export class BaseACLs extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'acls'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'acls',
+  ] as const);
+
   /**
    * Create ACL.
    *
@@ -20,7 +26,7 @@ export class ACLs extends APIResource {
    * ```
    */
   create(params: ACLCreateParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/secondary_dns/acls`, {
         body,
@@ -45,7 +51,7 @@ export class ACLs extends APIResource {
    * ```
    */
   update(aclID: string, params: ACLUpdateParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/secondary_dns/acls/${aclID}`, {
         body,
@@ -67,8 +73,11 @@ export class ACLs extends APIResource {
    * }
    * ```
    */
-  list(params: ACLListParams, options?: RequestOptions): PagePromise<ACLsSinglePage, ACL> {
-    const { account_id } = params;
+  list(
+    params: ACLListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ACLsSinglePage, ACL> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/secondary_dns/acls`,
       SinglePage<ACL>,
@@ -87,8 +96,12 @@ export class ACLs extends APIResource {
    * );
    * ```
    */
-  delete(aclID: string, params: ACLDeleteParams, options?: RequestOptions): APIPromise<ACLDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    aclID: string,
+    params: ACLDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ACLDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/secondary_dns/acls/${aclID}`, options) as APIPromise<{
         result: ACLDeleteResponse;
@@ -107,8 +120,12 @@ export class ACLs extends APIResource {
    * );
    * ```
    */
-  get(aclID: string, params: ACLGetParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id } = params;
+  get(
+    aclID: string,
+    params: ACLGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ACL> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/secondary_dns/acls/${aclID}`, options) as APIPromise<{
         result: ACL;
@@ -116,6 +133,7 @@ export class ACLs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ACLs extends BaseACLs {}
 
 export type ACLsSinglePage = SinglePage<ACL>;
 
@@ -145,7 +163,7 @@ export interface ACLCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Allowed IPv4/IPv6 address range of primary or secondary nameservers.
@@ -166,7 +184,7 @@ export interface ACLUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Allowed IPv4/IPv6 address range of primary or secondary nameservers.
@@ -184,15 +202,15 @@ export interface ACLUpdateParams {
 }
 
 export interface ACLListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ACLDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ACLGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ACLs {

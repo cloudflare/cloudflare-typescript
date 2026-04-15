@@ -10,7 +10,10 @@ import {
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Servers extends APIResource {
+export class BaseServers extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'aiControls', 'mcp', 'servers'] =
+    Object.freeze(['zeroTrust', 'access', 'aiControls', 'mcp', 'servers'] as const);
+
   /**
    * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
    *
@@ -29,7 +32,7 @@ export class Servers extends APIResource {
    * ```
    */
   create(params: ServerCreateParams, options?: RequestOptions): APIPromise<ServerCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/access/ai-controls/mcp/servers`, {
         body,
@@ -50,8 +53,12 @@ export class Servers extends APIResource {
    *   );
    * ```
    */
-  update(id: string, params: ServerUpdateParams, options?: RequestOptions): APIPromise<ServerUpdateResponse> {
-    const { account_id, ...body } = params;
+  update(
+    id: string,
+    params: ServerUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ServerUpdateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`, {
         body,
@@ -74,10 +81,10 @@ export class Servers extends APIResource {
    * ```
    */
   list(
-    params: ServerListParams,
+    params: ServerListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ServerListResponsesV4PagePaginationArray, ServerListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/ai-controls/mcp/servers`,
       V4PagePaginationArray<ServerListResponse>,
@@ -97,8 +104,12 @@ export class Servers extends APIResource {
    *   );
    * ```
    */
-  delete(id: string, params: ServerDeleteParams, options?: RequestOptions): APIPromise<ServerDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    id: string,
+    params: ServerDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ServerDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`,
@@ -119,8 +130,12 @@ export class Servers extends APIResource {
    *   );
    * ```
    */
-  read(id: string, params: ServerReadParams, options?: RequestOptions): APIPromise<ServerReadResponse> {
-    const { account_id } = params;
+  read(
+    id: string,
+    params: ServerReadParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ServerReadResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/access/ai-controls/mcp/servers/${id}`,
@@ -141,8 +156,12 @@ export class Servers extends APIResource {
    *   );
    * ```
    */
-  sync(id: string, params: ServerSyncParams, options?: RequestOptions): APIPromise<ServerSyncResponse> {
-    const { account_id } = params;
+  sync(
+    id: string,
+    params: ServerSyncParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ServerSyncResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/access/ai-controls/mcp/servers/${id}/sync`,
@@ -151,6 +170,7 @@ export class Servers extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Servers extends BaseServers {}
 
 export type ServerListResponsesV4PagePaginationArray = V4PagePaginationArray<ServerListResponse>;
 
@@ -465,7 +485,7 @@ export interface ServerCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: server id
@@ -534,7 +554,7 @@ export interface ServerUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -588,7 +608,7 @@ export interface ServerListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id, name
@@ -597,15 +617,15 @@ export interface ServerListParams extends V4PagePaginationArrayParams {
 }
 
 export interface ServerDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServerReadParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServerSyncParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Servers {

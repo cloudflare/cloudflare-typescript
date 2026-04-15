@@ -2,9 +2,10 @@
 
 export {
   ASN,
+  BaseASN,
   type ASNDeleteResponse,
   type ASNGetResponse,
   type ASNDeleteParams,
   type ASNGetParams,
 } from './asn';
-export { Configs } from './configs';
+export { Configs, BaseConfigs } from './configs';

@@ -2,9 +2,10 @@
 
 export {
   Summary,
+  BaseSummary,
   type SummaryModelResponse,
   type SummaryTaskResponse,
   type SummaryModelParams,
   type SummaryTaskParams,
 } from './summary';
-export { TimeseriesGroups } from './timeseries-groups';
+export { TimeseriesGroups, BaseTimeseriesGroups } from './timeseries-groups';

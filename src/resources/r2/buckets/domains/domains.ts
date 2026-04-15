@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as CustomAPI from './custom';
 import {
+  BaseCustom,
   Custom,
   CustomCreateParams,
   CustomCreateResponse,
@@ -17,6 +18,7 @@ import {
 } from './custom';
 import * as ManagedAPI from './managed';
 import {
+  BaseManaged,
   Managed,
   ManagedListParams,
   ManagedListResponse,
@@ -24,17 +26,27 @@ import {
   ManagedUpdateResponse,
 } from './managed';
 
-export class Domains extends APIResource {
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'domains'] = Object.freeze([
+    'r2',
+    'buckets',
+    'domains',
+  ] as const);
+}
+export class Domains extends BaseDomains {
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
   managed: ManagedAPI.Managed = new ManagedAPI.Managed(this._client);
 }
 
 Domains.Custom = Custom;
+Domains.BaseCustom = BaseCustom;
 Domains.Managed = Managed;
+Domains.BaseManaged = BaseManaged;
 
 export declare namespace Domains {
   export {
     Custom as Custom,
+    BaseCustom as BaseCustom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
     type CustomListResponse as CustomListResponse,
@@ -49,6 +61,7 @@ export declare namespace Domains {
 
   export {
     Managed as Managed,
+    BaseManaged as BaseManaged,
     type ManagedUpdateResponse as ManagedUpdateResponse,
     type ManagedListResponse as ManagedListResponse,
     type ManagedUpdateParams as ManagedUpdateParams,

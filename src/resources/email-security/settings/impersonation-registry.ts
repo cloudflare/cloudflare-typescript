@@ -10,7 +10,10 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ImpersonationRegistry extends APIResource {
+export class BaseImpersonationRegistry extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'settings', 'impersonationRegistry'] =
+    Object.freeze(['emailSecurity', 'settings', 'impersonationRegistry'] as const);
+
   /**
    * Creates a display name entry for email security impersonation protection.
    *
@@ -31,7 +34,7 @@ export class ImpersonationRegistry extends APIResource {
     params: ImpersonationRegistryCreateParams,
     options?: RequestOptions,
   ): APIPromise<ImpersonationRegistryCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/settings/impersonation_registry`, {
         body,
@@ -54,10 +57,10 @@ export class ImpersonationRegistry extends APIResource {
    * ```
    */
   list(
-    params: ImpersonationRegistryListParams,
+    params: ImpersonationRegistryListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ImpersonationRegistryListResponsesV4PagePaginationArray, ImpersonationRegistryListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/settings/impersonation_registry`,
       V4PagePaginationArray<ImpersonationRegistryListResponse>,
@@ -79,10 +82,10 @@ export class ImpersonationRegistry extends APIResource {
    */
   delete(
     displayNameID: number,
-    params: ImpersonationRegistryDeleteParams,
+    params: ImpersonationRegistryDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ImpersonationRegistryDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameID}`,
@@ -108,7 +111,7 @@ export class ImpersonationRegistry extends APIResource {
     params: ImpersonationRegistryEditParams,
     options?: RequestOptions,
   ): APIPromise<ImpersonationRegistryEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameID}`,
@@ -131,10 +134,10 @@ export class ImpersonationRegistry extends APIResource {
    */
   get(
     displayNameID: number,
-    params: ImpersonationRegistryGetParams,
+    params: ImpersonationRegistryGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ImpersonationRegistryGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameID}`,
@@ -143,6 +146,7 @@ export class ImpersonationRegistry extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ImpersonationRegistry extends BaseImpersonationRegistry {}
 
 export type ImpersonationRegistryListResponsesV4PagePaginationArray =
   V4PagePaginationArray<ImpersonationRegistryListResponse>;
@@ -263,7 +267,7 @@ export interface ImpersonationRegistryCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -285,7 +289,7 @@ export interface ImpersonationRegistryListParams extends V4PagePaginationArrayPa
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -314,14 +318,14 @@ export interface ImpersonationRegistryDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ImpersonationRegistryEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -343,7 +347,7 @@ export interface ImpersonationRegistryGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ImpersonationRegistry {

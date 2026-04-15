@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as SubdomainsAPI from './subdomains/subdomains';
 import {
+  BaseSubdomains,
   SubdomainCreateParams,
   SubdomainCreateResponse,
   SubdomainDeleteParams,
@@ -18,8 +19,8 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class EmailSending extends APIResource {
-  subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
+export class BaseEmailSending extends APIResource {
+  static override readonly _key: readonly ['emailSending'] = Object.freeze(['emailSending'] as const);
 
   /**
    * Send an email
@@ -35,7 +36,7 @@ export class EmailSending extends APIResource {
    * ```
    */
   send(params: EmailSendingSendParams, options?: RequestOptions): APIPromise<EmailSendingSendResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email/sending/send`, {
         body,
@@ -62,7 +63,7 @@ export class EmailSending extends APIResource {
     params: EmailSendingSendRawParams,
     options?: RequestOptions,
   ): APIPromise<EmailSendingSendRawResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email/sending/send_raw`, {
         body,
@@ -70,6 +71,9 @@ export class EmailSending extends APIResource {
       }) as APIPromise<{ result: EmailSendingSendRawResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class EmailSending extends BaseEmailSending {
+  subdomains: SubdomainsAPI.Subdomains = new SubdomainsAPI.Subdomains(this._client);
 }
 
 export interface EmailSendingSendResponse {
@@ -110,7 +114,7 @@ export interface EmailSendingSendParams {
   /**
    * Path param: Identifier of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sender email address. Either a plain string or an object with
@@ -251,7 +255,7 @@ export interface EmailSendingSendRawParams {
   /**
    * Path param: Identifier of the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Sender email address.
@@ -274,6 +278,7 @@ export interface EmailSendingSendRawParams {
 }
 
 EmailSending.Subdomains = Subdomains;
+EmailSending.BaseSubdomains = BaseSubdomains;
 
 export declare namespace EmailSending {
   export {
@@ -285,6 +290,7 @@ export declare namespace EmailSending {
 
   export {
     Subdomains as Subdomains,
+    BaseSubdomains as BaseSubdomains,
     type SubdomainCreateResponse as SubdomainCreateResponse,
     type SubdomainListResponse as SubdomainListResponse,
     type SubdomainDeleteResponse as SubdomainDeleteResponse,

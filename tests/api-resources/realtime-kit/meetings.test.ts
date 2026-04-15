@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseMeetings } from 'cloudflare/resources/realtime-kit/meetings';
+import { RealtimeKit } from 'cloudflare/resources/realtime-kit/realtime-kit';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource meetings', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMeetings],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [RealtimeKit],
+});
+
+const runTests = (client: PartialCloudflare<{ realtimeKit: { meetings: BaseMeetings } }>) => {
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('create: only required params', async () => {
     const responsePromise = client.realtimeKit.meetings.create('app_id', {
@@ -427,4 +445,7 @@ describe('resource meetings', () => {
       },
     );
   });
-});
+};
+describe('resource meetings', () => runTests(client));
+describe('resource meetings (tree shakable, base)', () => runTests(partialClient));
+describe('resource meetings (tree shakable, subresource)', () => runTests(parentPartialClient));

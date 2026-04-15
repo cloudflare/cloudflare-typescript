@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class PermissionGroups extends APIResource {
+export class BasePermissionGroups extends APIResource {
+  static override readonly _key: readonly ['user', 'tokens', 'permissionGroups'] = Object.freeze([
+    'user',
+    'tokens',
+    'permissionGroups',
+  ] as const);
+
   /**
    * Find all available permission groups for API Tokens.
    *
@@ -27,6 +33,7 @@ export class PermissionGroups extends APIResource {
     );
   }
 }
+export class PermissionGroups extends BasePermissionGroups {}
 
 export type PermissionGroupListResponsesSinglePage = SinglePage<PermissionGroupListResponse>;
 

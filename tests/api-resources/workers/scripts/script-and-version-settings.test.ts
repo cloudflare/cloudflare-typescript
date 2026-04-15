@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseScriptAndVersionSettings } from 'cloudflare/resources/workers/scripts/script-and-version-settings';
+import { Scripts } from 'cloudflare/resources/workers/scripts/scripts';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,25 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource scriptAndVersionSettings', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseScriptAndVersionSettings],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Scripts],
+});
+
+const runTests = (
+  client: PartialCloudflare<{
+    workers: { scripts: { scriptAndVersionSettings: BaseScriptAndVersionSettings } };
+  }>,
+) => {
   // 422 Unprocessable Entity: needs schema update which is merged but not published
   test.skip('edit: only required params', async () => {
     const responsePromise = client.workers.scripts.scriptAndVersionSettings.edit('this-is_my_script-01', {
@@ -104,4 +126,8 @@ describe('resource scriptAndVersionSettings', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource scriptAndVersionSettings', () => runTests(client));
+describe('resource scriptAndVersionSettings (tree shakable, base)', () => runTests(partialClient));
+describe('resource scriptAndVersionSettings (tree shakable, subresource)', () =>
+  runTests(parentPartialClient));

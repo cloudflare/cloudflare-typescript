@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ConnectivityPrecheck extends APIResource {
+export class BaseConnectivityPrecheck extends APIResource {
+  static override readonly _key: readonly ['r2', 'superSlurper', 'connectivityPrecheck'] = Object.freeze([
+    'r2',
+    'superSlurper',
+    'connectivityPrecheck',
+  ] as const);
+
   /**
    * Check whether tokens are valid against the source bucket
    *
@@ -28,7 +34,7 @@ export class ConnectivityPrecheck extends APIResource {
     params: ConnectivityPrecheckSourceParams,
     options?: RequestOptions,
   ): APIPromise<ConnectivityPrecheckSourceResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/slurper/source/connectivity-precheck`, {
         body,
@@ -58,7 +64,7 @@ export class ConnectivityPrecheck extends APIResource {
     params: ConnectivityPrecheckTargetParams,
     options?: RequestOptions,
   ): APIPromise<ConnectivityPrecheckTargetResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/slurper/target/connectivity-precheck`, {
         body,
@@ -67,6 +73,7 @@ export class ConnectivityPrecheck extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ConnectivityPrecheck extends BaseConnectivityPrecheck {}
 
 export interface ConnectivityPrecheckSourceResponse {
   connectivityStatus?: 'success' | 'error';
@@ -86,7 +93,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -136,7 +143,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -176,7 +183,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -222,7 +229,7 @@ export interface ConnectivityPrecheckTargetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as AsesAPI from './ases';
-import { AseOriginParams, AseOriginResponse, Ases } from './ases';
+import { AseOriginParams, AseOriginResponse, Ases, BaseAses } from './ases';
 import * as LocationsAPI from './locations';
 import {
+  BaseLocations,
   LocationOriginParams,
   LocationOriginResponse,
   LocationTargetParams,
@@ -14,9 +15,13 @@ import {
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 
-export class Top extends APIResource {
-  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
-  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer7', 'top'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer7',
+    'top',
+  ] as const);
 
   /**
    * Retrieves the top attacks from origin to target location. Values are percentages
@@ -75,6 +80,10 @@ export class Top extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Top extends BaseTop {
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
 }
 
 export interface TopAttacksResponse {
@@ -835,7 +844,9 @@ export interface TopVerticalParams {
 }
 
 Top.Locations = Locations;
+Top.BaseLocations = BaseLocations;
 Top.Ases = Ases;
+Top.BaseAses = BaseAses;
 
 export declare namespace Top {
   export {
@@ -849,6 +860,7 @@ export declare namespace Top {
 
   export {
     Locations as Locations,
+    BaseLocations as BaseLocations,
     type LocationOriginResponse as LocationOriginResponse,
     type LocationTargetResponse as LocationTargetResponse,
     type LocationOriginParams as LocationOriginParams,
@@ -857,6 +869,7 @@ export declare namespace Top {
 
   export {
     Ases as Ases,
+    BaseAses as BaseAses,
     type AseOriginResponse as AseOriginResponse,
     type AseOriginParams as AseOriginParams,
   };

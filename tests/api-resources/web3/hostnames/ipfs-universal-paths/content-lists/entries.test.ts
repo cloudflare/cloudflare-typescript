@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { ContentLists } from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/content-lists/content-lists';
+import { BaseEntries } from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,25 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource entries', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseEntries],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ContentLists],
+});
+
+const runTests = (
+  client: PartialCloudflare<{
+    web3: { hostnames: { ipfsUniversalPaths: { contentLists: { entries: BaseEntries } } } };
+  }>,
+) => {
   test('create: only required params', async () => {
     const responsePromise = client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -133,4 +155,7 @@ describe('resource entries', () => {
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', identifier: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
-});
+};
+describe('resource entries', () => runTests(client));
+describe('resource entries (tree shakable, base)', () => runTests(partialClient));
+describe('resource entries (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AISearch } from './aisearch';
+export { AISearch, BaseAISearch } from './aisearch';
 export {
   Instances,
+  BaseInstances,
   type InstanceCreateResponse,
   type InstanceUpdateResponse,
   type InstanceListResponse,
@@ -23,6 +24,7 @@ export {
 } from './instances/index';
 export {
   Tokens,
+  BaseTokens,
   type TokenCreateResponse,
   type TokenUpdateResponse,
   type TokenListResponse,

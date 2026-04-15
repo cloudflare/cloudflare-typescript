@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Reports extends APIResource {
+export class BaseReports extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'phishguard', 'reports'] = Object.freeze([
+    'emailSecurity',
+    'phishguard',
+    'reports',
+  ] as const);
+
   /**
    * Retrieves `PhishGuard` reports showing phishing attempts and suspicious email
    * patterns detected.
@@ -21,10 +27,10 @@ export class Reports extends APIResource {
    * ```
    */
   list(
-    params: ReportListParams,
+    params: ReportListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ReportListResponsesSinglePage, ReportListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/phishguard/reports`,
       SinglePage<ReportListResponse>,
@@ -32,6 +38,7 @@ export class Reports extends APIResource {
     );
   }
 }
+export class Reports extends BaseReports {}
 
 export type ReportListResponsesSinglePage = SinglePage<ReportListResponse>;
 
@@ -89,7 +96,7 @@ export interface ReportListParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The end of the search date range (RFC3339 format).

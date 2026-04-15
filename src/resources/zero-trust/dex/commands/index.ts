@@ -2,6 +2,7 @@
 
 export {
   Commands,
+  BaseCommands,
   type CommandCreateResponse,
   type CommandListResponse,
   type CommandCreateParams,
@@ -10,9 +11,10 @@ export {
 } from './commands';
 export {
   Devices,
+  BaseDevices,
   type DeviceListResponse,
   type DeviceListParams,
   type DeviceListResponsesV4PagePagination,
 } from './devices';
-export { Downloads, type DownloadGetParams } from './downloads';
-export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
+export { Downloads, BaseDownloads, type DownloadGetParams } from './downloads';
+export { Quota, BaseQuota, type QuotaGetResponse, type QuotaGetParams } from './quota';

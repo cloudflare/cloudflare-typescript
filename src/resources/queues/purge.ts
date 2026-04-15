@@ -6,7 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Purge extends APIResource {
+export class BasePurge extends APIResource {
+  static override readonly _key: readonly ['queues', 'purge'] = Object.freeze(['queues', 'purge'] as const);
+
   /**
    * Deletes all messages from the Queue.
    *
@@ -18,8 +20,12 @@ export class Purge extends APIResource {
    * );
    * ```
    */
-  start(queueID: string, params: PurgeStartParams, options?: RequestOptions): APIPromise<QueuesAPI.Queue> {
-    const { account_id, ...body } = params;
+  start(
+    queueID: string,
+    params: PurgeStartParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<QueuesAPI.Queue> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/queues/${queueID}/purge`, {
         body,
@@ -41,10 +47,10 @@ export class Purge extends APIResource {
    */
   status(
     queueID: string,
-    params: PurgeStatusParams,
+    params: PurgeStatusParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PurgeStatusResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/queues/${queueID}/purge`, options) as APIPromise<{
         result: PurgeStatusResponse;
@@ -52,6 +58,7 @@ export class Purge extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Purge extends BasePurge {}
 
 export interface PurgeStatusResponse {
   /**
@@ -69,7 +76,7 @@ export interface PurgeStartParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Confimation that all messages will be deleted permanently.
@@ -81,7 +88,7 @@ export interface PurgeStatusParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Purge {

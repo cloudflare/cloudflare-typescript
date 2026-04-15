@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseGlobalWARPOverride } from 'cloudflare/resources/zero-trust/devices/resilience/global-warp-override';
+import { Resilience } from 'cloudflare/resources/zero-trust/devices/resilience/resilience';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,25 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource globalWARPOverride', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseGlobalWARPOverride],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Resilience],
+});
+
+const runTests = (
+  client: PartialCloudflare<{
+    zeroTrust: { devices: { resilience: { globalWARPOverride: BaseGlobalWARPOverride } } };
+  }>,
+) => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.resilience.globalWARPOverride.create({
       account_id: '699d98642c564d2e855e9661899b7252',
@@ -49,4 +71,7 @@ describe('resource globalWARPOverride', () => {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
-});
+};
+describe('resource globalWARPOverride', () => runTests(client));
+describe('resource globalWARPOverride (tree shakable, base)', () => runTests(partialClient));
+describe('resource globalWARPOverride (tree shakable, subresource)', () => runTests(parentPartialClient));

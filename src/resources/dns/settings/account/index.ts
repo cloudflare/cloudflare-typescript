@@ -2,6 +2,7 @@
 
 export {
   Account,
+  BaseAccount,
   type AccountEditResponse,
   type AccountGetResponse,
   type AccountEditParams,
@@ -9,6 +10,7 @@ export {
 } from './account';
 export {
   Views,
+  BaseViews,
   type ViewCreateResponse,
   type ViewListResponse,
   type ViewDeleteResponse,

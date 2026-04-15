@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Previews extends APIResource {
+export class BasePreviews extends APIResource {
+  static override readonly _key: readonly ['healthchecks', 'previews'] = Object.freeze([
+    'healthchecks',
+    'previews',
+  ] as const);
+
   /**
    * Create a new preview health check.
    *
@@ -21,7 +26,7 @@ export class Previews extends APIResource {
    * ```
    */
   create(params: PreviewCreateParams, options?: RequestOptions): APIPromise<HealthchecksAPI.Healthcheck> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/healthchecks/preview`, { body, ...options }) as APIPromise<{
         result: HealthchecksAPI.Healthcheck;
@@ -42,10 +47,10 @@ export class Previews extends APIResource {
    */
   delete(
     healthcheckID: string,
-    params: PreviewDeleteParams,
+    params: PreviewDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PreviewDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/healthchecks/preview/${healthcheckID}`,
@@ -67,10 +72,10 @@ export class Previews extends APIResource {
    */
   get(
     healthcheckID: string,
-    params: PreviewGetParams,
+    params: PreviewGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HealthchecksAPI.Healthcheck> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/healthchecks/preview/${healthcheckID}`, options) as APIPromise<{
         result: HealthchecksAPI.Healthcheck;
@@ -78,6 +83,7 @@ export class Previews extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Previews extends BasePreviews {}
 
 export interface PreviewDeleteResponse {
   /**
@@ -90,7 +96,7 @@ export interface PreviewCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -171,14 +177,14 @@ export interface PreviewDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PreviewGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Previews {

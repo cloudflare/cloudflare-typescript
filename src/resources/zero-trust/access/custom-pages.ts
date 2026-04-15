@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CustomPages extends APIResource {
+export class BaseCustomPages extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'customPages'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'customPages',
+  ] as const);
+
   /**
    * Create a custom page
    *
@@ -27,7 +33,7 @@ export class CustomPages extends APIResource {
    * ```
    */
   create(params: CustomPageCreateParams, options?: RequestOptions): APIPromise<CustomPageWithoutHTML> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/access/custom_pages`, {
         body,
@@ -59,7 +65,7 @@ export class CustomPages extends APIResource {
     params: CustomPageUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CustomPageWithoutHTML> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/access/custom_pages/${customPageID}`, {
         body,
@@ -82,10 +88,10 @@ export class CustomPages extends APIResource {
    * ```
    */
   list(
-    params: CustomPageListParams,
+    params: CustomPageListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomPageWithoutHTMLsV4PagePaginationArray, CustomPageWithoutHTML> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/custom_pages`,
       V4PagePaginationArray<CustomPageWithoutHTML>,
@@ -107,10 +113,10 @@ export class CustomPages extends APIResource {
    */
   delete(
     customPageID: string,
-    params: CustomPageDeleteParams,
+    params: CustomPageDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomPageDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/access/custom_pages/${customPageID}`,
@@ -131,8 +137,12 @@ export class CustomPages extends APIResource {
    *   );
    * ```
    */
-  get(customPageID: string, params: CustomPageGetParams, options?: RequestOptions): APIPromise<CustomPage> {
-    const { account_id } = params;
+  get(
+    customPageID: string,
+    params: CustomPageGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CustomPage> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/access/custom_pages/${customPageID}`,
@@ -141,6 +151,7 @@ export class CustomPages extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CustomPages extends BaseCustomPages {}
 
 export type CustomPageWithoutHTMLsV4PagePaginationArray = V4PagePaginationArray<CustomPageWithoutHTML>;
 
@@ -194,7 +205,7 @@ export interface CustomPageCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Custom page HTML.
@@ -216,7 +227,7 @@ export interface CustomPageUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Custom page HTML.
@@ -238,21 +249,21 @@ export interface CustomPageListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomPageDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CustomPageGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace CustomPages {

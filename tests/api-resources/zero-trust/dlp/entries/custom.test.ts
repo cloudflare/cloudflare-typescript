@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseCustom } from 'cloudflare/resources/zero-trust/dlp/entries/custom';
+import { Entries } from 'cloudflare/resources/zero-trust/dlp/entries/entries';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource custom', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCustom],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Entries],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { dlp: { entries: { custom: BaseCustom } } } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.entries.custom.create({
       account_id: 'account_id',
@@ -124,4 +142,7 @@ describe('resource custom', () => {
       account_id: 'account_id',
     });
   });
-});
+};
+describe('resource custom', () => runTests(client));
+describe('resource custom (tree shakable, base)', () => runTests(partialClient));
+describe('resource custom (tree shakable, subresource)', () => runTests(parentPartialClient));

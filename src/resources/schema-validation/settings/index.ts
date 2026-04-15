@@ -2,6 +2,7 @@
 
 export {
   Operations,
+  BaseOperations,
   type OperationUpdateResponse,
   type OperationListResponse,
   type OperationDeleteResponse,
@@ -16,6 +17,7 @@ export {
 } from './operations';
 export {
   Settings,
+  BaseSettings,
   type SettingUpdateResponse,
   type SettingEditResponse,
   type SettingGetResponse,

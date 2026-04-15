@@ -2,6 +2,7 @@
 
 export {
   LeakedCredentials,
+  BaseLeakedCredentials,
   type LeakedCredentialSummaryV2Response,
   type LeakedCredentialTimeseriesGroupsV2Response,
   type LeakedCredentialSummaryV2Params,
@@ -9,6 +10,7 @@ export {
 } from './leaked-credentials';
 export {
   Summary,
+  BaseSummary,
   type SummaryBotClassResponse,
   type SummaryCompromisedResponse,
   type SummaryBotClassParams,
@@ -16,6 +18,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupBotClassResponse,
   type TimeseriesGroupCompromisedResponse,
   type TimeseriesGroupBotClassParams,

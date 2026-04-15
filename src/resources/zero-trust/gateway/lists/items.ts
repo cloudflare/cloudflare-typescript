@@ -6,7 +6,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Items extends APIResource {
+export class BaseItems extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'lists', 'items'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'lists',
+    'items',
+  ] as const);
+
   /**
    * Fetch all items in a single Zero Trust list.
    *
@@ -23,10 +30,10 @@ export class Items extends APIResource {
    */
   list(
     listID: string,
-    params: ItemListParams,
+    params: ItemListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ItemListResponsesSinglePage, ItemListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/lists/${listID}/items`,
       SinglePage<ItemListResponse>,
@@ -34,6 +41,7 @@ export class Items extends APIResource {
     );
   }
 }
+export class Items extends BaseItems {}
 
 export type ItemListResponsesSinglePage = SinglePage<ItemListResponse>;
 
@@ -43,7 +51,7 @@ export type ItemListResponsesSinglePage = SinglePage<ItemListResponse>;
 export type ItemListResponse = Array<ListsAPI.GatewayItem>;
 
 export interface ItemListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Items {

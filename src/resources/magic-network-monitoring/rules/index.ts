@@ -1,8 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Advertisements, type Advertisement, type AdvertisementEditParams } from './advertisements';
+export {
+  Advertisements,
+  BaseAdvertisements,
+  type Advertisement,
+  type AdvertisementEditParams,
+} from './advertisements';
 export {
   Rules,
+  BaseRules,
   type MagicNetworkMonitoringRule,
   type RuleCreateParams,
   type RuleUpdateParams,

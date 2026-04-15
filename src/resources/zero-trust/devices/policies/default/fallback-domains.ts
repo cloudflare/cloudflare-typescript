@@ -7,7 +7,10 @@ import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class FallbackDomains extends APIResource {
+export class BaseFallbackDomains extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies', 'default', 'fallbackDomains'] =
+    Object.freeze(['zeroTrust', 'devices', 'policies', 'default', 'fallbackDomains'] as const);
+
   /**
    * Sets the list of domains to bypass Gateway DNS resolution. These domains will
    * use the specified local DNS resolver instead.
@@ -29,7 +32,7 @@ export class FallbackDomains extends APIResource {
     params: FallbackDomainUpdateParams,
     options?: RequestOptions,
   ): PagePromise<FallbackDomainsSinglePage, PoliciesAPI.FallbackDomain> {
-    const { account_id, domains } = params;
+    const { account_id = this._client.accountID, domains } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/fallback_domains`,
       SinglePage<PoliciesAPI.FallbackDomain>,
@@ -52,10 +55,10 @@ export class FallbackDomains extends APIResource {
    * ```
    */
   get(
-    params: FallbackDomainGetParams,
+    params: FallbackDomainGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<FallbackDomainsSinglePage, PoliciesAPI.FallbackDomain> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/fallback_domains`,
       SinglePage<PoliciesAPI.FallbackDomain>,
@@ -63,12 +66,13 @@ export class FallbackDomains extends APIResource {
     );
   }
 }
+export class FallbackDomains extends BaseFallbackDomains {}
 
 export interface FallbackDomainUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -77,7 +81,7 @@ export interface FallbackDomainUpdateParams {
 }
 
 export interface FallbackDomainGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace FallbackDomains {

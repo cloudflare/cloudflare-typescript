@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Schemas extends APIResource {
+export class BaseSchemas extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'schemas'] = Object.freeze([
+    'apiGateway',
+    'schemas',
+  ] as const);
+
   /**
    * Retrieve operations and features as OpenAPI schemas
    *
@@ -16,8 +21,11 @@ export class Schemas extends APIResource {
    * });
    * ```
    */
-  list(params: SchemaListParams, options?: RequestOptions): APIPromise<SchemaListResponse> {
-    const { zone_id, ...query } = params;
+  list(
+    params: SchemaListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SchemaListResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/schemas`, { query, ...options }) as APIPromise<{
         result: SchemaListResponse;
@@ -25,6 +33,7 @@ export class Schemas extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Schemas extends BaseSchemas {}
 
 export interface SchemaListResponse {
   schemas?: Array<unknown>;
@@ -36,7 +45,7 @@ export interface SchemaListParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Add feature(s) to the results. The feature name that is given here

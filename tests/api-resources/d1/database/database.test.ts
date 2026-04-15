@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { D1Resource } from 'cloudflare/resources/d1/d1';
+import { BaseDatabase } from 'cloudflare/resources/d1/database/database';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource database', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDatabase],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [D1Resource],
+});
+
+const runTests = (client: PartialCloudflare<{ d1: { database: BaseDatabase } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.d1.database.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -224,4 +242,7 @@ describe('resource database', () => {
       params: ['firstParam', 'secondParam'],
     });
   });
-});
+};
+describe('resource database', () => runTests(client));
+describe('resource database (tree shakable, base)', () => runTests(partialClient));
+describe('resource database (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { CloudforceOne } from 'cloudflare/resources/cloudforce-one/cloudforce-one';
+import { BaseRequests } from 'cloudflare/resources/cloudforce-one/requests/requests';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource requests', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRequests],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [CloudforceOne],
+});
+
+const runTests = (client: PartialCloudflare<{ cloudforceOne: { requests: BaseRequests } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.requests.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -182,4 +200,7 @@ describe('resource requests', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource requests', () => runTests(client));
+describe('resource requests (tree shakable, base)', () => runTests(partialClient));
+describe('resource requests (tree shakable, subresource)', () => runTests(parentPartialClient));

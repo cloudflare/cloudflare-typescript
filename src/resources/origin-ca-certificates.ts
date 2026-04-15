@@ -8,7 +8,11 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class OriginCACertificates extends APIResource {
+export class BaseOriginCACertificates extends APIResource {
+  static override readonly _key: readonly ['originCACertificates'] = Object.freeze([
+    'originCACertificates',
+  ] as const);
+
   /**
    * Create an Origin CA certificate. You can use an Origin CA Key as your User
    * Service Key or an API token when calling this endpoint ([see above](#requests)).
@@ -100,6 +104,7 @@ export class OriginCACertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class OriginCACertificates extends BaseOriginCACertificates {}
 
 export type OriginCACertificatesV4PagePaginationArray = V4PagePaginationArray<OriginCACertificate>;
 

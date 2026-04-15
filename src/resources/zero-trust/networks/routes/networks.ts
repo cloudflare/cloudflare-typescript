@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Networks extends APIResource {
+export class BaseNetworks extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'routes', 'networks'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'routes',
+    'networks',
+  ] as const);
+
   /**
    * Routes a private network through a Cloudflare Tunnel. The CIDR in
    * `ip_network_encoded` must be written in URL-encoded format.
@@ -18,7 +25,7 @@ export class Networks extends APIResource {
     params: NetworkCreateParams,
     options?: RequestOptions,
   ): APIPromise<RoutesAPI.Route> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         body,
@@ -40,10 +47,10 @@ export class Networks extends APIResource {
    */
   delete(
     ipNetworkEncoded: string,
-    params: NetworkDeleteParams,
+    params: NetworkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RoutesAPI.Route> {
-    const { account_id, tun_type, tunnel_id, virtual_network_id } = params;
+    const { account_id = this._client.accountID, tun_type, tunnel_id, virtual_network_id } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         query: { tun_type, tunnel_id, virtual_network_id },
@@ -60,10 +67,10 @@ export class Networks extends APIResource {
    */
   edit(
     ipNetworkEncoded: string,
-    params: NetworkEditParams,
+    params: NetworkEditParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RoutesAPI.Route> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.patch(
         path`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`,
@@ -72,12 +79,13 @@ export class Networks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Networks extends BaseNetworks {}
 
 export interface NetworkCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: UUID of the tunnel.
@@ -99,7 +107,7 @@ export interface NetworkDeleteParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The type of tunnel.
@@ -121,7 +129,7 @@ export interface NetworkEditParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Networks {

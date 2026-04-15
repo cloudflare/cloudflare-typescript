@@ -12,7 +12,10 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Targets extends APIResource {
+export class BaseTargets extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'infrastructure', 'targets'] =
+    Object.freeze(['zeroTrust', 'access', 'infrastructure', 'targets'] as const);
+
   /**
    * Create new target
    *
@@ -29,7 +32,7 @@ export class Targets extends APIResource {
    * ```
    */
   create(params: TargetCreateParams, options?: RequestOptions): APIPromise<TargetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/infrastructure/targets`, {
         body,
@@ -59,7 +62,7 @@ export class Targets extends APIResource {
     params: TargetUpdateParams,
     options?: RequestOptions,
   ): APIPromise<TargetUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/infrastructure/targets/${targetID}`, {
         body,
@@ -83,10 +86,10 @@ export class Targets extends APIResource {
    * ```
    */
   list(
-    params: TargetListParams,
+    params: TargetListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TargetListResponsesV4PagePaginationArray, TargetListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/infrastructure/targets`,
       V4PagePaginationArray<TargetListResponse>,
@@ -105,8 +108,12 @@ export class Targets extends APIResource {
    * );
    * ```
    */
-  delete(targetID: string, params: TargetDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(
+    targetID: string,
+    params: TargetDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/infrastructure/targets/${targetID}`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -118,8 +125,11 @@ export class Targets extends APIResource {
    *
    * @deprecated
    */
-  bulkDelete(params: TargetBulkDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  bulkDelete(
+    params: TargetBulkDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/infrastructure/targets/batch`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -140,7 +150,7 @@ export class Targets extends APIResource {
    * ```
    */
   bulkDeleteV2(params: TargetBulkDeleteV2Params, options?: RequestOptions): APIPromise<void> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/infrastructure/targets/batch_delete`, {
       body,
       ...options,
@@ -173,7 +183,7 @@ export class Targets extends APIResource {
     params: TargetBulkUpdateParams,
     options?: RequestOptions,
   ): PagePromise<TargetBulkUpdateResponsesSinglePage, TargetBulkUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/infrastructure/targets/batch`,
       SinglePage<TargetBulkUpdateResponse>,
@@ -193,8 +203,12 @@ export class Targets extends APIResource {
    *   );
    * ```
    */
-  get(targetID: string, params: TargetGetParams, options?: RequestOptions): APIPromise<TargetGetResponse> {
-    const { account_id } = params;
+  get(
+    targetID: string,
+    params: TargetGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TargetGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/infrastructure/targets/${targetID}`,
@@ -203,6 +217,7 @@ export class Targets extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Targets extends BaseTargets {}
 
 export type TargetListResponsesV4PagePaginationArray = V4PagePaginationArray<TargetListResponse>;
 
@@ -602,7 +617,7 @@ export interface TargetCreateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A non-unique field that refers to a target. Case insensitive,
@@ -673,7 +688,7 @@ export interface TargetUpdateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A non-unique field that refers to a target. Case insensitive,
@@ -744,7 +759,7 @@ export interface TargetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Date and time at which the target was created after (inclusive)
@@ -848,21 +863,21 @@ export interface TargetDeleteParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TargetBulkDeleteParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TargetBulkDeleteV2Params {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of target IDs to bulk delete
@@ -874,7 +889,7 @@ export interface TargetBulkUpdateParams {
   /**
    * Path param: Account identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -953,7 +968,7 @@ export interface TargetGetParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Targets {

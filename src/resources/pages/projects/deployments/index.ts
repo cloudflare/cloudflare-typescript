@@ -2,6 +2,7 @@
 
 export {
   Deployments,
+  BaseDeployments,
   type DeploymentDeleteResponse,
   type DeploymentCreateParams,
   type DeploymentListParams,
@@ -10,4 +11,4 @@ export {
   type DeploymentRetryParams,
   type DeploymentRollbackParams,
 } from './deployments';
-export { History } from './history/index';
+export { History, BaseHistory } from './history/index';

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as HostnameRoutesAPI from './hostname-routes';
 import {
+  BaseHostnameRoutes,
   HostnameRoute,
   HostnameRouteCreateParams,
   HostnameRouteDeleteParams,
@@ -14,6 +15,7 @@ import {
 } from './hostname-routes';
 import * as VirtualNetworksAPI from './virtual-networks';
 import {
+  BaseVirtualNetworks,
   VirtualNetwork,
   VirtualNetworkCreateParams,
   VirtualNetworkDeleteParams,
@@ -25,6 +27,7 @@ import {
 } from './virtual-networks';
 import * as RoutesAPI from './routes/routes';
 import {
+  BaseRoutes,
   NetworkRoute,
   Route,
   RouteCreateParams,
@@ -37,9 +40,15 @@ import {
   TeamnetsV4PagePaginationArray,
 } from './routes/routes';
 import * as SubnetsAPI from './subnets/subnets';
-import { SubnetListParams, Subnets } from './subnets/subnets';
+import { BaseSubnets, SubnetListParams, Subnets } from './subnets/subnets';
 
-export class Networks extends APIResource {
+export class BaseNetworks extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+  ] as const);
+}
+export class Networks extends BaseNetworks {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   virtualNetworks: VirtualNetworksAPI.VirtualNetworks = new VirtualNetworksAPI.VirtualNetworks(this._client);
   subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
@@ -47,13 +56,18 @@ export class Networks extends APIResource {
 }
 
 Networks.Routes = Routes;
+Networks.BaseRoutes = BaseRoutes;
 Networks.VirtualNetworks = VirtualNetworks;
+Networks.BaseVirtualNetworks = BaseVirtualNetworks;
 Networks.Subnets = Subnets;
+Networks.BaseSubnets = BaseSubnets;
 Networks.HostnameRoutes = HostnameRoutes;
+Networks.BaseHostnameRoutes = BaseHostnameRoutes;
 
 export declare namespace Networks {
   export {
     Routes as Routes,
+    BaseRoutes as BaseRoutes,
     type NetworkRoute as NetworkRoute,
     type Route as Route,
     type Teamnet as Teamnet,
@@ -67,6 +81,7 @@ export declare namespace Networks {
 
   export {
     VirtualNetworks as VirtualNetworks,
+    BaseVirtualNetworks as BaseVirtualNetworks,
     type VirtualNetwork as VirtualNetwork,
     type VirtualNetworksSinglePage as VirtualNetworksSinglePage,
     type VirtualNetworkCreateParams as VirtualNetworkCreateParams,
@@ -76,10 +91,11 @@ export declare namespace Networks {
     type VirtualNetworkGetParams as VirtualNetworkGetParams,
   };
 
-  export { Subnets as Subnets, type SubnetListParams as SubnetListParams };
+  export { Subnets as Subnets, BaseSubnets as BaseSubnets, type SubnetListParams as SubnetListParams };
 
   export {
     HostnameRoutes as HostnameRoutes,
+    BaseHostnameRoutes as BaseHostnameRoutes,
     type HostnameRoute as HostnameRoute,
     type HostnameRoutesV4PagePaginationArray as HostnameRoutesV4PagePaginationArray,
     type HostnameRouteCreateParams as HostnameRouteCreateParams,

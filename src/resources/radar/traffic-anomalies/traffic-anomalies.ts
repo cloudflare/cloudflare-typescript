@@ -2,12 +2,20 @@
 
 import { APIResource } from '../../../core/resource';
 import * as LocationsAPI from './locations';
-import { LocationGetParams, LocationGetResponse, Locations as LocationsAPILocations } from './locations';
+import {
+  BaseLocations,
+  LocationGetParams,
+  LocationGetResponse,
+  Locations as LocationsAPILocations,
+} from './locations';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class TrafficAnomalies extends APIResource {
-  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+export class BaseTrafficAnomalies extends APIResource {
+  static override readonly _key: readonly ['radar', 'trafficAnomalies'] = Object.freeze([
+    'radar',
+    'trafficAnomalies',
+  ] as const);
 
   /**
    * Retrieves the latest Internet traffic anomalies, which are signals that might
@@ -30,6 +38,9 @@ export class TrafficAnomalies extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class TrafficAnomalies extends BaseTrafficAnomalies {
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 }
 
 export interface TrafficAnomalyGetResponse {
@@ -144,6 +155,7 @@ export interface TrafficAnomalyGetParams {
 }
 
 TrafficAnomalies.Locations = LocationsAPILocations;
+TrafficAnomalies.BaseLocations = BaseLocations;
 
 export declare namespace TrafficAnomalies {
   export {
@@ -153,6 +165,7 @@ export declare namespace TrafficAnomalies {
 
   export {
     LocationsAPILocations as Locations,
+    BaseLocations as BaseLocations,
     type LocationGetResponse as LocationGetResponse,
     type LocationGetParams as LocationGetParams,
   };

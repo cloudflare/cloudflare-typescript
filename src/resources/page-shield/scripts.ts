@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Scripts extends APIResource {
+export class BaseScripts extends APIResource {
+  static override readonly _key: readonly ['pageShield', 'scripts'] = Object.freeze([
+    'pageShield',
+    'scripts',
+  ] as const);
+
   /**
    * Lists all scripts detected by Page Shield.
    *
@@ -20,8 +25,11 @@ export class Scripts extends APIResource {
    * }
    * ```
    */
-  list(params: ScriptListParams, options?: RequestOptions): PagePromise<ScriptsSinglePage, Script> {
-    const { zone_id, ...query } = params;
+  list(
+    params: ScriptListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ScriptsSinglePage, Script> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/page_shield/scripts`, SinglePage<Script>, {
       query,
       ...options,
@@ -41,10 +49,10 @@ export class Scripts extends APIResource {
    */
   get(
     scriptID: string,
-    params: ScriptGetParams,
+    params: ScriptGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ScriptGetResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/page_shield/scripts/${scriptID}`, options) as APIPromise<{
         result: ScriptGetResponse | null;
@@ -52,6 +60,7 @@ export class Scripts extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Scripts extends BaseScripts {}
 
 export type ScriptsSinglePage = SinglePage<Script>;
 
@@ -256,7 +265,7 @@ export interface ScriptListParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned scripts.
@@ -350,7 +359,7 @@ export interface ScriptGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Scripts {

@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as ReverseDNSAPI from './reverse-dns';
 import {
+  BaseReverseDNS,
   ReverseDNS,
   ReverseDNSEditParams,
   ReverseDNSEditResponse,
@@ -10,15 +11,14 @@ import {
   ReverseDNSGetResponse,
 } from './reverse-dns';
 import * as AnalyticsAPI from './analytics/analytics';
-import { Analytics } from './analytics/analytics';
+import { Analytics, BaseAnalytics } from './analytics/analytics';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DNSFirewall extends APIResource {
-  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
-  reverseDNS: ReverseDNSAPI.ReverseDNS = new ReverseDNSAPI.ReverseDNS(this._client);
+export class BaseDNSFirewall extends APIResource {
+  static override readonly _key: readonly ['dnsFirewall'] = Object.freeze(['dnsFirewall'] as const);
 
   /**
    * Create a DNS Firewall cluster
@@ -37,7 +37,7 @@ export class DNSFirewall extends APIResource {
    * ```
    */
   create(params: DNSFirewallCreateParams, options?: RequestOptions): APIPromise<DNSFirewallCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dns_firewall`, { body, ...options }) as APIPromise<{
         result: DNSFirewallCreateResponse;
@@ -59,10 +59,10 @@ export class DNSFirewall extends APIResource {
    * ```
    */
   list(
-    params: DNSFirewallListParams,
+    params: DNSFirewallListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DNSFirewallListResponsesV4PagePaginationArray, DNSFirewallListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dns_firewall`,
       V4PagePaginationArray<DNSFirewallListResponse>,
@@ -83,10 +83,10 @@ export class DNSFirewall extends APIResource {
    */
   delete(
     dnsFirewallID: string,
-    params: DNSFirewallDeleteParams,
+    params: DNSFirewallDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DNSFirewallDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}`,
@@ -111,7 +111,7 @@ export class DNSFirewall extends APIResource {
     params: DNSFirewallEditParams,
     options?: RequestOptions,
   ): APIPromise<DNSFirewallEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}`, {
         body,
@@ -133,16 +133,20 @@ export class DNSFirewall extends APIResource {
    */
   get(
     dnsFirewallID: string,
-    params: DNSFirewallGetParams,
+    params: DNSFirewallGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DNSFirewallGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}`, options) as APIPromise<{
         result: DNSFirewallGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class DNSFirewall extends BaseDNSFirewall {
+  analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
+  reverseDNS: ReverseDNSAPI.ReverseDNS = new ReverseDNSAPI.ReverseDNS(this._client);
 }
 
 export type DNSFirewallListResponsesV4PagePaginationArray = V4PagePaginationArray<DNSFirewallListResponse>;
@@ -549,7 +553,7 @@ export interface DNSFirewallCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: DNS Firewall cluster name
@@ -632,21 +636,21 @@ export interface DNSFirewallListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DNSFirewallDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DNSFirewallEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Attack mitigation settings
@@ -729,11 +733,13 @@ export interface DNSFirewallGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 DNSFirewall.Analytics = Analytics;
+DNSFirewall.BaseAnalytics = BaseAnalytics;
 DNSFirewall.ReverseDNS = ReverseDNS;
+DNSFirewall.BaseReverseDNS = BaseReverseDNS;
 
 export declare namespace DNSFirewall {
   export {
@@ -753,10 +759,11 @@ export declare namespace DNSFirewall {
     type DNSFirewallGetParams as DNSFirewallGetParams,
   };
 
-  export { Analytics as Analytics };
+  export { Analytics as Analytics, BaseAnalytics as BaseAnalytics };
 
   export {
     ReverseDNS as ReverseDNS,
+    BaseReverseDNS as BaseReverseDNS,
     type ReverseDNSEditResponse as ReverseDNSEditResponse,
     type ReverseDNSGetResponse as ReverseDNSGetResponse,
     type ReverseDNSEditParams as ReverseDNSEditParams,

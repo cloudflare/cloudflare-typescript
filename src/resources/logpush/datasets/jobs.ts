@@ -8,7 +8,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Jobs extends APIResource {
+export class BaseJobs extends APIResource {
+  static override readonly _key: readonly ['logpush', 'datasets', 'jobs'] = Object.freeze([
+    'logpush',
+    'datasets',
+    'jobs',
+  ] as const);
+
   /**
    * Lists Logpush jobs for an account or zone for a dataset.
    *
@@ -60,7 +66,8 @@ export class Jobs extends APIResource {
     params: JobGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -84,6 +91,7 @@ export class Jobs extends APIResource {
     );
   }
 }
+export class Jobs extends BaseJobs {}
 
 export interface JobGetParams {
   /**

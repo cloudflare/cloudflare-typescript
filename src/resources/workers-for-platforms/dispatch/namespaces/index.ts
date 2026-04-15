@@ -2,6 +2,7 @@
 
 export {
   Namespaces,
+  BaseNamespaces,
   type NamespaceCreateResponse,
   type NamespaceListResponse,
   type NamespaceDeleteResponse,
@@ -14,6 +15,7 @@ export {
 } from './namespaces';
 export {
   Scripts,
+  BaseScripts,
   type Script,
   type ScriptUpdateResponse,
   type ScriptDeleteResponse,

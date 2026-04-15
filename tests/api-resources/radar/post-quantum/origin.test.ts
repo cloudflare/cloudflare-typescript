@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseOrigin } from 'cloudflare/resources/radar/post-quantum/origin';
+import { PostQuantum } from 'cloudflare/resources/radar/post-quantum/post-quantum';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource origin', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseOrigin],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [PostQuantum],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { postQuantum: { origin: BaseOrigin } } }>) => {
   test('summary', async () => {
     const responsePromise = client.radar.postQuantum.origin.summary('KEY_AGREEMENT');
     const rawResponse = await responsePromise.asResponse();
@@ -64,4 +82,7 @@ describe('resource origin', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource origin', () => runTests(client));
+describe('resource origin (tree shakable, base)', () => runTests(partialClient));
+describe('resource origin (tree shakable, subresource)', () => runTests(parentPartialClient));

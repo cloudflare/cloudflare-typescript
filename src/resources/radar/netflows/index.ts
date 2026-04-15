@@ -2,6 +2,7 @@
 
 export {
   NetFlows,
+  BaseNetFlows,
   type NetFlowsSummaryResponse,
   type NetFlowsSummaryV2Response,
   type NetFlowsTimeseriesResponse,
@@ -13,6 +14,7 @@ export {
 } from './netflows';
 export {
   Top,
+  BaseTop,
   type TopAsesResponse,
   type TopLocationsResponse,
   type TopAsesParams,

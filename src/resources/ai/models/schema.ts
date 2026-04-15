@@ -5,12 +5,18 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Schema extends APIResource {
+export class BaseSchema extends APIResource {
+  static override readonly _key: readonly ['ai', 'models', 'schema'] = Object.freeze([
+    'ai',
+    'models',
+    'schema',
+  ] as const);
+
   /**
    * Retrieves the input and output JSON schema definition for a Workers AI model.
    */
   get(params: SchemaGetParams, options?: RequestOptions): APIPromise<SchemaGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/ai/models/schema`, { query, ...options }) as APIPromise<{
         result: SchemaGetResponse;
@@ -18,6 +24,7 @@ export class Schema extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Schema extends BaseSchema {}
 
 export interface SchemaGetResponse {
   input: SchemaGetResponse.Input;
@@ -47,7 +54,7 @@ export interface SchemaGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Model Name

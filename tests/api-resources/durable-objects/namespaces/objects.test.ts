@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Namespaces } from 'cloudflare/resources/durable-objects/namespaces/namespaces';
+import { BaseObjects } from 'cloudflare/resources/durable-objects/namespaces/objects';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource objects', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseObjects],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Namespaces],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ durableObjects: { namespaces: { objects: BaseObjects } } }>,
+) => {
   test('list: only required params', async () => {
     const responsePromise = client.durableObjects.namespaces.objects.list(
       '5fd1cafff895419c8bcc647fc64ab8f0',
@@ -31,4 +51,7 @@ describe('resource objects', () => {
       limit: 10,
     });
   });
-});
+};
+describe('resource objects', () => runTests(client));
+describe('resource objects (tree shakable, base)', () => runTests(partialClient));
+describe('resource objects (tree shakable, subresource)', () => runTests(parentPartialClient));

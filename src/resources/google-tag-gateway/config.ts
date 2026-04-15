@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ConfigResource extends APIResource {
+export class BaseConfigResource extends APIResource {
+  static override readonly _key: readonly ['googleTagGateway', 'config'] = Object.freeze([
+    'googleTagGateway',
+    'config',
+  ] as const);
+
   /**
    * Updates the Google Tag Gateway configuration for a zone.
    *
@@ -21,7 +26,7 @@ export class ConfigResource extends APIResource {
    * ```
    */
   update(params: ConfigUpdateParams, options?: RequestOptions): APIPromise<Config> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/settings/google-tag-gateway/config`, {
         body,
@@ -40,8 +45,8 @@ export class ConfigResource extends APIResource {
    * });
    * ```
    */
-  get(params: ConfigGetParams, options?: RequestOptions): APIPromise<Config> {
-    const { zone_id } = params;
+  get(params: ConfigGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Config> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/settings/google-tag-gateway/config`, options) as APIPromise<{
         result: Config;
@@ -49,6 +54,7 @@ export class ConfigResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ConfigResource extends BaseConfigResource {}
 
 /**
  * Google Tag Gateway configuration for a zone.
@@ -87,7 +93,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Enables or disables Google Tag Gateway for this zone.
@@ -123,7 +129,7 @@ export interface ConfigGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace ConfigResource {

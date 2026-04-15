@@ -3,13 +3,18 @@
 import { APIResource } from '../../../core/resource';
 import * as V1API from '../v1/v1';
 import * as DirectUploadsAPI from './direct-uploads';
-import { DirectUploadCreateParams, DirectUploadCreateResponse, DirectUploads } from './direct-uploads';
+import {
+  BaseDirectUploads,
+  DirectUploadCreateParams,
+  DirectUploadCreateResponse,
+  DirectUploads,
+} from './direct-uploads';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class V2 extends APIResource {
-  directUploads: DirectUploadsAPI.DirectUploads = new DirectUploadsAPI.DirectUploads(this._client);
+export class BaseV2 extends APIResource {
+  static override readonly _key: readonly ['images', 'v2'] = Object.freeze(['images', 'v2'] as const);
 
   /**
    * List up to 10000 images with up to 1000 results per page. Use the optional
@@ -65,14 +70,17 @@ export class V2 extends APIResource {
    * });
    * ```
    */
-  list(params: V2ListParams, options?: RequestOptions): APIPromise<V2ListResponse> {
-    const { account_id, ...query } = params;
+  list(params: V2ListParams | null | undefined = {}, options?: RequestOptions): APIPromise<V2ListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/images/v2`, { query, ...options }) as APIPromise<{
         result: V2ListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class V2 extends BaseV2 {
+  directUploads: DirectUploadsAPI.DirectUploads = new DirectUploadsAPI.DirectUploads(this._client);
 }
 
 export interface V2ListResponse {
@@ -89,7 +97,7 @@ export interface V2ListParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Continuation token to fetch next page. Passed as a query param when
@@ -141,12 +149,14 @@ export namespace V2ListParams {
 }
 
 V2.DirectUploads = DirectUploads;
+V2.BaseDirectUploads = BaseDirectUploads;
 
 export declare namespace V2 {
   export { type V2ListResponse as V2ListResponse, type V2ListParams as V2ListParams };
 
   export {
     DirectUploads as DirectUploads,
+    BaseDirectUploads as BaseDirectUploads,
     type DirectUploadCreateResponse as DirectUploadCreateResponse,
     type DirectUploadCreateParams as DirectUploadCreateParams,
   };

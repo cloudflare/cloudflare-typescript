@@ -2,6 +2,7 @@
 
 export {
   Datasets,
+  BaseDatasets,
   type DatasetCreateResponse,
   type DatasetListResponse,
   type DatasetEditResponse,
@@ -13,4 +14,4 @@ export {
   type DatasetGetParams,
   type DatasetRawParams,
 } from './datasets';
-export { Health } from './health';
+export { Health, BaseHealth } from './health';

@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Token extends APIResource {
+export class BaseToken extends APIResource {
+  static override readonly _key: readonly ['stream', 'token'] = Object.freeze(['stream', 'token'] as const);
+
   /**
    * Creates a signed URL token for a video. If a body is not provided in the
    * request, a token is created with default values.
@@ -23,7 +25,7 @@ export class Token extends APIResource {
     params: TokenCreateParams,
     options?: RequestOptions,
   ): APIPromise<TokenCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/${identifier}/token`, {
         body,
@@ -32,6 +34,7 @@ export class Token extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Token extends BaseToken {}
 
 export interface TokenCreateResponse {
   /**
@@ -44,7 +47,7 @@ export interface TokenCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The optional ID of a Stream signing key. If present, the `pem` field

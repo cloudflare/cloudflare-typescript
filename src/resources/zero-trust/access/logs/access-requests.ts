@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class AccessRequests extends APIResource {
+export class BaseAccessRequests extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'logs', 'accessRequests'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'logs',
+    'accessRequests',
+  ] as const);
+
   /**
    * Gets a list of Access authentication audit logs for an account.
    *
@@ -18,8 +25,11 @@ export class AccessRequests extends APIResource {
    *   });
    * ```
    */
-  list(params: AccessRequestListParams, options?: RequestOptions): APIPromise<AccessRequestListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: AccessRequestListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccessRequestListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/logs/access_requests`, {
         query,
@@ -28,6 +38,7 @@ export class AccessRequests extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AccessRequests extends BaseAccessRequests {}
 
 export type AccessRequestListResponse = Array<SCIMAPI.AccessRequest>;
 
@@ -35,7 +46,7 @@ export interface AccessRequestListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Operator for the `allowed` filter.

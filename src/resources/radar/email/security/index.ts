@@ -2,6 +2,7 @@
 
 export {
   Security,
+  BaseSecurity,
   type SecuritySummaryV2Response,
   type SecurityTimeseriesGroupsV2Response,
   type SecuritySummaryV2Params,
@@ -9,6 +10,7 @@ export {
 } from './security';
 export {
   Summary,
+  BaseSummary,
   type SummaryARCResponse,
   type SummaryDKIMResponse,
   type SummaryDMARCResponse,
@@ -30,6 +32,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupARCResponse,
   type TimeseriesGroupDKIMResponse,
   type TimeseriesGroupDMARCResponse,
@@ -49,4 +52,4 @@ export {
   type TimeseriesGroupThreatCategoryParams,
   type TimeseriesGroupTLSVersionParams,
 } from './timeseries-groups';
-export { Top } from './top/index';
+export { Top, BaseTop } from './top/index';

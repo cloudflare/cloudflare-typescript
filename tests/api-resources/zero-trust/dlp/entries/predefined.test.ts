@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Entries } from 'cloudflare/resources/zero-trust/dlp/entries/entries';
+import { BasePredefined } from 'cloudflare/resources/zero-trust/dlp/entries/predefined';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource predefined', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePredefined],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Entries],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { dlp: { entries: { predefined: BasePredefined } } } }>,
+) => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.entries.predefined.create({
       account_id: 'account_id',
@@ -110,4 +130,7 @@ describe('resource predefined', () => {
       { account_id: 'account_id' },
     );
   });
-});
+};
+describe('resource predefined', () => runTests(client));
+describe('resource predefined (tree shakable, base)', () => runTests(partialClient));
+describe('resource predefined (tree shakable, subresource)', () => runTests(parentPartialClient));

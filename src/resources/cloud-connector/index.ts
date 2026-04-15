@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CloudConnector } from './cloud-connector';
+export { CloudConnector, BaseCloudConnector } from './cloud-connector';
 export {
   Rules,
+  BaseRules,
   type RuleUpdateResponse,
   type RuleListResponse,
   type RuleUpdateParams,

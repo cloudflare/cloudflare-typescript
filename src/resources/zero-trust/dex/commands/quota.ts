@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Quota extends APIResource {
+export class BaseQuota extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'commands', 'quota'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'commands',
+    'quota',
+  ] as const);
+
   /**
    * Retrieves the current quota usage and limits for device commands within a
    * specific account, including the time when the quota will reset
@@ -17,8 +24,11 @@ export class Quota extends APIResource {
    * );
    * ```
    */
-  get(params: QuotaGetParams, options?: RequestOptions): APIPromise<QuotaGetResponse> {
-    const { account_id } = params;
+  get(
+    params: QuotaGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<QuotaGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dex/commands/quota`, options) as APIPromise<{
         result: QuotaGetResponse;
@@ -26,6 +36,7 @@ export class Quota extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Quota extends BaseQuota {}
 
 export interface QuotaGetResponse {
   /**
@@ -48,7 +59,7 @@ export interface QuotaGetParams {
   /**
    * unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Quota {

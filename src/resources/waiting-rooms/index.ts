@@ -2,6 +2,7 @@
 
 export {
   Events,
+  BaseEvents,
   type Event,
   type EventDeleteResponse,
   type EventCreateParams,
@@ -12,9 +13,10 @@ export {
   type EventGetParams,
   type EventsV4PagePaginationArray,
 } from './events/index';
-export { Page, type PagePreviewResponse, type PagePreviewParams } from './page';
+export { Page, BasePage, type PagePreviewResponse, type PagePreviewParams } from './page';
 export {
   Rules,
+  BaseRules,
   type WaitingRoomRule,
   type RuleCreateParams,
   type RuleUpdateParams,
@@ -25,6 +27,7 @@ export {
 } from './rules';
 export {
   Settings,
+  BaseSettings,
   type Setting,
   type SettingUpdateResponse,
   type SettingEditResponse,
@@ -33,5 +36,5 @@ export {
   type SettingEditParams,
   type SettingGetParams,
 } from './settings';
-export { Statuses, type StatusGetResponse, type StatusGetParams } from './statuses';
-export { WaitingRooms } from './waiting-rooms';
+export { Statuses, BaseStatuses, type StatusGetResponse, type StatusGetParams } from './statuses';
+export { WaitingRooms, BaseWaitingRooms } from './waiting-rooms';

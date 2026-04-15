@@ -6,9 +6,11 @@ import {
   ActivationCheck,
   ActivationCheckTriggerParams,
   ActivationCheckTriggerResponse,
+  BaseActivationCheck,
 } from './activation-check';
 import * as CustomNameserversAPI from './custom-nameservers';
 import {
+  BaseCustomNameservers,
   CustomNameserverGetParams,
   CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
@@ -18,6 +20,7 @@ import {
 } from './custom-nameservers';
 import * as EnvironmentsAPI from './environments';
 import {
+  BaseEnvironments,
   EnvironmentCreateParams,
   EnvironmentCreateResponse,
   EnvironmentDeleteParams,
@@ -33,17 +36,27 @@ import {
   Environments,
 } from './environments';
 import * as HoldsAPI from './holds';
-import { HoldCreateParams, HoldDeleteParams, HoldEditParams, HoldGetParams, Holds, ZoneHold } from './holds';
+import {
+  BaseHolds,
+  HoldCreateParams,
+  HoldDeleteParams,
+  HoldEditParams,
+  HoldGetParams,
+  Holds,
+  ZoneHold,
+} from './holds';
 import * as PlansAPI from './plans';
 import {
   AvailableRatePlan,
   AvailableRatePlansSinglePage,
+  BasePlans,
   PlanGetParams,
   PlanListParams,
   Plans,
 } from './plans';
 import * as RatePlansAPI from './rate-plans';
 import {
+  BaseRatePlans,
   RatePlanGetParams,
   RatePlanGetResponse,
   RatePlanGetResponsesSinglePage,
@@ -57,6 +70,7 @@ import {
   AlwaysUseHTTPS,
   AutomaticHTTPSRewrites,
   AutomaticPlatformOptimization,
+  BaseSettings,
   Brotli,
   BrowserCacheTTL,
   BrowserCheck,
@@ -109,6 +123,7 @@ import {
 } from './settings';
 import * as SubscriptionsAPI from './subscriptions';
 import {
+  BaseSubscriptions,
   SubscriptionCreateParams,
   SubscriptionCreateResponse,
   SubscriptionGetParams,
@@ -122,17 +137,8 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Zones extends APIResource {
-  activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
-  customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
-    this._client,
-  );
-  holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
-  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
-  plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
-  ratePlans: RatePlansAPI.RatePlans = new RatePlansAPI.RatePlans(this._client);
+export class BaseZones extends APIResource {
+  static override readonly _key: readonly ['zones'] = Object.freeze(['zones'] as const);
 
   /**
    * Create Zone
@@ -180,8 +186,11 @@ export class Zones extends APIResource {
    * });
    * ```
    */
-  delete(params: ZoneDeleteParams, options?: RequestOptions): APIPromise<ZoneDeleteResponse | null> {
-    const { zone_id } = params;
+  delete(
+    params: ZoneDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ZoneDeleteResponse | null> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}`, options) as APIPromise<{
         result: ZoneDeleteResponse | null;
@@ -199,8 +208,8 @@ export class Zones extends APIResource {
    * });
    * ```
    */
-  edit(params: ZoneEditParams, options?: RequestOptions): APIPromise<Zone> {
-    const { zone_id, ...body } = params;
+  edit(params: ZoneEditParams | null | undefined = {}, options?: RequestOptions): APIPromise<Zone> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.patch(path`/zones/${zone_id}`, { body, ...options }) as APIPromise<{ result: Zone }>
     )._thenUnwrap((obj) => obj.result);
@@ -216,12 +225,24 @@ export class Zones extends APIResource {
    * });
    * ```
    */
-  get(params: ZoneGetParams, options?: RequestOptions): APIPromise<Zone> {
-    const { zone_id } = params;
+  get(params: ZoneGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Zone> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (this._client.get(path`/zones/${zone_id}`, options) as APIPromise<{ result: Zone }>)._thenUnwrap(
       (obj) => obj.result,
     );
   }
+}
+export class Zones extends BaseZones {
+  activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
+  customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
+    this._client,
+  );
+  holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
+  ratePlans: RatePlansAPI.RatePlans = new RatePlansAPI.RatePlans(this._client);
 }
 
 export type ZonesV4PagePaginationArray = V4PagePaginationArray<Zone>;
@@ -628,14 +649,14 @@ export interface ZoneDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ZoneEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Indicates whether the zone is only using Cloudflare DNS services. A
@@ -662,17 +683,25 @@ export interface ZoneGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Zones.ActivationCheck = ActivationCheck;
+Zones.BaseActivationCheck = BaseActivationCheck;
 Zones.Settings = Settings;
+Zones.BaseSettings = BaseSettings;
 Zones.Environments = Environments;
+Zones.BaseEnvironments = BaseEnvironments;
 Zones.CustomNameservers = CustomNameservers;
+Zones.BaseCustomNameservers = BaseCustomNameservers;
 Zones.Holds = Holds;
+Zones.BaseHolds = BaseHolds;
 Zones.Subscriptions = Subscriptions;
+Zones.BaseSubscriptions = BaseSubscriptions;
 Zones.Plans = Plans;
+Zones.BasePlans = BasePlans;
 Zones.RatePlans = RatePlans;
+Zones.BaseRatePlans = BaseRatePlans;
 
 export declare namespace Zones {
   export {
@@ -689,12 +718,14 @@ export declare namespace Zones {
 
   export {
     ActivationCheck as ActivationCheck,
+    BaseActivationCheck as BaseActivationCheck,
     type ActivationCheckTriggerResponse as ActivationCheckTriggerResponse,
     type ActivationCheckTriggerParams as ActivationCheckTriggerParams,
   };
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type AdvancedDDoS as AdvancedDDoS,
     type Aegis as Aegis,
     type AlwaysOnline as AlwaysOnline,
@@ -753,6 +784,7 @@ export declare namespace Zones {
 
   export {
     Environments as Environments,
+    BaseEnvironments as BaseEnvironments,
     type EnvironmentCreateResponse as EnvironmentCreateResponse,
     type EnvironmentUpdateResponse as EnvironmentUpdateResponse,
     type EnvironmentListResponse as EnvironmentListResponse,
@@ -769,6 +801,7 @@ export declare namespace Zones {
 
   export {
     CustomNameservers as CustomNameservers,
+    BaseCustomNameservers as BaseCustomNameservers,
     type CustomNameserverUpdateResponse as CustomNameserverUpdateResponse,
     type CustomNameserverGetResponse as CustomNameserverGetResponse,
     type CustomNameserverUpdateResponsesSinglePage as CustomNameserverUpdateResponsesSinglePage,
@@ -778,6 +811,7 @@ export declare namespace Zones {
 
   export {
     Holds as Holds,
+    BaseHolds as BaseHolds,
     type ZoneHold as ZoneHold,
     type HoldCreateParams as HoldCreateParams,
     type HoldDeleteParams as HoldDeleteParams,
@@ -787,6 +821,7 @@ export declare namespace Zones {
 
   export {
     Subscriptions as Subscriptions,
+    BaseSubscriptions as BaseSubscriptions,
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionGetResponse as SubscriptionGetResponse,
@@ -797,6 +832,7 @@ export declare namespace Zones {
 
   export {
     Plans as Plans,
+    BasePlans as BasePlans,
     type AvailableRatePlan as AvailableRatePlan,
     type AvailableRatePlansSinglePage as AvailableRatePlansSinglePage,
     type PlanListParams as PlanListParams,
@@ -805,6 +841,7 @@ export declare namespace Zones {
 
   export {
     RatePlans as RatePlans,
+    BaseRatePlans as BaseRatePlans,
     type RatePlanGetResponse as RatePlanGetResponse,
     type RatePlanGetResponsesSinglePage as RatePlanGetResponsesSinglePage,
     type RatePlanGetParams as RatePlanGetParams,

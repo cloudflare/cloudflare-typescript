@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Firewall } from 'cloudflare/resources/firewall/firewall';
+import { BaseUARules } from 'cloudflare/resources/firewall/ua-rules';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource uaRules', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseUARules],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Firewall],
+});
+
+const runTests = (client: PartialCloudflare<{ firewall: { uaRules: BaseUARules } }>) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.firewall.uaRules.create({
@@ -122,4 +140,7 @@ describe('resource uaRules', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource uaRules', () => runTests(client));
+describe('resource uaRules (tree shakable, base)', () => runTests(partialClient));
+describe('resource uaRules (tree shakable, subresource)', () => runTests(parentPartialClient));

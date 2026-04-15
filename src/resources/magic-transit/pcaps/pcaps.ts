@@ -3,9 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
-import { Download, DownloadGetParams } from './download';
+import { BaseDownload, Download, DownloadGetParams } from './download';
 import * as OwnershipAPI from './ownership';
 import {
+  BaseOwnershipResource,
   Ownership,
   OwnershipCreateParams,
   OwnershipDeleteParams,
@@ -20,9 +21,11 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class PCAPs extends APIResource {
-  ownership: OwnershipAPI.OwnershipResource = new OwnershipAPI.OwnershipResource(this._client);
-  download: DownloadAPI.Download = new DownloadAPI.Download(this._client);
+export class BasePCAPs extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'pcaps'] = Object.freeze([
+    'magicTransit',
+    'pcaps',
+  ] as const);
 
   /**
    * Create new PCAP request for account.
@@ -39,7 +42,7 @@ export class PCAPs extends APIResource {
    * ```
    */
   create(params: PCAPCreateParams, options?: RequestOptions): APIPromise<PCAPCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pcaps`, { body, ...options }) as APIPromise<{
         result: PCAPCreateResponse;
@@ -61,10 +64,10 @@ export class PCAPs extends APIResource {
    * ```
    */
   list(
-    params: PCAPListParams,
+    params: PCAPListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PCAPListResponsesSinglePage, PCAPListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pcaps`,
       SinglePage<PCAPListResponse>,
@@ -83,8 +86,12 @@ export class PCAPs extends APIResource {
    * );
    * ```
    */
-  get(pcapID: string, params: PCAPGetParams, options?: RequestOptions): APIPromise<PCAPGetResponse> {
-    const { account_id } = params;
+  get(
+    pcapID: string,
+    params: PCAPGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PCAPGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/pcaps/${pcapID}`, options) as APIPromise<{
         result: PCAPGetResponse;
@@ -103,13 +110,21 @@ export class PCAPs extends APIResource {
    * );
    * ```
    */
-  stop(pcapID: string, params: PCAPStopParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  stop(
+    pcapID: string,
+    params: PCAPStopParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.put(path`/accounts/${account_id}/pcaps/${pcapID}/stop`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
+}
+export class PCAPs extends BasePCAPs {
+  ownership: OwnershipAPI.OwnershipResource = new OwnershipAPI.OwnershipResource(this._client);
+  download: DownloadAPI.Download = new DownloadAPI.Download(this._client);
 }
 
 export type PCAPListResponsesSinglePage = SinglePage<PCAPListResponse>;
@@ -490,7 +505,7 @@ export declare namespace PCAPCreateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The limit of packets contained in a packet capture.
@@ -531,7 +546,7 @@ export declare namespace PCAPCreateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The name of the data center used for the packet capture. This can be
@@ -585,25 +600,27 @@ export interface PCAPListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PCAPGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PCAPStopParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 PCAPs.OwnershipResource = OwnershipResource;
+PCAPs.BaseOwnershipResource = BaseOwnershipResource;
 PCAPs.Download = Download;
+PCAPs.BaseDownload = BaseDownload;
 
 export declare namespace PCAPs {
   export {
@@ -621,6 +638,7 @@ export declare namespace PCAPs {
 
   export {
     OwnershipResource as OwnershipResource,
+    BaseOwnershipResource as BaseOwnershipResource,
     type Ownership as Ownership,
     type OwnershipsSinglePage as OwnershipsSinglePage,
     type OwnershipCreateParams as OwnershipCreateParams,
@@ -629,5 +647,5 @@ export declare namespace PCAPs {
     type OwnershipValidateParams as OwnershipValidateParams,
   };
 
-  export { Download as Download, type DownloadGetParams as DownloadGetParams };
+  export { Download as Download, BaseDownload as BaseDownload, type DownloadGetParams as DownloadGetParams };
 }

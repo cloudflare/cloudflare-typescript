@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Sessions extends APIResource {
+export class BaseSessions extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'sessions'] = Object.freeze([
+    'realtimeKit',
+    'sessions',
+  ] as const);
+
   /**
    * Trigger Summary generation of Transcripts for the session ID.
    *
@@ -26,7 +31,7 @@ export class Sessions extends APIResource {
     params: SessionGenerateSummaryOfTranscriptsParams,
     options?: RequestOptions,
   ): APIPromise<void> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/summary`,
       { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
@@ -54,7 +59,7 @@ export class Sessions extends APIResource {
     params: SessionGetParticipantDataFromPeerIDParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetParticipantDataFromPeerIDResponse> {
-    const { account_id, app_id, ...query } = params;
+    const { account_id = this._client.accountID, app_id, ...query } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/peer-report/${peerID}`,
       { query, ...options },
@@ -81,7 +86,7 @@ export class Sessions extends APIResource {
     params: SessionGetSessionChatParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionChatResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/chat`,
       options,
@@ -108,7 +113,7 @@ export class Sessions extends APIResource {
     params: SessionGetSessionDetailsParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionDetailsResponse> {
-    const { account_id, app_id, ...query } = params;
+    const { account_id = this._client.accountID, app_id, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}`, {
       query,
       ...options,
@@ -137,7 +142,7 @@ export class Sessions extends APIResource {
     params: SessionGetSessionParticipantDetailsParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionParticipantDetailsResponse> {
-    const { account_id, app_id, session_id, ...query } = params;
+    const { account_id = this._client.accountID, app_id, session_id, ...query } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${session_id}/participants/${participantID}`,
       { query, ...options },
@@ -164,7 +169,7 @@ export class Sessions extends APIResource {
     params: SessionGetSessionParticipantsParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionParticipantsResponse> {
-    const { account_id, app_id, ...query } = params;
+    const { account_id = this._client.accountID, app_id, ...query } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/participants`,
       { query, ...options },
@@ -192,7 +197,7 @@ export class Sessions extends APIResource {
     params: SessionGetSessionSummaryParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionSummaryResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/summary`,
       options,
@@ -219,7 +224,7 @@ export class Sessions extends APIResource {
     params: SessionGetSessionTranscriptsParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionTranscriptsResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/transcript`,
       options,
@@ -239,16 +244,17 @@ export class Sessions extends APIResource {
    */
   getSessions(
     appID: string,
-    params: SessionGetSessionsParams,
+    params: SessionGetSessionsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionsResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${appID}/sessions`, {
       query,
       ...options,
     });
   }
 }
+export class Sessions extends BaseSessions {}
 
 export interface SessionGetParticipantDataFromPeerIDResponse {
   data?: SessionGetParticipantDataFromPeerIDResponse.Data;
@@ -1276,7 +1282,7 @@ export interface SessionGenerateSummaryOfTranscriptsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1288,7 +1294,7 @@ export interface SessionGetParticipantDataFromPeerIDParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -1306,7 +1312,7 @@ export interface SessionGetSessionChatParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1318,7 +1324,7 @@ export interface SessionGetSessionDetailsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -1335,7 +1341,7 @@ export interface SessionGetSessionParticipantDetailsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -1363,7 +1369,7 @@ export interface SessionGetSessionParticipantsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -1414,7 +1420,7 @@ export interface SessionGetSessionSummaryParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1426,7 +1432,7 @@ export interface SessionGetSessionTranscriptsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1438,7 +1444,7 @@ export interface SessionGetSessionsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the meeting that sessions should be associated with

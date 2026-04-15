@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class MessageResource extends APIResource {
+export class BaseMessageResource extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'requests', 'message'] = Object.freeze([
+    'cloudforceOne',
+    'requests',
+    'message',
+  ] as const);
+
   /**
    * Adds a message to a Cloudforce One intelligence request conversation.
    *
@@ -20,7 +26,7 @@ export class MessageResource extends APIResource {
    * ```
    */
   create(requestID: string, params: MessageCreateParams, options?: RequestOptions): APIPromise<Message> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/cloudforce-one/requests/${requestID}/message/new`, {
         body,
@@ -42,7 +48,7 @@ export class MessageResource extends APIResource {
    * ```
    */
   update(messageID: number, params: MessageUpdateParams, options?: RequestOptions): APIPromise<Message> {
-    const { account_id, request_id, ...body } = params;
+    const { account_id = this._client.accountID, request_id, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/cloudforce-one/requests/${request_id}/message/${messageID}`,
@@ -68,7 +74,7 @@ export class MessageResource extends APIResource {
     params: MessageDeleteParams,
     options?: RequestOptions,
   ): APIPromise<MessageDeleteResponse> {
-    const { account_id, request_id } = params;
+    const { account_id = this._client.accountID, request_id } = params;
     return this._client.delete(
       path`/accounts/${account_id}/cloudforce-one/requests/${request_id}/message/${messageID}`,
       options,
@@ -98,7 +104,7 @@ export class MessageResource extends APIResource {
     params: MessageGetParams,
     options?: RequestOptions,
   ): PagePromise<MessagesSinglePage, Message> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/cloudforce-one/requests/${requestID}/message`,
       SinglePage<Message>,
@@ -106,6 +112,7 @@ export class MessageResource extends APIResource {
     );
   }
 }
+export class MessageResource extends BaseMessageResource {}
 
 export type MessagesSinglePage = SinglePage<Message>;
 
@@ -190,7 +197,7 @@ export interface MessageCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Content of message.
@@ -202,7 +209,7 @@ export interface MessageUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: UUID.
@@ -219,7 +226,7 @@ export interface MessageDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * UUID.
@@ -231,7 +238,7 @@ export interface MessageGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Page number of results.

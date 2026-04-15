@@ -7,7 +7,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'settings'] = Object.freeze([
+    'workers',
+    'scripts',
+    'settings',
+  ] as const);
+
   /**
    * Patch script-level settings when using
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
@@ -27,7 +33,7 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: RequestOptions,
   ): APIPromise<ScriptsAPI.ScriptSetting> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, {
         body,
@@ -52,10 +58,10 @@ export class Settings extends APIResource {
    */
   get(
     scriptName: string,
-    params: SettingGetParams,
+    params: SettingGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ScriptsAPI.ScriptSetting> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`,
@@ -64,12 +70,13 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether Logpush is turned on for the Worker.
@@ -183,7 +190,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Settings {

@@ -2,8 +2,9 @@
 
 export {
   Associations,
+  BaseAssociations,
   type CertificateAsssociation,
   type AssociationGetParams,
   type CertificateAsssociationsSinglePage,
 } from './associations';
-export { MTLSCertificates } from './mtls-certificates';
+export { MTLSCertificates, BaseMTLSCertificates } from './mtls-certificates';

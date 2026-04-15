@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Summary extends APIResource {
+export class BaseSummary extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'riskScoring', 'summary'] = Object.freeze([
+    'zeroTrust',
+    'riskScoring',
+    'summary',
+  ] as const);
+
   /**
    * Gets an aggregate summary of risk scores across the account, including
    * distribution and trends.
@@ -18,8 +24,11 @@ export class Summary extends APIResource {
    *   });
    * ```
    */
-  get(params: SummaryGetParams, options?: RequestOptions): APIPromise<SummaryGetResponse> {
-    const { account_id } = params;
+  get(
+    params: SummaryGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SummaryGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/zt_risk_scoring/summary`, options) as APIPromise<{
         result: SummaryGetResponse;
@@ -27,6 +36,7 @@ export class Summary extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summary extends BaseSummary {}
 
 export interface SummaryGetResponse {
   users: Array<SummaryGetResponse.User>;
@@ -49,7 +59,7 @@ export namespace SummaryGetResponse {
 }
 
 export interface SummaryGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Summary {

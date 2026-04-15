@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseManagedTransforms } from 'cloudflare/resources/managed-transforms';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +11,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource managedTransforms', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseManagedTransforms],
+});
+
+const runTests = (client: PartialCloudflare<{ managedTransforms: BaseManagedTransforms }>) => {
   // TODO: investigate unauthorized HTTP response
   test.skip('list: only required params', async () => {
     const responsePromise = client.managedTransforms.list({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
@@ -67,4 +77,6 @@ describe('resource managedTransforms', () => {
       managed_response_headers: [{ id: 'add_security_headers', enabled: true }],
     });
   });
-});
+};
+describe('resource managedTransforms', () => runTests(client));
+describe('resource managedTransforms (tree shakable, base)', () => runTests(partialClient));

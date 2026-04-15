@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class WorkflowResource extends APIResource {
+export class BaseWorkflowResource extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'workflow'] = Object.freeze([
+    'zaraz',
+    'workflow',
+  ] as const);
+
   /**
    * Gets Zaraz workflow for a zone.
    *
@@ -16,8 +21,8 @@ export class WorkflowResource extends APIResource {
    * });
    * ```
    */
-  get(params: WorkflowGetParams, options?: RequestOptions): APIPromise<Workflow> {
-    const { zone_id } = params;
+  get(params: WorkflowGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Workflow> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/settings/zaraz/workflow`, options) as APIPromise<{
         result: Workflow;
@@ -25,6 +30,7 @@ export class WorkflowResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class WorkflowResource extends BaseWorkflowResource {}
 
 /**
  * Zaraz workflow.
@@ -40,7 +46,7 @@ export interface WorkflowGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace WorkflowResource {

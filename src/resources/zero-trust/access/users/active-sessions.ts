@@ -7,7 +7,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class ActiveSessions extends APIResource {
+export class BaseActiveSessions extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'users', 'activeSessions'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'users',
+    'activeSessions',
+  ] as const);
+
   /**
    * Get active sessions for a single user.
    *
@@ -24,10 +31,10 @@ export class ActiveSessions extends APIResource {
    */
   list(
     userID: string,
-    params: ActiveSessionListParams,
+    params: ActiveSessionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/users/${userID}/active_sessions`,
       SinglePage<ActiveSessionListResponse>,
@@ -55,7 +62,7 @@ export class ActiveSessions extends APIResource {
     params: ActiveSessionGetParams,
     options?: RequestOptions,
   ): APIPromise<ActiveSessionGetResponse> {
-    const { account_id, user_id } = params;
+    const { account_id = this._client.accountID, user_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/access/users/${user_id}/active_sessions/${nonce}`,
@@ -64,6 +71,7 @@ export class ActiveSessions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ActiveSessions extends BaseActiveSessions {}
 
 export type ActiveSessionListResponsesSinglePage = SinglePage<ActiveSessionListResponse>;
 
@@ -197,14 +205,14 @@ export interface ActiveSessionListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ActiveSessionGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * UUID.

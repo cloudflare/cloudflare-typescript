@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Previews extends APIResource {
+export class BasePreviews extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'monitors', 'previews'] = Object.freeze([
+    'loadBalancers',
+    'monitors',
+    'previews',
+  ] as const);
+
   /**
    * Preview pools using the specified monitor with provided monitor details. The
    * returned preview_id can be used in the preview endpoint to retrieve the results.
@@ -24,7 +30,7 @@ export class Previews extends APIResource {
     params: PreviewCreateParams,
     options?: RequestOptions,
   ): APIPromise<PreviewCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/load_balancers/monitors/${monitorID}/preview`, {
         body,
@@ -33,6 +39,7 @@ export class Previews extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Previews extends BasePreviews {}
 
 export interface PreviewCreateResponse {
   /**
@@ -47,7 +54,7 @@ export interface PreviewCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This

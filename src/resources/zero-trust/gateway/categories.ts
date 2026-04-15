@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Categories extends APIResource {
+export class BaseCategories extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'categories'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'categories',
+  ] as const);
+
   /**
    * List all categories.
    *
@@ -19,8 +25,11 @@ export class Categories extends APIResource {
    * }
    * ```
    */
-  list(params: CategoryListParams, options?: RequestOptions): PagePromise<CategoriesSinglePage, Category> {
-    const { account_id } = params;
+  list(
+    params: CategoryListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CategoriesSinglePage, Category> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/categories`,
       SinglePage<Category>,
@@ -28,6 +37,7 @@ export class Categories extends APIResource {
     );
   }
 }
+export class Categories extends BaseCategories {}
 
 export type CategoriesSinglePage = SinglePage<Category>;
 
@@ -100,7 +110,7 @@ export interface CategoryListParams {
   /**
    * Provide the identifier string.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Categories {

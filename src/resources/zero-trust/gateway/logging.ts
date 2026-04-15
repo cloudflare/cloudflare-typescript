@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Logging extends APIResource {
+export class BaseLogging extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'logging'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'logging',
+  ] as const);
+
   /**
    * Update logging settings for the current Zero Trust account.
    *
@@ -17,8 +23,11 @@ export class Logging extends APIResource {
    *   });
    * ```
    */
-  update(params: LoggingUpdateParams, options?: RequestOptions): APIPromise<LoggingSetting> {
-    const { account_id, ...body } = params;
+  update(
+    params: LoggingUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LoggingSetting> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/gateway/logging`, { body, ...options }) as APIPromise<{
         result: LoggingSetting;
@@ -37,8 +46,11 @@ export class Logging extends APIResource {
    *   });
    * ```
    */
-  get(params: LoggingGetParams, options?: RequestOptions): APIPromise<LoggingSetting> {
-    const { account_id } = params;
+  get(
+    params: LoggingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LoggingSetting> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/logging`, options) as APIPromise<{
         result: LoggingSetting;
@@ -46,6 +58,7 @@ export class Logging extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Logging extends BaseLogging {}
 
 export interface LoggingSetting {
   /**
@@ -134,7 +147,7 @@ export interface LoggingUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Indicate whether to redact personally identifiable information from
@@ -219,7 +232,7 @@ export namespace LoggingUpdateParams {
 }
 
 export interface LoggingGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Logging {

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as PrebuiltPoliciesAPI from './prebuilt-policies';
 import {
+  BasePrebuiltPolicies,
   PrebuiltPolicies,
   PrebuiltPolicyListParams,
   PrebuiltPolicyListResponse,
@@ -14,16 +15,17 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CatalogSyncs extends APIResource {
-  prebuiltPolicies: PrebuiltPoliciesAPI.PrebuiltPolicies = new PrebuiltPoliciesAPI.PrebuiltPolicies(
-    this._client,
-  );
+export class BaseCatalogSyncs extends APIResource {
+  static override readonly _key: readonly ['magicCloudNetworking', 'catalogSyncs'] = Object.freeze([
+    'magicCloudNetworking',
+    'catalogSyncs',
+  ] as const);
 
   /**
    * Create a new Catalog Sync (Closed Beta).
    */
   create(params: CatalogSyncCreateParams, options?: RequestOptions): APIPromise<CatalogSyncCreateResponse> {
-    const { account_id, forwarded, ...body } = params;
+    const { account_id = this._client.accountID, forwarded, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/cloud/catalog-syncs`, {
         body,
@@ -44,7 +46,7 @@ export class CatalogSyncs extends APIResource {
     params: CatalogSyncUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CatalogSyncUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncID}`, {
         body,
@@ -57,10 +59,10 @@ export class CatalogSyncs extends APIResource {
    * List Catalog Syncs (Closed Beta).
    */
   list(
-    params: CatalogSyncListParams,
+    params: CatalogSyncListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CatalogSyncListResponsesSinglePage, CatalogSyncListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/cloud/catalog-syncs`,
       SinglePage<CatalogSyncListResponse>,
@@ -73,10 +75,10 @@ export class CatalogSyncs extends APIResource {
    */
   delete(
     syncID: string,
-    params: CatalogSyncDeleteParams,
+    params: CatalogSyncDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CatalogSyncDeleteResponse> {
-    const { account_id, delete_destination } = params;
+    const { account_id = this._client.accountID, delete_destination } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncID}`, {
         query: { delete_destination },
@@ -93,7 +95,7 @@ export class CatalogSyncs extends APIResource {
     params: CatalogSyncEditParams,
     options?: RequestOptions,
   ): APIPromise<CatalogSyncEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncID}`, {
         body,
@@ -107,10 +109,10 @@ export class CatalogSyncs extends APIResource {
    */
   get(
     syncID: string,
-    params: CatalogSyncGetParams,
+    params: CatalogSyncGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CatalogSyncGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncID}`,
@@ -125,10 +127,10 @@ export class CatalogSyncs extends APIResource {
    */
   refresh(
     syncID: string,
-    params: CatalogSyncRefreshParams,
+    params: CatalogSyncRefreshParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CatalogSyncRefreshResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/magic/cloud/catalog-syncs/${syncID}/refresh`,
@@ -136,6 +138,11 @@ export class CatalogSyncs extends APIResource {
       ) as APIPromise<{ result: CatalogSyncRefreshResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class CatalogSyncs extends BaseCatalogSyncs {
+  prebuiltPolicies: PrebuiltPoliciesAPI.PrebuiltPolicies = new PrebuiltPoliciesAPI.PrebuiltPolicies(
+    this._client,
+  );
 }
 
 export type CatalogSyncListResponsesSinglePage = SinglePage<CatalogSyncListResponse>;
@@ -1225,7 +1232,7 @@ export interface CatalogSyncCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1262,7 +1269,7 @@ export interface CatalogSyncUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1286,14 +1293,14 @@ export interface CatalogSyncUpdateParams {
 }
 
 export interface CatalogSyncListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CatalogSyncDeleteParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1305,7 +1312,7 @@ export interface CatalogSyncEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1329,14 +1336,15 @@ export interface CatalogSyncEditParams {
 }
 
 export interface CatalogSyncGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CatalogSyncRefreshParams {
-  account_id: string;
+  account_id?: string;
 }
 
 CatalogSyncs.PrebuiltPolicies = PrebuiltPolicies;
+CatalogSyncs.BasePrebuiltPolicies = BasePrebuiltPolicies;
 
 export declare namespace CatalogSyncs {
   export {
@@ -1359,6 +1367,7 @@ export declare namespace CatalogSyncs {
 
   export {
     PrebuiltPolicies as PrebuiltPolicies,
+    BasePrebuiltPolicies as BasePrebuiltPolicies,
     type PrebuiltPolicyListResponse as PrebuiltPolicyListResponse,
     type PrebuiltPolicyListResponsesSinglePage as PrebuiltPolicyListResponsesSinglePage,
     type PrebuiltPolicyListParams as PrebuiltPolicyListParams,

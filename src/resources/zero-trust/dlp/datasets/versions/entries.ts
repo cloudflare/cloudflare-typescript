@@ -6,7 +6,10 @@ import { buildHeaders } from '../../../../../internal/headers';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Entries extends APIResource {
+export class BaseEntries extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'datasets', 'versions', 'entries'] =
+    Object.freeze(['zeroTrust', 'dlp', 'datasets', 'versions', 'entries'] as const);
+
   /**
    * This is used for multi-column EDMv2 datasets. The EDMv2 format can only be
    * created in the Cloudflare dashboard.
@@ -31,7 +34,7 @@ export class Entries extends APIResource {
     params: EntryCreateParams,
     options?: RequestOptions,
   ): APIPromise<EntryCreateResponse> {
-    const { account_id, dataset_id, version } = params;
+    const { account_id = this._client.accountID, dataset_id, version } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/dlp/datasets/${dataset_id}/versions/${version}/entries/${entryID}`,
@@ -44,6 +47,7 @@ export class Entries extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Entries extends BaseEntries {}
 
 export interface EntryCreateResponse {
   entry_id: string;
@@ -59,7 +63,7 @@ export interface EntryCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param

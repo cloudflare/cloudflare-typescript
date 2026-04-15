@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Outputs extends APIResource {
+export class BaseOutputs extends APIResource {
+  static override readonly _key: readonly ['stream', 'liveInputs', 'outputs'] = Object.freeze([
+    'stream',
+    'liveInputs',
+    'outputs',
+  ] as const);
+
   /**
    * Creates a new output that can be used to simulcast or restream live video to
    * other RTMP or SRT destinations. Outputs are always linked to a specific live
@@ -31,7 +37,7 @@ export class Outputs extends APIResource {
     params: OutputCreateParams,
     options?: RequestOptions,
   ): APIPromise<Output> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
         body,
@@ -58,7 +64,7 @@ export class Outputs extends APIResource {
    * ```
    */
   update(outputIdentifier: string, params: OutputUpdateParams, options?: RequestOptions): APIPromise<Output> {
-    const { account_id, live_input_identifier, ...body } = params;
+    const { account_id = this._client.accountID, live_input_identifier, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/stream/live_inputs/${live_input_identifier}/outputs/${outputIdentifier}`,
@@ -83,10 +89,10 @@ export class Outputs extends APIResource {
    */
   list(
     liveInputIdentifier: string,
-    params: OutputListParams,
+    params: OutputListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OutputsSinglePage, Output> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
       SinglePage<Output>,
@@ -110,13 +116,14 @@ export class Outputs extends APIResource {
    * ```
    */
   delete(outputIdentifier: string, params: OutputDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, live_input_identifier } = params;
+    const { account_id = this._client.accountID, live_input_identifier } = params;
     return this._client.delete(
       path`/accounts/${account_id}/stream/live_inputs/${live_input_identifier}/outputs/${outputIdentifier}`,
       { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
     );
   }
 }
+export class Outputs extends BaseOutputs {}
 
 export type OutputsSinglePage = SinglePage<Output>;
 
@@ -150,7 +157,7 @@ export interface OutputCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The streamKey used to authenticate against an output's target.
@@ -176,7 +183,7 @@ export interface OutputUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: A unique identifier for a live input.
@@ -197,14 +204,14 @@ export interface OutputListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OutputDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * A unique identifier for a live input.

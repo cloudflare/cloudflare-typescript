@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Calls } from './calls';
+export { Calls, BaseCalls } from './calls';
 export {
   SFU,
+  BaseSFU,
   type SFUCreateResponse,
   type SFUUpdateResponse,
   type SFUListResponse,
@@ -17,6 +18,7 @@ export {
 } from './sfu';
 export {
   TURN,
+  BaseTURN,
   type TURNCreateResponse,
   type TURNUpdateResponse,
   type TURNListResponse,

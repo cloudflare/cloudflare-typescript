@@ -11,7 +11,14 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['firewall', 'waf', 'packages', 'rules'] = Object.freeze([
+    'firewall',
+    'waf',
+    'packages',
+    'rules',
+  ] as const);
+
   /**
    * Fetches WAF rules in a WAF package.
    *
@@ -22,10 +29,10 @@ export class Rules extends APIResource {
    */
   list(
     packageID: string,
-    params: RuleListParams,
+    params: RuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/firewall/waf/packages/${packageID}/rules`,
       V4PagePaginationArray<RuleListResponse>,
@@ -42,7 +49,7 @@ export class Rules extends APIResource {
    * @deprecated
    */
   edit(ruleID: string, params: RuleEditParams, options?: RequestOptions): APIPromise<RuleEditResponse> {
-    const { zone_id, package_id, ...body } = params;
+    const { zone_id = this._client.zoneID, package_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/firewall/waf/packages/${package_id}/rules/${ruleID}`, {
         body,
@@ -60,7 +67,7 @@ export class Rules extends APIResource {
    * @deprecated
    */
   get(ruleID: string, params: RuleGetParams, options?: RequestOptions): APIPromise<RuleGetResponse> {
-    const { zone_id, package_id } = params;
+    const { zone_id = this._client.zoneID, package_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/firewall/waf/packages/${package_id}/rules/${ruleID}`,
@@ -69,6 +76,7 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Rules extends BaseRules {}
 
 export type RuleListResponsesV4PagePaginationArray = V4PagePaginationArray<RuleListResponse>;
 
@@ -405,7 +413,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Defines the public description of the WAF rule.
@@ -450,7 +458,7 @@ export interface RuleEditParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param: Defines the unique identifier of a WAF package.
@@ -468,7 +476,7 @@ export interface RuleGetParams {
   /**
    * Defines an identifier of a schema.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Defines the unique identifier of a WAF package.

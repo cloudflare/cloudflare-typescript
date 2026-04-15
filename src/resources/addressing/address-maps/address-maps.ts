@@ -10,20 +10,29 @@ import {
   AccountUpdateParams,
   AccountUpdateResponse,
   Accounts,
+  BaseAccounts,
 } from './accounts';
 import * as AddressMapsIPsAPI from './ips';
-import { IPDeleteParams, IPDeleteResponse, IPUpdateParams, IPUpdateResponse, IPs } from './ips';
+import { BaseIPs, IPDeleteParams, IPDeleteResponse, IPUpdateParams, IPUpdateResponse, IPs } from './ips';
 import * as ZonesAPI from './zones';
-import { ZoneDeleteParams, ZoneDeleteResponse, ZoneUpdateParams, ZoneUpdateResponse, Zones } from './zones';
+import {
+  BaseZones,
+  ZoneDeleteParams,
+  ZoneDeleteResponse,
+  ZoneUpdateParams,
+  ZoneUpdateResponse,
+  Zones,
+} from './zones';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AddressMaps extends APIResource {
-  accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
-  ips: AddressMapsIPsAPI.IPs = new AddressMapsIPsAPI.IPs(this._client);
-  zones: ZonesAPI.Zones = new ZonesAPI.Zones(this._client);
+export class BaseAddressMaps extends APIResource {
+  static override readonly _key: readonly ['addressing', 'addressMaps'] = Object.freeze([
+    'addressing',
+    'addressMaps',
+  ] as const);
 
   /**
    * Create a new address map under the account.
@@ -36,8 +45,11 @@ export class AddressMaps extends APIResource {
    *   });
    * ```
    */
-  create(params: AddressMapCreateParams, options?: RequestOptions): APIPromise<AddressMapCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: AddressMapCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AddressMapCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/addressing/address_maps`, {
         body,
@@ -60,10 +72,10 @@ export class AddressMaps extends APIResource {
    * ```
    */
   list(
-    params: AddressMapListParams,
+    params: AddressMapListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AddressMapsSinglePage, AddressMap> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/address_maps`,
       SinglePage<AddressMap>,
@@ -86,10 +98,10 @@ export class AddressMaps extends APIResource {
    */
   delete(
     addressMapID: string,
-    params: AddressMapDeleteParams,
+    params: AddressMapDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AddressMapDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/addressing/address_maps/${addressMapID}`,
       options,
@@ -108,7 +120,7 @@ export class AddressMaps extends APIResource {
    * ```
    */
   edit(addressMapID: string, params: AddressMapEditParams, options?: RequestOptions): APIPromise<AddressMap> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/addressing/address_maps/${addressMapID}`, {
         body,
@@ -130,10 +142,10 @@ export class AddressMaps extends APIResource {
    */
   get(
     addressMapID: string,
-    params: AddressMapGetParams,
+    params: AddressMapGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AddressMapGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/addressing/address_maps/${addressMapID}`,
@@ -141,6 +153,11 @@ export class AddressMaps extends APIResource {
       ) as APIPromise<{ result: AddressMapGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class AddressMaps extends BaseAddressMaps {
+  accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
+  ips: AddressMapsIPsAPI.IPs = new AddressMapsIPsAPI.IPs(this._client);
+  zones: ZonesAPI.Zones = new ZonesAPI.Zones(this._client);
 }
 
 export type AddressMapsSinglePage = SinglePage<AddressMap>;
@@ -429,7 +446,7 @@ export interface AddressMapCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description field which may be used to describe the
@@ -473,21 +490,21 @@ export interface AddressMapListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AddressMapDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AddressMapEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If you have legacy TLS clients which do not send the TLS server name
@@ -515,12 +532,15 @@ export interface AddressMapGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 AddressMaps.Accounts = Accounts;
+AddressMaps.BaseAccounts = BaseAccounts;
 AddressMaps.IPs = IPs;
+AddressMaps.BaseIPs = BaseIPs;
 AddressMaps.Zones = Zones;
+AddressMaps.BaseZones = BaseZones;
 
 export declare namespace AddressMaps {
   export {
@@ -539,6 +559,7 @@ export declare namespace AddressMaps {
 
   export {
     Accounts as Accounts,
+    BaseAccounts as BaseAccounts,
     type AccountUpdateResponse as AccountUpdateResponse,
     type AccountDeleteResponse as AccountDeleteResponse,
     type AccountUpdateParams as AccountUpdateParams,
@@ -547,6 +568,7 @@ export declare namespace AddressMaps {
 
   export {
     IPs as IPs,
+    BaseIPs as BaseIPs,
     type IPUpdateResponse as IPUpdateResponse,
     type IPDeleteResponse as IPDeleteResponse,
     type IPUpdateParams as IPUpdateParams,
@@ -555,6 +577,7 @@ export declare namespace AddressMaps {
 
   export {
     Zones as Zones,
+    BaseZones as BaseZones,
     type ZoneUpdateResponse as ZoneUpdateResponse,
     type ZoneDeleteResponse as ZoneDeleteResponse,
     type ZoneUpdateParams as ZoneUpdateParams,

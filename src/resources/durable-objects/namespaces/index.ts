@@ -2,12 +2,14 @@
 
 export {
   Namespaces,
+  BaseNamespaces,
   type Namespace,
   type NamespaceListParams,
   type NamespacesV4PagePaginationArray,
 } from './namespaces';
 export {
   Objects,
+  BaseObjects,
   type DurableObject,
   type ObjectListParams,
   type DurableObjectsCursorPaginationAfter,

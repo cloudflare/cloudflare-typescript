@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ServiceBindings extends APIResource {
+export class BaseServiceBindings extends APIResource {
+  static override readonly _key: readonly ['addressing', 'prefixes', 'serviceBindings'] = Object.freeze([
+    'addressing',
+    'prefixes',
+    'serviceBindings',
+  ] as const);
+
   /**
    * Creates a new Service Binding, routing traffic to IPs within the given CIDR to a
    * service running on Cloudflare's network. **NOTE:** The first Service Binding
@@ -33,7 +39,7 @@ export class ServiceBindings extends APIResource {
     params: ServiceBindingCreateParams,
     options?: RequestOptions,
   ): APIPromise<ServiceBinding> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/addressing/prefixes/${prefixID}/bindings`, {
         body,
@@ -63,10 +69,10 @@ export class ServiceBindings extends APIResource {
    */
   list(
     prefixID: string,
-    params: ServiceBindingListParams,
+    params: ServiceBindingListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ServiceBindingsSinglePage, ServiceBinding> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/prefixes/${prefixID}/bindings`,
       SinglePage<ServiceBinding>,
@@ -94,7 +100,7 @@ export class ServiceBindings extends APIResource {
     params: ServiceBindingDeleteParams,
     options?: RequestOptions,
   ): APIPromise<ServiceBindingDeleteResponse> {
-    const { account_id, prefix_id } = params;
+    const { account_id = this._client.accountID, prefix_id } = params;
     return this._client.delete(
       path`/accounts/${account_id}/addressing/prefixes/${prefix_id}/bindings/${bindingID}`,
       options,
@@ -121,7 +127,7 @@ export class ServiceBindings extends APIResource {
     params: ServiceBindingGetParams,
     options?: RequestOptions,
   ): APIPromise<ServiceBinding> {
-    const { account_id, prefix_id } = params;
+    const { account_id = this._client.accountID, prefix_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/addressing/prefixes/${prefix_id}/bindings/${bindingID}`,
@@ -130,6 +136,7 @@ export class ServiceBindings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ServiceBindings extends BaseServiceBindings {}
 
 export type ServiceBindingsSinglePage = SinglePage<ServiceBinding>;
 
@@ -223,7 +230,7 @@ export interface ServiceBindingCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -241,14 +248,14 @@ export interface ServiceBindingListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ServiceBindingDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier of an IP Prefix.
@@ -260,7 +267,7 @@ export interface ServiceBindingGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier of an IP Prefix.

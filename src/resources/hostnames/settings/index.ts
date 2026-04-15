@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Settings } from './settings';
+export { Settings, BaseSettings } from './settings';
 export {
   TLS,
+  BaseTLS,
   type Setting,
   type SettingValue,
   type TLSDeleteResponse,

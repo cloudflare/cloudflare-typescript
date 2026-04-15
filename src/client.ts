@@ -173,6 +173,16 @@ export interface ClientOptions {
   userServiceKey?: string | null | undefined;
 
   /**
+   * Sets an account ID to be used with all account-scoped requests.
+   */
+  accountID?: string | null | undefined;
+
+  /**
+   * Sets a zone ID to be used with all zone-scoped requests.
+   */
+  zoneID?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['CLOUDFLARE_BASE_URL'].
@@ -242,13 +252,15 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Cloudflare API.
+ * Base class for Cloudflare API clients.
  */
-export class Cloudflare {
+export class BaseCloudflare {
   apiToken: string | null;
   apiKey: string | null;
   apiEmail: string | null;
   userServiceKey: string | null;
+  accountID: string | null;
+  zoneID: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -269,6 +281,8 @@ export class Cloudflare {
    * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.accountID=process.env['CLOUDFLARE_ACCOUNT_ID'] ?? null]
+   * @param {string | null | undefined} [opts.zoneID=process.env['CLOUDFLARE_ZONE_ID'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -283,6 +297,8 @@ export class Cloudflare {
     apiKey = readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = readEnv('CLOUDFLARE_EMAIL') ?? null,
     userServiceKey = readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
+    accountID = readEnv('CLOUDFLARE_ACCOUNT_ID') ?? null,
+    zoneID = readEnv('CLOUDFLARE_ZONE_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
@@ -290,12 +306,14 @@ export class Cloudflare {
       apiKey,
       apiEmail,
       userServiceKey,
+      accountID,
+      zoneID,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? Cloudflare.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? BaseCloudflare.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
@@ -315,6 +333,8 @@ export class Cloudflare {
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
     this.userServiceKey = userServiceKey;
+    this.accountID = accountID;
+    this.zoneID = zoneID;
   }
 
   /**
@@ -334,6 +354,8 @@ export class Cloudflare {
       apiKey: this.apiKey,
       apiEmail: this.apiEmail,
       userServiceKey: this.userServiceKey,
+      accountID: this.accountID,
+      zoneID: this.zoneID,
       ...options,
     });
     return client;
@@ -911,8 +933,14 @@ export class Cloudflare {
     }
   }
 
-  static Cloudflare = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
+}
+
+/**
+ * API Client for interfacing with the Cloudflare API.
+ */
+export class Cloudflare extends BaseCloudflare {
+  static Cloudflare = this;
 
   static CloudflareError = Errors.CloudflareError;
   static APIError = Errors.APIError;

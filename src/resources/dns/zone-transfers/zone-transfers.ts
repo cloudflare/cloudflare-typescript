@@ -12,11 +12,13 @@ import {
   ACLUpdateParams,
   ACLs,
   ACLsSinglePage,
+  BaseACLs,
 } from './acls';
 import * as ForceAXFRAPI from './force-axfr';
-import { ForceAXFR, ForceAXFRCreateParams, ForceAXFRResource } from './force-axfr';
+import { BaseForceAXFRResource, ForceAXFR, ForceAXFRCreateParams, ForceAXFRResource } from './force-axfr';
 import * as IncomingAPI from './incoming';
 import {
+  BaseIncomingResource,
   Incoming,
   IncomingCreateParams,
   IncomingCreateResponse,
@@ -30,6 +32,7 @@ import {
 } from './incoming';
 import * as PeersAPI from './peers';
 import {
+  BasePeers,
   Peer,
   PeerCreateParams,
   PeerDeleteParams,
@@ -42,6 +45,7 @@ import {
 } from './peers';
 import * as TSIGsAPI from './tsigs';
 import {
+  BaseTSIGs,
   TSIG,
   TSIGCreateParams,
   TSIGDeleteParams,
@@ -54,6 +58,7 @@ import {
 } from './tsigs';
 import * as OutgoingAPI from './outgoing/outgoing';
 import {
+  BaseOutgoingResource,
   DisableTransfer,
   EnableTransfer,
   Outgoing,
@@ -73,7 +78,13 @@ import {
   OutgoingUpdateResponse,
 } from './outgoing/outgoing';
 
-export class ZoneTransfers extends APIResource {
+export class BaseZoneTransfers extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+  ] as const);
+}
+export class ZoneTransfers extends BaseZoneTransfers {
   forceAXFR: ForceAXFRAPI.ForceAXFRResource = new ForceAXFRAPI.ForceAXFRResource(this._client);
   incoming: IncomingAPI.IncomingResource = new IncomingAPI.IncomingResource(this._client);
   outgoing: OutgoingAPI.OutgoingResource = new OutgoingAPI.OutgoingResource(this._client);
@@ -83,21 +94,29 @@ export class ZoneTransfers extends APIResource {
 }
 
 ZoneTransfers.ForceAXFRResource = ForceAXFRResource;
+ZoneTransfers.BaseForceAXFRResource = BaseForceAXFRResource;
 ZoneTransfers.IncomingResource = IncomingResource;
+ZoneTransfers.BaseIncomingResource = BaseIncomingResource;
 ZoneTransfers.OutgoingResource = OutgoingResource;
+ZoneTransfers.BaseOutgoingResource = BaseOutgoingResource;
 ZoneTransfers.ACLs = ACLs;
+ZoneTransfers.BaseACLs = BaseACLs;
 ZoneTransfers.Peers = Peers;
+ZoneTransfers.BasePeers = BasePeers;
 ZoneTransfers.TSIGs = TSIGs;
+ZoneTransfers.BaseTSIGs = BaseTSIGs;
 
 export declare namespace ZoneTransfers {
   export {
     ForceAXFRResource as ForceAXFRResource,
+    BaseForceAXFRResource as BaseForceAXFRResource,
     type ForceAXFR as ForceAXFR,
     type ForceAXFRCreateParams as ForceAXFRCreateParams,
   };
 
   export {
     IncomingResource as IncomingResource,
+    BaseIncomingResource as BaseIncomingResource,
     type Incoming as Incoming,
     type IncomingCreateResponse as IncomingCreateResponse,
     type IncomingUpdateResponse as IncomingUpdateResponse,
@@ -111,6 +130,7 @@ export declare namespace ZoneTransfers {
 
   export {
     OutgoingResource as OutgoingResource,
+    BaseOutgoingResource as BaseOutgoingResource,
     type DisableTransfer as DisableTransfer,
     type EnableTransfer as EnableTransfer,
     type Outgoing as Outgoing,
@@ -131,6 +151,7 @@ export declare namespace ZoneTransfers {
 
   export {
     ACLs as ACLs,
+    BaseACLs as BaseACLs,
     type ACL as ACL,
     type ACLDeleteResponse as ACLDeleteResponse,
     type ACLsSinglePage as ACLsSinglePage,
@@ -143,6 +164,7 @@ export declare namespace ZoneTransfers {
 
   export {
     Peers as Peers,
+    BasePeers as BasePeers,
     type Peer as Peer,
     type PeerDeleteResponse as PeerDeleteResponse,
     type PeersSinglePage as PeersSinglePage,
@@ -155,6 +177,7 @@ export declare namespace ZoneTransfers {
 
   export {
     TSIGs as TSIGs,
+    BaseTSIGs as BaseTSIGs,
     type TSIG as TSIG,
     type TSIGDeleteResponse as TSIGDeleteResponse,
     type TSIGsSinglePage as TSIGsSinglePage,

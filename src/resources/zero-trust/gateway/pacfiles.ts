@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Pacfiles extends APIResource {
+export class BasePacfiles extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'pacfiles'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'pacfiles',
+  ] as const);
+
   /**
    * Create a new Zero Trust Gateway PAC file.
    *
@@ -22,7 +28,7 @@ export class Pacfiles extends APIResource {
    * ```
    */
   create(params: PacfileCreateParams, options?: RequestOptions): APIPromise<PacfileCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/pacfiles`, { body, ...options }) as APIPromise<{
         result: PacfileCreateResponse;
@@ -53,7 +59,7 @@ export class Pacfiles extends APIResource {
     params: PacfileUpdateParams,
     options?: RequestOptions,
   ): APIPromise<PacfileUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/gateway/pacfiles/${pacfileID}`, {
         body,
@@ -76,10 +82,10 @@ export class Pacfiles extends APIResource {
    * ```
    */
   list(
-    params: PacfileListParams,
+    params: PacfileListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PacfileListResponsesSinglePage, PacfileListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/pacfiles`,
       SinglePage<PacfileListResponse>,
@@ -101,10 +107,10 @@ export class Pacfiles extends APIResource {
    */
   delete(
     pacfileID: string,
-    params: PacfileDeleteParams,
+    params: PacfileDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PacfileDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/gateway/pacfiles/${pacfileID}`,
@@ -124,8 +130,12 @@ export class Pacfiles extends APIResource {
    * );
    * ```
    */
-  get(pacfileID: string, params: PacfileGetParams, options?: RequestOptions): APIPromise<PacfileGetResponse> {
-    const { account_id } = params;
+  get(
+    pacfileID: string,
+    params: PacfileGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PacfileGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/pacfiles/${pacfileID}`, options) as APIPromise<{
         result: PacfileGetResponse;
@@ -133,6 +143,7 @@ export class Pacfiles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Pacfiles extends BasePacfiles {}
 
 export type PacfileListResponsesSinglePage = SinglePage<PacfileListResponse>;
 
@@ -269,7 +280,7 @@ export interface PacfileCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Actual contents of the PAC file
@@ -297,7 +308,7 @@ export interface PacfileUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Actual contents of the PAC file
@@ -316,15 +327,15 @@ export interface PacfileUpdateParams {
 }
 
 export interface PacfileListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PacfileDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PacfileGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Pacfiles {

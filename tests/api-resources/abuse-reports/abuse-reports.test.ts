@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAbuseReports } from 'cloudflare/resources/abuse-reports/abuse-reports';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +11,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource abuseReports', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAbuseReports],
+});
+
+const runTests = (client: PartialCloudflare<{ abuseReports: BaseAbuseReports }>) => {
   // TODO: investigate unauthorized HTTP response
   test.skip('create: only required params', async () => {
     const responsePromise = client.abuseReports.create('report_param', {
@@ -114,4 +124,6 @@ describe('resource abuseReports', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource abuseReports', () => runTests(client));
+describe('resource abuseReports (tree shakable, base)', () => runTests(partialClient));

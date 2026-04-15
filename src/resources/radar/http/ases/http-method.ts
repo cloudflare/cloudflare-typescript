@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class HTTPMethod extends APIResource {
+export class BaseHTTPMethod extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'ases', 'httpMethod'] = Object.freeze([
+    'radar',
+    'http',
+    'ases',
+    'httpMethod',
+  ] as const);
+
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested HTTP
    * version.
@@ -29,6 +36,7 @@ export class HTTPMethod extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class HTTPMethod extends BaseHTTPMethod {}
 
 export interface HTTPMethodGetResponse {
   /**

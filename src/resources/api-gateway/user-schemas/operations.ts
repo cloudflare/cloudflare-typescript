@@ -9,7 +9,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Operations extends APIResource {
+export class BaseOperations extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'userSchemas', 'operations'] = Object.freeze([
+    'apiGateway',
+    'userSchemas',
+    'operations',
+  ] as const);
+
   /**
    * Retrieves all operations from the schema. Operations that already exist in API
    * Shield Endpoint Management will be returned as full operations.
@@ -18,10 +24,10 @@ export class Operations extends APIResource {
    */
   list(
     schemaID: string,
-    params: OperationListParams,
+    params: OperationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/user_schemas/${schemaID}/operations`,
       V4PagePaginationArray<OperationListResponse>,
@@ -29,6 +35,7 @@ export class Operations extends APIResource {
     );
   }
 }
+export class Operations extends BaseOperations {}
 
 export type OperationListResponsesV4PagePaginationArray = V4PagePaginationArray<OperationListResponse>;
 
@@ -338,7 +345,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Filter results to only include endpoints containing this pattern.

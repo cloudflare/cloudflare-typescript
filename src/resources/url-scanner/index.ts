@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Responses, type ResponseGetResponse, type ResponseGetParams } from './responses';
+export { Responses, BaseResponses, type ResponseGetResponse, type ResponseGetParams } from './responses';
 export {
   Scans,
+  BaseScans,
   type ScanCreateResponse,
   type ScanListResponse,
   type ScanBulkCreateResponse,
@@ -17,4 +18,4 @@ export {
   type ScanHARParams,
   type ScanScreenshotParams,
 } from './scans';
-export { URLScanner } from './url-scanner';
+export { URLScanner, BaseURLScanner } from './url-scanner';

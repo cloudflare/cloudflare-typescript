@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ZoneCertificates extends APIResource {
+export class BaseZoneCertificates extends APIResource {
+  static override readonly _key: readonly ['originTLSClientAuth', 'zoneCertificates'] = Object.freeze([
+    'originTLSClientAuth',
+    'zoneCertificates',
+  ] as const);
+
   /**
    * Upload your own certificate you want Cloudflare to use for edge-to-origin
    * communication to override the shared certificate. Please note that it is
@@ -30,7 +35,7 @@ export class ZoneCertificates extends APIResource {
     params: ZoneCertificateCreateParams,
     options?: RequestOptions,
   ): APIPromise<ZoneCertificateCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as APIPromise<{
         result: ZoneCertificateCreateResponse;
@@ -53,10 +58,10 @@ export class ZoneCertificates extends APIResource {
    * ```
    */
   list(
-    params: ZoneCertificateListParams,
+    params: ZoneCertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ZoneCertificateListResponsesSinglePage, ZoneCertificateListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/origin_tls_client_auth`,
       SinglePage<ZoneCertificateListResponse>,
@@ -78,10 +83,10 @@ export class ZoneCertificates extends APIResource {
    */
   delete(
     certificateID: string,
-    params: ZoneCertificateDeleteParams,
+    params: ZoneCertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ZoneCertificateDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/origin_tls_client_auth/${certificateID}`,
@@ -105,10 +110,10 @@ export class ZoneCertificates extends APIResource {
    */
   get(
     certificateID: string,
-    params: ZoneCertificateGetParams,
+    params: ZoneCertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ZoneCertificateGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/origin_tls_client_auth/${certificateID}`,
@@ -117,6 +122,7 @@ export class ZoneCertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ZoneCertificates extends BaseZoneCertificates {}
 
 export type ZoneCertificateListResponsesSinglePage = SinglePage<ZoneCertificateListResponse>;
 
@@ -256,7 +262,7 @@ export interface ZoneCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's leaf certificate.
@@ -273,21 +279,21 @@ export interface ZoneCertificateListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ZoneCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ZoneCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace ZoneCertificates {

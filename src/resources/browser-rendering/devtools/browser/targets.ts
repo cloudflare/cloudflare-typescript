@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Targets extends APIResource {
+export class BaseTargets extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'devtools', 'browser', 'targets'] =
+    Object.freeze(['browserRendering', 'devtools', 'browser', 'targets'] as const);
+
   /**
    * Opens a new tab in the browser. Optionally specify a URL to navigate to.
    *
@@ -20,10 +23,10 @@ export class Targets extends APIResource {
    */
   create(
     sessionID: string,
-    params: TargetCreateParams,
+    params: TargetCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TargetCreateResponse> {
-    const { account_id, url } = params;
+    const { account_id = this._client.accountID, url } = params ?? {};
     return this._client.put(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/new`,
       { query: { url }, ...options },
@@ -45,10 +48,10 @@ export class Targets extends APIResource {
    */
   list(
     sessionID: string,
-    params: TargetListParams,
+    params: TargetListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TargetListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/list`,
       options,
@@ -75,7 +78,7 @@ export class Targets extends APIResource {
     params: TargetActivateParams,
     options?: RequestOptions,
   ): APIPromise<TargetActivateResponse> {
-    const { account_id, session_id } = params;
+    const { account_id = this._client.accountID, session_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${session_id}/json/activate/${targetID}`,
       options,
@@ -98,13 +101,14 @@ export class Targets extends APIResource {
    * ```
    */
   get(targetID: string, params: TargetGetParams, options?: RequestOptions): APIPromise<TargetGetResponse> {
-    const { account_id, session_id } = params;
+    const { account_id = this._client.accountID, session_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${session_id}/json/list/${targetID}`,
       options,
     );
   }
 }
+export class Targets extends BaseTargets {}
 
 export interface TargetCreateResponse {
   /**
@@ -232,7 +236,7 @@ export interface TargetCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -244,14 +248,14 @@ export interface TargetListParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TargetActivateParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Browser session ID.
@@ -263,7 +267,7 @@ export interface TargetGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Browser session ID.

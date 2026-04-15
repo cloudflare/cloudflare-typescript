@@ -2,6 +2,7 @@
 
 export {
   Configs,
+  BaseConfigs,
   type Configuration,
   type ConfigCreateParams,
   type ConfigUpdateParams,
@@ -9,9 +10,10 @@ export {
   type ConfigEditParams,
   type ConfigGetParams,
 } from './configs/index';
-export { MagicNetworkMonitoring } from './magic-network-monitoring';
+export { MagicNetworkMonitoring, BaseMagicNetworkMonitoring } from './magic-network-monitoring';
 export {
   Rules,
+  BaseRules,
   type MagicNetworkMonitoringRule,
   type RuleCreateParams,
   type RuleUpdateParams,
@@ -21,4 +23,4 @@ export {
   type RuleGetParams,
   type MagicNetworkMonitoringRulesSinglePage,
 } from './rules/index';
-export { VPCFlows } from './vpc-flows/index';
+export { VPCFlows, BaseVPCFlows } from './vpc-flows/index';

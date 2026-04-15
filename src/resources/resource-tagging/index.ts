@@ -2,6 +2,7 @@
 
 export {
   AccountTags,
+  BaseAccountTags,
   type AccountTagUpdateResponse,
   type AccountTagGetResponse,
   type AccountTagUpdateParams,
@@ -10,19 +11,22 @@ export {
 } from './account-tags';
 export {
   Keys,
+  BaseKeys,
   type KeyListResponse,
   type KeyListParams,
   type KeyListResponsesCursorPaginationAfter,
 } from './keys';
-export { ResourceTagging } from './resource-tagging';
+export { ResourceTagging, BaseResourceTagging } from './resource-tagging';
 export {
   Values,
+  BaseValues,
   type ValueListResponse,
   type ValueListParams,
   type ValueListResponsesCursorPaginationAfter,
 } from './values';
 export {
   ZoneTags,
+  BaseZoneTags,
   type ZoneTagUpdateResponse,
   type ZoneTagGetResponse,
   type ZoneTagUpdateParams,

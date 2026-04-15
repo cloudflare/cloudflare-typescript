@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class OverrideCodes extends APIResource {
+export class BaseOverrideCodes extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'overrideCodes'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'overrideCodes',
+  ] as const);
+
   /**
    * Fetches a one-time use admin override code for a device. This relies on the
    * **Admin Override** setting being enabled in your device configuration. Not
@@ -20,10 +26,10 @@ export class OverrideCodes extends APIResource {
    */
   list(
     deviceID: string,
-    params: OverrideCodeListParams,
+    params: OverrideCodeListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OverrideCodeListResponsesSinglePage, OverrideCodeListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/${deviceID}/override_codes`,
       SinglePage<OverrideCodeListResponse>,
@@ -46,10 +52,10 @@ export class OverrideCodes extends APIResource {
    */
   get(
     registrationID: string,
-    params: OverrideCodeGetParams,
+    params: OverrideCodeGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OverrideCodeGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/devices/registrations/${registrationID}/override_codes`,
@@ -58,6 +64,7 @@ export class OverrideCodes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class OverrideCodes extends BaseOverrideCodes {}
 
 export type OverrideCodeListResponsesSinglePage = SinglePage<OverrideCodeListResponse>;
 
@@ -68,11 +75,11 @@ export interface OverrideCodeGetResponse {
 }
 
 export interface OverrideCodeListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OverrideCodeGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace OverrideCodes {

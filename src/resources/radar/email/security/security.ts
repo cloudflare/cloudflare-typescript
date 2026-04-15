@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryARCParams,
   SummaryARCResponse,
@@ -25,6 +26,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupARCParams,
   TimeseriesGroupARCResponse,
   TimeseriesGroupDKIMParams,
@@ -46,17 +48,17 @@ import {
   TimeseriesGroups,
 } from './timeseries-groups';
 import * as TopAPI from './top/top';
-import { Top } from './top/top';
+import { BaseTop, Top } from './top/top';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Security extends APIResource {
-  top: TopAPI.Top = new TopAPI.Top(this._client);
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+export class BaseSecurity extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security'] = Object.freeze([
+    'radar',
+    'email',
+    'security',
+  ] as const);
 
   /**
    * Retrieves the distribution of email security metrics by the specified dimension.
@@ -122,6 +124,13 @@ export class Security extends APIResource {
       }) as APIPromise<{ result: SecurityTimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Security extends BaseSecurity {
+  top: TopAPI.Top = new TopAPI.Top(this._client);
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
 }
 
 export interface SecuritySummaryV2Response {
@@ -525,8 +534,11 @@ export interface SecurityTimeseriesGroupsV2Params {
 }
 
 Security.Top = Top;
+Security.BaseTop = BaseTop;
 Security.Summary = Summary;
+Security.BaseSummary = BaseSummary;
 Security.TimeseriesGroups = TimeseriesGroups;
+Security.BaseTimeseriesGroups = BaseTimeseriesGroups;
 
 export declare namespace Security {
   export {
@@ -536,10 +548,11 @@ export declare namespace Security {
     type SecurityTimeseriesGroupsV2Params as SecurityTimeseriesGroupsV2Params,
   };
 
-  export { Top as Top };
+  export { Top as Top, BaseTop as BaseTop };
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryARCResponse as SummaryARCResponse,
     type SummaryDKIMResponse as SummaryDKIMResponse,
     type SummaryDMARCResponse as SummaryDMARCResponse,
@@ -562,6 +575,7 @@ export declare namespace Security {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupARCResponse as TimeseriesGroupARCResponse,
     type TimeseriesGroupDKIMResponse as TimeseriesGroupDKIMResponse,
     type TimeseriesGroupDMARCResponse as TimeseriesGroupDMARCResponse,

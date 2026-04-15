@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Subdomains extends APIResource {
+export class BaseSubdomains extends APIResource {
+  static override readonly _key: readonly ['workers', 'subdomains'] = Object.freeze([
+    'workers',
+    'subdomains',
+  ] as const);
+
   /**
    * Creates a Workers subdomain for an account.
    *
@@ -19,7 +24,7 @@ export class Subdomains extends APIResource {
    * ```
    */
   update(params: SubdomainUpdateParams, options?: RequestOptions): APIPromise<SubdomainUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/workers/subdomain`, { body, ...options }) as APIPromise<{
         result: SubdomainUpdateResponse;
@@ -37,8 +42,8 @@ export class Subdomains extends APIResource {
    * });
    * ```
    */
-  delete(params: SubdomainDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id } = params;
+  delete(params: SubdomainDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/workers/subdomain`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -55,8 +60,11 @@ export class Subdomains extends APIResource {
    * });
    * ```
    */
-  get(params: SubdomainGetParams, options?: RequestOptions): APIPromise<SubdomainGetResponse> {
-    const { account_id } = params;
+  get(
+    params: SubdomainGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SubdomainGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/workers/subdomain`, options) as APIPromise<{
         result: SubdomainGetResponse;
@@ -64,6 +72,7 @@ export class Subdomains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Subdomains extends BaseSubdomains {}
 
 export interface SubdomainUpdateResponse {
   subdomain: string;
@@ -77,7 +86,7 @@ export interface SubdomainUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -89,14 +98,14 @@ export interface SubdomainDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SubdomainGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subdomains {

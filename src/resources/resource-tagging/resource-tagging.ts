@@ -9,11 +9,19 @@ import {
   AccountTagUpdateParams,
   AccountTagUpdateResponse,
   AccountTags,
+  BaseAccountTags,
 } from './account-tags';
 import * as KeysAPI from './keys';
-import { KeyListParams, KeyListResponse, KeyListResponsesCursorPaginationAfter, Keys } from './keys';
+import {
+  BaseKeys,
+  KeyListParams,
+  KeyListResponse,
+  KeyListResponsesCursorPaginationAfter,
+  Keys,
+} from './keys';
 import * as ValuesAPI from './values';
 import {
+  BaseValues,
   ValueListParams,
   ValueListResponse,
   ValueListResponsesCursorPaginationAfter,
@@ -21,6 +29,7 @@ import {
 } from './values';
 import * as ZoneTagsAPI from './zone-tags';
 import {
+  BaseZoneTags,
   ZoneTagDeleteParams,
   ZoneTagGetParams,
   ZoneTagGetResponse,
@@ -32,26 +41,29 @@ import { CursorPaginationAfter, type CursorPaginationAfterParams, PagePromise } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ResourceTagging extends APIResource {
-  accountTags: AccountTagsAPI.AccountTags = new AccountTagsAPI.AccountTags(this._client);
-  zoneTags: ZoneTagsAPI.ZoneTags = new ZoneTagsAPI.ZoneTags(this._client);
-  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
-  values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
+export class BaseResourceTagging extends APIResource {
+  static override readonly _key: readonly ['resourceTagging'] = Object.freeze(['resourceTagging'] as const);
 
   /**
    * Lists all tagged resources for an account.
    */
   list(
-    params: ResourceTaggingListParams,
+    params: ResourceTaggingListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ResourceTaggingListResponsesCursorPaginationAfter, ResourceTaggingListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/tags/resources`,
       CursorPaginationAfter<ResourceTaggingListResponse>,
       { query, ...options },
     );
   }
+}
+export class ResourceTagging extends BaseResourceTagging {
+  accountTags: AccountTagsAPI.AccountTags = new AccountTagsAPI.AccountTags(this._client);
+  zoneTags: ZoneTagsAPI.ZoneTags = new ZoneTagsAPI.ZoneTags(this._client);
+  keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
+  values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
 }
 
 export type ResourceTaggingListResponsesCursorPaginationAfter =
@@ -977,7 +989,7 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter resources by tag criteria. This parameter can be repeated
@@ -1036,9 +1048,13 @@ export interface ResourceTaggingListParams extends CursorPaginationAfterParams {
 }
 
 ResourceTagging.AccountTags = AccountTags;
+ResourceTagging.BaseAccountTags = BaseAccountTags;
 ResourceTagging.ZoneTags = ZoneTags;
+ResourceTagging.BaseZoneTags = BaseZoneTags;
 ResourceTagging.Keys = Keys;
+ResourceTagging.BaseKeys = BaseKeys;
 ResourceTagging.Values = Values;
+ResourceTagging.BaseValues = BaseValues;
 
 export declare namespace ResourceTagging {
   export {
@@ -1049,6 +1065,7 @@ export declare namespace ResourceTagging {
 
   export {
     AccountTags as AccountTags,
+    BaseAccountTags as BaseAccountTags,
     type AccountTagUpdateResponse as AccountTagUpdateResponse,
     type AccountTagGetResponse as AccountTagGetResponse,
     type AccountTagUpdateParams as AccountTagUpdateParams,
@@ -1058,6 +1075,7 @@ export declare namespace ResourceTagging {
 
   export {
     ZoneTags as ZoneTags,
+    BaseZoneTags as BaseZoneTags,
     type ZoneTagUpdateResponse as ZoneTagUpdateResponse,
     type ZoneTagGetResponse as ZoneTagGetResponse,
     type ZoneTagUpdateParams as ZoneTagUpdateParams,
@@ -1067,6 +1085,7 @@ export declare namespace ResourceTagging {
 
   export {
     Keys as Keys,
+    BaseKeys as BaseKeys,
     type KeyListResponse as KeyListResponse,
     type KeyListResponsesCursorPaginationAfter as KeyListResponsesCursorPaginationAfter,
     type KeyListParams as KeyListParams,
@@ -1074,6 +1093,7 @@ export declare namespace ResourceTagging {
 
   export {
     Values as Values,
+    BaseValues as BaseValues,
     type ValueListResponse as ValueListResponse,
     type ValueListResponsesCursorPaginationAfter as ValueListResponsesCursorPaginationAfter,
     type ValueListParams as ValueListParams,

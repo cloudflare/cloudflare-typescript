@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class NetworkPath extends APIResource {
+export class BaseNetworkPath extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'tracerouteTestResults', 'networkPath'] =
+    Object.freeze(['zeroTrust', 'dex', 'tracerouteTestResults', 'networkPath'] as const);
+
   /**
    * Get a breakdown of hops and performance metrics for a specific traceroute test
    * run
@@ -21,10 +24,10 @@ export class NetworkPath extends APIResource {
    */
   get(
     testResultID: string,
-    params: NetworkPathGetParams,
+    params: NetworkPathGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<NetworkPathGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/dex/traceroute-test-results/${testResultID}/network-path`,
@@ -33,6 +36,7 @@ export class NetworkPath extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class NetworkPath extends BaseNetworkPath {}
 
 export interface NetworkPathGetResponse {
   /**
@@ -97,7 +101,7 @@ export interface NetworkPathGetParams {
   /**
    * unique identifier linked to an account
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace NetworkPath {

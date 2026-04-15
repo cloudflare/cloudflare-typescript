@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Token extends APIResource {
+export class BaseToken extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'warpConnector', 'token'] = Object.freeze([
+    'zeroTrust',
+    'tunnels',
+    'warpConnector',
+    'token',
+  ] as const);
+
   /**
    * Gets the token used to associate warp device with a specific Warp Connector
    * tunnel.
@@ -19,8 +26,12 @@ export class Token extends APIResource {
    *   );
    * ```
    */
-  get(tunnelID: string, params: TokenGetParams, options?: RequestOptions): APIPromise<TokenGetResponse> {
-    const { account_id } = params;
+  get(
+    tunnelID: string,
+    params: TokenGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/warp_connector/${tunnelID}/token`,
@@ -29,6 +40,7 @@ export class Token extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Token extends BaseToken {}
 
 /**
  * The Tunnel Token is used as a mechanism to authenticate the operation of a
@@ -40,7 +52,7 @@ export interface TokenGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Token {

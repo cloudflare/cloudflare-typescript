@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Argo } from './argo';
+export { Argo, BaseArgo } from './argo';
 export {
   SmartRouting,
+  BaseSmartRouting,
   type SmartRoutingEditResponse,
   type SmartRoutingGetResponse,
   type SmartRoutingEditParams,
@@ -10,6 +11,7 @@ export {
 } from './smart-routing';
 export {
   TieredCaching,
+  BaseTieredCaching,
   type TieredCachingEditResponse,
   type TieredCachingGetResponse,
   type TieredCachingEditParams,

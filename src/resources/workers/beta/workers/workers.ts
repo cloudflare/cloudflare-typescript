@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as VersionsAPI from './versions';
 import {
+  BaseVersions,
   Version,
   VersionCreateParams,
   VersionDeleteParams,
@@ -21,8 +22,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Workers extends APIResource {
-  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
+export class BaseWorkers extends APIResource {
+  static override readonly _key: readonly ['workers', 'beta', 'workers'] = Object.freeze([
+    'workers',
+    'beta',
+    'workers',
+  ] as const);
 
   /**
    * Create a new Worker.
@@ -36,7 +41,7 @@ export class Workers extends APIResource {
    * ```
    */
   create(params: WorkerCreateParams, options?: RequestOptions): APIPromise<Worker> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/workers`, { body, ...options }) as APIPromise<{
         result: Worker;
@@ -62,7 +67,7 @@ export class Workers extends APIResource {
    * ```
    */
   update(workerID: string, params: WorkerUpdateParams, options?: RequestOptions): APIPromise<Worker> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/workers/workers/${workerID}`, {
         body,
@@ -85,10 +90,10 @@ export class Workers extends APIResource {
    * ```
    */
   list(
-    params: WorkerListParams,
+    params: WorkerListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<WorkersV4PagePaginationArray, Worker> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/workers`,
       V4PagePaginationArray<Worker>,
@@ -109,10 +114,10 @@ export class Workers extends APIResource {
    */
   delete(
     workerID: string,
-    params: WorkerDeleteParams,
+    params: WorkerDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WorkerDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/workers/workers/${workerID}`, options);
   }
 
@@ -137,7 +142,7 @@ export class Workers extends APIResource {
    * ```
    */
   edit(workerID: string, params: WorkerEditParams, options?: RequestOptions): APIPromise<Worker> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/workers/workers/${workerID}`, {
         body,
@@ -157,14 +162,21 @@ export class Workers extends APIResource {
    * );
    * ```
    */
-  get(workerID: string, params: WorkerGetParams, options?: RequestOptions): APIPromise<Worker> {
-    const { account_id } = params;
+  get(
+    workerID: string,
+    params: WorkerGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Worker> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/workers/workers/${workerID}`, options) as APIPromise<{
         result: Worker;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Workers extends BaseWorkers {
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 }
 
 export type WorkersV4PagePaginationArray = V4PagePaginationArray<Worker>;
@@ -519,7 +531,7 @@ export interface WorkerCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the Worker.
@@ -666,7 +678,7 @@ export interface WorkerUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the Worker.
@@ -813,7 +825,7 @@ export interface WorkerListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Sort direction.
@@ -830,14 +842,14 @@ export interface WorkerDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WorkerEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether logpush is enabled for the Worker.
@@ -984,10 +996,11 @@ export interface WorkerGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Workers.Versions = Versions;
+Workers.BaseVersions = BaseVersions;
 
 export declare namespace Workers {
   export {
@@ -1004,6 +1017,7 @@ export declare namespace Workers {
 
   export {
     Versions as Versions,
+    BaseVersions as BaseVersions,
     type Version as Version,
     type VersionDeleteResponse as VersionDeleteResponse,
     type VersionsV4PagePaginationArray as VersionsV4PagePaginationArray,

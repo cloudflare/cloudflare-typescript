@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Cache } from 'cloudflare/resources/cache/cache';
+import { BaseRegionalTieredCacheResource } from 'cloudflare/resources/cache/regional-tiered-cache';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource regionalTieredCache', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRegionalTieredCacheResource],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Cache],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ cache: { regionalTieredCache: BaseRegionalTieredCacheResource } }>,
+) => {
   test('edit: only required params', async () => {
     const responsePromise = client.cache.regionalTieredCache.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -48,4 +68,7 @@ describe('resource regionalTieredCache', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource regionalTieredCache', () => runTests(client));
+describe('resource regionalTieredCache (tree shakable, base)', () => runTests(partialClient));
+describe('resource regionalTieredCache (tree shakable, subresource)', () => runTests(parentPartialClient));

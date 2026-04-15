@@ -3,14 +3,18 @@
 import { APIResource } from '../../../../core/resource';
 import * as CaptionsAPI from '../captions';
 import * as VttAPI from './vtt';
-import { Vtt, VttGetParams, VttGetResponse } from './vtt';
+import { BaseVtt, Vtt, VttGetParams, VttGetResponse } from './vtt';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../../internal/uploads';
 import { path } from '../../../../internal/utils/path';
 
-export class Language extends APIResource {
-  vtt: VttAPI.Vtt = new VttAPI.Vtt(this._client);
+export class BaseLanguage extends APIResource {
+  static override readonly _key: readonly ['stream', 'captions', 'language'] = Object.freeze([
+    'stream',
+    'captions',
+    'language',
+  ] as const);
 
   /**
    * Generate captions or subtitles for provided language via AI.
@@ -29,7 +33,7 @@ export class Language extends APIResource {
     params: LanguageCreateParams,
     options?: RequestOptions,
   ): APIPromise<CaptionsAPI.Caption> {
-    const { account_id, identifier } = params;
+    const { account_id = this._client.accountID, identifier } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/stream/${identifier}/captions/${language}/generate`,
@@ -57,7 +61,7 @@ export class Language extends APIResource {
     params: LanguageUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CaptionsAPI.Caption> {
-    const { account_id, identifier, ...body } = params;
+    const { account_id = this._client.accountID, identifier, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/stream/${identifier}/captions/${language}`,
@@ -83,7 +87,7 @@ export class Language extends APIResource {
     params: LanguageDeleteParams,
     options?: RequestOptions,
   ): APIPromise<LanguageDeleteResponse> {
-    const { account_id, identifier } = params;
+    const { account_id = this._client.accountID, identifier } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/stream/${identifier}/captions/${language}`,
@@ -111,7 +115,7 @@ export class Language extends APIResource {
     params: LanguageGetParams,
     options?: RequestOptions,
   ): APIPromise<CaptionsAPI.Caption> {
-    const { account_id, identifier } = params;
+    const { account_id = this._client.accountID, identifier } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/stream/${identifier}/captions/${language}`,
@@ -120,6 +124,9 @@ export class Language extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Language extends BaseLanguage {
+  vtt: VttAPI.Vtt = new VttAPI.Vtt(this._client);
+}
 
 export type LanguageDeleteResponse = string;
 
@@ -127,7 +134,7 @@ export interface LanguageCreateParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * A Cloudflare-generated unique identifier for a media item.
@@ -139,7 +146,7 @@ export interface LanguageUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: A Cloudflare-generated unique identifier for a media item.
@@ -156,7 +163,7 @@ export interface LanguageDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * A Cloudflare-generated unique identifier for a media item.
@@ -168,7 +175,7 @@ export interface LanguageGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * A Cloudflare-generated unique identifier for a media item.
@@ -177,6 +184,7 @@ export interface LanguageGetParams {
 }
 
 Language.Vtt = Vtt;
+Language.BaseVtt = BaseVtt;
 
 export declare namespace Language {
   export {
@@ -187,5 +195,10 @@ export declare namespace Language {
     type LanguageGetParams as LanguageGetParams,
   };
 
-  export { Vtt as Vtt, type VttGetResponse as VttGetResponse, type VttGetParams as VttGetParams };
+  export {
+    Vtt as Vtt,
+    BaseVtt as BaseVtt,
+    type VttGetResponse as VttGetResponse,
+    type VttGetParams as VttGetParams,
+  };
 }

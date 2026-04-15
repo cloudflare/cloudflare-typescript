@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class LANs extends APIResource {
+export class BaseLANs extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'sites', 'lans'] = Object.freeze([
+    'magicTransit',
+    'sites',
+    'lans',
+  ] as const);
+
   /**
    * Creates a new Site LAN. If the site is in high availability mode,
    * static_addressing is required along with secondary and virtual address.
@@ -27,7 +33,7 @@ export class LANs extends APIResource {
     params: LANCreateParams,
     options?: RequestOptions,
   ): PagePromise<LANsSinglePage, LAN> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/sites/${siteID}/lans`,
       SinglePage<LAN>,
@@ -50,7 +56,7 @@ export class LANs extends APIResource {
    * ```
    */
   update(lanID: string, params: LANUpdateParams, options?: RequestOptions): APIPromise<LAN> {
-    const { account_id, site_id, ...body } = params;
+    const { account_id = this._client.accountID, site_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/sites/${site_id}/lans/${lanID}`, {
         body,
@@ -73,8 +79,12 @@ export class LANs extends APIResource {
    * }
    * ```
    */
-  list(siteID: string, params: LANListParams, options?: RequestOptions): PagePromise<LANsSinglePage, LAN> {
-    const { account_id } = params;
+  list(
+    siteID: string,
+    params: LANListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<LANsSinglePage, LAN> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/sites/${siteID}/lans`,
       SinglePage<LAN>,
@@ -97,7 +107,7 @@ export class LANs extends APIResource {
    * ```
    */
   delete(lanID: string, params: LANDeleteParams, options?: RequestOptions): APIPromise<LAN> {
-    const { account_id, site_id } = params;
+    const { account_id = this._client.accountID, site_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/magic/sites/${site_id}/lans/${lanID}`,
@@ -121,7 +131,7 @@ export class LANs extends APIResource {
    * ```
    */
   edit(lanID: string, params: LANEditParams, options?: RequestOptions): APIPromise<LAN> {
-    const { account_id, site_id, ...body } = params;
+    const { account_id = this._client.accountID, site_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/sites/${site_id}/lans/${lanID}`, {
         body,
@@ -145,7 +155,7 @@ export class LANs extends APIResource {
    * ```
    */
   get(lanID: string, params: LANGetParams, options?: RequestOptions): APIPromise<LAN> {
-    const { account_id, site_id } = params;
+    const { account_id = this._client.accountID, site_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/sites/${site_id}/lans/${lanID}`,
@@ -154,6 +164,7 @@ export class LANs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class LANs extends BaseLANs {}
 
 export type LANsSinglePage = SinglePage<LAN>;
 
@@ -367,7 +378,7 @@ export interface LANCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -428,7 +439,7 @@ export interface LANUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier
@@ -488,14 +499,14 @@ export interface LANListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LANDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier
@@ -507,7 +518,7 @@ export interface LANEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier
@@ -567,7 +578,7 @@ export interface LANGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier

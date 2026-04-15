@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class RatePlans extends APIResource {
+export class BaseRatePlans extends APIResource {
+  static override readonly _key: readonly ['zones', 'ratePlans'] = Object.freeze([
+    'zones',
+    'ratePlans',
+  ] as const);
+
   /**
    * Lists all rate plans the zone can subscribe to.
    *
@@ -20,10 +25,10 @@ export class RatePlans extends APIResource {
    * ```
    */
   get(
-    params: RatePlanGetParams,
+    params: RatePlanGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RatePlanGetResponsesSinglePage, RatePlanGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/available_rate_plans`,
       SinglePage<RatePlanGetResponse>,
@@ -31,6 +36,7 @@ export class RatePlans extends APIResource {
     );
   }
 }
+export class RatePlans extends BaseRatePlans {}
 
 export type RatePlanGetResponsesSinglePage = SinglePage<RatePlanGetResponse>;
 
@@ -89,7 +95,7 @@ export interface RatePlanGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace RatePlans {

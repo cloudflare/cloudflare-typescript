@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Authorities extends APIResource {
+export class BaseAuthorities extends APIResource {
+  static override readonly _key: readonly ['radar', 'ct', 'authorities'] = Object.freeze([
+    'radar',
+    'ct',
+    'authorities',
+  ] as const);
+
   /**
    * Retrieves a list of certificate authorities.
    *
@@ -48,6 +54,7 @@ export class Authorities extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Authorities extends BaseAuthorities {}
 
 export interface AuthorityListResponse {
   certificateAuthorities: Array<AuthorityListResponse.CertificateAuthority>;

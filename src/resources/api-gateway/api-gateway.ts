@@ -3,24 +3,27 @@
 import { APIResource } from '../../core/resource';
 import * as ConfigurationsAPI from './configurations';
 import {
+  BaseConfigurations,
   Configuration,
   ConfigurationGetParams,
   ConfigurationUpdateParams,
   Configurations,
 } from './configurations';
 import * as SchemasAPI from './schemas';
-import { SchemaListParams, SchemaListResponse, Schemas } from './schemas';
+import { BaseSchemas, SchemaListParams, SchemaListResponse, Schemas } from './schemas';
 import * as DiscoveryAPI from './discovery/discovery';
 import {
+  BaseDiscovery,
   Discovery,
   DiscoveryGetParams,
   DiscoveryGetResponse,
   DiscoveryOperation,
 } from './discovery/discovery';
 import * as ExpressionTemplateAPI from './expression-template/expression-template';
-import { ExpressionTemplate } from './expression-template/expression-template';
+import { BaseExpressionTemplate, ExpressionTemplate } from './expression-template/expression-template';
 import * as LabelsAPI from './labels/labels';
 import {
+  BaseLabels,
   LabelListParams,
   LabelListResponse,
   LabelListResponsesV4PagePaginationArray,
@@ -29,6 +32,7 @@ import {
 import * as OperationsAPI from './operations/operations';
 import {
   APIShield,
+  BaseOperations,
   OperationBulkCreateParams,
   OperationBulkCreateResponse,
   OperationBulkCreateResponsesSinglePage,
@@ -46,9 +50,10 @@ import {
   Operations,
 } from './operations/operations';
 import * as SettingsAPI from './settings/settings';
-import { Settings } from './settings/settings';
+import { BaseSettings, Settings } from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
 import {
+  BaseUserSchemas,
   Message,
   OldPublicSchema,
   OldPublicSchemasV4PagePaginationArray,
@@ -62,7 +67,10 @@ import {
   UserSchemas,
 } from './user-schemas/user-schemas';
 
-export class APIGateway extends APIResource {
+export class BaseAPIGateway extends APIResource {
+  static override readonly _key: readonly ['apiGateway'] = Object.freeze(['apiGateway'] as const);
+}
+export class APIGateway extends BaseAPIGateway {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
   discovery: DiscoveryAPI.Discovery = new DiscoveryAPI.Discovery(this._client);
   labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
@@ -76,16 +84,25 @@ export class APIGateway extends APIResource {
 }
 
 APIGateway.Configurations = Configurations;
+APIGateway.BaseConfigurations = BaseConfigurations;
 APIGateway.Discovery = Discovery;
+APIGateway.BaseDiscovery = BaseDiscovery;
 APIGateway.Labels = Labels;
+APIGateway.BaseLabels = BaseLabels;
 APIGateway.Operations = Operations;
+APIGateway.BaseOperations = BaseOperations;
 APIGateway.Schemas = Schemas;
+APIGateway.BaseSchemas = BaseSchemas;
+APIGateway.BaseSettings = BaseSettings;
 APIGateway.UserSchemas = UserSchemas;
+APIGateway.BaseUserSchemas = BaseUserSchemas;
 APIGateway.ExpressionTemplate = ExpressionTemplate;
+APIGateway.BaseExpressionTemplate = BaseExpressionTemplate;
 
 export declare namespace APIGateway {
   export {
     Configurations as Configurations,
+    BaseConfigurations as BaseConfigurations,
     type Configuration as Configuration,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
     type ConfigurationGetParams as ConfigurationGetParams,
@@ -93,6 +110,7 @@ export declare namespace APIGateway {
 
   export {
     Discovery as Discovery,
+    BaseDiscovery as BaseDiscovery,
     type DiscoveryOperation as DiscoveryOperation,
     type DiscoveryGetResponse as DiscoveryGetResponse,
     type DiscoveryGetParams as DiscoveryGetParams,
@@ -100,6 +118,7 @@ export declare namespace APIGateway {
 
   export {
     Labels as Labels,
+    BaseLabels as BaseLabels,
     type LabelListResponse as LabelListResponse,
     type LabelListResponsesV4PagePaginationArray as LabelListResponsesV4PagePaginationArray,
     type LabelListParams as LabelListParams,
@@ -107,6 +126,7 @@ export declare namespace APIGateway {
 
   export {
     Operations as Operations,
+    BaseOperations as BaseOperations,
     type APIShield as APIShield,
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
@@ -126,14 +146,16 @@ export declare namespace APIGateway {
 
   export {
     Schemas as Schemas,
+    BaseSchemas as BaseSchemas,
     type SchemaListResponse as SchemaListResponse,
     type SchemaListParams as SchemaListParams,
   };
 
-  export { type Settings as Settings };
+  export { type Settings as Settings, BaseSettings as BaseSettings };
 
   export {
     UserSchemas as UserSchemas,
+    BaseUserSchemas as BaseUserSchemas,
     type Message as Message,
     type OldPublicSchema as OldPublicSchema,
     type UserSchemaCreateResponse as UserSchemaCreateResponse,
@@ -146,5 +168,5 @@ export declare namespace APIGateway {
     type UserSchemaGetParams as UserSchemaGetParams,
   };
 
-  export { ExpressionTemplate as ExpressionTemplate };
+  export { ExpressionTemplate as ExpressionTemplate, BaseExpressionTemplate as BaseExpressionTemplate };
 }

@@ -3,7 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as IdentityProvidersAPI from './identity-providers';
 import * as SCIMAPI from './scim/scim';
-import { SCIM } from './scim/scim';
+import { BaseSCIM, SCIM } from './scim/scim';
 import { APIPromise } from '../../../core/api-promise';
 import { CloudflareError } from '../../../core/error';
 import {
@@ -14,8 +14,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IdentityProviders extends APIResource {
-  scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
+export class BaseIdentityProviders extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'identityProviders'] = Object.freeze([
+    'zeroTrust',
+    'identityProviders',
+  ] as const);
 
   /**
    * Adds a new identity provider to Access.
@@ -32,7 +35,11 @@ export class IdentityProviders extends APIResource {
    * ```
    */
   create(params: IdentityProviderCreateParams, options?: RequestOptions): APIPromise<IdentityProvider> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -79,7 +86,11 @@ export class IdentityProviders extends APIResource {
     params: IdentityProviderUpdateParams,
     options?: RequestOptions,
   ): APIPromise<IdentityProvider> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -121,7 +132,11 @@ export class IdentityProviders extends APIResource {
     params: IdentityProviderListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IdentityProviderListResponsesV4PagePaginationArray, IdentityProviderListResponse> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -162,7 +177,8 @@ export class IdentityProviders extends APIResource {
     params: IdentityProviderDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IdentityProviderDeleteResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -204,7 +220,8 @@ export class IdentityProviders extends APIResource {
     params: IdentityProviderGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IdentityProvider> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -228,6 +245,9 @@ export class IdentityProviders extends APIResource {
       ) as APIPromise<{ result: IdentityProvider }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class IdentityProviders extends BaseIdentityProviders {
+  scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
 }
 
 export type IdentityProviderListResponsesV4PagePaginationArray =
@@ -4706,6 +4726,7 @@ export interface IdentityProviderGetParams {
 }
 
 IdentityProviders.SCIM = SCIM;
+IdentityProviders.BaseSCIM = BaseSCIM;
 
 export declare namespace IdentityProviders {
   export {
@@ -4724,5 +4745,5 @@ export declare namespace IdentityProviders {
     type IdentityProviderGetParams as IdentityProviderGetParams,
   };
 
-  export { SCIM as SCIM };
+  export { SCIM as SCIM, BaseSCIM as BaseSCIM };
 }

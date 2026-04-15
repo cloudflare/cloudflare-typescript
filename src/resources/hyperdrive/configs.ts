@@ -8,7 +8,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Configs extends APIResource {
+export class BaseConfigs extends APIResource {
+  static override readonly _key: readonly ['hyperdrive', 'configs'] = Object.freeze([
+    'hyperdrive',
+    'configs',
+  ] as const);
+
   /**
    * Creates and returns a new Hyperdrive configuration.
    *
@@ -29,7 +34,7 @@ export class Configs extends APIResource {
    * ```
    */
   create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/hyperdrive/configs`, {
         body,
@@ -65,7 +70,7 @@ export class Configs extends APIResource {
     params: ConfigUpdateParams,
     options?: RequestOptions,
   ): APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`, {
         body,
@@ -88,10 +93,10 @@ export class Configs extends APIResource {
    * ```
    */
   list(
-    params: ConfigListParams,
+    params: ConfigListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/hyperdrive/configs`,
       SinglePage<HyperdriveAPI.Hyperdrive>,
@@ -112,10 +117,10 @@ export class Configs extends APIResource {
    */
   delete(
     hyperdriveID: string,
-    params: ConfigDeleteParams,
+    params: ConfigDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConfigDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`,
@@ -141,7 +146,7 @@ export class Configs extends APIResource {
     params: ConfigEditParams,
     options?: RequestOptions,
   ): APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`, {
         body,
@@ -163,10 +168,10 @@ export class Configs extends APIResource {
    */
   get(
     hyperdriveID: string,
-    params: ConfigGetParams,
+    params: ConfigGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/hyperdrive/configs/${hyperdriveID}`,
@@ -175,6 +180,7 @@ export class Configs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Configs extends BaseConfigs {}
 
 export type ConfigDeleteResponse = unknown;
 
@@ -182,7 +188,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the Hyperdrive configuration. Used to identify the
@@ -378,7 +384,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the Hyperdrive configuration. Used to identify the
@@ -574,21 +580,21 @@ export interface ConfigListParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigDeleteParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param: Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -752,7 +758,7 @@ export interface ConfigGetParams {
   /**
    * Define configurations using a unique string identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Configs {

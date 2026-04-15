@@ -2,8 +2,9 @@
 
 export {
   AccessRequests,
+  BaseAccessRequests,
   type AccessRequestListResponse,
   type AccessRequestListParams,
 } from './access-requests';
-export { Logs } from './logs';
-export { SCIM, type AccessRequest } from './scim/index';
+export { Logs, BaseLogs } from './logs';
+export { SCIM, BaseSCIM, type AccessRequest } from './scim/index';

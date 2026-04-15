@@ -2,6 +2,7 @@
 
 export {
   Authorities,
+  BaseAuthorities,
   type AuthorityListResponse,
   type AuthorityGetResponse,
   type AuthorityListParams,
@@ -9,6 +10,7 @@ export {
 } from './authorities';
 export {
   CT,
+  BaseCT,
   type CTSummaryResponse,
   type CTTimeseriesResponse,
   type CTTimeseriesGroupsResponse,
@@ -18,6 +20,7 @@ export {
 } from './ct';
 export {
   Logs,
+  BaseLogs,
   type LogListResponse,
   type LogGetResponse,
   type LogListParams,

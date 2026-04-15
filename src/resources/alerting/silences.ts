@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Silences extends APIResource {
+export class BaseSilences extends APIResource {
+  static override readonly _key: readonly ['alerting', 'silences'] = Object.freeze([
+    'alerting',
+    'silences',
+  ] as const);
+
   /**
    * Creates a new silence for an account.
    *
@@ -19,7 +24,7 @@ export class Silences extends APIResource {
    * ```
    */
   create(params: SilenceCreateParams, options?: RequestOptions): APIPromise<SilenceCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.post(path`/accounts/${account_id}/alerting/v3/silences`, { body: body, ...options });
   }
 
@@ -43,7 +48,7 @@ export class Silences extends APIResource {
     params: SilenceUpdateParams,
     options?: RequestOptions,
   ): PagePromise<SilenceUpdateResponsesSinglePage, SilenceUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/alerting/v3/silences`,
       SinglePage<SilenceUpdateResponse>,
@@ -65,10 +70,10 @@ export class Silences extends APIResource {
    * ```
    */
   list(
-    params: SilenceListParams,
+    params: SilenceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SilenceListResponsesSinglePage, SilenceListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/alerting/v3/silences`,
       SinglePage<SilenceListResponse>,
@@ -89,10 +94,10 @@ export class Silences extends APIResource {
    */
   delete(
     silenceID: string,
-    params: SilenceDeleteParams,
+    params: SilenceDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SilenceDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/alerting/v3/silences/${silenceID}`, options);
   }
 
@@ -107,8 +112,12 @@ export class Silences extends APIResource {
    * );
    * ```
    */
-  get(silenceID: string, params: SilenceGetParams, options?: RequestOptions): APIPromise<SilenceGetResponse> {
-    const { account_id } = params;
+  get(
+    silenceID: string,
+    params: SilenceGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SilenceGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/alerting/v3/silences/${silenceID}`,
@@ -117,6 +126,7 @@ export class Silences extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Silences extends BaseSilences {}
 
 export type SilenceUpdateResponsesSinglePage = SinglePage<SilenceUpdateResponse>;
 
@@ -272,7 +282,7 @@ export interface SilenceCreateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -303,7 +313,7 @@ export interface SilenceUpdateParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -334,21 +344,21 @@ export interface SilenceListParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SilenceDeleteParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SilenceGetParams {
   /**
    * The account id
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Silences {

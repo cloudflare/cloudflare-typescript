@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DLP } from './dlp';
+export { DLP, BaseDLP } from './dlp';
 export {
   Datasets,
+  BaseDatasets,
   type Dataset,
   type DatasetArray,
   type DatasetCreation,
@@ -13,9 +14,10 @@ export {
   type DatasetGetParams,
   type DatasetsSinglePage,
 } from './datasets/index';
-export { Email } from './email/index';
+export { Email, BaseEmail } from './email/index';
 export {
   Entries,
+  BaseEntries,
   type EntryCreateResponse,
   type EntryUpdateResponse,
   type EntryListResponse,
@@ -28,10 +30,11 @@ export {
   type EntryGetParams,
   type EntryListResponsesSinglePage,
 } from './entries/index';
-export { Limits, type LimitListResponse, type LimitListParams } from './limits';
-export { Patterns, type PatternValidateResponse, type PatternValidateParams } from './patterns';
+export { Limits, BaseLimits, type LimitListResponse, type LimitListParams } from './limits';
+export { Patterns, BasePatterns, type PatternValidateResponse, type PatternValidateParams } from './patterns';
 export {
   PayloadLogs,
+  BasePayloadLogs,
   type PayloadLogUpdateResponse,
   type PayloadLogGetResponse,
   type PayloadLogUpdateParams,
@@ -39,6 +42,7 @@ export {
 } from './payload-logs';
 export {
   Profiles,
+  BaseProfiles,
   type ContextAwareness,
   type Profile,
   type SkipConfiguration,

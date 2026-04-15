@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as SpeedAPI from '../speed';
 import * as TestsAPI from './tests';
 import {
+  BaseTests,
   Test,
   TestCreateParams,
   TestDeleteParams,
@@ -18,8 +19,8 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Pages extends APIResource {
-  tests: TestsAPI.Tests = new TestsAPI.Tests(this._client);
+export class BasePages extends APIResource {
+  static override readonly _key: readonly ['speed', 'pages'] = Object.freeze(['speed', 'pages'] as const);
 
   /**
    * Lists all webpages which have been tested.
@@ -35,10 +36,10 @@ export class Pages extends APIResource {
    * ```
    */
   list(
-    params: PageListParams,
+    params: PageListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PageListResponsesSinglePage, PageListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/speed_api/pages`,
       SinglePage<PageListResponse>,
@@ -65,7 +66,7 @@ export class Pages extends APIResource {
    * ```
    */
   trend(url: string, params: PageTrendParams, options?: RequestOptions): APIPromise<SpeedAPI.Trend> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params;
     return (
       this._client.get(path`/zones/${zone_id}/speed_api/pages/${url}/trend`, {
         query,
@@ -73,6 +74,9 @@ export class Pages extends APIResource {
       }) as APIPromise<{ result: SpeedAPI.Trend }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Pages extends BasePages {
+  tests: TestsAPI.Tests = new TestsAPI.Tests(this._client);
 }
 
 export type PageListResponsesSinglePage = SinglePage<PageListResponse>;
@@ -100,14 +104,14 @@ export interface PageListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PageTrendParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The type of device.
@@ -162,6 +166,7 @@ export interface PageTrendParams {
 }
 
 Pages.Tests = Tests;
+Pages.BaseTests = BaseTests;
 
 export declare namespace Pages {
   export {
@@ -173,6 +178,7 @@ export declare namespace Pages {
 
   export {
     Tests as Tests,
+    BaseTests as BaseTests,
     type Test as Test,
     type TestDeleteResponse as TestDeleteResponse,
     type TestsV4PagePaginationArray as TestsV4PagePaginationArray,

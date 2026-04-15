@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseCloudIntegrations } from 'cloudflare/resources/magic-cloud-networking/cloud-integrations';
+import { MagicCloudNetworking } from 'cloudflare/resources/magic-cloud-networking/magic-cloud-networking';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource cloudIntegrations', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCloudIntegrations],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [MagicCloudNetworking],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ magicCloudNetworking: { cloudIntegrations: BaseCloudIntegrations } }>,
+) => {
   test('create: only required params', async () => {
     const responsePromise = client.magicCloudNetworking.cloudIntegrations.create({
       account_id: 'account_id',
@@ -217,4 +237,7 @@ describe('resource cloudIntegrations', () => {
       { account_id: 'account_id' },
     );
   });
-});
+};
+describe('resource cloudIntegrations', () => runTests(client));
+describe('resource cloudIntegrations (tree shakable, base)', () => runTests(partialClient));
+describe('resource cloudIntegrations (tree shakable, subresource)', () => runTests(parentPartialClient));

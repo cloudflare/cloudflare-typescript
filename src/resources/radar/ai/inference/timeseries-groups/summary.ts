@@ -4,7 +4,10 @@ import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 
-export class Summary extends APIResource {
+export class BaseSummary extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai', 'inference', 'timeseriesGroups', 'summary'] =
+    Object.freeze(['radar', 'ai', 'inference', 'timeseriesGroups', 'summary'] as const);
+
   /**
    * Retrieves the distribution of unique accounts by model over time.
    *
@@ -37,6 +40,7 @@ export class Summary extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summary extends BaseSummary {}
 
 export interface SummaryModelResponse {
   /**

@@ -7,7 +7,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class SippyResource extends APIResource {
+export class BaseSippyResource extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'sippy'] = Object.freeze([
+    'r2',
+    'buckets',
+    'sippy',
+  ] as const);
+
   /**
    * Sets configuration for Sippy for an existing R2 bucket.
    *
@@ -20,7 +26,7 @@ export class SippyResource extends APIResource {
    * ```
    */
   update(bucketName: string, params: SippyUpdateParams, options?: RequestOptions): APIPromise<Sippy> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
@@ -50,10 +56,10 @@ export class SippyResource extends APIResource {
    */
   delete(
     bucketName: string,
-    params: SippyDeleteParams,
+    params: SippyDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SippyDeleteResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
@@ -80,8 +86,12 @@ export class SippyResource extends APIResource {
    * );
    * ```
    */
-  get(bucketName: string, params: SippyGetParams, options?: RequestOptions): APIPromise<Sippy> {
-    const { account_id, jurisdiction } = params;
+  get(
+    bucketName: string,
+    params: SippyGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Sippy> {
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
@@ -97,6 +107,7 @@ export class SippyResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SippyResource extends BaseSippyResource {}
 
 export type Provider = 'r2';
 
@@ -176,7 +187,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: R2 bucket to copy objects to.
@@ -255,7 +266,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: R2 bucket to copy objects to.
@@ -329,7 +340,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: R2 bucket to copy objects to.
@@ -404,7 +415,7 @@ export interface SippyDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -417,7 +428,7 @@ export interface SippyGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

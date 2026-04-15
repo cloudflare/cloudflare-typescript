@@ -2,12 +2,16 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as AsesAPI from './ases';
-import { AseGetParams, AseGetResponse, AsePrefixesParams, AsePrefixesResponse, Ases } from './ases';
+import { AseGetParams, AseGetResponse, AsePrefixesParams, AsePrefixesResponse, Ases, BaseAses } from './ases';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Top extends APIResource {
-  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp', 'top'] = Object.freeze([
+    'radar',
+    'bgp',
+    'top',
+  ] as const);
 
   /**
    * Retrieves the top network prefixes by BGP updates.
@@ -27,6 +31,9 @@ export class Top extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Top extends BaseTop {
+  ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
 }
 
 export interface TopPrefixesResponse {
@@ -112,12 +119,14 @@ export interface TopPrefixesParams {
 }
 
 Top.Ases = Ases;
+Top.BaseAses = BaseAses;
 
 export declare namespace Top {
   export { type TopPrefixesResponse as TopPrefixesResponse, type TopPrefixesParams as TopPrefixesParams };
 
   export {
     Ases as Ases,
+    BaseAses as BaseAses,
     type AseGetResponse as AseGetResponse,
     type AsePrefixesResponse as AsePrefixesResponse,
     type AseGetParams as AseGetParams,

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseConnectivityPrecheck } from 'cloudflare/resources/r2/super-slurper/connectivity-precheck';
+import { SuperSlurper } from 'cloudflare/resources/r2/super-slurper/super-slurper';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource connectivityPrecheck', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseConnectivityPrecheck],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [SuperSlurper],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ r2: { superSlurper: { connectivityPrecheck: BaseConnectivityPrecheck } } }>,
+) => {
   test('source: only required params', async () => {
     const responsePromise = client.r2.superSlurper.connectivityPrecheck.source({
       account_id: 'account_id',
@@ -63,4 +83,7 @@ describe('resource connectivityPrecheck', () => {
       jurisdiction: 'default',
     });
   });
-});
+};
+describe('resource connectivityPrecheck', () => runTests(client));
+describe('resource connectivityPrecheck (tree shakable, base)', () => runTests(partialClient));
+describe('resource connectivityPrecheck (tree shakable, subresource)', () => runTests(parentPartialClient));

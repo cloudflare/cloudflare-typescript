@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Policies } from 'cloudflare/resources/zero-trust/devices/policies/policies';
+import { BaseCustom } from 'cloudflare/resources/zero-trust/devices/policies/custom/custom';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource custom', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCustom],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Policies],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { devices: { policies: { custom: BaseCustom } } } }>,
+) => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.custom.create({
@@ -164,4 +184,7 @@ describe('resource custom', () => {
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
-});
+};
+describe('resource custom', () => runTests(client));
+describe('resource custom (tree shakable, base)', () => runTests(partialClient));
+describe('resource custom (tree shakable, subresource)', () => runTests(parentPartialClient));

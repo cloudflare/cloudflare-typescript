@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Cookies extends APIResource {
+export class BaseCookies extends APIResource {
+  static override readonly _key: readonly ['pageShield', 'cookies'] = Object.freeze([
+    'pageShield',
+    'cookies',
+  ] as const);
+
   /**
    * Lists all cookies collected by Page Shield.
    *
@@ -21,10 +26,10 @@ export class Cookies extends APIResource {
    * ```
    */
   list(
-    params: CookieListParams,
+    params: CookieListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CookieListResponsesSinglePage, CookieListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/page_shield/cookies`,
       SinglePage<CookieListResponse>,
@@ -45,10 +50,10 @@ export class Cookies extends APIResource {
    */
   get(
     cookieID: string,
-    params: CookieGetParams,
+    params: CookieGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CookieGetResponse | null> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/page_shield/cookies/${cookieID}`, options) as APIPromise<{
         result: CookieGetResponse | null;
@@ -56,6 +61,7 @@ export class Cookies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Cookies extends BaseCookies {}
 
 export type CookieListResponsesSinglePage = SinglePage<CookieListResponse>;
 
@@ -129,7 +135,7 @@ export interface CookieListParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The direction used to sort returned cookies.'
@@ -226,7 +232,7 @@ export interface CookieGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Cookies {

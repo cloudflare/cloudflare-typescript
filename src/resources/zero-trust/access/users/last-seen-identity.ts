@@ -6,7 +6,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class LastSeenIdentity extends APIResource {
+export class BaseLastSeenIdentity extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'users', 'lastSeenIdentity'] =
+    Object.freeze(['zeroTrust', 'access', 'users', 'lastSeenIdentity'] as const);
+
   /**
    * Get last seen identity for a single user.
    *
@@ -19,8 +22,12 @@ export class LastSeenIdentity extends APIResource {
    *   );
    * ```
    */
-  get(userID: string, params: LastSeenIdentityGetParams, options?: RequestOptions): APIPromise<Identity> {
-    const { account_id } = params;
+  get(
+    userID: string,
+    params: LastSeenIdentityGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Identity> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/access/users/${userID}/last_seen_identity`,
@@ -29,6 +36,7 @@ export class LastSeenIdentity extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class LastSeenIdentity extends BaseLastSeenIdentity {}
 
 export interface Identity {
   account_id?: string;
@@ -124,7 +132,7 @@ export interface LastSeenIdentityGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace LastSeenIdentity {

@@ -9,7 +9,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Hosts extends APIResource {
+export class BaseHosts extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'userSchemas', 'hosts'] = Object.freeze([
+    'apiGateway',
+    'userSchemas',
+    'hosts',
+  ] as const);
+
   /**
    * Lists all unique hosts found in uploaded OpenAPI schemas for the zone. Useful
    * for understanding which domains have schema coverage.
@@ -17,10 +23,10 @@ export class Hosts extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
-    params: HostListParams,
+    params: HostListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HostListResponsesV4PagePaginationArray, HostListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/user_schemas/hosts`,
       V4PagePaginationArray<HostListResponse>,
@@ -28,6 +34,7 @@ export class Hosts extends APIResource {
     );
   }
 }
+export class Hosts extends BaseHosts {}
 
 export type HostListResponsesV4PagePaginationArray = V4PagePaginationArray<HostListResponse>;
 
@@ -54,7 +61,7 @@ export interface HostListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Hosts {

@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Raw extends APIResource {
+export class BaseRaw extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'raw'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'raw',
+  ] as const);
+
   /**
    * Updates a raw event
    *
@@ -19,7 +25,7 @@ export class Raw extends APIResource {
    * ```
    */
   edit(rawID: string, params: RawEditParams, options?: RequestOptions): APIPromise<RawEditResponse> {
-    const { account_id, event_id, ...body } = params;
+    const { account_id = this._client.accountID, event_id, ...body } = params;
     return this._client.patch(path`/accounts/${account_id}/cloudforce-one/events/${event_id}/raw/${rawID}`, {
       body,
       ...options,
@@ -38,13 +44,14 @@ export class Raw extends APIResource {
    * ```
    */
   get(rawID: string, params: RawGetParams, options?: RequestOptions): APIPromise<RawGetResponse> {
-    const { account_id, event_id } = params;
+    const { account_id = this._client.accountID, event_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/cloudforce-one/events/${event_id}/raw/${rawID}`,
       options,
     );
   }
 }
+export class Raw extends BaseRaw {}
 
 export interface RawEditResponse {
   id: string;
@@ -70,7 +77,7 @@ export interface RawEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Event UUID.
@@ -97,7 +104,7 @@ export interface RawGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Event UUID.

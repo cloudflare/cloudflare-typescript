@@ -2,6 +2,7 @@
 
 export {
   AddressSpaces,
+  BaseAddressSpaces,
   type AddressSpaceUpdateResponse,
   type AddressSpaceListResponse,
   type AddressSpaceEditResponse,
@@ -11,6 +12,7 @@ export {
 } from './address-spaces';
 export {
   OnRamps,
+  BaseOnRamps,
   type OnRampCreateResponse,
   type OnRampUpdateResponse,
   type OnRampListResponse,

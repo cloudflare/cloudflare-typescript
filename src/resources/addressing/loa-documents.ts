@@ -7,7 +7,12 @@ import { RequestOptions } from '../../internal/request-options';
 import { multipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class LOADocuments extends APIResource {
+export class BaseLOADocuments extends APIResource {
+  static override readonly _key: readonly ['addressing', 'loaDocuments'] = Object.freeze([
+    'addressing',
+    'loaDocuments',
+  ] as const);
+
   /**
    * Submit LOA document (pdf format) under the account.
    *
@@ -21,7 +26,7 @@ export class LOADocuments extends APIResource {
    * ```
    */
   create(params: LOADocumentCreateParams, options?: RequestOptions): APIPromise<LOADocumentCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/addressing/loa_documents`,
@@ -47,10 +52,10 @@ export class LOADocuments extends APIResource {
    */
   get(
     loaDocumentID: string | null,
-    params: LOADocumentGetParams,
+    params: LOADocumentGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Response> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/addressing/loa_documents/${loaDocumentID}/download`,
       {
@@ -61,6 +66,7 @@ export class LOADocuments extends APIResource {
     );
   }
 }
+export class LOADocuments extends BaseLOADocuments {}
 
 export interface LOADocumentCreateResponse {
   /**
@@ -105,7 +111,7 @@ export interface LOADocumentCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: LOA document to upload.
@@ -117,7 +123,7 @@ export interface LOADocumentGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace LOADocuments {

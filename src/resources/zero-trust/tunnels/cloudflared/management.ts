@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Management extends APIResource {
+export class BaseManagement extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'cloudflared', 'management'] =
+    Object.freeze(['zeroTrust', 'tunnels', 'cloudflared', 'management'] as const);
+
   /**
    * Gets a management token used to access the management resources (i.e. Streaming
    * Logs) of a tunnel.
@@ -27,7 +30,7 @@ export class Management extends APIResource {
     params: ManagementCreateParams,
     options?: RequestOptions,
   ): APIPromise<ManagementCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}/management`, {
         body,
@@ -36,6 +39,7 @@ export class Management extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Management extends BaseManagement {}
 
 /**
  * The Tunnel Token is used as a mechanism to authenticate the operation of a
@@ -47,7 +51,7 @@ export interface ManagementCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

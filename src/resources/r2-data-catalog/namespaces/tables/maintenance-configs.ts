@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class MaintenanceConfigs extends APIResource {
+export class BaseMaintenanceConfigs extends APIResource {
+  static override readonly _key: readonly ['r2DataCatalog', 'namespaces', 'tables', 'maintenanceConfigs'] =
+    Object.freeze(['r2DataCatalog', 'namespaces', 'tables', 'maintenanceConfigs'] as const);
+
   /**
    * Update the maintenance configuration for a specific table. This allows you to
    * enable or disable compaction and adjust target file sizes for optimization.
@@ -37,7 +40,7 @@ export class MaintenanceConfigs extends APIResource {
     params: MaintenanceConfigUpdateParams,
     options?: RequestOptions,
   ): APIPromise<MaintenanceConfigUpdateResponse> {
-    const { account_id, bucket_name, namespace, ...body } = params;
+    const { account_id = this._client.accountID, bucket_name, namespace, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/r2-catalog/${bucket_name}/namespaces/${namespace}/tables/${tableName}/maintenance-configs`,
@@ -68,7 +71,7 @@ export class MaintenanceConfigs extends APIResource {
     params: MaintenanceConfigGetParams,
     options?: RequestOptions,
   ): APIPromise<MaintenanceConfigGetResponse> {
-    const { account_id, bucket_name, namespace } = params;
+    const { account_id = this._client.accountID, bucket_name, namespace } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/r2-catalog/${bucket_name}/namespaces/${namespace}/tables/${tableName}/maintenance-configs`,
@@ -77,6 +80,7 @@ export class MaintenanceConfigs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class MaintenanceConfigs extends BaseMaintenanceConfigs {}
 
 /**
  * Configures maintenance for the table.
@@ -204,7 +208,7 @@ export interface MaintenanceConfigUpdateParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Specifies the R2 bucket name.
@@ -269,7 +273,7 @@ export interface MaintenanceConfigGetParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Specifies the R2 bucket name.

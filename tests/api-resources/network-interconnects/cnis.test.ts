@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseCNIs } from 'cloudflare/resources/network-interconnects/cnis';
+import { NetworkInterconnects } from 'cloudflare/resources/network-interconnects/network-interconnects';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource cnis', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCNIs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [NetworkInterconnects],
+});
+
+const runTests = (client: PartialCloudflare<{ networkInterconnects: { cnis: BaseCNIs } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.networkInterconnects.cnis.create({
       account_id: 'account_id',
@@ -149,4 +167,7 @@ describe('resource cnis', () => {
       account_id: 'account_id',
     });
   });
-});
+};
+describe('resource cnis', () => runTests(client));
+describe('resource cnis (tree shakable, base)', () => runTests(partialClient));
+describe('resource cnis (tree shakable, subresource)', () => runTests(parentPartialClient));

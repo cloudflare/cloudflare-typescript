@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as PayloadsAPI from './payloads';
 import {
+  BasePayloads,
   PayloadCreateParams,
   PayloadCreateResponse,
   PayloadCreateResponsesSinglePage,
@@ -15,14 +16,13 @@ import {
   Payloads,
 } from './payloads';
 import * as SettingsAPI from './settings';
-import { SettingGetParams, SettingGetResponse, Settings } from './settings';
+import { BaseSettings, SettingGetParams, SettingGetResponse, Settings } from './settings';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ContentScanning extends APIResource {
-  payloads: PayloadsAPI.Payloads = new PayloadsAPI.Payloads(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+export class BaseContentScanning extends APIResource {
+  static override readonly _key: readonly ['contentScanning'] = Object.freeze(['contentScanning'] as const);
 
   /**
    * Update the Content Scanning status.
@@ -41,7 +41,7 @@ export class ContentScanning extends APIResource {
     params: ContentScanningCreateParams,
     options?: RequestOptions,
   ): APIPromise<ContentScanningCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/content-upload-scan/settings`, {
         body,
@@ -67,7 +67,7 @@ export class ContentScanning extends APIResource {
     params: ContentScanningUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ContentScanningUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/content-upload-scan/settings`, {
         body,
@@ -87,10 +87,10 @@ export class ContentScanning extends APIResource {
    * ```
    */
   disable(
-    params: ContentScanningDisableParams,
+    params: ContentScanningDisableParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ContentScanningDisableResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/content-upload-scan/disable`, options) as APIPromise<{
         result: ContentScanningDisableResponse;
@@ -109,10 +109,10 @@ export class ContentScanning extends APIResource {
    * ```
    */
   enable(
-    params: ContentScanningEnableParams,
+    params: ContentScanningEnableParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ContentScanningEnableResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/content-upload-scan/enable`, options) as APIPromise<{
         result: ContentScanningEnableResponse;
@@ -130,14 +130,21 @@ export class ContentScanning extends APIResource {
    * });
    * ```
    */
-  get(params: ContentScanningGetParams, options?: RequestOptions): APIPromise<ContentScanningGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: ContentScanningGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ContentScanningGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/content-upload-scan/settings`, options) as APIPromise<{
         result: ContentScanningGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class ContentScanning extends BaseContentScanning {
+  payloads: PayloadsAPI.Payloads = new PayloadsAPI.Payloads(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
 /**
@@ -193,7 +200,7 @@ export interface ContentScanningCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The status value for Content Scanning.
@@ -205,7 +212,7 @@ export interface ContentScanningUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The status value for Content Scanning.
@@ -217,25 +224,27 @@ export interface ContentScanningDisableParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ContentScanningEnableParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ContentScanningGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 ContentScanning.Payloads = Payloads;
+ContentScanning.BasePayloads = BasePayloads;
 ContentScanning.Settings = Settings;
+ContentScanning.BaseSettings = BaseSettings;
 
 export declare namespace ContentScanning {
   export {
@@ -253,6 +262,7 @@ export declare namespace ContentScanning {
 
   export {
     Payloads as Payloads,
+    BasePayloads as BasePayloads,
     type PayloadCreateResponse as PayloadCreateResponse,
     type PayloadListResponse as PayloadListResponse,
     type PayloadDeleteResponse as PayloadDeleteResponse,
@@ -266,6 +276,7 @@ export declare namespace ContentScanning {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingGetResponse as SettingGetResponse,
     type SettingGetParams as SettingGetParams,
   };

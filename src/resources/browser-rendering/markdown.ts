@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Markdown extends APIResource {
+export class BaseMarkdown extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'markdown'] = Object.freeze([
+    'browserRendering',
+    'markdown',
+  ] as const);
+
   /**
    * Gets markdown of a webpage from provided URL or HTML. Control page loading with
    * `gotoOptions` and `waitFor*` options.
@@ -20,7 +25,7 @@ export class Markdown extends APIResource {
    * ```
    */
   create(params: MarkdownCreateParams, options?: RequestOptions): APIPromise<MarkdownCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/markdown`, {
         query: { cacheTTL },
@@ -30,6 +35,7 @@ export class Markdown extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Markdown extends BaseMarkdown {}
 
 /**
  * Markdown content.
@@ -43,7 +49,7 @@ export declare namespace MarkdownCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -306,7 +312,7 @@ export declare namespace MarkdownCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either

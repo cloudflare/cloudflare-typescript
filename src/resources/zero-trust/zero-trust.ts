@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as ConnectivitySettingsAPI from './connectivity-settings';
 import {
+  BaseConnectivitySettings,
   ConnectivitySettingEditParams,
   ConnectivitySettingEditResponse,
   ConnectivitySettingGetParams,
@@ -10,11 +11,12 @@ import {
   ConnectivitySettings,
 } from './connectivity-settings';
 import * as SeatsAPI from './seats';
-import { Seat, SeatEditParams, Seats, SeatsSinglePage } from './seats';
+import { BaseSeats, Seat, SeatEditParams, Seats, SeatsSinglePage } from './seats';
 import * as AccessAPI from './access/access';
-import { Access } from './access/access';
+import { Access, BaseAccess } from './access/access';
 import * as DevicesAPI from './devices/devices';
 import {
+  BaseDevices,
   Device,
   DeviceGetParams,
   DeviceGetResponse,
@@ -23,11 +25,19 @@ import {
   DevicesSinglePage,
 } from './devices/devices';
 import * as DEXAPI from './dex/dex';
-import { DEX, DigitalExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles } from './dex/dex';
+import {
+  BaseDEX,
+  DEX,
+  DigitalExperienceMonitor,
+  NetworkPath,
+  NetworkPathResponse,
+  Percentiles,
+} from './dex/dex';
 import * as DLPAPI from './dlp/dlp';
-import { DLP } from './dlp/dlp';
+import { BaseDLP, DLP } from './dlp/dlp';
 import * as GatewayAPI from './gateway/gateway';
 import {
+  BaseGateway,
   Gateway,
   GatewayCreateParams,
   GatewayCreateResponse,
@@ -37,6 +47,7 @@ import {
 import * as IdentityProvidersAPI from './identity-providers/identity-providers';
 import {
   AzureAD,
+  BaseIdentityProviders,
   GenericOAuthConfig,
   IdentityProvider,
   IdentityProviderCreateParams,
@@ -52,9 +63,10 @@ import {
   IdentityProviders,
 } from './identity-providers/identity-providers';
 import * as NetworksAPI from './networks/networks';
-import { Networks } from './networks/networks';
+import { BaseNetworks, Networks } from './networks/networks';
 import * as OrganizationsAPI from './organizations/organizations';
 import {
+  BaseOrganizations,
   LoginDesign,
   Organization,
   OrganizationCreateParams,
@@ -66,6 +78,7 @@ import {
 } from './organizations/organizations';
 import * as RiskScoringAPI from './risk-scoring/risk-scoring';
 import {
+  BaseRiskScoring,
   RiskScoring,
   RiskScoringGetParams,
   RiskScoringGetResponse,
@@ -74,6 +87,7 @@ import {
 } from './risk-scoring/risk-scoring';
 import * as TunnelsAPI from './tunnels/tunnels';
 import {
+  BaseTunnels,
   Connection,
   TunnelListParams,
   TunnelListResponse,
@@ -81,7 +95,10 @@ import {
   Tunnels,
 } from './tunnels/tunnels';
 
-export class ZeroTrust extends APIResource {
+export class BaseZeroTrust extends APIResource {
+  static override readonly _key: readonly ['zeroTrust'] = Object.freeze(['zeroTrust'] as const);
+}
+export class ZeroTrust extends BaseZeroTrust {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   identityProviders: IdentityProvidersAPI.IdentityProviders = new IdentityProvidersAPI.IdentityProviders(
     this._client,
@@ -100,21 +117,34 @@ export class ZeroTrust extends APIResource {
 }
 
 ZeroTrust.Devices = Devices;
+ZeroTrust.BaseDevices = BaseDevices;
 ZeroTrust.IdentityProviders = IdentityProviders;
+ZeroTrust.BaseIdentityProviders = BaseIdentityProviders;
 ZeroTrust.Organizations = Organizations;
+ZeroTrust.BaseOrganizations = BaseOrganizations;
 ZeroTrust.Seats = Seats;
+ZeroTrust.BaseSeats = BaseSeats;
 ZeroTrust.Access = Access;
+ZeroTrust.BaseAccess = BaseAccess;
 ZeroTrust.DEX = DEX;
+ZeroTrust.BaseDEX = BaseDEX;
 ZeroTrust.Tunnels = Tunnels;
+ZeroTrust.BaseTunnels = BaseTunnels;
 ZeroTrust.ConnectivitySettings = ConnectivitySettings;
+ZeroTrust.BaseConnectivitySettings = BaseConnectivitySettings;
 ZeroTrust.DLP = DLP;
+ZeroTrust.BaseDLP = BaseDLP;
 ZeroTrust.Gateway = Gateway;
+ZeroTrust.BaseGateway = BaseGateway;
 ZeroTrust.Networks = Networks;
+ZeroTrust.BaseNetworks = BaseNetworks;
 ZeroTrust.RiskScoring = RiskScoring;
+ZeroTrust.BaseRiskScoring = BaseRiskScoring;
 
 export declare namespace ZeroTrust {
   export {
     Devices as Devices,
+    BaseDevices as BaseDevices,
     type Device as Device,
     type DeviceGetResponse as DeviceGetResponse,
     type DevicesSinglePage as DevicesSinglePage,
@@ -124,6 +154,7 @@ export declare namespace ZeroTrust {
 
   export {
     IdentityProviders as IdentityProviders,
+    BaseIdentityProviders as BaseIdentityProviders,
     type AzureAD as AzureAD,
     type GenericOAuthConfig as GenericOAuthConfig,
     type IdentityProvider as IdentityProvider,
@@ -141,6 +172,7 @@ export declare namespace ZeroTrust {
 
   export {
     Organizations as Organizations,
+    BaseOrganizations as BaseOrganizations,
     type LoginDesign as LoginDesign,
     type Organization as Organization,
     type OrganizationRevokeUsersResponse as OrganizationRevokeUsersResponse,
@@ -152,15 +184,17 @@ export declare namespace ZeroTrust {
 
   export {
     Seats as Seats,
+    BaseSeats as BaseSeats,
     type Seat as Seat,
     type SeatsSinglePage as SeatsSinglePage,
     type SeatEditParams as SeatEditParams,
   };
 
-  export { Access as Access };
+  export { Access as Access, BaseAccess as BaseAccess };
 
   export {
     DEX as DEX,
+    BaseDEX as BaseDEX,
     type DigitalExperienceMonitor as DigitalExperienceMonitor,
     type NetworkPath as NetworkPath,
     type NetworkPathResponse as NetworkPathResponse,
@@ -169,6 +203,7 @@ export declare namespace ZeroTrust {
 
   export {
     Tunnels as Tunnels,
+    BaseTunnels as BaseTunnels,
     type Connection as Connection,
     type TunnelListResponse as TunnelListResponse,
     type TunnelListResponsesV4PagePaginationArray as TunnelListResponsesV4PagePaginationArray,
@@ -177,26 +212,29 @@ export declare namespace ZeroTrust {
 
   export {
     ConnectivitySettings as ConnectivitySettings,
+    BaseConnectivitySettings as BaseConnectivitySettings,
     type ConnectivitySettingEditResponse as ConnectivitySettingEditResponse,
     type ConnectivitySettingGetResponse as ConnectivitySettingGetResponse,
     type ConnectivitySettingEditParams as ConnectivitySettingEditParams,
     type ConnectivitySettingGetParams as ConnectivitySettingGetParams,
   };
 
-  export { DLP as DLP };
+  export { DLP as DLP, BaseDLP as BaseDLP };
 
   export {
     Gateway as Gateway,
+    BaseGateway as BaseGateway,
     type GatewayCreateResponse as GatewayCreateResponse,
     type GatewayListResponse as GatewayListResponse,
     type GatewayCreateParams as GatewayCreateParams,
     type GatewayListParams as GatewayListParams,
   };
 
-  export { Networks as Networks };
+  export { Networks as Networks, BaseNetworks as BaseNetworks };
 
   export {
     RiskScoring as RiskScoring,
+    BaseRiskScoring as BaseRiskScoring,
     type RiskScoringGetResponse as RiskScoringGetResponse,
     type RiskScoringResetResponse as RiskScoringResetResponse,
     type RiskScoringGetParams as RiskScoringGetParams,

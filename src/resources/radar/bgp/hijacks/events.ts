@@ -4,7 +4,14 @@ import { APIResource } from '../../../../core/resource';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Events extends APIResource {
+export class BaseEvents extends APIResource {
+  static override readonly _key: readonly ['radar', 'bgp', 'hijacks', 'events'] = Object.freeze([
+    'radar',
+    'bgp',
+    'hijacks',
+    'events',
+  ] as const);
+
   /**
    * Retrieves the BGP hijack events.
    *
@@ -26,6 +33,7 @@ export class Events extends APIResource {
     });
   }
 }
+export class Events extends BaseEvents {}
 
 export type EventListResponsesV4PagePagination = V4PagePagination<EventListResponse>;
 

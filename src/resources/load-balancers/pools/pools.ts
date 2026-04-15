@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as LoadBalancersAPI from '../load-balancers';
 import * as HealthAPI from './health';
 import {
+  BaseHealth,
   Health,
   HealthCreateParams,
   HealthCreateResponse,
@@ -12,6 +13,7 @@ import {
 } from './health';
 import * as ReferencesAPI from './references';
 import {
+  BaseReferences,
   ReferenceGetParams,
   ReferenceGetResponse,
   ReferenceGetResponsesSinglePage,
@@ -22,9 +24,11 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Pools extends APIResource {
-  health: HealthAPI.Health = new HealthAPI.Health(this._client);
-  references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
+export class BasePools extends APIResource {
+  static override readonly _key: readonly ['loadBalancers', 'pools'] = Object.freeze([
+    'loadBalancers',
+    'pools',
+  ] as const);
 
   /**
    * Create a new pool.
@@ -39,7 +43,7 @@ export class Pools extends APIResource {
    * ```
    */
   create(params: PoolCreateParams, options?: RequestOptions): APIPromise<Pool> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/load_balancers/pools`, {
         body,
@@ -64,7 +68,7 @@ export class Pools extends APIResource {
    * ```
    */
   update(poolID: string, params: PoolUpdateParams, options?: RequestOptions): APIPromise<Pool> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/load_balancers/pools/${poolID}`, {
         body,
@@ -86,8 +90,11 @@ export class Pools extends APIResource {
    * }
    * ```
    */
-  list(params: PoolListParams, options?: RequestOptions): PagePromise<PoolsSinglePage, Pool> {
-    const { account_id, ...query } = params;
+  list(
+    params: PoolListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PoolsSinglePage, Pool> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/load_balancers/pools`, SinglePage<Pool>, {
       query,
       ...options,
@@ -105,8 +112,12 @@ export class Pools extends APIResource {
    * );
    * ```
    */
-  delete(poolID: string, params: PoolDeleteParams, options?: RequestOptions): APIPromise<PoolDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    poolID: string,
+    params: PoolDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PoolDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/load_balancers/pools/${poolID}`,
@@ -131,8 +142,11 @@ export class Pools extends APIResource {
    * }
    * ```
    */
-  bulkEdit(params: PoolBulkEditParams, options?: RequestOptions): PagePromise<PoolsSinglePage, Pool> {
-    const { account_id, ...body } = params;
+  bulkEdit(
+    params: PoolBulkEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PoolsSinglePage, Pool> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/load_balancers/pools`, SinglePage<Pool>, {
       body,
       method: 'patch',
@@ -152,7 +166,7 @@ export class Pools extends APIResource {
    * ```
    */
   edit(poolID: string, params: PoolEditParams, options?: RequestOptions): APIPromise<Pool> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/load_balancers/pools/${poolID}`, {
         body,
@@ -172,14 +186,22 @@ export class Pools extends APIResource {
    * );
    * ```
    */
-  get(poolID: string, params: PoolGetParams, options?: RequestOptions): APIPromise<Pool> {
-    const { account_id } = params;
+  get(
+    poolID: string,
+    params: PoolGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Pool> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/load_balancers/pools/${poolID}`, options) as APIPromise<{
         result: Pool;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Pools extends BasePools {
+  health: HealthAPI.Health = new HealthAPI.Health(this._client);
+  references: ReferencesAPI.References = new ReferencesAPI.References(this._client);
 }
 
 export type PoolsSinglePage = SinglePage<Pool>;
@@ -298,7 +320,7 @@ export interface PoolCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,
@@ -387,7 +409,7 @@ export interface PoolUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,
@@ -482,7 +504,7 @@ export interface PoolListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The ID of the Monitor to use for checking the health of origins
@@ -495,14 +517,14 @@ export interface PoolDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PoolBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The email address to send health status notifications to. This field
@@ -516,7 +538,7 @@ export interface PoolEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of regions from which to run health checks. Null means every
@@ -611,11 +633,13 @@ export interface PoolGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Pools.Health = Health;
+Pools.BaseHealth = BaseHealth;
 Pools.References = References;
+Pools.BaseReferences = BaseReferences;
 
 export declare namespace Pools {
   export {
@@ -633,6 +657,7 @@ export declare namespace Pools {
 
   export {
     Health as Health,
+    BaseHealth as BaseHealth,
     type HealthCreateResponse as HealthCreateResponse,
     type HealthGetResponse as HealthGetResponse,
     type HealthCreateParams as HealthCreateParams,
@@ -641,6 +666,7 @@ export declare namespace Pools {
 
   export {
     References as References,
+    BaseReferences as BaseReferences,
     type ReferenceGetResponse as ReferenceGetResponse,
     type ReferenceGetResponsesSinglePage as ReferenceGetResponsesSinglePage,
     type ReferenceGetParams as ReferenceGetParams,

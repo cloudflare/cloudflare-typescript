@@ -9,16 +9,22 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Objects extends APIResource {
+export class BaseObjects extends APIResource {
+  static override readonly _key: readonly ['durableObjects', 'namespaces', 'objects'] = Object.freeze([
+    'durableObjects',
+    'namespaces',
+    'objects',
+  ] as const);
+
   /**
    * Returns the Durable Objects in a given namespace.
    */
   list(
     id: string,
-    params: ObjectListParams,
+    params: ObjectListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DurableObjectsCursorPaginationAfter, DurableObject> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
       CursorPaginationAfter<DurableObject>,
@@ -26,6 +32,7 @@ export class Objects extends APIResource {
     );
   }
 }
+export class Objects extends BaseObjects {}
 
 export type DurableObjectsCursorPaginationAfter = CursorPaginationAfter<DurableObject>;
 
@@ -45,7 +52,7 @@ export interface ObjectListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The number of objects to return. The cursor attribute may be used

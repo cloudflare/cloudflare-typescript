@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Labels extends APIResource {
+export class BaseLabels extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'operations', 'labels'] = Object.freeze([
+    'apiGateway',
+    'operations',
+    'labels',
+  ] as const);
+
   /**
    * Attach label(s) on an operation in endpoint management
    *
@@ -24,7 +30,7 @@ export class Labels extends APIResource {
     params: LabelCreateParams,
     options?: RequestOptions,
   ): APIPromise<LabelCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/api_gateway/operations/${operationID}/labels`, {
         body,
@@ -50,7 +56,7 @@ export class Labels extends APIResource {
     params: LabelUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LabelUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/api_gateway/operations/${operationID}/labels`, {
         body,
@@ -73,10 +79,10 @@ export class Labels extends APIResource {
    */
   delete(
     operationID: string,
-    params: LabelDeleteParams,
+    params: LabelDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LabelDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/api_gateway/operations/${operationID}/labels`,
@@ -111,7 +117,7 @@ export class Labels extends APIResource {
     params: LabelBulkCreateParams,
     options?: RequestOptions,
   ): PagePromise<LabelBulkCreateResponsesSinglePage, LabelBulkCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/operations/labels`,
       SinglePage<LabelBulkCreateResponse>,
@@ -133,10 +139,10 @@ export class Labels extends APIResource {
    * ```
    */
   bulkDelete(
-    params: LabelBulkDeleteParams,
+    params: LabelBulkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LabelBulkDeleteResponsesSinglePage, LabelBulkDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/operations/labels`,
       SinglePage<LabelBulkDeleteResponse>,
@@ -172,7 +178,7 @@ export class Labels extends APIResource {
     params: LabelBulkUpdateParams,
     options?: RequestOptions,
   ): PagePromise<LabelBulkUpdateResponsesSinglePage, LabelBulkUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/api_gateway/operations/labels`,
       SinglePage<LabelBulkUpdateResponse>,
@@ -180,6 +186,7 @@ export class Labels extends APIResource {
     );
   }
 }
+export class Labels extends BaseLabels {}
 
 export type LabelBulkCreateResponsesSinglePage = SinglePage<LabelBulkCreateResponse>;
 
@@ -539,7 +546,7 @@ export interface LabelCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: List of managed label names.
@@ -556,7 +563,7 @@ export interface LabelUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: List of managed label names. Omitting this property or passing an
@@ -575,14 +582,14 @@ export interface LabelDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LabelBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Operation IDs selector
@@ -633,14 +640,14 @@ export interface LabelBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface LabelBulkUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Managed labels to replace for all affected operations

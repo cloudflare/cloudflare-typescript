@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as TemporaryCredentialsAPI from './temporary-credentials';
 import {
+  BaseTemporaryCredentials,
   TemporaryCredential,
   TemporaryCredentialCreateParams,
   TemporaryCredentialCreateResponse,
@@ -10,6 +11,7 @@ import {
 } from './temporary-credentials';
 import * as BucketsAPI from './buckets/buckets';
 import {
+  BaseBuckets,
   Bucket,
   BucketCreateParams,
   BucketDeleteParams,
@@ -21,9 +23,12 @@ import {
   Buckets,
 } from './buckets/buckets';
 import * as SuperSlurperAPI from './super-slurper/super-slurper';
-import { SuperSlurper } from './super-slurper/super-slurper';
+import { BaseSuperSlurper, SuperSlurper } from './super-slurper/super-slurper';
 
-export class R2 extends APIResource {
+export class BaseR2 extends APIResource {
+  static override readonly _key: readonly ['r2'] = Object.freeze(['r2'] as const);
+}
+export class R2 extends BaseR2 {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);
   temporaryCredentials: TemporaryCredentialsAPI.TemporaryCredentials =
     new TemporaryCredentialsAPI.TemporaryCredentials(this._client);
@@ -31,12 +36,16 @@ export class R2 extends APIResource {
 }
 
 R2.Buckets = Buckets;
+R2.BaseBuckets = BaseBuckets;
 R2.TemporaryCredentials = TemporaryCredentials;
+R2.BaseTemporaryCredentials = BaseTemporaryCredentials;
 R2.SuperSlurper = SuperSlurper;
+R2.BaseSuperSlurper = BaseSuperSlurper;
 
 export declare namespace R2 {
   export {
     Buckets as Buckets,
+    BaseBuckets as BaseBuckets,
     type Bucket as Bucket,
     type BucketListResponse as BucketListResponse,
     type BucketDeleteResponse as BucketDeleteResponse,
@@ -49,10 +58,11 @@ export declare namespace R2 {
 
   export {
     TemporaryCredentials as TemporaryCredentials,
+    BaseTemporaryCredentials as BaseTemporaryCredentials,
     type TemporaryCredential as TemporaryCredential,
     type TemporaryCredentialCreateResponse as TemporaryCredentialCreateResponse,
     type TemporaryCredentialCreateParams as TemporaryCredentialCreateParams,
   };
 
-  export { SuperSlurper as SuperSlurper };
+  export { SuperSlurper as SuperSlurper, BaseSuperSlurper as BaseSuperSlurper };
 }

@@ -6,9 +6,11 @@ import {
   AgentReadiness,
   AgentReadinessSummaryParams,
   AgentReadinessSummaryResponse,
+  BaseAgentReadiness,
 } from './agent-readiness';
 import * as DatasetsAPI from './datasets';
 import {
+  BaseDatasets,
   DatasetDownloadParams,
   DatasetDownloadResponse,
   DatasetGetResponse,
@@ -18,6 +20,7 @@ import {
 } from './datasets';
 import * as GeolocationsAPI from './geolocations';
 import {
+  BaseGeolocations,
   GeolocationGetParams,
   GeolocationGetResponse,
   GeolocationListParams,
@@ -25,9 +28,10 @@ import {
   Geolocations,
 } from './geolocations';
 import * as SearchAPI from './search';
-import { Search, SearchGlobalParams, SearchGlobalResponse } from './search';
+import { BaseSearch, Search, SearchGlobalParams, SearchGlobalResponse } from './search';
 import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
 import {
+  BaseTCPResetsTimeouts,
   TCPResetsTimeoutSummaryParams,
   TCPResetsTimeoutSummaryResponse,
   TCPResetsTimeoutTimeseriesGroupsParams,
@@ -35,9 +39,14 @@ import {
   TCPResetsTimeouts,
 } from './tcp-resets-timeouts';
 import * as AIAPI from './ai/ai';
-import { AI } from './ai/ai';
+import { AI, BaseAI } from './ai/ai';
 import * as AnnotationsAPI from './annotations/annotations';
-import { AnnotationListParams, AnnotationListResponse, Annotations } from './annotations/annotations';
+import {
+  AnnotationListParams,
+  AnnotationListResponse,
+  Annotations,
+  BaseAnnotations,
+} from './annotations/annotations';
 import * as AS112API from './as112/as112';
 import {
   AS112,
@@ -47,13 +56,15 @@ import {
   AS112TimeseriesGroupsV2Response,
   AS112TimeseriesParams,
   AS112TimeseriesResponse,
+  BaseAS112,
 } from './as112/as112';
 import * as AttacksAPI from './attacks/attacks';
-import { Attacks } from './attacks/attacks';
+import { Attacks, BaseAttacks } from './attacks/attacks';
 import * as BGPAPI from './bgp/bgp';
-import { BGP, BGPTimeseriesParams, BGPTimeseriesResponse } from './bgp/bgp';
+import { BGP, BGPTimeseriesParams, BGPTimeseriesResponse, BaseBGP } from './bgp/bgp';
 import * as BotsAPI from './bots/bots';
 import {
+  BaseBots,
   BotGetParams,
   BotGetResponse,
   BotListParams,
@@ -68,6 +79,7 @@ import {
 } from './bots/bots';
 import * as CTAPI from './ct/ct';
 import {
+  BaseCT,
   CT,
   CTSummaryParams,
   CTSummaryResponse,
@@ -78,6 +90,7 @@ import {
 } from './ct/ct';
 import * as DNSAPI from './dns/dns';
 import {
+  BaseDNS,
   DNS,
   DNSSummaryV2Params,
   DNSSummaryV2Response,
@@ -87,11 +100,12 @@ import {
   DNSTimeseriesResponse,
 } from './dns/dns';
 import * as EmailAPI from './email/email';
-import { Email, RadarEmailSeries, RadarEmailSummary } from './email/email';
+import { BaseEmail, Email, RadarEmailSeries, RadarEmailSummary } from './email/email';
 import * as EntitiesAPI from './entities/entities';
-import { Entities, EntityGetParams, EntityGetResponse } from './entities/entities';
+import { BaseEntities, Entities, EntityGetParams, EntityGetResponse } from './entities/entities';
 import * as HTTPAPI from './http/http';
 import {
+  BaseHTTP,
   HTTP,
   HTTPSummaryV2Params,
   HTTPSummaryV2Response,
@@ -102,6 +116,7 @@ import {
 } from './http/http';
 import * as LeakedCredentialsAPI from './leaked-credentials/leaked-credentials';
 import {
+  BaseLeakedCredentials,
   LeakedCredentialSummaryV2Params,
   LeakedCredentialSummaryV2Response,
   LeakedCredentialTimeseriesGroupsV2Params,
@@ -110,6 +125,7 @@ import {
 } from './leaked-credentials/leaked-credentials';
 import * as NetFlowsAPI from './netflows/netflows';
 import {
+  BaseNetFlows,
   NetFlows,
   NetFlowsSummaryParams,
   NetFlowsSummaryResponse,
@@ -121,11 +137,12 @@ import {
   NetFlowsTimeseriesResponse,
 } from './netflows/netflows';
 import * as PostQuantumAPI from './post-quantum/post-quantum';
-import { PostQuantum } from './post-quantum/post-quantum';
+import { BasePostQuantum, PostQuantum } from './post-quantum/post-quantum';
 import * as QualityAPI from './quality/quality';
-import { Quality } from './quality/quality';
+import { BaseQuality, Quality } from './quality/quality';
 import * as RankingAPI from './ranking/ranking';
 import {
+  BaseRanking,
   Ranking,
   RankingTimeseriesGroupsParams,
   RankingTimeseriesGroupsResponse,
@@ -133,17 +150,21 @@ import {
   RankingTopResponse,
 } from './ranking/ranking';
 import * as RobotsTXTAPI from './robots-txt/robots-txt';
-import { RobotsTXT } from './robots-txt/robots-txt';
+import { BaseRobotsTXT, RobotsTXT } from './robots-txt/robots-txt';
 import * as TrafficAnomaliesAPI from './traffic-anomalies/traffic-anomalies';
 import {
+  BaseTrafficAnomalies,
   TrafficAnomalies,
   TrafficAnomalyGetParams,
   TrafficAnomalyGetResponse,
 } from './traffic-anomalies/traffic-anomalies';
 import * as VerifiedBotsAPI from './verified-bots/verified-bots';
-import { VerifiedBots } from './verified-bots/verified-bots';
+import { BaseVerifiedBots, VerifiedBots } from './verified-bots/verified-bots';
 
-export class Radar extends APIResource {
+export class BaseRadar extends APIResource {
+  static override readonly _key: readonly ['radar'] = Object.freeze(['radar'] as const);
+}
+export class Radar extends BaseRadar {
   agentReadiness: AgentReadinessAPI.AgentReadiness = new AgentReadinessAPI.AgentReadiness(this._client);
   ai: AIAPI.AI = new AIAPI.AI(this._client);
   ct: CTAPI.CT = new CTAPI.CT(this._client);
@@ -177,41 +198,67 @@ export class Radar extends APIResource {
 }
 
 Radar.AgentReadiness = AgentReadiness;
+Radar.BaseAgentReadiness = BaseAgentReadiness;
 Radar.AI = AI;
+Radar.BaseAI = BaseAI;
 Radar.CT = CT;
+Radar.BaseCT = BaseCT;
 Radar.Annotations = Annotations;
+Radar.BaseAnnotations = BaseAnnotations;
 Radar.BGP = BGP;
+Radar.BaseBGP = BaseBGP;
 Radar.Bots = Bots;
+Radar.BaseBots = BaseBots;
 Radar.Datasets = Datasets;
+Radar.BaseDatasets = BaseDatasets;
 Radar.DNS = DNS;
+Radar.BaseDNS = BaseDNS;
 Radar.NetFlows = NetFlows;
+Radar.BaseNetFlows = BaseNetFlows;
 Radar.PostQuantum = PostQuantum;
+Radar.BasePostQuantum = BasePostQuantum;
 Radar.Search = Search;
+Radar.BaseSearch = BaseSearch;
 Radar.VerifiedBots = VerifiedBots;
+Radar.BaseVerifiedBots = BaseVerifiedBots;
 Radar.AS112 = AS112;
+Radar.BaseAS112 = BaseAS112;
 Radar.Email = Email;
+Radar.BaseEmail = BaseEmail;
 Radar.Attacks = Attacks;
+Radar.BaseAttacks = BaseAttacks;
 Radar.Entities = Entities;
+Radar.BaseEntities = BaseEntities;
 Radar.Geolocations = Geolocations;
+Radar.BaseGeolocations = BaseGeolocations;
 Radar.HTTP = HTTP;
+Radar.BaseHTTP = BaseHTTP;
 Radar.Quality = Quality;
+Radar.BaseQuality = BaseQuality;
 Radar.Ranking = Ranking;
+Radar.BaseRanking = BaseRanking;
 Radar.TrafficAnomalies = TrafficAnomalies;
+Radar.BaseTrafficAnomalies = BaseTrafficAnomalies;
 Radar.TCPResetsTimeouts = TCPResetsTimeouts;
+Radar.BaseTCPResetsTimeouts = BaseTCPResetsTimeouts;
 Radar.RobotsTXT = RobotsTXT;
+Radar.BaseRobotsTXT = BaseRobotsTXT;
 Radar.LeakedCredentials = LeakedCredentials;
+Radar.BaseLeakedCredentials = BaseLeakedCredentials;
 
 export declare namespace Radar {
   export {
     AgentReadiness as AgentReadiness,
+    BaseAgentReadiness as BaseAgentReadiness,
     type AgentReadinessSummaryResponse as AgentReadinessSummaryResponse,
     type AgentReadinessSummaryParams as AgentReadinessSummaryParams,
   };
 
-  export { AI as AI };
+  export { AI as AI, BaseAI as BaseAI };
 
   export {
     CT as CT,
+    BaseCT as BaseCT,
     type CTSummaryResponse as CTSummaryResponse,
     type CTTimeseriesResponse as CTTimeseriesResponse,
     type CTTimeseriesGroupsResponse as CTTimeseriesGroupsResponse,
@@ -222,18 +269,21 @@ export declare namespace Radar {
 
   export {
     Annotations as Annotations,
+    BaseAnnotations as BaseAnnotations,
     type AnnotationListResponse as AnnotationListResponse,
     type AnnotationListParams as AnnotationListParams,
   };
 
   export {
     BGP as BGP,
+    BaseBGP as BaseBGP,
     type BGPTimeseriesResponse as BGPTimeseriesResponse,
     type BGPTimeseriesParams as BGPTimeseriesParams,
   };
 
   export {
     Bots as Bots,
+    BaseBots as BaseBots,
     type BotListResponse as BotListResponse,
     type BotGetResponse as BotGetResponse,
     type BotSummaryResponse as BotSummaryResponse,
@@ -248,6 +298,7 @@ export declare namespace Radar {
 
   export {
     Datasets as Datasets,
+    BaseDatasets as BaseDatasets,
     type DatasetListResponse as DatasetListResponse,
     type DatasetDownloadResponse as DatasetDownloadResponse,
     type DatasetGetResponse as DatasetGetResponse,
@@ -257,6 +308,7 @@ export declare namespace Radar {
 
   export {
     DNS as DNS,
+    BaseDNS as BaseDNS,
     type DNSSummaryV2Response as DNSSummaryV2Response,
     type DNSTimeseriesResponse as DNSTimeseriesResponse,
     type DNSTimeseriesGroupsV2Response as DNSTimeseriesGroupsV2Response,
@@ -267,6 +319,7 @@ export declare namespace Radar {
 
   export {
     NetFlows as NetFlows,
+    BaseNetFlows as BaseNetFlows,
     type NetFlowsSummaryResponse as NetFlowsSummaryResponse,
     type NetFlowsSummaryV2Response as NetFlowsSummaryV2Response,
     type NetFlowsTimeseriesResponse as NetFlowsTimeseriesResponse,
@@ -277,18 +330,20 @@ export declare namespace Radar {
     type NetFlowsTimeseriesGroupsParams as NetFlowsTimeseriesGroupsParams,
   };
 
-  export { PostQuantum as PostQuantum };
+  export { PostQuantum as PostQuantum, BasePostQuantum as BasePostQuantum };
 
   export {
     Search as Search,
+    BaseSearch as BaseSearch,
     type SearchGlobalResponse as SearchGlobalResponse,
     type SearchGlobalParams as SearchGlobalParams,
   };
 
-  export { VerifiedBots as VerifiedBots };
+  export { VerifiedBots as VerifiedBots, BaseVerifiedBots as BaseVerifiedBots };
 
   export {
     AS112 as AS112,
+    BaseAS112 as BaseAS112,
     type AS112SummaryV2Response as AS112SummaryV2Response,
     type AS112TimeseriesResponse as AS112TimeseriesResponse,
     type AS112TimeseriesGroupsV2Response as AS112TimeseriesGroupsV2Response,
@@ -299,20 +354,23 @@ export declare namespace Radar {
 
   export {
     Email as Email,
+    BaseEmail as BaseEmail,
     type RadarEmailSeries as RadarEmailSeries,
     type RadarEmailSummary as RadarEmailSummary,
   };
 
-  export { Attacks as Attacks };
+  export { Attacks as Attacks, BaseAttacks as BaseAttacks };
 
   export {
     Entities as Entities,
+    BaseEntities as BaseEntities,
     type EntityGetResponse as EntityGetResponse,
     type EntityGetParams as EntityGetParams,
   };
 
   export {
     Geolocations as Geolocations,
+    BaseGeolocations as BaseGeolocations,
     type GeolocationListResponse as GeolocationListResponse,
     type GeolocationGetResponse as GeolocationGetResponse,
     type GeolocationListParams as GeolocationListParams,
@@ -321,6 +379,7 @@ export declare namespace Radar {
 
   export {
     HTTP as HTTP,
+    BaseHTTP as BaseHTTP,
     type HTTPSummaryV2Response as HTTPSummaryV2Response,
     type HTTPTimeseriesResponse as HTTPTimeseriesResponse,
     type HTTPTimeseriesGroupsV2Response as HTTPTimeseriesGroupsV2Response,
@@ -329,10 +388,11 @@ export declare namespace Radar {
     type HTTPTimeseriesGroupsV2Params as HTTPTimeseriesGroupsV2Params,
   };
 
-  export { Quality as Quality };
+  export { Quality as Quality, BaseQuality as BaseQuality };
 
   export {
     Ranking as Ranking,
+    BaseRanking as BaseRanking,
     type RankingTimeseriesGroupsResponse as RankingTimeseriesGroupsResponse,
     type RankingTopResponse as RankingTopResponse,
     type RankingTimeseriesGroupsParams as RankingTimeseriesGroupsParams,
@@ -341,22 +401,25 @@ export declare namespace Radar {
 
   export {
     TrafficAnomalies as TrafficAnomalies,
+    BaseTrafficAnomalies as BaseTrafficAnomalies,
     type TrafficAnomalyGetResponse as TrafficAnomalyGetResponse,
     type TrafficAnomalyGetParams as TrafficAnomalyGetParams,
   };
 
   export {
     TCPResetsTimeouts as TCPResetsTimeouts,
+    BaseTCPResetsTimeouts as BaseTCPResetsTimeouts,
     type TCPResetsTimeoutSummaryResponse as TCPResetsTimeoutSummaryResponse,
     type TCPResetsTimeoutTimeseriesGroupsResponse as TCPResetsTimeoutTimeseriesGroupsResponse,
     type TCPResetsTimeoutSummaryParams as TCPResetsTimeoutSummaryParams,
     type TCPResetsTimeoutTimeseriesGroupsParams as TCPResetsTimeoutTimeseriesGroupsParams,
   };
 
-  export { RobotsTXT as RobotsTXT };
+  export { RobotsTXT as RobotsTXT, BaseRobotsTXT as BaseRobotsTXT };
 
   export {
     LeakedCredentials as LeakedCredentials,
+    BaseLeakedCredentials as BaseLeakedCredentials,
     type LeakedCredentialSummaryV2Response as LeakedCredentialSummaryV2Response,
     type LeakedCredentialTimeseriesGroupsV2Response as LeakedCredentialTimeseriesGroupsV2Response,
     type LeakedCredentialSummaryV2Params as LeakedCredentialSummaryV2Params,

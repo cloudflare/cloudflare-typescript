@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class PDF extends APIResource {
+export class BasePDF extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'pdf'] = Object.freeze([
+    'browserRendering',
+    'pdf',
+  ] as const);
+
   /**
    * Fetches rendered PDF from provided URL or HTML. Check available options like
    * `gotoOptions` and `waitFor*` to control page load behaviour.
@@ -23,7 +28,7 @@ export class PDF extends APIResource {
    * ```
    */
   create(params: PDFCreateParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/browser-rendering/pdf`, {
       query: { cacheTTL },
       body,
@@ -33,6 +38,7 @@ export class PDF extends APIResource {
     });
   }
 }
+export class PDF extends BasePDF {}
 
 export type PDFCreateParams = PDFCreateParams.Variant0 | PDFCreateParams.Variant1;
 
@@ -41,7 +47,7 @@ export declare namespace PDFCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -410,7 +416,7 @@ export declare namespace PDFCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.

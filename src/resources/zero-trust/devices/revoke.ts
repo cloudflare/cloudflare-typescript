@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Revoke extends APIResource {
+export class BaseRevoke extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'revoke'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'revoke',
+  ] as const);
+
   /**
    * Revokes a list of devices. Not supported when
    * [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)
@@ -17,7 +23,7 @@ export class Revoke extends APIResource {
    * @deprecated
    */
   create(params: RevokeCreateParams, options?: RequestOptions): APIPromise<RevokeCreateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/revoke`, {
         body: body,
@@ -26,6 +32,7 @@ export class Revoke extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Revoke extends BaseRevoke {}
 
 export type RevokeCreateResponse = unknown | string;
 
@@ -33,7 +40,7 @@ export interface RevokeCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of Registration IDs to revoke.

@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class GatewayCA extends APIResource {
+export class BaseGatewayCA extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'gatewayCA'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'gatewayCA',
+  ] as const);
+
   /**
    * Adds a new SSH Certificate Authority (CA).
    *
@@ -18,8 +24,11 @@ export class GatewayCA extends APIResource {
    *   });
    * ```
    */
-  create(params: GatewayCACreateParams, options?: RequestOptions): APIPromise<GatewayCACreateResponse> {
-    const { account_id } = params;
+  create(
+    params: GatewayCACreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<GatewayCACreateResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/access/gateway_ca`, options) as APIPromise<{
         result: GatewayCACreateResponse;
@@ -41,10 +50,10 @@ export class GatewayCA extends APIResource {
    * ```
    */
   list(
-    params: GatewayCAListParams,
+    params: GatewayCAListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<GatewayCAListResponsesSinglePage, GatewayCAListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/access/gateway_ca`,
       SinglePage<GatewayCAListResponse>,
@@ -66,10 +75,10 @@ export class GatewayCA extends APIResource {
    */
   delete(
     certificateID: string,
-    params: GatewayCADeleteParams,
+    params: GatewayCADeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<GatewayCADeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/access/gateway_ca/${certificateID}`,
@@ -78,6 +87,7 @@ export class GatewayCA extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class GatewayCA extends BaseGatewayCA {}
 
 export type GatewayCAListResponsesSinglePage = SinglePage<GatewayCAListResponse>;
 
@@ -116,21 +126,21 @@ export interface GatewayCACreateParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface GatewayCAListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface GatewayCADeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace GatewayCA {

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Page extends APIResource {
+export class BasePage extends APIResource {
+  static override readonly _key: readonly ['waitingRooms', 'page'] = Object.freeze([
+    'waitingRooms',
+    'page',
+  ] as const);
+
   /**
    * Creates a waiting room page preview. Upload a custom waiting room page for
    * preview. You will receive a preview URL in the form
@@ -54,7 +59,7 @@ export class Page extends APIResource {
    * ```
    */
   preview(params: PagePreviewParams, options?: RequestOptions): APIPromise<PagePreviewResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/waiting_rooms/preview`, { body, ...options }) as APIPromise<{
         result: PagePreviewResponse;
@@ -62,6 +67,7 @@ export class Page extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Page extends BasePage {}
 
 export interface PagePreviewResponse {
   /**
@@ -74,7 +80,7 @@ export interface PagePreviewParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Only available for the Waiting Room Advanced subscription. This is a

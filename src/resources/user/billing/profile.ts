@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Profile extends APIResource {
+export class BaseProfile extends APIResource {
+  static override readonly _key: readonly ['user', 'billing', 'profile'] = Object.freeze([
+    'user',
+    'billing',
+    'profile',
+  ] as const);
+
   /**
    * Accesses your billing profile object.
    *
@@ -16,6 +22,7 @@ export class Profile extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Profile extends BaseProfile {}
 
 export interface ProfileGetResponse {
   /**

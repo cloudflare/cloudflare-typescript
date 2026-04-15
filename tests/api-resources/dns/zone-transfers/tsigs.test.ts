@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseTSIGs } from 'cloudflare/resources/dns/zone-transfers/tsigs';
+import { ZoneTransfers } from 'cloudflare/resources/dns/zone-transfers/zone-transfers';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tsigs', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTSIGs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ZoneTransfers],
+});
+
+const runTests = (client: PartialCloudflare<{ dns: { zoneTransfers: { tsigs: BaseTSIGs } } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.dns.zoneTransfers.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
@@ -119,4 +137,7 @@ describe('resource tsigs', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
-});
+};
+describe('resource tsigs', () => runTests(client));
+describe('resource tsigs (tree shakable, base)', () => runTests(partialClient));
+describe('resource tsigs (tree shakable, subresource)', () => runTests(parentPartialClient));

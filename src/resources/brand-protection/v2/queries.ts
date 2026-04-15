@@ -5,18 +5,28 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Queries extends APIResource {
+export class BaseQueries extends APIResource {
+  static override readonly _key: readonly ['brandProtection', 'v2', 'queries'] = Object.freeze([
+    'brandProtection',
+    'v2',
+    'queries',
+  ] as const);
+
   /**
    * Get all saved brand protection queries for an account
    */
-  get(params: QueryGetParams, options?: RequestOptions): APIPromise<QueryGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    params: QueryGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<QueryGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/v2/brand-protection/domain/queries`, {
       query,
       ...options,
     });
   }
 }
+export class Queries extends BaseQueries {}
 
 export type QueryGetResponse = Array<QueryGetResponse.QueryGetResponseItem>;
 
@@ -58,7 +68,7 @@ export interface QueryGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

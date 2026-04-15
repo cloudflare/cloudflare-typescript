@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Content, type ContentGetParams } from './content';
+export { Content, BaseContent, type ContentGetParams } from './content';
 export {
   Rules,
+  BaseRules,
   type RuleUpdateResponse,
   type RuleListResponse,
   type RuleDeleteResponse,
@@ -10,4 +11,4 @@ export {
   type RuleListParams,
   type RuleDeleteParams,
 } from './rules';
-export { Snippets } from './snippets';
+export { Snippets, BaseSnippets } from './snippets';

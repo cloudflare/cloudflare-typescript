@@ -2,7 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 
-export class IPLists extends APIResource {}
+export class BaseIPLists extends APIResource {
+  static override readonly _key: readonly ['intel', 'ipLists'] = Object.freeze(['intel', 'ipLists'] as const);
+}
+export class IPLists extends BaseIPLists {}
 
 export interface IPList {
   id?: number;

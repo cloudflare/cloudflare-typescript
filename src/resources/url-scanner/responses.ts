@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Responses extends APIResource {
+export class BaseResponses extends APIResource {
+  static override readonly _key: readonly ['urlScanner', 'responses'] = Object.freeze([
+    'urlScanner',
+    'responses',
+  ] as const);
+
   /**
    * Returns the raw response of the network request. Find the `response_id` in the
    * `data.requests.response.hash`.
@@ -19,14 +24,19 @@ export class Responses extends APIResource {
    * );
    * ```
    */
-  get(responseID: string, params: ResponseGetParams, options?: RequestOptions): APIPromise<string> {
-    const { account_id } = params;
+  get(
+    responseID: string,
+    params: ResponseGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/urlscanner/v2/responses/${responseID}`, {
       ...options,
       headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
     });
   }
 }
+export class Responses extends BaseResponses {}
 
 /**
  * Web resource or image.
@@ -37,7 +47,7 @@ export interface ResponseGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Responses {

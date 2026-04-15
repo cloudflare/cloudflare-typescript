@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Recipients extends APIResource {
+export class BaseRecipients extends APIResource {
+  static override readonly _key: readonly ['resourceSharing', 'recipients'] = Object.freeze([
+    'resourceSharing',
+    'recipients',
+  ] as const);
+
   /**
    * Adds a recipient to a resource share, granting them access to the shared
    * resources.
@@ -25,7 +30,7 @@ export class Recipients extends APIResource {
     params: RecipientCreateParams,
     options?: RequestOptions,
   ): APIPromise<RecipientCreateResponse> {
-    const { path_account_id, ...body } = params;
+    const { path_account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${path_account_id}/shares/${shareID}/recipients`, {
         body,
@@ -50,10 +55,10 @@ export class Recipients extends APIResource {
    */
   list(
     shareID: string,
-    params: RecipientListParams,
+    params: RecipientListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RecipientListResponsesV4PagePaginationArray, RecipientListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/shares/${shareID}/recipients`,
       V4PagePaginationArray<RecipientListResponse>,
@@ -82,7 +87,7 @@ export class Recipients extends APIResource {
     params: RecipientDeleteParams,
     options?: RequestOptions,
   ): APIPromise<RecipientDeleteResponse> {
-    const { account_id, share_id } = params;
+    const { account_id = this._client.accountID, share_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/shares/${share_id}/recipients/${recipientID}`,
@@ -111,7 +116,7 @@ export class Recipients extends APIResource {
     params: RecipientGetParams,
     options?: RequestOptions,
   ): APIPromise<RecipientGetResponse> {
-    const { account_id, share_id, ...query } = params;
+    const { account_id = this._client.accountID, share_id, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/shares/${share_id}/recipients/${recipientID}`, {
         query,
@@ -120,6 +125,7 @@ export class Recipients extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Recipients extends BaseRecipients {}
 
 export type RecipientListResponsesV4PagePaginationArray = V4PagePaginationArray<RecipientListResponse>;
 
@@ -339,7 +345,7 @@ export interface RecipientCreateParams {
   /**
    * Path param: Account identifier.
    */
-  path_account_id: string;
+  path_account_id?: string;
 
   /**
    * Body param: Account identifier.
@@ -356,7 +362,7 @@ export interface RecipientListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Include resources in the response.
@@ -368,7 +374,7 @@ export interface RecipientDeleteParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Share identifier tag.
@@ -380,7 +386,7 @@ export interface RecipientGetParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Share identifier tag.

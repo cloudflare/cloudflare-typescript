@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ASN extends APIResource {
+export class BaseASN extends APIResource {
+  static override readonly _key: readonly ['botnetFeed', 'asn'] = Object.freeze([
+    'botnetFeed',
+    'asn',
+  ] as const);
+
   /**
    * Gets all the data the botnet tracking database has for a given ASN registered to
    * user account for given date. If no date is given, it will return results for the
@@ -13,10 +18,10 @@ export class ASN extends APIResource {
    */
   dayReport(
     asnID: number,
-    params: ASNDayReportParams,
+    params: ASNDayReportParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ASNDayReportResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/botnet_feed/asn/${asnID}/day_report`, {
         query,
@@ -31,10 +36,10 @@ export class ASN extends APIResource {
    */
   fullReport(
     asnID: number,
-    params: ASNFullReportParams,
+    params: ASNFullReportParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ASNFullReportResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/botnet_feed/asn/${asnID}/full_report`,
@@ -43,6 +48,7 @@ export class ASN extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ASN extends BaseASN {}
 
 export interface ASNDayReportResponse {
   cidr?: string;
@@ -64,7 +70,7 @@ export interface ASNDayReportParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -76,7 +82,7 @@ export interface ASNFullReportParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ASN {

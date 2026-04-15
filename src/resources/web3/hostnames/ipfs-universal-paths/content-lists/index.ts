@@ -2,12 +2,14 @@
 
 export {
   ContentLists,
+  BaseContentLists,
   type ContentList,
   type ContentListUpdateParams,
   type ContentListGetParams,
 } from './content-lists';
 export {
   Entries,
+  BaseEntries,
   type EntryCreateResponse,
   type EntryUpdateResponse,
   type EntryListResponse,

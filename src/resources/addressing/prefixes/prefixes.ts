@@ -8,6 +8,7 @@ import {
   AdvertisementStatusEditResponse,
   AdvertisementStatusGetParams,
   AdvertisementStatusGetResponse,
+  BaseAdvertisementStatus,
 } from './advertisement-status';
 import * as BGPPrefixesAPI from './bgp-prefixes';
 import {
@@ -18,9 +19,11 @@ import {
   BGPPrefixListParams,
   BGPPrefixes,
   BGPPrefixesSinglePage,
+  BaseBGPPrefixes,
 } from './bgp-prefixes';
 import * as DelegationsAPI from './delegations';
 import {
+  BaseDelegations,
   DelegationCreateParams,
   DelegationDeleteParams,
   DelegationDeleteResponse,
@@ -30,6 +33,7 @@ import {
 } from './delegations';
 import * as ServiceBindingsAPI from './service-bindings';
 import {
+  BaseServiceBindings,
   ServiceBinding,
   ServiceBindingCreateParams,
   ServiceBindingDeleteParams,
@@ -44,12 +48,11 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Prefixes extends APIResource {
-  serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
-  bgpPrefixes: BGPPrefixesAPI.BGPPrefixes = new BGPPrefixesAPI.BGPPrefixes(this._client);
-  advertisementStatus: AdvertisementStatusAPI.AdvertisementStatus =
-    new AdvertisementStatusAPI.AdvertisementStatus(this._client);
-  delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
+export class BasePrefixes extends APIResource {
+  static override readonly _key: readonly ['addressing', 'prefixes'] = Object.freeze([
+    'addressing',
+    'prefixes',
+  ] as const);
 
   /**
    * Add a new prefix under the account.
@@ -64,7 +67,7 @@ export class Prefixes extends APIResource {
    * ```
    */
   create(params: PrefixCreateParams, options?: RequestOptions): APIPromise<Prefix> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/addressing/prefixes`, {
         body,
@@ -86,8 +89,11 @@ export class Prefixes extends APIResource {
    * }
    * ```
    */
-  list(params: PrefixListParams, options?: RequestOptions): PagePromise<PrefixesSinglePage, Prefix> {
-    const { account_id } = params;
+  list(
+    params: PrefixListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PrefixesSinglePage, Prefix> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/prefixes`,
       SinglePage<Prefix>,
@@ -108,10 +114,10 @@ export class Prefixes extends APIResource {
    */
   delete(
     prefixID: string,
-    params: PrefixDeleteParams,
+    params: PrefixDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PrefixDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/addressing/prefixes/${prefixID}`, options);
   }
 
@@ -130,7 +136,7 @@ export class Prefixes extends APIResource {
    * ```
    */
   edit(prefixID: string, params: PrefixEditParams, options?: RequestOptions): APIPromise<Prefix> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/addressing/prefixes/${prefixID}`, {
         body,
@@ -150,14 +156,25 @@ export class Prefixes extends APIResource {
    * );
    * ```
    */
-  get(prefixID: string, params: PrefixGetParams, options?: RequestOptions): APIPromise<Prefix> {
-    const { account_id } = params;
+  get(
+    prefixID: string,
+    params: PrefixGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Prefix> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/addressing/prefixes/${prefixID}`, options) as APIPromise<{
         result: Prefix;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Prefixes extends BasePrefixes {
+  serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
+  bgpPrefixes: BGPPrefixesAPI.BGPPrefixes = new BGPPrefixesAPI.BGPPrefixes(this._client);
+  advertisementStatus: AdvertisementStatusAPI.AdvertisementStatus =
+    new AdvertisementStatusAPI.AdvertisementStatus(this._client);
+  delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 }
 
 export type PrefixesSinglePage = SinglePage<Prefix>;
@@ -310,7 +327,7 @@ export interface PrefixCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Autonomous System Number (ASN) the prefix will be advertised under.
@@ -343,21 +360,21 @@ export interface PrefixListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PrefixDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PrefixEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Description of the prefix.
@@ -369,12 +386,16 @@ export interface PrefixGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Prefixes.ServiceBindings = ServiceBindings;
+Prefixes.BaseServiceBindings = BaseServiceBindings;
 Prefixes.BGPPrefixes = BGPPrefixes;
+Prefixes.BaseBGPPrefixes = BaseBGPPrefixes;
 Prefixes.AdvertisementStatus = AdvertisementStatus;
+Prefixes.BaseAdvertisementStatus = BaseAdvertisementStatus;
+Prefixes.BaseDelegations = BaseDelegations;
 
 export declare namespace Prefixes {
   export {
@@ -390,6 +411,7 @@ export declare namespace Prefixes {
 
   export {
     ServiceBindings as ServiceBindings,
+    BaseServiceBindings as BaseServiceBindings,
     type ServiceBinding as ServiceBinding,
     type ServiceBindingDeleteResponse as ServiceBindingDeleteResponse,
     type ServiceBindingsSinglePage as ServiceBindingsSinglePage,
@@ -401,6 +423,7 @@ export declare namespace Prefixes {
 
   export {
     BGPPrefixes as BGPPrefixes,
+    BaseBGPPrefixes as BaseBGPPrefixes,
     type BGPPrefix as BGPPrefix,
     type BGPPrefixesSinglePage as BGPPrefixesSinglePage,
     type BGPPrefixCreateParams as BGPPrefixCreateParams,
@@ -411,6 +434,7 @@ export declare namespace Prefixes {
 
   export {
     AdvertisementStatus as AdvertisementStatus,
+    BaseAdvertisementStatus as BaseAdvertisementStatus,
     type AdvertisementStatusEditResponse as AdvertisementStatusEditResponse,
     type AdvertisementStatusGetResponse as AdvertisementStatusGetResponse,
     type AdvertisementStatusEditParams as AdvertisementStatusEditParams,
@@ -419,6 +443,7 @@ export declare namespace Prefixes {
 
   export {
     type Delegations as Delegations,
+    BaseDelegations as BaseDelegations,
     type DelegationDeleteResponse as DelegationDeleteResponse,
     type DelegationsSinglePage as DelegationsSinglePage,
     type DelegationCreateParams as DelegationCreateParams,

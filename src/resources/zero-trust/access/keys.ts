@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Keys extends APIResource {
+export class BaseKeys extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'keys'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'keys',
+  ] as const);
+
   /**
    * Updates the Access key rotation settings for an account.
    *
@@ -18,7 +24,7 @@ export class Keys extends APIResource {
    * ```
    */
   update(params: KeyUpdateParams, options?: RequestOptions): APIPromise<KeyUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/access/keys`, { body, ...options }) as APIPromise<{
         result: KeyUpdateResponse;
@@ -36,8 +42,8 @@ export class Keys extends APIResource {
    * });
    * ```
    */
-  get(params: KeyGetParams, options?: RequestOptions): APIPromise<KeyGetResponse> {
-    const { account_id } = params;
+  get(params: KeyGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<KeyGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/access/keys`, options) as APIPromise<{
         result: KeyGetResponse;
@@ -55,8 +61,11 @@ export class Keys extends APIResource {
    * });
    * ```
    */
-  rotate(params: KeyRotateParams, options?: RequestOptions): APIPromise<KeyRotateResponse> {
-    const { account_id } = params;
+  rotate(
+    params: KeyRotateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<KeyRotateResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/access/keys/rotate`, options) as APIPromise<{
         result: KeyRotateResponse;
@@ -64,6 +73,7 @@ export class Keys extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Keys extends BaseKeys {}
 
 export interface KeyUpdateResponse {
   /**
@@ -120,7 +130,7 @@ export interface KeyUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The number of days between key rotations.
@@ -132,14 +142,14 @@ export interface KeyGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyRotateParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Keys {

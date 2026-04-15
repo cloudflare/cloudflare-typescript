@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as D1API from '../d1';
 import * as TimeTravelAPI from './time-travel';
 import {
+  BaseTimeTravel,
   TimeTravel,
   TimeTravelGetBookmarkParams,
   TimeTravelGetBookmarkResponse,
@@ -20,8 +21,8 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Database extends APIResource {
-  timeTravel: TimeTravelAPI.TimeTravel = new TimeTravelAPI.TimeTravel(this._client);
+export class BaseDatabase extends APIResource {
+  static override readonly _key: readonly ['d1', 'database'] = Object.freeze(['d1', 'database'] as const);
 
   /**
    * Returns the created D1 database.
@@ -35,7 +36,7 @@ export class Database extends APIResource {
    * ```
    */
   create(params: DatabaseCreateParams, options?: RequestOptions): APIPromise<D1API.D1> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/d1/database`, { body, ...options }) as APIPromise<{
         result: D1API.D1;
@@ -58,7 +59,7 @@ export class Database extends APIResource {
    * ```
    */
   update(databaseID: string, params: DatabaseUpdateParams, options?: RequestOptions): APIPromise<D1API.D1> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/d1/database/${databaseID}`, {
         body,
@@ -81,10 +82,10 @@ export class Database extends APIResource {
    * ```
    */
   list(
-    params: DatabaseListParams,
+    params: DatabaseListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/d1/database`,
       V4PagePaginationArray<DatabaseListResponse>,
@@ -105,10 +106,10 @@ export class Database extends APIResource {
    */
   delete(
     databaseID: string,
-    params: DatabaseDeleteParams,
+    params: DatabaseDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DatabaseDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/d1/database/${databaseID}`, options) as APIPromise<{
         result: DatabaseDeleteResponse | null;
@@ -128,7 +129,7 @@ export class Database extends APIResource {
    * ```
    */
   edit(databaseID: string, params: DatabaseEditParams, options?: RequestOptions): APIPromise<D1API.D1> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/d1/database/${databaseID}`, {
         body,
@@ -159,7 +160,7 @@ export class Database extends APIResource {
     params: DatabaseExportParams,
     options?: RequestOptions,
   ): APIPromise<DatabaseExportResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/d1/database/${databaseID}/export`, {
         body,
@@ -179,8 +180,12 @@ export class Database extends APIResource {
    * );
    * ```
    */
-  get(databaseID: string, params: DatabaseGetParams, options?: RequestOptions): APIPromise<D1API.D1> {
-    const { account_id } = params;
+  get(
+    databaseID: string,
+    params: DatabaseGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<D1API.D1> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/d1/database/${databaseID}`, options) as APIPromise<{
         result: D1API.D1;
@@ -210,7 +215,7 @@ export class Database extends APIResource {
     params: DatabaseImportParams,
     options?: RequestOptions,
   ): APIPromise<DatabaseImportResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/d1/database/${databaseID}/import`, {
         body,
@@ -241,7 +246,7 @@ export class Database extends APIResource {
     params: DatabaseQueryParams,
     options?: RequestOptions,
   ): PagePromise<QueryResultsSinglePage, QueryResult> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/d1/database/${databaseID}/query`,
       SinglePage<QueryResult>,
@@ -272,13 +277,16 @@ export class Database extends APIResource {
     params: DatabaseRawParams,
     options?: RequestOptions,
   ): PagePromise<DatabaseRawResponsesSinglePage, DatabaseRawResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/d1/database/${databaseID}/raw`,
       SinglePage<DatabaseRawResponse>,
       { body, method: 'post', ...options },
     );
   }
+}
+export class Database extends BaseDatabase {
+  timeTravel: TimeTravelAPI.TimeTravel = new TimeTravelAPI.TimeTravel(this._client);
 }
 
 export type DatabaseListResponsesV4PagePaginationArray = V4PagePaginationArray<DatabaseListResponse>;
@@ -677,7 +685,7 @@ export interface DatabaseCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: D1 database name.
@@ -702,7 +710,7 @@ export interface DatabaseUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Configuration for D1 read replication.
@@ -728,7 +736,7 @@ export interface DatabaseListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: a database name to search for.
@@ -740,14 +748,14 @@ export interface DatabaseDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DatabaseEditParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Configuration for D1 read replication.
@@ -773,7 +781,7 @@ export interface DatabaseExportParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specifies that you will poll this endpoint until the export
@@ -817,7 +825,7 @@ export interface DatabaseGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export type DatabaseImportParams =
@@ -830,7 +838,7 @@ export declare namespace DatabaseImportParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Indicates you have a new SQL file to upload.
@@ -849,7 +857,7 @@ export declare namespace DatabaseImportParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Indicates you've finished uploading to tell the D1 to start
@@ -873,7 +881,7 @@ export declare namespace DatabaseImportParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Indicates you've finished uploading to tell the D1 to start
@@ -895,7 +903,7 @@ export declare namespace DatabaseQueryParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
@@ -913,7 +921,7 @@ export declare namespace DatabaseQueryParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -944,7 +952,7 @@ export declare namespace DatabaseRawParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
@@ -962,7 +970,7 @@ export declare namespace DatabaseRawParams {
     /**
      * Path param: Account identifier tag.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -987,6 +995,7 @@ export declare namespace DatabaseRawParams {
 }
 
 Database.TimeTravel = TimeTravel;
+Database.BaseTimeTravel = BaseTimeTravel;
 
 export declare namespace Database {
   export {
@@ -1013,6 +1022,7 @@ export declare namespace Database {
 
   export {
     TimeTravel as TimeTravel,
+    BaseTimeTravel as BaseTimeTravel,
     type TimeTravelGetBookmarkResponse as TimeTravelGetBookmarkResponse,
     type TimeTravelRestoreResponse as TimeTravelRestoreResponse,
     type TimeTravelGetBookmarkParams as TimeTravelGetBookmarkParams,

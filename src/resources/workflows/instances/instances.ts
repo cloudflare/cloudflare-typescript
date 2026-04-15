@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as EventsAPI from './events';
-import { EventCreateParams, EventCreateResponse, Events } from './events';
+import { BaseEvents, EventCreateParams, EventCreateResponse, Events } from './events';
 import * as StatusAPI from './status';
-import { Status, StatusEditParams, StatusEditResponse } from './status';
+import { BaseStatus, Status, StatusEditParams, StatusEditResponse } from './status';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -15,19 +15,21 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Instances extends APIResource {
-  status: StatusAPI.Status = new StatusAPI.Status(this._client);
-  events: EventsAPI.Events = new EventsAPI.Events(this._client);
+export class BaseInstances extends APIResource {
+  static override readonly _key: readonly ['workflows', 'instances'] = Object.freeze([
+    'workflows',
+    'instances',
+  ] as const);
 
   /**
    * Creates a new instance of a workflow, starting its execution.
    */
   create(
     workflowName: string,
-    params: InstanceCreateParams,
+    params: InstanceCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InstanceCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/workflows/${workflowName}/instances`, {
         body,
@@ -41,10 +43,10 @@ export class Instances extends APIResource {
    */
   list(
     workflowName: string,
-    params: InstanceListParams,
+    params: InstanceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workflows/${workflowName}/instances`,
       V4PagePaginationArray<InstanceListResponse>,
@@ -57,10 +59,10 @@ export class Instances extends APIResource {
    */
   bulk(
     workflowName: string,
-    params: InstanceBulkParams,
+    params: InstanceBulkParams | null | undefined = undefined,
     options?: RequestOptions,
   ): PagePromise<InstanceBulkResponsesSinglePage, InstanceBulkResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workflows/${workflowName}/instances/batch`,
       SinglePage<InstanceBulkResponse>,
@@ -76,7 +78,7 @@ export class Instances extends APIResource {
     params: InstanceGetParams,
     options?: RequestOptions,
   ): APIPromise<InstanceGetResponse> {
-    const { account_id, workflow_name, ...query } = params;
+    const { account_id = this._client.accountID, workflow_name, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/workflows/${workflow_name}/instances/${instanceID}`, {
         query,
@@ -84,6 +86,10 @@ export class Instances extends APIResource {
       }) as APIPromise<{ result: InstanceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Instances extends BaseInstances {
+  status: StatusAPI.Status = new StatusAPI.Status(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 }
 
 export type InstanceListResponsesV4PagePaginationArray = V4PagePaginationArray<InstanceListResponse>;
@@ -325,7 +331,7 @@ export interface InstanceCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -361,7 +367,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Opaque token for cursor-based pagination. Mutually exclusive with
@@ -402,7 +408,7 @@ export interface InstanceBulkParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -438,7 +444,7 @@ export interface InstanceGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param
@@ -459,7 +465,9 @@ export interface InstanceGetParams {
 }
 
 Instances.Status = Status;
+Instances.BaseStatus = BaseStatus;
 Instances.Events = Events;
+Instances.BaseEvents = BaseEvents;
 
 export declare namespace Instances {
   export {
@@ -477,12 +485,14 @@ export declare namespace Instances {
 
   export {
     Status as Status,
+    BaseStatus as BaseStatus,
     type StatusEditResponse as StatusEditResponse,
     type StatusEditParams as StatusEditParams,
   };
 
   export {
     Events as Events,
+    BaseEvents as BaseEvents,
     type EventCreateResponse as EventCreateResponse,
     type EventCreateParams as EventCreateParams,
   };

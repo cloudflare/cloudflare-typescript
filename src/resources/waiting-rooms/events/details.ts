@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Details extends APIResource {
+export class BaseDetails extends APIResource {
+  static override readonly _key: readonly ['waitingRooms', 'events', 'details'] = Object.freeze([
+    'waitingRooms',
+    'events',
+    'details',
+  ] as const);
+
   /**
    * Previews an event's configuration as if it was active. Inherited fields from the
    * waiting room will be displayed with their current values.
@@ -22,7 +28,7 @@ export class Details extends APIResource {
    * ```
    */
   get(eventID: string, params: DetailGetParams, options?: RequestOptions): APIPromise<DetailGetResponse> {
-    const { zone_id, waiting_room_id } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/events/${eventID}/details`,
@@ -31,6 +37,7 @@ export class Details extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Details extends BaseDetails {}
 
 export interface EventQuery {
   /**
@@ -200,7 +207,7 @@ export interface DetailGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   waiting_room_id: string;
 }

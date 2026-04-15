@@ -2,16 +2,18 @@
 
 export {
   Custom,
+  BaseCustom,
   type CustomCreateParams,
   type CustomListParams,
   type CustomDeleteParams,
   type CustomEditParams,
   type CustomGetParams,
 } from './custom';
-export { Excludes, type ExcludeUpdateParams, type ExcludeGetParams } from './excludes';
+export { Excludes, BaseExcludes, type ExcludeUpdateParams, type ExcludeGetParams } from './excludes';
 export {
   FallbackDomains,
+  BaseFallbackDomains,
   type FallbackDomainUpdateParams,
   type FallbackDomainGetParams,
 } from './fallback-domains';
-export { Includes, type IncludeUpdateParams, type IncludeGetParams } from './includes';
+export { Includes, BaseIncludes, type IncludeUpdateParams, type IncludeGetParams } from './includes';

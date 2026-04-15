@@ -6,7 +6,12 @@ import { CloudflareError } from '../../core/error';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Ownership extends APIResource {
+export class BaseOwnership extends APIResource {
+  static override readonly _key: readonly ['logpush', 'ownership'] = Object.freeze([
+    'logpush',
+    'ownership',
+  ] as const);
+
   /**
    * Gets a new ownership challenge sent to your destination.
    *
@@ -22,7 +27,11 @@ export class Ownership extends APIResource {
     params: OwnershipCreateParams,
     options?: RequestOptions,
   ): APIPromise<OwnershipCreateResponse | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -64,7 +73,11 @@ export class Ownership extends APIResource {
     params: OwnershipValidateParams,
     options?: RequestOptions,
   ): APIPromise<OwnershipValidation | null> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -89,6 +102,7 @@ export class Ownership extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Ownership extends BaseOwnership {}
 
 export interface OwnershipValidation {
   valid?: boolean;

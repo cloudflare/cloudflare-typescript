@@ -8,7 +8,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Subscriptions extends APIResource {
+export class BaseSubscriptions extends APIResource {
+  static override readonly _key: readonly ['user', 'subscriptions'] = Object.freeze([
+    'user',
+    'subscriptions',
+  ] as const);
+
   /**
    * Updates a user's subscriptions.
    *
@@ -60,6 +65,7 @@ export class Subscriptions extends APIResource {
     return this._client.getAPIList('/user/subscriptions', SinglePage<Shared.Subscription>, options);
   }
 }
+export class Subscriptions extends BaseSubscriptions {}
 
 export type SubscriptionUpdateResponse = unknown | string | null;
 

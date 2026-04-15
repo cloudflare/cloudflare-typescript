@@ -7,7 +7,10 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Certificates extends APIResource {
+export class BaseCertificates extends APIResource {
+  static override readonly _key: readonly ['customHostnames', 'certificatePack', 'certificates'] =
+    Object.freeze(['customHostnames', 'certificatePack', 'certificates'] as const);
+
   /**
    * Replace a single custom certificate within a certificate pack that contains two
    * bundled certificates. The replacement must adhere to the following constraints.
@@ -38,7 +41,7 @@ export class Certificates extends APIResource {
     params: CertificateUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CertificateUpdateResponse> {
-    const { zone_id, custom_hostname_id, certificate_pack_id, ...body } = params;
+    const { zone_id = this._client.zoneID, custom_hostname_id, certificate_pack_id, ...body } = params;
     return (
       this._client.put(
         path`/zones/${zone_id}/custom_hostnames/${custom_hostname_id}/certificate_pack/${certificate_pack_id}/certificates/${certificateID}`,
@@ -73,13 +76,14 @@ export class Certificates extends APIResource {
     params: CertificateDeleteParams,
     options?: RequestOptions,
   ): APIPromise<CertificateDeleteResponse> {
-    const { zone_id, custom_hostname_id, certificate_pack_id } = params;
+    const { zone_id = this._client.zoneID, custom_hostname_id, certificate_pack_id } = params;
     return this._client.delete(
       path`/zones/${zone_id}/custom_hostnames/${custom_hostname_id}/certificate_pack/${certificate_pack_id}/certificates/${certificateID}`,
       options,
     );
   }
 }
+export class Certificates extends BaseCertificates {}
 
 export interface CertificateUpdateResponse {
   /**
@@ -459,7 +463,7 @@ export interface CertificateUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param: Identifier.
@@ -486,7 +490,7 @@ export interface CertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Identifier.

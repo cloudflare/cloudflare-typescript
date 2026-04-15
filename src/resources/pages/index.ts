@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Pages } from './pages';
+export { Pages, BasePages } from './pages';
 export {
   Projects,
+  BaseProjects,
   type Deployment,
   type Project,
   type Stage,

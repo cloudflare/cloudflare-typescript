@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class BrowserFamily extends APIResource {
+export class BaseBrowserFamily extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'locations', 'browserFamily'] = Object.freeze([
+    'radar',
+    'http',
+    'locations',
+    'browserFamily',
+  ] as const);
+
   /**
    * Retrieves the top locations, by HTTP requests, of the requested browser family.
    *
@@ -30,6 +37,7 @@ export class BrowserFamily extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class BrowserFamily extends BaseBrowserFamily {}
 
 export interface BrowserFamilyGetResponse {
   /**

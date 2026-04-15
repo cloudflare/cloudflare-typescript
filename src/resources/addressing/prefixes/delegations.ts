@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Delegations extends APIResource {
+export class BaseDelegations extends APIResource {
+  static override readonly _key: readonly ['addressing', 'prefixes', 'delegations'] = Object.freeze([
+    'addressing',
+    'prefixes',
+    'delegations',
+  ] as const);
+
   /**
    * Create a new account delegation for a given IP prefix.
    *
@@ -29,7 +35,7 @@ export class Delegations extends APIResource {
     params: DelegationCreateParams,
     options?: RequestOptions,
   ): APIPromise<Delegations> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/addressing/prefixes/${prefixID}/delegations`, {
         body,
@@ -54,10 +60,10 @@ export class Delegations extends APIResource {
    */
   list(
     prefixID: string,
-    params: DelegationListParams,
+    params: DelegationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DelegationsSinglePage, Delegations> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/addressing/prefixes/${prefixID}/delegations`,
       SinglePage<Delegations>,
@@ -85,7 +91,7 @@ export class Delegations extends APIResource {
     params: DelegationDeleteParams,
     options?: RequestOptions,
   ): APIPromise<DelegationDeleteResponse> {
-    const { account_id, prefix_id } = params;
+    const { account_id = this._client.accountID, prefix_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/addressing/prefixes/${prefix_id}/delegations/${delegationID}`,
@@ -94,6 +100,7 @@ export class Delegations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Delegations extends BaseDelegations {}
 
 export type DelegationsSinglePage = SinglePage<Delegations>;
 
@@ -134,7 +141,7 @@ export interface DelegationCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -152,14 +159,14 @@ export interface DelegationListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DelegationDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier of an IP Prefix.

@@ -2,6 +2,7 @@
 
 export {
   CNIs,
+  BaseCNIs,
   type CNICreateResponse,
   type CNIUpdateResponse,
   type CNIListResponse,
@@ -14,6 +15,7 @@ export {
 } from './cnis';
 export {
   Interconnects,
+  BaseInterconnects,
   type InterconnectCreateResponse,
   type InterconnectListResponse,
   type InterconnectGetResponse,
@@ -25,9 +27,10 @@ export {
   type InterconnectLOAParams,
   type InterconnectStatusParams,
 } from './interconnects';
-export { NetworkInterconnects } from './network-interconnects';
+export { NetworkInterconnects, BaseNetworkInterconnects } from './network-interconnects';
 export {
   Settings,
+  BaseSettings,
   type SettingUpdateResponse,
   type SettingGetResponse,
   type SettingUpdateParams,
@@ -35,6 +38,7 @@ export {
 } from './settings';
 export {
   Slots,
+  BaseSlots,
   type SlotListResponse,
   type SlotGetResponse,
   type SlotListParams,

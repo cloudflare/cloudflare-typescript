@@ -7,16 +7,18 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class AuditLogs extends APIResource {
+export class BaseAuditLogs extends APIResource {
+  static override readonly _key: readonly ['auditLogs'] = Object.freeze(['auditLogs'] as const);
+
   /**
    * Gets a list of audit logs for an account. Can be filtered by who made the
    * change, on which zone, and the timeframe of the change.
    */
   list(
-    params: AuditLogListParams,
+    params: AuditLogListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/audit_logs`,
       V4PagePaginationArray<Shared.AuditLog>,
@@ -24,12 +26,13 @@ export class AuditLogs extends APIResource {
     );
   }
 }
+export class AuditLogs extends BaseAuditLogs {}
 
 export interface AuditLogListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Finds a specific log by its ID.

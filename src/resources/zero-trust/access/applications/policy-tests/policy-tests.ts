@@ -5,13 +5,20 @@ import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
 import * as ApplicationsPoliciesAPI from '../policies';
 import * as UsersAPI from './users';
-import { UserListParams, UserListResponse, UserListResponsesV4PagePaginationArray, Users } from './users';
+import {
+  BaseUsers,
+  UserListParams,
+  UserListResponse,
+  UserListResponsesV4PagePaginationArray,
+  Users,
+} from './users';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class PolicyTests extends APIResource {
-  users: UsersAPI.Users = new UsersAPI.Users(this._client);
+export class BasePolicyTests extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'applications', 'policyTests'] =
+    Object.freeze(['zeroTrust', 'access', 'applications', 'policyTests'] as const);
 
   /**
    * Starts an Access policy test.
@@ -24,8 +31,11 @@ export class PolicyTests extends APIResource {
    *   );
    * ```
    */
-  create(params: PolicyTestCreateParams, options?: RequestOptions): APIPromise<PolicyTestCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: PolicyTestCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PolicyTestCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/access/policy-tests`, {
         body,
@@ -48,10 +58,10 @@ export class PolicyTests extends APIResource {
    */
   get(
     policyTestID: string,
-    params: PolicyTestGetParams,
+    params: PolicyTestGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PolicyTestGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/access/policy-tests/${policyTestID}`,
@@ -59,6 +69,9 @@ export class PolicyTests extends APIResource {
       ) as APIPromise<{ result: PolicyTestGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class PolicyTests extends BasePolicyTests {
+  users: UsersAPI.Users = new UsersAPI.Users(this._client);
 }
 
 export interface PolicyTestCreateResponse {
@@ -129,7 +142,7 @@ export interface PolicyTestCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -272,10 +285,11 @@ export interface PolicyTestGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 PolicyTests.Users = Users;
+PolicyTests.BaseUsers = BaseUsers;
 
 export declare namespace PolicyTests {
   export {
@@ -287,6 +301,7 @@ export declare namespace PolicyTests {
 
   export {
     Users as Users,
+    BaseUsers as BaseUsers,
     type UserListResponse as UserListResponse,
     type UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
     type UserListParams as UserListParams,

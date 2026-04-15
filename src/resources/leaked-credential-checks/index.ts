@@ -2,6 +2,7 @@
 
 export {
   Detections,
+  BaseDetections,
   type DetectionCreateResponse,
   type DetectionUpdateResponse,
   type DetectionListResponse,
@@ -14,4 +15,4 @@ export {
   type DetectionGetParams,
   type DetectionListResponsesSinglePage,
 } from './detections';
-export { LeakedCredentialChecks } from './leaked-credential-checks';
+export { LeakedCredentialChecks, BaseLeakedCredentialChecks } from './leaked-credential-checks';

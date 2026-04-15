@@ -5,7 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['rum', 'rules'] = Object.freeze(['rum', 'rules'] as const);
+
   /**
    * Creates a new rule in a Web Analytics ruleset.
    *
@@ -18,7 +20,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(rulesetID: string, params: RuleCreateParams, options?: RequestOptions): APIPromise<RUMRule> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/rum/v2/${rulesetID}/rule`, {
         body,
@@ -42,7 +44,7 @@ export class Rules extends APIResource {
    * ```
    */
   update(ruleID: string, params: RuleUpdateParams, options?: RequestOptions): APIPromise<RUMRule> {
-    const { account_id, ruleset_id, ...body } = params;
+    const { account_id = this._client.accountID, ruleset_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/rum/v2/${ruleset_id}/rule/${ruleID}`, {
         body,
@@ -62,8 +64,12 @@ export class Rules extends APIResource {
    * );
    * ```
    */
-  list(rulesetID: string, params: RuleListParams, options?: RequestOptions): APIPromise<RuleListResponse> {
-    const { account_id } = params;
+  list(
+    rulesetID: string,
+    params: RuleListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RuleListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/rum/v2/${rulesetID}/rules`, options) as APIPromise<{
         result: RuleListResponse;
@@ -86,7 +92,7 @@ export class Rules extends APIResource {
    * ```
    */
   delete(ruleID: string, params: RuleDeleteParams, options?: RequestOptions): APIPromise<RuleDeleteResponse> {
-    const { account_id, ruleset_id } = params;
+    const { account_id = this._client.accountID, ruleset_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/rum/v2/${ruleset_id}/rule/${ruleID}`,
@@ -111,7 +117,7 @@ export class Rules extends APIResource {
     params: RuleBulkCreateParams,
     options?: RequestOptions,
   ): APIPromise<RuleBulkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/rum/v2/${rulesetID}/rules`, {
         body,
@@ -120,6 +126,7 @@ export class Rules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Rules extends BaseRules {}
 
 export interface RUMRule {
   /**
@@ -223,7 +230,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -250,7 +257,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The Web Analytics ruleset identifier.
@@ -282,14 +289,14 @@ export interface RuleListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The Web Analytics ruleset identifier.
@@ -301,7 +308,7 @@ export interface RuleBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of rule identifiers to delete.

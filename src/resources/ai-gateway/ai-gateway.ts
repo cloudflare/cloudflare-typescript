@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as DatasetsAPI from './datasets';
 import {
+  BaseDatasets,
   DatasetCreateParams,
   DatasetCreateResponse,
   DatasetDeleteParams,
@@ -18,6 +19,7 @@ import {
 } from './datasets';
 import * as DynamicRoutingAPI from './dynamic-routing';
 import {
+  BaseDynamicRouting,
   DynamicRouting,
   DynamicRoutingCreateDeploymentParams,
   DynamicRoutingCreateDeploymentResponse,
@@ -42,6 +44,7 @@ import {
 } from './dynamic-routing';
 import * as EvaluationTypesAPI from './evaluation-types';
 import {
+  BaseEvaluationTypes,
   EvaluationTypeListParams,
   EvaluationTypeListResponse,
   EvaluationTypeListResponsesV4PagePaginationArray,
@@ -49,6 +52,7 @@ import {
 } from './evaluation-types';
 import * as EvaluationsAPI from './evaluations';
 import {
+  BaseEvaluations,
   EvaluationCreateParams,
   EvaluationCreateResponse,
   EvaluationDeleteParams,
@@ -62,6 +66,7 @@ import {
 } from './evaluations';
 import * as LogsAPI from './logs';
 import {
+  BaseLogs,
   LogDeleteParams,
   LogDeleteResponse,
   LogEditParams,
@@ -79,6 +84,7 @@ import {
 } from './logs';
 import * as ProviderConfigsAPI from './provider-configs';
 import {
+  BaseProviderConfigs,
   ProviderConfigCreateParams,
   ProviderConfigCreateResponse,
   ProviderConfigListParams,
@@ -87,20 +93,14 @@ import {
   ProviderConfigs,
 } from './provider-configs';
 import * as URLsAPI from './urls';
-import { URLGetParams, URLGetResponse, URLs } from './urls';
+import { BaseURLs, URLGetParams, URLGetResponse, URLs } from './urls';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AIGateway extends APIResource {
-  evaluationTypes: EvaluationTypesAPI.EvaluationTypes = new EvaluationTypesAPI.EvaluationTypes(this._client);
-  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
-  datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
-  evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
-  dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
-  providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
-  urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
+export class BaseAIGateway extends APIResource {
+  static override readonly _key: readonly ['aiGateway'] = Object.freeze(['aiGateway'] as const);
 
   /**
    * Creates a new AI Gateway.
@@ -119,7 +119,7 @@ export class AIGateway extends APIResource {
    * ```
    */
   create(params: AIGatewayCreateParams, options?: RequestOptions): APIPromise<AIGatewayCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/ai-gateway/gateways`, {
         body,
@@ -151,7 +151,7 @@ export class AIGateway extends APIResource {
     params: AIGatewayUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AIGatewayUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/ai-gateway/gateways/${id}`, {
         body,
@@ -174,10 +174,10 @@ export class AIGateway extends APIResource {
    * ```
    */
   list(
-    params: AIGatewayListParams,
+    params: AIGatewayListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-gateway/gateways`,
       V4PagePaginationArray<AIGatewayListResponse>,
@@ -198,10 +198,10 @@ export class AIGateway extends APIResource {
    */
   delete(
     id: string,
-    params: AIGatewayDeleteParams,
+    params: AIGatewayDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AIGatewayDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as APIPromise<{
         result: AIGatewayDeleteResponse;
@@ -219,14 +219,27 @@ export class AIGateway extends APIResource {
    * });
    * ```
    */
-  get(id: string, params: AIGatewayGetParams, options?: RequestOptions): APIPromise<AIGatewayGetResponse> {
-    const { account_id } = params;
+  get(
+    id: string,
+    params: AIGatewayGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AIGatewayGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as APIPromise<{
         result: AIGatewayGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class AIGateway extends BaseAIGateway {
+  evaluationTypes: EvaluationTypesAPI.EvaluationTypes = new EvaluationTypesAPI.EvaluationTypes(this._client);
+  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
+  evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
+  dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
+  providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
+  urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
 }
 
 export type AIGatewayListResponsesV4PagePaginationArray = V4PagePaginationArray<AIGatewayListResponse>;
@@ -825,7 +838,7 @@ export interface AIGatewayCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: gateway id
@@ -918,7 +931,7 @@ export interface AIGatewayUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1078,7 +1091,7 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search by id
@@ -1087,20 +1100,27 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
 }
 
 export interface AIGatewayDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AIGatewayGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 AIGateway.EvaluationTypes = EvaluationTypes;
+AIGateway.BaseEvaluationTypes = BaseEvaluationTypes;
 AIGateway.Logs = Logs;
+AIGateway.BaseLogs = BaseLogs;
 AIGateway.Datasets = Datasets;
+AIGateway.BaseDatasets = BaseDatasets;
 AIGateway.Evaluations = Evaluations;
+AIGateway.BaseEvaluations = BaseEvaluations;
 AIGateway.DynamicRouting = DynamicRouting;
+AIGateway.BaseDynamicRouting = BaseDynamicRouting;
 AIGateway.ProviderConfigs = ProviderConfigs;
+AIGateway.BaseProviderConfigs = BaseProviderConfigs;
 AIGateway.URLs = URLs;
+AIGateway.BaseURLs = BaseURLs;
 
 export declare namespace AIGateway {
   export {
@@ -1119,6 +1139,7 @@ export declare namespace AIGateway {
 
   export {
     EvaluationTypes as EvaluationTypes,
+    BaseEvaluationTypes as BaseEvaluationTypes,
     type EvaluationTypeListResponse as EvaluationTypeListResponse,
     type EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
     type EvaluationTypeListParams as EvaluationTypeListParams,
@@ -1126,6 +1147,7 @@ export declare namespace AIGateway {
 
   export {
     Logs as Logs,
+    BaseLogs as BaseLogs,
     type LogListResponse as LogListResponse,
     type LogDeleteResponse as LogDeleteResponse,
     type LogEditResponse as LogEditResponse,
@@ -1143,6 +1165,7 @@ export declare namespace AIGateway {
 
   export {
     Datasets as Datasets,
+    BaseDatasets as BaseDatasets,
     type DatasetCreateResponse as DatasetCreateResponse,
     type DatasetUpdateResponse as DatasetUpdateResponse,
     type DatasetListResponse as DatasetListResponse,
@@ -1158,6 +1181,7 @@ export declare namespace AIGateway {
 
   export {
     Evaluations as Evaluations,
+    BaseEvaluations as BaseEvaluations,
     type EvaluationCreateResponse as EvaluationCreateResponse,
     type EvaluationListResponse as EvaluationListResponse,
     type EvaluationDeleteResponse as EvaluationDeleteResponse,
@@ -1171,6 +1195,7 @@ export declare namespace AIGateway {
 
   export {
     DynamicRouting as DynamicRouting,
+    BaseDynamicRouting as BaseDynamicRouting,
     type DynamicRoutingCreateResponse as DynamicRoutingCreateResponse,
     type DynamicRoutingUpdateResponse as DynamicRoutingUpdateResponse,
     type DynamicRoutingListResponse as DynamicRoutingListResponse,
@@ -1195,6 +1220,7 @@ export declare namespace AIGateway {
 
   export {
     ProviderConfigs as ProviderConfigs,
+    BaseProviderConfigs as BaseProviderConfigs,
     type ProviderConfigCreateResponse as ProviderConfigCreateResponse,
     type ProviderConfigListResponse as ProviderConfigListResponse,
     type ProviderConfigListResponsesV4PagePaginationArray as ProviderConfigListResponsesV4PagePaginationArray,
@@ -1202,5 +1228,10 @@ export declare namespace AIGateway {
     type ProviderConfigListParams as ProviderConfigListParams,
   };
 
-  export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };
+  export {
+    URLs as URLs,
+    BaseURLs as BaseURLs,
+    type URLGetResponse as URLGetResponse,
+    type URLGetParams as URLGetParams,
+  };
 }

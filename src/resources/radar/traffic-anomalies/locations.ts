@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Locations extends APIResource {
+export class BaseLocations extends APIResource {
+  static override readonly _key: readonly ['radar', 'trafficAnomalies', 'locations'] = Object.freeze([
+    'radar',
+    'trafficAnomalies',
+    'locations',
+  ] as const);
+
   /**
    * Retrieves the sum of Internet traffic anomalies, grouped by location. These
    * anomalies are signals that might indicate an outage, automatically detected by
@@ -27,6 +33,7 @@ export class Locations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Locations extends BaseLocations {}
 
 export interface LocationGetResponse {
   trafficAnomalies: Array<LocationGetResponse.TrafficAnomaly>;

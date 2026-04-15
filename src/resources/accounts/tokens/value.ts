@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Value extends APIResource {
+export class BaseValue extends APIResource {
+  static override readonly _key: readonly ['accounts', 'tokens', 'value'] = Object.freeze([
+    'accounts',
+    'tokens',
+    'value',
+  ] as const);
+
   /**
    * Roll the Account Owned API token secret.
    *
@@ -27,7 +33,7 @@ export class Value extends APIResource {
     params: ValueUpdateParams,
     options?: RequestOptions,
   ): APIPromise<Shared.TokenValue> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/tokens/${tokenID}/value`, {
         body: body,
@@ -36,12 +42,13 @@ export class Value extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Value extends BaseValue {}
 
 export interface ValueUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

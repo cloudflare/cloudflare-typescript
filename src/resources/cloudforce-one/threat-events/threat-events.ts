@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AttackersAPI from './attackers';
-import { AttackerListParams, AttackerListResponse, Attackers } from './attackers';
+import { AttackerListParams, AttackerListResponse, Attackers, BaseAttackers } from './attackers';
 import * as CategoriesAPI from './categories';
 import {
+  BaseCategories,
   Categories,
   CategoryCreateParams,
   CategoryCreateResponse,
@@ -18,11 +19,12 @@ import {
   CategoryListResponse,
 } from './categories';
 import * as CountriesAPI from './countries';
-import { Countries, CountryListParams, CountryListResponse } from './countries';
+import { BaseCountries, Countries, CountryListParams, CountryListResponse } from './countries';
 import * as CronsAPI from './crons';
-import { Crons } from './crons';
+import { BaseCrons, Crons } from './crons';
 import * as EventTagsAPI from './event-tags';
 import {
+  BaseEventTags,
   EventTagCreateParams,
   EventTagCreateResponse,
   EventTagDeleteParams,
@@ -30,19 +32,37 @@ import {
   EventTags,
 } from './event-tags';
 import * as IndicatorTypesAPI from './indicator-types';
-import { IndicatorTypeListParams, IndicatorTypeListResponse, IndicatorTypes } from './indicator-types';
+import {
+  BaseIndicatorTypes,
+  IndicatorTypeListParams,
+  IndicatorTypeListResponse,
+  IndicatorTypes,
+} from './indicator-types';
 import * as InsightsAPI from './insights';
-import { Insights } from './insights';
+import { BaseInsights, Insights } from './insights';
 import * as RawAPI from './raw';
-import { Raw as RawAPIRaw, RawEditParams, RawEditResponse, RawGetParams, RawGetResponse } from './raw';
+import {
+  BaseRaw,
+  Raw as RawAPIRaw,
+  RawEditParams,
+  RawEditResponse,
+  RawGetParams,
+  RawGetResponse,
+} from './raw';
 import * as RelateAPI from './relate';
-import { Relate, RelateDeleteParams, RelateDeleteResponse } from './relate';
+import { BaseRelate, Relate, RelateDeleteParams, RelateDeleteResponse } from './relate';
 import * as TagsAPI from './tags';
-import { TagCreateParams, TagCreateResponse, Tags } from './tags';
+import { BaseTags, TagCreateParams, TagCreateResponse, Tags } from './tags';
 import * as TargetIndustriesAPI from './target-industries';
-import { TargetIndustries, TargetIndustryListParams, TargetIndustryListResponse } from './target-industries';
+import {
+  BaseTargetIndustries,
+  TargetIndustries,
+  TargetIndustryListParams,
+  TargetIndustryListResponse,
+} from './target-industries';
 import * as DatasetsAPI from './datasets/datasets';
 import {
+  BaseDatasets,
   DatasetCreateParams,
   DatasetCreateResponse,
   DatasetEditParams,
@@ -59,21 +79,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ThreatEvents extends APIResource {
-  attackers: AttackersAPI.Attackers = new AttackersAPI.Attackers(this._client);
-  categories: CategoriesAPI.Categories = new CategoriesAPI.Categories(this._client);
-  countries: CountriesAPI.Countries = new CountriesAPI.Countries(this._client);
-  crons: CronsAPI.Crons = new CronsAPI.Crons(this._client);
-  datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
-  indicatorTypes: IndicatorTypesAPI.IndicatorTypes = new IndicatorTypesAPI.IndicatorTypes(this._client);
-  raw: RawAPI.Raw = new RawAPI.Raw(this._client);
-  relate: RelateAPI.Relate = new RelateAPI.Relate(this._client);
-  tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
-  eventTags: EventTagsAPI.EventTags = new EventTagsAPI.EventTags(this._client);
-  targetIndustries: TargetIndustriesAPI.TargetIndustries = new TargetIndustriesAPI.TargetIndustries(
-    this._client,
-  );
-  insights: InsightsAPI.Insights = new InsightsAPI.Insights(this._client);
+export class BaseThreatEvents extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+  ] as const);
 
   /**
    * To create a dataset, see the
@@ -95,7 +105,7 @@ export class ThreatEvents extends APIResource {
    * ```
    */
   create(params: ThreatEventCreateParams, options?: RequestOptions): APIPromise<ThreatEventCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/create`, {
       body,
       ...options,
@@ -117,8 +127,11 @@ export class ThreatEvents extends APIResource {
    *   });
    * ```
    */
-  list(params: ThreatEventListParams, options?: RequestOptions): APIPromise<ThreatEventListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: ThreatEventListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ThreatEventListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events`, { query, ...options });
   }
 
@@ -151,7 +164,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventBulkCreateParams,
     options?: RequestOptions,
   ): APIPromise<ThreatEventBulkCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/create/bulk`, {
       body,
       ...options,
@@ -175,7 +188,7 @@ export class ThreatEvents extends APIResource {
     params: ThreatEventEditParams,
     options?: RequestOptions,
   ): APIPromise<ThreatEventEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.patch(path`/accounts/${account_id}/cloudforce-one/events/${eventID}`, {
       body,
       ...options,
@@ -190,12 +203,28 @@ export class ThreatEvents extends APIResource {
    */
   get(
     eventID: string,
-    params: ThreatEventGetParams,
+    params: ThreatEventGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ThreatEventGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/${eventID}`, options);
   }
+}
+export class ThreatEvents extends BaseThreatEvents {
+  attackers: AttackersAPI.Attackers = new AttackersAPI.Attackers(this._client);
+  categories: CategoriesAPI.Categories = new CategoriesAPI.Categories(this._client);
+  countries: CountriesAPI.Countries = new CountriesAPI.Countries(this._client);
+  crons: CronsAPI.Crons = new CronsAPI.Crons(this._client);
+  datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
+  indicatorTypes: IndicatorTypesAPI.IndicatorTypes = new IndicatorTypesAPI.IndicatorTypes(this._client);
+  raw: RawAPI.Raw = new RawAPI.Raw(this._client);
+  relate: RelateAPI.Relate = new RelateAPI.Relate(this._client);
+  tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
+  eventTags: EventTagsAPI.EventTags = new EventTagsAPI.EventTags(this._client);
+  targetIndustries: TargetIndustriesAPI.TargetIndustries = new TargetIndustriesAPI.TargetIndustries(
+    this._client,
+  );
+  insights: InsightsAPI.Insights = new InsightsAPI.Insights(this._client);
 }
 
 export interface ThreatEventCreateResponse {
@@ -502,7 +531,7 @@ export interface ThreatEventCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -612,7 +641,7 @@ export interface ThreatEventListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Cursor for pagination. When provided, filters are embedded in the
@@ -704,7 +733,7 @@ export interface ThreatEventBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -789,7 +818,7 @@ export interface ThreatEventEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Dataset ID containing the event to update.
@@ -876,21 +905,33 @@ export interface ThreatEventGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 ThreatEvents.Attackers = Attackers;
+ThreatEvents.BaseAttackers = BaseAttackers;
 ThreatEvents.Categories = Categories;
+ThreatEvents.BaseCategories = BaseCategories;
 ThreatEvents.Countries = Countries;
+ThreatEvents.BaseCountries = BaseCountries;
 ThreatEvents.Crons = Crons;
+ThreatEvents.BaseCrons = BaseCrons;
 ThreatEvents.Datasets = Datasets;
+ThreatEvents.BaseDatasets = BaseDatasets;
 ThreatEvents.IndicatorTypes = IndicatorTypes;
+ThreatEvents.BaseIndicatorTypes = BaseIndicatorTypes;
 ThreatEvents.Raw = RawAPIRaw;
+ThreatEvents.BaseRaw = BaseRaw;
 ThreatEvents.Relate = Relate;
+ThreatEvents.BaseRelate = BaseRelate;
 ThreatEvents.Tags = Tags;
+ThreatEvents.BaseTags = BaseTags;
 ThreatEvents.EventTags = EventTags;
+ThreatEvents.BaseEventTags = BaseEventTags;
 ThreatEvents.TargetIndustries = TargetIndustries;
+ThreatEvents.BaseTargetIndustries = BaseTargetIndustries;
 ThreatEvents.Insights = Insights;
+ThreatEvents.BaseInsights = BaseInsights;
 
 export declare namespace ThreatEvents {
   export {
@@ -908,12 +949,14 @@ export declare namespace ThreatEvents {
 
   export {
     Attackers as Attackers,
+    BaseAttackers as BaseAttackers,
     type AttackerListResponse as AttackerListResponse,
     type AttackerListParams as AttackerListParams,
   };
 
   export {
     Categories as Categories,
+    BaseCategories as BaseCategories,
     type CategoryCreateResponse as CategoryCreateResponse,
     type CategoryListResponse as CategoryListResponse,
     type CategoryDeleteResponse as CategoryDeleteResponse,
@@ -928,14 +971,16 @@ export declare namespace ThreatEvents {
 
   export {
     Countries as Countries,
+    BaseCountries as BaseCountries,
     type CountryListResponse as CountryListResponse,
     type CountryListParams as CountryListParams,
   };
 
-  export { Crons as Crons };
+  export { Crons as Crons, BaseCrons as BaseCrons };
 
   export {
     Datasets as Datasets,
+    BaseDatasets as BaseDatasets,
     type DatasetCreateResponse as DatasetCreateResponse,
     type DatasetListResponse as DatasetListResponse,
     type DatasetEditResponse as DatasetEditResponse,
@@ -950,12 +995,14 @@ export declare namespace ThreatEvents {
 
   export {
     IndicatorTypes as IndicatorTypes,
+    BaseIndicatorTypes as BaseIndicatorTypes,
     type IndicatorTypeListResponse as IndicatorTypeListResponse,
     type IndicatorTypeListParams as IndicatorTypeListParams,
   };
 
   export {
     RawAPIRaw as Raw,
+    BaseRaw as BaseRaw,
     type RawEditResponse as RawEditResponse,
     type RawGetResponse as RawGetResponse,
     type RawEditParams as RawEditParams,
@@ -964,18 +1011,21 @@ export declare namespace ThreatEvents {
 
   export {
     Relate as Relate,
+    BaseRelate as BaseRelate,
     type RelateDeleteResponse as RelateDeleteResponse,
     type RelateDeleteParams as RelateDeleteParams,
   };
 
   export {
     Tags as Tags,
+    BaseTags as BaseTags,
     type TagCreateResponse as TagCreateResponse,
     type TagCreateParams as TagCreateParams,
   };
 
   export {
     EventTags as EventTags,
+    BaseEventTags as BaseEventTags,
     type EventTagCreateResponse as EventTagCreateResponse,
     type EventTagDeleteResponse as EventTagDeleteResponse,
     type EventTagCreateParams as EventTagCreateParams,
@@ -984,9 +1034,10 @@ export declare namespace ThreatEvents {
 
   export {
     TargetIndustries as TargetIndustries,
+    BaseTargetIndustries as BaseTargetIndustries,
     type TargetIndustryListResponse as TargetIndustryListResponse,
     type TargetIndustryListParams as TargetIndustryListParams,
   };
 
-  export { Insights as Insights };
+  export { Insights as Insights, BaseInsights as BaseInsights };
 }

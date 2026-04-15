@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ZoneTags extends APIResource {
+export class BaseZoneTags extends APIResource {
+  static override readonly _key: readonly ['resourceTagging', 'zoneTags'] = Object.freeze([
+    'resourceTagging',
+    'zoneTags',
+  ] as const);
+
   /**
    * Creates or updates tags for a specific zone-level resource. Replaces all
    * existing tags for the resource.
@@ -22,7 +27,7 @@ export class ZoneTags extends APIResource {
    * ```
    */
   update(params: ZoneTagUpdateParams, options?: RequestOptions): APIPromise<ZoneTagUpdateResponse> {
-    const { zone_id, 'If-Match': ifMatch, ...body } = params;
+    const { zone_id = this._client.zoneID, 'If-Match': ifMatch, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/tags`, {
         body,
@@ -38,8 +43,8 @@ export class ZoneTags extends APIResource {
   /**
    * Removes all tags from a specific zone-level resource.
    */
-  delete(params: ZoneTagDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { zone_id, 'If-Match': ifMatch } = params;
+  delete(params: ZoneTagDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    const { zone_id = this._client.zoneID, 'If-Match': ifMatch } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/tags`, {
       ...options,
       headers: buildHeaders([
@@ -53,7 +58,7 @@ export class ZoneTags extends APIResource {
    * Retrieves tags for a specific zone-level resource.
    */
   get(params: ZoneTagGetParams, options?: RequestOptions): APIPromise<ZoneTagGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params;
     return (
       this._client.get(path`/zones/${zone_id}/tags`, { query, ...options }) as APIPromise<{
         result: ZoneTagGetResponse;
@@ -61,6 +66,7 @@ export class ZoneTags extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ZoneTags extends BaseZoneTags {}
 
 /**
  * Response for access_application resources
@@ -1903,7 +1909,7 @@ export declare namespace ZoneTagUpdateParams {
     /**
      * Path param: Zone ID is required only for zone-level resources
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Identifies the unique resource.
@@ -1940,7 +1946,7 @@ export declare namespace ZoneTagUpdateParams {
     /**
      * Path param: Zone ID is required only for zone-level resources
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Access application ID is required only for access_application_policy
@@ -1985,7 +1991,7 @@ export interface ZoneTagDeleteParams {
   /**
    * Path param: Zone ID is required only for zone-level resources
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Header param: ETag value for optimistic concurrency control. When provided, the
@@ -2000,7 +2006,7 @@ export interface ZoneTagGetParams {
   /**
    * Path param: Zone ID is required only for zone-level resources
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The ID of the resource to retrieve tags for.

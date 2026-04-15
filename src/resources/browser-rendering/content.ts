@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Content extends APIResource {
+export class BaseContent extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'content'] = Object.freeze([
+    'browserRendering',
+    'content',
+  ] as const);
+
   /**
    * Fetches rendered HTML content from provided URL or HTML. Check available options
    * like `gotoOptions` and `waitFor*` to control page load behaviour.
@@ -20,7 +25,7 @@ export class Content extends APIResource {
    * ```
    */
   create(params: ContentCreateParams, options?: RequestOptions): APIPromise<ContentCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/content`, {
         query: { cacheTTL },
@@ -30,6 +35,7 @@ export class Content extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Content extends BaseContent {}
 
 /**
  * HTML content.
@@ -43,7 +49,7 @@ export declare namespace ContentCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -306,7 +312,7 @@ export declare namespace ContentCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either

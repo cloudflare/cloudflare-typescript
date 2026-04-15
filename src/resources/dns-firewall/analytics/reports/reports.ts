@@ -2,14 +2,18 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as BytimesAPI from './bytimes';
-import { BytimeGetParams, Bytimes } from './bytimes';
+import { BaseBytimes, BytimeGetParams, Bytimes } from './bytimes';
 import * as ReportsReportsAPI from '../../../dns/analytics/reports/reports';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Reports extends APIResource {
-  bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
+export class BaseReports extends APIResource {
+  static override readonly _key: readonly ['dnsFirewall', 'analytics', 'reports'] = Object.freeze([
+    'dnsFirewall',
+    'analytics',
+    'reports',
+  ] as const);
 
   /**
    * Retrieves a list of summarised aggregate metrics over a given time period.
@@ -29,10 +33,10 @@ export class Reports extends APIResource {
    */
   get(
     dnsFirewallID: string,
-    params: ReportGetParams,
+    params: ReportGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ReportsReportsAPI.Report> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}/dns_analytics/report`, {
         query,
@@ -41,12 +45,15 @@ export class Reports extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Reports extends BaseReports {
+  bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
+}
 
 export interface ReportGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.
@@ -86,9 +93,10 @@ export interface ReportGetParams {
 }
 
 Reports.Bytimes = Bytimes;
+Reports.BaseBytimes = BaseBytimes;
 
 export declare namespace Reports {
   export { type ReportGetParams as ReportGetParams };
 
-  export { Bytimes as Bytimes, type BytimeGetParams as BytimeGetParams };
+  export { Bytimes as Bytimes, BaseBytimes as BaseBytimes, type BytimeGetParams as BytimeGetParams };
 }

@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AI } from './ai';
+export { AI, BaseAI } from './ai';
 export {
   Bots,
+  BaseBots,
   type BotSummaryV2Response,
   type BotTimeseriesResponse,
   type BotTimeseriesGroupsResponse,
@@ -12,6 +13,7 @@ export {
 } from './bots/index';
 export {
   Inference,
+  BaseInference,
   type InferenceSummaryV2Response,
   type InferenceTimeseriesGroupsV2Response,
   type InferenceSummaryV2Params,
@@ -19,6 +21,7 @@ export {
 } from './inference/index';
 export {
   MarkdownForAgents,
+  BaseMarkdownForAgents,
   type MarkdownForAgentSummaryResponse,
   type MarkdownForAgentTimeseriesResponse,
   type MarkdownForAgentSummaryParams,
@@ -26,6 +29,7 @@ export {
 } from './markdown-for-agents';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupSummaryResponse,
   type TimeseriesGroupTimeseriesResponse,
   type TimeseriesGroupTimeseriesGroupsResponse,
@@ -37,6 +41,7 @@ export {
 } from './timeseries-groups';
 export {
   ToMarkdown,
+  BaseToMarkdown,
   type ToMarkdownCreateResponse,
   type ToMarkdownCreateParams,
   type ToMarkdownCreateResponsesSinglePage,

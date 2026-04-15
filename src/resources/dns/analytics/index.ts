@@ -1,4 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Analytics } from './analytics';
-export { Reports, type Report, type ReportGetParams } from './reports/index';
+export { Analytics, BaseAnalytics } from './analytics';
+export { Reports, BaseReports, type Report, type ReportGetParams } from './reports/index';

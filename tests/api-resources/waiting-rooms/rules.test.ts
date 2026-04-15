@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseRules } from 'cloudflare/resources/waiting-rooms/rules';
+import { WaitingRooms } from 'cloudflare/resources/waiting-rooms/waiting-rooms';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource rules', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRules],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [WaitingRooms],
+});
+
+const runTests = (client: PartialCloudflare<{ waitingRooms: { rules: BaseRules } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.waitingRooms.rules.create('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -130,4 +148,7 @@ describe('resource rules', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource rules', () => runTests(client));
+describe('resource rules (tree shakable, base)', () => runTests(partialClient));
+describe('resource rules (tree shakable, subresource)', () => runTests(parentPartialClient));

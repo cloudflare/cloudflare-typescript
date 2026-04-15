@@ -1,8 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Details, type EventQuery, type DetailGetResponse, type DetailGetParams } from './details';
+export {
+  Details,
+  BaseDetails,
+  type EventQuery,
+  type DetailGetResponse,
+  type DetailGetParams,
+} from './details';
 export {
   Events,
+  BaseEvents,
   type Event,
   type EventDeleteResponse,
   type EventCreateParams,

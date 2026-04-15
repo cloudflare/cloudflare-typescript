@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { DEX } from 'cloudflare/resources/zero-trust/dex/dex';
+import { BaseRules } from 'cloudflare/resources/zero-trust/dex/rules';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource rules', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRules],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [DEX],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { dex: { rules: BaseRules } } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.rules.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
@@ -118,4 +136,7 @@ describe('resource rules', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
-});
+};
+describe('resource rules', () => runTests(client));
+describe('resource rules (tree shakable, base)', () => runTests(partialClient));
+describe('resource rules (tree shakable, subresource)', () => runTests(parentPartialClient));

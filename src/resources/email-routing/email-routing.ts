@@ -10,9 +10,11 @@ import {
   AddressListParams,
   Addresses,
   AddressesV4PagePaginationArray,
+  BaseAddresses,
 } from './addresses';
 import * as DNSAPI from './dns';
 import {
+  BaseDNS,
   DNS,
   DNSCreateParams,
   DNSDeleteParams,
@@ -25,6 +27,7 @@ import {
 import * as RulesAPI from './rules/rules';
 import {
   Action,
+  BaseRules,
   EmailRoutingRule,
   EmailRoutingRulesV4PagePaginationArray,
   Matcher,
@@ -39,10 +42,8 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class EmailRouting extends APIResource {
-  dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
-  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
-  addresses: AddressesAPI.Addresses = new AddressesAPI.Addresses(this._client);
+export class BaseEmailRouting extends APIResource {
+  static override readonly _key: readonly ['emailRouting'] = Object.freeze(['emailRouting'] as const);
 
   /**
    * Disable your Email Routing zone. Also removes additional MX records previously
@@ -51,7 +52,7 @@ export class EmailRouting extends APIResource {
    * @deprecated
    */
   disable(params: EmailRoutingDisableParams, options?: RequestOptions): APIPromise<Settings> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/email/routing/disable`, {
         body: body,
@@ -66,7 +67,7 @@ export class EmailRouting extends APIResource {
    * @deprecated
    */
   enable(params: EmailRoutingEnableParams, options?: RequestOptions): APIPromise<Settings> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/email/routing/enable`, {
         body: body,
@@ -85,12 +86,17 @@ export class EmailRouting extends APIResource {
    * });
    * ```
    */
-  get(params: EmailRoutingGetParams, options?: RequestOptions): APIPromise<Settings> {
-    const { zone_id } = params;
+  get(params: EmailRoutingGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Settings> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/email/routing`, options) as APIPromise<{ result: Settings }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class EmailRouting extends BaseEmailRouting {
+  dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
+  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+  addresses: AddressesAPI.Addresses = new AddressesAPI.Addresses(this._client);
 }
 
 export interface Settings {
@@ -140,7 +146,7 @@ export interface EmailRoutingDisableParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -152,7 +158,7 @@ export interface EmailRoutingEnableParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -164,12 +170,15 @@ export interface EmailRoutingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 EmailRouting.DNS = DNS;
+EmailRouting.BaseDNS = BaseDNS;
 EmailRouting.Rules = Rules;
+EmailRouting.BaseRules = BaseRules;
 EmailRouting.Addresses = Addresses;
+EmailRouting.BaseAddresses = BaseAddresses;
 
 export declare namespace EmailRouting {
   export {
@@ -181,6 +190,7 @@ export declare namespace EmailRouting {
 
   export {
     DNS as DNS,
+    BaseDNS as BaseDNS,
     type DNSRecord as DNSRecord,
     type DNSGetResponse as DNSGetResponse,
     type DNSRecordsSinglePage as DNSRecordsSinglePage,
@@ -192,6 +202,7 @@ export declare namespace EmailRouting {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type Action as Action,
     type EmailRoutingRule as EmailRoutingRule,
     type Matcher as Matcher,
@@ -205,6 +216,7 @@ export declare namespace EmailRouting {
 
   export {
     Addresses as Addresses,
+    BaseAddresses as BaseAddresses,
     type Address as Address,
     type AddressesV4PagePaginationArray as AddressesV4PagePaginationArray,
     type AddressCreateParams as AddressCreateParams,

@@ -6,15 +6,19 @@ import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class ManagedTransforms extends APIResource {
+export class BaseManagedTransforms extends APIResource {
+  static override readonly _key: readonly ['managedTransforms'] = Object.freeze([
+    'managedTransforms',
+  ] as const);
+
   /**
    * Fetches a list of all Managed Transforms.
    */
   list(
-    params: ManagedTransformListParams,
+    params: ManagedTransformListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ManagedTransformListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/managed_headers`, options) as APIPromise<{
         result: ManagedTransformListResponse;
@@ -25,8 +29,11 @@ export class ManagedTransforms extends APIResource {
   /**
    * Disables all Managed Transforms.
    */
-  delete(params: ManagedTransformDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { zone_id } = params;
+  delete(
+    params: ManagedTransformDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<void> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/managed_headers`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -40,7 +47,7 @@ export class ManagedTransforms extends APIResource {
     params: ManagedTransformEditParams,
     options?: RequestOptions,
   ): APIPromise<ManagedTransformEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/managed_headers`, { body, ...options }) as APIPromise<{
         result: ManagedTransformEditResponse;
@@ -48,6 +55,7 @@ export class ManagedTransforms extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ManagedTransforms extends BaseManagedTransforms {}
 
 /**
  * A result.
@@ -191,21 +199,21 @@ export interface ManagedTransformListParams {
   /**
    * The unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ManagedTransformDeleteParams {
   /**
    * The unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ManagedTransformEditParams {
   /**
    * Path param: The unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The list of Managed Request Transforms.

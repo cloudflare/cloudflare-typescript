@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Payloads extends APIResource {
+export class BasePayloads extends APIResource {
+  static override readonly _key: readonly ['contentScanning', 'payloads'] = Object.freeze([
+    'contentScanning',
+    'payloads',
+  ] as const);
+
   /**
    * Add custom scan expressions for Content Scanning.
    *
@@ -31,7 +36,7 @@ export class Payloads extends APIResource {
     params: PayloadCreateParams,
     options?: RequestOptions,
   ): PagePromise<PayloadCreateResponsesSinglePage, PayloadCreateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/content-upload-scan/payloads`,
       SinglePage<PayloadCreateResponse>,
@@ -53,10 +58,10 @@ export class Payloads extends APIResource {
    * ```
    */
   list(
-    params: PayloadListParams,
+    params: PayloadListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PayloadListResponsesSinglePage, PayloadListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/content-upload-scan/payloads`,
       SinglePage<PayloadListResponse>,
@@ -80,10 +85,10 @@ export class Payloads extends APIResource {
    */
   delete(
     expressionID: string,
-    params: PayloadDeleteParams,
+    params: PayloadDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PayloadDeleteResponsesSinglePage, PayloadDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/content-upload-scan/payloads/${expressionID}`,
       SinglePage<PayloadDeleteResponse>,
@@ -91,6 +96,7 @@ export class Payloads extends APIResource {
     );
   }
 }
+export class Payloads extends BasePayloads {}
 
 export type PayloadCreateResponsesSinglePage = SinglePage<PayloadCreateResponse>;
 
@@ -147,7 +153,7 @@ export interface PayloadCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -168,14 +174,14 @@ export interface PayloadListParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface PayloadDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Payloads {

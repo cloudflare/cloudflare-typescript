@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as LanguageAPI from './language/language';
 import {
+  BaseLanguage,
   Language,
   LanguageCreateParams,
   LanguageDeleteParams,
@@ -14,8 +15,11 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Captions extends APIResource {
-  language: LanguageAPI.Language = new LanguageAPI.Language(this._client);
+export class BaseCaptions extends APIResource {
+  static override readonly _key: readonly ['stream', 'captions'] = Object.freeze([
+    'stream',
+    'captions',
+  ] as const);
 
   /**
    * Lists the available captions or subtitles for a specific video.
@@ -33,16 +37,19 @@ export class Captions extends APIResource {
    */
   get(
     identifier: string,
-    params: CaptionGetParams,
+    params: CaptionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CaptionsSinglePage, Caption> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/stream/${identifier}/captions`,
       SinglePage<Caption>,
       options,
     );
   }
+}
+export class Captions extends BaseCaptions {
+  language: LanguageAPI.Language = new LanguageAPI.Language(this._client);
 }
 
 export type CaptionsSinglePage = SinglePage<Caption>;
@@ -73,10 +80,11 @@ export interface CaptionGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Captions.Language = Language;
+Captions.BaseLanguage = BaseLanguage;
 
 export declare namespace Captions {
   export {
@@ -87,6 +95,7 @@ export declare namespace Captions {
 
   export {
     Language as Language,
+    BaseLanguage as BaseLanguage,
     type LanguageDeleteResponse as LanguageDeleteResponse,
     type LanguageCreateParams as LanguageCreateParams,
     type LanguageUpdateParams as LanguageUpdateParams,

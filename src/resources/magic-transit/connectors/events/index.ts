@@ -2,9 +2,10 @@
 
 export {
   Events,
+  BaseEvents,
   type EventListResponse,
   type EventGetResponse,
   type EventListParams,
   type EventGetParams,
 } from './events';
-export { Latest, type LatestListResponse, type LatestListParams } from './latest';
+export { Latest, BaseLatest, type LatestListResponse, type LatestListParams } from './latest';

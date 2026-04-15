@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Session extends APIResource {
+export class BaseSession extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'devtools', 'session'] = Object.freeze([
+    'browserRendering',
+    'devtools',
+    'session',
+  ] as const);
+
   /**
    * List active browser sessions.
    *
@@ -17,8 +23,11 @@ export class Session extends APIResource {
    *   });
    * ```
    */
-  list(params: SessionListParams, options?: RequestOptions): APIPromise<SessionListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: SessionListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SessionListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/session`, {
       query,
       ...options,
@@ -39,16 +48,17 @@ export class Session extends APIResource {
    */
   get(
     sessionID: string,
-    params: SessionGetParams,
+    params: SessionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SessionGetResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/session/${sessionID}`,
       options,
     );
   }
 }
+export class Session extends BaseSession {}
 
 export type SessionListResponse = Array<SessionListResponse.SessionListResponseItem>;
 
@@ -172,7 +182,7 @@ export interface SessionListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -189,7 +199,7 @@ export interface SessionGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Session {

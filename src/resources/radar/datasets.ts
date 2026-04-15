@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Datasets extends APIResource {
+export class BaseDatasets extends APIResource {
+  static override readonly _key: readonly ['radar', 'datasets'] = Object.freeze([
+    'radar',
+    'datasets',
+  ] as const);
+
   /**
    * Retrieves a list of datasets.
    *
@@ -64,6 +69,7 @@ export class Datasets extends APIResource {
     });
   }
 }
+export class Datasets extends BaseDatasets {}
 
 export interface DatasetListResponse {
   datasets: Array<DatasetListResponse.Dataset>;

@@ -2,18 +2,22 @@
 
 import { APIResource } from '../../../../../../core/resource';
 import * as MaliciousAPI from './malicious';
-import { Malicious, MaliciousGetParams, MaliciousGetResponse } from './malicious';
+import { BaseMalicious, Malicious, MaliciousGetParams, MaliciousGetResponse } from './malicious';
 import * as SpamAPI from './spam';
-import { Spam, SpamGetParams, SpamGetResponse } from './spam';
+import { BaseSpam, Spam, SpamGetParams, SpamGetResponse } from './spam';
 import * as SpoofAPI from './spoof';
-import { Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
+import { BaseSpoof, Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
 import { APIPromise } from '../../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../../internal/request-options';
 
-export class TLDs extends APIResource {
-  malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
-  spam: SpamAPI.Spam = new SpamAPI.Spam(this._client);
-  spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
+export class BaseTLDs extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security', 'top', 'tlds'] = Object.freeze([
+    'radar',
+    'email',
+    'security',
+    'top',
+    'tlds',
+  ] as const);
 
   /**
    * Retrieves the top TLDs by number of email messages.
@@ -31,6 +35,11 @@ export class TLDs extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class TLDs extends BaseTLDs {
+  malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
+  spam: SpamAPI.Spam = new SpamAPI.Spam(this._client);
+  spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
 }
 
 export interface TLDGetResponse {
@@ -236,19 +245,33 @@ export interface TLDGetParams {
 }
 
 TLDs.Malicious = Malicious;
+TLDs.BaseMalicious = BaseMalicious;
 TLDs.Spam = Spam;
+TLDs.BaseSpam = BaseSpam;
 TLDs.Spoof = Spoof;
+TLDs.BaseSpoof = BaseSpoof;
 
 export declare namespace TLDs {
   export { type TLDGetResponse as TLDGetResponse, type TLDGetParams as TLDGetParams };
 
   export {
     Malicious as Malicious,
+    BaseMalicious as BaseMalicious,
     type MaliciousGetResponse as MaliciousGetResponse,
     type MaliciousGetParams as MaliciousGetParams,
   };
 
-  export { Spam as Spam, type SpamGetResponse as SpamGetResponse, type SpamGetParams as SpamGetParams };
+  export {
+    Spam as Spam,
+    BaseSpam as BaseSpam,
+    type SpamGetResponse as SpamGetResponse,
+    type SpamGetParams as SpamGetParams,
+  };
 
-  export { Spoof as Spoof, type SpoofGetResponse as SpoofGetResponse, type SpoofGetParams as SpoofGetParams };
+  export {
+    Spoof as Spoof,
+    BaseSpoof as BaseSpoof,
+    type SpoofGetResponse as SpoofGetResponse,
+    type SpoofGetParams as SpoofGetParams,
+  };
 }

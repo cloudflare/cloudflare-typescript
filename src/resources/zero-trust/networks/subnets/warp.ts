@@ -6,7 +6,14 @@ import { V4PagePaginationArray } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class WARP extends APIResource {
+export class BaseWARP extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'subnets', 'warp'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'subnets',
+    'warp',
+  ] as const);
+
   /**
    * Create a WARP IP assignment subnet. Currently, only IPv4 subnets can be created.
    *
@@ -31,7 +38,7 @@ export class WARP extends APIResource {
    * ```
    */
   create(params: WARPCreateParams, options?: RequestOptions): APIPromise<Subnet> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/zerotrust/subnets/warp`, {
         body,
@@ -55,10 +62,10 @@ export class WARP extends APIResource {
    */
   delete(
     subnetID: string,
-    params: WARPDeleteParams,
+    params: WARPDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WARPDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/zerotrust/subnets/warp/${subnetID}`,
@@ -86,7 +93,7 @@ export class WARP extends APIResource {
    * ```
    */
   edit(subnetID: string, params: WARPEditParams, options?: RequestOptions): APIPromise<Subnet> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/zerotrust/subnets/warp/${subnetID}`, {
         body,
@@ -107,8 +114,12 @@ export class WARP extends APIResource {
    *   );
    * ```
    */
-  get(subnetID: string, params: WARPGetParams, options?: RequestOptions): APIPromise<Subnet> {
-    const { account_id } = params;
+  get(
+    subnetID: string,
+    params: WARPGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Subnet> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/zerotrust/subnets/warp/${subnetID}`,
@@ -117,6 +128,7 @@ export class WARP extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class WARP extends BaseWARP {}
 
 export type SubnetsV4PagePaginationArray = V4PagePaginationArray<Subnet>;
 
@@ -212,7 +224,7 @@ export interface WARPCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for the subnet.
@@ -241,14 +253,14 @@ export interface WARPDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WARPEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the subnet.
@@ -277,7 +289,7 @@ export interface WARPGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace WARP {

@@ -2,14 +2,21 @@
 
 import { APIResource } from '../../../core/resource';
 import * as VersionsAPI from './versions';
-import { Versions } from './versions';
+import { BaseVersions, Versions } from './versions';
 
-export class Phases extends APIResource {
+export class BasePhases extends APIResource {
+  static override readonly _key: readonly ['rulesets', 'phases'] = Object.freeze([
+    'rulesets',
+    'phases',
+  ] as const);
+}
+export class Phases extends BasePhases {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 }
 
 Phases.Versions = Versions;
+Phases.BaseVersions = BaseVersions;
 
 export declare namespace Phases {
-  export { Versions as Versions };
+  export { Versions as Versions, BaseVersions as BaseVersions };
 }

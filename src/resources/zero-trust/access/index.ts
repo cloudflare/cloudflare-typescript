@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AIControls } from './ai-controls/index';
-export { Access } from './access';
+export { AIControls, BaseAIControls } from './ai-controls/index';
+export { Access, BaseAccess } from './access';
 export {
   Applications,
+  BaseApplications,
   type AllowedHeaders,
   type AllowedIdPs,
   type AllowedMethods,
@@ -39,6 +40,7 @@ export {
 } from './applications/index';
 export {
   Bookmarks,
+  BaseBookmarks,
   type Bookmark,
   type BookmarkDeleteResponse,
   type BookmarkCreateParams,
@@ -50,6 +52,7 @@ export {
 } from './bookmarks';
 export {
   Certificates,
+  BaseCertificates,
   type AssociatedHostnames,
   type Certificate,
   type CertificateDeleteResponse,
@@ -62,6 +65,7 @@ export {
 } from './certificates/index';
 export {
   CustomPages,
+  BaseCustomPages,
   type CustomPage,
   type CustomPageWithoutHTML,
   type CustomPageDeleteResponse,
@@ -74,6 +78,7 @@ export {
 } from './custom-pages';
 export {
   GatewayCA,
+  BaseGatewayCA,
   type GatewayCACreateResponse,
   type GatewayCAListResponse,
   type GatewayCADeleteResponse,
@@ -84,6 +89,7 @@ export {
 } from './gateway-ca';
 export {
   Groups,
+  BaseGroups,
   type ZeroTrustGroup,
   type GroupCreateResponse,
   type GroupUpdateResponse,
@@ -98,9 +104,10 @@ export {
   type ZeroTrustGroupsV4PagePaginationArray,
   type GroupListResponsesV4PagePaginationArray,
 } from './groups';
-export { Infrastructure } from './infrastructure/index';
+export { Infrastructure, BaseInfrastructure } from './infrastructure/index';
 export {
   Keys,
+  BaseKeys,
   type KeyUpdateResponse,
   type KeyGetResponse,
   type KeyRotateResponse,
@@ -108,9 +115,10 @@ export {
   type KeyGetParams,
   type KeyRotateParams,
 } from './keys';
-export { Logs } from './logs/index';
+export { Logs, BaseLogs } from './logs/index';
 export {
   Policies,
+  BasePolicies,
   type ApprovalGroup,
   type Policy,
   type PolicyCreateResponse,
@@ -127,6 +135,7 @@ export {
 } from './policies';
 export {
   ServiceTokens,
+  BaseServiceTokens,
   type ServiceToken,
   type ServiceTokenCreateResponse,
   type ServiceTokenRotateResponse,
@@ -141,6 +150,7 @@ export {
 } from './service-tokens';
 export {
   Tags,
+  BaseTags,
   type Tag,
   type TagDeleteResponse,
   type TagCreateParams,
@@ -152,6 +162,7 @@ export {
 } from './tags';
 export {
   Users,
+  BaseUsers,
   type AccessUser,
   type UserCreateResponse,
   type UserUpdateResponse,

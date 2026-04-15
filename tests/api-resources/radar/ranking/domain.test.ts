@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseDomain } from 'cloudflare/resources/radar/ranking/domain';
+import { Ranking } from 'cloudflare/resources/radar/ranking/ranking';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource domain', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseDomain],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Ranking],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { ranking: { domain: BaseDomain } } }>) => {
   test('get', async () => {
     const responsePromise = client.radar.ranking.domain.get('google.com');
     const rawResponse = await responsePromise.asResponse();
@@ -37,4 +55,7 @@ describe('resource domain', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource domain', () => runTests(client));
+describe('resource domain (tree shakable, base)', () => runTests(partialClient));
+describe('resource domain (tree shakable, subresource)', () => runTests(parentPartialClient));

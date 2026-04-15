@@ -2,6 +2,7 @@
 
 export {
   Configuration,
+  BaseConfiguration,
   type TokenConfig,
   type ConfigurationDeleteResponse,
   type ConfigurationEditResponse,
@@ -14,6 +15,7 @@ export {
 } from './configuration/index';
 export {
   Rules,
+  BaseRules,
   type TokenValidationRule,
   type RuleDeleteResponse,
   type RuleCreateParams,
@@ -26,4 +28,4 @@ export {
   type TokenValidationRulesV4PagePaginationArray,
   type TokenValidationRulesSinglePage,
 } from './rules';
-export { TokenValidation } from './token-validation';
+export { TokenValidation, BaseTokenValidation } from './token-validation';

@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Events extends APIResource {
+export class BaseEvents extends APIResource {
+  static override readonly _key: readonly ['workflows', 'instances', 'events'] = Object.freeze([
+    'workflows',
+    'instances',
+    'events',
+  ] as const);
+
   /**
    * Sends an event to a running workflow instance to trigger state transitions.
    */
@@ -14,7 +20,7 @@ export class Events extends APIResource {
     params: EventCreateParams,
     options?: RequestOptions,
   ): APIPromise<EventCreateResponse> {
-    const { account_id, workflow_name, instance_id, body } = params;
+    const { account_id = this._client.accountID, workflow_name, instance_id, body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/workflows/${workflow_name}/instances/${instance_id}/events/${eventType}`,
@@ -23,6 +29,7 @@ export class Events extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Events extends BaseEvents {}
 
 export type EventCreateResponse = unknown;
 
@@ -30,7 +37,7 @@ export interface EventCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Networks } from 'cloudflare/resources/zero-trust/networks/networks';
+import { BaseSubnets } from 'cloudflare/resources/zero-trust/networks/subnets/subnets';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource subnets', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSubnets],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Networks],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { networks: { subnets: BaseSubnets } } }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.networks.subnets.list({
       account_id: '699d98642c564d2e855e9661899b7252',
@@ -38,4 +56,7 @@ describe('resource subnets', () => {
       subnet_types: 'cloudflare_source',
     });
   });
-});
+};
+describe('resource subnets', () => runTests(client));
+describe('resource subnets (tree shakable, base)', () => runTests(partialClient));
+describe('resource subnets (tree shakable, subresource)', () => runTests(parentPartialClient));

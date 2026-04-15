@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AI } from './ai/index';
+export { AI, BaseAI } from './ai/index';
 export {
   AS112,
+  BaseAS112,
   type AS112SummaryV2Response,
   type AS112TimeseriesResponse,
   type AS112TimeseriesGroupsV2Response,
@@ -12,14 +13,21 @@ export {
 } from './as112/index';
 export {
   AgentReadiness,
+  BaseAgentReadiness,
   type AgentReadinessSummaryResponse,
   type AgentReadinessSummaryParams,
 } from './agent-readiness';
-export { Annotations, type AnnotationListResponse, type AnnotationListParams } from './annotations/index';
-export { Attacks } from './attacks/index';
-export { BGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp/index';
+export {
+  Annotations,
+  BaseAnnotations,
+  type AnnotationListResponse,
+  type AnnotationListParams,
+} from './annotations/index';
+export { Attacks, BaseAttacks } from './attacks/index';
+export { BGP, BaseBGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp/index';
 export {
   Bots,
+  BaseBots,
   type BotListResponse,
   type BotGetResponse,
   type BotSummaryResponse,
@@ -33,6 +41,7 @@ export {
 } from './bots/index';
 export {
   CT,
+  BaseCT,
   type CTSummaryResponse,
   type CTTimeseriesResponse,
   type CTTimeseriesGroupsResponse,
@@ -42,6 +51,7 @@ export {
 } from './ct/index';
 export {
   DNS,
+  BaseDNS,
   type DNSSummaryV2Response,
   type DNSTimeseriesResponse,
   type DNSTimeseriesGroupsV2Response,
@@ -51,16 +61,18 @@ export {
 } from './dns/index';
 export {
   Datasets,
+  BaseDatasets,
   type DatasetListResponse,
   type DatasetDownloadResponse,
   type DatasetGetResponse,
   type DatasetListParams,
   type DatasetDownloadParams,
 } from './datasets';
-export { Email, type RadarEmailSeries, type RadarEmailSummary } from './email/index';
-export { Entities, type EntityGetResponse, type EntityGetParams } from './entities/index';
+export { Email, BaseEmail, type RadarEmailSeries, type RadarEmailSummary } from './email/index';
+export { Entities, BaseEntities, type EntityGetResponse, type EntityGetParams } from './entities/index';
 export {
   Geolocations,
+  BaseGeolocations,
   type GeolocationListResponse,
   type GeolocationGetResponse,
   type GeolocationListParams,
@@ -68,6 +80,7 @@ export {
 } from './geolocations';
 export {
   HTTP,
+  BaseHTTP,
   type HTTPSummaryV2Response,
   type HTTPTimeseriesResponse,
   type HTTPTimeseriesGroupsV2Response,
@@ -77,6 +90,7 @@ export {
 } from './http/index';
 export {
   LeakedCredentials,
+  BaseLeakedCredentials,
   type LeakedCredentialSummaryV2Response,
   type LeakedCredentialTimeseriesGroupsV2Response,
   type LeakedCredentialSummaryV2Params,
@@ -84,6 +98,7 @@ export {
 } from './leaked-credentials/index';
 export {
   NetFlows,
+  BaseNetFlows,
   type NetFlowsSummaryResponse,
   type NetFlowsSummaryV2Response,
   type NetFlowsTimeseriesResponse,
@@ -93,20 +108,22 @@ export {
   type NetFlowsTimeseriesParams,
   type NetFlowsTimeseriesGroupsParams,
 } from './netflows/index';
-export { PostQuantum } from './post-quantum/index';
-export { Quality } from './quality/index';
-export { Radar } from './radar';
+export { PostQuantum, BasePostQuantum } from './post-quantum/index';
+export { Quality, BaseQuality } from './quality/index';
+export { Radar, BaseRadar } from './radar';
 export {
   Ranking,
+  BaseRanking,
   type RankingTimeseriesGroupsResponse,
   type RankingTopResponse,
   type RankingTimeseriesGroupsParams,
   type RankingTopParams,
 } from './ranking/index';
-export { RobotsTXT } from './robots-txt/index';
-export { Search, type SearchGlobalResponse, type SearchGlobalParams } from './search';
+export { RobotsTXT, BaseRobotsTXT } from './robots-txt/index';
+export { Search, BaseSearch, type SearchGlobalResponse, type SearchGlobalParams } from './search';
 export {
   TCPResetsTimeouts,
+  BaseTCPResetsTimeouts,
   type TCPResetsTimeoutSummaryResponse,
   type TCPResetsTimeoutTimeseriesGroupsResponse,
   type TCPResetsTimeoutSummaryParams,
@@ -114,7 +131,8 @@ export {
 } from './tcp-resets-timeouts';
 export {
   TrafficAnomalies,
+  BaseTrafficAnomalies,
   type TrafficAnomalyGetResponse,
   type TrafficAnomalyGetParams,
 } from './traffic-anomalies/index';
-export { VerifiedBots } from './verified-bots/index';
+export { VerifiedBots, BaseVerifiedBots } from './verified-bots/index';

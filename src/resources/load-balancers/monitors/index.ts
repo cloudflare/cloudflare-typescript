@@ -2,6 +2,7 @@
 
 export {
   Monitors,
+  BaseMonitors,
   type Monitor,
   type MonitorDeleteResponse,
   type MonitorCreateParams,
@@ -12,9 +13,10 @@ export {
   type MonitorGetParams,
   type MonitorsSinglePage,
 } from './monitors';
-export { Previews, type PreviewCreateResponse, type PreviewCreateParams } from './previews';
+export { Previews, BasePreviews, type PreviewCreateResponse, type PreviewCreateParams } from './previews';
 export {
   References,
+  BaseReferences,
   type ReferenceGetResponse,
   type ReferenceGetParams,
   type ReferenceGetResponsesSinglePage,

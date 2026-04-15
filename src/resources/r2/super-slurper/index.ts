@@ -2,6 +2,7 @@
 
 export {
   ConnectivityPrecheck,
+  BaseConnectivityPrecheck,
   type ConnectivityPrecheckSourceResponse,
   type ConnectivityPrecheckTargetResponse,
   type ConnectivityPrecheckSourceParams,
@@ -9,6 +10,7 @@ export {
 } from './connectivity-precheck';
 export {
   Jobs,
+  BaseJobs,
   type JobCreateResponse,
   type JobListResponse,
   type JobAbortResponse,
@@ -27,4 +29,4 @@ export {
   type JobResumeParams,
   type JobListResponsesSinglePage,
 } from './jobs/index';
-export { SuperSlurper } from './super-slurper';
+export { SuperSlurper, BaseSuperSlurper } from './super-slurper';

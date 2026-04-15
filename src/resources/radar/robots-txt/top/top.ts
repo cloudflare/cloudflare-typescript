@@ -2,12 +2,21 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as UserAgentsAPI from './user-agents';
-import { UserAgentDirectiveParams, UserAgentDirectiveResponse, UserAgents } from './user-agents';
+import {
+  BaseUserAgents,
+  UserAgentDirectiveParams,
+  UserAgentDirectiveResponse,
+  UserAgents,
+} from './user-agents';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Top extends APIResource {
-  userAgents: UserAgentsAPI.UserAgents = new UserAgentsAPI.UserAgents(this._client);
+export class BaseTop extends APIResource {
+  static override readonly _key: readonly ['radar', 'robotsTXT', 'top'] = Object.freeze([
+    'radar',
+    'robotsTXT',
+    'top',
+  ] as const);
 
   /**
    * Retrieves the top domain categories by the number of robots.txt files parsed.
@@ -28,6 +37,9 @@ export class Top extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Top extends BaseTop {
+  userAgents: UserAgentsAPI.UserAgents = new UserAgentsAPI.UserAgents(this._client);
 }
 
 export interface TopDomainCategoriesResponse {
@@ -192,6 +204,7 @@ export interface TopDomainCategoriesParams {
 }
 
 Top.UserAgents = UserAgents;
+Top.BaseUserAgents = BaseUserAgents;
 
 export declare namespace Top {
   export {
@@ -201,6 +214,7 @@ export declare namespace Top {
 
   export {
     UserAgents as UserAgents,
+    BaseUserAgents as BaseUserAgents,
     type UserAgentDirectiveResponse as UserAgentDirectiveResponse,
     type UserAgentDirectiveParams as UserAgentDirectiveParams,
   };

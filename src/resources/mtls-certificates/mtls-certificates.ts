@@ -5,6 +5,7 @@ import * as AssociationsAPI from './associations';
 import {
   AssociationGetParams,
   Associations,
+  BaseAssociations,
   CertificateAsssociation,
   CertificateAsssociationsSinglePage,
 } from './associations';
@@ -13,8 +14,8 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class MTLSCertificates extends APIResource {
-  associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
+export class BaseMTLSCertificates extends APIResource {
+  static override readonly _key: readonly ['mtlsCertificates'] = Object.freeze(['mtlsCertificates'] as const);
 
   /**
    * Upload a certificate that you want to use with mTLS-enabled Cloudflare services,
@@ -37,7 +38,7 @@ export class MTLSCertificates extends APIResource {
     params: MTLSCertificateCreateParams,
     options?: RequestOptions,
   ): APIPromise<MTLSCertificateCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/mtls_certificates`, { body, ...options }) as APIPromise<{
         result: MTLSCertificateCreateResponse;
@@ -62,10 +63,10 @@ export class MTLSCertificates extends APIResource {
    * ```
    */
   list(
-    params: MTLSCertificateListParams,
+    params: MTLSCertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/mtls_certificates`,
       SinglePage<MTLSCertificate>,
@@ -88,10 +89,10 @@ export class MTLSCertificates extends APIResource {
    */
   delete(
     mtlsCertificateID: string,
-    params: MTLSCertificateDeleteParams,
+    params: MTLSCertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MTLSCertificate> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}`,
@@ -115,10 +116,10 @@ export class MTLSCertificates extends APIResource {
    */
   get(
     mtlsCertificateID: string,
-    params: MTLSCertificateGetParams,
+    params: MTLSCertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MTLSCertificate> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/mtls_certificates/${mtlsCertificateID}`,
@@ -126,6 +127,9 @@ export class MTLSCertificates extends APIResource {
       ) as APIPromise<{ result: MTLSCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class MTLSCertificates extends BaseMTLSCertificates {
+  associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);
 }
 
 export type MTLSCertificatesSinglePage = SinglePage<MTLSCertificate>;
@@ -243,7 +247,7 @@ export interface MTLSCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Indicates whether the certificate is a CA or leaf certificate.
@@ -273,7 +277,7 @@ export interface MTLSCertificateListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filters results by certificate type. Multiple types can be
@@ -286,17 +290,18 @@ export interface MTLSCertificateDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MTLSCertificateGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 MTLSCertificates.Associations = Associations;
+MTLSCertificates.BaseAssociations = BaseAssociations;
 
 export declare namespace MTLSCertificates {
   export {
@@ -311,6 +316,7 @@ export declare namespace MTLSCertificates {
 
   export {
     Associations as Associations,
+    BaseAssociations as BaseAssociations,
     type CertificateAsssociation as CertificateAsssociation,
     type CertificateAsssociationsSinglePage as CertificateAsssociationsSinglePage,
     type AssociationGetParams as AssociationGetParams,

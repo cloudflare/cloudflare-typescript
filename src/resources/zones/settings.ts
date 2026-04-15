@@ -6,7 +6,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['zones', 'settings'] = Object.freeze([
+    'zones',
+    'settings',
+  ] as const);
+
   /**
    * Updates a single zone setting by the identifier
    *
@@ -23,7 +28,7 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: RequestOptions,
   ): APIPromise<SettingEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/settings/${settingID}`, { body, ...options }) as APIPromise<{
         result: SettingEditResponse;
@@ -42,8 +47,12 @@ export class Settings extends APIResource {
    * );
    * ```
    */
-  get(settingID: string, params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
-    const { zone_id } = params;
+  get(
+    settingID: string,
+    params: SettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/settings/${settingID}`, options) as APIPromise<{
         result: SettingGetResponse;
@@ -51,6 +60,7 @@ export class Settings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Settings extends BaseSettings {}
 
 /**
  * Advanced protection from Distributed Denial of Service (DDoS) attacks on your
@@ -3753,7 +3763,7 @@ export declare namespace SettingEditParams {
     /**
      * Path param: Identifier
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: ssl-recommender enrollment setting.
@@ -3765,7 +3775,7 @@ export declare namespace SettingEditParams {
     /**
      * Path param: Identifier
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Value of the zone setting.
@@ -3849,7 +3859,7 @@ export interface SettingGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Settings {

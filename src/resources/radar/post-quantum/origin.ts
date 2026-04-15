@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Origin extends APIResource {
+export class BaseOrigin extends APIResource {
+  static override readonly _key: readonly ['radar', 'postQuantum', 'origin'] = Object.freeze([
+    'radar',
+    'postQuantum',
+    'origin',
+  ] as const);
+
   /**
    * Returns a summary of origin post-quantum data grouped by the specified
    * dimension.
@@ -56,6 +62,7 @@ export class Origin extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Origin extends BaseOrigin {}
 
 export interface OriginSummaryResponse {
   /**

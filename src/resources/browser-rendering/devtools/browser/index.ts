@@ -2,6 +2,7 @@
 
 export {
   Browser,
+  BaseBrowser,
   type BrowserCreateResponse,
   type BrowserDeleteResponse,
   type BrowserProtocolResponse,
@@ -13,9 +14,10 @@ export {
   type BrowserProtocolParams,
   type BrowserVersionParams,
 } from './browser';
-export { Page, type PageGetParams } from './page';
+export { Page, BasePage, type PageGetParams } from './page';
 export {
   Targets,
+  BaseTargets,
   type TargetCreateResponse,
   type TargetListResponse,
   type TargetActivateResponse,

@@ -5,13 +5,14 @@ import * as Shared from '../../shared';
 import { TokensV4PagePaginationArray } from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
+  BasePermissionGroups,
   PermissionGroupListParams,
   PermissionGroupListResponse,
   PermissionGroupListResponsesSinglePage,
   PermissionGroups,
 } from './permission-groups';
 import * as ValueAPI from './value';
-import { Value, ValueUpdateParams } from './value';
+import { BaseValue, Value, ValueUpdateParams } from './value';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -21,11 +22,8 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tokens extends APIResource {
-  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
-    this._client,
-  );
-  value: ValueAPI.Value = new ValueAPI.Value(this._client);
+export class BaseTokens extends APIResource {
+  static override readonly _key: readonly ['user', 'tokens'] = Object.freeze(['user', 'tokens'] as const);
 
   /**
    * Create a new access token.
@@ -152,6 +150,12 @@ export class Tokens extends APIResource {
       this._client.get('/user/tokens/verify', options) as APIPromise<{ result: TokenVerifyResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Tokens extends BaseTokens {
+  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
+    this._client,
+  );
+  value: ValueAPI.Value = new ValueAPI.Value(this._client);
 }
 
 export interface TokenCreateResponse {
@@ -380,7 +384,9 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 }
 
 Tokens.PermissionGroups = PermissionGroups;
+Tokens.BasePermissionGroups = BasePermissionGroups;
 Tokens.Value = Value;
+Tokens.BaseValue = BaseValue;
 
 export declare namespace Tokens {
   export {
@@ -394,12 +400,13 @@ export declare namespace Tokens {
 
   export {
     PermissionGroups as PermissionGroups,
+    BasePermissionGroups as BasePermissionGroups,
     type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
     type PermissionGroupListParams as PermissionGroupListParams,
   };
 
-  export { Value as Value, type ValueUpdateParams as ValueUpdateParams };
+  export { Value as Value, BaseValue as BaseValue, type ValueUpdateParams as ValueUpdateParams };
 }
 
 export { type TokensV4PagePaginationArray };

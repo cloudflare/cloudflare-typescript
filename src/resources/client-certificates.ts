@@ -7,7 +7,11 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class ClientCertificates extends APIResource {
+export class BaseClientCertificates extends APIResource {
+  static override readonly _key: readonly ['clientCertificates'] = Object.freeze([
+    'clientCertificates',
+  ] as const);
+
   /**
    * Create a new API Shield mTLS Client Certificate
    *
@@ -22,7 +26,7 @@ export class ClientCertificates extends APIResource {
    * ```
    */
   create(params: ClientCertificateCreateParams, options?: RequestOptions): APIPromise<ClientCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/client_certificates`, { body, ...options }) as APIPromise<{
         result: ClientCertificate;
@@ -45,10 +49,10 @@ export class ClientCertificates extends APIResource {
    * ```
    */
   list(
-    params: ClientCertificateListParams,
+    params: ClientCertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/client_certificates`,
       V4PagePaginationArray<ClientCertificate>,
@@ -71,10 +75,10 @@ export class ClientCertificates extends APIResource {
    */
   delete(
     clientCertificateID: string,
-    params: ClientCertificateDeleteParams,
+    params: ClientCertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ClientCertificate> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/client_certificates/${clientCertificateID}`,
@@ -101,7 +105,7 @@ export class ClientCertificates extends APIResource {
     params: ClientCertificateEditParams,
     options?: RequestOptions,
   ): APIPromise<ClientCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/client_certificates/${clientCertificateID}`, {
         body,
@@ -124,10 +128,10 @@ export class ClientCertificates extends APIResource {
    */
   get(
     clientCertificateID: string,
-    params: ClientCertificateGetParams,
+    params: ClientCertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ClientCertificate> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/client_certificates/${clientCertificateID}`,
@@ -136,6 +140,7 @@ export class ClientCertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ClientCertificates extends BaseClientCertificates {}
 
 export type ClientCertificatesV4PagePaginationArray = V4PagePaginationArray<ClientCertificate>;
 
@@ -247,7 +252,7 @@ export interface ClientCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The Certificate Signing Request (CSR). Must be newline-encoded.
@@ -265,7 +270,7 @@ export interface ClientCertificateListParams extends V4PagePaginationArrayParams
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Limit to the number of records returned.
@@ -287,14 +292,14 @@ export interface ClientCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ClientCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -306,7 +311,7 @@ export interface ClientCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace ClientCertificates {

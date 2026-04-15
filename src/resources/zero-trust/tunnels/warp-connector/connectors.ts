@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Connectors extends APIResource {
+export class BaseConnectors extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'warpConnector', 'connectors'] =
+    Object.freeze(['zeroTrust', 'tunnels', 'warpConnector', 'connectors'] as const);
+
   /**
    * Fetches connector and connection details for a WARP Connector Tunnel.
    *
@@ -26,7 +29,7 @@ export class Connectors extends APIResource {
     params: ConnectorGetParams,
     options?: RequestOptions,
   ): APIPromise<ConnectorGetResponse> {
-    const { account_id, tunnel_id } = params;
+    const { account_id = this._client.accountID, tunnel_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/warp_connector/${tunnel_id}/connectors/${connectorID}`,
@@ -35,6 +38,7 @@ export class Connectors extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Connectors extends BaseConnectors {}
 
 /**
  * A WARP Connector client that maintains a connection to a Cloudflare data center.
@@ -114,7 +118,7 @@ export interface ConnectorGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * UUID of the tunnel.

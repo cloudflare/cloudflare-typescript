@@ -4,6 +4,7 @@ import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
 import {
+  BaseConsumers,
   Consumer,
   ConsumerCreateParams,
   ConsumerDeleteParams,
@@ -16,6 +17,7 @@ import {
 } from './consumers';
 import * as MessagesAPI from './messages';
 import {
+  BaseMessages,
   MessageAckParams,
   MessageAckResponse,
   MessageBulkPushParams,
@@ -27,9 +29,10 @@ import {
   Messages,
 } from './messages';
 import * as PurgeAPI from './purge';
-import { Purge, PurgeStartParams, PurgeStatusParams, PurgeStatusResponse } from './purge';
+import { BasePurge, Purge, PurgeStartParams, PurgeStatusParams, PurgeStatusResponse } from './purge';
 import * as SubscriptionsAPI from './subscriptions';
 import {
+  BaseSubscriptions,
   SubscriptionCreateParams,
   SubscriptionCreateResponse,
   SubscriptionDeleteParams,
@@ -48,11 +51,8 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Queues extends APIResource {
-  messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
-  purge: PurgeAPI.Purge = new PurgeAPI.Purge(this._client);
-  consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
-  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+export class BaseQueues extends APIResource {
+  static override readonly _key: readonly ['queues'] = Object.freeze(['queues'] as const);
 
   /**
    * Create a new queue
@@ -66,7 +66,7 @@ export class Queues extends APIResource {
    * ```
    */
   create(params: QueueCreateParams, options?: RequestOptions): APIPromise<Queue> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/queues`, { body, ...options }) as APIPromise<{
         result: Queue;
@@ -87,8 +87,12 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  update(queueID: string, params: QueueUpdateParams, options?: RequestOptions): APIPromise<Queue> {
-    const { account_id, ...body } = params;
+  update(
+    queueID: string,
+    params: QueueUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Queue> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/queues/${queueID}`, { body, ...options }) as APIPromise<{
         result: Queue;
@@ -109,8 +113,11 @@ export class Queues extends APIResource {
    * }
    * ```
    */
-  list(params: QueueListParams, options?: RequestOptions): PagePromise<QueuesSinglePage, Queue> {
-    const { account_id } = params;
+  list(
+    params: QueueListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<QueuesSinglePage, Queue> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/queues`, SinglePage<Queue>, options);
   }
 
@@ -127,10 +134,10 @@ export class Queues extends APIResource {
    */
   delete(
     queueID: string,
-    params: QueueDeleteParams,
+    params: QueueDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<QueueDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/queues/${queueID}`, options);
   }
 
@@ -145,8 +152,12 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  edit(queueID: string, params: QueueEditParams, options?: RequestOptions): APIPromise<Queue> {
-    const { account_id, ...body } = params;
+  edit(
+    queueID: string,
+    params: QueueEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Queue> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/queues/${queueID}`, {
         body,
@@ -166,14 +177,24 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  get(queueID: string, params: QueueGetParams, options?: RequestOptions): APIPromise<Queue> {
-    const { account_id } = params;
+  get(
+    queueID: string,
+    params: QueueGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Queue> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/queues/${queueID}`, options) as APIPromise<{
         result: Queue;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Queues extends BaseQueues {
+  messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
+  purge: PurgeAPI.Purge = new PurgeAPI.Purge(this._client);
+  consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 }
 
 export type QueuesSinglePage = SinglePage<Queue>;
@@ -244,7 +265,7 @@ export interface QueueCreateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -256,7 +277,7 @@ export interface QueueUpdateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -292,21 +313,21 @@ export interface QueueListParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface QueueDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface QueueEditParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -342,13 +363,17 @@ export interface QueueGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Queues.Messages = Messages;
+Queues.BaseMessages = BaseMessages;
 Queues.Purge = Purge;
+Queues.BasePurge = BasePurge;
 Queues.Consumers = Consumers;
+Queues.BaseConsumers = BaseConsumers;
 Queues.Subscriptions = Subscriptions;
+Queues.BaseSubscriptions = BaseSubscriptions;
 
 export declare namespace Queues {
   export {
@@ -365,6 +390,7 @@ export declare namespace Queues {
 
   export {
     Messages as Messages,
+    BaseMessages as BaseMessages,
     type MessageAckResponse as MessageAckResponse,
     type MessageBulkPushResponse as MessageBulkPushResponse,
     type MessagePullResponse as MessagePullResponse,
@@ -377,6 +403,7 @@ export declare namespace Queues {
 
   export {
     Purge as Purge,
+    BasePurge as BasePurge,
     type PurgeStatusResponse as PurgeStatusResponse,
     type PurgeStartParams as PurgeStartParams,
     type PurgeStatusParams as PurgeStatusParams,
@@ -384,6 +411,7 @@ export declare namespace Queues {
 
   export {
     Consumers as Consumers,
+    BaseConsumers as BaseConsumers,
     type Consumer as Consumer,
     type ConsumerDeleteResponse as ConsumerDeleteResponse,
     type ConsumersSinglePage as ConsumersSinglePage,
@@ -396,6 +424,7 @@ export declare namespace Queues {
 
   export {
     Subscriptions as Subscriptions,
+    BaseSubscriptions as BaseSubscriptions,
     type SubscriptionCreateResponse as SubscriptionCreateResponse,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionListResponse as SubscriptionListResponse,

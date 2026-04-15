@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class UniqueDevices extends APIResource {
+export class BaseUniqueDevices extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'tests', 'uniqueDevices'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'tests',
+    'uniqueDevices',
+  ] as const);
+
   /**
    * Returns unique count of devices that have run synthetic application monitoring
    * tests in the past 7 days.
@@ -18,8 +25,11 @@ export class UniqueDevices extends APIResource {
    *   });
    * ```
    */
-  list(params: UniqueDeviceListParams, options?: RequestOptions): APIPromise<UniqueDevices> {
-    const { account_id, ...query } = params;
+  list(
+    params: UniqueDeviceListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UniqueDevices> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dex/tests/unique-devices`, {
         query,
@@ -28,6 +38,7 @@ export class UniqueDevices extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class UniqueDevices extends BaseUniqueDevices {}
 
 export interface UniqueDevices {
   /**
@@ -40,7 +51,7 @@ export interface UniqueDeviceListParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter result stats to a specific device(s). Cannot be

@@ -14,6 +14,7 @@ import {
   AssetUpdateParams,
   AssetUpdateResponse,
   Assets,
+  BaseAssets,
 } from './assets';
 import { APIPromise } from '../../core/api-promise';
 import { CloudflareError } from '../../core/error';
@@ -21,8 +22,8 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CustomPages extends APIResource {
-  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
+export class BaseCustomPages extends APIResource {
+  static override readonly _key: readonly ['customPages'] = Object.freeze(['customPages'] as const);
 
   /**
    * Updates the configuration of an existing custom page.
@@ -54,7 +55,11 @@ export class CustomPages extends APIResource {
     params: CustomPageUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CustomPageUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -96,7 +101,8 @@ export class CustomPages extends APIResource {
     params: CustomPageListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomPageListResponsesSinglePage, CustomPageListResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -146,7 +152,8 @@ export class CustomPages extends APIResource {
     params: CustomPageGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomPageGetResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -170,6 +177,9 @@ export class CustomPages extends APIResource {
       ) as APIPromise<{ result: CustomPageGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class CustomPages extends BaseCustomPages {
+  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
 }
 
 export type CustomPageListResponsesSinglePage = SinglePage<CustomPageListResponse>;
@@ -295,6 +305,7 @@ export interface CustomPageGetParams {
 }
 
 CustomPages.Assets = Assets;
+CustomPages.BaseAssets = BaseAssets;
 
 export declare namespace CustomPages {
   export {
@@ -309,6 +320,7 @@ export declare namespace CustomPages {
 
   export {
     Assets as Assets,
+    BaseAssets as BaseAssets,
     type AssetCreateResponse as AssetCreateResponse,
     type AssetUpdateResponse as AssetUpdateResponse,
     type AssetListResponse as AssetListResponse,

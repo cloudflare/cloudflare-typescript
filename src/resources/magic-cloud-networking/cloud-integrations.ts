@@ -7,7 +7,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CloudIntegrations extends APIResource {
+export class BaseCloudIntegrations extends APIResource {
+  static override readonly _key: readonly ['magicCloudNetworking', 'cloudIntegrations'] = Object.freeze([
+    'magicCloudNetworking',
+    'cloudIntegrations',
+  ] as const);
+
   /**
    * Create a new Cloud Integration (Closed Beta).
    */
@@ -15,7 +20,7 @@ export class CloudIntegrations extends APIResource {
     params: CloudIntegrationCreateParams,
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationCreateResponse> {
-    const { account_id, forwarded, ...body } = params;
+    const { account_id = this._client.accountID, forwarded, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/cloud/providers`, {
         body,
@@ -36,7 +41,7 @@ export class CloudIntegrations extends APIResource {
     params: CloudIntegrationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/cloud/providers/${providerID}`, {
         body,
@@ -49,10 +54,10 @@ export class CloudIntegrations extends APIResource {
    * List Cloud Integrations (Closed Beta).
    */
   list(
-    params: CloudIntegrationListParams,
+    params: CloudIntegrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CloudIntegrationListResponsesSinglePage, CloudIntegrationListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/cloud/providers`,
       SinglePage<CloudIntegrationListResponse>,
@@ -65,10 +70,10 @@ export class CloudIntegrations extends APIResource {
    */
   delete(
     providerID: string,
-    params: CloudIntegrationDeleteParams,
+    params: CloudIntegrationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/magic/cloud/providers/${providerID}`,
@@ -82,10 +87,10 @@ export class CloudIntegrations extends APIResource {
    */
   discover(
     providerID: string,
-    params: CloudIntegrationDiscoverParams,
+    params: CloudIntegrationDiscoverParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationDiscoverResponse> {
-    const { account_id, v2 } = params;
+    const { account_id = this._client.accountID, v2 } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/magic/cloud/providers/${providerID}/discover`, {
       query: { v2 },
       ...options,
@@ -96,10 +101,10 @@ export class CloudIntegrations extends APIResource {
    * Run discovery for all Cloud Integrations in an account (Closed Beta).
    */
   discoverAll(
-    params: CloudIntegrationDiscoverAllParams,
+    params: CloudIntegrationDiscoverAllParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationDiscoverAllResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/magic/cloud/providers/discover`, options);
   }
 
@@ -111,7 +116,7 @@ export class CloudIntegrations extends APIResource {
     params: CloudIntegrationEditParams,
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/cloud/providers/${providerID}`, {
         body,
@@ -125,10 +130,10 @@ export class CloudIntegrations extends APIResource {
    */
   get(
     providerID: string,
-    params: CloudIntegrationGetParams,
+    params: CloudIntegrationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/cloud/providers/${providerID}`, {
         query,
@@ -142,10 +147,10 @@ export class CloudIntegrations extends APIResource {
    */
   initialSetup(
     providerID: string,
-    params: CloudIntegrationInitialSetupParams,
+    params: CloudIntegrationInitialSetupParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CloudIntegrationInitialSetupResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/cloud/providers/${providerID}/initial_setup`,
@@ -154,6 +159,7 @@ export class CloudIntegrations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CloudIntegrations extends BaseCloudIntegrations {}
 
 export type CloudIntegrationListResponsesSinglePage = SinglePage<CloudIntegrationListResponse>;
 
@@ -1424,7 +1430,7 @@ export interface CloudIntegrationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1451,7 +1457,7 @@ export interface CloudIntegrationUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1493,7 +1499,7 @@ export interface CloudIntegrationListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1517,14 +1523,14 @@ export interface CloudIntegrationListParams {
 }
 
 export interface CloudIntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CloudIntegrationDiscoverParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1533,14 +1539,14 @@ export interface CloudIntegrationDiscoverParams {
 }
 
 export interface CloudIntegrationDiscoverAllParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CloudIntegrationEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -1582,7 +1588,7 @@ export interface CloudIntegrationGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1591,7 +1597,7 @@ export interface CloudIntegrationGetParams {
 }
 
 export interface CloudIntegrationInitialSetupParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace CloudIntegrations {

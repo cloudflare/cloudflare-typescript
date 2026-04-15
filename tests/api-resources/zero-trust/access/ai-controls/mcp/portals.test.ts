@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Mcp } from 'cloudflare/resources/zero-trust/access/ai-controls/mcp/mcp';
+import { BasePortals } from 'cloudflare/resources/zero-trust/access/ai-controls/mcp/portals';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource portals', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePortals],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Mcp],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { access: { aiControls: { mcp: { portals: BasePortals } } } } }>,
+) => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.aiControls.mcp.portals.create({
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
@@ -166,4 +186,7 @@ describe('resource portals', () => {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
     });
   });
-});
+};
+describe('resource portals', () => runTests(client));
+describe('resource portals (tree shakable, base)', () => runTests(partialClient));
+describe('resource portals (tree shakable, subresource)', () => runTests(parentPartialClient));

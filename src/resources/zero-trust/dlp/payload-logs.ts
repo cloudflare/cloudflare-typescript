@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class PayloadLogs extends APIResource {
+export class BasePayloadLogs extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'payloadLogs'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'payloadLogs',
+  ] as const);
+
   /**
    * Enables or disables payload logging for DLP matches. When enabled, matched
    * content is stored for review.
@@ -18,8 +24,11 @@ export class PayloadLogs extends APIResource {
    *   });
    * ```
    */
-  update(params: PayloadLogUpdateParams, options?: RequestOptions): APIPromise<PayloadLogUpdateResponse> {
-    const { account_id, ...body } = params;
+  update(
+    params: PayloadLogUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PayloadLogUpdateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/dlp/payload_log`, { body, ...options }) as APIPromise<{
         result: PayloadLogUpdateResponse;
@@ -39,8 +48,11 @@ export class PayloadLogs extends APIResource {
    *   });
    * ```
    */
-  get(params: PayloadLogGetParams, options?: RequestOptions): APIPromise<PayloadLogGetResponse> {
-    const { account_id } = params;
+  get(
+    params: PayloadLogGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PayloadLogGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/payload_log`, options) as APIPromise<{
         result: PayloadLogGetResponse;
@@ -48,6 +60,7 @@ export class PayloadLogs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class PayloadLogs extends BasePayloadLogs {}
 
 export interface PayloadLogUpdateResponse {
   updated_at: string;
@@ -93,7 +106,7 @@ export interface PayloadLogUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Masking level for payload logs.
@@ -124,7 +137,7 @@ export interface PayloadLogUpdateParams {
 }
 
 export interface PayloadLogGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace PayloadLogs {

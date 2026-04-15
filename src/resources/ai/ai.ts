@@ -2,11 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as AuthorsAPI from './authors';
-import { AuthorListParams, AuthorListResponse, AuthorListResponsesSinglePage, Authors } from './authors';
+import {
+  AuthorListParams,
+  AuthorListResponse,
+  AuthorListResponsesSinglePage,
+  Authors,
+  BaseAuthors,
+} from './authors';
 import * as TasksAPI from './tasks';
-import { TaskListParams, TaskListResponse, TaskListResponsesSinglePage, Tasks } from './tasks';
+import { BaseTasks, TaskListParams, TaskListResponse, TaskListResponsesSinglePage, Tasks } from './tasks';
 import * as ToMarkdownAPI from './to-markdown';
 import {
+  BaseToMarkdown,
   ToMarkdown,
   ToMarkdownSupportedParams,
   ToMarkdownSupportedResponse,
@@ -17,6 +24,7 @@ import {
 } from './to-markdown';
 import * as FinetunesAPI from './finetunes/finetunes';
 import {
+  BaseFinetunes,
   FinetuneCreateParams,
   FinetuneCreateResponse,
   FinetuneListParams,
@@ -25,6 +33,7 @@ import {
 } from './finetunes/finetunes';
 import * as ModelsAPI from './models/models';
 import {
+  BaseModels,
   ModelListParams,
   ModelListResponse,
   ModelListResponsesV4PagePaginationArray,
@@ -35,12 +44,8 @@ import { type Uploadable } from '../../core/uploads';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AI extends APIResource {
-  finetunes: FinetunesAPI.Finetunes = new FinetunesAPI.Finetunes(this._client);
-  authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
-  tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
-  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
-  toMarkdown: ToMarkdownAPI.ToMarkdown = new ToMarkdownAPI.ToMarkdown(this._client);
+export class BaseAI extends APIResource {
+  static override readonly _key: readonly ['ai'] = Object.freeze(['ai'] as const);
 
   /**
    * This endpoint provides users with the capability to run specific AI models
@@ -53,8 +58,12 @@ export class AI extends APIResource {
    * Model specific inputs available in
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
-  run(modelName: string, params: AIRunParams, options?: RequestOptions): APIPromise<AIRunResponse> {
-    const { account_id, ...body } = params;
+  run(
+    modelName: string,
+    params: AIRunParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AIRunResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/ai/run/${modelName}`, {
         body,
@@ -62,6 +71,13 @@ export class AI extends APIResource {
       }) as APIPromise<{ result: AIRunResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class AI extends BaseAI {
+  finetunes: FinetunesAPI.Finetunes = new FinetunesAPI.Finetunes(this._client);
+  authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
+  tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
+  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
+  toMarkdown: ToMarkdownAPI.ToMarkdown = new ToMarkdownAPI.ToMarkdown(this._client);
 }
 
 /**
@@ -302,7 +318,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text that you want to classify
@@ -314,7 +330,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A text description of the image you want to generate
@@ -383,7 +399,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A text description of the audio you want to generate
@@ -401,7 +417,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text to embed
@@ -413,7 +429,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the audio data constrained to
@@ -437,7 +453,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -450,7 +466,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -463,7 +479,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The input text prompt for the model to generate a response.
@@ -552,7 +568,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of message objects representing the conversation history.
@@ -800,7 +816,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The language code to translate the text into (e.g., 'es' for
@@ -824,7 +840,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text that you want the model to summarize
@@ -841,7 +857,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -911,7 +927,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -980,7 +996,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -1094,7 +1110,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -1109,16 +1125,22 @@ export declare namespace AIRunParams {
 }
 
 AI.Finetunes = Finetunes;
+AI.BaseFinetunes = BaseFinetunes;
 AI.Authors = Authors;
+AI.BaseAuthors = BaseAuthors;
 AI.Tasks = Tasks;
+AI.BaseTasks = BaseTasks;
 AI.Models = Models;
+AI.BaseModels = BaseModels;
 AI.ToMarkdown = ToMarkdown;
+AI.BaseToMarkdown = BaseToMarkdown;
 
 export declare namespace AI {
   export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
 
   export {
     Finetunes as Finetunes,
+    BaseFinetunes as BaseFinetunes,
     type FinetuneCreateResponse as FinetuneCreateResponse,
     type FinetuneListResponse as FinetuneListResponse,
     type FinetuneCreateParams as FinetuneCreateParams,
@@ -1127,6 +1149,7 @@ export declare namespace AI {
 
   export {
     Authors as Authors,
+    BaseAuthors as BaseAuthors,
     type AuthorListResponse as AuthorListResponse,
     type AuthorListResponsesSinglePage as AuthorListResponsesSinglePage,
     type AuthorListParams as AuthorListParams,
@@ -1134,6 +1157,7 @@ export declare namespace AI {
 
   export {
     Tasks as Tasks,
+    BaseTasks as BaseTasks,
     type TaskListResponse as TaskListResponse,
     type TaskListResponsesSinglePage as TaskListResponsesSinglePage,
     type TaskListParams as TaskListParams,
@@ -1141,6 +1165,7 @@ export declare namespace AI {
 
   export {
     Models as Models,
+    BaseModels as BaseModels,
     type ModelListResponse as ModelListResponse,
     type ModelListResponsesV4PagePaginationArray as ModelListResponsesV4PagePaginationArray,
     type ModelListParams as ModelListParams,
@@ -1148,6 +1173,7 @@ export declare namespace AI {
 
   export {
     ToMarkdown as ToMarkdown,
+    BaseToMarkdown as BaseToMarkdown,
     type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
     type ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,

@@ -7,7 +7,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AccessRules extends APIResource {
+export class BaseAccessRules extends APIResource {
+  static override readonly _key: readonly ['firewall', 'accessRules'] = Object.freeze([
+    'firewall',
+    'accessRules',
+  ] as const);
+
   /**
    * Creates a new IP Access rule for an account or zone. The rule will apply to all
    * zones in the account or zone.
@@ -27,7 +32,11 @@ export class AccessRules extends APIResource {
    * ```
    */
   create(params: AccessRuleCreateParams, options?: RequestOptions): APIPromise<AccessRuleCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -71,7 +80,11 @@ export class AccessRules extends APIResource {
     params: AccessRuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -113,7 +126,8 @@ export class AccessRules extends APIResource {
     params: AccessRuleDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AccessRuleDeleteResponse | null> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -160,7 +174,11 @@ export class AccessRules extends APIResource {
     params: AccessRuleEditParams,
     options?: RequestOptions,
   ): APIPromise<AccessRuleEditResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -201,7 +219,8 @@ export class AccessRules extends APIResource {
     params: AccessRuleGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AccessRuleGetResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -226,6 +245,7 @@ export class AccessRules extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AccessRules extends BaseAccessRules {}
 
 export type AccessRuleListResponsesV4PagePaginationArray = V4PagePaginationArray<AccessRuleListResponse>;
 

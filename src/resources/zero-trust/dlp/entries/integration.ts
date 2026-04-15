@@ -7,7 +7,14 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Integration extends APIResource {
+export class BaseIntegration extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'entries', 'integration'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'entries',
+    'integration',
+  ] as const);
+
   /**
    * Integration entries can't be created, this will update an existing integration
    * entry. This is needed for our generated terraform API.
@@ -23,7 +30,7 @@ export class Integration extends APIResource {
    * ```
    */
   create(params: IntegrationCreateParams, options?: RequestOptions): APIPromise<IntegrationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/entries/integration`, {
         body,
@@ -49,7 +56,7 @@ export class Integration extends APIResource {
     params: IntegrationUpdateParams,
     options?: RequestOptions,
   ): APIPromise<IntegrationUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dlp/entries/integration/${entryID}`, {
         body,
@@ -72,10 +79,10 @@ export class Integration extends APIResource {
    * ```
    */
   list(
-    params: IntegrationListParams,
+    params: IntegrationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dlp/entries`,
       SinglePage<IntegrationListResponse>,
@@ -98,10 +105,10 @@ export class Integration extends APIResource {
    */
   delete(
     entryID: string,
-    params: IntegrationDeleteParams,
+    params: IntegrationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IntegrationDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/dlp/entries/integration/${entryID}`,
@@ -124,10 +131,10 @@ export class Integration extends APIResource {
    */
   get(
     entryID: string,
-    params: IntegrationGetParams,
+    params: IntegrationGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IntegrationGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/entries/${entryID}`, options) as APIPromise<{
         result: IntegrationGetResponse;
@@ -135,6 +142,7 @@ export class Integration extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Integration extends BaseIntegration {}
 
 export type IntegrationListResponsesSinglePage = SinglePage<IntegrationListResponse>;
 
@@ -568,7 +576,7 @@ export interface IntegrationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -591,7 +599,7 @@ export interface IntegrationUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -600,15 +608,15 @@ export interface IntegrationUpdateParams {
 }
 
 export interface IntegrationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IntegrationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Integration {

@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Quota extends APIResource {
+export class BaseQuota extends APIResource {
+  static override readonly _key: readonly ['ssl', 'certificatePacks', 'quota'] = Object.freeze([
+    'ssl',
+    'certificatePacks',
+    'quota',
+  ] as const);
+
   /**
    * For a given zone, list certificate pack quotas.
    *
@@ -16,8 +22,11 @@ export class Quota extends APIResource {
    * });
    * ```
    */
-  get(params: QuotaGetParams, options?: RequestOptions): APIPromise<QuotaGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: QuotaGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<QuotaGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/ssl/certificate_packs/quota`, options) as APIPromise<{
         result: QuotaGetResponse;
@@ -25,6 +34,7 @@ export class Quota extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Quota extends BaseQuota {}
 
 export interface QuotaGetResponse {
   advanced?: QuotaGetResponse.Advanced;
@@ -48,7 +58,7 @@ export interface QuotaGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Quota {

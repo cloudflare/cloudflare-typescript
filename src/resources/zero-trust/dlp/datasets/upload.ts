@@ -7,7 +7,14 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Upload extends APIResource {
+export class BaseUpload extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'datasets', 'upload'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'datasets',
+    'upload',
+  ] as const);
+
   /**
    * Creates a new version of a DLP dataset, allowing you to stage changes before
    * activation. Used for single-column EDM and custom word lists.
@@ -21,8 +28,12 @@ export class Upload extends APIResource {
    *   );
    * ```
    */
-  create(datasetID: string, params: UploadCreateParams, options?: RequestOptions): APIPromise<NewVersion> {
-    const { account_id } = params;
+  create(
+    datasetID: string,
+    params: UploadCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<NewVersion> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/dlp/datasets/${datasetID}/upload`,
@@ -56,7 +67,7 @@ export class Upload extends APIResource {
     params: UploadEditParams,
     options?: RequestOptions,
   ): APIPromise<DatasetsAPI.Dataset> {
-    const { account_id, dataset_id } = params;
+    const { account_id = this._client.accountID, dataset_id } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/datasets/${dataset_id}/upload/${version}`, {
         body: dataset,
@@ -66,6 +77,7 @@ export class Upload extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Upload extends BaseUpload {}
 
 export interface NewVersion {
   encoding_version: number;
@@ -94,14 +106,14 @@ export namespace NewVersion {
 }
 
 export interface UploadCreateParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface UploadEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param

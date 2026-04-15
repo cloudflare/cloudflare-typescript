@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class RegionalTieredCacheResource extends APIResource {
+export class BaseRegionalTieredCacheResource extends APIResource {
+  static override readonly _key: readonly ['cache', 'regionalTieredCache'] = Object.freeze([
+    'cache',
+    'regionalTieredCache',
+  ] as const);
+
   /**
    * Instructs Cloudflare to check a regional hub data center on the way to your
    * upper tier. This can help improve performance for smart and custom tiered cache
@@ -24,7 +29,7 @@ export class RegionalTieredCacheResource extends APIResource {
     params: RegionalTieredCacheEditParams,
     options?: RequestOptions,
   ): APIPromise<RegionalTieredCacheEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/regional_tiered_cache`, {
         body,
@@ -47,10 +52,10 @@ export class RegionalTieredCacheResource extends APIResource {
    * ```
    */
   get(
-    params: RegionalTieredCacheGetParams,
+    params: RegionalTieredCacheGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RegionalTieredCacheGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/cache/regional_tiered_cache`, options) as APIPromise<{
         result: RegionalTieredCacheGetResponse;
@@ -58,6 +63,7 @@ export class RegionalTieredCacheResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class RegionalTieredCacheResource extends BaseRegionalTieredCacheResource {}
 
 /**
  * The identifier of the caching setting.
@@ -112,7 +118,7 @@ export interface RegionalTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Value of the Regional Tiered Cache zone setting.
@@ -124,7 +130,7 @@ export interface RegionalTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace RegionalTieredCacheResource {

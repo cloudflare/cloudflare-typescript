@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Devtools } from 'cloudflare/resources/browser-rendering/devtools/devtools';
+import { BaseSession } from 'cloudflare/resources/browser-rendering/devtools/session';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource session', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSession],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Devtools],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ browserRendering: { devtools: { session: BaseSession } } }>,
+) => {
   test('list: only required params', async () => {
     const responsePromise = client.browserRendering.devtools.session.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -48,4 +68,7 @@ describe('resource session', () => {
       { account_id: 'account_id' },
     );
   });
-});
+};
+describe('resource session', () => runTests(client));
+describe('resource session (tree shakable, base)', () => runTests(partialClient));
+describe('resource session (tree shakable, subresource)', () => runTests(parentPartialClient));

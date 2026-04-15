@@ -2,6 +2,7 @@
 
 export {
   Versions,
+  BaseVersions,
   type Version,
   type VersionDeleteResponse,
   type VersionCreateParams,
@@ -12,6 +13,7 @@ export {
 } from './versions';
 export {
   Workers,
+  BaseWorkers,
   type Worker,
   type WorkerDeleteResponse,
   type WorkerCreateParams,

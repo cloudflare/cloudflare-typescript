@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Trace extends APIResource {
+export class BaseTrace extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'investigate', 'trace'] = Object.freeze([
+    'emailSecurity',
+    'investigate',
+    'trace',
+  ] as const);
+
   /**
    * Gets the delivery trace for an email message, showing its path through email
    * security processing.
@@ -19,8 +25,12 @@ export class Trace extends APIResource {
    *   );
    * ```
    */
-  get(postfixID: string, params: TraceGetParams, options?: RequestOptions): APIPromise<TraceGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    postfixID: string,
+    params: TraceGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TraceGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/email-security/investigate/${postfixID}/trace`, {
         query,
@@ -29,6 +39,7 @@ export class Trace extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Trace extends BaseTrace {}
 
 export interface TraceGetResponse {
   inbound: TraceGetResponse.Inbound;
@@ -74,7 +85,7 @@ export interface TraceGetParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: When true, search the submissions datastore only. When false or

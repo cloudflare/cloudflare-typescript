@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { AS112 } from 'cloudflare/resources/radar/as112/as112';
+import { BaseTimeseriesGroups } from 'cloudflare/resources/radar/as112/timeseries-groups';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource timeseriesGroups', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTimeseriesGroups],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [AS112],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { as112: { timeseriesGroups: BaseTimeseriesGroups } } }>,
+) => {
   test('dnssec', async () => {
     const responsePromise = client.radar.as112.timeseriesGroups.dnssec();
     const rawResponse = await responsePromise.asResponse();
@@ -205,4 +225,7 @@ describe('resource timeseriesGroups', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource timeseriesGroups', () => runTests(client));
+describe('resource timeseriesGroups (tree shakable, base)', () => runTests(partialClient));
+describe('resource timeseriesGroups (tree shakable, subresource)', () => runTests(parentPartialClient));

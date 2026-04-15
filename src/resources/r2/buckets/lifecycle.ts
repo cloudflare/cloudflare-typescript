@@ -6,7 +6,13 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Lifecycle extends APIResource {
+export class BaseLifecycle extends APIResource {
+  static override readonly _key: readonly ['r2', 'buckets', 'lifecycle'] = Object.freeze([
+    'r2',
+    'buckets',
+    'lifecycle',
+  ] as const);
+
   /**
    * Set the object lifecycle rules for a bucket.
    *
@@ -23,7 +29,7 @@ export class Lifecycle extends APIResource {
     params: LifecycleUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LifecycleUpdateResponse> {
-    const { account_id, jurisdiction, ...body } = params;
+    const { account_id = this._client.accountID, jurisdiction, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/r2/buckets/${bucketName}/lifecycle`, {
         body,
@@ -53,10 +59,10 @@ export class Lifecycle extends APIResource {
    */
   get(
     bucketName: string,
-    params: LifecycleGetParams,
+    params: LifecycleGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LifecycleGetResponse> {
-    const { account_id, jurisdiction } = params;
+    const { account_id = this._client.accountID, jurisdiction } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2/buckets/${bucketName}/lifecycle`, {
         ...options,
@@ -72,6 +78,7 @@ export class Lifecycle extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Lifecycle extends BaseLifecycle {}
 
 export type LifecycleUpdateResponse = unknown;
 
@@ -221,7 +228,7 @@ export interface LifecycleUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -377,7 +384,7 @@ export interface LifecycleGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

@@ -5,6 +5,7 @@ import * as Shared from '../../../shared';
 import { CloudflareTunnelsV4PagePaginationArray } from '../../../shared';
 import * as ConfigurationsAPI from './configurations';
 import {
+  BaseConfigurations,
   ConfigurationGetParams,
   ConfigurationGetResponse,
   ConfigurationUpdateParams,
@@ -13,6 +14,7 @@ import {
 } from './configurations';
 import * as ConnectionsAPI from './connections';
 import {
+  BaseConnections,
   Client,
   ClientsSinglePage,
   ConnectionDeleteParams,
@@ -21,11 +23,11 @@ import {
   Connections,
 } from './connections';
 import * as ConnectorsAPI from './connectors';
-import { ConnectorGetParams, Connectors } from './connectors';
+import { BaseConnectors, ConnectorGetParams, Connectors } from './connectors';
 import * as ManagementAPI from './management';
-import { Management, ManagementCreateParams, ManagementCreateResponse } from './management';
+import { BaseManagement, Management, ManagementCreateParams, ManagementCreateResponse } from './management';
 import * as TokenAPI from './token';
-import { Token, TokenGetParams, TokenGetResponse } from './token';
+import { BaseToken, Token, TokenGetParams, TokenGetResponse } from './token';
 import { APIPromise } from '../../../../core/api-promise';
 import {
   PagePromise,
@@ -35,12 +37,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Cloudflared extends APIResource {
-  configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
-  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
-  token: TokenAPI.Token = new TokenAPI.Token(this._client);
-  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
-  management: ManagementAPI.Management = new ManagementAPI.Management(this._client);
+export class BaseCloudflared extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'cloudflared'] = Object.freeze([
+    'zeroTrust',
+    'tunnels',
+    'cloudflared',
+  ] as const);
 
   /**
    * Creates a new Cloudflare Tunnel in an account.
@@ -55,7 +57,7 @@ export class Cloudflared extends APIResource {
    * ```
    */
   create(params: CloudflaredCreateParams, options?: RequestOptions): APIPromise<Shared.CloudflareTunnel> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/cfd_tunnel`, { body, ...options }) as APIPromise<{
         result: Shared.CloudflareTunnel;
@@ -77,10 +79,10 @@ export class Cloudflared extends APIResource {
    * ```
    */
   list(
-    params: CloudflaredListParams,
+    params: CloudflaredListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CloudflareTunnelsV4PagePaginationArray, Shared.CloudflareTunnel> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/cfd_tunnel`,
       V4PagePaginationArray<Shared.CloudflareTunnel>,
@@ -102,10 +104,10 @@ export class Cloudflared extends APIResource {
    */
   delete(
     tunnelID: string,
-    params: CloudflaredDeleteParams,
+    params: CloudflaredDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.CloudflareTunnel> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}`, options) as APIPromise<{
         result: Shared.CloudflareTunnel;
@@ -130,7 +132,7 @@ export class Cloudflared extends APIResource {
     params: CloudflaredEditParams,
     options?: RequestOptions,
   ): APIPromise<Shared.CloudflareTunnel> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}`, {
         body,
@@ -153,10 +155,10 @@ export class Cloudflared extends APIResource {
    */
   get(
     tunnelID: string,
-    params: CloudflaredGetParams,
+    params: CloudflaredGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.CloudflareTunnel> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}`, options) as APIPromise<{
         result: Shared.CloudflareTunnel;
@@ -164,12 +166,19 @@ export class Cloudflared extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Cloudflared extends BaseCloudflared {
+  configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
+  connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
+  token: TokenAPI.Token = new TokenAPI.Token(this._client);
+  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
+  management: ManagementAPI.Management = new ManagementAPI.Management(this._client);
+}
 
 export interface CloudflaredCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -194,7 +203,7 @@ export interface CloudflaredListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -252,14 +261,14 @@ export interface CloudflaredDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface CloudflaredEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -277,14 +286,19 @@ export interface CloudflaredGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Cloudflared.Configurations = Configurations;
+Cloudflared.BaseConfigurations = BaseConfigurations;
 Cloudflared.Connections = Connections;
+Cloudflared.BaseConnections = BaseConnections;
 Cloudflared.Token = Token;
+Cloudflared.BaseToken = BaseToken;
 Cloudflared.Connectors = Connectors;
+Cloudflared.BaseConnectors = BaseConnectors;
 Cloudflared.Management = Management;
+Cloudflared.BaseManagement = BaseManagement;
 
 export declare namespace Cloudflared {
   export {
@@ -297,6 +311,7 @@ export declare namespace Cloudflared {
 
   export {
     Configurations as Configurations,
+    BaseConfigurations as BaseConfigurations,
     type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
     type ConfigurationGetResponse as ConfigurationGetResponse,
     type ConfigurationUpdateParams as ConfigurationUpdateParams,
@@ -305,6 +320,7 @@ export declare namespace Cloudflared {
 
   export {
     Connections as Connections,
+    BaseConnections as BaseConnections,
     type Client as Client,
     type ConnectionDeleteResponse as ConnectionDeleteResponse,
     type ClientsSinglePage as ClientsSinglePage,
@@ -312,12 +328,22 @@ export declare namespace Cloudflared {
     type ConnectionGetParams as ConnectionGetParams,
   };
 
-  export { Token as Token, type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
+  export {
+    Token as Token,
+    BaseToken as BaseToken,
+    type TokenGetResponse as TokenGetResponse,
+    type TokenGetParams as TokenGetParams,
+  };
 
-  export { Connectors as Connectors, type ConnectorGetParams as ConnectorGetParams };
+  export {
+    Connectors as Connectors,
+    BaseConnectors as BaseConnectors,
+    type ConnectorGetParams as ConnectorGetParams,
+  };
 
   export {
     Management as Management,
+    BaseManagement as BaseManagement,
     type ManagementCreateResponse as ManagementCreateResponse,
     type ManagementCreateParams as ManagementCreateParams,
   };

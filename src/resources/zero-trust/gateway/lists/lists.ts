@@ -2,14 +2,18 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ItemsAPI from './items';
-import { ItemListParams, ItemListResponse, ItemListResponsesSinglePage, Items } from './items';
+import { BaseItems, ItemListParams, ItemListResponse, ItemListResponsesSinglePage, Items } from './items';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Lists extends APIResource {
-  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
+export class BaseLists extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'lists'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'lists',
+  ] as const);
 
   /**
    * Creates a new Zero Trust list.
@@ -24,7 +28,7 @@ export class Lists extends APIResource {
    * ```
    */
   create(params: ListCreateParams, options?: RequestOptions): APIPromise<ListCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/lists`, { body, ...options }) as APIPromise<{
         result: ListCreateResponse;
@@ -49,7 +53,7 @@ export class Lists extends APIResource {
    * ```
    */
   update(listID: string, params: ListUpdateParams, options?: RequestOptions): APIPromise<GatewayList> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/gateway/lists/${listID}`, {
         body,
@@ -71,8 +75,11 @@ export class Lists extends APIResource {
    * }
    * ```
    */
-  list(params: ListListParams, options?: RequestOptions): PagePromise<GatewayListsSinglePage, GatewayList> {
-    const { account_id, ...query } = params;
+  list(
+    params: ListListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<GatewayListsSinglePage, GatewayList> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/gateway/lists`, SinglePage<GatewayList>, {
       query,
       ...options,
@@ -90,8 +97,12 @@ export class Lists extends APIResource {
    * );
    * ```
    */
-  delete(listID: string, params: ListDeleteParams, options?: RequestOptions): APIPromise<ListDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    listID: string,
+    params: ListDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ListDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/gateway/lists/${listID}`, options) as APIPromise<{
         result: ListDeleteResponse;
@@ -112,7 +123,7 @@ export class Lists extends APIResource {
    * ```
    */
   edit(listID: string, params: ListEditParams, options?: RequestOptions): APIPromise<GatewayList> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/gateway/lists/${listID}`, {
         body,
@@ -133,14 +144,21 @@ export class Lists extends APIResource {
    *   );
    * ```
    */
-  get(listID: string, params: ListGetParams, options?: RequestOptions): APIPromise<GatewayList> {
-    const { account_id } = params;
+  get(
+    listID: string,
+    params: ListGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<GatewayList> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/lists/${listID}`, options) as APIPromise<{
         result: GatewayList;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Lists extends BaseLists {
+  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 }
 
 export type GatewayListsSinglePage = SinglePage<GatewayList>;
@@ -232,7 +250,7 @@ export interface ListCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the list name.
@@ -273,7 +291,7 @@ export interface ListUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the list name.
@@ -309,7 +327,7 @@ export interface ListListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Specify the list type.
@@ -318,14 +336,14 @@ export interface ListListParams {
 }
 
 export interface ListDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ListEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Add items to the list.
@@ -353,10 +371,11 @@ export namespace ListEditParams {
 }
 
 export interface ListGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Lists.Items = Items;
+Lists.BaseItems = BaseItems;
 
 export declare namespace Lists {
   export {
@@ -375,6 +394,7 @@ export declare namespace Lists {
 
   export {
     Items as Items,
+    BaseItems as BaseItems,
     type ItemListResponse as ItemListResponse,
     type ItemListResponsesSinglePage as ItemListResponsesSinglePage,
     type ItemListParams as ItemListParams,

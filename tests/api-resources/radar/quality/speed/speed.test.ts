@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Quality } from 'cloudflare/resources/radar/quality/quality';
+import { BaseSpeed } from 'cloudflare/resources/radar/quality/speed/speed';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource speed', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSpeed],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Quality],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { quality: { speed: BaseSpeed } } }>) => {
   test('histogram', async () => {
     const responsePromise = client.radar.quality.speed.histogram();
     const rawResponse = await responsePromise.asResponse();
@@ -66,4 +84,7 @@ describe('resource speed', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource speed', () => runTests(client));
+describe('resource speed (tree shakable, base)', () => runTests(partialClient));
+describe('resource speed (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Livestreams extends APIResource {
+export class BaseLivestreams extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'livestreams'] = Object.freeze([
+    'realtimeKit',
+    'livestreams',
+  ] as const);
+
   /**
    * Creates a livestream for the given App ID and returns ingest server, stream key,
    * and playback URL. You can pass custom input to the ingest server and stream key,
@@ -29,7 +34,7 @@ export class Livestreams extends APIResource {
     params: LivestreamCreateIndependentLivestreamParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamCreateIndependentLivestreamResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/realtime/kit/${appID}/livestreams`, {
       body,
       ...options,
@@ -57,7 +62,7 @@ export class Livestreams extends APIResource {
     params: LivestreamGetActiveLivestreamsForLivestreamIDParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamGetActiveLivestreamsForLivestreamIDResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/livestreams/${livestreamID}/active-livestream-session`,
       options,
@@ -81,10 +86,10 @@ export class Livestreams extends APIResource {
    */
   getAllLivestreams(
     appID: string,
-    params: LivestreamGetAllLivestreamsParams,
+    params: LivestreamGetAllLivestreamsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LivestreamGetAllLivestreamsResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${appID}/livestreams`, {
       query,
       ...options,
@@ -105,10 +110,10 @@ export class Livestreams extends APIResource {
    */
   getLivestreamAnalyticsComplete(
     appID: string,
-    params: LivestreamGetLivestreamAnalyticsCompleteParams,
+    params: LivestreamGetLivestreamAnalyticsCompleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LivestreamGetLivestreamAnalyticsCompleteResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${appID}/analytics/livestreams/overall`,
       { query, ...options },
@@ -137,7 +142,7 @@ export class Livestreams extends APIResource {
     params: LivestreamGetLivestreamSessionDetailsForSessionIDParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamGetLivestreamSessionDetailsForSessionIDResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/livestreams/sessions/${livestreamSessionID}`,
       options,
@@ -165,7 +170,7 @@ export class Livestreams extends APIResource {
     params: LivestreamGetLivestreamSessionForLivestreamIDParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamGetLivestreamSessionForLivestreamIDResponse> {
-    const { account_id, app_id, ...query } = params;
+    const { account_id = this._client.accountID, app_id, ...query } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/livestreams/${livestreamID}`,
       { query, ...options },
@@ -192,7 +197,7 @@ export class Livestreams extends APIResource {
     params: LivestreamGetMeetingActiveLivestreamsParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamGetMeetingActiveLivestreamsResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/active-livestream`,
       options,
@@ -215,10 +220,10 @@ export class Livestreams extends APIResource {
    */
   getOrgAnalytics(
     appID: string,
-    params: LivestreamGetOrgAnalyticsParams,
+    params: LivestreamGetOrgAnalyticsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LivestreamGetOrgAnalyticsResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${appID}/analytics/daywise`, {
       query,
       ...options,
@@ -247,7 +252,7 @@ export class Livestreams extends APIResource {
     params: LivestreamStartLivestreamingAMeetingParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamStartLivestreamingAMeetingResponse> {
-    const { account_id, app_id, ...body } = params;
+    const { account_id = this._client.accountID, app_id, ...body } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/livestreams`,
       { body, ...options },
@@ -275,13 +280,14 @@ export class Livestreams extends APIResource {
     params: LivestreamStopLivestreamingAMeetingParams,
     options?: RequestOptions,
   ): APIPromise<LivestreamStopLivestreamingAMeetingResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/meetings/${meetingID}/active-livestream/stop`,
       options,
     );
   }
 }
+export class Livestreams extends BaseLivestreams {}
 
 export interface LivestreamCreateIndependentLivestreamResponse {
   data?: LivestreamCreateIndependentLivestreamResponse.Data;
@@ -892,7 +898,7 @@ export interface LivestreamCreateIndependentLivestreamParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the livestream
@@ -904,7 +910,7 @@ export interface LivestreamGetActiveLivestreamsForLivestreamIDParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -916,7 +922,7 @@ export interface LivestreamGetAllLivestreamsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Specify the end time range in ISO format to access the live stream.
@@ -960,7 +966,7 @@ export interface LivestreamGetLivestreamAnalyticsCompleteParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Specify the end time range in ISO format to access the livestream
@@ -979,7 +985,7 @@ export interface LivestreamGetLivestreamSessionDetailsForSessionIDParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -991,7 +997,7 @@ export interface LivestreamGetLivestreamSessionForLivestreamIDParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -1014,7 +1020,7 @@ export interface LivestreamGetMeetingActiveLivestreamsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1026,7 +1032,7 @@ export interface LivestreamGetOrgAnalyticsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: end date in YYYY-MM-DD format
@@ -1043,7 +1049,7 @@ export interface LivestreamStartLivestreamingAMeetingParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: The app identifier tag.
@@ -1079,7 +1085,7 @@ export interface LivestreamStopLivestreamingAMeetingParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Analytics extends APIResource {
+export class BaseAnalytics extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'analytics'] = Object.freeze([
+    'realtimeKit',
+    'analytics',
+  ] as const);
+
   /**
    * Returns day-wise session and recording analytics data of an App for the
    * specified time range start_date to end_date. If start_date and end_date are not
@@ -22,16 +27,17 @@ export class Analytics extends APIResource {
    */
   getOrgAnalytics(
     appID: string,
-    params: AnalyticsGetOrgAnalyticsParams,
+    params: AnalyticsGetOrgAnalyticsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AnalyticsGetOrgAnalyticsResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${appID}/analytics/daywise`, {
       query,
       ...options,
     });
   }
 }
+export class Analytics extends BaseAnalytics {}
 
 export interface AnalyticsGetOrgAnalyticsResponse {
   data?: AnalyticsGetOrgAnalyticsResponse.Data;
@@ -131,7 +137,7 @@ export interface AnalyticsGetOrgAnalyticsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: end date in YYYY-MM-DD format

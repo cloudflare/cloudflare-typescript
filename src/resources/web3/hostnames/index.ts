@@ -2,6 +2,7 @@
 
 export {
   Hostnames,
+  BaseHostnames,
   type Hostname,
   type HostnameDeleteResponse,
   type HostnameCreateParams,
@@ -11,4 +12,4 @@ export {
   type HostnameGetParams,
   type HostnamesSinglePage,
 } from './hostnames';
-export { IPFSUniversalPaths } from './ipfs-universal-paths/index';
+export { IPFSUniversalPaths, BaseIPFSUniversalPaths } from './ipfs-universal-paths/index';

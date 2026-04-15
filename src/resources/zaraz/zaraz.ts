@@ -2,17 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as ConfigAPI from './config';
-import { Config, ConfigGetParams, ConfigUpdateParams, Configuration } from './config';
+import { BaseConfig, Config, ConfigGetParams, ConfigUpdateParams, Configuration } from './config';
 import * as DefaultAPI from './default';
-import { Default, DefaultGetParams } from './default';
+import { BaseDefault, Default, DefaultGetParams } from './default';
 import * as ExportAPI from './export';
-import { Export, ExportGetParams } from './export';
+import { BaseExport, Export, ExportGetParams } from './export';
 import * as PublishAPI from './publish';
-import { Publish, PublishCreateParams, PublishCreateResponse } from './publish';
+import { BasePublish, Publish, PublishCreateParams, PublishCreateResponse } from './publish';
 import * as WorkflowAPI from './workflow';
-import { Workflow, WorkflowGetParams, WorkflowResource } from './workflow';
+import { BaseWorkflowResource, Workflow, WorkflowGetParams, WorkflowResource } from './workflow';
 import * as HistoryAPI from './history/history';
 import {
+  BaseHistory,
   History,
   HistoryListParams,
   HistoryListResponse,
@@ -23,13 +24,8 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Zaraz extends APIResource {
-  config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
-  default: DefaultAPI.Default = new DefaultAPI.Default(this._client);
-  export: ExportAPI.Export = new ExportAPI.Export(this._client);
-  history: HistoryAPI.History = new HistoryAPI.History(this._client);
-  publish: PublishAPI.Publish = new PublishAPI.Publish(this._client);
-  workflow: WorkflowAPI.WorkflowResource = new WorkflowAPI.WorkflowResource(this._client);
+export class BaseZaraz extends APIResource {
+  static override readonly _key: readonly ['zaraz'] = Object.freeze(['zaraz'] as const);
 
   /**
    * Updates Zaraz workflow for a zone.
@@ -43,7 +39,7 @@ export class Zaraz extends APIResource {
    * ```
    */
   update(params: ZarazUpdateParams, options?: RequestOptions): APIPromise<WorkflowAPI.Workflow> {
-    const { zone_id, workflow } = params;
+    const { zone_id = this._client.zoneID, workflow } = params;
     return (
       this._client.put(path`/zones/${zone_id}/settings/zaraz/workflow`, {
         body: workflow,
@@ -51,6 +47,14 @@ export class Zaraz extends APIResource {
       }) as APIPromise<{ result: WorkflowAPI.Workflow }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Zaraz extends BaseZaraz {
+  config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
+  default: DefaultAPI.Default = new DefaultAPI.Default(this._client);
+  export: ExportAPI.Export = new ExportAPI.Export(this._client);
+  history: HistoryAPI.History = new HistoryAPI.History(this._client);
+  publish: PublishAPI.Publish = new PublishAPI.Publish(this._client);
+  workflow: WorkflowAPI.WorkflowResource = new WorkflowAPI.WorkflowResource(this._client);
 }
 
 export interface ButtonTextTranslation {
@@ -135,7 +139,7 @@ export interface ZarazUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zaraz workflow.
@@ -144,11 +148,17 @@ export interface ZarazUpdateParams {
 }
 
 Zaraz.Config = Config;
+Zaraz.BaseConfig = BaseConfig;
 Zaraz.Default = Default;
+Zaraz.BaseDefault = BaseDefault;
 Zaraz.Export = Export;
+Zaraz.BaseExport = BaseExport;
 Zaraz.History = History;
+Zaraz.BaseHistory = BaseHistory;
 Zaraz.Publish = Publish;
+Zaraz.BasePublish = BasePublish;
 Zaraz.WorkflowResource = WorkflowResource;
+Zaraz.BaseWorkflowResource = BaseWorkflowResource;
 
 export declare namespace Zaraz {
   export {
@@ -159,17 +169,19 @@ export declare namespace Zaraz {
 
   export {
     Config as Config,
+    BaseConfig as BaseConfig,
     type Configuration as Configuration,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigGetParams as ConfigGetParams,
   };
 
-  export { Default as Default, type DefaultGetParams as DefaultGetParams };
+  export { Default as Default, BaseDefault as BaseDefault, type DefaultGetParams as DefaultGetParams };
 
-  export { Export as Export, type ExportGetParams as ExportGetParams };
+  export { Export as Export, BaseExport as BaseExport, type ExportGetParams as ExportGetParams };
 
   export {
     History as History,
+    BaseHistory as BaseHistory,
     type HistoryListResponse as HistoryListResponse,
     type HistoryListResponsesSinglePage as HistoryListResponsesSinglePage,
     type HistoryUpdateParams as HistoryUpdateParams,
@@ -178,12 +190,14 @@ export declare namespace Zaraz {
 
   export {
     Publish as Publish,
+    BasePublish as BasePublish,
     type PublishCreateResponse as PublishCreateResponse,
     type PublishCreateParams as PublishCreateParams,
   };
 
   export {
     WorkflowResource as WorkflowResource,
+    BaseWorkflowResource as BaseWorkflowResource,
     type Workflow as Workflow,
     type WorkflowGetParams as WorkflowGetParams,
   };

@@ -2,9 +2,10 @@
 
 export {
   GlobalWARPOverride,
+  BaseGlobalWARPOverride,
   type GlobalWARPOverrideCreateResponse,
   type GlobalWARPOverrideGetResponse,
   type GlobalWARPOverrideCreateParams,
   type GlobalWARPOverrideGetParams,
 } from './global-warp-override';
-export { Resilience } from './resilience';
+export { Resilience, BaseResilience } from './resilience';

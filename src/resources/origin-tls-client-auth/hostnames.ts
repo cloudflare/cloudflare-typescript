@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Hostnames extends APIResource {
+export class BaseHostnames extends APIResource {
+  static override readonly _key: readonly ['originTLSClientAuth', 'hostnames'] = Object.freeze([
+    'originTLSClientAuth',
+    'hostnames',
+  ] as const);
+
   /**
    * Associate a hostname to a certificate and enable, disable or invalidate the
    * association. If disabled, client certificate will not be sent to the hostname
@@ -31,7 +36,7 @@ export class Hostnames extends APIResource {
     params: HostnameUpdateParams,
     options?: RequestOptions,
   ): PagePromise<HostnameUpdateResponsesSinglePage, HostnameUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/origin_tls_client_auth/hostnames`,
       SinglePage<HostnameUpdateResponse>,
@@ -54,10 +59,10 @@ export class Hostnames extends APIResource {
    */
   get(
     hostname: string,
-    params: HostnameGetParams,
+    params: HostnameGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AuthenticatedOriginPull> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
@@ -66,6 +71,7 @@ export class Hostnames extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Hostnames extends BaseHostnames {}
 
 export type HostnameUpdateResponsesSinglePage = SinglePage<HostnameUpdateResponse>;
 
@@ -195,7 +201,7 @@ export interface HostnameUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -228,7 +234,7 @@ export interface HostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Hostnames {

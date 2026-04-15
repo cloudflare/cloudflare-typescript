@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ASNs extends APIResource {
+export class BaseASNs extends APIResource {
+  static override readonly _key: readonly ['radar', 'entities', 'asns'] = Object.freeze([
+    'radar',
+    'entities',
+    'asns',
+  ] as const);
+
   /**
    * Retrieves a list of autonomous systems.
    *
@@ -126,6 +132,7 @@ export class ASNs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ASNs extends BaseASNs {}
 
 export interface ASNListResponse {
   asns: Array<ASNListResponse.ASN>;

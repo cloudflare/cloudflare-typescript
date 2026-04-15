@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as MembersAPI from './members';
 import {
+  BaseMembers,
   MemberCreateParams,
   MemberDeleteParams,
   MemberDeleteResponse,
@@ -13,9 +14,10 @@ import {
   Status,
 } from './members';
 import * as RolesAPI from './roles';
-import { RoleGetParams, RoleListParams, Roles } from './roles';
+import { BaseRoles, RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
+  BaseSubscriptions,
   SubscriptionCreateParams,
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
@@ -24,9 +26,10 @@ import {
   Subscriptions,
 } from './subscriptions';
 import * as LogsAPI from './logs/logs';
-import { Logs } from './logs/logs';
+import { BaseLogs, Logs } from './logs/logs';
 import * as TokensAPI from './tokens/tokens';
 import {
+  BaseTokens,
   TokenCreateParams,
   TokenCreateResponse,
   TokenDeleteParams,
@@ -43,12 +46,8 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Accounts extends APIResource {
-  members: MembersAPI.Members = new MembersAPI.Members(this._client);
-  roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
-  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
-  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
-  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+export class BaseAccounts extends APIResource {
+  static override readonly _key: readonly ['accounts'] = Object.freeze(['accounts'] as const);
 
   /**
    * Create an account (only available for tenant admins at this time)
@@ -80,7 +79,7 @@ export class Accounts extends APIResource {
    * ```
    */
   update(params: AccountUpdateParams, options?: RequestOptions): APIPromise<Account> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}`, { body, ...options }) as APIPromise<{ result: Account }>
     )._thenUnwrap((obj) => obj.result);
@@ -116,8 +115,11 @@ export class Accounts extends APIResource {
    * });
    * ```
    */
-  delete(params: AccountDeleteParams, options?: RequestOptions): APIPromise<AccountDeleteResponse | null> {
-    const { account_id } = params;
+  delete(
+    params: AccountDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountDeleteResponse | null> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}`, options) as APIPromise<{
         result: AccountDeleteResponse | null;
@@ -135,12 +137,19 @@ export class Accounts extends APIResource {
    * });
    * ```
    */
-  get(params: AccountGetParams, options?: RequestOptions): APIPromise<Account> {
-    const { account_id } = params;
+  get(params: AccountGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Account> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}`, options) as APIPromise<{ result: Account }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Accounts extends BaseAccounts {
+  members: MembersAPI.Members = new MembersAPI.Members(this._client);
+  roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
+  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 }
 
 export type AccountsV4PagePaginationArray = V4PagePaginationArray<Account>;
@@ -248,7 +257,7 @@ export interface AccountUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Identifier
@@ -315,21 +324,26 @@ export interface AccountDeleteParams {
   /**
    * The account ID of the account to be deleted
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AccountGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Accounts.Members = Members;
+Accounts.BaseMembers = BaseMembers;
 Accounts.Roles = Roles;
+Accounts.BaseRoles = BaseRoles;
 Accounts.Subscriptions = Subscriptions;
+Accounts.BaseSubscriptions = BaseSubscriptions;
 Accounts.Tokens = Tokens;
+Accounts.BaseTokens = BaseTokens;
 Accounts.Logs = Logs;
+Accounts.BaseLogs = BaseLogs;
 
 export declare namespace Accounts {
   export {
@@ -345,6 +359,7 @@ export declare namespace Accounts {
 
   export {
     Members as Members,
+    BaseMembers as BaseMembers,
     type Status as Status,
     type MemberDeleteResponse as MemberDeleteResponse,
     type MemberCreateParams as MemberCreateParams,
@@ -354,10 +369,16 @@ export declare namespace Accounts {
     type MemberGetParams as MemberGetParams,
   };
 
-  export { Roles as Roles, type RoleListParams as RoleListParams, type RoleGetParams as RoleGetParams };
+  export {
+    Roles as Roles,
+    BaseRoles as BaseRoles,
+    type RoleListParams as RoleListParams,
+    type RoleGetParams as RoleGetParams,
+  };
 
   export {
     Subscriptions as Subscriptions,
+    BaseSubscriptions as BaseSubscriptions,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
@@ -367,6 +388,7 @@ export declare namespace Accounts {
 
   export {
     Tokens as Tokens,
+    BaseTokens as BaseTokens,
     type TokenCreateResponse as TokenCreateResponse,
     type TokenDeleteResponse as TokenDeleteResponse,
     type TokenVerifyResponse as TokenVerifyResponse,
@@ -378,5 +400,5 @@ export declare namespace Accounts {
     type TokenVerifyParams as TokenVerifyParams,
   };
 
-  export { Logs as Logs };
+  export { Logs as Logs, BaseLogs as BaseLogs };
 }

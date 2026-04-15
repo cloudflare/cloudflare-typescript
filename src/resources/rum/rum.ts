@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   RUMRule,
   RuleBulkCreateParams,
   RuleBulkCreateResponse,
@@ -16,6 +17,7 @@ import {
 } from './rules';
 import * as SiteInfoAPI from './site-info';
 import {
+  BaseSiteInfo,
   Site,
   SiteInfo,
   SiteInfoCreateParams,
@@ -27,17 +29,23 @@ import {
   SitesV4PagePaginationArray,
 } from './site-info';
 
-export class RUM extends APIResource {
+export class BaseRUM extends APIResource {
+  static override readonly _key: readonly ['rum'] = Object.freeze(['rum'] as const);
+}
+export class RUM extends BaseRUM {
   siteInfo: SiteInfoAPI.SiteInfo = new SiteInfoAPI.SiteInfo(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
 RUM.SiteInfo = SiteInfo;
+RUM.BaseSiteInfo = BaseSiteInfo;
 RUM.Rules = Rules;
+RUM.BaseRules = BaseRules;
 
 export declare namespace RUM {
   export {
     SiteInfo as SiteInfo,
+    BaseSiteInfo as BaseSiteInfo,
     type Site as Site,
     type SiteInfoDeleteResponse as SiteInfoDeleteResponse,
     type SitesV4PagePaginationArray as SitesV4PagePaginationArray,
@@ -50,6 +58,7 @@ export declare namespace RUM {
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type RUMRule as RUMRule,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,

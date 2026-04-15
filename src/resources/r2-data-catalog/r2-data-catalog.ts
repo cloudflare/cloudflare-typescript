@@ -2,9 +2,15 @@
 
 import { APIResource } from '../../core/resource';
 import * as CredentialsAPI from './credentials';
-import { CredentialCreateParams, CredentialCreateResponse, Credentials } from './credentials';
+import {
+  BaseCredentials,
+  CredentialCreateParams,
+  CredentialCreateResponse,
+  Credentials,
+} from './credentials';
 import * as MaintenanceConfigsAPI from './maintenance-configs';
 import {
+  BaseMaintenanceConfigs,
   MaintenanceConfigGetParams,
   MaintenanceConfigGetResponse,
   MaintenanceConfigUpdateParams,
@@ -12,18 +18,19 @@ import {
   MaintenanceConfigs,
 } from './maintenance-configs';
 import * as NamespacesAPI from './namespaces/namespaces';
-import { NamespaceListParams, NamespaceListResponse, Namespaces } from './namespaces/namespaces';
+import {
+  BaseNamespaces,
+  NamespaceListParams,
+  NamespaceListResponse,
+  Namespaces,
+} from './namespaces/namespaces';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class R2DataCatalog extends APIResource {
-  maintenanceConfigs: MaintenanceConfigsAPI.MaintenanceConfigs = new MaintenanceConfigsAPI.MaintenanceConfigs(
-    this._client,
-  );
-  credentials: CredentialsAPI.Credentials = new CredentialsAPI.Credentials(this._client);
-  namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
+export class BaseR2DataCatalog extends APIResource {
+  static override readonly _key: readonly ['r2DataCatalog'] = Object.freeze(['r2DataCatalog'] as const);
 
   /**
    * Returns a list of R2 buckets that have been enabled as Apache Iceberg catalogs
@@ -37,8 +44,11 @@ export class R2DataCatalog extends APIResource {
    * });
    * ```
    */
-  list(params: R2DataCatalogListParams, options?: RequestOptions): APIPromise<R2DataCatalogListResponse> {
-    const { account_id } = params;
+  list(
+    params: R2DataCatalogListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<R2DataCatalogListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2-catalog`, options) as APIPromise<{
         result: R2DataCatalogListResponse;
@@ -59,10 +69,10 @@ export class R2DataCatalog extends APIResource {
    */
   disable(
     bucketName: string,
-    params: R2DataCatalogDisableParams,
+    params: R2DataCatalogDisableParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<void> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/r2-catalog/${bucketName}/disable`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
@@ -84,10 +94,10 @@ export class R2DataCatalog extends APIResource {
    */
   enable(
     bucketName: string,
-    params: R2DataCatalogEnableParams,
+    params: R2DataCatalogEnableParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<R2DataCatalogEnableResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/r2-catalog/${bucketName}/enable`,
@@ -110,16 +120,23 @@ export class R2DataCatalog extends APIResource {
    */
   get(
     bucketName: string,
-    params: R2DataCatalogGetParams,
+    params: R2DataCatalogGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<R2DataCatalogGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/r2-catalog/${bucketName}`, options) as APIPromise<{
         result: R2DataCatalogGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class R2DataCatalog extends BaseR2DataCatalog {
+  maintenanceConfigs: MaintenanceConfigsAPI.MaintenanceConfigs = new MaintenanceConfigsAPI.MaintenanceConfigs(
+    this._client,
+  );
+  credentials: CredentialsAPI.Credentials = new CredentialsAPI.Credentials(this._client);
+  namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
 }
 
 /**
@@ -337,33 +354,36 @@ export interface R2DataCatalogListParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface R2DataCatalogDisableParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface R2DataCatalogEnableParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface R2DataCatalogGetParams {
   /**
    * Use this to identify the account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 R2DataCatalog.MaintenanceConfigs = MaintenanceConfigs;
+R2DataCatalog.BaseMaintenanceConfigs = BaseMaintenanceConfigs;
 R2DataCatalog.Credentials = Credentials;
+R2DataCatalog.BaseCredentials = BaseCredentials;
 R2DataCatalog.Namespaces = Namespaces;
+R2DataCatalog.BaseNamespaces = BaseNamespaces;
 
 export declare namespace R2DataCatalog {
   export {
@@ -378,6 +398,7 @@ export declare namespace R2DataCatalog {
 
   export {
     MaintenanceConfigs as MaintenanceConfigs,
+    BaseMaintenanceConfigs as BaseMaintenanceConfigs,
     type MaintenanceConfigUpdateResponse as MaintenanceConfigUpdateResponse,
     type MaintenanceConfigGetResponse as MaintenanceConfigGetResponse,
     type MaintenanceConfigUpdateParams as MaintenanceConfigUpdateParams,
@@ -386,12 +407,14 @@ export declare namespace R2DataCatalog {
 
   export {
     Credentials as Credentials,
+    BaseCredentials as BaseCredentials,
     type CredentialCreateResponse as CredentialCreateResponse,
     type CredentialCreateParams as CredentialCreateParams,
   };
 
   export {
     Namespaces as Namespaces,
+    BaseNamespaces as BaseNamespaces,
     type NamespaceListResponse as NamespaceListResponse,
     type NamespaceListParams as NamespaceListParams,
   };

@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as CloudIntegrationsAPI from './cloud-integrations';
 import {
+  BaseCloudIntegrations,
   CloudIntegrationCreateParams,
   CloudIntegrationCreateResponse,
   CloudIntegrationDeleteParams,
@@ -26,6 +27,7 @@ import {
 } from './cloud-integrations';
 import * as ResourcesAPI from './resources';
 import {
+  BaseResources,
   ResourceExportParams,
   ResourceGetParams,
   ResourceGetResponse,
@@ -38,6 +40,7 @@ import {
 } from './resources';
 import * as CatalogSyncsAPI from './catalog-syncs/catalog-syncs';
 import {
+  BaseCatalogSyncs,
   CatalogSyncCreateParams,
   CatalogSyncCreateResponse,
   CatalogSyncDeleteParams,
@@ -57,6 +60,7 @@ import {
 } from './catalog-syncs/catalog-syncs';
 import * as OnRampsAPI from './on-ramps/on-ramps';
 import {
+  BaseOnRamps,
   OnRampApplyParams,
   OnRampApplyResponse,
   OnRampCreateParams,
@@ -78,7 +82,12 @@ import {
   OnRamps,
 } from './on-ramps/on-ramps';
 
-export class MagicCloudNetworking extends APIResource {
+export class BaseMagicCloudNetworking extends APIResource {
+  static override readonly _key: readonly ['magicCloudNetworking'] = Object.freeze([
+    'magicCloudNetworking',
+  ] as const);
+}
+export class MagicCloudNetworking extends BaseMagicCloudNetworking {
   catalogSyncs: CatalogSyncsAPI.CatalogSyncs = new CatalogSyncsAPI.CatalogSyncs(this._client);
   onRamps: OnRampsAPI.OnRamps = new OnRampsAPI.OnRamps(this._client);
   cloudIntegrations: CloudIntegrationsAPI.CloudIntegrations = new CloudIntegrationsAPI.CloudIntegrations(
@@ -88,13 +97,18 @@ export class MagicCloudNetworking extends APIResource {
 }
 
 MagicCloudNetworking.CatalogSyncs = CatalogSyncs;
+MagicCloudNetworking.BaseCatalogSyncs = BaseCatalogSyncs;
 MagicCloudNetworking.OnRamps = OnRamps;
+MagicCloudNetworking.BaseOnRamps = BaseOnRamps;
 MagicCloudNetworking.CloudIntegrations = CloudIntegrations;
+MagicCloudNetworking.BaseCloudIntegrations = BaseCloudIntegrations;
 MagicCloudNetworking.Resources = Resources;
+MagicCloudNetworking.BaseResources = BaseResources;
 
 export declare namespace MagicCloudNetworking {
   export {
     CatalogSyncs as CatalogSyncs,
+    BaseCatalogSyncs as BaseCatalogSyncs,
     type CatalogSyncCreateResponse as CatalogSyncCreateResponse,
     type CatalogSyncUpdateResponse as CatalogSyncUpdateResponse,
     type CatalogSyncListResponse as CatalogSyncListResponse,
@@ -114,6 +128,7 @@ export declare namespace MagicCloudNetworking {
 
   export {
     OnRamps as OnRamps,
+    BaseOnRamps as BaseOnRamps,
     type OnRampCreateResponse as OnRampCreateResponse,
     type OnRampUpdateResponse as OnRampUpdateResponse,
     type OnRampListResponse as OnRampListResponse,
@@ -136,6 +151,7 @@ export declare namespace MagicCloudNetworking {
 
   export {
     CloudIntegrations as CloudIntegrations,
+    BaseCloudIntegrations as BaseCloudIntegrations,
     type CloudIntegrationCreateResponse as CloudIntegrationCreateResponse,
     type CloudIntegrationUpdateResponse as CloudIntegrationUpdateResponse,
     type CloudIntegrationListResponse as CloudIntegrationListResponse,
@@ -159,6 +175,7 @@ export declare namespace MagicCloudNetworking {
 
   export {
     Resources as Resources,
+    BaseResources as BaseResources,
     type ResourceListResponse as ResourceListResponse,
     type ResourceGetResponse as ResourceGetResponse,
     type ResourcePolicyPreviewResponse as ResourcePolicyPreviewResponse,

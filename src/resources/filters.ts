@@ -14,7 +14,9 @@ import { path } from '../internal/utils/path';
 /**
  * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
  */
-export class Filters extends APIResource {
+export class BaseFilters extends APIResource {
+  static override readonly _key: readonly ['filters'] = Object.freeze(['filters'] as const);
+
   /**
    * Creates one or more filters.
    *
@@ -24,7 +26,7 @@ export class Filters extends APIResource {
     params: FilterCreateParams,
     options?: RequestOptions,
   ): PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(path`/zones/${zone_id}/filters`, SinglePage<FirewallFilter>, {
       body: body,
       method: 'post',
@@ -38,7 +40,7 @@ export class Filters extends APIResource {
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   update(filterID: string, params: FilterUpdateParams, options?: RequestOptions): APIPromise<FirewallFilter> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/filters/${filterID}`, { body, ...options }) as APIPromise<{
         result: FirewallFilter;
@@ -53,10 +55,10 @@ export class Filters extends APIResource {
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
-    params: FilterListParams,
+    params: FilterListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<FirewallFiltersV4PagePaginationArray, FirewallFilter> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(path`/zones/${zone_id}/filters`, V4PagePaginationArray<FirewallFilter>, {
       query,
       ...options,
@@ -70,10 +72,10 @@ export class Filters extends APIResource {
    */
   delete(
     filterID: string,
-    params: FilterDeleteParams,
+    params: FilterDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<FilterDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/filters/${filterID}`, options) as APIPromise<{
         result: FilterDeleteResponse;
@@ -90,7 +92,7 @@ export class Filters extends APIResource {
     params: FilterBulkDeleteParams,
     options?: RequestOptions,
   ): APIPromise<FilterBulkDeleteResponse | null> {
-    const { zone_id, id } = params;
+    const { zone_id = this._client.zoneID, id } = params;
     return (
       this._client.delete(path`/zones/${zone_id}/filters`, { query: { id }, ...options }) as APIPromise<{
         result: FilterBulkDeleteResponse | null;
@@ -107,7 +109,7 @@ export class Filters extends APIResource {
     params: FilterBulkUpdateParams,
     options?: RequestOptions,
   ): PagePromise<FirewallFiltersSinglePage, FirewallFilter> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return this._client.getAPIList(path`/zones/${zone_id}/filters`, SinglePage<FirewallFilter>, {
       body: body,
       method: 'put',
@@ -120,8 +122,12 @@ export class Filters extends APIResource {
    *
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  get(filterID: string, params: FilterGetParams, options?: RequestOptions): APIPromise<FirewallFilter> {
-    const { zone_id } = params;
+  get(
+    filterID: string,
+    params: FilterGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FirewallFilter> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/filters/${filterID}`, options) as APIPromise<{
         result: FirewallFilter;
@@ -129,6 +135,10 @@ export class Filters extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+/**
+ * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+ */
+export class Filters extends BaseFilters {}
 
 export type FirewallFiltersSinglePage = SinglePage<FirewallFilter>;
 
@@ -207,7 +217,7 @@ export interface FilterCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -219,7 +229,7 @@ export interface FilterUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: An informative summary of the filter.
@@ -247,7 +257,7 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: The unique identifier of the filter.
@@ -280,14 +290,14 @@ export interface FilterDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface FilterBulkDeleteParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param
@@ -299,7 +309,7 @@ export interface FilterBulkUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -336,7 +346,7 @@ export interface FilterGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Filters {

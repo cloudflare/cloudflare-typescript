@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Retention extends APIResource {
+export class BaseRetention extends APIResource {
+  static override readonly _key: readonly ['logs', 'control', 'retention'] = Object.freeze([
+    'logs',
+    'control',
+    'retention',
+  ] as const);
+
   /**
    * Updates log retention flag for Logpull API.
    *
@@ -18,10 +24,10 @@ export class Retention extends APIResource {
    * ```
    */
   create(
-    params: RetentionCreateParams,
+    params: RetentionCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RetentionCreateResponse | null> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/logs/control/retention/flag`, {
         body,
@@ -40,8 +46,11 @@ export class Retention extends APIResource {
    * });
    * ```
    */
-  get(params: RetentionGetParams, options?: RequestOptions): APIPromise<RetentionGetResponse | null> {
-    const { zone_id } = params;
+  get(
+    params: RetentionGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RetentionGetResponse | null> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/logs/control/retention/flag`, options) as APIPromise<{
         result: RetentionGetResponse | null;
@@ -49,6 +58,7 @@ export class Retention extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Retention extends BaseRetention {}
 
 export interface RetentionCreateResponse {
   /**
@@ -68,7 +78,7 @@ export interface RetentionCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The log retention flag for Logpull API.
@@ -80,7 +90,7 @@ export interface RetentionGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Retention {

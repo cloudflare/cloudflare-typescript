@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as QuotaAPI from './quota';
-import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
+import { BaseQuota, Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -12,8 +12,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class CertificatePacks extends APIResource {
-  quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
+export class BaseCertificatePacks extends APIResource {
+  static override readonly _key: readonly ['ssl', 'certificatePacks'] = Object.freeze([
+    'ssl',
+    'certificatePacks',
+  ] as const);
 
   /**
    * For a given zone, order an advanced certificate pack.
@@ -39,7 +42,7 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackCreateParams,
     options?: RequestOptions,
   ): APIPromise<CertificatePackCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/ssl/certificate_packs/order`, {
         body,
@@ -62,10 +65,10 @@ export class CertificatePacks extends APIResource {
    * ```
    */
   list(
-    params: CertificatePackListParams,
+    params: CertificatePackListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/ssl/certificate_packs`,
       V4PagePaginationArray<CertificatePackListResponse>,
@@ -87,10 +90,10 @@ export class CertificatePacks extends APIResource {
    */
   delete(
     certificatePackID: string,
-    params: CertificatePackDeleteParams,
+    params: CertificatePackDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CertificatePackDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/ssl/certificate_packs/${certificatePackID}`,
@@ -117,7 +120,7 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackEditParams,
     options?: RequestOptions,
   ): APIPromise<CertificatePackEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/ssl/certificate_packs/${certificatePackID}`, {
         body,
@@ -140,10 +143,10 @@ export class CertificatePacks extends APIResource {
    */
   get(
     certificatePackID: string,
-    params: CertificatePackGetParams,
+    params: CertificatePackGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CertificatePackGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/ssl/certificate_packs/${certificatePackID}`,
@@ -151,6 +154,9 @@ export class CertificatePacks extends APIResource {
       ) as APIPromise<{ result: CertificatePackGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class CertificatePacks extends BaseCertificatePacks {
+  quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 }
 
 export type CertificatePackListResponsesV4PagePaginationArray =
@@ -1268,7 +1274,7 @@ export interface CertificatePackCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Certificate Authority selected for the order. For information on any
@@ -1310,7 +1316,7 @@ export interface CertificatePackListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Specify the deployment environment for the certificate packs.
@@ -1327,14 +1333,14 @@ export interface CertificatePackDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CertificatePackEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether or not to add Cloudflare Branding for the order. This will
@@ -1347,10 +1353,11 @@ export interface CertificatePackGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CertificatePacks.Quota = Quota;
+CertificatePacks.BaseQuota = BaseQuota;
 
 export declare namespace CertificatePacks {
   export {
@@ -1371,5 +1378,10 @@ export declare namespace CertificatePacks {
     type CertificatePackGetParams as CertificatePackGetParams,
   };
 
-  export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
+  export {
+    Quota as Quota,
+    BaseQuota as BaseQuota,
+    type QuotaGetResponse as QuotaGetResponse,
+    type QuotaGetParams as QuotaGetParams,
+  };
 }

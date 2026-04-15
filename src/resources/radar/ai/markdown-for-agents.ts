@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class MarkdownForAgents extends APIResource {
+export class BaseMarkdownForAgents extends APIResource {
+  static override readonly _key: readonly ['radar', 'ai', 'markdownForAgents'] = Object.freeze([
+    'radar',
+    'ai',
+    'markdownForAgents',
+  ] as const);
+
   /**
    * Retrieves the overall median HTML-to-markdown reduction ratio for AI agent
    * requests over the given date range.
@@ -47,6 +53,7 @@ export class MarkdownForAgents extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class MarkdownForAgents extends BaseMarkdownForAgents {}
 
 export interface MarkdownForAgentSummaryResponse {
   /**

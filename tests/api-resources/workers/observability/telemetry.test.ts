@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Observability } from 'cloudflare/resources/workers/observability/observability';
+import { BaseTelemetry } from 'cloudflare/resources/workers/observability/telemetry';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource telemetry', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTelemetry],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Observability],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ workers: { observability: { telemetry: BaseTelemetry } } }>,
+) => {
   test('keys: only required params', async () => {
     const responsePromise = client.workers.observability.telemetry.keys({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -153,4 +173,7 @@ describe('resource telemetry', () => {
       },
     });
   });
-});
+};
+describe('resource telemetry', () => runTests(client));
+describe('resource telemetry (tree shakable, base)', () => runTests(partialClient));
+describe('resource telemetry (tree shakable, subresource)', () => runTests(parentPartialClient));

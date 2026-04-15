@@ -10,7 +10,14 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Views extends APIResource {
+export class BaseViews extends APIResource {
+  static override readonly _key: readonly ['dns', 'settings', 'account', 'views'] = Object.freeze([
+    'dns',
+    'settings',
+    'account',
+    'views',
+  ] as const);
+
   /**
    * Create Internal DNS View for an account
    *
@@ -26,7 +33,7 @@ export class Views extends APIResource {
    * ```
    */
   create(params: ViewCreateParams, options?: RequestOptions): APIPromise<ViewCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dns_settings/views`, {
         body,
@@ -49,10 +56,10 @@ export class Views extends APIResource {
    * ```
    */
   list(
-    params: ViewListParams,
+    params: ViewListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ViewListResponsesV4PagePaginationArray, ViewListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/dns_settings/views`,
       V4PagePaginationArray<ViewListResponse>,
@@ -71,8 +78,12 @@ export class Views extends APIResource {
    * );
    * ```
    */
-  delete(viewID: string, params: ViewDeleteParams, options?: RequestOptions): APIPromise<ViewDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    viewID: string,
+    params: ViewDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ViewDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/dns_settings/views/${viewID}`, options) as APIPromise<{
         result: ViewDeleteResponse;
@@ -93,7 +104,7 @@ export class Views extends APIResource {
    * ```
    */
   edit(viewID: string, params: ViewEditParams, options?: RequestOptions): APIPromise<ViewEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/dns_settings/views/${viewID}`, {
         body,
@@ -113,8 +124,12 @@ export class Views extends APIResource {
    * );
    * ```
    */
-  get(viewID: string, params: ViewGetParams, options?: RequestOptions): APIPromise<ViewGetResponse> {
-    const { account_id } = params;
+  get(
+    viewID: string,
+    params: ViewGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ViewGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dns_settings/views/${viewID}`, options) as APIPromise<{
         result: ViewGetResponse;
@@ -122,6 +137,7 @@ export class Views extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Views extends BaseViews {}
 
 export type ViewListResponsesV4PagePaginationArray = V4PagePaginationArray<ViewListResponse>;
 
@@ -244,7 +260,7 @@ export interface ViewCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the view.
@@ -261,7 +277,7 @@ export interface ViewListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order DNS views in.
@@ -324,14 +340,14 @@ export interface ViewDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ViewEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the view.
@@ -348,7 +364,7 @@ export interface ViewGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Views {

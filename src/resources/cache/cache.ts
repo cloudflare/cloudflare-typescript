@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as CacheReserveAPI from './cache-reserve';
 import {
+  BaseCacheReserveResource,
   CacheReserve,
   CacheReserveClear,
   CacheReserveClearParams,
@@ -18,6 +19,7 @@ import {
 } from './cache-reserve';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 import {
+  BaseRegionalTieredCacheResource,
   RegionalTieredCache,
   RegionalTieredCacheEditParams,
   RegionalTieredCacheEditResponse,
@@ -27,6 +29,7 @@ import {
 } from './regional-tiered-cache';
 import * as SmartTieredCacheAPI from './smart-tiered-cache';
 import {
+  BaseSmartTieredCache,
   SmartTieredCache,
   SmartTieredCacheDeleteParams,
   SmartTieredCacheDeleteResponse,
@@ -37,6 +40,7 @@ import {
 } from './smart-tiered-cache';
 import * as VariantsAPI from './variants';
 import {
+  BaseVariants,
   CacheVariant,
   VariantDeleteParams,
   VariantDeleteResponse,
@@ -50,14 +54,8 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Cache extends APIResource {
-  cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
-  smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(
-    this._client,
-  );
-  variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
-  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource =
-    new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
+export class BaseCache extends APIResource {
+  static override readonly _key: readonly ['cache'] = Object.freeze(['cache'] as const);
 
   /**
    * ### Purge All Cached Content
@@ -129,14 +127,26 @@ export class Cache extends APIResource {
    * });
    * ```
    */
-  purge(params: CachePurgeParams, options?: RequestOptions): APIPromise<CachePurgeResponse | null> {
-    const { zone_id, ...body } = params;
+  purge(
+    params: CachePurgeParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CachePurgeResponse | null> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/purge_cache`, { body, ...options }) as APIPromise<{
         result: CachePurgeResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Cache extends BaseCache {
+  cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
+  smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(
+    this._client,
+  );
+  variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
+  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource =
+    new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
 }
 
 export interface CachePurgeResponse {
@@ -156,7 +166,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: For more information on cache tags and purging by tags, please refer
@@ -170,7 +180,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: For more information purging by hostnames, please refer to
@@ -183,7 +193,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: For more information on purging by prefixes, please refer to
@@ -196,7 +206,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: For more information, please refer to
@@ -209,7 +219,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: For more information on purging files, please refer to
@@ -222,7 +232,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: For more information on purging files with URL and headers, please
@@ -242,15 +252,20 @@ export declare namespace CachePurgeParams {
 }
 
 Cache.CacheReserveResource = CacheReserveResource;
+Cache.BaseCacheReserveResource = BaseCacheReserveResource;
 Cache.SmartTieredCache = SmartTieredCache;
+Cache.BaseSmartTieredCache = BaseSmartTieredCache;
 Cache.Variants = Variants;
+Cache.BaseVariants = BaseVariants;
 Cache.RegionalTieredCacheResource = RegionalTieredCacheResource;
+Cache.BaseRegionalTieredCacheResource = BaseRegionalTieredCacheResource;
 
 export declare namespace Cache {
   export { type CachePurgeResponse as CachePurgeResponse, type CachePurgeParams as CachePurgeParams };
 
   export {
     CacheReserveResource as CacheReserveResource,
+    BaseCacheReserveResource as BaseCacheReserveResource,
     type CacheReserve as CacheReserve,
     type CacheReserveClear as CacheReserveClear,
     type State as State,
@@ -266,6 +281,7 @@ export declare namespace Cache {
 
   export {
     SmartTieredCache as SmartTieredCache,
+    BaseSmartTieredCache as BaseSmartTieredCache,
     type SmartTieredCacheDeleteResponse as SmartTieredCacheDeleteResponse,
     type SmartTieredCacheEditResponse as SmartTieredCacheEditResponse,
     type SmartTieredCacheGetResponse as SmartTieredCacheGetResponse,
@@ -276,6 +292,7 @@ export declare namespace Cache {
 
   export {
     Variants as Variants,
+    BaseVariants as BaseVariants,
     type CacheVariant as CacheVariant,
     type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
@@ -287,6 +304,7 @@ export declare namespace Cache {
 
   export {
     RegionalTieredCacheResource as RegionalTieredCacheResource,
+    BaseRegionalTieredCacheResource as BaseRegionalTieredCacheResource,
     type RegionalTieredCache as RegionalTieredCache,
     type RegionalTieredCacheEditResponse as RegionalTieredCacheEditResponse,
     type RegionalTieredCacheGetResponse as RegionalTieredCacheGetResponse,

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Bots } from 'cloudflare/resources/radar/bots/bots';
+import { BaseWebCrawlers } from 'cloudflare/resources/radar/bots/web-crawlers';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource webCrawlers', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseWebCrawlers],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Bots],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { bots: { webCrawlers: BaseWebCrawlers } } }>) => {
   test('summary', async () => {
     const responsePromise = client.radar.bots.webCrawlers.summary('CLIENT_TYPE');
     const rawResponse = await responsePromise.asResponse();
@@ -79,4 +97,7 @@ describe('resource webCrawlers', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource webCrawlers', () => runTests(client));
+describe('resource webCrawlers (tree shakable, base)', () => runTests(partialClient));
+describe('resource webCrawlers (tree shakable, subresource)', () => runTests(parentPartialClient));

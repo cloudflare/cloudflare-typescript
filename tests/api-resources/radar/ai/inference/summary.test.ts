@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Inference } from 'cloudflare/resources/radar/ai/inference/inference';
+import { BaseSummary } from 'cloudflare/resources/radar/ai/inference/summary';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource summary', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSummary],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Inference],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { ai: { inference: { summary: BaseSummary } } } }>) => {
   test('model', async () => {
     const responsePromise = client.radar.ai.inference.summary.model();
     const rawResponse = await responsePromise.asResponse();
@@ -64,4 +82,7 @@ describe('resource summary', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource summary', () => runTests(client));
+describe('resource summary (tree shakable, base)', () => runTests(partialClient));
+describe('resource summary (tree shakable, subresource)', () => runTests(parentPartialClient));

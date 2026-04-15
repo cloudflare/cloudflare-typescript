@@ -15,9 +15,11 @@ import {
   AllowPolicyListParams,
   AllowPolicyListResponse,
   AllowPolicyListResponsesV4PagePaginationArray,
+  BaseAllowPolicies,
 } from './allow-policies';
 import * as BlockSendersAPI from './block-senders';
 import {
+  BaseBlockSenders,
   BlockSenderCreateParams,
   BlockSenderCreateResponse,
   BlockSenderDeleteParams,
@@ -33,6 +35,7 @@ import {
 } from './block-senders';
 import * as DomainsAPI from './domains';
 import {
+  BaseDomains,
   DomainBulkDeleteParams,
   DomainBulkDeleteResponse,
   DomainBulkDeleteResponsesSinglePage,
@@ -49,6 +52,7 @@ import {
 } from './domains';
 import * as ImpersonationRegistryAPI from './impersonation-registry';
 import {
+  BaseImpersonationRegistry,
   ImpersonationRegistry,
   ImpersonationRegistryCreateParams,
   ImpersonationRegistryCreateResponse,
@@ -64,6 +68,7 @@ import {
 } from './impersonation-registry';
 import * as TrustedDomainsAPI from './trusted-domains';
 import {
+  BaseTrustedDomains,
   TrustedDomainCreateParams,
   TrustedDomainCreateResponse,
   TrustedDomainDeleteParams,
@@ -78,7 +83,13 @@ import {
   TrustedDomains,
 } from './trusted-domains';
 
-export class Settings extends APIResource {
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'settings'] = Object.freeze([
+    'emailSecurity',
+    'settings',
+  ] as const);
+}
+export class Settings extends BaseSettings {
   allowPolicies: AllowPoliciesAPI.AllowPolicies = new AllowPoliciesAPI.AllowPolicies(this._client);
   blockSenders: BlockSendersAPI.BlockSenders = new BlockSendersAPI.BlockSenders(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
@@ -88,14 +99,20 @@ export class Settings extends APIResource {
 }
 
 Settings.AllowPolicies = AllowPolicies;
+Settings.BaseAllowPolicies = BaseAllowPolicies;
 Settings.BlockSenders = BlockSenders;
+Settings.BaseBlockSenders = BaseBlockSenders;
 Settings.Domains = Domains;
+Settings.BaseDomains = BaseDomains;
 Settings.ImpersonationRegistry = ImpersonationRegistry;
+Settings.BaseImpersonationRegistry = BaseImpersonationRegistry;
 Settings.TrustedDomains = TrustedDomains;
+Settings.BaseTrustedDomains = BaseTrustedDomains;
 
 export declare namespace Settings {
   export {
     AllowPolicies as AllowPolicies,
+    BaseAllowPolicies as BaseAllowPolicies,
     type AllowPolicyCreateResponse as AllowPolicyCreateResponse,
     type AllowPolicyListResponse as AllowPolicyListResponse,
     type AllowPolicyDeleteResponse as AllowPolicyDeleteResponse,
@@ -111,6 +128,7 @@ export declare namespace Settings {
 
   export {
     BlockSenders as BlockSenders,
+    BaseBlockSenders as BaseBlockSenders,
     type BlockSenderCreateResponse as BlockSenderCreateResponse,
     type BlockSenderListResponse as BlockSenderListResponse,
     type BlockSenderDeleteResponse as BlockSenderDeleteResponse,
@@ -126,6 +144,7 @@ export declare namespace Settings {
 
   export {
     Domains as Domains,
+    BaseDomains as BaseDomains,
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
     type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
@@ -142,6 +161,7 @@ export declare namespace Settings {
 
   export {
     ImpersonationRegistry as ImpersonationRegistry,
+    BaseImpersonationRegistry as BaseImpersonationRegistry,
     type ImpersonationRegistryCreateResponse as ImpersonationRegistryCreateResponse,
     type ImpersonationRegistryListResponse as ImpersonationRegistryListResponse,
     type ImpersonationRegistryDeleteResponse as ImpersonationRegistryDeleteResponse,
@@ -157,6 +177,7 @@ export declare namespace Settings {
 
   export {
     TrustedDomains as TrustedDomains,
+    BaseTrustedDomains as BaseTrustedDomains,
     type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
     type TrustedDomainListResponse as TrustedDomainListResponse,
     type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,

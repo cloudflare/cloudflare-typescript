@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { ZeroTrust } from 'cloudflare/resources/zero-trust/zero-trust';
+import { BaseRiskScoring } from 'cloudflare/resources/zero-trust/risk-scoring/risk-scoring';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource riskScoring', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRiskScoring],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ZeroTrust],
+});
+
+const runTests = (client: PartialCloudflare<{ zeroTrust: { riskScoring: BaseRiskScoring } }>) => {
   test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.riskScoring.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 'account_id',
@@ -46,4 +64,7 @@ describe('resource riskScoring', () => {
       account_id: 'account_id',
     });
   });
-});
+};
+describe('resource riskScoring', () => runTests(client));
+describe('resource riskScoring (tree shakable, base)', () => runTests(partialClient));
+describe('resource riskScoring (tree shakable, subresource)', () => runTests(parentPartialClient));

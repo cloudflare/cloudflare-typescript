@@ -6,7 +6,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Credentials extends APIResource {
+export class BaseCredentials extends APIResource {
+  static override readonly _key: readonly ['tokenValidation', 'configuration', 'credentials'] = Object.freeze(
+    ['tokenValidation', 'configuration', 'credentials'] as const,
+  );
+
   /**
    * Update Token Configuration credentials
    *
@@ -36,13 +40,14 @@ export class Credentials extends APIResource {
     params: CredentialUpdateParams,
     options?: RequestOptions,
   ): APIPromise<CredentialUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return this._client.put(path`/zones/${zone_id}/token_validation/config/${configID}/credentials`, {
       body,
       ...options,
     });
   }
 }
+export class Credentials extends BaseCredentials {}
 
 export interface CredentialUpdateResponse {
   errors: UserSchemasAPI.Message;
@@ -167,7 +172,7 @@ export interface CredentialUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param

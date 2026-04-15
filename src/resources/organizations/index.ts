@@ -2,7 +2,8 @@
 
 export {
   OrganizationProfileResource,
+  BaseOrganizationProfileResource,
   type OrganizationProfile,
   type OrganizationProfileUpdateParams,
 } from './organization-profile';
-export { Organizations } from './organizations';
+export { Organizations, BaseOrganizations } from './organizations';

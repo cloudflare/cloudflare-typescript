@@ -2,6 +2,7 @@
 
 export {
   Recipients,
+  BaseRecipients,
   type RecipientCreateResponse,
   type RecipientListResponse,
   type RecipientDeleteResponse,
@@ -12,9 +13,10 @@ export {
   type RecipientGetParams,
   type RecipientListResponsesV4PagePaginationArray,
 } from './recipients';
-export { ResourceSharing } from './resource-sharing';
+export { ResourceSharing, BaseResourceSharing } from './resource-sharing';
 export {
   Resources,
+  BaseResources,
   type ResourceCreateResponse,
   type ResourceUpdateResponse,
   type ResourceListResponse,

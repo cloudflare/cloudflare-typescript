@@ -7,7 +7,10 @@ import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Excludes extends APIResource {
+export class BaseExcludes extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies', 'custom', 'excludes'] =
+    Object.freeze(['zeroTrust', 'devices', 'policies', 'custom', 'excludes'] as const);
+
   /**
    * Sets the list of routes excluded from the WARP client's tunnel for a specific
    * device settings profile.
@@ -31,7 +34,7 @@ export class Excludes extends APIResource {
     params: ExcludeUpdateParams,
     options?: RequestOptions,
   ): PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/${policyID}/exclude`,
       SinglePage<PoliciesAPI.SplitTunnelExclude>,
@@ -56,10 +59,10 @@ export class Excludes extends APIResource {
    */
   get(
     policyID: string,
-    params: ExcludeGetParams,
+    params: ExcludeGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/devices/policy/${policyID}/exclude`,
       SinglePage<PoliciesAPI.SplitTunnelExclude>,
@@ -67,12 +70,13 @@ export class Excludes extends APIResource {
     );
   }
 }
+export class Excludes extends BaseExcludes {}
 
 export interface ExcludeUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -81,7 +85,7 @@ export interface ExcludeUpdateParams {
 }
 
 export interface ExcludeGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Excludes {

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Workers } from 'cloudflare/resources/workers/workers';
+import { BaseScripts } from 'cloudflare/resources/workers/scripts/scripts';
+
 import Cloudflare, { toFile } from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource scripts', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseScripts],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Workers],
+});
+
+const runTests = (client: PartialCloudflare<{ workers: { scripts: BaseScripts } }>) => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = client.workers.scripts.update('this-is_my_script-01', {
@@ -182,4 +200,7 @@ describe('resource scripts', () => {
       per_page: 1,
     });
   });
-});
+};
+describe('resource scripts', () => runTests(client));
+describe('resource scripts (tree shakable, base)', () => runTests(partialClient));
+describe('resource scripts (tree shakable, subresource)', () => runTests(parentPartialClient));

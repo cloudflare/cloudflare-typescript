@@ -5,14 +5,19 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Usage extends APIResource {
+export class BaseUsage extends APIResource {
+  static override readonly _key: readonly ['billing', 'usage'] = Object.freeze(['billing', 'usage'] as const);
+
   /**
    * Returns billable usage data for PayGo (self-serve) accounts. When no query
    * parameters are provided, returns usage for the current billing period. This
    * endpoint is currently in beta and access is restricted to select accounts.
    */
-  paygo(params: UsagePaygoParams, options?: RequestOptions): APIPromise<UsagePaygoResponse> {
-    const { account_id, ...query } = params;
+  paygo(
+    params: UsagePaygoParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<UsagePaygoResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/billing/usage/paygo`, {
         query,
@@ -21,6 +26,7 @@ export class Usage extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Usage extends BaseUsage {}
 
 /**
  * Contains the array of billable usage records.
@@ -93,7 +99,7 @@ export interface UsagePaygoParams {
   /**
    * Path param: Represents a Cloudflare resource identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Defines the start date for the usage query (e.g., 2025-02-01).

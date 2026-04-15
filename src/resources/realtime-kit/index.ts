@@ -2,6 +2,7 @@
 
 export {
   ActiveSession,
+  BaseActiveSession,
   type ActiveSessionCreatePollResponse,
   type ActiveSessionGetActiveSessionResponse,
   type ActiveSessionKickAllParticipantsResponse,
@@ -13,11 +14,13 @@ export {
 } from './active-session';
 export {
   Analytics,
+  BaseAnalytics,
   type AnalyticsGetOrgAnalyticsResponse,
   type AnalyticsGetOrgAnalyticsParams,
 } from './analytics';
 export {
   Apps,
+  BaseApps,
   type AppGetResponse,
   type AppPostResponse,
   type AppGetParams,
@@ -25,6 +28,7 @@ export {
 } from './apps';
 export {
   Livestreams,
+  BaseLivestreams,
   type LivestreamCreateIndependentLivestreamResponse,
   type LivestreamGetActiveLivestreamsForLivestreamIDResponse,
   type LivestreamGetAllLivestreamsResponse,
@@ -48,6 +52,7 @@ export {
 } from './livestreams';
 export {
   Meetings,
+  BaseMeetings,
   type MeetingCreateResponse,
   type MeetingAddParticipantResponse,
   type MeetingDeleteMeetingParticipantResponse,
@@ -73,6 +78,7 @@ export {
 } from './meetings';
 export {
   Presets,
+  BasePresets,
   type PresetCreateResponse,
   type PresetUpdateResponse,
   type PresetDeleteResponse,
@@ -84,9 +90,10 @@ export {
   type PresetGetParams,
   type PresetGetPresetByIDParams,
 } from './presets';
-export { RealtimeKit } from './realtime-kit';
+export { RealtimeKit, BaseRealtimeKit } from './realtime-kit';
 export {
   Recordings,
+  BaseRecordings,
   type RecordingGetActiveRecordingsResponse,
   type RecordingGetOneRecordingResponse,
   type RecordingGetRecordingsResponse,
@@ -101,6 +108,7 @@ export {
 } from './recordings';
 export {
   Sessions,
+  BaseSessions,
   type SessionGetParticipantDataFromPeerIDResponse,
   type SessionGetSessionChatResponse,
   type SessionGetSessionDetailsResponse,
@@ -121,6 +129,7 @@ export {
 } from './sessions';
 export {
   Webhooks,
+  BaseWebhooks,
   type WebhookCreateWebhookResponse,
   type WebhookDeleteWebhookResponse,
   type WebhookEditWebhookResponse,

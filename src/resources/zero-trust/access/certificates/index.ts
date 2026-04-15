@@ -2,6 +2,7 @@
 
 export {
   Certificates,
+  BaseCertificates,
   type AssociatedHostnames,
   type Certificate,
   type CertificateDeleteResponse,
@@ -14,6 +15,7 @@ export {
 } from './certificates';
 export {
   Settings,
+  BaseSettings,
   type CertificateSettings,
   type SettingUpdateParams,
   type SettingGetParams,

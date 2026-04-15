@@ -5,7 +5,14 @@ import * as EmailAPI from '../email';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class TimeseriesGroups extends APIResource {
+export class BaseTimeseriesGroups extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security', 'timeseriesGroups'] = Object.freeze([
+    'radar',
+    'email',
+    'security',
+    'timeseriesGroups',
+  ] as const);
+
   /**
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation over time.
@@ -159,6 +166,7 @@ export class TimeseriesGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TimeseriesGroups extends BaseTimeseriesGroups {}
 
 export interface TimeseriesGroupARCResponse {
   /**

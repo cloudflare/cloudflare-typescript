@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../../core/resource';
 import * as EntriesAPI from './entries';
 import {
+  BaseEntries,
   Entries,
   EntryCreateParams,
   EntryCreateResponse,
@@ -19,8 +20,9 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class ContentLists extends APIResource {
-  entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
+export class BaseContentLists extends APIResource {
+  static override readonly _key: readonly ['web3', 'hostnames', 'ipfsUniversalPaths', 'contentLists'] =
+    Object.freeze(['web3', 'hostnames', 'ipfsUniversalPaths', 'contentLists'] as const);
 
   /**
    * Update IPFS Universal Path Gateway Content List
@@ -43,7 +45,7 @@ export class ContentLists extends APIResource {
     params: ContentListUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ContentList> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
@@ -64,8 +66,12 @@ export class ContentLists extends APIResource {
    *   );
    * ```
    */
-  get(identifier: string, params: ContentListGetParams, options?: RequestOptions): APIPromise<ContentList> {
-    const { zone_id } = params;
+  get(
+    identifier: string,
+    params: ContentListGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ContentList> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
@@ -73,6 +79,9 @@ export class ContentLists extends APIResource {
       ) as APIPromise<{ result: ContentList }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class ContentLists extends BaseContentLists {
+  entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
 }
 
 export interface ContentList {
@@ -86,7 +95,7 @@ export interface ContentListUpdateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Behavior of the content list.
@@ -125,10 +134,11 @@ export interface ContentListGetParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 ContentLists.Entries = Entries;
+ContentLists.BaseEntries = BaseEntries;
 
 export declare namespace ContentLists {
   export {
@@ -139,6 +149,7 @@ export declare namespace ContentLists {
 
   export {
     Entries as Entries,
+    BaseEntries as BaseEntries,
     type EntryCreateResponse as EntryCreateResponse,
     type EntryUpdateResponse as EntryUpdateResponse,
     type EntryListResponse as EntryListResponse,

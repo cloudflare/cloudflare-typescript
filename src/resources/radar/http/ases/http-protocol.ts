@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class HTTPProtocol extends APIResource {
+export class BaseHTTPProtocol extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'ases', 'httpProtocol'] = Object.freeze([
+    'radar',
+    'http',
+    'ases',
+    'httpProtocol',
+  ] as const);
+
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested HTTP
    * protocol.
@@ -29,6 +36,7 @@ export class HTTPProtocol extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class HTTPProtocol extends BaseHTTPProtocol {}
 
 export interface HTTPProtocolGetResponse {
   /**

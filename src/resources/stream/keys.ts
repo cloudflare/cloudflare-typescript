@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Keys extends APIResource {
+export class BaseKeys extends APIResource {
+  static override readonly _key: readonly ['stream', 'keys'] = Object.freeze(['stream', 'keys'] as const);
+
   /**
    * Creates an RSA private key in PEM and JWK formats. Key files are only displayed
    * once after creation. Keys are created, used, and deleted independently of
@@ -21,7 +23,7 @@ export class Keys extends APIResource {
    * ```
    */
   create(params: KeyCreateParams, options?: RequestOptions): APIPromise<Keys> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/stream/keys`, { body: body, ...options }) as APIPromise<{
         result: Keys;
@@ -42,10 +44,10 @@ export class Keys extends APIResource {
    */
   delete(
     identifier: string,
-    params: KeyDeleteParams,
+    params: KeyDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KeyDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/stream/keys/${identifier}`, options) as APIPromise<{
         result: KeyDeleteResponse;
@@ -67,10 +69,10 @@ export class Keys extends APIResource {
    * ```
    */
   get(
-    params: KeyGetParams,
+    params: KeyGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<KeyGetResponsesSinglePage, KeyGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/stream/keys`,
       SinglePage<KeyGetResponse>,
@@ -78,6 +80,7 @@ export class Keys extends APIResource {
     );
   }
 }
+export class Keys extends BaseKeys {}
 
 export type KeyGetResponsesSinglePage = SinglePage<KeyGetResponse>;
 
@@ -126,7 +129,7 @@ export interface KeyCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -138,14 +141,14 @@ export interface KeyDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Keys {

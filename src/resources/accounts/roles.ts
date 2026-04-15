@@ -8,7 +8,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Roles extends APIResource {
+export class BaseRoles extends APIResource {
+  static override readonly _key: readonly ['accounts', 'roles'] = Object.freeze([
+    'accounts',
+    'roles',
+  ] as const);
+
   /**
    * Get all available roles for an account.
    *
@@ -23,10 +28,10 @@ export class Roles extends APIResource {
    * ```
    */
   list(
-    params: RoleListParams,
+    params: RoleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RolesV4PagePaginationArray, Shared.Role> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/roles`, V4PagePaginationArray<Shared.Role>, {
       query,
       ...options,
@@ -44,8 +49,12 @@ export class Roles extends APIResource {
    * );
    * ```
    */
-  get(roleID: string, params: RoleGetParams, options?: RequestOptions): APIPromise<Shared.Role> {
-    const { account_id } = params;
+  get(
+    roleID: string,
+    params: RoleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Role> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/roles/${roleID}`, options) as APIPromise<{
         result: Shared.Role;
@@ -53,19 +62,20 @@ export class Roles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Roles extends BaseRoles {}
 
 export interface RoleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface RoleGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Roles {

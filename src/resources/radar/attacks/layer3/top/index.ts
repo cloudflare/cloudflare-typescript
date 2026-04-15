@@ -2,6 +2,7 @@
 
 export {
   Locations,
+  BaseLocations,
   type LocationOriginResponse,
   type LocationTargetResponse,
   type LocationOriginParams,
@@ -9,6 +10,7 @@ export {
 } from './locations';
 export {
   Top,
+  BaseTop,
   type TopAttacksResponse,
   type TopIndustryResponse,
   type TopVerticalResponse,

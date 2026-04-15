@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { LoadBalancers } from 'cloudflare/resources/load-balancers/load-balancers';
+import { BasePools } from 'cloudflare/resources/load-balancers/pools/pools';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource pools', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePools],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [LoadBalancers],
+});
+
+const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.loadBalancers.pools.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -247,4 +265,7 @@ describe('resource pools', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource pools', () => runTests(client));
+describe('resource pools (tree shakable, base)', () => runTests(partialClient));
+describe('resource pools (tree shakable, subresource)', () => runTests(parentPartialClient));

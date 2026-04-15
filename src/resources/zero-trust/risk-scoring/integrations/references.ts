@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class References extends APIResource {
+export class BaseReferences extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'riskScoring', 'integrations', 'references'] =
+    Object.freeze(['zeroTrust', 'riskScoring', 'integrations', 'references'] as const);
+
   /**
    * Retrieves a Zero Trust risk score integration using its external reference ID.
    *
@@ -20,10 +23,10 @@ export class References extends APIResource {
    */
   get(
     referenceID: string,
-    params: ReferenceGetParams,
+    params: ReferenceGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ReferenceGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/zt_risk_scoring/integrations/reference_id/${referenceID}`,
@@ -32,6 +35,7 @@ export class References extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class References extends BaseReferences {}
 
 export interface ReferenceGetResponse {
   /**
@@ -77,7 +81,7 @@ export interface ReferenceGetResponse {
 }
 
 export interface ReferenceGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace References {

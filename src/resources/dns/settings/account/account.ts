@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as ViewsAPI from './views';
 import {
+  BaseViews,
   ViewCreateParams,
   ViewCreateResponse,
   ViewDeleteParams,
@@ -20,8 +21,12 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Account extends APIResource {
-  views: ViewsAPI.Views = new ViewsAPI.Views(this._client);
+export class BaseAccount extends APIResource {
+  static override readonly _key: readonly ['dns', 'settings', 'account'] = Object.freeze([
+    'dns',
+    'settings',
+    'account',
+  ] as const);
 
   /**
    * Update DNS settings for an account
@@ -33,8 +38,11 @@ export class Account extends APIResource {
    * });
    * ```
    */
-  edit(params: AccountEditParams, options?: RequestOptions): APIPromise<AccountEditResponse> {
-    const { account_id, ...body } = params;
+  edit(
+    params: AccountEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountEditResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/dns_settings`, { body, ...options }) as APIPromise<{
         result: AccountEditResponse;
@@ -52,14 +60,20 @@ export class Account extends APIResource {
    * });
    * ```
    */
-  get(params: AccountGetParams, options?: RequestOptions): APIPromise<AccountGetResponse> {
-    const { account_id } = params;
+  get(
+    params: AccountGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dns_settings`, options) as APIPromise<{
         result: AccountGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Account extends BaseAccount {
+  views: ViewsAPI.Views = new ViewsAPI.Views(this._client);
 }
 
 export interface AccountEditResponse {
@@ -314,7 +328,7 @@ export interface AccountEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -446,10 +460,11 @@ export interface AccountGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Account.Views = Views;
+Account.BaseViews = BaseViews;
 
 export declare namespace Account {
   export {
@@ -461,6 +476,7 @@ export declare namespace Account {
 
   export {
     Views as Views,
+    BaseViews as BaseViews,
     type ViewCreateResponse as ViewCreateResponse,
     type ViewListResponse as ViewListResponse,
     type ViewDeleteResponse as ViewDeleteResponse,

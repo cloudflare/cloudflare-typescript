@@ -3,9 +3,10 @@
 import { APIResource } from '../../../core/resource';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
-import { Content, ContentGetParams, ContentUpdateParams } from './content';
+import { BaseContent, Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as DeploymentsAPI from './deployments';
 import {
+  BaseDeployments,
   Deployment,
   DeploymentCreateParams,
   DeploymentDeleteParams,
@@ -17,6 +18,7 @@ import {
 } from './deployments';
 import * as SchedulesAPI from './schedules';
 import {
+  BaseSchedules,
   ScheduleGetParams,
   ScheduleGetResponse,
   ScheduleUpdateParams,
@@ -25,6 +27,7 @@ import {
 } from './schedules';
 import * as ScriptAndVersionSettingsAPI from './script-and-version-settings';
 import {
+  BaseScriptAndVersionSettings,
   ScriptAndVersionSettingEditParams,
   ScriptAndVersionSettingEditResponse,
   ScriptAndVersionSettingGetParams,
@@ -33,6 +36,7 @@ import {
 } from './script-and-version-settings';
 import * as SecretsAPI from './secrets';
 import {
+  BaseSecrets,
   SecretDeleteParams,
   SecretDeleteResponse,
   SecretGetParams,
@@ -45,9 +49,10 @@ import {
   Secrets,
 } from './secrets';
 import * as SettingsAPI from './settings';
-import { SettingEditParams, SettingGetParams, Settings } from './settings';
+import { BaseSettings, SettingEditParams, SettingGetParams, Settings } from './settings';
 import * as SubdomainAPI from './subdomain';
 import {
+  BaseSubdomain,
   Subdomain,
   SubdomainCreateParams,
   SubdomainCreateResponse,
@@ -58,6 +63,7 @@ import {
 } from './subdomain';
 import * as TailAPI from './tail';
 import {
+  BaseTail,
   ConsumerScript,
   Tail,
   TailCreateParams,
@@ -69,6 +75,7 @@ import {
 } from './tail';
 import * as VersionsAPI from './versions';
 import {
+  BaseVersions,
   VersionCreateParams,
   VersionCreateResponse,
   VersionGetParams,
@@ -79,7 +86,7 @@ import {
   Versions,
 } from './versions';
 import * as AssetsAPI from './assets/assets';
-import { Assets as AssetsAPIAssets } from './assets/assets';
+import { Assets as AssetsAPIAssets, BaseAssets } from './assets/assets';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { type Uploadable } from '../../../core/uploads';
@@ -88,18 +95,11 @@ import { RequestOptions } from '../../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Scripts extends APIResource {
-  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
-  subdomain: SubdomainAPI.Subdomain = new SubdomainAPI.Subdomain(this._client);
-  schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
-  tail: TailAPI.Tail = new TailAPI.Tail(this._client);
-  content: ContentAPI.Content = new ContentAPI.Content(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
-  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
-  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
-  scriptAndVersionSettings: ScriptAndVersionSettingsAPI.ScriptAndVersionSettings =
-    new ScriptAndVersionSettingsAPI.ScriptAndVersionSettings(this._client);
+export class BaseScripts extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts'] = Object.freeze([
+    'workers',
+    'scripts',
+  ] as const);
 
   /**
    * Upload a worker module. You can find more about the multipart metadata on our
@@ -122,7 +122,7 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ScriptUpdateResponse> {
-    const { account_id, bindings_inherit, ...body } = params;
+    const { account_id = this._client.accountID, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/workers/scripts/${scriptName}`,
@@ -153,10 +153,10 @@ export class Scripts extends APIResource {
    * ```
    */
   list(
-    params: ScriptListParams,
+    params: ScriptListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ScriptListResponsesSinglePage, ScriptListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/scripts`,
       SinglePage<ScriptListResponse>,
@@ -177,10 +177,10 @@ export class Scripts extends APIResource {
    */
   delete(
     scriptName: string,
-    params: ScriptDeleteParams,
+    params: ScriptDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ScriptDeleteResponse | null> {
-    const { account_id, force } = params;
+    const { account_id = this._client.accountID, force } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/workers/scripts/${scriptName}`, {
         query: { force },
@@ -201,8 +201,12 @@ export class Scripts extends APIResource {
    * );
    * ```
    */
-  get(scriptName: string, params: ScriptGetParams, options?: RequestOptions): APIPromise<string> {
-    const { account_id } = params;
+  get(
+    scriptName: string,
+    params: ScriptGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<string> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/workers/scripts/${scriptName}`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/javascript' }, options?.headers]),
@@ -219,8 +223,11 @@ export class Scripts extends APIResource {
    * });
    * ```
    */
-  search(params: ScriptSearchParams, options?: RequestOptions): APIPromise<ScriptSearchResponse> {
-    const { account_id, ...query } = params;
+  search(
+    params: ScriptSearchParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ScriptSearchResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/workers/scripts-search`, {
         query,
@@ -228,6 +235,19 @@ export class Scripts extends APIResource {
       }) as APIPromise<{ result: ScriptSearchResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Scripts extends BaseScripts {
+  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
+  subdomain: SubdomainAPI.Subdomain = new SubdomainAPI.Subdomain(this._client);
+  schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
+  tail: TailAPI.Tail = new TailAPI.Tail(this._client);
+  content: ContentAPI.Content = new ContentAPI.Content(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
+  secrets: SecretsAPI.Secrets = new SecretsAPI.Secrets(this._client);
+  scriptAndVersionSettings: ScriptAndVersionSettingsAPI.ScriptAndVersionSettings =
+    new ScriptAndVersionSettingsAPI.ScriptAndVersionSettings(this._client);
 }
 
 export type ScriptListResponsesSinglePage = SinglePage<ScriptListResponse>;
@@ -1674,7 +1694,7 @@ export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -2910,7 +2930,7 @@ export interface ScriptListParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter scripts by tags. Format: comma-separated list of tag:allowed
@@ -2923,7 +2943,7 @@ export interface ScriptDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service
@@ -2937,14 +2957,14 @@ export interface ScriptGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ScriptSearchParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Worker ID (also called tag) to search for. Only exact matches are
@@ -2975,15 +2995,25 @@ export interface ScriptSearchParams {
 }
 
 Scripts.Assets = AssetsAPIAssets;
+Scripts.BaseAssets = BaseAssets;
 Scripts.Subdomain = Subdomain;
+Scripts.BaseSubdomain = BaseSubdomain;
 Scripts.Schedules = Schedules;
+Scripts.BaseSchedules = BaseSchedules;
 Scripts.Tail = Tail;
+Scripts.BaseTail = BaseTail;
 Scripts.Content = Content;
+Scripts.BaseContent = BaseContent;
 Scripts.Settings = Settings;
+Scripts.BaseSettings = BaseSettings;
 Scripts.Deployments = Deployments;
+Scripts.BaseDeployments = BaseDeployments;
 Scripts.Versions = Versions;
+Scripts.BaseVersions = BaseVersions;
 Scripts.Secrets = Secrets;
+Scripts.BaseSecrets = BaseSecrets;
 Scripts.ScriptAndVersionSettings = ScriptAndVersionSettings;
+Scripts.BaseScriptAndVersionSettings = BaseScriptAndVersionSettings;
 
 export declare namespace Scripts {
   export {
@@ -3002,10 +3032,11 @@ export declare namespace Scripts {
     type ScriptSearchParams as ScriptSearchParams,
   };
 
-  export { AssetsAPIAssets as Assets };
+  export { AssetsAPIAssets as Assets, BaseAssets as BaseAssets };
 
   export {
     Subdomain as Subdomain,
+    BaseSubdomain as BaseSubdomain,
     type SubdomainCreateResponse as SubdomainCreateResponse,
     type SubdomainDeleteResponse as SubdomainDeleteResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
@@ -3016,6 +3047,7 @@ export declare namespace Scripts {
 
   export {
     Schedules as Schedules,
+    BaseSchedules as BaseSchedules,
     type ScheduleUpdateResponse as ScheduleUpdateResponse,
     type ScheduleGetResponse as ScheduleGetResponse,
     type ScheduleUpdateParams as ScheduleUpdateParams,
@@ -3024,6 +3056,7 @@ export declare namespace Scripts {
 
   export {
     Tail as Tail,
+    BaseTail as BaseTail,
     type ConsumerScript as ConsumerScript,
     type TailCreateResponse as TailCreateResponse,
     type TailDeleteResponse as TailDeleteResponse,
@@ -3035,18 +3068,21 @@ export declare namespace Scripts {
 
   export {
     Content as Content,
+    BaseContent as BaseContent,
     type ContentUpdateParams as ContentUpdateParams,
     type ContentGetParams as ContentGetParams,
   };
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
   };
 
   export {
     Deployments as Deployments,
+    BaseDeployments as BaseDeployments,
     type Deployment as Deployment,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
@@ -3058,6 +3094,7 @@ export declare namespace Scripts {
 
   export {
     Versions as Versions,
+    BaseVersions as BaseVersions,
     type VersionCreateResponse as VersionCreateResponse,
     type VersionListResponse as VersionListResponse,
     type VersionGetResponse as VersionGetResponse,
@@ -3069,6 +3106,7 @@ export declare namespace Scripts {
 
   export {
     Secrets as Secrets,
+    BaseSecrets as BaseSecrets,
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
@@ -3082,6 +3120,7 @@ export declare namespace Scripts {
 
   export {
     ScriptAndVersionSettings as ScriptAndVersionSettings,
+    BaseScriptAndVersionSettings as BaseScriptAndVersionSettings,
     type ScriptAndVersionSettingEditResponse as ScriptAndVersionSettingEditResponse,
     type ScriptAndVersionSettingGetResponse as ScriptAndVersionSettingGetResponse,
     type ScriptAndVersionSettingEditParams as ScriptAndVersionSettingEditParams,

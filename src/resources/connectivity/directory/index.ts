@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Directory } from './directory';
+export { Directory, BaseDirectory } from './directory';
 export {
   Services,
+  BaseServices,
   type ServiceCreateResponse,
   type ServiceUpdateResponse,
   type ServiceListResponse,

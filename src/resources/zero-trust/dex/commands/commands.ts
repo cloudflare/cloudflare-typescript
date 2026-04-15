@@ -3,24 +3,27 @@
 import { APIResource } from '../../../../core/resource';
 import * as DevicesAPI from './devices';
 import {
+  BaseDevices,
   DeviceListParams,
   DeviceListResponse,
   DeviceListResponsesV4PagePagination,
   Devices,
 } from './devices';
 import * as DownloadsAPI from './downloads';
-import { DownloadGetParams, Downloads } from './downloads';
+import { BaseDownloads, DownloadGetParams, Downloads } from './downloads';
 import * as QuotaAPI from './quota';
-import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
+import { BaseQuota, Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Commands extends APIResource {
-  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
-  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
-  quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
+export class BaseCommands extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'commands'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'commands',
+  ] as const);
 
   /**
    * Initiate commands for up to 10 devices per account
@@ -40,7 +43,7 @@ export class Commands extends APIResource {
    * ```
    */
   create(params: CommandCreateParams, options?: RequestOptions): APIPromise<CommandCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dex/commands`, { body, ...options }) as APIPromise<{
         result: CommandCreateResponse;
@@ -70,13 +73,18 @@ export class Commands extends APIResource {
     params: CommandListParams,
     options?: RequestOptions,
   ): PagePromise<CommandListResponsesV4PagePagination, CommandListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/commands`,
       V4PagePagination<CommandListResponse>,
       { query, ...options },
     );
   }
+}
+export class Commands extends BaseCommands {
+  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
+  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
+  quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 }
 
 export type CommandListResponsesV4PagePagination = V4PagePagination<CommandListResponse>;
@@ -155,7 +163,7 @@ export interface CommandCreateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: List of device-level commands to execute
@@ -228,7 +236,7 @@ export interface CommandListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Optionally filter executed commands by command type
@@ -262,8 +270,11 @@ export interface CommandListParams extends V4PagePaginationParams {
 }
 
 Commands.Devices = Devices;
+Commands.BaseDevices = BaseDevices;
 Commands.Downloads = Downloads;
+Commands.BaseDownloads = BaseDownloads;
 Commands.Quota = Quota;
+Commands.BaseQuota = BaseQuota;
 
 export declare namespace Commands {
   export {
@@ -276,12 +287,22 @@ export declare namespace Commands {
 
   export {
     Devices as Devices,
+    BaseDevices as BaseDevices,
     type DeviceListResponse as DeviceListResponse,
     type DeviceListResponsesV4PagePagination as DeviceListResponsesV4PagePagination,
     type DeviceListParams as DeviceListParams,
   };
 
-  export { Downloads as Downloads, type DownloadGetParams as DownloadGetParams };
+  export {
+    Downloads as Downloads,
+    BaseDownloads as BaseDownloads,
+    type DownloadGetParams as DownloadGetParams,
+  };
 
-  export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
+  export {
+    Quota as Quota,
+    BaseQuota as BaseQuota,
+    type QuotaGetResponse as QuotaGetResponse,
+    type QuotaGetParams as QuotaGetParams,
+  };
 }

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OperationsAPI from './operations';
 import {
+  BaseOperations,
   OperationBulkEditParams,
   OperationBulkEditResponse,
   OperationEditParams,
@@ -15,8 +16,11 @@ import { V4PagePaginationArray } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Discovery extends APIResource {
-  operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
+export class BaseDiscovery extends APIResource {
+  static override readonly _key: readonly ['apiGateway', 'discovery'] = Object.freeze([
+    'apiGateway',
+    'discovery',
+  ] as const);
 
   /**
    * Retrieve the most up to date view of discovered operations, rendered as OpenAPI
@@ -29,14 +33,20 @@ export class Discovery extends APIResource {
    * });
    * ```
    */
-  get(params: DiscoveryGetParams, options?: RequestOptions): APIPromise<DiscoveryGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: DiscoveryGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DiscoveryGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/api_gateway/discovery`, options) as APIPromise<{
         result: DiscoveryGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Discovery extends BaseDiscovery {
+  operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
 }
 
 export type DiscoveryOperationsV4PagePaginationArray = V4PagePaginationArray<DiscoveryOperation>;
@@ -116,10 +126,11 @@ export interface DiscoveryGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Discovery.Operations = Operations;
+Discovery.BaseOperations = BaseOperations;
 
 export declare namespace Discovery {
   export {
@@ -130,6 +141,7 @@ export declare namespace Discovery {
 
   export {
     Operations as Operations,
+    BaseOperations as BaseOperations,
     type OperationBulkEditResponse as OperationBulkEditResponse,
     type OperationEditResponse as OperationEditResponse,
     type OperationListParams as OperationListParams,

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseSpoof } from 'cloudflare/resources/radar/email/security/top/tlds/spoof';
+import { TLDs } from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource spoof', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseSpoof],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [TLDs],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { email: { security: { top: { tlds: { spoof: BaseSpoof } } } } } }>,
+) => {
   test('get', async () => {
     const responsePromise = client.radar.email.security.top.tlds.spoof.get('SPOOF');
     const rawResponse = await responsePromise.asResponse();
@@ -43,4 +63,7 @@ describe('resource spoof', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource spoof', () => runTests(client));
+describe('resource spoof (tree shakable, base)', () => runTests(partialClient));
+describe('resource spoof (tree shakable, subresource)', () => runTests(parentPartialClient));

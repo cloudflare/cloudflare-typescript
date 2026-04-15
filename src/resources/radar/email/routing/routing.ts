@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryARCParams,
   SummaryARCResponse,
@@ -19,6 +20,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupARCParams,
   TimeseriesGroupARCResponse,
   TimeseriesGroupDKIMParams,
@@ -37,11 +39,12 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Routing extends APIResource {
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+export class BaseRouting extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'routing'] = Object.freeze([
+    'radar',
+    'email',
+    'routing',
+  ] as const);
 
   /**
    * Retrieves the distribution of email routing metrics by the specified dimension.
@@ -89,6 +92,12 @@ export class Routing extends APIResource {
       }) as APIPromise<{ result: RoutingTimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Routing extends BaseRouting {
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
 }
 
 export interface RoutingSummaryV2Response {
@@ -502,7 +511,9 @@ export interface RoutingTimeseriesGroupsV2Params {
 }
 
 Routing.Summary = Summary;
+Routing.BaseSummary = BaseSummary;
 Routing.TimeseriesGroups = TimeseriesGroups;
+Routing.BaseTimeseriesGroups = BaseTimeseriesGroups;
 
 export declare namespace Routing {
   export {
@@ -514,6 +525,7 @@ export declare namespace Routing {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryARCResponse as SummaryARCResponse,
     type SummaryDKIMResponse as SummaryDKIMResponse,
     type SummaryDMARCResponse as SummaryDMARCResponse,
@@ -530,6 +542,7 @@ export declare namespace Routing {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupARCResponse as TimeseriesGroupARCResponse,
     type TimeseriesGroupDKIMResponse as TimeseriesGroupDKIMResponse,
     type TimeseriesGroupDMARCResponse as TimeseriesGroupDMARCResponse,

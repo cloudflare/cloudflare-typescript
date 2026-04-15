@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Json extends APIResource {
+export class BaseJson extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'json'] = Object.freeze([
+    'browserRendering',
+    'json',
+  ] as const);
+
   /**
    * Gets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema`
    * in the body. Control page loading with `gotoOptions` and `waitFor*` options.
@@ -19,7 +24,7 @@ export class Json extends APIResource {
    * ```
    */
   create(params: JsonCreateParams, options?: RequestOptions): APIPromise<JsonCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/browser-rendering/json`, {
         query: { cacheTTL },
@@ -29,6 +34,7 @@ export class Json extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Json extends BaseJson {}
 
 export type JsonCreateResponse = { [key: string]: unknown };
 
@@ -39,7 +45,7 @@ export declare namespace JsonCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -344,7 +350,7 @@ export declare namespace JsonCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.

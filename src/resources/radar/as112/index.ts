@@ -2,6 +2,7 @@
 
 export {
   AS112,
+  BaseAS112,
   type AS112SummaryV2Response,
   type AS112TimeseriesResponse,
   type AS112TimeseriesGroupsV2Response,
@@ -11,6 +12,7 @@ export {
 } from './as112';
 export {
   Summary,
+  BaseSummary,
   type SummaryDNSSECResponse,
   type SummaryEdnsResponse,
   type SummaryIPVersionResponse,
@@ -26,6 +28,7 @@ export {
 } from './summary';
 export {
   TimeseriesGroups,
+  BaseTimeseriesGroups,
   type TimeseriesGroupDNSSECResponse,
   type TimeseriesGroupEdnsResponse,
   type TimeseriesGroupIPVersionResponse,
@@ -41,6 +44,7 @@ export {
 } from './timeseries-groups';
 export {
   Top,
+  BaseTop,
   type TopDNSSECResponse,
   type TopEdnsResponse,
   type TopIPVersionResponse,

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { SCIM } from 'cloudflare/resources/zero-trust/access/logs/scim/scim';
+import { BaseUpdates } from 'cloudflare/resources/zero-trust/access/logs/scim/updates';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource updates', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseUpdates],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [SCIM],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { access: { logs: { scim: { updates: BaseUpdates } } } } }>,
+) => {
   test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.access.logs.scim.updates.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -42,4 +62,7 @@ describe('resource updates', () => {
       until: '2025-01-02T00:00:00Z',
     });
   });
-});
+};
+describe('resource updates', () => runTests(client));
+describe('resource updates (tree shakable, base)', () => runTests(partialClient));
+describe('resource updates (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Recordings extends APIResource {
+export class BaseRecordings extends APIResource {
+  static override readonly _key: readonly ['realtimeKit', 'recordings'] = Object.freeze([
+    'realtimeKit',
+    'recordings',
+  ] as const);
+
   /**
    * Returns the active recording details for the given meeting ID.
    *
@@ -27,7 +32,7 @@ export class Recordings extends APIResource {
     params: RecordingGetActiveRecordingsParams,
     options?: RequestOptions,
   ): APIPromise<RecordingGetActiveRecordingsResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/recordings/active-recording/${meetingID}`,
       options,
@@ -54,7 +59,7 @@ export class Recordings extends APIResource {
     params: RecordingGetOneRecordingParams,
     options?: RequestOptions,
   ): APIPromise<RecordingGetOneRecordingResponse> {
-    const { account_id, app_id } = params;
+    const { account_id = this._client.accountID, app_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/recordings/${recordingID}`,
       options,
@@ -76,10 +81,10 @@ export class Recordings extends APIResource {
    */
   getRecordings(
     appID: string,
-    params: RecordingGetRecordingsParams,
+    params: RecordingGetRecordingsParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<RecordingGetRecordingsResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/realtime/kit/${appID}/recordings`, {
       query,
       ...options,
@@ -107,7 +112,7 @@ export class Recordings extends APIResource {
     params: RecordingPauseResumeStopRecordingParams,
     options?: RequestOptions,
   ): APIPromise<RecordingPauseResumeStopRecordingResponse> {
-    const { account_id, app_id, ...body } = params;
+    const { account_id = this._client.accountID, app_id, ...body } = params;
     return this._client.put(path`/accounts/${account_id}/realtime/kit/${app_id}/recordings/${recordingID}`, {
       body,
       ...options,
@@ -156,7 +161,7 @@ export class Recordings extends APIResource {
     params: RecordingStartRecordingsParams,
     options?: RequestOptions,
   ): APIPromise<RecordingStartRecordingsResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/realtime/kit/${appID}/recordings`, {
       body,
       ...options,
@@ -196,7 +201,7 @@ export class Recordings extends APIResource {
     params: RecordingStartTrackRecordingParams,
     options?: RequestOptions,
   ): APIPromise<void> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/realtime/kit/${appID}/recordings/track`, {
       body,
       ...options,
@@ -204,6 +209,7 @@ export class Recordings extends APIResource {
     });
   }
 }
+export class Recordings extends BaseRecordings {}
 
 export interface RecordingGetActiveRecordingsResponse {
   /**
@@ -1136,7 +1142,7 @@ export interface RecordingGetActiveRecordingsParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1148,7 +1154,7 @@ export interface RecordingGetOneRecordingParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * The app identifier tag.
@@ -1160,7 +1166,7 @@ export interface RecordingGetRecordingsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The end time range for which you want to retrieve the meetings. The
@@ -1223,7 +1229,7 @@ export interface RecordingPauseResumeStopRecordingParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: A Cloudflare-generated unique identifier for an item.
@@ -1240,7 +1246,7 @@ export interface RecordingStartRecordingsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: By default, a meeting allows only one recording to run at a time.
@@ -1501,7 +1507,7 @@ export interface RecordingStartTrackRecordingParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

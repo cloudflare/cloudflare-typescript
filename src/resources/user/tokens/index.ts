@@ -2,12 +2,14 @@
 
 export {
   PermissionGroups,
+  BasePermissionGroups,
   type PermissionGroupListResponse,
   type PermissionGroupListParams,
   type PermissionGroupListResponsesSinglePage,
 } from './permission-groups';
 export {
   Tokens,
+  BaseTokens,
   type TokenCreateResponse,
   type TokenDeleteResponse,
   type TokenVerifyResponse,
@@ -15,4 +17,4 @@ export {
   type TokenUpdateParams,
   type TokenListParams,
 } from './tokens';
-export { Value, type ValueUpdateParams } from './value';
+export { Value, BaseValue, type ValueUpdateParams } from './value';

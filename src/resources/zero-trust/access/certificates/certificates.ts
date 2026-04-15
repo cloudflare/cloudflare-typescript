@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   CertificateSettings,
   CertificateSettingsSinglePage,
   SettingGetParams,
@@ -19,8 +20,12 @@ import {
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Certificates extends APIResource {
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+export class BaseCertificates extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'certificates'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'certificates',
+  ] as const);
 
   /**
    * Adds a new mTLS root certificate to Access.
@@ -37,7 +42,11 @@ export class Certificates extends APIResource {
    * ```
    */
   create(params: CertificateCreateParams, options?: RequestOptions): APIPromise<Certificate> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -82,7 +91,11 @@ export class Certificates extends APIResource {
     params: CertificateUpdateParams,
     options?: RequestOptions,
   ): APIPromise<Certificate> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -124,7 +137,11 @@ export class Certificates extends APIResource {
     params: CertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CertificatesV4PagePaginationArray, Certificate> {
-    const { account_id, zone_id, ...query } = params ?? {};
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...query
+    } = params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -165,7 +182,8 @@ export class Certificates extends APIResource {
     params: CertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CertificateDeleteResponse> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -207,7 +225,8 @@ export class Certificates extends APIResource {
     params: CertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Certificate> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -231,6 +250,9 @@ export class Certificates extends APIResource {
       ) as APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Certificates extends BaseCertificates {
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
 export type CertificatesV4PagePaginationArray = V4PagePaginationArray<Certificate>;
@@ -368,6 +390,7 @@ export interface CertificateGetParams {
 }
 
 Certificates.Settings = Settings;
+Certificates.BaseSettings = BaseSettings;
 
 export declare namespace Certificates {
   export {
@@ -384,6 +407,7 @@ export declare namespace Certificates {
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type CertificateSettings as CertificateSettings,
     type CertificateSettingsSinglePage as CertificateSettingsSinglePage,
     type SettingUpdateParams as SettingUpdateParams,

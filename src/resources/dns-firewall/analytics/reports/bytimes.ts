@@ -6,7 +6,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Bytimes extends APIResource {
+export class BaseBytimes extends APIResource {
+  static override readonly _key: readonly ['dnsFirewall', 'analytics', 'reports', 'bytimes'] = Object.freeze([
+    'dnsFirewall',
+    'analytics',
+    'reports',
+    'bytimes',
+  ] as const);
+
   /**
    * Retrieves a list of aggregate metrics grouped by time interval.
    *
@@ -25,10 +32,10 @@ export class Bytimes extends APIResource {
    */
   get(
     dnsFirewallID: string,
-    params: BytimeGetParams,
+    params: BytimeGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ReportsBytimesAPI.ByTime> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/dns_firewall/${dnsFirewallID}/dns_analytics/report/bytime`,
@@ -37,12 +44,13 @@ export class Bytimes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Bytimes extends BaseBytimes {}
 
 export interface BytimeGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.

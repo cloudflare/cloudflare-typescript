@@ -2,6 +2,7 @@
 
 export {
   Lists,
+  BaseLists,
   type Hostname,
   type ListsList,
   type Redirect,
@@ -16,4 +17,4 @@ export {
   type ListGetParams,
   type ListsListsSinglePage,
 } from './lists/index';
-export { Rules } from './rules';
+export { Rules, BaseRules } from './rules';

@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TrustedDomains extends APIResource {
+export class BaseTrustedDomains extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'settings', 'trustedDomains'] = Object.freeze([
+    'emailSecurity',
+    'settings',
+    'trustedDomains',
+  ] as const);
+
   /**
    * Adds a domain to the trusted domains list for email security, reducing false
    * positive detections.
@@ -33,7 +39,7 @@ export class TrustedDomains extends APIResource {
     params: TrustedDomainCreateParams,
     options?: RequestOptions,
   ): APIPromise<TrustedDomainCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/settings/trusted_domains`, {
         body,
@@ -56,10 +62,10 @@ export class TrustedDomains extends APIResource {
    * ```
    */
   list(
-    params: TrustedDomainListParams,
+    params: TrustedDomainListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TrustedDomainListResponsesV4PagePaginationArray, TrustedDomainListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/settings/trusted_domains`,
       V4PagePaginationArray<TrustedDomainListResponse>,
@@ -82,10 +88,10 @@ export class TrustedDomains extends APIResource {
    */
   delete(
     trustedDomainID: number,
-    params: TrustedDomainDeleteParams,
+    params: TrustedDomainDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TrustedDomainDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/email-security/settings/trusted_domains/${trustedDomainID}`,
@@ -111,7 +117,7 @@ export class TrustedDomains extends APIResource {
     params: TrustedDomainEditParams,
     options?: RequestOptions,
   ): APIPromise<TrustedDomainEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/email-security/settings/trusted_domains/${trustedDomainID}`,
@@ -134,10 +140,10 @@ export class TrustedDomains extends APIResource {
    */
   get(
     trustedDomainID: number,
-    params: TrustedDomainGetParams,
+    params: TrustedDomainGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TrustedDomainGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/settings/trusted_domains/${trustedDomainID}`,
@@ -146,6 +152,7 @@ export class TrustedDomains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TrustedDomains extends BaseTrustedDomains {}
 
 export type TrustedDomainListResponsesV4PagePaginationArray =
   V4PagePaginationArray<TrustedDomainListResponse>;
@@ -317,7 +324,7 @@ export declare namespace TrustedDomainCreateParams {
     /**
      * Path param: Account Identifier
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Select to prevent recently registered domains from triggering a
@@ -352,7 +359,7 @@ export declare namespace TrustedDomainCreateParams {
     /**
      * Path param: Account Identifier
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -387,7 +394,7 @@ export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -426,14 +433,14 @@ export interface TrustedDomainDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TrustedDomainEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -468,7 +475,7 @@ export interface TrustedDomainGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace TrustedDomains {

@@ -10,7 +10,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class BlockSenders extends APIResource {
+export class BaseBlockSenders extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'settings', 'blockSenders'] = Object.freeze([
+    'emailSecurity',
+    'settings',
+    'blockSenders',
+  ] as const);
+
   /**
    * Adds a sender pattern to the email block list, preventing messages from matching
    * senders from being delivered.
@@ -27,7 +33,7 @@ export class BlockSenders extends APIResource {
    * ```
    */
   create(params: BlockSenderCreateParams, options?: RequestOptions): APIPromise<BlockSenderCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/settings/block_senders`, {
         body,
@@ -50,10 +56,10 @@ export class BlockSenders extends APIResource {
    * ```
    */
   list(
-    params: BlockSenderListParams,
+    params: BlockSenderListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/settings/block_senders`,
       V4PagePaginationArray<BlockSenderListResponse>,
@@ -76,10 +82,10 @@ export class BlockSenders extends APIResource {
    */
   delete(
     patternID: number,
-    params: BlockSenderDeleteParams,
+    params: BlockSenderDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BlockSenderDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/email-security/settings/block_senders/${patternID}`,
@@ -105,7 +111,7 @@ export class BlockSenders extends APIResource {
     params: BlockSenderEditParams,
     options?: RequestOptions,
   ): APIPromise<BlockSenderEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/email-security/settings/block_senders/${patternID}`, {
         body,
@@ -129,10 +135,10 @@ export class BlockSenders extends APIResource {
    */
   get(
     patternID: number,
-    params: BlockSenderGetParams,
+    params: BlockSenderGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BlockSenderGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/settings/block_senders/${patternID}`,
@@ -141,6 +147,7 @@ export class BlockSenders extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class BlockSenders extends BaseBlockSenders {}
 
 export type BlockSenderListResponsesV4PagePaginationArray = V4PagePaginationArray<BlockSenderListResponse>;
 
@@ -231,7 +238,7 @@ export interface BlockSenderCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -258,7 +265,7 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The sorting direction.
@@ -292,14 +299,14 @@ export interface BlockSenderDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface BlockSenderEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -326,7 +333,7 @@ export interface BlockSenderGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace BlockSenders {

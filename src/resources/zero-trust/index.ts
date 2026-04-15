@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Access } from './access/index';
+export { Access, BaseAccess } from './access/index';
 export {
   ConnectivitySettings,
+  BaseConnectivitySettings,
   type ConnectivitySettingEditResponse,
   type ConnectivitySettingGetResponse,
   type ConnectivitySettingEditParams,
@@ -10,14 +11,16 @@ export {
 } from './connectivity-settings';
 export {
   DEX,
+  BaseDEX,
   type DigitalExperienceMonitor,
   type NetworkPath,
   type NetworkPathResponse,
   type Percentiles,
 } from './dex/index';
-export { DLP } from './dlp/index';
+export { DLP, BaseDLP } from './dlp/index';
 export {
   Devices,
+  BaseDevices,
   type Device,
   type DeviceGetResponse,
   type DeviceListParams,
@@ -26,6 +29,7 @@ export {
 } from './devices/index';
 export {
   Gateway,
+  BaseGateway,
   type GatewayCreateResponse,
   type GatewayListResponse,
   type GatewayCreateParams,
@@ -33,6 +37,7 @@ export {
 } from './gateway/index';
 export {
   IdentityProviders,
+  BaseIdentityProviders,
   type AzureAD,
   type GenericOAuthConfig,
   type IdentityProvider,
@@ -47,9 +52,10 @@ export {
   type IdentityProviderGetParams,
   type IdentityProviderListResponsesV4PagePaginationArray,
 } from './identity-providers/index';
-export { Networks } from './networks/index';
+export { Networks, BaseNetworks } from './networks/index';
 export {
   Organizations,
+  BaseOrganizations,
   type LoginDesign,
   type Organization,
   type OrganizationRevokeUsersResponse,
@@ -60,17 +66,19 @@ export {
 } from './organizations/index';
 export {
   RiskScoring,
+  BaseRiskScoring,
   type RiskScoringGetResponse,
   type RiskScoringResetResponse,
   type RiskScoringGetParams,
   type RiskScoringResetParams,
 } from './risk-scoring/index';
-export { Seats, type Seat, type SeatEditParams, type SeatsSinglePage } from './seats';
+export { Seats, BaseSeats, type Seat, type SeatEditParams, type SeatsSinglePage } from './seats';
 export {
   Tunnels,
+  BaseTunnels,
   type Connection,
   type TunnelListResponse,
   type TunnelListParams,
   type TunnelListResponsesV4PagePaginationArray,
 } from './tunnels/index';
-export { ZeroTrust } from './zero-trust';
+export { ZeroTrust, BaseZeroTrust } from './zero-trust';

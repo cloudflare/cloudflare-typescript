@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Config extends APIResource {
+export class BaseConfig extends APIResource {
+  static override readonly _key: readonly ['logs', 'control', 'cmb', 'config'] = Object.freeze([
+    'logs',
+    'control',
+    'cmb',
+    'config',
+  ] as const);
+
   /**
    * Updates CMB config.
    *
@@ -17,8 +24,11 @@ export class Config extends APIResource {
    *   });
    * ```
    */
-  create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<CmbConfig | null> {
-    const { account_id, ...body } = params;
+  create(
+    params: ConfigCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CmbConfig | null> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/logs/control/cmb/config`, {
         body,
@@ -37,8 +47,11 @@ export class Config extends APIResource {
    * });
    * ```
    */
-  delete(params: ConfigDeleteParams, options?: RequestOptions): APIPromise<ConfigDeleteResponse | null> {
-    const { account_id } = params;
+  delete(
+    params: ConfigDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigDeleteResponse | null> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/logs/control/cmb/config`, options) as APIPromise<{
         result: ConfigDeleteResponse | null;
@@ -56,8 +69,11 @@ export class Config extends APIResource {
    * });
    * ```
    */
-  get(params: ConfigGetParams, options?: RequestOptions): APIPromise<CmbConfig | null> {
-    const { account_id } = params;
+  get(
+    params: ConfigGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CmbConfig | null> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/logs/control/cmb/config`, options) as APIPromise<{
         result: CmbConfig | null;
@@ -65,6 +81,7 @@ export class Config extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Config extends BaseConfig {}
 
 export interface CmbConfig {
   /**
@@ -84,7 +101,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Allow out of region access
@@ -101,14 +118,14 @@ export interface ConfigDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Config {

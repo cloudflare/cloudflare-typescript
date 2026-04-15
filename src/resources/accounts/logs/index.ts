@@ -2,8 +2,9 @@
 
 export {
   Audit,
+  BaseAudit,
   type AuditListResponse,
   type AuditListParams,
   type AuditListResponsesCursorPaginationAfter,
 } from './audit';
-export { Logs } from './logs';
+export { Logs, BaseLogs } from './logs';

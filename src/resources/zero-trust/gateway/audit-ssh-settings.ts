@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AuditSSHSettings extends APIResource {
+export class BaseAuditSSHSettings extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'auditSSHSettings'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'auditSSHSettings',
+  ] as const);
+
   /**
    * Update Zero Trust Audit SSH and SSH with Access for Infrastructure settings for
    * an account.
@@ -21,7 +27,7 @@ export class AuditSSHSettings extends APIResource {
    * ```
    */
   update(params: AuditSSHSettingUpdateParams, options?: RequestOptions): APIPromise<GatewaySettings> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/gateway/audit_ssh_settings`, {
         body,
@@ -42,8 +48,11 @@ export class AuditSSHSettings extends APIResource {
    *   });
    * ```
    */
-  get(params: AuditSSHSettingGetParams, options?: RequestOptions): APIPromise<GatewaySettings> {
-    const { account_id } = params;
+  get(
+    params: AuditSSHSettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<GatewaySettings> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as APIPromise<{
         result: GatewaySettings;
@@ -63,8 +72,11 @@ export class AuditSSHSettings extends APIResource {
    *   );
    * ```
    */
-  rotateSeed(params: AuditSSHSettingRotateSeedParams, options?: RequestOptions): APIPromise<GatewaySettings> {
-    const { account_id } = params;
+  rotateSeed(
+    params: AuditSSHSettingRotateSeedParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<GatewaySettings> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/gateway/audit_ssh_settings/rotate_seed`,
@@ -73,6 +85,7 @@ export class AuditSSHSettings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AuditSSHSettings extends BaseAuditSSHSettings {}
 
 export interface GatewaySettings {
   created_at?: string;
@@ -95,7 +108,7 @@ export interface AuditSSHSettingUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Provide the Base64-encoded HPKE public key that encrypts SSH session
@@ -106,11 +119,11 @@ export interface AuditSSHSettingUpdateParams {
 }
 
 export interface AuditSSHSettingGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AuditSSHSettingRotateSeedParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AuditSSHSettings {

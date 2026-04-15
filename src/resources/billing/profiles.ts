@@ -5,14 +5,22 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Profiles extends APIResource {
+export class BaseProfiles extends APIResource {
+  static override readonly _key: readonly ['billing', 'profiles'] = Object.freeze([
+    'billing',
+    'profiles',
+  ] as const);
+
   /**
    * Gets the current billing profile for the account.
    *
    * @deprecated
    */
-  get(params: ProfileGetParams, options?: RequestOptions): APIPromise<ProfileGetResponse> {
-    const { account_id } = params;
+  get(
+    params: ProfileGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ProfileGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/billing/profile`, options) as APIPromise<{
         result: ProfileGetResponse;
@@ -20,6 +28,7 @@ export class Profiles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Profiles extends BaseProfiles {}
 
 export interface ProfileGetResponse {
   /**
@@ -108,7 +117,7 @@ export interface ProfileGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Profiles {

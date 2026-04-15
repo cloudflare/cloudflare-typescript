@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DNS, type DNSGetParams } from './dns';
+export { DNS, BaseDNS, type DNSGetParams } from './dns';
 export {
   Subdomains,
+  BaseSubdomains,
   type SubdomainCreateResponse,
   type SubdomainListResponse,
   type SubdomainDeleteResponse,

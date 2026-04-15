@@ -6,7 +6,9 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class TURN extends APIResource {
+export class BaseTURN extends APIResource {
+  static override readonly _key: readonly ['calls', 'turn'] = Object.freeze(['calls', 'turn'] as const);
+
   /**
    * Creates a new Cloudflare Calls TURN key.
    *
@@ -17,8 +19,11 @@ export class TURN extends APIResource {
    * });
    * ```
    */
-  create(params: TURNCreateParams, options?: RequestOptions): APIPromise<TURNCreateResponse> {
-    const { account_id, ...body } = params;
+  create(
+    params: TURNCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TURNCreateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/calls/turn_keys`, { body, ...options }) as APIPromise<{
         result: TURNCreateResponse;
@@ -38,7 +43,7 @@ export class TURN extends APIResource {
    * ```
    */
   update(keyID: string, params: TURNUpdateParams, options?: RequestOptions): APIPromise<TURNUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/calls/turn_keys/${keyID}`, {
         body,
@@ -61,10 +66,10 @@ export class TURN extends APIResource {
    * ```
    */
   list(
-    params: TURNListParams,
+    params: TURNListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TURNListResponsesSinglePage, TURNListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/calls/turn_keys`,
       SinglePage<TURNListResponse>,
@@ -83,8 +88,12 @@ export class TURN extends APIResource {
    * );
    * ```
    */
-  delete(keyID: string, params: TURNDeleteParams, options?: RequestOptions): APIPromise<TURNDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    keyID: string,
+    params: TURNDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TURNDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/calls/turn_keys/${keyID}`, options) as APIPromise<{
         result: TURNDeleteResponse;
@@ -103,8 +112,12 @@ export class TURN extends APIResource {
    * );
    * ```
    */
-  get(keyID: string, params: TURNGetParams, options?: RequestOptions): APIPromise<TURNGetResponse> {
-    const { account_id } = params;
+  get(
+    keyID: string,
+    params: TURNGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TURNGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/calls/turn_keys/${keyID}`, options) as APIPromise<{
         result: TURNGetResponse;
@@ -112,6 +125,7 @@ export class TURN extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TURN extends BaseTURN {}
 
 export type TURNListResponsesSinglePage = SinglePage<TURNListResponse>;
 
@@ -234,7 +248,7 @@ export interface TURNCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of a TURN key, not shown to end users.
@@ -246,7 +260,7 @@ export interface TURNUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of a TURN key, not shown to end users.
@@ -258,21 +272,21 @@ export interface TURNListParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TURNDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TURNGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace TURN {

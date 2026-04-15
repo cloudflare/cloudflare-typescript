@@ -1,20 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Alerting } from './alerting';
+export { Alerting, BaseAlerting } from './alerting';
 export {
   AvailableAlerts,
+  BaseAvailableAlerts,
   type AvailableAlertListResponse,
   type AvailableAlertListParams,
 } from './available-alerts';
-export { Destinations } from './destinations/index';
+export { Destinations, BaseDestinations } from './destinations/index';
 export {
   HistoryResource,
+  BaseHistoryResource,
   type History,
   type HistoryListParams,
   type HistoriesV4PagePaginationArray,
 } from './history';
 export {
   Policies,
+  BasePolicies,
   type Mechanism,
   type Policy,
   type PolicyFilter,
@@ -30,6 +33,7 @@ export {
 } from './policies';
 export {
   Silences,
+  BaseSilences,
   type SilenceCreateResponse,
   type SilenceUpdateResponse,
   type SilenceListResponse,

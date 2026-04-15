@@ -1,8 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Availabilities, type Availability, type AvailabilityListParams } from './availabilities';
+export {
+  Availabilities,
+  BaseAvailabilities,
+  type Availability,
+  type AvailabilityListParams,
+} from './availabilities';
 export {
   Pages,
+  BasePages,
   type PageListResponse,
   type PageListParams,
   type PageTrendParams,
@@ -10,6 +16,7 @@ export {
 } from './pages/index';
 export {
   ScheduleResource,
+  BaseScheduleResource,
   type Schedule,
   type ScheduleCreateResponse,
   type ScheduleDeleteResponse,
@@ -17,4 +24,4 @@ export {
   type ScheduleDeleteParams,
   type ScheduleGetParams,
 } from './schedule';
-export { Speed } from './speed';
+export { Speed, BaseSpeed } from './speed';

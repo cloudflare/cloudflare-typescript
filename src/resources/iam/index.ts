@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { IAM } from './iam';
+export { IAM, BaseIAM } from './iam';
 export {
   PermissionGroups,
+  BasePermissionGroups,
   type PermissionGroupListResponse,
   type PermissionGroupGetResponse,
   type PermissionGroupListParams,
@@ -11,6 +12,7 @@ export {
 } from './permission-groups';
 export {
   ResourceGroups,
+  BaseResourceGroups,
   type ResourceGroupCreateResponse,
   type ResourceGroupUpdateResponse,
   type ResourceGroupListResponse,
@@ -25,6 +27,7 @@ export {
 } from './resource-groups';
 export {
   SSO,
+  BaseSSO,
   type SSOCreateResponse,
   type SSOUpdateResponse,
   type SSOListResponse,
@@ -41,6 +44,7 @@ export {
 } from './sso';
 export {
   UserGroups,
+  BaseUserGroups,
   type UserGroupCreateResponse,
   type UserGroupUpdateResponse,
   type UserGroupListResponse,

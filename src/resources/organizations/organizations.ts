@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as OrganizationProfileAPI from './organization-profile';
 import {
+  BaseOrganizationProfileResource,
   OrganizationProfile,
   OrganizationProfileResource,
   OrganizationProfileUpdateParams,
@@ -12,9 +13,8 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Organizations extends APIResource {
-  organizationProfile: OrganizationProfileAPI.OrganizationProfileResource =
-    new OrganizationProfileAPI.OrganizationProfileResource(this._client);
+export class BaseOrganizations extends APIResource {
+  static override readonly _key: readonly ['organizations'] = Object.freeze(['organizations'] as const);
 
   /**
    * Create a new organization for a user. (Currently in Closed Beta - see
@@ -77,6 +77,10 @@ export class Organizations extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Organizations extends BaseOrganizations {
+  organizationProfile: OrganizationProfileAPI.OrganizationProfileResource =
+    new OrganizationProfileAPI.OrganizationProfileResource(this._client);
 }
 
 export type OrganizationsSinglePage = SinglePage<Organization>;
@@ -288,6 +292,7 @@ export namespace OrganizationListParams {
 }
 
 Organizations.OrganizationProfileResource = OrganizationProfileResource;
+Organizations.BaseOrganizationProfileResource = BaseOrganizationProfileResource;
 
 export declare namespace Organizations {
   export {
@@ -301,6 +306,7 @@ export declare namespace Organizations {
 
   export {
     OrganizationProfileResource as OrganizationProfileResource,
+    BaseOrganizationProfileResource as BaseOrganizationProfileResource,
     type OrganizationProfile as OrganizationProfile,
     type OrganizationProfileUpdateParams as OrganizationProfileUpdateParams,
   };

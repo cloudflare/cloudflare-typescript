@@ -3,6 +3,7 @@
 import { APIResource } from '../../../../core/resource';
 import * as SummaryAPI from './summary';
 import {
+  BaseSummary,
   Summary,
   SummaryBitrateParams,
   SummaryBitrateResponse,
@@ -21,6 +22,7 @@ import {
 } from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import {
+  BaseTimeseriesGroups,
   TimeseriesGroupBitrateParams,
   TimeseriesGroupBitrateResponse,
   TimeseriesGroupDurationParams,
@@ -39,6 +41,7 @@ import {
 } from './timeseries-groups';
 import * as TopAPI from './top/top';
 import {
+  BaseTop,
   Top,
   TopAttacksParams,
   TopAttacksResponse,
@@ -51,12 +54,12 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Layer3 extends APIResource {
-  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
-  top: TopAPI.Top = new TopAPI.Top(this._client);
+export class BaseLayer3 extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer3'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer3',
+  ] as const);
 
   /**
    * Retrieves the distribution of layer 3 attacks by the specified dimension.
@@ -123,6 +126,13 @@ export class Layer3 extends APIResource {
       }) as APIPromise<{ result: Layer3TimeseriesGroupsV2Response }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Layer3 extends BaseLayer3 {
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 }
 
 export interface Layer3SummaryV2Response {
@@ -769,8 +779,11 @@ export interface Layer3TimeseriesGroupsV2Params {
 }
 
 Layer3.Summary = Summary;
+Layer3.BaseSummary = BaseSummary;
 Layer3.TimeseriesGroups = TimeseriesGroups;
+Layer3.BaseTimeseriesGroups = BaseTimeseriesGroups;
 Layer3.Top = Top;
+Layer3.BaseTop = BaseTop;
 
 export declare namespace Layer3 {
   export {
@@ -784,6 +797,7 @@ export declare namespace Layer3 {
 
   export {
     Summary as Summary,
+    BaseSummary as BaseSummary,
     type SummaryBitrateResponse as SummaryBitrateResponse,
     type SummaryDurationResponse as SummaryDurationResponse,
     type SummaryIndustryResponse as SummaryIndustryResponse,
@@ -802,6 +816,7 @@ export declare namespace Layer3 {
 
   export {
     TimeseriesGroups as TimeseriesGroups,
+    BaseTimeseriesGroups as BaseTimeseriesGroups,
     type TimeseriesGroupBitrateResponse as TimeseriesGroupBitrateResponse,
     type TimeseriesGroupDurationResponse as TimeseriesGroupDurationResponse,
     type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
@@ -820,6 +835,7 @@ export declare namespace Layer3 {
 
   export {
     Top as Top,
+    BaseTop as BaseTop,
     type TopAttacksResponse as TopAttacksResponse,
     type TopIndustryResponse as TopIndustryResponse,
     type TopVerticalResponse as TopVerticalResponse,

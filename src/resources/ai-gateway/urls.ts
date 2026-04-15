@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class URLs extends APIResource {
+export class BaseURLs extends APIResource {
+  static override readonly _key: readonly ['aiGateway', 'urls'] = Object.freeze([
+    'aiGateway',
+    'urls',
+  ] as const);
+
   /**
    * Retrieves the endpoint URL for an AI Gateway.
    *
@@ -18,7 +23,7 @@ export class URLs extends APIResource {
    * ```
    */
   get(provider: string, params: URLGetParams, options?: RequestOptions): APIPromise<URLGetResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/url/${provider}`,
@@ -27,11 +32,12 @@ export class URLs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class URLs extends BaseURLs {}
 
 export type URLGetResponse = string;
 
 export interface URLGetParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * gateway id

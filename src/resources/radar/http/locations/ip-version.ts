@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class IPVersion extends APIResource {
+export class BaseIPVersion extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'locations', 'ipVersion'] = Object.freeze([
+    'radar',
+    'http',
+    'locations',
+    'ipVersion',
+  ] as const);
+
   /**
    * Retrieves the top locations, by HTTP requests, of the requested IP version.
    *
@@ -28,6 +35,7 @@ export class IPVersion extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IPVersion extends BaseIPVersion {}
 
 export interface IPVersionGetResponse {
   /**

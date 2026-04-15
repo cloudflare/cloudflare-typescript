@@ -2,6 +2,7 @@
 
 export {
   Connections,
+  BaseConnections,
   type Connection,
   type ConnectionListParams,
   type ConnectionGetParams,
@@ -9,15 +10,17 @@ export {
 } from './connections';
 export {
   Cookies,
+  BaseCookies,
   type CookieListResponse,
   type CookieGetResponse,
   type CookieListParams,
   type CookieGetParams,
   type CookieListResponsesSinglePage,
 } from './cookies';
-export { PageShield } from './page-shield';
+export { PageShield, BasePageShield } from './page-shield';
 export {
   Policies,
+  BasePolicies,
   type Policy,
   type PolicyCreateResponse,
   type PolicyUpdateResponse,
@@ -32,6 +35,7 @@ export {
 } from './policies';
 export {
   Scripts,
+  BaseScripts,
   type Script,
   type ScriptGetResponse,
   type ScriptListParams,

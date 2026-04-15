@@ -2,6 +2,7 @@
 
 export {
   Destinations,
+  BaseDestinations,
   type DestinationCreateResponse,
   type DestinationUpdateResponse,
   type DestinationListResponse,
@@ -12,9 +13,10 @@ export {
   type DestinationDeleteParams,
   type DestinationListResponsesSinglePage,
 } from './destinations';
-export { Observability } from './observability';
+export { Observability, BaseObservability } from './observability';
 export {
   Telemetry,
+  BaseTelemetry,
   type TelemetryKeysResponse,
   type TelemetryQueryResponse,
   type TelemetryValuesResponse,

@@ -2,6 +2,7 @@
 
 export {
   Assets,
+  BaseAssets,
   type AssetCreateResponse,
   type AssetUpdateResponse,
   type AssetListResponse,
@@ -13,4 +14,4 @@ export {
   type AssetGetParams,
   type AssetListResponsesV4PagePaginationArray,
 } from './assets';
-export { CustomPages } from './custom-pages';
+export { CustomPages, BaseCustomPages } from './custom-pages';

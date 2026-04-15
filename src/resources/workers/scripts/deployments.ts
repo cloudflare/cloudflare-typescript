@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Deployments extends APIResource {
+export class BaseDeployments extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'deployments'] = Object.freeze([
+    'workers',
+    'scripts',
+    'deployments',
+  ] as const);
+
   /**
    * Deployments configure how
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions)
@@ -36,7 +42,7 @@ export class Deployments extends APIResource {
     params: DeploymentCreateParams,
     options?: RequestOptions,
   ): APIPromise<Deployment> {
-    const { account_id, force, ...body } = params;
+    const { account_id = this._client.accountID, force, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
         query: { force },
@@ -61,10 +67,10 @@ export class Deployments extends APIResource {
    */
   list(
     scriptName: string,
-    params: DeploymentListParams,
+    params: DeploymentListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DeploymentListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
@@ -94,7 +100,7 @@ export class Deployments extends APIResource {
     params: DeploymentDeleteParams,
     options?: RequestOptions,
   ): APIPromise<DeploymentDeleteResponse> {
-    const { account_id, script_name } = params;
+    const { account_id = this._client.accountID, script_name } = params;
     return this._client.delete(
       path`/accounts/${account_id}/workers/scripts/${script_name}/deployments/${deploymentID}`,
       options,
@@ -117,7 +123,7 @@ export class Deployments extends APIResource {
    * ```
    */
   get(deploymentID: string, params: DeploymentGetParams, options?: RequestOptions): APIPromise<Deployment> {
-    const { account_id, script_name } = params;
+    const { account_id = this._client.accountID, script_name } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${script_name}/deployments/${deploymentID}`,
@@ -126,6 +132,7 @@ export class Deployments extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Deployments extends BaseDeployments {}
 
 export interface Deployment {
   id: string;
@@ -216,7 +223,7 @@ export interface DeploymentCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -260,14 +267,14 @@ export interface DeploymentListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DeploymentDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the script, used in URLs and route configuration.
@@ -279,7 +286,7 @@ export interface DeploymentGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the script, used in URLs and route configuration.

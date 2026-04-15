@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAuditLogs } from 'cloudflare/resources/audit-logs';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +11,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource auditLogs', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAuditLogs],
+});
+
+const runTests = (client: PartialCloudflare<{ auditLogs: BaseAuditLogs }>) => {
   test('list: only required params', async () => {
     const responsePromise = client.auditLogs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -36,4 +46,6 @@ describe('resource auditLogs', () => {
       zone: { name: 'example.com' },
     });
   });
-});
+};
+describe('resource auditLogs', () => runTests(client));
+describe('resource auditLogs (tree shakable, base)', () => runTests(partialClient));

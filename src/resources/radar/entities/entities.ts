@@ -16,9 +16,11 @@ import {
   ASNRelParams,
   ASNRelResponse,
   ASNs,
+  BaseASNs,
 } from './asns';
 import * as LocationsAPI from './locations';
 import {
+  BaseLocations,
   LocationGetParams,
   LocationGetResponse,
   LocationListParams,
@@ -28,9 +30,11 @@ import {
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class Entities extends APIResource {
-  asns: ASNsAPI.ASNs = new ASNsAPI.ASNs(this._client);
-  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
+export class BaseEntities extends APIResource {
+  static override readonly _key: readonly ['radar', 'entities'] = Object.freeze([
+    'radar',
+    'entities',
+  ] as const);
 
   /**
    * Retrieves IP address information.
@@ -49,6 +53,10 @@ export class Entities extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Entities extends BaseEntities {
+  asns: ASNsAPI.ASNs = new ASNsAPI.ASNs(this._client);
+  locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
 }
 
 export interface EntityGetResponse {
@@ -88,13 +96,16 @@ export interface EntityGetParams {
 }
 
 Entities.ASNs = ASNs;
+Entities.BaseASNs = BaseASNs;
 Entities.Locations = Locations;
+Entities.BaseLocations = BaseLocations;
 
 export declare namespace Entities {
   export { type EntityGetResponse as EntityGetResponse, type EntityGetParams as EntityGetParams };
 
   export {
     ASNs as ASNs,
+    BaseASNs as BaseASNs,
     type ASNListResponse as ASNListResponse,
     type ASNAsSetResponse as ASNAsSetResponse,
     type ASNBotnetThreatFeedResponse as ASNBotnetThreatFeedResponse,
@@ -111,6 +122,7 @@ export declare namespace Entities {
 
   export {
     Locations as Locations,
+    BaseLocations as BaseLocations,
     type LocationListResponse as LocationListResponse,
     type LocationGetResponse as LocationGetResponse,
     type LocationListParams as LocationListParams,

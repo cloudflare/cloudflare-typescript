@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Destinations } from './destinations';
-export { Eligible, type EligibleGetResponse, type EligibleGetParams } from './eligible';
+export { Destinations, BaseDestinations } from './destinations';
+export { Eligible, BaseEligible, type EligibleGetResponse, type EligibleGetParams } from './eligible';
 export {
   PagerdutyResource,
+  BasePagerdutyResource,
   type Pagerduty,
   type PagerdutyCreateResponse,
   type PagerdutyDeleteResponse,
@@ -16,6 +17,7 @@ export {
 } from './pagerduty';
 export {
   Webhooks,
+  BaseWebhooks,
   type WebhookCreateResponse,
   type WebhookUpdateResponse,
   type WebhookDeleteResponse,

@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class AccountMapping extends APIResource {
+export class BaseAccountMapping extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dlp', 'email', 'accountMapping'] = Object.freeze([
+    'zeroTrust',
+    'dlp',
+    'email',
+    'accountMapping',
+  ] as const);
+
   /**
    * Creates a mapping between a Cloudflare account and an email provider for DLP
    * email scanning integration.
@@ -26,7 +33,7 @@ export class AccountMapping extends APIResource {
     params: AccountMappingCreateParams,
     options?: RequestOptions,
   ): APIPromise<AccountMappingCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dlp/email/account_mapping`, {
         body,
@@ -46,8 +53,11 @@ export class AccountMapping extends APIResource {
    *   });
    * ```
    */
-  get(params: AccountMappingGetParams, options?: RequestOptions): APIPromise<AccountMappingGetResponse> {
-    const { account_id } = params;
+  get(
+    params: AccountMappingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AccountMappingGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/dlp/email/account_mapping`, options) as APIPromise<{
         result: AccountMappingGetResponse;
@@ -55,6 +65,7 @@ export class AccountMapping extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AccountMapping extends BaseAccountMapping {}
 
 export interface AccountMappingCreateResponse {
   addin_identifier_token: string;
@@ -96,7 +107,7 @@ export interface AccountMappingCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -117,7 +128,7 @@ export namespace AccountMappingCreateParams {
 }
 
 export interface AccountMappingGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace AccountMapping {

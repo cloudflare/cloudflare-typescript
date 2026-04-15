@@ -11,7 +11,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Members extends APIResource {
+export class BaseMembers extends APIResource {
+  static override readonly _key: readonly ['iam', 'userGroups', 'members'] = Object.freeze([
+    'iam',
+    'userGroups',
+    'members',
+  ] as const);
+
   /**
    * Add members to a User Group.
    *
@@ -31,7 +37,7 @@ export class Members extends APIResource {
     params: MemberCreateParams,
     options?: RequestOptions,
   ): APIPromise<MemberCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/iam/user_groups/${userGroupID}/members`, {
         body: body,
@@ -62,7 +68,7 @@ export class Members extends APIResource {
     params: MemberUpdateParams,
     options?: RequestOptions,
   ): PagePromise<MemberUpdateResponsesSinglePage, MemberUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/iam/user_groups/${userGroupID}/members`,
       SinglePage<MemberUpdateResponse>,
@@ -86,10 +92,10 @@ export class Members extends APIResource {
    */
   list(
     userGroupID: string,
-    params: MemberListParams,
+    params: MemberListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/iam/user_groups/${userGroupID}/members`,
       V4PagePaginationArray<MemberListResponse>,
@@ -116,7 +122,7 @@ export class Members extends APIResource {
     params: MemberDeleteParams,
     options?: RequestOptions,
   ): APIPromise<MemberDeleteResponse> {
-    const { account_id, user_group_id } = params;
+    const { account_id = this._client.accountID, user_group_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/iam/user_groups/${user_group_id}/members/${memberID}`,
@@ -125,6 +131,7 @@ export class Members extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Members extends BaseMembers {}
 
 export type MemberUpdateResponsesSinglePage = SinglePage<MemberUpdateResponse>;
 
@@ -214,7 +221,7 @@ export interface MemberCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -235,7 +242,7 @@ export interface MemberUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Set/Replace members to a user group.
@@ -256,14 +263,14 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MemberDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * User Group identifier tag.

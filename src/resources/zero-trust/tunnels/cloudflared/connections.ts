@@ -6,7 +6,10 @@ import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Connections extends APIResource {
+export class BaseConnections extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'tunnels', 'cloudflared', 'connections'] =
+    Object.freeze(['zeroTrust', 'tunnels', 'cloudflared', 'connections'] as const);
+
   /**
    * Removes a connection (aka Cloudflare Tunnel Connector) from a Cloudflare Tunnel
    * independently of its current state. If no connector id (client_id) is provided
@@ -24,10 +27,10 @@ export class Connections extends APIResource {
    */
   delete(
     tunnelID: string,
-    params: ConnectionDeleteParams,
+    params: ConnectionDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConnectionDeleteResponse | null> {
-    const { account_id, client_id } = params;
+    const { account_id = this._client.accountID, client_id } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}/connections`, {
         query: { client_id },
@@ -52,10 +55,10 @@ export class Connections extends APIResource {
    */
   get(
     tunnelID: string,
-    params: ConnectionGetParams,
+    params: ConnectionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ClientsSinglePage, Client> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/cfd_tunnel/${tunnelID}/connections`,
       SinglePage<Client>,
@@ -63,6 +66,7 @@ export class Connections extends APIResource {
     );
   }
 }
+export class Connections extends BaseConnections {}
 
 export type ClientsSinglePage = SinglePage<Client>;
 
@@ -161,7 +165,7 @@ export interface ConnectionDeleteParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: UUID of the Cloudflare Tunnel connector.
@@ -173,7 +177,7 @@ export interface ConnectionGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Connections {

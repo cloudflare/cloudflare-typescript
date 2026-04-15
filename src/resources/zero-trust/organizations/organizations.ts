@@ -2,14 +2,17 @@
 
 import { APIResource } from '../../../core/resource';
 import * as DOHAPI from './doh';
-import { DOH, DOHGetParams, DOHGetResponse, DOHUpdateParams, DOHUpdateResponse } from './doh';
+import { BaseDOH, DOH, DOHGetParams, DOHGetResponse, DOHUpdateParams, DOHUpdateResponse } from './doh';
 import { APIPromise } from '../../../core/api-promise';
 import { CloudflareError } from '../../../core/error';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Organizations extends APIResource {
-  doh: DOHAPI.DOH = new DOHAPI.DOH(this._client);
+export class BaseOrganizations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'organizations'] = Object.freeze([
+    'zeroTrust',
+    'organizations',
+  ] as const);
 
   /**
    * Sets up a Zero Trust organization for your account or zone.
@@ -25,7 +28,11 @@ export class Organizations extends APIResource {
    * ```
    */
   create(params: OrganizationCreateParams, options?: RequestOptions): APIPromise<Organization> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -62,7 +69,11 @@ export class Organizations extends APIResource {
    * ```
    */
   update(params: OrganizationUpdateParams, options?: RequestOptions): APIPromise<Organization> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -102,7 +113,8 @@ export class Organizations extends APIResource {
     params: OrganizationListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Organization> {
-    const { account_id, zone_id } = params ?? {};
+    const { account_id = this._client.accountID ?? undefined, zone_id = this._client.zoneID ?? undefined } =
+      params ?? {};
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -143,7 +155,12 @@ export class Organizations extends APIResource {
     params: OrganizationRevokeUsersParams,
     options?: RequestOptions,
   ): APIPromise<OrganizationRevokeUsersResponse> {
-    const { account_id, zone_id, query_devices, ...body } = params;
+    const {
+      account_id = this._client.accountID ?? undefined,
+      zone_id = this._client.zoneID ?? undefined,
+      query_devices,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -168,6 +185,9 @@ export class Organizations extends APIResource {
       }) as APIPromise<{ result: OrganizationRevokeUsersResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Organizations extends BaseOrganizations {
+  doh: DOHAPI.DOH = new DOHAPI.DOH(this._client);
 }
 
 export interface LoginDesign {
@@ -840,6 +860,7 @@ export interface OrganizationRevokeUsersParams {
 }
 
 Organizations.DOH = DOH;
+Organizations.BaseDOH = BaseDOH;
 
 export declare namespace Organizations {
   export {
@@ -854,6 +875,7 @@ export declare namespace Organizations {
 
   export {
     DOH as DOH,
+    BaseDOH as BaseDOH,
     type DOHUpdateResponse as DOHUpdateResponse,
     type DOHGetResponse as DOHGetResponse,
     type DOHUpdateParams as DOHUpdateParams,

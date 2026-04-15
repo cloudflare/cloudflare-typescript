@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { ACM } from 'cloudflare/resources/acm/acm';
+import { BaseCustomTrustStore } from 'cloudflare/resources/acm/custom-trust-store';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource customTrustStore', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseCustomTrustStore],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ACM],
+});
+
+const runTests = (client: PartialCloudflare<{ acm: { customTrustStore: BaseCustomTrustStore } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.acm.customTrustStore.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -90,4 +108,7 @@ describe('resource customTrustStore', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource customTrustStore', () => runTests(client));
+describe('resource customTrustStore (tree shakable, base)', () => runTests(partialClient));
+describe('resource customTrustStore (tree shakable, subresource)', () => runTests(parentPartialClient));

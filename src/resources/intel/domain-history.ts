@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DomainHistoryResource extends APIResource {
+export class BaseDomainHistoryResource extends APIResource {
+  static override readonly _key: readonly ['intel', 'domainHistory'] = Object.freeze([
+    'intel',
+    'domainHistory',
+  ] as const);
+
   /**
    * Gets historical security threat and content categories currently and previously
    * assigned to a domain.
@@ -18,8 +23,11 @@ export class DomainHistoryResource extends APIResource {
    *   });
    * ```
    */
-  get(params: DomainHistoryGetParams, options?: RequestOptions): APIPromise<DomainHistoryGetResponse | null> {
-    const { account_id, ...query } = params;
+  get(
+    params: DomainHistoryGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DomainHistoryGetResponse | null> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/intel/domain-history`, {
         query,
@@ -28,6 +36,7 @@ export class DomainHistoryResource extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class DomainHistoryResource extends BaseDomainHistoryResource {}
 
 export interface DomainHistory {
   categorizations?: Array<DomainHistory.Categorization>;
@@ -59,7 +68,7 @@ export interface DomainHistoryGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

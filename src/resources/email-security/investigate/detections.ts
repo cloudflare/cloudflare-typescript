@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Detections extends APIResource {
+export class BaseDetections extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'investigate', 'detections'] = Object.freeze([
+    'emailSecurity',
+    'investigate',
+    'detections',
+  ] as const);
+
   /**
    * Returns detection details such as threat categories and sender information for
    * non-benign messages.
@@ -21,10 +27,10 @@ export class Detections extends APIResource {
    */
   get(
     postfixID: string,
-    params: DetectionGetParams,
+    params: DetectionGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DetectionGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/investigate/${postfixID}/detections`,
@@ -33,6 +39,7 @@ export class Detections extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Detections extends BaseDetections {}
 
 export interface DetectionGetResponse {
   action: string;
@@ -140,7 +147,7 @@ export interface DetectionGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Detections {

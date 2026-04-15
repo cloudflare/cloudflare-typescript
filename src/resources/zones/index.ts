@@ -2,11 +2,13 @@
 
 export {
   ActivationCheck,
+  BaseActivationCheck,
   type ActivationCheckTriggerResponse,
   type ActivationCheckTriggerParams,
 } from './activation-check';
 export {
   CustomNameservers,
+  BaseCustomNameservers,
   type CustomNameserverUpdateResponse,
   type CustomNameserverGetResponse,
   type CustomNameserverUpdateParams,
@@ -15,6 +17,7 @@ export {
 } from './custom-nameservers';
 export {
   Environments,
+  BaseEnvironments,
   type EnvironmentCreateResponse,
   type EnvironmentUpdateResponse,
   type EnvironmentListResponse,
@@ -30,6 +33,7 @@ export {
 } from './environments';
 export {
   Holds,
+  BaseHolds,
   type ZoneHold,
   type HoldCreateParams,
   type HoldDeleteParams,
@@ -38,6 +42,7 @@ export {
 } from './holds';
 export {
   Plans,
+  BasePlans,
   type AvailableRatePlan,
   type PlanListParams,
   type PlanGetParams,
@@ -45,12 +50,14 @@ export {
 } from './plans';
 export {
   RatePlans,
+  BaseRatePlans,
   type RatePlanGetResponse,
   type RatePlanGetParams,
   type RatePlanGetResponsesSinglePage,
 } from './rate-plans';
 export {
   Settings,
+  BaseSettings,
   type AdvancedDDoS,
   type Aegis,
   type AlwaysOnline,
@@ -108,6 +115,7 @@ export {
 } from './settings';
 export {
   Subscriptions,
+  BaseSubscriptions,
   type SubscriptionCreateResponse,
   type SubscriptionUpdateResponse,
   type SubscriptionGetResponse,
@@ -115,4 +123,4 @@ export {
   type SubscriptionUpdateParams,
   type SubscriptionGetParams,
 } from './subscriptions';
-export { Zones } from './zones';
+export { Zones, BaseZones } from './zones';

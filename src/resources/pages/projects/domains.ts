@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Domains extends APIResource {
+export class BaseDomains extends APIResource {
+  static override readonly _key: readonly ['pages', 'projects', 'domains'] = Object.freeze([
+    'pages',
+    'projects',
+    'domains',
+  ] as const);
+
   /**
    * Add a new domain for the Pages project.
    *
@@ -26,7 +32,7 @@ export class Domains extends APIResource {
     params: DomainCreateParams,
     options?: RequestOptions,
   ): APIPromise<DomainCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
         body,
@@ -51,10 +57,10 @@ export class Domains extends APIResource {
    */
   list(
     projectName: string,
-    params: DomainListParams,
+    params: DomainListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/pages/projects/${projectName}/domains`,
       SinglePage<DomainListResponse>,
@@ -81,7 +87,7 @@ export class Domains extends APIResource {
     params: DomainDeleteParams,
     options?: RequestOptions,
   ): APIPromise<DomainDeleteResponse | null> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/pages/projects/${project_name}/domains/${domainName}`,
@@ -109,7 +115,7 @@ export class Domains extends APIResource {
     params: DomainEditParams,
     options?: RequestOptions,
   ): APIPromise<DomainEditResponse> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/pages/projects/${project_name}/domains/${domainName}`,
@@ -133,7 +139,7 @@ export class Domains extends APIResource {
    * ```
    */
   get(domainName: string, params: DomainGetParams, options?: RequestOptions): APIPromise<DomainGetResponse> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/pages/projects/${project_name}/domains/${domainName}`,
@@ -142,6 +148,7 @@ export class Domains extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Domains extends BaseDomains {}
 
 export type DomainListResponsesSinglePage = SinglePage<DomainListResponse>;
 
@@ -323,7 +330,7 @@ export interface DomainCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The domain name.
@@ -335,14 +342,14 @@ export interface DomainListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.
@@ -354,7 +361,7 @@ export interface DomainEditParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.
@@ -366,7 +373,7 @@ export interface DomainGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.

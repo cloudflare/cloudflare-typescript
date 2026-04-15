@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Accounts extends APIResource {
+export class BaseAccounts extends APIResource {
+  static override readonly _key: readonly ['addressing', 'addressMaps', 'accounts'] = Object.freeze([
+    'addressing',
+    'addressMaps',
+    'accounts',
+  ] as const);
+
   /**
    * Add an account as a member of a particular address map.
    *
@@ -26,7 +32,7 @@ export class Accounts extends APIResource {
     params: AccountUpdateParams,
     options?: RequestOptions,
   ): APIPromise<AccountUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.put(
       path`/accounts/${account_id}/addressing/address_maps/${addressMapID}/accounts/${account_id}`,
       { body: body, ...options },
@@ -47,16 +53,17 @@ export class Accounts extends APIResource {
    */
   delete(
     addressMapID: string,
-    params: AccountDeleteParams,
+    params: AccountDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AccountDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.delete(
       path`/accounts/${account_id}/addressing/address_maps/${addressMapID}/accounts/${account_id}`,
       options,
     );
   }
 }
+export class Accounts extends BaseAccounts {}
 
 export interface AccountUpdateResponse {
   errors: Array<AccountUpdateResponse.Error>;
@@ -210,7 +217,7 @@ export interface AccountUpdateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -222,7 +229,7 @@ export interface AccountDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Accounts {

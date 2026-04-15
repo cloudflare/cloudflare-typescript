@@ -5,6 +5,7 @@ import * as Shared from '../../shared';
 import { TokensV4PagePaginationArray } from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
+  BasePermissionGroups,
   PermissionGroupGetParams,
   PermissionGroupGetResponse,
   PermissionGroupListParams,
@@ -13,7 +14,7 @@ import {
   PermissionGroups,
 } from './permission-groups';
 import * as ValueAPI from './value';
-import { Value, ValueUpdateParams } from './value';
+import { BaseValue, Value, ValueUpdateParams } from './value';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -23,11 +24,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tokens extends APIResource {
-  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
-    this._client,
-  );
-  value: ValueAPI.Value = new ValueAPI.Value(this._client);
+export class BaseTokens extends APIResource {
+  static override readonly _key: readonly ['accounts', 'tokens'] = Object.freeze([
+    'accounts',
+    'tokens',
+  ] as const);
 
   /**
    * Create a new Account Owned API token.
@@ -51,7 +52,7 @@ export class Tokens extends APIResource {
    * ```
    */
   create(params: TokenCreateParams, options?: RequestOptions): APIPromise<TokenCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/tokens`, { body, ...options }) as APIPromise<{
         result: TokenCreateResponse;
@@ -84,7 +85,7 @@ export class Tokens extends APIResource {
    * ```
    */
   update(tokenID: string, params: TokenUpdateParams, options?: RequestOptions): APIPromise<Shared.Token> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/tokens/${tokenID}`, { body, ...options }) as APIPromise<{
         result: Shared.Token;
@@ -106,10 +107,10 @@ export class Tokens extends APIResource {
    * ```
    */
   list(
-    params: TokenListParams,
+    params: TokenListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TokensV4PagePaginationArray, Shared.Token> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/tokens`,
       V4PagePaginationArray<Shared.Token>,
@@ -130,10 +131,10 @@ export class Tokens extends APIResource {
    */
   delete(
     tokenID: string,
-    params: TokenDeleteParams,
+    params: TokenDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<TokenDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/tokens/${tokenID}`, options) as APIPromise<{
         result: TokenDeleteResponse | null;
@@ -152,8 +153,12 @@ export class Tokens extends APIResource {
    * );
    * ```
    */
-  get(tokenID: string, params: TokenGetParams, options?: RequestOptions): APIPromise<Shared.Token> {
-    const { account_id } = params;
+  get(
+    tokenID: string,
+    params: TokenGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Token> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/tokens/${tokenID}`, options) as APIPromise<{
         result: Shared.Token;
@@ -171,14 +176,23 @@ export class Tokens extends APIResource {
    * });
    * ```
    */
-  verify(params: TokenVerifyParams, options?: RequestOptions): APIPromise<TokenVerifyResponse> {
-    const { account_id } = params;
+  verify(
+    params: TokenVerifyParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TokenVerifyResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/tokens/verify`, options) as APIPromise<{
         result: TokenVerifyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Tokens extends BaseTokens {
+  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
+    this._client,
+  );
+  value: ValueAPI.Value = new ValueAPI.Value(this._client);
 }
 
 export interface TokenCreateResponse {
@@ -296,7 +310,7 @@ export interface TokenCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Token name.
@@ -355,7 +369,7 @@ export interface TokenUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Token name.
@@ -419,7 +433,7 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -431,25 +445,27 @@ export interface TokenDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TokenGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TokenVerifyParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Tokens.PermissionGroups = PermissionGroups;
+Tokens.BasePermissionGroups = BasePermissionGroups;
 Tokens.Value = Value;
+Tokens.BaseValue = BaseValue;
 
 export declare namespace Tokens {
   export {
@@ -466,6 +482,7 @@ export declare namespace Tokens {
 
   export {
     PermissionGroups as PermissionGroups,
+    BasePermissionGroups as BasePermissionGroups,
     type PermissionGroupListResponse as PermissionGroupListResponse,
     type PermissionGroupGetResponse as PermissionGroupGetResponse,
     type PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
@@ -473,7 +490,7 @@ export declare namespace Tokens {
     type PermissionGroupGetParams as PermissionGroupGetParams,
   };
 
-  export { Value as Value, type ValueUpdateParams as ValueUpdateParams };
+  export { Value as Value, BaseValue as BaseValue, type ValueUpdateParams as ValueUpdateParams };
 }
 
 export { type TokensV4PagePaginationArray };

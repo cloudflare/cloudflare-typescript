@@ -3,22 +3,29 @@
 import { APIResource } from '../../../../../core/resource';
 import * as PoliciesAPI from '../policies';
 import * as CertificatesAPI from './certificates';
-import { CertificateEditParams, CertificateGetParams, Certificates } from './certificates';
+import { BaseCertificates, CertificateEditParams, CertificateGetParams, Certificates } from './certificates';
 import * as ExcludesAPI from './excludes';
-import { ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
+import { BaseExcludes, ExcludeGetParams, ExcludeUpdateParams, Excludes } from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
-import { FallbackDomainGetParams, FallbackDomainUpdateParams, FallbackDomains } from './fallback-domains';
+import {
+  BaseFallbackDomains,
+  FallbackDomainGetParams,
+  FallbackDomainUpdateParams,
+  FallbackDomains,
+} from './fallback-domains';
 import * as IncludesAPI from './includes';
-import { IncludeGetParams, IncludeUpdateParams, Includes } from './includes';
+import { BaseIncludes, IncludeGetParams, IncludeUpdateParams, Includes } from './includes';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Default extends APIResource {
-  excludes: ExcludesAPI.Excludes = new ExcludesAPI.Excludes(this._client);
-  includes: IncludesAPI.Includes = new IncludesAPI.Includes(this._client);
-  fallbackDomains: FallbackDomainsAPI.FallbackDomains = new FallbackDomainsAPI.FallbackDomains(this._client);
-  certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
+export class BaseDefault extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'policies', 'default'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'policies',
+    'default',
+  ] as const);
 
   /**
    * Updates the default device settings profile for an account.
@@ -31,8 +38,11 @@ export class Default extends APIResource {
    *   });
    * ```
    */
-  edit(params: DefaultEditParams, options?: RequestOptions): APIPromise<DefaultEditResponse | null> {
-    const { account_id, ...body } = params;
+  edit(
+    params: DefaultEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DefaultEditResponse | null> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/devices/policy`, { body, ...options }) as APIPromise<{
         result: DefaultEditResponse | null;
@@ -51,14 +61,23 @@ export class Default extends APIResource {
    *   });
    * ```
    */
-  get(params: DefaultGetParams, options?: RequestOptions): APIPromise<DefaultGetResponse | null> {
-    const { account_id } = params;
+  get(
+    params: DefaultGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DefaultGetResponse | null> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/policy`, options) as APIPromise<{
         result: DefaultGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Default extends BaseDefault {
+  excludes: ExcludesAPI.Excludes = new ExcludesAPI.Excludes(this._client);
+  includes: IncludesAPI.Includes = new IncludesAPI.Includes(this._client);
+  fallbackDomains: FallbackDomainsAPI.FallbackDomains = new FallbackDomainsAPI.FallbackDomains(this._client);
+  certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
 }
 
 export interface DefaultEditResponse {
@@ -283,7 +302,7 @@ export interface DefaultEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -399,13 +418,17 @@ export namespace DefaultEditParams {
 }
 
 export interface DefaultGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Default.Excludes = Excludes;
+Default.BaseExcludes = BaseExcludes;
 Default.Includes = Includes;
+Default.BaseIncludes = BaseIncludes;
 Default.FallbackDomains = FallbackDomains;
+Default.BaseFallbackDomains = BaseFallbackDomains;
 Default.Certificates = Certificates;
+Default.BaseCertificates = BaseCertificates;
 
 export declare namespace Default {
   export {
@@ -417,24 +440,28 @@ export declare namespace Default {
 
   export {
     Excludes as Excludes,
+    BaseExcludes as BaseExcludes,
     type ExcludeUpdateParams as ExcludeUpdateParams,
     type ExcludeGetParams as ExcludeGetParams,
   };
 
   export {
     Includes as Includes,
+    BaseIncludes as BaseIncludes,
     type IncludeUpdateParams as IncludeUpdateParams,
     type IncludeGetParams as IncludeGetParams,
   };
 
   export {
     FallbackDomains as FallbackDomains,
+    BaseFallbackDomains as BaseFallbackDomains,
     type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
     type FallbackDomainGetParams as FallbackDomainGetParams,
   };
 
   export {
     Certificates as Certificates,
+    BaseCertificates as BaseCertificates,
     type CertificateEditParams as CertificateEditParams,
     type CertificateGetParams as CertificateGetParams,
   };

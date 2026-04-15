@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Keys extends APIResource {
+export class BaseKeys extends APIResource {
+  static override readonly _key: readonly ['images', 'v1', 'keys'] = Object.freeze([
+    'images',
+    'v1',
+    'keys',
+  ] as const);
+
   /**
    * Create a new signing key with specified name. Returns all keys available.
    *
@@ -18,10 +24,10 @@ export class Keys extends APIResource {
    */
   update(
     signingKeyName: string,
-    params: KeyUpdateParams,
+    params: KeyUpdateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KeyUpdateResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.put(
         path`/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
@@ -40,8 +46,8 @@ export class Keys extends APIResource {
    * });
    * ```
    */
-  list(params: KeyListParams, options?: RequestOptions): APIPromise<KeyListResponse> {
-    const { account_id } = params;
+  list(params: KeyListParams | null | undefined = {}, options?: RequestOptions): APIPromise<KeyListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/images/v1/keys`, options) as APIPromise<{
         result: KeyListResponse;
@@ -62,10 +68,10 @@ export class Keys extends APIResource {
    */
   delete(
     signingKeyName: string,
-    params: KeyDeleteParams,
+    params: KeyDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<KeyDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
@@ -74,6 +80,7 @@ export class Keys extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Keys extends BaseKeys {}
 
 export interface Key {
   /**
@@ -103,21 +110,21 @@ export interface KeyUpdateParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyListParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Keys {

@@ -2,24 +2,39 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as AccessRequestsAPI from './access-requests';
-import { AccessRequestListParams, AccessRequestListResponse, AccessRequests } from './access-requests';
+import {
+  AccessRequestListParams,
+  AccessRequestListResponse,
+  AccessRequests,
+  BaseAccessRequests,
+} from './access-requests';
 import * as SCIMAPI from './scim/scim';
-import { AccessRequest, SCIM } from './scim/scim';
+import { AccessRequest, BaseSCIM, SCIM } from './scim/scim';
 
-export class Logs extends APIResource {
+export class BaseLogs extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'access', 'logs'] = Object.freeze([
+    'zeroTrust',
+    'access',
+    'logs',
+  ] as const);
+}
+export class Logs extends BaseLogs {
   accessRequests: AccessRequestsAPI.AccessRequests = new AccessRequestsAPI.AccessRequests(this._client);
   scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
 }
 
 Logs.AccessRequests = AccessRequests;
+Logs.BaseAccessRequests = BaseAccessRequests;
 Logs.SCIM = SCIM;
+Logs.BaseSCIM = BaseSCIM;
 
 export declare namespace Logs {
   export {
     AccessRequests as AccessRequests,
+    BaseAccessRequests as BaseAccessRequests,
     type AccessRequestListResponse as AccessRequestListResponse,
     type AccessRequestListParams as AccessRequestListParams,
   };
 
-  export { SCIM as SCIM, type AccessRequest as AccessRequest };
+  export { SCIM as SCIM, BaseSCIM as BaseSCIM, type AccessRequest as AccessRequest };
 }

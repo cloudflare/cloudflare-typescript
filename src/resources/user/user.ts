@@ -2,11 +2,12 @@
 
 import { APIResource } from '../../core/resource';
 import * as AuditLogsAPI from './audit-logs';
-import { AuditLogListParams, AuditLogs } from './audit-logs';
+import { AuditLogListParams, AuditLogs, BaseAuditLogs } from './audit-logs';
 import * as InvitesAPI from './invites';
-import { Invite, InviteEditParams, Invites, InvitesSinglePage } from './invites';
+import { BaseInvites, Invite, InviteEditParams, Invites, InvitesSinglePage } from './invites';
 import * as OrganizationsAPI from './organizations';
 import {
+  BaseOrganizations,
   Organization,
   OrganizationDeleteResponse,
   OrganizationGetResponse,
@@ -16,15 +17,17 @@ import {
 } from './organizations';
 import * as SubscriptionsAPI from './subscriptions';
 import {
+  BaseSubscriptions,
   SubscriptionDeleteResponse,
   SubscriptionUpdateParams,
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
 import * as BillingAPI from './billing/billing';
-import { Billing } from './billing/billing';
+import { BaseBilling, Billing } from './billing/billing';
 import * as TokensAPI from './tokens/tokens';
 import {
+  BaseTokens,
   TokenCreateParams,
   TokenCreateResponse,
   TokenDeleteResponse,
@@ -36,13 +39,8 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
-export class User extends APIResource {
-  auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
-  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
-  invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
-  organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
-  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
-  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
+export class BaseUser extends APIResource {
+  static override readonly _key: readonly ['user'] = Object.freeze(['user'] as const);
 
   /**
    * Edit part of your user details.
@@ -71,6 +69,14 @@ export class User extends APIResource {
       (obj) => obj.result,
     );
   }
+}
+export class User extends BaseUser {
+  auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
+  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
+  invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
+  organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 }
 
 export interface UserEditResponse {
@@ -243,11 +249,17 @@ export interface UserEditParams {
 }
 
 User.AuditLogs = AuditLogs;
+User.BaseAuditLogs = BaseAuditLogs;
 User.Billing = Billing;
+User.BaseBilling = BaseBilling;
 User.Invites = Invites;
+User.BaseInvites = BaseInvites;
 User.Organizations = Organizations;
+User.BaseOrganizations = BaseOrganizations;
 User.Subscriptions = Subscriptions;
+User.BaseSubscriptions = BaseSubscriptions;
 User.Tokens = Tokens;
+User.BaseTokens = BaseTokens;
 
 export declare namespace User {
   export {
@@ -256,12 +268,17 @@ export declare namespace User {
     type UserEditParams as UserEditParams,
   };
 
-  export { AuditLogs as AuditLogs, type AuditLogListParams as AuditLogListParams };
+  export {
+    AuditLogs as AuditLogs,
+    BaseAuditLogs as BaseAuditLogs,
+    type AuditLogListParams as AuditLogListParams,
+  };
 
-  export { Billing as Billing };
+  export { Billing as Billing, BaseBilling as BaseBilling };
 
   export {
     Invites as Invites,
+    BaseInvites as BaseInvites,
     type Invite as Invite,
     type InvitesSinglePage as InvitesSinglePage,
     type InviteEditParams as InviteEditParams,
@@ -269,6 +286,7 @@ export declare namespace User {
 
   export {
     Organizations as Organizations,
+    BaseOrganizations as BaseOrganizations,
     type Organization as Organization,
     type OrganizationDeleteResponse as OrganizationDeleteResponse,
     type OrganizationGetResponse as OrganizationGetResponse,
@@ -278,6 +296,7 @@ export declare namespace User {
 
   export {
     Subscriptions as Subscriptions,
+    BaseSubscriptions as BaseSubscriptions,
     type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
@@ -285,6 +304,7 @@ export declare namespace User {
 
   export {
     Tokens as Tokens,
+    BaseTokens as BaseTokens,
     type TokenCreateResponse as TokenCreateResponse,
     type TokenDeleteResponse as TokenDeleteResponse,
     type TokenVerifyResponse as TokenVerifyResponse,

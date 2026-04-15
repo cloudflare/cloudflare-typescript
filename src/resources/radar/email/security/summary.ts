@@ -5,7 +5,14 @@ import * as EmailAPI from '../email';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 
-export class Summary extends APIResource {
+export class BaseSummary extends APIResource {
+  static override readonly _key: readonly ['radar', 'email', 'security', 'summary'] = Object.freeze([
+    'radar',
+    'email',
+    'security',
+    'summary',
+  ] as const);
+
   /**
    * Retrieves the distribution of emails by ARC (Authenticated Received Chain)
    * validation.
@@ -155,6 +162,7 @@ export class Summary extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Summary extends BaseSummary {}
 
 export interface SummaryARCResponse {
   /**

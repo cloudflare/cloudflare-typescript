@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Locations } from 'cloudflare/resources/radar/http/locations/locations';
+import { BaseTLSVersion } from 'cloudflare/resources/radar/http/locations/tls-version';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tlsVersion', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTLSVersion],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Locations],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { http: { locations: { tlsVersion: BaseTLSVersion } } } }>,
+) => {
   test('get', async () => {
     const responsePromise = client.radar.http.locations.tlsVersion.get('TLSv1_0');
     const rawResponse = await responsePromise.asResponse();
@@ -48,4 +68,7 @@ describe('resource tlsVersion', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource tlsVersion', () => runTests(client));
+describe('resource tlsVersion (tree shakable, base)', () => runTests(partialClient));
+describe('resource tlsVersion (tree shakable, subresource)', () => runTests(parentPartialClient));

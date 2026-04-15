@@ -5,7 +5,15 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class AssetUpload extends APIResource {
+export class BaseAssetUpload extends APIResource {
+  static override readonly _key: readonly [
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+    'scripts',
+    'assetUpload',
+  ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'assetUpload'] as const);
+
   /**
    * Start uploading a collection of assets for use in a Worker version. To learn
    * more about the direct uploads of assets, see
@@ -29,7 +37,7 @@ export class AssetUpload extends APIResource {
     params: AssetUploadCreateParams,
     options?: RequestOptions,
   ): APIPromise<AssetUploadCreateResponse> {
-    const { account_id, dispatch_namespace, ...body } = params;
+    const { account_id = this._client.accountID, dispatch_namespace, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/assets-upload-session`,
@@ -38,6 +46,7 @@ export class AssetUpload extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AssetUpload extends BaseAssetUpload {}
 
 export interface AssetUploadCreateResponse {
   /**
@@ -55,7 +64,7 @@ export interface AssetUploadCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Name of the Workers for Platforms dispatch namespace.

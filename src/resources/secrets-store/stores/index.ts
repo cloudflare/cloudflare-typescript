@@ -2,6 +2,7 @@
 
 export {
   Secrets,
+  BaseSecrets,
   type SecretCreateResponse,
   type SecretListResponse,
   type SecretDeleteResponse,
@@ -21,6 +22,7 @@ export {
 } from './secrets';
 export {
   Stores,
+  BaseStores,
   type StoreCreateResponse,
   type StoreListResponse,
   type StoreDeleteResponse,

@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class ACLs extends APIResource {
+export class BaseACLs extends APIResource {
+  static override readonly _key: readonly ['magicTransit', 'sites', 'acls'] = Object.freeze([
+    'magicTransit',
+    'sites',
+    'acls',
+  ] as const);
+
   /**
    * Creates a new Site ACL.
    *
@@ -24,7 +30,7 @@ export class ACLs extends APIResource {
    * ```
    */
   create(siteID: string, params: ACLCreateParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/sites/${siteID}/acls`, {
         body,
@@ -48,7 +54,7 @@ export class ACLs extends APIResource {
    * ```
    */
   update(aclID: string, params: ACLUpdateParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, site_id, ...body } = params;
+    const { account_id = this._client.accountID, site_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/sites/${site_id}/acls/${aclID}`, {
         body,
@@ -71,8 +77,12 @@ export class ACLs extends APIResource {
    * }
    * ```
    */
-  list(siteID: string, params: ACLListParams, options?: RequestOptions): PagePromise<ACLsSinglePage, ACL> {
-    const { account_id } = params;
+  list(
+    siteID: string,
+    params: ACLListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ACLsSinglePage, ACL> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/sites/${siteID}/acls`,
       SinglePage<ACL>,
@@ -95,7 +105,7 @@ export class ACLs extends APIResource {
    * ```
    */
   delete(aclID: string, params: ACLDeleteParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, site_id } = params;
+    const { account_id = this._client.accountID, site_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/magic/sites/${site_id}/acls/${aclID}`,
@@ -119,7 +129,7 @@ export class ACLs extends APIResource {
    * ```
    */
   edit(aclID: string, params: ACLEditParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, site_id, ...body } = params;
+    const { account_id = this._client.accountID, site_id, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/sites/${site_id}/acls/${aclID}`, {
         body,
@@ -143,7 +153,7 @@ export class ACLs extends APIResource {
    * ```
    */
   get(aclID: string, params: ACLGetParams, options?: RequestOptions): APIPromise<ACL> {
-    const { account_id, site_id } = params;
+    const { account_id = this._client.accountID, site_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/sites/${site_id}/acls/${aclID}`,
@@ -152,6 +162,7 @@ export class ACLs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ACLs extends BaseACLs {}
 
 export type ACLsSinglePage = SinglePage<ACL>;
 
@@ -284,7 +295,7 @@ export interface ACLCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -332,7 +343,7 @@ export interface ACLUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier
@@ -385,14 +396,14 @@ export interface ACLListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ACLDeleteParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier
@@ -404,7 +415,7 @@ export interface ACLEditParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier
@@ -457,7 +468,7 @@ export interface ACLGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier

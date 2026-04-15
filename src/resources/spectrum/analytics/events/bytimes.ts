@@ -6,12 +6,19 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Bytimes extends APIResource {
+export class BaseBytimes extends APIResource {
+  static override readonly _key: readonly ['spectrum', 'analytics', 'events', 'bytimes'] = Object.freeze([
+    'spectrum',
+    'analytics',
+    'events',
+    'bytimes',
+  ] as const);
+
   /**
    * Retrieves a list of aggregate metrics grouped by time interval.
    */
   get(params: BytimeGetParams, options?: RequestOptions): APIPromise<BytimeGetResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params;
     return (
       this._client.get(path`/zones/${zone_id}/spectrum/analytics/events/bytime`, {
         query,
@@ -20,6 +27,7 @@ export class Bytimes extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Bytimes extends BaseBytimes {}
 
 export interface BytimeGetResponse {
   /**
@@ -152,7 +160,7 @@ export interface BytimeGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Used to select time series resolution.

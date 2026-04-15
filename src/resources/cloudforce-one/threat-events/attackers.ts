@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Attackers extends APIResource {
+export class BaseAttackers extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'attackers'] = Object.freeze([
+    'cloudforceOne',
+    'threatEvents',
+    'attackers',
+  ] as const);
+
   /**
    * Lists attackers across multiple datasets
    *
@@ -17,14 +23,18 @@ export class Attackers extends APIResource {
    *   });
    * ```
    */
-  list(params: AttackerListParams, options?: RequestOptions): APIPromise<AttackerListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: AttackerListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AttackerListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/attackers`, {
       query,
       ...options,
     });
   }
 }
+export class Attackers extends BaseAttackers {}
 
 export interface AttackerListResponse {
   items: AttackerListResponse.Items;
@@ -42,7 +52,7 @@ export interface AttackerListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Array of dataset IDs to query attackers from. If not provided, uses

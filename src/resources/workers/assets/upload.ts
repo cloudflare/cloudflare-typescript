@@ -6,7 +6,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class Upload extends APIResource {
+export class BaseUpload extends APIResource {
+  static override readonly _key: readonly ['workers', 'assets', 'upload'] = Object.freeze([
+    'workers',
+    'assets',
+    'upload',
+  ] as const);
+
   /**
    * Upload assets ahead of creating a Worker version. To learn more about the direct
    * uploads of assets, see
@@ -22,7 +28,7 @@ export class Upload extends APIResource {
    * ```
    */
   create(params: UploadCreateParams, options?: RequestOptions): APIPromise<UploadCreateResponse> {
-    const { account_id, base64, body } = params;
+    const { account_id = this._client.accountID, base64, body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/workers/assets/upload`,
@@ -31,6 +37,7 @@ export class Upload extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Upload extends BaseUpload {}
 
 export interface UploadCreateResponse {
   /**
@@ -43,7 +50,7 @@ export interface UploadCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Whether the file contents are base64-encoded. Must be `true`.

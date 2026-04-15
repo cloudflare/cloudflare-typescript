@@ -10,6 +10,7 @@ import {
   AddressSpaceUpdateParams,
   AddressSpaceUpdateResponse,
   AddressSpaces,
+  BaseAddressSpaces,
 } from './address-spaces';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
@@ -17,14 +18,17 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class OnRamps extends APIResource {
-  addressSpaces: AddressSpacesAPI.AddressSpaces = new AddressSpacesAPI.AddressSpaces(this._client);
+export class BaseOnRamps extends APIResource {
+  static override readonly _key: readonly ['magicCloudNetworking', 'onRamps'] = Object.freeze([
+    'magicCloudNetworking',
+    'onRamps',
+  ] as const);
 
   /**
    * Create a new On-ramp (Closed Beta).
    */
   create(params: OnRampCreateParams, options?: RequestOptions): APIPromise<OnRampCreateResponse> {
-    const { account_id, forwarded, ...body } = params;
+    const { account_id = this._client.accountID, forwarded, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/cloud/onramps`, {
         body,
@@ -45,7 +49,7 @@ export class OnRamps extends APIResource {
     params: OnRampUpdateParams,
     options?: RequestOptions,
   ): APIPromise<OnRampUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}`, {
         body,
@@ -58,10 +62,10 @@ export class OnRamps extends APIResource {
    * List On-ramps (Closed Beta).
    */
   list(
-    params: OnRampListParams,
+    params: OnRampListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<OnRampListResponsesSinglePage, OnRampListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/cloud/onramps`,
       SinglePage<OnRampListResponse>,
@@ -74,10 +78,10 @@ export class OnRamps extends APIResource {
    */
   delete(
     onrampID: string,
-    params: OnRampDeleteParams,
+    params: OnRampDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OnRampDeleteResponse> {
-    const { account_id, destroy, force } = params;
+    const { account_id = this._client.accountID, destroy, force } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}`, {
         query: { destroy, force },
@@ -91,10 +95,10 @@ export class OnRamps extends APIResource {
    */
   apply(
     onrampID: string,
-    params: OnRampApplyParams,
+    params: OnRampApplyParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<OnRampApplyResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}/apply`, options);
   }
 
@@ -102,7 +106,7 @@ export class OnRamps extends APIResource {
    * Update an On-ramp (Closed Beta).
    */
   edit(onrampID: string, params: OnRampEditParams, options?: RequestOptions): APIPromise<OnRampEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}`, {
         body,
@@ -114,8 +118,12 @@ export class OnRamps extends APIResource {
   /**
    * Export an On-ramp to terraform ready file(s) (Closed Beta).
    */
-  export(onrampID: string, params: OnRampExportParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id } = params;
+  export(
+    onrampID: string,
+    params: OnRampExportParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}/export`, {
       ...options,
       headers: buildHeaders([{ Accept: 'application/zip' }, options?.headers]),
@@ -126,8 +134,12 @@ export class OnRamps extends APIResource {
   /**
    * Read an On-ramp (Closed Beta).
    */
-  get(onrampID: string, params: OnRampGetParams, options?: RequestOptions): APIPromise<OnRampGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    onrampID: string,
+    params: OnRampGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OnRampGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}`, {
         query,
@@ -139,10 +151,17 @@ export class OnRamps extends APIResource {
   /**
    * Plan an On-ramp (Closed Beta).
    */
-  plan(onrampID: string, params: OnRampPlanParams, options?: RequestOptions): APIPromise<OnRampPlanResponse> {
-    const { account_id } = params;
+  plan(
+    onrampID: string,
+    params: OnRampPlanParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OnRampPlanResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.post(path`/accounts/${account_id}/magic/cloud/onramps/${onrampID}/plan`, options);
   }
+}
+export class OnRamps extends BaseOnRamps {
+  addressSpaces: AddressSpacesAPI.AddressSpaces = new AddressSpacesAPI.AddressSpaces(this._client);
 }
 
 export type OnRampListResponsesSinglePage = SinglePage<OnRampListResponse>;
@@ -8768,7 +8787,7 @@ export interface OnRampCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -8862,7 +8881,7 @@ export interface OnRampUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -8914,7 +8933,7 @@ export interface OnRampListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -8941,7 +8960,7 @@ export interface OnRampDeleteParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -8955,14 +8974,14 @@ export interface OnRampDeleteParams {
 }
 
 export interface OnRampApplyParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OnRampEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -9011,14 +9030,14 @@ export interface OnRampEditParams {
 }
 
 export interface OnRampExportParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface OnRampGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -9042,10 +9061,11 @@ export interface OnRampGetParams {
 }
 
 export interface OnRampPlanParams {
-  account_id: string;
+  account_id?: string;
 }
 
 OnRamps.AddressSpaces = AddressSpaces;
+OnRamps.BaseAddressSpaces = BaseAddressSpaces;
 
 export declare namespace OnRamps {
   export {
@@ -9071,6 +9091,7 @@ export declare namespace OnRamps {
 
   export {
     AddressSpaces as AddressSpaces,
+    BaseAddressSpaces as BaseAddressSpaces,
     type AddressSpaceUpdateResponse as AddressSpaceUpdateResponse,
     type AddressSpaceListResponse as AddressSpaceListResponse,
     type AddressSpaceEditResponse as AddressSpaceEditResponse,

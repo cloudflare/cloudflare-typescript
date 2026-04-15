@@ -12,13 +12,20 @@ import {
   ActiveSessionKickAllParticipantsResponse,
   ActiveSessionKickParticipantsParams,
   ActiveSessionKickParticipantsResponse,
+  BaseActiveSession,
 } from './active-session';
 import * as AnalyticsAPI from './analytics';
-import { Analytics, AnalyticsGetOrgAnalyticsParams, AnalyticsGetOrgAnalyticsResponse } from './analytics';
+import {
+  Analytics,
+  AnalyticsGetOrgAnalyticsParams,
+  AnalyticsGetOrgAnalyticsResponse,
+  BaseAnalytics,
+} from './analytics';
 import * as AppsAPI from './apps';
-import { AppGetParams, AppGetResponse, AppPostParams, AppPostResponse, Apps } from './apps';
+import { AppGetParams, AppGetResponse, AppPostParams, AppPostResponse, Apps, BaseApps } from './apps';
 import * as LivestreamsAPI from './livestreams';
 import {
+  BaseLivestreams,
   LivestreamCreateIndependentLivestreamParams,
   LivestreamCreateIndependentLivestreamResponse,
   LivestreamGetActiveLivestreamsForLivestreamIDParams,
@@ -43,6 +50,7 @@ import {
 } from './livestreams';
 import * as MeetingsAPI from './meetings';
 import {
+  BaseMeetings,
   MeetingAddParticipantParams,
   MeetingAddParticipantResponse,
   MeetingCreateParams,
@@ -69,6 +77,7 @@ import {
 } from './meetings';
 import * as PresetsAPI from './presets';
 import {
+  BasePresets,
   PresetCreateParams,
   PresetCreateResponse,
   PresetDeleteParams,
@@ -83,6 +92,7 @@ import {
 } from './presets';
 import * as RecordingsAPI from './recordings';
 import {
+  BaseRecordings,
   RecordingGetActiveRecordingsParams,
   RecordingGetActiveRecordingsResponse,
   RecordingGetOneRecordingParams,
@@ -98,6 +108,7 @@ import {
 } from './recordings';
 import * as SessionsAPI from './sessions';
 import {
+  BaseSessions,
   SessionGenerateSummaryOfTranscriptsParams,
   SessionGetParticipantDataFromPeerIDParams,
   SessionGetParticipantDataFromPeerIDResponse,
@@ -119,6 +130,7 @@ import {
 } from './sessions';
 import * as WebhooksAPI from './webhooks';
 import {
+  BaseWebhooks,
   WebhookCreateWebhookParams,
   WebhookCreateWebhookResponse,
   WebhookDeleteWebhookParams,
@@ -134,7 +146,10 @@ import {
   Webhooks,
 } from './webhooks';
 
-export class RealtimeKit extends APIResource {
+export class BaseRealtimeKit extends APIResource {
+  static override readonly _key: readonly ['realtimeKit'] = Object.freeze(['realtimeKit'] as const);
+}
+export class RealtimeKit extends BaseRealtimeKit {
   apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
   meetings: MeetingsAPI.Meetings = new MeetingsAPI.Meetings(this._client);
   presets: PresetsAPI.Presets = new PresetsAPI.Presets(this._client);
@@ -147,18 +162,28 @@ export class RealtimeKit extends APIResource {
 }
 
 RealtimeKit.Apps = Apps;
+RealtimeKit.BaseApps = BaseApps;
 RealtimeKit.Meetings = Meetings;
+RealtimeKit.BaseMeetings = BaseMeetings;
 RealtimeKit.Presets = Presets;
+RealtimeKit.BasePresets = BasePresets;
 RealtimeKit.Sessions = Sessions;
+RealtimeKit.BaseSessions = BaseSessions;
 RealtimeKit.Recordings = Recordings;
+RealtimeKit.BaseRecordings = BaseRecordings;
 RealtimeKit.Webhooks = Webhooks;
+RealtimeKit.BaseWebhooks = BaseWebhooks;
 RealtimeKit.ActiveSession = ActiveSession;
+RealtimeKit.BaseActiveSession = BaseActiveSession;
 RealtimeKit.Livestreams = Livestreams;
+RealtimeKit.BaseLivestreams = BaseLivestreams;
 RealtimeKit.Analytics = Analytics;
+RealtimeKit.BaseAnalytics = BaseAnalytics;
 
 export declare namespace RealtimeKit {
   export {
     Apps as Apps,
+    BaseApps as BaseApps,
     type AppGetResponse as AppGetResponse,
     type AppPostResponse as AppPostResponse,
     type AppGetParams as AppGetParams,
@@ -167,6 +192,7 @@ export declare namespace RealtimeKit {
 
   export {
     Meetings as Meetings,
+    BaseMeetings as BaseMeetings,
     type MeetingCreateResponse as MeetingCreateResponse,
     type MeetingAddParticipantResponse as MeetingAddParticipantResponse,
     type MeetingDeleteMeetingParticipantResponse as MeetingDeleteMeetingParticipantResponse,
@@ -193,6 +219,7 @@ export declare namespace RealtimeKit {
 
   export {
     Presets as Presets,
+    BasePresets as BasePresets,
     type PresetCreateResponse as PresetCreateResponse,
     type PresetUpdateResponse as PresetUpdateResponse,
     type PresetDeleteResponse as PresetDeleteResponse,
@@ -207,6 +234,7 @@ export declare namespace RealtimeKit {
 
   export {
     Sessions as Sessions,
+    BaseSessions as BaseSessions,
     type SessionGetParticipantDataFromPeerIDResponse as SessionGetParticipantDataFromPeerIDResponse,
     type SessionGetSessionChatResponse as SessionGetSessionChatResponse,
     type SessionGetSessionDetailsResponse as SessionGetSessionDetailsResponse,
@@ -228,6 +256,7 @@ export declare namespace RealtimeKit {
 
   export {
     Recordings as Recordings,
+    BaseRecordings as BaseRecordings,
     type RecordingGetActiveRecordingsResponse as RecordingGetActiveRecordingsResponse,
     type RecordingGetOneRecordingResponse as RecordingGetOneRecordingResponse,
     type RecordingGetRecordingsResponse as RecordingGetRecordingsResponse,
@@ -243,6 +272,7 @@ export declare namespace RealtimeKit {
 
   export {
     Webhooks as Webhooks,
+    BaseWebhooks as BaseWebhooks,
     type WebhookCreateWebhookResponse as WebhookCreateWebhookResponse,
     type WebhookDeleteWebhookResponse as WebhookDeleteWebhookResponse,
     type WebhookEditWebhookResponse as WebhookEditWebhookResponse,
@@ -259,6 +289,7 @@ export declare namespace RealtimeKit {
 
   export {
     ActiveSession as ActiveSession,
+    BaseActiveSession as BaseActiveSession,
     type ActiveSessionCreatePollResponse as ActiveSessionCreatePollResponse,
     type ActiveSessionGetActiveSessionResponse as ActiveSessionGetActiveSessionResponse,
     type ActiveSessionKickAllParticipantsResponse as ActiveSessionKickAllParticipantsResponse,
@@ -271,6 +302,7 @@ export declare namespace RealtimeKit {
 
   export {
     Livestreams as Livestreams,
+    BaseLivestreams as BaseLivestreams,
     type LivestreamCreateIndependentLivestreamResponse as LivestreamCreateIndependentLivestreamResponse,
     type LivestreamGetActiveLivestreamsForLivestreamIDResponse as LivestreamGetActiveLivestreamsForLivestreamIDResponse,
     type LivestreamGetAllLivestreamsResponse as LivestreamGetAllLivestreamsResponse,
@@ -295,6 +327,7 @@ export declare namespace RealtimeKit {
 
   export {
     Analytics as Analytics,
+    BaseAnalytics as BaseAnalytics,
     type AnalyticsGetOrgAnalyticsResponse as AnalyticsGetOrgAnalyticsResponse,
     type AnalyticsGetOrgAnalyticsParams as AnalyticsGetOrgAnalyticsParams,
   };

@@ -2,6 +2,7 @@
 
 export {
   Domains,
+  BaseDomains,
   type Domain,
   type DomainUpdateResponse,
   type DomainGetResponse,
@@ -10,13 +11,18 @@ export {
   type DomainGetParams,
   type DomainsSinglePage,
 } from './domains';
-export { Registrar } from './registrar';
-export { RegistrationStatus, type RegistrationStatusGetParams } from './registration-status';
+export { Registrar, BaseRegistrar } from './registrar';
+export {
+  RegistrationStatus,
+  BaseRegistrationStatus,
+  type RegistrationStatusGetParams,
+} from './registration-status';
 export {
   Registrations,
+  BaseRegistrations,
   type RegistrationCreateParams,
   type RegistrationListParams,
   type RegistrationEditParams,
   type RegistrationGetParams,
 } from './registrations';
-export { UpdateStatus, type UpdateStatusGetParams } from './update-status';
+export { UpdateStatus, BaseUpdateStatus, type UpdateStatusGetParams } from './update-status';

@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseRoutes } from 'cloudflare/resources/workers/routes';
+import { Workers } from 'cloudflare/resources/workers/workers';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource routes', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseRoutes],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Workers],
+});
+
+const runTests = (client: PartialCloudflare<{ workers: { routes: BaseRoutes } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.workers.routes.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -105,4 +123,7 @@ describe('resource routes', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource routes', () => runTests(client));
+describe('resource routes (tree shakable, base)', () => runTests(partialClient));
+describe('resource routes (tree shakable, subresource)', () => runTests(parentPartialClient));

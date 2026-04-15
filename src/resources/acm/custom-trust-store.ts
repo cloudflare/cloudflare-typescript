@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class CustomTrustStore extends APIResource {
+export class BaseCustomTrustStore extends APIResource {
+  static override readonly _key: readonly ['acm', 'customTrustStore'] = Object.freeze([
+    'acm',
+    'customTrustStore',
+  ] as const);
+
   /**
    * Add Custom Origin Trust Store for a Zone.
    *
@@ -21,7 +26,7 @@ export class CustomTrustStore extends APIResource {
    * ```
    */
   create(params: CustomTrustStoreCreateParams, options?: RequestOptions): APIPromise<CustomTrustStore> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/acm/custom_trust_store`, { body, ...options }) as APIPromise<{
         result: CustomTrustStore;
@@ -43,10 +48,10 @@ export class CustomTrustStore extends APIResource {
    * ```
    */
   list(
-    params: CustomTrustStoreListParams,
+    params: CustomTrustStoreListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CustomTrustStoresV4PagePaginationArray, CustomTrustStore> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/acm/custom_trust_store`,
       V4PagePaginationArray<CustomTrustStore>,
@@ -69,10 +74,10 @@ export class CustomTrustStore extends APIResource {
    */
   delete(
     customOriginTrustStoreID: string,
-    params: CustomTrustStoreDeleteParams,
+    params: CustomTrustStoreDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomTrustStoreDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/acm/custom_trust_store/${customOriginTrustStoreID}`,
@@ -96,10 +101,10 @@ export class CustomTrustStore extends APIResource {
    */
   get(
     customOriginTrustStoreID: string,
-    params: CustomTrustStoreGetParams,
+    params: CustomTrustStoreGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CustomTrustStore> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/acm/custom_trust_store/${customOriginTrustStoreID}`,
@@ -108,6 +113,7 @@ export class CustomTrustStore extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class CustomTrustStore extends BaseCustomTrustStore {}
 
 export type CustomTrustStoresV4PagePaginationArray = V4PagePaginationArray<CustomTrustStore>;
 
@@ -164,7 +170,7 @@ export interface CustomTrustStoreCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
@@ -176,7 +182,7 @@ export interface CustomTrustStoreListParams extends V4PagePaginationArrayParams 
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Limit to the number of records returned.
@@ -193,14 +199,14 @@ export interface CustomTrustStoreDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomTrustStoreGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace CustomTrustStore {

@@ -2,6 +2,7 @@
 
 export {
   Custom,
+  BaseCustom,
   type CustomCreateParams,
   type CustomListParams,
   type CustomDeleteParams,
@@ -10,6 +11,7 @@ export {
 } from './custom/index';
 export {
   Default,
+  BaseDefault,
   type DefaultEditResponse,
   type DefaultGetResponse,
   type DefaultEditParams,
@@ -17,6 +19,7 @@ export {
 } from './default/index';
 export {
   Policies,
+  BasePolicies,
   type DevicePolicyCertificates,
   type FallbackDomain,
   type FallbackDomainPolicy,

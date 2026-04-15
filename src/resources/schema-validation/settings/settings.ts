@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OperationsAPI from './operations';
 import {
+  BaseOperations,
   OperationBulkEditParams,
   OperationBulkEditResponse,
   OperationDeleteParams,
@@ -20,8 +21,11 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Settings extends APIResource {
-  operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
+export class BaseSettings extends APIResource {
+  static override readonly _key: readonly ['schemaValidation', 'settings'] = Object.freeze([
+    'schemaValidation',
+    'settings',
+  ] as const);
 
   /**
    * Fully updates global schema validation settings for a zone, replacing existing
@@ -37,7 +41,7 @@ export class Settings extends APIResource {
    * ```
    */
   update(params: SettingUpdateParams, options?: RequestOptions): APIPromise<SettingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/schema_validation/settings`, {
         body,
@@ -58,8 +62,11 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  edit(params: SettingEditParams, options?: RequestOptions): APIPromise<SettingEditResponse> {
-    const { zone_id, ...body } = params;
+  edit(
+    params: SettingEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingEditResponse> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.patch(path`/zones/${zone_id}/schema_validation/settings`, {
         body,
@@ -78,14 +85,20 @@ export class Settings extends APIResource {
    * });
    * ```
    */
-  get(params: SettingGetParams, options?: RequestOptions): APIPromise<SettingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SettingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SettingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/schema_validation/settings`, options) as APIPromise<{
         result: SettingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Settings extends BaseSettings {
+  operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
 }
 
 export interface SettingUpdateResponse {
@@ -158,7 +171,7 @@ export interface SettingUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The default mitigation action used Mitigation actions are as
@@ -184,7 +197,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The default mitigation action used Mitigation actions are as
@@ -210,10 +223,11 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Settings.Operations = Operations;
+Settings.BaseOperations = BaseOperations;
 
 export declare namespace Settings {
   export {
@@ -227,6 +241,7 @@ export declare namespace Settings {
 
   export {
     Operations as Operations,
+    BaseOperations as BaseOperations,
     type OperationUpdateResponse as OperationUpdateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,

@@ -2,6 +2,7 @@
 
 export {
   Browser,
+  BaseBrowser,
   type BrowserCreateResponse,
   type BrowserDeleteResponse,
   type BrowserProtocolResponse,
@@ -13,9 +14,10 @@ export {
   type BrowserProtocolParams,
   type BrowserVersionParams,
 } from './browser/index';
-export { Devtools } from './devtools';
+export { Devtools, BaseDevtools } from './devtools';
 export {
   Session,
+  BaseSession,
   type SessionListResponse,
   type SessionGetResponse,
   type SessionListParams,

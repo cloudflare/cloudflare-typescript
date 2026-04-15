@@ -227,6 +227,63 @@ while (page.hasNextPage()) {
 
 ## Advanced Usage
 
+### Tree shaking
+
+This library supports tree shaking to reduce bundle size. Instead of importing the full client, you can create a client only including the API resources you need:
+
+```ts
+import { createClient } from 'cloudflare/tree-shakable';
+import { Zones } from 'cloudflare/resources/zones/zones';
+import { BaseAccounts } from 'cloudflare/resources/accounts/accounts';
+
+const client = createClient({
+  // Specify the resources you'd like to use ...
+  resources: [Zones, BaseAccounts],
+});
+
+// ... then make API calls as usual.
+const zone = await client.zones.create({
+  account: {},
+  name: 'example.com',
+});
+const account = await client.accounts.create({ name: 'name' });
+```
+
+Each API resource has two versions, the full resource (e.g., `Zones`) which includes all subresources, and the base resource (e.g., `BaseZones`) which does not.
+
+The tree-shaken client is fully typed, so TypeScript will provide accurate autocomplete and prevent access to resources not included in your configuration.
+The `createClient` function automatically infers the correct type, but you can also use the `PartialCloudflare` type explicitly:
+
+```ts
+import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
+import { BaseZones } from 'cloudflare/resources/zones/zones';
+
+// Explicit variable type
+const client: PartialCloudflare<{ zones: BaseZones }> = createClient({
+  resources: [BaseZones],
+  /* ... */
+});
+
+// Function parameter type
+async function main(client: PartialCloudflare<{ zones: BaseZones }>) {
+  const zone = await client.zones.create({
+    account: {},
+    name: 'example.com',
+  });
+}
+
+// Works with any client that has the zones resource
+const treeShakableClient = createClient({
+  resources: [BaseZones],
+  /* ... */
+});
+const fullClient = new Cloudflare(/* ... */);
+
+main(treeShakableClient); // Works
+main(fullClient); // Also works
+```
+
 ### Accessing raw Response data (e.g., headers)
 
 The "raw" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.

@@ -2,6 +2,7 @@
 
 export {
   Cloudflared,
+  BaseCloudflared,
   type CloudflaredCreateParams,
   type CloudflaredListParams,
   type CloudflaredDeleteParams,
@@ -10,6 +11,7 @@ export {
 } from './cloudflared';
 export {
   Configurations,
+  BaseConfigurations,
   type ConfigurationUpdateResponse,
   type ConfigurationGetResponse,
   type ConfigurationUpdateParams,
@@ -17,12 +19,18 @@ export {
 } from './configurations';
 export {
   Connections,
+  BaseConnections,
   type Client,
   type ConnectionDeleteResponse,
   type ConnectionDeleteParams,
   type ConnectionGetParams,
   type ClientsSinglePage,
 } from './connections';
-export { Connectors, type ConnectorGetParams } from './connectors';
-export { Management, type ManagementCreateResponse, type ManagementCreateParams } from './management';
-export { Token, type TokenGetResponse, type TokenGetParams } from './token';
+export { Connectors, BaseConnectors, type ConnectorGetParams } from './connectors';
+export {
+  Management,
+  BaseManagement,
+  type ManagementCreateResponse,
+  type ManagementCreateParams,
+} from './management';
+export { Token, BaseToken, type TokenGetResponse, type TokenGetParams } from './token';

@@ -2,6 +2,7 @@
 
 export {
   Speed,
+  BaseSpeed,
   type SpeedHistogramResponse,
   type SpeedSummaryResponse,
   type SpeedHistogramParams,
@@ -9,6 +10,7 @@ export {
 } from './speed';
 export {
   Top,
+  BaseTop,
   type TopAsesResponse,
   type TopLocationsResponse,
   type TopAsesParams,

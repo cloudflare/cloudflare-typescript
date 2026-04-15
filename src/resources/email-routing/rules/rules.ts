@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as CatchAllsAPI from './catch-alls';
 import {
+  BaseCatchAlls,
   CatchAllAction,
   CatchAllGetParams,
   CatchAllGetResponse,
@@ -20,8 +21,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Rules extends APIResource {
-  catchAlls: CatchAllsAPI.CatchAlls = new CatchAllsAPI.CatchAlls(this._client);
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['emailRouting', 'rules'] = Object.freeze([
+    'emailRouting',
+    'rules',
+  ] as const);
 
   /**
    * Rules consist of a set of criteria for matching emails (such as an email being
@@ -40,7 +44,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: RequestOptions): APIPromise<EmailRoutingRule> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/email/routing/rules`, { body, ...options }) as APIPromise<{
         result: EmailRoutingRule;
@@ -70,7 +74,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: RequestOptions,
   ): APIPromise<EmailRoutingRule> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, {
         body,
@@ -93,10 +97,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params: RuleListParams,
+    params: RuleListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/email/routing/rules`,
       V4PagePaginationArray<EmailRoutingRule>,
@@ -118,10 +122,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleIdentifier: string,
-    params: RuleDeleteParams,
+    params: RuleDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<EmailRoutingRule> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
@@ -142,14 +146,21 @@ export class Rules extends APIResource {
    *   );
    * ```
    */
-  get(ruleIdentifier: string, params: RuleGetParams, options?: RequestOptions): APIPromise<EmailRoutingRule> {
-    const { zone_id } = params;
+  get(
+    ruleIdentifier: string,
+    params: RuleGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<EmailRoutingRule> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, options) as APIPromise<{
         result: EmailRoutingRule;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Rules extends BaseRules {
+  catchAlls: CatchAllsAPI.CatchAlls = new CatchAllsAPI.CatchAlls(this._client);
 }
 
 export type EmailRoutingRulesV4PagePaginationArray = V4PagePaginationArray<EmailRoutingRule>;
@@ -259,7 +270,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: List actions patterns.
@@ -291,7 +302,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: List actions patterns.
@@ -323,7 +334,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Filter by enabled routing rules.
@@ -335,17 +346,18 @@ export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RuleGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Rules.CatchAlls = CatchAlls;
+Rules.BaseCatchAlls = BaseCatchAlls;
 
 export declare namespace Rules {
   export {
@@ -362,6 +374,7 @@ export declare namespace Rules {
 
   export {
     CatchAlls as CatchAlls,
+    BaseCatchAlls as BaseCatchAlls,
     type CatchAllAction as CatchAllAction,
     type CatchAllMatcher as CatchAllMatcher,
     type CatchAllUpdateResponse as CatchAllUpdateResponse,

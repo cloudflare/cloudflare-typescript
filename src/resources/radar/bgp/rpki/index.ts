@@ -2,6 +2,7 @@
 
 export {
   ASPA,
+  BaseASPA,
   type ASPAChangesResponse,
   type ASPASnapshotResponse,
   type ASPATimeseriesResponse,
@@ -9,4 +10,4 @@ export {
   type ASPASnapshotParams,
   type ASPATimeseriesParams,
 } from './aspa';
-export { RPKI } from './rpki';
+export { RPKI, BaseRPKI } from './rpki';

@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseContentScanning } from 'cloudflare/resources/content-scanning/content-scanning';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +11,14 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource contentScanning', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseContentScanning],
+});
+
+const runTests = (client: PartialCloudflare<{ contentScanning: BaseContentScanning }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.contentScanning.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -95,4 +105,6 @@ describe('resource contentScanning', () => {
   test('get: required and optional params', async () => {
     const response = await client.contentScanning.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
-});
+};
+describe('resource contentScanning', () => runTests(client));
+describe('resource contentScanning (tree shakable, base)', () => runTests(partialClient));

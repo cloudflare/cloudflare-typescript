@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Radar } from 'cloudflare/resources/radar/radar';
+import { BaseTCPResetsTimeouts } from 'cloudflare/resources/radar/tcp-resets-timeouts';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tcpResetsTimeouts', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTCPResetsTimeouts],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Radar],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { tcpResetsTimeouts: BaseTCPResetsTimeouts } }>) => {
   test('summary', async () => {
     const responsePromise = client.radar.tcpResetsTimeouts.summary();
     const rawResponse = await responsePromise.asResponse();
@@ -69,4 +87,7 @@ describe('resource tcpResetsTimeouts', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource tcpResetsTimeouts', () => runTests(client));
+describe('resource tcpResetsTimeouts (tree shakable, base)', () => runTests(partialClient));
+describe('resource tcpResetsTimeouts (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Screenshot extends APIResource {
+export class BaseScreenshot extends APIResource {
+  static override readonly _key: readonly ['browserRendering', 'screenshot'] = Object.freeze([
+    'browserRendering',
+    'screenshot',
+  ] as const);
+
   /**
    * Takes a screenshot of a webpage from provided URL or HTML. Control page loading
    * with `gotoOptions` and `waitFor*` options. Customize screenshots with
@@ -21,7 +26,7 @@ export class Screenshot extends APIResource {
    * ```
    */
   create(params: ScreenshotCreateParams, options?: RequestOptions): APIPromise<ScreenshotCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountID, cacheTTL, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/browser-rendering/screenshot`, {
       query: { cacheTTL },
       body,
@@ -29,6 +34,7 @@ export class Screenshot extends APIResource {
     });
   }
 }
+export class Screenshot extends BaseScreenshot {}
 
 export interface ScreenshotCreateResponse {
   /**
@@ -60,7 +66,7 @@ export declare namespace ScreenshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either
@@ -376,7 +382,7 @@ export declare namespace ScreenshotCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.

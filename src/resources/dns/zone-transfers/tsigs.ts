@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TSIGs extends APIResource {
+export class BaseTSIGs extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'tsigs'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'tsigs',
+  ] as const);
+
   /**
    * Create TSIG.
    *
@@ -22,7 +28,7 @@ export class TSIGs extends APIResource {
    * ```
    */
   create(params: TSIGCreateParams, options?: RequestOptions): APIPromise<TSIG> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/secondary_dns/tsigs`, {
         body,
@@ -49,7 +55,7 @@ export class TSIGs extends APIResource {
    * ```
    */
   update(tsigID: string, params: TSIGUpdateParams, options?: RequestOptions): APIPromise<TSIG> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/secondary_dns/tsigs/${tsigID}`, {
         body,
@@ -71,8 +77,11 @@ export class TSIGs extends APIResource {
    * }
    * ```
    */
-  list(params: TSIGListParams, options?: RequestOptions): PagePromise<TSIGsSinglePage, TSIG> {
-    const { account_id } = params;
+  list(
+    params: TSIGListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<TSIGsSinglePage, TSIG> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/secondary_dns/tsigs`,
       SinglePage<TSIG>,
@@ -91,8 +100,12 @@ export class TSIGs extends APIResource {
    * );
    * ```
    */
-  delete(tsigID: string, params: TSIGDeleteParams, options?: RequestOptions): APIPromise<TSIGDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    tsigID: string,
+    params: TSIGDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TSIGDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/secondary_dns/tsigs/${tsigID}`,
@@ -112,8 +125,12 @@ export class TSIGs extends APIResource {
    * );
    * ```
    */
-  get(tsigID: string, params: TSIGGetParams, options?: RequestOptions): APIPromise<TSIG> {
-    const { account_id } = params;
+  get(
+    tsigID: string,
+    params: TSIGGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TSIG> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/secondary_dns/tsigs/${tsigID}`, options) as APIPromise<{
         result: TSIG;
@@ -121,6 +138,7 @@ export class TSIGs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TSIGs extends BaseTSIGs {}
 
 export type TSIGsSinglePage = SinglePage<TSIG>;
 
@@ -151,7 +169,7 @@ export interface TSIGCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: TSIG algorithm.
@@ -173,7 +191,7 @@ export interface TSIGUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: TSIG algorithm.
@@ -192,15 +210,15 @@ export interface TSIGUpdateParams {
 }
 
 export interface TSIGListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TSIGDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TSIGGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace TSIGs {

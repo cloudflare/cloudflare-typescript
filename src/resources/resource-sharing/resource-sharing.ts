@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as RecipientsAPI from './recipients';
 import {
+  BaseRecipients,
   RecipientCreateParams,
   RecipientCreateResponse,
   RecipientDeleteParams,
@@ -16,6 +17,7 @@ import {
 } from './recipients';
 import * as ResourcesAPI from './resources';
 import {
+  BaseResources,
   ResourceCreateParams,
   ResourceCreateResponse,
   ResourceDeleteParams,
@@ -34,9 +36,8 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ResourceSharing extends APIResource {
-  recipients: RecipientsAPI.Recipients = new RecipientsAPI.Recipients(this._client);
-  resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
+export class BaseResourceSharing extends APIResource {
+  static override readonly _key: readonly ['resourceSharing'] = Object.freeze(['resourceSharing'] as const);
 
   /**
    * Creates a new resource share for sharing Cloudflare resources with other
@@ -66,7 +67,7 @@ export class ResourceSharing extends APIResource {
     params: ResourceSharingCreateParams,
     options?: RequestOptions,
   ): APIPromise<ResourceSharingCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/shares`, { body, ...options }) as APIPromise<{
         result: ResourceSharingCreateResponse;
@@ -94,7 +95,7 @@ export class ResourceSharing extends APIResource {
     params: ResourceSharingUpdateParams,
     options?: RequestOptions,
   ): APIPromise<ResourceSharingUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/shares/${shareID}`, { body, ...options }) as APIPromise<{
         result: ResourceSharingUpdateResponse;
@@ -116,10 +117,10 @@ export class ResourceSharing extends APIResource {
    * ```
    */
   list(
-    params: ResourceSharingListParams,
+    params: ResourceSharingListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ResourceSharingListResponsesV4PagePaginationArray, ResourceSharingListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/shares`,
       V4PagePaginationArray<ResourceSharingListResponse>,
@@ -141,10 +142,10 @@ export class ResourceSharing extends APIResource {
    */
   delete(
     shareID: string,
-    params: ResourceSharingDeleteParams,
+    params: ResourceSharingDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResourceSharingDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/shares/${shareID}`, options) as APIPromise<{
         result: ResourceSharingDeleteResponse;
@@ -165,16 +166,20 @@ export class ResourceSharing extends APIResource {
    */
   get(
     shareID: string,
-    params: ResourceSharingGetParams,
+    params: ResourceSharingGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResourceSharingGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/shares/${shareID}`, { query, ...options }) as APIPromise<{
         result: ResourceSharingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class ResourceSharing extends BaseResourceSharing {
+  recipients: RecipientsAPI.Recipients = new RecipientsAPI.Recipients(this._client);
+  resources: ResourcesAPI.Resources = new ResourcesAPI.Resources(this._client);
 }
 
 export type ResourceSharingListResponsesV4PagePaginationArray =
@@ -819,7 +824,7 @@ export interface ResourceSharingCreateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the share.
@@ -885,7 +890,7 @@ export interface ResourceSharingUpdateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The name of the share.
@@ -897,7 +902,7 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to sort objects.
@@ -950,14 +955,14 @@ export interface ResourceSharingDeleteParams {
   /**
    * Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ResourceSharingGetParams {
   /**
    * Path param: Account identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Include recipient counts in the response.
@@ -971,7 +976,9 @@ export interface ResourceSharingGetParams {
 }
 
 ResourceSharing.Recipients = Recipients;
+ResourceSharing.BaseRecipients = BaseRecipients;
 ResourceSharing.Resources = Resources;
+ResourceSharing.BaseResources = BaseResources;
 
 export declare namespace ResourceSharing {
   export {
@@ -990,6 +997,7 @@ export declare namespace ResourceSharing {
 
   export {
     Recipients as Recipients,
+    BaseRecipients as BaseRecipients,
     type RecipientCreateResponse as RecipientCreateResponse,
     type RecipientListResponse as RecipientListResponse,
     type RecipientDeleteResponse as RecipientDeleteResponse,
@@ -1003,6 +1011,7 @@ export declare namespace ResourceSharing {
 
   export {
     Resources as Resources,
+    BaseResources as BaseResources,
     type ResourceCreateResponse as ResourceCreateResponse,
     type ResourceUpdateResponse as ResourceUpdateResponse,
     type ResourceListResponse as ResourceListResponse,

@@ -3,6 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as RulesAPI from './rules';
 import {
+  BaseRules,
   BlockRule,
   CompressResponseRule,
   DDoSDynamicRule,
@@ -24,11 +25,14 @@ import {
   SkipRule,
 } from './rules';
 import * as VersionsAPI from './versions';
-import { Versions } from './versions';
+import { BaseVersions, Versions } from './versions';
 import * as PhasesAPI from './phases/phases';
-import { Phases } from './phases/phases';
+import { BasePhases, Phases } from './phases/phases';
 
-export class Rulesets extends APIResource {
+export class BaseRulesets extends APIResource {
+  static override readonly _key: readonly ['rulesets'] = Object.freeze(['rulesets'] as const);
+}
+export class Rulesets extends BaseRulesets {
   phases: PhasesAPI.Phases = new PhasesAPI.Phases(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
@@ -99,16 +103,20 @@ export interface Ruleset {
 }
 
 Rulesets.Phases = Phases;
+Rulesets.BasePhases = BasePhases;
 Rulesets.Rules = Rules;
+Rulesets.BaseRules = BaseRules;
 Rulesets.Versions = Versions;
+Rulesets.BaseVersions = BaseVersions;
 
 export declare namespace Rulesets {
   export { type Kind as Kind, type Phase as Phase, type Ruleset as Ruleset };
 
-  export { Phases as Phases };
+  export { Phases as Phases, BasePhases as BasePhases };
 
   export {
     Rules as Rules,
+    BaseRules as BaseRules,
     type BlockRule as BlockRule,
     type CompressResponseRule as CompressResponseRule,
     type DDoSDynamicRule as DDoSDynamicRule,
@@ -129,5 +137,5 @@ export declare namespace Rulesets {
     type SkipRule as SkipRule,
   };
 
-  export { Versions as Versions };
+  export { Versions as Versions, BaseVersions as BaseVersions };
 }

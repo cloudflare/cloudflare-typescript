@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Top } from 'cloudflare/resources/radar/email/security/top/top';
+import { BaseTLDs } from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tlds', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseTLDs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Top],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ radar: { email: { security: { top: { tlds: BaseTLDs } } } } }>,
+) => {
   test('get', async () => {
     const responsePromise = client.radar.email.security.top.tlds.get();
     const rawResponse = await responsePromise.asResponse();
@@ -42,4 +62,7 @@ describe('resource tlds', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource tlds', () => runTests(client));
+describe('resource tlds (tree shakable, base)', () => runTests(partialClient));
+describe('resource tlds (tree shakable, subresource)', () => runTests(parentPartialClient));

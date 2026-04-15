@@ -5,12 +5,20 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class LogoMatches extends APIResource {
+export class BaseLogoMatches extends APIResource {
+  static override readonly _key: readonly ['brandProtection', 'logoMatches'] = Object.freeze([
+    'brandProtection',
+    'logoMatches',
+  ] as const);
+
   /**
    * Return matches as CSV for logo queries based on ID
    */
-  download(params: LogoMatchDownloadParams, options?: RequestOptions): APIPromise<LogoMatchDownloadResponse> {
-    const { account_id, ...query } = params;
+  download(
+    params: LogoMatchDownloadParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LogoMatchDownloadResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/brand-protection/logo-matches/download`, {
       query,
       ...options,
@@ -20,14 +28,18 @@ export class LogoMatches extends APIResource {
   /**
    * Return matches for logo queries based on ID
    */
-  get(params: LogoMatchGetParams, options?: RequestOptions): APIPromise<LogoMatchGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    params: LogoMatchGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<LogoMatchGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/brand-protection/logo-matches`, {
       query,
       ...options,
     });
   }
 }
+export class LogoMatches extends BaseLogoMatches {}
 
 export interface LogoMatchDownloadResponse {
   matches?: Array<{ [key: string]: unknown }>;
@@ -45,7 +57,7 @@ export interface LogoMatchDownloadParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -67,7 +79,7 @@ export interface LogoMatchGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

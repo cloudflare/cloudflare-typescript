@@ -7,7 +7,12 @@ import { RequestOptions } from '../../internal/request-options';
 import { maybeMultipartFormRequestOptions } from '../../internal/uploads';
 import { path } from '../../internal/utils/path';
 
-export class Watermarks extends APIResource {
+export class BaseWatermarks extends APIResource {
+  static override readonly _key: readonly ['stream', 'watermarks'] = Object.freeze([
+    'stream',
+    'watermarks',
+  ] as const);
+
   /**
    * Creates watermark profiles using a single `HTTP POST multipart/form-data`
    * request.
@@ -19,8 +24,11 @@ export class Watermarks extends APIResource {
    * });
    * ```
    */
-  create(params: WatermarkCreateParams, options?: RequestOptions): APIPromise<Watermark> {
-    const { account_id, ...body } = params;
+  create(
+    params: WatermarkCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Watermark> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.post(
         path`/accounts/${account_id}/stream/watermarks`,
@@ -42,8 +50,11 @@ export class Watermarks extends APIResource {
    * }
    * ```
    */
-  list(params: WatermarkListParams, options?: RequestOptions): PagePromise<WatermarksSinglePage, Watermark> {
-    const { account_id } = params;
+  list(
+    params: WatermarkListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<WatermarksSinglePage, Watermark> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/stream/watermarks`,
       SinglePage<Watermark>,
@@ -64,10 +75,10 @@ export class Watermarks extends APIResource {
    */
   delete(
     identifier: string,
-    params: WatermarkDeleteParams,
+    params: WatermarkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<WatermarkDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/stream/watermarks/${identifier}`,
@@ -87,8 +98,12 @@ export class Watermarks extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: WatermarkGetParams, options?: RequestOptions): APIPromise<Watermark> {
-    const { account_id } = params;
+  get(
+    identifier: string,
+    params: WatermarkGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Watermark> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/watermarks/${identifier}`, options) as APIPromise<{
         result: Watermark;
@@ -96,6 +111,7 @@ export class Watermarks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Watermarks extends BaseWatermarks {}
 
 export type WatermarksSinglePage = SinglePage<Watermark>;
 
@@ -172,7 +188,7 @@ export interface WatermarkCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A short description of the watermark profile.
@@ -219,21 +235,21 @@ export interface WatermarkListParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WatermarkDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WatermarkGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Watermarks {

@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Colos extends APIResource {
+export class BaseColos extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'dex', 'colos'] = Object.freeze([
+    'zeroTrust',
+    'dex',
+    'colos',
+  ] as const);
+
   /**
    * List Cloudflare colos that account's devices were connected to during a time
    * period, sorted by usage starting from the most used colo. Colos without traffic
@@ -29,13 +35,14 @@ export class Colos extends APIResource {
     params: ColoListParams,
     options?: RequestOptions,
   ): PagePromise<ColoListResponsesSinglePage, ColoListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return this._client.getAPIList(path`/accounts/${account_id}/dex/colos`, SinglePage<ColoListResponse>, {
       query,
       ...options,
     });
   }
 }
+export class Colos extends BaseColos {}
 
 export type ColoListResponsesSinglePage = SinglePage<ColoListResponse>;
 
@@ -60,7 +67,7 @@ export interface ColoListParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Start time for connection period in ISO (RFC3339 - ISO 8601) format

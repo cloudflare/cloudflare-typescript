@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { ContentScanning } from 'cloudflare/resources/content-scanning/content-scanning';
+import { BasePayloads } from 'cloudflare/resources/content-scanning/payloads';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource payloads', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BasePayloads],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [ContentScanning],
+});
+
+const runTests = (client: PartialCloudflare<{ contentScanning: { payloads: BasePayloads } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.contentScanning.payloads.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -67,4 +85,7 @@ describe('resource payloads', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource payloads', () => runTests(client));
+describe('resource payloads (tree shakable, base)', () => runTests(partialClient));
+describe('resource payloads (tree shakable, subresource)', () => runTests(parentPartialClient));

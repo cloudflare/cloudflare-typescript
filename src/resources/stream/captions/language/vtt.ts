@@ -6,7 +6,14 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Vtt extends APIResource {
+export class BaseVtt extends APIResource {
+  static override readonly _key: readonly ['stream', 'captions', 'language', 'vtt'] = Object.freeze([
+    'stream',
+    'captions',
+    'language',
+    'vtt',
+  ] as const);
+
   /**
    * Return WebVTT captions for a provided language.
    *
@@ -22,13 +29,14 @@ export class Vtt extends APIResource {
    * ```
    */
   get(language: string, params: VttGetParams, options?: RequestOptions): APIPromise<string> {
-    const { account_id, identifier } = params;
+    const { account_id = this._client.accountID, identifier } = params;
     return this._client.get(path`/accounts/${account_id}/stream/${identifier}/captions/${language}/vtt`, {
       ...options,
       headers: buildHeaders([{ Accept: 'text/vtt' }, options?.headers]),
     });
   }
 }
+export class Vtt extends BaseVtt {}
 
 export type VttGetResponse = string;
 
@@ -36,7 +44,7 @@ export interface VttGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * A Cloudflare-generated unique identifier for a media item.

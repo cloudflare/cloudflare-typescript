@@ -2,14 +2,17 @@
 
 import { APIResource } from '../../../core/resource';
 import * as DNSAPI from './dns';
-import { DNS, DNSGetParams } from './dns';
+import { BaseDNS, DNS, DNSGetParams } from './dns';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Subdomains extends APIResource {
-  dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
+export class BaseSubdomains extends APIResource {
+  static override readonly _key: readonly ['emailSending', 'subdomains'] = Object.freeze([
+    'emailSending',
+    'subdomains',
+  ] as const);
 
   /**
    * Creates a new sending subdomain or re-enables sending on an existing subdomain
@@ -26,7 +29,7 @@ export class Subdomains extends APIResource {
    * ```
    */
   create(params: SubdomainCreateParams, options?: RequestOptions): APIPromise<SubdomainCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/email/sending/subdomains`, {
         body,
@@ -49,10 +52,10 @@ export class Subdomains extends APIResource {
    * ```
    */
   list(
-    params: SubdomainListParams,
+    params: SubdomainListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SubdomainListResponsesSinglePage, SubdomainListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/email/sending/subdomains`,
       SinglePage<SubdomainListResponse>,
@@ -75,10 +78,10 @@ export class Subdomains extends APIResource {
    */
   delete(
     subdomainID: string,
-    params: SubdomainDeleteParams,
+    params: SubdomainDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubdomainDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.delete(path`/zones/${zone_id}/email/sending/subdomains/${subdomainID}`, options);
   }
 
@@ -95,10 +98,10 @@ export class Subdomains extends APIResource {
    */
   get(
     subdomainID: string,
-    params: SubdomainGetParams,
+    params: SubdomainGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubdomainGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/email/sending/subdomains/${subdomainID}`,
@@ -106,6 +109,9 @@ export class Subdomains extends APIResource {
       ) as APIPromise<{ result: SubdomainGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Subdomains extends BaseSubdomains {
+  dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
 }
 
 export type SubdomainListResponsesSinglePage = SinglePage<SubdomainListResponse>;
@@ -270,7 +276,7 @@ export interface SubdomainCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The subdomain name. Must be within the zone.
@@ -282,24 +288,25 @@ export interface SubdomainListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SubdomainDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SubdomainGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Subdomains.DNS = DNS;
+Subdomains.BaseDNS = BaseDNS;
 
 export declare namespace Subdomains {
   export {
@@ -314,5 +321,5 @@ export declare namespace Subdomains {
     type SubdomainGetParams as SubdomainGetParams,
   };
 
-  export { DNS as DNS, type DNSGetParams as DNSGetParams };
+  export { DNS as DNS, BaseDNS as BaseDNS, type DNSGetParams as DNSGetParams };
 }

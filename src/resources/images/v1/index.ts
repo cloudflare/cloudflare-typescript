@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Blobs, type BlobGetParams } from './blobs';
+export { Blobs, BaseBlobs, type BlobGetParams } from './blobs';
 export {
   Keys,
+  BaseKeys,
   type Key,
   type KeyUpdateResponse,
   type KeyListResponse,
@@ -11,9 +12,10 @@ export {
   type KeyListParams,
   type KeyDeleteParams,
 } from './keys';
-export { Stats, type Stat, type StatGetParams } from './stats';
+export { Stats, BaseStats, type Stat, type StatGetParams } from './stats';
 export {
   V1,
+  BaseV1,
   type Image,
   type V1ListResponse,
   type V1DeleteResponse,
@@ -26,6 +28,7 @@ export {
 } from './v1';
 export {
   Variants,
+  BaseVariants,
   type Variant,
   type VariantCreateResponse,
   type VariantDeleteResponse,

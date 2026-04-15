@@ -5,7 +5,10 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class TargetIndustries extends APIResource {
+export class BaseTargetIndustries extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'targetIndustries'] =
+    Object.freeze(['cloudforceOne', 'threatEvents', 'targetIndustries'] as const);
+
   /**
    * Lists target industries across multiple datasets
    *
@@ -17,14 +20,18 @@ export class TargetIndustries extends APIResource {
    *   );
    * ```
    */
-  list(params: TargetIndustryListParams, options?: RequestOptions): APIPromise<TargetIndustryListResponse> {
-    const { account_id, ...query } = params;
+  list(
+    params: TargetIndustryListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TargetIndustryListResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/targetIndustries`, {
       query,
       ...options,
     });
   }
 }
+export class TargetIndustries extends BaseTargetIndustries {}
 
 export interface TargetIndustryListResponse {
   items: TargetIndustryListResponse.Items;
@@ -42,7 +49,7 @@ export interface TargetIndustryListParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Array of dataset IDs to query target industries from. If not

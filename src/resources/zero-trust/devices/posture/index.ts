@@ -2,6 +2,7 @@
 
 export {
   Integrations,
+  BaseIntegrations,
   type Integration,
   type IntegrationDeleteResponse,
   type IntegrationCreateParams,
@@ -13,6 +14,7 @@ export {
 } from './integrations';
 export {
   Posture,
+  BasePosture,
   type CarbonblackInput,
   type ClientCertificateInput,
   type CrowdstrikeInput,

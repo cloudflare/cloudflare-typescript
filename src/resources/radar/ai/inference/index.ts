@@ -2,6 +2,7 @@
 
 export {
   Inference,
+  BaseInference,
   type InferenceSummaryV2Response,
   type InferenceTimeseriesGroupsV2Response,
   type InferenceSummaryV2Params,
@@ -9,9 +10,10 @@ export {
 } from './inference';
 export {
   Summary,
+  BaseSummary,
   type SummaryModelResponse,
   type SummaryTaskResponse,
   type SummaryModelParams,
   type SummaryTaskParams,
 } from './summary';
-export { TimeseriesGroups } from './timeseries-groups/index';
+export { TimeseriesGroups, BaseTimeseriesGroups } from './timeseries-groups/index';

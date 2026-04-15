@@ -5,7 +5,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Release extends APIResource {
+export class BaseRelease extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'investigate', 'release'] = Object.freeze([
+    'emailSecurity',
+    'investigate',
+    'release',
+  ] as const);
+
   /**
    * Releases a quarantined email message, allowing it to be delivered to the
    * recipient.
@@ -27,7 +33,7 @@ export class Release extends APIResource {
     params: ReleaseBulkParams,
     options?: RequestOptions,
   ): PagePromise<ReleaseBulkResponsesSinglePage, ReleaseBulkResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountID, body } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/email-security/investigate/release`,
       SinglePage<ReleaseBulkResponse>,
@@ -35,6 +41,7 @@ export class Release extends APIResource {
     );
   }
 }
+export class Release extends BaseRelease {}
 
 export type ReleaseBulkResponsesSinglePage = SinglePage<ReleaseBulkResponse>;
 
@@ -57,7 +64,7 @@ export interface ReleaseBulkParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A list of messages identfied by their `postfix_id`s that should be

@@ -6,7 +6,12 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class AccountTags extends APIResource {
+export class BaseAccountTags extends APIResource {
+  static override readonly _key: readonly ['resourceTagging', 'accountTags'] = Object.freeze([
+    'resourceTagging',
+    'accountTags',
+  ] as const);
+
   /**
    * Creates or updates tags for a specific account-level resource.
    *
@@ -22,7 +27,7 @@ export class AccountTags extends APIResource {
    * ```
    */
   update(params: AccountTagUpdateParams, options?: RequestOptions): APIPromise<AccountTagUpdateResponse> {
-    const { account_id, 'If-Match': ifMatch, ...body } = params;
+    const { account_id = this._client.accountID, 'If-Match': ifMatch, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/tags`, {
         body,
@@ -38,8 +43,8 @@ export class AccountTags extends APIResource {
   /**
    * Removes all tags from a specific account-level resource.
    */
-  delete(params: AccountTagDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, 'If-Match': ifMatch } = params;
+  delete(params: AccountTagDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<void> {
+    const { account_id = this._client.accountID, 'If-Match': ifMatch } = params ?? {};
     return this._client.delete(path`/accounts/${account_id}/tags`, {
       ...options,
       headers: buildHeaders([
@@ -53,7 +58,7 @@ export class AccountTags extends APIResource {
    * Retrieves tags for a specific account-level resource.
    */
   get(params: AccountTagGetParams, options?: RequestOptions): APIPromise<AccountTagGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/tags`, { query, ...options }) as APIPromise<{
         result: AccountTagGetResponse;
@@ -61,6 +66,7 @@ export class AccountTags extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AccountTags extends BaseAccountTags {}
 
 /**
  * Response for access_application resources
@@ -1903,7 +1909,7 @@ export declare namespace AccountTagUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Identifies the unique resource.
@@ -1959,7 +1965,7 @@ export declare namespace AccountTagUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Identifies the unique resource.
@@ -2010,7 +2016,7 @@ export interface AccountTagDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: ETag value for optimistic concurrency control. When provided, the
@@ -2025,7 +2031,7 @@ export interface AccountTagGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The ID of the resource to retrieve tags for.

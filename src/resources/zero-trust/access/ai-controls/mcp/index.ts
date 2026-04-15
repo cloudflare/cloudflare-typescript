@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Mcp } from './mcp';
+export { Mcp, BaseMcp } from './mcp';
 export {
   Portals,
+  BasePortals,
   type PortalCreateResponse,
   type PortalUpdateResponse,
   type PortalListResponse,
@@ -17,6 +18,7 @@ export {
 } from './portals';
 export {
   Servers,
+  BaseServers,
   type ServerCreateResponse,
   type ServerUpdateResponse,
   type ServerListResponse,

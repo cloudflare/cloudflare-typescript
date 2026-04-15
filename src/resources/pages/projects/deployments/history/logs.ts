@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Logs extends APIResource {
+export class BaseLogs extends APIResource {
+  static override readonly _key: readonly ['pages', 'projects', 'deployments', 'history', 'logs'] =
+    Object.freeze(['pages', 'projects', 'deployments', 'history', 'logs'] as const);
+
   /**
    * Fetch deployment logs for a project.
    *
@@ -22,7 +25,7 @@ export class Logs extends APIResource {
    * ```
    */
   get(deploymentID: string, params: LogGetParams, options?: RequestOptions): APIPromise<LogGetResponse> {
-    const { account_id, project_name } = params;
+    const { account_id = this._client.accountID, project_name } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/pages/projects/${project_name}/deployments/${deploymentID}/history/logs`,
@@ -31,6 +34,7 @@ export class Logs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Logs extends BaseLogs {}
 
 export interface LogGetResponse {
   data: Array<LogGetResponse.Data>;
@@ -52,7 +56,7 @@ export interface LogGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the project.

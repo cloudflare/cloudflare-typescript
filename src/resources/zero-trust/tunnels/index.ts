@@ -2,6 +2,7 @@
 
 export {
   Cloudflared,
+  BaseCloudflared,
   type CloudflaredCreateParams,
   type CloudflaredListParams,
   type CloudflaredDeleteParams,
@@ -10,6 +11,7 @@ export {
 } from './cloudflared/index';
 export {
   Tunnels,
+  BaseTunnels,
   type Connection,
   type TunnelListResponse,
   type TunnelListParams,
@@ -17,6 +19,7 @@ export {
 } from './tunnels';
 export {
   WARPConnector,
+  BaseWARPConnector,
   type WARPConnectorCreateResponse,
   type WARPConnectorListResponse,
   type WARPConnectorDeleteResponse,

@@ -6,16 +6,21 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Versions extends APIResource {
+export class BaseVersions extends APIResource {
+  static override readonly _key: readonly ['workflows', 'versions'] = Object.freeze([
+    'workflows',
+    'versions',
+  ] as const);
+
   /**
    * Lists all deployed versions of a workflow.
    */
   list(
     workflowName: string,
-    params: VersionListParams,
+    params: VersionListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<VersionListResponsesV4PagePaginationArray, VersionListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/workflows/${workflowName}/versions`,
       V4PagePaginationArray<VersionListResponse>,
@@ -27,7 +32,7 @@ export class Versions extends APIResource {
    * Retrieves details for a specific deployed workflow version.
    */
   get(versionID: string, params: VersionGetParams, options?: RequestOptions): APIPromise<VersionGetResponse> {
-    const { account_id, workflow_name } = params;
+    const { account_id = this._client.accountID, workflow_name } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/workflows/${workflow_name}/versions/${versionID}`,
@@ -36,6 +41,7 @@ export class Versions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Versions extends BaseVersions {}
 
 export type VersionListResponsesV4PagePaginationArray = V4PagePaginationArray<VersionListResponse>;
 
@@ -97,11 +103,11 @@ export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VersionGetParams {
-  account_id: string;
+  account_id?: string;
 
   workflow_name: string;
 }

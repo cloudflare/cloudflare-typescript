@@ -2,6 +2,7 @@
 
 export {
   Instances,
+  BaseInstances,
   type InstanceCreateResponse,
   type InstanceUpdateResponse,
   type InstanceListResponse,
@@ -20,9 +21,10 @@ export {
   type InstanceStatsParams,
   type InstanceListResponsesV4PagePaginationArray,
 } from './instances';
-export { Items } from './items';
+export { Items, BaseItems } from './items';
 export {
   Jobs,
+  BaseJobs,
   type JobCreateResponse,
   type JobListResponse,
   type JobGetResponse,

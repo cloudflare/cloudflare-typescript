@@ -5,7 +5,10 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class GlobalWARPOverride extends APIResource {
+export class BaseGlobalWARPOverride extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'resilience', 'globalWARPOverride'] =
+    Object.freeze(['zeroTrust', 'devices', 'resilience', 'globalWARPOverride'] as const);
+
   /**
    * Sets the Global WARP override state.
    *
@@ -24,7 +27,7 @@ export class GlobalWARPOverride extends APIResource {
     params: GlobalWARPOverrideCreateParams,
     options?: RequestOptions,
   ): APIPromise<GlobalWARPOverrideCreateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/resilience/disconnect`, {
         body,
@@ -45,10 +48,10 @@ export class GlobalWARPOverride extends APIResource {
    * ```
    */
   get(
-    params: GlobalWARPOverrideGetParams,
+    params: GlobalWARPOverrideGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<GlobalWARPOverrideGetResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/resilience/disconnect`, options) as APIPromise<{
         result: GlobalWARPOverrideGetResponse | null;
@@ -56,6 +59,7 @@ export class GlobalWARPOverride extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class GlobalWARPOverride extends BaseGlobalWARPOverride {}
 
 export interface GlobalWARPOverrideCreateResponse {
   /**
@@ -85,7 +89,7 @@ export interface GlobalWARPOverrideCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Disconnects all devices on the account using Global WARP override.
@@ -100,7 +104,7 @@ export interface GlobalWARPOverrideCreateParams {
 }
 
 export interface GlobalWARPOverrideGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace GlobalWARPOverride {

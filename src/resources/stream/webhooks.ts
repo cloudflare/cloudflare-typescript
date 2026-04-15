@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Webhooks extends APIResource {
+export class BaseWebhooks extends APIResource {
+  static override readonly _key: readonly ['stream', 'webhooks'] = Object.freeze([
+    'stream',
+    'webhooks',
+  ] as const);
+
   /**
    * Creates a webhook notification.
    *
@@ -16,8 +21,11 @@ export class Webhooks extends APIResource {
    * });
    * ```
    */
-  update(params: WebhookUpdateParams, options?: RequestOptions): APIPromise<WebhookUpdateResponse> {
-    const { account_id, ...body } = params;
+  update(
+    params: WebhookUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WebhookUpdateResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.put(path`/accounts/${account_id}/stream/webhook`, { body, ...options }) as APIPromise<{
         result: WebhookUpdateResponse;
@@ -35,8 +43,11 @@ export class Webhooks extends APIResource {
    * });
    * ```
    */
-  delete(params: WebhookDeleteParams, options?: RequestOptions): APIPromise<WebhookDeleteResponse> {
-    const { account_id } = params;
+  delete(
+    params: WebhookDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WebhookDeleteResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(path`/accounts/${account_id}/stream/webhook`, options) as APIPromise<{
         result: WebhookDeleteResponse;
@@ -54,8 +65,11 @@ export class Webhooks extends APIResource {
    * });
    * ```
    */
-  get(params: WebhookGetParams, options?: RequestOptions): APIPromise<WebhookGetResponse> {
-    const { account_id } = params;
+  get(
+    params: WebhookGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WebhookGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/webhook`, options) as APIPromise<{
         result: WebhookGetResponse;
@@ -63,6 +77,7 @@ export class Webhooks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Webhooks extends BaseWebhooks {}
 
 export interface WebhookUpdateResponse {
   /**
@@ -114,7 +129,7 @@ export interface WebhookUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The URL where webhooks will be sent.
@@ -131,14 +146,14 @@ export interface WebhookDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface WebhookGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Webhooks {

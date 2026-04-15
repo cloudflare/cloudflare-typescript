@@ -8,7 +8,13 @@ import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
 
-export class ScriptAndVersionSettings extends APIResource {
+export class BaseScriptAndVersionSettings extends APIResource {
+  static override readonly _key: readonly ['workers', 'scripts', 'scriptAndVersionSettings'] = Object.freeze([
+    'workers',
+    'scripts',
+    'scriptAndVersionSettings',
+  ] as const);
+
   /**
    * Patch metadata or config, such as bindings or usage model.
    *
@@ -26,7 +32,7 @@ export class ScriptAndVersionSettings extends APIResource {
     params: ScriptAndVersionSettingEditParams,
     options?: RequestOptions,
   ): APIPromise<ScriptAndVersionSettingEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
@@ -49,10 +55,10 @@ export class ScriptAndVersionSettings extends APIResource {
    */
   get(
     scriptName: string,
-    params: ScriptAndVersionSettingGetParams,
+    params: ScriptAndVersionSettingGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ScriptAndVersionSettingGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/workers/scripts/${scriptName}/settings`,
@@ -61,6 +67,7 @@ export class ScriptAndVersionSettings extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class ScriptAndVersionSettings extends BaseScriptAndVersionSettings {}
 
 export interface ScriptAndVersionSettingEditResponse {
   /**
@@ -2230,7 +2237,7 @@ export interface ScriptAndVersionSettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -3360,7 +3367,7 @@ export interface ScriptAndVersionSettingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ScriptAndVersionSettings {

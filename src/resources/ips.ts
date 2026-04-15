@@ -4,7 +4,9 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class IPs extends APIResource {
+export class BaseIPs extends APIResource {
+  static override readonly _key: readonly ['ips'] = Object.freeze(['ips'] as const);
+
   /**
    * Get IPs used on the Cloudflare/JD Cloud network, see
    * https://www.cloudflare.com/ips for Cloudflare IPs or
@@ -17,6 +19,7 @@ export class IPs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IPs extends BaseIPs {}
 
 /**
  * The set of IPs on the Address Map.

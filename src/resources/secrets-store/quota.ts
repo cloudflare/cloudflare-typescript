@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Quota extends APIResource {
+export class BaseQuota extends APIResource {
+  static override readonly _key: readonly ['secretsStore', 'quota'] = Object.freeze([
+    'secretsStore',
+    'quota',
+  ] as const);
+
   /**
    * Lists the number of secrets used in the account.
    *
@@ -16,8 +21,11 @@ export class Quota extends APIResource {
    * });
    * ```
    */
-  get(params: QuotaGetParams, options?: RequestOptions): APIPromise<QuotaGetResponse> {
-    const { account_id } = params;
+  get(
+    params: QuotaGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<QuotaGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/secrets_store/quota`, options) as APIPromise<{
         result: QuotaGetResponse;
@@ -25,6 +33,7 @@ export class Quota extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Quota extends BaseQuota {}
 
 export interface QuotaGetResponse {
   secrets: QuotaGetResponse.Secrets;
@@ -48,7 +57,7 @@ export interface QuotaGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Quota {

@@ -2,6 +2,7 @@
 
 export {
   Connectors,
+  BaseConnectors,
   type ConnectorCreateResponse,
   type ConnectorUpdateResponse,
   type ConnectorListResponse,
@@ -18,6 +19,7 @@ export {
 } from './connectors';
 export {
   Events,
+  BaseEvents,
   type EventListResponse,
   type EventGetResponse,
   type EventListParams,
@@ -25,6 +27,7 @@ export {
 } from './events/index';
 export {
   Snapshots,
+  BaseSnapshots,
   type SnapshotListResponse,
   type SnapshotGetResponse,
   type SnapshotListParams,

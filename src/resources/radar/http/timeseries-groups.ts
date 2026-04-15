@@ -4,7 +4,13 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
-export class TimeseriesGroups extends APIResource {
+export class BaseTimeseriesGroups extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'timeseriesGroups'] = Object.freeze([
+    'radar',
+    'http',
+    'timeseriesGroups',
+  ] as const);
+
   /**
    * Retrieves the distribution of HTTP requests classified as automated or human
    * over time. Visit https://developers.cloudflare.com/radar/concepts/bot-classes/
@@ -168,6 +174,7 @@ export class TimeseriesGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TimeseriesGroups extends BaseTimeseriesGroups {}
 
 export interface TimeseriesGroupBotClassResponse {
   /**

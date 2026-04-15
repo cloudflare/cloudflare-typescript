@@ -5,7 +5,14 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class BotClass extends APIResource {
+export class BaseBotClass extends APIResource {
+  static override readonly _key: readonly ['radar', 'http', 'ases', 'botClass'] = Object.freeze([
+    'radar',
+    'http',
+    'ases',
+    'botClass',
+  ] as const);
+
   /**
    * Retrieves the top autonomous systems, by HTTP requests, of the requested bot
    * class.
@@ -30,6 +37,7 @@ export class BotClass extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class BotClass extends BaseBotClass {}
 
 export interface BotClassGetResponse {
   /**

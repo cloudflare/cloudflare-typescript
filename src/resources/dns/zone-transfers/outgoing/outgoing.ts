@@ -2,13 +2,17 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as StatusAPI from './status';
-import { Status, StatusGetParams } from './status';
+import { BaseStatus, Status, StatusGetParams } from './status';
 import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class OutgoingResource extends APIResource {
-  status: StatusAPI.Status = new StatusAPI.Status(this._client);
+export class BaseOutgoingResource extends APIResource {
+  static override readonly _key: readonly ['dns', 'zoneTransfers', 'outgoing'] = Object.freeze([
+    'dns',
+    'zoneTransfers',
+    'outgoing',
+  ] as const);
 
   /**
    * Create primary zone configuration for outgoing zone transfers.
@@ -27,7 +31,7 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   create(params: OutgoingCreateParams, options?: RequestOptions): APIPromise<OutgoingCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as APIPromise<{
         result: OutgoingCreateResponse;
@@ -52,7 +56,7 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   update(params: OutgoingUpdateParams, options?: RequestOptions): APIPromise<OutgoingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as APIPromise<{
         result: OutgoingUpdateResponse;
@@ -71,8 +75,11 @@ export class OutgoingResource extends APIResource {
    *   });
    * ```
    */
-  delete(params: OutgoingDeleteParams, options?: RequestOptions): APIPromise<OutgoingDeleteResponse> {
-    const { zone_id } = params;
+  delete(
+    params: OutgoingDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OutgoingDeleteResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/secondary_dns/outgoing`, options) as APIPromise<{
         result: OutgoingDeleteResponse;
@@ -94,7 +101,7 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   disable(params: OutgoingDisableParams, options?: RequestOptions): APIPromise<DisableTransfer> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/disable`, {
         body: body,
@@ -116,7 +123,7 @@ export class OutgoingResource extends APIResource {
    * ```
    */
   enable(params: OutgoingEnableParams, options?: RequestOptions): APIPromise<EnableTransfer> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/enable`, {
         body: body,
@@ -141,7 +148,7 @@ export class OutgoingResource extends APIResource {
     params: OutgoingForceNotifyParams,
     options?: RequestOptions,
   ): APIPromise<OutgoingForceNotifyResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, {
         body: body,
@@ -161,14 +168,20 @@ export class OutgoingResource extends APIResource {
    *   });
    * ```
    */
-  get(params: OutgoingGetParams, options?: RequestOptions): APIPromise<OutgoingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: OutgoingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<OutgoingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/secondary_dns/outgoing`, options) as APIPromise<{
         result: OutgoingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class OutgoingResource extends BaseOutgoingResource {
+  status: StatusAPI.Status = new StatusAPI.Status(this._client);
 }
 
 /**
@@ -336,7 +349,7 @@ export interface OutgoingCreateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zone name.
@@ -353,7 +366,7 @@ export interface OutgoingUpdateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Zone name.
@@ -367,14 +380,14 @@ export interface OutgoingUpdateParams {
 }
 
 export interface OutgoingDeleteParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OutgoingDisableParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -386,7 +399,7 @@ export interface OutgoingEnableParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -398,7 +411,7 @@ export interface OutgoingForceNotifyParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -407,10 +420,11 @@ export interface OutgoingForceNotifyParams {
 }
 
 export interface OutgoingGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 OutgoingResource.Status = Status;
+OutgoingResource.BaseStatus = BaseStatus;
 
 export declare namespace OutgoingResource {
   export {
@@ -432,5 +446,5 @@ export declare namespace OutgoingResource {
     type OutgoingGetParams as OutgoingGetParams,
   };
 
-  export { Status as Status, type StatusGetParams as StatusGetParams };
+  export { Status as Status, BaseStatus as BaseStatus, type StatusGetParams as StatusGetParams };
 }

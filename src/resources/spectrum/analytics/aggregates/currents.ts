@@ -5,13 +5,20 @@ import { APIPromise } from '../../../../core/api-promise';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
-export class Currents extends APIResource {
+export class BaseCurrents extends APIResource {
+  static override readonly _key: readonly ['spectrum', 'analytics', 'aggregates', 'currents'] = Object.freeze(
+    ['spectrum', 'analytics', 'aggregates', 'currents'] as const,
+  );
+
   /**
    * Retrieves analytics aggregated from the last minute of usage on Spectrum
    * applications underneath a given zone.
    */
-  get(params: CurrentGetParams, options?: RequestOptions): APIPromise<CurrentGetResponse> {
-    const { zone_id, ...query } = params;
+  get(
+    params: CurrentGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CurrentGetResponse> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/spectrum/analytics/aggregate/current`, {
         query,
@@ -20,6 +27,7 @@ export class Currents extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Currents extends BaseCurrents {}
 
 export type CurrentGetResponse = Array<CurrentGetResponse.CurrentGetResponseItem>;
 
@@ -56,7 +64,7 @@ export interface CurrentGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Comma-delimited list of Spectrum Application Id(s). If provided,

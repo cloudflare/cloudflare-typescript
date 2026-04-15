@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Config extends APIResource {
+export class BaseConfig extends APIResource {
+  static override readonly _key: readonly ['cloudforceOne', 'scans', 'config'] = Object.freeze([
+    'cloudforceOne',
+    'scans',
+    'config',
+  ] as const);
+
   /**
    * Create a new Scan Config
    *
@@ -20,7 +26,7 @@ export class Config extends APIResource {
    * ```
    */
   create(params: ConfigCreateParams, options?: RequestOptions): APIPromise<ConfigCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/cloudforce-one/scans/config`, {
         body,
@@ -43,10 +49,10 @@ export class Config extends APIResource {
    * ```
    */
   list(
-    params: ConfigListParams,
+    params: ConfigListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ConfigListResponsesSinglePage, ConfigListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/cloudforce-one/scans/config`,
       SinglePage<ConfigListResponse>,
@@ -68,10 +74,10 @@ export class Config extends APIResource {
    */
   delete(
     configID: string,
-    params: ConfigDeleteParams,
+    params: ConfigDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ConfigDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/cloudforce-one/scans/config/${configID}`,
@@ -92,8 +98,12 @@ export class Config extends APIResource {
    *   );
    * ```
    */
-  edit(configID: string, params: ConfigEditParams, options?: RequestOptions): APIPromise<ConfigEditResponse> {
-    const { account_id, ...body } = params;
+  edit(
+    configID: string,
+    params: ConfigEditParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigEditResponse> {
+    const { account_id = this._client.accountID, ...body } = params ?? {};
     return (
       this._client.patch(path`/accounts/${account_id}/cloudforce-one/scans/config/${configID}`, {
         body,
@@ -102,6 +112,7 @@ export class Config extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Config extends BaseConfig {}
 
 export type ConfigListResponsesSinglePage = SinglePage<ConfigListResponse>;
 
@@ -192,7 +203,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Defines the Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Defines a list of IP addresses or CIDR blocks to scan. The maximum
@@ -217,21 +228,21 @@ export interface ConfigListParams {
   /**
    * Defines the Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigDeleteParams {
   /**
    * Defines the Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param: Defines the Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Defines the number of days between each scan (0 = One-off scan).

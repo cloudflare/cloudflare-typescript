@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Cache } from './cache';
+export { Cache, BaseCache } from './cache';
 export {
   CacheReserveResource,
+  BaseCacheReserveResource,
   type CacheReserve,
   type CacheReserveClear,
   type State,
@@ -17,6 +18,7 @@ export {
 } from './cache-reserve';
 export {
   RegionalTieredCacheResource,
+  BaseRegionalTieredCacheResource,
   type RegionalTieredCache,
   type RegionalTieredCacheEditResponse,
   type RegionalTieredCacheGetResponse,
@@ -25,6 +27,7 @@ export {
 } from './regional-tiered-cache';
 export {
   SmartTieredCache,
+  BaseSmartTieredCache,
   type SmartTieredCacheDeleteResponse,
   type SmartTieredCacheEditResponse,
   type SmartTieredCacheGetResponse,
@@ -34,6 +37,7 @@ export {
 } from './smart-tiered-cache';
 export {
   Variants,
+  BaseVariants,
   type CacheVariant,
   type VariantDeleteResponse,
   type VariantEditResponse,

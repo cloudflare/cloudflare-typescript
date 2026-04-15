@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Monitors } from 'cloudflare/resources/load-balancers/monitors/monitors';
+import { BaseReferences } from 'cloudflare/resources/load-balancers/monitors/references';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource references', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseReferences],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Monitors],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ loadBalancers: { monitors: { references: BaseReferences } } }>,
+) => {
   test('get: only required params', async () => {
     const responsePromise = client.loadBalancers.monitors.references.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -27,4 +47,7 @@ describe('resource references', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource references', () => runTests(client));
+describe('resource references (tree shakable, base)', () => runTests(partialClient));
+describe('resource references (tree shakable, subresource)', () => runTests(parentPartialClient));

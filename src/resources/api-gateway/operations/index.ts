@@ -2,6 +2,7 @@
 
 export {
   Labels,
+  BaseLabels,
   type LabelCreateResponse,
   type LabelUpdateResponse,
   type LabelDeleteResponse,
@@ -20,6 +21,7 @@ export {
 } from './labels';
 export {
   Operations,
+  BaseOperations,
   type APIShield,
   type OperationCreateResponse,
   type OperationListResponse,
@@ -38,6 +40,7 @@ export {
 } from './operations';
 export {
   SchemaValidation,
+  BaseSchemaValidation,
   type SettingsMultipleRequest,
   type SchemaValidationUpdateResponse,
   type SchemaValidationGetResponse,

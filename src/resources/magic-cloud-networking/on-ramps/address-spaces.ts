@@ -5,12 +5,15 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class AddressSpaces extends APIResource {
+export class BaseAddressSpaces extends APIResource {
+  static override readonly _key: readonly ['magicCloudNetworking', 'onRamps', 'addressSpaces'] =
+    Object.freeze(['magicCloudNetworking', 'onRamps', 'addressSpaces'] as const);
+
   /**
    * Update the Magic WAN Address Space (Closed Beta).
    */
   update(params: AddressSpaceUpdateParams, options?: RequestOptions): APIPromise<AddressSpaceUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/magic/cloud/onramps/magic_wan_address_space`, {
         body,
@@ -22,8 +25,11 @@ export class AddressSpaces extends APIResource {
   /**
    * Read the Magic WAN Address Space (Closed Beta).
    */
-  list(params: AddressSpaceListParams, options?: RequestOptions): APIPromise<AddressSpaceListResponse> {
-    const { account_id } = params;
+  list(
+    params: AddressSpaceListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AddressSpaceListResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/magic/cloud/onramps/magic_wan_address_space`,
@@ -36,7 +42,7 @@ export class AddressSpaces extends APIResource {
    * Update the Magic WAN Address Space (Closed Beta).
    */
   edit(params: AddressSpaceEditParams, options?: RequestOptions): APIPromise<AddressSpaceEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/magic/cloud/onramps/magic_wan_address_space`, {
         body,
@@ -45,6 +51,7 @@ export class AddressSpaces extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class AddressSpaces extends BaseAddressSpaces {}
 
 export interface AddressSpaceUpdateResponse {
   prefixes: Array<string>;
@@ -62,7 +69,7 @@ export interface AddressSpaceUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -71,14 +78,14 @@ export interface AddressSpaceUpdateParams {
 }
 
 export interface AddressSpaceListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AddressSpaceEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

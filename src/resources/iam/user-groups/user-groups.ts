@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as MembersAPI from './members';
 import {
+  BaseMembers,
   MemberCreateParams,
   MemberCreateResponse,
   MemberDeleteParams,
@@ -24,8 +25,11 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class UserGroups extends APIResource {
-  members: MembersAPI.Members = new MembersAPI.Members(this._client);
+export class BaseUserGroups extends APIResource {
+  static override readonly _key: readonly ['iam', 'userGroups'] = Object.freeze([
+    'iam',
+    'userGroups',
+  ] as const);
 
   /**
    * Create a new user group under the specified account.
@@ -51,7 +55,7 @@ export class UserGroups extends APIResource {
    * ```
    */
   create(params: UserGroupCreateParams, options?: RequestOptions): APIPromise<UserGroupCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/iam/user_groups`, { body, ...options }) as APIPromise<{
         result: UserGroupCreateResponse;
@@ -75,7 +79,7 @@ export class UserGroups extends APIResource {
     params: UserGroupUpdateParams,
     options?: RequestOptions,
   ): APIPromise<UserGroupUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/iam/user_groups/${userGroupID}`, {
         body,
@@ -98,10 +102,10 @@ export class UserGroups extends APIResource {
    * ```
    */
   list(
-    params: UserGroupListParams,
+    params: UserGroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<UserGroupListResponsesV4PagePaginationArray, UserGroupListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/iam/user_groups`,
       V4PagePaginationArray<UserGroupListResponse>,
@@ -122,10 +126,10 @@ export class UserGroups extends APIResource {
    */
   delete(
     userGroupID: string,
-    params: UserGroupDeleteParams,
+    params: UserGroupDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<UserGroupDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/iam/user_groups/${userGroupID}`,
@@ -147,16 +151,19 @@ export class UserGroups extends APIResource {
    */
   get(
     userGroupID: string,
-    params: UserGroupGetParams,
+    params: UserGroupGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<UserGroupGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/iam/user_groups/${userGroupID}`, options) as APIPromise<{
         result: UserGroupGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class UserGroups extends BaseUserGroups {
+  members: MembersAPI.Members = new MembersAPI.Members(this._client);
 }
 
 export type UserGroupListResponsesV4PagePaginationArray = V4PagePaginationArray<UserGroupListResponse>;
@@ -800,7 +807,7 @@ export interface UserGroupCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the User group.
@@ -859,7 +866,7 @@ export interface UserGroupUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Name of the User group.
@@ -923,7 +930,7 @@ export interface UserGroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: ID of the user group to be fetched.
@@ -952,17 +959,18 @@ export interface UserGroupDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface UserGroupGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 UserGroups.Members = Members;
+UserGroups.BaseMembers = BaseMembers;
 
 export declare namespace UserGroups {
   export {
@@ -981,6 +989,7 @@ export declare namespace UserGroups {
 
   export {
     Members as Members,
+    BaseMembers as BaseMembers,
     type MemberCreateResponse as MemberCreateResponse,
     type MemberUpdateResponse as MemberUpdateResponse,
     type MemberListResponse as MemberListResponse,

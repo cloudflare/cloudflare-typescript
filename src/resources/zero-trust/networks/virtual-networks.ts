@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class VirtualNetworks extends APIResource {
+export class BaseVirtualNetworks extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'networks', 'virtualNetworks'] = Object.freeze([
+    'zeroTrust',
+    'networks',
+    'virtualNetworks',
+  ] as const);
+
   /**
    * Adds a new virtual network to an account.
    *
@@ -20,7 +26,7 @@ export class VirtualNetworks extends APIResource {
    * ```
    */
   create(params: VirtualNetworkCreateParams, options?: RequestOptions): APIPromise<VirtualNetwork> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/teamnet/virtual_networks`, {
         body,
@@ -43,10 +49,10 @@ export class VirtualNetworks extends APIResource {
    * ```
    */
   list(
-    params: VirtualNetworkListParams,
+    params: VirtualNetworkListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<VirtualNetworksSinglePage, VirtualNetwork> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/teamnet/virtual_networks`,
       SinglePage<VirtualNetwork>,
@@ -68,10 +74,10 @@ export class VirtualNetworks extends APIResource {
    */
   delete(
     virtualNetworkID: string,
-    params: VirtualNetworkDeleteParams,
+    params: VirtualNetworkDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<VirtualNetwork> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkID}`,
@@ -97,7 +103,7 @@ export class VirtualNetworks extends APIResource {
     params: VirtualNetworkEditParams,
     options?: RequestOptions,
   ): APIPromise<VirtualNetwork> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkID}`, {
         body,
@@ -120,10 +126,10 @@ export class VirtualNetworks extends APIResource {
    */
   get(
     virtualNetworkID: string,
-    params: VirtualNetworkGetParams,
+    params: VirtualNetworkGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<VirtualNetwork> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkID}`,
@@ -132,6 +138,7 @@ export class VirtualNetworks extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class VirtualNetworks extends BaseVirtualNetworks {}
 
 export type VirtualNetworksSinglePage = SinglePage<VirtualNetwork>;
 
@@ -172,7 +179,7 @@ export interface VirtualNetworkCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A user-friendly name for the virtual network.
@@ -199,7 +206,7 @@ export interface VirtualNetworkListParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: UUID of the virtual network.
@@ -237,14 +244,14 @@ export interface VirtualNetworkDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface VirtualNetworkEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Optional remark describing the virtual network.
@@ -266,7 +273,7 @@ export interface VirtualNetworkGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace VirtualNetworks {

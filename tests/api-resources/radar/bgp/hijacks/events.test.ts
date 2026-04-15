@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseEvents } from 'cloudflare/resources/radar/bgp/hijacks/events';
+import { Hijacks } from 'cloudflare/resources/radar/bgp/hijacks/hijacks';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource events', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseEvents],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Hijacks],
+});
+
+const runTests = (client: PartialCloudflare<{ radar: { bgp: { hijacks: { events: BaseEvents } } } }>) => {
   test('list', async () => {
     const responsePromise = client.radar.bgp.hijacks.events.list();
     const rawResponse = await responsePromise.asResponse();
@@ -46,4 +64,7 @@ describe('resource events', () => {
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-});
+};
+describe('resource events', () => runTests(client));
+describe('resource events (tree shakable, base)', () => runTests(partialClient));
+describe('resource events (tree shakable, subresource)', () => runTests(parentPartialClient));

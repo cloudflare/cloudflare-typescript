@@ -2,9 +2,10 @@
 
 export {
   Ases,
+  BaseAses,
   type AseGetResponse,
   type AsePrefixesResponse,
   type AseGetParams,
   type AsePrefixesParams,
 } from './ases';
-export { Top, type TopPrefixesResponse, type TopPrefixesParams } from './top';
+export { Top, BaseTop, type TopPrefixesResponse, type TopPrefixesParams } from './top';

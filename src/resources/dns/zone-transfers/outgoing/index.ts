@@ -2,6 +2,7 @@
 
 export {
   OutgoingResource,
+  BaseOutgoingResource,
   type DisableTransfer,
   type EnableTransfer,
   type Outgoing,
@@ -19,4 +20,4 @@ export {
   type OutgoingForceNotifyParams,
   type OutgoingGetParams,
 } from './outgoing';
-export { Status, type StatusGetParams } from './status';
+export { Status, BaseStatus, type StatusGetParams } from './status';

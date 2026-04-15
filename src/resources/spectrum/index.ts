@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Analytics } from './analytics/index';
+export { Analytics, BaseAnalytics } from './analytics/index';
 export {
   Apps,
+  BaseApps,
   type AppCreateResponse,
   type AppUpdateResponse,
   type AppListResponse,
@@ -15,4 +16,4 @@ export {
   type AppGetParams,
   type AppListResponsesV4PagePaginationArray,
 } from './apps';
-export { Spectrum } from './spectrum';
+export { Spectrum, BaseSpectrum } from './spectrum';

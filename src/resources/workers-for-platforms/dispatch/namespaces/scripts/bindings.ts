@@ -5,7 +5,15 @@ import { PagePromise, SinglePage } from '../../../../../core/pagination';
 import { RequestOptions } from '../../../../../internal/request-options';
 import { path } from '../../../../../internal/utils/path';
 
-export class Bindings extends APIResource {
+export class BaseBindings extends APIResource {
+  static override readonly _key: readonly [
+    'workersForPlatforms',
+    'dispatch',
+    'namespaces',
+    'scripts',
+    'bindings',
+  ] = Object.freeze(['workersForPlatforms', 'dispatch', 'namespaces', 'scripts', 'bindings'] as const);
+
   /**
    * Fetch script bindings from a script uploaded to a Workers for Platforms
    * namespace.
@@ -29,7 +37,7 @@ export class Bindings extends APIResource {
     params: BindingGetParams,
     options?: RequestOptions,
   ): PagePromise<BindingGetResponsesSinglePage, BindingGetResponse> {
-    const { account_id, dispatch_namespace } = params;
+    const { account_id = this._client.accountID, dispatch_namespace } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/workers/dispatch/namespaces/${dispatch_namespace}/scripts/${scriptName}/bindings`,
       SinglePage<BindingGetResponse>,
@@ -37,6 +45,7 @@ export class Bindings extends APIResource {
     );
   }
 }
+export class Bindings extends BaseBindings {}
 
 export type BindingGetResponsesSinglePage = SinglePage<BindingGetResponse>;
 
@@ -833,7 +842,7 @@ export interface BindingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Name of the Workers for Platforms dispatch namespace.

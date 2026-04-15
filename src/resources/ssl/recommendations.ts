@@ -5,14 +5,22 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Recommendations extends APIResource {
+export class BaseRecommendations extends APIResource {
+  static override readonly _key: readonly ['ssl', 'recommendations'] = Object.freeze([
+    'ssl',
+    'recommendations',
+  ] as const);
+
   /**
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
    *
    * @deprecated SSL/TLS Recommender has been decommissioned in favor of Automatic SSL/TLS
    */
-  get(params: RecommendationGetParams, options?: RequestOptions): APIPromise<RecommendationGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: RecommendationGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RecommendationGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/ssl/recommendation`, options) as APIPromise<{
         result: RecommendationGetResponse;
@@ -20,6 +28,7 @@ export class Recommendations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Recommendations extends BaseRecommendations {}
 
 export interface RecommendationGetResponse {
   id: string;
@@ -46,7 +55,7 @@ export interface RecommendationGetResponse {
 }
 
 export interface RecommendationGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Recommendations {

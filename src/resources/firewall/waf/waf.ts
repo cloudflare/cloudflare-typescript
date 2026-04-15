@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as OverridesAPI from './overrides';
 import {
+  BaseOverrides,
   Override,
   OverrideCreateParams,
   OverrideDeleteParams,
@@ -18,6 +19,7 @@ import {
 } from './overrides';
 import * as PackagesAPI from './packages/packages';
 import {
+  BasePackages,
   PackageGetParams,
   PackageGetResponse,
   PackageListParams,
@@ -29,17 +31,26 @@ import {
 /**
  * @deprecated WAF managed rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#waf-managed-rules-apis-previous-version for full details.
  */
-export class WAF extends APIResource {
+export class BaseWAF extends APIResource {
+  static override readonly _key: readonly ['firewall', 'waf'] = Object.freeze(['firewall', 'waf'] as const);
+}
+/**
+ * @deprecated WAF managed rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#waf-managed-rules-apis-previous-version for full details.
+ */
+export class WAF extends BaseWAF {
   overrides: OverridesAPI.Overrides = new OverridesAPI.Overrides(this._client);
   packages: PackagesAPI.Packages = new PackagesAPI.Packages(this._client);
 }
 
 WAF.Overrides = Overrides;
+WAF.BaseOverrides = BaseOverrides;
 WAF.Packages = Packages;
+WAF.BasePackages = BasePackages;
 
 export declare namespace WAF {
   export {
     Overrides as Overrides,
+    BaseOverrides as BaseOverrides,
     type Override as Override,
     type OverrideURL as OverrideURL,
     type RewriteAction as RewriteAction,
@@ -55,6 +66,7 @@ export declare namespace WAF {
 
   export {
     Packages as Packages,
+    BasePackages as BasePackages,
     type PackageListResponse as PackageListResponse,
     type PackageGetResponse as PackageGetResponse,
     type PackageListResponsesV4PagePaginationArray as PackageListResponsesV4PagePaginationArray,

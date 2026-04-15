@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type Cloudflare } from '../client';
+import { type BaseCloudflare } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: Cloudflare;
+  #client: BaseCloudflare;
 
   constructor(
-    client: Cloudflare,
+    client: BaseCloudflare,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: Cloudflare,
+      client: BaseCloudflare,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {

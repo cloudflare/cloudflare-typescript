@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IPs extends APIResource {
+export class BaseIPs extends APIResource {
+  static override readonly _key: readonly ['addressing', 'addressMaps', 'ips'] = Object.freeze([
+    'addressing',
+    'addressMaps',
+    'ips',
+  ] as const);
+
   /**
    * Add an IP from a prefix owned by the account to a particular address map.
    *
@@ -22,7 +28,7 @@ export class IPs extends APIResource {
    * ```
    */
   update(ipAddress: string, params: IPUpdateParams, options?: RequestOptions): APIPromise<IPUpdateResponse> {
-    const { account_id, address_map_id, body } = params;
+    const { account_id = this._client.accountID, address_map_id, body } = params;
     return this._client.put(
       path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/ips/${ipAddress}`,
       { body: body, ...options },
@@ -44,13 +50,14 @@ export class IPs extends APIResource {
    * ```
    */
   delete(ipAddress: string, params: IPDeleteParams, options?: RequestOptions): APIPromise<IPDeleteResponse> {
-    const { account_id, address_map_id } = params;
+    const { account_id = this._client.accountID, address_map_id } = params;
     return this._client.delete(
       path`/accounts/${account_id}/addressing/address_maps/${address_map_id}/ips/${ipAddress}`,
       options,
     );
   }
 }
+export class IPs extends BaseIPs {}
 
 export interface IPUpdateResponse {
   errors: Array<IPUpdateResponse.Error>;
@@ -204,7 +211,7 @@ export interface IPUpdateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param: Identifier of an Address Map.
@@ -221,7 +228,7 @@ export interface IPDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Identifier of an Address Map.

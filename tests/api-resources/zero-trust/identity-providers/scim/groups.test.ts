@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseGroups } from 'cloudflare/resources/zero-trust/identity-providers/scim/groups';
+import { SCIM } from 'cloudflare/resources/zero-trust/identity-providers/scim/scim';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,23 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource groups', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseGroups],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [SCIM],
+});
+
+const runTests = (
+  client: PartialCloudflare<{ zeroTrust: { identityProviders: { scim: { groups: BaseGroups } } } }>,
+) => {
   test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.identityProviders.scim.groups.list(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -36,4 +56,7 @@ describe('resource groups', () => {
       },
     );
   });
-});
+};
+describe('resource groups', () => runTests(client));
+describe('resource groups (tree shakable, base)', () => runTests(partialClient));
+describe('resource groups (tree shakable, subresource)', () => runTests(parentPartialClient));

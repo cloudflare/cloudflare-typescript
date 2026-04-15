@@ -5,7 +5,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Rules extends APIResource {
+export class BaseRules extends APIResource {
+  static override readonly _key: readonly ['waitingRooms', 'rules'] = Object.freeze([
+    'waitingRooms',
+    'rules',
+  ] as const);
+
   /**
    * Only available for the Waiting Room Advanced subscription. Creates a rule for a
    * waiting room.
@@ -32,7 +37,7 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: RequestOptions,
   ): PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id, rules } = params;
+    const { zone_id = this._client.zoneID, rules } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/rules`,
       SinglePage<WaitingRoomRule>,
@@ -68,7 +73,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: RequestOptions,
   ): PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id, rules } = params;
+    const { zone_id = this._client.zoneID, rules } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/rules`,
       SinglePage<WaitingRoomRule>,
@@ -98,7 +103,7 @@ export class Rules extends APIResource {
     params: RuleDeleteParams,
     options?: RequestOptions,
   ): PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id, waiting_room_id } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/rules/${ruleID}`,
       SinglePage<WaitingRoomRule>,
@@ -130,7 +135,7 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: RequestOptions,
   ): PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id, waiting_room_id, ...body } = params;
+    const { zone_id = this._client.zoneID, waiting_room_id, ...body } = params;
     return this._client.getAPIList(
       path`/zones/${zone_id}/waiting_rooms/${waiting_room_id}/rules/${ruleID}`,
       SinglePage<WaitingRoomRule>,
@@ -154,10 +159,10 @@ export class Rules extends APIResource {
    */
   get(
     waitingRoomID: string,
-    params: RuleGetParams,
+    params: RuleGetParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/waiting_rooms/${waitingRoomID}/rules`,
       SinglePage<WaitingRoomRule>,
@@ -165,6 +170,7 @@ export class Rules extends APIResource {
     );
   }
 }
+export class Rules extends BaseRules {}
 
 export type WaitingRoomRulesSinglePage = SinglePage<WaitingRoomRule>;
 
@@ -206,7 +212,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -242,7 +248,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -278,7 +284,7 @@ export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   waiting_room_id: string;
 }
@@ -287,7 +293,7 @@ export interface RuleEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Path param
@@ -352,7 +358,7 @@ export interface RuleGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Rules {

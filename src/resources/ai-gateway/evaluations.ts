@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Evaluations extends APIResource {
+export class BaseEvaluations extends APIResource {
+  static override readonly _key: readonly ['aiGateway', 'evaluations'] = Object.freeze([
+    'aiGateway',
+    'evaluations',
+  ] as const);
+
   /**
    * Creates a new AI Gateway.
    *
@@ -26,7 +31,7 @@ export class Evaluations extends APIResource {
     params: EvaluationCreateParams,
     options?: RequestOptions,
   ): APIPromise<EvaluationCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/evaluations`, {
         body,
@@ -51,10 +56,10 @@ export class Evaluations extends APIResource {
    */
   list(
     gatewayID: string,
-    params: EvaluationListParams,
+    params: EvaluationListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EvaluationListResponsesV4PagePaginationArray, EvaluationListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/evaluations`,
       V4PagePaginationArray<EvaluationListResponse>,
@@ -79,7 +84,7 @@ export class Evaluations extends APIResource {
     params: EvaluationDeleteParams,
     options?: RequestOptions,
   ): APIPromise<EvaluationDeleteResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/evaluations/${id}`,
@@ -103,7 +108,7 @@ export class Evaluations extends APIResource {
    * ```
    */
   get(id: string, params: EvaluationGetParams, options?: RequestOptions): APIPromise<EvaluationGetResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/evaluations/${id}`,
@@ -112,6 +117,7 @@ export class Evaluations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Evaluations extends BaseEvaluations {}
 
 export type EvaluationListResponsesV4PagePaginationArray = V4PagePaginationArray<EvaluationListResponse>;
 
@@ -483,7 +489,7 @@ export interface EvaluationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -505,7 +511,7 @@ export interface EvaluationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -524,7 +530,7 @@ export interface EvaluationListParams extends V4PagePaginationArrayParams {
 }
 
 export interface EvaluationDeleteParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * gateway id
@@ -533,7 +539,7 @@ export interface EvaluationDeleteParams {
 }
 
 export interface EvaluationGetParams {
-  account_id: string;
+  account_id?: string;
 
   /**
    * gateway id

@@ -2,13 +2,15 @@
 
 export {
   Labels,
+  BaseLabels,
   type LabelListResponse,
   type LabelListParams,
   type LabelListResponsesV4PagePaginationArray,
 } from './labels';
-export { Managed, type ManagedGetResponse, type ManagedGetParams } from './managed/index';
+export { Managed, BaseManaged, type ManagedGetResponse, type ManagedGetParams } from './managed/index';
 export {
   User,
+  BaseUser,
   type UserUpdateResponse,
   type UserDeleteResponse,
   type UserBulkCreateResponse,

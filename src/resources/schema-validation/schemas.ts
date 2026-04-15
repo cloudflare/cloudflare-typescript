@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Schemas extends APIResource {
+export class BaseSchemas extends APIResource {
+  static override readonly _key: readonly ['schemaValidation', 'schemas'] = Object.freeze([
+    'schemaValidation',
+    'schemas',
+  ] as const);
+
   /**
    * Uploads a new OpenAPI schema for API Shield schema validation. The schema
    * defines expected request/response formats for API endpoints.
@@ -24,7 +29,7 @@ export class Schemas extends APIResource {
    * ```
    */
   create(params: SchemaCreateParams, options?: RequestOptions): APIPromise<PublicSchema> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/schema_validation/schemas`, {
         body,
@@ -47,10 +52,10 @@ export class Schemas extends APIResource {
    * ```
    */
   list(
-    params: SchemaListParams,
+    params: SchemaListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/schema_validation/schemas`,
       V4PagePaginationArray<PublicSchema>,
@@ -72,10 +77,10 @@ export class Schemas extends APIResource {
    */
   delete(
     schemaID: string,
-    params: SchemaDeleteParams,
+    params: SchemaDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SchemaDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/schema_validation/schemas/${schemaID}`,
@@ -98,7 +103,7 @@ export class Schemas extends APIResource {
    * ```
    */
   edit(schemaID: string, params: SchemaEditParams, options?: RequestOptions): APIPromise<PublicSchema> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/schema_validation/schemas/${schemaID}`, {
         body,
@@ -120,8 +125,12 @@ export class Schemas extends APIResource {
    *   );
    * ```
    */
-  get(schemaID: string, params: SchemaGetParams, options?: RequestOptions): APIPromise<PublicSchema> {
-    const { zone_id, ...query } = params;
+  get(
+    schemaID: string,
+    params: SchemaGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PublicSchema> {
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/schema_validation/schemas/${schemaID}`, {
         query,
@@ -130,6 +139,7 @@ export class Schemas extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Schemas extends BaseSchemas {}
 
 export type PublicSchemasV4PagePaginationArray = V4PagePaginationArray<PublicSchema>;
 
@@ -176,7 +186,7 @@ export interface SchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The kind of the schema
@@ -203,7 +213,7 @@ export interface SchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -220,14 +230,14 @@ export interface SchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -239,7 +249,7 @@ export interface SchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.

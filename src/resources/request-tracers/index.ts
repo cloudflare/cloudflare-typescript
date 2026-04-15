@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { RequestTracers } from './request-tracers';
+export { RequestTracers, BaseRequestTracers } from './request-tracers';
 export {
   Traces,
+  BaseTraces,
   type Trace,
   type TraceItem,
   type TraceCreateResponse,

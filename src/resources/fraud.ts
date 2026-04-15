@@ -5,7 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-export class Fraud extends APIResource {
+export class BaseFraud extends APIResource {
+  static override readonly _key: readonly ['fraud'] = Object.freeze(['fraud'] as const);
+
   /**
    * Update Fraud Detection settings for a zone.
    *
@@ -22,8 +24,11 @@ export class Fraud extends APIResource {
    * });
    * ```
    */
-  update(params: FraudUpdateParams, options?: RequestOptions): APIPromise<FraudSettings> {
-    const { zone_id, ...body } = params;
+  update(
+    params: FraudUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FraudSettings> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.put(path`/zones/${zone_id}/fraud_detection/settings`, { body, ...options }) as APIPromise<{
         result: FraudSettings;
@@ -41,8 +46,8 @@ export class Fraud extends APIResource {
    * });
    * ```
    */
-  get(params: FraudGetParams, options?: RequestOptions): APIPromise<FraudSettings> {
-    const { zone_id } = params;
+  get(params: FraudGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<FraudSettings> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/fraud_detection/settings`, options) as APIPromise<{
         result: FraudSettings;
@@ -50,6 +55,7 @@ export class Fraud extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Fraud extends BaseFraud {}
 
 export interface FraudSettings {
   /**
@@ -73,7 +79,7 @@ export interface FraudUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Whether Fraud User Profiles is enabled for the zone.
@@ -96,7 +102,7 @@ export interface FraudGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Fraud {

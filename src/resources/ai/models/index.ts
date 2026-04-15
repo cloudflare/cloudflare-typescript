@@ -2,8 +2,9 @@
 
 export {
   Models,
+  BaseModels,
   type ModelListResponse,
   type ModelListParams,
   type ModelListResponsesV4PagePaginationArray,
 } from './models';
-export { Schema, type SchemaGetResponse, type SchemaGetParams } from './schema';
+export { Schema, BaseSchema, type SchemaGetResponse, type SchemaGetParams } from './schema';

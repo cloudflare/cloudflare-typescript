@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class TieredCaching extends APIResource {
+export class BaseTieredCaching extends APIResource {
+  static override readonly _key: readonly ['argo', 'tieredCaching'] = Object.freeze([
+    'argo',
+    'tieredCaching',
+  ] as const);
+
   /**
    * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of
    * lower-tiers and upper-tiers. If content is not cached in lower-tier data centers
@@ -28,7 +33,7 @@ export class TieredCaching extends APIResource {
    * ```
    */
   edit(params: TieredCachingEditParams, options?: RequestOptions): APIPromise<TieredCachingEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/argo/tiered_caching`, { body, ...options }) as APIPromise<{
         result: TieredCachingEditResponse;
@@ -56,8 +61,11 @@ export class TieredCaching extends APIResource {
    * });
    * ```
    */
-  get(params: TieredCachingGetParams, options?: RequestOptions): APIPromise<TieredCachingGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: TieredCachingGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TieredCachingGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(path`/zones/${zone_id}/argo/tiered_caching`, options) as APIPromise<{
         result: TieredCachingGetResponse;
@@ -65,6 +73,7 @@ export class TieredCaching extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class TieredCaching extends BaseTieredCaching {}
 
 export interface TieredCachingEditResponse {
   /**
@@ -114,7 +123,7 @@ export interface TieredCachingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Enables Tiered Caching.
@@ -126,7 +135,7 @@ export interface TieredCachingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace TieredCaching {

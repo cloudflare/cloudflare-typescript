@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Preview extends APIResource {
+export class BasePreview extends APIResource {
+  static override readonly _key: readonly ['emailSecurity', 'investigate', 'preview'] = Object.freeze([
+    'emailSecurity',
+    'investigate',
+    'preview',
+  ] as const);
+
   /**
    * Generates a preview of an email message for safe viewing without executing any
    * embedded content.
@@ -20,7 +26,7 @@ export class Preview extends APIResource {
    * ```
    */
   create(params: PreviewCreateParams, options?: RequestOptions): APIPromise<PreviewCreateResponse> {
-    const { account_id, submission, ...body } = params;
+    const { account_id = this._client.accountID, submission, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/email-security/investigate/preview`, {
         query: { submission },
@@ -43,8 +49,12 @@ export class Preview extends APIResource {
    *   );
    * ```
    */
-  get(postfixID: string, params: PreviewGetParams, options?: RequestOptions): APIPromise<PreviewGetResponse> {
-    const { account_id } = params;
+  get(
+    postfixID: string,
+    params: PreviewGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PreviewGetResponse> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/email-security/investigate/${postfixID}/preview`,
@@ -53,6 +63,7 @@ export class Preview extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Preview extends BasePreview {}
 
 export interface PreviewCreateResponse {
   /**
@@ -72,7 +83,7 @@ export interface PreviewCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The identifier of the message.
@@ -90,7 +101,7 @@ export interface PreviewGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Preview {

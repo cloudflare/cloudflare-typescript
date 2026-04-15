@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Downloads extends APIResource {
+export class BaseDownloads extends APIResource {
+  static override readonly _key: readonly ['stream', 'downloads'] = Object.freeze([
+    'stream',
+    'downloads',
+  ] as const);
+
   /**
    * Creates a download for a video when a video is ready to view. Use
    * `/downloads/{download_type}` instead for type-specific downloads. Available
@@ -21,10 +26,10 @@ export class Downloads extends APIResource {
    */
   create(
     identifier: string,
-    params: DownloadCreateParams,
+    params: DownloadCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DownloadCreateResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.post(path`/accounts/${account_id}/stream/${identifier}/downloads`, options) as APIPromise<{
         result: DownloadCreateResponse;
@@ -46,10 +51,10 @@ export class Downloads extends APIResource {
    */
   delete(
     identifier: string,
-    params: DownloadDeleteParams,
+    params: DownloadDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DownloadDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/stream/${identifier}/downloads`,
@@ -71,10 +76,10 @@ export class Downloads extends APIResource {
    */
   get(
     identifier: string,
-    params: DownloadGetParams,
+    params: DownloadGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DownloadGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/stream/${identifier}/downloads`, options) as APIPromise<{
         result: DownloadGetResponse;
@@ -82,6 +87,7 @@ export class Downloads extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Downloads extends BaseDownloads {}
 
 /**
  * An object with download type keys. Each key is optional and only present if that
@@ -205,21 +211,21 @@ export interface DownloadCreateParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DownloadDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DownloadGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Downloads {

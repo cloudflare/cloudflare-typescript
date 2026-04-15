@@ -4,7 +4,15 @@ import { APIResource } from '../../../../../core/resource';
 import { APIPromise } from '../../../../../core/api-promise';
 import { RequestOptions } from '../../../../../internal/request-options';
 
-export class Locations extends APIResource {
+export class BaseLocations extends APIResource {
+  static override readonly _key: readonly ['radar', 'attacks', 'layer7', 'top', 'locations'] = Object.freeze([
+    'radar',
+    'attacks',
+    'layer7',
+    'top',
+    'locations',
+  ] as const);
+
   /**
    * Retrieves the top origin locations of layer 7 attacks. Values are percentages of
    * the total layer 7 attacks, with the origin location determined by the client IP
@@ -49,6 +57,7 @@ export class Locations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Locations extends BaseLocations {}
 
 export interface LocationOriginResponse {
   /**

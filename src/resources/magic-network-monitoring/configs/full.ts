@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Full extends APIResource {
+export class BaseFull extends APIResource {
+  static override readonly _key: readonly ['magicNetworkMonitoring', 'configs', 'full'] = Object.freeze([
+    'magicNetworkMonitoring',
+    'configs',
+    'full',
+  ] as const);
+
   /**
    * Lists default sampling, router IPs, warp devices, and rules for account.
    *
@@ -18,8 +24,11 @@ export class Full extends APIResource {
    *   });
    * ```
    */
-  get(params: FullGetParams, options?: RequestOptions): APIPromise<ConfigsAPI.Configuration> {
-    const { account_id } = params;
+  get(
+    params: FullGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ConfigsAPI.Configuration> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/mnm/config/full`, options) as APIPromise<{
         result: ConfigsAPI.Configuration;
@@ -27,9 +36,10 @@ export class Full extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Full extends BaseFull {}
 
 export interface FullGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Full {

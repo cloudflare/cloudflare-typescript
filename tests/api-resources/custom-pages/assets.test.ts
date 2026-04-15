@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { BaseAssets } from 'cloudflare/resources/custom-pages/assets';
+import { CustomPages } from 'cloudflare/resources/custom-pages/custom-pages';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource assets', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseAssets],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [CustomPages],
+});
+
+const runTests = (client: PartialCloudflare<{ customPages: { assets: BaseAssets } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.customPages.assets.create({
       description: 'Custom 500 error page',
@@ -93,4 +111,7 @@ describe('resource assets', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
-});
+};
+describe('resource assets', () => runTests(client));
+describe('resource assets (tree shakable, base)', () => runTests(partialClient));
+describe('resource assets (tree shakable, subresource)', () => runTests(parentPartialClient));

@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Locations extends APIResource {
+export class BaseLocations extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'gateway', 'locations'] = Object.freeze([
+    'zeroTrust',
+    'gateway',
+    'locations',
+  ] as const);
+
   /**
    * Create a new Zero Trust Gateway location.
    *
@@ -20,7 +26,7 @@ export class Locations extends APIResource {
    * ```
    */
   create(params: LocationCreateParams, options?: RequestOptions): APIPromise<Location> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/gateway/locations`, { body, ...options }) as APIPromise<{
         result: Location;
@@ -44,7 +50,7 @@ export class Locations extends APIResource {
    * ```
    */
   update(locationID: string, params: LocationUpdateParams, options?: RequestOptions): APIPromise<Location> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/gateway/locations/${locationID}`, {
         body,
@@ -66,8 +72,11 @@ export class Locations extends APIResource {
    * }
    * ```
    */
-  list(params: LocationListParams, options?: RequestOptions): PagePromise<LocationsSinglePage, Location> {
-    const { account_id } = params;
+  list(
+    params: LocationListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<LocationsSinglePage, Location> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/gateway/locations`,
       SinglePage<Location>,
@@ -89,10 +98,10 @@ export class Locations extends APIResource {
    */
   delete(
     locationID: string,
-    params: LocationDeleteParams,
+    params: LocationDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LocationDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/gateway/locations/${locationID}`,
@@ -113,8 +122,12 @@ export class Locations extends APIResource {
    *   );
    * ```
    */
-  get(locationID: string, params: LocationGetParams, options?: RequestOptions): APIPromise<Location> {
-    const { account_id } = params;
+  get(
+    locationID: string,
+    params: LocationGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Location> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/gateway/locations/${locationID}`, options) as APIPromise<{
         result: Location;
@@ -122,6 +135,7 @@ export class Locations extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Locations extends BaseLocations {}
 
 export type LocationsSinglePage = SinglePage<Location>;
 
@@ -374,7 +388,7 @@ export interface LocationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the location name.
@@ -426,7 +440,7 @@ export interface LocationUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the location name.
@@ -475,15 +489,15 @@ export namespace LocationUpdateParams {
 }
 
 export interface LocationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LocationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LocationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Locations {

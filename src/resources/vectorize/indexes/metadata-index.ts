@@ -5,7 +5,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class MetadataIndex extends APIResource {
+export class BaseMetadataIndex extends APIResource {
+  static override readonly _key: readonly ['vectorize', 'indexes', 'metadataIndex'] = Object.freeze([
+    'vectorize',
+    'indexes',
+    'metadataIndex',
+  ] as const);
+
   /**
    * Enable metadata filtering based on metadata property. Limited to 10 properties.
    *
@@ -27,7 +33,7 @@ export class MetadataIndex extends APIResource {
     params: MetadataIndexCreateParams,
     options?: RequestOptions,
   ): APIPromise<MetadataIndexCreateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/create`,
@@ -50,10 +56,10 @@ export class MetadataIndex extends APIResource {
    */
   list(
     indexName: string,
-    params: MetadataIndexListParams,
+    params: MetadataIndexListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<MetadataIndexListResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/list`,
@@ -82,7 +88,7 @@ export class MetadataIndex extends APIResource {
     params: MetadataIndexDeleteParams,
     options?: RequestOptions,
   ): APIPromise<MetadataIndexDeleteResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/delete`,
@@ -91,6 +97,7 @@ export class MetadataIndex extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class MetadataIndex extends BaseMetadataIndex {}
 
 export interface MetadataIndexCreateResponse {
   /**
@@ -131,7 +138,7 @@ export interface MetadataIndexCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specifies the type of metadata property to index.
@@ -148,14 +155,14 @@ export interface MetadataIndexListParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface MetadataIndexDeleteParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specifies the metadata property for which the index must be deleted.

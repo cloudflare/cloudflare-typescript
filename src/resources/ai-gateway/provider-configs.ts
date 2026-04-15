@@ -6,7 +6,12 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class ProviderConfigs extends APIResource {
+export class BaseProviderConfigs extends APIResource {
+  static override readonly _key: readonly ['aiGateway', 'providerConfigs'] = Object.freeze([
+    'aiGateway',
+    'providerConfigs',
+  ] as const);
+
   /**
    * Creates a new AI Gateway.
    *
@@ -31,7 +36,7 @@ export class ProviderConfigs extends APIResource {
     params: ProviderConfigCreateParams,
     options?: RequestOptions,
   ): APIPromise<ProviderConfigCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/provider_configs`, {
         body,
@@ -56,10 +61,10 @@ export class ProviderConfigs extends APIResource {
    */
   list(
     gatewayID: string,
-    params: ProviderConfigListParams,
+    params: ProviderConfigListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ProviderConfigListResponsesV4PagePaginationArray, ProviderConfigListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/provider_configs`,
       V4PagePaginationArray<ProviderConfigListResponse>,
@@ -67,6 +72,7 @@ export class ProviderConfigs extends APIResource {
     );
   }
 }
+export class ProviderConfigs extends BaseProviderConfigs {}
 
 export type ProviderConfigListResponsesV4PagePaginationArray =
   V4PagePaginationArray<ProviderConfigListResponse>;
@@ -125,7 +131,7 @@ export interface ProviderConfigCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -167,7 +173,7 @@ export interface ProviderConfigListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ProviderConfigs {

@@ -6,7 +6,12 @@ import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class HostnameCertificates extends APIResource {
+export class BaseHostnameCertificates extends APIResource {
+  static override readonly _key: readonly ['originTLSClientAuth', 'hostnameCertificates'] = Object.freeze([
+    'originTLSClientAuth',
+    'hostnameCertificates',
+  ] as const);
+
   /**
    * Upload a certificate to be used for client authentication on a hostname. 10
    * hostname certificates per zone are allowed.
@@ -29,7 +34,7 @@ export class HostnameCertificates extends APIResource {
     params: HostnameCertificateCreateParams,
     options?: RequestOptions,
   ): APIPromise<HostnameCertificateCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, {
         body,
@@ -53,10 +58,10 @@ export class HostnameCertificates extends APIResource {
    * ```
    */
   list(
-    params: HostnameCertificateListParams,
+    params: HostnameCertificateListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HostnameCertificateListResponsesSinglePage, HostnameCertificateListResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
       SinglePage<HostnameCertificateListResponse>,
@@ -82,10 +87,10 @@ export class HostnameCertificates extends APIResource {
    */
   delete(
     certificateID: string,
-    params: HostnameCertificateDeleteParams,
+    params: HostnameCertificateDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameCertificateDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateID}`,
@@ -108,10 +113,10 @@ export class HostnameCertificates extends APIResource {
    */
   get(
     certificateID: string,
-    params: HostnameCertificateGetParams,
+    params: HostnameCertificateGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<HostnameCertificateGetResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateID}`,
@@ -120,6 +125,7 @@ export class HostnameCertificates extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class HostnameCertificates extends BaseHostnameCertificates {}
 
 export type HostnameCertificateListResponsesSinglePage = SinglePage<HostnameCertificateListResponse>;
 
@@ -372,7 +378,7 @@ export interface HostnameCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The hostname certificate.
@@ -389,21 +395,21 @@ export interface HostnameCertificateListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HostnameCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HostnameCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace HostnameCertificates {

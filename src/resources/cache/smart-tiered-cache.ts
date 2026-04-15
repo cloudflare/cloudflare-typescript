@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class SmartTieredCache extends APIResource {
+export class BaseSmartTieredCache extends APIResource {
+  static override readonly _key: readonly ['cache', 'smartTieredCache'] = Object.freeze([
+    'cache',
+    'smartTieredCache',
+  ] as const);
+
   /**
    * Smart Tiered Cache dynamically selects the single closest upper tier for each of
    * your website’s origins with no configuration required, using our in-house
@@ -23,10 +28,10 @@ export class SmartTieredCache extends APIResource {
    * ```
    */
   delete(
-    params: SmartTieredCacheDeleteParams,
+    params: SmartTieredCacheDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SmartTieredCacheDeleteResponse> {
-    const { zone_id } = params;
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.delete(
         path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
@@ -55,7 +60,7 @@ export class SmartTieredCache extends APIResource {
     params: SmartTieredCacheEditParams,
     options?: RequestOptions,
   ): APIPromise<SmartTieredCacheEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneID, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
         body,
@@ -80,8 +85,11 @@ export class SmartTieredCache extends APIResource {
    *   });
    * ```
    */
-  get(params: SmartTieredCacheGetParams, options?: RequestOptions): APIPromise<SmartTieredCacheGetResponse> {
-    const { zone_id } = params;
+  get(
+    params: SmartTieredCacheGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<SmartTieredCacheGetResponse> {
+    const { zone_id = this._client.zoneID } = params ?? {};
     return (
       this._client.get(
         path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
@@ -90,6 +98,7 @@ export class SmartTieredCache extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class SmartTieredCache extends BaseSmartTieredCache {}
 
 export interface SmartTieredCacheDeleteResponse {
   /**
@@ -156,14 +165,14 @@ export interface SmartTieredCacheDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SmartTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Enable or disable the Smart Tiered Cache.
@@ -175,7 +184,7 @@ export interface SmartTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace SmartTieredCache {

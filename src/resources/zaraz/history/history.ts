@@ -3,14 +3,14 @@
 import { APIResource } from '../../../core/resource';
 import * as ConfigAPI from '../config';
 import * as ConfigsAPI from './configs';
-import { ConfigGetParams, ConfigGetResponse, Configs } from './configs';
+import { BaseConfigs, ConfigGetParams, ConfigGetResponse, Configs } from './configs';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class History extends APIResource {
-  configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
+export class BaseHistory extends APIResource {
+  static override readonly _key: readonly ['zaraz', 'history'] = Object.freeze(['zaraz', 'history'] as const);
 
   /**
    * Restores a historical published Zaraz configuration by ID for a zone.
@@ -24,7 +24,7 @@ export class History extends APIResource {
    * ```
    */
   update(params: HistoryUpdateParams, options?: RequestOptions): APIPromise<ConfigAPI.Configuration> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneID, body } = params;
     return (
       this._client.put(path`/zones/${zone_id}/settings/zaraz/history`, {
         body: body,
@@ -47,16 +47,19 @@ export class History extends APIResource {
    * ```
    */
   list(
-    params: HistoryListParams,
+    params: HistoryListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<HistoryListResponsesSinglePage, HistoryListResponse> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/settings/zaraz/history`,
       SinglePage<HistoryListResponse>,
       { query, ...options },
     );
   }
+}
+export class History extends BaseHistory {
+  configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
 
 export type HistoryListResponsesSinglePage = SinglePage<HistoryListResponse>;
@@ -92,7 +95,7 @@ export interface HistoryUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: ID of the Zaraz configuration to restore.
@@ -104,7 +107,7 @@ export interface HistoryListParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Maximum amount of results to list. Default value is 10.
@@ -129,6 +132,7 @@ export interface HistoryListParams {
 }
 
 History.Configs = Configs;
+History.BaseConfigs = BaseConfigs;
 
 export declare namespace History {
   export {
@@ -140,6 +144,7 @@ export declare namespace History {
 
   export {
     Configs as Configs,
+    BaseConfigs as BaseConfigs,
     type ConfigGetResponse as ConfigGetResponse,
     type ConfigGetParams as ConfigGetParams,
   };

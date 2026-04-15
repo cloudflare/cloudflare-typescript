@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class PermissionGroups extends APIResource {
+export class BasePermissionGroups extends APIResource {
+  static override readonly _key: readonly ['accounts', 'tokens', 'permissionGroups'] = Object.freeze([
+    'accounts',
+    'tokens',
+    'permissionGroups',
+  ] as const);
+
   /**
    * Find all available permission groups for Account Owned API Tokens
    *
@@ -21,10 +27,10 @@ export class PermissionGroups extends APIResource {
    * ```
    */
   list(
-    params: PermissionGroupListParams,
+    params: PermissionGroupListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PermissionGroupListResponsesSinglePage, PermissionGroupListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/tokens/permission_groups`,
       SinglePage<PermissionGroupListResponse>,
@@ -43,8 +49,11 @@ export class PermissionGroups extends APIResource {
    *   });
    * ```
    */
-  get(params: PermissionGroupGetParams, options?: RequestOptions): APIPromise<PermissionGroupGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    params: PermissionGroupGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PermissionGroupGetResponse> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/tokens/permission_groups`, {
         query,
@@ -53,6 +62,7 @@ export class PermissionGroups extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class PermissionGroups extends BasePermissionGroups {}
 
 export type PermissionGroupListResponsesSinglePage = SinglePage<PermissionGroupListResponse>;
 
@@ -108,7 +118,7 @@ export interface PermissionGroupListParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by the name of the permission group. The value must be
@@ -127,7 +137,7 @@ export interface PermissionGroupGetParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by the name of the permission group. The value must be

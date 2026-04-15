@@ -11,7 +11,13 @@ import {
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Tests extends APIResource {
+export class BaseTests extends APIResource {
+  static override readonly _key: readonly ['speed', 'pages', 'tests'] = Object.freeze([
+    'speed',
+    'pages',
+    'tests',
+  ] as const);
+
   /**
    * Starts a test for a specific webpage, in a specific region.
    *
@@ -23,8 +29,12 @@ export class Tests extends APIResource {
    * );
    * ```
    */
-  create(url: string, params: TestCreateParams, options?: RequestOptions): APIPromise<Test> {
-    const { zone_id, ...body } = params;
+  create(
+    url: string,
+    params: TestCreateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Test> {
+    const { zone_id = this._client.zoneID, ...body } = params ?? {};
     return (
       this._client.post(path`/zones/${zone_id}/speed_api/pages/${url}/tests`, {
         body,
@@ -49,10 +59,10 @@ export class Tests extends APIResource {
    */
   list(
     url: string,
-    params: TestListParams,
+    params: TestListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<TestsV4PagePaginationArray, Test> {
-    const { zone_id, ...query } = params;
+    const { zone_id = this._client.zoneID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/zones/${zone_id}/speed_api/pages/${url}/tests`,
       V4PagePaginationArray<Test>,
@@ -72,8 +82,12 @@ export class Tests extends APIResource {
    * );
    * ```
    */
-  delete(url: string, params: TestDeleteParams, options?: RequestOptions): APIPromise<TestDeleteResponse> {
-    const { zone_id, region } = params;
+  delete(
+    url: string,
+    params: TestDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<TestDeleteResponse> {
+    const { zone_id = this._client.zoneID, region } = params ?? {};
     return (
       this._client.delete(path`/zones/${zone_id}/speed_api/pages/${url}/tests`, {
         query: { region },
@@ -94,7 +108,7 @@ export class Tests extends APIResource {
    * ```
    */
   get(testID: string, params: TestGetParams, options?: RequestOptions): APIPromise<Test> {
-    const { zone_id, url } = params;
+    const { zone_id = this._client.zoneID, url } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/speed_api/pages/${url}/tests/${testID}`,
@@ -103,6 +117,7 @@ export class Tests extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Tests extends BaseTests {}
 
 export type TestsV4PagePaginationArray = V4PagePaginationArray<Test>;
 
@@ -151,7 +166,7 @@ export interface TestCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A test region.
@@ -184,7 +199,7 @@ export interface TestListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A test region.
@@ -217,7 +232,7 @@ export interface TestDeleteParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: A test region.
@@ -250,7 +265,7 @@ export interface TestGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * A URL.

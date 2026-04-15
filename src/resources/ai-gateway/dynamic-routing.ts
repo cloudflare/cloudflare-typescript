@@ -5,7 +5,12 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class DynamicRouting extends APIResource {
+export class BaseDynamicRouting extends APIResource {
+  static override readonly _key: readonly ['aiGateway', 'dynamicRouting'] = Object.freeze([
+    'aiGateway',
+    'dynamicRouting',
+  ] as const);
+
   /**
    * Create a new AI Gateway Dynamic Route.
    *
@@ -30,7 +35,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingCreateParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/routes`, {
         body,
@@ -57,7 +62,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingUpdateParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingUpdateResponse> {
-    const { account_id, gateway_id, ...body } = params;
+    const { account_id = this._client.accountID, gateway_id, ...body } = params;
     return this._client.patch(path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}`, {
       body,
       ...options,
@@ -77,10 +82,10 @@ export class DynamicRouting extends APIResource {
    */
   list(
     gatewayID: string,
-    params: DynamicRoutingListParams,
+    params: DynamicRoutingListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingListResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/ai-gateway/gateways/${gatewayID}/routes`, options);
   }
 
@@ -101,7 +106,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingDeleteParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingDeleteResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return (
       this._client.delete(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}`,
@@ -131,7 +136,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingCreateDeploymentParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingCreateDeploymentResponse> {
-    const { account_id, gateway_id, ...body } = params;
+    const { account_id = this._client.accountID, gateway_id, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}/deployments`,
@@ -167,7 +172,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingCreateVersionParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingCreateVersionResponse> {
-    const { account_id, gateway_id, ...body } = params;
+    const { account_id = this._client.accountID, gateway_id, ...body } = params;
     return (
       this._client.post(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}/versions`,
@@ -193,7 +198,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingGetParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingGetResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}`,
@@ -223,7 +228,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingGetVersionParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingGetVersionResponse> {
-    const { account_id, gateway_id, id } = params;
+    const { account_id = this._client.accountID, gateway_id, id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}/versions/${versionID}`,
@@ -252,7 +257,7 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingListDeploymentsParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingListDeploymentsResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}/deployments`,
       options,
@@ -279,13 +284,14 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingListVersionsParams,
     options?: RequestOptions,
   ): APIPromise<DynamicRoutingListVersionsResponse> {
-    const { account_id, gateway_id } = params;
+    const { account_id = this._client.accountID, gateway_id } = params;
     return this._client.get(
       path`/accounts/${account_id}/ai-gateway/gateways/${gateway_id}/routes/${id}/versions`,
       options,
     );
   }
 }
+export class DynamicRouting extends BaseDynamicRouting {}
 
 export interface DynamicRoutingCreateResponse {
   id: string;
@@ -1913,7 +1919,7 @@ export interface DynamicRoutingCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -2095,7 +2101,7 @@ export interface DynamicRoutingUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param
@@ -2109,11 +2115,11 @@ export interface DynamicRoutingUpdateParams {
 }
 
 export interface DynamicRoutingListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DynamicRoutingDeleteParams {
-  account_id: string;
+  account_id?: string;
 
   gateway_id: string;
 }
@@ -2122,7 +2128,7 @@ export interface DynamicRoutingCreateDeploymentParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param
@@ -2139,7 +2145,7 @@ export interface DynamicRoutingCreateVersionParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Path param
@@ -2318,13 +2324,13 @@ export namespace DynamicRoutingCreateVersionParams {
 }
 
 export interface DynamicRoutingGetParams {
-  account_id: string;
+  account_id?: string;
 
   gateway_id: string;
 }
 
 export interface DynamicRoutingGetVersionParams {
-  account_id: string;
+  account_id?: string;
 
   gateway_id: string;
 
@@ -2332,13 +2338,13 @@ export interface DynamicRoutingGetVersionParams {
 }
 
 export interface DynamicRoutingListDeploymentsParams {
-  account_id: string;
+  account_id?: string;
 
   gateway_id: string;
 }
 
 export interface DynamicRoutingListVersionsParams {
-  account_id: string;
+  account_id?: string;
 
   gateway_id: string;
 }

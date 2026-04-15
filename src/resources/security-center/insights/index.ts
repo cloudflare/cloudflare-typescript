@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Class } from './class';
-export { Insights } from './insights';
-export { Severity } from './severity';
-export { Type } from './type';
+export { Class, BaseClass } from './class';
+export { Insights, BaseInsights } from './insights';
+export { Severity, BaseSeverity } from './severity';
+export { Type, BaseType } from './type';

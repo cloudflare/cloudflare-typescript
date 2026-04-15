@@ -6,7 +6,13 @@ import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class IPProfiles extends APIResource {
+export class BaseIPProfiles extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices', 'ipProfiles'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+    'ipProfiles',
+  ] as const);
+
   /**
    * Creates a WARP Device IP profile. Currently, only IPv4 Device subnets can be
    * associated.
@@ -24,7 +30,7 @@ export class IPProfiles extends APIResource {
    * ```
    */
   create(params: IPProfileCreateParams, options?: RequestOptions): APIPromise<IPProfile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/devices/ip-profiles`, {
         body,
@@ -47,7 +53,7 @@ export class IPProfiles extends APIResource {
    * ```
    */
   update(profileID: string, params: IPProfileUpdateParams, options?: RequestOptions): APIPromise<IPProfile> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.patch(path`/accounts/${account_id}/devices/ip-profiles/${profileID}`, {
         body,
@@ -69,8 +75,11 @@ export class IPProfiles extends APIResource {
    * }
    * ```
    */
-  list(params: IPProfileListParams, options?: RequestOptions): PagePromise<IPProfilesSinglePage, IPProfile> {
-    const { account_id, ...query } = params;
+  list(
+    params: IPProfileListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<IPProfilesSinglePage, IPProfile> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/devices/ip-profiles`, SinglePage<IPProfile>, {
       query,
       ...options,
@@ -91,10 +100,10 @@ export class IPProfiles extends APIResource {
    */
   delete(
     profileID: string,
-    params: IPProfileDeleteParams,
+    params: IPProfileDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<IPProfileDeleteResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.delete(
         path`/accounts/${account_id}/devices/ip-profiles/${profileID}`,
@@ -115,8 +124,12 @@ export class IPProfiles extends APIResource {
    *   );
    * ```
    */
-  get(profileID: string, params: IPProfileGetParams, options?: RequestOptions): APIPromise<IPProfile> {
-    const { account_id } = params;
+  get(
+    profileID: string,
+    params: IPProfileGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<IPProfile> {
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(
         path`/accounts/${account_id}/devices/ip-profiles/${profileID}`,
@@ -125,6 +138,7 @@ export class IPProfiles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class IPProfiles extends BaseIPProfiles {}
 
 export type IPProfilesSinglePage = SinglePage<IPProfile>;
 
@@ -190,7 +204,7 @@ export interface IPProfileCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The wirefilter expression to match registrations. Available values:
@@ -231,7 +245,7 @@ export interface IPProfileUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: An optional description of the Device IP profile.
@@ -272,7 +286,7 @@ export interface IPProfileListParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The number of IP profiles to return per page.
@@ -281,11 +295,11 @@ export interface IPProfileListParams {
 }
 
 export interface IPProfileDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface IPProfileGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace IPProfiles {

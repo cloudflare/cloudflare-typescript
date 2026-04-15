@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Attackers, type AttackerListResponse, type AttackerListParams } from './attackers';
+export { Attackers, BaseAttackers, type AttackerListResponse, type AttackerListParams } from './attackers';
 export {
   Categories,
+  BaseCategories,
   type CategoryCreateResponse,
   type CategoryListResponse,
   type CategoryDeleteResponse,
@@ -14,10 +15,11 @@ export {
   type CategoryEditParams,
   type CategoryGetParams,
 } from './categories';
-export { Countries, type CountryListResponse, type CountryListParams } from './countries';
-export { Crons } from './crons';
+export { Countries, BaseCountries, type CountryListResponse, type CountryListParams } from './countries';
+export { Crons, BaseCrons } from './crons';
 export {
   Datasets,
+  BaseDatasets,
   type DatasetCreateResponse,
   type DatasetListResponse,
   type DatasetEditResponse,
@@ -31,6 +33,7 @@ export {
 } from './datasets/index';
 export {
   EventTags,
+  BaseEventTags,
   type EventTagCreateResponse,
   type EventTagDeleteResponse,
   type EventTagCreateParams,
@@ -38,20 +41,30 @@ export {
 } from './event-tags';
 export {
   IndicatorTypes,
+  BaseIndicatorTypes,
   type IndicatorTypeListResponse,
   type IndicatorTypeListParams,
 } from './indicator-types';
-export { Insights } from './insights';
-export { Raw, type RawEditResponse, type RawGetResponse, type RawEditParams, type RawGetParams } from './raw';
-export { Relate, type RelateDeleteResponse, type RelateDeleteParams } from './relate';
-export { Tags, type TagCreateResponse, type TagCreateParams } from './tags';
+export { Insights, BaseInsights } from './insights';
+export {
+  Raw,
+  BaseRaw,
+  type RawEditResponse,
+  type RawGetResponse,
+  type RawEditParams,
+  type RawGetParams,
+} from './raw';
+export { Relate, BaseRelate, type RelateDeleteResponse, type RelateDeleteParams } from './relate';
+export { Tags, BaseTags, type TagCreateResponse, type TagCreateParams } from './tags';
 export {
   TargetIndustries,
+  BaseTargetIndustries,
   type TargetIndustryListResponse,
   type TargetIndustryListParams,
 } from './target-industries';
 export {
   ThreatEvents,
+  BaseThreatEvents,
   type ThreatEventCreateResponse,
   type ThreatEventListResponse,
   type ThreatEventBulkCreateResponse,

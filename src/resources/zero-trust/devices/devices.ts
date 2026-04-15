@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import * as DevicesDevicesAPI from './devices_';
 import {
+  BaseDevices as DevicesAPIBaseDevices,
   DeviceDeleteParams,
   DeviceDeleteResponse,
   DeviceListResponse,
@@ -13,6 +14,7 @@ import {
 } from './devices_';
 import * as DEXTestsAPI from './dex-tests';
 import {
+  BaseDEXTests,
   DEXTestCreateParams,
   DEXTestCreateResponse,
   DEXTestDeleteParams,
@@ -29,9 +31,10 @@ import {
   SchemaHTTP,
 } from './dex-tests';
 import * as FleetStatusAPI from './fleet-status';
-import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
+import { BaseFleetStatus, FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
 import * as IPProfilesAPI from './ip-profiles';
 import {
+  BaseIPProfiles,
   IPProfile,
   IPProfileCreateParams,
   IPProfileDeleteParams,
@@ -44,6 +47,7 @@ import {
 } from './ip-profiles';
 import * as NetworksAPI from './networks';
 import {
+  BaseNetworks,
   DeviceNetwork,
   DeviceNetworksSinglePage,
   NetworkCreateParams,
@@ -55,6 +59,7 @@ import {
 } from './networks';
 import * as OverrideCodesAPI from './override-codes';
 import {
+  BaseOverrideCodes,
   OverrideCodeGetParams,
   OverrideCodeGetResponse,
   OverrideCodeListParams,
@@ -64,6 +69,7 @@ import {
 } from './override-codes';
 import * as RegistrationsAPI from './registrations';
 import {
+  BaseRegistrations,
   RegistrationBulkDeleteParams,
   RegistrationBulkDeleteResponse,
   RegistrationDeleteParams,
@@ -80,9 +86,10 @@ import {
   Registrations,
 } from './registrations';
 import * as RevokeAPI from './revoke';
-import { Revoke, RevokeCreateParams, RevokeCreateResponse } from './revoke';
+import { BaseRevoke, Revoke, RevokeCreateParams, RevokeCreateResponse } from './revoke';
 import * as SettingsAPI from './settings';
 import {
+  BaseSettings,
   DeviceSettings,
   SettingDeleteParams,
   SettingEditParams,
@@ -91,9 +98,10 @@ import {
   Settings,
 } from './settings';
 import * as UnrevokeAPI from './unrevoke';
-import { Unrevoke, UnrevokeCreateParams, UnrevokeCreateResponse } from './unrevoke';
+import { BaseUnrevoke, Unrevoke, UnrevokeCreateParams, UnrevokeCreateResponse } from './unrevoke';
 import * as PoliciesAPI from './policies/policies';
 import {
+  BasePolicies,
   DevicePolicyCertificates,
   FallbackDomain,
   FallbackDomainPolicy,
@@ -104,6 +112,7 @@ import {
 } from './policies/policies';
 import * as PostureAPI from './posture/posture';
 import {
+  BasePosture,
   CarbonblackInput,
   ClientCertificateInput,
   CrowdstrikeInput,
@@ -132,26 +141,17 @@ import {
   WorkspaceOneInput,
 } from './posture/posture';
 import * as ResilienceAPI from './resilience/resilience';
-import { Resilience } from './resilience/resilience';
+import { BaseResilience, Resilience } from './resilience/resilience';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Devices extends APIResource {
-  devices: DevicesDevicesAPI.Devices = new DevicesDevicesAPI.Devices(this._client);
-  resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
-  registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
-  dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
-  ipProfiles: IPProfilesAPI.IPProfiles = new IPProfilesAPI.IPProfiles(this._client);
-  networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
-  fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
-  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
-  posture: PostureAPI.Posture = new PostureAPI.Posture(this._client);
-  revoke: RevokeAPI.Revoke = new RevokeAPI.Revoke(this._client);
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  unrevoke: UnrevokeAPI.Unrevoke = new UnrevokeAPI.Unrevoke(this._client);
-  overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
+export class BaseDevices extends APIResource {
+  static override readonly _key: readonly ['zeroTrust', 'devices'] = Object.freeze([
+    'zeroTrust',
+    'devices',
+  ] as const);
 
   /**
    * List WARP devices. Not supported when
@@ -165,8 +165,11 @@ export class Devices extends APIResource {
    *
    * @deprecated
    */
-  list(params: DeviceListParams, options?: RequestOptions): PagePromise<DevicesSinglePage, Device> {
-    const { account_id } = params;
+  list(
+    params: DeviceListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<DevicesSinglePage, Device> {
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.getAPIList(path`/accounts/${account_id}/devices`, SinglePage<Device>, options);
   }
 
@@ -184,16 +187,31 @@ export class Devices extends APIResource {
    */
   get(
     deviceID: string,
-    params: DeviceGetParams,
+    params: DeviceGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<DeviceGetResponse | null> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/devices/${deviceID}`, options) as APIPromise<{
         result: DeviceGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+export class Devices extends BaseDevices {
+  devices: DevicesDevicesAPI.Devices = new DevicesDevicesAPI.Devices(this._client);
+  resilience: ResilienceAPI.Resilience = new ResilienceAPI.Resilience(this._client);
+  registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
+  dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
+  ipProfiles: IPProfilesAPI.IPProfiles = new IPProfilesAPI.IPProfiles(this._client);
+  networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
+  fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
+  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  posture: PostureAPI.Posture = new PostureAPI.Posture(this._client);
+  revoke: RevokeAPI.Revoke = new RevokeAPI.Revoke(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  unrevoke: UnrevokeAPI.Unrevoke = new UnrevokeAPI.Unrevoke(this._client);
+  overrideCodes: OverrideCodesAPI.OverrideCodes = new OverrideCodesAPI.OverrideCodes(this._client);
 }
 
 export type DevicesSinglePage = SinglePage<Device>;
@@ -442,26 +460,39 @@ export namespace DeviceGetResponse {
 }
 
 export interface DeviceListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DeviceGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Devices.Devices = DevicesAPIDevices;
+Devices.BaseDevices = DevicesAPIBaseDevices;
 Devices.Resilience = Resilience;
+Devices.BaseResilience = BaseResilience;
 Devices.Registrations = Registrations;
+Devices.BaseRegistrations = BaseRegistrations;
 Devices.DEXTests = DEXTests;
+Devices.BaseDEXTests = BaseDEXTests;
 Devices.IPProfiles = IPProfiles;
+Devices.BaseIPProfiles = BaseIPProfiles;
 Devices.Networks = Networks;
+Devices.BaseNetworks = BaseNetworks;
 Devices.FleetStatus = FleetStatus;
+Devices.BaseFleetStatus = BaseFleetStatus;
 Devices.Policies = Policies;
+Devices.BasePolicies = BasePolicies;
 Devices.Posture = Posture;
+Devices.BasePosture = BasePosture;
 Devices.Revoke = Revoke;
+Devices.BaseRevoke = BaseRevoke;
 Devices.Settings = Settings;
+Devices.BaseSettings = BaseSettings;
 Devices.Unrevoke = Unrevoke;
+Devices.BaseUnrevoke = BaseUnrevoke;
 Devices.OverrideCodes = OverrideCodes;
+Devices.BaseOverrideCodes = BaseOverrideCodes;
 
 export declare namespace Devices {
   export {
@@ -474,6 +505,7 @@ export declare namespace Devices {
 
   export {
     DevicesAPIDevices as Devices,
+    DevicesAPIBaseDevices as BaseDevices,
     type DeviceListResponse as DeviceListResponse,
     type DeviceDeleteResponse as DeviceDeleteResponse,
     type DeviceRevokeResponse as DeviceRevokeResponse,
@@ -482,10 +514,11 @@ export declare namespace Devices {
     type DeviceRevokeParams as DeviceRevokeParams,
   };
 
-  export { Resilience as Resilience };
+  export { Resilience as Resilience, BaseResilience as BaseResilience };
 
   export {
     Registrations as Registrations,
+    BaseRegistrations as BaseRegistrations,
     type RegistrationListResponse as RegistrationListResponse,
     type RegistrationDeleteResponse as RegistrationDeleteResponse,
     type RegistrationBulkDeleteResponse as RegistrationBulkDeleteResponse,
@@ -503,6 +536,7 @@ export declare namespace Devices {
 
   export {
     DEXTests as DEXTests,
+    BaseDEXTests as BaseDEXTests,
     type SchemaData as SchemaData,
     type SchemaHTTP as SchemaHTTP,
     type DEXTestCreateResponse as DEXTestCreateResponse,
@@ -520,6 +554,7 @@ export declare namespace Devices {
 
   export {
     IPProfiles as IPProfiles,
+    BaseIPProfiles as BaseIPProfiles,
     type IPProfile as IPProfile,
     type IPProfileDeleteResponse as IPProfileDeleteResponse,
     type IPProfilesSinglePage as IPProfilesSinglePage,
@@ -532,6 +567,7 @@ export declare namespace Devices {
 
   export {
     Networks as Networks,
+    BaseNetworks as BaseNetworks,
     type DeviceNetwork as DeviceNetwork,
     type DeviceNetworksSinglePage as DeviceNetworksSinglePage,
     type NetworkCreateParams as NetworkCreateParams,
@@ -543,12 +579,14 @@ export declare namespace Devices {
 
   export {
     FleetStatus as FleetStatus,
+    BaseFleetStatus as BaseFleetStatus,
     type FleetStatusGetResponse as FleetStatusGetResponse,
     type FleetStatusGetParams as FleetStatusGetParams,
   };
 
   export {
     Policies as Policies,
+    BasePolicies as BasePolicies,
     type DevicePolicyCertificates as DevicePolicyCertificates,
     type FallbackDomain as FallbackDomain,
     type FallbackDomainPolicy as FallbackDomainPolicy,
@@ -559,6 +597,7 @@ export declare namespace Devices {
 
   export {
     Posture as Posture,
+    BasePosture as BasePosture,
     type CarbonblackInput as CarbonblackInput,
     type ClientCertificateInput as ClientCertificateInput,
     type CrowdstrikeInput as CrowdstrikeInput,
@@ -588,12 +627,14 @@ export declare namespace Devices {
 
   export {
     Revoke as Revoke,
+    BaseRevoke as BaseRevoke,
     type RevokeCreateResponse as RevokeCreateResponse,
     type RevokeCreateParams as RevokeCreateParams,
   };
 
   export {
     Settings as Settings,
+    BaseSettings as BaseSettings,
     type DeviceSettings as DeviceSettings,
     type SettingUpdateParams as SettingUpdateParams,
     type SettingDeleteParams as SettingDeleteParams,
@@ -603,12 +644,14 @@ export declare namespace Devices {
 
   export {
     Unrevoke as Unrevoke,
+    BaseUnrevoke as BaseUnrevoke,
     type UnrevokeCreateResponse as UnrevokeCreateResponse,
     type UnrevokeCreateParams as UnrevokeCreateParams,
   };
 
   export {
     OverrideCodes as OverrideCodes,
+    BaseOverrideCodes as BaseOverrideCodes,
     type OverrideCodeListResponse as OverrideCodeListResponse,
     type OverrideCodeGetResponse as OverrideCodeGetResponse,
     type OverrideCodeListResponsesSinglePage as OverrideCodeListResponsesSinglePage,

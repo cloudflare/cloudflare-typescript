@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { Stream } from 'cloudflare/resources/stream/stream';
+import { BaseLiveInputs } from 'cloudflare/resources/stream/live-inputs/live-inputs';
+
 import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
@@ -8,7 +12,21 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource liveInputs', () => {
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseLiveInputs],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Stream],
+});
+
+const runTests = (client: PartialCloudflare<{ stream: { liveInputs: BaseLiveInputs } }>) => {
   test('create: only required params', async () => {
     const responsePromise = client.stream.liveInputs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -126,4 +144,7 @@ describe('resource liveInputs', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
-});
+};
+describe('resource liveInputs', () => runTests(client));
+describe('resource liveInputs (tree shakable, base)', () => runTests(partialClient));
+describe('resource liveInputs (tree shakable, subresource)', () => runTests(parentPartialClient));

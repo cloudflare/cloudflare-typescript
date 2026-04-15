@@ -7,15 +7,20 @@ import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-export class Resources extends APIResource {
+export class BaseResources extends APIResource {
+  static override readonly _key: readonly ['magicCloudNetworking', 'resources'] = Object.freeze([
+    'magicCloudNetworking',
+    'resources',
+  ] as const);
+
   /**
    * List resources in the Resource Catalog (Closed Beta).
    */
   list(
-    params: ResourceListParams,
+    params: ResourceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ResourceListResponsesV4PagePaginationArray, ResourceListResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.getAPIList(
       path`/accounts/${account_id}/magic/cloud/resources`,
       V4PagePaginationArray<ResourceListResponse>,
@@ -26,8 +31,11 @@ export class Resources extends APIResource {
   /**
    * Export resources in the Resource Catalog as a JSON file (Closed Beta).
    */
-  export(params: ResourceExportParams, options?: RequestOptions): APIPromise<Response> {
-    const { account_id, ...query } = params;
+  export(
+    params: ResourceExportParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Response> {
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/magic/cloud/resources/export`, {
       query,
       ...options,
@@ -41,10 +49,10 @@ export class Resources extends APIResource {
    */
   get(
     resourceID: string,
-    params: ResourceGetParams,
+    params: ResourceGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<ResourceGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id = this._client.accountID, ...query } = params ?? {};
     return (
       this._client.get(path`/accounts/${account_id}/magic/cloud/resources/${resourceID}`, {
         query,
@@ -60,7 +68,7 @@ export class Resources extends APIResource {
     params: ResourcePolicyPreviewParams,
     options?: RequestOptions,
   ): APIPromise<ResourcePolicyPreviewResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountID, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/magic/cloud/resources/policy-preview`, {
         body,
@@ -69,6 +77,7 @@ export class Resources extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+export class Resources extends BaseResources {}
 
 export type ResourceListResponsesV4PagePaginationArray = V4PagePaginationArray<ResourceListResponse>;
 
@@ -1232,7 +1241,7 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1352,7 +1361,7 @@ export interface ResourceExportParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1462,7 +1471,7 @@ export interface ResourceGetParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param
@@ -1474,7 +1483,7 @@ export interface ResourcePolicyPreviewParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param

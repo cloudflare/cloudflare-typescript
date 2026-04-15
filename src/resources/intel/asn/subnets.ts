@@ -6,7 +6,13 @@ import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
-export class Subnets extends APIResource {
+export class BaseSubnets extends APIResource {
+  static override readonly _key: readonly ['intel', 'asn', 'subnets'] = Object.freeze([
+    'intel',
+    'asn',
+    'subnets',
+  ] as const);
+
   /**
    * Get ASN Subnets.
    *
@@ -19,13 +25,14 @@ export class Subnets extends APIResource {
    */
   get(
     asn: Shared.ASNParam,
-    params: SubnetGetParams,
+    params: SubnetGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<SubnetGetResponse> {
-    const { account_id } = params;
+    const { account_id = this._client.accountID } = params ?? {};
     return this._client.get(path`/accounts/${account_id}/intel/asn/${asn}/subnets`, options);
   }
 }
+export class Subnets extends BaseSubnets {}
 
 export interface SubnetGetResponse {
   asn?: Shared.ASN;
@@ -54,7 +61,7 @@ export interface SubnetGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subnets {
