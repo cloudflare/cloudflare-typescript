@@ -5,7 +5,8 @@ import * as Core from '../../core';
 
 export class Settings extends APIResource {
   /**
-   * Update zone-level Waiting Room settings
+   * Fully updates zone-level Waiting Room settings, replacing the existing
+   * configuration.
    *
    * @example
    * ```ts
@@ -24,7 +25,7 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Patch zone-level Waiting Room settings
+   * Partially updates zone-level Waiting Room settings using PATCH semantics.
    *
    * @example
    * ```ts
@@ -44,7 +45,8 @@ export class Settings extends APIResource {
   }
 
   /**
-   * Get zone-level Waiting Room settings
+   * Gets the zone-level Waiting Room settings that apply as defaults to all waiting
+   * rooms on the zone.
    *
    * @example
    * ```ts
