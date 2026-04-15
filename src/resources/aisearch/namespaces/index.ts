@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AISearch } from './aisearch';
 export {
   InstanceListResponsesV4PagePaginationArray,
   Instances,
@@ -38,18 +37,4 @@ export {
   type NamespaceChatCompletionsParams,
   type NamespaceReadParams,
   type NamespaceSearchParams,
-} from './namespaces/index';
-export {
-  TokenListResponsesV4PagePaginationArray,
-  Tokens,
-  type TokenCreateResponse,
-  type TokenUpdateResponse,
-  type TokenListResponse,
-  type TokenDeleteResponse,
-  type TokenReadResponse,
-  type TokenCreateParams,
-  type TokenUpdateParams,
-  type TokenListParams,
-  type TokenDeleteParams,
-  type TokenReadParams,
-} from './tokens';
+} from './namespaces';
