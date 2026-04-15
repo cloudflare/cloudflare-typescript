@@ -2024,6 +2024,10 @@ client.example.list(undefined, { headers: { ... } });
 - `client.zeroTrust.dlp.datasets.upload.create()`
 - `client.zeroTrust.dlp.payloadLogs.update()`
 - `client.zeroTrust.dlp.payloadLogs.get()`
+- `client.zeroTrust.dlp.settings.update()`
+- `client.zeroTrust.dlp.settings.delete()`
+- `client.zeroTrust.dlp.settings.edit()`
+- `client.zeroTrust.dlp.settings.get()`
 - `client.zeroTrust.dlp.email.accountMapping.get()`
 - `client.zeroTrust.dlp.email.rules.list()`
 - `client.zeroTrust.dlp.email.rules.delete()`

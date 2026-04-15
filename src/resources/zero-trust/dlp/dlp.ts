@@ -14,6 +14,16 @@ import {
   PayloadLogUpdateResponse,
   PayloadLogs,
 } from './payload-logs';
+import * as SettingsAPI from './settings';
+import {
+  BaseSettings,
+  DLPSettings,
+  SettingDeleteParams,
+  SettingEditParams,
+  SettingGetParams,
+  SettingUpdateParams,
+  Settings,
+} from './settings';
 import * as DatasetsAPI from './datasets/datasets';
 import {
   BaseDatasets,
@@ -65,6 +75,7 @@ export class DLP extends BaseDLP {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   patterns: PatternsAPI.Patterns = new PatternsAPI.Patterns(this._client);
   payloadLogs: PayloadLogsAPI.PayloadLogs = new PayloadLogsAPI.PayloadLogs(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   email: EmailAPI.Email = new EmailAPI.Email(this._client);
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
@@ -77,6 +88,8 @@ DLP.Patterns = Patterns;
 DLP.BasePatterns = BasePatterns;
 DLP.PayloadLogs = PayloadLogs;
 DLP.BasePayloadLogs = BasePayloadLogs;
+DLP.Settings = Settings;
+DLP.BaseSettings = BaseSettings;
 DLP.Email = Email;
 DLP.BaseEmail = BaseEmail;
 DLP.Profiles = Profiles;
@@ -115,6 +128,16 @@ export declare namespace DLP {
     type PayloadLogGetResponse as PayloadLogGetResponse,
     type PayloadLogUpdateParams as PayloadLogUpdateParams,
     type PayloadLogGetParams as PayloadLogGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    BaseSettings as BaseSettings,
+    type DLPSettings as DLPSettings,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingDeleteParams as SettingDeleteParams,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
   };
 
   export { Email as Email, BaseEmail as BaseEmail };
