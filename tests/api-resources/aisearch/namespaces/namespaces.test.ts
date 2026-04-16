@@ -13,7 +13,7 @@ describe('resource namespaces', () => {
   test('create: only required params', async () => {
     const responsePromise = client.aiSearch.namespaces.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'production',
+      name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource namespaces', () => {
   test('create: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      name: 'production',
+      name: 'name',
       description: 'Production environment',
     });
   });
@@ -68,10 +68,9 @@ describe('resource namespaces', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      order_by: 'created_at',
-      order_by_direction: 'asc',
       page: 1,
-      per_page: 1,
+      per_page: 20,
+      search: 'prod',
     });
   });
 
