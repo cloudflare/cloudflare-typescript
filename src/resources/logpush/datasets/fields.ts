@@ -50,8 +50,7 @@ export class Fields extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params?: FieldGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldGetResponse>;
@@ -87,8 +86,7 @@ export class Fields extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldGetResponse>;
   get(
@@ -123,8 +121,7 @@ export class Fields extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params: FieldGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldGetResponse> {

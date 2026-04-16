@@ -6,6 +6,7 @@ import {
   APIConnectionTimeoutError,
   APIUserAbortError,
 } from './error';
+import { stringifyQuery } from './internal/utils/query';
 import {
   kind as shimsKind,
   type Readable,
@@ -70,6 +71,12 @@ async function defaultParseResponse<T>(props: APIResponseProps): Promise<T> {
   const mediaType = contentType?.split(';')[0]?.trim();
   const isJSON = mediaType?.includes('application/json') || mediaType?.endsWith('+json');
   if (isJSON) {
+    const contentLength = response.headers.get('content-length');
+    if (contentLength === '0') {
+      // if there is no content we can't do anything
+      return undefined as T;
+    }
+
     const json = await response.json();
 
     debug('response', response.status, response.url, response.headers, json);
@@ -517,32 +524,20 @@ export abstract class APIClient {
       : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
-    if (!isEmptyObj(defaultQuery)) {
-      query = { ...defaultQuery, ...query } as Req;
+    const pathQuery = Object.fromEntries(url.searchParams);
+    if (!isEmptyObj(defaultQuery) || !isEmptyObj(pathQuery)) {
+      query = { ...pathQuery, ...defaultQuery, ...query } as Req;
     }
 
     if (typeof query === 'object' && query && !Array.isArray(query)) {
-      url.search = this.stringifyQuery(query as Record<string, unknown>);
+      url.search = this.stringifyQuery(query);
     }
 
     return url.toString();
   }
 
-  protected stringifyQuery(query: Record<string, unknown>): string {
-    return Object.entries(query)
-      .filter(([_, value]) => typeof value !== 'undefined')
-      .map(([key, value]) => {
-        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-        }
-        if (value === null) {
-          return `${encodeURIComponent(key)}=`;
-        }
-        throw new CloudflareError(
-          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
-        );
-      })
-      .join('&');
+  protected stringifyQuery(query: object | Record<string, unknown>): string {
+    return stringifyQuery(query);
   }
 
   async fetchWithTimeout(
@@ -624,9 +619,9 @@ export abstract class APIClient {
       }
     }
 
-    // If the API asks us to wait a certain amount of time (and it's a reasonable amount),
-    // just do what it says, but otherwise calculate a default
-    if (!(timeoutMillis && 0 <= timeoutMillis && timeoutMillis < 60 * 1000)) {
+    // If the API asks us to wait a certain amount of time, do what it says.
+    // Otherwise calculate a default.
+    if (timeoutMillis === undefined) {
       const maxRetries = options.maxRetries ?? this.maxRetries;
       timeoutMillis = this.calculateDefaultRetryTimeoutMillis(retriesRemaining, maxRetries);
     }
@@ -1058,10 +1053,10 @@ export const ensurePresent = <T>(value: T | null | undefined): T => {
  */
 export const readEnv = (env: string): string | undefined => {
   if (typeof process !== 'undefined') {
-    return process.env?.[env]?.trim() ?? undefined;
+    return process.env?.[env]?.trim() || undefined;
   }
   if (typeof Deno !== 'undefined') {
-    return Deno.env?.get?.(env)?.trim();
+    return Deno.env?.get?.(env)?.trim() || undefined;
   }
   return undefined;
 };

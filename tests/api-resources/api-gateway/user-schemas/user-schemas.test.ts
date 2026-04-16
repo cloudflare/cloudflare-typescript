@@ -13,7 +13,7 @@ describe('resource userSchemas', () => {
   test('create: only required params', async () => {
     const responsePromise = client.apiGateway.userSchemas.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       kind: 'openapi_v3',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource userSchemas', () => {
   test('create: required and optional params', async () => {
     const response = await client.apiGateway.userSchemas.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       kind: 'openapi_v3',
       name: 'petstore schema',
       validation_enabled: 'true',

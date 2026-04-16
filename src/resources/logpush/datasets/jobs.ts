@@ -54,8 +54,7 @@ export class Jobs extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params?: JobGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
@@ -91,8 +90,7 @@ export class Jobs extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
   get(
@@ -127,8 +125,7 @@ export class Jobs extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null> {

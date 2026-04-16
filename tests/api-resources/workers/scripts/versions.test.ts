@@ -49,7 +49,7 @@ describe('resource versions', () => {
         usage_model: 'standard',
       },
       bindings_inherit: 'strict',
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      files: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
   });
 

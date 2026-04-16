@@ -31,7 +31,7 @@ describe('resource toMarkdown', () => {
   test.skip('transform: only required params', async () => {
     const responsePromise = client.ai.toMarkdown.transform({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: { files: [await toFile(Buffer.from('# my file contents'), 'README.md')] },
+      file: { files: [await toFile(Buffer.from('Example data'), 'README.md')] },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,7 +46,7 @@ describe('resource toMarkdown', () => {
   test.skip('transform: required and optional params', async () => {
     const response = await client.ai.toMarkdown.transform({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: { files: [await toFile(Buffer.from('# my file contents'), 'README.md')] },
+      file: { files: [await toFile(Buffer.from('Example data'), 'README.md')] },
     });
   });
 });

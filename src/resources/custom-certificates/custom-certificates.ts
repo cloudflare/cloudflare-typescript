@@ -3,10 +3,10 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
 import { Prioritize, PrioritizeUpdateParams } from './prioritize';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
+import * as KeylessCertificatesAPI from '../keyless-certificates/keyless-certificates';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomCertificates extends APIResource {

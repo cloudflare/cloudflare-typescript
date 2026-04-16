@@ -43,7 +43,7 @@ describe('resource scripts', () => {
               _redirects: '/foo /bar 301\n/news/* /blog/:splat',
               html_handling: 'auto-trailing-slash',
               not_found_handling: '404-page',
-              run_worker_first: ['string'],
+              run_worker_first: true,
               serve_directly: true,
             },
             jwt: 'jwt',
@@ -107,7 +107,7 @@ describe('resource scripts', () => {
           usage_model: 'standard',
         },
         bindings_inherit: 'strict',
-        files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+        files: [await toFile(Buffer.from('Example data'), 'README.md')],
       },
     );
   });

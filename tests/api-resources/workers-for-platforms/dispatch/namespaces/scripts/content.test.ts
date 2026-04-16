@@ -37,14 +37,15 @@ describe('resource content', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         metadata: { body_part: 'worker.js', main_module: 'worker.js' },
-        files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+        files: [await toFile(Buffer.from('Example data'), 'README.md')],
         'CF-WORKER-BODY-PART': 'CF-WORKER-BODY-PART',
         'CF-WORKER-MAIN-MODULE-PART': 'CF-WORKER-MAIN-MODULE-PART',
       },
     );
   });
 
-  test('get: required and optional params', async () => {
+  // Mock server doesn't support string responses
+  test.skip('get: required and optional params', async () => {
     const response = await client.workersForPlatforms.dispatch.namespaces.scripts.content.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
