@@ -85,7 +85,7 @@ describe('resource deployments', () => {
     const response = await client.pages.projects.deployments.delete(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', force: true },
     );
   });
 
