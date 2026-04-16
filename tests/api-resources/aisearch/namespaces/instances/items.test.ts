@@ -121,7 +121,8 @@ describe('resource items', () => {
     );
   });
 
-  test('download: required and optional params', async () => {
+  // Mock server doesn't support application/octet-stream responses
+  test.skip('download: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.download(
       'my-namespace',
       'my-ai-search',
@@ -215,7 +216,7 @@ describe('resource items', () => {
       'my-ai-search',
       {
         account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-        file: { file: await toFile(Buffer.from('# my file contents'), 'README.md') },
+        file: { file: await toFile(Buffer.from('Example data'), 'README.md') },
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -231,7 +232,7 @@ describe('resource items', () => {
     const response = await client.aiSearch.namespaces.instances.items.upload('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       file: {
-        file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+        file: await toFile(Buffer.from('Example data'), 'README.md'),
         metadata: 'metadata',
         wait_for_completion: true,
       },

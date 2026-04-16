@@ -17,13 +17,7 @@ export class Policies extends APIResource {
    *   await client.zeroTrust.access.policies.create({
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     decision: 'allow',
-   *     include: [
-   *       {
-   *         group: {
-   *           id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
-   *         },
-   *       },
-   *     ],
+   *     include: [{ certificate: {} }],
    *     name: 'Allow devs',
    *   });
    * ```
@@ -48,13 +42,7 @@ export class Policies extends APIResource {
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       decision: 'allow',
-   *       include: [
-   *         {
-   *           group: {
-   *             id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
-   *           },
-   *         },
-   *       ],
+   *       include: [{ certificate: {} }],
    *       name: 'Allow devs',
    *     },
    *   );

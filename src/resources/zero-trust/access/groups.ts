@@ -14,11 +14,7 @@ export class Groups extends APIResource {
    * @example
    * ```ts
    * const group = await client.zeroTrust.access.groups.create({
-   *   include: [
-   *     {
-   *       group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' },
-   *     },
-   *   ],
+   *   include: [{ certificate: {} }],
    *   name: 'Allow devs',
    *   account_id: 'account_id',
    * });
@@ -62,13 +58,7 @@ export class Groups extends APIResource {
    * const group = await client.zeroTrust.access.groups.update(
    *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *   {
-   *     include: [
-   *       {
-   *         group: {
-   *           id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
-   *         },
-   *       },
-   *     ],
+   *     include: [{ certificate: {} }],
    *     name: 'Allow devs',
    *     account_id: 'account_id',
    *   },

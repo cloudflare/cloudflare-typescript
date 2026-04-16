@@ -3,8 +3,8 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as FiltersAPI from '../filters';
-import * as RateLimitsAPI from '../rate-limits';
+import * as FiltersAPI from '../filters/filters';
+import * as RateLimitsAPI from '../rate-limits/rate-limits';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 /**

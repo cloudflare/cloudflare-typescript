@@ -5,7 +5,7 @@ import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BytimesAPI from './bytimes';
 import { BytimeGetParams, Bytimes } from './bytimes';
-import * as ReportsReportsAPI from '../../../dns/analytics/reports/reports';
+import * as AnalyticsReportsAPI from '../../../dns/analytics/reports/reports';
 
 export class Reports extends APIResource {
   bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
@@ -30,13 +30,13 @@ export class Reports extends APIResource {
     dnsFirewallId: string,
     params?: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsReportsAPI.Report>;
-  get(dnsFirewallId: string, options?: Core.RequestOptions): Core.APIPromise<ReportsReportsAPI.Report>;
+  ): Core.APIPromise<AnalyticsReportsAPI.Report>;
+  get(dnsFirewallId: string, options?: Core.RequestOptions): Core.APIPromise<AnalyticsReportsAPI.Report>;
   get(
     dnsFirewallId: string,
     params: ReportGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsReportsAPI.Report> {
+  ): Core.APIPromise<AnalyticsReportsAPI.Report> {
     if (isRequestOptions(params)) {
       return this.get(dnsFirewallId, {}, params);
     }
@@ -45,7 +45,7 @@ export class Reports extends APIResource {
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportsReportsAPI.Report }>
+      }) as Core.APIPromise<{ result: AnalyticsReportsAPI.Report }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

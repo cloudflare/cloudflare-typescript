@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Phases } from './phases/index';
+export {
+  Phases,
+  type PhaseUpdateResponse,
+  type PhaseGetResponse,
+  type PhaseUpdateParams,
+  type PhaseGetParams,
+} from './phases/index';
 export {
   Rules,
   type BlockRule,
@@ -21,6 +27,20 @@ export {
   type SetCacheSettingsRule,
   type SetConfigRule,
   type SkipRule,
+  type RuleCreateResponse,
+  type RuleDeleteResponse,
+  type RuleEditResponse,
+  type RuleCreateParams,
+  type RuleDeleteParams,
+  type RuleEditParams,
 } from './rules';
 export { Rulesets } from './rulesets';
-export { Versions } from './versions';
+export {
+  VersionListResponsesSinglePage,
+  Versions,
+  type VersionListResponse,
+  type VersionGetResponse,
+  type VersionListParams,
+  type VersionDeleteParams,
+  type VersionGetParams,
+} from './versions';
