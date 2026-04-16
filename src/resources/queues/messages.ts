@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 
 export class Messages extends APIResource {
   /**
@@ -66,10 +65,12 @@ export class Messages extends APIResource {
       return this.bulkPush(queueId, {}, params);
     }
     const { account_id = this._client.accountId, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/batch`, {
-      body,
-      ...options,
-    });
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/batch`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessageBulkPushResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -132,7 +133,12 @@ export class Messages extends APIResource {
       return this.push(queueId, {}, params);
     }
     const { account_id = this._client.accountId, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, { body, ...options });
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessagePushResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -154,23 +160,52 @@ export interface MessageAckResponse {
 }
 
 export interface MessageBulkPushResponse {
-  errors?: Array<Shared.ResponseInfo>;
+  metadata?: MessageBulkPushResponse.Metadata;
+}
 
-  messages?: Array<string>;
+export namespace MessageBulkPushResponse {
+  export interface Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    metrics?: Metadata.Metrics;
+  }
 
-  /**
-   * Indicates if the API call was successful or not.
-   */
-  success?: true;
+  export namespace Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    export interface Metrics {
+      /**
+       * The size in bytes of unacknowledged messages in the queue.
+       */
+      backlog_bytes: number;
+
+      /**
+       * The number of unacknowledged messages in the queue.
+       */
+      backlog_count: number;
+
+      /**
+       * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+       * queue. Returns 0 if unknown.
+       */
+      oldest_message_timestamp_ms: number;
+    }
+  }
 }
 
 export interface MessagePullResponse {
   /**
-   * The number of unacknowledged messages in the queue
+   * The number of unacknowledged messages in the queue.
    */
   message_backlog_count?: number;
 
   messages?: Array<MessagePullResponse.Message>;
+
+  metadata?: MessagePullResponse.Metadata;
 }
 
 export namespace MessagePullResponse {
@@ -191,17 +226,76 @@ export namespace MessagePullResponse {
 
     timestamp_ms?: number;
   }
+
+  export interface Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    metrics?: Metadata.Metrics;
+  }
+
+  export namespace Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    export interface Metrics {
+      /**
+       * The size in bytes of unacknowledged messages in the queue.
+       */
+      backlog_bytes: number;
+
+      /**
+       * The number of unacknowledged messages in the queue.
+       */
+      backlog_count: number;
+
+      /**
+       * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+       * queue. Returns 0 if unknown.
+       */
+      oldest_message_timestamp_ms: number;
+    }
+  }
 }
 
 export interface MessagePushResponse {
-  errors?: Array<Shared.ResponseInfo>;
+  metadata?: MessagePushResponse.Metadata;
+}
 
-  messages?: Array<string>;
+export namespace MessagePushResponse {
+  export interface Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    metrics?: Metadata.Metrics;
+  }
 
-  /**
-   * Indicates if the API call was successful or not.
-   */
-  success?: true;
+  export namespace Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    export interface Metrics {
+      /**
+       * The size in bytes of unacknowledged messages in the queue.
+       */
+      backlog_bytes: number;
+
+      /**
+       * The number of unacknowledged messages in the queue.
+       */
+      backlog_count: number;
+
+      /**
+       * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+       * queue. Returns 0 if unknown.
+       */
+      oldest_message_timestamp_ms: number;
+    }
+  }
 }
 
 export interface MessageAckParams {
