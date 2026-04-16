@@ -1069,6 +1069,8 @@ export namespace ScanGetResponse {
           }
 
           export interface Commerce {
+            acp: Commerce.Acp;
+
             ap2: Commerce.Ap2;
 
             ucp: Commerce.Ucp;
@@ -1077,6 +1079,62 @@ export namespace ScanGetResponse {
           }
 
           export namespace Commerce {
+            export interface Acp {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<Acp.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace Acp {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
             export interface Ap2 {
               status: string;
 

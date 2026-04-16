@@ -39,13 +39,13 @@ export class BaseNamespaces extends APIResource {
   ] as const);
 
   /**
-   * Create a new namespaces.
+   * Create a new namespace.
    *
    * @example
    * ```ts
    * const namespace = await client.aiSearch.namespaces.create({
    *   account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *   name: 'production',
+   *   name: 'name',
    * });
    * ```
    */
@@ -253,16 +253,7 @@ export interface NamespaceListResponse {
   description?: string | null;
 }
 
-export interface NamespaceDeleteResponse {
-  created_at: string;
-
-  name: string;
-
-  /**
-   * Optional description for the namespace. Max 256 characters.
-   */
-  description?: string | null;
-}
+export type NamespaceDeleteResponse = unknown;
 
 export interface NamespaceChatCompletionsResponse {
   choices: Array<NamespaceChatCompletionsResponse.Choice>;
@@ -447,14 +438,10 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
   account_id?: string;
 
   /**
-   * Query param: Order By Column Name
+   * Query param: Filter namespaces whose name or description contains this string
+   * (case-insensitive).
    */
-  order_by?: 'created_at';
-
-  /**
-   * Query param: Order By Direction
-   */
-  order_by_direction?: 'asc' | 'desc';
+  search?: string;
 }
 
 export interface NamespaceDeleteParams {
