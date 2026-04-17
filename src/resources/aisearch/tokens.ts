@@ -7,15 +7,15 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Tokens extends APIResource {
   /**
-   * Create a new tokens.
+   * Create a new token.
    *
    * @example
    * ```ts
    * const token = await client.aiSearch.tokens.create({
    *   account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *   cf_api_id: 'cf_api_id',
-   *   cf_api_key: 'cf_api_key',
-   *   name: 'name',
+   *   cf_api_id: 'a1b2c3d4e5f6',
+   *   cf_api_key: 'abc123',
+   *   name: 'my-token',
    * });
    * ```
    */
@@ -29,17 +29,17 @@ export class Tokens extends APIResource {
   }
 
   /**
-   * Update tokens.
+   * Update token.
    *
    * @example
    * ```ts
    * const token = await client.aiSearch.tokens.update(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   '62af0db3-c410-40b2-9ee3-0e93f6dd1de0',
    *   {
    *     account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *     cf_api_id: 'cf_api_id',
-   *     cf_api_key: 'cf_api_key',
-   *     name: 'name',
+   *     cf_api_id: 'a1b2c3d4e5f6',
+   *     cf_api_key: 'abc123',
+   *     name: 'my-token',
    *   },
    * );
    * ```
@@ -94,12 +94,12 @@ export class Tokens extends APIResource {
   }
 
   /**
-   * Delete tokens.
+   * Delete token.
    *
    * @example
    * ```ts
    * const token = await client.aiSearch.tokens.delete(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   '62af0db3-c410-40b2-9ee3-0e93f6dd1de0',
    *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
    * );
    * ```
@@ -127,12 +127,12 @@ export class Tokens extends APIResource {
   }
 
   /**
-   * Read tokens.
+   * Read token.
    *
    * @example
    * ```ts
    * const response = await client.aiSearch.tokens.read(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   '62af0db3-c410-40b2-9ee3-0e93f6dd1de0',
    *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
    * );
    * ```
@@ -222,25 +222,7 @@ export interface TokenListResponse {
   modified_by?: string | null;
 }
 
-export interface TokenDeleteResponse {
-  id: string;
-
-  cf_api_id: string;
-
-  created_at: string;
-
-  modified_at: string;
-
-  name: string;
-
-  created_by?: string | null;
-
-  enabled?: boolean;
-
-  legacy?: boolean;
-
-  modified_by?: string | null;
-}
+export type TokenDeleteResponse = unknown;
 
 export interface TokenReadResponse {
   id: string;
@@ -282,6 +264,11 @@ export interface TokenCreateParams {
    * Body param
    */
   name: string;
+
+  /**
+   * Body param
+   */
+  legacy?: boolean;
 }
 
 export interface TokenUpdateParams {
@@ -304,6 +291,11 @@ export interface TokenUpdateParams {
    * Body param
    */
   name: string;
+
+  /**
+   * Body param
+   */
+  legacy?: boolean;
 }
 
 export interface TokenListParams extends V4PagePaginationArrayParams {
@@ -313,14 +305,9 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
   account_id?: string;
 
   /**
-   * Query param: Order By Column Name
+   * Query param: Filter tokens whose name contains this string (case-insensitive).
    */
-  order_by?: 'created_at';
-
-  /**
-   * Query param: Order By Direction
-   */
-  order_by_direction?: 'asc' | 'desc';
+  search?: string;
 }
 
 export interface TokenDeleteParams {

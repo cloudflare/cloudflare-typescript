@@ -435,10 +435,10 @@ export interface InstanceCreateResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -827,10 +827,10 @@ export interface InstanceUpdateResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -1219,10 +1219,10 @@ export interface InstanceListResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -1611,10 +1611,10 @@ export interface InstanceDeleteResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -2073,10 +2073,10 @@ export interface InstanceReadResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -2627,10 +2627,11 @@ export interface InstanceCreateParams {
   source_params?: InstanceCreateParams.SourceParams | null;
 
   /**
-   * Body param: Interval between automatic syncs, in seconds. Allowed values: 3600
-   * (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
+   * (15min), 1800 (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200
+   * (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   /**
    * Body param
@@ -3107,10 +3108,11 @@ export interface InstanceUpdateParams {
     | null;
 
   /**
-   * Body param: Interval between automatic syncs, in seconds. Allowed values: 3600
-   * (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
+   * (15min), 1800 (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200
+   * (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   /**
    * Body param

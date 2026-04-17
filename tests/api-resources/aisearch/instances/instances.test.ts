@@ -98,7 +98,7 @@ describe('resource instances', () => {
           },
         },
       },
-      sync_interval: 3600,
+      sync_interval: 900,
       token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       type: 'r2',
     });
@@ -191,7 +191,7 @@ describe('resource instances', () => {
       },
       summarization: true,
       summarization_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
-      sync_interval: 3600,
+      sync_interval: 900,
       system_prompt_ai_search: 'system_prompt_ai_search',
       system_prompt_index_summarization: 'system_prompt_index_summarization',
       system_prompt_rewrite_query: 'system_prompt_rewrite_query',
