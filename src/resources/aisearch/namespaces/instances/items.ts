@@ -594,6 +594,11 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
   account_id?: string;
 
   /**
+   * Query param: Filter items by their unique ID. Returns at most one item.
+   */
+  item_id?: string;
+
+  /**
    * Query param: JSON-encoded metadata filter using Vectorize filter syntax.
    * Examples: {"folder":"reports/"},
    * {"timestamp":{"$gte":1700000000000}}, {"folder":{"$in":["docs/","reports/"]}}

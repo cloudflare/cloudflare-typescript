@@ -26,6 +26,7 @@ describe('resource items', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.namespaces.instances.items.list('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+      item_id: 'item_id',
       metadata_filter: 'metadata_filter',
       page: 1,
       per_page: 0,
