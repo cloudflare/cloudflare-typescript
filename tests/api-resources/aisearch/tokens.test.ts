@@ -13,9 +13,9 @@ describe('resource tokens', () => {
   test('create: only required params', async () => {
     const responsePromise = client.aiSearch.tokens.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'cf_api_id',
-      cf_api_key: 'cf_api_key',
-      name: 'name',
+      cf_api_id: 'a1b2c3d4e5f6',
+      cf_api_key: 'abc123',
+      name: 'my-token',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,18 +29,19 @@ describe('resource tokens', () => {
   test('create: required and optional params', async () => {
     const response = await client.aiSearch.tokens.create({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'cf_api_id',
-      cf_api_key: 'cf_api_key',
-      name: 'name',
+      cf_api_id: 'a1b2c3d4e5f6',
+      cf_api_key: 'abc123',
+      name: 'my-token',
+      legacy: true,
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const responsePromise = client.aiSearch.tokens.update('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'cf_api_id',
-      cf_api_key: 'cf_api_key',
-      name: 'name',
+      cf_api_id: 'a1b2c3d4e5f6',
+      cf_api_key: 'abc123',
+      name: 'my-token',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,11 +53,12 @@ describe('resource tokens', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await client.aiSearch.tokens.update('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'cf_api_id',
-      cf_api_key: 'cf_api_key',
-      name: 'name',
+      cf_api_id: 'a1b2c3d4e5f6',
+      cf_api_key: 'abc123',
+      name: 'my-token',
+      legacy: true,
     });
   });
 
@@ -74,15 +76,14 @@ describe('resource tokens', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiSearch.tokens.list({
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      order_by: 'created_at',
-      order_by_direction: 'asc',
       page: 1,
-      per_page: 1,
+      per_page: 20,
+      search: 'my-token',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const responsePromise = client.aiSearch.tokens.delete('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -95,13 +96,13 @@ describe('resource tokens', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await client.aiSearch.tokens.delete('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
   });
 
   test('read: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.read('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const responsePromise = client.aiSearch.tokens.read('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -114,7 +115,7 @@ describe('resource tokens', () => {
   });
 
   test('read: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.read('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await client.aiSearch.tokens.read('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
   });
