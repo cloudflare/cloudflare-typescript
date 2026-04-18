@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
 
@@ -28,7 +27,7 @@ export class VerificationResource extends APIResource {
     params: VerificationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VerificationEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/ssl/verification/${certificatePackId}`, {
         body,
@@ -48,18 +47,10 @@ export class VerificationResource extends APIResource {
    * ```
    */
   get(
-    params?: VerificationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VerificationGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<VerificationGetResponse>;
-  get(
-    params: VerificationGetParams | Core.RequestOptions = {},
+    params: VerificationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VerificationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/ssl/verification`, { query, ...options }) as Core.APIPromise<{
         result: VerificationGetResponse;
@@ -153,7 +144,7 @@ export interface VerificationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Desired validation method.
@@ -165,7 +156,7 @@ export interface VerificationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Immediately retry SSL Verification.

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import { RolesV4PagePaginationArray } from '../shared';
@@ -22,18 +21,10 @@ export class Roles extends APIResource {
    * ```
    */
   list(
-    params?: RoleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RolesV4PagePaginationArray, Shared.Role>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RolesV4PagePaginationArray, Shared.Role>;
-  list(
-    params: RoleListParams | Core.RequestOptions = {},
+    params: RoleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RolesV4PagePaginationArray, Shared.Role> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesV4PagePaginationArray, {
       query,
       ...options,
@@ -51,17 +42,8 @@ export class Roles extends APIResource {
    * );
    * ```
    */
-  get(roleId: string, params?: RoleGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Role>;
-  get(roleId: string, options?: Core.RequestOptions): Core.APIPromise<Shared.Role>;
-  get(
-    roleId: string,
-    params: RoleGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.Role> {
-    if (isRequestOptions(params)) {
-      return this.get(roleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(roleId: string, params: RoleGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Role> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/roles/${roleId}`, options) as Core.APIPromise<{
         result: Shared.Role;
@@ -74,14 +56,14 @@ export interface RoleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RoleGetParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Roles {

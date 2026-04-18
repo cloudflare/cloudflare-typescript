@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Zone extends APIResource {
@@ -15,16 +14,8 @@ export class Zone extends APIResource {
    * });
    * ```
    */
-  edit(params?: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneEditResponse>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<ZoneEditResponse>;
-  edit(
-    params: ZoneEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+  edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<ZoneEditResponse> {
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dns_settings`, { body, ...options }) as Core.APIPromise<{
         result: ZoneEditResponse;
@@ -42,16 +33,8 @@ export class Zone extends APIResource {
    * });
    * ```
    */
-  get(params?: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse>;
-  get(
-    params: ZoneGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_settings`, options) as Core.APIPromise<{
         result: ZoneGetResponse;
@@ -310,7 +293,7 @@ export interface ZoneEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Whether to flatten all CNAME records in the zone. Note that, due to
@@ -439,7 +422,7 @@ export interface ZoneGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Zone {

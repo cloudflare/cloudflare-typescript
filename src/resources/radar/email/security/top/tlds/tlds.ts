@@ -10,7 +10,7 @@ import { Spam, SpamGetParams, SpamGetResponse } from './spam';
 import * as SpoofAPI from './spoof';
 import { Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
 
-export class TLDs extends APIResource {
+export class Tlds extends APIResource {
   malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
   spam: SpamAPI.Spam = new SpamAPI.Spam(this._client);
   spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
@@ -24,33 +24,33 @@ export class TLDs extends APIResource {
    *   await client.radar.email.security.top.tlds.get();
    * ```
    */
-  get(query?: TLDGetParams, options?: Core.RequestOptions): Core.APIPromise<TLDGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TLDGetResponse>;
+  get(query?: TldGetParams, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
   get(
-    query: TLDGetParams | Core.RequestOptions = {},
+    query: TldGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLDGetResponse> {
+  ): Core.APIPromise<TldGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
     return (
       this._client.get('/radar/email/security/top/tlds', { query, ...options }) as Core.APIPromise<{
-        result: TLDGetResponse;
+        result: TldGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface TLDGetResponse {
+export interface TldGetResponse {
   /**
    * Metadata for the results.
    */
-  meta: TLDGetResponse.Meta;
+  meta: TldGetResponse.Meta;
 
-  top_0: Array<TLDGetResponse.Top0>;
+  top_0: Array<TldGetResponse.Top0>;
 }
 
-export namespace TLDGetResponse {
+export namespace TldGetResponse {
   /**
    * Metadata for the results.
    */
@@ -178,7 +178,7 @@ export namespace TLDGetResponse {
   }
 }
 
-export interface TLDGetParams {
+export interface TldGetParams {
   /**
    * Filters results by ARC (Authenticated Received Chain) validation.
    */
@@ -243,12 +243,12 @@ export interface TLDGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-TLDs.Malicious = Malicious;
-TLDs.Spam = Spam;
-TLDs.Spoof = Spoof;
+Tlds.Malicious = Malicious;
+Tlds.Spam = Spam;
+Tlds.Spoof = Spoof;
 
-export declare namespace TLDs {
-  export { type TLDGetResponse as TLDGetResponse, type TLDGetParams as TLDGetParams };
+export declare namespace Tlds {
+  export { type TldGetResponse as TldGetResponse, type TldGetParams as TldGetParams };
 
   export {
     Malicious as Malicious,

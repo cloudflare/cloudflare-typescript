@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -34,7 +33,7 @@ export class Secrets extends APIResource {
     params: SecretCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SecretCreateResponsesSinglePage, SecretCreateResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/secrets_store/stores/${storeId}/secrets`,
       SecretCreateResponsesSinglePage,
@@ -58,22 +57,10 @@ export class Secrets extends APIResource {
    */
   list(
     storeId: string,
-    params?: SecretListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SecretListResponsesV4PagePaginationArray, SecretListResponse>;
-  list(
-    storeId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SecretListResponsesV4PagePaginationArray, SecretListResponse>;
-  list(
-    storeId: string,
-    params: SecretListParams | Core.RequestOptions = {},
+    params: SecretListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SecretListResponsesV4PagePaginationArray, SecretListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(storeId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/secrets_store/stores/${storeId}/secrets`,
       SecretListResponsesV4PagePaginationArray,
@@ -97,24 +84,10 @@ export class Secrets extends APIResource {
   delete(
     storeId: string,
     secretId: string,
-    params?: SecretDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecretDeleteResponse | null>;
-  delete(
-    storeId: string,
-    secretId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecretDeleteResponse | null>;
-  delete(
-    storeId: string,
-    secretId: string,
-    params: SecretDeleteParams | Core.RequestOptions = {},
+    params: SecretDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(storeId, secretId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/secrets_store/stores/${storeId}/secrets/${secretId}`,
@@ -137,22 +110,10 @@ export class Secrets extends APIResource {
    */
   bulkDelete(
     storeId: string,
-    params?: SecretBulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecretBulkDeleteResponse | null>;
-  bulkDelete(
-    storeId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecretBulkDeleteResponse | null>;
-  bulkDelete(
-    storeId: string,
-    params: SecretBulkDeleteParams | Core.RequestOptions = {},
+    params: SecretBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretBulkDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.bulkDelete(storeId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/secrets_store/stores/${storeId}/secrets`,
@@ -184,7 +145,7 @@ export class Secrets extends APIResource {
     params: SecretDuplicateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretDuplicateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/secrets_store/stores/${storeId}/secrets/${secretId}/duplicate`,
@@ -212,7 +173,7 @@ export class Secrets extends APIResource {
     params: SecretEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/secrets_store/stores/${storeId}/secrets/${secretId}`, {
         body,
@@ -236,20 +197,10 @@ export class Secrets extends APIResource {
   get(
     storeId: string,
     secretId: string,
-    params?: SecretGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecretGetResponse>;
-  get(storeId: string, secretId: string, options?: Core.RequestOptions): Core.APIPromise<SecretGetResponse>;
-  get(
-    storeId: string,
-    secretId: string,
-    params: SecretGetParams | Core.RequestOptions = {},
+    params: SecretGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(storeId, secretId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/secrets_store/stores/${storeId}/secrets/${secretId}`,
@@ -472,7 +423,7 @@ export interface SecretCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -509,7 +460,7 @@ export interface SecretListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Direction to sort objects
@@ -537,21 +488,21 @@ export interface SecretDeleteParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SecretBulkDeleteParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SecretDuplicateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the secret
@@ -573,7 +524,7 @@ export interface SecretEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Freeform text describing the secret
@@ -596,7 +547,7 @@ export interface SecretGetParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Secrets.SecretCreateResponsesSinglePage = SecretCreateResponsesSinglePage;

@@ -6,7 +6,7 @@ export {
   type BulkOperationGetParams,
 } from './bulk-operations';
 export {
-  ItemListResponsesCursorPaginationAfter,
+  ItemListResponsesCursorPagination,
   Items,
   type ListCursor,
   type ListItem,

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class PayloadLogs extends APIResource {
@@ -18,18 +17,10 @@ export class PayloadLogs extends APIResource {
    * ```
    */
   update(
-    params?: PayloadLogUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PayloadLogUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.APIPromise<PayloadLogUpdateResponse>;
-  update(
-    params: PayloadLogUpdateParams | Core.RequestOptions = {},
+    params: PayloadLogUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PayloadLogUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/payload_log`, { body, ...options }) as Core.APIPromise<{
         result: PayloadLogUpdateResponse;
@@ -49,16 +40,8 @@ export class PayloadLogs extends APIResource {
    *   });
    * ```
    */
-  get(params?: PayloadLogGetParams, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse>;
-  get(
-    params: PayloadLogGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PayloadLogGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: PayloadLogGetParams, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/payload_log`, options) as Core.APIPromise<{
         result: PayloadLogGetResponse;
@@ -111,7 +94,7 @@ export interface PayloadLogUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Masking level for payload logs.
@@ -142,7 +125,7 @@ export interface PayloadLogUpdateParams {
 }
 
 export interface PayloadLogGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace PayloadLogs {

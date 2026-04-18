@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AddressSpacesAPI from './address-spaces';
 import {
@@ -23,7 +22,7 @@ export class OnRamps extends APIResource {
    * Create a new On-ramp (Closed Beta).
    */
   create(params: OnRampCreateParams, options?: Core.RequestOptions): Core.APIPromise<OnRampCreateResponse> {
-    const { account_id = this._client.accountId, forwarded, ...body } = params;
+    const { account_id, forwarded, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/cloud/onramps`, {
         body,
@@ -41,7 +40,7 @@ export class OnRamps extends APIResource {
     params: OnRampUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OnRampUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}`, {
         body,
@@ -54,18 +53,10 @@ export class OnRamps extends APIResource {
    * List On-ramps (Closed Beta).
    */
   list(
-    params?: OnRampListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OnRampListResponsesSinglePage, OnRampListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<OnRampListResponsesSinglePage, OnRampListResponse>;
-  list(
-    params: OnRampListParams | Core.RequestOptions = {},
+    params: OnRampListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OnRampListResponsesSinglePage, OnRampListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/cloud/onramps`,
       OnRampListResponsesSinglePage,
@@ -78,19 +69,10 @@ export class OnRamps extends APIResource {
    */
   delete(
     onrampId: string,
-    params?: OnRampDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OnRampDeleteResponse>;
-  delete(onrampId: string, options?: Core.RequestOptions): Core.APIPromise<OnRampDeleteResponse>;
-  delete(
-    onrampId: string,
-    params: OnRampDeleteParams | Core.RequestOptions = {},
+    params: OnRampDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OnRampDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(onrampId, {}, params);
-    }
-    const { account_id = this._client.accountId, destroy, force } = params;
+    const { account_id, destroy, force } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}`, {
         query: { destroy, force },
@@ -104,19 +86,10 @@ export class OnRamps extends APIResource {
    */
   apply(
     onrampId: string,
-    params?: OnRampApplyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OnRampApplyResponse>;
-  apply(onrampId: string, options?: Core.RequestOptions): Core.APIPromise<OnRampApplyResponse>;
-  apply(
-    onrampId: string,
-    params: OnRampApplyParams | Core.RequestOptions = {},
+    params: OnRampApplyParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OnRampApplyResponse> {
-    if (isRequestOptions(params)) {
-      return this.apply(onrampId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.post(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}/apply`, options);
   }
 
@@ -128,7 +101,7 @@ export class OnRamps extends APIResource {
     params: OnRampEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OnRampEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}`, {
         body,
@@ -142,19 +115,10 @@ export class OnRamps extends APIResource {
    */
   export(
     onrampId: string,
-    params?: OnRampExportParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  export(onrampId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
-  export(
-    onrampId: string,
-    params: OnRampExportParams | Core.RequestOptions = {},
+    params: OnRampExportParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
-    if (isRequestOptions(params)) {
-      return this.export(onrampId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.post(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}/export`, {
       ...options,
       headers: { Accept: 'application/zip', ...options?.headers },
@@ -167,19 +131,10 @@ export class OnRamps extends APIResource {
    */
   get(
     onrampId: string,
-    params?: OnRampGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OnRampGetResponse>;
-  get(onrampId: string, options?: Core.RequestOptions): Core.APIPromise<OnRampGetResponse>;
-  get(
-    onrampId: string,
-    params: OnRampGetParams | Core.RequestOptions = {},
+    params: OnRampGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OnRampGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(onrampId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}`, {
         query,
@@ -193,19 +148,10 @@ export class OnRamps extends APIResource {
    */
   plan(
     onrampId: string,
-    params?: OnRampPlanParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OnRampPlanResponse>;
-  plan(onrampId: string, options?: Core.RequestOptions): Core.APIPromise<OnRampPlanResponse>;
-  plan(
-    onrampId: string,
-    params: OnRampPlanParams | Core.RequestOptions = {},
+    params: OnRampPlanParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OnRampPlanResponse> {
-    if (isRequestOptions(params)) {
-      return this.plan(onrampId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.post(`/accounts/${account_id}/magic/cloud/onramps/${onrampId}/plan`, options);
   }
 }
@@ -8833,7 +8779,7 @@ export interface OnRampCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -8927,7 +8873,7 @@ export interface OnRampUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -8979,7 +8925,7 @@ export interface OnRampListParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -9006,7 +8952,7 @@ export interface OnRampDeleteParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -9020,14 +8966,14 @@ export interface OnRampDeleteParams {
 }
 
 export interface OnRampApplyParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface OnRampEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -9076,14 +9022,14 @@ export interface OnRampEditParams {
 }
 
 export interface OnRampExportParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface OnRampGetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -9107,7 +9053,7 @@ export interface OnRampGetParams {
 }
 
 export interface OnRampPlanParams {
-  account_id?: string;
+  account_id: string;
 }
 
 OnRamps.OnRampListResponsesSinglePage = OnRampListResponsesSinglePage;

@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ObjectsAPI from './objects';
-import { DurableObject, DurableObjectsCursorPaginationAfter, ObjectListParams, Objects } from './objects';
+import { DurableObject, DurableObjectsCursorLimitPagination, ObjectListParams, Objects } from './objects';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
@@ -14,18 +13,10 @@ export class Namespaces extends APIResource {
    * Returns the Durable Object namespaces owned by an account.
    */
   list(
-    params?: NamespaceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace>;
-  list(options?: Core.RequestOptions): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace>;
-  list(
-    params: NamespaceListParams | Core.RequestOptions = {},
+    params: NamespaceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces`,
       NamespacesV4PagePaginationArray,
@@ -52,12 +43,12 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
 Namespaces.Objects = Objects;
-Namespaces.DurableObjectsCursorPaginationAfter = DurableObjectsCursorPaginationAfter;
+Namespaces.DurableObjectsCursorLimitPagination = DurableObjectsCursorLimitPagination;
 
 export declare namespace Namespaces {
   export {
@@ -69,7 +60,7 @@ export declare namespace Namespaces {
   export {
     Objects as Objects,
     type DurableObject as DurableObject,
-    DurableObjectsCursorPaginationAfter as DurableObjectsCursorPaginationAfter,
+    DurableObjectsCursorLimitPagination as DurableObjectsCursorLimitPagination,
     type ObjectListParams as ObjectListParams,
   };
 }

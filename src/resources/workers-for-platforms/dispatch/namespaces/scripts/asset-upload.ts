@@ -28,7 +28,7 @@ export class AssetUpload extends APIResource {
     params: AssetUploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetUploadCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/assets-upload-session`,
@@ -54,7 +54,7 @@ export interface AssetUploadCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A manifest ([path]: {hash, size}) map of files to upload. As an

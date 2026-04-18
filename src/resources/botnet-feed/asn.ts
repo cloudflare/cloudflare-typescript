@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ASN extends APIResource {
@@ -12,19 +11,10 @@ export class ASN extends APIResource {
    */
   dayReport(
     asnId: number,
-    params?: ASNDayReportParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ASNDayReportResponse>;
-  dayReport(asnId: number, options?: Core.RequestOptions): Core.APIPromise<ASNDayReportResponse>;
-  dayReport(
-    asnId: number,
-    params: ASNDayReportParams | Core.RequestOptions = {},
+    params: ASNDayReportParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ASNDayReportResponse> {
-    if (isRequestOptions(params)) {
-      return this.dayReport(asnId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/botnet_feed/asn/${asnId}/day_report`, {
         query,
@@ -39,19 +29,10 @@ export class ASN extends APIResource {
    */
   fullReport(
     asnId: number,
-    params?: ASNFullReportParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ASNFullReportResponse>;
-  fullReport(asnId: number, options?: Core.RequestOptions): Core.APIPromise<ASNFullReportResponse>;
-  fullReport(
-    asnId: number,
-    params: ASNFullReportParams | Core.RequestOptions = {},
+    params: ASNFullReportParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ASNFullReportResponse> {
-    if (isRequestOptions(params)) {
-      return this.fullReport(asnId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/botnet_feed/asn/${asnId}/full_report`,
@@ -81,7 +62,7 @@ export interface ASNDayReportParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -93,7 +74,7 @@ export interface ASNFullReportParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace ASN {

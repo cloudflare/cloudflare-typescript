@@ -3,16 +3,6 @@
 import { APIResource } from '../../resource';
 import * as ContentAPI from './content';
 import { Content, ContentCreateParams, ContentCreateResponse } from './content';
-import * as CrawlAPI from './crawl';
-import {
-  Crawl,
-  CrawlCreateParams,
-  CrawlCreateResponse,
-  CrawlDeleteParams,
-  CrawlDeleteResponse,
-  CrawlGetParams,
-  CrawlGetResponse,
-} from './crawl';
 import * as JsonAPI from './json';
 import { Json, JsonCreateParams, JsonCreateResponse } from './json';
 import * as LinksAPI from './links';
@@ -27,8 +17,6 @@ import * as ScreenshotAPI from './screenshot';
 import { Screenshot, ScreenshotCreateParams, ScreenshotCreateResponse } from './screenshot';
 import * as SnapshotAPI from './snapshot';
 import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapshot';
-import * as DevtoolsAPI from './devtools/devtools';
-import { Devtools } from './devtools/devtools';
 
 export class BrowserRendering extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
@@ -39,8 +27,6 @@ export class BrowserRendering extends APIResource {
   json: JsonAPI.Json = new JsonAPI.Json(this._client);
   links: LinksAPI.Links = new LinksAPI.Links(this._client);
   markdown: MarkdownAPI.Markdown = new MarkdownAPI.Markdown(this._client);
-  crawl: CrawlAPI.Crawl = new CrawlAPI.Crawl(this._client);
-  devtools: DevtoolsAPI.Devtools = new DevtoolsAPI.Devtools(this._client);
 }
 
 BrowserRendering.Content = Content;
@@ -51,8 +37,6 @@ BrowserRendering.Snapshot = Snapshot;
 BrowserRendering.Json = Json;
 BrowserRendering.Links = Links;
 BrowserRendering.Markdown = Markdown;
-BrowserRendering.Crawl = Crawl;
-BrowserRendering.Devtools = Devtools;
 
 export declare namespace BrowserRendering {
   export {
@@ -98,16 +82,4 @@ export declare namespace BrowserRendering {
     type MarkdownCreateResponse as MarkdownCreateResponse,
     type MarkdownCreateParams as MarkdownCreateParams,
   };
-
-  export {
-    Crawl as Crawl,
-    type CrawlCreateResponse as CrawlCreateResponse,
-    type CrawlDeleteResponse as CrawlDeleteResponse,
-    type CrawlGetResponse as CrawlGetResponse,
-    type CrawlCreateParams as CrawlCreateParams,
-    type CrawlDeleteParams as CrawlDeleteParams,
-    type CrawlGetParams as CrawlGetParams,
-  };
-
-  export { Devtools as Devtools };
 }

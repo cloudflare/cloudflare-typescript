@@ -41,15 +41,9 @@ import {
   RecordImportResponse,
   RecordListParams,
   RecordResponse,
-  RecordResponsesSinglePage,
   RecordResponsesV4PagePaginationArray,
-  RecordScanListParams,
   RecordScanParams,
   RecordScanResponse,
-  RecordScanReviewParams,
-  RecordScanReviewResponse,
-  RecordScanTriggerParams,
-  RecordScanTriggerResponse,
   RecordTags,
   RecordUpdateParams,
   Records,
@@ -66,15 +60,12 @@ import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
 import * as SettingsAPI from './settings/settings';
 import { Settings } from './settings/settings';
-import * as UsageAPI from './usage/usage';
-import { Usage } from './usage/usage';
 import * as ZoneTransfersAPI from './zone-transfers/zone-transfers';
 import { ZoneTransfers } from './zone-transfers/zone-transfers';
 
 export class DNS extends APIResource {
   dnssec: DNSSECAPI.DNSSECResource = new DNSSECAPI.DNSSECResource(this._client);
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
-  usage: UsageAPI.Usage = new UsageAPI.Usage(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   zoneTransfers: ZoneTransfersAPI.ZoneTransfers = new ZoneTransfersAPI.ZoneTransfers(this._client);
@@ -83,8 +74,6 @@ export class DNS extends APIResource {
 DNS.DNSSECResource = DNSSECResource;
 DNS.Records = Records;
 DNS.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
-DNS.RecordResponsesSinglePage = RecordResponsesSinglePage;
-DNS.Usage = Usage;
 DNS.Settings = Settings;
 DNS.Analytics = Analytics;
 DNS.ZoneTransfers = ZoneTransfers;
@@ -132,10 +121,7 @@ export declare namespace DNS {
     type RecordExportResponse as RecordExportResponse,
     type RecordImportResponse as RecordImportResponse,
     type RecordScanResponse as RecordScanResponse,
-    type RecordScanReviewResponse as RecordScanReviewResponse,
-    type RecordScanTriggerResponse as RecordScanTriggerResponse,
     RecordResponsesV4PagePaginationArray as RecordResponsesV4PagePaginationArray,
-    RecordResponsesSinglePage as RecordResponsesSinglePage,
     type RecordCreateParams as RecordCreateParams,
     type RecordUpdateParams as RecordUpdateParams,
     type RecordListParams as RecordListParams,
@@ -146,12 +132,7 @@ export declare namespace DNS {
     type RecordGetParams as RecordGetParams,
     type RecordImportParams as RecordImportParams,
     type RecordScanParams as RecordScanParams,
-    type RecordScanListParams as RecordScanListParams,
-    type RecordScanReviewParams as RecordScanReviewParams,
-    type RecordScanTriggerParams as RecordScanTriggerParams,
   };
-
-  export { Usage as Usage };
 
   export { Settings as Settings };
 

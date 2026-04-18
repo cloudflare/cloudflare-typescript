@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ScriptsAPI from './scripts/scripts';
 import {
@@ -30,18 +29,10 @@ export class Namespaces extends APIResource {
    * ```
    */
   create(
-    params?: NamespaceCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<NamespaceCreateResponse>;
-  create(
-    params: NamespaceCreateParams | Core.RequestOptions = {},
+    params: NamespaceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/dispatch/namespaces`, {
         body,
@@ -64,20 +55,10 @@ export class Namespaces extends APIResource {
    * ```
    */
   list(
-    params?: NamespaceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse>;
-  list(
-    params: NamespaceListParams | Core.RequestOptions = {},
+    params: NamespaceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/dispatch/namespaces`,
       NamespaceListResponsesSinglePage,
@@ -99,22 +80,10 @@ export class Namespaces extends APIResource {
    */
   delete(
     dispatchNamespace: string,
-    params?: NamespaceDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceDeleteResponse | null>;
-  delete(
-    dispatchNamespace: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceDeleteResponse | null>;
-  delete(
-    dispatchNamespace: string,
-    params: NamespaceDeleteParams | Core.RequestOptions = {},
+    params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(dispatchNamespace, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`,
@@ -137,19 +106,10 @@ export class Namespaces extends APIResource {
    */
   get(
     dispatchNamespace: string,
-    params?: NamespaceGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceGetResponse>;
-  get(dispatchNamespace: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceGetResponse>;
-  get(
-    dispatchNamespace: string,
-    params: NamespaceGetParams | Core.RequestOptions = {},
+    params: NamespaceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(dispatchNamespace, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`,
@@ -305,7 +265,7 @@ export interface NamespaceCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the dispatch namespace.
@@ -317,21 +277,21 @@ export interface NamespaceListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface NamespaceDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface NamespaceGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Namespaces.NamespaceListResponsesSinglePage = NamespaceListResponsesSinglePage;

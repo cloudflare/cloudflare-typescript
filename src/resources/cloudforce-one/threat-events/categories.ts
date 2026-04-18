@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Categories extends APIResource {
@@ -24,7 +23,7 @@ export class Categories extends APIResource {
     params: CategoryCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CategoryCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/categories/create`, {
       body,
       ...options,
@@ -42,16 +41,8 @@ export class Categories extends APIResource {
    *   });
    * ```
    */
-  list(params?: CategoryListParams, options?: Core.RequestOptions): Core.APIPromise<CategoryListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<CategoryListResponse>;
-  list(
-    params: CategoryListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CategoryListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: CategoryListParams, options?: Core.RequestOptions): Core.APIPromise<CategoryListResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/categories`, {
       query,
       ...options,
@@ -72,19 +63,10 @@ export class Categories extends APIResource {
    */
   delete(
     categoryId: string,
-    params?: CategoryDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CategoryDeleteResponse>;
-  delete(categoryId: string, options?: Core.RequestOptions): Core.APIPromise<CategoryDeleteResponse>;
-  delete(
-    categoryId: string,
-    params: CategoryDeleteParams | Core.RequestOptions = {},
+    params: CategoryDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CategoryDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(categoryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/cloudforce-one/events/categories/${categoryId}`,
       options,
@@ -105,19 +87,10 @@ export class Categories extends APIResource {
    */
   edit(
     categoryId: string,
-    params?: CategoryEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CategoryEditResponse>;
-  edit(categoryId: string, options?: Core.RequestOptions): Core.APIPromise<CategoryEditResponse>;
-  edit(
-    categoryId: string,
-    params: CategoryEditParams | Core.RequestOptions = {},
+    params: CategoryEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CategoryEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit(categoryId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/cloudforce-one/events/categories/${categoryId}`, {
       body,
       ...options,
@@ -138,19 +111,10 @@ export class Categories extends APIResource {
    */
   get(
     categoryId: string,
-    params?: CategoryGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CategoryGetResponse>;
-  get(categoryId: string, options?: Core.RequestOptions): Core.APIPromise<CategoryGetResponse>;
-  get(
-    categoryId: string,
-    params: CategoryGetParams | Core.RequestOptions = {},
+    params: CategoryGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CategoryGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(categoryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/cloudforce-one/events/categories/${categoryId}`,
       options,
@@ -226,7 +190,7 @@ export interface CategoryCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -258,7 +222,7 @@ export interface CategoryListParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Array of dataset IDs to query categories from. If not provided,
@@ -271,14 +235,14 @@ export interface CategoryDeleteParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CategoryEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -310,7 +274,7 @@ export interface CategoryGetParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Categories {

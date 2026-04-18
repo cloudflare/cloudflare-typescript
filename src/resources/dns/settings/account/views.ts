@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
@@ -21,7 +20,7 @@ export class Views extends APIResource {
    * ```
    */
   create(params: ViewCreateParams, options?: Core.RequestOptions): Core.APIPromise<ViewCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dns_settings/views`, {
         body,
@@ -44,20 +43,10 @@ export class Views extends APIResource {
    * ```
    */
   list(
-    params?: ViewListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ViewListResponsesV4PagePaginationArray, ViewListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ViewListResponsesV4PagePaginationArray, ViewListResponse>;
-  list(
-    params: ViewListParams | Core.RequestOptions = {},
+    params: ViewListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ViewListResponsesV4PagePaginationArray, ViewListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dns_settings/views`,
       ViewListResponsesV4PagePaginationArray,
@@ -78,19 +67,10 @@ export class Views extends APIResource {
    */
   delete(
     viewId: string,
-    params?: ViewDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ViewDeleteResponse>;
-  delete(viewId: string, options?: Core.RequestOptions): Core.APIPromise<ViewDeleteResponse>;
-  delete(
-    viewId: string,
-    params: ViewDeleteParams | Core.RequestOptions = {},
+    params: ViewDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ViewDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(viewId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dns_settings/views/${viewId}`,
@@ -116,7 +96,7 @@ export class Views extends APIResource {
     params: ViewEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ViewEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_settings/views/${viewId}`, {
         body,
@@ -138,19 +118,10 @@ export class Views extends APIResource {
    */
   get(
     viewId: string,
-    params?: ViewGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ViewGetResponse>;
-  get(viewId: string, options?: Core.RequestOptions): Core.APIPromise<ViewGetResponse>;
-  get(
-    viewId: string,
-    params: ViewGetParams | Core.RequestOptions = {},
+    params: ViewGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ViewGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(viewId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_settings/views/${viewId}`, options) as Core.APIPromise<{
         result: ViewGetResponse;
@@ -280,7 +251,7 @@ export interface ViewCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the view.
@@ -297,7 +268,7 @@ export interface ViewListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Direction to order DNS views in.
@@ -360,14 +331,14 @@ export interface ViewDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ViewEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the view.
@@ -384,7 +355,7 @@ export interface ViewGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Views.ViewListResponsesV4PagePaginationArray = ViewListResponsesV4PagePaginationArray;

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class EventTags extends APIResource {
@@ -22,7 +21,7 @@ export class EventTags extends APIResource {
     params: EventTagCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventTagCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cloudforce-one/events/event_tag/${eventId}/create`, {
         body,
@@ -45,19 +44,10 @@ export class EventTags extends APIResource {
    */
   delete(
     eventId: string,
-    params?: EventTagDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EventTagDeleteResponse>;
-  delete(eventId: string, options?: Core.RequestOptions): Core.APIPromise<EventTagDeleteResponse>;
-  delete(
-    eventId: string,
-    params: EventTagDeleteParams | Core.RequestOptions = {},
+    params: EventTagDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventTagDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(eventId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/cloudforce-one/events/event_tag/${eventId}`,
@@ -79,7 +69,7 @@ export interface EventTagCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -91,7 +81,7 @@ export interface EventTagDeleteParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace EventTags {

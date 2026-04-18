@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as RoutesAPI from './routes';
 
@@ -17,7 +16,7 @@ export class Networks extends APIResource {
     params: NetworkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RoutesAPI.Route> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         body,
@@ -39,19 +38,10 @@ export class Networks extends APIResource {
    */
   delete(
     ipNetworkEncoded: string,
-    params?: NetworkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.Route>;
-  delete(ipNetworkEncoded: string, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Route>;
-  delete(
-    ipNetworkEncoded: string,
-    params: NetworkDeleteParams | Core.RequestOptions = {},
+    params: NetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RoutesAPI.Route> {
-    if (isRequestOptions(params)) {
-      return this.delete(ipNetworkEncoded, {}, params);
-    }
-    const { account_id = this._client.accountId, tun_type, tunnel_id, virtual_network_id } = params;
+    const { account_id, tun_type, tunnel_id, virtual_network_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
         query: { tun_type, tunnel_id, virtual_network_id },
@@ -68,19 +58,10 @@ export class Networks extends APIResource {
    */
   edit(
     ipNetworkEncoded: string,
-    params?: NetworkEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.Route>;
-  edit(ipNetworkEncoded: string, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Route>;
-  edit(
-    ipNetworkEncoded: string,
-    params: NetworkEditParams | Core.RequestOptions = {},
+    params: NetworkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RoutesAPI.Route> {
-    if (isRequestOptions(params)) {
-      return this.edit(ipNetworkEncoded, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`,
@@ -94,7 +75,7 @@ export interface NetworkCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: UUID of the tunnel.
@@ -116,7 +97,7 @@ export interface NetworkDeleteParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The type of tunnel.
@@ -138,7 +119,7 @@ export interface NetworkEditParams {
   /**
    * Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Networks {

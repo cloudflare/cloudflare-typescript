@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Raw extends APIResource {
@@ -18,19 +17,10 @@ export class Raw extends APIResource {
    */
   get(
     postfixId: string,
-    params?: RawGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RawGetResponse>;
-  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<RawGetResponse>;
-  get(
-    postfixId: string,
-    params: RawGetParams | Core.RequestOptions = {},
+    params: RawGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RawGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(postfixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/investigate/${postfixId}/raw`,
@@ -51,7 +41,7 @@ export interface RawGetParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Raw {

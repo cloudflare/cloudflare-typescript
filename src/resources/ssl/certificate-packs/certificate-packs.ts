@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
@@ -34,7 +33,7 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/ssl/certificate_packs/order`, {
         body,
@@ -57,20 +56,10 @@ export class CertificatePacks extends APIResource {
    * ```
    */
   list(
-    params?: CertificatePackListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse>;
-  list(
-    params: CertificatePackListParams | Core.RequestOptions = {},
+    params: CertificatePackListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CertificatePackListResponsesV4PagePaginationArray, CertificatePackListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/ssl/certificate_packs`,
       CertificatePackListResponsesV4PagePaginationArray,
@@ -92,22 +81,10 @@ export class CertificatePacks extends APIResource {
    */
   delete(
     certificatePackId: string,
-    params?: CertificatePackDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackDeleteResponse>;
-  delete(
-    certificatePackId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackDeleteResponse>;
-  delete(
-    certificatePackId: string,
-    params: CertificatePackDeleteParams | Core.RequestOptions = {},
+    params: CertificatePackDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(certificatePackId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
@@ -134,7 +111,7 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
         body,
@@ -157,19 +134,10 @@ export class CertificatePacks extends APIResource {
    */
   get(
     certificatePackId: string,
-    params?: CertificatePackGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificatePackGetResponse>;
-  get(certificatePackId: string, options?: Core.RequestOptions): Core.APIPromise<CertificatePackGetResponse>;
-  get(
-    certificatePackId: string,
-    params: CertificatePackGetParams | Core.RequestOptions = {},
+    params: CertificatePackGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(certificatePackId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
@@ -1293,7 +1261,7 @@ export interface CertificatePackCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Certificate Authority selected for the order. For information on any
@@ -1335,7 +1303,7 @@ export interface CertificatePackListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Specify the deployment environment for the certificate packs.
@@ -1352,14 +1320,14 @@ export interface CertificatePackDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface CertificatePackEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Whether or not to add Cloudflare Branding for the order. This will
@@ -1372,7 +1340,7 @@ export interface CertificatePackGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 CertificatePacks.CertificatePackListResponsesV4PagePaginationArray =

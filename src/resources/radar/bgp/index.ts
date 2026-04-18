@@ -4,7 +4,6 @@ export { BGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp
 export { Hijacks } from './hijacks/index';
 export { IPs, type IPTimeseriesResponse, type IPTimeseriesParams } from './ips';
 export { Leaks } from './leaks/index';
-export { RPKI } from './rpki/index';
 export {
   Routes,
   type RouteAsesResponse,

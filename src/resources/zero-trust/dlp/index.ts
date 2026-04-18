@@ -46,11 +46,3 @@ export {
   type ProfileListParams,
   type ProfileGetParams,
 } from './profiles/index';
-export {
-  Settings,
-  type DLPSettings,
-  type SettingUpdateParams,
-  type SettingDeleteParams,
-  type SettingEditParams,
-  type SettingGetParams,
-} from './settings';

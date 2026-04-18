@@ -18,7 +18,7 @@ export class Content extends APIResource {
    * ```
    */
   create(params: ContentCreateParams, options?: Core.RequestOptions): Core.APIPromise<ContentCreateResponse> {
-    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
+    const { account_id, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/content`, {
         query: { cacheTTL },
@@ -41,7 +41,7 @@ export declare namespace ContentCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: URL to navigate to, eg. `https://example.com`.
@@ -304,7 +304,7 @@ export declare namespace ContentCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either

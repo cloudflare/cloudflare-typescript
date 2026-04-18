@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as FiltersAPI from '../filters/filters';
 import * as RateLimitsAPI from '../rate-limits/rate-limits';
@@ -20,7 +19,7 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
       body,
       method: 'post',
@@ -38,7 +37,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/firewall/rules/${ruleId}`, {
         body,
@@ -54,18 +53,10 @@ export class Rules extends APIResource {
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
-    params?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
-  list(options?: Core.RequestOptions): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesV4PagePaginationArray, {
       query,
       ...options,
@@ -79,19 +70,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleId: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallRule>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<FirewallRule>;
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallRule> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/firewall/rules/${ruleId}`, options) as Core.APIPromise<{
         result: FirewallRule;
@@ -105,18 +87,10 @@ export class Rules extends APIResource {
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   bulkDelete(
-    params?: RuleBulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule>;
-  bulkDelete(options?: Core.RequestOptions): Core.PagePromise<FirewallRulesSinglePage, FirewallRule>;
-  bulkDelete(
-    params: RuleBulkDeleteParams | Core.RequestOptions = {},
+    params: RuleBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    if (isRequestOptions(params)) {
-      return this.bulkDelete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
       method: 'delete',
       ...options,
@@ -132,7 +106,7 @@ export class Rules extends APIResource {
     params: RuleBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
       body: body,
       method: 'patch',
@@ -149,7 +123,7 @@ export class Rules extends APIResource {
     params: RuleBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/firewall/rules`, FirewallRulesSinglePage, {
       body: body,
       method: 'put',
@@ -167,7 +141,7 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FirewallRulesSinglePage, FirewallRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.getAPIList(`/zones/${zone_id}/firewall/rules/${ruleId}`, FirewallRulesSinglePage, {
       body,
       method: 'patch',
@@ -180,17 +154,8 @@ export class Rules extends APIResource {
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  get(ruleId: string, params?: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<FirewallRule>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<FirewallRule>;
-  get(
-    ruleId: string,
-    params: RuleGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallRule> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/firewall/rules/${ruleId}`, options) as Core.APIPromise<{
         result: FirewallRule;
@@ -263,7 +228,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The action to perform when the threshold of matched traffic within
@@ -336,7 +301,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The action to perform when the threshold of matched traffic within
@@ -409,7 +374,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The unique identifier of the firewall rule.
@@ -436,21 +401,21 @@ export interface RuleDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleBulkDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleBulkEditParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -462,7 +427,7 @@ export interface RuleBulkUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -474,14 +439,14 @@ export interface RuleEditParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Rules.FirewallRulesSinglePage = FirewallRulesSinglePage;

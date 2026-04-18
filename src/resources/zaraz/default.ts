@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ConfigAPI from './config';
 
@@ -16,16 +15,8 @@ export class Default extends APIResource {
    * });
    * ```
    */
-  get(params?: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration>;
-  get(options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration>;
-  get(
-    params: DefaultGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigAPI.Configuration> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigAPI.Configuration> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/zaraz/default`, options) as Core.APIPromise<{
         result: ConfigAPI.Configuration;
@@ -38,7 +29,7 @@ export interface DefaultGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Default {

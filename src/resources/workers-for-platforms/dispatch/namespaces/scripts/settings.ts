@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as TailAPI from '../../../../workers/scripts/tail';
@@ -26,7 +25,7 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
@@ -51,24 +50,10 @@ export class Settings extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params?: SettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingGetResponse>;
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingGetResponse>;
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: SettingGetParams | Core.RequestOptions = {},
+    params: SettingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(dispatchNamespace, scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
@@ -2196,7 +2181,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Script and version settings for Workers for Platforms namespace
@@ -3309,7 +3294,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Settings {

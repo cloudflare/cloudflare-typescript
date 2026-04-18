@@ -16,25 +16,6 @@ export {
 } from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
 export {
-  LabelListResponsesV4PagePaginationArray,
-  Labels,
-  type LabelListResponse,
-  type LabelListParams,
-} from './labels/index';
-export {
-  OldPublicSchemasV4PagePaginationArray,
-  UserSchemas,
-  type Message,
-  type OldPublicSchema,
-  type UserSchemaCreateResponse,
-  type UserSchemaDeleteResponse,
-  type UserSchemaCreateParams,
-  type UserSchemaListParams,
-  type UserSchemaDeleteParams,
-  type UserSchemaEditParams,
-  type UserSchemaGetParams,
-} from './user-schemas/index';
-export {
   OperationListResponsesV4PagePaginationArray,
   OperationBulkCreateResponsesSinglePage,
   Operations,
@@ -52,5 +33,22 @@ export {
   type OperationBulkDeleteParams,
   type OperationGetParams,
 } from './operations/index';
+export {
+  PublicSchemasV4PagePaginationArray,
+  UserSchemaListResponsesV4PagePaginationArray,
+  UserSchemas,
+  type Message,
+  type PublicSchema,
+  type UserSchemaCreateResponse,
+  type UserSchemaListResponse,
+  type UserSchemaDeleteResponse,
+  type UserSchemaEditResponse,
+  type UserSchemaGetResponse,
+  type UserSchemaCreateParams,
+  type UserSchemaListParams,
+  type UserSchemaDeleteParams,
+  type UserSchemaEditParams,
+  type UserSchemaGetParams,
+} from './user-schemas/index';
 export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
 export { Settings } from './settings/index';

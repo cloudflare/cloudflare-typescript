@@ -10,47 +10,6 @@ const client = new Cloudflare({
 });
 
 describe('resource layer3', () => {
-  test('summaryV2', async () => {
-    const responsePromise = client.radar.attacks.layer3.summaryV2('PROTOCOL');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('summaryV2: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.attacks.layer3.summaryV2('PROTOCOL', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('summaryV2: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.attacks.layer3.summaryV2(
-        'PROTOCOL',
-        {
-          continent: ['string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
-          format: 'JSON',
-          ipVersion: ['IPv4'],
-          limitPerGroup: 10,
-          location: ['string'],
-          name: ['main_series'],
-          protocol: ['UDP'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
   test('timeseries', async () => {
     const responsePromise = client.radar.attacks.layer3.timeseries();
     const rawResponse = await responsePromise.asResponse();
@@ -87,49 +46,6 @@ describe('resource layer3', () => {
           metric: 'BYTES',
           name: ['main_series'],
           normalization: 'MIN0_MAX',
-          protocol: ['UDP'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('timeseriesGroupsV2', async () => {
-    const responsePromise = client.radar.attacks.layer3.timeseriesGroupsV2('PROTOCOL');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('timeseriesGroupsV2: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.attacks.layer3.timeseriesGroupsV2('PROTOCOL', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('timeseriesGroupsV2: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.attacks.layer3.timeseriesGroupsV2(
-        'PROTOCOL',
-        {
-          aggInterval: '1h',
-          continent: ['string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z'],
-          direction: 'ORIGIN',
-          format: 'JSON',
-          ipVersion: ['IPv4'],
-          limitPerGroup: 10,
-          location: ['string'],
-          name: ['main_series'],
-          normalization: 'PERCENTAGE',
           protocol: ['UDP'],
         },
         { path: '/_stainless_unknown_path' },

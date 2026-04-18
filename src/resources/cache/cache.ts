@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CacheReserveAPI from './cache-reserve';
 import {
@@ -128,16 +127,8 @@ export class Cache extends APIResource {
    * });
    * ```
    */
-  purge(params?: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null>;
-  purge(options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null>;
-  purge(
-    params: CachePurgeParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CachePurgeResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.purge({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+  purge(params: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null> {
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/purge_cache`, { body, ...options }) as Core.APIPromise<{
         result: CachePurgeResponse | null;
@@ -163,7 +154,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on cache tags and purging by tags, please refer
@@ -177,7 +168,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information purging by hostnames, please refer to
@@ -190,7 +181,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on purging by prefixes, please refer to
@@ -203,7 +194,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information, please refer to
@@ -216,7 +207,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on purging files, please refer to
@@ -229,7 +220,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on purging files with URL and headers, please

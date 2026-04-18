@@ -8,13 +8,24 @@ export class ToMarkdown extends APIResource {
   /**
    * Converts uploaded files into Markdown format using Workers AI.
    *
-   * @deprecated Use [AI > To Markdown](https://developers.cloudflare.com/api/resources/ai/subresources/to_markdown/) instead.
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const toMarkdownCreateResponse of client.radar.ai.toMarkdown.create(
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     files: [fs.createReadStream('path/to/file')],
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   create(
     params: ToMarkdownCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/tomarkdown`,
       ToMarkdownCreateResponsesSinglePage,
@@ -41,7 +52,7 @@ export interface ToMarkdownCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

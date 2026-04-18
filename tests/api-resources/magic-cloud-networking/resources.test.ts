@@ -40,8 +40,7 @@ describe('resource resources', () => {
     });
   });
 
-  // Mock server doesn't support application/octet-stream responses
-  test.skip('export: required and optional params', async () => {
+  test('export: required and optional params', async () => {
     const response = await client.magicCloudNetworking.resources.export({
       account_id: 'account_id',
       desc: true,

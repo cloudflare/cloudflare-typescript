@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 
@@ -26,7 +25,7 @@ export class Certificates extends APIResource {
     params: CertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.DevicePolicyCertificates | null> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/devices/policy/certificates`, {
         body,
@@ -47,18 +46,10 @@ export class Certificates extends APIResource {
    * ```
    */
   get(
-    params?: CertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PoliciesAPI.DevicePolicyCertificates | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<PoliciesAPI.DevicePolicyCertificates | null>;
-  get(
-    params: CertificateGetParams | Core.RequestOptions = {},
+    params: CertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.DevicePolicyCertificates | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/devices/policy/certificates`, options) as Core.APIPromise<{
         result: PoliciesAPI.DevicePolicyCertificates | null;
@@ -71,7 +62,7 @@ export interface CertificateEditParams {
   /**
    * Path param
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The current status of the device policy certificate provisioning
@@ -81,7 +72,7 @@ export interface CertificateEditParams {
 }
 
 export interface CertificateGetParams {
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Certificates {

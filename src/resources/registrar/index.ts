@@ -11,5 +11,3 @@ export {
   type DomainGetParams,
 } from './domains';
 export { Registrar } from './registrar';
-export { RegistrationStatus, type RegistrationStatusGetParams } from './registration-status';
-export { UpdateStatus, type UpdateStatusGetParams } from './update-status';

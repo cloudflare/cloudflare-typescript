@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
@@ -19,16 +18,8 @@ export class DNS extends APIResource {
    * }
    * ```
    */
-  list(params?: DNSListParams, options?: Core.RequestOptions): Core.PagePromise<DNSV4PagePagination, DNS>;
-  list(options?: Core.RequestOptions): Core.PagePromise<DNSV4PagePagination, DNS>;
-  list(
-    params: DNSListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSV4PagePagination, DNS> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: DNSListParams, options?: Core.RequestOptions): Core.PagePromise<DNSV4PagePagination, DNS> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSV4PagePagination, {
       query,
       ...options,
@@ -83,7 +74,7 @@ export interface DNSListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param

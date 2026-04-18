@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class SecurityTXT extends APIResource {
@@ -17,18 +16,10 @@ export class SecurityTXT extends APIResource {
    * ```
    */
   update(
-    params?: SecurityTXTUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityTXTUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.APIPromise<SecurityTXTUpdateResponse>;
-  update(
-    params: SecurityTXTUpdateParams | Core.RequestOptions = {},
+    params: SecurityTXTUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecurityTXTUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/security-center/securitytxt`, { body, ...options });
   }
 
@@ -44,18 +35,10 @@ export class SecurityTXT extends APIResource {
    * ```
    */
   delete(
-    params?: SecurityTXTDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityTXTDeleteResponse>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<SecurityTXTDeleteResponse>;
-  delete(
-    params: SecurityTXTDeleteParams | Core.RequestOptions = {},
+    params: SecurityTXTDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecurityTXTDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/security-center/securitytxt`, options);
   }
 
@@ -70,16 +53,8 @@ export class SecurityTXT extends APIResource {
    * });
    * ```
    */
-  get(params?: SecurityTXTGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse>;
-  get(
-    params: SecurityTXTGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SecurityTXTGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: SecurityTXTGetParams, options?: Core.RequestOptions): Core.APIPromise<SecurityTXTGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/security-center/securitytxt`, options) as Core.APIPromise<{
         result: SecurityTXTGetResponse;
@@ -202,7 +177,7 @@ export interface SecurityTXTUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -254,14 +229,14 @@ export interface SecurityTXTDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SecurityTXTGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace SecurityTXT {

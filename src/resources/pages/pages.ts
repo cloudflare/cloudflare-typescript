@@ -6,15 +6,19 @@ import {
   Deployment,
   Project,
   ProjectCreateParams,
+  ProjectCreateResponse,
   ProjectDeleteParams,
   ProjectDeleteResponse,
   ProjectEditParams,
+  ProjectEditResponse,
   ProjectGetParams,
+  ProjectGetResponse,
   ProjectListParams,
+  ProjectListResponse,
+  ProjectListResponsesV4PagePaginationArray,
   ProjectPurgeBuildCacheParams,
   ProjectPurgeBuildCacheResponse,
   Projects,
-  ProjectsV4PagePaginationArray,
   Stage,
 } from './projects/projects';
 
@@ -23,7 +27,7 @@ export class Pages extends APIResource {
 }
 
 Pages.Projects = Projects;
-Pages.ProjectsV4PagePaginationArray = ProjectsV4PagePaginationArray;
+Pages.ProjectListResponsesV4PagePaginationArray = ProjectListResponsesV4PagePaginationArray;
 
 export declare namespace Pages {
   export {
@@ -31,9 +35,13 @@ export declare namespace Pages {
     type Deployment as Deployment,
     type Project as Project,
     type Stage as Stage,
+    type ProjectCreateResponse as ProjectCreateResponse,
+    type ProjectListResponse as ProjectListResponse,
     type ProjectDeleteResponse as ProjectDeleteResponse,
+    type ProjectEditResponse as ProjectEditResponse,
+    type ProjectGetResponse as ProjectGetResponse,
     type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
-    ProjectsV4PagePaginationArray as ProjectsV4PagePaginationArray,
+    ProjectListResponsesV4PagePaginationArray as ProjectListResponsesV4PagePaginationArray,
     type ProjectCreateParams as ProjectCreateParams,
     type ProjectListParams as ProjectListParams,
     type ProjectDeleteParams as ProjectDeleteParams,

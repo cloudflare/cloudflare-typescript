@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { type Response } from '../../_shims/index';
 
@@ -22,7 +21,7 @@ export class LOADocuments extends APIResource {
     params: LOADocumentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LOADocumentCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/addressing/loa_documents`,
@@ -48,19 +47,10 @@ export class LOADocuments extends APIResource {
    */
   get(
     loaDocumentId: string,
-    params?: LOADocumentGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  get(loaDocumentId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
-  get(
-    loaDocumentId: string,
-    params: LOADocumentGetParams | Core.RequestOptions = {},
+    params: LOADocumentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
-    if (isRequestOptions(params)) {
-      return this.get(loaDocumentId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/addressing/loa_documents/${loaDocumentId}/download`, {
       ...options,
       headers: { Accept: 'application/pdf', ...options?.headers },
@@ -112,7 +102,7 @@ export interface LOADocumentCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: LOA document to upload.
@@ -124,7 +114,7 @@ export interface LOADocumentGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace LOADocuments {

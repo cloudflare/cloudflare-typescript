@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
 
@@ -17,16 +16,8 @@ export class Analyze extends APIResource {
    * });
    * ```
    */
-  create(params?: AnalyzeCreateParams, options?: Core.RequestOptions): Core.APIPromise<AnalyzeCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<AnalyzeCreateResponse>;
-  create(
-    params: AnalyzeCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyzeCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+  create(params: AnalyzeCreateParams, options?: Core.RequestOptions): Core.APIPromise<AnalyzeCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/ssl/analyze`, { body, ...options }) as Core.APIPromise<{
         result: AnalyzeCreateResponse;
@@ -41,7 +32,7 @@ export interface AnalyzeCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: A ubiquitous bundle has the highest probability of being verified

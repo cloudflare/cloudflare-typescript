@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -26,7 +25,7 @@ export class Operations extends APIResource {
     params: OperationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/schema_validation/settings/operations/${operationId}`, {
         body,
@@ -49,20 +48,10 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params?: OperationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
-  list(
-    params: OperationListParams | Core.RequestOptions = {},
+    params: OperationListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/schema_validation/settings/operations`,
       OperationListResponsesV4PagePaginationArray,
@@ -85,19 +74,10 @@ export class Operations extends APIResource {
    */
   delete(
     operationId: string,
-    params?: OperationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationDeleteResponse>;
-  delete(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationDeleteResponse>;
-  delete(
-    operationId: string,
-    params: OperationDeleteParams | Core.RequestOptions = {},
+    params: OperationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(operationId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/schema_validation/settings/operations/${operationId}`,
@@ -128,7 +108,7 @@ export class Operations extends APIResource {
     params: OperationBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationBulkEditResponse> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/settings/operations`, {
         body: body,
@@ -152,19 +132,10 @@ export class Operations extends APIResource {
    */
   get(
     operationId: string,
-    params?: OperationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationGetResponse>;
-  get(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationGetResponse>;
-  get(
-    operationId: string,
-    params: OperationGetParams | Core.RequestOptions = {},
+    params: OperationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(operationId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/schema_validation/settings/operations/${operationId}`,
@@ -270,7 +241,7 @@ export interface OperationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: When set, this applies a mitigation action to this operation
@@ -289,21 +260,21 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OperationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OperationBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -331,7 +302,7 @@ export interface OperationGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;

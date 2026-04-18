@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as OutputsAPI from './outputs';
 import {
@@ -28,16 +27,8 @@ export class LiveInputs extends APIResource {
    * });
    * ```
    */
-  create(params?: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput>;
-  create(options?: Core.RequestOptions): Core.APIPromise<LiveInput>;
-  create(
-    params: LiveInputCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInput> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  create(params: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/live_inputs`, {
         body,
@@ -62,7 +53,7 @@ export class LiveInputs extends APIResource {
     params: LiveInputUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LiveInput> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
         body,
@@ -82,16 +73,8 @@ export class LiveInputs extends APIResource {
    * });
    * ```
    */
-  list(params?: LiveInputListParams, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse>;
-  list(
-    params: LiveInputListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInputListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: LiveInputListParams, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse> {
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/live_inputs`, {
         query,
@@ -114,19 +97,10 @@ export class LiveInputs extends APIResource {
    */
   delete(
     liveInputIdentifier: string,
-    params?: LiveInputDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  delete(liveInputIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    liveInputIdentifier: string,
-    params: LiveInputDeleteParams | Core.RequestOptions = {},
+    params: LiveInputDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete(liveInputIdentifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -146,19 +120,10 @@ export class LiveInputs extends APIResource {
    */
   get(
     liveInputIdentifier: string,
-    params?: LiveInputGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInput>;
-  get(liveInputIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<LiveInput>;
-  get(
-    liveInputIdentifier: string,
-    params: LiveInputGetParams | Core.RequestOptions = {},
+    params: LiveInputGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LiveInput> {
-    if (isRequestOptions(params)) {
-      return this.get(liveInputIdentifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`,
@@ -449,7 +414,7 @@ export interface LiveInputCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Sets the creator ID asssociated with this live input.
@@ -531,7 +496,7 @@ export interface LiveInputUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Sets the creator ID asssociated with this live input.
@@ -613,7 +578,7 @@ export interface LiveInputListParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Includes the total number of videos associated with the submitted
@@ -626,14 +591,14 @@ export interface LiveInputDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface LiveInputGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 LiveInputs.Outputs = Outputs;

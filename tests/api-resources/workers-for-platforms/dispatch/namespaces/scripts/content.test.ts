@@ -44,8 +44,7 @@ describe('resource content', () => {
     );
   });
 
-  // Mock server doesn't support string responses
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await client.workersForPlatforms.dispatch.namespaces.scripts.content.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
