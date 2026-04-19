@@ -45,6 +45,69 @@ describe('resource asns', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
+  test('asSet', async () => {
+    const responsePromise = client.radar.entities.asns.asSet(3);
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('asSet: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.radar.entities.asns.asSet(3, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
+  });
+
+  test('asSet: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.entities.asns.asSet(3, { format: 'JSON' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('botnetThreatFeed', async () => {
+    const responsePromise = client.radar.entities.asns.botnetThreatFeed();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('botnetThreatFeed: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.entities.asns.botnetThreatFeed({ path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('botnetThreatFeed: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.radar.entities.asns.botnetThreatFeed(
+        {
+          asn: ['string'],
+          compareDateRange: '7d',
+          date: '2026-02-04',
+          format: 'JSON',
+          limit: 1,
+          location: 'US',
+          metric: 'OFFENSE_COUNT',
+          offset: 0,
+          sortOrder: 'ASC',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('get', async () => {
     const responsePromise = client.radar.entities.asns.get(174);
     const rawResponse = await responsePromise.asResponse();

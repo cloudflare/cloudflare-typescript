@@ -103,7 +103,11 @@ export class Applications extends APIResource {
     params: ApplicationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -149,7 +153,11 @@ export class Applications extends APIResource {
     params: ApplicationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -201,7 +209,11 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id, ...query } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...query
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -251,7 +263,8 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -302,7 +315,8 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -356,7 +370,8 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.revokeTokens(appId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -1566,14 +1581,14 @@ export namespace ApplicationPolicy {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -2679,7 +2694,7 @@ export type ApplicationCreateResponse =
   | ApplicationCreateResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationCreateResponse.BookmarkApplication
   | ApplicationCreateResponse.InfrastructureApplication
-  | ApplicationCreateResponse.BrowserRdpApplication
+  | ApplicationCreateResponse.BrowserRDPApplication
   | ApplicationCreateResponse.McpServerApplication
   | ApplicationCreateResponse.McpServerPortalApplication;
 
@@ -3139,14 +3154,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -3449,14 +3464,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -4061,14 +4076,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -4673,14 +4688,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -5070,14 +5085,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -5282,14 +5297,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -5494,14 +5509,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -5706,14 +5721,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -5897,14 +5912,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -6095,14 +6110,14 @@ export namespace ApplicationCreateResponse {
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -6180,9 +6195,9 @@ export namespace ApplicationCreateResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -6205,7 +6220,7 @@ export namespace ApplicationCreateResponse {
     /**
      * Configures multi-factor authentication (MFA) settings.
      */
-    mfa_config?: BrowserRdpApplication.MfaConfig;
+    mfa_config?: BrowserRDPApplication.MfaConfig;
 
     /**
      * The name of the application.
@@ -6219,7 +6234,7 @@ export namespace ApplicationCreateResponse {
      * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
      * for OAuth 2.0). This feature is currently in beta.
      */
-    oauth_configuration?: BrowserRdpApplication.OAuthConfiguration;
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -6233,7 +6248,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -6256,7 +6271,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -6298,7 +6313,7 @@ export namespace ApplicationCreateResponse {
     use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -6570,14 +6585,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -7074,14 +7089,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -7584,14 +7599,14 @@ export namespace ApplicationCreateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -7739,7 +7754,7 @@ export type ApplicationUpdateResponse =
   | ApplicationUpdateResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationUpdateResponse.BookmarkApplication
   | ApplicationUpdateResponse.InfrastructureApplication
-  | ApplicationUpdateResponse.BrowserRdpApplication
+  | ApplicationUpdateResponse.BrowserRDPApplication
   | ApplicationUpdateResponse.McpServerApplication
   | ApplicationUpdateResponse.McpServerPortalApplication;
 
@@ -8199,14 +8214,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -8509,14 +8524,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -9121,14 +9136,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -9733,14 +9748,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -10130,14 +10145,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -10342,14 +10357,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -10554,14 +10569,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -10766,14 +10781,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -10957,14 +10972,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -11155,14 +11170,14 @@ export namespace ApplicationUpdateResponse {
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -11240,9 +11255,9 @@ export namespace ApplicationUpdateResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -11265,7 +11280,7 @@ export namespace ApplicationUpdateResponse {
     /**
      * Configures multi-factor authentication (MFA) settings.
      */
-    mfa_config?: BrowserRdpApplication.MfaConfig;
+    mfa_config?: BrowserRDPApplication.MfaConfig;
 
     /**
      * The name of the application.
@@ -11279,7 +11294,7 @@ export namespace ApplicationUpdateResponse {
      * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
      * for OAuth 2.0). This feature is currently in beta.
      */
-    oauth_configuration?: BrowserRdpApplication.OAuthConfiguration;
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -11293,7 +11308,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -11316,7 +11331,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -11358,7 +11373,7 @@ export namespace ApplicationUpdateResponse {
     use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -11630,14 +11645,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -12134,14 +12149,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -12644,14 +12659,14 @@ export namespace ApplicationUpdateResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -12799,7 +12814,7 @@ export type ApplicationListResponse =
   | ApplicationListResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationListResponse.BookmarkApplication
   | ApplicationListResponse.InfrastructureApplication
-  | ApplicationListResponse.BrowserRdpApplication
+  | ApplicationListResponse.BrowserRDPApplication
   | ApplicationListResponse.McpServerApplication
   | ApplicationListResponse.McpServerPortalApplication;
 
@@ -13259,14 +13274,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -13569,14 +13584,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -14181,14 +14196,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -14793,14 +14808,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -15190,14 +15205,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -15402,14 +15417,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -15614,14 +15629,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -15826,14 +15841,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -16017,14 +16032,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -16215,14 +16230,14 @@ export namespace ApplicationListResponse {
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -16300,9 +16315,9 @@ export namespace ApplicationListResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -16325,7 +16340,7 @@ export namespace ApplicationListResponse {
     /**
      * Configures multi-factor authentication (MFA) settings.
      */
-    mfa_config?: BrowserRdpApplication.MfaConfig;
+    mfa_config?: BrowserRDPApplication.MfaConfig;
 
     /**
      * The name of the application.
@@ -16339,7 +16354,7 @@ export namespace ApplicationListResponse {
      * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
      * for OAuth 2.0). This feature is currently in beta.
      */
-    oauth_configuration?: BrowserRdpApplication.OAuthConfiguration;
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -16353,7 +16368,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -16376,7 +16391,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -16418,7 +16433,7 @@ export namespace ApplicationListResponse {
     use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -16690,14 +16705,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -17194,14 +17209,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -17704,14 +17719,14 @@ export namespace ApplicationListResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -17866,7 +17881,7 @@ export type ApplicationGetResponse =
   | ApplicationGetResponse.GatewayIdentityProxyEndpointApplication
   | ApplicationGetResponse.BookmarkApplication
   | ApplicationGetResponse.InfrastructureApplication
-  | ApplicationGetResponse.BrowserRdpApplication
+  | ApplicationGetResponse.BrowserRDPApplication
   | ApplicationGetResponse.McpServerApplication
   | ApplicationGetResponse.McpServerPortalApplication;
 
@@ -18326,14 +18341,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -18636,14 +18651,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -19248,14 +19263,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -19860,14 +19875,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -20257,14 +20272,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -20469,14 +20484,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -20681,14 +20696,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -20893,14 +20908,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -21084,14 +21099,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -21282,14 +21297,14 @@ export namespace ApplicationGetResponse {
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * The primary hostname and path secured by Access. This domain will be displayed
      * if the app is visible in the App Launcher.
      */
     domain: string;
 
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * The application type.
@@ -21367,9 +21382,9 @@ export namespace ApplicationGetResponse {
      * `destinations` are provided, then `self_hosted_domains` will be ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -21392,7 +21407,7 @@ export namespace ApplicationGetResponse {
     /**
      * Configures multi-factor authentication (MFA) settings.
      */
-    mfa_config?: BrowserRdpApplication.MfaConfig;
+    mfa_config?: BrowserRDPApplication.MfaConfig;
 
     /**
      * The name of the application.
@@ -21406,7 +21421,7 @@ export namespace ApplicationGetResponse {
      * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
      * for OAuth 2.0). This feature is currently in beta.
      */
-    oauth_configuration?: BrowserRdpApplication.OAuthConfiguration;
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Allows options preflight requests to bypass Access authentication and go
@@ -21420,7 +21435,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<BrowserRdpApplication.Policy>;
+    policies?: Array<BrowserRDPApplication.Policy>;
 
     /**
      * Allows matching Access Service Tokens passed HTTP in a single header with this
@@ -21443,7 +21458,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated List of public domains that Access will secure. This field is
@@ -21485,7 +21500,7 @@ export namespace ApplicationGetResponse {
     use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -21757,14 +21772,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -22261,14 +22276,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -22771,14 +22786,14 @@ export namespace ApplicationGetResponse {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -22928,7 +22943,7 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.GatewayIdentityProxyEndpointApplication
   | ApplicationCreateParams.BookmarkApplication
   | ApplicationCreateParams.InfrastructureApplication
-  | ApplicationCreateParams.BrowserRdpApplication
+  | ApplicationCreateParams.BrowserRDPApplication
   | ApplicationCreateParams.McpServerApplication
   | ApplicationCreateParams.McpServerPortalApplication;
 
@@ -23385,14 +23400,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -23690,14 +23705,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -24299,14 +24314,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -24908,14 +24923,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -25289,14 +25304,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -25486,14 +25501,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -25683,14 +25698,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -25891,14 +25906,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -26073,14 +26088,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -26270,7 +26285,7 @@ export declare namespace ApplicationCreateParams {
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * Body param: The primary hostname and path secured by Access. This domain will be
      * displayed if the app is visible in the App Launcher.
@@ -26280,7 +26295,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param
      */
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * Body param: The application type.
@@ -26365,9 +26380,9 @@ export declare namespace ApplicationCreateParams {
      * ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -26390,7 +26405,7 @@ export declare namespace ApplicationCreateParams {
     /**
      * Body param: Configures multi-factor authentication (MFA) settings.
      */
-    mfa_config?: BrowserRdpApplication.MfaConfig;
+    mfa_config?: BrowserRDPApplication.MfaConfig;
 
     /**
      * Body param: The name of the application.
@@ -26404,7 +26419,7 @@ export declare namespace ApplicationCreateParams {
      * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
      * for OAuth 2.0). This feature is currently in beta.
      */
-    oauth_configuration?: BrowserRdpApplication.OAuthConfiguration;
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -26424,7 +26439,7 @@ export declare namespace ApplicationCreateParams {
      * policies exclusive to the application. Reusable and inline policies are mutually
      * exclusive.
      */
-    policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+    policies?: Array<BrowserRDPApplication.AccessAppPolicyLink | string | BrowserRDPApplication.UnionMember2>;
 
     /**
      * Body param: Allows matching Access Service Tokens passed HTTP in a single header
@@ -26447,7 +26462,7 @@ export declare namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated Body param: List of public domains that Access will secure. This
@@ -26490,7 +26505,7 @@ export declare namespace ApplicationCreateParams {
     use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -26745,14 +26760,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -27242,14 +27257,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -27747,14 +27762,14 @@ export declare namespace ApplicationCreateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -27902,7 +27917,7 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.GatewayIdentityProxyEndpointApplication
   | ApplicationUpdateParams.BookmarkApplication
   | ApplicationUpdateParams.InfrastructureApplication
-  | ApplicationUpdateParams.BrowserRdpApplication
+  | ApplicationUpdateParams.BrowserRDPApplication
   | ApplicationUpdateParams.McpServerApplication
   | ApplicationUpdateParams.McpServerPortalApplication;
 
@@ -28359,14 +28374,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -28664,14 +28679,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -29273,14 +29288,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -29882,14 +29897,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -30263,14 +30278,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -30460,14 +30475,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -30657,14 +30672,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -30865,14 +30880,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -31047,14 +31062,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -31244,7 +31259,7 @@ export declare namespace ApplicationUpdateParams {
     }
   }
 
-  export interface BrowserRdpApplication {
+  export interface BrowserRDPApplication {
     /**
      * Body param: The primary hostname and path secured by Access. This domain will be
      * displayed if the app is visible in the App Launcher.
@@ -31254,7 +31269,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param
      */
-    target_criteria: Array<BrowserRdpApplication.TargetCriterion>;
+    target_criteria: Array<BrowserRDPApplication.TargetCriterion>;
 
     /**
      * Body param: The application type.
@@ -31339,9 +31354,9 @@ export declare namespace ApplicationUpdateParams {
      * ignored.
      */
     destinations?: Array<
-      | BrowserRdpApplication.PublicDestination
-      | BrowserRdpApplication.PrivateDestination
-      | BrowserRdpApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.PublicDestination
+      | BrowserRDPApplication.PrivateDestination
+      | BrowserRDPApplication.ViaMcpServerPortalDestination
     >;
 
     /**
@@ -31364,7 +31379,7 @@ export declare namespace ApplicationUpdateParams {
     /**
      * Body param: Configures multi-factor authentication (MFA) settings.
      */
-    mfa_config?: BrowserRdpApplication.MfaConfig;
+    mfa_config?: BrowserRDPApplication.MfaConfig;
 
     /**
      * Body param: The name of the application.
@@ -31378,7 +31393,7 @@ export declare namespace ApplicationUpdateParams {
      * [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707) (Resource Indicators
      * for OAuth 2.0). This feature is currently in beta.
      */
-    oauth_configuration?: BrowserRdpApplication.OAuthConfiguration;
+    oauth_configuration?: BrowserRDPApplication.OAuthConfiguration;
 
     /**
      * Body param: Allows options preflight requests to bypass Access authentication
@@ -31398,7 +31413,7 @@ export declare namespace ApplicationUpdateParams {
      * policies exclusive to the application. Reusable and inline policies are mutually
      * exclusive.
      */
-    policies?: Array<BrowserRdpApplication.AccessAppPolicyLink | string | BrowserRdpApplication.UnionMember2>;
+    policies?: Array<BrowserRDPApplication.AccessAppPolicyLink | string | BrowserRDPApplication.UnionMember2>;
 
     /**
      * Body param: Allows matching Access Service Tokens passed HTTP in a single header
@@ -31421,7 +31436,7 @@ export declare namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: BrowserRdpApplication.SCIMConfig;
+    scim_config?: BrowserRDPApplication.SCIMConfig;
 
     /**
      * @deprecated Body param: List of public domains that Access will secure. This
@@ -31464,7 +31479,7 @@ export declare namespace ApplicationUpdateParams {
     use_clientless_isolation_app_launcher_url?: boolean;
   }
 
-  export namespace BrowserRdpApplication {
+  export namespace BrowserRDPApplication {
     export interface TargetCriterion {
       /**
        * The port that the targets use for the chosen communication protocol. A port
@@ -31719,14 +31734,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -32216,14 +32231,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
@@ -32721,14 +32736,14 @@ export declare namespace ApplicationUpdateParams {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        rdp?: ConnectionRules.Rdp;
+        rdp?: ConnectionRules.RDP;
       }
 
       export namespace ConnectionRules {
         /**
          * The RDP-specific rules that define clipboard behavior for RDP connections.
          */
-        export interface Rdp {
+        export interface RDP {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */

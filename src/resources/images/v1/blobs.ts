@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { type Response } from '../../../_shims/index';
 
@@ -19,8 +20,17 @@ export class Blobs extends APIResource {
    * console.log(content);
    * ```
    */
-  get(imageId: string, params: BlobGetParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    const { account_id } = params;
+  get(imageId: string, params?: BlobGetParams, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  get(imageId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  get(
+    imageId: string,
+    params: BlobGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Response> {
+    if (isRequestOptions(params)) {
+      return this.get(imageId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/images/v1/${imageId}/blob`, {
       ...options,
       headers: { Accept: 'image/*', ...options?.headers },
@@ -33,7 +43,7 @@ export interface BlobGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Blobs {

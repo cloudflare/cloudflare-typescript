@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as RecordsAPI from './records';
 import * as Shared from '../shared';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Records extends APIResource {
   /**
@@ -28,7 +29,7 @@ export class Records extends APIResource {
    * ```
    */
   create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
         result: RecordResponse;
@@ -64,7 +65,7 @@ export class Records extends APIResource {
     params: RecordUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
@@ -87,10 +88,18 @@ export class Records extends APIResource {
    * ```
    */
   list(
-    params: RecordListParams,
+    params?: RecordListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RecordResponsesV4PagePaginationArray, RecordResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<RecordResponsesV4PagePaginationArray, RecordResponse>;
+  list(
+    params: RecordListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RecordResponsesV4PagePaginationArray, RecordResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/dns_records`, RecordResponsesV4PagePaginationArray, {
       query,
       ...options,
@@ -110,10 +119,19 @@ export class Records extends APIResource {
    */
   delete(
     dnsRecordId: string,
-    params: RecordDeleteParams,
+    params?: RecordDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordDeleteResponse>;
+  delete(dnsRecordId: string, options?: Core.RequestOptions): Core.APIPromise<RecordDeleteResponse>;
+  delete(
+    dnsRecordId: string,
+    params: RecordDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(dnsRecordId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
         result: RecordDeleteResponse;
@@ -147,8 +165,16 @@ export class Records extends APIResource {
    * });
    * ```
    */
-  batch(params: RecordBatchParams, options?: Core.RequestOptions): Core.APIPromise<RecordBatchResponse> {
-    const { zone_id, ...body } = params;
+  batch(params?: RecordBatchParams, options?: Core.RequestOptions): Core.APIPromise<RecordBatchResponse>;
+  batch(options?: Core.RequestOptions): Core.APIPromise<RecordBatchResponse>;
+  batch(
+    params: RecordBatchParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordBatchResponse> {
+    if (isRequestOptions(params)) {
+      return this.batch({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/dns_records/batch`, { body, ...options }) as Core.APIPromise<{
         result: RecordBatchResponse;
@@ -184,7 +210,7 @@ export class Records extends APIResource {
     params: RecordEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
         body,
@@ -209,8 +235,16 @@ export class Records extends APIResource {
    * });
    * ```
    */
-  export(params: RecordExportParams, options?: Core.RequestOptions): Core.APIPromise<string> {
-    const { zone_id } = params;
+  export(params?: RecordExportParams, options?: Core.RequestOptions): Core.APIPromise<string>;
+  export(options?: Core.RequestOptions): Core.APIPromise<string>;
+  export(
+    params: RecordExportParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<string> {
+    if (isRequestOptions(params)) {
+      return this.export({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.get(`/zones/${zone_id}/dns_records/export`, {
       ...options,
       headers: { Accept: 'text/plain', ...options?.headers },
@@ -230,10 +264,19 @@ export class Records extends APIResource {
    */
   get(
     dnsRecordId: string,
-    params: RecordGetParams,
+    params?: RecordGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordResponse>;
+  get(dnsRecordId: string, options?: Core.RequestOptions): Core.APIPromise<RecordResponse>;
+  get(
+    dnsRecordId: string,
+    params: RecordGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dnsRecordId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
         result: RecordResponse;
@@ -260,7 +303,7 @@ export class Records extends APIResource {
    * ```
    */
   import(params: RecordImportParams, options?: Core.RequestOptions): Core.APIPromise<RecordImportResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(
         `/zones/${zone_id}/dns_records/import`,
@@ -276,16 +319,116 @@ export class Records extends APIResource {
    * @deprecated This endpoint is deprecated in favor of a new asynchronous version. Please use the [/scan/trigger](https://developers.cloudflare.com/api/resources/dns/subresources/records/methods/scan/trigger) and [/scan/review](https://developers.cloudflare.com/api/resources/dns/subresources/records/methods/scan/review) endpoints instead.
    */
   scan(params: RecordScanParams, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/dns_records/scan`, { body: body, ...options }) as Core.APIPromise<{
         result: RecordScanResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Retrieves the list of DNS records discovered up to this point by the
+   * asynchronous scan. These records are temporary until explicitly accepted or
+   * rejected via `POST /scan/review`. Additional records may be discovered by the
+   * scan later.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const recordResponse of client.dns.records.scanList(
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  scanList(
+    params?: RecordScanListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RecordResponsesSinglePage, RecordResponse>;
+  scanList(options?: Core.RequestOptions): Core.PagePromise<RecordResponsesSinglePage, RecordResponse>;
+  scanList(
+    params: RecordScanListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RecordResponsesSinglePage, RecordResponse> {
+    if (isRequestOptions(params)) {
+      return this.scanList({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
+    return this._client.getAPIList(
+      `/zones/${zone_id}/dns_records/scan/review`,
+      RecordResponsesSinglePage,
+      options,
+    );
+  }
+
+  /**
+   * Accept or reject DNS records found by the DNS records scan. Accepted records
+   * will be permanently added to the zone, while rejected records will be
+   * permanently deleted.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.scanReview({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  scanReview(
+    params?: RecordScanReviewParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordScanReviewResponse>;
+  scanReview(options?: Core.RequestOptions): Core.APIPromise<RecordScanReviewResponse>;
+  scanReview(
+    params: RecordScanReviewParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordScanReviewResponse> {
+    if (isRequestOptions(params)) {
+      return this.scanReview({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
+    return (
+      this._client.post(`/zones/${zone_id}/dns_records/scan/review`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RecordScanReviewResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Initiates an asynchronous scan for common DNS records on your domain. Note that
+   * this **does not** automatically add records to your zone. The scan runs in the
+   * background, and results can be reviewed later using the `/scan/review`
+   * endpoints. Useful if you haven't updated your nameservers yet.
+   *
+   * @example
+   * ```ts
+   * const response = await client.dns.records.scanTrigger({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  scanTrigger(
+    params?: RecordScanTriggerParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordScanTriggerResponse>;
+  scanTrigger(options?: Core.RequestOptions): Core.APIPromise<RecordScanTriggerResponse>;
+  scanTrigger(
+    params: RecordScanTriggerParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecordScanTriggerResponse> {
+    if (isRequestOptions(params)) {
+      return this.scanTrigger({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
+    return this._client.post(`/zones/${zone_id}/dns_records/scan/trigger`, options);
+  }
 }
 
 export class RecordResponsesV4PagePaginationArray extends V4PagePaginationArray<RecordResponse> {}
+
+export class RecordResponsesSinglePage extends SinglePage<RecordResponse> {}
 
 export interface ARecord {
   /**
@@ -5872,6 +6015,57 @@ export interface RecordScanResponse {
   total_records_parsed?: number;
 }
 
+export interface RecordScanReviewResponse {
+  accepts?: Array<RecordResponse>;
+
+  rejects?: Array<string>;
+}
+
+export interface RecordScanTriggerResponse {
+  errors: Array<RecordScanTriggerResponse.Error>;
+
+  messages: Array<RecordScanTriggerResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
+export namespace RecordScanTriggerResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
 export type RecordCreateParams =
   | RecordCreateParams.ARecord
   | RecordCreateParams.AAAARecord
@@ -5900,7 +6094,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -5980,7 +6174,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6060,7 +6254,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6143,7 +6337,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6226,7 +6420,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6301,7 +6495,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6377,7 +6571,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6452,7 +6646,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6532,7 +6726,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6627,7 +6821,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6727,7 +6921,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6827,7 +7021,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -6927,7 +7121,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7022,7 +7216,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7162,7 +7356,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7272,7 +7466,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7372,7 +7566,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7474,7 +7668,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7569,7 +7763,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7664,7 +7858,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7764,7 +7958,7 @@ export declare namespace RecordCreateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7887,7 +8081,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -7967,7 +8161,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8047,7 +8241,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8130,7 +8324,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8213,7 +8407,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8288,7 +8482,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8364,7 +8558,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8439,7 +8633,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8519,7 +8713,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8614,7 +8808,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8714,7 +8908,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8814,7 +9008,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -8914,7 +9108,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9009,7 +9203,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9149,7 +9343,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9259,7 +9453,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9359,7 +9553,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9461,7 +9655,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9556,7 +9750,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9651,7 +9845,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9751,7 +9945,7 @@ export declare namespace RecordUpdateParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -9850,7 +10044,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param
@@ -10065,14 +10259,14 @@ export interface RecordDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RecordBatchParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -10223,7 +10417,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10303,7 +10497,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10383,7 +10577,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10466,7 +10660,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10549,7 +10743,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10624,7 +10818,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10700,7 +10894,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10775,7 +10969,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10855,7 +11049,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -10950,7 +11144,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11050,7 +11244,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11150,7 +11344,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11250,7 +11444,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11345,7 +11539,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11485,7 +11679,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11595,7 +11789,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11695,7 +11889,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11797,7 +11991,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11892,7 +12086,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -11987,7 +12181,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -12087,7 +12281,7 @@ export declare namespace RecordEditParams {
     /**
      * Path param: Identifier.
      */
-    zone_id: string;
+    zone_id?: string;
 
     /**
      * Body param: Complete DNS record name, including the zone name, in Punycode.
@@ -12186,21 +12380,21 @@ export interface RecordExportParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RecordGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RecordImportParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: BIND config to import.
@@ -12223,7 +12417,7 @@ export interface RecordScanParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -12231,7 +12425,139 @@ export interface RecordScanParams {
   body: unknown;
 }
 
+export interface RecordScanListParams {
+  /**
+   * Identifier.
+   */
+  zone_id?: string;
+}
+
+export interface RecordScanReviewParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id?: string;
+
+  /**
+   * Body param
+   */
+  accepts?: Array<
+    | ARecordParam
+    | AAAARecordParam
+    | CNAMERecordParam
+    | MXRecordParam
+    | NSRecordParam
+    | RecordScanReviewParams.DNSRecordsOpenpgpkeyRecord
+    | PTRRecordParam
+    | TXTRecordParam
+    | CAARecordParam
+    | CERTRecordParam
+    | DNSKEYRecordParam
+    | DSRecordParam
+    | HTTPSRecordParam
+    | LOCRecordParam
+    | NAPTRRecordParam
+    | SMIMEARecordParam
+    | SRVRecordParam
+    | SSHFPRecordParam
+    | SVCBRecordParam
+    | TLSARecordParam
+    | URIRecordParam
+  >;
+
+  /**
+   * Body param
+   */
+  rejects?: Array<RecordScanReviewParams.Reject>;
+}
+
+export namespace RecordScanReviewParams {
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Complete DNS record name, including the zone name, in Punycode.
+     */
+    name: string;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTLParam;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied?: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings?: DNSRecordsOpenpgpkeyRecord.Settings;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTagsParam>;
+  }
+
+  export namespace DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Settings for the DNS record.
+     */
+    export interface Settings {
+      /**
+       * When enabled, only A records will be generated, and AAAA records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv4_only?: boolean;
+
+      /**
+       * When enabled, only AAAA records will be generated, and A records will not be
+       * created. This setting is intended for exceptional cases. Note that this option
+       * only applies to proxied records and it has no effect on whether Cloudflare
+       * communicates with the origin using IPv4 or IPv6.
+       */
+      ipv6_only?: boolean;
+    }
+  }
+
+  export interface Reject {
+    /**
+     * Identifier.
+     */
+    id: string;
+  }
+}
+
+export interface RecordScanTriggerParams {
+  /**
+   * Identifier.
+   */
+  zone_id?: string;
+}
+
 Records.RecordResponsesV4PagePaginationArray = RecordResponsesV4PagePaginationArray;
+Records.RecordResponsesSinglePage = RecordResponsesSinglePage;
 
 export declare namespace Records {
   export {
@@ -12266,7 +12592,10 @@ export declare namespace Records {
     type RecordExportResponse as RecordExportResponse,
     type RecordImportResponse as RecordImportResponse,
     type RecordScanResponse as RecordScanResponse,
+    type RecordScanReviewResponse as RecordScanReviewResponse,
+    type RecordScanTriggerResponse as RecordScanTriggerResponse,
     RecordResponsesV4PagePaginationArray as RecordResponsesV4PagePaginationArray,
+    RecordResponsesSinglePage as RecordResponsesSinglePage,
     type RecordCreateParams as RecordCreateParams,
     type RecordUpdateParams as RecordUpdateParams,
     type RecordListParams as RecordListParams,
@@ -12277,5 +12606,8 @@ export declare namespace Records {
     type RecordGetParams as RecordGetParams,
     type RecordImportParams as RecordImportParams,
     type RecordScanParams as RecordScanParams,
+    type RecordScanListParams as RecordScanListParams,
+    type RecordScanReviewParams as RecordScanReviewParams,
+    type RecordScanTriggerParams as RecordScanTriggerParams,
   };
 }

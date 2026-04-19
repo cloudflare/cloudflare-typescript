@@ -3,4 +3,4 @@
 export { Malicious, type MaliciousGetResponse, type MaliciousGetParams } from './malicious';
 export { Spam, type SpamGetResponse, type SpamGetParams } from './spam';
 export { Spoof, type SpoofGetResponse, type SpoofGetParams } from './spoof';
-export { Tlds, type TldGetResponse, type TldGetParams } from './tlds';
+export { TLDs, type TLDGetResponse, type TLDGetParams } from './tlds';

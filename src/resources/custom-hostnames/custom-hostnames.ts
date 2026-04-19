@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
@@ -46,7 +47,7 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_hostnames`, { body, ...options }) as Core.APIPromise<{
         result: CustomHostnameCreateResponse;
@@ -68,10 +69,20 @@ export class CustomHostnames extends APIResource {
    * ```
    */
   list(
-    params: CustomHostnameListParams,
+    params?: CustomHostnameListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse>;
+  list(
+    params: CustomHostnameListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_hostnames`,
       CustomHostnameListResponsesV4PagePaginationArray,
@@ -93,10 +104,22 @@ export class CustomHostnames extends APIResource {
    */
   delete(
     customHostnameId: string,
-    params: CustomHostnameDeleteParams,
+    params?: CustomHostnameDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomHostnameDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomHostnameDeleteResponse>;
+  delete(
+    customHostnameId: string,
+    params: CustomHostnameDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customHostnameId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options);
   }
 
@@ -122,7 +145,7 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
         body,
@@ -145,10 +168,19 @@ export class CustomHostnames extends APIResource {
    */
   get(
     customHostnameId: string,
-    params: CustomHostnameGetParams,
+    params?: CustomHostnameGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomHostnameGetResponse>;
+  get(customHostnameId: string, options?: Core.RequestOptions): Core.APIPromise<CustomHostnameGetResponse>;
+  get(
+    customHostnameId: string,
+    params: CustomHostnameGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(customHostnameId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options) as Core.APIPromise<{
         result: CustomHostnameGetResponse;
@@ -2043,7 +2075,7 @@ export interface CustomHostnameCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The custom hostname that will point to your hostname via CNAME.
@@ -2178,7 +2210,7 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Hostname ID to match against. This ID was generated and returned
@@ -2285,14 +2317,14 @@ export interface CustomHostnameDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomHostnameEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Unique key/value metadata for this hostname. These are per-hostname
@@ -2437,7 +2469,7 @@ export interface CustomHostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomHostnames.CustomHostnameListResponsesV4PagePaginationArray =

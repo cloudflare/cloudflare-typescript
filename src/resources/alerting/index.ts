@@ -28,3 +28,18 @@ export {
   type PolicyDeleteParams,
   type PolicyGetParams,
 } from './policies';
+export {
+  SilenceUpdateResponsesSinglePage,
+  SilenceListResponsesSinglePage,
+  Silences,
+  type SilenceCreateResponse,
+  type SilenceUpdateResponse,
+  type SilenceListResponse,
+  type SilenceDeleteResponse,
+  type SilenceGetResponse,
+  type SilenceCreateParams,
+  type SilenceUpdateParams,
+  type SilenceListParams,
+  type SilenceDeleteParams,
+  type SilenceGetParams,
+} from './silences';

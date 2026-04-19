@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -26,7 +27,7 @@ export class Secrets extends APIResource {
     params: SecretUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}/secrets`, {
         body,
@@ -51,10 +52,22 @@ export class Secrets extends APIResource {
    */
   list(
     scriptName: string,
-    params: SecretListParams,
+    params?: SecretListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SecretListResponsesSinglePage, SecretListResponse>;
+  list(
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SecretListResponsesSinglePage, SecretListResponse>;
+  list(
+    scriptName: string,
+    params: SecretListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SecretListResponsesSinglePage, SecretListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/scripts/${scriptName}/secrets`,
       SecretListResponsesSinglePage,
@@ -77,10 +90,24 @@ export class Secrets extends APIResource {
   delete(
     scriptName: string,
     secretName: string,
-    params: SecretDeleteParams,
+    params?: SecretDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretDeleteResponse | null>;
+  delete(
+    scriptName: string,
+    secretName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretDeleteResponse | null>;
+  delete(
+    scriptName: string,
+    secretName: string,
+    params: SecretDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretDeleteResponse | null> {
-    const { account_id, url_encoded } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(scriptName, secretName, {}, params);
+    }
+    const { account_id = this._client.accountId, url_encoded } = params;
     return (
       this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`, {
         query: { url_encoded },
@@ -104,10 +131,24 @@ export class Secrets extends APIResource {
   get(
     scriptName: string,
     secretName: string,
-    params: SecretGetParams,
+    params?: SecretGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretGetResponse>;
+  get(
+    scriptName: string,
+    secretName: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretGetResponse>;
+  get(
+    scriptName: string,
+    secretName: string,
+    params: SecretGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SecretGetResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, secretName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/secrets/${secretName}`, {
         query,
@@ -289,7 +330,7 @@ export declare namespace SecretUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A JavaScript variable name for the binding.
@@ -311,7 +352,7 @@ export declare namespace SecretUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Algorithm-specific key parameters.
@@ -362,14 +403,14 @@ export interface SecretListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SecretDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Flag that indicates whether the secret name is URL encoded.
@@ -381,7 +422,7 @@ export interface SecretGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Flag that indicates whether the secret name is URL encoded.

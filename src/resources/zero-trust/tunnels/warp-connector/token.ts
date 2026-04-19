@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Token extends APIResource {
@@ -19,10 +20,19 @@ export class Token extends APIResource {
    */
   get(
     tunnelId: string,
-    params: TokenGetParams,
+    params?: TokenGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenGetResponse>;
+  get(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse>;
+  get(
+    tunnelId: string,
+    params: TokenGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(tunnelId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/warp_connector/${tunnelId}/token`,
@@ -42,7 +52,7 @@ export interface TokenGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Token {

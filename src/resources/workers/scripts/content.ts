@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ScriptsAPI from './scripts';
 import { type Response } from '../../../_shims/index';
@@ -26,7 +27,7 @@ export class Content extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptsAPI.Script> {
     const {
-      account_id,
+      account_id = this._client.accountId,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
       ...body
@@ -65,10 +66,19 @@ export class Content extends APIResource {
    */
   get(
     scriptName: string,
-    params: ContentGetParams,
+    params?: ContentGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Response>;
+  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  get(
+    scriptName: string,
+    params: ContentGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/content/v2`, {
       ...options,
       headers: { Accept: 'string', ...options?.headers },
@@ -81,7 +91,7 @@ export interface ContentUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -136,7 +146,7 @@ export interface ContentGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Content {

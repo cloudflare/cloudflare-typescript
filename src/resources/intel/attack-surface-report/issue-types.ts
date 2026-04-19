@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,10 +21,18 @@ export class IssueTypes extends APIResource {
    * ```
    */
   get(
-    params: IssueTypeGetParams,
+    params?: IssueTypeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IssueTypeGetResponsesSinglePage, IssueTypeGetResponse>;
+  get(options?: Core.RequestOptions): Core.PagePromise<IssueTypeGetResponsesSinglePage, IssueTypeGetResponse>;
+  get(
+    params: IssueTypeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<IssueTypeGetResponsesSinglePage, IssueTypeGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/intel/attack-surface-report/issue-types`,
       IssueTypeGetResponsesSinglePage,
@@ -40,7 +49,7 @@ export interface IssueTypeGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 IssueTypes.IssueTypeGetResponsesSinglePage = IssueTypeGetResponsesSinglePage;

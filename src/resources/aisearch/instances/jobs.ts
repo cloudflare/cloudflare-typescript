@@ -1,0 +1,275 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as Core from '../../../core';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+
+export class Jobs extends APIResource {
+  /**
+   * Creates a new indexing job for an AI Search instance.
+   *
+   * @example
+   * ```ts
+   * const job = await client.aiSearch.instances.jobs.create(
+   *   'my-ai-search',
+   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   * );
+   * ```
+   */
+  create(
+    id: string,
+    params?: JobCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobCreateResponse>;
+  create(id: string, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse>;
+  create(
+    id: string,
+    params: JobCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobCreateResponse> {
+    if (isRequestOptions(params)) {
+      return this.create(id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/jobs`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: JobCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists indexing jobs for an AI Search instance.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const jobListResponse of client.aiSearch.instances.jobs.list(
+   *   'my-ai-search',
+   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    id: string,
+    params?: JobListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse>;
+  list(
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse>;
+  list(
+    id: string,
+    params: JobListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list(id, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai-search/instances/${id}/jobs`,
+      JobListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Retrieves details for a specific AI Search indexing job.
+   *
+   * @example
+   * ```ts
+   * const job = await client.aiSearch.instances.jobs.get(
+   *   'my-ai-search',
+   *   'job_id',
+   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   * );
+   * ```
+   */
+  get(
+    id: string,
+    jobId: string,
+    params?: JobGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobGetResponse>;
+  get(id: string, jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse>;
+  get(
+    id: string,
+    jobId: string,
+    params: JobGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(id, jobId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/ai-search/instances/${id}/jobs/${jobId}`,
+        options,
+      ) as Core.APIPromise<{ result: JobGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists log entries for an AI Search indexing job.
+   *
+   * @example
+   * ```ts
+   * const response = await client.aiSearch.instances.jobs.logs(
+   *   'my-ai-search',
+   *   'job_id',
+   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   * );
+   * ```
+   */
+  logs(
+    id: string,
+    jobId: string,
+    params?: JobLogsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobLogsResponse>;
+  logs(id: string, jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobLogsResponse>;
+  logs(
+    id: string,
+    jobId: string,
+    params: JobLogsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobLogsResponse> {
+    if (isRequestOptions(params)) {
+      return this.logs(id, jobId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/ai-search/instances/${id}/jobs/${jobId}/logs`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: JobLogsResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export class JobListResponsesV4PagePaginationArray extends V4PagePaginationArray<JobListResponse> {}
+
+export interface JobCreateResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export interface JobListResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export interface JobGetResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export type JobLogsResponse = Array<JobLogsResponse.JobLogsResponseItem>;
+
+export namespace JobLogsResponse {
+  export interface JobLogsResponseItem {
+    id: number;
+
+    created_at: number;
+
+    message: string;
+
+    message_type: number;
+  }
+}
+
+export interface JobCreateParams {
+  /**
+   * Path param
+   */
+  account_id?: string;
+
+  /**
+   * Body param
+   */
+  description?: string;
+}
+
+export interface JobListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param
+   */
+  account_id?: string;
+}
+
+export interface JobGetParams {
+  account_id?: string;
+}
+
+export interface JobLogsParams {
+  /**
+   * Path param
+   */
+  account_id?: string;
+
+  /**
+   * Query param
+   */
+  page?: number;
+
+  /**
+   * Query param
+   */
+  per_page?: number;
+}
+
+Jobs.JobListResponsesV4PagePaginationArray = JobListResponsesV4PagePaginationArray;
+
+export declare namespace Jobs {
+  export {
+    type JobCreateResponse as JobCreateResponse,
+    type JobListResponse as JobListResponse,
+    type JobGetResponse as JobGetResponse,
+    type JobLogsResponse as JobLogsResponse,
+    JobListResponsesV4PagePaginationArray as JobListResponsesV4PagePaginationArray,
+    type JobCreateParams as JobCreateParams,
+    type JobListParams as JobListParams,
+    type JobGetParams as JobGetParams,
+    type JobLogsParams as JobLogsParams,
+  };
+}

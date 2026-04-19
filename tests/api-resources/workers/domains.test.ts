@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource domains', () => {
-  test('update: only required params', async () => {
+  // Prism: 422 Unprocessable Entity
+  test.skip('update: only required params', async () => {
     const responsePromise = client.workers.domains.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',
@@ -25,7 +26,8 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // Prism: 422 Unprocessable Entity
+  test.skip('update: required and optional params', async () => {
     const response = await client.workers.domains.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',

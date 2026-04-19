@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage } from '../../../../pagination';
 
@@ -21,10 +22,22 @@ export class FailedLogins extends APIResource {
    */
   list(
     userId: string,
-    params: FailedLoginListParams,
+    params?: FailedLoginListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<FailedLoginListResponsesSinglePage, FailedLoginListResponse>;
+  list(
+    userId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<FailedLoginListResponsesSinglePage, FailedLoginListResponse>;
+  list(
+    userId: string,
+    params: FailedLoginListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<FailedLoginListResponsesSinglePage, FailedLoginListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(userId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/users/${userId}/failed_logins`,
       FailedLoginListResponsesSinglePage,
@@ -45,7 +58,7 @@ export interface FailedLoginListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 FailedLogins.FailedLoginListResponsesSinglePage = FailedLoginListResponsesSinglePage;

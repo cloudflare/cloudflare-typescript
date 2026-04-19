@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SplitTunnelIncludesSinglePage } from '../policies';
@@ -29,7 +30,7 @@ export class Includes extends APIResource {
     params: IncludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/${policyId}/include`,
       SplitTunnelIncludesSinglePage,
@@ -54,10 +55,22 @@ export class Includes extends APIResource {
    */
   get(
     policyId: string,
-    params: IncludeGetParams,
+    params?: IncludeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude>;
+  get(
+    policyId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude>;
+  get(
+    policyId: string,
+    params: IncludeGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/${policyId}/include`,
       SplitTunnelIncludesSinglePage,
@@ -70,7 +83,7 @@ export interface IncludeUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -79,7 +92,7 @@ export interface IncludeUpdateParams {
 }
 
 export interface IncludeGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Includes {

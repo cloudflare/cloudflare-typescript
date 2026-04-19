@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -18,7 +19,7 @@ export class Locations extends APIResource {
    * ```
    */
   create(params: LocationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Location> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/locations`, {
         body,
@@ -47,7 +48,7 @@ export class Locations extends APIResource {
     params: LocationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Location> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/locations/${locationId}`, {
         body,
@@ -70,10 +71,18 @@ export class Locations extends APIResource {
    * ```
    */
   list(
-    params: LocationListParams,
+    params?: LocationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LocationsSinglePage, Location>;
+  list(options?: Core.RequestOptions): Core.PagePromise<LocationsSinglePage, Location>;
+  list(
+    params: LocationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LocationsSinglePage, Location> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/gateway/locations`, LocationsSinglePage, options);
   }
 
@@ -91,10 +100,19 @@ export class Locations extends APIResource {
    */
   delete(
     locationId: string,
-    params: LocationDeleteParams,
+    params?: LocationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationDeleteResponse>;
+  delete(locationId: string, options?: Core.RequestOptions): Core.APIPromise<LocationDeleteResponse>;
+  delete(
+    locationId: string,
+    params: LocationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(locationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/gateway/locations/${locationId}`,
@@ -117,10 +135,19 @@ export class Locations extends APIResource {
    */
   get(
     locationId: string,
-    params: LocationGetParams,
+    params?: LocationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Location>;
+  get(locationId: string, options?: Core.RequestOptions): Core.APIPromise<Location>;
+  get(
+    locationId: string,
+    params: LocationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Location> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(locationId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/locations/${locationId}`,
@@ -381,7 +408,7 @@ export interface LocationCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the location name.
@@ -433,7 +460,7 @@ export interface LocationUpdateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Specify the location name.
@@ -482,15 +509,15 @@ export namespace LocationUpdateParams {
 }
 
 export interface LocationListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LocationDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface LocationGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Locations.LocationsSinglePage = LocationsSinglePage;

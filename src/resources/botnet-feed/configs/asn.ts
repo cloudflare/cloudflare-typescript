@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class ASN extends APIResource {
@@ -9,10 +10,19 @@ export class ASN extends APIResource {
    */
   delete(
     asnId: number,
-    params: ASNDeleteParams,
+    params?: ASNDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ASNDeleteResponse>;
+  delete(asnId: number, options?: Core.RequestOptions): Core.APIPromise<ASNDeleteResponse>;
+  delete(
+    asnId: number,
+    params: ASNDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ASNDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(asnId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/botnet_feed/configs/asn/${asnId}`,
@@ -24,8 +34,16 @@ export class ASN extends APIResource {
   /**
    * Gets a list of all ASNs registered for a user for the DDoS Botnet Feed API.
    */
-  get(params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse> {
-    const { account_id } = params;
+  get(params?: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
+  get(
+    params: ASNGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ASNGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/botnet_feed/configs/asn`, options) as Core.APIPromise<{
         result: ASNGetResponse;
@@ -46,14 +64,14 @@ export interface ASNDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface ASNGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace ASN {

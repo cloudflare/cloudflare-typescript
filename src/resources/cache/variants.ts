@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Variants extends APIResource {
@@ -18,8 +19,16 @@ export class Variants extends APIResource {
    * });
    * ```
    */
-  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
-    const { zone_id } = params;
+  delete(params?: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse>;
+  delete(
+    params: VariantDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VariantDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
         result: VariantDeleteResponse;
@@ -43,7 +52,7 @@ export class Variants extends APIResource {
    * ```
    */
   edit(params: VariantEditParams, options?: Core.RequestOptions): Core.APIPromise<VariantEditResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/variants`, { body, ...options }) as Core.APIPromise<{
         result: VariantEditResponse;
@@ -65,8 +74,16 @@ export class Variants extends APIResource {
    * });
    * ```
    */
-  get(params: VariantGetParams, options?: Core.RequestOptions): Core.APIPromise<VariantGetResponse> {
-    const { zone_id } = params;
+  get(params?: VariantGetParams, options?: Core.RequestOptions): Core.APIPromise<VariantGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<VariantGetResponse>;
+  get(
+    params: VariantGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VariantGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
         result: VariantGetResponse;
@@ -305,14 +322,14 @@ export interface VariantDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Value of the zone setting.
@@ -397,7 +414,7 @@ export interface VariantGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Variants {

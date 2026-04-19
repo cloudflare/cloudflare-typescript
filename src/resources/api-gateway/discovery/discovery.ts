@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as OperationsAPI from './operations';
 import {
@@ -27,8 +28,16 @@ export class Discovery extends APIResource {
    * });
    * ```
    */
-  get(params: DiscoveryGetParams, options?: Core.RequestOptions): Core.APIPromise<DiscoveryGetResponse> {
-    const { zone_id } = params;
+  get(params?: DiscoveryGetParams, options?: Core.RequestOptions): Core.APIPromise<DiscoveryGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<DiscoveryGetResponse>;
+  get(
+    params: DiscoveryGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DiscoveryGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/discovery`, options) as Core.APIPromise<{
         result: DiscoveryGetResponse;
@@ -114,7 +123,7 @@ export interface DiscoveryGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Discovery.Operations = Operations;

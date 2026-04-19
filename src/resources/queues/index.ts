@@ -1,13 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  ConsumerListResponsesSinglePage,
+  ConsumersSinglePage,
   Consumers,
-  type ConsumerCreateResponse,
-  type ConsumerUpdateResponse,
-  type ConsumerListResponse,
+  type Consumer,
   type ConsumerDeleteResponse,
-  type ConsumerGetResponse,
   type ConsumerCreateParams,
   type ConsumerUpdateParams,
   type ConsumerListParams,
@@ -27,3 +24,17 @@ export {
 } from './messages';
 export { Purge, type PurgeStatusResponse, type PurgeStartParams, type PurgeStatusParams } from './purge';
 export { Queues } from './queues';
+export {
+  SubscriptionListResponsesV4PagePaginationArray,
+  Subscriptions,
+  type SubscriptionCreateResponse,
+  type SubscriptionUpdateResponse,
+  type SubscriptionListResponse,
+  type SubscriptionDeleteResponse,
+  type SubscriptionGetResponse,
+  type SubscriptionCreateParams,
+  type SubscriptionUpdateParams,
+  type SubscriptionListParams,
+  type SubscriptionDeleteParams,
+  type SubscriptionGetParams,
+} from './subscriptions';

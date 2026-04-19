@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import {
@@ -9,6 +10,11 @@ import {
   CustomCreateResponse,
   CustomDeleteParams,
   CustomDeleteResponse,
+  CustomGetParams,
+  CustomGetResponse,
+  CustomListParams,
+  CustomListResponse,
+  CustomListResponsesSinglePage,
   CustomUpdateParams,
   CustomUpdateResponse,
 } from './custom';
@@ -19,6 +25,11 @@ import {
   IntegrationCreateResponse,
   IntegrationDeleteParams,
   IntegrationDeleteResponse,
+  IntegrationGetParams,
+  IntegrationGetResponse,
+  IntegrationListParams,
+  IntegrationListResponse,
+  IntegrationListResponsesSinglePage,
   IntegrationUpdateParams,
   IntegrationUpdateResponse,
 } from './integration';
@@ -29,6 +40,11 @@ import {
   PredefinedCreateResponse,
   PredefinedDeleteParams,
   PredefinedDeleteResponse,
+  PredefinedGetParams,
+  PredefinedGetResponse,
+  PredefinedListParams,
+  PredefinedListResponse,
+  PredefinedListResponsesSinglePage,
   PredefinedUpdateParams,
   PredefinedUpdateResponse,
 } from './predefined';
@@ -54,7 +70,7 @@ export class Entries extends APIResource {
    * ```
    */
   create(params: EntryCreateParams, options?: Core.RequestOptions): Core.APIPromise<EntryCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries`, { body, ...options }) as Core.APIPromise<{
         result: EntryCreateResponse;
@@ -83,7 +99,7 @@ export class Entries extends APIResource {
     params: EntryUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/${entryId}`, {
         body,
@@ -106,10 +122,18 @@ export class Entries extends APIResource {
    * ```
    */
   list(
-    params: EntryListParams,
+    params?: EntryListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse>;
+  list(
+    params: EntryListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       EntryListResponsesSinglePage,
@@ -130,10 +154,19 @@ export class Entries extends APIResource {
    */
   delete(
     entryId: string,
-    params: EntryDeleteParams,
+    params?: EntryDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryDeleteResponse | null>;
+  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<EntryDeleteResponse | null>;
+  delete(
+    entryId: string,
+    params: EntryDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: EntryDeleteResponse | null;
@@ -154,10 +187,19 @@ export class Entries extends APIResource {
    */
   get(
     entryId: string,
-    params: EntryGetParams,
+    params?: EntryGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryGetResponse>;
+  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<EntryGetResponse>;
+  get(
+    entryId: string,
+    params: EntryGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(entryId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: EntryGetResponse;
@@ -742,7 +784,7 @@ export interface EntryCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -780,7 +822,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -812,7 +854,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -829,7 +871,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -844,21 +886,24 @@ export declare namespace EntryUpdateParams {
 }
 
 export interface EntryListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EntryDeleteParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export interface EntryGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Entries.EntryListResponsesSinglePage = EntryListResponsesSinglePage;
 Entries.Custom = Custom;
+Entries.CustomListResponsesSinglePage = CustomListResponsesSinglePage;
 Entries.Predefined = Predefined;
+Entries.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;
 Entries.Integration = Integration;
+Entries.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
 
 export declare namespace Entries {
   export {
@@ -879,29 +924,44 @@ export declare namespace Entries {
     Custom as Custom,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomUpdateResponse as CustomUpdateResponse,
+    type CustomListResponse as CustomListResponse,
     type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomGetResponse as CustomGetResponse,
+    CustomListResponsesSinglePage as CustomListResponsesSinglePage,
     type CustomCreateParams as CustomCreateParams,
     type CustomUpdateParams as CustomUpdateParams,
+    type CustomListParams as CustomListParams,
     type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
   };
 
   export {
     Predefined as Predefined,
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
+    type PredefinedListResponse as PredefinedListResponse,
     type PredefinedDeleteResponse as PredefinedDeleteResponse,
+    type PredefinedGetResponse as PredefinedGetResponse,
+    PredefinedListResponsesSinglePage as PredefinedListResponsesSinglePage,
     type PredefinedCreateParams as PredefinedCreateParams,
     type PredefinedUpdateParams as PredefinedUpdateParams,
+    type PredefinedListParams as PredefinedListParams,
     type PredefinedDeleteParams as PredefinedDeleteParams,
+    type PredefinedGetParams as PredefinedGetParams,
   };
 
   export {
     Integration as Integration,
     type IntegrationCreateResponse as IntegrationCreateResponse,
     type IntegrationUpdateResponse as IntegrationUpdateResponse,
+    type IntegrationListResponse as IntegrationListResponse,
     type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    type IntegrationGetResponse as IntegrationGetResponse,
+    IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
     type IntegrationCreateParams as IntegrationCreateParams,
     type IntegrationUpdateParams as IntegrationUpdateParams,
+    type IntegrationListParams as IntegrationListParams,
     type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationGetParams as IntegrationGetParams,
   };
 }

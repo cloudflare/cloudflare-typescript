@@ -55,6 +55,21 @@ describe('resource predefined', () => {
     );
   });
 
+  test('list: only required params', async () => {
+    const responsePromise = client.zeroTrust.dlp.entries.predefined.list({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.zeroTrust.dlp.entries.predefined.list({ account_id: 'account_id' });
+  });
+
   test('delete: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.entries.predefined.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -71,6 +86,27 @@ describe('resource predefined', () => {
 
   test('delete: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.entries.predefined.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.dlp.entries.predefined.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.dlp.entries.predefined.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },
     );

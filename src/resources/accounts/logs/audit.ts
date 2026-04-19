@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
+import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
 
 export class Audit extends APIResource {
   /**
@@ -25,17 +25,17 @@ export class Audit extends APIResource {
   list(
     params: AuditListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AuditListResponsesCursorLimitPagination, AuditListResponse> {
-    const { account_id, ...query } = params;
+  ): Core.PagePromise<AuditListResponsesCursorPaginationAfter, AuditListResponse> {
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/logs/audit`,
-      AuditListResponsesCursorLimitPagination,
+      AuditListResponsesCursorPaginationAfter,
       { query, ...options },
     );
   }
 }
 
-export class AuditListResponsesCursorLimitPagination extends CursorLimitPagination<AuditListResponse> {}
+export class AuditListResponsesCursorPaginationAfter extends CursorPaginationAfter<AuditListResponse> {}
 
 export interface AuditListResponse {
   /**
@@ -228,11 +228,11 @@ export namespace AuditListResponse {
   }
 }
 
-export interface AuditListParams extends CursorLimitPaginationParams {
+export interface AuditListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The unique id that identifies the account.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Limits the returned results to logs older than the specified date.
@@ -312,6 +312,13 @@ export interface AuditListParams extends CursorLimitPaginationParams {
    * Query param: Sets sorting order.
    */
   direction?: 'desc' | 'asc';
+
+  /**
+   * Query param: The number limits the objects to return. The cursor attribute may
+   * be used to iterate over the next batch of objects if there are more than the
+   * limit.
+   */
+  limit?: number;
 
   /**
    * Query param
@@ -526,12 +533,12 @@ export namespace AuditListParams {
   }
 }
 
-Audit.AuditListResponsesCursorLimitPagination = AuditListResponsesCursorLimitPagination;
+Audit.AuditListResponsesCursorPaginationAfter = AuditListResponsesCursorPaginationAfter;
 
 export declare namespace Audit {
   export {
     type AuditListResponse as AuditListResponse,
-    AuditListResponsesCursorLimitPagination as AuditListResponsesCursorLimitPagination,
+    AuditListResponsesCursorPaginationAfter as AuditListResponsesCursorPaginationAfter,
     type AuditListParams as AuditListParams,
   };
 }

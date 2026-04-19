@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource top', () => {
   test('ases', async () => {
-    const responsePromise = client.radar.netflows.top.ases();
+    const responsePromise = client.radar.netFlows.top.ases();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource top', () => {
 
   test('ases: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.netflows.top.ases({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.netFlows.top.ases({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -31,7 +31,7 @@ describe('resource top', () => {
   test('ases: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.top.ases(
+      client.radar.netFlows.top.ases(
         {
           asn: ['string'],
           continent: ['string'],
@@ -50,7 +50,7 @@ describe('resource top', () => {
   });
 
   test('locations', async () => {
-    const responsePromise = client.radar.netflows.top.locations();
+    const responsePromise = client.radar.netFlows.top.locations();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,7 +62,7 @@ describe('resource top', () => {
 
   test('locations: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.netflows.top.locations({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.netFlows.top.locations({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -70,7 +70,7 @@ describe('resource top', () => {
   test('locations: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.radar.netflows.top.locations(
+      client.radar.netFlows.top.locations(
         {
           asn: ['string'],
           continent: ['string'],

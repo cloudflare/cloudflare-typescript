@@ -19,7 +19,11 @@ export class Class extends APIResource {
     if (isRequestOptions(params)) {
       return this.get({}, params);
     }
-    const { account_id, zone_id, ...query } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...query
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

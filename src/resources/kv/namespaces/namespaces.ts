@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as KeysAPI from './keys';
 import {
@@ -47,7 +48,7 @@ export class Namespaces extends APIResource {
    * ```
    */
   create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<Namespace> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces`, {
         body,
@@ -75,7 +76,7 @@ export class Namespaces extends APIResource {
     params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Namespace> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
@@ -98,10 +99,18 @@ export class Namespaces extends APIResource {
    * ```
    */
   list(
-    params: NamespaceListParams,
+    params?: NamespaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace>;
+  list(options?: Core.RequestOptions): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace>;
+  list(
+    params: NamespaceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/storage/kv/namespaces`,
       NamespacesV4PagePaginationArray,
@@ -122,10 +131,19 @@ export class Namespaces extends APIResource {
    */
   delete(
     namespaceId: string,
-    params: NamespaceDeleteParams,
+    params?: NamespaceDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceDeleteResponse | null>;
+  delete(namespaceId: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceDeleteResponse | null>;
+  delete(
+    namespaceId: string,
+    params: NamespaceDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceDeleteResponse | null> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(namespaceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
@@ -154,7 +172,7 @@ export class Namespaces extends APIResource {
     params: NamespaceBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceBulkDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk/delete`, {
         body: body,
@@ -184,7 +202,7 @@ export class Namespaces extends APIResource {
     params: NamespaceBulkGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceBulkGetResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk/get`, {
         body,
@@ -217,7 +235,7 @@ export class Namespaces extends APIResource {
     params: NamespaceBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceBulkUpdateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
         body: body,
@@ -239,10 +257,19 @@ export class Namespaces extends APIResource {
    */
   get(
     namespaceId: string,
-    params: NamespaceGetParams,
+    params?: NamespaceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Namespace>;
+  get(namespaceId: string, options?: Core.RequestOptions): Core.APIPromise<Namespace>;
+  get(
+    namespaceId: string,
+    params: NamespaceGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Namespace> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(namespaceId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
@@ -307,8 +334,14 @@ export namespace NamespaceBulkGetResponse {
 
   export namespace WorkersKVBulkGetResultWithMetadata {
     export interface Values {
+      /**
+       * The metadata associated with the key.
+       */
       metadata: unknown;
 
+      /**
+       * The value associated with the key.
+       */
       value: unknown;
 
       /**
@@ -336,7 +369,7 @@ export interface NamespaceCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A human-readable string name for a Namespace.
@@ -348,7 +381,7 @@ export interface NamespaceUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: A human-readable string name for a Namespace.
@@ -360,7 +393,7 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Direction to order namespaces.
@@ -377,14 +410,14 @@ export interface NamespaceDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface NamespaceBulkDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -396,7 +429,7 @@ export interface NamespaceBulkGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Array of keys to retrieve (maximum of 100).
@@ -418,7 +451,7 @@ export interface NamespaceBulkUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -457,6 +490,9 @@ export namespace NamespaceBulkUpdateParams {
      */
     expiration_ttl?: number;
 
+    /**
+     * Arbitrary JSON that is associated with a key.
+     */
     metadata?: unknown;
   }
 }
@@ -465,7 +501,7 @@ export interface NamespaceGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;

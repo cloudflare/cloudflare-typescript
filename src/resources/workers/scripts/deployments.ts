@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Deployments extends APIResource {
@@ -33,14 +34,14 @@ export class Deployments extends APIResource {
     scriptName: string,
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentCreateResponse> {
-    const { account_id, force, ...body } = params;
+  ): Core.APIPromise<Deployment> {
+    const { account_id = this._client.accountId, force, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
         query: { force },
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DeploymentCreateResponse }>
+      }) as Core.APIPromise<{ result: Deployment }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,10 +60,19 @@ export class Deployments extends APIResource {
    */
   list(
     scriptName: string,
-    params: DeploymentListParams,
+    params?: DeploymentListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentListResponse>;
+  list(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<DeploymentListResponse>;
+  list(
+    scriptName: string,
+    params: DeploymentListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
@@ -88,10 +98,24 @@ export class Deployments extends APIResource {
   delete(
     scriptName: string,
     deploymentId: string,
-    params: DeploymentDeleteParams,
+    params?: DeploymentDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentDeleteResponse>;
+  delete(
+    scriptName: string,
+    deploymentId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentDeleteResponse>;
+  delete(
+    scriptName: string,
+    deploymentId: string,
+    params: DeploymentDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(scriptName, deploymentId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/scripts/${scriptName}/deployments/${deploymentId}`,
       options,
@@ -114,20 +138,30 @@ export class Deployments extends APIResource {
   get(
     scriptName: string,
     deploymentId: string,
-    params: DeploymentGetParams,
+    params?: DeploymentGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentGetResponse> {
-    const { account_id } = params;
+  ): Core.APIPromise<Deployment>;
+  get(scriptName: string, deploymentId: string, options?: Core.RequestOptions): Core.APIPromise<Deployment>;
+  get(
+    scriptName: string,
+    deploymentId: string,
+    params: DeploymentGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Deployment> {
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, deploymentId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/deployments/${deploymentId}`,
         options,
-      ) as Core.APIPromise<{ result: DeploymentGetResponse }>
+      ) as Core.APIPromise<{ result: Deployment }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface DeploymentCreateResponse {
+export interface Deployment {
   id: string;
 
   created_on: string;
@@ -136,14 +170,14 @@ export interface DeploymentCreateResponse {
 
   strategy: 'percentage';
 
-  versions: Array<DeploymentCreateResponse.Version>;
+  versions: Array<Deployment.Version>;
 
-  annotations?: DeploymentCreateResponse.Annotations;
+  annotations?: Deployment.Annotations;
 
   author_email?: string;
 }
 
-export namespace DeploymentCreateResponse {
+export namespace Deployment {
   export interface Version {
     percentage: number;
 
@@ -164,45 +198,7 @@ export namespace DeploymentCreateResponse {
 }
 
 export interface DeploymentListResponse {
-  deployments: Array<DeploymentListResponse.Deployment>;
-}
-
-export namespace DeploymentListResponse {
-  export interface Deployment {
-    id: string;
-
-    created_on: string;
-
-    source: string;
-
-    strategy: 'percentage';
-
-    versions: Array<Deployment.Version>;
-
-    annotations?: Deployment.Annotations;
-
-    author_email?: string;
-  }
-
-  export namespace Deployment {
-    export interface Version {
-      percentage: number;
-
-      version_id: string;
-    }
-
-    export interface Annotations {
-      /**
-       * Human-readable message about the deployment. Truncated to 1000 bytes if longer.
-       */
-      'workers/message'?: string;
-
-      /**
-       * Operation that triggered the creation of the deployment.
-       */
-      'workers/triggered_by'?: string;
-    }
-  }
+  deployments: Array<Deployment>;
 }
 
 export interface DeploymentDeleteResponse {
@@ -250,47 +246,11 @@ export namespace DeploymentDeleteResponse {
   }
 }
 
-export interface DeploymentGetResponse {
-  id: string;
-
-  created_on: string;
-
-  source: string;
-
-  strategy: 'percentage';
-
-  versions: Array<DeploymentGetResponse.Version>;
-
-  annotations?: DeploymentGetResponse.Annotations;
-
-  author_email?: string;
-}
-
-export namespace DeploymentGetResponse {
-  export interface Version {
-    percentage: number;
-
-    version_id: string;
-  }
-
-  export interface Annotations {
-    /**
-     * Human-readable message about the deployment. Truncated to 1000 bytes if longer.
-     */
-    'workers/message'?: string;
-
-    /**
-     * Operation that triggered the creation of the deployment.
-     */
-    'workers/triggered_by'?: string;
-  }
-}
-
 export interface DeploymentCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -334,29 +294,28 @@ export interface DeploymentListParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DeploymentDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DeploymentGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Deployments {
   export {
-    type DeploymentCreateResponse as DeploymentCreateResponse,
+    type Deployment as Deployment,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
-    type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentDeleteParams as DeploymentDeleteParams,

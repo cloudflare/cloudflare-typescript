@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -19,10 +20,20 @@ export class Domains extends APIResource {
    * ```
    */
   list(
-    params: DomainListParams,
+    params?: DomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainListResponsesV4PagePaginationArray, DomainListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainListResponsesV4PagePaginationArray, DomainListResponse>;
+  list(
+    params: DomainListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DomainListResponsesV4PagePaginationArray, DomainListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/domains`,
       DomainListResponsesV4PagePaginationArray,
@@ -43,10 +54,19 @@ export class Domains extends APIResource {
    */
   delete(
     domainId: number,
-    params: DomainDeleteParams,
+    params?: DomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainDeleteResponse>;
+  delete(domainId: number, options?: Core.RequestOptions): Core.APIPromise<DomainDeleteResponse>;
+  delete(
+    domainId: number,
+    params: DomainDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(domainId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email-security/settings/domains/${domainId}`,
@@ -70,10 +90,20 @@ export class Domains extends APIResource {
    * ```
    */
   bulkDelete(
-    params: DomainBulkDeleteParams,
+    params?: DomainBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse>;
+  bulkDelete(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse>;
+  bulkDelete(
+    params: DomainBulkDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.bulkDelete({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/domains`,
       DomainBulkDeleteResponsesSinglePage,
@@ -98,7 +128,7 @@ export class Domains extends APIResource {
     params: DomainEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/email-security/settings/domains/${domainId}`, {
         body,
@@ -120,10 +150,19 @@ export class Domains extends APIResource {
    */
   get(
     domainId: number,
-    params: DomainGetParams,
+    params?: DomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse>;
+  get(domainId: number, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>;
+  get(
+    domainId: number,
+    params: DomainGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(domainId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/settings/domains/${domainId}`,
@@ -377,7 +416,7 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filters response to domains with the currently active delivery
@@ -423,21 +462,21 @@ export interface DomainDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainBulkDeleteParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface DomainEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -510,7 +549,7 @@ export interface DomainGetParams {
   /**
    * Account Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Domains.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;

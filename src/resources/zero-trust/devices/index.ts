@@ -72,6 +72,17 @@ export {
 } from './devices';
 export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
 export {
+  IPProfilesSinglePage,
+  IPProfiles,
+  type IPProfile,
+  type IPProfileDeleteResponse,
+  type IPProfileCreateParams,
+  type IPProfileUpdateParams,
+  type IPProfileListParams,
+  type IPProfileDeleteParams,
+  type IPProfileGetParams,
+} from './ip-profiles';
+export {
   OverrideCodeListResponsesSinglePage,
   OverrideCodes,
   type OverrideCodeListResponse,

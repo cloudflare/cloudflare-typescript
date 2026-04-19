@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as UserSchemasAPI from '../api-gateway/user-schemas/user-schemas';
-import { PublicSchemasV4PagePaginationArray } from '../api-gateway/user-schemas/user-schemas';
-import { type V4PagePaginationArrayParams } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Schemas extends APIResource {
   /**
@@ -23,16 +22,13 @@ export class Schemas extends APIResource {
    *   });
    * ```
    */
-  create(
-    params: SchemaCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UserSchemasAPI.PublicSchema> {
-    const { zone_id, ...body } = params;
+  create(params: SchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublicSchema> {
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/schema_validation/schemas`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UserSchemasAPI.PublicSchema }>
+      }) as Core.APIPromise<{ result: PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,10 +46,18 @@ export class Schemas extends APIResource {
    * ```
    */
   list(
-    params: SchemaListParams,
+    params?: SchemaListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, UserSchemasAPI.PublicSchema> {
-    const { zone_id, ...query } = params;
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema>;
+  list(options?: Core.RequestOptions): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema>;
+  list(
+    params: SchemaListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/schema_validation/schemas`,
       PublicSchemasV4PagePaginationArray,
@@ -75,10 +79,19 @@ export class Schemas extends APIResource {
    */
   delete(
     schemaId: string,
-    params: SchemaDeleteParams,
+    params?: SchemaDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SchemaDeleteResponse>;
+  delete(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<SchemaDeleteResponse>;
+  delete(
+    schemaId: string,
+    params: SchemaDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SchemaDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/schema_validation/schemas/${schemaId}`,
@@ -104,13 +117,13 @@ export class Schemas extends APIResource {
     schemaId: string,
     params: SchemaEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserSchemasAPI.PublicSchema> {
-    const { zone_id, ...body } = params;
+  ): Core.APIPromise<PublicSchema> {
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UserSchemasAPI.PublicSchema }>
+      }) as Core.APIPromise<{ result: PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -129,17 +142,60 @@ export class Schemas extends APIResource {
    */
   get(
     schemaId: string,
-    params: SchemaGetParams,
+    params?: SchemaGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserSchemasAPI.PublicSchema> {
-    const { zone_id, ...query } = params;
+  ): Core.APIPromise<PublicSchema>;
+  get(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<PublicSchema>;
+  get(
+    schemaId: string,
+    params: SchemaGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PublicSchema> {
+    if (isRequestOptions(params)) {
+      return this.get(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: UserSchemasAPI.PublicSchema }>
+      }) as Core.APIPromise<{ result: PublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
+
+/**
+ * A schema used in schema validation
+ */
+export interface PublicSchema {
+  created_at: string;
+
+  /**
+   * The kind of the schema
+   */
+  kind: 'openapi_v3';
+
+  /**
+   * A human-readable name for the schema
+   */
+  name: string;
+
+  /**
+   * A unique identifier of this schema
+   */
+  schema_id: string;
+
+  /**
+   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   */
+  source: string;
+
+  /**
+   * An indicator if this schema is enabled
+   */
+  validation_enabled?: boolean;
 }
 
 export interface SchemaDeleteResponse {
@@ -153,7 +209,7 @@ export interface SchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The kind of the schema
@@ -180,7 +236,7 @@ export interface SchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -197,14 +253,14 @@ export interface SchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface SchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -216,7 +272,7 @@ export interface SchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -224,9 +280,13 @@ export interface SchemaGetParams {
   omit_source?: boolean;
 }
 
+Schemas.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
+
 export declare namespace Schemas {
   export {
+    type PublicSchema as PublicSchema,
     type SchemaDeleteResponse as SchemaDeleteResponse,
+    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaDeleteParams as SchemaDeleteParams,
@@ -234,5 +294,3 @@ export declare namespace Schemas {
     type SchemaGetParams as SchemaGetParams,
   };
 }
-
-export { PublicSchemasV4PagePaginationArray };

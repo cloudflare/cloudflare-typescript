@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
 import * as CloudflaredAPI from './cloudflared/cloudflared';
@@ -47,10 +48,20 @@ export class Tunnels extends APIResource {
    * ```
    */
   list(
-    params: TunnelListParams,
+    params?: TunnelListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse>;
+  list(
+    params: TunnelListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/tunnels`,
       TunnelListResponsesV4PagePaginationArray,
@@ -207,7 +218,7 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param

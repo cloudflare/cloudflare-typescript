@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
@@ -23,10 +24,18 @@ export class PolicyTests extends APIResource {
    * ```
    */
   create(
-    params: PolicyTestCreateParams,
+    params?: PolicyTestCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyTestCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<PolicyTestCreateResponse>;
+  create(
+    params: PolicyTestCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestCreateResponse> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/policy-tests`, {
         body,
@@ -49,10 +58,19 @@ export class PolicyTests extends APIResource {
    */
   get(
     policyTestId: string,
-    params: PolicyTestGetParams,
+    params?: PolicyTestGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyTestGetResponse>;
+  get(policyTestId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyTestGetResponse>;
+  get(
+    policyTestId: string,
+    params: PolicyTestGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyTestGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyTestId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/policy-tests/${policyTestId}`,
@@ -130,7 +148,7 @@ export interface PolicyTestCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -225,14 +243,14 @@ export namespace PolicyTestCreateParams {
       /**
        * The RDP-specific rules that define clipboard behavior for RDP connections.
        */
-      rdp?: ConnectionRules.Rdp;
+      rdp?: ConnectionRules.RDP;
     }
 
     export namespace ConnectionRules {
       /**
        * The RDP-specific rules that define clipboard behavior for RDP connections.
        */
-      export interface Rdp {
+      export interface RDP {
         /**
          * Clipboard formats allowed when copying from local machine to remote RDP session.
          */
@@ -273,7 +291,7 @@ export interface PolicyTestGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 PolicyTests.Users = Users;

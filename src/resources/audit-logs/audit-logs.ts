@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import { AuditLogsV4PagePaginationArray } from '../shared';
@@ -12,10 +13,18 @@ export class AuditLogs extends APIResource {
    * change, on which zone, and the timeframe of the change.
    */
   list(
-    params: AuditLogListParams,
+    params?: AuditLogListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>;
+  list(
+    params: AuditLogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/audit_logs`, AuditLogsV4PagePaginationArray, {
       query,
       ...options,
@@ -27,7 +36,7 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Finds a specific log by its ID.

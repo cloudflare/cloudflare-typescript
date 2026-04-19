@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ListsAPI from './lists';
-import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
+import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
 
 export class Items extends APIResource {
   /**
@@ -31,7 +32,7 @@ export class Items extends APIResource {
     params: ItemCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body: body,
@@ -66,7 +67,7 @@ export class Items extends APIResource {
     params: ItemUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body: body,
@@ -91,13 +92,25 @@ export class Items extends APIResource {
    */
   list(
     listId: string,
-    params: ItemListParams,
+    params?: ItemListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
-    const { account_id, ...query } = params;
+  ): Core.PagePromise<ItemListResponsesCursorPaginationAfter, ItemListResponse>;
+  list(
+    listId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ItemListResponsesCursorPaginationAfter, ItemListResponse>;
+  list(
+    listId: string,
+    params: ItemListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ItemListResponsesCursorPaginationAfter, ItemListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list(listId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/rules/lists/${listId}/items`,
-      ItemListResponsesCursorPagination,
+      ItemListResponsesCursorPaginationAfter,
       { query, ...options },
     );
   }
@@ -124,7 +137,7 @@ export class Items extends APIResource {
     params: ItemDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemDeleteResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body,
@@ -148,10 +161,20 @@ export class Items extends APIResource {
   get(
     listId: string,
     itemId: string,
-    params: ItemGetParams,
+    params?: ItemGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemGetResponse>;
+  get(listId: string, itemId: string, options?: Core.RequestOptions): Core.APIPromise<ItemGetResponse>;
+  get(
+    listId: string,
+    itemId: string,
+    params: ItemGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(listId, itemId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/rules/lists/${listId}/items/${itemId}`,
@@ -161,9 +184,15 @@ export class Items extends APIResource {
   }
 }
 
-export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
+export class ItemListResponsesCursorPaginationAfter extends CursorPaginationAfter<ItemListResponse> {}
 
 export interface ListCursor {
+  after?: string;
+
+  before?: string;
+}
+
+export interface ListCursorParam {
   after?: string;
 
   before?: string;
@@ -190,7 +219,122 @@ export interface ItemUpdateResponse {
   operation_id: string;
 }
 
-export type ItemListResponse = unknown;
+export type ItemListResponse =
+  | ItemListResponse.ListsListItemIPFull
+  | ItemListResponse.ListsListItemHostnameFull
+  | ItemListResponse.ListsListItemRedirectFull
+  | ItemListResponse.ListsListItemASNFull;
+
+export namespace ItemListResponse {
+  export interface ListsListItemIPFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     */
+    ip: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemHostnameFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname: ListsAPI.Hostname;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemRedirectFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.Redirect;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemASNFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+}
 
 export interface ItemDeleteResponse {
   /**
@@ -199,13 +343,128 @@ export interface ItemDeleteResponse {
   operation_id: string;
 }
 
-export type ItemGetResponse = unknown;
+export type ItemGetResponse =
+  | ItemGetResponse.ListsListItemIPFull
+  | ItemGetResponse.ListsListItemHostnameFull
+  | ItemGetResponse.ListsListItemRedirectFull
+  | ItemGetResponse.ListsListItemASNFull;
+
+export namespace ItemGetResponse {
+  export interface ListsListItemIPFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
+     */
+    ip: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemHostnameFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
+     */
+    hostname: ListsAPI.Hostname;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemRedirectFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The definition of the redirect.
+     */
+    redirect: ListsAPI.Redirect;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+
+  export interface ListsListItemASNFull {
+    /**
+     * Defines the unique ID of the item in the List.
+     */
+    id: string;
+
+    /**
+     * Defines a non-negative 32 bit integer.
+     */
+    asn: number;
+
+    /**
+     * The RFC 3339 timestamp of when the list was created.
+     */
+    created_on: string;
+
+    /**
+     * The RFC 3339 timestamp of when the list was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * Defines an informative summary of the list item.
+     */
+    comment?: string;
+  }
+}
 
 export interface ItemCreateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -273,7 +532,7 @@ export interface ItemUpdateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -337,11 +596,17 @@ export namespace ItemUpdateParams {
   }
 }
 
-export interface ItemListParams extends CursorPaginationParams {
+export interface ItemListParams extends CursorPaginationAfterParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
+
+  /**
+   * Query param: Amount of results to include in each paginated response. A
+   * non-negative 32 bit integer.
+   */
+  per_page?: number;
 
   /**
    * Query param: A search query to filter returned items. Its meaning depends on the
@@ -355,7 +620,7 @@ export interface ItemDeleteParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -376,10 +641,10 @@ export interface ItemGetParams {
   /**
    * The Account ID for this resource.
    */
-  account_id: string;
+  account_id?: string;
 }
 
-Items.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
+Items.ItemListResponsesCursorPaginationAfter = ItemListResponsesCursorPaginationAfter;
 
 export declare namespace Items {
   export {
@@ -390,7 +655,7 @@ export declare namespace Items {
     type ItemListResponse as ItemListResponse,
     type ItemDeleteResponse as ItemDeleteResponse,
     type ItemGetResponse as ItemGetResponse,
-    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    ItemListResponsesCursorPaginationAfter as ItemListResponsesCursorPaginationAfter,
     type ItemCreateParams as ItemCreateParams,
     type ItemUpdateParams as ItemUpdateParams,
     type ItemListParams as ItemListParams,

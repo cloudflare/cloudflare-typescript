@@ -28,7 +28,7 @@ export class Prioritize extends APIResource {
     params: PrioritizeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomCertificatesSinglePage, CustomCertificatesAPI.CustomCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_certificates/prioritize`,
       CustomCertificatesSinglePage,
@@ -41,7 +41,7 @@ export interface PrioritizeUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Array of ordered certificates.

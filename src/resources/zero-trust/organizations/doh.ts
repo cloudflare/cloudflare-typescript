@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class DOH extends APIResource {
@@ -14,8 +15,16 @@ export class DOH extends APIResource {
    * );
    * ```
    */
-  update(params: DOHUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DOHUpdateResponse> {
-    const { account_id, ...body } = params;
+  update(params?: DOHUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DOHUpdateResponse>;
+  update(options?: Core.RequestOptions): Core.APIPromise<DOHUpdateResponse>;
+  update(
+    params: DOHUpdateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DOHUpdateResponse> {
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/organizations/doh`, {
         body,
@@ -34,8 +43,16 @@ export class DOH extends APIResource {
    * });
    * ```
    */
-  get(params: DOHGetParams, options?: Core.RequestOptions): Core.APIPromise<DOHGetResponse> {
-    const { account_id } = params;
+  get(params?: DOHGetParams, options?: Core.RequestOptions): Core.APIPromise<DOHGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<DOHGetResponse>;
+  get(
+    params: DOHGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DOHGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/access/organizations/doh`, options) as Core.APIPromise<{
         result: DOHGetResponse;
@@ -117,7 +134,7 @@ export interface DOHUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The duration the DoH JWT is valid for. Must be in the format `300ms`
@@ -137,7 +154,7 @@ export interface DOHGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace DOH {

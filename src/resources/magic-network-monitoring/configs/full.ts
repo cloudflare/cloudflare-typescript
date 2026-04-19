@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ConfigsAPI from './configs';
 
@@ -16,8 +17,16 @@ export class Full extends APIResource {
    *   });
    * ```
    */
-  get(params: FullGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigsAPI.Configuration> {
-    const { account_id } = params;
+  get(params?: FullGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigsAPI.Configuration>;
+  get(options?: Core.RequestOptions): Core.APIPromise<ConfigsAPI.Configuration>;
+  get(
+    params: FullGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigsAPI.Configuration> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/config/full`, options) as Core.APIPromise<{
         result: ConfigsAPI.Configuration;
@@ -27,7 +36,7 @@ export class Full extends APIResource {
 }
 
 export interface FullGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Full {

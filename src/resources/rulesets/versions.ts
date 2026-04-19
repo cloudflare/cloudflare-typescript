@@ -40,7 +40,8 @@ export class Versions extends APIResource {
     if (isRequestOptions(params)) {
       return this.list(rulesetId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -92,7 +93,8 @@ export class Versions extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(rulesetId, rulesetVersion, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -147,7 +149,8 @@ export class Versions extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(rulesetId, rulesetVersion, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as IPFSUniversalPathsAPI from './ipfs-universal-paths/ipfs-universal-paths';
 import { IPFSUniversalPaths } from './ipfs-universal-paths/ipfs-universal-paths';
@@ -24,7 +25,7 @@ export class Hostnames extends APIResource {
    * ```
    */
   create(params: HostnameCreateParams, options?: Core.RequestOptions): Core.APIPromise<Hostname> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/web3/hostnames`, { body, ...options }) as Core.APIPromise<{
         result: Hostname;
@@ -46,10 +47,18 @@ export class Hostnames extends APIResource {
    * ```
    */
   list(
-    params: HostnameListParams,
+    params?: HostnameListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HostnamesSinglePage, Hostname>;
+  list(options?: Core.RequestOptions): Core.PagePromise<HostnamesSinglePage, Hostname>;
+  list(
+    params: HostnameListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<HostnamesSinglePage, Hostname> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(`/zones/${zone_id}/web3/hostnames`, HostnamesSinglePage, options);
   }
 
@@ -66,10 +75,19 @@ export class Hostnames extends APIResource {
    */
   delete(
     identifier: string,
-    params: HostnameDeleteParams,
+    params?: HostnameDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HostnameDeleteResponse | null>;
+  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<HostnameDeleteResponse | null>;
+  delete(
+    identifier: string,
+    params: HostnameDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameDeleteResponse | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/web3/hostnames/${identifier}`, options) as Core.APIPromise<{
         result: HostnameDeleteResponse | null;
@@ -93,7 +111,7 @@ export class Hostnames extends APIResource {
     params: HostnameEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Hostname> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/web3/hostnames/${identifier}`, {
         body,
@@ -115,10 +133,19 @@ export class Hostnames extends APIResource {
    */
   get(
     identifier: string,
-    params: HostnameGetParams,
+    params?: HostnameGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Hostname>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<Hostname>;
+  get(
+    identifier: string,
+    params: HostnameGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Hostname> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/web3/hostnames/${identifier}`, options) as Core.APIPromise<{
         result: Hostname;
@@ -176,7 +203,7 @@ export interface HostnameCreateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Specify the hostname that points to the target gateway via CNAME.
@@ -203,21 +230,21 @@ export interface HostnameListParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HostnameDeleteParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface HostnameEditParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Specify an optional description of the hostname.
@@ -234,7 +261,7 @@ export interface HostnameGetParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Hostnames.HostnamesSinglePage = HostnamesSinglePage;

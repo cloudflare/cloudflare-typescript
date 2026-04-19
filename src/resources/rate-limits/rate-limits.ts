@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -15,7 +16,7 @@ export class RateLimits extends APIResource {
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   create(params: RateLimitCreateParams, options?: Core.RequestOptions): Core.APIPromise<RateLimit> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/rate_limits`, { body, ...options }) as Core.APIPromise<{
         result: RateLimit;
@@ -29,10 +30,18 @@ export class RateLimits extends APIResource {
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   list(
-    params: RateLimitListParams,
+    params?: RateLimitListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>;
+  list(options?: Core.RequestOptions): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>;
+  list(
+    params: RateLimitListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/rate_limits`, RateLimitsV4PagePaginationArray, {
       query,
       ...options,
@@ -46,10 +55,19 @@ export class RateLimits extends APIResource {
    */
   delete(
     rateLimitId: string,
-    params: RateLimitDeleteParams,
+    params?: RateLimitDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimitDeleteResponse>;
+  delete(rateLimitId: string, options?: Core.RequestOptions): Core.APIPromise<RateLimitDeleteResponse>;
+  delete(
+    rateLimitId: string,
+    params: RateLimitDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RateLimitDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(rateLimitId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/rate_limits/${rateLimitId}`, options) as Core.APIPromise<{
         result: RateLimitDeleteResponse;
@@ -67,7 +85,7 @@ export class RateLimits extends APIResource {
     params: RateLimitEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RateLimit> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/rate_limits/${rateLimitId}`, {
         body,
@@ -83,10 +101,19 @@ export class RateLimits extends APIResource {
    */
   get(
     rateLimitId: string,
-    params: RateLimitGetParams,
+    params?: RateLimitGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimit>;
+  get(rateLimitId: string, options?: Core.RequestOptions): Core.APIPromise<RateLimit>;
+  get(
+    rateLimitId: string,
+    params: RateLimitGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<RateLimit> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(rateLimitId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/rate_limits/${rateLimitId}`, options) as Core.APIPromise<{
         result: RateLimit;
@@ -468,7 +495,7 @@ export interface RateLimitCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to perform when the threshold of matched traffic within
@@ -621,21 +648,21 @@ export interface RateLimitListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RateLimitDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface RateLimitEditParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The action to perform when the threshold of matched traffic within
@@ -788,7 +815,7 @@ export interface RateLimitGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 RateLimits.RateLimitsV4PagePaginationArray = RateLimitsV4PagePaginationArray;

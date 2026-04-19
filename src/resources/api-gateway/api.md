@@ -35,6 +35,70 @@ Methods:
 - <code title="patch /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">bulkEdit</a>({ ...params }) -> OperationBulkEditResponse</code>
 - <code title="patch /zones/{zone_id}/api_gateway/discovery/operations/{operation_id}">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">edit</a>(operationId, { ...params }) -> OperationEditResponse</code>
 
+## Labels
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/labels.ts">LabelListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/labels">client.apiGateway.labels.<a href="./src/resources/api-gateway/labels/labels.ts">list</a>({ ...params }) -> LabelListResponsesV4PagePaginationArray</code>
+
+### User
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserUpdateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserBulkCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserEditResponse</a></code>
+- <code><a href="./src/resources/api-gateway/labels/user/user.ts">UserGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">update</a>(name, { ...params }) -> UserUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">delete</a>(name, { ...params }) -> UserDeleteResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/labels/user">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">bulkCreate</a>([ ...body ]) -> UserBulkCreateResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/labels/user">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">bulkDelete</a>({ ...params }) -> UserBulkDeleteResponsesSinglePage</code>
+- <code title="patch /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">edit</a>(name, { ...params }) -> UserEditResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/labels/user/{name}">client.apiGateway.labels.user.<a href="./src/resources/api-gateway/labels/user/user.ts">get</a>(name, { ...params }) -> UserGetResponse</code>
+
+#### Resources
+
+##### Operation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/user/resources/operation.ts">OperationUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/labels/user/{name}/resources/operation">client.apiGateway.labels.user.resources.operation.<a href="./src/resources/api-gateway/labels/user/resources/operation.ts">update</a>(name, { ...params }) -> OperationUpdateResponse</code>
+
+### Managed
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/managed/managed.ts">ManagedGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/labels/managed/{name}">client.apiGateway.labels.managed.<a href="./src/resources/api-gateway/labels/managed/managed.ts">get</a>(name, { ...params }) -> ManagedGetResponse</code>
+
+#### Resources
+
+##### Operation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/labels/managed/resources/operation.ts">OperationUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/labels/managed/{name}/resources/operation">client.apiGateway.labels.managed.resources.operation.<a href="./src/resources/api-gateway/labels/managed/resources/operation.ts">update</a>(name, { ...params }) -> OperationUpdateResponse</code>
+
 ## Operations
 
 Types:
@@ -56,18 +120,38 @@ Methods:
 - <code title="delete /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">bulkDelete</a>({ ...params }) -> OperationBulkDeleteResponse</code>
 - <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">get</a>(operationId, { ...params }) -> OperationGetResponse</code>
 
+### Labels
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelUpdateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelBulkCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelBulkDeleteResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/labels.ts">LabelBulkUpdateResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/operations/{operation_id}/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">create</a>(operationId, { ...params }) -> LabelCreateResponse</code>
+- <code title="put /zones/{zone_id}/api_gateway/operations/{operation_id}/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">update</a>(operationId, { ...params }) -> LabelUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations/{operation_id}/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">delete</a>(operationId, { ...params }) -> LabelDeleteResponse</code>
+- <code title="post /zones/{zone_id}/api_gateway/operations/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">bulkCreate</a>({ ...params }) -> LabelBulkCreateResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">bulkDelete</a>({ ...params }) -> LabelBulkDeleteResponsesSinglePage</code>
+- <code title="put /zones/{zone_id}/api_gateway/operations/labels">client.apiGateway.operations.labels.<a href="./src/resources/api-gateway/operations/labels.ts">bulkUpdate</a>({ ...params }) -> LabelBulkUpdateResponsesSinglePage</code>
+
 ### SchemaValidation
 
 Types:
 
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SettingsMultipleRequest</a></code>
 - <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationUpdateResponse</a></code>
-- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationEditResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationGetResponse</a></code>
 
 Methods:
 
 - <code title="put /zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">update</a>(operationId, { ...params }) -> SchemaValidationUpdateResponse</code>
-- <code title="patch /zones/{zone_id}/api_gateway/operations/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">edit</a>({ ...params }) -> SchemaValidationEditResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/operations/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">edit</a>({ ...params }) -> SettingsMultipleRequest</code>
 - <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">get</a>(operationId, { ...params }) -> SchemaValidationGetResponse</code>
 
 ## Schemas
@@ -82,39 +166,34 @@ Methods:
 
 ## Settings
 
-### SchemaValidation
-
 Types:
 
-- <code><a href="./src/resources/api-gateway/settings/schema-validation.ts">SchemaValidationUpdateResponse</a></code>
-- <code><a href="./src/resources/api-gateway/settings/schema-validation.ts">SchemaValidationEditResponse</a></code>
-- <code><a href="./src/resources/api-gateway/settings/schema-validation.ts">SchemaValidationGetResponse</a></code>
+- <code><a href="./src/resources/api-gateway/settings/settings.ts">Settings</a></code>
+
+### SchemaValidation
 
 Methods:
 
-- <code title="put /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">update</a>({ ...params }) -> SchemaValidationUpdateResponse</code>
-- <code title="patch /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">edit</a>({ ...params }) -> SchemaValidationEditResponse</code>
-- <code title="get /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">get</a>({ ...params }) -> SchemaValidationGetResponse</code>
+- <code title="put /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">update</a>({ ...params }) -> Settings</code>
+- <code title="patch /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">edit</a>({ ...params }) -> Settings</code>
+- <code title="get /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">get</a>({ ...params }) -> Settings</code>
 
 ## UserSchemas
 
 Types:
 
 - <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">Message</a></code>
-- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">PublicSchema</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">OldPublicSchema</a></code>
 - <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaCreateResponse</a></code>
-- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaListResponse</a></code>
 - <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaDeleteResponse</a></code>
-- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaEditResponse</a></code>
-- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaGetResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">create</a>({ ...params }) -> UserSchemaCreateResponse</code>
-- <code title="get /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">list</a>({ ...params }) -> UserSchemaListResponsesV4PagePaginationArray</code>
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">list</a>({ ...params }) -> OldPublicSchemasV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">delete</a>(schemaId, { ...params }) -> UserSchemaDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">edit</a>(schemaId, { ...params }) -> UserSchemaEditResponse</code>
-- <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">get</a>(schemaId, { ...params }) -> UserSchemaGetResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">edit</a>(schemaId, { ...params }) -> OldPublicSchema</code>
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">get</a>(schemaId, { ...params }) -> OldPublicSchema</code>
 
 ### Operations
 

@@ -19,7 +19,7 @@ export class Scrape extends APIResource {
    * ```
    */
   create(params: ScrapeCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScrapeCreateResponse> {
-    const { account_id, cacheTTL, ...body } = params;
+    const { account_id = this._client.accountId, cacheTTL, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/browser-rendering/scrape`, {
         query: { cacheTTL },
@@ -100,7 +100,7 @@ export declare namespace ScrapeCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param
@@ -373,7 +373,7 @@ export declare namespace ScrapeCreateParams {
     /**
      * Path param: Account ID.
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param

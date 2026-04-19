@@ -82,6 +82,21 @@ Methods:
 - <code title="delete /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">delete</a>(dexTestId, { ...params }) -> DEXTestDeleteResponse</code>
 - <code title="get /accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}">client.zeroTrust.devices.dexTests.<a href="./src/resources/zero-trust/devices/dex-tests.ts">get</a>(dexTestId, { ...params }) -> DEXTestGetResponse</code>
 
+### IPProfiles
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/ip-profiles.ts">IPProfile</a></code>
+- <code><a href="./src/resources/zero-trust/devices/ip-profiles.ts">IPProfileDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">create</a>({ ...params }) -> IPProfile</code>
+- <code title="patch /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">update</a>(profileId, { ...params }) -> IPProfile</code>
+- <code title="get /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">list</a>({ ...params }) -> IPProfilesSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">delete</a>(profileId, { ...params }) -> IPProfileDeleteResponse</code>
+- <code title="get /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">get</a>(profileId, { ...params }) -> IPProfile</code>
+
 ### Networks
 
 Types:
@@ -352,6 +367,48 @@ Methods:
 - <code title="patch /accounts/{account_id}/access/seats">client.zeroTrust.seats.<a href="./src/resources/zero-trust/seats.ts">edit</a>([ ...body ]) -> SeatsSinglePage</code>
 
 ## Access
+
+### AIControls
+
+#### Mcp
+
+##### Portals
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">PortalReadResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/portals">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">create</a>({ ...params }) -> PortalCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">update</a>(id, { ...params }) -> PortalUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/portals">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">list</a>({ ...params }) -> PortalListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">delete</a>(id, { ...params }) -> PortalDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/portals/{id}">client.zeroTrust.access.aiControls.mcp.portals.<a href="./src/resources/zero-trust/access/ai-controls/mcp/portals.ts">read</a>(id, { ...params }) -> PortalReadResponse</code>
+
+##### Servers
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerReadResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">ServerSyncResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/servers">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">create</a>({ ...params }) -> ServerCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">update</a>(id, { ...params }) -> ServerUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/servers">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">list</a>({ ...params }) -> ServerListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">delete</a>(id, { ...params }) -> ServerDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/ai-controls/mcp/servers/{id}">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">read</a>(id, { ...params }) -> ServerReadResponse</code>
+- <code title="post /accounts/{account_id}/access/ai-controls/mcp/servers/{id}/sync">client.zeroTrust.access.aiControls.mcp.servers.<a href="./src/resources/zero-trust/access/ai-controls/mcp/servers.ts">sync</a>(id, { ...params }) -> ServerSyncResponse</code>
 
 ### GatewayCA
 
@@ -652,11 +709,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">UserListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">UserGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">create</a>({ ...params }) -> UserCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/users/{user_id}">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">update</a>(userId, { ...params }) -> UserUpdateResponse</code>
 - <code title="get /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>({ ...params }) -> UserListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/access/users/{user_id}">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">delete</a>(userId, { ...params }) -> UserDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/access/users/{user_id}">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">get</a>(userId, { ...params }) -> UserGetResponse</code>
 
 #### ActiveSessions
 
@@ -898,6 +963,24 @@ Methods:
 - <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/network-path">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">networkPath</a>(testId, { ...params }) -> NetworkPathResponse</code>
 - <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/percentiles">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">percentiles</a>(testId, { ...params }) -> TracerouteTestPercentilesResponse</code>
 
+### Rules
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dex/rules.ts">RuleGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dex/rules">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">create</a>({ ...params }) -> RuleCreateResponse</code>
+- <code title="patch /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">update</a>(ruleId, { ...params }) -> RuleUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dex/rules">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">list</a>({ ...params }) -> RuleListResponsesV4PagePagination</code>
+- <code title="delete /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">get</a>(ruleId, { ...params }) -> RuleGetResponse</code>
+
 ## Tunnels
 
 Types:
@@ -997,6 +1080,36 @@ Methods:
 
 - <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/token">client.zeroTrust.tunnels.warpConnector.token.<a href="./src/resources/zero-trust/tunnels/warp-connector/token.ts">get</a>(tunnelId, { ...params }) -> TokenGetResponse</code>
 
+#### Connections
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/connections.ts">ConnectionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/connections">client.zeroTrust.tunnels.warpConnector.connections.<a href="./src/resources/zero-trust/tunnels/warp-connector/connections.ts">get</a>(tunnelId, { ...params }) -> ConnectionGetResponsesSinglePage</code>
+
+#### Connectors
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/connectors.ts">ConnectorGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/connectors/{connector_id}">client.zeroTrust.tunnels.warpConnector.connectors.<a href="./src/resources/zero-trust/tunnels/warp-connector/connectors.ts">get</a>(tunnelId, connectorId, { ...params }) -> ConnectorGetResponse</code>
+
+#### Failover
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/failover.ts">FailoverUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/warp_connector/{tunnel_id}/failover">client.zeroTrust.tunnels.warpConnector.failover.<a href="./src/resources/zero-trust/tunnels/warp-connector/failover.ts">update</a>(tunnelId, { ...params }) -> FailoverUpdateResponse | null</code>
+
 ## ConnectivitySettings
 
 Types:
@@ -1080,6 +1193,19 @@ Methods:
 - <code title="put /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">update</a>({ ...params }) -> PayloadLogUpdateResponse</code>
 - <code title="get /accounts/{account_id}/dlp/payload_log">client.zeroTrust.dlp.payloadLogs.<a href="./src/resources/zero-trust/dlp/payload-logs.ts">get</a>({ ...params }) -> PayloadLogGetResponse</code>
 
+### Settings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/settings.ts">DLPSettings</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">update</a>({ ...params }) -> DLPSettings</code>
+- <code title="delete /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">delete</a>({ ...params }) -> DLPSettings</code>
+- <code title="patch /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">edit</a>({ ...params }) -> DLPSettings</code>
+- <code title="get /accounts/{account_id}/dlp/settings">client.zeroTrust.dlp.settings.<a href="./src/resources/zero-trust/dlp/settings.ts">get</a>({ ...params }) -> DLPSettings</code>
+
 ### Email
 
 #### AccountMapping
@@ -1151,10 +1277,9 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/dlp/profiles/predefined">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">create</a>({ ...params }) -> Profile</code>
-- <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">update</a>(profileId, { ...params }) -> Profile</code>
+- <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}/config">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">update</a>(profileId, { ...params }) -> PredefinedProfile</code>
 - <code title="delete /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">delete</a>(profileId, { ...params }) -> PredefinedDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">get</a>(profileId, { ...params }) -> Profile</code>
+- <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}/config">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">get</a>(profileId, { ...params }) -> PredefinedProfile</code>
 
 ### Limits
 
@@ -1190,13 +1315,17 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/custom.ts">CustomGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">create</a>({ ...params }) -> CustomCreateResponse</code>
-- <code title="put /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">update</a>(entryId, { ...params }) -> CustomUpdateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/custom/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">update</a>(entryId, { ...params }) -> CustomUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">list</a>({ ...params }) -> CustomListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">delete</a>(entryId, { ...params }) -> CustomDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.custom.<a href="./src/resources/zero-trust/dlp/entries/custom.ts">get</a>(entryId, { ...params }) -> CustomGetResponse</code>
 
 #### Predefined
 
@@ -1204,13 +1333,17 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/predefined.ts">PredefinedGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/dlp/entries/predefined">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">create</a>({ ...params }) -> PredefinedCreateResponse</code>
 - <code title="put /accounts/{account_id}/dlp/entries/predefined/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">update</a>(entryId, { ...params }) -> PredefinedUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">list</a>({ ...params }) -> PredefinedListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/dlp/entries/predefined/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">delete</a>(entryId, { ...params }) -> PredefinedDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.predefined.<a href="./src/resources/zero-trust/dlp/entries/predefined.ts">get</a>(entryId, { ...params }) -> PredefinedGetResponse</code>
 
 #### Integration
 
@@ -1218,13 +1351,17 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries/integration.ts">IntegrationGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/dlp/entries/integration">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
 - <code title="put /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">update</a>(entryId, { ...params }) -> IntegrationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">list</a>({ ...params }) -> IntegrationListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">delete</a>(entryId, { ...params }) -> IntegrationDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">get</a>(entryId, { ...params }) -> IntegrationGetResponse</code>
 
 ## Gateway
 
@@ -1398,6 +1535,7 @@ Methods:
 - <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> GatewayRule</code>
+- <code title="get /accounts/{account_id}/gateway/rules/tenant">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">listTenant</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="post /accounts/{account_id}/gateway/rules/{rule_id}/reset_expiration">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">resetExpiration</a>(ruleId, { ...params }) -> GatewayRule</code>
 
 ### Certificates
@@ -1419,6 +1557,24 @@ Methods:
 - <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/activate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">activate</a>(certificateId, { ...params }) -> CertificateActivateResponse</code>
 - <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/deactivate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">deactivate</a>(certificateId, { ...params }) -> CertificateDeactivateResponse</code>
 - <code title="get /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">get</a>(certificateId, { ...params }) -> CertificateGetResponse</code>
+
+### Pacfiles
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/pacfiles.ts">PacfileGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">create</a>({ ...params }) -> PacfileCreateResponse</code>
+- <code title="put /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">update</a>(pacfileId, { ...params }) -> PacfileUpdateResponse</code>
+- <code title="get /accounts/{account_id}/gateway/pacfiles">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">list</a>({ ...params }) -> PacfileListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">delete</a>(pacfileId, { ...params }) -> PacfileDeleteResponse</code>
+- <code title="get /accounts/{account_id}/gateway/pacfiles/{pacfile_id}">client.zeroTrust.gateway.pacfiles.<a href="./src/resources/zero-trust/gateway/pacfiles.ts">get</a>(pacfileId, { ...params }) -> PacfileGetResponse</code>
 
 ## Networks
 
@@ -1468,23 +1624,43 @@ Methods:
 
 ### Subnets
 
+Methods:
+
+- <code title="get /accounts/{account_id}/zerotrust/subnets">client.zeroTrust.networks.subnets.<a href="./src/resources/zero-trust/networks/subnets/subnets.ts">list</a>({ ...params }) -> SubnetsV4PagePaginationArray</code>
+
+#### WARP
+
 Types:
 
-- <code><a href="./src/resources/zero-trust/networks/subnets/subnets.ts">SubnetListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/networks/subnets/warp.ts">Subnet</a></code>
+- <code><a href="./src/resources/zero-trust/networks/subnets/warp.ts">WARPDeleteResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/zerotrust/subnets">client.zeroTrust.networks.subnets.<a href="./src/resources/zero-trust/networks/subnets/subnets.ts">list</a>({ ...params }) -> SubnetListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/zerotrust/subnets/warp">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">create</a>({ ...params }) -> Subnet</code>
+- <code title="delete /accounts/{account_id}/zerotrust/subnets/warp/{subnet_id}">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">delete</a>(subnetId, { ...params }) -> WARPDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/zerotrust/subnets/warp/{subnet_id}">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">edit</a>(subnetId, { ...params }) -> Subnet</code>
+- <code title="get /accounts/{account_id}/zerotrust/subnets/warp/{subnet_id}">client.zeroTrust.networks.subnets.warp.<a href="./src/resources/zero-trust/networks/subnets/warp.ts">get</a>(subnetId, { ...params }) -> Subnet</code>
 
 #### CloudflareSource
 
+Methods:
+
+- <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> Subnet</code>
+
+### HostnameRoutes
+
 Types:
 
-- <code><a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">CloudflareSourceUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/networks/hostname-routes.ts">HostnameRoute</a></code>
 
 Methods:
 
-- <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> CloudflareSourceUpdateResponse</code>
+- <code title="post /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">create</a>({ ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">list</a>({ ...params }) -> HostnameRoutesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">delete</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+- <code title="patch /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">edit</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
+- <code title="get /accounts/{account_id}/zerotrust/routes/hostname/{hostname_route_id}">client.zeroTrust.networks.hostnameRoutes.<a href="./src/resources/zero-trust/networks/hostname-routes.ts">get</a>(hostnameRouteId, { ...params }) -> HostnameRoute</code>
 
 ## RiskScoring
 

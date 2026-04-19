@@ -19,6 +19,13 @@ import {
 } from './discovery/discovery';
 import * as ExpressionTemplateAPI from './expression-template/expression-template';
 import { ExpressionTemplate } from './expression-template/expression-template';
+import * as LabelsAPI from './labels/labels';
+import {
+  LabelListParams,
+  LabelListResponse,
+  LabelListResponsesV4PagePaginationArray,
+  Labels,
+} from './labels/labels';
 import * as OperationsAPI from './operations/operations';
 import {
   APIShield,
@@ -43,24 +50,22 @@ import { Settings } from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
 import {
   Message,
-  PublicSchema,
+  OldPublicSchema,
+  OldPublicSchemasV4PagePaginationArray,
   UserSchemaCreateParams,
   UserSchemaCreateResponse,
   UserSchemaDeleteParams,
   UserSchemaDeleteResponse,
   UserSchemaEditParams,
-  UserSchemaEditResponse,
   UserSchemaGetParams,
-  UserSchemaGetResponse,
   UserSchemaListParams,
-  UserSchemaListResponse,
-  UserSchemaListResponsesV4PagePaginationArray,
   UserSchemas,
 } from './user-schemas/user-schemas';
 
 export class APIGateway extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
   discovery: DiscoveryAPI.Discovery = new DiscoveryAPI.Discovery(this._client);
+  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -72,13 +77,14 @@ export class APIGateway extends APIResource {
 
 APIGateway.Configurations = Configurations;
 APIGateway.Discovery = Discovery;
+APIGateway.Labels = Labels;
+APIGateway.LabelListResponsesV4PagePaginationArray = LabelListResponsesV4PagePaginationArray;
 APIGateway.Operations = Operations;
 APIGateway.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 APIGateway.OperationBulkCreateResponsesSinglePage = OperationBulkCreateResponsesSinglePage;
 APIGateway.Schemas = Schemas;
-APIGateway.Settings = Settings;
 APIGateway.UserSchemas = UserSchemas;
-APIGateway.UserSchemaListResponsesV4PagePaginationArray = UserSchemaListResponsesV4PagePaginationArray;
+APIGateway.OldPublicSchemasV4PagePaginationArray = OldPublicSchemasV4PagePaginationArray;
 APIGateway.ExpressionTemplate = ExpressionTemplate;
 
 export declare namespace APIGateway {
@@ -94,6 +100,13 @@ export declare namespace APIGateway {
     type DiscoveryOperation as DiscoveryOperation,
     type DiscoveryGetResponse as DiscoveryGetResponse,
     type DiscoveryGetParams as DiscoveryGetParams,
+  };
+
+  export {
+    Labels as Labels,
+    type LabelListResponse as LabelListResponse,
+    LabelListResponsesV4PagePaginationArray as LabelListResponsesV4PagePaginationArray,
+    type LabelListParams as LabelListParams,
   };
 
   export {
@@ -121,18 +134,15 @@ export declare namespace APIGateway {
     type SchemaListParams as SchemaListParams,
   };
 
-  export { Settings as Settings };
+  export { type Settings as Settings };
 
   export {
     UserSchemas as UserSchemas,
     type Message as Message,
-    type PublicSchema as PublicSchema,
+    type OldPublicSchema as OldPublicSchema,
     type UserSchemaCreateResponse as UserSchemaCreateResponse,
-    type UserSchemaListResponse as UserSchemaListResponse,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    type UserSchemaEditResponse as UserSchemaEditResponse,
-    type UserSchemaGetResponse as UserSchemaGetResponse,
-    UserSchemaListResponsesV4PagePaginationArray as UserSchemaListResponsesV4PagePaginationArray,
+    OldPublicSchemasV4PagePaginationArray as OldPublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,

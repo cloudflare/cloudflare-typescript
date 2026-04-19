@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AssetsAPI from './assets';
 import { AssetCreateParams, AssetCreateResponse, Assets } from './assets';
@@ -18,7 +19,7 @@ export class Finetunes extends APIResource {
     params: FinetuneCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FinetuneCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/finetunes`, { body, ...options }) as Core.APIPromise<{
         result: FinetuneCreateResponse;
@@ -29,8 +30,16 @@ export class Finetunes extends APIResource {
   /**
    * Lists all fine-tuning jobs created by the account, including status and metrics.
    */
-  list(params: FinetuneListParams, options?: Core.RequestOptions): Core.APIPromise<FinetuneListResponse> {
-    const { account_id } = params;
+  list(params?: FinetuneListParams, options?: Core.RequestOptions): Core.APIPromise<FinetuneListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<FinetuneListResponse>;
+  list(
+    params: FinetuneListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FinetuneListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai/finetunes`, options) as Core.APIPromise<{
         result: FinetuneListResponse;
@@ -73,7 +82,7 @@ export interface FinetuneCreateParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -97,7 +106,7 @@ export interface FinetuneCreateParams {
 }
 
 export interface FinetuneListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Finetunes.Assets = Assets;

@@ -58,4 +58,24 @@ describe('resource queries', () => {
       tag: 'tag',
     });
   });
+
+  // TODO: investigate broken test, 401 Unauthorized
+  test.skip('bulk: only required params', async () => {
+    const responsePromise = client.brandProtection.queries.bulk({ account_id: 'x' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test, 401 Unauthorized
+  test.skip('bulk: required and optional params', async () => {
+    const response = await client.brandProtection.queries.bulk({
+      account_id: 'x',
+      queries: [{ foo: 'bar' }],
+    });
+  });
 });
