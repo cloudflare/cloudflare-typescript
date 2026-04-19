@@ -1,7 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Datasets } from './datasets/index';
-export { Edge, type InstantLogpushJob } from './edge';
+export {
+  InstantLogpushJobsSinglePage,
+  Edge,
+  type InstantLogpushJob,
+  type EdgeCreateParams,
+  type EdgeGetParams,
+} from './edge';
 export { Logpush } from './logpush';
 export {
   LogpushJobsSinglePage,

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Stats extends APIResource {
@@ -16,8 +17,16 @@ export class Stats extends APIResource {
    * });
    * ```
    */
-  get(params: StatGetParams, options?: Core.RequestOptions): Core.APIPromise<Stat> {
-    const { account_id } = params;
+  get(params?: StatGetParams, options?: Core.RequestOptions): Core.APIPromise<Stat>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Stat>;
+  get(
+    params: StatGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Stat> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/stats`, options) as Core.APIPromise<{
         result: Stat;
@@ -48,7 +57,7 @@ export interface StatGetParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Stats {

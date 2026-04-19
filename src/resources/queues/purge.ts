@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as QueuesAPI from './queues';
 
@@ -18,10 +19,19 @@ export class Purge extends APIResource {
    */
   start(
     queueId: string,
-    params: PurgeStartParams,
+    params?: PurgeStartParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueuesAPI.Queue>;
+  start(queueId: string, options?: Core.RequestOptions): Core.APIPromise<QueuesAPI.Queue>;
+  start(
+    queueId: string,
+    params: PurgeStartParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueuesAPI.Queue> {
-    const { account_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.start(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/purge`, {
         body,
@@ -43,10 +53,19 @@ export class Purge extends APIResource {
    */
   status(
     queueId: string,
-    params: PurgeStatusParams,
+    params?: PurgeStatusParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PurgeStatusResponse>;
+  status(queueId: string, options?: Core.RequestOptions): Core.APIPromise<PurgeStatusResponse>;
+  status(
+    queueId: string,
+    params: PurgeStatusParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PurgeStatusResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.status(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/queues/${queueId}/purge`, options) as Core.APIPromise<{
         result: PurgeStatusResponse;
@@ -71,7 +90,7 @@ export interface PurgeStartParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Confimation that all messages will be deleted permanently.
@@ -83,7 +102,7 @@ export interface PurgeStatusParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Purge {

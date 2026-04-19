@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Latest extends APIResource {
@@ -18,10 +19,19 @@ export class Latest extends APIResource {
    */
   list(
     connectorId: string,
-    params: LatestListParams,
+    params?: LatestListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LatestListResponse>;
+  list(connectorId: string, options?: Core.RequestOptions): Core.APIPromise<LatestListResponse>;
+  list(
+    connectorId: string,
+    params: LatestListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LatestListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(connectorId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/connectors/${connectorId}/telemetry/events/latest`,
@@ -200,7 +210,7 @@ export interface LatestListParams {
   /**
    * Account identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Latest {

@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource downloads', () => {
-  test('create: only required params', async () => {
+  // SKIP: prism 415 Unsupported Media Type
+  test.skip('create: only required params', async () => {
     const responsePromise = client.stream.downloads.create('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,13 +24,15 @@ describe('resource downloads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // SKIP: prism 415 Unsupported Media Type
+  test.skip('create: required and optional params', async () => {
     const response = await client.stream.downloads.create('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('delete: only required params', async () => {
+  // SKIP: prism 415 Unsupported Media Type
+  test.skip('delete: only required params', async () => {
     const responsePromise = client.stream.downloads.delete('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -42,13 +45,15 @@ describe('resource downloads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // SKIP: prism 415 Unsupported Media Type
+  test.skip('delete: required and optional params', async () => {
     const response = await client.stream.downloads.delete('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('get: only required params', async () => {
+  // SKIP: prism 415 Unsupported Media Type
+  test.skip('get: only required params', async () => {
     const responsePromise = client.stream.downloads.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -61,7 +66,8 @@ describe('resource downloads', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // SKIP: prism 415 Unsupported Media Type
+  test.skip('get: required and optional params', async () => {
     const response = await client.stream.downloads.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

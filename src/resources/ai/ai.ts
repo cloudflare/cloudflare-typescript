@@ -1,11 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AuthorsAPI from './authors';
 import { AuthorListParams, AuthorListResponse, AuthorListResponsesSinglePage, Authors } from './authors';
 import * as TasksAPI from './tasks';
 import { TaskListParams, TaskListResponse, TaskListResponsesSinglePage, Tasks } from './tasks';
+import * as ToMarkdownAPI from './to-markdown';
+import {
+  ToMarkdown,
+  ToMarkdownSupportedParams,
+  ToMarkdownSupportedResponse,
+  ToMarkdownSupportedResponsesSinglePage,
+  ToMarkdownTransformParams,
+  ToMarkdownTransformResponse,
+  ToMarkdownTransformResponsesSinglePage,
+} from './to-markdown';
 import * as FinetunesAPI from './finetunes/finetunes';
 import {
   FinetuneCreateParams,
@@ -27,6 +38,7 @@ export class AI extends APIResource {
   authors: AuthorsAPI.Authors = new AuthorsAPI.Authors(this._client);
   tasks: TasksAPI.Tasks = new TasksAPI.Tasks(this._client);
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
+  toMarkdown: ToMarkdownAPI.ToMarkdown = new ToMarkdownAPI.ToMarkdown(this._client);
 
   /**
    * This endpoint provides users with the capability to run specific AI models
@@ -39,8 +51,17 @@ export class AI extends APIResource {
    * Model specific inputs available in
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
-  run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
-    const { account_id, ...body } = params;
+  run(modelName: string, params?: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse>;
+  run(modelName: string, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse>;
+  run(
+    modelName: string,
+    params: AIRunParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIRunResponse> {
+    if (isRequestOptions(params)) {
+      return this.run(modelName, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
         body,
@@ -288,7 +309,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text that you want to classify
@@ -300,7 +321,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A text description of the image you want to generate
@@ -369,7 +390,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: A text description of the audio you want to generate
@@ -387,7 +408,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text to embed
@@ -399,7 +420,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the audio data constrained to
@@ -423,7 +444,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -436,7 +457,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -449,7 +470,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The input text prompt for the model to generate a response.
@@ -538,7 +559,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of message objects representing the conversation history.
@@ -786,7 +807,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The language code to translate the text into (e.g., 'es' for
@@ -810,7 +831,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: The text that you want the model to summarize
@@ -827,7 +848,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: An array of integers that represent the image data constrained to
@@ -897,7 +918,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -966,7 +987,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -1080,7 +1101,7 @@ export declare namespace AIRunParams {
     /**
      * Path param
      */
-    account_id: string;
+    account_id?: string;
 
     /**
      * Body param: Image in base64 encoded format.
@@ -1101,6 +1122,9 @@ AI.Tasks = Tasks;
 AI.TaskListResponsesSinglePage = TaskListResponsesSinglePage;
 AI.Models = Models;
 AI.ModelListResponsesV4PagePaginationArray = ModelListResponsesV4PagePaginationArray;
+AI.ToMarkdown = ToMarkdown;
+AI.ToMarkdownSupportedResponsesSinglePage = ToMarkdownSupportedResponsesSinglePage;
+AI.ToMarkdownTransformResponsesSinglePage = ToMarkdownTransformResponsesSinglePage;
 
 export declare namespace AI {
   export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
@@ -1132,5 +1156,15 @@ export declare namespace AI {
     type ModelListResponse as ModelListResponse,
     ModelListResponsesV4PagePaginationArray as ModelListResponsesV4PagePaginationArray,
     type ModelListParams as ModelListParams,
+  };
+
+  export {
+    ToMarkdown as ToMarkdown,
+    type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
+    type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
+    ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
+    ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
+    type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
+    type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };
 }

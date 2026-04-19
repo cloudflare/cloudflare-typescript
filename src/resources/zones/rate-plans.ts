@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -19,10 +20,18 @@ export class RatePlans extends APIResource {
    * ```
    */
   get(
-    params: RatePlanGetParams,
+    params?: RatePlanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RatePlanGetResponsesSinglePage, RatePlanGetResponse>;
+  get(options?: Core.RequestOptions): Core.PagePromise<RatePlanGetResponsesSinglePage, RatePlanGetResponse>;
+  get(
+    params: RatePlanGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RatePlanGetResponsesSinglePage, RatePlanGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/available_rate_plans`,
       RatePlanGetResponsesSinglePage,
@@ -88,7 +97,7 @@ export interface RatePlanGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 RatePlans.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;

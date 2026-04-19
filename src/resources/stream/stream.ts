@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AudioTracksAPI from './audio-tracks';
 import {
@@ -113,7 +114,7 @@ export class Stream extends APIResource {
    */
   create(params: StreamCreateParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const {
-      account_id,
+      account_id = this._client.accountId,
       'Tus-Resumable': tusResumable,
       'Upload-Length': uploadLength,
       direct_user,
@@ -148,8 +149,16 @@ export class Stream extends APIResource {
    * }
    * ```
    */
-  list(params: StreamListParams, options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video> {
-    const { account_id, ...query } = params;
+  list(params?: StreamListParams, options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video>;
+  list(options?: Core.RequestOptions): Core.PagePromise<VideosSinglePage, Video>;
+  list(
+    params: StreamListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VideosSinglePage, Video> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/stream`, VideosSinglePage, { query, ...options });
   }
 
@@ -166,10 +175,19 @@ export class Stream extends APIResource {
    */
   delete(
     identifier: string,
-    params: StreamDeleteParams,
+    params?: StreamDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void>;
+  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    identifier: string,
+    params: StreamDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -188,7 +206,7 @@ export class Stream extends APIResource {
    * ```
    */
   edit(identifier: string, params: StreamEditParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}`, {
         body,
@@ -208,8 +226,17 @@ export class Stream extends APIResource {
    * );
    * ```
    */
-  get(identifier: string, params: StreamGetParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
-    const { account_id } = params;
+  get(identifier: string, params?: StreamGetParams, options?: Core.RequestOptions): Core.APIPromise<Video>;
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<Video>;
+  get(
+    identifier: string,
+    params: StreamGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Video> {
+    if (isRequestOptions(params)) {
+      return this.get(identifier, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}`, options) as Core.APIPromise<{
         result: Video;
@@ -449,7 +476,7 @@ export interface StreamCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Header param: Specifies the TUS protocol version. This value must be included in
@@ -488,7 +515,7 @@ export interface StreamListParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Filter by video ID(s). Can be a single ID or a comma-separated list
@@ -579,14 +606,14 @@ export interface StreamDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface StreamEditParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Lists the origins allowed to display the video. Enter allowed origin
@@ -677,7 +704,7 @@ export interface StreamGetParams {
   /**
    * The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Stream.VideosSinglePage = VideosSinglePage;

@@ -18,6 +18,22 @@ import {
   CustomNameserverUpdateResponsesSinglePage,
   CustomNameservers,
 } from './custom-nameservers';
+import * as EnvironmentsAPI from './environments';
+import {
+  EnvironmentCreateParams,
+  EnvironmentCreateResponse,
+  EnvironmentDeleteParams,
+  EnvironmentDeleteResponse,
+  EnvironmentEditParams,
+  EnvironmentEditResponse,
+  EnvironmentListParams,
+  EnvironmentListResponse,
+  EnvironmentRollbackParams,
+  EnvironmentRollbackResponse,
+  EnvironmentUpdateParams,
+  EnvironmentUpdateResponse,
+  Environments,
+} from './environments';
 import * as HoldsAPI from './holds';
 import { HoldCreateParams, HoldDeleteParams, HoldEditParams, HoldGetParams, Holds, ZoneHold } from './holds';
 import * as PlansAPI from './plans';
@@ -108,6 +124,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Zones extends APIResource {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
   );
@@ -171,10 +188,18 @@ export class Zones extends APIResource {
    * ```
    */
   delete(
-    params: ZoneDeleteParams,
+    params?: ZoneDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneDeleteResponse | null>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<ZoneDeleteResponse | null>;
+  delete(
+    params: ZoneDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneDeleteResponse | null> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}`, options) as Core.APIPromise<{
         result: ZoneDeleteResponse | null;
@@ -192,8 +217,16 @@ export class Zones extends APIResource {
    * });
    * ```
    */
-  edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
-    const { zone_id, ...body } = params;
+  edit(params?: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<Zone>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<Zone>;
+  edit(
+    params: ZoneEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Zone> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}`, { body, ...options }) as Core.APIPromise<{ result: Zone }>
     )._thenUnwrap((obj) => obj.result);
@@ -209,8 +242,16 @@ export class Zones extends APIResource {
    * });
    * ```
    */
-  get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
-    const { zone_id } = params;
+  get(params?: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<Zone>;
+  get(options?: Core.RequestOptions): Core.APIPromise<Zone>;
+  get(
+    params: ZoneGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Zone> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (this._client.get(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: Zone }>)._thenUnwrap(
       (obj) => obj.result,
     );
@@ -621,14 +662,14 @@ export interface ZoneDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ZoneEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Indicates whether the zone is only using Cloudflare DNS services. A
@@ -655,12 +696,13 @@ export interface ZoneGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 Zones.ZonesV4PagePaginationArray = ZonesV4PagePaginationArray;
 Zones.ActivationCheck = ActivationCheck;
 Zones.Settings = Settings;
+Zones.Environments = Environments;
 Zones.CustomNameservers = CustomNameservers;
 Zones.CustomNameserverUpdateResponsesSinglePage = CustomNameserverUpdateResponsesSinglePage;
 Zones.Holds = Holds;
@@ -745,6 +787,22 @@ export declare namespace Zones {
     type SettingGetResponse as SettingGetResponse,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    Environments as Environments,
+    type EnvironmentCreateResponse as EnvironmentCreateResponse,
+    type EnvironmentUpdateResponse as EnvironmentUpdateResponse,
+    type EnvironmentListResponse as EnvironmentListResponse,
+    type EnvironmentDeleteResponse as EnvironmentDeleteResponse,
+    type EnvironmentEditResponse as EnvironmentEditResponse,
+    type EnvironmentRollbackResponse as EnvironmentRollbackResponse,
+    type EnvironmentCreateParams as EnvironmentCreateParams,
+    type EnvironmentUpdateParams as EnvironmentUpdateParams,
+    type EnvironmentListParams as EnvironmentListParams,
+    type EnvironmentDeleteParams as EnvironmentDeleteParams,
+    type EnvironmentEditParams as EnvironmentEditParams,
+    type EnvironmentRollbackParams as EnvironmentRollbackParams,
   };
 
   export {

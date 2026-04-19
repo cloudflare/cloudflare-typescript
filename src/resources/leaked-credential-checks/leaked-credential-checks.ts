@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as DetectionsAPI from './detections';
 import {
@@ -8,6 +9,8 @@ import {
   DetectionCreateResponse,
   DetectionDeleteParams,
   DetectionDeleteResponse,
+  DetectionGetParams,
+  DetectionGetResponse,
   DetectionListParams,
   DetectionListResponse,
   DetectionListResponsesSinglePage,
@@ -31,10 +34,18 @@ export class LeakedCredentialChecks extends APIResource {
    * ```
    */
   create(
-    params: LeakedCredentialCheckCreateParams,
+    params?: LeakedCredentialCheckCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LeakedCredentialCheckCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<LeakedCredentialCheckCreateResponse>;
+  create(
+    params: LeakedCredentialCheckCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LeakedCredentialCheckCreateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/leaked-credential-checks`, {
         body,
@@ -55,10 +66,18 @@ export class LeakedCredentialChecks extends APIResource {
    * ```
    */
   get(
-    params: LeakedCredentialCheckGetParams,
+    params?: LeakedCredentialCheckGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LeakedCredentialCheckGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<LeakedCredentialCheckGetResponse>;
+  get(
+    params: LeakedCredentialCheckGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<LeakedCredentialCheckGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/leaked-credential-checks`, options) as Core.APIPromise<{
         result: LeakedCredentialCheckGetResponse;
@@ -91,7 +110,7 @@ export interface LeakedCredentialCheckCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Determines whether or not Leaked Credential Checks are enabled.
@@ -103,7 +122,7 @@ export interface LeakedCredentialCheckGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 LeakedCredentialChecks.Detections = Detections;
@@ -123,10 +142,12 @@ export declare namespace LeakedCredentialChecks {
     type DetectionUpdateResponse as DetectionUpdateResponse,
     type DetectionListResponse as DetectionListResponse,
     type DetectionDeleteResponse as DetectionDeleteResponse,
+    type DetectionGetResponse as DetectionGetResponse,
     DetectionListResponsesSinglePage as DetectionListResponsesSinglePage,
     type DetectionCreateParams as DetectionCreateParams,
     type DetectionUpdateParams as DetectionUpdateParams,
     type DetectionListParams as DetectionListParams,
     type DetectionDeleteParams as DetectionDeleteParams,
+    type DetectionGetParams as DetectionGetParams,
   };
 }

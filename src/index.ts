@@ -8,6 +8,8 @@ import * as Pagination from './pagination';
 import {
   type CursorLimitPaginationParams,
   CursorLimitPaginationResponse,
+  type CursorPaginationAfterParams,
+  CursorPaginationAfterResponse,
   type CursorPaginationParams,
   CursorPaginationResponse,
   SinglePageResponse,
@@ -24,6 +26,7 @@ import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
 import { AI } from './resources/ai/ai';
+import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
@@ -39,6 +42,7 @@ import { CertificateAuthorities } from './resources/certificate-authorities/cert
 import { ClientCertificates } from './resources/client-certificates/client-certificates';
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
+import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
@@ -47,14 +51,16 @@ import { CustomPages } from './resources/custom-pages/custom-pages';
 import { D1Resource } from './resources/d1/d1';
 import { DCVDelegation } from './resources/dcv-delegation/dcv-delegation';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
-import { DLS } from './resources/dls/dls';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
+import { EmailSending } from './resources/email-sending/email-sending';
 import { Filters } from './resources/filters/filters';
 import { Firewall } from './resources/firewall/firewall';
+import { Fraud } from './resources/fraud/fraud';
+import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
 import { Hostnames } from './resources/hostnames/hostnames';
 import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
@@ -75,6 +81,7 @@ import { ManagedTransforms } from './resources/managed-transforms/managed-transf
 import { Memberships } from './resources/memberships/memberships';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
+import { Organizations } from './resources/organizations/organizations';
 import { OriginCACertificates } from './resources/origin-ca-certificates/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
@@ -83,12 +90,15 @@ import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
 import { Pipelines } from './resources/pipelines/pipelines';
 import { Queues } from './resources/queues/queues';
+import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
 import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
 import { RateLimits } from './resources/rate-limits/rate-limits';
+import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
 import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
+import { ResourceTagging } from './resources/resource-tagging/resource-tagging';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
@@ -101,11 +111,13 @@ import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
+import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLNormalization } from './resources/url-normalization/url-normalization';
 import { URLScanner } from './resources/url-scanner/url-scanner';
 import { User } from './resources/user/user';
 import { Vectorize } from './resources/vectorize/vectorize';
+import { VulnerabilityScanner } from './resources/vulnerability-scanner/vulnerability-scanner';
 import { WaitingRooms } from './resources/waiting-rooms/waiting-rooms';
 import { Web3 } from './resources/web3/web3';
 import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
@@ -135,6 +147,16 @@ export interface ClientOptions {
    * Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).
    */
   userServiceKey?: string | null | undefined;
+
+  /**
+   * Sets an account ID to be used with all account-scoped requests.
+   */
+  accountId?: string | null | undefined;
+
+  /**
+   * Sets a zone ID to be used with all zone-scoped requests.
+   */
+  zoneId?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -208,6 +230,8 @@ export class Cloudflare extends Core.APIClient {
   apiKey: string | null;
   apiEmail: string | null;
   userServiceKey: string | null;
+  accountId: string | null;
+  zoneId: string | null;
 
   private _options: ClientOptions;
 
@@ -218,6 +242,8 @@ export class Cloudflare extends Core.APIClient {
    * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.accountId=process.env['CLOUDFLARE_ACCOUNT_ID'] ?? null]
+   * @param {string | null | undefined} [opts.zoneId=process.env['CLOUDFLARE_ZONE_ID'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {string | null} [opts.apiVersion] - Define the version to target for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -234,6 +260,8 @@ export class Cloudflare extends Core.APIClient {
     apiKey = Core.readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = Core.readEnv('CLOUDFLARE_EMAIL') ?? null,
     userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
+    accountId = Core.readEnv('CLOUDFLARE_ACCOUNT_ID') ?? null,
+    zoneId = Core.readEnv('CLOUDFLARE_ZONE_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
@@ -241,6 +269,8 @@ export class Cloudflare extends Core.APIClient {
       apiKey,
       apiEmail,
       userServiceKey,
+      accountId,
+      zoneId,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
       apiVersion: apiVersion || new Date().toISOString().slice(0, 10),
@@ -262,9 +292,12 @@ export class Cloudflare extends Core.APIClient {
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
     this.userServiceKey = userServiceKey;
+    this.accountId = accountId;
+    this.zoneId = zoneId;
   }
 
   accounts: API.Accounts = new API.Accounts(this);
+  organizations: API.Organizations = new API.Organizations(this);
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
@@ -284,6 +317,7 @@ export class Cloudflare extends Core.APIClient {
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
+  emailSending: API.EmailSending = new API.EmailSending(this);
   filters: API.Filters = new API.Filters(this);
   firewall: API.Firewall = new API.Firewall(this);
   healthchecks: API.Healthchecks = new API.Healthchecks(this);
@@ -306,7 +340,6 @@ export class Cloudflare extends Core.APIClient {
   urlNormalization: API.URLNormalization = new API.URLNormalization(this);
   spectrum: API.Spectrum = new API.Spectrum(this);
   addressing: API.Addressing = new API.Addressing(this);
-  dls: API.DLS = new API.DLS(this);
   auditLogs: API.AuditLogs = new API.AuditLogs(this);
   billing: API.Billing = new API.Billing(this);
   brandProtection: API.BrandProtection = new API.BrandProtection(this);
@@ -326,21 +359,27 @@ export class Cloudflare extends Core.APIClient {
   alerting: API.Alerting = new API.Alerting(this);
   d1: API.D1Resource = new API.D1Resource(this);
   r2: API.R2 = new API.R2(this);
+  r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
+  connectivity: API.Connectivity = new API.Connectivity(this);
   hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
+  vulnerabilityScanner: API.VulnerabilityScanner = new API.VulnerabilityScanner(this);
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
+  fraud: API.Fraud = new API.Fraud(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  googleTagGateway: API.GoogleTagGateway = new API.GoogleTagGateway(this);
   zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
   dcvDelegation: API.DCVDelegation = new API.DCVDelegation(this);
   hostnames: API.Hostnames = new API.Hostnames(this);
   snippets: API.Snippets = new API.Snippets(this);
+  realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
@@ -350,16 +389,19 @@ export class Cloudflare extends Core.APIClient {
   securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
   workflows: API.Workflows = new API.Workflows(this);
   resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
+  resourceTagging: API.ResourceTagging = new API.ResourceTagging(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  aiSearch: API.AISearch = new API.AISearch(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
   customPages: API.CustomPages = new API.CustomPages(this);
   secretsStore: API.SecretsStore = new API.SecretsStore(this);
   pipelines: API.Pipelines = new API.Pipelines(this);
   schemaValidation: API.SchemaValidation = new API.SchemaValidation(this);
+  tokenValidation: API.TokenValidation = new API.TokenValidation(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -503,6 +545,7 @@ export class Cloudflare extends Core.APIClient {
 }
 
 Cloudflare.Accounts = Accounts;
+Cloudflare.Organizations = Organizations;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
 Cloudflare.Memberships = Memberships;
@@ -522,6 +565,7 @@ Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
 Cloudflare.EmailRouting = EmailRouting;
+Cloudflare.EmailSending = EmailSending;
 Cloudflare.Filters = Filters;
 Cloudflare.Firewall = Firewall;
 Cloudflare.Healthchecks = Healthchecks;
@@ -544,7 +588,6 @@ Cloudflare.Rulesets = Rulesets;
 Cloudflare.URLNormalization = URLNormalization;
 Cloudflare.Spectrum = Spectrum;
 Cloudflare.Addressing = Addressing;
-Cloudflare.DLS = DLS;
 Cloudflare.AuditLogs = AuditLogs;
 Cloudflare.Billing = Billing;
 Cloudflare.BrandProtection = BrandProtection;
@@ -564,21 +607,27 @@ Cloudflare.Stream = Stream;
 Cloudflare.Alerting = Alerting;
 Cloudflare.D1Resource = D1Resource;
 Cloudflare.R2 = R2;
+Cloudflare.R2DataCatalog = R2DataCatalog;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
+Cloudflare.Connectivity = Connectivity;
 Cloudflare.HyperdriveResource = HyperdriveResource;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
+Cloudflare.VulnerabilityScanner = VulnerabilityScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
+Cloudflare.Fraud = Fraud;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.GoogleTagGateway = GoogleTagGateway;
 Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
 Cloudflare.DCVDelegation = DCVDelegation;
 Cloudflare.Hostnames = Hostnames;
 Cloudflare.Snippets = Snippets;
+Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
@@ -588,16 +637,19 @@ Cloudflare.BotnetFeed = BotnetFeed;
 Cloudflare.SecurityTXT = SecurityTXT;
 Cloudflare.Workflows = Workflows;
 Cloudflare.ResourceSharing = ResourceSharing;
+Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.AISearch = AISearch;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
 Cloudflare.CustomPages = CustomPages;
 Cloudflare.SecretsStore = SecretsStore;
 Cloudflare.Pipelines = Pipelines;
 Cloudflare.SchemaValidation = SchemaValidation;
+Cloudflare.TokenValidation = TokenValidation;
 
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
@@ -620,6 +672,12 @@ export declare namespace Cloudflare {
     type CursorPaginationResponse as CursorPaginationResponse,
   };
 
+  export import CursorPaginationAfter = Pagination.CursorPaginationAfter;
+  export {
+    type CursorPaginationAfterParams as CursorPaginationAfterParams,
+    type CursorPaginationAfterResponse as CursorPaginationAfterResponse,
+  };
+
   export import CursorLimitPagination = Pagination.CursorLimitPagination;
   export {
     type CursorLimitPaginationParams as CursorLimitPaginationParams,
@@ -630,6 +688,8 @@ export declare namespace Cloudflare {
   export { type SinglePageResponse as SinglePageResponse };
 
   export { Accounts as Accounts };
+
+  export { Organizations as Organizations };
 
   export { OriginCACertificates as OriginCACertificates };
 
@@ -668,6 +728,8 @@ export declare namespace Cloudflare {
   export { EmailSecurity as EmailSecurity };
 
   export { EmailRouting as EmailRouting };
+
+  export { EmailSending as EmailSending };
 
   export { Filters as Filters };
 
@@ -713,8 +775,6 @@ export declare namespace Cloudflare {
 
   export { Addressing as Addressing };
 
-  export { DLS as DLS };
-
   export { AuditLogs as AuditLogs };
 
   export { Billing as Billing };
@@ -753,11 +813,15 @@ export declare namespace Cloudflare {
 
   export { R2 as R2 };
 
+  export { R2DataCatalog as R2DataCatalog };
+
   export { WorkersForPlatforms as WorkersForPlatforms };
 
   export { ZeroTrust as ZeroTrust };
 
   export { Turnstile as Turnstile };
+
+  export { Connectivity as Connectivity };
 
   export { HyperdriveResource as HyperdriveResource };
 
@@ -767,11 +831,17 @@ export declare namespace Cloudflare {
 
   export { URLScanner as URLScanner };
 
+  export { VulnerabilityScanner as VulnerabilityScanner };
+
   export { Radar as Radar };
 
   export { BotManagement as BotManagement };
 
+  export { Fraud as Fraud };
+
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
+
+  export { GoogleTagGateway as GoogleTagGateway };
 
   export { Zaraz as Zaraz };
 
@@ -782,6 +852,8 @@ export declare namespace Cloudflare {
   export { Hostnames as Hostnames };
 
   export { Snippets as Snippets };
+
+  export { RealtimeKit as RealtimeKit };
 
   export { Calls as Calls };
 
@@ -801,6 +873,8 @@ export declare namespace Cloudflare {
 
   export { ResourceSharing as ResourceSharing };
 
+  export { ResourceTagging as ResourceTagging };
+
   export { LeakedCredentialChecks as LeakedCredentialChecks };
 
   export { ContentScanning as ContentScanning };
@@ -808,6 +882,8 @@ export declare namespace Cloudflare {
   export { AbuseReports as AbuseReports };
 
   export { AI as AI };
+
+  export { AISearch as AISearch };
 
   export { SecurityCenter as SecurityCenter };
 
@@ -820,6 +896,8 @@ export declare namespace Cloudflare {
   export { Pipelines as Pipelines };
 
   export { SchemaValidation as SchemaValidation };
+
+  export { TokenValidation as TokenValidation };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

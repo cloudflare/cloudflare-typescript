@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 
@@ -17,10 +18,18 @@ export class Subscriptions extends APIResource {
    * ```
    */
   create(
-    params: SubscriptionCreateParams,
+    params?: SubscriptionCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<SubscriptionCreateResponse>;
+  create(
+    params: SubscriptionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionCreateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/subscription`, { body, ...options }) as Core.APIPromise<{
         result: SubscriptionCreateResponse;
@@ -40,10 +49,18 @@ export class Subscriptions extends APIResource {
    * ```
    */
   update(
-    params: SubscriptionUpdateParams,
+    params?: SubscriptionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionUpdateResponse>;
+  update(options?: Core.RequestOptions): Core.APIPromise<SubscriptionUpdateResponse>;
+  update(
+    params: SubscriptionUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionUpdateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.update({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/subscription`, { body, ...options }) as Core.APIPromise<{
         result: SubscriptionUpdateResponse;
@@ -62,10 +79,18 @@ export class Subscriptions extends APIResource {
    * ```
    */
   get(
-    params: SubscriptionGetParams,
+    params?: SubscriptionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse>;
+  get(
+    params: SubscriptionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/subscription`, options) as Core.APIPromise<{
         result: SubscriptionGetResponse;
@@ -207,7 +232,7 @@ export interface SubscriptionCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -224,7 +249,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -241,7 +266,7 @@ export interface SubscriptionGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace Subscriptions {

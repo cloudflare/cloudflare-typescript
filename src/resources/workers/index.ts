@@ -8,6 +8,7 @@ export {
   type AccountSettingGetParams,
 } from './account-settings';
 export { Assets } from './assets/index';
+export { Beta } from './beta/index';
 export {
   DomainListResponsesSinglePage,
   Domains,
@@ -44,16 +45,19 @@ export {
   type ScriptListResponse,
   type ScriptDeleteResponse,
   type ScriptGetResponse,
+  type ScriptSearchResponse,
   type ScriptUpdateParams,
   type ScriptListParams,
   type ScriptDeleteParams,
   type ScriptGetParams,
+  type ScriptSearchParams,
 } from './scripts/index';
 export {
   Subdomains,
   type SubdomainUpdateResponse,
   type SubdomainGetResponse,
   type SubdomainUpdateParams,
+  type SubdomainDeleteParams,
   type SubdomainGetParams,
 } from './subdomains';
 export { Workers } from './workers';

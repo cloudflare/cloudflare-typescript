@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as HostsAPI from './hosts';
 import { HostListParams, HostListResponse, HostListResponsesV4PagePaginationArray, Hosts } from './hosts';
@@ -13,6 +14,9 @@ import {
 } from './operations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
+/**
+ * @deprecated Please use the [Schema Validation](https://developers.cloudflare.com/api/resources/schema_validation/) APIs instead
+ */
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
   hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
@@ -26,7 +30,7 @@ export class UserSchemas extends APIResource {
     params: UserSchemaCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserSchemaCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(
         `/zones/${zone_id}/api_gateway/user_schemas`,
@@ -42,13 +46,23 @@ export class UserSchemas extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
-    params: UserSchemaListParams,
+    params?: UserSchemaListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<UserSchemaListResponsesV4PagePaginationArray, UserSchemaListResponse> {
-    const { zone_id, ...query } = params;
+  ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema>;
+  list(
+    params: UserSchemaListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OldPublicSchemasV4PagePaginationArray, OldPublicSchema> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas`,
-      UserSchemaListResponsesV4PagePaginationArray,
+      OldPublicSchemasV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -61,10 +75,19 @@ export class UserSchemas extends APIResource {
    */
   delete(
     schemaId: string,
-    params: UserSchemaDeleteParams,
+    params?: UserSchemaDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserSchemaDeleteResponse>;
+  delete(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<UserSchemaDeleteResponse>;
+  delete(
+    schemaId: string,
+    params: UserSchemaDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserSchemaDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, options);
   }
 
@@ -78,13 +101,13 @@ export class UserSchemas extends APIResource {
     schemaId: string,
     params: UserSchemaEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserSchemaEditResponse> {
-    const { zone_id, ...body } = params;
+  ): Core.APIPromise<OldPublicSchema> {
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UserSchemaEditResponse }>
+      }) as Core.APIPromise<{ result: OldPublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -96,22 +119,29 @@ export class UserSchemas extends APIResource {
    */
   get(
     schemaId: string,
-    params: UserSchemaGetParams,
+    params?: UserSchemaGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserSchemaGetResponse> {
-    const { zone_id, ...query } = params;
+  ): Core.APIPromise<OldPublicSchema>;
+  get(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<OldPublicSchema>;
+  get(
+    schemaId: string,
+    params: UserSchemaGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OldPublicSchema> {
+    if (isRequestOptions(params)) {
+      return this.get(schemaId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: UserSchemaGetResponse }>
+      }) as Core.APIPromise<{ result: OldPublicSchema }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class UserSchemaListResponsesV4PagePaginationArray extends V4PagePaginationArray<UserSchemaListResponse> {}
-
-export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
+export class OldPublicSchemasV4PagePaginationArray extends V4PagePaginationArray<OldPublicSchema> {}
 
 export type Message = Array<Message.MessageItem>;
 
@@ -133,74 +163,42 @@ export namespace Message {
   }
 }
 
-/**
- * A schema used in schema validation
- */
-export interface PublicSchema {
+export interface OldPublicSchema {
   created_at: string;
 
   /**
-   * The kind of the schema
+   * Kind of schema
    */
   kind: 'openapi_v3';
 
   /**
-   * A human-readable name for the schema
+   * Name of the schema
    */
   name: string;
 
   /**
-   * A unique identifier of this schema
+   * UUID.
    */
   schema_id: string;
 
   /**
-   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   * Source of the schema
    */
-  source: string;
+  source?: string;
 
   /**
-   * An indicator if this schema is enabled
+   * Flag whether schema is enabled for validation.
    */
   validation_enabled?: boolean;
 }
 
 export interface UserSchemaCreateResponse {
-  schema: UserSchemaCreateResponse.Schema;
+  schema: OldPublicSchema;
 
   upload_details?: UserSchemaCreateResponse.UploadDetails;
 }
 
 export namespace UserSchemaCreateResponse {
-  export interface Schema {
-    created_at: string;
-
-    /**
-     * Kind of schema
-     */
-    kind: 'openapi_v3';
-
-    /**
-     * Name of the schema
-     */
-    name: string;
-
-    /**
-     * UUID.
-     */
-    schema_id: string;
-
-    /**
-     * Source of the schema
-     */
-    source?: string;
-
-    /**
-     * Flag whether schema is enabled for validation.
-     */
-    validation_enabled?: boolean;
-  }
-
   export interface UploadDetails {
     /**
      * Diagnostic warning events that occurred during processing. These events are
@@ -231,35 +229,6 @@ export namespace UserSchemaCreateResponse {
   }
 }
 
-export interface UserSchemaListResponse {
-  created_at: string;
-
-  /**
-   * Kind of schema
-   */
-  kind: 'openapi_v3';
-
-  /**
-   * Name of the schema
-   */
-  name: string;
-
-  /**
-   * UUID.
-   */
-  schema_id: string;
-
-  /**
-   * Source of the schema
-   */
-  source?: string;
-
-  /**
-   * Flag whether schema is enabled for validation.
-   */
-  validation_enabled?: boolean;
-}
-
 export interface UserSchemaDeleteResponse {
   errors: Message;
 
@@ -271,69 +240,11 @@ export interface UserSchemaDeleteResponse {
   success: true;
 }
 
-export interface UserSchemaEditResponse {
-  created_at: string;
-
-  /**
-   * Kind of schema
-   */
-  kind: 'openapi_v3';
-
-  /**
-   * Name of the schema
-   */
-  name: string;
-
-  /**
-   * UUID.
-   */
-  schema_id: string;
-
-  /**
-   * Source of the schema
-   */
-  source?: string;
-
-  /**
-   * Flag whether schema is enabled for validation.
-   */
-  validation_enabled?: boolean;
-}
-
-export interface UserSchemaGetResponse {
-  created_at: string;
-
-  /**
-   * Kind of schema
-   */
-  kind: 'openapi_v3';
-
-  /**
-   * Name of the schema
-   */
-  name: string;
-
-  /**
-   * UUID.
-   */
-  schema_id: string;
-
-  /**
-   * Source of the schema
-   */
-  source?: string;
-
-  /**
-   * Flag whether schema is enabled for validation.
-   */
-  validation_enabled?: boolean;
-}
-
 export interface UserSchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Schema file bytes
@@ -360,7 +271,7 @@ export interface UserSchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -377,14 +288,14 @@ export interface UserSchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface UserSchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -396,7 +307,7 @@ export interface UserSchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -404,7 +315,7 @@ export interface UserSchemaGetParams {
   omit_source?: boolean;
 }
 
-UserSchemas.UserSchemaListResponsesV4PagePaginationArray = UserSchemaListResponsesV4PagePaginationArray;
+UserSchemas.OldPublicSchemasV4PagePaginationArray = OldPublicSchemasV4PagePaginationArray;
 UserSchemas.Operations = Operations;
 UserSchemas.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 UserSchemas.Hosts = Hosts;
@@ -413,13 +324,10 @@ UserSchemas.HostListResponsesV4PagePaginationArray = HostListResponsesV4PagePagi
 export declare namespace UserSchemas {
   export {
     type Message as Message,
-    type PublicSchema as PublicSchema,
+    type OldPublicSchema as OldPublicSchema,
     type UserSchemaCreateResponse as UserSchemaCreateResponse,
-    type UserSchemaListResponse as UserSchemaListResponse,
     type UserSchemaDeleteResponse as UserSchemaDeleteResponse,
-    type UserSchemaEditResponse as UserSchemaEditResponse,
-    type UserSchemaGetResponse as UserSchemaGetResponse,
-    UserSchemaListResponsesV4PagePaginationArray as UserSchemaListResponsesV4PagePaginationArray,
+    OldPublicSchemasV4PagePaginationArray as OldPublicSchemasV4PagePaginationArray,
     type UserSchemaCreateParams as UserSchemaCreateParams,
     type UserSchemaListParams as UserSchemaListParams,
     type UserSchemaDeleteParams as UserSchemaDeleteParams,

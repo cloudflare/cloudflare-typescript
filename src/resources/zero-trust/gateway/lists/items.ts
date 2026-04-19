@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ListsAPI from './lists';
 import { SinglePage } from '../../../../pagination';
@@ -22,10 +23,22 @@ export class Items extends APIResource {
    */
   list(
     listId: string,
-    params: ItemListParams,
+    params?: ItemListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ItemListResponsesSinglePage, ItemListResponse>;
+  list(
+    listId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ItemListResponsesSinglePage, ItemListResponse>;
+  list(
+    listId: string,
+    params: ItemListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ItemListResponsesSinglePage, ItemListResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list(listId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/lists/${listId}/items`,
       ItemListResponsesSinglePage,
@@ -42,7 +55,7 @@ export class ItemListResponsesSinglePage extends SinglePage<ItemListResponse> {}
 export type ItemListResponse = Array<ListsAPI.GatewayItem>;
 
 export interface ItemListParams {
-  account_id: string;
+  account_id?: string;
 }
 
 Items.ItemListResponsesSinglePage = ItemListResponsesSinglePage;

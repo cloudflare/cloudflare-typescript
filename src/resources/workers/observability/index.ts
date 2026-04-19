@@ -1,5 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  DestinationListResponsesSinglePage,
+  Destinations,
+  type DestinationCreateResponse,
+  type DestinationUpdateResponse,
+  type DestinationListResponse,
+  type DestinationDeleteResponse,
+  type DestinationCreateParams,
+  type DestinationUpdateParams,
+  type DestinationListParams,
+  type DestinationDeleteParams,
+} from './destinations';
 export { Observability } from './observability';
 export {
   TelemetryKeysResponsesSinglePage,

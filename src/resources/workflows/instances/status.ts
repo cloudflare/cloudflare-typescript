@@ -14,7 +14,7 @@ export class Status extends APIResource {
     params: StatusEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StatusEditResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workflows/${workflowName}/instances/${instanceId}/status`, {
         body,
@@ -45,7 +45,7 @@ export interface StatusEditParams {
   /**
    * Path param
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Apply action to instance.

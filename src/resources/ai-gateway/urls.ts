@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class URLs extends APIResource {
@@ -19,10 +20,20 @@ export class URLs extends APIResource {
   get(
     gatewayId: string,
     provider: string,
-    params: URLGetParams,
+    params?: URLGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<URLGetResponse>;
+  get(gatewayId: string, provider: string, options?: Core.RequestOptions): Core.APIPromise<URLGetResponse>;
+  get(
+    gatewayId: string,
+    provider: string,
+    params: URLGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<URLGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(gatewayId, provider, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/url/${provider}`,
@@ -35,7 +46,7 @@ export class URLs extends APIResource {
 export type URLGetResponse = string;
 
 export interface URLGetParams {
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace URLs {

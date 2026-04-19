@@ -23,6 +23,8 @@ import * as HijacksAPI from './hijacks/hijacks';
 import { Hijacks } from './hijacks/hijacks';
 import * as LeaksAPI from './leaks/leaks';
 import { Leaks } from './leaks/leaks';
+import * as RPKIAPI from './rpki/rpki';
+import { RPKI } from './rpki/rpki';
 import * as TopAPI from './top/top';
 import { Top, TopPrefixesParams, TopPrefixesResponse } from './top/top';
 
@@ -32,6 +34,7 @@ export class BGP extends APIResource {
   hijacks: HijacksAPI.Hijacks = new HijacksAPI.Hijacks(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
+  rpki: RPKIAPI.RPKI = new RPKIAPI.RPKI(this._client);
 
   /**
    * Retrieves BGP updates over time. When requesting updates for an autonomous
@@ -223,6 +226,7 @@ BGP.Top = Top;
 BGP.Hijacks = Hijacks;
 BGP.Routes = Routes;
 BGP.IPs = IPs;
+BGP.RPKI = RPKI;
 
 export declare namespace BGP {
   export {
@@ -259,4 +263,6 @@ export declare namespace BGP {
     type IPTimeseriesResponse as IPTimeseriesResponse,
     type IPTimeseriesParams as IPTimeseriesParams,
   };
+
+  export { RPKI as RPKI };
 }

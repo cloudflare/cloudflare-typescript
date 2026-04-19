@@ -1,22 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
 import {
+  Consumer,
   ConsumerCreateParams,
-  ConsumerCreateResponse,
   ConsumerDeleteParams,
   ConsumerDeleteResponse,
   ConsumerGetParams,
-  ConsumerGetResponse,
   ConsumerListParams,
-  ConsumerListResponse,
-  ConsumerListResponsesSinglePage,
   ConsumerUpdateParams,
-  ConsumerUpdateResponse,
   Consumers,
+  ConsumersSinglePage,
 } from './consumers';
 import * as MessagesAPI from './messages';
 import {
@@ -32,12 +30,28 @@ import {
 } from './messages';
 import * as PurgeAPI from './purge';
 import { Purge, PurgeStartParams, PurgeStatusParams, PurgeStatusResponse } from './purge';
+import * as SubscriptionsAPI from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionCreateResponse,
+  SubscriptionDeleteParams,
+  SubscriptionDeleteResponse,
+  SubscriptionGetParams,
+  SubscriptionGetResponse,
+  SubscriptionListParams,
+  SubscriptionListResponse,
+  SubscriptionListResponsesV4PagePaginationArray,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import { SinglePage } from '../../pagination';
 
 export class Queues extends APIResource {
-  consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
   messages: MessagesAPI.Messages = new MessagesAPI.Messages(this._client);
   purge: PurgeAPI.Purge = new PurgeAPI.Purge(this._client);
+  consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 
   /**
    * Create a new queue
@@ -51,7 +65,7 @@ export class Queues extends APIResource {
    * ```
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
         result: Queue;
@@ -72,8 +86,17 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  update(queueId: string, params: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id, ...body } = params;
+  update(queueId: string, params?: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  update(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  update(
+    queueId: string,
+    params: QueueUpdateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Queue> {
+    if (isRequestOptions(params)) {
+      return this.update(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/queues/${queueId}`, { body, ...options }) as Core.APIPromise<{
         result: Queue;
@@ -94,8 +117,16 @@ export class Queues extends APIResource {
    * }
    * ```
    */
-  list(params: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue> {
-    const { account_id } = params;
+  list(params?: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue>;
+  list(options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue>;
+  list(
+    params: QueueListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<QueuesSinglePage, Queue> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(`/accounts/${account_id}/queues`, QueuesSinglePage, options);
   }
 
@@ -112,10 +143,19 @@ export class Queues extends APIResource {
    */
   delete(
     queueId: string,
-    params: QueueDeleteParams,
+    params?: QueueDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueDeleteResponse>;
+  delete(queueId: string, options?: Core.RequestOptions): Core.APIPromise<QueueDeleteResponse>;
+  delete(
+    queueId: string,
+    params: QueueDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options);
   }
 
@@ -130,8 +170,17 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  edit(queueId: string, params: QueueEditParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id, ...body } = params;
+  edit(queueId: string, params?: QueueEditParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  edit(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  edit(
+    queueId: string,
+    params: QueueEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Queue> {
+    if (isRequestOptions(params)) {
+      return this.edit(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/queues/${queueId}`, {
         body,
@@ -151,8 +200,17 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id } = params;
+  get(queueId: string, params?: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  get(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
+  get(
+    queueId: string,
+    params: QueueGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Queue> {
+    if (isRequestOptions(params)) {
+      return this.get(queueId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
         result: Queue;
@@ -164,7 +222,7 @@ export class Queues extends APIResource {
 export class QueuesSinglePage extends SinglePage<Queue> {}
 
 export interface Queue {
-  consumers?: Array<Queue.MqWorkerConsumerResponse | Queue.MqHTTPConsumerResponse>;
+  consumers?: Array<ConsumersAPI.Consumer>;
 
   consumers_total_count?: number;
 
@@ -184,109 +242,6 @@ export interface Queue {
 }
 
 export namespace Queue {
-  export interface MqWorkerConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    /**
-     * Name of a Worker
-     */
-    script_name?: string;
-
-    settings?: MqWorkerConsumerResponse.Settings;
-
-    type?: 'worker';
-  }
-
-  export namespace MqWorkerConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * Maximum number of concurrent consumers that may consume from this Queue. Set to
-       * `null` to automatically opt in to the platform's maximum (recommended).
-       */
-      max_concurrency?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of milliseconds to wait for a batch to fill up before attempting to
-       * deliver it
-       */
-      max_wait_time_ms?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-    }
-  }
-
-  export interface MqHTTPConsumerResponse {
-    /**
-     * A Resource identifier.
-     */
-    consumer_id?: string;
-
-    created_on?: string;
-
-    /**
-     * Name of the dead letter queue, or empty string if not configured
-     */
-    dead_letter_queue?: string;
-
-    queue_name?: string;
-
-    settings?: MqHTTPConsumerResponse.Settings;
-
-    type?: 'http_pull';
-  }
-
-  export namespace MqHTTPConsumerResponse {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch.
-       */
-      batch_size?: number;
-
-      /**
-       * The maximum number of retries
-       */
-      max_retries?: number;
-
-      /**
-       * The number of seconds to delay before making the message available for another
-       * attempt.
-       */
-      retry_delay?: number;
-
-      /**
-       * The number of milliseconds that a message is exclusively leased. After the
-       * timeout, the message becomes available for another attempt.
-       */
-      visibility_timeout_ms?: number;
-    }
-  }
-
   export interface MqWorkerProducer {
     script?: string;
 
@@ -332,7 +287,7 @@ export interface QueueCreateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -344,7 +299,7 @@ export interface QueueUpdateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -380,21 +335,21 @@ export interface QueueListParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface QueueDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface QueueEditParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -430,14 +385,16 @@ export interface QueueGetParams {
   /**
    * A Resource identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Queues.QueuesSinglePage = QueuesSinglePage;
-Queues.Consumers = Consumers;
-Queues.ConsumerListResponsesSinglePage = ConsumerListResponsesSinglePage;
 Queues.Messages = Messages;
 Queues.Purge = Purge;
+Queues.Consumers = Consumers;
+Queues.ConsumersSinglePage = ConsumersSinglePage;
+Queues.Subscriptions = Subscriptions;
+Queues.SubscriptionListResponsesV4PagePaginationArray = SubscriptionListResponsesV4PagePaginationArray;
 
 export declare namespace Queues {
   export {
@@ -450,21 +407,6 @@ export declare namespace Queues {
     type QueueDeleteParams as QueueDeleteParams,
     type QueueEditParams as QueueEditParams,
     type QueueGetParams as QueueGetParams,
-  };
-
-  export {
-    Consumers as Consumers,
-    type ConsumerCreateResponse as ConsumerCreateResponse,
-    type ConsumerUpdateResponse as ConsumerUpdateResponse,
-    type ConsumerListResponse as ConsumerListResponse,
-    type ConsumerDeleteResponse as ConsumerDeleteResponse,
-    type ConsumerGetResponse as ConsumerGetResponse,
-    ConsumerListResponsesSinglePage as ConsumerListResponsesSinglePage,
-    type ConsumerCreateParams as ConsumerCreateParams,
-    type ConsumerUpdateParams as ConsumerUpdateParams,
-    type ConsumerListParams as ConsumerListParams,
-    type ConsumerDeleteParams as ConsumerDeleteParams,
-    type ConsumerGetParams as ConsumerGetParams,
   };
 
   export {
@@ -484,5 +426,32 @@ export declare namespace Queues {
     type PurgeStatusResponse as PurgeStatusResponse,
     type PurgeStartParams as PurgeStartParams,
     type PurgeStatusParams as PurgeStatusParams,
+  };
+
+  export {
+    Consumers as Consumers,
+    type Consumer as Consumer,
+    type ConsumerDeleteResponse as ConsumerDeleteResponse,
+    ConsumersSinglePage as ConsumersSinglePage,
+    type ConsumerCreateParams as ConsumerCreateParams,
+    type ConsumerUpdateParams as ConsumerUpdateParams,
+    type ConsumerListParams as ConsumerListParams,
+    type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionListResponse as SubscriptionListResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    SubscriptionListResponsesV4PagePaginationArray as SubscriptionListResponsesV4PagePaginationArray,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionListParams as SubscriptionListParams,
+    type SubscriptionDeleteParams as SubscriptionDeleteParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
   };
 }

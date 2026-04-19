@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CustomCertificatesAPI from '../custom-certificates/custom-certificates';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -23,7 +24,7 @@ export class ClientCertificates extends APIResource {
     params: ClientCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/client_certificates`, { body, ...options }) as Core.APIPromise<{
         result: ClientCertificate;
@@ -46,10 +47,20 @@ export class ClientCertificates extends APIResource {
    * ```
    */
   list(
-    params: ClientCertificateListParams,
+    params?: ClientCertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate>;
+  list(
+    params: ClientCertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/client_certificates`,
       ClientCertificatesV4PagePaginationArray,
@@ -72,10 +83,19 @@ export class ClientCertificates extends APIResource {
    */
   delete(
     clientCertificateId: string,
-    params: ClientCertificateDeleteParams,
+    params?: ClientCertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ClientCertificate>;
+  delete(clientCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<ClientCertificate>;
+  delete(
+    clientCertificateId: string,
+    params: ClientCertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificate> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(clientCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
@@ -102,7 +122,7 @@ export class ClientCertificates extends APIResource {
     params: ClientCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/client_certificates/${clientCertificateId}`, {
         body,
@@ -125,10 +145,19 @@ export class ClientCertificates extends APIResource {
    */
   get(
     clientCertificateId: string,
-    params: ClientCertificateGetParams,
+    params?: ClientCertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ClientCertificate>;
+  get(clientCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<ClientCertificate>;
+  get(
+    clientCertificateId: string,
+    params: ClientCertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ClientCertificate> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(clientCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
@@ -248,7 +277,7 @@ export interface ClientCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The Certificate Signing Request (CSR). Must be newline-encoded.
@@ -266,7 +295,7 @@ export interface ClientCertificateListParams extends V4PagePaginationArrayParams
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Limit to the number of records returned.
@@ -288,14 +317,14 @@ export interface ClientCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface ClientCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -307,7 +336,7 @@ export interface ClientCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 ClientCertificates.ClientCertificatesV4PagePaginationArray = ClientCertificatesV4PagePaginationArray;

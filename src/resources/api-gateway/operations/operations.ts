@@ -1,21 +1,42 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
+import * as LabelsAPI from './labels';
+import {
+  LabelBulkCreateParams,
+  LabelBulkCreateResponse,
+  LabelBulkCreateResponsesSinglePage,
+  LabelBulkDeleteParams,
+  LabelBulkDeleteResponse,
+  LabelBulkDeleteResponsesSinglePage,
+  LabelBulkUpdateParams,
+  LabelBulkUpdateResponse,
+  LabelBulkUpdateResponsesSinglePage,
+  LabelCreateParams,
+  LabelCreateResponse,
+  LabelDeleteParams,
+  LabelDeleteResponse,
+  LabelUpdateParams,
+  LabelUpdateResponse,
+  Labels,
+} from './labels';
 import * as SchemaValidationAPI from './schema-validation';
 import {
   SchemaValidation,
   SchemaValidationEditParams,
-  SchemaValidationEditResponse,
   SchemaValidationGetParams,
   SchemaValidationGetResponse,
   SchemaValidationUpdateParams,
   SchemaValidationUpdateResponse,
+  SettingsMultipleRequest,
 } from './schema-validation';
 import * as UserSchemasAPI from '../user-schemas/user-schemas';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
+  labels: LabelsAPI.Labels = new LabelsAPI.Labels(this._client);
   schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
     this._client,
   );
@@ -43,7 +64,7 @@ export class Operations extends APIResource {
     params: OperationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/api_gateway/operations/item`, {
         body,
@@ -67,10 +88,20 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params: OperationListParams,
+    params?: OperationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
+  list(
+    params: OperationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/operations`,
       OperationListResponsesV4PagePaginationArray,
@@ -92,10 +123,19 @@ export class Operations extends APIResource {
    */
   delete(
     operationId: string,
-    params: OperationDeleteParams,
+    params?: OperationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationDeleteResponse>;
+  delete(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationDeleteResponse>;
+  delete(
+    operationId: string,
+    params: OperationDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(operationId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/operations/${operationId}`, options);
   }
 
@@ -129,7 +169,7 @@ export class Operations extends APIResource {
     params: OperationBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationBulkCreateResponsesSinglePage, OperationBulkCreateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id = this._client.zoneId, body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/operations`,
       OperationBulkCreateResponsesSinglePage,
@@ -150,10 +190,18 @@ export class Operations extends APIResource {
    * ```
    */
   bulkDelete(
-    params: OperationBulkDeleteParams,
+    params?: OperationBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationBulkDeleteResponse>;
+  bulkDelete(options?: Core.RequestOptions): Core.APIPromise<OperationBulkDeleteResponse>;
+  bulkDelete(
+    params: OperationBulkDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationBulkDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.bulkDelete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/operations`, options);
   }
 
@@ -171,10 +219,19 @@ export class Operations extends APIResource {
    */
   get(
     operationId: string,
-    params: OperationGetParams,
+    params?: OperationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationGetResponse>;
+  get(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationGetResponse>;
+  get(
+    operationId: string,
+    params: OperationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationGetResponse> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.get(operationId, {}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/operations/${operationId}`, {
         query,
@@ -1345,7 +1402,7 @@ export interface OperationCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The endpoint which can contain path parameter templates in curly
@@ -1371,7 +1428,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Direction to order results.
@@ -1411,14 +1468,14 @@ export interface OperationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param
@@ -1452,14 +1509,14 @@ export interface OperationBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface OperationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Add feature(s) to the results. The feature name that is given here
@@ -1471,6 +1528,10 @@ export interface OperationGetParams {
 
 Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
 Operations.OperationBulkCreateResponsesSinglePage = OperationBulkCreateResponsesSinglePage;
+Operations.Labels = Labels;
+Operations.LabelBulkCreateResponsesSinglePage = LabelBulkCreateResponsesSinglePage;
+Operations.LabelBulkDeleteResponsesSinglePage = LabelBulkDeleteResponsesSinglePage;
+Operations.LabelBulkUpdateResponsesSinglePage = LabelBulkUpdateResponsesSinglePage;
 Operations.SchemaValidation = SchemaValidation;
 
 export declare namespace Operations {
@@ -1493,9 +1554,28 @@ export declare namespace Operations {
   };
 
   export {
+    Labels as Labels,
+    type LabelCreateResponse as LabelCreateResponse,
+    type LabelUpdateResponse as LabelUpdateResponse,
+    type LabelDeleteResponse as LabelDeleteResponse,
+    type LabelBulkCreateResponse as LabelBulkCreateResponse,
+    type LabelBulkDeleteResponse as LabelBulkDeleteResponse,
+    type LabelBulkUpdateResponse as LabelBulkUpdateResponse,
+    LabelBulkCreateResponsesSinglePage as LabelBulkCreateResponsesSinglePage,
+    LabelBulkDeleteResponsesSinglePage as LabelBulkDeleteResponsesSinglePage,
+    LabelBulkUpdateResponsesSinglePage as LabelBulkUpdateResponsesSinglePage,
+    type LabelCreateParams as LabelCreateParams,
+    type LabelUpdateParams as LabelUpdateParams,
+    type LabelDeleteParams as LabelDeleteParams,
+    type LabelBulkCreateParams as LabelBulkCreateParams,
+    type LabelBulkDeleteParams as LabelBulkDeleteParams,
+    type LabelBulkUpdateParams as LabelBulkUpdateParams,
+  };
+
+  export {
     SchemaValidation as SchemaValidation,
+    type SettingsMultipleRequest as SettingsMultipleRequest,
     type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
-    type SchemaValidationEditResponse as SchemaValidationEditResponse,
     type SchemaValidationGetResponse as SchemaValidationGetResponse,
     type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
     type SchemaValidationEditParams as SchemaValidationEditParams,

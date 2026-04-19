@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Tail extends APIResource {
@@ -23,7 +24,7 @@ export class Tail extends APIResource {
     params: TailCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id = this._client.accountId, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/tails`, {
         body: body,
@@ -47,10 +48,20 @@ export class Tail extends APIResource {
   delete(
     scriptName: string,
     id: string,
-    params: TailDeleteParams,
+    params?: TailDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TailDeleteResponse>;
+  delete(scriptName: string, id: string, options?: Core.RequestOptions): Core.APIPromise<TailDeleteResponse>;
+  delete(
+    scriptName: string,
+    id: string,
+    params: TailDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(scriptName, id, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, options);
   }
 
@@ -67,10 +78,19 @@ export class Tail extends APIResource {
    */
   get(
     scriptName: string,
-    params: TailGetParams,
+    params?: TailGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TailGetResponse>;
+  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<TailGetResponse>;
+  get(
+    scriptName: string,
+    params: TailGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/tails`,
@@ -191,7 +211,7 @@ export interface TailCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param
@@ -203,14 +223,14 @@ export interface TailDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface TailGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Tail {

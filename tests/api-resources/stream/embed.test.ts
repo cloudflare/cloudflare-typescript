@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource embed', () => {
-  test('get: only required params', async () => {
+  // SKIP: prism 406 Not Acceptable
+  test.skip('get: only required params', async () => {
     const responsePromise = client.stream.embed.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource embed', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // SKIP: prism 406 Not Acceptable
+  test.skip('get: required and optional params', async () => {
     const response = await client.stream.embed.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

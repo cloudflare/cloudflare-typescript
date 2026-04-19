@@ -79,3 +79,15 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/ai/models/schema">client.ai.models.schema.<a href="./src/resources/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
+
+## ToMarkdown
+
+Types:
+
+- <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownSupportedResponse</a></code>
+- <code><a href="./src/resources/ai/to-markdown.ts">ToMarkdownTransformResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai/tomarkdown/supported">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">supported</a>({ ...params }) -> ToMarkdownSupportedResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/ai/tomarkdown">client.ai.toMarkdown.<a href="./src/resources/ai/to-markdown.ts">transform</a>({ ...params }) -> ToMarkdownTransformResponsesSinglePage</code>

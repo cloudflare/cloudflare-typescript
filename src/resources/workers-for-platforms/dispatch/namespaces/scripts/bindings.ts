@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import { SinglePage } from '../../../../../pagination';
 
@@ -24,10 +25,24 @@ export class Bindings extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params: BindingGetParams,
+    params?: BindingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse>;
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse>;
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: BindingGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<BindingGetResponsesSinglePage, BindingGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(dispatchNamespace, scriptName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/bindings`,
       BindingGetResponsesSinglePage,
@@ -831,7 +846,7 @@ export interface BindingGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Bindings.BindingGetResponsesSinglePage = BindingGetResponsesSinglePage;

@@ -30,6 +30,65 @@ export class ASNs extends APIResource {
   }
 
   /**
+   * Retrieves Internet Routing Registry AS-SETs that an AS is a member of.
+   *
+   * @example
+   * ```ts
+   * const response = await client.radar.entities.asns.asSet(3);
+   * ```
+   */
+  asSet(
+    asn: number,
+    query?: ASNAsSetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ASNAsSetResponse>;
+  asSet(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNAsSetResponse>;
+  asSet(
+    asn: number,
+    query: ASNAsSetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ASNAsSetResponse> {
+    if (isRequestOptions(query)) {
+      return this.asSet(asn, {}, query);
+    }
+    return (
+      this._client.get(`/radar/entities/asns/${asn}/as_set`, { query, ...options }) as Core.APIPromise<{
+        result: ASNAsSetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Retrieves a ranked list of Autonomous Systems based on their presence in the
+   * Cloudflare Botnet Threat Feed. Rankings can be sorted by offense count or number
+   * of bad IPs. Optionally compare to a previous date to see rank changes.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.radar.entities.asns.botnetThreatFeed();
+   * ```
+   */
+  botnetThreatFeed(
+    query?: ASNBotnetThreatFeedParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ASNBotnetThreatFeedResponse>;
+  botnetThreatFeed(options?: Core.RequestOptions): Core.APIPromise<ASNBotnetThreatFeedResponse>;
+  botnetThreatFeed(
+    query: ASNBotnetThreatFeedParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ASNBotnetThreatFeedResponse> {
+    if (isRequestOptions(query)) {
+      return this.botnetThreatFeed({}, query);
+    }
+    return (
+      this._client.get('/radar/entities/asns/botnet_threat_feed', { query, ...options }) as Core.APIPromise<{
+        result: ASNBotnetThreatFeedResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieves the requested autonomous system information. (A confidence level below
    * `5` indicates a low level of confidence in the traffic data - normally this
    * happens because Cloudflare has a small amount of traffic from/to this AS).
@@ -121,6 +180,92 @@ export namespace ASNListResponse {
     orgName?: string;
 
     website?: string;
+  }
+}
+
+export interface ASNAsSetResponse {
+  as_sets: Array<ASNAsSetResponse.AsSet>;
+
+  /**
+   * Paths from the AS-SET that include the given AS to its upstreams recursively
+   */
+  paths: Array<Array<string>>;
+}
+
+export namespace ASNAsSetResponse {
+  export interface AsSet {
+    /**
+     * The number of AS members in the AS-SET
+     */
+    as_members_count: number;
+
+    /**
+     * The number of AS-SET members in the AS-SET
+     */
+    as_set_members_count: number;
+
+    /**
+     * The number of recursive upstream AS-SETs
+     */
+    as_set_upstreams_count: number;
+
+    /**
+     * The number of unique ASNs in the AS-SETs recursive downstream
+     */
+    asn_cone_size: number;
+
+    /**
+     * The IRR sources of the AS-SET
+     */
+    irr_sources: Array<string>;
+
+    /**
+     * The name of the AS-SET
+     */
+    name: string;
+
+    /**
+     * The AS number following hierarchical AS-SET name
+     */
+    hierarchical_asn?: number;
+
+    /**
+     * The inferred AS number of the AS-SET
+     */
+    inferred_asn?: number;
+
+    /**
+     * The AS number matching PeeringDB record
+     */
+    peeringdb_asn?: number;
+  }
+}
+
+export interface ASNBotnetThreatFeedResponse {
+  ases: Array<ASNBotnetThreatFeedResponse.Ase>;
+
+  meta: ASNBotnetThreatFeedResponse.Meta;
+}
+
+export namespace ASNBotnetThreatFeedResponse {
+  export interface Ase {
+    asn: number;
+
+    country: string;
+
+    name: string;
+
+    rank: number;
+
+    rankChange?: number;
+  }
+
+  export interface Meta {
+    date: string;
+
+    total: number;
+
+    compareDate?: string;
   }
 }
 
@@ -327,6 +472,66 @@ export interface ASNListParams {
   orderBy?: 'ASN' | 'POPULATION';
 }
 
+export interface ASNAsSetParams {
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+}
+
+export interface ASNBotnetThreatFeedParams {
+  /**
+   * Filters results by Autonomous System. Specify one or more Autonomous System
+   * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
+   * results. For example, `-174, 3356` excludes results from AS174, but includes
+   * results from AS3356.
+   */
+  asn?: Array<string>;
+
+  /**
+   * Relative date range for rank change comparison (e.g., "1d", "7d", "30d").
+   */
+  compareDateRange?: string;
+
+  /**
+   * The date to retrieve (YYYY-MM-DD format). If not specified, returns the most
+   * recent available data. Note: This is the date the report was generated. The
+   * report is generated from information collected from the previous day (e.g., the
+   * 2026-02-23 entry contains data from 2026-02-22).
+   */
+  date?: string;
+
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limits the number of objects returned in the response.
+   */
+  limit?: number;
+
+  /**
+   * Filters results by location. Specify an alpha-2 location code.
+   */
+  location?: string;
+
+  /**
+   * Metric to rank ASNs by.
+   */
+  metric?: 'OFFENSE_COUNT' | 'NUMBER_OF_OFFENDING_IPS';
+
+  /**
+   * Skips the specified number of objects before fetching the results.
+   */
+  offset?: number;
+
+  /**
+   * Sort order.
+   */
+  sortOrder?: 'ASC' | 'DESC';
+}
+
 export interface ASNGetParams {
   /**
    * Format in which results will be returned.
@@ -361,10 +566,14 @@ export interface ASNRelParams {
 export declare namespace ASNs {
   export {
     type ASNListResponse as ASNListResponse,
+    type ASNAsSetResponse as ASNAsSetResponse,
+    type ASNBotnetThreatFeedResponse as ASNBotnetThreatFeedResponse,
     type ASNGetResponse as ASNGetResponse,
     type ASNIPResponse as ASNIPResponse,
     type ASNRelResponse as ASNRelResponse,
     type ASNListParams as ASNListParams,
+    type ASNAsSetParams as ASNAsSetParams,
+    type ASNBotnetThreatFeedParams as ASNBotnetThreatFeedParams,
     type ASNGetParams as ASNGetParams,
     type ASNIPParams as ASNIPParams,
     type ASNRelParams as ASNRelParams,

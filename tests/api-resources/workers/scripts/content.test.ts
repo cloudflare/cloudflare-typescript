@@ -36,7 +36,8 @@ describe('resource content', () => {
     });
   });
 
-  test('get: required and optional params', async () => {
+  // Mock server doesn't support string responses
+  test.skip('get: required and optional params', async () => {
     const response = await client.workers.scripts.content.get('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

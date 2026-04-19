@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class DNSSECResource extends APIResource {
@@ -14,8 +15,16 @@ export class DNSSECResource extends APIResource {
    * });
    * ```
    */
-  delete(params: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
-    const { zone_id } = params;
+  delete(params?: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse>;
+  delete(
+    params: DNSSECDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSSECDeleteResponse> {
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{
         result: DNSSECDeleteResponse;
@@ -33,8 +42,16 @@ export class DNSSECResource extends APIResource {
    * });
    * ```
    */
-  edit(params: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
-    const { zone_id, ...body } = params;
+  edit(params?: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC>;
+  edit(options?: Core.RequestOptions): Core.APIPromise<DNSSEC>;
+  edit(
+    params: DNSSECEditParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSSEC> {
+    if (isRequestOptions(params)) {
+      return this.edit({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dnssec`, { body, ...options }) as Core.APIPromise<{
         result: DNSSEC;
@@ -52,8 +69,16 @@ export class DNSSECResource extends APIResource {
    * });
    * ```
    */
-  get(params: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
-    const { zone_id } = params;
+  get(params?: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC>;
+  get(options?: Core.RequestOptions): Core.APIPromise<DNSSEC>;
+  get(
+    params: DNSSECGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DNSSEC> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{ result: DNSSEC }>
     )._thenUnwrap((obj) => obj.result);
@@ -159,14 +184,14 @@ export interface DNSSECDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DNSSECEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: If true, multi-signer DNSSEC is enabled on the zone, allowing
@@ -215,7 +240,7 @@ export interface DNSSECGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace DNSSECResource {

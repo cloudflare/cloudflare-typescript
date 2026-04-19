@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as RulesAPI from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -16,8 +17,16 @@ export class SiteInfo extends APIResource {
    * });
    * ```
    */
-  create(params: SiteInfoCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id, ...body } = params;
+  create(params?: SiteInfoCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site>;
+  create(options?: Core.RequestOptions): Core.APIPromise<Site>;
+  create(
+    params: SiteInfoCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Site> {
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rum/site_info`, { body, ...options }) as Core.APIPromise<{
         result: Site;
@@ -37,7 +46,7 @@ export class SiteInfo extends APIResource {
    * ```
    */
   update(siteId: string, params: SiteInfoUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rum/site_info/${siteId}`, {
         body,
@@ -60,10 +69,18 @@ export class SiteInfo extends APIResource {
    * ```
    */
   list(
-    params: SiteInfoListParams,
+    params?: SiteInfoListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SitesV4PagePaginationArray, Site>;
+  list(options?: Core.RequestOptions): Core.PagePromise<SitesV4PagePaginationArray, Site>;
+  list(
+    params: SiteInfoListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SitesV4PagePaginationArray, Site> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/rum/site_info/list`, SitesV4PagePaginationArray, {
       query,
       ...options,
@@ -83,10 +100,19 @@ export class SiteInfo extends APIResource {
    */
   delete(
     siteId: string,
-    params: SiteInfoDeleteParams,
+    params?: SiteInfoDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SiteInfoDeleteResponse>;
+  delete(siteId: string, options?: Core.RequestOptions): Core.APIPromise<SiteInfoDeleteResponse>;
+  delete(
+    siteId: string,
+    params: SiteInfoDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SiteInfoDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(siteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
         result: SiteInfoDeleteResponse;
@@ -105,8 +131,17 @@ export class SiteInfo extends APIResource {
    * );
    * ```
    */
-  get(siteId: string, params: SiteInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id } = params;
+  get(siteId: string, params?: SiteInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<Site>;
+  get(siteId: string, options?: Core.RequestOptions): Core.APIPromise<Site>;
+  get(
+    siteId: string,
+    params: SiteInfoGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Site> {
+    if (isRequestOptions(params)) {
+      return this.get(siteId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
         result: Site;
@@ -181,7 +216,7 @@ export interface SiteInfoCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If enabled, the JavaScript snippet is automatically injected for
@@ -204,7 +239,7 @@ export interface SiteInfoUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: If enabled, the JavaScript snippet is automatically injected for
@@ -239,7 +274,7 @@ export interface SiteInfoListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: The property used to sort the list of results.
@@ -251,14 +286,14 @@ export interface SiteInfoDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface SiteInfoGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 SiteInfo.SitesV4PagePaginationArray = SitesV4PagePaginationArray;

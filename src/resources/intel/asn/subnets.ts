@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
 
@@ -17,10 +18,19 @@ export class Subnets extends APIResource {
    */
   get(
     asn: Shared.ASNParam,
-    params: SubnetGetParams,
+    params?: SubnetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubnetGetResponse>;
+  get(asn: Shared.ASNParam, options?: Core.RequestOptions): Core.APIPromise<SubnetGetResponse>;
+  get(
+    asn: Shared.ASNParam,
+    params: SubnetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubnetGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(asn, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/intel/asn/${asn}/subnets`, options);
   }
 }
@@ -52,7 +62,7 @@ export interface SubnetGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Subnets {

@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import * as TldsAPI from './tlds/tlds';
-import { TldGetParams, TldGetResponse, Tlds } from './tlds/tlds';
+import * as TLDsAPI from './tlds/tlds';
+import { TLDGetParams, TLDGetResponse, TLDs } from './tlds/tlds';
 
 export class Top extends APIResource {
-  tlds: TldsAPI.Tlds = new TldsAPI.Tlds(this._client);
+  tlds: TLDsAPI.TLDs = new TLDsAPI.TLDs(this._client);
 }
 
-Top.Tlds = Tlds;
+Top.TLDs = TLDs;
 
 export declare namespace Top {
-  export { Tlds as Tlds, type TldGetResponse as TldGetResponse, type TldGetParams as TldGetParams };
+  export { TLDs as TLDs, type TLDGetResponse as TLDGetResponse, type TLDGetParams as TLDGetParams };
 }

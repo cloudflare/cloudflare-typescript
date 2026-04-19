@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
@@ -19,10 +20,20 @@ export class Searches extends APIResource {
    * ```
    */
   list(
-    params: SearchListParams,
+    params?: SearchListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SearchListResponsesV4PagePagination, SearchListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SearchListResponsesV4PagePagination, SearchListResponse>;
+  list(
+    params: SearchListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<SearchListResponsesV4PagePagination, SearchListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/load_balancers/search`,
       SearchListResponsesV4PagePagination,
@@ -73,7 +84,7 @@ export interface SearchListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Search query term.

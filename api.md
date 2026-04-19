@@ -29,6 +29,8 @@ Types:
 
 # [Accounts](src/resources/accounts/api.md)
 
+# [Organizations](src/resources/organizations/api.md)
+
 # [OriginCACertificates](src/resources/origin-ca-certificates/api.md)
 
 # [IPs](src/resources/ips/api.md)
@@ -66,6 +68,8 @@ Types:
 # [EmailSecurity](src/resources/email-security/api.md)
 
 # [EmailRouting](src/resources/email-routing/api.md)
+
+# [EmailSending](src/resources/email-sending/api.md)
 
 # [Filters](src/resources/filters/api.md)
 
@@ -111,8 +115,6 @@ Types:
 
 # [Addressing](src/resources/addressing/api.md)
 
-# [DLS](src/resources/dls/api.md)
-
 # [AuditLogs](src/resources/audit-logs/api.md)
 
 # [Billing](src/resources/billing/api.md)
@@ -151,11 +153,15 @@ Types:
 
 # [R2](src/resources/r2/api.md)
 
+# [R2DataCatalog](src/resources/r2-data-catalog/api.md)
+
 # [WorkersForPlatforms](src/resources/workers-for-platforms/api.md)
 
 # [ZeroTrust](src/resources/zero-trust/api.md)
 
 # [Turnstile](src/resources/turnstile/api.md)
+
+# [Connectivity](src/resources/connectivity/api.md)
 
 # [Hyperdrive](src/resources/hyperdrive/api.md)
 
@@ -165,11 +171,17 @@ Types:
 
 # [URLScanner](src/resources/url-scanner/api.md)
 
+# [VulnerabilityScanner](src/resources/vulnerability-scanner/api.md)
+
 # [Radar](src/resources/radar/api.md)
 
 # [BotManagement](src/resources/bot-management/api.md)
 
+# [Fraud](src/resources/fraud/api.md)
+
 # [OriginPostQuantumEncryption](src/resources/origin-post-quantum-encryption/api.md)
+
+# [GoogleTagGateway](src/resources/google-tag-gateway/api.md)
 
 # [Zaraz](src/resources/zaraz/api.md)
 
@@ -180,6 +192,8 @@ Types:
 # [Hostnames](src/resources/hostnames/api.md)
 
 # [Snippets](src/resources/snippets/api.md)
+
+# [RealtimeKit](src/resources/realtime-kit/api.md)
 
 # [Calls](src/resources/calls/api.md)
 
@@ -199,6 +213,8 @@ Types:
 
 # [ResourceSharing](src/resources/resource-sharing/api.md)
 
+# [ResourceTagging](src/resources/resource-tagging/api.md)
+
 # [LeakedCredentialChecks](src/resources/leaked-credential-checks/api.md)
 
 # [ContentScanning](src/resources/content-scanning/api.md)
@@ -206,6 +222,8 @@ Types:
 # [AbuseReports](src/resources/abuse-reports/api.md)
 
 # [AI](src/resources/ai/api.md)
+
+# [AISearch](src/resources/aisearch/api.md)
 
 # [SecurityCenter](src/resources/security-center/api.md)
 
@@ -218,3 +236,5 @@ Types:
 # [Pipelines](src/resources/pipelines/api.md)
 
 # [SchemaValidation](src/resources/schema-validation/api.md)
+
+# [TokenValidation](src/resources/token-validation/api.md)

@@ -21,6 +21,21 @@ export {
   type CustomNameserverGetParams,
 } from './custom-nameservers';
 export {
+  Environments,
+  type EnvironmentCreateResponse,
+  type EnvironmentUpdateResponse,
+  type EnvironmentListResponse,
+  type EnvironmentDeleteResponse,
+  type EnvironmentEditResponse,
+  type EnvironmentRollbackResponse,
+  type EnvironmentCreateParams,
+  type EnvironmentUpdateParams,
+  type EnvironmentListParams,
+  type EnvironmentDeleteParams,
+  type EnvironmentEditParams,
+  type EnvironmentRollbackParams,
+} from './environments';
+export {
   Holds,
   type ZoneHold,
   type HoldCreateParams,

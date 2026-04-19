@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class URLNormalization extends APIResource {
@@ -21,7 +22,7 @@ export class URLNormalization extends APIResource {
     params: URLNormalizationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<URLNormalizationUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/url_normalization`, { body, ...options }) as Core.APIPromise<{
         result: URLNormalizationUpdateResponse;
@@ -39,8 +40,16 @@ export class URLNormalization extends APIResource {
    * });
    * ```
    */
-  delete(params: URLNormalizationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { zone_id } = params;
+  delete(params?: URLNormalizationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<void>;
+  delete(
+    params: URLNormalizationDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.delete(`/zones/${zone_id}/url_normalization`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -58,10 +67,18 @@ export class URLNormalization extends APIResource {
    * ```
    */
   get(
-    params: URLNormalizationGetParams,
+    params?: URLNormalizationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<URLNormalizationGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<URLNormalizationGetResponse>;
+  get(
+    params: URLNormalizationGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<URLNormalizationGetResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/url_normalization`, options) as Core.APIPromise<{
         result: URLNormalizationGetResponse;
@@ -104,7 +121,7 @@ export interface URLNormalizationUpdateParams {
   /**
    * Path param: The unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The scope of the URL normalization.
@@ -121,14 +138,14 @@ export interface URLNormalizationDeleteParams {
   /**
    * The unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface URLNormalizationGetParams {
   /**
    * The unique ID of the zone.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace URLNormalization {

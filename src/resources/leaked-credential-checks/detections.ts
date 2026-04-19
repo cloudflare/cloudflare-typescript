@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -17,10 +18,18 @@ export class Detections extends APIResource {
    * ```
    */
   create(
-    params: DetectionCreateParams,
+    params?: DetectionCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DetectionCreateResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<DetectionCreateResponse>;
+  create(
+    params: DetectionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionCreateResponse> {
-    const { zone_id, ...body } = params;
+    if (isRequestOptions(params)) {
+      return this.create({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/leaked-credential-checks/detections`, {
         body,
@@ -46,7 +55,7 @@ export class Detections extends APIResource {
     params: DetectionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`, {
         body,
@@ -69,10 +78,20 @@ export class Detections extends APIResource {
    * ```
    */
   list(
-    params: DetectionListParams,
+    params?: DetectionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DetectionListResponsesSinglePage, DetectionListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DetectionListResponsesSinglePage, DetectionListResponse>;
+  list(
+    params: DetectionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<DetectionListResponsesSinglePage, DetectionListResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/leaked-credential-checks/detections`,
       DetectionListResponsesSinglePage,
@@ -94,15 +113,59 @@ export class Detections extends APIResource {
    */
   delete(
     detectionId: string,
-    params: DetectionDeleteParams,
+    params?: DetectionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DetectionDeleteResponse>;
+  delete(detectionId: string, options?: Core.RequestOptions): Core.APIPromise<DetectionDeleteResponse>;
+  delete(
+    detectionId: string,
+    params: DetectionDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(detectionId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`,
         options,
       ) as Core.APIPromise<{ result: DetectionDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get user-defined detection pattern for Leaked Credential Checks.
+   *
+   * @example
+   * ```ts
+   * const detection =
+   *   await client.leakedCredentialChecks.detections.get(
+   *     '18a14bafaa8eb1df04ce683ec18c765e',
+   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  get(
+    detectionId: string,
+    params?: DetectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DetectionGetResponse>;
+  get(detectionId: string, options?: Core.RequestOptions): Core.APIPromise<DetectionGetResponse>;
+  get(
+    detectionId: string,
+    params: DetectionGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DetectionGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(detectionId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
+    return (
+      this._client.get(
+        `/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`,
+        options,
+      ) as Core.APIPromise<{ result: DetectionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -174,11 +237,32 @@ export interface DetectionListResponse {
 
 export type DetectionDeleteResponse = unknown;
 
+/**
+ * Defines a custom set of username/password expressions to match Leaked Credential
+ * Checks on.
+ */
+export interface DetectionGetResponse {
+  /**
+   * Defines the unique ID for this custom detection.
+   */
+  id?: string;
+
+  /**
+   * Defines ehe ruleset expression to use in matching the password in a request.
+   */
+  password?: string;
+
+  /**
+   * Defines the ruleset expression to use in matching the username in a request.
+   */
+  username?: string;
+}
+
 export interface DetectionCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Defines ehe ruleset expression to use in matching the password in a
@@ -197,7 +281,7 @@ export interface DetectionUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: Defines ehe ruleset expression to use in matching the password in a
@@ -216,14 +300,21 @@ export interface DetectionListParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface DetectionDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id: string;
+  zone_id?: string;
+}
+
+export interface DetectionGetParams {
+  /**
+   * Defines an identifier.
+   */
+  zone_id?: string;
 }
 
 Detections.DetectionListResponsesSinglePage = DetectionListResponsesSinglePage;
@@ -234,10 +325,12 @@ export declare namespace Detections {
     type DetectionUpdateResponse as DetectionUpdateResponse,
     type DetectionListResponse as DetectionListResponse,
     type DetectionDeleteResponse as DetectionDeleteResponse,
+    type DetectionGetResponse as DetectionGetResponse,
     DetectionListResponsesSinglePage as DetectionListResponsesSinglePage,
     type DetectionCreateParams as DetectionCreateParams,
     type DetectionUpdateParams as DetectionUpdateParams,
     type DetectionListParams as DetectionListParams,
     type DetectionDeleteParams as DetectionDeleteParams,
+    type DetectionGetParams as DetectionGetParams,
   };
 }

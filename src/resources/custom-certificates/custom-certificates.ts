@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as PrioritizeAPI from './prioritize';
 import { Prioritize, PrioritizeUpdateParams } from './prioritize';
@@ -30,7 +31,7 @@ export class CustomCertificates extends APIResource {
     params: CustomCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{
         result: CustomCertificate;
@@ -54,10 +55,20 @@ export class CustomCertificates extends APIResource {
    * ```
    */
   list(
-    params: CustomCertificateListParams,
+    params?: CustomCertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate>;
+  list(
+    params: CustomCertificateListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate> {
-    const { zone_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { zone_id = this._client.zoneId, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/custom_certificates`,
       CustomCertificatesV4PagePaginationArray,
@@ -79,10 +90,22 @@ export class CustomCertificates extends APIResource {
    */
   delete(
     customCertificateId: string,
-    params: CustomCertificateDeleteParams,
+    params?: CustomCertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificateDeleteResponse>;
+  delete(
+    customCertificateId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificateDeleteResponse>;
+  delete(
+    customCertificateId: string,
+    params: CustomCertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificateDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(customCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
@@ -110,7 +133,7 @@ export class CustomCertificates extends APIResource {
     params: CustomCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificate> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body,
@@ -135,10 +158,19 @@ export class CustomCertificates extends APIResource {
    */
   get(
     customCertificateId: string,
-    params: CustomCertificateGetParams,
+    params?: CustomCertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomCertificate>;
+  get(customCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<CustomCertificate>;
+  get(
+    customCertificateId: string,
+    params: CustomCertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificate> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(customCertificateId, {}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
@@ -284,7 +316,7 @@ export interface CustomCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
@@ -351,7 +383,7 @@ export interface CustomCertificateListParams extends V4PagePaginationArrayParams
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Query param: Whether to match all search requirements or at least one (any).
@@ -368,14 +400,14 @@ export interface CustomCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface CustomCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: A ubiquitous bundle has the highest probability of being verified
@@ -436,7 +468,7 @@ export interface CustomCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id?: string;
 }
 
 CustomCertificates.CustomCertificatesV4PagePaginationArray = CustomCertificatesV4PagePaginationArray;

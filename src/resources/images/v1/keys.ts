@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Keys extends APIResource {
@@ -16,10 +17,19 @@ export class Keys extends APIResource {
    */
   update(
     signingKeyName: string,
-    params: KeyUpdateParams,
+    params?: KeyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyUpdateResponse>;
+  update(signingKeyName: string, options?: Core.RequestOptions): Core.APIPromise<KeyUpdateResponse>;
+  update(
+    signingKeyName: string,
+    params: KeyUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyUpdateResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.update(signingKeyName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
@@ -38,8 +48,16 @@ export class Keys extends APIResource {
    * });
    * ```
    */
-  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
-    const { account_id } = params;
+  list(params?: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<KeyListResponse>;
+  list(
+    params: KeyListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{
         result: KeyListResponse;
@@ -60,10 +78,19 @@ export class Keys extends APIResource {
    */
   delete(
     signingKeyName: string,
-    params: KeyDeleteParams,
+    params?: KeyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyDeleteResponse>;
+  delete(signingKeyName: string, options?: Core.RequestOptions): Core.APIPromise<KeyDeleteResponse>;
+  delete(
+    signingKeyName: string,
+    params: KeyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(signingKeyName, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
@@ -101,21 +128,21 @@ export interface KeyUpdateParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyListParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface KeyDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Keys {

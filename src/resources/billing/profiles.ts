@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Profiles extends APIResource {
@@ -9,8 +10,16 @@ export class Profiles extends APIResource {
    *
    * @deprecated
    */
-  get(params: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
-    const { account_id } = params;
+  get(params?: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse>;
+  get(
+    params: ProfileGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfileGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/billing/profile`, options) as Core.APIPromise<{
         result: ProfileGetResponse;
@@ -106,7 +115,7 @@ export interface ProfileGetParams {
   /**
    * Identifier
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace Profiles {

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class IncomingResource extends APIResource {
@@ -25,7 +26,7 @@ export class IncomingResource extends APIResource {
     params: IncomingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncomingCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
         result: IncomingCreateResponse;
@@ -54,7 +55,7 @@ export class IncomingResource extends APIResource {
     params: IncomingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncomingUpdateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id = this._client.zoneId, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
         result: IncomingUpdateResponse;
@@ -74,10 +75,18 @@ export class IncomingResource extends APIResource {
    * ```
    */
   delete(
-    params: IncomingDeleteParams,
+    params?: IncomingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingDeleteResponse>;
+  delete(options?: Core.RequestOptions): Core.APIPromise<IncomingDeleteResponse>;
+  delete(
+    params: IncomingDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncomingDeleteResponse> {
-    const { zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.delete(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
         result: IncomingDeleteResponse;
@@ -96,8 +105,16 @@ export class IncomingResource extends APIResource {
    *   });
    * ```
    */
-  get(params: IncomingGetParams, options?: Core.RequestOptions): Core.APIPromise<IncomingGetResponse> {
-    const { zone_id } = params;
+  get(params?: IncomingGetParams, options?: Core.RequestOptions): Core.APIPromise<IncomingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<IncomingGetResponse>;
+  get(
+    params: IncomingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { zone_id = this._client.zoneId } = params;
     return (
       this._client.get(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
         result: IncomingGetResponse;
@@ -274,7 +291,7 @@ export interface IncomingCreateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often should a secondary zone auto refresh regardless of DNS
@@ -297,7 +314,7 @@ export interface IncomingUpdateParams {
   /**
    * Path param
    */
-  zone_id: string;
+  zone_id?: string;
 
   /**
    * Body param: How often should a secondary zone auto refresh regardless of DNS
@@ -317,11 +334,11 @@ export interface IncomingUpdateParams {
 }
 
 export interface IncomingDeleteParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export interface IncomingGetParams {
-  zone_id: string;
+  zone_id?: string;
 }
 
 export declare namespace IncomingResource {

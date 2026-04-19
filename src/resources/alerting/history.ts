@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -21,10 +22,18 @@ export class HistoryResource extends APIResource {
    * ```
    */
   list(
-    params: HistoryListParams,
+    params?: HistoryListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HistoriesV4PagePaginationArray, History>;
+  list(options?: Core.RequestOptions): Core.PagePromise<HistoriesV4PagePaginationArray, History>;
+  list(
+    params: HistoryListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<HistoriesV4PagePaginationArray, History> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/alerting/v3/history`,
       HistoriesV4PagePaginationArray,
@@ -87,7 +96,7 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: The account id
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Limit the returned results to history records older than the

@@ -29,7 +29,11 @@ export class Policies extends APIResource {
     params: PolicyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyCreateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -74,7 +78,11 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
-    const { account_id, zone_id, ...body } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...body
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -131,7 +139,11 @@ export class Policies extends APIResource {
     if (isRequestOptions(params)) {
       return this.list(appId, {}, params);
     }
-    const { account_id, zone_id, ...query } = params;
+    const {
+      account_id = this._client.accountId ?? undefined,
+      zone_id = this._client.zoneId ?? undefined,
+      ...query
+    } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -189,7 +201,8 @@ export class Policies extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(appId, policyId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -244,7 +257,8 @@ export class Policies extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(appId, policyId, {}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
+      params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -1361,14 +1375,14 @@ export namespace PolicyCreateResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -1505,14 +1519,14 @@ export namespace PolicyUpdateResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -1649,14 +1663,14 @@ export namespace PolicyListResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -1800,14 +1814,14 @@ export namespace PolicyGetResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -1920,14 +1934,14 @@ export namespace PolicyCreateParams {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -2040,14 +2054,14 @@ export namespace PolicyUpdateParams {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */

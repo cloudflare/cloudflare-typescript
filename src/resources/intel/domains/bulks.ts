@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Bulks extends APIResource {
@@ -14,8 +15,16 @@ export class Bulks extends APIResource {
    * });
    * ```
    */
-  get(params: BulkGetParams, options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null> {
-    const { account_id, ...query } = params;
+  get(params?: BulkGetParams, options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null>;
+  get(options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null>;
+  get(
+    params: BulkGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BulkGetResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.get({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/domain/bulk`, {
         query,
@@ -129,7 +138,7 @@ export interface BulkGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Query param: Accepts multiple values like

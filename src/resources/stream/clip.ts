@@ -19,7 +19,7 @@ export class ClipResource extends APIResource {
    * ```
    */
   create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamAPI.Video> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/clip`, { body, ...options }) as Core.APIPromise<{
         result: StreamAPI.Video;
@@ -134,7 +134,7 @@ export interface ClipCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The unique video identifier (UID).

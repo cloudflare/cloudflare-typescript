@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class BinaryStorage extends APIResource {
@@ -20,7 +21,7 @@ export class BinaryStorage extends APIResource {
     params: BinaryStorageCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BinaryStorageCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(
       `/accounts/${account_id}/cloudforce-one/binary`,
       Core.multipartFormRequestOptions({ body, ...options }),
@@ -37,8 +38,17 @@ export class BinaryStorage extends APIResource {
    * });
    * ```
    */
-  get(hash: string, params: BinaryStorageGetParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const { account_id } = params;
+  get(hash: string, params?: BinaryStorageGetParams, options?: Core.RequestOptions): Core.APIPromise<void>;
+  get(hash: string, options?: Core.RequestOptions): Core.APIPromise<void>;
+  get(
+    hash: string,
+    params: BinaryStorageGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
+    if (isRequestOptions(params)) {
+      return this.get(hash, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/binary/${hash}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -60,7 +70,7 @@ export interface BinaryStorageCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The binary file content to upload.
@@ -72,7 +82,7 @@ export interface BinaryStorageGetParams {
   /**
    * Account ID.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export declare namespace BinaryStorage {

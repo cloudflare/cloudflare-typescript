@@ -6,6 +6,38 @@ Types:
 - <code><a href="./src/resources/workers/workers.ts">SingleStepMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
+## Beta
+
+### Workers
+
+Types:
+
+- <code><a href="./src/resources/workers/beta/workers/workers.ts">Worker</a></code>
+- <code><a href="./src/resources/workers/beta/workers/workers.ts">WorkerDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">create</a>({ ...params }) -> Worker</code>
+- <code title="put /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">update</a>(workerId, { ...params }) -> Worker</code>
+- <code title="get /accounts/{account_id}/workers/workers">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">list</a>({ ...params }) -> WorkersV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">delete</a>(workerId, { ...params }) -> WorkerDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">edit</a>(workerId, { ...params }) -> Worker</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}">client.workers.beta.workers.<a href="./src/resources/workers/beta/workers/workers.ts">get</a>(workerId, { ...params }) -> Worker</code>
+
+#### Versions
+
+Types:
+
+- <code><a href="./src/resources/workers/beta/workers/versions.ts">Version</a></code>
+- <code><a href="./src/resources/workers/beta/workers/versions.ts">VersionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">create</a>(workerId, { ...params }) -> Version</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">list</a>(workerId, { ...params }) -> VersionsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">delete</a>(workerId, versionId, { ...params }) -> VersionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/workers/workers/{worker_id}/versions/{version_id}">client.workers.beta.workers.versions.<a href="./src/resources/workers/beta/workers/versions.ts">get</a>(workerId, versionId, { ...params }) -> Version</code>
+
 ## Routes
 
 Types:
@@ -46,6 +78,7 @@ Types:
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptListResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptGetResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/scripts.ts">ScriptSearchResponse</a></code>
 
 Methods:
 
@@ -53,6 +86,7 @@ Methods:
 - <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> ScriptDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> string</code>
+- <code title="get /accounts/{account_id}/workers/scripts-search">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">search</a>({ ...params }) -> ScriptSearchResponse</code>
 
 ### Assets
 
@@ -125,17 +159,16 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/deployments.ts">Deployment</a></code>
 - <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentListResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentDeleteResponse</a></code>
-- <code><a href="./src/resources/workers/scripts/deployments.ts">DeploymentGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">create</a>(scriptName, { ...params }) -> DeploymentCreateResponse</code>
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">create</a>(scriptName, { ...params }) -> Deployment</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">list</a>(scriptName, { ...params }) -> DeploymentListResponse</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">delete</a>(scriptName, deploymentId, { ...params }) -> DeploymentDeleteResponse</code>
-- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">get</a>(scriptName, deploymentId, { ...params }) -> DeploymentGetResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/deployments/{deployment_id}">client.workers.scripts.deployments.<a href="./src/resources/workers/scripts/deployments.ts">get</a>(scriptName, deploymentId, { ...params }) -> Deployment</code>
 
 ### Versions
 
@@ -217,6 +250,7 @@ Types:
 Methods:
 
 - <code title="put /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">update</a>({ ...params }) -> SubdomainUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">delete</a>({ ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/workers/subdomain">client.workers.subdomains.<a href="./src/resources/workers/subdomains.ts">get</a>({ ...params }) -> SubdomainGetResponse</code>
 
 ## Observability
@@ -234,3 +268,19 @@ Methods:
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">keys</a>({ ...params }) -> TelemetryKeysResponsesSinglePage</code>
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">query</a>({ ...params }) -> TelemetryQueryResponse</code>
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">values</a>({ ...params }) -> TelemetryValuesResponsesSinglePage</code>
+
+### Destinations
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationCreateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationListResponse</a></code>
+- <code><a href="./src/resources/workers/observability/destinations.ts">DestinationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/destinations">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">create</a>({ ...params }) -> DestinationCreateResponse</code>
+- <code title="patch /accounts/{account_id}/workers/observability/destinations/{slug}">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">update</a>(slug, { ...params }) -> DestinationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/observability/destinations">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">list</a>({ ...params }) -> DestinationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/observability/destinations/{slug}">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">delete</a>(slug, { ...params }) -> DestinationDeleteResponse</code>

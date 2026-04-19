@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -28,7 +29,7 @@ export class Assets extends APIResource {
     params: AssetCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AssetCreateResponsesSinglePage, AssetCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset`,
       AssetCreateResponsesSinglePage,
@@ -55,7 +56,7 @@ export class Assets extends APIResource {
     params: AssetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset/${assetId}`, {
         body,
@@ -80,10 +81,24 @@ export class Assets extends APIResource {
   delete(
     requestId: string,
     assetId: string,
-    params: AssetDeleteParams,
+    params?: AssetDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AssetDeleteResponse>;
+  delete(
+    requestId: string,
+    assetId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AssetDeleteResponse>;
+  delete(
+    requestId: string,
+    assetId: string,
+    params: AssetDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(requestId, assetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.delete(
       `/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset/${assetId}`,
       options,
@@ -108,10 +123,24 @@ export class Assets extends APIResource {
   get(
     requestId: string,
     assetId: string,
-    params: AssetGetParams,
+    params?: AssetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AssetGetResponsesSinglePage, AssetGetResponse>;
+  get(
+    requestId: string,
+    assetId: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AssetGetResponsesSinglePage, AssetGetResponse>;
+  get(
+    requestId: string,
+    assetId: string,
+    params: AssetGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<AssetGetResponsesSinglePage, AssetGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(requestId, assetId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cloudforce-one/requests/${requestId}/asset/${assetId}`,
       AssetGetResponsesSinglePage,
@@ -254,7 +283,7 @@ export interface AssetCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Page number of results.
@@ -271,7 +300,7 @@ export interface AssetUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: Asset file to upload.
@@ -283,14 +312,14 @@ export interface AssetDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface AssetGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Assets.AssetCreateResponsesSinglePage = AssetCreateResponsesSinglePage;

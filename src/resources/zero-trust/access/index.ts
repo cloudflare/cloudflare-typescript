@@ -1,13 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { AIControls } from './ai-controls/index';
 export { Access } from './access';
 export {
   AccessUsersV4PagePaginationArray,
   UserListResponsesV4PagePaginationArray,
   Users,
   type AccessUser,
+  type UserCreateResponse,
+  type UserUpdateResponse,
   type UserListResponse,
+  type UserDeleteResponse,
+  type UserGetResponse,
+  type UserCreateParams,
+  type UserUpdateParams,
   type UserListParams,
+  type UserDeleteParams,
+  type UserGetParams,
 } from './users/index';
 export {
   ApplicationListResponsesV4PagePaginationArray,

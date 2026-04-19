@@ -17,17 +17,21 @@ import {
   InvestigateListResponse,
   InvestigateListResponsesV4PagePaginationArray,
 } from './investigate/investigate';
+import * as PhishguardAPI from './phishguard/phishguard';
+import { Phishguard } from './phishguard/phishguard';
 import * as SettingsAPI from './settings/settings';
 import { Settings } from './settings/settings';
 
 export class EmailSecurity extends APIResource {
   investigate: InvestigateAPI.Investigate = new InvestigateAPI.Investigate(this._client);
+  phishguard: PhishguardAPI.Phishguard = new PhishguardAPI.Phishguard(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   submissions: SubmissionsAPI.Submissions = new SubmissionsAPI.Submissions(this._client);
 }
 
 EmailSecurity.Investigate = Investigate;
 EmailSecurity.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
+EmailSecurity.Phishguard = Phishguard;
 EmailSecurity.Settings = Settings;
 EmailSecurity.Submissions = Submissions;
 EmailSecurity.SubmissionListResponsesV4PagePaginationArray = SubmissionListResponsesV4PagePaginationArray;
@@ -41,6 +45,8 @@ export declare namespace EmailSecurity {
     type InvestigateListParams as InvestigateListParams,
     type InvestigateGetParams as InvestigateGetParams,
   };
+
+  export { Phishguard as Phishguard };
 
   export { Settings as Settings };
 

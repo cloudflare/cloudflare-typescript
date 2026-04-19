@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { SchemaValidation } from './schema-validation';
 export {
+  PublicSchemasV4PagePaginationArray,
   Schemas,
+  type PublicSchema,
   type SchemaDeleteResponse,
   type SchemaCreateParams,
   type SchemaListParams,
@@ -10,6 +11,7 @@ export {
   type SchemaEditParams,
   type SchemaGetParams,
 } from './schemas';
+export { SchemaValidation } from './schema-validation';
 export {
   Settings,
   type SettingUpdateResponse,

@@ -22,4 +22,4 @@ export {
   type DatabaseImportParams,
   type DatabaseQueryParams,
   type DatabaseRawParams,
-} from './database';
+} from './database/index';

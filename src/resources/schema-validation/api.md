@@ -4,6 +4,7 @@
 
 Types:
 
+- <code><a href="./src/resources/schema-validation/schemas.ts">PublicSchema</a></code>
 - <code><a href="./src/resources/schema-validation/schemas.ts">SchemaDeleteResponse</a></code>
 
 Methods:

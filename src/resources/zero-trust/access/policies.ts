@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ApplicationsAPI from './applications/applications';
 import * as ApplicationsPoliciesAPI from './applications/policies';
@@ -22,7 +23,7 @@ export class Policies extends APIResource {
    * ```
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/policies`, { body, ...options }) as Core.APIPromise<{
         result: PolicyCreateResponse;
@@ -52,7 +53,7 @@ export class Policies extends APIResource {
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id = this._client.accountId, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/policies/${policyId}`, {
         body,
@@ -75,10 +76,20 @@ export class Policies extends APIResource {
    * ```
    */
   list(
-    params: PolicyListParams,
+    params?: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse>;
+  list(
+    params: PolicyListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<PolicyListResponsesV4PagePaginationArray, PolicyListResponse> {
-    const { account_id, ...query } = params;
+    if (isRequestOptions(params)) {
+      return this.list({}, params);
+    }
+    const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/policies`,
       PolicyListResponsesV4PagePaginationArray,
@@ -100,10 +111,19 @@ export class Policies extends APIResource {
    */
   delete(
     policyId: string,
-    params: PolicyDeleteParams,
+    params?: PolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyDeleteResponse>;
+  delete(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse>;
+  delete(
+    policyId: string,
+    params: PolicyDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyDeleteResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.delete(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{
         result: PolicyDeleteResponse;
@@ -124,10 +144,19 @@ export class Policies extends APIResource {
    */
   get(
     policyId: string,
-    params: PolicyGetParams,
+    params?: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse>;
+  get(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse>;
+  get(
+    policyId: string,
+    params: PolicyGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<PolicyGetResponse> {
-    const { account_id } = params;
+    if (isRequestOptions(params)) {
+      return this.get(policyId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
     return (
       this._client.get(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{
         result: PolicyGetResponse;
@@ -373,14 +402,14 @@ export namespace PolicyCreateResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -518,14 +547,14 @@ export namespace PolicyUpdateResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -663,14 +692,14 @@ export namespace PolicyListResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -815,14 +844,14 @@ export namespace PolicyGetResponse {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -862,7 +891,7 @@ export interface PolicyCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The action Access will take if a user matches this policy.
@@ -951,14 +980,14 @@ export namespace PolicyCreateParams {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -998,7 +1027,7 @@ export interface PolicyUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 
   /**
    * Body param: The action Access will take if a user matches this policy.
@@ -1087,14 +1116,14 @@ export namespace PolicyUpdateParams {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    rdp?: ConnectionRules.Rdp;
+    rdp?: ConnectionRules.RDP;
   }
 
   export namespace ConnectionRules {
     /**
      * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface Rdp {
+    export interface RDP {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
@@ -1134,21 +1163,21 @@ export interface PolicyListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyDeleteParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 export interface PolicyGetParams {
   /**
    * Identifier.
    */
-  account_id: string;
+  account_id?: string;
 }
 
 Policies.PolicyListResponsesV4PagePaginationArray = PolicyListResponsesV4PagePaginationArray;
