@@ -57,6 +57,7 @@ TEST_PATHS=(
 	tests/api-resources/cache/smart-tiered-cache.test.ts
 	tests/api-resources/cache/variants.test.ts
 	tests/api-resources/cache/regional-tiered-cache.test.ts
+	tests/api-resources/cache/origin-cloud-regions.test.ts
 	tests/api-resources/ssl/ssl.test.ts
 	tests/api-resources/ssl/analyze.test.ts
 	tests/api-resources/ssl/certificate-packs/certificate-packs.test.ts
