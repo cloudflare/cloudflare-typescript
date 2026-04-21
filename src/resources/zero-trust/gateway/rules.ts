@@ -718,7 +718,8 @@ export namespace RuleSetting {
 
     /**
      * Configure download behavior. When set to remote_only, users can view downloads
-     * but cannot save them. Applies only when version == "v2".
+     * but cannot save them. If this field is absent, downloading remains enabled.
+     * Applies only when version == "v2".
      */
     download?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -761,6 +762,12 @@ export namespace RuleSetting {
      * Indicate which version of the browser isolation controls should apply.
      */
     version?: 'v1' | 'v2';
+
+    /**
+     * Specify the watermark ID (UUID) to apply to the isolated browser session. When
+     * present, enables watermark rendering in the isolated browser.
+     */
+    wm_id?: string;
   }
 
   /**
@@ -1192,7 +1199,8 @@ export namespace RuleSettingParam {
 
     /**
      * Configure download behavior. When set to remote_only, users can view downloads
-     * but cannot save them. Applies only when version == "v2".
+     * but cannot save them. If this field is absent, downloading remains enabled.
+     * Applies only when version == "v2".
      */
     download?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -1235,6 +1243,12 @@ export namespace RuleSettingParam {
      * Indicate which version of the browser isolation controls should apply.
      */
     version?: 'v1' | 'v2';
+
+    /**
+     * Specify the watermark ID (UUID) to apply to the isolated browser session. When
+     * present, enables watermark rendering in the isolated browser.
+     */
+    wm_id?: string;
   }
 
   /**
