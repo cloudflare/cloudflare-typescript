@@ -16,6 +16,26 @@ export {
   type CacheReserveStatusParams,
 } from './cache-reserve';
 export {
+  OriginCloudRegions,
+  type OriginCloudRegion,
+  type OriginCloudRegionCreateResponse,
+  type OriginCloudRegionListResponse,
+  type OriginCloudRegionDeleteResponse,
+  type OriginCloudRegionBulkDeleteResponse,
+  type OriginCloudRegionBulkEditResponse,
+  type OriginCloudRegionEditResponse,
+  type OriginCloudRegionGetResponse,
+  type OriginCloudRegionSupportedRegionsResponse,
+  type OriginCloudRegionCreateParams,
+  type OriginCloudRegionListParams,
+  type OriginCloudRegionDeleteParams,
+  type OriginCloudRegionBulkDeleteParams,
+  type OriginCloudRegionBulkEditParams,
+  type OriginCloudRegionEditParams,
+  type OriginCloudRegionGetParams,
+  type OriginCloudRegionSupportedRegionsParams,
+} from './origin-cloud-regions';
+export {
   RegionalTieredCacheResource,
   type RegionalTieredCache,
   type RegionalTieredCacheEditResponse,
