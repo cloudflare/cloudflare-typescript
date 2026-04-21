@@ -47,6 +47,7 @@ describe('resource jobs', () => {
         'CVE-2021-44228': false,
         field_delimiter: ',',
         field_names: ['Datetime', 'DstIP', 'SrcIP'],
+        merge_subrequests: true,
         output_type: 'ndjson',
         record_delimiter: '',
         record_prefix: '{',
