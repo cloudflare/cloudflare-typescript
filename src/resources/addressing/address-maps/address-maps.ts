@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AddressMapsAPI from './address-maps';
-import * as IPsAPI from '../../ips';
+import * as IPsAPI from '../../ips/ips';
 import * as AccountsAPI from './accounts';
 import {
   AccountDeleteParams,

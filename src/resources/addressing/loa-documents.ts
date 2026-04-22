@@ -47,13 +47,13 @@ export class LOADocuments extends APIResource {
    * ```
    */
   get(
-    loaDocumentId: string | null,
+    loaDocumentId: string,
     params?: LOADocumentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response>;
-  get(loaDocumentId: string | null, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  get(loaDocumentId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
   get(
-    loaDocumentId: string | null,
+    loaDocumentId: string,
     params: LOADocumentGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
