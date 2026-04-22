@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class CNIs extends APIResource {
@@ -23,7 +22,7 @@ export class CNIs extends APIResource {
    * ```
    */
   create(params: CNICreateParams, options?: Core.RequestOptions): Core.APIPromise<CNICreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cni/cnis`, { body, ...options });
   }
 
@@ -55,7 +54,7 @@ export class CNIs extends APIResource {
     params: CNIUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CNIUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.put(`/accounts/${account_id}/cni/cnis/${cni}`, { body, ...options });
   }
 
@@ -69,16 +68,8 @@ export class CNIs extends APIResource {
    * });
    * ```
    */
-  list(params?: CNIListParams, options?: Core.RequestOptions): Core.APIPromise<CNIListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<CNIListResponse>;
-  list(
-    params: CNIListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CNIListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: CNIListParams, options?: Core.RequestOptions): Core.APIPromise<CNIListResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cni/cnis`, { query, ...options });
   }
 
@@ -93,17 +84,8 @@ export class CNIs extends APIResource {
    * );
    * ```
    */
-  delete(cni: string, params?: CNIDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(cni: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    cni: string,
-    params: CNIDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete(cni, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  delete(cni: string, params: CNIDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/cni/cnis/${cni}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -121,17 +103,8 @@ export class CNIs extends APIResource {
    * );
    * ```
    */
-  get(cni: string, params?: CNIGetParams, options?: Core.RequestOptions): Core.APIPromise<CNIGetResponse>;
-  get(cni: string, options?: Core.RequestOptions): Core.APIPromise<CNIGetResponse>;
-  get(
-    cni: string,
-    params: CNIGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CNIGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(cni, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(cni: string, params: CNIGetParams, options?: Core.RequestOptions): Core.APIPromise<CNIGetResponse> {
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/cni/cnis/${cni}`, options);
   }
 }
@@ -444,7 +417,7 @@ export interface CNICreateParams {
   /**
    * Path param: Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Customer account tag
@@ -515,7 +488,7 @@ export interface CNIUpdateParams {
   /**
    * Path param: Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -603,7 +576,7 @@ export interface CNIListParams {
   /**
    * Path param: Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -631,14 +604,14 @@ export interface CNIDeleteParams {
   /**
    * Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CNIGetParams {
   /**
    * Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace CNIs {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
 import { SinglePage } from '../../pagination';
@@ -27,7 +26,7 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificate> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as Core.APIPromise<{
         result: KeylessCertificate;
@@ -49,18 +48,10 @@ export class KeylessCertificates extends APIResource {
    * ```
    */
   list(
-    params?: KeylessCertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<KeylessCertificatesSinglePage, KeylessCertificate>;
-  list(options?: Core.RequestOptions): Core.PagePromise<KeylessCertificatesSinglePage, KeylessCertificate>;
-  list(
-    params: KeylessCertificateListParams | Core.RequestOptions = {},
+    params: KeylessCertificateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<KeylessCertificatesSinglePage, KeylessCertificate> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/keyless_certificates`,
       KeylessCertificatesSinglePage,
@@ -83,22 +74,10 @@ export class KeylessCertificates extends APIResource {
    */
   delete(
     keylessCertificateId: string,
-    params?: KeylessCertificateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificateDeleteResponse>;
-  delete(
-    keylessCertificateId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificateDeleteResponse>;
-  delete(
-    keylessCertificateId: string,
-    params: KeylessCertificateDeleteParams | Core.RequestOptions = {},
+    params: KeylessCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificateDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(keylessCertificateId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
@@ -125,7 +104,7 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificate> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body,
@@ -148,19 +127,10 @@ export class KeylessCertificates extends APIResource {
    */
   get(
     keylessCertificateId: string,
-    params?: KeylessCertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeylessCertificate>;
-  get(keylessCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<KeylessCertificate>;
-  get(
-    keylessCertificateId: string,
-    params: KeylessCertificateGetParams | Core.RequestOptions = {},
+    params: KeylessCertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificate> {
-    if (isRequestOptions(params)) {
-      return this.get(keylessCertificateId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
@@ -267,7 +237,7 @@ export interface KeylessCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The zone's SSL certificate or SSL certificate and intermediate(s).
@@ -308,21 +278,21 @@ export interface KeylessCertificateListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface KeylessCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface KeylessCertificateEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * @deprecated Body param: Whether or not the Keyless SSL is on or off.
@@ -355,7 +325,7 @@ export interface KeylessCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 KeylessCertificates.KeylessCertificatesSinglePage = KeylessCertificatesSinglePage;

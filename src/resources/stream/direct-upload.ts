@@ -22,7 +22,7 @@ export class DirectUpload extends APIResource {
     params: DirectUploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DirectUploadCreateResponse> {
-    const { account_id = this._client.accountId, 'Upload-Creator': uploadCreator, ...body } = params;
+    const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/direct_upload`, {
         body,
@@ -62,7 +62,7 @@ export interface DirectUploadCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The maximum duration in seconds for a video upload. Can be set for a

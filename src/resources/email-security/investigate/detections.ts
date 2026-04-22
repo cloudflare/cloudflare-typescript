@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Detections extends APIResource {
@@ -20,19 +19,10 @@ export class Detections extends APIResource {
    */
   get(
     postfixId: string,
-    params?: DetectionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DetectionGetResponse>;
-  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<DetectionGetResponse>;
-  get(
-    postfixId: string,
-    params: DetectionGetParams | Core.RequestOptions = {},
+    params: DetectionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(postfixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/investigate/${postfixId}/detections`,
@@ -148,7 +138,7 @@ export interface DetectionGetParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Detections {

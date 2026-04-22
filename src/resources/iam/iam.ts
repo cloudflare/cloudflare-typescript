@@ -25,23 +25,6 @@ import {
   ResourceGroupUpdateResponse,
   ResourceGroups,
 } from './resource-groups';
-import * as SSOAPI from './sso';
-import {
-  SSO,
-  SSOBeginVerificationParams,
-  SSOBeginVerificationResponse,
-  SSOCreateParams,
-  SSOCreateResponse,
-  SSODeleteParams,
-  SSODeleteResponse,
-  SSOGetParams,
-  SSOGetResponse,
-  SSOListParams,
-  SSOListResponse,
-  SSOListResponsesSinglePage,
-  SSOUpdateParams,
-  SSOUpdateResponse,
-} from './sso';
 import * as UserGroupsAPI from './user-groups/user-groups';
 import {
   UserGroupCreateParams,
@@ -64,7 +47,6 @@ export class IAM extends APIResource {
   );
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
   userGroups: UserGroupsAPI.UserGroups = new UserGroupsAPI.UserGroups(this._client);
-  sso: SSOAPI.SSO = new SSOAPI.SSO(this._client);
 }
 
 IAM.PermissionGroups = PermissionGroups;
@@ -73,8 +55,6 @@ IAM.ResourceGroups = ResourceGroups;
 IAM.ResourceGroupListResponsesSinglePage = ResourceGroupListResponsesSinglePage;
 IAM.UserGroups = UserGroups;
 IAM.UserGroupListResponsesV4PagePaginationArray = UserGroupListResponsesV4PagePaginationArray;
-IAM.SSO = SSO;
-IAM.SSOListResponsesSinglePage = SSOListResponsesSinglePage;
 
 export declare namespace IAM {
   export {
@@ -114,22 +94,5 @@ export declare namespace IAM {
     type UserGroupListParams as UserGroupListParams,
     type UserGroupDeleteParams as UserGroupDeleteParams,
     type UserGroupGetParams as UserGroupGetParams,
-  };
-
-  export {
-    SSO as SSO,
-    type SSOCreateResponse as SSOCreateResponse,
-    type SSOUpdateResponse as SSOUpdateResponse,
-    type SSOListResponse as SSOListResponse,
-    type SSODeleteResponse as SSODeleteResponse,
-    type SSOBeginVerificationResponse as SSOBeginVerificationResponse,
-    type SSOGetResponse as SSOGetResponse,
-    SSOListResponsesSinglePage as SSOListResponsesSinglePage,
-    type SSOCreateParams as SSOCreateParams,
-    type SSOUpdateParams as SSOUpdateParams,
-    type SSOListParams as SSOListParams,
-    type SSODeleteParams as SSODeleteParams,
-    type SSOBeginVerificationParams as SSOBeginVerificationParams,
-    type SSOGetParams as SSOGetParams,
   };
 }

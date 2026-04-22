@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Regions extends APIResource {
@@ -15,16 +14,8 @@ export class Regions extends APIResource {
    * });
    * ```
    */
-  list(params?: RegionListParams, options?: Core.RequestOptions): Core.APIPromise<RegionListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<RegionListResponse>;
-  list(
-    params: RegionListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: RegionListParams, options?: Core.RequestOptions): Core.APIPromise<RegionListResponse> {
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/load_balancers/regions`, {
         query,
@@ -59,48 +50,10 @@ export class Regions extends APIResource {
       | 'SAS'
       | 'SEAS'
       | 'NEAS',
-    params?: RegionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionGetResponse>;
-  get(
-    regionId:
-      | 'WNAM'
-      | 'ENAM'
-      | 'WEU'
-      | 'EEU'
-      | 'NSAM'
-      | 'SSAM'
-      | 'OC'
-      | 'ME'
-      | 'NAF'
-      | 'SAF'
-      | 'SAS'
-      | 'SEAS'
-      | 'NEAS',
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionGetResponse>;
-  get(
-    regionId:
-      | 'WNAM'
-      | 'ENAM'
-      | 'WEU'
-      | 'EEU'
-      | 'NSAM'
-      | 'SSAM'
-      | 'OC'
-      | 'ME'
-      | 'NAF'
-      | 'SAF'
-      | 'SAS'
-      | 'SEAS'
-      | 'NEAS',
-    params: RegionGetParams | Core.RequestOptions = {},
+    params: RegionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(regionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/regions/${regionId}`,
@@ -121,7 +74,7 @@ export interface RegionListParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Two-letter alpha-2 country code followed in ISO 3166-1.
@@ -143,7 +96,7 @@ export interface RegionGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Regions {

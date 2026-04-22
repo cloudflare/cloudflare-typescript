@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource stores', () => {
-  // SKIP: prism error for 422 Unprocessable Entity
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.secretsStore.stores.create({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       name: 'service_x_keys',
@@ -25,16 +24,14 @@ describe('resource stores', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // SKIP: prism error for 422 Unprocessable Entity
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.secretsStore.stores.create({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       name: 'service_x_keys',
     });
   });
 
-  // SKIP: prism error for 422 Unprocessable Entity
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = client.secretsStore.stores.list({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,8 +44,7 @@ describe('resource stores', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // SKIP: prism error for 422 Unprocessable Entity
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await client.secretsStore.stores.list({
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
@@ -58,8 +54,7 @@ describe('resource stores', () => {
     });
   });
 
-  // SKIP: prism error for 422 Unprocessable Entity
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = client.secretsStore.stores.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -72,8 +67,7 @@ describe('resource stores', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // SKIP: prism error for 422 Unprocessable Entity
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await client.secretsStore.stores.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
     });

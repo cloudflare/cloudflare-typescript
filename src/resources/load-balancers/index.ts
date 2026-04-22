@@ -2,17 +2,6 @@
 
 export { LoadBalancers } from './load-balancers';
 export {
-  MonitorGroupsSinglePage,
-  MonitorGroups,
-  type MonitorGroup,
-  type MonitorGroupCreateParams,
-  type MonitorGroupUpdateParams,
-  type MonitorGroupListParams,
-  type MonitorGroupDeleteParams,
-  type MonitorGroupEditParams,
-  type MonitorGroupGetParams,
-} from './monitor-groups';
-export {
   MonitorsSinglePage,
   Monitors,
   type Monitor,

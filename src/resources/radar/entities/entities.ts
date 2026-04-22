@@ -4,10 +4,6 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as ASNsAPI from './asns';
 import {
-  ASNAsSetParams,
-  ASNAsSetResponse,
-  ASNBotnetThreatFeedParams,
-  ASNBotnetThreatFeedResponse,
   ASNGetParams,
   ASNGetResponse,
   ASNIPParams,
@@ -95,14 +91,10 @@ export declare namespace Entities {
   export {
     ASNs as ASNs,
     type ASNListResponse as ASNListResponse,
-    type ASNAsSetResponse as ASNAsSetResponse,
-    type ASNBotnetThreatFeedResponse as ASNBotnetThreatFeedResponse,
     type ASNGetResponse as ASNGetResponse,
     type ASNIPResponse as ASNIPResponse,
     type ASNRelResponse as ASNRelResponse,
     type ASNListParams as ASNListParams,
-    type ASNAsSetParams as ASNAsSetParams,
-    type ASNBotnetThreatFeedParams as ASNBotnetThreatFeedParams,
     type ASNGetParams as ASNGetParams,
     type ASNIPParams as ASNIPParams,
     type ASNRelParams as ASNRelParams,

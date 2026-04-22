@@ -37,7 +37,7 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<VersionCreateResponsesSinglePage, VersionCreateResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/datasets/${datasetId}/versions/${version}`,
       VersionCreateResponsesSinglePage,
@@ -62,7 +62,7 @@ export interface VersionCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

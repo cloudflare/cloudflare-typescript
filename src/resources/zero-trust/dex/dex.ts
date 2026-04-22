@@ -3,21 +3,6 @@
 import { APIResource } from '../../../resource';
 import * as ColosAPI from './colos';
 import { ColoListParams, ColoListResponse, ColoListResponsesSinglePage, Colos } from './colos';
-import * as RulesAPI from './rules';
-import {
-  RuleCreateParams,
-  RuleCreateResponse,
-  RuleDeleteParams,
-  RuleDeleteResponse,
-  RuleGetParams,
-  RuleGetResponse,
-  RuleListParams,
-  RuleListResponse,
-  RuleListResponsesV4PagePagination,
-  RuleUpdateParams,
-  RuleUpdateResponse,
-  Rules,
-} from './rules';
 import * as TracerouteTestsAPI from './traceroute-tests';
 import {
   Traceroute,
@@ -66,7 +51,6 @@ export class DEX extends APIResource {
   tracerouteTestResults: TracerouteTestResultsAPI.TracerouteTestResults =
     new TracerouteTestResultsAPI.TracerouteTestResults(this._client);
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
-  rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
 }
 
 export interface DigitalExperienceMonitor {
@@ -193,8 +177,6 @@ DEX.HTTPTests = HTTPTests;
 DEX.TestsV4PagePagination = TestsV4PagePagination;
 DEX.TracerouteTestResults = TracerouteTestResults;
 DEX.TracerouteTests = TracerouteTests;
-DEX.Rules = Rules;
-DEX.RuleListResponsesV4PagePagination = RuleListResponsesV4PagePagination;
 
 export declare namespace DEX {
   export {
@@ -257,20 +239,5 @@ export declare namespace DEX {
     type TracerouteTestGetParams as TracerouteTestGetParams,
     type TracerouteTestNetworkPathParams as TracerouteTestNetworkPathParams,
     type TracerouteTestPercentilesParams as TracerouteTestPercentilesParams,
-  };
-
-  export {
-    Rules as Rules,
-    type RuleCreateResponse as RuleCreateResponse,
-    type RuleUpdateResponse as RuleUpdateResponse,
-    type RuleListResponse as RuleListResponse,
-    type RuleDeleteResponse as RuleDeleteResponse,
-    type RuleGetResponse as RuleGetResponse,
-    RuleListResponsesV4PagePagination as RuleListResponsesV4PagePagination,
-    type RuleCreateParams as RuleCreateParams,
-    type RuleUpdateParams as RuleUpdateParams,
-    type RuleListParams as RuleListParams,
-    type RuleDeleteParams as RuleDeleteParams,
-    type RuleGetParams as RuleGetParams,
   };
 }

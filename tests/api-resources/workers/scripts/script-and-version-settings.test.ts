@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource scriptAndVersionSettings', () => {
-  // 422 Unprocessable Entity: needs schema update which is merged but not published
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = client.workers.scripts.scriptAndVersionSettings.edit('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource scriptAndVersionSettings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // 422 Unprocessable Entity: needs schema update which is merged but not published
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await client.workers.scripts.scriptAndVersionSettings.edit('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       settings: {

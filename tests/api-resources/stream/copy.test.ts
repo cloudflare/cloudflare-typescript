@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource copy', () => {
-  // HTTP 401 error from prism
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.stream.copy.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource copy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // HTTP 401 error from prism
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.stream.copy.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       allowedOrigins: ['example.com'],

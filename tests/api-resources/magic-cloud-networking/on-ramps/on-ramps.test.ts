@@ -178,8 +178,7 @@ describe('resource onRamps', () => {
     });
   });
 
-  // Mock server doesn't support application/zip responses
-  test.skip('export: required and optional params', async () => {
+  test('export: required and optional params', async () => {
     const response = await client.magicCloudNetworking.onRamps.export(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'account_id' },

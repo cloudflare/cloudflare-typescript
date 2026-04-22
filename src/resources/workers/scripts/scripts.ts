@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as DeploymentsAPI from './deployments';
 import {
-  Deployment,
   DeploymentCreateParams,
+  DeploymentCreateResponse,
   DeploymentDeleteParams,
   DeploymentDeleteResponse,
   DeploymentGetParams,
+  DeploymentGetResponse,
   DeploymentListParams,
   DeploymentListResponse,
   Deployments,
@@ -118,7 +118,7 @@ export class Scripts extends APIResource {
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptUpdateResponse> {
-    const { account_id = this._client.accountId, bindings_inherit, ...body } = params;
+    const { account_id, bindings_inherit, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
@@ -147,18 +147,10 @@ export class Scripts extends APIResource {
    * ```
    */
   list(
-    params?: ScriptListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse>;
-  list(
-    params: ScriptListParams | Core.RequestOptions = {},
+    params: ScriptListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ScriptListResponsesSinglePage, ScriptListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/workers/scripts`, ScriptListResponsesSinglePage, {
       query,
       ...options,
@@ -178,19 +170,10 @@ export class Scripts extends APIResource {
    */
   delete(
     scriptName: string,
-    params?: ScriptDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptDeleteResponse | null>;
-  delete(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<ScriptDeleteResponse | null>;
-  delete(
-    scriptName: string,
-    params: ScriptDeleteParams | Core.RequestOptions = {},
+    params: ScriptDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId, force } = params;
+    const { account_id, force } = params;
     return (
       this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
         query: { force },
@@ -211,49 +194,12 @@ export class Scripts extends APIResource {
    * );
    * ```
    */
-  get(scriptName: string, params?: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<string>;
-  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<string>;
-  get(
-    scriptName: string,
-    params: ScriptGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<string> {
-    if (isRequestOptions(params)) {
-      return this.get(scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(scriptName: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
       ...options,
       headers: { Accept: 'application/javascript', ...options?.headers },
     });
-  }
-
-  /**
-   * Search for Workers in an account.
-   *
-   * @example
-   * ```ts
-   * const response = await client.workers.scripts.search({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
-   * ```
-   */
-  search(params?: ScriptSearchParams, options?: Core.RequestOptions): Core.APIPromise<ScriptSearchResponse>;
-  search(options?: Core.RequestOptions): Core.APIPromise<ScriptSearchResponse>;
-  search(
-    params: ScriptSearchParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptSearchResponse> {
-    if (isRequestOptions(params)) {
-      return this.search({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/scripts-search`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ScriptSearchResponse }>
-    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -1656,52 +1602,11 @@ export type ScriptDeleteResponse = unknown;
 
 export type ScriptGetResponse = string;
 
-export type ScriptSearchResponse = Array<ScriptSearchResponse.ScriptSearchResponseItem>;
-
-export namespace ScriptSearchResponse {
-  export interface ScriptSearchResponseItem {
-    /**
-     * Identifier.
-     */
-    id: string;
-
-    /**
-     * When the script was created.
-     */
-    created_on: string;
-
-    /**
-     * When the script was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * Name of the script, used in URLs and route configuration.
-     */
-    script_name: string;
-
-    /**
-     * Whether the environment is the default environment.
-     */
-    environment_is_default?: boolean;
-
-    /**
-     * Name of the environment.
-     */
-    environment_name?: string;
-
-    /**
-     * Name of the service.
-     */
-    service_name?: string;
-  }
-}
-
 export interface ScriptUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -2937,7 +2842,7 @@ export interface ScriptListParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter scripts by tags. Format: comma-separated list of tag:allowed
@@ -2950,7 +2855,7 @@ export interface ScriptDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service
@@ -2964,41 +2869,7 @@ export interface ScriptGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
-}
-
-export interface ScriptSearchParams {
-  /**
-   * Path param: Identifier.
-   */
-  account_id?: string;
-
-  /**
-   * Query param: Worker ID (also called tag) to search for. Only exact matches are
-   * returned.
-   */
-  id?: string;
-
-  /**
-   * Query param: Worker name to search for. Both exact and partial matches are
-   * returned.
-   */
-  name?: string;
-
-  /**
-   * Query param: Property to sort results by. Results are sorted in ascending order.
-   */
-  order_by?: 'created_on' | 'modified_on' | 'name';
-
-  /**
-   * Query param: Current page.
-   */
-  page?: number;
-
-  /**
-   * Query param: Items per page.
-   */
-  per_page?: number;
+  account_id: string;
 }
 
 Scripts.ScriptListResponsesSinglePage = ScriptListResponsesSinglePage;
@@ -3023,13 +2894,11 @@ export declare namespace Scripts {
     type ScriptListResponse as ScriptListResponse,
     type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
-    type ScriptSearchResponse as ScriptSearchResponse,
     ScriptListResponsesSinglePage as ScriptListResponsesSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptListParams as ScriptListParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,
-    type ScriptSearchParams as ScriptSearchParams,
   };
 
   export { AssetsAPIAssets as Assets };
@@ -3077,9 +2946,10 @@ export declare namespace Scripts {
 
   export {
     Deployments as Deployments,
-    type Deployment as Deployment,
+    type DeploymentCreateResponse as DeploymentCreateResponse,
     type DeploymentListResponse as DeploymentListResponse,
     type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentGetResponse as DeploymentGetResponse,
     type DeploymentCreateParams as DeploymentCreateParams,
     type DeploymentListParams as DeploymentListParams,
     type DeploymentDeleteParams as DeploymentDeleteParams,

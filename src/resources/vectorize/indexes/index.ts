@@ -14,7 +14,6 @@ export {
   type IndexGetByIDsResponse,
   type IndexInfoResponse,
   type IndexInsertResponse,
-  type IndexListVectorsResponse,
   type IndexQueryResponse,
   type IndexUpsertResponse,
   type IndexCreateParams,
@@ -25,7 +24,6 @@ export {
   type IndexGetByIDsParams,
   type IndexInfoParams,
   type IndexInsertParams,
-  type IndexListVectorsParams,
   type IndexQueryParams,
   type IndexUpsertParams,
 } from './indexes';

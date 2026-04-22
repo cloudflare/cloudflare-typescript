@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,20 +19,10 @@ export class Telemetry extends APIResource {
    * ```
    */
   keys(
-    params?: TelemetryKeysParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TelemetryKeysResponsesSinglePage, TelemetryKeysResponse>;
-  keys(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TelemetryKeysResponsesSinglePage, TelemetryKeysResponse>;
-  keys(
-    params: TelemetryKeysParams | Core.RequestOptions = {},
+    params: TelemetryKeysParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TelemetryKeysResponsesSinglePage, TelemetryKeysResponse> {
-    if (isRequestOptions(params)) {
-      return this.keys({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/observability/telemetry/keys`,
       TelemetryKeysResponsesSinglePage,
@@ -58,7 +47,7 @@ export class Telemetry extends APIResource {
     params: TelemetryQueryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TelemetryQueryResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/observability/telemetry/query`, {
         body,
@@ -90,7 +79,7 @@ export class Telemetry extends APIResource {
     params: TelemetryValuesParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TelemetryValuesResponsesSinglePage, TelemetryValuesResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/observability/telemetry/values`,
       TelemetryValuesResponsesSinglePage,
@@ -1116,7 +1105,7 @@ export interface TelemetryKeysParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Leave this empty to use the default datasets
@@ -1253,7 +1242,7 @@ export interface TelemetryQueryParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Unique identifier for the query to execute
@@ -1566,7 +1555,7 @@ export interface TelemetryValuesParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Leave this empty to use the default datasets

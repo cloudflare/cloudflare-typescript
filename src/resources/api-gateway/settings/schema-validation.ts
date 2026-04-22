@@ -1,9 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as SettingsAPI from './settings';
 
 export class SchemaValidation extends APIResource {
   /**
@@ -14,8 +12,8 @@ export class SchemaValidation extends APIResource {
   update(
     params: SchemaValidationUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+  ): Core.APIPromise<SchemaValidationUpdateResponse> {
+    const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/api_gateway/settings/schema_validation`, { body, ...options });
   }
 
@@ -25,18 +23,10 @@ export class SchemaValidation extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   edit(
-    params?: SchemaValidationEditParams,
+    params: SchemaValidationEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings>;
-  edit(
-    params: SchemaValidationEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+  ): Core.APIPromise<SchemaValidationEditResponse> {
+    const { zone_id, ...body } = params;
     return this._client.patch(`/zones/${zone_id}/api_gateway/settings/schema_validation`, {
       body,
       ...options,
@@ -49,27 +39,91 @@ export class SchemaValidation extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   get(
-    params?: SchemaValidationGetParams,
+    params: SchemaValidationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings>;
-  get(
-    params: SchemaValidationGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  ): Core.APIPromise<SchemaValidationGetResponse> {
+    const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/api_gateway/settings/schema_validation`, options);
   }
+}
+
+export interface SchemaValidationUpdateResponse {
+  /**
+   * The default mitigation action used when there is no mitigation action defined on
+   * the operation
+   *
+   * Mitigation actions are as follows:
+   *
+   * - `log` - log request when request does not conform to schema
+   * - `block` - deny access to the site when request does not conform to schema
+   *
+   * A special value of of `none` will skip running schema validation entirely for
+   * the request when there is no mitigation action defined on the operation
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   * - `none` will skip running schema validation entirely for the request
+   * - `null` indicates that no override is in place
+   */
+  validation_override_mitigation_action?: 'none' | null;
+}
+
+export interface SchemaValidationEditResponse {
+  /**
+   * The default mitigation action used when there is no mitigation action defined on
+   * the operation
+   *
+   * Mitigation actions are as follows:
+   *
+   * - `log` - log request when request does not conform to schema
+   * - `block` - deny access to the site when request does not conform to schema
+   *
+   * A special value of of `none` will skip running schema validation entirely for
+   * the request when there is no mitigation action defined on the operation
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   * - `none` will skip running schema validation entirely for the request
+   * - `null` indicates that no override is in place
+   */
+  validation_override_mitigation_action?: 'none' | null;
+}
+
+export interface SchemaValidationGetResponse {
+  /**
+   * The default mitigation action used when there is no mitigation action defined on
+   * the operation
+   *
+   * Mitigation actions are as follows:
+   *
+   * - `log` - log request when request does not conform to schema
+   * - `block` - deny access to the site when request does not conform to schema
+   *
+   * A special value of of `none` will skip running schema validation entirely for
+   * the request when there is no mitigation action defined on the operation
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   * - `none` will skip running schema validation entirely for the request
+   * - `null` indicates that no override is in place
+   */
+  validation_override_mitigation_action?: 'none' | null;
 }
 
 export interface SchemaValidationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The default mitigation action used when there is no mitigation
@@ -101,7 +155,7 @@ export interface SchemaValidationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The default mitigation action used when there is no mitigation
@@ -134,11 +188,14 @@ export interface SchemaValidationGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace SchemaValidation {
   export {
+    type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
+    type SchemaValidationEditResponse as SchemaValidationEditResponse,
+    type SchemaValidationGetResponse as SchemaValidationGetResponse,
     type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
     type SchemaValidationEditParams as SchemaValidationEditParams,
     type SchemaValidationGetParams as SchemaValidationGetParams,

@@ -107,8 +107,6 @@ import {
   Tags,
   TagsV4PagePaginationArray,
 } from './tags';
-import * as AIControlsAPI from './ai-controls/ai-controls';
-import { AIControls } from './ai-controls/ai-controls';
 import * as ApplicationsAPI from './applications/applications';
 import {
   AllowedHeaders,
@@ -165,22 +163,13 @@ import { Logs } from './logs/logs';
 import * as UsersAPI from './users/users';
 import {
   AccessUser,
-  UserCreateParams,
-  UserCreateResponse,
-  UserDeleteParams,
-  UserDeleteResponse,
-  UserGetParams,
-  UserGetResponse,
   UserListParams,
   UserListResponse,
   UserListResponsesV4PagePaginationArray,
-  UserUpdateParams,
-  UserUpdateResponse,
   Users,
 } from './users/users';
 
 export class Access extends APIResource {
-  aiControls: AIControlsAPI.AIControls = new AIControlsAPI.AIControls(this._client);
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
   infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
@@ -196,7 +185,6 @@ export class Access extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 }
 
-Access.AIControls = AIControls;
 Access.GatewayCA = GatewayCA;
 Access.GatewayCAListResponsesSinglePage = GatewayCAListResponsesSinglePage;
 Access.Infrastructure = Infrastructure;
@@ -222,8 +210,6 @@ Access.Policies = Policies;
 Access.PolicyListResponsesV4PagePaginationArray = PolicyListResponsesV4PagePaginationArray;
 
 export declare namespace Access {
-  export { AIControls as AIControls };
-
   export {
     GatewayCA as GatewayCA,
     type GatewayCACreateResponse as GatewayCACreateResponse,
@@ -344,17 +330,9 @@ export declare namespace Access {
   export {
     Users as Users,
     type AccessUser as AccessUser,
-    type UserCreateResponse as UserCreateResponse,
-    type UserUpdateResponse as UserUpdateResponse,
     type UserListResponse as UserListResponse,
-    type UserDeleteResponse as UserDeleteResponse,
-    type UserGetResponse as UserGetResponse,
     UserListResponsesV4PagePaginationArray as UserListResponsesV4PagePaginationArray,
-    type UserCreateParams as UserCreateParams,
-    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
-    type UserDeleteParams as UserDeleteParams,
-    type UserGetParams as UserGetParams,
   };
 
   export {

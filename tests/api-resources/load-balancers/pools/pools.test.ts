@@ -156,8 +156,7 @@ describe('resource pools', () => {
     });
   });
 
-  // TODO: Investigate 422 Unprocessable Entity in prism test
-  test.skip('bulkEdit: only required params', async () => {
+  test('bulkEdit: only required params', async () => {
     const responsePromise = client.loadBalancers.pools.bulkEdit({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -170,8 +169,7 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: Investigate 422 Unprocessable Entity in prism test
-  test.skip('bulkEdit: required and optional params', async () => {
+  test('bulkEdit: required and optional params', async () => {
     const response = await client.loadBalancers.pools.bulkEdit({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       notification_email: '',

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Matches extends APIResource {
@@ -9,18 +8,10 @@ export class Matches extends APIResource {
    * Return matches as CSV for string queries based on ID
    */
   download(
-    params?: MatchDownloadParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MatchDownloadResponse>;
-  download(options?: Core.RequestOptions): Core.APIPromise<MatchDownloadResponse>;
-  download(
-    params: MatchDownloadParams | Core.RequestOptions = {},
+    params: MatchDownloadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MatchDownloadResponse> {
-    if (isRequestOptions(params)) {
-      return this.download({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/brand-protection/matches/download`, {
       query,
       ...options,
@@ -30,16 +21,8 @@ export class Matches extends APIResource {
   /**
    * Return matches for string queries based on ID
    */
-  get(params?: MatchGetParams, options?: Core.RequestOptions): Core.APIPromise<MatchGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<MatchGetResponse>;
-  get(
-    params: MatchGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MatchGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  get(params: MatchGetParams, options?: Core.RequestOptions): Core.APIPromise<MatchGetResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/brand-protection/matches`, { query, ...options });
   }
 }
@@ -60,7 +43,7 @@ export interface MatchDownloadParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -87,7 +70,7 @@ export interface MatchGetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param

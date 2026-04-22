@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Quota extends APIResource {
@@ -15,16 +14,8 @@ export class Quota extends APIResource {
    * });
    * ```
    */
-  get(params?: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse>;
-  get(
-    params: QuotaGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QuotaGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/ssl/certificate_packs/quota`, options) as Core.APIPromise<{
         result: QuotaGetResponse;
@@ -55,7 +46,7 @@ export interface QuotaGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Quota {

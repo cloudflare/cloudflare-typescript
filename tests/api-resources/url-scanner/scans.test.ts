@@ -144,8 +144,7 @@ describe('resource scans', () => {
     });
   });
 
-  // Mock server doesn't support image/png responses
-  test.skip('screenshot: required and optional params', async () => {
+  test('screenshot: required and optional params', async () => {
     const response = await client.urlScanner.scans.screenshot('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       account_id: 'account_id',
       resolution: 'desktop',

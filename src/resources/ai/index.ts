@@ -21,11 +21,3 @@ export {
   type ModelListParams,
 } from './models/index';
 export { TaskListResponsesSinglePage, Tasks, type TaskListResponse, type TaskListParams } from './tasks';
-export {
-  ToMarkdownSupportedResponsesSinglePage,
-  ToMarkdown,
-  type ToMarkdownSupportedResponse,
-  type ToMarkdownTransformResponse,
-  type ToMarkdownSupportedParams,
-  type ToMarkdownTransformParams,
-} from './to-markdown';

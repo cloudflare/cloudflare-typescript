@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as CustomAPI from '../profiles/custom';
-import { SinglePage } from '../../../../pagination';
 
 export class Predefined extends APIResource {
   /**
@@ -25,7 +22,7 @@ export class Predefined extends APIResource {
     params: PredefinedCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries/predefined`, {
         body,
@@ -51,48 +48,13 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/predefined/${entryId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: PredefinedUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all DLP entries in an account.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const predefinedListResponse of client.zeroTrust.dlp.entries.predefined.list(
-   *   { account_id: 'account_id' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params?: PredefinedListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse>;
-  list(
-    params: PredefinedListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PredefinedListResponsesSinglePage, PredefinedListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/dlp/entries`,
-      PredefinedListResponsesSinglePage,
-      options,
-    );
   }
 
   /**
@@ -110,19 +72,10 @@ export class Predefined extends APIResource {
    */
   delete(
     entryId: string,
-    params?: PredefinedDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PredefinedDeleteResponse | null>;
-  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedDeleteResponse | null>;
-  delete(
-    entryId: string,
-    params: PredefinedDeleteParams | Core.RequestOptions = {},
+    params: PredefinedDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(entryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/entries/predefined/${entryId}`,
@@ -130,43 +83,7 @@ export class Predefined extends APIResource {
       ) as Core.APIPromise<{ result: PredefinedDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Fetches a DLP entry by ID.
-   *
-   * @example
-   * ```ts
-   * const predefined =
-   *   await client.zeroTrust.dlp.entries.predefined.get(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  get(
-    entryId: string,
-    params?: PredefinedGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PredefinedGetResponse>;
-  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedGetResponse>;
-  get(
-    entryId: string,
-    params: PredefinedGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PredefinedGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(entryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
-        result: PredefinedGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
-
-export class PredefinedListResponsesSinglePage extends SinglePage<PredefinedListResponse> {}
 
 export interface PredefinedCreateResponse {
   id: string;
@@ -248,409 +165,13 @@ export namespace PredefinedUpdateResponse {
   }
 }
 
-export type PredefinedListResponse =
-  | PredefinedListResponse.UnionMember0
-  | PredefinedListResponse.UnionMember1
-  | PredefinedListResponse.UnionMember2
-  | PredefinedListResponse.UnionMember3
-  | PredefinedListResponse.UnionMember4
-  | PredefinedListResponse.UnionMember5;
-
-export namespace PredefinedListResponse {
-  export interface UnionMember0 {
-    id: string;
-
-    created_at: string;
-
-    /**
-     * @deprecated
-     */
-    enabled: boolean;
-
-    name: string;
-
-    pattern: CustomAPI.Pattern;
-
-    type: 'custom';
-
-    updated_at: string;
-
-    description?: string | null;
-
-    /**
-     * @deprecated
-     */
-    profile_id?: string | null;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface UnionMember1 {
-    id: string;
-
-    confidence: UnionMember1.Confidence;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'predefined';
-
-    /**
-     * @deprecated
-     */
-    profile_id?: string | null;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    variant?: UnionMember1.Variant;
-  }
-
-  export namespace UnionMember1 {
-    export interface Confidence {
-      /**
-       * Indicates whether this entry has AI remote service validation.
-       */
-      ai_context_available: boolean;
-
-      /**
-       * Indicates whether this entry has any form of validation that is not an AI remote
-       * service.
-       */
-      available: boolean;
-    }
-
-    export interface Variant {
-      topic_type: 'Intent' | 'Content';
-
-      type: 'PromptTopic';
-
-      description?: string | null;
-    }
-  }
-
-  export interface UnionMember2 {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'integration';
-
-    updated_at: string;
-
-    profile_id?: string | null;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface UnionMember3 {
-    id: string;
-
-    /**
-     * Only applies to custom word lists. Determines if the words should be matched in
-     * a case-sensitive manner Cannot be set to false if secret is true
-     */
-    case_sensitive: boolean;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    secret: boolean;
-
-    type: 'exact_data';
-
-    updated_at: string;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface UnionMember4 {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'document_fingerprint';
-
-    updated_at: string;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export interface UnionMember5 {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'word_list';
-
-    updated_at: string;
-
-    word_list: unknown;
-
-    profile_id?: string | null;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-}
-
 export type PredefinedDeleteResponse = unknown;
-
-export type PredefinedGetResponse =
-  | PredefinedGetResponse.UnionMember0
-  | PredefinedGetResponse.UnionMember1
-  | PredefinedGetResponse.UnionMember2
-  | PredefinedGetResponse.UnionMember3
-  | PredefinedGetResponse.UnionMember4
-  | PredefinedGetResponse.UnionMember5;
-
-export namespace PredefinedGetResponse {
-  export interface UnionMember0 {
-    id: string;
-
-    created_at: string;
-
-    /**
-     * @deprecated
-     */
-    enabled: boolean;
-
-    name: string;
-
-    pattern: CustomAPI.Pattern;
-
-    type: 'custom';
-
-    updated_at: string;
-
-    description?: string | null;
-
-    /**
-     * @deprecated
-     */
-    profile_id?: string | null;
-
-    profiles?: Array<UnionMember0.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export namespace UnionMember0 {
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-  }
-
-  export interface UnionMember1 {
-    id: string;
-
-    confidence: UnionMember1.Confidence;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'predefined';
-
-    /**
-     * @deprecated
-     */
-    profile_id?: string | null;
-
-    profiles?: Array<UnionMember1.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-
-    variant?: UnionMember1.Variant;
-  }
-
-  export namespace UnionMember1 {
-    export interface Confidence {
-      /**
-       * Indicates whether this entry has AI remote service validation.
-       */
-      ai_context_available: boolean;
-
-      /**
-       * Indicates whether this entry has any form of validation that is not an AI remote
-       * service.
-       */
-      available: boolean;
-    }
-
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-
-    export interface Variant {
-      topic_type: 'Intent' | 'Content';
-
-      type: 'PromptTopic';
-
-      description?: string | null;
-    }
-  }
-
-  export interface UnionMember2 {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'integration';
-
-    updated_at: string;
-
-    profile_id?: string | null;
-
-    profiles?: Array<UnionMember2.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export namespace UnionMember2 {
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-  }
-
-  export interface UnionMember3 {
-    id: string;
-
-    /**
-     * Only applies to custom word lists. Determines if the words should be matched in
-     * a case-sensitive manner Cannot be set to false if secret is true
-     */
-    case_sensitive: boolean;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    secret: boolean;
-
-    type: 'exact_data';
-
-    updated_at: string;
-
-    profiles?: Array<UnionMember3.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export namespace UnionMember3 {
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-  }
-
-  export interface UnionMember4 {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'document_fingerprint';
-
-    updated_at: string;
-
-    profiles?: Array<UnionMember4.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export namespace UnionMember4 {
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-  }
-
-  export interface UnionMember5 {
-    id: string;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    type: 'word_list';
-
-    updated_at: string;
-
-    word_list: unknown;
-
-    profile_id?: string | null;
-
-    profiles?: Array<UnionMember5.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export namespace UnionMember5 {
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-  }
-}
 
 export interface PredefinedCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -673,7 +194,7 @@ export interface PredefinedUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -681,32 +202,17 @@ export interface PredefinedUpdateParams {
   enabled: boolean;
 }
 
-export interface PredefinedListParams {
-  account_id?: string;
-}
-
 export interface PredefinedDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
-
-export interface PredefinedGetParams {
-  account_id?: string;
-}
-
-Predefined.PredefinedListResponsesSinglePage = PredefinedListResponsesSinglePage;
 
 export declare namespace Predefined {
   export {
     type PredefinedCreateResponse as PredefinedCreateResponse,
     type PredefinedUpdateResponse as PredefinedUpdateResponse,
-    type PredefinedListResponse as PredefinedListResponse,
     type PredefinedDeleteResponse as PredefinedDeleteResponse,
-    type PredefinedGetResponse as PredefinedGetResponse,
-    PredefinedListResponsesSinglePage as PredefinedListResponsesSinglePage,
     type PredefinedCreateParams as PredefinedCreateParams,
     type PredefinedUpdateParams as PredefinedUpdateParams,
-    type PredefinedListParams as PredefinedListParams,
     type PredefinedDeleteParams as PredefinedDeleteParams,
-    type PredefinedGetParams as PredefinedGetParams,
   };
 }

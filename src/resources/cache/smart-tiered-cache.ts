@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class SmartTieredCache extends APIResource {
@@ -22,18 +21,10 @@ export class SmartTieredCache extends APIResource {
    * ```
    */
   delete(
-    params?: SmartTieredCacheDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartTieredCacheDeleteResponse>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<SmartTieredCacheDeleteResponse>;
-  delete(
-    params: SmartTieredCacheDeleteParams | Core.RequestOptions = {},
+    params: SmartTieredCacheDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SmartTieredCacheDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
@@ -62,7 +53,7 @@ export class SmartTieredCache extends APIResource {
     params: SmartTieredCacheEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SmartTieredCacheEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
         body,
@@ -88,18 +79,10 @@ export class SmartTieredCache extends APIResource {
    * ```
    */
   get(
-    params?: SmartTieredCacheGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartTieredCacheGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SmartTieredCacheGetResponse>;
-  get(
-    params: SmartTieredCacheGetParams | Core.RequestOptions = {},
+    params: SmartTieredCacheGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SmartTieredCacheGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
@@ -174,14 +157,14 @@ export interface SmartTieredCacheDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SmartTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Enable or disable the Smart Tiered Cache.
@@ -193,7 +176,7 @@ export interface SmartTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace SmartTieredCache {

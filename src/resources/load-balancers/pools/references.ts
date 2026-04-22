@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -22,22 +21,10 @@ export class References extends APIResource {
    */
   get(
     poolId: string,
-    params?: ReferenceGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ReferenceGetResponsesSinglePage, ReferenceGetResponse>;
-  get(
-    poolId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ReferenceGetResponsesSinglePage, ReferenceGetResponse>;
-  get(
-    poolId: string,
-    params: ReferenceGetParams | Core.RequestOptions = {},
+    params: ReferenceGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ReferenceGetResponsesSinglePage, ReferenceGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(poolId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
       ReferenceGetResponsesSinglePage,
@@ -62,7 +49,7 @@ export interface ReferenceGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 References.ReferenceGetResponsesSinglePage = ReferenceGetResponsesSinglePage;

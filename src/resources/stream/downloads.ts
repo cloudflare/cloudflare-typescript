@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Downloads extends APIResource {
@@ -20,19 +19,10 @@ export class Downloads extends APIResource {
    */
   create(
     identifier: string,
-    params?: DownloadCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DownloadCreateResponse>;
-  create(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DownloadCreateResponse>;
-  create(
-    identifier: string,
-    params: DownloadCreateParams | Core.RequestOptions = {},
+    params: DownloadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(identifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/${identifier}/downloads`,
@@ -55,19 +45,10 @@ export class Downloads extends APIResource {
    */
   delete(
     identifier: string,
-    params?: DownloadDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DownloadDeleteResponse>;
-  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DownloadDeleteResponse>;
-  delete(
-    identifier: string,
-    params: DownloadDeleteParams | Core.RequestOptions = {},
+    params: DownloadDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(identifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/${identifier}/downloads`,
@@ -89,19 +70,10 @@ export class Downloads extends APIResource {
    */
   get(
     identifier: string,
-    params?: DownloadGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DownloadGetResponse>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<DownloadGetResponse>;
-  get(
-    identifier: string,
-    params: DownloadGetParams | Core.RequestOptions = {},
+    params: DownloadGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DownloadGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(identifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}/downloads`, options) as Core.APIPromise<{
         result: DownloadGetResponse;
@@ -232,21 +204,21 @@ export interface DownloadCreateParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DownloadDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DownloadGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Downloads {

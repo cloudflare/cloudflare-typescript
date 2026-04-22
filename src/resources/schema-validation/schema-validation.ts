@@ -3,8 +3,6 @@
 import { APIResource } from '../../resource';
 import * as SchemasAPI from './schemas';
 import {
-  PublicSchema,
-  PublicSchemasV4PagePaginationArray,
   SchemaCreateParams,
   SchemaDeleteParams,
   SchemaDeleteResponse,
@@ -30,15 +28,12 @@ export class SchemaValidation extends APIResource {
 }
 
 SchemaValidation.Schemas = Schemas;
-SchemaValidation.PublicSchemasV4PagePaginationArray = PublicSchemasV4PagePaginationArray;
 SchemaValidation.Settings = Settings;
 
 export declare namespace SchemaValidation {
   export {
     Schemas as Schemas,
-    type PublicSchema as PublicSchema,
     type SchemaDeleteResponse as SchemaDeleteResponse,
-    PublicSchemasV4PagePaginationArray as PublicSchemasV4PagePaginationArray,
     type SchemaCreateParams as SchemaCreateParams,
     type SchemaListParams as SchemaListParams,
     type SchemaDeleteParams as SchemaDeleteParams,

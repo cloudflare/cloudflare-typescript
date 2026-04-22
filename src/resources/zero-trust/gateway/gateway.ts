@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AppTypesAPI from './app-types';
 import { AppType, AppTypeListParams, AppTypes, AppTypesSinglePage } from './app-types';
@@ -53,21 +52,6 @@ import {
 } from './locations';
 import * as LoggingAPI from './logging';
 import { Logging, LoggingGetParams, LoggingSetting, LoggingUpdateParams } from './logging';
-import * as PacfilesAPI from './pacfiles';
-import {
-  PacfileCreateParams,
-  PacfileCreateResponse,
-  PacfileDeleteParams,
-  PacfileDeleteResponse,
-  PacfileGetParams,
-  PacfileGetResponse,
-  PacfileListParams,
-  PacfileListResponse,
-  PacfileListResponsesSinglePage,
-  PacfileUpdateParams,
-  PacfileUpdateResponse,
-  Pacfiles,
-} from './pacfiles';
 import * as ProxyEndpointsAPI from './proxy-endpoints';
 import {
   GatewayIPs,
@@ -93,7 +77,6 @@ import {
   RuleDeleteResponse,
   RuleGetParams,
   RuleListParams,
-  RuleListTenantParams,
   RuleResetExpirationParams,
   RuleSetting,
   RuleUpdateParams,
@@ -151,7 +134,6 @@ export class Gateway extends APIResource {
   proxyEndpoints: ProxyEndpointsAPI.ProxyEndpoints = new ProxyEndpointsAPI.ProxyEndpoints(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
-  pacfiles: PacfilesAPI.Pacfiles = new PacfilesAPI.Pacfiles(this._client);
 
   /**
    * Create a Zero Trust account for an existing Cloudflare account.
@@ -163,16 +145,8 @@ export class Gateway extends APIResource {
    * });
    * ```
    */
-  create(params?: GatewayCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse>;
-  create(
-    params: GatewayCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  create(params: GatewayCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse> {
+    const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{
         result: GatewayCreateResponse;
@@ -190,16 +164,8 @@ export class Gateway extends APIResource {
    * });
    * ```
    */
-  list(params?: GatewayListParams, options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse>;
-  list(
-    params: GatewayListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: GatewayListParams, options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{
         result: GatewayListResponse;
@@ -243,11 +209,11 @@ export interface GatewayListResponse {
 }
 
 export interface GatewayCreateParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface GatewayListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Gateway.AuditSSHSettings = AuditSSHSettings;
@@ -267,8 +233,6 @@ Gateway.Rules = Rules;
 Gateway.GatewayRulesSinglePage = GatewayRulesSinglePage;
 Gateway.Certificates = Certificates;
 Gateway.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
-Gateway.Pacfiles = Pacfiles;
-Gateway.PacfileListResponsesSinglePage = PacfileListResponsesSinglePage;
 
 export declare namespace Gateway {
   export {
@@ -391,7 +355,6 @@ export declare namespace Gateway {
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
-    type RuleListTenantParams as RuleListTenantParams,
     type RuleResetExpirationParams as RuleResetExpirationParams,
   };
 
@@ -410,20 +373,5 @@ export declare namespace Gateway {
     type CertificateActivateParams as CertificateActivateParams,
     type CertificateDeactivateParams as CertificateDeactivateParams,
     type CertificateGetParams as CertificateGetParams,
-  };
-
-  export {
-    Pacfiles as Pacfiles,
-    type PacfileCreateResponse as PacfileCreateResponse,
-    type PacfileUpdateResponse as PacfileUpdateResponse,
-    type PacfileListResponse as PacfileListResponse,
-    type PacfileDeleteResponse as PacfileDeleteResponse,
-    type PacfileGetResponse as PacfileGetResponse,
-    PacfileListResponsesSinglePage as PacfileListResponsesSinglePage,
-    type PacfileCreateParams as PacfileCreateParams,
-    type PacfileUpdateParams as PacfileUpdateParams,
-    type PacfileListParams as PacfileListParams,
-    type PacfileDeleteParams as PacfileDeleteParams,
-    type PacfileGetParams as PacfileGetParams,
   };
 }

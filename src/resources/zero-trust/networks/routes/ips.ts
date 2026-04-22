@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as RoutesAPI from './routes';
 
@@ -18,17 +17,8 @@ export class IPs extends APIResource {
    *   );
    * ```
    */
-  get(ip: string, params?: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Teamnet>;
-  get(ip: string, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Teamnet>;
-  get(
-    ip: string,
-    params: IPGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.Teamnet> {
-    if (isRequestOptions(params)) {
-      return this.get(ip, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  get(ip: string, params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Teamnet> {
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/teamnet/routes/ip/${ip}`, {
         query,
@@ -42,7 +32,7 @@ export interface IPGetParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: When the virtual_network_id parameter is not provided the request

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { type Response as FetchResponse } from '../../_shims/index';
 
@@ -19,7 +18,7 @@ export class Scans extends APIResource {
    * ```
    */
   create(params: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/urlscanner/v2/scan`, { body, ...options });
   }
 
@@ -40,16 +39,8 @@ export class Scans extends APIResource {
    * });
    * ```
    */
-  list(params?: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ScanListResponse>;
-  list(
-    params: ScanListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: ScanListParams, options?: Core.RequestOptions): Core.APIPromise<ScanListResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/search`, { query, ...options });
   }
 
@@ -67,18 +58,10 @@ export class Scans extends APIResource {
    * ```
    */
   bulkCreate(
-    params?: ScanBulkCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanBulkCreateResponse>;
-  bulkCreate(options?: Core.RequestOptions): Core.APIPromise<ScanBulkCreateResponse>;
-  bulkCreate(
-    params?: ScanBulkCreateParams | Core.RequestOptions,
+    params: ScanBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanBulkCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.bulkCreate(undefined, params);
-    }
-    const { account_id = this._client.accountId, body } = params ?? {};
+    const { account_id, body } = params ?? {};
     return this._client.post(`/accounts/${account_id}/urlscanner/v2/bulk`, { body: body, ...options });
   }
 
@@ -94,17 +77,8 @@ export class Scans extends APIResource {
    * );
    * ```
    */
-  dom(scanId: string, params?: ScanDOMParams, options?: Core.RequestOptions): Core.APIPromise<string>;
-  dom(scanId: string, options?: Core.RequestOptions): Core.APIPromise<string>;
-  dom(
-    scanId: string,
-    params: ScanDOMParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<string> {
-    if (isRequestOptions(params)) {
-      return this.dom(scanId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  dom(scanId: string, params: ScanDOMParams, options?: Core.RequestOptions): Core.APIPromise<string> {
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/dom/${scanId}`, {
       ...options,
       headers: { Accept: 'text/plain', ...options?.headers },
@@ -124,19 +98,10 @@ export class Scans extends APIResource {
    */
   get(
     scanId: string,
-    params?: ScanGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanGetResponse>;
-  get(scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>;
-  get(
-    scanId: string,
-    params: ScanGetParams | Core.RequestOptions = {},
+    params: ScanGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(scanId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/result/${scanId}`, options);
   }
 
@@ -154,19 +119,10 @@ export class Scans extends APIResource {
    */
   har(
     scanId: string,
-    params?: ScanHARParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanHARResponse>;
-  har(scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHARResponse>;
-  har(
-    scanId: string,
-    params: ScanHARParams | Core.RequestOptions = {},
+    params: ScanHARParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanHARResponse> {
-    if (isRequestOptions(params)) {
-      return this.har(scanId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/har/${scanId}`, options);
   }
 
@@ -186,19 +142,10 @@ export class Scans extends APIResource {
    */
   screenshot(
     scanId: string,
-    params?: ScanScreenshotParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FetchResponse>;
-  screenshot(scanId: string, options?: Core.RequestOptions): Core.APIPromise<FetchResponse>;
-  screenshot(
-    scanId: string,
-    params: ScanScreenshotParams | Core.RequestOptions = {},
+    params: ScanScreenshotParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FetchResponse> {
-    if (isRequestOptions(params)) {
-      return this.screenshot(scanId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/urlscanner/v2/screenshots/${scanId}.png`, {
       query,
       ...options,
@@ -2544,7 +2491,7 @@ export interface ScanCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -2790,7 +2737,7 @@ export interface ScanListParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter scans
@@ -2807,7 +2754,7 @@ export interface ScanBulkCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: List of urls to scan (up to a 100).
@@ -2853,28 +2800,28 @@ export interface ScanDOMParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ScanGetParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ScanHARParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ScanScreenshotParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Target device type.

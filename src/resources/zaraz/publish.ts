@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Publish extends APIResource {
@@ -15,16 +14,8 @@ export class Publish extends APIResource {
    * });
    * ```
    */
-  create(params?: PublishCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublishCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<PublishCreateResponse>;
-  create(
-    params?: PublishCreateParams | Core.RequestOptions,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PublishCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(undefined, params);
-    }
-    const { zone_id = this._client.zoneId, body } = params ?? {};
+  create(params: PublishCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublishCreateResponse> {
+    const { zone_id, body } = params ?? {};
     return (
       this._client.post(`/zones/${zone_id}/settings/zaraz/publish`, {
         body: body,
@@ -40,7 +31,7 @@ export interface PublishCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Zaraz configuration description.

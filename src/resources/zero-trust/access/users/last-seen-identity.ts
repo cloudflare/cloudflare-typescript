@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 
@@ -20,19 +19,10 @@ export class LastSeenIdentity extends APIResource {
    */
   get(
     userId: string,
-    params?: LastSeenIdentityGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Identity>;
-  get(userId: string, options?: Core.RequestOptions): Core.APIPromise<Identity>;
-  get(
-    userId: string,
-    params: LastSeenIdentityGetParams | Core.RequestOptions = {},
+    params: LastSeenIdentityGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Identity> {
-    if (isRequestOptions(params)) {
-      return this.get(userId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/users/${userId}/last_seen_identity`,
@@ -136,7 +126,7 @@ export interface LastSeenIdentityGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace LastSeenIdentity {

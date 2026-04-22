@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as HealthAPI from './health';
 import { Health } from './health';
@@ -23,7 +22,7 @@ export class Datasets extends APIResource {
    * ```
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/cloudforce-one/events/dataset/create`, {
       body,
       ...options,
@@ -41,16 +40,8 @@ export class Datasets extends APIResource {
    *   });
    * ```
    */
-  list(params?: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
-  list(
-    params: DatasetListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse> {
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/dataset`, options);
   }
 
@@ -75,7 +66,7 @@ export class Datasets extends APIResource {
     params: DatasetEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.patch(`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetId}`, {
       body,
       ...options,
@@ -96,19 +87,10 @@ export class Datasets extends APIResource {
    */
   get(
     datasetId: string,
-    params?: DatasetGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetGetResponse>;
-  get(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<DatasetGetResponse>;
-  get(
-    datasetId: string,
-    params: DatasetGetParams | Core.RequestOptions = {},
+    params: DatasetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(datasetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetId}`, options);
   }
 
@@ -129,20 +111,10 @@ export class Datasets extends APIResource {
   raw(
     datasetId: string,
     eventId: string,
-    params?: DatasetRawParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatasetRawResponse>;
-  raw(datasetId: string, eventId: string, options?: Core.RequestOptions): Core.APIPromise<DatasetRawResponse>;
-  raw(
-    datasetId: string,
-    eventId: string,
-    params: DatasetRawParams | Core.RequestOptions = {},
+    params: DatasetRawParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetRawResponse> {
-    if (isRequestOptions(params)) {
-      return this.raw(datasetId, eventId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/cloudforce-one/events/raw/${datasetId}/${eventId}`,
       options,
@@ -204,7 +176,7 @@ export interface DatasetCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: If true, then anyone can search the dataset. If false, then its
@@ -222,14 +194,14 @@ export interface DatasetListParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DatasetEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: If true, then anyone can search the dataset. If false, then its
@@ -247,14 +219,14 @@ export interface DatasetGetParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DatasetRawParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Datasets.Health = Health;

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as PreviewsAPI from './previews';
 import { PreviewCreateParams, PreviewCreateResponse, Previews } from './previews';
@@ -28,16 +27,8 @@ export class Monitors extends APIResource {
    * });
    * ```
    */
-  create(params?: MonitorCreateParams, options?: Core.RequestOptions): Core.APIPromise<Monitor>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Monitor>;
-  create(
-    params: MonitorCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Monitor> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  create(params: MonitorCreateParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/monitors`, {
         body,
@@ -62,7 +53,7 @@ export class Monitors extends APIResource {
     params: MonitorUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Monitor> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
         body,
@@ -85,18 +76,10 @@ export class Monitors extends APIResource {
    * ```
    */
   list(
-    params?: MonitorListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MonitorsSinglePage, Monitor>;
-  list(options?: Core.RequestOptions): Core.PagePromise<MonitorsSinglePage, Monitor>;
-  list(
-    params: MonitorListParams | Core.RequestOptions = {},
+    params: MonitorListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MonitorsSinglePage, Monitor> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/load_balancers/monitors`,
       MonitorsSinglePage,
@@ -117,19 +100,10 @@ export class Monitors extends APIResource {
    */
   delete(
     monitorId: string,
-    params?: MonitorDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MonitorDeleteResponse>;
-  delete(monitorId: string, options?: Core.RequestOptions): Core.APIPromise<MonitorDeleteResponse>;
-  delete(
-    monitorId: string,
-    params: MonitorDeleteParams | Core.RequestOptions = {},
+    params: MonitorDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MonitorDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(monitorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/load_balancers/monitors/${monitorId}`,
@@ -154,7 +128,7 @@ export class Monitors extends APIResource {
     params: MonitorEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Monitor> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
         body,
@@ -174,17 +148,8 @@ export class Monitors extends APIResource {
    * );
    * ```
    */
-  get(monitorId: string, params?: MonitorGetParams, options?: Core.RequestOptions): Core.APIPromise<Monitor>;
-  get(monitorId: string, options?: Core.RequestOptions): Core.APIPromise<Monitor>;
-  get(
-    monitorId: string,
-    params: MonitorGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Monitor> {
-    if (isRequestOptions(params)) {
-      return this.get(monitorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(monitorId: string, params: MonitorGetParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/monitors/${monitorId}`,
@@ -309,7 +274,7 @@ export interface MonitorCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -415,7 +380,7 @@ export interface MonitorUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -521,21 +486,21 @@ export interface MonitorListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface MonitorDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface MonitorEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
@@ -641,7 +606,7 @@ export interface MonitorGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Monitors.MonitorsSinglePage = MonitorsSinglePage;

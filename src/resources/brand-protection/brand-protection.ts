@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as LogoMatchesAPI from './logo-matches';
 import {
@@ -22,9 +21,7 @@ import {
   Matches,
 } from './matches';
 import * as QueriesAPI from './queries';
-import { Queries, QueryBulkParams, QueryCreateParams, QueryDeleteParams } from './queries';
-import * as V2API from './v2/v2';
-import { V2 } from './v2/v2';
+import { Queries, QueryCreateParams, QueryDeleteParams } from './queries';
 import { SinglePage } from '../../pagination';
 
 export class BrandProtection extends APIResource {
@@ -32,24 +29,15 @@ export class BrandProtection extends APIResource {
   matches: MatchesAPI.Matches = new MatchesAPI.Matches(this._client);
   logos: LogosAPI.Logos = new LogosAPI.Logos(this._client);
   logoMatches: LogoMatchesAPI.LogoMatches = new LogoMatchesAPI.LogoMatches(this._client);
-  v2: V2API.V2 = new V2API.V2(this._client);
 
   /**
    * Return new URL submissions
    */
   submit(
-    params?: BrandProtectionSubmitParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrandProtectionSubmitResponse>;
-  submit(options?: Core.RequestOptions): Core.APIPromise<BrandProtectionSubmitResponse>;
-  submit(
-    params: BrandProtectionSubmitParams | Core.RequestOptions = {},
+    params: BrandProtectionSubmitParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrandProtectionSubmitResponse> {
-    if (isRequestOptions(params)) {
-      return this.submit({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.post(`/accounts/${account_id}/brand-protection/submit`, options);
   }
 
@@ -57,20 +45,10 @@ export class BrandProtection extends APIResource {
    * Return submitted URLs based on ID
    */
   urlInfo(
-    params?: BrandProtectionURLInfoParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse>;
-  urlInfo(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse>;
-  urlInfo(
-    params: BrandProtectionURLInfoParams | Core.RequestOptions = {},
+    params: BrandProtectionURLInfoParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<BrandProtectionURLInfoResponsesSinglePage, BrandProtectionURLInfoResponse> {
-    if (isRequestOptions(params)) {
-      return this.urlInfo({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/brand-protection/url-info`,
       BrandProtectionURLInfoResponsesSinglePage,
@@ -252,11 +230,11 @@ export interface BrandProtectionSubmitResponse {
 export type BrandProtectionURLInfoResponse = { [key: string]: unknown };
 
 export interface BrandProtectionSubmitParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface BrandProtectionURLInfoParams {
-  account_id?: string;
+  account_id: string;
 }
 
 BrandProtection.BrandProtectionURLInfoResponsesSinglePage = BrandProtectionURLInfoResponsesSinglePage;
@@ -264,7 +242,6 @@ BrandProtection.Queries = Queries;
 BrandProtection.Matches = Matches;
 BrandProtection.Logos = Logos;
 BrandProtection.LogoMatches = LogoMatches;
-BrandProtection.V2 = V2;
 
 export declare namespace BrandProtection {
   export {
@@ -281,7 +258,6 @@ export declare namespace BrandProtection {
     Queries as Queries,
     type QueryCreateParams as QueryCreateParams,
     type QueryDeleteParams as QueryDeleteParams,
-    type QueryBulkParams as QueryBulkParams,
   };
 
   export {
@@ -306,6 +282,4 @@ export declare namespace BrandProtection {
     type LogoMatchDownloadParams as LogoMatchDownloadParams,
     type LogoMatchGetParams as LogoMatchGetParams,
   };
-
-  export { V2 as V2 };
 }

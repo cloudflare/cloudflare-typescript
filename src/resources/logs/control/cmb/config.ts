@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Config extends APIResource {
@@ -16,16 +15,8 @@ export class Config extends APIResource {
    *   });
    * ```
    */
-  create(params?: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null>;
-  create(options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null>;
-  create(
-    params: ConfigCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CmbConfig | null> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/logs/control/cmb/config`, {
         body,
@@ -45,18 +36,10 @@ export class Config extends APIResource {
    * ```
    */
   delete(
-    params?: ConfigDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigDeleteResponse | null>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse | null>;
-  delete(
-    params: ConfigDeleteParams | Core.RequestOptions = {},
+    params: ConfigDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
         result: ConfigDeleteResponse | null;
@@ -74,16 +57,8 @@ export class Config extends APIResource {
    * });
    * ```
    */
-  get(params?: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null>;
-  get(
-    params: ConfigGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CmbConfig | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<CmbConfig | null> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
         result: CmbConfig | null;
@@ -110,7 +85,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Allow out of region access
@@ -127,14 +102,14 @@ export interface ConfigDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ConfigGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Config {

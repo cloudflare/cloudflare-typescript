@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class FallbackOrigin extends APIResource {
@@ -22,7 +21,7 @@ export class FallbackOrigin extends APIResource {
     params: FallbackOriginUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackOriginUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/custom_hostnames/fallback_origin`, {
         body,
@@ -44,18 +43,10 @@ export class FallbackOrigin extends APIResource {
    * ```
    */
   delete(
-    params?: FallbackOriginDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackOriginDeleteResponse>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<FallbackOriginDeleteResponse>;
-  delete(
-    params: FallbackOriginDeleteParams | Core.RequestOptions = {},
+    params: FallbackOriginDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackOriginDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{
         result: FallbackOriginDeleteResponse;
@@ -77,18 +68,10 @@ export class FallbackOrigin extends APIResource {
    * ```
    */
   get(
-    params?: FallbackOriginGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackOriginGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<FallbackOriginGetResponse>;
-  get(
-    params: FallbackOriginGetParams | Core.RequestOptions = {},
+    params: FallbackOriginGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackOriginGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{
         result: FallbackOriginGetResponse;
@@ -203,7 +186,7 @@ export interface FallbackOriginUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Your origin hostname that requests to your custom hostnames will be
@@ -216,14 +199,14 @@ export interface FallbackOriginDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface FallbackOriginGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace FallbackOrigin {

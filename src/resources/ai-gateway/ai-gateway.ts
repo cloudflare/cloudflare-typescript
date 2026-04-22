@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as DatasetsAPI from './datasets';
 import {
@@ -18,30 +17,6 @@ import {
   DatasetUpdateResponse,
   Datasets,
 } from './datasets';
-import * as DynamicRoutingAPI from './dynamic-routing';
-import {
-  DynamicRouting,
-  DynamicRoutingCreateDeploymentParams,
-  DynamicRoutingCreateDeploymentResponse,
-  DynamicRoutingCreateParams,
-  DynamicRoutingCreateResponse,
-  DynamicRoutingCreateVersionParams,
-  DynamicRoutingCreateVersionResponse,
-  DynamicRoutingDeleteParams,
-  DynamicRoutingDeleteResponse,
-  DynamicRoutingGetParams,
-  DynamicRoutingGetResponse,
-  DynamicRoutingGetVersionParams,
-  DynamicRoutingGetVersionResponse,
-  DynamicRoutingListDeploymentsParams,
-  DynamicRoutingListDeploymentsResponse,
-  DynamicRoutingListParams,
-  DynamicRoutingListResponse,
-  DynamicRoutingListVersionsParams,
-  DynamicRoutingListVersionsResponse,
-  DynamicRoutingUpdateParams,
-  DynamicRoutingUpdateResponse,
-} from './dynamic-routing';
 import * as EvaluationTypesAPI from './evaluation-types';
 import {
   EvaluationTypeListParams,
@@ -79,15 +54,6 @@ import {
   LogResponseResponse,
   Logs,
 } from './logs';
-import * as ProviderConfigsAPI from './provider-configs';
-import {
-  ProviderConfigCreateParams,
-  ProviderConfigCreateResponse,
-  ProviderConfigListParams,
-  ProviderConfigListResponse,
-  ProviderConfigListResponsesV4PagePaginationArray,
-  ProviderConfigs,
-} from './provider-configs';
 import * as URLsAPI from './urls';
 import { URLGetParams, URLGetResponse, URLs } from './urls';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -97,8 +63,6 @@ export class AIGateway extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
-  dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
-  providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
 
   /**
@@ -121,7 +85,7 @@ export class AIGateway extends APIResource {
     params: AIGatewayCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-gateway/gateways`, {
         body,
@@ -153,7 +117,7 @@ export class AIGateway extends APIResource {
     params: AIGatewayUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-gateway/gateways/${id}`, {
         body,
@@ -176,20 +140,10 @@ export class AIGateway extends APIResource {
    * ```
    */
   list(
-    params?: AIGatewayListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse>;
-  list(
-    params: AIGatewayListParams | Core.RequestOptions = {},
+    params: AIGatewayListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-gateway/gateways`,
       AIGatewayListResponsesV4PagePaginationArray,
@@ -210,19 +164,10 @@ export class AIGateway extends APIResource {
    */
   delete(
     id: string,
-    params?: AIGatewayDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AIGatewayDeleteResponse>;
-  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<AIGatewayDeleteResponse>;
-  delete(
-    id: string,
-    params: AIGatewayDeleteParams | Core.RequestOptions = {},
+    params: AIGatewayDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
         result: AIGatewayDeleteResponse;
@@ -242,19 +187,10 @@ export class AIGateway extends APIResource {
    */
   get(
     id: string,
-    params?: AIGatewayGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AIGatewayGetResponse>;
-  get(id: string, options?: Core.RequestOptions): Core.APIPromise<AIGatewayGetResponse>;
-  get(
-    id: string,
-    params: AIGatewayGetParams | Core.RequestOptions = {},
+    params: AIGatewayGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AIGatewayGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
         result: AIGatewayGetResponse;
@@ -859,7 +795,7 @@ export interface AIGatewayCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: gateway id
@@ -952,7 +888,7 @@ export interface AIGatewayUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -1112,7 +1048,7 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Search by id
@@ -1121,11 +1057,11 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
 }
 
 export interface AIGatewayDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface AIGatewayGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 AIGateway.AIGatewayListResponsesV4PagePaginationArray = AIGatewayListResponsesV4PagePaginationArray;
@@ -1137,9 +1073,6 @@ AIGateway.Datasets = Datasets;
 AIGateway.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
 AIGateway.Evaluations = Evaluations;
 AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
-AIGateway.DynamicRouting = DynamicRouting;
-AIGateway.ProviderConfigs = ProviderConfigs;
-AIGateway.ProviderConfigListResponsesV4PagePaginationArray = ProviderConfigListResponsesV4PagePaginationArray;
 AIGateway.URLs = URLs;
 
 export declare namespace AIGateway {
@@ -1207,39 +1140,6 @@ export declare namespace AIGateway {
     type EvaluationListParams as EvaluationListParams,
     type EvaluationDeleteParams as EvaluationDeleteParams,
     type EvaluationGetParams as EvaluationGetParams,
-  };
-
-  export {
-    DynamicRouting as DynamicRouting,
-    type DynamicRoutingCreateResponse as DynamicRoutingCreateResponse,
-    type DynamicRoutingUpdateResponse as DynamicRoutingUpdateResponse,
-    type DynamicRoutingListResponse as DynamicRoutingListResponse,
-    type DynamicRoutingDeleteResponse as DynamicRoutingDeleteResponse,
-    type DynamicRoutingCreateDeploymentResponse as DynamicRoutingCreateDeploymentResponse,
-    type DynamicRoutingCreateVersionResponse as DynamicRoutingCreateVersionResponse,
-    type DynamicRoutingGetResponse as DynamicRoutingGetResponse,
-    type DynamicRoutingGetVersionResponse as DynamicRoutingGetVersionResponse,
-    type DynamicRoutingListDeploymentsResponse as DynamicRoutingListDeploymentsResponse,
-    type DynamicRoutingListVersionsResponse as DynamicRoutingListVersionsResponse,
-    type DynamicRoutingCreateParams as DynamicRoutingCreateParams,
-    type DynamicRoutingUpdateParams as DynamicRoutingUpdateParams,
-    type DynamicRoutingListParams as DynamicRoutingListParams,
-    type DynamicRoutingDeleteParams as DynamicRoutingDeleteParams,
-    type DynamicRoutingCreateDeploymentParams as DynamicRoutingCreateDeploymentParams,
-    type DynamicRoutingCreateVersionParams as DynamicRoutingCreateVersionParams,
-    type DynamicRoutingGetParams as DynamicRoutingGetParams,
-    type DynamicRoutingGetVersionParams as DynamicRoutingGetVersionParams,
-    type DynamicRoutingListDeploymentsParams as DynamicRoutingListDeploymentsParams,
-    type DynamicRoutingListVersionsParams as DynamicRoutingListVersionsParams,
-  };
-
-  export {
-    ProviderConfigs as ProviderConfigs,
-    type ProviderConfigCreateResponse as ProviderConfigCreateResponse,
-    type ProviderConfigListResponse as ProviderConfigListResponse,
-    ProviderConfigListResponsesV4PagePaginationArray as ProviderConfigListResponsesV4PagePaginationArray,
-    type ProviderConfigCreateParams as ProviderConfigCreateParams,
-    type ProviderConfigListParams as ProviderConfigListParams,
   };
 
   export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };

@@ -39,7 +39,6 @@ import {
 } from './routes';
 import * as SubdomainsAPI from './subdomains';
 import {
-  SubdomainDeleteParams,
   SubdomainGetParams,
   SubdomainGetResponse,
   SubdomainUpdateParams,
@@ -48,8 +47,6 @@ import {
 } from './subdomains';
 import * as AssetsAPI from './assets/assets';
 import { Assets } from './assets/assets';
-import * as BetaAPI from './beta/beta';
-import { Beta } from './beta/beta';
 import * as ObservabilityAPI from './observability/observability';
 import { Observability } from './observability/observability';
 import * as ScriptsAPI from './scripts/scripts';
@@ -62,8 +59,6 @@ import {
   ScriptListParams,
   ScriptListResponse,
   ScriptListResponsesSinglePage,
-  ScriptSearchParams,
-  ScriptSearchResponse,
   ScriptSetting,
   ScriptUpdateParams,
   ScriptUpdateResponse,
@@ -71,7 +66,6 @@ import {
 } from './scripts/scripts';
 
 export class Workers extends APIResource {
-  beta: BetaAPI.Beta = new BetaAPI.Beta(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
@@ -226,7 +220,6 @@ export interface WorkerMetadataParam {
   main_module?: string;
 }
 
-Workers.Beta = Beta;
 Workers.Routes = Routes;
 Workers.RouteListResponsesSinglePage = RouteListResponsesSinglePage;
 Workers.Assets = Assets;
@@ -244,8 +237,6 @@ export declare namespace Workers {
     type SingleStepMigration as SingleStepMigration,
     type WorkerMetadata as WorkerMetadata,
   };
-
-  export { Beta as Beta };
 
   export {
     Routes as Routes,
@@ -272,13 +263,11 @@ export declare namespace Workers {
     type ScriptListResponse as ScriptListResponse,
     type ScriptDeleteResponse as ScriptDeleteResponse,
     type ScriptGetResponse as ScriptGetResponse,
-    type ScriptSearchResponse as ScriptSearchResponse,
     ScriptListResponsesSinglePage as ScriptListResponsesSinglePage,
     type ScriptUpdateParams as ScriptUpdateParams,
     type ScriptListParams as ScriptListParams,
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,
-    type ScriptSearchParams as ScriptSearchParams,
   };
 
   export {
@@ -307,7 +296,6 @@ export declare namespace Workers {
     type SubdomainUpdateResponse as SubdomainUpdateResponse,
     type SubdomainGetResponse as SubdomainGetResponse,
     type SubdomainUpdateParams as SubdomainUpdateParams,
-    type SubdomainDeleteParams as SubdomainDeleteParams,
     type SubdomainGetParams as SubdomainGetParams,
   };
 

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as Shared from '../../../shared';
 import * as GroupsAPI from './groups';
@@ -43,20 +42,10 @@ export class Packages extends APIResource {
    * @deprecated
    */
   list(
-    params?: PackageListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>;
-  list(
-    params: PackageListParams | Core.RequestOptions = {},
+    params: PackageListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages`,
       PackageListResponsesV4PagePaginationArray,
@@ -74,19 +63,10 @@ export class Packages extends APIResource {
    */
   get(
     packageId: string,
-    params?: PackageGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PackageGetResponse>;
-  get(packageId: string, options?: Core.RequestOptions): Core.APIPromise<PackageGetResponse>;
-  get(
-    packageId: string,
-    params: PackageGetParams | Core.RequestOptions = {},
+    params: PackageGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PackageGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(packageId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/firewall/waf/packages/${packageId}`, options);
   }
 }
@@ -120,7 +100,7 @@ export interface PackageListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The direction used to sort returned packages.
@@ -148,7 +128,7 @@ export interface PackageGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Packages.PackageListResponsesV4PagePaginationArray = PackageListResponsesV4PagePaginationArray;

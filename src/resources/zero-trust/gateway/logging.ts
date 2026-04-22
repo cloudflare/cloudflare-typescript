@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Logging extends APIResource {
@@ -16,16 +15,8 @@ export class Logging extends APIResource {
    *   });
    * ```
    */
-  update(params?: LoggingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting>;
-  update(options?: Core.RequestOptions): Core.APIPromise<LoggingSetting>;
-  update(
-    params: LoggingUpdateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoggingSetting> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  update(params: LoggingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/logging`, { body, ...options }) as Core.APIPromise<{
         result: LoggingSetting;
@@ -44,16 +35,8 @@ export class Logging extends APIResource {
    *   });
    * ```
    */
-  get(params?: LoggingGetParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting>;
-  get(options?: Core.RequestOptions): Core.APIPromise<LoggingSetting>;
-  get(
-    params: LoggingGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoggingSetting> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: LoggingGetParams, options?: Core.RequestOptions): Core.APIPromise<LoggingSetting> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/logging`, options) as Core.APIPromise<{
         result: LoggingSetting;
@@ -149,7 +132,7 @@ export interface LoggingUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Indicate whether to redact personally identifiable information from
@@ -234,7 +217,7 @@ export namespace LoggingUpdateParams {
 }
 
 export interface LoggingGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Logging {

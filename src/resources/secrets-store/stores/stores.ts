@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as SecretsAPI from './secrets';
 import {
@@ -40,7 +39,7 @@ export class Stores extends APIResource {
    * ```
    */
   create(params: StoreCreateParams, options?: Core.RequestOptions): Core.APIPromise<StoreCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secrets_store/stores`, {
         body,
@@ -63,20 +62,10 @@ export class Stores extends APIResource {
    * ```
    */
   list(
-    params?: StoreListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<StoreListResponsesV4PagePaginationArray, StoreListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<StoreListResponsesV4PagePaginationArray, StoreListResponse>;
-  list(
-    params: StoreListParams | Core.RequestOptions = {},
+    params: StoreListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<StoreListResponsesV4PagePaginationArray, StoreListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/secrets_store/stores`,
       StoreListResponsesV4PagePaginationArray,
@@ -97,19 +86,10 @@ export class Stores extends APIResource {
    */
   delete(
     storeId: string,
-    params?: StoreDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StoreDeleteResponse | null>;
-  delete(storeId: string, options?: Core.RequestOptions): Core.APIPromise<StoreDeleteResponse | null>;
-  delete(
-    storeId: string,
-    params: StoreDeleteParams | Core.RequestOptions = {},
+    params: StoreDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StoreDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(storeId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/secrets_store/stores/${storeId}`,
@@ -184,7 +164,7 @@ export interface StoreCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the store
@@ -196,7 +176,7 @@ export interface StoreListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Direction to sort objects
@@ -213,7 +193,7 @@ export interface StoreDeleteParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Stores.StoreListResponsesV4PagePaginationArray = StoreListResponsesV4PagePaginationArray;

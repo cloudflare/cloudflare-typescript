@@ -10,8 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource consumers', () => {
-  // 422 status codes in prism tests
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       script_name: 'my-consumer-worker',
@@ -26,8 +25,7 @@ describe('resource consumers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // 422 status codes in prism tests
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.queues.consumers.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       script_name: 'my-consumer-worker',
@@ -43,8 +41,7 @@ describe('resource consumers', () => {
     });
   });
 
-  // 422 status codes in prism tests
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.queues.consumers.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -63,8 +60,7 @@ describe('resource consumers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // 422 status codes in prism tests
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.queues.consumers.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',

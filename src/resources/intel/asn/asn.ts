@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
 import * as SubnetsAPI from './subnets';
@@ -23,19 +22,10 @@ export class ASN extends APIResource {
    */
   get(
     asn: Shared.ASNParam,
-    params?: ASNGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.ASN>;
-  get(asn: Shared.ASNParam, options?: Core.RequestOptions): Core.APIPromise<Shared.ASN>;
-  get(
-    asn: Shared.ASNParam,
-    params: ASNGetParams | Core.RequestOptions = {},
+    params: ASNGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.ASN> {
-    if (isRequestOptions(params)) {
-      return this.get(asn, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/asn/${asn}`, options) as Core.APIPromise<{
         result: Shared.ASN;
@@ -48,7 +38,7 @@ export interface ASNGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 ASN.Subnets = Subnets;

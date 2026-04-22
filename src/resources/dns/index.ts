@@ -12,7 +12,6 @@ export {
 } from './dnssec';
 export {
   RecordResponsesV4PagePaginationArray,
-  RecordResponsesSinglePage,
   Records,
   type ARecord,
   type AAAARecord,
@@ -45,8 +44,6 @@ export {
   type RecordExportResponse,
   type RecordImportResponse,
   type RecordScanResponse,
-  type RecordScanReviewResponse,
-  type RecordScanTriggerResponse,
   type RecordCreateParams,
   type RecordUpdateParams,
   type RecordListParams,
@@ -57,10 +54,6 @@ export {
   type RecordGetParams,
   type RecordImportParams,
   type RecordScanParams,
-  type RecordScanListParams,
-  type RecordScanReviewParams,
-  type RecordScanTriggerParams,
 } from './records';
 export { Settings } from './settings/index';
-export { Usage } from './usage/index';
 export { ZoneTransfers } from './zone-transfers/index';
