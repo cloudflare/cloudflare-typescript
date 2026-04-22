@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Assets extends APIResource {
@@ -10,18 +9,9 @@ export class Assets extends APIResource {
    */
   create(
     finetuneId: string,
-    params?: AssetCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AssetCreateResponse>;
-  create(finetuneId: string, options?: Core.RequestOptions): Core.APIPromise<AssetCreateResponse>;
-  create(
-    finetuneId: string,
-    params: AssetCreateParams | Core.RequestOptions = {},
+    params: AssetCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(finetuneId, {}, params);
-    }
     const { account_id = this._client.accountId, ...body } = params;
     return this._client.post(
       `/accounts/${account_id}/ai/finetunes/${finetuneId}/finetune-assets`,
@@ -41,14 +31,14 @@ export interface AssetCreateParams {
   account_id?: string;
 
   /**
-   * Body param
+   * Body param: File to upload
    */
-  file?: Core.Uploadable;
+  file: Core.Uploadable;
 
   /**
-   * Body param
+   * Body param: Name of the file (adapter_config.json or adapter_model.safetensors)
    */
-  file_name?: string;
+  file_name: string;
 }
 
 export declare namespace Assets {
