@@ -15,7 +15,7 @@ export class Members extends APIResource {
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+   *     members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
    *   },
    * );
    * ```
@@ -25,10 +25,10 @@ export class Members extends APIResource {
     params: MemberCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MemberCreateResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id = this._client.accountId, members } = params;
     return (
       this._client.post(`/accounts/${account_id}/iam/user_groups/${userGroupId}/members`, {
-        body: body,
+        body: members,
         ...options,
       }) as Core.APIPromise<{ result: MemberCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -44,7 +44,7 @@ export class Members extends APIResource {
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+   *     members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
    *   },
    * )) {
    *   // ...
@@ -56,11 +56,11 @@ export class Members extends APIResource {
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MemberUpdateResponsesSinglePage, MemberUpdateResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id = this._client.accountId, members } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
       MemberUpdateResponsesSinglePage,
-      { body: body, method: 'put', ...options },
+      { body: members, method: 'put', ...options },
     );
   }
 
@@ -238,11 +238,11 @@ export interface MemberCreateParams {
   /**
    * Body param
    */
-  body: Array<MemberCreateParams.Body>;
+  members: Array<MemberCreateParams.Member>;
 }
 
 export namespace MemberCreateParams {
-  export interface Body {
+  export interface Member {
     /**
      * The identifier of an existing account Member.
      */
@@ -259,11 +259,11 @@ export interface MemberUpdateParams {
   /**
    * Body param: Set/Replace members to a user group.
    */
-  body: Array<MemberUpdateParams.Body>;
+  members: Array<MemberUpdateParams.Member>;
 }
 
 export namespace MemberUpdateParams {
-  export interface Body {
+  export interface Member {
     /**
      * The identifier of an existing account Member.
      */
