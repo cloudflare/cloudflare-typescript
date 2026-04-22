@@ -28,6 +28,11 @@ describe('resource status', () => {
     const response = await client.workflows.instances.status.edit('x', 'x', {
       account_id: 'account_id',
       status: 'resume',
+      from: {
+        name: 'x',
+        count: 1,
+        type: 'do',
+      },
     });
   });
 });
