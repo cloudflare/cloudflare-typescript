@@ -9,13 +9,10 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource tokens', () => {
+describe('resource jobs', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.create({
+    const responsePromise = client.aiSearch.namespaces.instances.jobs.create('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'a1b2c3d4e5f6',
-      cf_api_key: 'abc123',
-      name: 'my-token',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,22 +24,19 @@ describe('resource tokens', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.create({
+    const response = await client.aiSearch.namespaces.instances.jobs.create('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'a1b2c3d4e5f6',
-      cf_api_key: 'abc123',
-      name: 'my-token',
-      legacy: true,
+      description: 'description',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.update('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'a1b2c3d4e5f6',
-      cf_api_key: 'abc123',
-      name: 'my-token',
-    });
+    const responsePromise = client.aiSearch.namespaces.instances.jobs.update(
+      'my-namespace',
+      'my-ai-search',
+      'job_id',
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22', action: 'cancel' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,17 +47,18 @@ describe('resource tokens', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.update('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      cf_api_id: 'a1b2c3d4e5f6',
-      cf_api_key: 'abc123',
-      name: 'my-token',
-      legacy: true,
-    });
+    const response = await client.aiSearch.namespaces.instances.jobs.update(
+      'my-namespace',
+      'my-ai-search',
+      'job_id',
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22', action: 'cancel' },
+    );
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.list({ account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' });
+    const responsePromise = client.aiSearch.namespaces.instances.jobs.list('my-namespace', 'my-ai-search', {
+      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,18 +69,20 @@ describe('resource tokens', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.list({
+    const response = await client.aiSearch.namespaces.instances.jobs.list('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       page: 1,
-      per_page: 20,
-      search: 'my-token',
+      per_page: 0,
     });
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.delete('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-    });
+  test('get: only required params', async () => {
+    const responsePromise = client.aiSearch.namespaces.instances.jobs.get(
+      'my-namespace',
+      'my-ai-search',
+      'job_id',
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,16 +92,22 @@ describe('resource tokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.delete('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-    });
+  test('get: required and optional params', async () => {
+    const response = await client.aiSearch.namespaces.instances.jobs.get(
+      'my-namespace',
+      'my-ai-search',
+      'job_id',
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+    );
   });
 
-  test('read: only required params', async () => {
-    const responsePromise = client.aiSearch.tokens.read('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-    });
+  test('logs: only required params', async () => {
+    const responsePromise = client.aiSearch.namespaces.instances.jobs.logs(
+      'my-namespace',
+      'my-ai-search',
+      'job_id',
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,9 +117,16 @@ describe('resource tokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('read: required and optional params', async () => {
-    const response = await client.aiSearch.tokens.read('62af0db3-c410-40b2-9ee3-0e93f6dd1de0', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-    });
+  test('logs: required and optional params', async () => {
+    const response = await client.aiSearch.namespaces.instances.jobs.logs(
+      'my-namespace',
+      'my-ai-search',
+      'job_id',
+      {
+        account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+        page: 1,
+        per_page: 0,
+      },
+    );
   });
 });

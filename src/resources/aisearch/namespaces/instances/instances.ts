@@ -1,8 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import * as Core from '../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as Core from '../../../../core';
+import * as SippyAPI from '../../../r2/buckets/sippy';
+import * as ItemsAPI from './items';
+import {
+  ItemChunksParams,
+  ItemChunksResponse,
+  ItemCreateOrUpdateParams,
+  ItemCreateOrUpdateResponse,
+  ItemDeleteParams,
+  ItemDeleteResponse,
+  ItemDownloadParams,
+  ItemGetParams,
+  ItemGetResponse,
+  ItemListParams,
+  ItemListResponse,
+  ItemListResponsesV4PagePaginationArray,
+  ItemLogsParams,
+  ItemLogsResponse,
+  ItemSyncParams,
+  ItemSyncResponse,
+  ItemUploadParams,
+  ItemUploadResponse,
+  Items,
+} from './items';
 import * as JobsAPI from './jobs';
 import {
   JobCreateParams,
@@ -14,32 +37,39 @@ import {
   JobListResponsesV4PagePaginationArray,
   JobLogsParams,
   JobLogsResponse,
+  JobUpdateParams,
+  JobUpdateResponse,
   Jobs,
 } from './jobs';
-import * as SippyAPI from '../../r2/buckets/sippy';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Instances extends APIResource {
   jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
+  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
   /**
    * Create a new instances.
    *
    * @example
    * ```ts
-   * const instance = await client.aiSearch.instances.create({
-   *   account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *   id: 'my-ai-search',
-   * });
+   * const instance =
+   *   await client.aiSearch.namespaces.instances.create(
+   *     'my-namespace',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       id: 'my-ai-search',
+   *     },
+   *   );
    * ```
    */
   create(
+    name: string,
     params: InstanceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceCreateResponse> {
     const { account_id = this._client.accountId, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/ai-search/instances`, {
+      this._client.post(`/accounts/${account_id}/ai-search/namespaces/${name}/instances`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: InstanceCreateResponse }>
@@ -51,29 +81,33 @@ export class Instances extends APIResource {
    *
    * @example
    * ```ts
-   * const instance = await client.aiSearch.instances.update(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const instance =
+   *   await client.aiSearch.namespaces.instances.update(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
    * ```
    */
   update(
+    name: string,
     id: string,
     params?: InstanceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceUpdateResponse>;
-  update(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceUpdateResponse>;
+  update(name: string, id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceUpdateResponse>;
   update(
+    name: string,
     id: string,
     params: InstanceUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceUpdateResponse> {
     if (isRequestOptions(params)) {
-      return this.update(id, {}, params);
+      return this.update(name, id, {}, params);
     }
     const { account_id = this._client.accountId, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/ai-search/instances/${id}`, {
+      this._client.put(`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: InstanceUpdateResponse }>
@@ -86,7 +120,8 @@ export class Instances extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const instanceListResponse of client.aiSearch.instances.list(
+   * for await (const instanceListResponse of client.aiSearch.namespaces.instances.list(
+   *   'my-namespace',
    *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
    * )) {
    *   // ...
@@ -94,22 +129,25 @@ export class Instances extends APIResource {
    * ```
    */
   list(
+    name: string,
     params?: InstanceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
   list(
+    name: string,
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
   list(
+    name: string,
     params: InstanceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
     if (isRequestOptions(params)) {
-      return this.list({}, params);
+      return this.list(name, {}, params);
     }
     const { account_id = this._client.accountId, ...query } = params;
     return this._client.getAPIList(
-      `/accounts/${account_id}/ai-search/instances`,
+      `/accounts/${account_id}/ai-search/namespaces/${name}/instances`,
       InstanceListResponsesV4PagePaginationArray,
       { query, ...options },
     );
@@ -120,31 +158,36 @@ export class Instances extends APIResource {
    *
    * @example
    * ```ts
-   * const instance = await client.aiSearch.instances.delete(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const instance =
+   *   await client.aiSearch.namespaces.instances.delete(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
    * ```
    */
   delete(
+    name: string,
     id: string,
     params?: InstanceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceDeleteResponse>;
-  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceDeleteResponse>;
+  delete(name: string, id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceDeleteResponse>;
   delete(
+    name: string,
     id: string,
     params: InstanceDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceDeleteResponse> {
     if (isRequestOptions(params)) {
-      return this.delete(id, {}, params);
+      return this.delete(name, id, {}, params);
     }
     const { account_id = this._client.accountId } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/ai-search/instances/${id}`, options) as Core.APIPromise<{
-        result: InstanceDeleteResponse;
-      }>
+      this._client.delete(
+        `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}`,
+        options,
+      ) as Core.APIPromise<{ result: InstanceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -155,7 +198,8 @@ export class Instances extends APIResource {
    * @example
    * ```ts
    * const response =
-   *   await client.aiSearch.instances.chatCompletions(
+   *   await client.aiSearch.namespaces.instances.chatCompletions(
+   *     'my-namespace',
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
@@ -165,15 +209,16 @@ export class Instances extends APIResource {
    * ```
    */
   chatCompletions(
+    name: string,
     id: string,
     params: InstanceChatCompletionsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceChatCompletionsResponse> {
     const { account_id = this._client.accountId, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/chat/completions`, {
-      body,
-      ...options,
-    });
+    return this._client.post(
+      `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/chat/completions`,
+      { body, ...options },
+    );
   }
 
   /**
@@ -181,31 +226,36 @@ export class Instances extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.aiSearch.instances.read(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const response =
+   *   await client.aiSearch.namespaces.instances.read(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
    * ```
    */
   read(
+    name: string,
     id: string,
     params?: InstanceReadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceReadResponse>;
-  read(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceReadResponse>;
+  read(name: string, id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceReadResponse>;
   read(
+    name: string,
     id: string,
     params: InstanceReadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceReadResponse> {
     if (isRequestOptions(params)) {
-      return this.read(id, {}, params);
+      return this.read(name, id, {}, params);
     }
     const { account_id = this._client.accountId } = params;
     return (
-      this._client.get(`/accounts/${account_id}/ai-search/instances/${id}`, options) as Core.APIPromise<{
-        result: InstanceReadResponse;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}`,
+        options,
+      ) as Core.APIPromise<{ result: InstanceReadResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -215,29 +265,33 @@ export class Instances extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.aiSearch.instances.search(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const response =
+   *   await client.aiSearch.namespaces.instances.search(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
    * ```
    */
   search(
+    name: string,
     id: string,
     params?: InstanceSearchParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceSearchResponse>;
-  search(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceSearchResponse>;
+  search(name: string, id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceSearchResponse>;
   search(
+    name: string,
     id: string,
     params: InstanceSearchParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceSearchResponse> {
     if (isRequestOptions(params)) {
-      return this.search(id, {}, params);
+      return this.search(name, id, {}, params);
     }
     const { account_id = this._client.accountId, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/search`, {
+      this._client.post(`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/search`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: InstanceSearchResponse }>
@@ -249,30 +303,34 @@ export class Instances extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.aiSearch.instances.stats(
-   *   'my-ai-search',
-   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
-   * );
+   * const response =
+   *   await client.aiSearch.namespaces.instances.stats(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
    * ```
    */
   stats(
+    name: string,
     id: string,
     params?: InstanceStatsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceStatsResponse>;
-  stats(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceStatsResponse>;
+  stats(name: string, id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceStatsResponse>;
   stats(
+    name: string,
     id: string,
     params: InstanceStatsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceStatsResponse> {
     if (isRequestOptions(params)) {
-      return this.stats(id, {}, params);
+      return this.stats(name, id, {}, params);
     }
     const { account_id = this._client.accountId } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/ai-search/instances/${id}/stats`,
+        `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/stats`,
         options,
       ) as Core.APIPromise<{ result: InstanceStatsResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -3735,6 +3793,8 @@ export interface InstanceStatsParams {
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Instances.Jobs = Jobs;
 Instances.JobListResponsesV4PagePaginationArray = JobListResponsesV4PagePaginationArray;
+Instances.Items = Items;
+Instances.ItemListResponsesV4PagePaginationArray = ItemListResponsesV4PagePaginationArray;
 
 export declare namespace Instances {
   export {
@@ -3760,13 +3820,37 @@ export declare namespace Instances {
   export {
     Jobs as Jobs,
     type JobCreateResponse as JobCreateResponse,
+    type JobUpdateResponse as JobUpdateResponse,
     type JobListResponse as JobListResponse,
     type JobGetResponse as JobGetResponse,
     type JobLogsResponse as JobLogsResponse,
     JobListResponsesV4PagePaginationArray as JobListResponsesV4PagePaginationArray,
     type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
     type JobListParams as JobListParams,
     type JobGetParams as JobGetParams,
     type JobLogsParams as JobLogsParams,
+  };
+
+  export {
+    Items as Items,
+    type ItemListResponse as ItemListResponse,
+    type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemChunksResponse as ItemChunksResponse,
+    type ItemCreateOrUpdateResponse as ItemCreateOrUpdateResponse,
+    type ItemGetResponse as ItemGetResponse,
+    type ItemLogsResponse as ItemLogsResponse,
+    type ItemSyncResponse as ItemSyncResponse,
+    type ItemUploadResponse as ItemUploadResponse,
+    ItemListResponsesV4PagePaginationArray as ItemListResponsesV4PagePaginationArray,
+    type ItemListParams as ItemListParams,
+    type ItemDeleteParams as ItemDeleteParams,
+    type ItemChunksParams as ItemChunksParams,
+    type ItemCreateOrUpdateParams as ItemCreateOrUpdateParams,
+    type ItemDownloadParams as ItemDownloadParams,
+    type ItemGetParams as ItemGetParams,
+    type ItemLogsParams as ItemLogsParams,
+    type ItemSyncParams as ItemSyncParams,
+    type ItemUploadParams as ItemUploadParams,
   };
 }

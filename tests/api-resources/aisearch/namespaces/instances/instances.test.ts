@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource instances', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.create({
+    const responsePromise = client.aiSearch.namespaces.instances.create('my-namespace', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
     });
@@ -25,7 +25,7 @@ describe('resource instances', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.aiSearch.instances.create({
+    const response = await client.aiSearch.namespaces.instances.create('my-namespace', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       id: 'my-ai-search',
       ai_gateway_id: 'ai_gateway_id',
@@ -105,7 +105,7 @@ describe('resource instances', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.update('my-ai-search', {
+    const responsePromise = client.aiSearch.namespaces.instances.update('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -118,7 +118,7 @@ describe('resource instances', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.aiSearch.instances.update('my-ai-search', {
+    const response = await client.aiSearch.namespaces.instances.update('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       ai_gateway_id: 'ai_gateway_id',
       ai_search_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
@@ -200,7 +200,7 @@ describe('resource instances', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.list({
+    const responsePromise = client.aiSearch.namespaces.instances.list('my-namespace', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -213,7 +213,7 @@ describe('resource instances', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.aiSearch.instances.list({
+    const response = await client.aiSearch.namespaces.instances.list('my-namespace', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       namespace: 'namespace',
       order_by: 'created_at',
@@ -225,7 +225,7 @@ describe('resource instances', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.delete('my-ai-search', {
+    const responsePromise = client.aiSearch.namespaces.instances.delete('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -238,16 +238,17 @@ describe('resource instances', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.aiSearch.instances.delete('my-ai-search', {
+    const response = await client.aiSearch.namespaces.instances.delete('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
   });
 
   test('chatCompletions: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.chatCompletions('my-ai-search', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      messages: [{ content: 'content', role: 'system' }],
-    });
+    const responsePromise = client.aiSearch.namespaces.instances.chatCompletions(
+      'my-namespace',
+      'my-ai-search',
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22', messages: [{ content: 'content', role: 'system' }] },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -258,40 +259,44 @@ describe('resource instances', () => {
   });
 
   test('chatCompletions: required and optional params', async () => {
-    const response = await client.aiSearch.instances.chatCompletions('my-ai-search', {
-      account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      messages: [{ content: 'content', role: 'system' }],
-      ai_search_options: {
-        cache: { cache_threshold: 'super_strict_match', enabled: true },
-        query_rewrite: {
-          enabled: true,
-          model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
-          rewrite_prompt: 'rewrite_prompt',
+    const response = await client.aiSearch.namespaces.instances.chatCompletions(
+      'my-namespace',
+      'my-ai-search',
+      {
+        account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+        messages: [{ content: 'content', role: 'system' }],
+        ai_search_options: {
+          cache: { cache_threshold: 'super_strict_match', enabled: true },
+          query_rewrite: {
+            enabled: true,
+            model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+            rewrite_prompt: 'rewrite_prompt',
+          },
+          reranking: {
+            enabled: true,
+            match_threshold: 0,
+            model: '@cf/baai/bge-reranker-base',
+          },
+          retrieval: {
+            boost_by: [{ field: 'timestamp', direction: 'desc' }],
+            context_expansion: 0,
+            filters: { foo: 'bar' },
+            fusion_method: 'max',
+            keyword_match_mode: 'and',
+            match_threshold: 0,
+            max_num_results: 1,
+            retrieval_type: 'vector',
+            return_on_failure: true,
+          },
         },
-        reranking: {
-          enabled: true,
-          match_threshold: 0,
-          model: '@cf/baai/bge-reranker-base',
-        },
-        retrieval: {
-          boost_by: [{ field: 'timestamp', direction: 'desc' }],
-          context_expansion: 0,
-          filters: { foo: 'bar' },
-          fusion_method: 'max',
-          keyword_match_mode: 'and',
-          match_threshold: 0,
-          max_num_results: 1,
-          retrieval_type: 'vector',
-          return_on_failure: true,
-        },
+        model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+        stream: true,
       },
-      model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
-      stream: true,
-    });
+    );
   });
 
   test('read: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.read('my-ai-search', {
+    const responsePromise = client.aiSearch.namespaces.instances.read('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -304,13 +309,13 @@ describe('resource instances', () => {
   });
 
   test('read: required and optional params', async () => {
-    const response = await client.aiSearch.instances.read('my-ai-search', {
+    const response = await client.aiSearch.namespaces.instances.read('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
   });
 
   test('search: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.search('my-ai-search', {
+    const responsePromise = client.aiSearch.namespaces.instances.search('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -323,7 +328,7 @@ describe('resource instances', () => {
   });
 
   test('search: required and optional params', async () => {
-    const response = await client.aiSearch.instances.search('my-ai-search', {
+    const response = await client.aiSearch.namespaces.instances.search('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       ai_search_options: {
         cache: { cache_threshold: 'super_strict_match', enabled: true },
@@ -355,7 +360,7 @@ describe('resource instances', () => {
   });
 
   test('stats: only required params', async () => {
-    const responsePromise = client.aiSearch.instances.stats('my-ai-search', {
+    const responsePromise = client.aiSearch.namespaces.instances.stats('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -368,7 +373,7 @@ describe('resource instances', () => {
   });
 
   test('stats: required and optional params', async () => {
-    const response = await client.aiSearch.instances.stats('my-ai-search', {
+    const response = await client.aiSearch.namespaces.instances.stats('my-namespace', 'my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
     });
   });
