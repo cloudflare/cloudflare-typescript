@@ -79,6 +79,15 @@ export class Account extends APIResource {
 
 export interface AccountEditResponse {
   zone_defaults: AccountEditResponse.ZoneDefaults;
+
+  /**
+   * When enabled, forces all proxied DNS records in the account to behave as
+   * DNS-only at the edge, regardless of each record's individual proxy setting. Note
+   * that this account-level override does not modify the records themselves; it only
+   * affects how they are served at the edge. See more on
+   * [Enforce DNS-only](https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only).
+   */
+  enforce_dns_only?: boolean;
 }
 
 export namespace AccountEditResponse {
@@ -203,6 +212,15 @@ export namespace AccountEditResponse {
 
 export interface AccountGetResponse {
   zone_defaults: AccountGetResponse.ZoneDefaults;
+
+  /**
+   * When enabled, forces all proxied DNS records in the account to behave as
+   * DNS-only at the edge, regardless of each record's individual proxy setting. Note
+   * that this account-level override does not modify the records themselves; it only
+   * affects how they are served at the edge. See more on
+   * [Enforce DNS-only](https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only).
+   */
+  enforce_dns_only?: boolean;
 }
 
 export namespace AccountGetResponse {
@@ -330,6 +348,15 @@ export interface AccountEditParams {
    * Path param: Identifier.
    */
   account_id?: string;
+
+  /**
+   * Body param: When enabled, forces all proxied DNS records in the account to
+   * behave as DNS-only at the edge, regardless of each record's individual proxy
+   * setting. Note that this account-level override does not modify the records
+   * themselves; it only affects how they are served at the edge. See more on
+   * [Enforce DNS-only](https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only).
+   */
+  enforce_dns_only?: boolean;
 
   /**
    * Body param
