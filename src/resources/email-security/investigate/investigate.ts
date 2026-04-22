@@ -161,6 +161,10 @@ export interface InvestigateListResponse {
     | 'RETRO_SCAN'
     | null;
 
+  delivery_status?: Array<
+    'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued'
+  >;
+
   edf_hash?: string | null;
 
   envelope_from?: string | null;
@@ -181,7 +185,7 @@ export interface InvestigateListResponse {
     | null;
 
   /**
-   * @deprecated Deprecated.
+   * @deprecated Deprecated: use `/investigate/{id}/detections` instead.
    */
   findings?: Array<InvestigateListResponse.Finding> | null;
 
@@ -334,6 +338,10 @@ export interface InvestigateGetResponse {
     | 'RETRO_SCAN'
     | null;
 
+  delivery_status?: Array<
+    'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued'
+  >;
+
   edf_hash?: string | null;
 
   envelope_from?: string | null;
@@ -354,7 +362,7 @@ export interface InvestigateGetResponse {
     | null;
 
   /**
-   * @deprecated Deprecated.
+   * @deprecated Deprecated: use `/investigate/{id}/detections` instead.
    */
   findings?: Array<InvestigateGetResponse.Finding> | null;
 

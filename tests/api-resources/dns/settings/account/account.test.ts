@@ -28,6 +28,7 @@ describe('resource account', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.dns.settings.account.edit({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enforce_dns_only: false,
       zone_defaults: {
         flatten_all_cnames: false,
         foundation_dns: false,

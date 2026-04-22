@@ -47,6 +47,8 @@ export interface DetectionGetResponse {
 
   attachments: Array<DetectionGetResponse.Attachment>;
 
+  findings: Array<DetectionGetResponse.Finding>;
+
   headers: Array<DetectionGetResponse.Header>;
 
   links: Array<DetectionGetResponse.Link>;
@@ -93,6 +95,37 @@ export namespace DetectionGetResponse {
     encrypted?: boolean | null;
 
     name?: string | null;
+  }
+
+  export interface Finding {
+    attachment?: string | null;
+
+    detail?: string | null;
+
+    detection?:
+      | 'MALICIOUS'
+      | 'MALICIOUS-BEC'
+      | 'SUSPICIOUS'
+      | 'SPOOF'
+      | 'SPAM'
+      | 'BULK'
+      | 'ENCRYPTED'
+      | 'EXTERNAL'
+      | 'UNKNOWN'
+      | 'NONE'
+      | null;
+
+    field?: string | null;
+
+    name?: string | null;
+
+    portion?: string | null;
+
+    reason?: string | null;
+
+    score?: number | null;
+
+    value?: string | null;
   }
 
   export interface Header {

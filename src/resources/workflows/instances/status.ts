@@ -51,6 +51,24 @@ export interface StatusEditParams {
    * Body param: Apply action to instance.
    */
   status: 'resume' | 'pause' | 'terminate' | 'restart';
+
+  /**
+   * Body param: Step to restart from. Only applicable when status is "restart".
+   */
+  from?: StatusEditParams.From;
+}
+
+export namespace StatusEditParams {
+  /**
+   * Step to restart from. Only applicable when status is "restart".
+   */
+  export interface From {
+    name: string;
+
+    count?: number;
+
+    type?: 'do' | 'sleep' | 'waitForEvent';
+  }
 }
 
 export declare namespace Status {
