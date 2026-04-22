@@ -1,3 +1,3 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export * from './keyless-certificates/index';
+export { KeylessCertificates } from './keyless-certificates';
