@@ -839,14 +839,20 @@ export interface KolideInput {
   connection_id: string;
 
   /**
+   * The set of Kolide device authentication states that pass the posture check.
+   * Device must match one of the specified states.
+   */
+  auth_state?: Array<'Good' | 'Notified' | 'Will Block' | 'Blocked'>;
+
+  /**
    * Count Operator.
    */
-  countOperator: '<' | '<=' | '>' | '>=' | '==';
+  countOperator?: '<' | '<=' | '>' | '>=' | '==';
 
   /**
    * The Number of Issues.
    */
-  issue_count: string;
+  issue_count?: string;
 }
 
 export interface KolideInputParam {
@@ -856,14 +862,20 @@ export interface KolideInputParam {
   connection_id: string;
 
   /**
+   * The set of Kolide device authentication states that pass the posture check.
+   * Device must match one of the specified states.
+   */
+  auth_state?: Array<'Good' | 'Notified' | 'Will Block' | 'Blocked'>;
+
+  /**
    * Count Operator.
    */
-  countOperator: '<' | '<=' | '>' | '>=' | '==';
+  countOperator?: '<' | '<=' | '>' | '>=' | '==';
 
   /**
    * The Number of Issues.
    */
-  issue_count: string;
+  issue_count?: string;
 }
 
 export interface OSVersionInput {

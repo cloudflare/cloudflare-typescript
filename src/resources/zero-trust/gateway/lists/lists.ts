@@ -226,7 +226,7 @@ export interface GatewayList {
   /**
    * Specify the list type.
    */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE';
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE' | 'AAGUID';
 
   updated_at?: string;
 }
@@ -257,7 +257,7 @@ export interface ListCreateResponse {
   /**
    * Specify the list type.
    */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE';
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE' | 'AAGUID';
 
   updated_at?: string;
 }
@@ -278,7 +278,7 @@ export interface ListCreateParams {
   /**
    * Body param: Specify the list type.
    */
-  type: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE';
+  type: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE' | 'AAGUID';
 
   /**
    * Body param: Provide the list description.
@@ -350,7 +350,7 @@ export interface ListListParams {
   /**
    * Query param: Specify the list type.
    */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE';
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP' | 'CATEGORY' | 'LOCATION' | 'DEVICE' | 'AAGUID';
 }
 
 export interface ListDeleteParams {
