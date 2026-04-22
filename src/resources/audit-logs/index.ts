@@ -1,3 +1,3 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export * from './audit-logs/index';
+export { AuditLogs } from './audit-logs';
