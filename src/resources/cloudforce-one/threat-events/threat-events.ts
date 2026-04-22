@@ -102,11 +102,11 @@ export class ThreatEvents extends APIResource {
   }
 
   /**
-   * When `datasetId` is unspecified, events will be listed from the
-   * `Cloudforce One Threat Events` dataset. To list existing datasets (and their
-   * IDs), use the
+   * Use `datasetId=all` or `datasetId=*` to query all event datasets for the account
+   * (limited to 10). When `datasetId` is unspecified, events are listed from the
+   * default Cloudforce One Threat Events dataset. To list existing datasets, use the
    * [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)
-   * endpoint). Also, must provide query parameters.
+   * endpoint.
    *
    * @example
    * ```ts
@@ -642,7 +642,9 @@ export interface ThreatEventListParams {
   cursor?: string;
 
   /**
-   * Query param
+   * Query param: Dataset IDs to query events from (array of UUIDs), or special value
+   * 'all' or '\*' to query all event datasets for the account. If not provided, uses
+   * the default dataset.
    */
   datasetId?: Array<string>;
 
