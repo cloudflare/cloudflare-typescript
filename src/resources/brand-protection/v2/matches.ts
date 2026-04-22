@@ -7,7 +7,8 @@ export class Matches extends APIResource {
   /**
    * Get paginated list of domain matches for one or more brand protection queries.
    * When multiple query_ids are provided (comma-separated), matches are deduplicated
-   * across queries and each match includes a matched_queries array.
+   * across queries and each match includes a match_details array with per-match
+   * query metadata and individual dismissed state.
    */
   get(params: MatchGetParams, options?: Core.RequestOptions): Core.APIPromise<MatchGetResponse> {
     const { account_id = this._client.accountId, ...query } = params;
@@ -26,8 +27,6 @@ export interface MatchGetResponse {
 
 export namespace MatchGetResponse {
   export interface Match {
-    dismissed: boolean;
-
     domain: string;
 
     first_seen: string;
@@ -43,21 +42,37 @@ export namespace MatchGetResponse {
     source: string | null;
 
     /**
-     * All underlying match row IDs for this domain. Only present when multiple
-     * query_ids are requested.
+     * Whether the match is dismissed. Only present for single-query requests. For
+     * multi-query requests, use the dismissed field in each match_details entry.
      */
-    match_ids?: Array<number>;
+    dismissed?: boolean;
 
     /**
-     * List of query IDs that produced this match. Only present when multiple query_ids
-     * are requested.
+     * Per-match detail objects with query metadata and individual dismissed state.
+     * Only present when multiple query_ids are requested.
      */
-    matched_queries?: Array<number>;
+    match_details?: Array<Match.MatchDetail>;
   }
 
   export namespace Match {
     export interface PublicScans {
       submission_id: string;
+    }
+
+    export interface MatchDetail {
+      /**
+       * Individual dismissed state for this specific match.
+       */
+      dismissed: boolean;
+
+      match_id: number;
+
+      query_id: number;
+
+      /**
+       * Tag associated with the query, if one exists.
+       */
+      query_tag: string | null;
     }
   }
 }
@@ -70,8 +85,8 @@ export interface MatchGetParams {
 
   /**
    * Query param: Query ID or comma-separated list of Query IDs. When multiple IDs
-   * are provided, matches are deduplicated across queries and each match includes
-   * matched_queries and match_ids arrays.
+   * are provided, matches are deduplicated across queries and each match includes a
+   * match_details array with per-match query metadata and dismissed state.
    */
   query_id: Array<string>;
 
