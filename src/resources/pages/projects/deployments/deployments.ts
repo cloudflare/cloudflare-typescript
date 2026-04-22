@@ -111,11 +111,11 @@ export class Deployments extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(projectName, deploymentId, {}, params);
     }
-    const { account_id = this._client.accountId } = params;
+    const { account_id = this._client.accountId, force } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
-        options,
+        { query: { force }, ...options },
       ) as Core.APIPromise<{ result: DeploymentDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -343,9 +343,15 @@ export interface DeploymentListParams extends V4PagePaginationArrayParams {
 
 export interface DeploymentDeleteParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   account_id?: string;
+
+  /**
+   * Query param: Allow deletion of aliased non-production deployments when a normal
+   * delete would be rejected.
+   */
+  force?: boolean;
 }
 
 export interface DeploymentGetParams {
