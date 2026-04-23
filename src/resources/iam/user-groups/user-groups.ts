@@ -7,8 +7,11 @@ import * as MembersAPI from './members';
 import {
   MemberCreateParams,
   MemberCreateResponse,
+  MemberCreateResponsesSinglePage,
   MemberDeleteParams,
   MemberDeleteResponse,
+  MemberGetParams,
+  MemberGetResponse,
   MemberListParams,
   MemberListResponse,
   MemberListResponsesV4PagePaginationArray,
@@ -30,18 +33,6 @@ export class UserGroups extends APIResource {
    * const userGroup = await client.iam.userGroups.create({
    *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   name: 'My New User Group',
-   *   policies: [
-   *     {
-   *       access: 'allow',
-   *       permission_groups: [
-   *         { id: 'c8fed203ed3043cba015a93ad1616f1f' },
-   *         { id: '82e64a83756745bbbb1c9c2701bf816b' },
-   *       ],
-   *       resource_groups: [
-   *         { id: '6d7f2f5f5b1d4a0e9081fdc98d432fd1' },
-   *       ],
-   *     },
-   *   ],
    * });
    * ```
    */
@@ -836,7 +827,7 @@ export interface UserGroupCreateParams {
   /**
    * Body param: Policies attached to the User group
    */
-  policies: Array<UserGroupCreateParams.Policy>;
+  policies?: Array<UserGroupCreateParams.Policy>;
 }
 
 export namespace UserGroupCreateParams {
@@ -957,10 +948,10 @@ export interface UserGroupListParams extends V4PagePaginationArrayParams {
   id?: string;
 
   /**
-   * Query param: The sort order of returned user groups by name. Default sort order
-   * is ascending. To switch to descending, set this parameter to "desc"
+   * Query param: The sort order of returned user groups by name (ascending or
+   * descending).
    */
-  direction?: string;
+  direction?: 'asc' | 'desc';
 
   /**
    * Query param: A string used for searching for user groups containing that
@@ -990,6 +981,7 @@ export interface UserGroupGetParams {
 
 UserGroups.UserGroupListResponsesV4PagePaginationArray = UserGroupListResponsesV4PagePaginationArray;
 UserGroups.Members = Members;
+UserGroups.MemberCreateResponsesSinglePage = MemberCreateResponsesSinglePage;
 UserGroups.MemberUpdateResponsesSinglePage = MemberUpdateResponsesSinglePage;
 UserGroups.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
 
@@ -1014,11 +1006,14 @@ export declare namespace UserGroups {
     type MemberUpdateResponse as MemberUpdateResponse,
     type MemberListResponse as MemberListResponse,
     type MemberDeleteResponse as MemberDeleteResponse,
+    type MemberGetResponse as MemberGetResponse,
+    MemberCreateResponsesSinglePage as MemberCreateResponsesSinglePage,
     MemberUpdateResponsesSinglePage as MemberUpdateResponsesSinglePage,
     MemberListResponsesV4PagePaginationArray as MemberListResponsesV4PagePaginationArray,
     type MemberCreateParams as MemberCreateParams,
     type MemberUpdateParams as MemberUpdateParams,
     type MemberListParams as MemberListParams,
     type MemberDeleteParams as MemberDeleteParams,
+    type MemberGetParams as MemberGetParams,
   };
 }

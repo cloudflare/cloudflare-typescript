@@ -11,27 +11,29 @@ export class Members extends APIResource {
    *
    * @example
    * ```ts
-   * const member = await client.iam.userGroups.members.create(
+   * // Automatically fetches more pages as needed.
+   * for await (const memberCreateResponse of client.iam.userGroups.members.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
    *   },
-   * );
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   create(
     userGroupId: string,
     params: MemberCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberCreateResponse> {
+  ): Core.PagePromise<MemberCreateResponsesSinglePage, MemberCreateResponse> {
     const { account_id = this._client.accountId, members } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/iam/user_groups/${userGroupId}/members`, {
-        body: members,
-        ...options,
-      }) as Core.APIPromise<{ result: MemberCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
+      MemberCreateResponsesSinglePage,
+      { body: members, method: 'post', ...options },
+    );
   }
 
   /**
@@ -143,7 +145,50 @@ export class Members extends APIResource {
       ) as Core.APIPromise<{ result: MemberDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get details of a specific member in a user group.
+   *
+   * @example
+   * ```ts
+   * const member = await client.iam.userGroups.members.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  get(
+    userGroupId: string,
+    memberId: string,
+    params?: MemberGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberGetResponse>;
+  get(
+    userGroupId: string,
+    memberId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberGetResponse>;
+  get(
+    userGroupId: string,
+    memberId: string,
+    params: MemberGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(userGroupId, memberId, {}, params);
+    }
+    const { account_id = this._client.accountId } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/iam/user_groups/${userGroupId}/members/${memberId}`,
+        options,
+      ) as Core.APIPromise<{ result: MemberGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
+
+export class MemberCreateResponsesSinglePage extends SinglePage<MemberCreateResponse> {}
 
 export class MemberUpdateResponsesSinglePage extends SinglePage<MemberUpdateResponse> {}
 
@@ -229,6 +274,63 @@ export interface MemberDeleteResponse {
   status?: 'accepted' | 'pending';
 }
 
+/**
+ * Detailed member information for a User Group member.
+ */
+export interface MemberGetResponse {
+  /**
+   * Account member identifier.
+   */
+  id: string;
+
+  /**
+   * When the member was added to the user group.
+   */
+  created_at?: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email?: string;
+
+  /**
+   * The member's status in the account.
+   */
+  status?: 'accepted' | 'pending';
+
+  /**
+   * Details of the user associated with this membership.
+   */
+  user?: MemberGetResponse.User;
+}
+
+export namespace MemberGetResponse {
+  /**
+   * Details of the user associated with this membership.
+   */
+  export interface User {
+    /**
+     * User identifier tag.
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * User's first name.
+     */
+    first_name?: string;
+
+    /**
+     * User's last name.
+     */
+    last_name?: string;
+  }
+}
+
 export interface MemberCreateParams {
   /**
    * Path param: Account identifier tag.
@@ -276,6 +378,16 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
    * Path param: Account identifier tag.
    */
   account_id?: string;
+
+  /**
+   * Query param: The sort order of returned user group members by email.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: A string used for filtering members by partial email match.
+   */
+  fuzzyEmail?: string;
 }
 
 export interface MemberDeleteParams {
@@ -285,6 +397,14 @@ export interface MemberDeleteParams {
   account_id?: string;
 }
 
+export interface MemberGetParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id?: string;
+}
+
+Members.MemberCreateResponsesSinglePage = MemberCreateResponsesSinglePage;
 Members.MemberUpdateResponsesSinglePage = MemberUpdateResponsesSinglePage;
 Members.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
 
@@ -294,11 +414,14 @@ export declare namespace Members {
     type MemberUpdateResponse as MemberUpdateResponse,
     type MemberListResponse as MemberListResponse,
     type MemberDeleteResponse as MemberDeleteResponse,
+    type MemberGetResponse as MemberGetResponse,
+    MemberCreateResponsesSinglePage as MemberCreateResponsesSinglePage,
     MemberUpdateResponsesSinglePage as MemberUpdateResponsesSinglePage,
     MemberListResponsesV4PagePaginationArray as MemberListResponsesV4PagePaginationArray,
     type MemberCreateParams as MemberCreateParams,
     type MemberUpdateParams as MemberUpdateParams,
     type MemberListParams as MemberListParams,
     type MemberDeleteParams as MemberDeleteParams,
+    type MemberGetParams as MemberGetParams,
   };
 }
