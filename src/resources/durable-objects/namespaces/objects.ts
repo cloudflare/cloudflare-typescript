@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../../pagination';
 
@@ -11,22 +10,10 @@ export class Objects extends APIResource {
    */
   list(
     id: string,
-    params?: ObjectListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DurableObjectsCursorPaginationAfter, DurableObject>;
-  list(
-    id: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DurableObjectsCursorPaginationAfter, DurableObject>;
-  list(
-    id: string,
-    params: ObjectListParams | Core.RequestOptions = {},
+    params: ObjectListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DurableObjectsCursorPaginationAfter, DurableObject> {
-    if (isRequestOptions(params)) {
-      return this.list(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
       DurableObjectsCursorPaginationAfter,
@@ -53,7 +40,7 @@ export interface ObjectListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The number of objects to return. The cursor attribute may be used

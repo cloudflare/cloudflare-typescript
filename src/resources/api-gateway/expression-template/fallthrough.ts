@@ -23,7 +23,7 @@ export class Fallthrough extends APIResource {
     params: FallthroughCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallthroughCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/api_gateway/expression-template/fallthrough`, {
         body,
@@ -49,7 +49,7 @@ export interface FallthroughCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: List of hosts to be targeted in the expression

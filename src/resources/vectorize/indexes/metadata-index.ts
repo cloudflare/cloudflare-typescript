@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class MetadataIndex extends APIResource {
@@ -26,7 +25,7 @@ export class MetadataIndex extends APIResource {
     params: MetadataIndexCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MetadataIndexCreateResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/create`, {
         body,
@@ -49,19 +48,10 @@ export class MetadataIndex extends APIResource {
    */
   list(
     indexName: string,
-    params?: MetadataIndexListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MetadataIndexListResponse | null>;
-  list(indexName: string, options?: Core.RequestOptions): Core.APIPromise<MetadataIndexListResponse | null>;
-  list(
-    indexName: string,
-    params: MetadataIndexListParams | Core.RequestOptions = {},
+    params: MetadataIndexListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MetadataIndexListResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.list(indexName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/list`,
@@ -90,7 +80,7 @@ export class MetadataIndex extends APIResource {
     params: MetadataIndexDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MetadataIndexDeleteResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/delete`, {
         body,
@@ -139,7 +129,7 @@ export interface MetadataIndexCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specifies the type of metadata property to index.
@@ -156,14 +146,14 @@ export interface MetadataIndexListParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface MetadataIndexDeleteParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specifies the metadata property for which the index must be deleted.

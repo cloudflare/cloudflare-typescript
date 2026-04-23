@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Quota extends APIResource {
@@ -15,16 +14,8 @@ export class Quota extends APIResource {
    * });
    * ```
    */
-  get(params?: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse>;
-  get(
-    params: QuotaGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QuotaGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: QuotaGetParams, options?: Core.RequestOptions): Core.APIPromise<QuotaGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secrets_store/quota`, options) as Core.APIPromise<{
         result: QuotaGetResponse;
@@ -55,7 +46,7 @@ export interface QuotaGetParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Quota {

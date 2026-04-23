@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as FullAPI from './full';
 import { Full, FullGetParams } from './full';
@@ -23,7 +22,7 @@ export class Configs extends APIResource {
    * ```
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/config`, { body, ...options }) as Core.APIPromise<{
         result: Configuration;
@@ -46,7 +45,7 @@ export class Configs extends APIResource {
    * ```
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/mnm/config`, { body, ...options }) as Core.APIPromise<{
         result: Configuration;
@@ -65,16 +64,8 @@ export class Configs extends APIResource {
    *   });
    * ```
    */
-  delete(params?: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Configuration>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<Configuration>;
-  delete(
-    params: ConfigDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Configuration> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  delete(params: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: Configuration;
@@ -93,16 +84,8 @@ export class Configs extends APIResource {
    *   });
    * ```
    */
-  edit(params?: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<Configuration>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<Configuration>;
-  edit(
-    params: ConfigEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Configuration> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/config`, { body, ...options }) as Core.APIPromise<{
         result: Configuration;
@@ -121,16 +104,8 @@ export class Configs extends APIResource {
    *   });
    * ```
    */
-  get(params?: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration>;
-  get(options?: Core.RequestOptions): Core.APIPromise<Configuration>;
-  get(
-    params: ConfigGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Configuration> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
         result: Configuration;
@@ -183,7 +158,7 @@ export interface ConfigCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Fallback sampling rate of flow messages being sent in packets per
@@ -234,7 +209,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Fallback sampling rate of flow messages being sent in packets per
@@ -282,14 +257,14 @@ export namespace ConfigUpdateParams {
 }
 
 export interface ConfigDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Fallback sampling rate of flow messages being sent in packets per
@@ -337,7 +312,7 @@ export namespace ConfigEditParams {
 }
 
 export interface ConfigGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Configs.Full = Full;

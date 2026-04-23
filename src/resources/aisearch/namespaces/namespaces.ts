@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as InstancesAPI from './instances/instances';
 import {
@@ -44,7 +43,7 @@ export class Namespaces extends APIResource {
     params: NamespaceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/namespaces`, {
         body,
@@ -66,19 +65,10 @@ export class Namespaces extends APIResource {
    */
   update(
     name: string,
-    params?: NamespaceUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceUpdateResponse>;
-  update(name: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceUpdateResponse>;
-  update(
-    name: string,
-    params: NamespaceUpdateParams | Core.RequestOptions = {},
+    params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update(name, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-search/namespaces/${name}`, {
         body,
@@ -101,20 +91,10 @@ export class Namespaces extends APIResource {
    * ```
    */
   list(
-    params?: NamespaceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse>;
-  list(
-    params: NamespaceListParams | Core.RequestOptions = {},
+    params: NamespaceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<NamespaceListResponsesV4PagePaginationArray, NamespaceListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-search/namespaces`,
       NamespaceListResponsesV4PagePaginationArray,
@@ -135,19 +115,10 @@ export class Namespaces extends APIResource {
    */
   delete(
     name: string,
-    params?: NamespaceDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceDeleteResponse>;
-  delete(name: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceDeleteResponse>;
-  delete(
-    name: string,
-    params: NamespaceDeleteParams | Core.RequestOptions = {},
+    params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(name, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/ai-search/namespaces/${name}`,
@@ -178,7 +149,7 @@ export class Namespaces extends APIResource {
     params: NamespaceChatCompletionsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceChatCompletionsResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/ai-search/namespaces/${name}/chat/completions`, {
       body,
       ...options,
@@ -198,19 +169,10 @@ export class Namespaces extends APIResource {
    */
   read(
     name: string,
-    params?: NamespaceReadParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceReadResponse>;
-  read(name: string, options?: Core.RequestOptions): Core.APIPromise<NamespaceReadResponse>;
-  read(
-    name: string,
-    params: NamespaceReadParams | Core.RequestOptions = {},
+    params: NamespaceReadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceReadResponse> {
-    if (isRequestOptions(params)) {
-      return this.read(name, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai-search/namespaces/${name}`, options) as Core.APIPromise<{
         result: NamespaceReadResponse;
@@ -237,7 +199,7 @@ export class Namespaces extends APIResource {
     params: NamespaceSearchParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceSearchResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/namespaces/${name}/search`, {
         body,
@@ -435,7 +397,7 @@ export interface NamespaceCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -452,7 +414,7 @@ export interface NamespaceUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Optional description for the namespace. Max 256 characters.
@@ -464,7 +426,7 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter namespaces whose name or description contains this string
@@ -474,14 +436,14 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
 }
 
 export interface NamespaceDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface NamespaceChatCompletionsParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -663,14 +625,14 @@ export namespace NamespaceChatCompletionsParams {
 }
 
 export interface NamespaceReadParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface NamespaceSearchParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ACLsAPI from './acls';
 import {
@@ -67,7 +66,7 @@ export class Sites extends APIResource {
    * ```
    */
   create(params: SiteCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/sites`, { body, ...options }) as Core.APIPromise<{
         result: Site;
@@ -87,7 +86,7 @@ export class Sites extends APIResource {
    * ```
    */
   update(siteId: string, params: SiteUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}`, {
         body,
@@ -111,16 +110,8 @@ export class Sites extends APIResource {
    * }
    * ```
    */
-  list(params?: SiteListParams, options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site>;
-  list(options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site>;
-  list(
-    params: SiteListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SitesSinglePage, Site> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: SiteListParams, options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/sites`, SitesSinglePage, {
       query,
       ...options,
@@ -138,17 +129,8 @@ export class Sites extends APIResource {
    * );
    * ```
    */
-  delete(siteId: string, params?: SiteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Site>;
-  delete(siteId: string, options?: Core.RequestOptions): Core.APIPromise<Site>;
-  delete(
-    siteId: string,
-    params: SiteDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Site> {
-    if (isRequestOptions(params)) {
-      return this.delete(siteId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  delete(siteId: string, params: SiteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
         result: Site;
@@ -168,7 +150,7 @@ export class Sites extends APIResource {
    * ```
    */
   edit(siteId: string, params: SiteEditParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}`, {
         body,
@@ -188,17 +170,8 @@ export class Sites extends APIResource {
    * );
    * ```
    */
-  get(siteId: string, params?: SiteGetParams, options?: Core.RequestOptions): Core.APIPromise<Site>;
-  get(siteId: string, options?: Core.RequestOptions): Core.APIPromise<Site>;
-  get(
-    siteId: string,
-    params: SiteGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Site> {
-    if (isRequestOptions(params)) {
-      return this.get(siteId, {}, params);
-    }
-    const { account_id = this._client.accountId, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
+  get(siteId: string, params: SiteGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, {
         ...options,
@@ -284,7 +257,7 @@ export interface SiteCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the site.
@@ -323,7 +296,7 @@ export interface SiteUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Magic Connector identifier tag.
@@ -356,7 +329,7 @@ export interface SiteListParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Identifier
@@ -368,14 +341,14 @@ export interface SiteDeleteParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SiteEditParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Magic Connector identifier tag.
@@ -408,7 +381,7 @@ export interface SiteGetParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: If true, the health check target in the response body will be

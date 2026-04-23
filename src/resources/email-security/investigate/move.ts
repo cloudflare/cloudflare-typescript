@@ -26,7 +26,7 @@ export class Move extends APIResource {
     params: MoveCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MoveCreateResponse> {
-    const { account_id = this._client.accountId, submission, ...body } = params;
+    const { account_id, submission, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/move`, {
         query: { submission },
@@ -56,7 +56,7 @@ export class Move extends APIResource {
     params: MoveBulkParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MoveBulkResponsesSinglePage, MoveBulkResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/investigate/move`,
       MoveBulkResponsesSinglePage,
@@ -127,7 +127,7 @@ export interface MoveCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -150,7 +150,7 @@ export interface MoveBulkParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

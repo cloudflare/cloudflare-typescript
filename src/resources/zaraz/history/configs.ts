@@ -17,7 +17,7 @@ export class Configs extends APIResource {
    * ```
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigGetResponse> {
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/zaraz/history/configs`, {
         query,
@@ -65,7 +65,7 @@ export interface ConfigGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Comma separated list of Zaraz configuration IDs.

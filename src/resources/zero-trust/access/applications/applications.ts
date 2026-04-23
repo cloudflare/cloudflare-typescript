@@ -103,11 +103,7 @@ export class Applications extends APIResource {
     params: ApplicationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationCreateResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -153,11 +149,7 @@ export class Applications extends APIResource {
     params: ApplicationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ApplicationUpdateResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -209,11 +201,7 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...query
-    } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -263,8 +251,7 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(appId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -315,8 +302,7 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -370,8 +356,7 @@ export class Applications extends APIResource {
     if (isRequestOptions(params)) {
       return this.revokeTokens(appId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

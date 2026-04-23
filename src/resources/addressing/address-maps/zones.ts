@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Zones extends APIResource {
@@ -26,7 +25,7 @@ export class Zones extends APIResource {
     params: ZoneUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneUpdateResponse> {
-    const { zone_id = this._client.zoneId, account_id = this._client.accountId, body } = params;
+    const { zone_id, account_id, body } = params;
     return this._client.put(
       `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
       { body: body, ...options },
@@ -50,19 +49,10 @@ export class Zones extends APIResource {
    */
   delete(
     addressMapId: string,
-    params?: ZoneDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneDeleteResponse>;
-  delete(addressMapId: string, options?: Core.RequestOptions): Core.APIPromise<ZoneDeleteResponse>;
-  delete(
-    addressMapId: string,
-    params: ZoneDeleteParams | Core.RequestOptions = {},
+    params: ZoneDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(addressMapId, {}, params);
-    }
-    const { zone_id = this._client.zoneId, account_id = this._client.accountId } = params;
+    const { zone_id, account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
       options,
@@ -222,12 +212,12 @@ export interface ZoneUpdateParams {
   /**
    * Path param: Identifier of a zone.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -239,12 +229,12 @@ export interface ZoneDeleteParams {
   /**
    * Identifier of a zone.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Zones {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as CredentialsAPI from './credentials';
 import {
@@ -46,7 +45,7 @@ export class Configuration extends APIResource {
    * ```
    */
   create(params: ConfigurationCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenConfig> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/token_validation/config`, {
         body,
@@ -69,18 +68,10 @@ export class Configuration extends APIResource {
    * ```
    */
   list(
-    params?: ConfigurationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TokenConfigsV4PagePaginationArray, TokenConfig>;
-  list(options?: Core.RequestOptions): Core.PagePromise<TokenConfigsV4PagePaginationArray, TokenConfig>;
-  list(
-    params: ConfigurationListParams | Core.RequestOptions = {},
+    params: ConfigurationListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TokenConfigsV4PagePaginationArray, TokenConfig> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/token_validation/config`,
       TokenConfigsV4PagePaginationArray,
@@ -102,19 +93,10 @@ export class Configuration extends APIResource {
    */
   delete(
     configId: string,
-    params?: ConfigurationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationDeleteResponse>;
-  delete(configId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigurationDeleteResponse>;
-  delete(
-    configId: string,
-    params: ConfigurationDeleteParams | Core.RequestOptions = {},
+    params: ConfigurationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(configId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/token_validation/config/${configId}`,
@@ -140,7 +122,7 @@ export class Configuration extends APIResource {
     params: ConfigurationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/token_validation/config/${configId}`, {
         body,
@@ -163,19 +145,10 @@ export class Configuration extends APIResource {
    */
   get(
     configId: string,
-    params?: ConfigurationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenConfig>;
-  get(configId: string, options?: Core.RequestOptions): Core.APIPromise<TokenConfig>;
-  get(
-    configId: string,
-    params: ConfigurationGetParams | Core.RequestOptions = {},
+    params: ConfigurationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenConfig> {
-    if (isRequestOptions(params)) {
-      return this.get(configId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/token_validation/config/${configId}`, options) as Core.APIPromise<{
         result: TokenConfig;
@@ -343,7 +316,7 @@ export interface ConfigurationCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -487,21 +460,21 @@ export interface ConfigurationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface ConfigurationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface ConfigurationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -523,7 +496,7 @@ export interface ConfigurationGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Configuration.TokenConfigsV4PagePaginationArray = TokenConfigsV4PagePaginationArray;

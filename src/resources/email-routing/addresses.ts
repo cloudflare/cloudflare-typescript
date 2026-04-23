@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -19,7 +18,7 @@ export class Addresses extends APIResource {
    * ```
    */
   create(params: AddressCreateParams, options?: Core.RequestOptions): Core.APIPromise<Address> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email/routing/addresses`, {
         body,
@@ -42,18 +41,10 @@ export class Addresses extends APIResource {
    * ```
    */
   list(
-    params?: AddressListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressesV4PagePaginationArray, Address>;
-  list(options?: Core.RequestOptions): Core.PagePromise<AddressesV4PagePaginationArray, Address>;
-  list(
-    params: AddressListParams | Core.RequestOptions = {},
+    params: AddressListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AddressesV4PagePaginationArray, Address> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email/routing/addresses`,
       AddressesV4PagePaginationArray,
@@ -74,19 +65,10 @@ export class Addresses extends APIResource {
    */
   delete(
     destinationAddressIdentifier: string,
-    params?: AddressDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Address>;
-  delete(destinationAddressIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<Address>;
-  delete(
-    destinationAddressIdentifier: string,
-    params: AddressDeleteParams | Core.RequestOptions = {},
+    params: AddressDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Address> {
-    if (isRequestOptions(params)) {
-      return this.delete(destinationAddressIdentifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email/routing/addresses/${destinationAddressIdentifier}`,
@@ -108,19 +90,10 @@ export class Addresses extends APIResource {
    */
   get(
     destinationAddressIdentifier: string,
-    params?: AddressGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Address>;
-  get(destinationAddressIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<Address>;
-  get(
-    destinationAddressIdentifier: string,
-    params: AddressGetParams | Core.RequestOptions = {},
+    params: AddressGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Address> {
-    if (isRequestOptions(params)) {
-      return this.get(destinationAddressIdentifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email/routing/addresses/${destinationAddressIdentifier}`,
@@ -170,7 +143,7 @@ export interface AddressCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The contact email address of the user.
@@ -182,7 +155,7 @@ export interface AddressListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Sorts results in an ascending or descending order.
@@ -199,14 +172,14 @@ export interface AddressDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface AddressGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Addresses.AddressesV4PagePaginationArray = AddressesV4PagePaginationArray;

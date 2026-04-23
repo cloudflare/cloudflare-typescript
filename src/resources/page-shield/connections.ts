@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -20,18 +19,10 @@ export class Connections extends APIResource {
    * ```
    */
   list(
-    params?: ConnectionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ConnectionsSinglePage, Connection>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ConnectionsSinglePage, Connection>;
-  list(
-    params: ConnectionListParams | Core.RequestOptions = {},
+    params: ConnectionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConnectionsSinglePage, Connection> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/page_shield/connections`, ConnectionsSinglePage, {
       query,
       ...options,
@@ -51,19 +42,10 @@ export class Connections extends APIResource {
    */
   get(
     connectionId: string,
-    params?: ConnectionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Connection | null>;
-  get(connectionId: string, options?: Core.RequestOptions): Core.APIPromise<Connection | null>;
-  get(
-    connectionId: string,
-    params: ConnectionGetParams | Core.RequestOptions = {},
+    params: ConnectionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Connection | null> {
-    if (isRequestOptions(params)) {
-      return this.get(connectionId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/page_shield/connections/${connectionId}`,
@@ -110,7 +92,7 @@ export interface ConnectionListParams {
   /**
    * Path param: Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The direction used to sort returned connections.
@@ -198,7 +180,7 @@ export interface ConnectionGetParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Connections.ConnectionsSinglePage = ConnectionsSinglePage;

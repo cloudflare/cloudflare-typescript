@@ -25,7 +25,7 @@ export class FleetStatus extends APIResource {
     params: FleetStatusGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FleetStatusGetResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/dex/devices/${deviceId}/fleet-status/live`, {
       query,
       ...options,
@@ -318,7 +318,7 @@ export interface FleetStatusGetParams {
   /**
    * Path param: Unique identifier for account
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Number of minutes before current time

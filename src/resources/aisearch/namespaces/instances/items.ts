@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 import { type Response } from '../../../../_shims/index';
@@ -25,24 +24,10 @@ export class Items extends APIResource {
   list(
     name: string,
     id: string,
-    params?: ItemListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ItemListResponsesV4PagePaginationArray, ItemListResponse>;
-  list(
-    name: string,
-    id: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ItemListResponsesV4PagePaginationArray, ItemListResponse>;
-  list(
-    name: string,
-    id: string,
-    params: ItemListParams | Core.RequestOptions = {},
+    params: ItemListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ItemListResponsesV4PagePaginationArray, ItemListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(name, id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items`,
       ItemListResponsesV4PagePaginationArray,
@@ -68,26 +53,10 @@ export class Items extends APIResource {
     name: string,
     id: string,
     itemId: string,
-    params?: ItemDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemDeleteResponse>;
-  delete(
-    name: string,
-    id: string,
-    itemId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemDeleteResponse>;
-  delete(
-    name: string,
-    id: string,
-    itemId: string,
-    params: ItemDeleteParams | Core.RequestOptions = {},
+    params: ItemDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(name, id, itemId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemId}`,
@@ -115,26 +84,10 @@ export class Items extends APIResource {
     name: string,
     id: string,
     itemId: string,
-    params?: ItemChunksParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemChunksResponse>;
-  chunks(
-    name: string,
-    id: string,
-    itemId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemChunksResponse>;
-  chunks(
-    name: string,
-    id: string,
-    itemId: string,
-    params: ItemChunksParams | Core.RequestOptions = {},
+    params: ItemChunksParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemChunksResponse> {
-    if (isRequestOptions(params)) {
-      return this.chunks(name, id, itemId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemId}/chunks`,
@@ -166,7 +119,7 @@ export class Items extends APIResource {
     params: ItemCreateOrUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemCreateOrUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items`, {
         body,
@@ -197,26 +150,10 @@ export class Items extends APIResource {
     name: string,
     id: string,
     itemId: string,
-    params?: ItemDownloadParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  download(
-    name: string,
-    id: string,
-    itemId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  download(
-    name: string,
-    id: string,
-    itemId: string,
-    params: ItemDownloadParams | Core.RequestOptions = {},
+    params: ItemDownloadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
-    if (isRequestOptions(params)) {
-      return this.download(name, id, itemId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemId}/download`,
       {
@@ -245,26 +182,10 @@ export class Items extends APIResource {
     name: string,
     id: string,
     itemId: string,
-    params?: ItemGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemGetResponse>;
-  get(
-    name: string,
-    id: string,
-    itemId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemGetResponse>;
-  get(
-    name: string,
-    id: string,
-    itemId: string,
-    params: ItemGetParams | Core.RequestOptions = {},
+    params: ItemGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(name, id, itemId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemId}`,
@@ -291,26 +212,10 @@ export class Items extends APIResource {
     name: string,
     id: string,
     itemId: string,
-    params?: ItemLogsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemLogsResponse>;
-  logs(
-    name: string,
-    id: string,
-    itemId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemLogsResponse>;
-  logs(
-    name: string,
-    id: string,
-    itemId: string,
-    params: ItemLogsParams | Core.RequestOptions = {},
+    params: ItemLogsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemLogsResponse> {
-    if (isRequestOptions(params)) {
-      return this.logs(name, id, itemId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemId}/logs`,
@@ -343,7 +248,7 @@ export class Items extends APIResource {
     params: ItemSyncParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemSyncResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items/${itemId}`,
@@ -375,7 +280,7 @@ export class Items extends APIResource {
     params: ItemUploadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemUploadResponse> {
-    const { account_id = this._client.accountId, file } = params;
+    const { account_id, file } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/items`,
@@ -591,7 +496,7 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter items by their unique ID. Returns at most one item.
@@ -630,14 +535,14 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
 }
 
 export interface ItemDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ItemChunksParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -654,7 +559,7 @@ export interface ItemCreateOrUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Item key / filename. Must not exceed 128 characters.
@@ -668,18 +573,18 @@ export interface ItemCreateOrUpdateParams {
 }
 
 export interface ItemDownloadParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ItemGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ItemLogsParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -696,7 +601,7 @@ export interface ItemSyncParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -708,7 +613,7 @@ export interface ItemUploadParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

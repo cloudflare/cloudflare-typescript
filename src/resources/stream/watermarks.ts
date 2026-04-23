@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -17,16 +16,8 @@ export class Watermarks extends APIResource {
    * });
    * ```
    */
-  create(params?: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermark>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Watermark>;
-  create(
-    params: WatermarkCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Watermark> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  create(params: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermark> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
@@ -49,18 +40,10 @@ export class Watermarks extends APIResource {
    * ```
    */
   list(
-    params?: WatermarkListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WatermarksSinglePage, Watermark>;
-  list(options?: Core.RequestOptions): Core.PagePromise<WatermarksSinglePage, Watermark>;
-  list(
-    params: WatermarkListParams | Core.RequestOptions = {},
+    params: WatermarkListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WatermarksSinglePage, Watermark> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/stream/watermarks`,
       WatermarksSinglePage,
@@ -81,19 +64,10 @@ export class Watermarks extends APIResource {
    */
   delete(
     identifier: string,
-    params?: WatermarkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkDeleteResponse>;
-  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<WatermarkDeleteResponse>;
-  delete(
-    identifier: string,
-    params: WatermarkDeleteParams | Core.RequestOptions = {},
+    params: WatermarkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WatermarkDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(identifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/stream/watermarks/${identifier}`,
@@ -115,19 +89,10 @@ export class Watermarks extends APIResource {
    */
   get(
     identifier: string,
-    params?: WatermarkGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Watermark>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<Watermark>;
-  get(
-    identifier: string,
-    params: WatermarkGetParams | Core.RequestOptions = {},
+    params: WatermarkGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Watermark> {
-    if (isRequestOptions(params)) {
-      return this.get(identifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/watermarks/${identifier}`,
@@ -212,7 +177,7 @@ export interface WatermarkCreateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A short description of the watermark profile.
@@ -259,21 +224,21 @@ export interface WatermarkListParams {
   /**
    * The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface WatermarkDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface WatermarkGetParams {
   /**
    * The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Watermarks.WatermarksSinglePage = WatermarksSinglePage;

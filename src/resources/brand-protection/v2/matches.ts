@@ -11,7 +11,7 @@ export class Matches extends APIResource {
    * query metadata and individual dismissed state.
    */
   get(params: MatchGetParams, options?: Core.RequestOptions): Core.APIPromise<MatchGetResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/v2/brand-protection/domain/matches`, {
       query,
       ...options,
@@ -81,7 +81,7 @@ export interface MatchGetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Query ID or comma-separated list of Query IDs. When multiple IDs

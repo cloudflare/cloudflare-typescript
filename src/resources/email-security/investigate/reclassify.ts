@@ -25,7 +25,7 @@ export class Reclassify extends APIResource {
     params: ReclassifyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReclassifyCreateResponse> {
-    const { account_id = this._client.accountId, submission, ...body } = params;
+    const { account_id, submission, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/reclassify`, {
         query: { submission },
@@ -42,7 +42,7 @@ export interface ReclassifyCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

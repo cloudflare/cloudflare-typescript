@@ -12,7 +12,7 @@ export class Assets extends APIResource {
     params: AssetCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AssetCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(
       `/accounts/${account_id}/ai/finetunes/${finetuneId}/finetune-assets`,
       Core.multipartFormRequestOptions({ body, ...options }),
@@ -28,7 +28,7 @@ export interface AssetCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: File to upload

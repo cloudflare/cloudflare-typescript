@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
@@ -28,7 +27,7 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionCreateResponse> {
-    const { account_id = this._client.accountId, bindings_inherit, ...body } = params;
+    const { account_id, bindings_inherit, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
@@ -53,22 +52,10 @@ export class Versions extends APIResource {
    */
   list(
     scriptName: string,
-    params?: VersionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse>;
-  list(
-    scriptName: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse>;
-  list(
-    scriptName: string,
-    params: VersionListParams | Core.RequestOptions = {},
+    params: VersionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
       VersionListResponsesV4PagePagination,
@@ -91,24 +78,10 @@ export class Versions extends APIResource {
   get(
     scriptName: string,
     versionId: string,
-    params?: VersionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionGetResponse>;
-  get(
-    scriptName: string,
-    versionId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionGetResponse>;
-  get(
-    scriptName: string,
-    versionId: string,
-    params: VersionGetParams | Core.RequestOptions = {},
+    params: VersionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(scriptName, versionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/versions/${versionId}`,
@@ -2072,7 +2045,7 @@ export interface VersionCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -2968,7 +2941,7 @@ export interface VersionListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Only return versions that can be used in a deployment. Ignores
@@ -2981,7 +2954,7 @@ export interface VersionGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Versions.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;

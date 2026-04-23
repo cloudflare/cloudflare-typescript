@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class OriginCloudRegions extends APIResource {
@@ -28,7 +27,7 @@ export class OriginCloudRegions extends APIResource {
     params: OriginCloudRegionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/cache/origin_cloud_regions`, {
         body,
@@ -52,18 +51,10 @@ export class OriginCloudRegions extends APIResource {
    * ```
    */
   list(
-    params?: OriginCloudRegionListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCloudRegionListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<OriginCloudRegionListResponse>;
-  list(
-    params: OriginCloudRegionListParams | Core.RequestOptions = {},
+    params: OriginCloudRegionListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/origin_cloud_regions`, options) as Core.APIPromise<{
         result: OriginCloudRegionListResponse;
@@ -88,19 +79,10 @@ export class OriginCloudRegions extends APIResource {
    */
   delete(
     originIP: string,
-    params?: OriginCloudRegionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCloudRegionDeleteResponse>;
-  delete(originIP: string, options?: Core.RequestOptions): Core.APIPromise<OriginCloudRegionDeleteResponse>;
-  delete(
-    originIP: string,
-    params: OriginCloudRegionDeleteParams | Core.RequestOptions = {},
+    params: OriginCloudRegionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(originIP, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/cache/origin_cloud_regions/${originIP}`,
@@ -124,18 +106,10 @@ export class OriginCloudRegions extends APIResource {
    * ```
    */
   bulkDelete(
-    params?: OriginCloudRegionBulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCloudRegionBulkDeleteResponse>;
-  bulkDelete(options?: Core.RequestOptions): Core.APIPromise<OriginCloudRegionBulkDeleteResponse>;
-  bulkDelete(
-    params: OriginCloudRegionBulkDeleteParams | Core.RequestOptions = {},
+    params: OriginCloudRegionBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionBulkDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.bulkDelete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/origin_cloud_regions/batch`, options) as Core.APIPromise<{
         result: OriginCloudRegionBulkDeleteResponse;
@@ -174,7 +148,7 @@ export class OriginCloudRegions extends APIResource {
     params: OriginCloudRegionBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionBulkEditResponse> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/origin_cloud_regions/batch`, {
         body: body,
@@ -206,7 +180,7 @@ export class OriginCloudRegions extends APIResource {
     params: OriginCloudRegionEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/origin_cloud_regions`, {
         body,
@@ -230,19 +204,10 @@ export class OriginCloudRegions extends APIResource {
    */
   get(
     originIP: string,
-    params?: OriginCloudRegionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCloudRegionGetResponse>;
-  get(originIP: string, options?: Core.RequestOptions): Core.APIPromise<OriginCloudRegionGetResponse>;
-  get(
-    originIP: string,
-    params: OriginCloudRegionGetParams | Core.RequestOptions = {},
+    params: OriginCloudRegionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(originIP, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/cache/origin_cloud_regions/${originIP}`,
@@ -266,18 +231,10 @@ export class OriginCloudRegions extends APIResource {
    * ```
    */
   supportedRegions(
-    params?: OriginCloudRegionSupportedRegionsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCloudRegionSupportedRegionsResponse>;
-  supportedRegions(options?: Core.RequestOptions): Core.APIPromise<OriginCloudRegionSupportedRegionsResponse>;
-  supportedRegions(
-    params: OriginCloudRegionSupportedRegionsParams | Core.RequestOptions = {},
+    params: OriginCloudRegionSupportedRegionsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCloudRegionSupportedRegionsResponse> {
-    if (isRequestOptions(params)) {
-      return this.supportedRegions({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/cache/origin_cloud_regions/supported_regions`,
@@ -629,7 +586,7 @@ export interface OriginCloudRegionCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Origin IP address (IPv4 or IPv6). Normalized to canonical form
@@ -654,28 +611,28 @@ export interface OriginCloudRegionListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OriginCloudRegionDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OriginCloudRegionBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OriginCloudRegionBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -711,7 +668,7 @@ export interface OriginCloudRegionEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Origin IP address (IPv4 or IPv6). Normalized to canonical form
@@ -736,14 +693,14 @@ export interface OriginCloudRegionGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OriginCloudRegionSupportedRegionsParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace OriginCloudRegions {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Variants extends APIResource {
@@ -23,7 +22,7 @@ export class Variants extends APIResource {
    * ```
    */
   create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<VariantCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/images/v1/variants`, {
         body,
@@ -42,16 +41,8 @@ export class Variants extends APIResource {
    * });
    * ```
    */
-  list(params?: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<Variant>;
-  list(options?: Core.RequestOptions): Core.APIPromise<Variant>;
-  list(
-    params: VariantListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Variant> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<Variant> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/variants`, options) as Core.APIPromise<{
         result: Variant;
@@ -72,19 +63,10 @@ export class Variants extends APIResource {
    */
   delete(
     variantId: string,
-    params?: VariantDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantDeleteResponse>;
-  delete(variantId: string, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse>;
-  delete(
-    variantId: string,
-    params: VariantDeleteParams | Core.RequestOptions = {},
+    params: VariantDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(variantId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/images/v1/variants/${variantId}`,
@@ -117,7 +99,7 @@ export class Variants extends APIResource {
     params: VariantEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
         body,
@@ -139,19 +121,10 @@ export class Variants extends APIResource {
    */
   get(
     variantId: string,
-    params?: VariantGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VariantGetResponse>;
-  get(variantId: string, options?: Core.RequestOptions): Core.APIPromise<VariantGetResponse>;
-  get(
-    variantId: string,
-    params: VariantGetParams | Core.RequestOptions = {},
+    params: VariantGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VariantGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(variantId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/images/v1/variants/${variantId}`,
@@ -369,7 +342,7 @@ export interface VariantCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -420,21 +393,21 @@ export interface VariantListParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface VariantDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Allows you to define image resizing sizes for different use cases.
@@ -480,7 +453,7 @@ export interface VariantGetParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Variants {

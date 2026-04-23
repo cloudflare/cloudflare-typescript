@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -15,7 +14,7 @@ export class TLS extends APIResource {
     params: TLSUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Setting> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, {
         body,
@@ -30,24 +29,10 @@ export class TLS extends APIResource {
   delete(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
     hostname: string,
-    params?: TLSDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSDeleteResponse>;
-  delete(
-    settingId: 'ciphers' | 'min_tls_version' | 'http2',
-    hostname: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSDeleteResponse>;
-  delete(
-    settingId: 'ciphers' | 'min_tls_version' | 'http2',
-    hostname: string,
-    params: TLSDeleteParams | Core.RequestOptions = {},
+    params: TLSDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TLSDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(settingId, hostname, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`,
@@ -61,22 +46,10 @@ export class TLS extends APIResource {
    */
   get(
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
-    params?: TLSGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TLSGetResponsesSinglePage, TLSGetResponse>;
-  get(
-    settingId: 'ciphers' | 'min_tls_version' | 'http2',
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TLSGetResponsesSinglePage, TLSGetResponse>;
-  get(
-    settingId: 'ciphers' | 'min_tls_version' | 'http2',
-    params: TLSGetParams | Core.RequestOptions = {},
+    params: TLSGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TLSGetResponsesSinglePage, TLSGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(settingId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/hostnames/settings/${settingId}`,
       TLSGetResponsesSinglePage,
@@ -222,7 +195,7 @@ export interface TLSUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The TLS setting value. The type depends on the `setting_id` used in
@@ -242,14 +215,14 @@ export interface TLSDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface TLSGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 TLS.TLSGetResponsesSinglePage = TLSGetResponsesSinglePage;

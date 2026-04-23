@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class TotalTLS extends APIResource {
@@ -20,7 +19,7 @@ export class TotalTLS extends APIResource {
     params: TotalTLSUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TotalTLSUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{
         result: TotalTLSUpdateResponse;
@@ -40,7 +39,7 @@ export class TotalTLS extends APIResource {
    * ```
    */
   edit(params: TotalTLSEditParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{
         result: TotalTLSEditResponse;
@@ -58,16 +57,8 @@ export class TotalTLS extends APIResource {
    * });
    * ```
    */
-  get(params?: TotalTLSGetParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse>;
-  get(
-    params: TotalTLSGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TotalTLSGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: TotalTLSGetParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/acm/total_tls`, options) as Core.APIPromise<{
         result: TotalTLSGetResponse;
@@ -144,7 +135,7 @@ export interface TotalTLSUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: If enabled, Total TLS will order a hostname specific TLS certificate
@@ -163,7 +154,7 @@ export interface TotalTLSEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: If enabled, Total TLS will order a hostname specific TLS certificate
@@ -182,7 +173,7 @@ export interface TotalTLSGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace TotalTLS {

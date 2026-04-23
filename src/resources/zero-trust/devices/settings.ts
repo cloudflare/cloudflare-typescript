@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Settings extends APIResource {
@@ -16,16 +15,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  update(params?: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  update(options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  update(
-    params: SettingUpdateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceSettings | null> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{
         result: DeviceSettings | null;
@@ -44,16 +35,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  delete(params?: SettingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  delete(
-    params: SettingDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceSettings | null> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  delete(params: SettingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
         result: DeviceSettings | null;
@@ -72,16 +55,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  edit(params?: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  edit(
-    params: SettingEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceSettings | null> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/settings`, {
         body,
@@ -101,16 +76,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null>;
-  get(
-    params: SettingGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceSettings | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
         result: DeviceSettings | null;
@@ -177,7 +144,7 @@ export interface SettingUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Sets the time limit, in seconds, that a user can use an override
@@ -235,14 +202,14 @@ export interface SettingUpdateParams {
 }
 
 export interface SettingDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SettingEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Sets the time limit, in seconds, that a user can use an override
@@ -300,7 +267,7 @@ export interface SettingEditParams {
 }
 
 export interface SettingGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Settings {

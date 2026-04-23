@@ -92,7 +92,7 @@ export class Registrar extends APIResource {
     params: RegistrarCheckParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrarCheckResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/registrar/domain-check`, {
         body,
@@ -146,7 +146,7 @@ export class Registrar extends APIResource {
     params: RegistrarSearchParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrarSearchResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/registrar/domain-search`, {
         query,
@@ -556,7 +556,7 @@ export interface RegistrarCheckParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: List of fully qualified domain names (FQDNs) to check for
@@ -576,7 +576,7 @@ export interface RegistrarSearchParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The search term to find domain suggestions. Accepts keywords,

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ContentAPI from './content';
 import { Content, ContentGetParams } from './content';
@@ -29,7 +28,7 @@ export class Snippets extends APIResource {
     params: SnippetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(
         `/zones/${zone_id}/snippets/${snippetName}`,
@@ -42,20 +41,10 @@ export class Snippets extends APIResource {
    * Fetches all snippets belonging to the zone.
    */
   list(
-    params?: SnippetListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse>;
-  list(
-    params: SnippetListParams | Core.RequestOptions = {},
+    params: SnippetListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SnippetListResponsesV4PagePaginationArray, SnippetListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/snippets`, SnippetListResponsesV4PagePaginationArray, {
       query,
       ...options,
@@ -67,19 +56,10 @@ export class Snippets extends APIResource {
    */
   delete(
     snippetName: string,
-    params?: SnippetDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetDeleteResponse | null>;
-  delete(snippetName: string, options?: Core.RequestOptions): Core.APIPromise<SnippetDeleteResponse | null>;
-  delete(
-    snippetName: string,
-    params: SnippetDeleteParams | Core.RequestOptions = {},
+    params: SnippetDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(snippetName, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{
         result: SnippetDeleteResponse | null;
@@ -92,19 +72,10 @@ export class Snippets extends APIResource {
    */
   get(
     snippetName: string,
-    params?: SnippetGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetGetResponse>;
-  get(snippetName: string, options?: Core.RequestOptions): Core.APIPromise<SnippetGetResponse>;
-  get(
-    snippetName: string,
-    params: SnippetGetParams | Core.RequestOptions = {},
+    params: SnippetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(snippetName, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{
         result: SnippetGetResponse;
@@ -184,7 +155,7 @@ export interface SnippetUpdateParams {
   /**
    * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Provide metadata about the snippet.
@@ -210,21 +181,21 @@ export interface SnippetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SnippetDeleteParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SnippetGetParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Snippets.SnippetListResponsesV4PagePaginationArray = SnippetListResponsesV4PagePaginationArray;

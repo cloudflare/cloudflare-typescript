@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -32,7 +31,7 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id = this._client.zoneId, rules } = params;
+    const { zone_id, rules } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
       WaitingRoomRulesSinglePage,
@@ -68,7 +67,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id = this._client.zoneId, rules } = params;
+    const { zone_id, rules } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
       WaitingRoomRulesSinglePage,
@@ -94,24 +93,10 @@ export class Rules extends APIResource {
   delete(
     waitingRoomId: string,
     ruleId: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule>;
-  delete(
-    waitingRoomId: string,
-    ruleId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule>;
-  delete(
-    waitingRoomId: string,
-    ruleId: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    if (isRequestOptions(params)) {
-      return this.delete(waitingRoomId, ruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`,
       WaitingRoomRulesSinglePage,
@@ -144,7 +129,7 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`,
       WaitingRoomRulesSinglePage,
@@ -168,22 +153,10 @@ export class Rules extends APIResource {
    */
   get(
     waitingRoomId: string,
-    params?: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule>;
-  get(
-    waitingRoomId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule>;
-  get(
-    waitingRoomId: string,
-    params: RuleGetParams | Core.RequestOptions = {},
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    if (isRequestOptions(params)) {
-      return this.get(waitingRoomId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
       WaitingRoomRulesSinglePage,
@@ -232,7 +205,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -268,7 +241,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -304,14 +277,14 @@ export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The action to take when the expression matches.
@@ -371,7 +344,7 @@ export interface RuleGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Rules.WaitingRoomRulesSinglePage = WaitingRoomRulesSinglePage;

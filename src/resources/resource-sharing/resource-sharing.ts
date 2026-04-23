@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as RecipientsAPI from './recipients';
 import {
@@ -65,7 +64,7 @@ export class ResourceSharing extends APIResource {
     params: ResourceSharingCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceSharingCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/shares`, { body, ...options }) as Core.APIPromise<{
         result: ResourceSharingCreateResponse;
@@ -93,7 +92,7 @@ export class ResourceSharing extends APIResource {
     params: ResourceSharingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceSharingUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/shares/${shareId}`, { body, ...options }) as Core.APIPromise<{
         result: ResourceSharingUpdateResponse;
@@ -115,20 +114,10 @@ export class ResourceSharing extends APIResource {
    * ```
    */
   list(
-    params?: ResourceSharingListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ResourceSharingListResponsesV4PagePaginationArray, ResourceSharingListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ResourceSharingListResponsesV4PagePaginationArray, ResourceSharingListResponse>;
-  list(
-    params: ResourceSharingListParams | Core.RequestOptions = {},
+    params: ResourceSharingListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ResourceSharingListResponsesV4PagePaginationArray, ResourceSharingListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/shares`,
       ResourceSharingListResponsesV4PagePaginationArray,
@@ -150,19 +139,10 @@ export class ResourceSharing extends APIResource {
    */
   delete(
     shareId: string,
-    params?: ResourceSharingDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ResourceSharingDeleteResponse>;
-  delete(shareId: string, options?: Core.RequestOptions): Core.APIPromise<ResourceSharingDeleteResponse>;
-  delete(
-    shareId: string,
-    params: ResourceSharingDeleteParams | Core.RequestOptions = {},
+    params: ResourceSharingDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceSharingDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(shareId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/shares/${shareId}`, options) as Core.APIPromise<{
         result: ResourceSharingDeleteResponse;
@@ -183,19 +163,10 @@ export class ResourceSharing extends APIResource {
    */
   get(
     shareId: string,
-    params?: ResourceSharingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ResourceSharingGetResponse>;
-  get(shareId: string, options?: Core.RequestOptions): Core.APIPromise<ResourceSharingGetResponse>;
-  get(
-    shareId: string,
-    params: ResourceSharingGetParams | Core.RequestOptions = {},
+    params: ResourceSharingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceSharingGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(shareId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/shares/${shareId}`, {
         query,
@@ -846,7 +817,7 @@ export interface ResourceSharingCreateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the share.
@@ -912,7 +883,7 @@ export interface ResourceSharingUpdateParams {
   /**
    * Path param: Account identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the share.
@@ -924,7 +895,7 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Direction to sort objects.
@@ -977,14 +948,14 @@ export interface ResourceSharingDeleteParams {
   /**
    * Account identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ResourceSharingGetParams {
   /**
    * Path param: Account identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Include recipient counts in the response.

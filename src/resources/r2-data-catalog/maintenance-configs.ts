@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class MaintenanceConfigs extends APIResource {
@@ -34,7 +33,7 @@ export class MaintenanceConfigs extends APIResource {
     params: MaintenanceConfigUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MaintenanceConfigUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2-catalog/${bucketName}/maintenance-configs`, {
         body,
@@ -58,19 +57,10 @@ export class MaintenanceConfigs extends APIResource {
    */
   get(
     bucketName: string,
-    params?: MaintenanceConfigGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MaintenanceConfigGetResponse>;
-  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<MaintenanceConfigGetResponse>;
-  get(
-    bucketName: string,
-    params: MaintenanceConfigGetParams | Core.RequestOptions = {},
+    params: MaintenanceConfigGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MaintenanceConfigGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/r2-catalog/${bucketName}/maintenance-configs`,
@@ -211,7 +201,7 @@ export interface MaintenanceConfigUpdateParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Updates compaction configuration (all fields optional).
@@ -265,7 +255,7 @@ export interface MaintenanceConfigGetParams {
   /**
    * Use this to identify the account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace MaintenanceConfigs {

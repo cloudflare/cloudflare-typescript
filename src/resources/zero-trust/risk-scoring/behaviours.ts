@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Behaviours extends APIResource {
@@ -24,7 +23,7 @@ export class Behaviours extends APIResource {
     params: BehaviourUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BehaviourUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/zt_risk_scoring/behaviors`, {
         body,
@@ -45,16 +44,8 @@ export class Behaviours extends APIResource {
    *   });
    * ```
    */
-  get(params?: BehaviourGetParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse>;
-  get(
-    params: BehaviourGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BehaviourGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: BehaviourGetParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/zt_risk_scoring/behaviors`, options) as Core.APIPromise<{
         result: BehaviourGetResponse;
@@ -95,7 +86,7 @@ export interface BehaviourUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -112,7 +103,7 @@ export namespace BehaviourUpdateParams {
 }
 
 export interface BehaviourGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Behaviours {

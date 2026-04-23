@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as VersionsAPI from './versions';
 import {
@@ -31,7 +30,7 @@ export class Workers extends APIResource {
    * ```
    */
   create(params: WorkerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/workers`, { body, ...options }) as Core.APIPromise<{
         result: Worker;
@@ -61,7 +60,7 @@ export class Workers extends APIResource {
     params: WorkerUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Worker> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/workers/${workerId}`, {
         body,
@@ -84,18 +83,10 @@ export class Workers extends APIResource {
    * ```
    */
   list(
-    params?: WorkerListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WorkersV4PagePaginationArray, Worker>;
-  list(options?: Core.RequestOptions): Core.PagePromise<WorkersV4PagePaginationArray, Worker>;
-  list(
-    params: WorkerListParams | Core.RequestOptions = {},
+    params: WorkerListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WorkersV4PagePaginationArray, Worker> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/workers/workers`, WorkersV4PagePaginationArray, {
       query,
       ...options,
@@ -115,19 +106,10 @@ export class Workers extends APIResource {
    */
   delete(
     workerId: string,
-    params?: WorkerDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkerDeleteResponse>;
-  delete(workerId: string, options?: Core.RequestOptions): Core.APIPromise<WorkerDeleteResponse>;
-  delete(
-    workerId: string,
-    params: WorkerDeleteParams | Core.RequestOptions = {},
+    params: WorkerDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WorkerDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(workerId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/workers/workers/${workerId}`, options);
   }
 
@@ -152,7 +134,7 @@ export class Workers extends APIResource {
    * ```
    */
   edit(workerId: string, params: WorkerEditParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/workers/${workerId}`, {
         body,
@@ -172,17 +154,8 @@ export class Workers extends APIResource {
    * );
    * ```
    */
-  get(workerId: string, params?: WorkerGetParams, options?: Core.RequestOptions): Core.APIPromise<Worker>;
-  get(workerId: string, options?: Core.RequestOptions): Core.APIPromise<Worker>;
-  get(
-    workerId: string,
-    params: WorkerGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Worker> {
-    if (isRequestOptions(params)) {
-      return this.get(workerId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(workerId: string, params: WorkerGetParams, options?: Core.RequestOptions): Core.APIPromise<Worker> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/workers/${workerId}`, options) as Core.APIPromise<{
         result: Worker;
@@ -543,7 +516,7 @@ export interface WorkerCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Name of the Worker.
@@ -690,7 +663,7 @@ export interface WorkerUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Name of the Worker.
@@ -837,7 +810,7 @@ export interface WorkerListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Sort direction.
@@ -854,14 +827,14 @@ export interface WorkerDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface WorkerEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Whether logpush is enabled for the Worker.
@@ -1008,7 +981,7 @@ export interface WorkerGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Workers.WorkersV4PagePaginationArray = WorkersV4PagePaginationArray;

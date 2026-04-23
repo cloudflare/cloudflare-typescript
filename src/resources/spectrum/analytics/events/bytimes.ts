@@ -9,7 +9,7 @@ export class Bytimes extends APIResource {
    * Retrieves a list of aggregate metrics grouped by time interval.
    */
   get(params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<BytimeGetResponse> {
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/spectrum/analytics/events/bytime`, {
         query,
@@ -150,7 +150,7 @@ export interface BytimeGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Used to select time series resolution.
