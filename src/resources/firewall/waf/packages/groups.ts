@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
@@ -16,22 +15,10 @@ export class Groups extends APIResource {
    */
   list(
     packageId: string,
-    params?: GroupListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GroupsV4PagePaginationArray, Group>;
-  list(
-    packageId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GroupsV4PagePaginationArray, Group>;
-  list(
-    packageId: string,
-    params: GroupListParams | Core.RequestOptions = {},
+    params: GroupListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<GroupsV4PagePaginationArray, Group> {
-    if (isRequestOptions(params)) {
-      return this.list(packageId, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/packages/${packageId}/groups`,
       GroupsV4PagePaginationArray,
@@ -54,7 +41,7 @@ export class Groups extends APIResource {
     params: GroupEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`, {
         body,
@@ -74,20 +61,10 @@ export class Groups extends APIResource {
   get(
     packageId: string,
     groupId: string,
-    params?: GroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupGetResponse>;
-  get(packageId: string, groupId: string, options?: Core.RequestOptions): Core.APIPromise<GroupGetResponse>;
-  get(
-    packageId: string,
-    groupId: string,
-    params: GroupGetParams | Core.RequestOptions = {},
+    params: GroupGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(packageId, groupId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`,
@@ -151,7 +128,7 @@ export interface GroupListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Defines the direction used to sort returned rule groups.
@@ -191,7 +168,7 @@ export interface GroupEditParams {
   /**
    * Path param: Defines an identifier of a schema.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Defines the state of the rules contained in the rule group. When
@@ -204,7 +181,7 @@ export interface GroupGetParams {
   /**
    * Defines an identifier of a schema.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Groups.GroupsV4PagePaginationArray = GroupsV4PagePaginationArray;

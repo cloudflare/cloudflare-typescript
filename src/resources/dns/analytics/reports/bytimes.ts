@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Bytimes extends APIResource {
@@ -20,16 +19,8 @@ export class Bytimes extends APIResource {
    *   });
    * ```
    */
-  get(params?: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<ByTime>;
-  get(options?: Core.RequestOptions): Core.APIPromise<ByTime>;
-  get(
-    params: BytimeGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ByTime> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+  get(params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<ByTime> {
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/dns_analytics/report/bytime`, {
         query,
@@ -156,7 +147,7 @@ export interface BytimeGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.

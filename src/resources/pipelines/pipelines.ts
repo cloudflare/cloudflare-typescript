@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as SinksAPI from './sinks';
 import {
@@ -47,7 +46,7 @@ export class Pipelines extends APIResource {
     params: PipelineCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pipelines`, { body, ...options }) as Core.APIPromise<{
         result: PipelineCreateResponse;
@@ -66,7 +65,7 @@ export class Pipelines extends APIResource {
     params: PipelineUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/pipelines/${pipelineName}`, {
         body,
@@ -81,16 +80,8 @@ export class Pipelines extends APIResource {
    *
    * @deprecated Use list_v1 instead. This endpoint will be removed in the future.
    */
-  list(params?: PipelineListParams, options?: Core.RequestOptions): Core.APIPromise<PipelineListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<PipelineListResponse>;
-  list(
-    params: PipelineListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PipelineListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: PipelineListParams, options?: Core.RequestOptions): Core.APIPromise<PipelineListResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/pipelines`, { query, ...options });
   }
 
@@ -102,19 +93,10 @@ export class Pipelines extends APIResource {
    */
   delete(
     pipelineName: string,
-    params?: PipelineDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  delete(pipelineName: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    pipelineName: string,
-    params: PipelineDeleteParams | Core.RequestOptions = {},
+    params: PipelineDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete(pipelineName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/pipelines/${pipelineName}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -137,7 +119,7 @@ export class Pipelines extends APIResource {
     params: PipelineCreateV1Params,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineCreateV1Response> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pipelines/v1/pipelines`, {
         body,
@@ -159,19 +141,10 @@ export class Pipelines extends APIResource {
    */
   deleteV1(
     pipelineId: string,
-    params?: PipelineDeleteV1Params,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PipelineDeleteV1Response>;
-  deleteV1(pipelineId: string, options?: Core.RequestOptions): Core.APIPromise<PipelineDeleteV1Response>;
-  deleteV1(
-    pipelineId: string,
-    params: PipelineDeleteV1Params | Core.RequestOptions = {},
+    params: PipelineDeleteV1Params,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineDeleteV1Response> {
-    if (isRequestOptions(params)) {
-      return this.deleteV1(pipelineId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pipelines/v1/pipelines/${pipelineId}`,
@@ -188,19 +161,10 @@ export class Pipelines extends APIResource {
    */
   get(
     pipelineName: string,
-    params?: PipelineGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PipelineGetResponse>;
-  get(pipelineName: string, options?: Core.RequestOptions): Core.APIPromise<PipelineGetResponse>;
-  get(
-    pipelineName: string,
-    params: PipelineGetParams | Core.RequestOptions = {},
+    params: PipelineGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(pipelineName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/pipelines/${pipelineName}`, options) as Core.APIPromise<{
         result: PipelineGetResponse;
@@ -221,19 +185,10 @@ export class Pipelines extends APIResource {
    */
   getV1(
     pipelineId: string,
-    params?: PipelineGetV1Params,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PipelineGetV1Response>;
-  getV1(pipelineId: string, options?: Core.RequestOptions): Core.APIPromise<PipelineGetV1Response>;
-  getV1(
-    pipelineId: string,
-    params: PipelineGetV1Params | Core.RequestOptions = {},
+    params: PipelineGetV1Params,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineGetV1Response> {
-    if (isRequestOptions(params)) {
-      return this.getV1(pipelineId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pipelines/v1/pipelines/${pipelineId}`,
@@ -256,20 +211,10 @@ export class Pipelines extends APIResource {
    * ```
    */
   listV1(
-    params?: PipelineListV1Params,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PipelineListV1ResponsesV4PagePaginationArray, PipelineListV1Response>;
-  listV1(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PipelineListV1ResponsesV4PagePaginationArray, PipelineListV1Response>;
-  listV1(
-    params: PipelineListV1Params | Core.RequestOptions = {},
+    params: PipelineListV1Params,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PipelineListV1ResponsesV4PagePaginationArray, PipelineListV1Response> {
-    if (isRequestOptions(params)) {
-      return this.listV1({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pipelines/v1/pipelines`,
       PipelineListV1ResponsesV4PagePaginationArray,
@@ -292,7 +237,7 @@ export class Pipelines extends APIResource {
     params: PipelineValidateSqlParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PipelineValidateSqlResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pipelines/v1/validate_sql`, {
         body,
@@ -1085,7 +1030,7 @@ export interface PipelineCreateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -1239,7 +1184,7 @@ export interface PipelineUpdateParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -1393,7 +1338,7 @@ export interface PipelineListParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Specifies which page to retrieve.
@@ -1415,14 +1360,14 @@ export interface PipelineDeleteParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PipelineCreateV1Params {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specifies the name of the Pipeline.
@@ -1439,35 +1384,35 @@ export interface PipelineDeleteV1Params {
   /**
    * Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PipelineGetParams {
   /**
    * Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PipelineGetV1Params {
   /**
    * Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PipelineListV1Params extends V4PagePaginationArrayParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PipelineValidateSqlParams {
   /**
    * Path param: Specifies the public ID of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specifies SQL to validate.

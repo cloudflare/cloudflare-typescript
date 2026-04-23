@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class OriginPostQuantumEncryption extends APIResource {
@@ -17,7 +16,7 @@ export class OriginPostQuantumEncryption extends APIResource {
     params: OriginPostQuantumEncryptionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginPostQuantumEncryptionUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, {
         body,
@@ -35,18 +34,10 @@ export class OriginPostQuantumEncryption extends APIResource {
    * means that PQ algorithms are not advertised.
    */
   get(
-    params?: OriginPostQuantumEncryptionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<OriginPostQuantumEncryptionGetResponse>;
-  get(
-    params: OriginPostQuantumEncryptionGetParams | Core.RequestOptions = {},
+    params: OriginPostQuantumEncryptionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
         result: OriginPostQuantumEncryptionGetResponse;
@@ -103,7 +94,7 @@ export interface OriginPostQuantumEncryptionUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Value of the Origin Post Quantum Encryption Setting.
@@ -115,7 +106,7 @@ export interface OriginPostQuantumEncryptionGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace OriginPostQuantumEncryption {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as LanguageAPI from './language/language';
 import {
@@ -33,19 +32,10 @@ export class Captions extends APIResource {
    */
   get(
     identifier: string,
-    params?: CaptionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CaptionsSinglePage, Caption>;
-  get(identifier: string, options?: Core.RequestOptions): Core.PagePromise<CaptionsSinglePage, Caption>;
-  get(
-    identifier: string,
-    params: CaptionGetParams | Core.RequestOptions = {},
+    params: CaptionGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CaptionsSinglePage, Caption> {
-    if (isRequestOptions(params)) {
-      return this.get(identifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/stream/${identifier}/captions`,
       CaptionsSinglePage,
@@ -82,7 +72,7 @@ export interface CaptionGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Captions.CaptionsSinglePage = CaptionsSinglePage;

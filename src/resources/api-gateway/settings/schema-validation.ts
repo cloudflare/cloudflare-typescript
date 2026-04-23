@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as SettingsAPI from './settings';
 
@@ -15,7 +14,7 @@ export class SchemaValidation extends APIResource {
     params: SchemaValidationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingsAPI.Settings> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/api_gateway/settings/schema_validation`, { body, ...options });
   }
 
@@ -25,18 +24,10 @@ export class SchemaValidation extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   edit(
-    params?: SchemaValidationEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings>;
-  edit(
-    params: SchemaValidationEditParams | Core.RequestOptions = {},
+    params: SchemaValidationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingsAPI.Settings> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.patch(`/zones/${zone_id}/api_gateway/settings/schema_validation`, {
       body,
       ...options,
@@ -49,18 +40,10 @@ export class SchemaValidation extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   get(
-    params?: SchemaValidationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingsAPI.Settings>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings>;
-  get(
-    params: SchemaValidationGetParams | Core.RequestOptions = {},
+    params: SchemaValidationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingsAPI.Settings> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/api_gateway/settings/schema_validation`, options);
   }
 }
@@ -69,7 +52,7 @@ export interface SchemaValidationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The default mitigation action used when there is no mitigation
@@ -101,7 +84,7 @@ export interface SchemaValidationEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The default mitigation action used when there is no mitigation
@@ -134,7 +117,7 @@ export interface SchemaValidationGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace SchemaValidation {

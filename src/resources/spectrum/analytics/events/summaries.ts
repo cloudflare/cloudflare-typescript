@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as EventsAPI from './events';
 
@@ -9,16 +8,8 @@ export class Summaries extends APIResource {
   /**
    * Retrieves a list of summarised aggregate metrics over a given time period.
    */
-  get(params?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(
-    params: SummaryGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+  get(params: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse> {
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/spectrum/analytics/events/summary`, {
         query,
@@ -159,7 +150,7 @@ export interface SummaryGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Can be used to break down the data by given attributes. Options

@@ -67,7 +67,7 @@ export class WaitingRooms extends APIResource {
    * ```
    */
   create(params: WaitingRoomCreateParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/waiting_rooms`, { body, ...options }) as Core.APIPromise<{
         result: WaitingRoom;
@@ -97,7 +97,7 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoom> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, {
         body,
@@ -131,11 +131,7 @@ export class WaitingRooms extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...query
-    } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -172,19 +168,10 @@ export class WaitingRooms extends APIResource {
    */
   delete(
     waitingRoomId: string,
-    params?: WaitingRoomDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoomDeleteResponse>;
-  delete(waitingRoomId: string, options?: Core.RequestOptions): Core.APIPromise<WaitingRoomDeleteResponse>;
-  delete(
-    waitingRoomId: string,
-    params: WaitingRoomDeleteParams | Core.RequestOptions = {},
+    params: WaitingRoomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoomDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(waitingRoomId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{
         result: WaitingRoomDeleteResponse;
@@ -214,7 +201,7 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoom> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, {
         body,
@@ -236,19 +223,10 @@ export class WaitingRooms extends APIResource {
    */
   get(
     waitingRoomId: string,
-    params?: WaitingRoomGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoom>;
-  get(waitingRoomId: string, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom>;
-  get(
-    waitingRoomId: string,
-    params: WaitingRoomGetParams | Core.RequestOptions = {},
+    params: WaitingRoomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoom> {
-    if (isRequestOptions(params)) {
-      return this.get(waitingRoomId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{
         result: WaitingRoom;
@@ -1117,7 +1095,7 @@ export interface WaitingRoomCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The host name to which the waiting room will be applied (no
@@ -1503,7 +1481,7 @@ export interface WaitingRoomUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The host name to which the waiting room will be applied (no
@@ -1903,14 +1881,14 @@ export interface WaitingRoomDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface WaitingRoomEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The host name to which the waiting room will be applied (no
@@ -2296,7 +2274,7 @@ export interface WaitingRoomGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 WaitingRooms.WaitingRoomsV4PagePaginationArray = WaitingRoomsV4PagePaginationArray;

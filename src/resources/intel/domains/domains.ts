@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as BulksAPI from './bulks';
 import { BulkGetParams, BulkGetResponse, Bulks } from './bulks';
@@ -19,16 +18,8 @@ export class Domains extends APIResource {
    * });
    * ```
    */
-  get(params?: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain>;
-  get(options?: Core.RequestOptions): Core.APIPromise<Domain>;
-  get(
-    params: DomainGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Domain> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/domain`, { query, ...options }) as Core.APIPromise<{
         result: Domain;
@@ -156,7 +147,7 @@ export interface DomainGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as SettingsAPI from '../zones/settings';
 
@@ -27,7 +26,7 @@ export class PageRules extends APIResource {
    * ```
    */
   create(params: PageRuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{
         result: PageRule;
@@ -64,7 +63,7 @@ export class PageRules extends APIResource {
     params: PageRuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
         result: PageRule;
@@ -82,16 +81,8 @@ export class PageRules extends APIResource {
    * });
    * ```
    */
-  list(params?: PageRuleListParams, options?: Core.RequestOptions): Core.APIPromise<PageRuleListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<PageRuleListResponse>;
-  list(
-    params: PageRuleListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageRuleListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+  list(params: PageRuleListParams, options?: Core.RequestOptions): Core.APIPromise<PageRuleListResponse> {
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/pagerules`, { query, ...options }) as Core.APIPromise<{
         result: PageRuleListResponse;
@@ -112,19 +103,10 @@ export class PageRules extends APIResource {
    */
   delete(
     pageruleId: string,
-    params?: PageRuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageRuleDeleteResponse | null>;
-  delete(pageruleId: string, options?: Core.RequestOptions): Core.APIPromise<PageRuleDeleteResponse | null>;
-  delete(
-    pageruleId: string,
-    params: PageRuleDeleteParams | Core.RequestOptions = {},
+    params: PageRuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRuleDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(pageruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
         result: PageRuleDeleteResponse | null;
@@ -148,7 +130,7 @@ export class PageRules extends APIResource {
     params: PageRuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/pagerules/${pageruleId}`, {
         body,
@@ -170,19 +152,10 @@ export class PageRules extends APIResource {
    */
   get(
     pageruleId: string,
-    params?: PageRuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageRule>;
-  get(pageruleId: string, options?: Core.RequestOptions): Core.APIPromise<PageRule>;
-  get(
-    pageruleId: string,
-    params: PageRuleGetParams | Core.RequestOptions = {},
+    params: PageRuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageRule> {
-    if (isRequestOptions(params)) {
-      return this.get(pageruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
         result: PageRule;
@@ -687,7 +660,7 @@ export interface PageRuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The set of actions to perform if the targets of this rule match the
@@ -1094,7 +1067,7 @@ export interface PageRuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The set of actions to perform if the targets of this rule match the
@@ -1501,7 +1474,7 @@ export interface PageRuleListParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The direction used to sort returned Page Rules.
@@ -1529,14 +1502,14 @@ export interface PageRuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface PageRuleEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The set of actions to perform if the targets of this rule match the
@@ -1943,7 +1916,7 @@ export interface PageRuleGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace PageRules {

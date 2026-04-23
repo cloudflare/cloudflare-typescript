@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ProjectsAPI from '../projects';
 import { DeploymentsV4PagePaginationArray } from '../projects';
@@ -30,7 +29,7 @@ export class Deployments extends APIResource {
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectsAPI.Deployment> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
@@ -55,22 +54,10 @@ export class Deployments extends APIResource {
    */
   list(
     projectName: string,
-    params?: DeploymentListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeploymentsV4PagePaginationArray, ProjectsAPI.Deployment>;
-  list(
-    projectName: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeploymentsV4PagePaginationArray, ProjectsAPI.Deployment>;
-  list(
-    projectName: string,
-    params: DeploymentListParams | Core.RequestOptions = {},
+    params: DeploymentListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeploymentsV4PagePaginationArray, ProjectsAPI.Deployment> {
-    if (isRequestOptions(params)) {
-      return this.list(projectName, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pages/projects/${projectName}/deployments`,
       DeploymentsV4PagePaginationArray,
@@ -94,24 +81,10 @@ export class Deployments extends APIResource {
   delete(
     projectName: string,
     deploymentId: string,
-    params?: DeploymentDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentDeleteResponse | null>;
-  delete(
-    projectName: string,
-    deploymentId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentDeleteResponse | null>;
-  delete(
-    projectName: string,
-    deploymentId: string,
-    params: DeploymentDeleteParams | Core.RequestOptions = {},
+    params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(projectName, deploymentId, {}, params);
-    }
-    const { account_id = this._client.accountId, force } = params;
+    const { account_id, force } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
@@ -136,24 +109,10 @@ export class Deployments extends APIResource {
   get(
     projectName: string,
     deploymentId: string,
-    params?: DeploymentGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.Deployment>;
-  get(
-    projectName: string,
-    deploymentId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.Deployment>;
-  get(
-    projectName: string,
-    deploymentId: string,
-    params: DeploymentGetParams | Core.RequestOptions = {},
+    params: DeploymentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectsAPI.Deployment> {
-    if (isRequestOptions(params)) {
-      return this.get(projectName, deploymentId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
@@ -178,24 +137,10 @@ export class Deployments extends APIResource {
   retry(
     projectName: string,
     deploymentId: string,
-    params?: DeploymentRetryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.Deployment>;
-  retry(
-    projectName: string,
-    deploymentId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.Deployment>;
-  retry(
-    projectName: string,
-    deploymentId: string,
-    params: DeploymentRetryParams | Core.RequestOptions = {},
+    params: DeploymentRetryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectsAPI.Deployment> {
-    if (isRequestOptions(params)) {
-      return this.retry(projectName, deploymentId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/retry`,
@@ -221,24 +166,10 @@ export class Deployments extends APIResource {
   rollback(
     projectName: string,
     deploymentId: string,
-    params?: DeploymentRollbackParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.Deployment>;
-  rollback(
-    projectName: string,
-    deploymentId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectsAPI.Deployment>;
-  rollback(
-    projectName: string,
-    deploymentId: string,
-    params: DeploymentRollbackParams | Core.RequestOptions = {},
+    params: DeploymentRollbackParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectsAPI.Deployment> {
-    if (isRequestOptions(params)) {
-      return this.rollback(projectName, deploymentId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}/rollback`,
@@ -254,7 +185,7 @@ export interface DeploymentCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Headers configuration file for the deployment.
@@ -333,7 +264,7 @@ export interface DeploymentListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: What type of deployments to fetch.
@@ -345,7 +276,7 @@ export interface DeploymentDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Allow deletion of aliased non-production deployments when a normal
@@ -358,21 +289,21 @@ export interface DeploymentGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DeploymentRetryParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DeploymentRollbackParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Deployments.History = History;

@@ -135,8 +135,7 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(datasetId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

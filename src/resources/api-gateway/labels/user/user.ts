@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ResourcesAPI from './resources/resources';
 import { Resources } from './resources/resources';
@@ -26,7 +25,7 @@ export class User extends APIResource {
     params: UserUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/api_gateway/labels/user/${name}`, {
         body,
@@ -48,19 +47,10 @@ export class User extends APIResource {
    */
   delete(
     name: string,
-    params?: UserDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UserDeleteResponse>;
-  delete(name: string, options?: Core.RequestOptions): Core.APIPromise<UserDeleteResponse>;
-  delete(
-    name: string,
-    params: UserDeleteParams | Core.RequestOptions = {},
+    params: UserDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(name, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/api_gateway/labels/user/${name}`, options) as Core.APIPromise<{
         result: UserDeleteResponse;
@@ -88,7 +78,7 @@ export class User extends APIResource {
     params: UserBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UserBulkCreateResponsesSinglePage, UserBulkCreateResponse> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/labels/user`,
       UserBulkCreateResponsesSinglePage,
@@ -110,20 +100,10 @@ export class User extends APIResource {
    * ```
    */
   bulkDelete(
-    params?: UserBulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UserBulkDeleteResponsesSinglePage, UserBulkDeleteResponse>;
-  bulkDelete(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UserBulkDeleteResponsesSinglePage, UserBulkDeleteResponse>;
-  bulkDelete(
-    params: UserBulkDeleteParams | Core.RequestOptions = {},
+    params: UserBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UserBulkDeleteResponsesSinglePage, UserBulkDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.bulkDelete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/labels/user`,
       UserBulkDeleteResponsesSinglePage,
@@ -147,7 +127,7 @@ export class User extends APIResource {
     params: UserEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/api_gateway/labels/user/${name}`, {
         body,
@@ -167,17 +147,8 @@ export class User extends APIResource {
    * );
    * ```
    */
-  get(name: string, params?: UserGetParams, options?: Core.RequestOptions): Core.APIPromise<UserGetResponse>;
-  get(name: string, options?: Core.RequestOptions): Core.APIPromise<UserGetResponse>;
-  get(
-    name: string,
-    params: UserGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UserGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(name, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+  get(name: string, params: UserGetParams, options?: Core.RequestOptions): Core.APIPromise<UserGetResponse> {
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/labels/user/${name}`, {
         query,
@@ -362,7 +333,7 @@ export interface UserUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The description of the label
@@ -379,14 +350,14 @@ export interface UserDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface UserBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -417,14 +388,14 @@ export interface UserBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface UserEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The description of the label
@@ -441,7 +412,7 @@ export interface UserGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Include `mapped_resources` for each label

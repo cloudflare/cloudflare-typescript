@@ -29,7 +29,7 @@ export class Entries extends APIResource {
     params: EntryCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryCreateResponse> {
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/versions/${version}/entries/${entryId}`,
@@ -58,7 +58,7 @@ export interface EntryCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Entries {

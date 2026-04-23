@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -20,18 +19,10 @@ export class Regions extends APIResource {
    * ```
    */
   list(
-    params?: RegionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RegionListResponsesSinglePage, RegionListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RegionListResponsesSinglePage, RegionListResponse>;
-  list(
-    params: RegionListParams | Core.RequestOptions = {},
+    params: RegionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RegionListResponsesSinglePage, RegionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/regional_hostnames/regions`,
       RegionListResponsesSinglePage,
@@ -58,7 +49,7 @@ export interface RegionListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Regions.RegionListResponsesSinglePage = RegionListResponsesSinglePage;

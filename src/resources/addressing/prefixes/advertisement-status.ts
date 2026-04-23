@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class AdvertisementStatus extends APIResource {
@@ -18,7 +17,7 @@ export class AdvertisementStatus extends APIResource {
     params: AdvertisementStatusEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AdvertisementStatusEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/status`, {
         body,
@@ -37,19 +36,10 @@ export class AdvertisementStatus extends APIResource {
    */
   get(
     prefixId: string,
-    params?: AdvertisementStatusGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AdvertisementStatusGetResponse>;
-  get(prefixId: string, options?: Core.RequestOptions): Core.APIPromise<AdvertisementStatusGetResponse>;
-  get(
-    prefixId: string,
-    params: AdvertisementStatusGetParams | Core.RequestOptions = {},
+    params: AdvertisementStatusGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AdvertisementStatusGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(prefixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/status`,
@@ -91,7 +81,7 @@ export interface AdvertisementStatusEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Advertisement status of the prefix. If `true`, the BGP route for the
@@ -104,7 +94,7 @@ export interface AdvertisementStatusGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace AdvertisementStatus {

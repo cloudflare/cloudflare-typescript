@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ManagedTransforms extends APIResource {
@@ -9,18 +8,10 @@ export class ManagedTransforms extends APIResource {
    * Fetches a list of all Managed Transforms.
    */
   list(
-    params?: ManagedTransformListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ManagedTransformListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ManagedTransformListResponse>;
-  list(
-    params: ManagedTransformListParams | Core.RequestOptions = {},
+    params: ManagedTransformListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedTransformListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/managed_headers`, options) as Core.APIPromise<{
         result: ManagedTransformListResponse;
@@ -31,16 +22,8 @@ export class ManagedTransforms extends APIResource {
   /**
    * Disables all Managed Transforms.
    */
-  delete(params?: ManagedTransformDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    params: ManagedTransformDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  delete(params: ManagedTransformDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/managed_headers`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -54,7 +37,7 @@ export class ManagedTransforms extends APIResource {
     params: ManagedTransformEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedTransformEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/managed_headers`, { body, ...options }) as Core.APIPromise<{
         result: ManagedTransformEditResponse;
@@ -205,21 +188,21 @@ export interface ManagedTransformListParams {
   /**
    * The unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface ManagedTransformDeleteParams {
   /**
    * The unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface ManagedTransformEditParams {
   /**
    * Path param: The unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The list of Managed Request Transforms.

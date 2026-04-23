@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { type Response } from '../../../_shims/index';
 
@@ -21,17 +20,8 @@ export class Download extends APIResource {
    * console.log(content);
    * ```
    */
-  get(pcapId: string, params?: DownloadGetParams, options?: Core.RequestOptions): Core.APIPromise<Response>;
-  get(pcapId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
-  get(
-    pcapId: string,
-    params: DownloadGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
-    if (isRequestOptions(params)) {
-      return this.get(pcapId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(pcapId: string, params: DownloadGetParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/pcaps/${pcapId}/download`, {
       ...options,
       headers: { Accept: 'application/vnd.tcpdump.pcap', ...options?.headers },
@@ -44,7 +34,7 @@ export interface DownloadGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Download {

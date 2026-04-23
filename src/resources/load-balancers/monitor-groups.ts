@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -28,7 +27,7 @@ export class MonitorGroups extends APIResource {
    * ```
    */
   create(params: MonitorGroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<MonitorGroup> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/monitor_groups`, {
         body,
@@ -66,7 +65,7 @@ export class MonitorGroups extends APIResource {
     params: MonitorGroupUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MonitorGroup> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/load_balancers/monitor_groups/${monitorGroupId}`, {
         body,
@@ -89,18 +88,10 @@ export class MonitorGroups extends APIResource {
    * ```
    */
   list(
-    params?: MonitorGroupListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MonitorGroupsSinglePage, MonitorGroup>;
-  list(options?: Core.RequestOptions): Core.PagePromise<MonitorGroupsSinglePage, MonitorGroup>;
-  list(
-    params: MonitorGroupListParams | Core.RequestOptions = {},
+    params: MonitorGroupListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MonitorGroupsSinglePage, MonitorGroup> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/load_balancers/monitor_groups`,
       MonitorGroupsSinglePage,
@@ -122,19 +113,10 @@ export class MonitorGroups extends APIResource {
    */
   delete(
     monitorGroupId: string,
-    params?: MonitorGroupDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MonitorGroup>;
-  delete(monitorGroupId: string, options?: Core.RequestOptions): Core.APIPromise<MonitorGroup>;
-  delete(
-    monitorGroupId: string,
-    params: MonitorGroupDeleteParams | Core.RequestOptions = {},
+    params: MonitorGroupDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MonitorGroup> {
-    if (isRequestOptions(params)) {
-      return this.delete(monitorGroupId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/load_balancers/monitor_groups/${monitorGroupId}`,
@@ -172,7 +154,7 @@ export class MonitorGroups extends APIResource {
     params: MonitorGroupEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MonitorGroup> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/load_balancers/monitor_groups/${monitorGroupId}`, {
         body,
@@ -195,19 +177,10 @@ export class MonitorGroups extends APIResource {
    */
   get(
     monitorGroupId: string,
-    params?: MonitorGroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MonitorGroup>;
-  get(monitorGroupId: string, options?: Core.RequestOptions): Core.APIPromise<MonitorGroup>;
-  get(
-    monitorGroupId: string,
-    params: MonitorGroupGetParams | Core.RequestOptions = {},
+    params: MonitorGroupGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MonitorGroup> {
-    if (isRequestOptions(params)) {
-      return this.get(monitorGroupId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/monitor_groups/${monitorGroupId}`,
@@ -286,7 +259,7 @@ export interface MonitorGroupCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The ID of the Monitor Group to use for checking the health of
@@ -334,7 +307,7 @@ export interface MonitorGroupUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The ID of the Monitor Group to use for checking the health of
@@ -382,21 +355,21 @@ export interface MonitorGroupListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface MonitorGroupDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface MonitorGroupEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The ID of the Monitor Group to use for checking the health of
@@ -444,7 +417,7 @@ export interface MonitorGroupGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 MonitorGroups.MonitorGroupsSinglePage = MonitorGroupsSinglePage;

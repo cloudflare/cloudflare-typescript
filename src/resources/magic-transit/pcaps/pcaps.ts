@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
@@ -37,7 +36,7 @@ export class PCAPs extends APIResource {
    * ```
    */
   create(params: PCAPCreateParams, options?: Core.RequestOptions): Core.APIPromise<PCAPCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps`, { body, ...options }) as Core.APIPromise<{
         result: PCAPCreateResponse;
@@ -59,18 +58,10 @@ export class PCAPs extends APIResource {
    * ```
    */
   list(
-    params?: PCAPListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PCAPListResponsesSinglePage, PCAPListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<PCAPListResponsesSinglePage, PCAPListResponse>;
-  list(
-    params: PCAPListParams | Core.RequestOptions = {},
+    params: PCAPListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PCAPListResponsesSinglePage, PCAPListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/pcaps`, PCAPListResponsesSinglePage, options);
   }
 
@@ -87,19 +78,10 @@ export class PCAPs extends APIResource {
    */
   get(
     pcapId: string,
-    params?: PCAPGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PCAPGetResponse>;
-  get(pcapId: string, options?: Core.RequestOptions): Core.APIPromise<PCAPGetResponse>;
-  get(
-    pcapId: string,
-    params: PCAPGetParams | Core.RequestOptions = {},
+    params: PCAPGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PCAPGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(pcapId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/pcaps/${pcapId}`, options) as Core.APIPromise<{
         result: PCAPGetResponse;
@@ -118,17 +100,8 @@ export class PCAPs extends APIResource {
    * );
    * ```
    */
-  stop(pcapId: string, params?: PCAPStopParams, options?: Core.RequestOptions): Core.APIPromise<void>;
-  stop(pcapId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  stop(
-    pcapId: string,
-    params: PCAPStopParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.stop(pcapId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  stop(pcapId: string, params: PCAPStopParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id } = params;
     return this._client.put(`/accounts/${account_id}/pcaps/${pcapId}/stop`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -514,7 +487,7 @@ export declare namespace PCAPCreateParams {
     /**
      * Path param: Identifier.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: The limit of packets contained in a packet capture.
@@ -555,7 +528,7 @@ export declare namespace PCAPCreateParams {
     /**
      * Path param: Identifier.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: The name of the data center used for the packet capture. This can be
@@ -609,21 +582,21 @@ export interface PCAPListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PCAPGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PCAPStopParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 PCAPs.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;

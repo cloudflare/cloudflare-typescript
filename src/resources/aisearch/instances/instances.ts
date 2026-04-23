@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as JobsAPI from './jobs';
 import {
@@ -37,7 +36,7 @@ export class Instances extends APIResource {
     params: InstanceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/instances`, {
         body,
@@ -59,19 +58,10 @@ export class Instances extends APIResource {
    */
   update(
     id: string,
-    params?: InstanceUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceUpdateResponse>;
-  update(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceUpdateResponse>;
-  update(
-    id: string,
-    params: InstanceUpdateParams | Core.RequestOptions = {},
+    params: InstanceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-search/instances/${id}`, {
         body,
@@ -94,20 +84,10 @@ export class Instances extends APIResource {
    * ```
    */
   list(
-    params?: InstanceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
-  list(
-    params: InstanceListParams | Core.RequestOptions = {},
+    params: InstanceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-search/instances`,
       InstanceListResponsesV4PagePaginationArray,
@@ -128,19 +108,10 @@ export class Instances extends APIResource {
    */
   delete(
     id: string,
-    params?: InstanceDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceDeleteResponse>;
-  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceDeleteResponse>;
-  delete(
-    id: string,
-    params: InstanceDeleteParams | Core.RequestOptions = {},
+    params: InstanceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/ai-search/instances/${id}`, options) as Core.APIPromise<{
         result: InstanceDeleteResponse;
@@ -169,7 +140,7 @@ export class Instances extends APIResource {
     params: InstanceChatCompletionsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceChatCompletionsResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/chat/completions`, {
       body,
       ...options,
@@ -189,19 +160,10 @@ export class Instances extends APIResource {
    */
   read(
     id: string,
-    params?: InstanceReadParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceReadResponse>;
-  read(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceReadResponse>;
-  read(
-    id: string,
-    params: InstanceReadParams | Core.RequestOptions = {},
+    params: InstanceReadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceReadResponse> {
-    if (isRequestOptions(params)) {
-      return this.read(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai-search/instances/${id}`, options) as Core.APIPromise<{
         result: InstanceReadResponse;
@@ -223,19 +185,10 @@ export class Instances extends APIResource {
    */
   search(
     id: string,
-    params?: InstanceSearchParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceSearchResponse>;
-  search(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceSearchResponse>;
-  search(
-    id: string,
-    params: InstanceSearchParams | Core.RequestOptions = {},
+    params: InstanceSearchParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceSearchResponse> {
-    if (isRequestOptions(params)) {
-      return this.search(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/search`, {
         body,
@@ -257,19 +210,10 @@ export class Instances extends APIResource {
    */
   stats(
     id: string,
-    params?: InstanceStatsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceStatsResponse>;
-  stats(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceStatsResponse>;
-  stats(
-    id: string,
-    params: InstanceStatsParams | Core.RequestOptions = {},
+    params: InstanceStatsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceStatsResponse> {
-    if (isRequestOptions(params)) {
-      return this.stats(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-search/instances/${id}/stats`,
@@ -2425,7 +2369,7 @@ export interface InstanceCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -2876,7 +2820,7 @@ export interface InstanceUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -3367,7 +3311,7 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -3391,14 +3335,14 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
 }
 
 export interface InstanceDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface InstanceChatCompletionsParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -3578,14 +3522,14 @@ export namespace InstanceChatCompletionsParams {
 }
 
 export interface InstanceReadParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface InstanceSearchParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -3729,7 +3673,7 @@ export namespace InstanceSearchParams {
 }
 
 export interface InstanceStatsParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;

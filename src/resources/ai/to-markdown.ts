@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -10,20 +9,10 @@ export class ToMarkdown extends APIResource {
    * Lists all file formats supported for conversion to Markdown.
    */
   supported(
-    params?: ToMarkdownSupportedParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ToMarkdownSupportedResponsesSinglePage, ToMarkdownSupportedResponse>;
-  supported(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ToMarkdownSupportedResponsesSinglePage, ToMarkdownSupportedResponse>;
-  supported(
-    params: ToMarkdownSupportedParams | Core.RequestOptions = {},
+    params: ToMarkdownSupportedParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ToMarkdownSupportedResponsesSinglePage, ToMarkdownSupportedResponse> {
-    if (isRequestOptions(params)) {
-      return this.supported({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/tomarkdown/supported`,
       ToMarkdownSupportedResponsesSinglePage,
@@ -38,7 +27,7 @@ export class ToMarkdown extends APIResource {
     params: ToMarkdownTransformParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
-    const { account_id = this._client.accountId, file } = params;
+    const { account_id, file } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai/tomarkdown`,
       ToMarkdownTransformResponsesSinglePage,
@@ -70,14 +59,14 @@ export interface ToMarkdownTransformResponse {
 }
 
 export interface ToMarkdownSupportedParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ToMarkdownTransformParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

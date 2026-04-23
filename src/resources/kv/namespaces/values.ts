@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { type Response } from '../../../_shims/index';
 
@@ -34,7 +33,7 @@ export class Values extends APIResource {
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValueUpdateResponse | null> {
-    const { account_id = this._client.accountId, expiration, expiration_ttl, ...body } = params;
+    const { account_id, expiration, expiration_ttl, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
@@ -64,24 +63,10 @@ export class Values extends APIResource {
   delete(
     namespaceId: string,
     keyName: string,
-    params?: ValueDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueDeleteResponse | null>;
-  delete(
-    namespaceId: string,
-    keyName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueDeleteResponse | null>;
-  delete(
-    namespaceId: string,
-    keyName: string,
-    params: ValueDeleteParams | Core.RequestOptions = {},
+    params: ValueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValueDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(namespaceId, keyName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
@@ -112,20 +97,10 @@ export class Values extends APIResource {
   get(
     namespaceId: string,
     keyName: string,
-    params?: ValueGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  get(namespaceId: string, keyName: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
-  get(
-    namespaceId: string,
-    keyName: string,
-    params: ValueGetParams | Core.RequestOptions = {},
+    params: ValueGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
-    if (isRequestOptions(params)) {
-      return this.get(namespaceId, keyName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
       {
@@ -145,7 +120,7 @@ export interface ValueUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
@@ -173,14 +148,14 @@ export interface ValueDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ValueGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Values {

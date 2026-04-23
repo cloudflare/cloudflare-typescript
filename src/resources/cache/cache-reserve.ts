@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class CacheReserveResource extends APIResource {
@@ -23,7 +22,7 @@ export class CacheReserveResource extends APIResource {
     params: CacheReserveClearParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CacheReserveClearResponse> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/cache/cache_reserve_clear`, {
         body: body,
@@ -52,7 +51,7 @@ export class CacheReserveResource extends APIResource {
     params: CacheReserveEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CacheReserveEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/cache_reserve`, { body, ...options }) as Core.APIPromise<{
         result: CacheReserveEditResponse;
@@ -76,18 +75,10 @@ export class CacheReserveResource extends APIResource {
    * ```
    */
   get(
-    params?: CacheReserveGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<CacheReserveGetResponse>;
-  get(
-    params: CacheReserveGetParams | Core.RequestOptions = {},
+    params: CacheReserveGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CacheReserveGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/cache_reserve`, options) as Core.APIPromise<{
         result: CacheReserveGetResponse;
@@ -109,18 +100,10 @@ export class CacheReserveResource extends APIResource {
    * ```
    */
   status(
-    params?: CacheReserveStatusParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveStatusResponse>;
-  status(options?: Core.RequestOptions): Core.APIPromise<CacheReserveStatusResponse>;
-  status(
-    params: CacheReserveStatusParams | Core.RequestOptions = {},
+    params: CacheReserveStatusParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CacheReserveStatusResponse> {
-    if (isRequestOptions(params)) {
-      return this.status({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
         result: CacheReserveStatusResponse;
@@ -258,7 +241,7 @@ export interface CacheReserveClearParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -270,7 +253,7 @@ export interface CacheReserveEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Value of the Cache Reserve zone setting.
@@ -282,14 +265,14 @@ export interface CacheReserveGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface CacheReserveStatusParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace CacheReserveResource {

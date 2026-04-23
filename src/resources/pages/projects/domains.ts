@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -25,7 +24,7 @@ export class Domains extends APIResource {
     params: DomainCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
         body,
@@ -50,22 +49,10 @@ export class Domains extends APIResource {
    */
   list(
     projectName: string,
-    params?: DomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse>;
-  list(
-    projectName: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse>;
-  list(
-    projectName: string,
-    params: DomainListParams | Core.RequestOptions = {},
+    params: DomainListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(projectName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/pages/projects/${projectName}/domains`,
       DomainListResponsesSinglePage,
@@ -88,24 +75,10 @@ export class Domains extends APIResource {
   delete(
     projectName: string,
     domainName: string,
-    params?: DomainDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainDeleteResponse | null>;
-  delete(
-    projectName: string,
-    domainName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainDeleteResponse | null>;
-  delete(
-    projectName: string,
-    domainName: string,
-    params: DomainDeleteParams | Core.RequestOptions = {},
+    params: DomainDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(projectName, domainName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
@@ -129,24 +102,10 @@ export class Domains extends APIResource {
   edit(
     projectName: string,
     domainName: string,
-    params?: DomainEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainEditResponse>;
-  edit(
-    projectName: string,
-    domainName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainEditResponse>;
-  edit(
-    projectName: string,
-    domainName: string,
-    params: DomainEditParams | Core.RequestOptions = {},
+    params: DomainEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit(projectName, domainName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
@@ -170,24 +129,10 @@ export class Domains extends APIResource {
   get(
     projectName: string,
     domainName: string,
-    params?: DomainGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse>;
-  get(
-    projectName: string,
-    domainName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse>;
-  get(
-    projectName: string,
-    domainName: string,
-    params: DomainGetParams | Core.RequestOptions = {},
+    params: DomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(projectName, domainName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
@@ -377,7 +322,7 @@ export interface DomainCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The domain name.
@@ -389,28 +334,28 @@ export interface DomainListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DomainDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DomainEditParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DomainGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Domains.DomainListResponsesSinglePage = DomainListResponsesSinglePage;

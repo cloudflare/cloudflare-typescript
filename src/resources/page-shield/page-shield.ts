@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ConnectionsAPI from './connections';
 import {
@@ -62,18 +61,10 @@ export class PageShield extends APIResource {
    * ```
    */
   update(
-    params?: PageShieldUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.APIPromise<PageShieldUpdateResponse>;
-  update(
-    params: PageShieldUpdateParams | Core.RequestOptions = {},
+    params: PageShieldUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageShieldUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/page_shield`, { body, ...options }) as Core.APIPromise<{
         result: PageShieldUpdateResponse;
@@ -91,16 +82,8 @@ export class PageShield extends APIResource {
    * });
    * ```
    */
-  get(params?: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<Setting | null>;
-  get(
-    params: PageShieldGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Setting | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting | null> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{
         result: Setting | null;
@@ -159,7 +142,7 @@ export interface PageShieldUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: When true, indicates that Page Shield is enabled.
@@ -183,7 +166,7 @@ export interface PageShieldGetParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 PageShield.Policies = Policies;

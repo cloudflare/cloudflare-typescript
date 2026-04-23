@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Miscategorizations extends APIResource {
@@ -17,18 +16,10 @@ export class Miscategorizations extends APIResource {
    * ```
    */
   create(
-    params?: MiscategorizationCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MiscategorizationCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<MiscategorizationCreateResponse>;
-  create(
-    params: MiscategorizationCreateParams | Core.RequestOptions = {},
+    params: MiscategorizationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MiscategorizationCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/intel/miscategorization`, { body, ...options });
   }
 }
@@ -82,7 +73,7 @@ export interface MiscategorizationCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Content category IDs to add.

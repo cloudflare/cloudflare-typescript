@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SplitTunnelIncludesSinglePage } from '../policies';
@@ -27,7 +26,7 @@ export class Includes extends APIResource {
     params: IncludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/include`,
       SplitTunnelIncludesSinglePage,
@@ -49,20 +48,10 @@ export class Includes extends APIResource {
    * ```
    */
   get(
-    params?: IncludeGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude>;
-  get(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude>;
-  get(
-    params: IncludeGetParams | Core.RequestOptions = {},
+    params: IncludeGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelIncludesSinglePage, PoliciesAPI.SplitTunnelInclude> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/include`,
       SplitTunnelIncludesSinglePage,
@@ -75,7 +64,7 @@ export interface IncludeUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -84,7 +73,7 @@ export interface IncludeUpdateParams {
 }
 
 export interface IncludeGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Includes {

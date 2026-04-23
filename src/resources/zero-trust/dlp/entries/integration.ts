@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from '../profiles/custom';
 import { SinglePage } from '../../../../pagination';
@@ -25,7 +24,7 @@ export class Integration extends APIResource {
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries/integration`, {
         body,
@@ -51,7 +50,7 @@ export class Integration extends APIResource {
     params: IntegrationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/integration/${entryId}`, {
         body,
@@ -74,20 +73,10 @@ export class Integration extends APIResource {
    * ```
    */
   list(
-    params?: IntegrationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse>;
-  list(
-    params: IntegrationListParams | Core.RequestOptions = {},
+    params: IntegrationListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       IntegrationListResponsesSinglePage,
@@ -110,19 +99,10 @@ export class Integration extends APIResource {
    */
   delete(
     entryId: string,
-    params?: IntegrationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse | null>;
-  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationDeleteResponse | null>;
-  delete(
-    entryId: string,
-    params: IntegrationDeleteParams | Core.RequestOptions = {},
+    params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(entryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/entries/integration/${entryId}`,
@@ -145,19 +125,10 @@ export class Integration extends APIResource {
    */
   get(
     entryId: string,
-    params?: IntegrationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationGetResponse>;
-  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<IntegrationGetResponse>;
-  get(
-    entryId: string,
-    params: IntegrationGetParams | Core.RequestOptions = {},
+    params: IntegrationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(entryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: IntegrationGetResponse;
@@ -598,7 +569,7 @@ export interface IntegrationCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -621,7 +592,7 @@ export interface IntegrationUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -630,15 +601,15 @@ export interface IntegrationUpdateParams {
 }
 
 export interface IntegrationListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IntegrationGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Integration.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;

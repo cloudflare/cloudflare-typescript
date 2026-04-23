@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CursorPaginationAfter, type CursorPaginationAfterParams } from '../../pagination';
 
@@ -10,20 +9,10 @@ export class Keys extends APIResource {
    * Lists all distinct tag keys used across resources in an account.
    */
   list(
-    params?: KeyListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<KeyListResponsesCursorPaginationAfter, KeyListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<KeyListResponsesCursorPaginationAfter, KeyListResponse>;
-  list(
-    params: KeyListParams | Core.RequestOptions = {},
+    params: KeyListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<KeyListResponsesCursorPaginationAfter, KeyListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/tags/keys`,
       KeyListResponsesCursorPaginationAfter,
@@ -40,7 +29,7 @@ export interface KeyListParams extends CursorPaginationAfterParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Keys.KeyListResponsesCursorPaginationAfter = KeyListResponsesCursorPaginationAfter;

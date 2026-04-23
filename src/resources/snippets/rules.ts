@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Rules extends APIResource {
@@ -9,7 +8,7 @@ export class Rules extends APIResource {
    * Updates all snippet rules belonging to the zone.
    */
   update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/snippets/snippet_rules`, { body, ...options }) as Core.APIPromise<{
         result: RuleUpdateResponse;
@@ -20,16 +19,8 @@ export class Rules extends APIResource {
   /**
    * Fetches all snippet rules belonging to the zone.
    */
-  list(params?: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<RuleListResponse>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  list(params: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/snippets/snippet_rules`, options) as Core.APIPromise<{
         result: RuleListResponse;
@@ -40,16 +31,8 @@ export class Rules extends APIResource {
   /**
    * Deletes all snippet rules belonging to the zone.
    */
-  delete(params?: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>;
-  delete(
-    params: RuleDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  delete(params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/snippets/snippet_rules`, options) as Core.APIPromise<{
         result: RuleDeleteResponse;
@@ -77,7 +60,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Lists snippet rules.
@@ -116,14 +99,14 @@ export interface RuleListParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleDeleteParams {
   /**
    * Use this field to specify the unique ID of the zone.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Rules {

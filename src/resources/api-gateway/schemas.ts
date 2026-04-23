@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Schemas extends APIResource {
@@ -15,16 +14,8 @@ export class Schemas extends APIResource {
    * });
    * ```
    */
-  list(params?: SchemaListParams, options?: Core.RequestOptions): Core.APIPromise<SchemaListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SchemaListResponse>;
-  list(
-    params: SchemaListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SchemaListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+  list(params: SchemaListParams, options?: Core.RequestOptions): Core.APIPromise<SchemaListResponse> {
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/schemas`, { query, ...options }) as Core.APIPromise<{
         result: SchemaListResponse;
@@ -43,7 +34,7 @@ export interface SchemaListParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Add feature(s) to the results. The feature name that is given here

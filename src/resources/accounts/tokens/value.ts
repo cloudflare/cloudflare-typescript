@@ -25,7 +25,7 @@ export class Value extends APIResource {
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Shared.TokenValue> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/tokens/${tokenId}/value`, {
         body: body,
@@ -39,7 +39,7 @@ export interface ValueUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

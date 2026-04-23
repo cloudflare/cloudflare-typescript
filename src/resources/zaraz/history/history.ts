@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ConfigAPI from '../config';
 import * as ConfigsAPI from './configs';
@@ -26,7 +25,7 @@ export class History extends APIResource {
     params: HistoryUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigAPI.Configuration> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return (
       this._client.put(`/zones/${zone_id}/settings/zaraz/history`, {
         body: body,
@@ -49,18 +48,10 @@ export class History extends APIResource {
    * ```
    */
   list(
-    params?: HistoryListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HistoryListResponsesSinglePage, HistoryListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<HistoryListResponsesSinglePage, HistoryListResponse>;
-  list(
-    params: HistoryListParams | Core.RequestOptions = {},
+    params: HistoryListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<HistoryListResponsesSinglePage, HistoryListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/settings/zaraz/history`,
       HistoryListResponsesSinglePage,
@@ -102,7 +93,7 @@ export interface HistoryUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: ID of the Zaraz configuration to restore.
@@ -114,7 +105,7 @@ export interface HistoryListParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Maximum amount of results to list. Default value is 10.

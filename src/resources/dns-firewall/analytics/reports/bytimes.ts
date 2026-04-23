@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ReportsBytimesAPI from '../../../dns/analytics/reports/bytimes';
 
@@ -24,19 +23,10 @@ export class Bytimes extends APIResource {
    */
   get(
     dnsFirewallId: string,
-    params?: BytimeGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsBytimesAPI.ByTime>;
-  get(dnsFirewallId: string, options?: Core.RequestOptions): Core.APIPromise<ReportsBytimesAPI.ByTime>;
-  get(
-    dnsFirewallId: string,
-    params: BytimeGetParams | Core.RequestOptions = {},
+    params: BytimeGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReportsBytimesAPI.ByTime> {
-    if (isRequestOptions(params)) {
-      return this.get(dnsFirewallId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report/bytime`, {
         query,
@@ -50,7 +40,7 @@ export interface BytimeGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.

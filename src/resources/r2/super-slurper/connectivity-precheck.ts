@@ -26,7 +26,7 @@ export class ConnectivityPrecheck extends APIResource {
     params: ConnectivityPrecheckSourceParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectivityPrecheckSourceResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/source/connectivity-precheck`, {
         body,
@@ -56,7 +56,7 @@ export class ConnectivityPrecheck extends APIResource {
     params: ConnectivityPrecheckTargetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectivityPrecheckTargetResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/slurper/target/connectivity-precheck`, {
         body,
@@ -84,7 +84,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Path param
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -134,7 +134,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Path param
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -174,7 +174,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     /**
      * Path param
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -220,7 +220,7 @@ export interface ConnectivityPrecheckTargetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

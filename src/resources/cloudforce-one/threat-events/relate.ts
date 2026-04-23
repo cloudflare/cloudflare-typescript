@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Relate extends APIResource {
@@ -19,19 +18,10 @@ export class Relate extends APIResource {
    */
   delete(
     eventId: string,
-    params?: RelateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RelateDeleteResponse>;
-  delete(eventId: string, options?: Core.RequestOptions): Core.APIPromise<RelateDeleteResponse>;
-  delete(
-    eventId: string,
-    params: RelateDeleteParams | Core.RequestOptions = {},
+    params: RelateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RelateDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(eventId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/cloudforce-one/events/relate/${eventId}`,
@@ -49,7 +39,7 @@ export interface RelateDeleteParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Relate {

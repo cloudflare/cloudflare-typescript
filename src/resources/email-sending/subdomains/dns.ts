@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DNSAPI from '../../email-routing/dns';
 import { DNSRecordsSinglePage } from '../../email-routing/dns';
@@ -23,22 +22,10 @@ export class DNS extends APIResource {
    */
   get(
     subdomainId: string,
-    params?: DNSGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSRecordsSinglePage, DNSAPI.DNSRecord>;
-  get(
-    subdomainId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSRecordsSinglePage, DNSAPI.DNSRecord>;
-  get(
-    subdomainId: string,
-    params: DNSGetParams | Core.RequestOptions = {},
+    params: DNSGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DNSRecordsSinglePage, DNSAPI.DNSRecord> {
-    if (isRequestOptions(params)) {
-      return this.get(subdomainId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/email/sending/subdomains/${subdomainId}/dns`,
       DNSRecordsSinglePage,
@@ -51,7 +38,7 @@ export interface DNSGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace DNS {

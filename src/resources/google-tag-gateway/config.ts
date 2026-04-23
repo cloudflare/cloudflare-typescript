@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ConfigResource extends APIResource {
@@ -20,7 +19,7 @@ export class ConfigResource extends APIResource {
    * ```
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Config> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/settings/google-tag-gateway/config`, {
         body,
@@ -39,16 +38,8 @@ export class ConfigResource extends APIResource {
    * });
    * ```
    */
-  get(params?: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Config>;
-  get(options?: Core.RequestOptions): Core.APIPromise<Config>;
-  get(
-    params: ConfigGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Config> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Config> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/google-tag-gateway/config`, options) as Core.APIPromise<{
         result: Config;
@@ -94,7 +85,7 @@ export interface ConfigUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Enables or disables Google Tag Gateway for this zone.
@@ -130,7 +121,7 @@ export interface ConfigGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace ConfigResource {
