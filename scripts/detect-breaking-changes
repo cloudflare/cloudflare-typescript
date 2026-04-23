@@ -18,6 +18,8 @@ TEST_PATHS=(
 	tests/api-resources/accounts/logs/audit.test.ts
 	tests/api-resources/organizations/organizations.test.ts
 	tests/api-resources/organizations/organization-profile.test.ts
+	tests/api-resources/organizations/logs/logs.test.ts
+	tests/api-resources/organizations/logs/audit.test.ts
 	tests/api-resources/origin-ca-certificates.test.ts
 	tests/api-resources/ips.test.ts
 	tests/api-resources/memberships.test.ts
@@ -57,6 +59,7 @@ TEST_PATHS=(
 	tests/api-resources/cache/smart-tiered-cache.test.ts
 	tests/api-resources/cache/variants.test.ts
 	tests/api-resources/cache/regional-tiered-cache.test.ts
+	tests/api-resources/cache/origin-cloud-regions.test.ts
 	tests/api-resources/ssl/ssl.test.ts
 	tests/api-resources/ssl/analyze.test.ts
 	tests/api-resources/ssl/certificate-packs/certificate-packs.test.ts
@@ -245,6 +248,11 @@ TEST_PATHS=(
 	tests/api-resources/page-shield/connections.test.ts
 	tests/api-resources/page-shield/scripts.test.ts
 	tests/api-resources/page-shield/cookies.test.ts
+	tests/api-resources/rulesets/rulesets.test.ts
+	tests/api-resources/rulesets/phases/phases.test.ts
+	tests/api-resources/rulesets/phases/versions.test.ts
+	tests/api-resources/rulesets/rules.test.ts
+	tests/api-resources/rulesets/versions.test.ts
 	tests/api-resources/url-normalization.test.ts
 	tests/api-resources/spectrum/spectrum.test.ts
 	tests/api-resources/spectrum/analytics/analytics.test.ts
@@ -811,9 +819,18 @@ TEST_PATHS=(
 	tests/api-resources/ai/models/schema.test.ts
 	tests/api-resources/ai/to-markdown.test.ts
 	tests/api-resources/aisearch/aisearch.test.ts
+	tests/api-resources/aisearch/namespaces/namespaces.test.ts
+	tests/api-resources/aisearch/namespaces/instances/instances.test.ts
+	tests/api-resources/aisearch/namespaces/instances/jobs.test.ts
+	tests/api-resources/aisearch/namespaces/instances/items.test.ts
 	tests/api-resources/aisearch/instances/instances.test.ts
 	tests/api-resources/aisearch/instances/jobs.test.ts
 	tests/api-resources/aisearch/tokens.test.ts
+	tests/api-resources/security-center/security-center.test.ts
+	tests/api-resources/security-center/insights/insights.test.ts
+	tests/api-resources/security-center/insights/class.test.ts
+	tests/api-resources/security-center/insights/severity.test.ts
+	tests/api-resources/security-center/insights/type.test.ts
 	tests/api-resources/browser-rendering/browser-rendering.test.ts
 	tests/api-resources/browser-rendering/content.test.ts
 	tests/api-resources/browser-rendering/pdf.test.ts
