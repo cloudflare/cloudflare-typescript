@@ -23,3 +23,15 @@ Methods:
 
 - <code title="put /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">update</a>(organizationId, { ...params }) -> void</code>
 - <code title="get /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">get</a>(organizationId) -> organizations_api_ProfileResponse.Result</code>
+
+## Logs
+
+### Audit
+
+Types:
+
+- <code><a href="./src/resources/organizations/logs/audit.ts">AuditListResponse</a></code>
+
+Methods:
+
+- <code title="get /organizations/{organization_id}/logs/audit">client.organizations.logs.audit.<a href="./src/resources/organizations/logs/audit.ts">list</a>(organizationId, { ...params }) -> AuditListResponsesCursorPaginationAfter</code>
