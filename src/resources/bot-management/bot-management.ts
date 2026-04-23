@@ -144,6 +144,13 @@ export interface BotFightModeConfiguration {
   cf_robots_variant?: 'off' | 'policy_only';
 
   /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -231,6 +238,13 @@ export interface BotFightModeConfigurationParam {
   cf_robots_variant?: 'off' | 'policy_only';
 
   /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -277,6 +291,13 @@ export interface SubscriptionConfiguration {
    * Specifies the Robots Access Control License variant to use.
    */
   cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -380,6 +401,13 @@ export interface SubscriptionConfigurationParam {
   cf_robots_variant?: 'off' | 'policy_only';
 
   /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -414,6 +442,13 @@ export interface SuperBotFightModeDefinitelyConfiguration {
    * Specifies the Robots Access Control License variant to use.
    */
   cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -499,6 +534,13 @@ export interface SuperBotFightModeDefinitelyConfigurationParam {
   cf_robots_variant?: 'off' | 'policy_only';
 
   /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -549,6 +591,13 @@ export interface SuperBotFightModeLikelyConfiguration {
    * Specifies the Robots Access Control License variant to use.
    */
   cf_robots_variant?: 'off' | 'policy_only';
+
+  /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
 
   /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -633,6 +682,13 @@ export interface SuperBotFightModeLikelyConfigurationParam {
   cf_robots_variant?: 'off' | 'policy_only';
 
   /**
+   * Enable rule to block content bots. When enabled, blocks automated traffic with
+   * low bot scores, excluding safe verified bot categories. Exceptions should be
+   * managed via skip rules.
+   */
+  content_bots_protection?: 'block' | 'disabled';
+
+  /**
    * Enable rule to punish AI Scrapers and Crawlers via a link maze.
    */
   crawler_protection?: 'enabled' | 'disabled';
@@ -714,6 +770,13 @@ export declare namespace BotManagementUpdateParams {
     cf_robots_variant?: 'off' | 'policy_only';
 
     /**
+     * Body param: Enable rule to block content bots. When enabled, blocks automated
+     * traffic with low bot scores, excluding safe verified bot categories. Exceptions
+     * should be managed via skip rules.
+     */
+    content_bots_protection?: 'block' | 'disabled';
+
+    /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
      */
     crawler_protection?: 'enabled' | 'disabled';
@@ -753,6 +816,13 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Specifies the Robots Access Control License variant to use.
      */
     cf_robots_variant?: 'off' | 'policy_only';
+
+    /**
+     * Body param: Enable rule to block content bots. When enabled, blocks automated
+     * traffic with low bot scores, excluding safe verified bot categories. Exceptions
+     * should be managed via skip rules.
+     */
+    content_bots_protection?: 'block' | 'disabled';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -813,6 +883,13 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Specifies the Robots Access Control License variant to use.
      */
     cf_robots_variant?: 'off' | 'policy_only';
+
+    /**
+     * Body param: Enable rule to block content bots. When enabled, blocks automated
+     * traffic with low bot scores, excluding safe verified bot categories. Exceptions
+     * should be managed via skip rules.
+     */
+    content_bots_protection?: 'block' | 'disabled';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.
@@ -892,6 +969,13 @@ export declare namespace BotManagementUpdateParams {
      * Body param: Specifies the Robots Access Control License variant to use.
      */
     cf_robots_variant?: 'off' | 'policy_only';
+
+    /**
+     * Body param: Enable rule to block content bots. When enabled, blocks automated
+     * traffic with low bot scores, excluding safe verified bot categories. Exceptions
+     * should be managed via skip rules.
+     */
+    content_bots_protection?: 'block' | 'disabled';
 
     /**
      * Body param: Enable rule to punish AI Scrapers and Crawlers via a link maze.

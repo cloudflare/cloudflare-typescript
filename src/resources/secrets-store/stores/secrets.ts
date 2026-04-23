@@ -493,8 +493,9 @@ export namespace SecretCreateParams {
     scopes: Array<string>;
 
     /**
-     * The value of the secret. Note that this is 'write only' - no API reponse will
-     * provide this value, it is only used to create/modify secrets.
+     * The value of the secret. Maximum 64 KiB (65,536 bytes). Note that this is 'write
+     * only' - no API response will provide this value, it is only used to
+     * create/modify secrets.
      */
     value: string;
 
@@ -586,8 +587,9 @@ export interface SecretEditParams {
   scopes?: Array<string>;
 
   /**
-   * Body param: The value of the secret. Note that this is 'write only' - no API
-   * reponse will provide this value, it is only used to create/modify secrets.
+   * Body param: The value of the secret. Maximum 64 KiB (65,536 bytes). Note that
+   * this is 'write only' - no API response will provide this value, it is only used
+   * to create/modify secrets.
    */
   value?: string;
 }

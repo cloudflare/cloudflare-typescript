@@ -14,16 +14,6 @@ describe('resource userGroups', () => {
     const responsePromise = client.iam.userGroups.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My New User Group',
-      policies: [
-        {
-          access: 'allow',
-          permission_groups: [
-            { id: 'c8fed203ed3043cba015a93ad1616f1f' },
-            { id: '82e64a83756745bbbb1c9c2701bf816b' },
-          ],
-          resource_groups: [{ id: '6d7f2f5f5b1d4a0e9081fdc98d432fd1' }],
-        },
-      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -101,7 +91,7 @@ describe('resource userGroups', () => {
       fuzzyName: 'Foo',
       name: 'NameOfTheUserGroup',
       page: 1,
-      per_page: 5,
+      per_page: 1,
     });
   });
 
