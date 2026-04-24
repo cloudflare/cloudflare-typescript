@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/queues/queues.ts">Queue</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueDeleteResponse</a></code>
+- <code><a href="./src/resources/queues/queues.ts">QueueGetMetricsResponse</a></code>
 
 Methods:
 
@@ -13,6 +14,7 @@ Methods:
 - <code title="delete /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">delete</a>(queueId, { ...params }) -> QueueDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">edit</a>(queueId, { ...params }) -> Queue</code>
 - <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueId, { ...params }) -> Queue</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}/metrics">client.queues.<a href="./src/resources/queues/queues.ts">getMetrics</a>(queueId, { ...params }) -> QueueGetMetricsResponse</code>
 
 ## Messages
 
