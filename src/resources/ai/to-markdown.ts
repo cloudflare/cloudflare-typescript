@@ -26,19 +26,18 @@ export class ToMarkdown extends APIResource {
   transform(
     params: ToMarkdownTransformParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ToMarkdownTransformResponsesSinglePage, ToMarkdownTransformResponse> {
+  ): Core.APIPromise<ToMarkdownTransformResponse[]> {
     const { account_id, file } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/ai/tomarkdown`,
-      ToMarkdownTransformResponsesSinglePage,
-      Core.multipartFormRequestOptions({ body: file, method: 'post', ...options }),
-    );
+    return (
+      this._client.post(
+        `/accounts/${account_id}/ai/tomarkdown`,
+        Core.multipartFormRequestOptions({ body: file, ...options }),
+      ) as Core.APIPromise<{ result: ToMarkdownTransformResponse[] }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class ToMarkdownSupportedResponsesSinglePage extends SinglePage<ToMarkdownSupportedResponse> {}
-
-export class ToMarkdownTransformResponsesSinglePage extends SinglePage<ToMarkdownTransformResponse> {}
 
 export interface ToMarkdownSupportedResponse {
   extension: string;
@@ -81,14 +80,12 @@ export namespace ToMarkdownTransformParams {
 }
 
 ToMarkdown.ToMarkdownSupportedResponsesSinglePage = ToMarkdownSupportedResponsesSinglePage;
-ToMarkdown.ToMarkdownTransformResponsesSinglePage = ToMarkdownTransformResponsesSinglePage;
 
 export declare namespace ToMarkdown {
   export {
     type ToMarkdownSupportedResponse as ToMarkdownSupportedResponse,
     type ToMarkdownTransformResponse as ToMarkdownTransformResponse,
     ToMarkdownSupportedResponsesSinglePage as ToMarkdownSupportedResponsesSinglePage,
-    ToMarkdownTransformResponsesSinglePage as ToMarkdownTransformResponsesSinglePage,
     type ToMarkdownSupportedParams as ToMarkdownSupportedParams,
     type ToMarkdownTransformParams as ToMarkdownTransformParams,
   };
