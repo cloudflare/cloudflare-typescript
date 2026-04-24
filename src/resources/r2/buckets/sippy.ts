@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as SippyAPI from './sippy';
 
@@ -22,7 +21,7 @@ export class SippyResource extends APIResource {
     params: SippyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Sippy> {
-    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
@@ -50,19 +49,10 @@ export class SippyResource extends APIResource {
    */
   delete(
     bucketName: string,
-    params?: SippyDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SippyDeleteResponse>;
-  delete(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<SippyDeleteResponse>;
-  delete(
-    bucketName: string,
-    params: SippyDeleteParams | Core.RequestOptions = {},
+    params: SippyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SippyDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
@@ -87,17 +77,8 @@ export class SippyResource extends APIResource {
    * );
    * ```
    */
-  get(bucketName: string, params?: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<Sippy>;
-  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<Sippy>;
-  get(
-    bucketName: string,
-    params: SippyGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Sippy> {
-    if (isRequestOptions(params)) {
-      return this.get(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+  get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<Sippy> {
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         ...options,
@@ -190,7 +171,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Path param: Account ID.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: R2 bucket to copy objects to.
@@ -269,7 +250,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Path param: Account ID.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: R2 bucket to copy objects to.
@@ -343,7 +324,7 @@ export declare namespace SippyUpdateParams {
     /**
      * Path param: Account ID.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: R2 bucket to copy objects to.
@@ -418,7 +399,7 @@ export interface SippyDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -431,7 +412,7 @@ export interface SippyGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

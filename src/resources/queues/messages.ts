@@ -1,9 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 
 export class Messages extends APIResource {
   /**
@@ -19,19 +17,10 @@ export class Messages extends APIResource {
    */
   ack(
     queueId: string,
-    params?: MessageAckParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MessageAckResponse>;
-  ack(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessageAckResponse>;
-  ack(
-    queueId: string,
-    params: MessageAckParams | Core.RequestOptions = {},
+    params: MessageAckParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessageAckResponse> {
-    if (isRequestOptions(params)) {
-      return this.ack(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/ack`, {
         body,
@@ -53,23 +42,16 @@ export class Messages extends APIResource {
    */
   bulkPush(
     queueId: string,
-    params?: MessageBulkPushParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MessageBulkPushResponse>;
-  bulkPush(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessageBulkPushResponse>;
-  bulkPush(
-    queueId: string,
-    params: MessageBulkPushParams | Core.RequestOptions = {},
+    params: MessageBulkPushParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessageBulkPushResponse> {
-    if (isRequestOptions(params)) {
-      return this.bulkPush(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/batch`, {
-      body,
-      ...options,
-    });
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/batch`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessageBulkPushResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -85,19 +67,10 @@ export class Messages extends APIResource {
    */
   pull(
     queueId: string,
-    params?: MessagePullParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MessagePullResponse>;
-  pull(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessagePullResponse>;
-  pull(
-    queueId: string,
-    params: MessagePullParams | Core.RequestOptions = {},
+    params: MessagePullParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessagePullResponse> {
-    if (isRequestOptions(params)) {
-      return this.pull(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
         body,
@@ -119,20 +92,16 @@ export class Messages extends APIResource {
    */
   push(
     queueId: string,
-    params?: MessagePushParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MessagePushResponse>;
-  push(queueId: string, options?: Core.RequestOptions): Core.APIPromise<MessagePushResponse>;
-  push(
-    queueId: string,
-    params: MessagePushParams | Core.RequestOptions = {},
+    params: MessagePushParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessagePushResponse> {
-    if (isRequestOptions(params)) {
-      return this.push(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, { body, ...options });
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessagePushResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -154,23 +123,52 @@ export interface MessageAckResponse {
 }
 
 export interface MessageBulkPushResponse {
-  errors?: Array<Shared.ResponseInfo>;
+  metadata?: MessageBulkPushResponse.Metadata;
+}
 
-  messages?: Array<string>;
+export namespace MessageBulkPushResponse {
+  export interface Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    metrics?: Metadata.Metrics;
+  }
 
-  /**
-   * Indicates if the API call was successful or not.
-   */
-  success?: true;
+  export namespace Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    export interface Metrics {
+      /**
+       * The size in bytes of unacknowledged messages in the queue.
+       */
+      backlog_bytes: number;
+
+      /**
+       * The number of unacknowledged messages in the queue.
+       */
+      backlog_count: number;
+
+      /**
+       * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+       * queue. Returns 0 if unknown.
+       */
+      oldest_message_timestamp_ms: number;
+    }
+  }
 }
 
 export interface MessagePullResponse {
   /**
-   * The number of unacknowledged messages in the queue
+   * The number of unacknowledged messages in the queue.
    */
   message_backlog_count?: number;
 
   messages?: Array<MessagePullResponse.Message>;
+
+  metadata?: MessagePullResponse.Metadata;
 }
 
 export namespace MessagePullResponse {
@@ -191,24 +189,83 @@ export namespace MessagePullResponse {
 
     timestamp_ms?: number;
   }
+
+  export interface Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    metrics?: Metadata.Metrics;
+  }
+
+  export namespace Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    export interface Metrics {
+      /**
+       * The size in bytes of unacknowledged messages in the queue.
+       */
+      backlog_bytes: number;
+
+      /**
+       * The number of unacknowledged messages in the queue.
+       */
+      backlog_count: number;
+
+      /**
+       * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+       * queue. Returns 0 if unknown.
+       */
+      oldest_message_timestamp_ms: number;
+    }
+  }
 }
 
 export interface MessagePushResponse {
-  errors?: Array<Shared.ResponseInfo>;
+  metadata?: MessagePushResponse.Metadata;
+}
 
-  messages?: Array<string>;
+export namespace MessagePushResponse {
+  export interface Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    metrics?: Metadata.Metrics;
+  }
 
-  /**
-   * Indicates if the API call was successful or not.
-   */
-  success?: true;
+  export namespace Metadata {
+    /**
+     * Best-effort metrics for the queue. Values may be approximate due to the
+     * distributed nature of queues.
+     */
+    export interface Metrics {
+      /**
+       * The size in bytes of unacknowledged messages in the queue.
+       */
+      backlog_bytes: number;
+
+      /**
+       * The number of unacknowledged messages in the queue.
+       */
+      backlog_count: number;
+
+      /**
+       * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+       * queue. Returns 0 if unknown.
+       */
+      oldest_message_timestamp_ms: number;
+    }
+  }
 }
 
 export interface MessageAckParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -249,7 +306,7 @@ export interface MessageBulkPushParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The number of seconds to wait for attempting to deliver this batch
@@ -293,7 +350,7 @@ export interface MessagePullParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The maximum number of messages to include in a batch.
@@ -314,7 +371,7 @@ export declare namespace MessagePushParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -337,7 +394,7 @@ export declare namespace MessagePushParams {
     /**
      * Path param: A Resource identifier.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param

@@ -13,7 +13,7 @@ describe('resource members', () => {
   test('create: only required params', async () => {
     const responsePromise = client.iam.userGroups.members.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+      members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,14 +27,14 @@ describe('resource members', () => {
   test('create: required and optional params', async () => {
     const response = await client.iam.userGroups.members.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+      members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.iam.userGroups.members.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+      members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +48,7 @@ describe('resource members', () => {
   test('update: required and optional params', async () => {
     const response = await client.iam.userGroups.members.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+      members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
     });
   });
 
@@ -68,6 +68,8 @@ describe('resource members', () => {
   test('list: required and optional params', async () => {
     const response = await client.iam.userGroups.members.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      direction: 'asc',
+      fuzzyEmail: 'user@',
       page: 1,
       per_page: 1,
     });
@@ -90,6 +92,29 @@ describe('resource members', () => {
 
   test('delete: required and optional params', async () => {
     const response = await client.iam.userGroups.members.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.iam.userGroups.members.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.iam.userGroups.members.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

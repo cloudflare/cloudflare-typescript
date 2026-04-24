@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ActiveSessionsAPI from './active-sessions';
 import {
@@ -42,7 +41,7 @@ export class Users extends APIResource {
    * ```
    */
   create(params: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<UserCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/users`, { body, ...options }) as Core.APIPromise<{
         result: UserCreateResponse;
@@ -71,7 +70,7 @@ export class Users extends APIResource {
     params: UserUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/users/${userId}`, {
         body,
@@ -94,20 +93,10 @@ export class Users extends APIResource {
    * ```
    */
   list(
-    params?: UserListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse>;
-  list(
-    params: UserListParams | Core.RequestOptions = {},
+    params: UserListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UserListResponsesV4PagePaginationArray, UserListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/users`,
       UserListResponsesV4PagePaginationArray,
@@ -129,19 +118,10 @@ export class Users extends APIResource {
    */
   delete(
     userId: string,
-    params?: UserDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UserDeleteResponse | null>;
-  delete(userId: string, options?: Core.RequestOptions): Core.APIPromise<UserDeleteResponse | null>;
-  delete(
-    userId: string,
-    params: UserDeleteParams | Core.RequestOptions = {},
+    params: UserDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(userId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/access/users/${userId}`, options) as Core.APIPromise<{
         result: UserDeleteResponse | null;
@@ -162,19 +142,10 @@ export class Users extends APIResource {
    */
   get(
     userId: string,
-    params?: UserGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UserGetResponse>;
-  get(userId: string, options?: Core.RequestOptions): Core.APIPromise<UserGetResponse>;
-  get(
-    userId: string,
-    params: UserGetParams | Core.RequestOptions = {},
+    params: UserGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(userId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/access/users/${userId}`, options) as Core.APIPromise<{
         result: UserGetResponse;
@@ -466,7 +437,7 @@ export interface UserCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The email of the user.
@@ -483,7 +454,7 @@ export interface UserUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The email of the user.
@@ -500,7 +471,7 @@ export interface UserListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The email of the user.
@@ -522,14 +493,14 @@ export interface UserDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface UserGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Users.UserListResponsesV4PagePaginationArray = UserListResponsesV4PagePaginationArray;

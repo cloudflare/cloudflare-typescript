@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as DatasetsAPI from './datasets';
 import { type BlobLike } from '../../../../uploads';
@@ -22,19 +21,10 @@ export class Upload extends APIResource {
    */
   create(
     datasetId: string,
-    params?: UploadCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NewVersion>;
-  create(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<NewVersion>;
-  create(
-    datasetId: string,
-    params: UploadCreateParams | Core.RequestOptions = {},
+    params: UploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NewVersion> {
-    if (isRequestOptions(params)) {
-      return this.create(datasetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/dlp/datasets/${datasetId}/upload`,
@@ -67,7 +57,7 @@ export class Upload extends APIResource {
     params: UploadEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DatasetsAPI.Dataset> {
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
         body: dataset,
@@ -106,14 +96,14 @@ export namespace NewVersion {
 }
 
 export interface UploadCreateParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface UploadEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Upload {

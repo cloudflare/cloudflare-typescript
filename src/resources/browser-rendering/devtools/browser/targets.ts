@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Targets extends APIResource {
@@ -19,19 +18,10 @@ export class Targets extends APIResource {
    */
   create(
     sessionId: string,
-    params?: TargetCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TargetCreateResponse>;
-  create(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<TargetCreateResponse>;
-  create(
-    sessionId: string,
-    params: TargetCreateParams | Core.RequestOptions = {},
+    params: TargetCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId, url } = params;
+    const { account_id, url } = params;
     return this._client.put(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/new`,
       { query: { url }, ...options },
@@ -53,19 +43,10 @@ export class Targets extends APIResource {
    */
   list(
     sessionId: string,
-    params?: TargetListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TargetListResponse>;
-  list(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<TargetListResponse>;
-  list(
-    sessionId: string,
-    params: TargetListParams | Core.RequestOptions = {},
+    params: TargetListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/list`,
       options,
@@ -88,24 +69,10 @@ export class Targets extends APIResource {
   activate(
     sessionId: string,
     targetId: string,
-    params?: TargetActivateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TargetActivateResponse>;
-  activate(
-    sessionId: string,
-    targetId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TargetActivateResponse>;
-  activate(
-    sessionId: string,
-    targetId: string,
-    params: TargetActivateParams | Core.RequestOptions = {},
+    params: TargetActivateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetActivateResponse> {
-    if (isRequestOptions(params)) {
-      return this.activate(sessionId, targetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/activate/${targetId}`,
       options,
@@ -128,20 +95,10 @@ export class Targets extends APIResource {
   get(
     sessionId: string,
     targetId: string,
-    params?: TargetGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TargetGetResponse>;
-  get(sessionId: string, targetId: string, options?: Core.RequestOptions): Core.APIPromise<TargetGetResponse>;
-  get(
-    sessionId: string,
-    targetId: string,
-    params: TargetGetParams | Core.RequestOptions = {},
+    params: TargetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TargetGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(sessionId, targetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/list/${targetId}`,
       options,
@@ -275,7 +232,7 @@ export interface TargetCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -287,21 +244,21 @@ export interface TargetListParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface TargetActivateParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface TargetGetParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Targets {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -29,7 +28,7 @@ export class Outputs extends APIResource {
     params: OutputCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Output> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
         body,
@@ -60,7 +59,7 @@ export class Outputs extends APIResource {
     params: OutputUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Output> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
@@ -85,22 +84,10 @@ export class Outputs extends APIResource {
    */
   list(
     liveInputIdentifier: string,
-    params?: OutputListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OutputsSinglePage, Output>;
-  list(
-    liveInputIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OutputsSinglePage, Output>;
-  list(
-    liveInputIdentifier: string,
-    params: OutputListParams | Core.RequestOptions = {},
+    params: OutputListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OutputsSinglePage, Output> {
-    if (isRequestOptions(params)) {
-      return this.list(liveInputIdentifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
       OutputsSinglePage,
@@ -123,24 +110,10 @@ export class Outputs extends APIResource {
   delete(
     liveInputIdentifier: string,
     outputIdentifier: string,
-    params?: OutputDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  delete(
-    liveInputIdentifier: string,
-    outputIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  delete(
-    liveInputIdentifier: string,
-    outputIdentifier: string,
-    params: OutputDeleteParams | Core.RequestOptions = {},
+    params: OutputDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete(liveInputIdentifier, outputIdentifier, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
       { ...options, headers: { Accept: '*/*', ...options?.headers } },
@@ -180,7 +153,7 @@ export interface OutputCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The streamKey used to authenticate against an output's target.
@@ -206,7 +179,7 @@ export interface OutputUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: When enabled, live video streamed to the associated live input will
@@ -222,14 +195,14 @@ export interface OutputListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface OutputDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Outputs.OutputsSinglePage = OutputsSinglePage;

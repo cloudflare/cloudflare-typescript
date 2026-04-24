@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AccessRulesAPI from './access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -20,7 +19,7 @@ export class UARules extends APIResource {
    * ```
    */
   create(params: UARuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<UARuleCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/firewall/ua_rules`, { body, ...options }) as Core.APIPromise<{
         result: UARuleCreateResponse;
@@ -48,7 +47,7 @@ export class UARules extends APIResource {
     params: UARuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UARuleUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/firewall/ua_rules/${uaRuleId}`, {
         body,
@@ -72,20 +71,10 @@ export class UARules extends APIResource {
    * ```
    */
   list(
-    params?: UARuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
-  list(
-    params: UARuleListParams | Core.RequestOptions = {},
+    params: UARuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/ua_rules`,
       UARuleListResponsesV4PagePaginationArray,
@@ -106,19 +95,10 @@ export class UARules extends APIResource {
    */
   delete(
     uaRuleId: string,
-    params?: UARuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleDeleteResponse>;
-  delete(uaRuleId: string, options?: Core.RequestOptions): Core.APIPromise<UARuleDeleteResponse>;
-  delete(
-    uaRuleId: string,
-    params: UARuleDeleteParams | Core.RequestOptions = {},
+    params: UARuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UARuleDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(uaRuleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/firewall/ua_rules/${uaRuleId}`, options) as Core.APIPromise<{
         result: UARuleDeleteResponse;
@@ -139,19 +119,10 @@ export class UARules extends APIResource {
    */
   get(
     uaRuleId: string,
-    params?: UARuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UARuleGetResponse>;
-  get(uaRuleId: string, options?: Core.RequestOptions): Core.APIPromise<UARuleGetResponse>;
-  get(
-    uaRuleId: string,
-    params: UARuleGetParams | Core.RequestOptions = {},
+    params: UARuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UARuleGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(uaRuleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/firewall/ua_rules/${uaRuleId}`, options) as Core.APIPromise<{
         result: UARuleGetResponse;
@@ -396,7 +367,7 @@ export interface UARuleCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -439,7 +410,7 @@ export interface UARuleUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The rule configuration.
@@ -472,7 +443,7 @@ export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: A string to search for in the description of existing rules.
@@ -494,14 +465,14 @@ export interface UARuleDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface UARuleGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 UARules.UARuleListResponsesV4PagePaginationArray = UARuleListResponsesV4PagePaginationArray;

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as BulkOperationsAPI from './bulk-operations';
 import { BulkOperationGetParams, BulkOperationGetResponse, BulkOperations } from './bulk-operations';
@@ -41,7 +40,7 @@ export class Lists extends APIResource {
    * ```
    */
   create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{
         result: ListCreateResponse;
@@ -65,7 +64,7 @@ export class Lists extends APIResource {
     params: ListUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, {
         body,
@@ -88,18 +87,10 @@ export class Lists extends APIResource {
    * ```
    */
   list(
-    params?: ListListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ListsListsSinglePage, ListsList>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ListsListsSinglePage, ListsList>;
-  list(
-    params: ListListParams | Core.RequestOptions = {},
+    params: ListListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ListsListsSinglePage, ListsList> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/rules/lists`, ListsListsSinglePage, options);
   }
 
@@ -116,19 +107,10 @@ export class Lists extends APIResource {
    */
   delete(
     listId: string,
-    params?: ListDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListDeleteResponse>;
-  delete(listId: string, options?: Core.RequestOptions): Core.APIPromise<ListDeleteResponse>;
-  delete(
-    listId: string,
-    params: ListDeleteParams | Core.RequestOptions = {},
+    params: ListDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(listId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
         result: ListDeleteResponse;
@@ -149,19 +131,10 @@ export class Lists extends APIResource {
    */
   get(
     listId: string,
-    params?: ListGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListGetResponse>;
-  get(listId: string, options?: Core.RequestOptions): Core.APIPromise<ListGetResponse>;
-  get(
-    listId: string,
-    params: ListGetParams | Core.RequestOptions = {},
+    params: ListGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(listId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
         result: ListGetResponse;
@@ -423,7 +396,7 @@ export interface ListCreateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The type of the list. Each type supports specific list items (IP
@@ -447,7 +420,7 @@ export interface ListUpdateParams {
   /**
    * Path param: The Account ID for this resource.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: An informative summary of the list.
@@ -459,21 +432,21 @@ export interface ListListParams {
   /**
    * The Account ID for this resource.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ListDeleteParams {
   /**
    * The Account ID for this resource.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ListGetParams {
   /**
    * The Account ID for this resource.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Lists.ListsListsSinglePage = ListsListsSinglePage;

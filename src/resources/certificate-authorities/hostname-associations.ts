@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class HostnameAssociations extends APIResource {
@@ -9,18 +8,10 @@ export class HostnameAssociations extends APIResource {
    * Replace Hostname Associations
    */
   update(
-    params?: HostnameAssociationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.APIPromise<HostnameAssociationUpdateResponse>;
-  update(
-    params: HostnameAssociationUpdateParams | Core.RequestOptions = {},
+    params: HostnameAssociationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameAssociationUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         body,
@@ -33,18 +24,10 @@ export class HostnameAssociations extends APIResource {
    * List Hostname Associations
    */
   get(
-    params?: HostnameAssociationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameAssociationGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<HostnameAssociationGetResponse>;
-  get(
-    params: HostnameAssociationGetParams | Core.RequestOptions = {},
+    params: HostnameAssociationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameAssociationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/certificate_authorities/hostname_associations`, {
         query,
@@ -81,7 +64,7 @@ export interface HostnameAssociationUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -100,7 +83,7 @@ export interface HostnameAssociationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The UUID to match against for a certificate that was uploaded to

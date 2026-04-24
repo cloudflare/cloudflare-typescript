@@ -18,7 +18,7 @@ export class Unrevoke extends APIResource {
     params: UnrevokeCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UnrevokeCreateResponse | null> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/unrevoke`, {
         body: body,
@@ -34,7 +34,7 @@ export interface UnrevokeCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A list of Registration IDs to unrevoke.

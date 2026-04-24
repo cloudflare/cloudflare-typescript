@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -15,7 +14,7 @@ export class Overrides extends APIResource {
    * @deprecated
    */
   create(params: OverrideCreateParams, options?: Core.RequestOptions): Core.APIPromise<Override> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/firewall/waf/overrides`, { body, ...options }) as Core.APIPromise<{
         result: Override;
@@ -36,7 +35,7 @@ export class Overrides extends APIResource {
     params: OverrideUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Override> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/firewall/waf/overrides/${overridesId}`, {
         body,
@@ -54,18 +53,10 @@ export class Overrides extends APIResource {
    * @deprecated
    */
   list(
-    params?: OverrideListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OverridesV4PagePaginationArray, Override>;
-  list(options?: Core.RequestOptions): Core.PagePromise<OverridesV4PagePaginationArray, Override>;
-  list(
-    params: OverrideListParams | Core.RequestOptions = {},
+    params: OverrideListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OverridesV4PagePaginationArray, Override> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/firewall/waf/overrides`,
       OverridesV4PagePaginationArray,
@@ -83,19 +74,10 @@ export class Overrides extends APIResource {
    */
   delete(
     overridesId: string,
-    params?: OverrideDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OverrideDeleteResponse>;
-  delete(overridesId: string, options?: Core.RequestOptions): Core.APIPromise<OverrideDeleteResponse>;
-  delete(
-    overridesId: string,
-    params: OverrideDeleteParams | Core.RequestOptions = {},
+    params: OverrideDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OverrideDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(overridesId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/firewall/waf/overrides/${overridesId}`,
@@ -114,19 +96,10 @@ export class Overrides extends APIResource {
    */
   get(
     overridesId: string,
-    params?: OverrideGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Override>;
-  get(overridesId: string, options?: Core.RequestOptions): Core.APIPromise<Override>;
-  get(
-    overridesId: string,
-    params: OverrideGetParams | Core.RequestOptions = {},
+    params: OverrideGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Override> {
-    if (isRequestOptions(params)) {
-      return this.get(overridesId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/firewall/waf/overrides/${overridesId}`,
@@ -288,7 +261,7 @@ export interface OverrideCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The URLs to include in the current WAF override. You can use
@@ -302,7 +275,7 @@ export interface OverrideUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Defines an identifier.
@@ -336,21 +309,21 @@ export interface OverrideListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OverrideDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OverrideGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Overrides.OverridesV4PagePaginationArray = OverridesV4PagePaginationArray;

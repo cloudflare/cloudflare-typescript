@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DetailsAPI from './details';
 import { DetailGetParams, DetailGetResponse, Details, EventQuery } from './details';
@@ -36,7 +35,7 @@ export class Events extends APIResource {
     params: EventCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Event> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`, {
         body,
@@ -68,7 +67,7 @@ export class Events extends APIResource {
     params: EventUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Event> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
         body,
@@ -93,22 +92,10 @@ export class Events extends APIResource {
    */
   list(
     waitingRoomId: string,
-    params?: EventListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EventsV4PagePaginationArray, Event>;
-  list(
-    waitingRoomId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EventsV4PagePaginationArray, Event>;
-  list(
-    waitingRoomId: string,
-    params: EventListParams | Core.RequestOptions = {},
+    params: EventListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<EventsV4PagePaginationArray, Event> {
-    if (isRequestOptions(params)) {
-      return this.list(waitingRoomId, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`,
       EventsV4PagePaginationArray,
@@ -131,24 +118,10 @@ export class Events extends APIResource {
   delete(
     waitingRoomId: string,
     eventId: string,
-    params?: EventDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EventDeleteResponse>;
-  delete(
-    waitingRoomId: string,
-    eventId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EventDeleteResponse>;
-  delete(
-    waitingRoomId: string,
-    eventId: string,
-    params: EventDeleteParams | Core.RequestOptions = {},
+    params: EventDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(waitingRoomId, eventId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
@@ -180,7 +153,7 @@ export class Events extends APIResource {
     params: EventEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Event> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
         body,
@@ -204,20 +177,10 @@ export class Events extends APIResource {
   get(
     waitingRoomId: string,
     eventId: string,
-    params?: EventGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Event>;
-  get(waitingRoomId: string, eventId: string, options?: Core.RequestOptions): Core.APIPromise<Event>;
-  get(
-    waitingRoomId: string,
-    eventId: string,
-    params: EventGetParams | Core.RequestOptions = {},
+    params: EventGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Event> {
-    if (isRequestOptions(params)) {
-      return this.get(waitingRoomId, eventId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
@@ -341,7 +304,7 @@ export interface EventCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: An ISO 8601 timestamp that marks the end of the event.
@@ -450,7 +413,7 @@ export interface EventUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: An ISO 8601 timestamp that marks the end of the event.
@@ -559,21 +522,21 @@ export interface EventListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface EventDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface EventEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: An ISO 8601 timestamp that marks the end of the event.
@@ -682,7 +645,7 @@ export interface EventGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Events.EventsV4PagePaginationArray = EventsV4PagePaginationArray;

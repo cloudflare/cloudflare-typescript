@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -11,27 +10,29 @@ export class Members extends APIResource {
    *
    * @example
    * ```ts
-   * const member = await client.iam.userGroups.members.create(
+   * // Automatically fetches more pages as needed.
+   * for await (const memberCreateResponse of client.iam.userGroups.members.create(
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+   *     members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
    *   },
-   * );
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   create(
     userGroupId: string,
     params: MemberCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberCreateResponse> {
-    const { account_id = this._client.accountId, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/iam/user_groups/${userGroupId}/members`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: MemberCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<MemberCreateResponsesSinglePage, MemberCreateResponse> {
+    const { account_id, members } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
+      MemberCreateResponsesSinglePage,
+      { body: members, method: 'post', ...options },
+    );
   }
 
   /**
@@ -44,7 +45,7 @@ export class Members extends APIResource {
    *   '023e105f4ecef8ad9ca31a8372d0c353',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+   *     members: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
    *   },
    * )) {
    *   // ...
@@ -56,11 +57,11 @@ export class Members extends APIResource {
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MemberUpdateResponsesSinglePage, MemberUpdateResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, members } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
       MemberUpdateResponsesSinglePage,
-      { body: body, method: 'put', ...options },
+      { body: members, method: 'put', ...options },
     );
   }
 
@@ -80,22 +81,10 @@ export class Members extends APIResource {
    */
   list(
     userGroupId: string,
-    params?: MemberListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse>;
-  list(
-    userGroupId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse>;
-  list(
-    userGroupId: string,
-    params: MemberListParams | Core.RequestOptions = {},
+    params: MemberListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(userGroupId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/iam/user_groups/${userGroupId}/members`,
       MemberListResponsesV4PagePaginationArray,
@@ -118,24 +107,10 @@ export class Members extends APIResource {
   delete(
     userGroupId: string,
     memberId: string,
-    params?: MemberDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberDeleteResponse>;
-  delete(
-    userGroupId: string,
-    memberId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberDeleteResponse>;
-  delete(
-    userGroupId: string,
-    memberId: string,
-    params: MemberDeleteParams | Core.RequestOptions = {},
+    params: MemberDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MemberDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(userGroupId, memberId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/iam/user_groups/${userGroupId}/members/${memberId}`,
@@ -143,7 +118,36 @@ export class Members extends APIResource {
       ) as Core.APIPromise<{ result: MemberDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get details of a specific member in a user group.
+   *
+   * @example
+   * ```ts
+   * const member = await client.iam.userGroups.members.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  get(
+    userGroupId: string,
+    memberId: string,
+    params: MemberGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MemberGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/iam/user_groups/${userGroupId}/members/${memberId}`,
+        options,
+      ) as Core.APIPromise<{ result: MemberGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
+
+export class MemberCreateResponsesSinglePage extends SinglePage<MemberCreateResponse> {}
 
 export class MemberUpdateResponsesSinglePage extends SinglePage<MemberUpdateResponse> {}
 
@@ -229,20 +233,77 @@ export interface MemberDeleteResponse {
   status?: 'accepted' | 'pending';
 }
 
+/**
+ * Detailed member information for a User Group member.
+ */
+export interface MemberGetResponse {
+  /**
+   * Account member identifier.
+   */
+  id: string;
+
+  /**
+   * When the member was added to the user group.
+   */
+  created_at?: string;
+
+  /**
+   * The contact email address of the user.
+   */
+  email?: string;
+
+  /**
+   * The member's status in the account.
+   */
+  status?: 'accepted' | 'pending';
+
+  /**
+   * Details of the user associated with this membership.
+   */
+  user?: MemberGetResponse.User;
+}
+
+export namespace MemberGetResponse {
+  /**
+   * Details of the user associated with this membership.
+   */
+  export interface User {
+    /**
+     * User identifier tag.
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * User's first name.
+     */
+    first_name?: string;
+
+    /**
+     * User's last name.
+     */
+    last_name?: string;
+  }
+}
+
 export interface MemberCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
    */
-  body: Array<MemberCreateParams.Body>;
+  members: Array<MemberCreateParams.Member>;
 }
 
 export namespace MemberCreateParams {
-  export interface Body {
+  export interface Member {
     /**
      * The identifier of an existing account Member.
      */
@@ -254,16 +315,16 @@ export interface MemberUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Set/Replace members to a user group.
    */
-  body: Array<MemberUpdateParams.Body>;
+  members: Array<MemberUpdateParams.Member>;
 }
 
 export namespace MemberUpdateParams {
-  export interface Body {
+  export interface Member {
     /**
      * The identifier of an existing account Member.
      */
@@ -275,16 +336,34 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
+
+  /**
+   * Query param: The sort order of returned user group members by email.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: A string used for filtering members by partial email match.
+   */
+  fuzzyEmail?: string;
 }
 
 export interface MemberDeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
+export interface MemberGetParams {
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
+}
+
+Members.MemberCreateResponsesSinglePage = MemberCreateResponsesSinglePage;
 Members.MemberUpdateResponsesSinglePage = MemberUpdateResponsesSinglePage;
 Members.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
 
@@ -294,11 +373,14 @@ export declare namespace Members {
     type MemberUpdateResponse as MemberUpdateResponse,
     type MemberListResponse as MemberListResponse,
     type MemberDeleteResponse as MemberDeleteResponse,
+    type MemberGetResponse as MemberGetResponse,
+    MemberCreateResponsesSinglePage as MemberCreateResponsesSinglePage,
     MemberUpdateResponsesSinglePage as MemberUpdateResponsesSinglePage,
     MemberListResponsesV4PagePaginationArray as MemberListResponsesV4PagePaginationArray,
     type MemberCreateParams as MemberCreateParams,
     type MemberUpdateParams as MemberUpdateParams,
     type MemberListParams as MemberListParams,
     type MemberDeleteParams as MemberDeleteParams,
+    type MemberGetParams as MemberGetParams,
   };
 }

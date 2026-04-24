@@ -29,7 +29,7 @@ describe('resource logos', () => {
       match_type: 'match_type',
       tag: 'tag',
       threshold: 0,
-      image: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      image: await toFile(Buffer.from('Example data'), 'README.md'),
     });
   });
 

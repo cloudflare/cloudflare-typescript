@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class ToMarkdown extends APIResource {
   /**
@@ -12,16 +13,17 @@ export class ToMarkdown extends APIResource {
   create(
     params: ToMarkdownCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ToMarkdownCreateResponse[]> {
-    const { account_id = this._client.accountId, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/ai/tomarkdown`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ToMarkdownCreateResponse[] }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<ToMarkdownCreateResponsesSinglePage, ToMarkdownCreateResponse> {
+    const { account_id, ...body } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai/tomarkdown`,
+      ToMarkdownCreateResponsesSinglePage,
+      Core.multipartFormRequestOptions({ body, method: 'post', ...options }),
+    );
   }
 }
+
+export class ToMarkdownCreateResponsesSinglePage extends SinglePage<ToMarkdownCreateResponse> {}
 
 export interface ToMarkdownCreateResponse {
   data: string;
@@ -39,7 +41,7 @@ export interface ToMarkdownCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -47,9 +49,12 @@ export interface ToMarkdownCreateParams {
   files: Array<Core.Uploadable>;
 }
 
+ToMarkdown.ToMarkdownCreateResponsesSinglePage = ToMarkdownCreateResponsesSinglePage;
+
 export declare namespace ToMarkdown {
   export {
     type ToMarkdownCreateResponse as ToMarkdownCreateResponse,
+    ToMarkdownCreateResponsesSinglePage as ToMarkdownCreateResponsesSinglePage,
     type ToMarkdownCreateParams as ToMarkdownCreateParams,
   };
 }

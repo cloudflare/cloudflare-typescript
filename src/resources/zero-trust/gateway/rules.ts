@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as RulesAPI from './rules';
 import { SinglePage } from '../../../pagination';
@@ -21,7 +20,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/rules`, { body, ...options }) as Core.APIPromise<{
         result: GatewayRule;
@@ -50,7 +49,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewayRule> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/rules/${ruleId}`, {
         body,
@@ -73,18 +72,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule>;
-  list(options?: Core.RequestOptions): Core.PagePromise<GatewayRulesSinglePage, GatewayRule>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/gateway/rules`, GatewayRulesSinglePage, options);
   }
 
@@ -101,19 +92,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleId: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>;
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleDeleteResponse;
@@ -133,17 +115,8 @@ export class Rules extends APIResource {
    *   );
    * ```
    */
-  get(ruleId: string, params?: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<GatewayRule>;
-  get(
-    ruleId: string,
-    params: RuleGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayRule> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
         result: GatewayRule;
@@ -166,18 +139,10 @@ export class Rules extends APIResource {
    * ```
    */
   listTenant(
-    params?: RuleListTenantParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule>;
-  listTenant(options?: Core.RequestOptions): Core.PagePromise<GatewayRulesSinglePage, GatewayRule>;
-  listTenant(
-    params: RuleListTenantParams | Core.RequestOptions = {},
+    params: RuleListTenantParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
-    if (isRequestOptions(params)) {
-      return this.listTenant({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/gateway/rules/tenant`,
       GatewayRulesSinglePage,
@@ -201,19 +166,10 @@ export class Rules extends APIResource {
    */
   resetExpiration(
     ruleId: string,
-    params?: RuleResetExpirationParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayRule>;
-  resetExpiration(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<GatewayRule>;
-  resetExpiration(
-    ruleId: string,
-    params: RuleResetExpirationParams | Core.RequestOptions = {},
+    params: RuleResetExpirationParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewayRule> {
-    if (isRequestOptions(params)) {
-      return this.resetExpiration(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/gateway/rules/${ruleId}/reset_expiration`,
@@ -718,7 +674,8 @@ export namespace RuleSetting {
 
     /**
      * Configure download behavior. When set to remote_only, users can view downloads
-     * but cannot save them. Applies only when version == "v2".
+     * but cannot save them. If this field is absent, downloading remains enabled.
+     * Applies only when version == "v2".
      */
     download?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -761,6 +718,12 @@ export namespace RuleSetting {
      * Indicate which version of the browser isolation controls should apply.
      */
     version?: 'v1' | 'v2';
+
+    /**
+     * Specify the watermark ID (UUID) to apply to the isolated browser session. When
+     * present, enables watermark rendering in the isolated browser.
+     */
+    wm_id?: string;
   }
 
   /**
@@ -1192,7 +1155,8 @@ export namespace RuleSettingParam {
 
     /**
      * Configure download behavior. When set to remote_only, users can view downloads
-     * but cannot save them. Applies only when version == "v2".
+     * but cannot save them. If this field is absent, downloading remains enabled.
+     * Applies only when version == "v2".
      */
     download?: 'enabled' | 'disabled' | 'remote_only';
 
@@ -1235,6 +1199,12 @@ export namespace RuleSettingParam {
      * Indicate which version of the browser isolation controls should apply.
      */
     version?: 'v1' | 'v2';
+
+    /**
+     * Specify the watermark ID (UUID) to apply to the isolated browser session. When
+     * present, enables watermark rendering in the isolated browser.
+     */
+    wm_id?: string;
   }
 
   /**
@@ -1600,7 +1570,7 @@ export interface RuleCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specify the action to perform when the associated traffic, identity,
@@ -1728,7 +1698,7 @@ export interface RuleUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specify the action to perform when the associated traffic, identity,
@@ -1853,23 +1823,23 @@ export namespace RuleUpdateParams {
 }
 
 export interface RuleListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleListTenantParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleResetExpirationParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Rules.GatewayRulesSinglePage = GatewayRulesSinglePage;

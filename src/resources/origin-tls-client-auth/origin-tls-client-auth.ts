@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as HostnameCertificatesAPI from './hostname-certificates';
 import {
@@ -72,7 +71,7 @@ export class OriginTLSClientAuth extends APIResource {
     params: OriginTLSClientAuthCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
         result: OriginTLSClientAuthCreateResponse;
@@ -87,20 +86,10 @@ export class OriginTLSClientAuth extends APIResource {
    * @deprecated Use zone_certificates.list for zone-level certificates. This method will be removed in a future major version.
    */
   list(
-    params?: OriginTLSClientAuthListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse>;
-  list(
-    params: OriginTLSClientAuthListParams | Core.RequestOptions = {},
+    params: OriginTLSClientAuthListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OriginTLSClientAuthListResponsesSinglePage, OriginTLSClientAuthListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth`,
       OriginTLSClientAuthListResponsesSinglePage,
@@ -115,22 +104,10 @@ export class OriginTLSClientAuth extends APIResource {
    */
   delete(
     certificateId: string,
-    params?: OriginTLSClientAuthDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthDeleteResponse>;
-  delete(
-    certificateId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthDeleteResponse>;
-  delete(
-    certificateId: string,
-    params: OriginTLSClientAuthDeleteParams | Core.RequestOptions = {},
+    params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(certificateId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
@@ -147,19 +124,10 @@ export class OriginTLSClientAuth extends APIResource {
    */
   get(
     certificateId: string,
-    params?: OriginTLSClientAuthGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthGetResponse>;
-  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginTLSClientAuthGetResponse>;
-  get(
-    certificateId: string,
-    params: OriginTLSClientAuthGetParams | Core.RequestOptions = {},
+    params: OriginTLSClientAuthGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginTLSClientAuthGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(certificateId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
@@ -263,7 +231,7 @@ export interface OriginTLSClientAuthCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The zone's leaf certificate.
@@ -280,21 +248,21 @@ export interface OriginTLSClientAuthListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OriginTLSClientAuthDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OriginTLSClientAuthGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 OriginTLSClientAuth.OriginTLSClientAuthListResponsesSinglePage = OriginTLSClientAuthListResponsesSinglePage;

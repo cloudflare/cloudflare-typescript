@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DomainsAPI from './domains';
 import {
@@ -48,7 +47,7 @@ export class Projects extends APIResource {
    * ```
    */
   create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<Project> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects`, { body, ...options }) as Core.APIPromise<{
         result: Project;
@@ -70,18 +69,10 @@ export class Projects extends APIResource {
    * ```
    */
   list(
-    params?: ProjectListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ProjectsV4PagePaginationArray, Project>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ProjectsV4PagePaginationArray, Project>;
-  list(
-    params: ProjectListParams | Core.RequestOptions = {},
+    params: ProjectListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ProjectsV4PagePaginationArray, Project> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/pages/projects`, ProjectsV4PagePaginationArray, {
       query,
       ...options,
@@ -101,19 +92,10 @@ export class Projects extends APIResource {
    */
   delete(
     projectName: string,
-    params?: ProjectDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectDeleteResponse | null>;
-  delete(projectName: string, options?: Core.RequestOptions): Core.APIPromise<ProjectDeleteResponse | null>;
-  delete(
-    projectName: string,
-    params: ProjectDeleteParams | Core.RequestOptions = {},
+    params: ProjectDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(projectName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}`,
@@ -139,7 +121,7 @@ export class Projects extends APIResource {
     params: ProjectEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Project> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}`, {
         body,
@@ -161,19 +143,10 @@ export class Projects extends APIResource {
    */
   get(
     projectName: string,
-    params?: ProjectGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Project>;
-  get(projectName: string, options?: Core.RequestOptions): Core.APIPromise<Project>;
-  get(
-    projectName: string,
-    params: ProjectGetParams | Core.RequestOptions = {},
+    params: ProjectGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Project> {
-    if (isRequestOptions(params)) {
-      return this.get(projectName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{
         result: Project;
@@ -195,22 +168,10 @@ export class Projects extends APIResource {
    */
   purgeBuildCache(
     projectName: string,
-    params?: ProjectPurgeBuildCacheParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectPurgeBuildCacheResponse | null>;
-  purgeBuildCache(
-    projectName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectPurgeBuildCacheResponse | null>;
-  purgeBuildCache(
-    projectName: string,
-    params: ProjectPurgeBuildCacheParams | Core.RequestOptions = {},
+    params: ProjectPurgeBuildCacheParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProjectPurgeBuildCacheResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.purgeBuildCache(projectName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
@@ -1323,7 +1284,7 @@ export interface ProjectCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Name of the project.
@@ -2060,21 +2021,21 @@ export interface ProjectListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ProjectDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ProjectEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Configs for the project build process.
@@ -2811,14 +2772,14 @@ export interface ProjectGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ProjectPurgeBuildCacheParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Projects.ProjectsV4PagePaginationArray = ProjectsV4PagePaginationArray;

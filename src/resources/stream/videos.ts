@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Videos extends APIResource {
@@ -16,18 +15,10 @@ export class Videos extends APIResource {
    * ```
    */
   storageUsage(
-    params?: VideoStorageUsageParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VideoStorageUsageResponse>;
-  storageUsage(options?: Core.RequestOptions): Core.APIPromise<VideoStorageUsageResponse>;
-  storageUsage(
-    params: VideoStorageUsageParams | Core.RequestOptions = {},
+    params: VideoStorageUsageParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VideoStorageUsageResponse> {
-    if (isRequestOptions(params)) {
-      return this.storageUsage({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/storage-usage`, {
         query,
@@ -64,7 +55,7 @@ export interface VideoStorageUsageParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: A user-defined identifier for the media creator.

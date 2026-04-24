@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import * as CertificatesAPI from './certificates';
@@ -31,18 +30,10 @@ export class Default extends APIResource {
    * ```
    */
   edit(
-    params?: DefaultEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DefaultEditResponse | null>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<DefaultEditResponse | null>;
-  edit(
-    params: DefaultEditParams | Core.RequestOptions = {},
+    params: DefaultEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DefaultEditResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
         result: DefaultEditResponse | null;
@@ -61,16 +52,8 @@ export class Default extends APIResource {
    *   });
    * ```
    */
-  get(params?: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<DefaultGetResponse | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<DefaultGetResponse | null>;
-  get(
-    params: DefaultGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DefaultGetResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: DefaultGetParams, options?: Core.RequestOptions): Core.APIPromise<DefaultGetResponse | null> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/policy`, options) as Core.APIPromise<{
         result: DefaultGetResponse | null;
@@ -301,7 +284,7 @@ export interface DefaultEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -417,7 +400,7 @@ export namespace DefaultEditParams {
 }
 
 export interface DefaultGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Default.Excludes = Excludes;

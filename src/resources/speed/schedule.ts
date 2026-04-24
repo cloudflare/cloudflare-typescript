@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as TestsAPI from './pages/tests';
 
@@ -19,19 +18,10 @@ export class ScheduleResource extends APIResource {
    */
   create(
     url: string,
-    params?: ScheduleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScheduleCreateResponse>;
-  create(url: string, options?: Core.RequestOptions): Core.APIPromise<ScheduleCreateResponse>;
-  create(
-    url: string,
-    params: ScheduleCreateParams | Core.RequestOptions = {},
+    params: ScheduleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScheduleCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(url, {}, params);
-    }
-    const { zone_id = this._client.zoneId, frequency, region } = params;
+    const { zone_id, frequency, region } = params;
     return (
       this._client.post(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query: { frequency, region },
@@ -53,19 +43,10 @@ export class ScheduleResource extends APIResource {
    */
   delete(
     url: string,
-    params?: ScheduleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScheduleDeleteResponse>;
-  delete(url: string, options?: Core.RequestOptions): Core.APIPromise<ScheduleDeleteResponse>;
-  delete(
-    url: string,
-    params: ScheduleDeleteParams | Core.RequestOptions = {},
+    params: ScheduleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScheduleDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(url, {}, params);
-    }
-    const { zone_id = this._client.zoneId, region } = params;
+    const { zone_id, region } = params;
     return (
       this._client.delete(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query: { region },
@@ -85,17 +66,8 @@ export class ScheduleResource extends APIResource {
    * );
    * ```
    */
-  get(url: string, params?: ScheduleGetParams, options?: Core.RequestOptions): Core.APIPromise<Schedule>;
-  get(url: string, options?: Core.RequestOptions): Core.APIPromise<Schedule>;
-  get(
-    url: string,
-    params: ScheduleGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Schedule> {
-    if (isRequestOptions(params)) {
-      return this.get(url, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+  get(url: string, params: ScheduleGetParams, options?: Core.RequestOptions): Core.APIPromise<Schedule> {
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/speed_api/schedule/${url}`, {
         query,
@@ -166,7 +138,7 @@ export interface ScheduleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The frequency of the scheduled test. Defaults to WEEKLY for free
@@ -205,7 +177,7 @@ export interface ScheduleDeleteParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: A test region.
@@ -238,7 +210,7 @@ export interface ScheduleGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: A test region.

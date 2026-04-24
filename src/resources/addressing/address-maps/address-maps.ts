@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AddressMapsAPI from './address-maps';
-import * as IPsAPI from '../../ips';
+import * as IPsAPI from '../../ips/ips';
 import * as AccountsAPI from './accounts';
 import {
   AccountDeleteParams,
@@ -36,18 +35,10 @@ export class AddressMaps extends APIResource {
    * ```
    */
   create(
-    params?: AddressMapCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<AddressMapCreateResponse>;
-  create(
-    params: AddressMapCreateParams | Core.RequestOptions = {},
+    params: AddressMapCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/address_maps`, {
         body,
@@ -70,18 +61,10 @@ export class AddressMaps extends APIResource {
    * ```
    */
   list(
-    params?: AddressMapListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressMapsSinglePage, AddressMap>;
-  list(options?: Core.RequestOptions): Core.PagePromise<AddressMapsSinglePage, AddressMap>;
-  list(
-    params: AddressMapListParams | Core.RequestOptions = {},
+    params: AddressMapListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AddressMapsSinglePage, AddressMap> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/address_maps`,
       AddressMapsSinglePage,
@@ -104,19 +87,10 @@ export class AddressMaps extends APIResource {
    */
   delete(
     addressMapId: string,
-    params?: AddressMapDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapDeleteResponse>;
-  delete(addressMapId: string, options?: Core.RequestOptions): Core.APIPromise<AddressMapDeleteResponse>;
-  delete(
-    addressMapId: string,
-    params: AddressMapDeleteParams | Core.RequestOptions = {},
+    params: AddressMapDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(addressMapId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, options);
   }
 
@@ -136,7 +110,7 @@ export class AddressMaps extends APIResource {
     params: AddressMapEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMap> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
         body,
@@ -158,19 +132,10 @@ export class AddressMaps extends APIResource {
    */
   get(
     addressMapId: string,
-    params?: AddressMapGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapGetResponse>;
-  get(addressMapId: string, options?: Core.RequestOptions): Core.APIPromise<AddressMapGetResponse>;
-  get(
-    addressMapId: string,
-    params: AddressMapGetParams | Core.RequestOptions = {},
+    params: AddressMapGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(addressMapId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
@@ -466,7 +431,7 @@ export interface AddressMapCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: An optional description field which may be used to describe the
@@ -510,21 +475,21 @@ export interface AddressMapListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface AddressMapDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface AddressMapEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: If you have legacy TLS clients which do not send the TLS server name
@@ -552,7 +517,7 @@ export interface AddressMapGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 AddressMaps.AddressMapsSinglePage = AddressMapsSinglePage;

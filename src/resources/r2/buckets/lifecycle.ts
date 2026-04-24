@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Lifecycle extends APIResource {
@@ -21,7 +20,7 @@ export class Lifecycle extends APIResource {
     params: LifecycleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LifecycleUpdateResponse> {
-    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/lifecycle`, {
         body,
@@ -49,19 +48,10 @@ export class Lifecycle extends APIResource {
    */
   get(
     bucketName: string,
-    params?: LifecycleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LifecycleGetResponse>;
-  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<LifecycleGetResponse>;
-  get(
-    bucketName: string,
-    params: LifecycleGetParams | Core.RequestOptions = {},
+    params: LifecycleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LifecycleGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/lifecycle`, {
         ...options,
@@ -224,7 +214,7 @@ export interface LifecycleUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -380,7 +370,7 @@ export interface LifecycleGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

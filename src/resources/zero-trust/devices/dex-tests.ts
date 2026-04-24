@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -25,7 +24,7 @@ export class DEXTests extends APIResource {
    * ```
    */
   create(params: DEXTestCreateParams, options?: Core.RequestOptions): Core.APIPromise<DEXTestCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dex/devices/dex_tests`, {
         body,
@@ -60,7 +59,7 @@ export class DEXTests extends APIResource {
     params: DEXTestUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dex/devices/dex_tests/${dexTestId}`, {
         body,
@@ -83,20 +82,10 @@ export class DEXTests extends APIResource {
    * ```
    */
   list(
-    params?: DEXTestListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse>;
-  list(
-    params: DEXTestListParams | Core.RequestOptions = {},
+    params: DEXTestListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dex/devices/dex_tests`,
       DEXTestListResponsesV4PagePaginationArray,
@@ -119,19 +108,10 @@ export class DEXTests extends APIResource {
    */
   delete(
     dexTestId: string,
-    params?: DEXTestDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestDeleteResponse>;
-  delete(dexTestId: string, options?: Core.RequestOptions): Core.APIPromise<DEXTestDeleteResponse>;
-  delete(
-    dexTestId: string,
-    params: DEXTestDeleteParams | Core.RequestOptions = {},
+    params: DEXTestDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(dexTestId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dex/devices/dex_tests/${dexTestId}`,
@@ -153,19 +133,10 @@ export class DEXTests extends APIResource {
    */
   get(
     dexTestId: string,
-    params?: DEXTestGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestGetResponse>;
-  get(dexTestId: string, options?: Core.RequestOptions): Core.APIPromise<DEXTestGetResponse>;
-  get(
-    dexTestId: string,
-    params: DEXTestGetParams | Core.RequestOptions = {},
+    params: DEXTestGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DEXTestGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(dexTestId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dex/devices/dex_tests/${dexTestId}`,
@@ -667,7 +638,7 @@ export interface DEXTestCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -750,7 +721,7 @@ export interface DEXTestUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The configuration object which contains the details for the WARP
@@ -833,7 +804,7 @@ export interface DEXTestListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter by test type
@@ -847,11 +818,11 @@ export interface DEXTestListParams extends V4PagePaginationArrayParams {
 }
 
 export interface DEXTestDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DEXTestGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 DEXTests.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;

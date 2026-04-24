@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -29,7 +28,7 @@ export class Destinations extends APIResource {
     params: DestinationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DestinationCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/observability/destinations`, {
         body,
@@ -63,7 +62,7 @@ export class Destinations extends APIResource {
     params: DestinationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DestinationUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/observability/destinations/${slug}`, {
         body,
@@ -86,20 +85,10 @@ export class Destinations extends APIResource {
    * ```
    */
   list(
-    params?: DestinationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DestinationListResponsesSinglePage, DestinationListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DestinationListResponsesSinglePage, DestinationListResponse>;
-  list(
-    params: DestinationListParams | Core.RequestOptions = {},
+    params: DestinationListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DestinationListResponsesSinglePage, DestinationListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/observability/destinations`,
       DestinationListResponsesSinglePage,
@@ -121,19 +110,10 @@ export class Destinations extends APIResource {
    */
   delete(
     slug: string,
-    params?: DestinationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DestinationDeleteResponse>;
-  delete(slug: string, options?: Core.RequestOptions): Core.APIPromise<DestinationDeleteResponse>;
-  delete(
-    slug: string,
-    params: DestinationDeleteParams | Core.RequestOptions = {},
+    params: DestinationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DestinationDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(slug, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/workers/observability/destinations/${slug}`,
@@ -265,7 +245,7 @@ export interface DestinationCreateParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -304,7 +284,7 @@ export interface DestinationUpdateParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -331,7 +311,7 @@ export interface DestinationListParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -358,7 +338,7 @@ export interface DestinationDeleteParams {
   /**
    * Your Cloudflare account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Destinations.DestinationListResponsesSinglePage = DestinationListResponsesSinglePage;

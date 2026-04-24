@@ -24,11 +24,7 @@ export class Organizations extends APIResource {
    * ```
    */
   create(params: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -65,11 +61,7 @@ export class Organizations extends APIResource {
    * ```
    */
   update(params: OrganizationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -114,8 +106,7 @@ export class Organizations extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -156,12 +147,7 @@ export class Organizations extends APIResource {
     params: OrganizationRevokeUsersParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationRevokeUsersResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      query_devices,
-      ...body
-    } = params;
+    const { account_id, zone_id, query_devices, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

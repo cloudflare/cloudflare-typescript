@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as PageAPI from './page';
 import { Page, PageGetParams } from './page';
@@ -33,16 +32,8 @@ export class Browser extends APIResource {
    *   });
    * ```
    */
-  create(params?: BrowserCreateParams, options?: Core.RequestOptions): Core.APIPromise<BrowserCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<BrowserCreateResponse>;
-  create(
-    params: BrowserCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, keep_alive, lab, recording, targets } = params;
+  create(params: BrowserCreateParams, options?: Core.RequestOptions): Core.APIPromise<BrowserCreateResponse> {
+    const { account_id, keep_alive, lab, recording, targets } = params;
     return this._client.post(`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query: { keep_alive, lab, recording, targets },
       ...options,
@@ -63,19 +54,10 @@ export class Browser extends APIResource {
    */
   delete(
     sessionId: string,
-    params?: BrowserDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserDeleteResponse>;
-  delete(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<BrowserDeleteResponse>;
-  delete(
-    sessionId: string,
-    params: BrowserDeleteParams | Core.RequestOptions = {},
+    params: BrowserDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrowserDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}`,
       options,
@@ -95,19 +77,10 @@ export class Browser extends APIResource {
    */
   connect(
     sessionId: string,
-    params?: BrowserConnectParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  connect(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  connect(
-    sessionId: string,
-    params: BrowserConnectParams | Core.RequestOptions = {},
+    params: BrowserConnectParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.connect(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}`, {
       query,
       ...options,
@@ -125,16 +98,8 @@ export class Browser extends APIResource {
    * });
    * ```
    */
-  launch(params?: BrowserLaunchParams, options?: Core.RequestOptions): Core.APIPromise<void>;
-  launch(options?: Core.RequestOptions): Core.APIPromise<void>;
-  launch(
-    params: BrowserLaunchParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.launch({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  launch(params: BrowserLaunchParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query,
       ...options,
@@ -157,19 +122,10 @@ export class Browser extends APIResource {
    */
   protocol(
     sessionId: string,
-    params?: BrowserProtocolParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserProtocolResponse>;
-  protocol(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<BrowserProtocolResponse>;
-  protocol(
-    sessionId: string,
-    params: BrowserProtocolParams | Core.RequestOptions = {},
+    params: BrowserProtocolParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrowserProtocolResponse> {
-    if (isRequestOptions(params)) {
-      return this.protocol(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/protocol`,
       options,
@@ -190,19 +146,10 @@ export class Browser extends APIResource {
    */
   version(
     sessionId: string,
-    params?: BrowserVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserVersionResponse>;
-  version(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<BrowserVersionResponse>;
-  version(
-    sessionId: string,
-    params: BrowserVersionParams | Core.RequestOptions = {},
+    params: BrowserVersionParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BrowserVersionResponse> {
-    if (isRequestOptions(params)) {
-      return this.version(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/version`,
       options,
@@ -323,7 +270,7 @@ export interface BrowserCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Keep-alive time in milliseconds.
@@ -350,14 +297,14 @@ export interface BrowserDeleteParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface BrowserConnectParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Keep-alive time in ms (only valid when acquiring new session).
@@ -379,7 +326,7 @@ export interface BrowserLaunchParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Keep-alive time in ms (only valid when acquiring new session).
@@ -401,14 +348,14 @@ export interface BrowserProtocolParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface BrowserVersionParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Browser.Page = Page;

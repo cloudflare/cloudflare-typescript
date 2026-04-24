@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -10,18 +9,10 @@ export class Rules extends APIResource {
    * Put Rules
    */
   update(
-    params?: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse>;
-  update(
-    params?: RuleUpdateParams | Core.RequestOptions,
+    params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleUpdateResponsesSinglePage, RuleUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update(undefined, params);
-    }
-    const { zone_id = this._client.zoneId, rules } = params ?? {};
+    const { zone_id, rules } = params ?? {};
     return this._client.getAPIList(`/zones/${zone_id}/cloud_connector/rules`, RuleUpdateResponsesSinglePage, {
       body: rules,
       method: 'put',
@@ -33,18 +24,10 @@ export class Rules extends APIResource {
    * Rules
    */
   list(
-    params?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/cloud_connector/rules`,
       RuleListResponsesSinglePage,
@@ -125,7 +108,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -171,7 +154,7 @@ export interface RuleListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Rules.RuleUpdateResponsesSinglePage = RuleUpdateResponsesSinglePage;

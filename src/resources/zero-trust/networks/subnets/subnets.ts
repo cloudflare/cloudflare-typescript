@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CloudflareSourceAPI from './cloudflare-source';
 import { CloudflareSource, CloudflareSourceUpdateParams } from './cloudflare-source';
@@ -38,18 +37,10 @@ export class Subnets extends APIResource {
    * ```
    */
   list(
-    params?: SubnetListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubnetsV4PagePaginationArray, WARPAPI.Subnet>;
-  list(options?: Core.RequestOptions): Core.PagePromise<SubnetsV4PagePaginationArray, WARPAPI.Subnet>;
-  list(
-    params: SubnetListParams | Core.RequestOptions = {},
+    params: SubnetListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubnetsV4PagePaginationArray, WARPAPI.Subnet> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/zerotrust/subnets`,
       SubnetsV4PagePaginationArray,
@@ -62,7 +53,7 @@ export interface SubnetListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: If set, only include subnets in the given address family - `v4` or

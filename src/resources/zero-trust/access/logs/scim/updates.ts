@@ -30,7 +30,7 @@ export class Updates extends APIResource {
     params: UpdateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<UpdateListResponsesV4PagePaginationArray, UpdateListResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/logs/scim/updates`,
       UpdateListResponsesV4PagePaginationArray,
@@ -100,7 +100,7 @@ export interface UpdateListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The unique Id of the IdP that has SCIM enabled.

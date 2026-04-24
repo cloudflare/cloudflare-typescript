@@ -243,6 +243,12 @@ export namespace BotGetResponse {
     userAgentPatterns: Array<string>;
 
     userAgents: Array<string>;
+
+    /**
+     * The URL of the agent's [Web Bot Auth](https://blog.cloudflare.com/web-bot-auth/)
+     * resource. Null for bots not verified via request signature.
+     */
+    signatureAgentUrl?: string | null;
   }
 }
 
