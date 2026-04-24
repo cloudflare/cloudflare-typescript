@@ -25,7 +25,7 @@ describe('resource instances', () => {
     const response = await client.workflows.instances.create('x', {
       account_id: 'account_id',
       instance_id: 'instance_id',
-      instance_retention: { error_retention: 0, success_retention: 0 },
+      instance_retention: { error_retention: '5 minutes', success_retention: '5 minutes' },
       params: {},
     });
   });
@@ -71,7 +71,7 @@ describe('resource instances', () => {
       body: [
         {
           instance_id: 'instance_id',
-          instance_retention: { error_retention: 0, success_retention: 0 },
+          instance_retention: { error_retention: '5 minutes', success_retention: '5 minutes' },
           params: {},
         },
       ],

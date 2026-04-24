@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AssetsAPI from './assets';
 import {
@@ -60,16 +59,8 @@ export class Requests extends APIResource {
    * });
    * ```
    */
-  create(params?: RequestCreateParams, options?: Core.RequestOptions): Core.APIPromise<Item>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Item>;
-  create(
-    params: RequestCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Item> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  create(params: RequestCreateParams, options?: Core.RequestOptions): Core.APIPromise<Item> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cloudforce-one/requests/new`, {
         body,
@@ -96,7 +87,7 @@ export class Requests extends APIResource {
     params: RequestUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Item> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/cloudforce-one/requests/${requestId}`, {
         body,
@@ -126,7 +117,7 @@ export class Requests extends APIResource {
     params: RequestListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ListItemsSinglePage, ListItem> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/cloudforce-one/requests`, ListItemsSinglePage, {
       body,
       method: 'post',
@@ -147,19 +138,10 @@ export class Requests extends APIResource {
    */
   delete(
     requestId: string,
-    params?: RequestDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestDeleteResponse>;
-  delete(requestId: string, options?: Core.RequestOptions): Core.APIPromise<RequestDeleteResponse>;
-  delete(
-    requestId: string,
-    params: RequestDeleteParams | Core.RequestOptions = {},
+    params: RequestDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(requestId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/cloudforce-one/requests/${requestId}`, options);
   }
 
@@ -176,18 +158,10 @@ export class Requests extends APIResource {
    * ```
    */
   constants(
-    params?: RequestConstantsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestConstants>;
-  constants(options?: Core.RequestOptions): Core.APIPromise<RequestConstants>;
-  constants(
-    params: RequestConstantsParams | Core.RequestOptions = {},
+    params: RequestConstantsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestConstants> {
-    if (isRequestOptions(params)) {
-      return this.constants({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cloudforce-one/requests/constants`,
@@ -207,17 +181,8 @@ export class Requests extends APIResource {
    * );
    * ```
    */
-  get(requestId: string, params?: RequestGetParams, options?: Core.RequestOptions): Core.APIPromise<Item>;
-  get(requestId: string, options?: Core.RequestOptions): Core.APIPromise<Item>;
-  get(
-    requestId: string,
-    params: RequestGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Item> {
-    if (isRequestOptions(params)) {
-      return this.get(requestId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(requestId: string, params: RequestGetParams, options?: Core.RequestOptions): Core.APIPromise<Item> {
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cloudforce-one/requests/${requestId}`,
@@ -236,16 +201,8 @@ export class Requests extends APIResource {
    * });
    * ```
    */
-  quota(params?: RequestQuotaParams, options?: Core.RequestOptions): Core.APIPromise<Quota>;
-  quota(options?: Core.RequestOptions): Core.APIPromise<Quota>;
-  quota(
-    params: RequestQuotaParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Quota> {
-    if (isRequestOptions(params)) {
-      return this.quota({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  quota(params: RequestQuotaParams, options?: Core.RequestOptions): Core.APIPromise<Quota> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/cloudforce-one/requests/quota`, options) as Core.APIPromise<{
         result: Quota;
@@ -267,20 +224,10 @@ export class Requests extends APIResource {
    * ```
    */
   types(
-    params?: RequestTypesParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RequestTypesResponsesSinglePage, RequestTypesResponse>;
-  types(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RequestTypesResponsesSinglePage, RequestTypesResponse>;
-  types(
-    params: RequestTypesParams | Core.RequestOptions = {},
+    params: RequestTypesParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RequestTypesResponsesSinglePage, RequestTypesResponse> {
-    if (isRequestOptions(params)) {
-      return this.types({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cloudforce-one/requests/types`,
       RequestTypesResponsesSinglePage,
@@ -493,7 +440,7 @@ export interface RequestCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Request content.
@@ -525,7 +472,7 @@ export interface RequestUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Request content.
@@ -557,7 +504,7 @@ export interface RequestListParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Page number of results.
@@ -614,35 +561,35 @@ export interface RequestDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RequestConstantsParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RequestGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RequestQuotaParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RequestTypesParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Requests.ListItemsSinglePage = ListItemsSinglePage;

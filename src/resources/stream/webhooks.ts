@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Webhooks extends APIResource {
@@ -15,16 +14,8 @@ export class Webhooks extends APIResource {
    * });
    * ```
    */
-  update(params?: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse>;
-  update(
-    params: WebhookUpdateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  update(params: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
         result: WebhookUpdateResponse;
@@ -42,16 +33,8 @@ export class Webhooks extends APIResource {
    * });
    * ```
    */
-  delete(params?: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse>;
-  delete(
-    params: WebhookDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  delete(params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
         result: WebhookDeleteResponse;
@@ -69,16 +52,8 @@ export class Webhooks extends APIResource {
    * });
    * ```
    */
-  get(params?: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse>;
-  get(
-    params: WebhookGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
         result: WebhookGetResponse;
@@ -137,7 +112,7 @@ export interface WebhookUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The URL where webhooks will be sent.
@@ -154,14 +129,14 @@ export interface WebhookDeleteParams {
   /**
    * The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface WebhookGetParams {
   /**
    * The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Webhooks {

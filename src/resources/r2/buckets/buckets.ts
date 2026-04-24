@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as CORSAPI from './cors';
 import {
@@ -73,7 +72,7 @@ export class Buckets extends APIResource {
    * ```
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets`, {
         body,
@@ -98,16 +97,8 @@ export class Buckets extends APIResource {
    * });
    * ```
    */
-  list(params?: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<BucketListResponse>;
-  list(
-    params: BucketListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction, ...query } = params;
+  list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
+    const { account_id, jurisdiction, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets`, {
         query,
@@ -135,19 +126,10 @@ export class Buckets extends APIResource {
    */
   delete(
     bucketName: string,
-    params?: BucketDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BucketDeleteResponse>;
-  delete(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<BucketDeleteResponse>;
-  delete(
-    bucketName: string,
-    params: BucketDeleteParams | Core.RequestOptions = {},
+    params: BucketDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BucketDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
@@ -176,7 +158,7 @@ export class Buckets extends APIResource {
    * ```
    */
   edit(bucketName: string, params: BucketEditParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id = this._client.accountId, storage_class, jurisdiction } = params;
+    const { account_id, storage_class, jurisdiction } = params;
     return (
       this._client.patch(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
@@ -202,17 +184,8 @@ export class Buckets extends APIResource {
    * );
    * ```
    */
-  get(bucketName: string, params?: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket>;
-  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<Bucket>;
-  get(
-    bucketName: string,
-    params: BucketGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Bucket> {
-    if (isRequestOptions(params)) {
-      return this.get(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+  get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
         ...options,
@@ -267,7 +240,7 @@ export interface BucketCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Name of the bucket.
@@ -296,7 +269,7 @@ export interface BucketListParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Pagination cursor received during the last List Buckets call. R2
@@ -342,7 +315,7 @@ export interface BucketDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -355,7 +328,7 @@ export interface BucketEditParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Storage class for newly uploaded objects, unless specified
@@ -374,7 +347,7 @@ export interface BucketGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

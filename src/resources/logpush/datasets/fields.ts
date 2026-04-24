@@ -32,6 +32,7 @@ export class Fields extends APIResource {
       | 'dns_firewall_logs'
       | 'dns_logs'
       | 'email_security_alerts'
+      | 'email_security_post_delivery_events'
       | 'firewall_events'
       | 'gateway_dns'
       | 'gateway_http'
@@ -50,8 +51,7 @@ export class Fields extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params?: FieldGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldGetResponse>;
@@ -69,6 +69,7 @@ export class Fields extends APIResource {
       | 'dns_firewall_logs'
       | 'dns_logs'
       | 'email_security_alerts'
+      | 'email_security_post_delivery_events'
       | 'firewall_events'
       | 'gateway_dns'
       | 'gateway_http'
@@ -87,8 +88,7 @@ export class Fields extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldGetResponse>;
   get(
@@ -105,6 +105,7 @@ export class Fields extends APIResource {
       | 'dns_firewall_logs'
       | 'dns_logs'
       | 'email_security_alerts'
+      | 'email_security_post_delivery_events'
       | 'firewall_events'
       | 'gateway_dns'
       | 'gateway_http'
@@ -123,16 +124,14 @@ export class Fields extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params: FieldGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FieldGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(datasetId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

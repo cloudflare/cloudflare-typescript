@@ -14,7 +14,7 @@ describe('resource binaryStorage', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.cloudforceOne.binaryStorage.create({
       account_id: 'account_id',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource binaryStorage', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.cloudforceOne.binaryStorage.create({
       account_id: 'account_id',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
   });
 

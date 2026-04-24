@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 
 export class Entries extends APIResource {
@@ -27,7 +26,7 @@ export class Entries extends APIResource {
     params: EntryCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(
         `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
@@ -60,7 +59,7 @@ export class Entries extends APIResource {
     params: EntryUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(
         `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
@@ -83,19 +82,10 @@ export class Entries extends APIResource {
    */
   list(
     identifier: string,
-    params?: EntryListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryListResponse | null>;
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<EntryListResponse | null>;
-  list(
-    identifier: string,
-    params: EntryListParams | Core.RequestOptions = {},
+    params: EntryListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryListResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.list(identifier, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
@@ -120,24 +110,10 @@ export class Entries extends APIResource {
   delete(
     identifier: string,
     contentListEntryIdentifier: string,
-    params?: EntryDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryDeleteResponse | null>;
-  delete(
-    identifier: string,
-    contentListEntryIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryDeleteResponse | null>;
-  delete(
-    identifier: string,
-    contentListEntryIdentifier: string,
-    params: EntryDeleteParams | Core.RequestOptions = {},
+    params: EntryDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(identifier, contentListEntryIdentifier, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
@@ -162,24 +138,10 @@ export class Entries extends APIResource {
   get(
     identifier: string,
     contentListEntryIdentifier: string,
-    params?: EntryGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryGetResponse>;
-  get(
-    identifier: string,
-    contentListEntryIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryGetResponse>;
-  get(
-    identifier: string,
-    contentListEntryIdentifier: string,
-    params: EntryGetParams | Core.RequestOptions = {},
+    params: EntryGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(identifier, contentListEntryIdentifier, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
@@ -325,7 +287,7 @@ export interface EntryCreateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Specify the CID or content path of content to block.
@@ -347,7 +309,7 @@ export interface EntryUpdateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Specify the CID or content path of content to block.
@@ -369,21 +331,21 @@ export interface EntryListParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface EntryDeleteParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface EntryGetParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Entries {

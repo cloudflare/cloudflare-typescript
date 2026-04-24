@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as EntriesAPI from './entries';
 import {
@@ -42,7 +41,7 @@ export class ContentLists extends APIResource {
     params: ContentListUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ContentList> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`, {
         body,
@@ -65,19 +64,10 @@ export class ContentLists extends APIResource {
    */
   get(
     identifier: string,
-    params?: ContentListGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentList>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<ContentList>;
-  get(
-    identifier: string,
-    params: ContentListGetParams | Core.RequestOptions = {},
+    params: ContentListGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ContentList> {
-    if (isRequestOptions(params)) {
-      return this.get(identifier, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
@@ -98,7 +88,7 @@ export interface ContentListUpdateParams {
   /**
    * Path param: Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Behavior of the content list.
@@ -137,7 +127,7 @@ export interface ContentListGetParams {
   /**
    * Specify the identifier of the hostname.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 ContentLists.Entries = Entries;

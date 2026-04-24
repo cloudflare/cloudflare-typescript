@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -22,22 +21,10 @@ export class Associations extends APIResource {
    */
   get(
     mtlsCertificateId: string,
-    params?: AssociationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificateAsssociationsSinglePage, CertificateAsssociation>;
-  get(
-    mtlsCertificateId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificateAsssociationsSinglePage, CertificateAsssociation>;
-  get(
-    mtlsCertificateId: string,
-    params: AssociationGetParams | Core.RequestOptions = {},
+    params: AssociationGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CertificateAsssociationsSinglePage, CertificateAsssociation> {
-    if (isRequestOptions(params)) {
-      return this.get(mtlsCertificateId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}/associations`,
       CertificateAsssociationsSinglePage,
@@ -64,7 +51,7 @@ export interface AssociationGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Associations.CertificateAsssociationsSinglePage = CertificateAsssociationsSinglePage;

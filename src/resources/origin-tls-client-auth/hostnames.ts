@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -30,7 +29,7 @@ export class Hostnames extends APIResource {
     params: HostnameUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<HostnameUpdateResponsesSinglePage, HostnameUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth/hostnames`,
       HostnameUpdateResponsesSinglePage,
@@ -53,19 +52,10 @@ export class Hostnames extends APIResource {
    */
   get(
     hostname: string,
-    params?: HostnameGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AuthenticatedOriginPull>;
-  get(hostname: string, options?: Core.RequestOptions): Core.APIPromise<AuthenticatedOriginPull>;
-  get(
-    hostname: string,
-    params: HostnameGetParams | Core.RequestOptions = {},
+    params: HostnameGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AuthenticatedOriginPull> {
-    if (isRequestOptions(params)) {
-      return this.get(hostname, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
@@ -203,7 +193,7 @@ export interface HostnameUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -236,7 +226,7 @@ export interface HostnameGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Hostnames.HostnameUpdateResponsesSinglePage = HostnameUpdateResponsesSinglePage;

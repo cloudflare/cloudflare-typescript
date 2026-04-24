@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class SmartRouting extends APIResource {
@@ -20,7 +19,7 @@ export class SmartRouting extends APIResource {
     params: SmartRoutingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SmartRoutingEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/argo/smart_routing`, { body, ...options }) as Core.APIPromise<{
         result: SmartRoutingEditResponse;
@@ -39,18 +38,10 @@ export class SmartRouting extends APIResource {
    * ```
    */
   get(
-    params?: SmartRoutingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SmartRoutingGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SmartRoutingGetResponse>;
-  get(
-    params: SmartRoutingGetParams | Core.RequestOptions = {},
+    params: SmartRoutingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SmartRoutingGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/argo/smart_routing`, options) as Core.APIPromise<{
         result: SmartRoutingGetResponse;
@@ -107,7 +98,7 @@ export interface SmartRoutingEditParams {
   /**
    * Path param: Specifies the zone associated with the API call.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Specifies the enablement value of Argo Smart Routing.
@@ -119,7 +110,7 @@ export interface SmartRoutingGetParams {
   /**
    * Specifies the zone associated with the API call.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace SmartRouting {

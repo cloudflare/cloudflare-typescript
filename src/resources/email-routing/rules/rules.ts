@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as CatchAllsAPI from './catch-alls';
 import {
@@ -35,7 +34,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/routing/rules`, { body, ...options }) as Core.APIPromise<{
         result: EmailRoutingRule;
@@ -65,7 +64,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`, {
         body,
@@ -88,20 +87,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/email/routing/rules`,
       EmailRoutingRulesV4PagePaginationArray,
@@ -123,19 +112,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleIdentifier: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRoutingRule>;
-  delete(ruleIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingRule>;
-  delete(
-    ruleIdentifier: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingRule> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleIdentifier, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
@@ -158,19 +138,10 @@ export class Rules extends APIResource {
    */
   get(
     ruleIdentifier: string,
-    params?: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRoutingRule>;
-  get(ruleIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingRule>;
-  get(
-    ruleIdentifier: string,
-    params: RuleGetParams | Core.RequestOptions = {},
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailRoutingRule> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleIdentifier, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/email/routing/rules/${ruleIdentifier}`,
@@ -287,7 +258,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: List actions patterns.
@@ -319,7 +290,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: List actions patterns.
@@ -351,7 +322,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Filter by enabled routing rules.
@@ -363,14 +334,14 @@ export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Rules.EmailRoutingRulesV4PagePaginationArray = EmailRoutingRulesV4PagePaginationArray;

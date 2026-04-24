@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class WorkflowResource extends APIResource {
@@ -15,16 +14,8 @@ export class WorkflowResource extends APIResource {
    * });
    * ```
    */
-  get(params?: WorkflowGetParams, options?: Core.RequestOptions): Core.APIPromise<Workflow>;
-  get(options?: Core.RequestOptions): Core.APIPromise<Workflow>;
-  get(
-    params: WorkflowGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Workflow> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+  get(params: WorkflowGetParams, options?: Core.RequestOptions): Core.APIPromise<Workflow> {
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/settings/zaraz/workflow`, options) as Core.APIPromise<{
         result: Workflow;
@@ -47,7 +38,7 @@ export interface WorkflowGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace WorkflowResource {

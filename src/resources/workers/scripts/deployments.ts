@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Deployments extends APIResource {
@@ -35,7 +34,7 @@ export class Deployments extends APIResource {
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Deployment> {
-    const { account_id = this._client.accountId, force, ...body } = params;
+    const { account_id, force, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
         query: { force },
@@ -60,19 +59,10 @@ export class Deployments extends APIResource {
    */
   list(
     scriptName: string,
-    params?: DeploymentListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentListResponse>;
-  list(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<DeploymentListResponse>;
-  list(
-    scriptName: string,
-    params: DeploymentListParams | Core.RequestOptions = {},
+    params: DeploymentListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
@@ -98,24 +88,10 @@ export class Deployments extends APIResource {
   delete(
     scriptName: string,
     deploymentId: string,
-    params?: DeploymentDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentDeleteResponse>;
-  delete(
-    scriptName: string,
-    deploymentId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentDeleteResponse>;
-  delete(
-    scriptName: string,
-    deploymentId: string,
-    params: DeploymentDeleteParams | Core.RequestOptions = {},
+    params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(scriptName, deploymentId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/scripts/${scriptName}/deployments/${deploymentId}`,
       options,
@@ -138,20 +114,10 @@ export class Deployments extends APIResource {
   get(
     scriptName: string,
     deploymentId: string,
-    params?: DeploymentGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Deployment>;
-  get(scriptName: string, deploymentId: string, options?: Core.RequestOptions): Core.APIPromise<Deployment>;
-  get(
-    scriptName: string,
-    deploymentId: string,
-    params: DeploymentGetParams | Core.RequestOptions = {},
+    params: DeploymentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Deployment> {
-    if (isRequestOptions(params)) {
-      return this.get(scriptName, deploymentId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/deployments/${deploymentId}`,
@@ -250,7 +216,7 @@ export interface DeploymentCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -294,21 +260,21 @@ export interface DeploymentListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DeploymentDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DeploymentGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Deployments {

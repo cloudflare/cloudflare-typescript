@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ViewsAPI from './views';
 import {
@@ -32,16 +31,8 @@ export class Account extends APIResource {
    * });
    * ```
    */
-  edit(params?: AccountEditParams, options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse>;
-  edit(
-    params: AccountEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  edit(params: AccountEditParams, options?: Core.RequestOptions): Core.APIPromise<AccountEditResponse> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dns_settings`, { body, ...options }) as Core.APIPromise<{
         result: AccountEditResponse;
@@ -59,16 +50,8 @@ export class Account extends APIResource {
    * });
    * ```
    */
-  get(params?: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse>;
-  get(
-    params: AccountGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_settings`, options) as Core.APIPromise<{
         result: AccountGetResponse;
@@ -79,6 +62,15 @@ export class Account extends APIResource {
 
 export interface AccountEditResponse {
   zone_defaults: AccountEditResponse.ZoneDefaults;
+
+  /**
+   * When enabled, forces all proxied DNS records in the account to behave as
+   * DNS-only at the edge, regardless of each record's individual proxy setting. Note
+   * that this account-level override does not modify the records themselves; it only
+   * affects how they are served at the edge. See more on
+   * [Enforce DNS-only](https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only).
+   */
+  enforce_dns_only?: boolean;
 }
 
 export namespace AccountEditResponse {
@@ -203,6 +195,15 @@ export namespace AccountEditResponse {
 
 export interface AccountGetResponse {
   zone_defaults: AccountGetResponse.ZoneDefaults;
+
+  /**
+   * When enabled, forces all proxied DNS records in the account to behave as
+   * DNS-only at the edge, regardless of each record's individual proxy setting. Note
+   * that this account-level override does not modify the records themselves; it only
+   * affects how they are served at the edge. See more on
+   * [Enforce DNS-only](https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only).
+   */
+  enforce_dns_only?: boolean;
 }
 
 export namespace AccountGetResponse {
@@ -329,7 +330,16 @@ export interface AccountEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
+
+  /**
+   * Body param: When enabled, forces all proxied DNS records in the account to
+   * behave as DNS-only at the edge, regardless of each record's individual proxy
+   * setting. Note that this account-level override does not modify the records
+   * themselves; it only affects how they are served at the edge. See more on
+   * [Enforce DNS-only](https://developers.cloudflare.com/dns/proxy-status/enforce-dns-only).
+   */
+  enforce_dns_only?: boolean;
 
   /**
    * Body param
@@ -461,7 +471,7 @@ export interface AccountGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Account.Views = Views;

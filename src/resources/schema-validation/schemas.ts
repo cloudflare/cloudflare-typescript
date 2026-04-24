@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -23,7 +22,7 @@ export class Schemas extends APIResource {
    * ```
    */
   create(params: SchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<PublicSchema> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/schema_validation/schemas`, {
         body,
@@ -46,18 +45,10 @@ export class Schemas extends APIResource {
    * ```
    */
   list(
-    params?: SchemaListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema>;
-  list(options?: Core.RequestOptions): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema>;
-  list(
-    params: SchemaListParams | Core.RequestOptions = {},
+    params: SchemaListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/schema_validation/schemas`,
       PublicSchemasV4PagePaginationArray,
@@ -79,19 +70,10 @@ export class Schemas extends APIResource {
    */
   delete(
     schemaId: string,
-    params?: SchemaDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SchemaDeleteResponse>;
-  delete(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<SchemaDeleteResponse>;
-  delete(
-    schemaId: string,
-    params: SchemaDeleteParams | Core.RequestOptions = {},
+    params: SchemaDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SchemaDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(schemaId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/schema_validation/schemas/${schemaId}`,
@@ -118,7 +100,7 @@ export class Schemas extends APIResource {
     params: SchemaEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PublicSchema> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         body,
@@ -142,19 +124,10 @@ export class Schemas extends APIResource {
    */
   get(
     schemaId: string,
-    params?: SchemaGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PublicSchema>;
-  get(schemaId: string, options?: Core.RequestOptions): Core.APIPromise<PublicSchema>;
-  get(
-    schemaId: string,
-    params: SchemaGetParams | Core.RequestOptions = {},
+    params: SchemaGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PublicSchema> {
-    if (isRequestOptions(params)) {
-      return this.get(schemaId, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/schema_validation/schemas/${schemaId}`, {
         query,
@@ -209,7 +182,7 @@ export interface SchemaCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The kind of the schema
@@ -236,7 +209,7 @@ export interface SchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
@@ -253,14 +226,14 @@ export interface SchemaDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SchemaEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Flag whether schema is enabled for validation.
@@ -272,7 +245,7 @@ export interface SchemaGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.

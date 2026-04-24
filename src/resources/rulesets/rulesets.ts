@@ -319,6 +319,7 @@ export type Phase =
   | 'http_request_sanitize'
   | 'http_request_sbfm'
   | 'http_request_transform'
+  | 'http_response_cache_settings'
   | 'http_response_compression'
   | 'http_response_firewall_managed'
   | 'http_response_headers_transform'
@@ -347,6 +348,7 @@ export type PhaseParam =
   | 'http_request_sanitize'
   | 'http_request_sbfm'
   | 'http_request_transform'
+  | 'http_response_cache_settings'
   | 'http_response_compression'
   | 'http_response_firewall_managed'
   | 'http_response_headers_transform'
@@ -433,7 +435,9 @@ export interface RulesetCreateResponse {
     | RulesAPI.RouteRule
     | RulesAPI.ScoreRule
     | RulesAPI.ServeErrorRule
+    | RulesetCreateResponse.RulesetsSetCacheControlRule
     | RulesAPI.SetCacheSettingsRule
+    | RulesetCreateResponse.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
   >;
@@ -719,6 +723,872 @@ export namespace RulesetCreateResponse {
       score_response_header_name?: string;
     }
   }
+
+  export interface RulesetsSetCacheControlRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_control';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheControlRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A cache-control directive configuration.
+       */
+      immutable?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'max-age'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-understand'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      'no-cache'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-store'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-transform'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      private?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'proxy-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      public?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      's-maxage'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-if-error'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-while-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsSetCacheTagsRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_tags';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?:
+      | RulesetsSetCacheTagsRule.AddCacheTagsValues
+      | RulesetsSetCacheTagsRule.AddCacheTagsExpression
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
+      | RulesetsSetCacheTagsRule.SetCacheTagsValues
+      | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheTagsRule {
+    /**
+     * Add cache tags using a list of values.
+     */
+    export interface AddCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Add cache tags using an expression.
+     */
+    export interface AddCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Remove cache tags using a list of values.
+     */
+    export interface RemoveCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Remove cache tags using an expression.
+     */
+    export interface RemoveCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Set cache tags using a list of values.
+     */
+    export interface SetCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Set cache tags using an expression.
+     */
+    export interface SetCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
 }
 
 /**
@@ -769,7 +1639,9 @@ export interface RulesetUpdateResponse {
     | RulesAPI.RouteRule
     | RulesAPI.ScoreRule
     | RulesAPI.ServeErrorRule
+    | RulesetUpdateResponse.RulesetsSetCacheControlRule
     | RulesAPI.SetCacheSettingsRule
+    | RulesetUpdateResponse.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
   >;
@@ -1055,6 +1927,872 @@ export namespace RulesetUpdateResponse {
       score_response_header_name?: string;
     }
   }
+
+  export interface RulesetsSetCacheControlRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_control';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheControlRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A cache-control directive configuration.
+       */
+      immutable?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'max-age'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-understand'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      'no-cache'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-store'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-transform'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      private?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'proxy-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      public?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      's-maxage'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-if-error'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-while-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsSetCacheTagsRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_tags';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?:
+      | RulesetsSetCacheTagsRule.AddCacheTagsValues
+      | RulesetsSetCacheTagsRule.AddCacheTagsExpression
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
+      | RulesetsSetCacheTagsRule.SetCacheTagsValues
+      | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheTagsRule {
+    /**
+     * Add cache tags using a list of values.
+     */
+    export interface AddCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Add cache tags using an expression.
+     */
+    export interface AddCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Remove cache tags using a list of values.
+     */
+    export interface RemoveCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Remove cache tags using an expression.
+     */
+    export interface RemoveCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Set cache tags using a list of values.
+     */
+    export interface SetCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Set cache tags using an expression.
+     */
+    export interface SetCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
 }
 
 /**
@@ -1145,7 +2883,9 @@ export interface RulesetGetResponse {
     | RulesAPI.RouteRule
     | RulesAPI.ScoreRule
     | RulesAPI.ServeErrorRule
+    | RulesetGetResponse.RulesetsSetCacheControlRule
     | RulesAPI.SetCacheSettingsRule
+    | RulesetGetResponse.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
   >;
@@ -1431,6 +3171,872 @@ export namespace RulesetGetResponse {
       score_response_header_name?: string;
     }
   }
+
+  export interface RulesetsSetCacheControlRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_control';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheControlRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A cache-control directive configuration.
+       */
+      immutable?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'max-age'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-understand'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      'no-cache'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-store'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-transform'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      private?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'proxy-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      public?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      's-maxage'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-if-error'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-while-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsSetCacheTagsRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_tags';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?:
+      | RulesetsSetCacheTagsRule.AddCacheTagsValues
+      | RulesetsSetCacheTagsRule.AddCacheTagsExpression
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
+      | RulesetsSetCacheTagsRule.SetCacheTagsValues
+      | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheTagsRule {
+    /**
+     * Add cache tags using a list of values.
+     */
+    export interface AddCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Add cache tags using an expression.
+     */
+    export interface AddCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Remove cache tags using a list of values.
+     */
+    export interface RemoveCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Remove cache tags using an expression.
+     */
+    export interface RemoveCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Set cache tags using a list of values.
+     */
+    export interface SetCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Set cache tags using an expression.
+     */
+    export interface SetCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
 }
 
 export interface RulesetCreateParams {
@@ -1485,7 +4091,9 @@ export interface RulesetCreateParams {
     | RulesAPI.RouteRuleParam
     | RulesAPI.ScoreRuleParam
     | RulesAPI.ServeErrorRuleParam
+    | RulesetCreateParams.RulesetsSetCacheControlRule
     | RulesAPI.SetCacheSettingsRuleParam
+    | RulesetCreateParams.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRuleParam
     | RulesAPI.SkipRuleParam
   >;
@@ -1731,6 +4339,842 @@ export namespace RulesetCreateParams {
       score_response_header_name?: string;
     }
   }
+
+  export interface RulesetsSetCacheControlRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_control';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheControlRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A cache-control directive configuration.
+       */
+      immutable?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'max-age'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-understand'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      'no-cache'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-store'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-transform'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      private?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'proxy-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      public?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      's-maxage'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-if-error'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-while-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsSetCacheTagsRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_tags';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?:
+      | RulesetsSetCacheTagsRule.AddCacheTagsValues
+      | RulesetsSetCacheTagsRule.AddCacheTagsExpression
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
+      | RulesetsSetCacheTagsRule.SetCacheTagsValues
+      | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheTagsRule {
+    /**
+     * Add cache tags using a list of values.
+     */
+    export interface AddCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Add cache tags using an expression.
+     */
+    export interface AddCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Remove cache tags using a list of values.
+     */
+    export interface RemoveCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Remove cache tags using an expression.
+     */
+    export interface RemoveCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Set cache tags using a list of values.
+     */
+    export interface SetCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Set cache tags using an expression.
+     */
+    export interface SetCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
 }
 
 export interface RulesetUpdateParams {
@@ -1785,7 +5229,9 @@ export interface RulesetUpdateParams {
     | RulesAPI.RouteRuleParam
     | RulesAPI.ScoreRuleParam
     | RulesAPI.ServeErrorRuleParam
+    | RulesetUpdateParams.RulesetsSetCacheControlRule
     | RulesAPI.SetCacheSettingsRuleParam
+    | RulesetUpdateParams.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRuleParam
     | RulesAPI.SkipRuleParam
   >;
@@ -1965,6 +5411,842 @@ export namespace RulesetUpdateParams {
   }
 
   export namespace RulesetsJSChallengeRule {
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsSetCacheControlRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_control';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsSetCacheControlRule.ActionParameters;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheControlRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheControlRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheControlRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * A cache-control directive configuration.
+       */
+      immutable?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'max-age'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'must-understand'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      'no-cache'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-store'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'no-transform'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts optional qualifiers (header
+       * names).
+       */
+      private?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      'proxy-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration.
+       */
+      public?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      's-maxage'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-if-error'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+
+      /**
+       * A cache-control directive configuration that accepts a duration value in
+       * seconds.
+       */
+      'stale-while-revalidate'?: ActionParameters.SetDirective | ActionParameters.RemoveDirective;
+    }
+
+    export namespace ActionParameters {
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with optional qualifiers.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+
+        /**
+         * Optional list of header names to qualify the directive (e.g., for "private" or
+         * "no-cache" directives).
+         */
+        qualifiers?: Array<string>;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Set the directive with a duration value in seconds.
+       */
+      export interface SetDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * The duration value in seconds for the directive.
+         */
+        value: number;
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+
+      /**
+       * Remove the directive.
+       */
+      export interface RemoveDirective {
+        /**
+         * The operation to perform on the cache-control directive.
+         */
+        operation: 'set' | 'remove';
+
+        /**
+         * Whether the directive should only be applied to the Cloudflare CDN cache.
+         */
+        cloudflare_only?: boolean;
+      }
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsSetCacheTagsRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'set_cache_tags';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?:
+      | RulesetsSetCacheTagsRule.AddCacheTagsValues
+      | RulesetsSetCacheTagsRule.AddCacheTagsExpression
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsValues
+      | RulesetsSetCacheTagsRule.RemoveCacheTagsExpression
+      | RulesetsSetCacheTagsRule.SetCacheTagsValues
+      | RulesetsSetCacheTagsRule.SetCacheTagsExpression;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsSetCacheTagsRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsSetCacheTagsRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsSetCacheTagsRule {
+    /**
+     * Add cache tags using a list of values.
+     */
+    export interface AddCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Add cache tags using an expression.
+     */
+    export interface AddCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Remove cache tags using a list of values.
+     */
+    export interface RemoveCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Remove cache tags using an expression.
+     */
+    export interface RemoveCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Set cache tags using a list of values.
+     */
+    export interface SetCacheTagsValues {
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+
+      /**
+       * A list of cache tag values.
+       */
+      values: Array<string>;
+    }
+
+    /**
+     * Set cache tags using an expression.
+     */
+    export interface SetCacheTagsExpression {
+      /**
+       * An expression that evaluates to an array of cache tag values.
+       */
+      expression: string;
+
+      /**
+       * The operation to perform on the cache tags.
+       */
+      operation: 'add' | 'remove' | 'set';
+    }
+
     /**
      * Configuration for exposed credential checking.
      */

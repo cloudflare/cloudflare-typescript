@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Statuses extends APIResource {
@@ -36,19 +35,10 @@ export class Statuses extends APIResource {
    */
   get(
     waitingRoomId: string,
-    params?: StatusGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusGetResponse>;
-  get(waitingRoomId: string, options?: Core.RequestOptions): Core.APIPromise<StatusGetResponse>;
-  get(
-    waitingRoomId: string,
-    params: StatusGetParams | Core.RequestOptions = {},
+    params: StatusGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StatusGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(waitingRoomId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/status`,
@@ -74,7 +64,7 @@ export interface StatusGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Statuses {

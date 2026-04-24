@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
 
@@ -20,20 +19,10 @@ export class Devices extends APIResource {
    * ```
    */
   list(
-    params?: DeviceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeviceListResponsesCursorPagination, DeviceListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeviceListResponsesCursorPagination, DeviceListResponse>;
-  list(
-    params: DeviceListParams | Core.RequestOptions = {},
+    params: DeviceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DeviceListResponsesCursorPagination, DeviceListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/physical-devices`,
       DeviceListResponsesCursorPagination,
@@ -55,19 +44,10 @@ export class Devices extends APIResource {
    */
   delete(
     deviceId: string,
-    params?: DeviceDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceDeleteResponse | null>;
-  delete(deviceId: string, options?: Core.RequestOptions): Core.APIPromise<DeviceDeleteResponse | null>;
-  delete(
-    deviceId: string,
-    params: DeviceDeleteParams | Core.RequestOptions = {},
+    params: DeviceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(deviceId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/physical-devices/${deviceId}`,
@@ -89,19 +69,10 @@ export class Devices extends APIResource {
    */
   get(
     deviceId: string,
-    params?: DeviceGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceGetResponse>;
-  get(deviceId: string, options?: Core.RequestOptions): Core.APIPromise<DeviceGetResponse>;
-  get(
-    deviceId: string,
-    params: DeviceGetParams | Core.RequestOptions = {},
+    params: DeviceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(deviceId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/physical-devices/${deviceId}`, {
         query,
@@ -124,19 +95,10 @@ export class Devices extends APIResource {
    */
   revoke(
     deviceId: string,
-    params?: DeviceRevokeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceRevokeResponse | null>;
-  revoke(deviceId: string, options?: Core.RequestOptions): Core.APIPromise<DeviceRevokeResponse | null>;
-  revoke(
-    deviceId: string,
-    params: DeviceRevokeParams | Core.RequestOptions = {},
+    params: DeviceRevokeParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceRevokeResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.revoke(deviceId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/devices/physical-devices/${deviceId}/revoke`,
@@ -494,7 +456,7 @@ export interface DeviceListParams extends CursorPaginationParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter by a one or more device IDs.
@@ -564,14 +526,14 @@ export namespace DeviceListParams {
 }
 
 export interface DeviceDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DeviceGetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Comma-separated list of additional information that should be
@@ -582,7 +544,7 @@ export interface DeviceGetParams {
 }
 
 export interface DeviceRevokeParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Devices.DeviceListResponsesCursorPagination = DeviceListResponsesCursorPagination;

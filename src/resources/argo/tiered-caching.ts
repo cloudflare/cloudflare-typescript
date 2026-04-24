@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class TieredCaching extends APIResource {
@@ -30,7 +29,7 @@ export class TieredCaching extends APIResource {
     params: TieredCachingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TieredCachingEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/argo/tiered_caching`, { body, ...options }) as Core.APIPromise<{
         result: TieredCachingEditResponse;
@@ -59,18 +58,10 @@ export class TieredCaching extends APIResource {
    * ```
    */
   get(
-    params?: TieredCachingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TieredCachingGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TieredCachingGetResponse>;
-  get(
-    params: TieredCachingGetParams | Core.RequestOptions = {},
+    params: TieredCachingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TieredCachingGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/argo/tiered_caching`, options) as Core.APIPromise<{
         result: TieredCachingGetResponse;
@@ -127,7 +118,7 @@ export interface TieredCachingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Enables Tiered Caching.
@@ -139,7 +130,7 @@ export interface TieredCachingGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace TieredCaching {

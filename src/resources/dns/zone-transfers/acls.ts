@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -19,7 +18,7 @@ export class ACLs extends APIResource {
    * ```
    */
   create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/acls`, {
         body,
@@ -44,7 +43,7 @@ export class ACLs extends APIResource {
    * ```
    */
   update(aclId: string, params: ACLUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, {
         body,
@@ -66,16 +65,8 @@ export class ACLs extends APIResource {
    * }
    * ```
    */
-  list(params?: ACLListParams, options?: Core.RequestOptions): Core.PagePromise<ACLsSinglePage, ACL>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ACLsSinglePage, ACL>;
-  list(
-    params: ACLListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ACLsSinglePage, ACL> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: ACLListParams, options?: Core.RequestOptions): Core.PagePromise<ACLsSinglePage, ACL> {
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/acls`, ACLsSinglePage, options);
   }
 
@@ -92,19 +83,10 @@ export class ACLs extends APIResource {
    */
   delete(
     aclId: string,
-    params?: ACLDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLDeleteResponse>;
-  delete(aclId: string, options?: Core.RequestOptions): Core.APIPromise<ACLDeleteResponse>;
-  delete(
-    aclId: string,
-    params: ACLDeleteParams | Core.RequestOptions = {},
+    params: ACLDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACLDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(aclId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
         result: ACLDeleteResponse;
@@ -123,17 +105,8 @@ export class ACLs extends APIResource {
    * );
    * ```
    */
-  get(aclId: string, params?: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<ACL>;
-  get(aclId: string, options?: Core.RequestOptions): Core.APIPromise<ACL>;
-  get(
-    aclId: string,
-    params: ACLGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ACL> {
-    if (isRequestOptions(params)) {
-      return this.get(aclId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(aclId: string, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
         result: ACL;
@@ -170,7 +143,7 @@ export interface ACLCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Allowed IPv4/IPv6 address range of primary or secondary nameservers.
@@ -191,7 +164,7 @@ export interface ACLUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Allowed IPv4/IPv6 address range of primary or secondary nameservers.
@@ -209,15 +182,15 @@ export interface ACLUpdateParams {
 }
 
 export interface ACLListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ACLDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ACLGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 ACLs.ACLsSinglePage = ACLsSinglePage;

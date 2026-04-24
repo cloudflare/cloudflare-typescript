@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ConnectivitySettings extends APIResource {
@@ -17,18 +16,10 @@ export class ConnectivitySettings extends APIResource {
    * ```
    */
   edit(
-    params?: ConnectivitySettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectivitySettingEditResponse>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<ConnectivitySettingEditResponse>;
-  edit(
-    params: ConnectivitySettingEditParams | Core.RequestOptions = {},
+    params: ConnectivitySettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectivitySettingEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/zerotrust/connectivity_settings`, {
         body,
@@ -49,18 +40,10 @@ export class ConnectivitySettings extends APIResource {
    * ```
    */
   get(
-    params?: ConnectivitySettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectivitySettingGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<ConnectivitySettingGetResponse>;
-  get(
-    params: ConnectivitySettingGetParams | Core.RequestOptions = {},
+    params: ConnectivitySettingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectivitySettingGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/zerotrust/connectivity_settings`,
@@ -98,7 +81,7 @@ export interface ConnectivitySettingEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A flag to enable the ICMP proxy for the account network.
@@ -115,7 +98,7 @@ export interface ConnectivitySettingGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace ConnectivitySettings {

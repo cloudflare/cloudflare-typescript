@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -26,7 +25,7 @@ export class ImpersonationRegistry extends APIResource {
     params: ImpersonationRegistryCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImpersonationRegistryCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/settings/impersonation_registry`, {
         body,
@@ -49,29 +48,13 @@ export class ImpersonationRegistry extends APIResource {
    * ```
    */
   list(
-    params?: ImpersonationRegistryListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    ImpersonationRegistryListResponsesV4PagePaginationArray,
-    ImpersonationRegistryListResponse
-  >;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    ImpersonationRegistryListResponsesV4PagePaginationArray,
-    ImpersonationRegistryListResponse
-  >;
-  list(
-    params: ImpersonationRegistryListParams | Core.RequestOptions = {},
+    params: ImpersonationRegistryListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<
     ImpersonationRegistryListResponsesV4PagePaginationArray,
     ImpersonationRegistryListResponse
   > {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/impersonation_registry`,
       ImpersonationRegistryListResponsesV4PagePaginationArray,
@@ -93,22 +76,10 @@ export class ImpersonationRegistry extends APIResource {
    */
   delete(
     displayNameId: number,
-    params?: ImpersonationRegistryDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryDeleteResponse>;
-  delete(
-    displayNameId: number,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryDeleteResponse>;
-  delete(
-    displayNameId: number,
-    params: ImpersonationRegistryDeleteParams | Core.RequestOptions = {},
+    params: ImpersonationRegistryDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImpersonationRegistryDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(displayNameId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`,
@@ -134,7 +105,7 @@ export class ImpersonationRegistry extends APIResource {
     params: ImpersonationRegistryEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImpersonationRegistryEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`,
@@ -157,22 +128,10 @@ export class ImpersonationRegistry extends APIResource {
    */
   get(
     displayNameId: number,
-    params?: ImpersonationRegistryGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryGetResponse>;
-  get(
-    displayNameId: number,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryGetResponse>;
-  get(
-    displayNameId: number,
-    params: ImpersonationRegistryGetParams | Core.RequestOptions = {},
+    params: ImpersonationRegistryGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ImpersonationRegistryGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(displayNameId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`,
@@ -300,7 +259,7 @@ export interface ImpersonationRegistryCreateParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -322,7 +281,7 @@ export interface ImpersonationRegistryListParams extends V4PagePaginationArrayPa
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The sorting direction.
@@ -351,14 +310,14 @@ export interface ImpersonationRegistryDeleteParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ImpersonationRegistryEditParams {
   /**
    * Path param: Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -380,7 +339,7 @@ export interface ImpersonationRegistryGetParams {
   /**
    * Account Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 ImpersonationRegistry.ImpersonationRegistryListResponsesV4PagePaginationArray =

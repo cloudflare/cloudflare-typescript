@@ -29,11 +29,7 @@ export class AccessRules extends APIResource {
     params: AccessRuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleCreateResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -87,11 +83,7 @@ export class AccessRules extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...query
-    } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -142,8 +134,7 @@ export class AccessRules extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(ruleId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -190,11 +181,7 @@ export class AccessRules extends APIResource {
     params: AccessRuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleEditResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -244,8 +231,7 @@ export class AccessRules extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(ruleId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

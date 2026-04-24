@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -18,7 +17,7 @@ export class SSO extends APIResource {
    * ```
    */
   create(params: SSOCreateParams, options?: Core.RequestOptions): Core.APIPromise<SSOCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/sso_connectors`, { body, ...options }) as Core.APIPromise<{
         result: SSOCreateResponse;
@@ -39,19 +38,10 @@ export class SSO extends APIResource {
    */
   update(
     ssoConnectorId: string,
-    params?: SSOUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SSOUpdateResponse>;
-  update(ssoConnectorId: string, options?: Core.RequestOptions): Core.APIPromise<SSOUpdateResponse>;
-  update(
-    ssoConnectorId: string,
-    params: SSOUpdateParams | Core.RequestOptions = {},
+    params: SSOUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SSOUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update(ssoConnectorId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/sso_connectors/${ssoConnectorId}`, {
         body,
@@ -74,18 +64,10 @@ export class SSO extends APIResource {
    * ```
    */
   list(
-    params?: SSOListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SSOListResponsesSinglePage, SSOListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<SSOListResponsesSinglePage, SSOListResponse>;
-  list(
-    params: SSOListParams | Core.RequestOptions = {},
+    params: SSOListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SSOListResponsesSinglePage, SSOListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/sso_connectors`,
       SSOListResponsesSinglePage,
@@ -106,19 +88,10 @@ export class SSO extends APIResource {
    */
   delete(
     ssoConnectorId: string,
-    params?: SSODeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SSODeleteResponse | null>;
-  delete(ssoConnectorId: string, options?: Core.RequestOptions): Core.APIPromise<SSODeleteResponse | null>;
-  delete(
-    ssoConnectorId: string,
-    params: SSODeleteParams | Core.RequestOptions = {},
+    params: SSODeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SSODeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(ssoConnectorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/sso_connectors/${ssoConnectorId}`,
@@ -140,22 +113,10 @@ export class SSO extends APIResource {
    */
   beginVerification(
     ssoConnectorId: string,
-    params?: SSOBeginVerificationParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SSOBeginVerificationResponse>;
-  beginVerification(
-    ssoConnectorId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SSOBeginVerificationResponse>;
-  beginVerification(
-    ssoConnectorId: string,
-    params: SSOBeginVerificationParams | Core.RequestOptions = {},
+    params: SSOBeginVerificationParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SSOBeginVerificationResponse> {
-    if (isRequestOptions(params)) {
-      return this.beginVerification(ssoConnectorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.post(
       `/accounts/${account_id}/sso_connectors/${ssoConnectorId}/begin_verification`,
       options,
@@ -175,19 +136,10 @@ export class SSO extends APIResource {
    */
   get(
     ssoConnectorId: string,
-    params?: SSOGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SSOGetResponse>;
-  get(ssoConnectorId: string, options?: Core.RequestOptions): Core.APIPromise<SSOGetResponse>;
-  get(
-    ssoConnectorId: string,
-    params: SSOGetParams | Core.RequestOptions = {},
+    params: SSOGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SSOGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(ssoConnectorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/sso_connectors/${ssoConnectorId}`,
@@ -427,7 +379,7 @@ export interface SSOCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Email domain of the new SSO connector
@@ -450,7 +402,7 @@ export interface SSOUpdateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: SSO Connector enabled state
@@ -468,28 +420,28 @@ export interface SSOListParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SSODeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SSOBeginVerificationParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SSOGetParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 SSO.SSOListResponsesSinglePage = SSOListResponsesSinglePage;

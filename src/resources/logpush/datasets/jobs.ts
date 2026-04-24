@@ -36,6 +36,7 @@ export class Jobs extends APIResource {
       | 'dns_firewall_logs'
       | 'dns_logs'
       | 'email_security_alerts'
+      | 'email_security_post_delivery_events'
       | 'firewall_events'
       | 'gateway_dns'
       | 'gateway_http'
@@ -54,8 +55,7 @@ export class Jobs extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params?: JobGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
@@ -73,6 +73,7 @@ export class Jobs extends APIResource {
       | 'dns_firewall_logs'
       | 'dns_logs'
       | 'email_security_alerts'
+      | 'email_security_post_delivery_events'
       | 'firewall_events'
       | 'gateway_dns'
       | 'gateway_http'
@@ -91,8 +92,7 @@ export class Jobs extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null>;
   get(
@@ -109,6 +109,7 @@ export class Jobs extends APIResource {
       | 'dns_firewall_logs'
       | 'dns_logs'
       | 'email_security_alerts'
+      | 'email_security_post_delivery_events'
       | 'firewall_events'
       | 'gateway_dns'
       | 'gateway_http'
@@ -127,16 +128,14 @@ export class Jobs extends APIResource {
       | 'warp_toggle_changes'
       | 'workers_trace_events'
       | 'zaraz_events'
-      | 'zero_trust_network_sessions'
-      | null,
+      | 'zero_trust_network_sessions',
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<LogpushJobsSinglePage, JobsAPI.LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.get(datasetId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

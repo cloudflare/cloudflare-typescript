@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -28,7 +27,7 @@ export class BGPPrefixes extends APIResource {
     params: BGPPrefixCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefix> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`, {
         body,
@@ -56,19 +55,10 @@ export class BGPPrefixes extends APIResource {
    */
   list(
     prefixId: string,
-    params?: BGPPrefixListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix>;
-  list(prefixId: string, options?: Core.RequestOptions): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix>;
-  list(
-    prefixId: string,
-    params: BGPPrefixListParams | Core.RequestOptions = {},
+    params: BGPPrefixListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix> {
-    if (isRequestOptions(params)) {
-      return this.list(prefixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`,
       BGPPrefixesSinglePage,
@@ -96,7 +86,7 @@ export class BGPPrefixes extends APIResource {
     params: BGPPrefixEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefix> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
@@ -121,20 +111,10 @@ export class BGPPrefixes extends APIResource {
   get(
     prefixId: string,
     bgpPrefixId: string,
-    params?: BGPPrefixGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BGPPrefix>;
-  get(prefixId: string, bgpPrefixId: string, options?: Core.RequestOptions): Core.APIPromise<BGPPrefix>;
-  get(
-    prefixId: string,
-    bgpPrefixId: string,
-    params: BGPPrefixGetParams | Core.RequestOptions = {},
+    params: BGPPrefixGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BGPPrefix> {
-    if (isRequestOptions(params)) {
-      return this.get(prefixId, bgpPrefixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
@@ -230,7 +210,7 @@ export interface BGPPrefixCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: IP Prefix in Classless Inter-Domain Routing format.
@@ -242,14 +222,14 @@ export interface BGPPrefixListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface BGPPrefixEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Number of times to prepend the Cloudflare ASN to the BGP AS-Path
@@ -282,7 +262,7 @@ export interface BGPPrefixGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 BGPPrefixes.BGPPrefixesSinglePage = BGPPrefixesSinglePage;

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as PreviewsAPI from './previews';
 import {
@@ -29,7 +28,7 @@ export class Healthchecks extends APIResource {
    * ```
    */
   create(params: HealthcheckCreateParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/healthchecks`, { body, ...options }) as Core.APIPromise<{
         result: Healthcheck;
@@ -57,7 +56,7 @@ export class Healthchecks extends APIResource {
     params: HealthcheckUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Healthcheck> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
         body,
@@ -80,18 +79,10 @@ export class Healthchecks extends APIResource {
    * ```
    */
   list(
-    params?: HealthcheckListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck>;
-  list(options?: Core.RequestOptions): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck>;
-  list(
-    params: HealthcheckListParams | Core.RequestOptions = {},
+    params: HealthcheckListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksV4PagePaginationArray, {
       query,
       ...options,
@@ -111,19 +102,10 @@ export class Healthchecks extends APIResource {
    */
   delete(
     healthcheckId: string,
-    params?: HealthcheckDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HealthcheckDeleteResponse>;
-  delete(healthcheckId: string, options?: Core.RequestOptions): Core.APIPromise<HealthcheckDeleteResponse>;
-  delete(
-    healthcheckId: string,
-    params: HealthcheckDeleteParams | Core.RequestOptions = {},
+    params: HealthcheckDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthcheckDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(healthcheckId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
         result: HealthcheckDeleteResponse;
@@ -151,7 +133,7 @@ export class Healthchecks extends APIResource {
     params: HealthcheckEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Healthcheck> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
         body,
@@ -173,19 +155,10 @@ export class Healthchecks extends APIResource {
    */
   get(
     healthcheckId: string,
-    params?: HealthcheckGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Healthcheck>;
-  get(healthcheckId: string, options?: Core.RequestOptions): Core.APIPromise<Healthcheck>;
-  get(
-    healthcheckId: string,
-    params: HealthcheckGetParams | Core.RequestOptions = {},
+    params: HealthcheckGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Healthcheck> {
-    if (isRequestOptions(params)) {
-      return this.get(healthcheckId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
         result: Healthcheck;
@@ -550,7 +523,7 @@ export interface HealthcheckCreateParams {
   /**
    * Path param: Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -631,7 +604,7 @@ export interface HealthcheckUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -712,21 +685,21 @@ export interface HealthcheckListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface HealthcheckDeleteParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface HealthcheckEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The hostname or IP address of the origin server to run health checks
@@ -807,7 +780,7 @@ export interface HealthcheckGetParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Healthchecks.HealthchecksV4PagePaginationArray = HealthchecksV4PagePaginationArray;

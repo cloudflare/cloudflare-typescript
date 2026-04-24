@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -19,7 +18,7 @@ export class Config extends APIResource {
    * ```
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<ConfigCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/cloudforce-one/scans/config`, {
         body,
@@ -42,18 +41,10 @@ export class Config extends APIResource {
    * ```
    */
   list(
-    params?: ConfigListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ConfigListResponsesSinglePage, ConfigListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ConfigListResponsesSinglePage, ConfigListResponse>;
-  list(
-    params: ConfigListParams | Core.RequestOptions = {},
+    params: ConfigListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConfigListResponsesSinglePage, ConfigListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/cloudforce-one/scans/config`,
       ConfigListResponsesSinglePage,
@@ -75,19 +66,10 @@ export class Config extends APIResource {
    */
   delete(
     configId: string,
-    params?: ConfigDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigDeleteResponse>;
-  delete(configId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse>;
-  delete(
-    configId: string,
-    params: ConfigDeleteParams | Core.RequestOptions = {},
+    params: ConfigDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(configId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/cloudforce-one/scans/config/${configId}`,
@@ -110,19 +92,10 @@ export class Config extends APIResource {
    */
   edit(
     configId: string,
-    params?: ConfigEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigEditResponse>;
-  edit(configId: string, options?: Core.RequestOptions): Core.APIPromise<ConfigEditResponse>;
-  edit(
-    configId: string,
-    params: ConfigEditParams | Core.RequestOptions = {},
+    params: ConfigEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit(configId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/cloudforce-one/scans/config/${configId}`, {
         body,
@@ -221,7 +194,7 @@ export interface ConfigCreateParams {
   /**
    * Path param: Defines the Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Defines a list of IP addresses or CIDR blocks to scan. The maximum
@@ -246,21 +219,21 @@ export interface ConfigListParams {
   /**
    * Defines the Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ConfigDeleteParams {
   /**
    * Defines the Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ConfigEditParams {
   /**
    * Path param: Defines the Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Defines the number of days between each scan (0 = One-off scan).

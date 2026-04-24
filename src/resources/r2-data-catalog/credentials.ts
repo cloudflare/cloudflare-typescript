@@ -25,7 +25,7 @@ export class Credentials extends APIResource {
     params: CredentialCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CredentialCreateResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2-catalog/${bucketName}/credential`, {
         body,
@@ -41,7 +41,7 @@ export interface CredentialCreateParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Provides the Cloudflare API token for accessing R2.

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class CORS extends APIResource {
@@ -21,7 +20,7 @@ export class CORS extends APIResource {
     params: CORSUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CORSUpdateResponse> {
-    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         body,
@@ -49,19 +48,10 @@ export class CORS extends APIResource {
    */
   delete(
     bucketName: string,
-    params?: CORSDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CORSDeleteResponse>;
-  delete(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<CORSDeleteResponse>;
-  delete(
-    bucketName: string,
-    params: CORSDeleteParams | Core.RequestOptions = {},
+    params: CORSDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CORSDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         ...options,
@@ -88,19 +78,10 @@ export class CORS extends APIResource {
    */
   get(
     bucketName: string,
-    params?: CORSGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CORSGetResponse>;
-  get(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<CORSGetResponse>;
-  get(
-    bucketName: string,
-    params: CORSGetParams | Core.RequestOptions = {},
+    params: CORSGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CORSGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/cors`, {
         ...options,
@@ -183,7 +164,7 @@ export interface CORSUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -257,7 +238,7 @@ export interface CORSDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -270,7 +251,7 @@ export interface CORSGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

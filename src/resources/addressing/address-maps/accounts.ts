@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Accounts extends APIResource {
@@ -25,7 +24,7 @@ export class Accounts extends APIResource {
     params: AccountUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountUpdateResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return this._client.put(
       `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
       { body: body, ...options },
@@ -46,19 +45,10 @@ export class Accounts extends APIResource {
    */
   delete(
     addressMapId: string,
-    params?: AccountDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountDeleteResponse>;
-  delete(addressMapId: string, options?: Core.RequestOptions): Core.APIPromise<AccountDeleteResponse>;
-  delete(
-    addressMapId: string,
-    params: AccountDeleteParams | Core.RequestOptions = {},
+    params: AccountDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(addressMapId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
       options,
@@ -218,7 +208,7 @@ export interface AccountUpdateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -230,7 +220,7 @@ export interface AccountDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Accounts {

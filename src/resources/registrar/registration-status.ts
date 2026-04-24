@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as RegistrarAPI from './registrar';
 
@@ -60,19 +59,10 @@ export class RegistrationStatus extends APIResource {
    */
   get(
     domainName: string,
-    params?: RegistrationStatusGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegistrarAPI.WorkflowStatus>;
-  get(domainName: string, options?: Core.RequestOptions): Core.APIPromise<RegistrarAPI.WorkflowStatus>;
-  get(
-    domainName: string,
-    params: RegistrationStatusGetParams | Core.RequestOptions = {},
+    params: RegistrationStatusGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegistrarAPI.WorkflowStatus> {
-    if (isRequestOptions(params)) {
-      return this.get(domainName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/registrar/registrations/${domainName}/registration-status`,
@@ -86,7 +76,7 @@ export interface RegistrationStatusGetParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace RegistrationStatus {

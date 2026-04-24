@@ -20,11 +20,7 @@ export class Validate extends APIResource {
     params: ValidateDestinationParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateDestinationResponse | null> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -65,11 +61,7 @@ export class Validate extends APIResource {
     params: ValidateDestinationExistsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateDestinationExistsResponse | null> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -110,11 +102,7 @@ export class Validate extends APIResource {
     params: ValidateOriginParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValidateOriginResponse | null> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

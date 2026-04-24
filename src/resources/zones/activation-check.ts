@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class ActivationCheck extends APIResource {
@@ -17,18 +16,10 @@ export class ActivationCheck extends APIResource {
    * ```
    */
   trigger(
-    params?: ActivationCheckTriggerParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ActivationCheckTriggerResponse>;
-  trigger(options?: Core.RequestOptions): Core.APIPromise<ActivationCheckTriggerResponse>;
-  trigger(
-    params: ActivationCheckTriggerParams | Core.RequestOptions = {},
+    params: ActivationCheckTriggerParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActivationCheckTriggerResponse> {
-    if (isRequestOptions(params)) {
-      return this.trigger({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.put(`/zones/${zone_id}/activation_check`, options) as Core.APIPromise<{
         result: ActivationCheckTriggerResponse;
@@ -48,7 +39,7 @@ export interface ActivationCheckTriggerParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace ActivationCheck {

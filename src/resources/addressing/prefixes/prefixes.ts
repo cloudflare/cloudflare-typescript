@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as AdvertisementStatusAPI from './advertisement-status';
 import {
@@ -63,7 +62,7 @@ export class Prefixes extends APIResource {
    * ```
    */
   create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/addressing/prefixes`, {
         body,
@@ -86,18 +85,10 @@ export class Prefixes extends APIResource {
    * ```
    */
   list(
-    params?: PrefixListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PrefixesSinglePage, Prefix>;
-  list(options?: Core.RequestOptions): Core.PagePromise<PrefixesSinglePage, Prefix>;
-  list(
-    params: PrefixListParams | Core.RequestOptions = {},
+    params: PrefixListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PrefixesSinglePage, Prefix> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/prefixes`,
       PrefixesSinglePage,
@@ -118,19 +109,10 @@ export class Prefixes extends APIResource {
    */
   delete(
     prefixId: string,
-    params?: PrefixDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixDeleteResponse>;
-  delete(prefixId: string, options?: Core.RequestOptions): Core.APIPromise<PrefixDeleteResponse>;
-  delete(
-    prefixId: string,
-    params: PrefixDeleteParams | Core.RequestOptions = {},
+    params: PrefixDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrefixDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(prefixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, options);
   }
 
@@ -149,7 +131,7 @@ export class Prefixes extends APIResource {
    * ```
    */
   edit(prefixId: string, params: PrefixEditParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
         body,
@@ -169,17 +151,8 @@ export class Prefixes extends APIResource {
    * );
    * ```
    */
-  get(prefixId: string, params?: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<Prefix>;
-  get(prefixId: string, options?: Core.RequestOptions): Core.APIPromise<Prefix>;
-  get(
-    prefixId: string,
-    params: PrefixGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Prefix> {
-    if (isRequestOptions(params)) {
-      return this.get(prefixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(prefixId: string, params: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
@@ -339,7 +312,7 @@ export interface PrefixCreateParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Autonomous System Number (ASN) the prefix will be advertised under.
@@ -372,21 +345,21 @@ export interface PrefixListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PrefixDeleteParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PrefixEditParams {
   /**
    * Path param: Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Description of the prefix.
@@ -398,7 +371,7 @@ export interface PrefixGetParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Prefixes.PrefixesSinglePage = PrefixesSinglePage;

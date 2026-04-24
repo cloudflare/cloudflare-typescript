@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as BlobsAPI from './blobs';
 import { BlobGetParams, Blobs } from './blobs';
@@ -52,16 +51,8 @@ export class V1 extends APIResource {
    * });
    * ```
    */
-  create(params?: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<Image>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Image>;
-  create(
-    params: V1CreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Image> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/images/v1`,
@@ -77,18 +68,10 @@ export class V1 extends APIResource {
    * @deprecated
    */
   list(
-    params?: V1ListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse>;
-  list(
-    params: V1ListParams | Core.RequestOptions = {},
+    params: V1ListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/images/v1`, V1ListResponsesV4PagePagination, {
       query,
       ...options,
@@ -108,19 +91,10 @@ export class V1 extends APIResource {
    */
   delete(
     imageId: string,
-    params?: V1DeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1DeleteResponse>;
-  delete(imageId: string, options?: Core.RequestOptions): Core.APIPromise<V1DeleteResponse>;
-  delete(
-    imageId: string,
-    params: V1DeleteParams | Core.RequestOptions = {},
+    params: V1DeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<V1DeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(imageId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
         result: V1DeleteResponse;
@@ -140,7 +114,7 @@ export class V1 extends APIResource {
    * ```
    */
   edit(imageId: string, params: V1EditParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/images/v1/${imageId}`, {
         body,
@@ -159,17 +133,8 @@ export class V1 extends APIResource {
    * });
    * ```
    */
-  get(imageId: string, params?: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<Image>;
-  get(imageId: string, options?: Core.RequestOptions): Core.APIPromise<Image>;
-  get(
-    imageId: string,
-    params: V1GetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Image> {
-    if (isRequestOptions(params)) {
-      return this.get(imageId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
         result: Image;
@@ -229,7 +194,7 @@ export interface V1CreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: An optional custom unique identifier for your image.
@@ -269,7 +234,7 @@ export interface V1ListParams extends V4PagePaginationParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Internal user ID set within the creator field. Setting to empty
@@ -282,14 +247,14 @@ export interface V1DeleteParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface V1EditParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Can set the creator field with an internal user ID.
@@ -314,7 +279,7 @@ export interface V1GetParams {
   /**
    * Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 V1.V1ListResponsesV4PagePagination = V1ListResponsesV4PagePagination;

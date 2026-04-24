@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -18,18 +17,10 @@ export class Detections extends APIResource {
    * ```
    */
   create(
-    params?: DetectionCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DetectionCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<DetectionCreateResponse>;
-  create(
-    params: DetectionCreateParams | Core.RequestOptions = {},
+    params: DetectionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/leaked-credential-checks/detections`, {
         body,
@@ -55,7 +46,7 @@ export class Detections extends APIResource {
     params: DetectionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`, {
         body,
@@ -78,20 +69,10 @@ export class Detections extends APIResource {
    * ```
    */
   list(
-    params?: DetectionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DetectionListResponsesSinglePage, DetectionListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DetectionListResponsesSinglePage, DetectionListResponse>;
-  list(
-    params: DetectionListParams | Core.RequestOptions = {},
+    params: DetectionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DetectionListResponsesSinglePage, DetectionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/leaked-credential-checks/detections`,
       DetectionListResponsesSinglePage,
@@ -113,19 +94,10 @@ export class Detections extends APIResource {
    */
   delete(
     detectionId: string,
-    params?: DetectionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DetectionDeleteResponse>;
-  delete(detectionId: string, options?: Core.RequestOptions): Core.APIPromise<DetectionDeleteResponse>;
-  delete(
-    detectionId: string,
-    params: DetectionDeleteParams | Core.RequestOptions = {},
+    params: DetectionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(detectionId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`,
@@ -148,19 +120,10 @@ export class Detections extends APIResource {
    */
   get(
     detectionId: string,
-    params?: DetectionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DetectionGetResponse>;
-  get(detectionId: string, options?: Core.RequestOptions): Core.APIPromise<DetectionGetResponse>;
-  get(
-    detectionId: string,
-    params: DetectionGetParams | Core.RequestOptions = {},
+    params: DetectionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DetectionGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(detectionId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/leaked-credential-checks/detections/${detectionId}`,
@@ -262,7 +225,7 @@ export interface DetectionCreateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Defines ehe ruleset expression to use in matching the password in a
@@ -281,7 +244,7 @@ export interface DetectionUpdateParams {
   /**
    * Path param: Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Defines ehe ruleset expression to use in matching the password in a
@@ -300,21 +263,21 @@ export interface DetectionListParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface DetectionDeleteParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface DetectionGetParams {
   /**
    * Defines an identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Detections.DetectionListResponsesSinglePage = DetectionListResponsesSinglePage;

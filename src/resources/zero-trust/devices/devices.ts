@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DevicesDevicesAPI from './devices_';
 import {
@@ -164,16 +163,8 @@ export class Devices extends APIResource {
    *
    * @deprecated
    */
-  list(params?: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device>;
-  list(options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device>;
-  list(
-    params: DeviceListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicesSinglePage, Device> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DevicesSinglePage, Device> {
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/devices`, DevicesSinglePage, options);
   }
 
@@ -191,19 +182,10 @@ export class Devices extends APIResource {
    */
   get(
     deviceId: string,
-    params?: DeviceGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceGetResponse | null>;
-  get(deviceId: string, options?: Core.RequestOptions): Core.APIPromise<DeviceGetResponse | null>;
-  get(
-    deviceId: string,
-    params: DeviceGetParams | Core.RequestOptions = {},
+    params: DeviceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeviceGetResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.get(deviceId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
         result: DeviceGetResponse | null;
@@ -458,11 +440,11 @@ export namespace DeviceGetResponse {
 }
 
 export interface DeviceListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DeviceGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Devices.DevicesSinglePage = DevicesSinglePage;

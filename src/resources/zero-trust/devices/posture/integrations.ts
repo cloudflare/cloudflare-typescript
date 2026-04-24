@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage } from '../../../../pagination';
 
@@ -33,7 +32,7 @@ export class Integrations extends APIResource {
     params: IntegrationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Integration | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
         body,
@@ -56,18 +55,10 @@ export class Integrations extends APIResource {
    * ```
    */
   list(
-    params?: IntegrationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IntegrationsSinglePage, Integration>;
-  list(options?: Core.RequestOptions): Core.PagePromise<IntegrationsSinglePage, Integration>;
-  list(
-    params: IntegrationListParams | Core.RequestOptions = {},
+    params: IntegrationListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<IntegrationsSinglePage, Integration> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/posture/integration`,
       IntegrationsSinglePage,
@@ -89,22 +80,10 @@ export class Integrations extends APIResource {
    */
   delete(
     integrationId: string,
-    params?: IntegrationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse | null>;
-  delete(
-    integrationId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse | null>;
-  delete(
-    integrationId: string,
-    params: IntegrationDeleteParams | Core.RequestOptions = {},
+    params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IntegrationDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(integrationId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
@@ -130,7 +109,7 @@ export class Integrations extends APIResource {
     params: IntegrationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Integration | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body,
@@ -153,19 +132,10 @@ export class Integrations extends APIResource {
    */
   get(
     integrationId: string,
-    params?: IntegrationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Integration | null>;
-  get(integrationId: string, options?: Core.RequestOptions): Core.APIPromise<Integration | null>;
-  get(
-    integrationId: string,
-    params: IntegrationGetParams | Core.RequestOptions = {},
+    params: IntegrationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Integration | null> {
-    if (isRequestOptions(params)) {
-      return this.get(integrationId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
@@ -241,7 +211,7 @@ export interface IntegrationCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The configuration object containing third-party integration
@@ -435,18 +405,18 @@ export namespace IntegrationCreateParams {
 }
 
 export interface IntegrationListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IntegrationDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IntegrationEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The configuration object containing third-party integration
@@ -640,7 +610,7 @@ export namespace IntegrationEditParams {
 }
 
 export interface IntegrationGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Integrations.IntegrationsSinglePage = IntegrationsSinglePage;

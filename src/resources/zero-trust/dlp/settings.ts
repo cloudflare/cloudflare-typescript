@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Settings extends APIResource {
@@ -16,16 +15,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  update(params?: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  update(options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  update(
-    params: SettingUpdateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPSettings> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/settings`, { body, ...options }) as Core.APIPromise<{
         result: DLPSettings;
@@ -44,16 +35,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  delete(params?: SettingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  delete(
-    params: SettingDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPSettings> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  delete(params: SettingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings> {
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dlp/settings`, options) as Core.APIPromise<{
         result: DLPSettings;
@@ -72,16 +55,8 @@ export class Settings extends APIResource {
    *   });
    * ```
    */
-  edit(params?: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  edit(
-    params: SettingEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPSettings> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dlp/settings`, { body, ...options }) as Core.APIPromise<{
         result: DLPSettings;
@@ -99,16 +74,8 @@ export class Settings extends APIResource {
    * );
    * ```
    */
-  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  get(options?: Core.RequestOptions): Core.APIPromise<DLPSettings>;
-  get(
-    params: SettingGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DLPSettings> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<DLPSettings> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/settings`, options) as Core.APIPromise<{
         result: DLPSettings;
@@ -160,7 +127,7 @@ export interface SettingUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Whether AI context analysis is enabled at the account level.
@@ -209,14 +176,14 @@ export namespace SettingUpdateParams {
 }
 
 export interface SettingDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface SettingEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Whether AI context analysis is enabled at the account level.
@@ -265,7 +232,7 @@ export namespace SettingEditParams {
 }
 
 export interface SettingGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Settings {

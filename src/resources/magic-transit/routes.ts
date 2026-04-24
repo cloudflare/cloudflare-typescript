@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as RoutesAPI from './routes';
 
@@ -21,7 +20,7 @@ export class Routes extends APIResource {
    * ```
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
         result: RouteCreateResponse;
@@ -51,7 +50,7 @@ export class Routes extends APIResource {
     params: RouteUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/routes/${routeId}`, {
         body,
@@ -70,16 +69,8 @@ export class Routes extends APIResource {
    * });
    * ```
    */
-  list(params?: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<RouteListResponse>;
-  list(
-    params: RouteListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{
         result: RouteListResponse;
@@ -100,19 +91,10 @@ export class Routes extends APIResource {
    */
   delete(
     routeId: string,
-    params?: RouteDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteDeleteResponse>;
-  delete(routeId: string, options?: Core.RequestOptions): Core.APIPromise<RouteDeleteResponse>;
-  delete(
-    routeId: string,
-    params: RouteDeleteParams | Core.RequestOptions = {},
+    params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(routeId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteDeleteResponse;
@@ -145,7 +127,7 @@ export class Routes extends APIResource {
     params: RouteBulkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteBulkUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
         result: RouteBulkUpdateResponse;
@@ -163,16 +145,8 @@ export class Routes extends APIResource {
    * });
    * ```
    */
-  empty(params?: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse>;
-  empty(options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse>;
-  empty(
-    params: RouteEmptyParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteEmptyResponse> {
-    if (isRequestOptions(params)) {
-      return this.empty({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  empty(params: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{
         result: RouteEmptyResponse;
@@ -193,19 +167,10 @@ export class Routes extends APIResource {
    */
   get(
     routeId: string,
-    params?: RouteGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteGetResponse>;
-  get(routeId: string, options?: Core.RequestOptions): Core.APIPromise<RouteGetResponse>;
-  get(
-    routeId: string,
-    params: RouteGetParams | Core.RequestOptions = {},
+    params: RouteGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(routeId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteGetResponse;
@@ -621,7 +586,7 @@ export interface RouteCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The next-hop IP Address for the static route.
@@ -658,7 +623,7 @@ export interface RouteUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The next-hop IP Address for the static route.
@@ -695,21 +660,21 @@ export interface RouteListParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RouteDeleteParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RouteBulkUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -760,14 +725,14 @@ export interface RouteEmptyParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RouteGetParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Routes {

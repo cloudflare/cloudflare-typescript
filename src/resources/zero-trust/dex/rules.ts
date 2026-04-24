@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
@@ -19,7 +18,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dex/rules`, { body, ...options }) as Core.APIPromise<{
         result: RuleCreateResponse;
@@ -43,7 +42,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dex/rules/${ruleId}`, {
         body,
@@ -73,7 +72,7 @@ export class Rules extends APIResource {
     params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleListResponsesV4PagePagination, RuleListResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/dex/rules`, RuleListResponsesV4PagePagination, {
       query,
       ...options,
@@ -93,19 +92,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleId: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse | null>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse | null>;
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dex/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleDeleteResponse | null;
@@ -126,19 +116,10 @@ export class Rules extends APIResource {
    */
   get(
     ruleId: string,
-    params?: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleGetResponse>;
-  get(
-    ruleId: string,
-    params: RuleGetParams | Core.RequestOptions = {},
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleGetResponse;
@@ -393,7 +374,7 @@ export interface RuleCreateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The wirefilter expression to match.
@@ -415,7 +396,7 @@ export interface RuleUpdateParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -437,7 +418,7 @@ export interface RuleListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filter results by rule name
@@ -459,14 +440,14 @@ export interface RuleDeleteParams {
   /**
    * unique identifier linked to an account in the API request path
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleGetParams {
   /**
    * unique identifier linked to an account in the API request path
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Rules.RuleListResponsesV4PagePagination = RuleListResponsesV4PagePagination;

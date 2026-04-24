@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as MaintenanceConfigsAPI from './maintenance-configs';
 import {
@@ -34,24 +33,10 @@ export class Tables extends APIResource {
   list(
     bucketName: string,
     namespace: string,
-    params?: TableListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TableListResponse>;
-  list(
-    bucketName: string,
-    namespace: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TableListResponse>;
-  list(
-    bucketName: string,
-    namespace: string,
-    params: TableListParams | Core.RequestOptions = {},
+    params: TableListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TableListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(bucketName, namespace, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2-catalog/${bucketName}/namespaces/${namespace}/tables`, {
         query,
@@ -164,7 +149,7 @@ export interface TableListParams {
   /**
    * Path param: Use this to identify the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Maximum number of tables to return per page. Defaults to 100,

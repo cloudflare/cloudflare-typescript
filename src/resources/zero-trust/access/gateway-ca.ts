@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -18,18 +17,10 @@ export class GatewayCA extends APIResource {
    * ```
    */
   create(
-    params?: GatewayCACreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayCACreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<GatewayCACreateResponse>;
-  create(
-    params: GatewayCACreateParams | Core.RequestOptions = {},
+    params: GatewayCACreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewayCACreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/gateway_ca`, options) as Core.APIPromise<{
         result: GatewayCACreateResponse;
@@ -51,20 +42,10 @@ export class GatewayCA extends APIResource {
    * ```
    */
   list(
-    params?: GatewayCAListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayCAListResponsesSinglePage, GatewayCAListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayCAListResponsesSinglePage, GatewayCAListResponse>;
-  list(
-    params: GatewayCAListParams | Core.RequestOptions = {},
+    params: GatewayCAListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<GatewayCAListResponsesSinglePage, GatewayCAListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/gateway_ca`,
       GatewayCAListResponsesSinglePage,
@@ -86,19 +67,10 @@ export class GatewayCA extends APIResource {
    */
   delete(
     certificateId: string,
-    params?: GatewayCADeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayCADeleteResponse>;
-  delete(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<GatewayCADeleteResponse>;
-  delete(
-    certificateId: string,
-    params: GatewayCADeleteParams | Core.RequestOptions = {},
+    params: GatewayCADeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GatewayCADeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(certificateId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/access/gateway_ca/${certificateId}`,
@@ -145,21 +117,21 @@ export interface GatewayCACreateParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface GatewayCAListParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface GatewayCADeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 GatewayCA.GatewayCAListResponsesSinglePage = GatewayCAListResponsesSinglePage;

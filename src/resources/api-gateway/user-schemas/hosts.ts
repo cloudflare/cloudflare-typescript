@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -13,20 +12,10 @@ export class Hosts extends APIResource {
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */
   list(
-    params?: HostListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HostListResponsesV4PagePaginationArray, HostListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HostListResponsesV4PagePaginationArray, HostListResponse>;
-  list(
-    params: HostListParams | Core.RequestOptions = {},
+    params: HostListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<HostListResponsesV4PagePaginationArray, HostListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas/hosts`,
       HostListResponsesV4PagePaginationArray,
@@ -60,7 +49,7 @@ export interface HostListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Hosts.HostListResponsesV4PagePaginationArray = HostListResponsesV4PagePaginationArray;

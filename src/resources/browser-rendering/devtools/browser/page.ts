@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Page extends APIResource {
@@ -20,20 +19,10 @@ export class Page extends APIResource {
   get(
     sessionId: string,
     targetId: string,
-    params?: PageGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  get(sessionId: string, targetId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  get(
-    sessionId: string,
-    targetId: string,
-    params: PageGetParams | Core.RequestOptions = {},
+    params: PageGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.get(sessionId, targetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/page/${targetId}`,
       { ...options, headers: { Accept: '*/*', ...options?.headers } },
@@ -45,7 +34,7 @@ export interface PageGetParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Page {
