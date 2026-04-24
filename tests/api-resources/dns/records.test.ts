@@ -326,7 +326,8 @@ describe('resource records', () => {
     });
   });
 
-  test('scanList: only required params', async () => {
+  // mock server returns invalid data
+  test.skip('scanList: only required params', async () => {
     const responsePromise = client.dns.records.scanList({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -337,11 +338,13 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('scanList: required and optional params', async () => {
+  // mock server returns invalid data
+  test.skip('scanList: required and optional params', async () => {
     const response = await client.dns.records.scanList({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  test('scanReview: only required params', async () => {
+  // mock server returns invalid data
+  test.skip('scanReview: only required params', async () => {
     const responsePromise = client.dns.records.scanReview({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -352,7 +355,8 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('scanReview: required and optional params', async () => {
+  // mock server returns invalid data
+  test.skip('scanReview: required and optional params', async () => {
     const response = await client.dns.records.scanReview({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       accepts: [
