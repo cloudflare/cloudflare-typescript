@@ -28,7 +28,13 @@ describe('resource telemetry', () => {
       filters: [
         {
           filterCombination: 'and',
-          filters: [{}],
+          filters: [
+            {
+              filterCombination: 'and',
+              filters: [{}],
+              kind: 'group',
+            },
+          ],
           kind: 'group',
         },
       ],
@@ -91,7 +97,13 @@ describe('resource telemetry', () => {
         filters: [
           {
             filterCombination: 'and',
-            filters: [{}],
+            filters: [
+              {
+                filterCombination: 'and',
+                filters: [{}],
+                kind: 'group',
+              },
+            ],
             kind: 'group',
           },
         ],
@@ -142,7 +154,13 @@ describe('resource telemetry', () => {
       filters: [
         {
           filterCombination: 'and',
-          filters: [{}],
+          filters: [
+            {
+              filterCombination: 'and',
+              filters: [{}],
+              kind: 'group',
+            },
+          ],
           kind: 'group',
         },
       ],
