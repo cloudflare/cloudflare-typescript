@@ -172,6 +172,31 @@ export class Queues extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Return best-effort metrics for a queue. Values may be approximate due to the
+   * distributed nature of queues.
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.getMetrics(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  getMetrics(
+    queueId: string,
+    params: QueueGetMetricsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueGetMetricsResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/queues/${queueId}/metrics`, options) as Core.APIPromise<{
+        result: QueueGetMetricsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class QueuesSinglePage extends SinglePage<Queue> {}
@@ -236,6 +261,28 @@ export interface QueueDeleteResponse {
    * Indicates if the API call was successful or not.
    */
   success?: true;
+}
+
+/**
+ * Best-effort metrics for the queue. Values may be approximate due to the
+ * distributed nature of queues.
+ */
+export interface QueueGetMetricsResponse {
+  /**
+   * The size in bytes of unacknowledged messages in the queue.
+   */
+  backlog_bytes: number;
+
+  /**
+   * The number of unacknowledged messages in the queue.
+   */
+  backlog_count: number;
+
+  /**
+   * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+   * queue. Returns 0 if unknown.
+   */
+  oldest_message_timestamp_ms: number;
 }
 
 export interface QueueCreateParams {
@@ -343,6 +390,13 @@ export interface QueueGetParams {
   account_id: string;
 }
 
+export interface QueueGetMetricsParams {
+  /**
+   * A Resource identifier.
+   */
+  account_id: string;
+}
+
 Queues.QueuesSinglePage = QueuesSinglePage;
 Queues.Messages = Messages;
 Queues.Purge = Purge;
@@ -355,6 +409,7 @@ export declare namespace Queues {
   export {
     type Queue as Queue,
     type QueueDeleteResponse as QueueDeleteResponse,
+    type QueueGetMetricsResponse as QueueGetMetricsResponse,
     QueuesSinglePage as QueuesSinglePage,
     type QueueCreateParams as QueueCreateParams,
     type QueueUpdateParams as QueueUpdateParams,
@@ -362,6 +417,7 @@ export declare namespace Queues {
     type QueueDeleteParams as QueueDeleteParams,
     type QueueEditParams as QueueEditParams,
     type QueueGetParams as QueueGetParams,
+    type QueueGetMetricsParams as QueueGetMetricsParams,
   };
 
   export {
