@@ -100,46 +100,99 @@ export interface TelemetryKeysResponse {
   type: 'string' | 'boolean' | 'number';
 }
 
+/**
+ * Complete results of a query run. The populated fields depend on the requested
+ * view type (events, calculations, invocations, traces, or agents).
+ */
 export interface TelemetryQueryResponse {
   /**
-   * A Workers Observability Query Object
+   * The query run metadata including the query definition, execution status, and
+   * timeframe.
    */
   run: TelemetryQueryResponse.Run;
 
   /**
-   * The statistics object contains information about query performance from the
-   * database, it does not include any network latency
+   * Query performance statistics from the database. Includes execution time, rows
+   * scanned, and bytes read. Does not include network latency.
    */
   statistics: TelemetryQueryResponse.Statistics;
 
+  /**
+   * Durable Object agent summaries. Present when the query view is 'agents'. Each
+   * entry represents an agent with its event counts and status.
+   */
   agents?: Array<TelemetryQueryResponse.Agent>;
 
+  /**
+   * Aggregated calculation results. Present when the query view is 'calculations'.
+   * Contains computed metrics (count, avg, p99, etc.) with optional group-by
+   * breakdowns and time-series data.
+   */
   calculations?: Array<TelemetryQueryResponse.Calculation>;
 
+  /**
+   * Comparison calculation results from the previous time period. Present when the
+   * compare option is enabled. Same structure as calculations.
+   */
   compare?: Array<TelemetryQueryResponse.Compare>;
 
+  /**
+   * Individual event results. Present when the query view is 'events'. Contains the
+   * matching log lines and their metadata.
+   */
   events?: TelemetryQueryResponse.Events;
 
+  /**
+   * Events grouped by invocation (request ID). Present when the query view is
+   * 'invocations'. Each key is a request ID mapping to all events from that
+   * invocation.
+   */
   invocations?: { [key: string]: Array<TelemetryQueryResponse.Invocation> };
 
+  /**
+   * Trace summaries matching the query. Present when the query view is 'traces'.
+   * Each entry represents a distributed trace with its spans, duration, and services
+   * involved.
+   */
   traces?: Array<TelemetryQueryResponse.Trace>;
 }
 
 export namespace TelemetryQueryResponse {
   /**
-   * A Workers Observability Query Object
+   * The query run metadata including the query definition, execution status, and
+   * timeframe.
    */
   export interface Run {
+    /**
+     * Unique identifier for this query run.
+     */
     id: string;
 
+    /**
+     * Cloudflare account ID that owns this query run.
+     */
     accountId: string;
 
+    /**
+     * Whether this was a dry run (results not persisted).
+     */
     dry: boolean;
 
+    /**
+     * Number of time-series buckets used for the query. Higher values produce more
+     * detailed series data.
+     */
     granularity: number;
 
+    /**
+     * A saved query definition with its parameters, metadata, and ownership
+     * information.
+     */
     query: Run.Query;
 
+    /**
+     * Current execution status of the query run.
+     */
     status: 'STARTED' | 'COMPLETED';
 
     /**
@@ -147,16 +200,33 @@ export namespace TelemetryQueryResponse {
      */
     timeframe: Run.Timeframe;
 
+    /**
+     * ID of the user who initiated the query run.
+     */
     userId: string;
 
+    /**
+     * ISO-8601 timestamp when the query run was created.
+     */
     created?: string;
 
+    /**
+     * Query performance statistics from the database (does not include network
+     * latency).
+     */
     statistics?: Run.Statistics;
 
+    /**
+     * ISO-8601 timestamp when the query run was last updated.
+     */
     updated?: string;
   }
 
   export namespace Run {
+    /**
+     * A saved query definition with its parameters, metadata, and ownership
+     * information.
+     */
     export interface Query {
       id: string;
 
@@ -290,19 +360,22 @@ export namespace TelemetryQueryResponse {
         }
 
         /**
-         * Filtering best practices: use observability_keys and observability_values to
-         * confirm available fields and values. If searching for errors, filter for
-         * $metadata.error exists.
+         * A filter condition applied to query results. Use the keys and values endpoints
+         * to discover available fields and their values before constructing filters.
          */
         export interface WorkersObservabilityFilterLeaf {
           /**
-           * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
-           * previous query results or the observability_keys response. Preferred keys:
-           * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
-           * $metadata.error.
+           * Filter field name. Use verified keys from previous query results or the keys
+           * endpoint. Common keys include $metadata.service, $metadata.origin,
+           * $metadata.trigger, $metadata.message, and $metadata.error.
            */
           key: string;
 
+          /**
+           * Comparison operator. String operators: includes, not_includes, starts_with,
+           * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+           * values). Numeric: eq, neq, gt, gte, lt, lte.
+           */
           operation:
             | 'includes'
             | 'not_includes'
@@ -333,17 +406,23 @@ export namespace TelemetryQueryResponse {
             | 'NOT_IN'
             | 'STARTS_WITH';
 
+          /**
+           * Data type of the filter field. Must match the actual type of the key being
+           * filtered.
+           */
           type: 'string' | 'number' | 'boolean';
 
+          /**
+           * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+           * omitted.
+           */
           kind?: 'filter';
 
           /**
-           * Filter comparison value. IMPORTANT: must match actual values in your logs.
-           * Verify using previous query results or the /values endpoint. Ensure value type
-           * matches the field type. String comparisons are case-sensitive unless using
-           * specific operations. Regex uses ClickHouse RE2 syntax (no
-           * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
-           * boundary.
+           * Comparison value. Must match actual values in your data — verify with the values
+           * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+           * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+           * lookaheads/lookbehinds).
            */
           value?: string | number | boolean;
         }
@@ -409,6 +488,10 @@ export namespace TelemetryQueryResponse {
       to: number;
     }
 
+    /**
+     * Query performance statistics from the database (does not include network
+     * latency).
+     */
     export interface Statistics {
       /**
        * Number of uncompressed bytes read from the table.
@@ -434,8 +517,8 @@ export namespace TelemetryQueryResponse {
   }
 
   /**
-   * The statistics object contains information about query performance from the
-   * database, it does not include any network latency
+   * Query performance statistics from the database. Includes execution time, rows
+   * scanned, and bytes read. Does not include network latency.
    */
   export interface Statistics {
     /**
@@ -461,20 +544,45 @@ export namespace TelemetryQueryResponse {
   }
 
   export interface Agent {
+    /**
+     * Class name of the Durable Object agent.
+     */
     agentClass: string;
 
+    /**
+     * Breakdown of event counts by event type.
+     */
     eventTypeCounts: { [key: string]: number };
 
+    /**
+     * Timestamp of the earliest event from this agent in the queried window (Unix
+     * epoch ms).
+     */
     firstEventMs: number;
 
+    /**
+     * Whether the agent emitted any error events in the queried window.
+     */
     hasErrors: boolean;
 
+    /**
+     * Timestamp of the most recent event from this agent (Unix epoch ms).
+     */
     lastEventMs: number;
 
+    /**
+     * Durable Object namespace the agent belongs to.
+     */
     namespace: string;
 
+    /**
+     * Worker service name that hosts this agent.
+     */
     service: string;
 
+    /**
+     * Total number of events emitted by this agent in the queried window.
+     */
     totalEvents: number;
   }
 
@@ -606,107 +714,234 @@ export namespace TelemetryQueryResponse {
     }
   }
 
+  /**
+   * Individual event results. Present when the query view is 'events'. Contains the
+   * matching log lines and their metadata.
+   */
   export interface Events {
+    /**
+     * Total number of events matching the query (may exceed the number returned due to
+     * limits).
+     */
     count?: number;
 
+    /**
+     * List of individual telemetry events matching the query.
+     */
     events?: Array<Events.Event>;
 
+    /**
+     * List of fields discovered in the matched events. Useful for building dynamic
+     * UIs.
+     */
     fields?: Array<Events.Field>;
 
+    /**
+     * Time-series data for the matched events, bucketed by the query granularity.
+     */
     series?: Array<Events.Series>;
   }
 
   export namespace Events {
     /**
-     * The data structure of a telemetry event
+     * A single telemetry event representing a log line, span, or metric data point
+     * emitted by a Worker.
      */
     export interface Event {
+      /**
+       * Structured metadata extracted from the event. These fields are indexed and
+       * available for filtering and aggregation.
+       */
       $metadata: Event.Metadata;
 
+      /**
+       * The dataset this event belongs to (e.g. cloudflare-workers).
+       */
       dataset: string;
 
+      /**
+       * Raw log payload. May be a string or a structured object depending on how the log
+       * was emitted.
+       */
       source: string | unknown;
 
+      /**
+       * Event timestamp as a Unix epoch in milliseconds.
+       */
       timestamp: number;
 
       /**
-       * Cloudflare Containers event information enriches your logs so you can easily
-       * identify and debug issues.
+       * Cloudflare Containers event information that enriches your logs for identifying
+       * and debugging issues.
        */
       $containers?: unknown;
 
       /**
-       * Cloudflare Workers event information enriches your logs so you can easily
-       * identify and debug issues.
+       * Cloudflare Workers event information that enriches your logs for identifying and
+       * debugging issues.
        */
       $workers?: Event.UnionMember0 | Event.UnionMember1;
     }
 
     export namespace Event {
+      /**
+       * Structured metadata extracted from the event. These fields are indexed and
+       * available for filtering and aggregation.
+       */
       export interface Metadata {
         /**
-         * Unique event ID. Use as the cursor for offset-based pagination.
+         * Unique event ID. Use as the cursor value for offset-based pagination.
          */
         id: string;
 
+        /**
+         * Cloudflare account identifier.
+         */
         account?: string;
 
+        /**
+         * Cloudflare product that generated this event (e.g. workers, pages).
+         */
         cloudService?: string;
 
+        /**
+         * Whether this was a cold start (1) or warm invocation (0).
+         */
         coldStart?: number;
 
+        /**
+         * Estimated cost units for this invocation.
+         */
         cost?: number;
 
+        /**
+         * Span duration in milliseconds.
+         */
         duration?: number;
 
+        /**
+         * Span end time as a Unix epoch in milliseconds.
+         */
         endTime?: number;
 
+        /**
+         * Error message, present when the log represents an error.
+         */
         error?: string;
 
+        /**
+         * Templatized version of the error message used for grouping similar errors.
+         */
         errorTemplate?: string;
 
+        /**
+         * Content-based fingerprint used to group similar events.
+         */
         fingerprint?: string;
 
+        /**
+         * Log level (e.g. log, debug, info, warn, error).
+         */
         level?: string;
 
+        /**
+         * Log message text.
+         */
         message?: string;
 
+        /**
+         * Templatized version of the log message used for grouping similar messages.
+         */
         messageTemplate?: string;
 
+        /**
+         * Metric name when the event represents a metric data point.
+         */
         metricName?: string;
 
+        /**
+         * Origin of the event (e.g. fetch, scheduled, queue).
+         */
         origin?: string;
 
+        /**
+         * Span ID of the parent span in the trace hierarchy.
+         */
         parentSpanId?: string;
 
+        /**
+         * Infrastructure provider identifier.
+         */
         provider?: string;
 
+        /**
+         * Cloudflare data center / region that handled the request.
+         */
         region?: string;
 
+        /**
+         * Cloudflare request ID that ties all logs from a single invocation together.
+         */
         requestId?: string;
 
+        /**
+         * Worker script name that produced this event.
+         */
         service?: string;
 
+        /**
+         * Span ID for this individual unit of work within a trace.
+         */
         spanId?: string;
 
+        /**
+         * Human-readable name for this span.
+         */
         spanName?: string;
 
+        /**
+         * Stack / deployment identifier.
+         */
         stackId?: string;
 
+        /**
+         * Span start time as a Unix epoch in milliseconds.
+         */
         startTime?: number;
 
+        /**
+         * HTTP response status code returned by the Worker.
+         */
         statusCode?: number;
 
+        /**
+         * Total duration of the entire trace in milliseconds.
+         */
         traceDuration?: number;
 
+        /**
+         * Distributed trace ID linking spans across services.
+         */
         traceId?: string;
 
+        /**
+         * Logical transaction name for this request.
+         */
         transactionName?: string;
 
+        /**
+         * What triggered the invocation (e.g. GET /users, POST /orders, queue message).
+         */
         trigger?: string;
 
+        /**
+         * Event type classifier (e.g. cf-worker-event, cf-worker-log).
+         */
         type?: string;
 
+        /**
+         * Request URL that triggered the Worker invocation.
+         */
         url?: string;
       }
 
@@ -739,6 +974,10 @@ export namespace TelemetryQueryResponse {
         outcome?: string;
 
         scriptVersion?: UnionMember0.ScriptVersion;
+
+        spanId?: string;
+
+        traceId?: string;
 
         truncated?: boolean;
       }
@@ -791,6 +1030,10 @@ export namespace TelemetryQueryResponse {
 
         scriptVersion?: UnionMember1.ScriptVersion;
 
+        spanId?: string;
+
+        traceId?: string;
+
         truncated?: boolean;
       }
 
@@ -814,8 +1057,14 @@ export namespace TelemetryQueryResponse {
     }
 
     export interface Field {
+      /**
+       * Field name present in the matched events.
+       */
       key: string;
 
+      /**
+       * Data type of the field (string, number, or boolean).
+       */
       type: string;
     }
 
@@ -875,95 +1124,204 @@ export namespace TelemetryQueryResponse {
   }
 
   /**
-   * The data structure of a telemetry event
+   * A single telemetry event representing a log line, span, or metric data point
+   * emitted by a Worker.
    */
   export interface Invocation {
+    /**
+     * Structured metadata extracted from the event. These fields are indexed and
+     * available for filtering and aggregation.
+     */
     $metadata: Invocation.Metadata;
 
+    /**
+     * The dataset this event belongs to (e.g. cloudflare-workers).
+     */
     dataset: string;
 
+    /**
+     * Raw log payload. May be a string or a structured object depending on how the log
+     * was emitted.
+     */
     source: string | unknown;
 
+    /**
+     * Event timestamp as a Unix epoch in milliseconds.
+     */
     timestamp: number;
 
     /**
-     * Cloudflare Containers event information enriches your logs so you can easily
-     * identify and debug issues.
+     * Cloudflare Containers event information that enriches your logs for identifying
+     * and debugging issues.
      */
     $containers?: unknown;
 
     /**
-     * Cloudflare Workers event information enriches your logs so you can easily
-     * identify and debug issues.
+     * Cloudflare Workers event information that enriches your logs for identifying and
+     * debugging issues.
      */
     $workers?: Invocation.UnionMember0 | Invocation.UnionMember1;
   }
 
   export namespace Invocation {
+    /**
+     * Structured metadata extracted from the event. These fields are indexed and
+     * available for filtering and aggregation.
+     */
     export interface Metadata {
       /**
-       * Unique event ID. Use as the cursor for offset-based pagination.
+       * Unique event ID. Use as the cursor value for offset-based pagination.
        */
       id: string;
 
+      /**
+       * Cloudflare account identifier.
+       */
       account?: string;
 
+      /**
+       * Cloudflare product that generated this event (e.g. workers, pages).
+       */
       cloudService?: string;
 
+      /**
+       * Whether this was a cold start (1) or warm invocation (0).
+       */
       coldStart?: number;
 
+      /**
+       * Estimated cost units for this invocation.
+       */
       cost?: number;
 
+      /**
+       * Span duration in milliseconds.
+       */
       duration?: number;
 
+      /**
+       * Span end time as a Unix epoch in milliseconds.
+       */
       endTime?: number;
 
+      /**
+       * Error message, present when the log represents an error.
+       */
       error?: string;
 
+      /**
+       * Templatized version of the error message used for grouping similar errors.
+       */
       errorTemplate?: string;
 
+      /**
+       * Content-based fingerprint used to group similar events.
+       */
       fingerprint?: string;
 
+      /**
+       * Log level (e.g. log, debug, info, warn, error).
+       */
       level?: string;
 
+      /**
+       * Log message text.
+       */
       message?: string;
 
+      /**
+       * Templatized version of the log message used for grouping similar messages.
+       */
       messageTemplate?: string;
 
+      /**
+       * Metric name when the event represents a metric data point.
+       */
       metricName?: string;
 
+      /**
+       * Origin of the event (e.g. fetch, scheduled, queue).
+       */
       origin?: string;
 
+      /**
+       * Span ID of the parent span in the trace hierarchy.
+       */
       parentSpanId?: string;
 
+      /**
+       * Infrastructure provider identifier.
+       */
       provider?: string;
 
+      /**
+       * Cloudflare data center / region that handled the request.
+       */
       region?: string;
 
+      /**
+       * Cloudflare request ID that ties all logs from a single invocation together.
+       */
       requestId?: string;
 
+      /**
+       * Worker script name that produced this event.
+       */
       service?: string;
 
+      /**
+       * Span ID for this individual unit of work within a trace.
+       */
       spanId?: string;
 
+      /**
+       * Human-readable name for this span.
+       */
       spanName?: string;
 
+      /**
+       * Stack / deployment identifier.
+       */
       stackId?: string;
 
+      /**
+       * Span start time as a Unix epoch in milliseconds.
+       */
       startTime?: number;
 
+      /**
+       * HTTP response status code returned by the Worker.
+       */
       statusCode?: number;
 
+      /**
+       * Total duration of the entire trace in milliseconds.
+       */
       traceDuration?: number;
 
+      /**
+       * Distributed trace ID linking spans across services.
+       */
       traceId?: string;
 
+      /**
+       * Logical transaction name for this request.
+       */
       transactionName?: string;
 
+      /**
+       * What triggered the invocation (e.g. GET /users, POST /orders, queue message).
+       */
       trigger?: string;
 
+      /**
+       * Event type classifier (e.g. cf-worker-event, cf-worker-log).
+       */
       type?: string;
 
+      /**
+       * Request URL that triggered the Worker invocation.
+       */
       url?: string;
     }
 
@@ -996,6 +1354,10 @@ export namespace TelemetryQueryResponse {
       outcome?: string;
 
       scriptVersion?: UnionMember0.ScriptVersion;
+
+      spanId?: string;
+
+      traceId?: string;
 
       truncated?: boolean;
     }
@@ -1048,6 +1410,10 @@ export namespace TelemetryQueryResponse {
 
       scriptVersion?: UnionMember1.ScriptVersion;
 
+      spanId?: string;
+
+      traceId?: string;
+
       truncated?: boolean;
     }
 
@@ -1071,22 +1437,49 @@ export namespace TelemetryQueryResponse {
   }
 
   export interface Trace {
+    /**
+     * Name of the root span that initiated the trace.
+     */
     rootSpanName: string;
 
+    /**
+     * Logical transaction name for the root span.
+     */
     rootTransactionName: string;
 
+    /**
+     * List of Worker services involved in the trace.
+     */
     service: Array<string>;
 
+    /**
+     * Total number of spans in the trace.
+     */
     spans: number;
 
+    /**
+     * Total duration of the trace in milliseconds.
+     */
     traceDurationMs: number;
 
+    /**
+     * Trace end time as a Unix epoch in milliseconds.
+     */
     traceEndMs: number;
 
+    /**
+     * Unique identifier for the distributed trace.
+     */
     traceId: string;
 
+    /**
+     * Trace start time as a Unix epoch in milliseconds.
+     */
     traceStartMs: number;
 
+    /**
+     * Error messages encountered during the trace, if any.
+     */
     errors?: Array<string>;
   }
 }
@@ -1150,25 +1543,106 @@ export namespace TelemetryKeysParams {
   export interface UnionMember0 {
     filterCombination: 'and' | 'or' | 'AND' | 'OR';
 
-    filters: Array<unknown>;
+    filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
 
     kind: 'group';
   }
 
+  export namespace UnionMember0 {
+    export interface UnionMember0 {
+      filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+      filters: Array<unknown>;
+
+      kind: 'group';
+    }
+
+    /**
+     * A filter condition applied to query results. Use the keys and values endpoints
+     * to discover available fields and their values before constructing filters.
+     */
+    export interface WorkersObservabilityFilterLeaf {
+      /**
+       * Filter field name. Use verified keys from previous query results or the keys
+       * endpoint. Common keys include $metadata.service, $metadata.origin,
+       * $metadata.trigger, $metadata.message, and $metadata.error.
+       */
+      key: string;
+
+      /**
+       * Comparison operator. String operators: includes, not_includes, starts_with,
+       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       */
+      operation:
+        | 'includes'
+        | 'not_includes'
+        | 'starts_with'
+        | 'regex'
+        | 'exists'
+        | 'is_null'
+        | 'in'
+        | 'not_in'
+        | 'eq'
+        | 'neq'
+        | 'gt'
+        | 'gte'
+        | 'lt'
+        | 'lte'
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'INCLUDES'
+        | 'DOES_NOT_INCLUDE'
+        | 'MATCH_REGEX'
+        | 'EXISTS'
+        | 'DOES_NOT_EXIST'
+        | 'IN'
+        | 'NOT_IN'
+        | 'STARTS_WITH';
+
+      /**
+       * Data type of the filter field. Must match the actual type of the key being
+       * filtered.
+       */
+      type: 'string' | 'number' | 'boolean';
+
+      /**
+       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+       * omitted.
+       */
+      kind?: 'filter';
+
+      /**
+       * Comparison value. Must match actual values in your data — verify with the values
+       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+       * lookaheads/lookbehinds).
+       */
+      value?: string | number | boolean;
+    }
+  }
+
   /**
-   * Filtering best practices: use observability_keys and observability_values to
-   * confirm available fields and values. If searching for errors, filter for
-   * $metadata.error exists.
+   * A filter condition applied to query results. Use the keys and values endpoints
+   * to discover available fields and their values before constructing filters.
    */
   export interface WorkersObservabilityFilterLeaf {
     /**
-     * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
-     * previous query results or the observability_keys response. Preferred keys:
-     * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
-     * $metadata.error.
+     * Filter field name. Use verified keys from previous query results or the keys
+     * endpoint. Common keys include $metadata.service, $metadata.origin,
+     * $metadata.trigger, $metadata.message, and $metadata.error.
      */
     key: string;
 
+    /**
+     * Comparison operator. String operators: includes, not_includes, starts_with,
+     * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+     * values). Numeric: eq, neq, gt, gte, lt, lte.
+     */
     operation:
       | 'includes'
       | 'not_includes'
@@ -1199,17 +1673,23 @@ export namespace TelemetryKeysParams {
       | 'NOT_IN'
       | 'STARTS_WITH';
 
+    /**
+     * Data type of the filter field. Must match the actual type of the key being
+     * filtered.
+     */
     type: 'string' | 'number' | 'boolean';
 
+    /**
+     * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+     * omitted.
+     */
     kind?: 'filter';
 
     /**
-     * Filter comparison value. IMPORTANT: must match actual values in your logs.
-     * Verify using previous query results or the /values endpoint. Ensure value type
-     * matches the field type. String comparisons are case-sensitive unless using
-     * specific operations. Regex uses ClickHouse RE2 syntax (no
-     * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
-     * boundary.
+     * Comparison value. Must match actual values in your data — verify with the values
+     * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+     * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+     * lookaheads/lookbehinds).
      */
     value?: string | number | boolean;
   }
@@ -1219,10 +1699,19 @@ export namespace TelemetryKeysParams {
    * Make sure matchCase is false to avoid case sensitivity issues.
    */
   export interface KeyNeedle {
+    /**
+     * The text or pattern to search for.
+     */
     value: string | number | boolean;
 
+    /**
+     * When true, treats the value as a regular expression (RE2 syntax).
+     */
     isRegex?: boolean;
 
+    /**
+     * When true, performs a case-sensitive search. Defaults to case-insensitive.
+     */
     matchCase?: boolean;
   }
 
@@ -1230,10 +1719,19 @@ export namespace TelemetryKeysParams {
    * Search for a specific substring in any of the events
    */
   export interface Needle {
+    /**
+     * The text or pattern to search for.
+     */
     value: string | number | boolean;
 
+    /**
+     * When true, treats the value as a regular expression (RE2 syntax).
+     */
     isRegex?: boolean;
 
+    /**
+     * When true, performs a case-sensitive search. Defaults to case-insensitive.
+     */
     matchCase?: boolean;
   }
 }
@@ -1245,86 +1743,93 @@ export interface TelemetryQueryParams {
   account_id: string;
 
   /**
-   * Body param: Unique identifier for the query to execute
+   * Body param: Identifier for the query. When parameters are omitted, this ID is
+   * used to load a previously saved query's parameters. When providing parameters
+   * inline, pass any identifier (e.g. an ad-hoc ID).
    */
   queryId: string;
 
   /**
-   * Body param: Timeframe for your query using Unix timestamps in milliseconds.
-   * Provide from/to epoch ms; narrower timeframes provide faster responses and more
-   * specific results.
+   * Body param: Timeframe for the query using Unix timestamps in milliseconds.
+   * Narrower timeframes produce faster responses and more specific results.
    */
   timeframe: TelemetryQueryParams.Timeframe;
 
   /**
-   * Body param: Whether to include timeseties data in the response
+   * Body param: When true, includes time-series data in the response.
    */
   chart?: boolean;
 
   /**
-   * Body param: Whether to include comparison data with previous time periods
+   * Body param: When true, includes a comparison dataset from the previous time
+   * period of equal length.
    */
   compare?: boolean;
 
   /**
-   * Body param: Whether to perform a dry run without saving the results of the
-   * query. Useful for validation
+   * Body param: When true, executes the query without persisting the results. Useful
+   * for validation or previewing.
    */
   dry?: boolean;
 
   /**
-   * Body param: This is only used when the view is calculations. Leaving it empty
-   * lets Workers Observability detect the correct granularity.
+   * Body param: Number of time-series buckets. Only used when view is
+   * 'calculations'. Omit to let the system auto-detect an appropriate granularity.
    */
   granularity?: number;
 
   /**
-   * Body param: Whether to ignore time-series data in the results and return only
-   * aggregated values
+   * Body param: When true, omits time-series data from the response and returns only
+   * aggregated values. Reduces response size when series are not needed.
    */
   ignoreSeries?: boolean;
 
   /**
-   * Body param: Use this limit to cap the number of events returned when the view is
-   * events.
+   * Body param: Maximum number of events to return when view is 'events'. Also
+   * controls the number of group-by rows when view is 'calculations'.
    */
   limit?: number;
 
   /**
-   * Body param: Cursor pagination for event/trace/invocation views. Pass the last
-   * item's $metadata.id as the next offset.
+   * Body param: Cursor for pagination in event, trace, and invocation views. Pass
+   * the $metadata.id of the last returned item to fetch the next page.
    */
   offset?: string;
 
   /**
-   * Body param: Numeric offset for pattern results (top-N list). Use with limit to
-   * page pattern groups; not used by cursor pagination.
+   * Body param: Numeric offset for paginating grouped/pattern results (top-N lists).
+   * Use together with limit. Not used by cursor-based pagination.
    */
   offsetBy?: number;
 
   /**
-   * Body param: Direction for offset-based pagination (e.g., 'next', 'prev')
+   * Body param: Pagination direction: 'next' for forward, 'prev' for backward.
    */
   offsetDirection?: string;
 
   /**
-   * Body param: Optional parameters to pass to the query execution
+   * Body param: Query parameters defining what data to retrieve — filters,
+   * calculations, group-bys, and ordering. In practice this should always be
+   * provided for ad-hoc queries. Only omit when executing a previously saved query
+   * by queryId. Use the keys and values endpoints to discover available fields
+   * before building filters.
    */
   parameters?: TelemetryQueryParams.Parameters;
 
   /**
-   * Body param: Examples by view type. Events: show errors for a worker in the last
-   * 30 minutes. Calculations: p99 of wall time or count by status code. Invocations:
-   * find a specific request that resulted in a 500.
+   * Body param: Controls the shape of the response. 'events': individual log lines
+   * matching the query. 'calculations': aggregated metrics (count, avg, p99, etc.)
+   * with optional group-by breakdowns and time-series. 'invocations': events grouped
+   * by request ID. 'traces': distributed trace summaries. 'agents': Durable Object
+   * agent summaries.
    */
   view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'agents';
 }
 
 export namespace TelemetryQueryParams {
   /**
-   * Timeframe for your query using Unix timestamps in milliseconds. Provide from/to
-   * epoch ms; narrower timeframes provide faster responses and more specific
-   * results.
+   * Timeframe for the query using Unix timestamps in milliseconds. Narrower
+   * timeframes produce faster responses and more specific results.
    */
   export interface Timeframe {
     /**
@@ -1339,58 +1844,73 @@ export namespace TelemetryQueryParams {
   }
 
   /**
-   * Optional parameters to pass to the query execution
+   * Query parameters defining what data to retrieve — filters, calculations,
+   * group-bys, and ordering. In practice this should always be provided for ad-hoc
+   * queries. Only omit when executing a previously saved query by queryId. Use the
+   * keys and values endpoints to discover available fields before building filters.
    */
   export interface Parameters {
     /**
-     * Create Calculations to compute as part of the query.
+     * Aggregation calculations to compute (e.g. count, avg, p99). Each calculation
+     * produces aggregate values and optional time-series data.
      */
     calculations?: Array<Parameters.Calculation>;
 
     /**
-     * Set the Datasets to query. Leave it empty to query all the datasets.
+     * Datasets to query. Leave empty to query all available datasets.
      */
     datasets?: Array<string>;
 
     /**
-     * Set a Flag to describe how to combine the filters on the query.
+     * Logical operator for combining top-level filters: 'and' (all must match) or 'or'
+     * (any must match). Defaults to 'and'.
      */
     filterCombination?: 'and' | 'or' | 'AND' | 'OR';
 
     /**
-     * Configure the Filters to apply to the query. Supports nested groups via kind:
+     * Filters to narrow query results. Use the keys and values endpoints to discover
+     * available fields before building filters. Supports nested groups via kind:
      * 'group'. Maximum nesting depth is 4.
      */
     filters?: Array<Parameters.UnionMember0 | Parameters.WorkersObservabilityFilterLeaf>;
 
     /**
-     * Define how to group the results of the query.
+     * Fields to group calculation results by. Only applicable when the query view is
+     * 'calculations'. Produces per-group aggregate values.
      */
     groupBys?: Array<Parameters.GroupBy>;
 
     /**
-     * Configure the Having clauses that filter on calculations in the query result.
+     * Post-aggregation filters applied to calculation results. Use to filter groups
+     * after aggregation (e.g. only groups where count > 100).
      */
     havings?: Array<Parameters.Having>;
 
     /**
-     * Set a limit on the number of results / records returned by the query
+     * Maximum number of group-by rows to return in calculation results. A value of 10
+     * is a sensible default for most use cases.
      */
     limit?: number;
 
     /**
-     * Define an expression to search using full-text search.
+     * Full-text search expression applied across all event fields. Matches events
+     * containing the specified text.
      */
     needle?: Parameters.Needle;
 
     /**
-     * Configure the order of the results returned by the query.
+     * Ordering for grouped calculation results. Only effective when a group-by is
+     * present.
      */
     orderBy?: Parameters.OrderBy;
   }
 
   export namespace Parameters {
     export interface Calculation {
+      /**
+       * Aggregation operator to apply. Examples: count, avg, sum, min, max, p50, p90,
+       * p95, p99, uniq, stddev, variance.
+       */
       operator:
         | 'uniq'
         | 'count'
@@ -1431,39 +1951,128 @@ export namespace TelemetryQueryParams {
         | 'STDDEV'
         | 'VARIANCE';
 
+      /**
+       * Custom label for this calculation in the results. Useful for distinguishing
+       * multiple calculations.
+       */
       alias?: string;
 
       /**
-       * The key to use for the calculation. This key must exist in the logs. Use the
-       * observability_keys response to confirm. Do not guess keys.
+       * Field name to calculate over. Must exist in the data — verify with the keys
+       * endpoint. Omit for operators that don't require a key (e.g. count).
        */
       key?: string;
 
+      /**
+       * Data type of the key. Required when key is provided to ensure correct
+       * aggregation.
+       */
       keyType?: 'string' | 'number' | 'boolean';
     }
 
     export interface UnionMember0 {
       filterCombination: 'and' | 'or' | 'AND' | 'OR';
 
-      filters: Array<unknown>;
+      filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
 
       kind: 'group';
     }
 
+    export namespace UnionMember0 {
+      export interface UnionMember0 {
+        filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+        filters: Array<unknown>;
+
+        kind: 'group';
+      }
+
+      /**
+       * A filter condition applied to query results. Use the keys and values endpoints
+       * to discover available fields and their values before constructing filters.
+       */
+      export interface WorkersObservabilityFilterLeaf {
+        /**
+         * Filter field name. Use verified keys from previous query results or the keys
+         * endpoint. Common keys include $metadata.service, $metadata.origin,
+         * $metadata.trigger, $metadata.message, and $metadata.error.
+         */
+        key: string;
+
+        /**
+         * Comparison operator. String operators: includes, not_includes, starts_with,
+         * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+         * values). Numeric: eq, neq, gt, gte, lt, lte.
+         */
+        operation:
+          | 'includes'
+          | 'not_includes'
+          | 'starts_with'
+          | 'regex'
+          | 'exists'
+          | 'is_null'
+          | 'in'
+          | 'not_in'
+          | 'eq'
+          | 'neq'
+          | 'gt'
+          | 'gte'
+          | 'lt'
+          | 'lte'
+          | '='
+          | '!='
+          | '>'
+          | '>='
+          | '<'
+          | '<='
+          | 'INCLUDES'
+          | 'DOES_NOT_INCLUDE'
+          | 'MATCH_REGEX'
+          | 'EXISTS'
+          | 'DOES_NOT_EXIST'
+          | 'IN'
+          | 'NOT_IN'
+          | 'STARTS_WITH';
+
+        /**
+         * Data type of the filter field. Must match the actual type of the key being
+         * filtered.
+         */
+        type: 'string' | 'number' | 'boolean';
+
+        /**
+         * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+         * omitted.
+         */
+        kind?: 'filter';
+
+        /**
+         * Comparison value. Must match actual values in your data — verify with the values
+         * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+         * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+         * lookaheads/lookbehinds).
+         */
+        value?: string | number | boolean;
+      }
+    }
+
     /**
-     * Filtering best practices: use observability_keys and observability_values to
-     * confirm available fields and values. If searching for errors, filter for
-     * $metadata.error exists.
+     * A filter condition applied to query results. Use the keys and values endpoints
+     * to discover available fields and their values before constructing filters.
      */
     export interface WorkersObservabilityFilterLeaf {
       /**
-       * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
-       * previous query results or the observability_keys response. Preferred keys:
-       * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
-       * $metadata.error.
+       * Filter field name. Use verified keys from previous query results or the keys
+       * endpoint. Common keys include $metadata.service, $metadata.origin,
+       * $metadata.trigger, $metadata.message, and $metadata.error.
        */
       key: string;
 
+      /**
+       * Comparison operator. String operators: includes, not_includes, starts_with,
+       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       */
       operation:
         | 'includes'
         | 'not_includes'
@@ -1494,57 +2103,90 @@ export namespace TelemetryQueryParams {
         | 'NOT_IN'
         | 'STARTS_WITH';
 
+      /**
+       * Data type of the filter field. Must match the actual type of the key being
+       * filtered.
+       */
       type: 'string' | 'number' | 'boolean';
 
+      /**
+       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+       * omitted.
+       */
       kind?: 'filter';
 
       /**
-       * Filter comparison value. IMPORTANT: must match actual values in your logs.
-       * Verify using previous query results or the /values endpoint. Ensure value type
-       * matches the field type. String comparisons are case-sensitive unless using
-       * specific operations. Regex uses ClickHouse RE2 syntax (no
-       * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
-       * boundary.
+       * Comparison value. Must match actual values in your data — verify with the values
+       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+       * lookaheads/lookbehinds).
        */
       value?: string | number | boolean;
     }
 
     export interface GroupBy {
+      /**
+       * Data type of the group-by field.
+       */
       type: 'string' | 'number' | 'boolean';
 
+      /**
+       * Field name to group results by (e.g. $metadata.service, $metadata.statusCode).
+       */
       value: string;
     }
 
     export interface Having {
+      /**
+       * Calculation alias or operator to filter on after aggregation.
+       */
       key: string;
 
+      /**
+       * Numeric comparison operator: eq, neq, gt, gte, lt, lte.
+       */
       operation: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte';
 
+      /**
+       * Threshold value to compare the calculation result against.
+       */
       value: number;
     }
 
     /**
-     * Define an expression to search using full-text search.
+     * Full-text search expression applied across all event fields. Matches events
+     * containing the specified text.
      */
     export interface Needle {
+      /**
+       * The text or pattern to search for.
+       */
       value: string | number | boolean;
 
+      /**
+       * When true, treats the value as a regular expression (RE2 syntax).
+       */
       isRegex?: boolean;
 
+      /**
+       * When true, performs a case-sensitive search. Defaults to case-insensitive.
+       */
       matchCase?: boolean;
     }
 
     /**
-     * Configure the order of the results returned by the query.
+     * Ordering for grouped calculation results. Only effective when a group-by is
+     * present.
      */
     export interface OrderBy {
       /**
-       * Configure which Calculation to order the results by.
+       * Alias of the calculation to order results by. Must match the alias (or operator)
+       * of a calculation in the query.
        */
       value: string;
 
       /**
-       * Set the order of the results
+       * Sort direction: 'asc' for ascending, 'desc' for descending.
        */
       order?: 'asc' | 'desc';
     }
@@ -1589,7 +2231,8 @@ export interface TelemetryValuesParams {
   limit?: number;
 
   /**
-   * Body param: Search for a specific substring in the event.
+   * Body param: Full-text search expression to match events containing the specified
+   * text or pattern.
    */
   needle?: TelemetryValuesParams.Needle;
 }
@@ -1604,25 +2247,106 @@ export namespace TelemetryValuesParams {
   export interface UnionMember0 {
     filterCombination: 'and' | 'or' | 'AND' | 'OR';
 
-    filters: Array<unknown>;
+    filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
 
     kind: 'group';
   }
 
+  export namespace UnionMember0 {
+    export interface UnionMember0 {
+      filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+      filters: Array<unknown>;
+
+      kind: 'group';
+    }
+
+    /**
+     * A filter condition applied to query results. Use the keys and values endpoints
+     * to discover available fields and their values before constructing filters.
+     */
+    export interface WorkersObservabilityFilterLeaf {
+      /**
+       * Filter field name. Use verified keys from previous query results or the keys
+       * endpoint. Common keys include $metadata.service, $metadata.origin,
+       * $metadata.trigger, $metadata.message, and $metadata.error.
+       */
+      key: string;
+
+      /**
+       * Comparison operator. String operators: includes, not_includes, starts_with,
+       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       */
+      operation:
+        | 'includes'
+        | 'not_includes'
+        | 'starts_with'
+        | 'regex'
+        | 'exists'
+        | 'is_null'
+        | 'in'
+        | 'not_in'
+        | 'eq'
+        | 'neq'
+        | 'gt'
+        | 'gte'
+        | 'lt'
+        | 'lte'
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'INCLUDES'
+        | 'DOES_NOT_INCLUDE'
+        | 'MATCH_REGEX'
+        | 'EXISTS'
+        | 'DOES_NOT_EXIST'
+        | 'IN'
+        | 'NOT_IN'
+        | 'STARTS_WITH';
+
+      /**
+       * Data type of the filter field. Must match the actual type of the key being
+       * filtered.
+       */
+      type: 'string' | 'number' | 'boolean';
+
+      /**
+       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+       * omitted.
+       */
+      kind?: 'filter';
+
+      /**
+       * Comparison value. Must match actual values in your data — verify with the values
+       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+       * lookaheads/lookbehinds).
+       */
+      value?: string | number | boolean;
+    }
+  }
+
   /**
-   * Filtering best practices: use observability_keys and observability_values to
-   * confirm available fields and values. If searching for errors, filter for
-   * $metadata.error exists.
+   * A filter condition applied to query results. Use the keys and values endpoints
+   * to discover available fields and their values before constructing filters.
    */
   export interface WorkersObservabilityFilterLeaf {
     /**
-     * Filter field name. IMPORTANT: do not guess keys. Always use verified keys from
-     * previous query results or the observability_keys response. Preferred keys:
-     * $metadata.service, $metadata.origin, $metadata.trigger, $metadata.message,
-     * $metadata.error.
+     * Filter field name. Use verified keys from previous query results or the keys
+     * endpoint. Common keys include $metadata.service, $metadata.origin,
+     * $metadata.trigger, $metadata.message, and $metadata.error.
      */
     key: string;
 
+    /**
+     * Comparison operator. String operators: includes, not_includes, starts_with,
+     * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
+     * values). Numeric: eq, neq, gt, gte, lt, lte.
+     */
     operation:
       | 'includes'
       | 'not_includes'
@@ -1653,29 +2377,45 @@ export namespace TelemetryValuesParams {
       | 'NOT_IN'
       | 'STARTS_WITH';
 
+    /**
+     * Data type of the filter field. Must match the actual type of the key being
+     * filtered.
+     */
     type: 'string' | 'number' | 'boolean';
 
+    /**
+     * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+     * omitted.
+     */
     kind?: 'filter';
 
     /**
-     * Filter comparison value. IMPORTANT: must match actual values in your logs.
-     * Verify using previous query results or the /values endpoint. Ensure value type
-     * matches the field type. String comparisons are case-sensitive unless using
-     * specific operations. Regex uses ClickHouse RE2 syntax (no
-     * lookaheads/lookbehinds); examples: ^5\d{2}$ for HTTP 5xx, \bERROR\b for word
-     * boundary.
+     * Comparison value. Must match actual values in your data — verify with the values
+     * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+     * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+     * lookaheads/lookbehinds).
      */
     value?: string | number | boolean;
   }
 
   /**
-   * Search for a specific substring in the event.
+   * Full-text search expression to match events containing the specified text or
+   * pattern.
    */
   export interface Needle {
+    /**
+     * The text or pattern to search for.
+     */
     value: string | number | boolean;
 
+    /**
+     * When true, treats the value as a regular expression (RE2 syntax).
+     */
     isRegex?: boolean;
 
+    /**
+     * When true, performs a case-sensitive search. Defaults to case-insensitive.
+     */
     matchCase?: boolean;
   }
 }

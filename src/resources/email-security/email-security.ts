@@ -11,8 +11,6 @@ import {
 import * as InvestigateAPI from './investigate/investigate';
 import {
   Investigate,
-  InvestigateGetParams,
-  InvestigateGetResponse,
   InvestigateListParams,
   InvestigateListResponse,
   InvestigateListResponsesV4PagePaginationArray,
@@ -40,10 +38,8 @@ export declare namespace EmailSecurity {
   export {
     Investigate as Investigate,
     type InvestigateListResponse as InvestigateListResponse,
-    type InvestigateGetResponse as InvestigateGetResponse,
     InvestigateListResponsesV4PagePaginationArray as InvestigateListResponsesV4PagePaginationArray,
     type InvestigateListParams as InvestigateListParams,
-    type InvestigateGetParams as InvestigateGetParams,
   };
 
   export { Phishguard as Phishguard };

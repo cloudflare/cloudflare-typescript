@@ -32,7 +32,7 @@ describe('resource blockSenders', () => {
       is_regex: false,
       pattern: 'test@example.com',
       pattern_type: 'EMAIL',
-      comments: 'block sender with email test@example.com',
+      comments: 'Block sender with email test@example.com',
     });
   });
 
@@ -57,15 +57,16 @@ describe('resource blockSenders', () => {
       page: 1,
       pattern: 'pattern',
       pattern_type: 'EMAIL',
-      per_page: 1,
+      per_page: 20,
       search: 'search',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.blockSenders.delete(2402, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.blockSenders.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,15 +77,17 @@ describe('resource blockSenders', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.blockSenders.delete(2402, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.settings.blockSenders.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.blockSenders.edit(2402, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.blockSenders.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,19 +98,23 @@ describe('resource blockSenders', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.blockSenders.edit(2402, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comments: 'comments',
-      is_regex: true,
-      pattern: 'x',
-      pattern_type: 'EMAIL',
-    });
+    const response = await client.emailSecurity.settings.blockSenders.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        comments: 'Block sender with email test@example.com',
+        is_regex: false,
+        pattern: 'test@example.com',
+        pattern_type: 'EMAIL',
+      },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.blockSenders.get(2402, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.blockSenders.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -118,8 +125,9 @@ describe('resource blockSenders', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.blockSenders.get(2402, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.settings.blockSenders.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });
