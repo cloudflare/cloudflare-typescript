@@ -13,9 +13,9 @@ describe('resource impersonationRegistry', () => {
   test('create: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.impersonationRegistry.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      email: 'email',
-      is_email_regex: true,
-      name: 'name',
+      email: 'john.doe@example.com',
+      is_email_regex: false,
+      name: 'John Doe',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,9 +29,14 @@ describe('resource impersonationRegistry', () => {
   test('create: required and optional params', async () => {
     const response = await client.emailSecurity.settings.impersonationRegistry.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      email: 'email',
-      is_email_regex: true,
-      name: 'name',
+      email: 'john.doe@example.com',
+      is_email_regex: false,
+      name: 'John Doe',
+      comments: 'comments',
+      directory_id: 0,
+      directory_node_id: 0,
+      external_directory_node_id: 'external_directory_node_id',
+      provenance: 'A1S_INTERNAL',
     });
   });
 
@@ -54,69 +59,9 @@ describe('resource impersonationRegistry', () => {
       direction: 'asc',
       order: 'name',
       page: 1,
-      per_page: 1,
+      per_page: 20,
       provenance: 'A1S_INTERNAL',
       search: 'search',
-    });
-  });
-
-  test('delete: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.impersonationRegistry.delete(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('delete: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.impersonationRegistry.delete(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('edit: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.impersonationRegistry.edit(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('edit: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.impersonationRegistry.edit(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      email: 'email',
-      is_email_regex: true,
-      name: 'name',
-    });
-  });
-
-  test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.impersonationRegistry.get(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.impersonationRegistry.get(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });

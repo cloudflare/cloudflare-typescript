@@ -33,9 +33,6 @@ import {
 } from './block-senders';
 import * as DomainsAPI from './domains';
 import {
-  DomainBulkDeleteParams,
-  DomainBulkDeleteResponse,
-  DomainBulkDeleteResponsesSinglePage,
   DomainDeleteParams,
   DomainDeleteResponse,
   DomainEditParams,
@@ -52,12 +49,6 @@ import {
   ImpersonationRegistry,
   ImpersonationRegistryCreateParams,
   ImpersonationRegistryCreateResponse,
-  ImpersonationRegistryDeleteParams,
-  ImpersonationRegistryDeleteResponse,
-  ImpersonationRegistryEditParams,
-  ImpersonationRegistryEditResponse,
-  ImpersonationRegistryGetParams,
-  ImpersonationRegistryGetResponse,
   ImpersonationRegistryListParams,
   ImpersonationRegistryListResponse,
   ImpersonationRegistryListResponsesV4PagePaginationArray,
@@ -93,7 +84,6 @@ Settings.BlockSenders = BlockSenders;
 Settings.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;
 Settings.Domains = Domains;
 Settings.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;
-Settings.DomainBulkDeleteResponsesSinglePage = DomainBulkDeleteResponsesSinglePage;
 Settings.ImpersonationRegistry = ImpersonationRegistry;
 Settings.ImpersonationRegistryListResponsesV4PagePaginationArray =
   ImpersonationRegistryListResponsesV4PagePaginationArray;
@@ -135,14 +125,11 @@ export declare namespace Settings {
     Domains as Domains,
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
-    type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
-    DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
-    type DomainBulkDeleteParams as DomainBulkDeleteParams,
     type DomainEditParams as DomainEditParams,
     type DomainGetParams as DomainGetParams,
   };
@@ -151,15 +138,9 @@ export declare namespace Settings {
     ImpersonationRegistry as ImpersonationRegistry,
     type ImpersonationRegistryCreateResponse as ImpersonationRegistryCreateResponse,
     type ImpersonationRegistryListResponse as ImpersonationRegistryListResponse,
-    type ImpersonationRegistryDeleteResponse as ImpersonationRegistryDeleteResponse,
-    type ImpersonationRegistryEditResponse as ImpersonationRegistryEditResponse,
-    type ImpersonationRegistryGetResponse as ImpersonationRegistryGetResponse,
     ImpersonationRegistryListResponsesV4PagePaginationArray as ImpersonationRegistryListResponsesV4PagePaginationArray,
     type ImpersonationRegistryCreateParams as ImpersonationRegistryCreateParams,
     type ImpersonationRegistryListParams as ImpersonationRegistryListParams,
-    type ImpersonationRegistryDeleteParams as ImpersonationRegistryDeleteParams,
-    type ImpersonationRegistryEditParams as ImpersonationRegistryEditParams,
-    type ImpersonationRegistryGetParams as ImpersonationRegistryGetParams,
   };
 
   export {

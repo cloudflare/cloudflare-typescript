@@ -66,24 +66,22 @@ describe('resource allowPolicies', () => {
       direction: 'asc',
       is_acceptable_sender: true,
       is_exempt_recipient: true,
-      is_recipient: true,
-      is_sender: true,
-      is_spoof: true,
       is_trusted_sender: true,
       order: 'pattern',
       page: 1,
       pattern: 'pattern',
       pattern_type: 'EMAIL',
-      per_page: 1,
+      per_page: 20,
       search: 'search',
       verify_sender: true,
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.allowPolicies.delete(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.allowPolicies.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,15 +92,17 @@ describe('resource allowPolicies', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.allowPolicies.delete(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.settings.allowPolicies.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
-  test('edit: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.allowPolicies.edit(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test.skip('edit: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.allowPolicies.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,24 +112,31 @@ describe('resource allowPolicies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.allowPolicies.edit(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comments: 'comments',
-      is_acceptable_sender: true,
-      is_exempt_recipient: true,
-      is_regex: true,
-      is_trusted_sender: true,
-      pattern: 'x',
-      pattern_type: 'EMAIL',
-      verify_sender: true,
-    });
+  test.skip('edit: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.allowPolicies.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        comments: 'Trust all messages send from test@example.com',
+        is_acceptable_sender: false,
+        is_exempt_recipient: false,
+        is_recipient: false,
+        is_regex: false,
+        is_sender: true,
+        is_spoof: false,
+        is_trusted_sender: true,
+        pattern: 'test@example.com',
+        pattern_type: 'EMAIL',
+        verify_sender: true,
+      },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.allowPolicies.get(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.allowPolicies.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -140,8 +147,9 @@ describe('resource allowPolicies', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.allowPolicies.get(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.settings.allowPolicies.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

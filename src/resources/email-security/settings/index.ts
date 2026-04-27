@@ -30,16 +30,13 @@ export {
 } from './block-senders';
 export {
   DomainListResponsesV4PagePaginationArray,
-  DomainBulkDeleteResponsesSinglePage,
   Domains,
   type DomainListResponse,
   type DomainDeleteResponse,
-  type DomainBulkDeleteResponse,
   type DomainEditResponse,
   type DomainGetResponse,
   type DomainListParams,
   type DomainDeleteParams,
-  type DomainBulkDeleteParams,
   type DomainEditParams,
   type DomainGetParams,
 } from './domains';
@@ -48,14 +45,8 @@ export {
   ImpersonationRegistry,
   type ImpersonationRegistryCreateResponse,
   type ImpersonationRegistryListResponse,
-  type ImpersonationRegistryDeleteResponse,
-  type ImpersonationRegistryEditResponse,
-  type ImpersonationRegistryGetResponse,
   type ImpersonationRegistryCreateParams,
   type ImpersonationRegistryListParams,
-  type ImpersonationRegistryDeleteParams,
-  type ImpersonationRegistryEditParams,
-  type ImpersonationRegistryGetParams,
 } from './impersonation-registry';
 export { Settings } from './settings';
 export {
