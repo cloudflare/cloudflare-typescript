@@ -148,7 +148,8 @@ export namespace CfInterconnectUpdateResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -239,7 +240,8 @@ export namespace CfInterconnectListResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -332,7 +334,8 @@ export namespace CfInterconnectBulkUpdateResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -423,7 +426,8 @@ export namespace CfInterconnectGetResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -509,7 +513,8 @@ export interface CfInterconnectUpdateParams {
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
-   * tunnel, false otherwise.
+   * tunnel, false otherwise. Requires the `coupler_integration` account flag to be
+   * enabled; requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 

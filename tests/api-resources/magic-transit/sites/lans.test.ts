@@ -44,6 +44,13 @@ describe('resource lans', () => {
         address: '192.0.2.0/24',
         dhcp_relay: { server_addresses: ['192.0.2.1'] },
         dhcp_server: {
+          dhcp_options: [
+            {
+              code: 66,
+              type: 'ip',
+              value: '10.20.30.40',
+            },
+          ],
           dhcp_pool_end: '192.0.2.1',
           dhcp_pool_start: '192.0.2.1',
           dns_server: '192.0.2.1',
@@ -95,6 +102,13 @@ describe('resource lans', () => {
           address: '192.0.2.0/24',
           dhcp_relay: { server_addresses: ['192.0.2.1'] },
           dhcp_server: {
+            dhcp_options: [
+              {
+                code: 66,
+                type: 'ip',
+                value: '10.20.30.40',
+              },
+            ],
             dhcp_pool_end: '192.0.2.1',
             dhcp_pool_start: '192.0.2.1',
             dns_server: '192.0.2.1',
@@ -189,6 +203,13 @@ describe('resource lans', () => {
           address: '192.0.2.0/24',
           dhcp_relay: { server_addresses: ['192.0.2.1'] },
           dhcp_server: {
+            dhcp_options: [
+              {
+                code: 66,
+                type: 'ip',
+                value: '10.20.30.40',
+              },
+            ],
             dhcp_pool_end: '192.0.2.1',
             dhcp_pool_start: '192.0.2.1',
             dns_server: '192.0.2.1',
