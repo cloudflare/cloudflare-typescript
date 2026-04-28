@@ -118,6 +118,7 @@ describe('resource items', () => {
         account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
         key: 'key',
         next_action: 'INDEX',
+        wait_for_completion: true,
       },
     );
   });
@@ -207,7 +208,11 @@ describe('resource items', () => {
       'my-namespace',
       'my-ai-search',
       'item_id',
-      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22', next_action: 'INDEX' },
+      {
+        account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+        next_action: 'INDEX',
+        wait_for_completion: true,
+      },
     );
   });
 

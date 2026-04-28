@@ -219,7 +219,7 @@ describe('resource instances', () => {
       order_by: 'created_at',
       order_by_direction: 'asc',
       page: 1,
-      per_page: 1,
+      per_page: 20,
       search: 'search',
     });
   });

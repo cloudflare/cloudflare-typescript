@@ -570,6 +570,15 @@ export interface ItemCreateOrUpdateParams {
    * Body param
    */
   next_action: 'INDEX';
+
+  /**
+   * Body param: Wait for indexing to fully complete before responding. On RAGs with
+   * vector indexing enabled, this additionally waits for Vectorize ingestion
+   * confirmation (up to 40s) so the returned item reflects a queryable state. On
+   * timeout the item is returned in `running` state and the background alarm
+   * continues polling. Defaults to false.
+   */
+  wait_for_completion?: boolean;
 }
 
 export interface ItemDownloadParams {
@@ -607,6 +616,15 @@ export interface ItemSyncParams {
    * Body param
    */
   next_action: 'INDEX';
+
+  /**
+   * Body param: Wait for indexing to fully complete before responding. On RAGs with
+   * vector indexing enabled, this additionally waits for Vectorize ingestion
+   * confirmation (up to 40s) so the returned item reflects a queryable state. On
+   * timeout the item is returned in `running` state and the background alarm
+   * continues polling. Defaults to false.
+   */
+  wait_for_completion?: boolean;
 }
 
 export interface ItemUploadParams {
@@ -634,7 +652,11 @@ export namespace ItemUploadParams {
     metadata?: string;
 
     /**
-     * Wait for indexing to complete before responding. Defaults to false.
+     * Wait for indexing to fully complete before responding. On RAGs with vector
+     * indexing enabled, this additionally waits for Vectorize ingestion confirmation
+     * (up to 40s) so the returned item reflects a queryable state. On timeout the item
+     * is returned in `running` state and the background alarm continues polling.
+     * Defaults to false.
      */
     wait_for_completion?: boolean;
   }
