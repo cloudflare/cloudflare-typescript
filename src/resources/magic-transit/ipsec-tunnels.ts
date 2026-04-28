@@ -281,7 +281,8 @@ export interface IPSECTunnelCreateResponse {
 
   /**
    * True if automatic stateful return routing should be enabled for a tunnel, false
-   * otherwise.
+   * otherwise. Requires the `coupler_integration` account flag to be enabled;
+   * requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 
@@ -501,7 +502,8 @@ export namespace IPSECTunnelUpdateResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -720,7 +722,8 @@ export namespace IPSECTunnelListResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -941,7 +944,8 @@ export namespace IPSECTunnelDeleteResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -1162,7 +1166,8 @@ export namespace IPSECTunnelBulkUpdateResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -1381,7 +1386,8 @@ export namespace IPSECTunnelGetResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -1607,7 +1613,8 @@ export interface IPSECTunnelCreateParams {
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
-   * tunnel, false otherwise.
+   * tunnel, false otherwise. Requires the `coupler_integration` account flag to be
+   * enabled; requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 
@@ -1793,7 +1800,8 @@ export interface IPSECTunnelUpdateParams {
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
-   * tunnel, false otherwise.
+   * tunnel, false otherwise. Requires the `coupler_integration` account flag to be
+   * enabled; requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 
