@@ -2,15 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as HostnameAssociationsAPI from './hostname-associations';
-import {
-  HostnameAssociation,
-  HostnameAssociationGetParams,
-  HostnameAssociationGetResponse,
-  HostnameAssociationUpdateParams,
-  HostnameAssociationUpdateResponse,
-  HostnameAssociations,
-  TLSHostnameAssociation,
-} from './hostname-associations';
+import { HostnameAssociations } from './hostname-associations';
 
 export class CertificateAuthorities extends APIResource {
   hostnameAssociations: HostnameAssociationsAPI.HostnameAssociations =
@@ -20,13 +12,5 @@ export class CertificateAuthorities extends APIResource {
 CertificateAuthorities.HostnameAssociations = HostnameAssociations;
 
 export declare namespace CertificateAuthorities {
-  export {
-    HostnameAssociations as HostnameAssociations,
-    type HostnameAssociation as HostnameAssociation,
-    type TLSHostnameAssociation as TLSHostnameAssociation,
-    type HostnameAssociationUpdateResponse as HostnameAssociationUpdateResponse,
-    type HostnameAssociationGetResponse as HostnameAssociationGetResponse,
-    type HostnameAssociationUpdateParams as HostnameAssociationUpdateParams,
-    type HostnameAssociationGetParams as HostnameAssociationGetParams,
-  };
+  export { HostnameAssociations as HostnameAssociations };
 }

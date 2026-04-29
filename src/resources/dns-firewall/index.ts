@@ -2,10 +2,4 @@
 
 export { Analytics } from './analytics/index';
 export { DNSFirewall } from './dns-firewall';
-export {
-  ReverseDNS,
-  type ReverseDNSEditResponse,
-  type ReverseDNSGetResponse,
-  type ReverseDNSEditParams,
-  type ReverseDNSGetParams,
-} from './reverse-dns';
+export { ReverseDNS } from './reverse-dns';

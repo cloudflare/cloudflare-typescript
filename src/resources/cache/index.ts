@@ -5,7 +5,6 @@ export {
   CacheReserveResource,
   type CacheReserve,
   type CacheReserveClear,
-  type State,
   type CacheReserveClearResponse,
   type CacheReserveEditResponse,
   type CacheReserveGetResponse,
@@ -17,7 +16,6 @@ export {
 } from './cache-reserve';
 export {
   OriginCloudRegions,
-  type OriginCloudRegion,
   type OriginCloudRegionCreateResponse,
   type OriginCloudRegionListResponse,
   type OriginCloudRegionDeleteResponse,
@@ -54,7 +52,6 @@ export {
 } from './smart-tiered-cache';
 export {
   Variants,
-  type CacheVariant,
   type VariantDeleteResponse,
   type VariantEditResponse,
   type VariantGetResponse,

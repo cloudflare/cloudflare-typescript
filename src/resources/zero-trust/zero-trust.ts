@@ -2,84 +2,29 @@
 
 import { APIResource } from '../../resource';
 import * as ConnectivitySettingsAPI from './connectivity-settings';
-import {
-  ConnectivitySettingEditParams,
-  ConnectivitySettingEditResponse,
-  ConnectivitySettingGetParams,
-  ConnectivitySettingGetResponse,
-  ConnectivitySettings,
-} from './connectivity-settings';
+import { ConnectivitySettings } from './connectivity-settings';
 import * as SeatsAPI from './seats';
-import { Seat, SeatEditParams, Seats, SeatsSinglePage } from './seats';
+import { Seats } from './seats';
 import * as AccessAPI from './access/access';
 import { Access } from './access/access';
 import * as DevicesAPI from './devices/devices';
-import {
-  Device,
-  DeviceGetParams,
-  DeviceGetResponse,
-  DeviceListParams,
-  Devices,
-  DevicesSinglePage,
-} from './devices/devices';
+import { Devices } from './devices/devices';
 import * as DEXAPI from './dex/dex';
-import { DEX, DigitalExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles } from './dex/dex';
+import { DEX } from './dex/dex';
 import * as DLPAPI from './dlp/dlp';
 import { DLP } from './dlp/dlp';
 import * as GatewayAPI from './gateway/gateway';
-import {
-  Gateway,
-  GatewayCreateParams,
-  GatewayCreateResponse,
-  GatewayListParams,
-  GatewayListResponse,
-} from './gateway/gateway';
+import { Gateway } from './gateway/gateway';
 import * as IdentityProvidersAPI from './identity-providers/identity-providers';
-import {
-  AzureAD,
-  GenericOAuthConfig,
-  IdentityProvider,
-  IdentityProviderCreateParams,
-  IdentityProviderDeleteParams,
-  IdentityProviderDeleteResponse,
-  IdentityProviderGetParams,
-  IdentityProviderListParams,
-  IdentityProviderListResponse,
-  IdentityProviderListResponsesV4PagePaginationArray,
-  IdentityProviderSCIMConfig,
-  IdentityProviderType,
-  IdentityProviderUpdateParams,
-  IdentityProviders,
-} from './identity-providers/identity-providers';
+import { IdentityProviders } from './identity-providers/identity-providers';
 import * as NetworksAPI from './networks/networks';
 import { Networks } from './networks/networks';
 import * as OrganizationsAPI from './organizations/organizations';
-import {
-  LoginDesign,
-  Organization,
-  OrganizationCreateParams,
-  OrganizationListParams,
-  OrganizationRevokeUsersParams,
-  OrganizationRevokeUsersResponse,
-  OrganizationUpdateParams,
-  Organizations,
-} from './organizations/organizations';
+import { Organizations } from './organizations/organizations';
 import * as RiskScoringAPI from './risk-scoring/risk-scoring';
-import {
-  RiskScoring,
-  RiskScoringGetParams,
-  RiskScoringGetResponse,
-  RiskScoringResetParams,
-  RiskScoringResetResponse,
-} from './risk-scoring/risk-scoring';
+import { RiskScoring } from './risk-scoring/risk-scoring';
 import * as TunnelsAPI from './tunnels/tunnels';
-import {
-  Connection,
-  TunnelListParams,
-  TunnelListResponse,
-  TunnelListResponsesV4PagePaginationArray,
-  Tunnels,
-} from './tunnels/tunnels';
+import { Tunnels } from './tunnels/tunnels';
 
 export class ZeroTrust extends APIResource {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
@@ -100,17 +45,12 @@ export class ZeroTrust extends APIResource {
 }
 
 ZeroTrust.Devices = Devices;
-ZeroTrust.DevicesSinglePage = DevicesSinglePage;
 ZeroTrust.IdentityProviders = IdentityProviders;
-ZeroTrust.IdentityProviderListResponsesV4PagePaginationArray =
-  IdentityProviderListResponsesV4PagePaginationArray;
 ZeroTrust.Organizations = Organizations;
 ZeroTrust.Seats = Seats;
-ZeroTrust.SeatsSinglePage = SeatsSinglePage;
 ZeroTrust.Access = Access;
 ZeroTrust.DEX = DEX;
 ZeroTrust.Tunnels = Tunnels;
-ZeroTrust.TunnelListResponsesV4PagePaginationArray = TunnelListResponsesV4PagePaginationArray;
 ZeroTrust.ConnectivitySettings = ConnectivitySettings;
 ZeroTrust.DLP = DLP;
 ZeroTrust.Gateway = Gateway;
@@ -118,93 +58,27 @@ ZeroTrust.Networks = Networks;
 ZeroTrust.RiskScoring = RiskScoring;
 
 export declare namespace ZeroTrust {
-  export {
-    Devices as Devices,
-    type Device as Device,
-    type DeviceGetResponse as DeviceGetResponse,
-    DevicesSinglePage as DevicesSinglePage,
-    type DeviceListParams as DeviceListParams,
-    type DeviceGetParams as DeviceGetParams,
-  };
+  export { Devices as Devices };
 
-  export {
-    IdentityProviders as IdentityProviders,
-    type AzureAD as AzureAD,
-    type GenericOAuthConfig as GenericOAuthConfig,
-    type IdentityProvider as IdentityProvider,
-    type IdentityProviderSCIMConfig as IdentityProviderSCIMConfig,
-    type IdentityProviderType as IdentityProviderType,
-    type IdentityProviderListResponse as IdentityProviderListResponse,
-    type IdentityProviderDeleteResponse as IdentityProviderDeleteResponse,
-    IdentityProviderListResponsesV4PagePaginationArray as IdentityProviderListResponsesV4PagePaginationArray,
-    type IdentityProviderCreateParams as IdentityProviderCreateParams,
-    type IdentityProviderUpdateParams as IdentityProviderUpdateParams,
-    type IdentityProviderListParams as IdentityProviderListParams,
-    type IdentityProviderDeleteParams as IdentityProviderDeleteParams,
-    type IdentityProviderGetParams as IdentityProviderGetParams,
-  };
+  export { IdentityProviders as IdentityProviders };
 
-  export {
-    Organizations as Organizations,
-    type LoginDesign as LoginDesign,
-    type Organization as Organization,
-    type OrganizationRevokeUsersResponse as OrganizationRevokeUsersResponse,
-    type OrganizationCreateParams as OrganizationCreateParams,
-    type OrganizationUpdateParams as OrganizationUpdateParams,
-    type OrganizationListParams as OrganizationListParams,
-    type OrganizationRevokeUsersParams as OrganizationRevokeUsersParams,
-  };
+  export { Organizations as Organizations };
 
-  export {
-    Seats as Seats,
-    type Seat as Seat,
-    SeatsSinglePage as SeatsSinglePage,
-    type SeatEditParams as SeatEditParams,
-  };
+  export { Seats as Seats };
 
   export { Access as Access };
 
-  export {
-    DEX as DEX,
-    type DigitalExperienceMonitor as DigitalExperienceMonitor,
-    type NetworkPath as NetworkPath,
-    type NetworkPathResponse as NetworkPathResponse,
-    type Percentiles as Percentiles,
-  };
+  export { DEX as DEX };
 
-  export {
-    Tunnels as Tunnels,
-    type Connection as Connection,
-    type TunnelListResponse as TunnelListResponse,
-    TunnelListResponsesV4PagePaginationArray as TunnelListResponsesV4PagePaginationArray,
-    type TunnelListParams as TunnelListParams,
-  };
+  export { Tunnels as Tunnels };
 
-  export {
-    ConnectivitySettings as ConnectivitySettings,
-    type ConnectivitySettingEditResponse as ConnectivitySettingEditResponse,
-    type ConnectivitySettingGetResponse as ConnectivitySettingGetResponse,
-    type ConnectivitySettingEditParams as ConnectivitySettingEditParams,
-    type ConnectivitySettingGetParams as ConnectivitySettingGetParams,
-  };
+  export { ConnectivitySettings as ConnectivitySettings };
 
   export { DLP as DLP };
 
-  export {
-    Gateway as Gateway,
-    type GatewayCreateResponse as GatewayCreateResponse,
-    type GatewayListResponse as GatewayListResponse,
-    type GatewayCreateParams as GatewayCreateParams,
-    type GatewayListParams as GatewayListParams,
-  };
+  export { Gateway as Gateway };
 
   export { Networks as Networks };
 
-  export {
-    RiskScoring as RiskScoring,
-    type RiskScoringGetResponse as RiskScoringGetResponse,
-    type RiskScoringResetResponse as RiskScoringResetResponse,
-    type RiskScoringGetParams as RiskScoringGetParams,
-    type RiskScoringResetParams as RiskScoringResetParams,
-  };
+  export { RiskScoring as RiskScoring };
 }

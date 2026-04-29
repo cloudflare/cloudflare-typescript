@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import * as OperationAPI from './operation';
-import { Operation, OperationUpdateParams, OperationUpdateResponse } from './operation';
+import { Operation } from './operation';
 
 export class Resources extends APIResource {
   operation: OperationAPI.Operation = new OperationAPI.Operation(this._client);
@@ -11,9 +11,5 @@ export class Resources extends APIResource {
 Resources.Operation = Operation;
 
 export declare namespace Resources {
-  export {
-    Operation as Operation,
-    type OperationUpdateResponse as OperationUpdateResponse,
-    type OperationUpdateParams as OperationUpdateParams,
-  };
+  export { Operation as Operation };
 }

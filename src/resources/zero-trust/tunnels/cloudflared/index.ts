@@ -1,28 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  ClientsSinglePage,
-  Connections,
-  type Client,
-  type ConnectionDeleteResponse,
-  type ConnectionDeleteParams,
-  type ConnectionGetParams,
-} from './connections';
-export {
-  Cloudflared,
-  type CloudflaredCreateParams,
-  type CloudflaredListParams,
-  type CloudflaredDeleteParams,
-  type CloudflaredEditParams,
-  type CloudflaredGetParams,
-} from './cloudflared';
-export {
-  Configurations,
-  type ConfigurationUpdateResponse,
-  type ConfigurationGetResponse,
-  type ConfigurationUpdateParams,
-  type ConfigurationGetParams,
-} from './configurations';
-export { Connectors, type ConnectorGetParams } from './connectors';
-export { Management, type ManagementCreateResponse, type ManagementCreateParams } from './management';
-export { Token, type TokenGetResponse, type TokenGetParams } from './token';
+export { Cloudflared } from './cloudflared';
+export { Configurations } from './configurations';
+export { Connections } from './connections';
+export { Connectors } from './connectors';
+export { Management } from './management';
+export { Token } from './token';

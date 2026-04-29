@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as AggregatesAPI from './aggregates/aggregates';
 import { Aggregates } from './aggregates/aggregates';
 import * as EventsAPI from './events/events';
-import { Dimension, Events } from './events/events';
+import { Events } from './events/events';
 
 export class Analytics extends APIResource {
   aggregates: AggregatesAPI.Aggregates = new AggregatesAPI.Aggregates(this._client);
@@ -17,5 +17,5 @@ Analytics.Events = Events;
 export declare namespace Analytics {
   export { Aggregates as Aggregates };
 
-  export { Events as Events, type Dimension as Dimension };
+  export { Events as Events };
 }

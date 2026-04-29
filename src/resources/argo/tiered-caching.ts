@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class TieredCaching extends APIResource {
   /**
@@ -118,7 +119,7 @@ export interface TieredCachingEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Enables Tiered Caching.
@@ -130,7 +131,7 @@ export interface TieredCachingGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace TieredCaching {

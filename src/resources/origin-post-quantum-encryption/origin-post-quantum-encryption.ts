@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class OriginPostQuantumEncryption extends APIResource {
   /**
@@ -94,7 +95,7 @@ export interface OriginPostQuantumEncryptionUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Value of the Origin Post Quantum Encryption Setting.
@@ -106,7 +107,7 @@ export interface OriginPostQuantumEncryptionGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace OriginPostQuantumEncryption {

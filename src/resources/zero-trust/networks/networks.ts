@@ -2,42 +2,13 @@
 
 import { APIResource } from '../../../resource';
 import * as HostnameRoutesAPI from './hostname-routes';
-import {
-  HostnameRoute,
-  HostnameRouteCreateParams,
-  HostnameRouteDeleteParams,
-  HostnameRouteEditParams,
-  HostnameRouteGetParams,
-  HostnameRouteListParams,
-  HostnameRoutes,
-  HostnameRoutesV4PagePaginationArray,
-} from './hostname-routes';
+import { HostnameRoutes } from './hostname-routes';
 import * as VirtualNetworksAPI from './virtual-networks';
-import {
-  VirtualNetwork,
-  VirtualNetworkCreateParams,
-  VirtualNetworkDeleteParams,
-  VirtualNetworkEditParams,
-  VirtualNetworkGetParams,
-  VirtualNetworkListParams,
-  VirtualNetworks,
-  VirtualNetworksSinglePage,
-} from './virtual-networks';
+import { VirtualNetworks } from './virtual-networks';
 import * as RoutesAPI from './routes/routes';
-import {
-  NetworkRoute,
-  Route,
-  RouteCreateParams,
-  RouteDeleteParams,
-  RouteEditParams,
-  RouteGetParams,
-  RouteListParams,
-  Routes,
-  Teamnet,
-  TeamnetsV4PagePaginationArray,
-} from './routes/routes';
+import { Routes } from './routes/routes';
 import * as SubnetsAPI from './subnets/subnets';
-import { SubnetListParams, Subnets } from './subnets/subnets';
+import { Subnets } from './subnets/subnets';
 
 export class Networks extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
@@ -47,48 +18,16 @@ export class Networks extends APIResource {
 }
 
 Networks.Routes = Routes;
-Networks.TeamnetsV4PagePaginationArray = TeamnetsV4PagePaginationArray;
 Networks.VirtualNetworks = VirtualNetworks;
-Networks.VirtualNetworksSinglePage = VirtualNetworksSinglePage;
 Networks.Subnets = Subnets;
 Networks.HostnameRoutes = HostnameRoutes;
-Networks.HostnameRoutesV4PagePaginationArray = HostnameRoutesV4PagePaginationArray;
 
 export declare namespace Networks {
-  export {
-    Routes as Routes,
-    type NetworkRoute as NetworkRoute,
-    type Route as Route,
-    type Teamnet as Teamnet,
-    TeamnetsV4PagePaginationArray as TeamnetsV4PagePaginationArray,
-    type RouteCreateParams as RouteCreateParams,
-    type RouteListParams as RouteListParams,
-    type RouteDeleteParams as RouteDeleteParams,
-    type RouteEditParams as RouteEditParams,
-    type RouteGetParams as RouteGetParams,
-  };
+  export { Routes as Routes };
 
-  export {
-    VirtualNetworks as VirtualNetworks,
-    type VirtualNetwork as VirtualNetwork,
-    VirtualNetworksSinglePage as VirtualNetworksSinglePage,
-    type VirtualNetworkCreateParams as VirtualNetworkCreateParams,
-    type VirtualNetworkListParams as VirtualNetworkListParams,
-    type VirtualNetworkDeleteParams as VirtualNetworkDeleteParams,
-    type VirtualNetworkEditParams as VirtualNetworkEditParams,
-    type VirtualNetworkGetParams as VirtualNetworkGetParams,
-  };
+  export { VirtualNetworks as VirtualNetworks };
 
-  export { Subnets as Subnets, type SubnetListParams as SubnetListParams };
+  export { Subnets as Subnets };
 
-  export {
-    HostnameRoutes as HostnameRoutes,
-    type HostnameRoute as HostnameRoute,
-    HostnameRoutesV4PagePaginationArray as HostnameRoutesV4PagePaginationArray,
-    type HostnameRouteCreateParams as HostnameRouteCreateParams,
-    type HostnameRouteListParams as HostnameRouteListParams,
-    type HostnameRouteDeleteParams as HostnameRouteDeleteParams,
-    type HostnameRouteEditParams as HostnameRouteEditParams,
-    type HostnameRouteGetParams as HostnameRouteGetParams,
-  };
+  export { HostnameRoutes as HostnameRoutes };
 }

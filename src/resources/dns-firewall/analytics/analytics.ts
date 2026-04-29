@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as ReportsAPI from './reports/reports';
-import { ReportGetParams, Reports } from './reports/reports';
+import { Reports } from './reports/reports';
 
 export class Analytics extends APIResource {
   reports: ReportsAPI.Reports = new ReportsAPI.Reports(this._client);
@@ -11,5 +11,5 @@ export class Analytics extends APIResource {
 Analytics.Reports = Reports;
 
 export declare namespace Analytics {
-  export { Reports as Reports, type ReportGetParams as ReportGetParams };
+  export { Reports as Reports };
 }

@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import * as HistoryAPI from './history';
-import { BillingHistoriesV4PagePaginationArray, BillingHistory, History, HistoryListParams } from './history';
+import { History } from './history';
 import * as ProfileAPI from './profile';
-import { Profile, ProfileGetResponse } from './profile';
+import { Profile } from './profile';
 
 export class Billing extends APIResource {
   history: HistoryAPI.History = new HistoryAPI.History(this._client);
@@ -12,16 +12,10 @@ export class Billing extends APIResource {
 }
 
 Billing.History = History;
-Billing.BillingHistoriesV4PagePaginationArray = BillingHistoriesV4PagePaginationArray;
 Billing.Profile = Profile;
 
 export declare namespace Billing {
-  export {
-    History as History,
-    type BillingHistory as BillingHistory,
-    BillingHistoriesV4PagePaginationArray as BillingHistoriesV4PagePaginationArray,
-    type HistoryListParams as HistoryListParams,
-  };
+  export { History as History };
 
-  export { Profile as Profile, type ProfileGetResponse as ProfileGetResponse };
+  export { Profile as Profile };
 }

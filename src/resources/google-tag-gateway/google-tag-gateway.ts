@@ -2,19 +2,14 @@
 
 import { APIResource } from '../../resource';
 import * as ConfigAPI from './config';
-import { Config, ConfigGetParams, ConfigResource, ConfigUpdateParams } from './config';
+import { Config } from './config';
 
 export class GoogleTagGateway extends APIResource {
-  config: ConfigAPI.ConfigResource = new ConfigAPI.ConfigResource(this._client);
+  config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
 }
 
-GoogleTagGateway.ConfigResource = ConfigResource;
+GoogleTagGateway.Config = Config;
 
 export declare namespace GoogleTagGateway {
-  export {
-    ConfigResource as ConfigResource,
-    type Config as Config,
-    type ConfigUpdateParams as ConfigUpdateParams,
-    type ConfigGetParams as ConfigGetParams,
-  };
+  export { Config as Config };
 }

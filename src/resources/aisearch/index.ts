@@ -1,55 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { AISearch } from './aisearch';
-export {
-  InstanceListResponsesV4PagePaginationArray,
-  Instances,
-  type InstanceCreateResponse,
-  type InstanceUpdateResponse,
-  type InstanceListResponse,
-  type InstanceDeleteResponse,
-  type InstanceChatCompletionsResponse,
-  type InstanceReadResponse,
-  type InstanceSearchResponse,
-  type InstanceStatsResponse,
-  type InstanceCreateParams,
-  type InstanceUpdateParams,
-  type InstanceListParams,
-  type InstanceDeleteParams,
-  type InstanceChatCompletionsParams,
-  type InstanceReadParams,
-  type InstanceSearchParams,
-  type InstanceStatsParams,
-} from './instances/index';
-export {
-  NamespaceListResponsesV4PagePaginationArray,
-  Namespaces,
-  type NamespaceCreateResponse,
-  type NamespaceUpdateResponse,
-  type NamespaceListResponse,
-  type NamespaceDeleteResponse,
-  type NamespaceChatCompletionsResponse,
-  type NamespaceReadResponse,
-  type NamespaceSearchResponse,
-  type NamespaceCreateParams,
-  type NamespaceUpdateParams,
-  type NamespaceListParams,
-  type NamespaceDeleteParams,
-  type NamespaceChatCompletionsParams,
-  type NamespaceReadParams,
-  type NamespaceSearchParams,
-} from './namespaces/index';
-export {
-  TokenListResponsesV4PagePaginationArray,
-  Tokens,
-  type TokenCreateResponse,
-  type TokenUpdateResponse,
-  type TokenListResponse,
-  type TokenDeleteResponse,
-  type TokenReadResponse,
-  type TokenCreateParams,
-  type TokenUpdateParams,
-  type TokenListParams,
-  type TokenDeleteParams,
-  type TokenReadParams,
-} from './tokens';
+export { Instances } from './instances/index';
+export { Namespaces } from './namespaces/index';
+export { Tokens } from './tokens';

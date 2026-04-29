@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class SmartTieredCache extends APIResource {
   /**
@@ -157,14 +158,14 @@ export interface SmartTieredCacheDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface SmartTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Enable or disable the Smart Tiered Cache.
@@ -176,7 +177,7 @@ export interface SmartTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace SmartTieredCache {

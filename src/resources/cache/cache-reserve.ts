@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class CacheReserveResource extends APIResource {
   /**
@@ -123,11 +124,6 @@ export type CacheReserve = 'cache_reserve';
 export type CacheReserveClear = 'cache_reserve_clear';
 
 /**
- * The current state of the Cache Reserve Clear operation.
- */
-export type State = 'In-progress' | 'Completed';
-
-/**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
  * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
  * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -147,7 +143,7 @@ export interface CacheReserveClearResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -224,7 +220,7 @@ export interface CacheReserveStatusResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -241,7 +237,7 @@ export interface CacheReserveClearParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param
@@ -253,7 +249,7 @@ export interface CacheReserveEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Value of the Cache Reserve zone setting.
@@ -265,21 +261,20 @@ export interface CacheReserveGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface CacheReserveStatusParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace CacheReserveResource {
   export {
     type CacheReserve as CacheReserve,
     type CacheReserveClear as CacheReserveClear,
-    type State as State,
     type CacheReserveClearResponse as CacheReserveClearResponse,
     type CacheReserveEditResponse as CacheReserveEditResponse,
     type CacheReserveGetResponse as CacheReserveGetResponse,

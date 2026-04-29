@@ -2,20 +2,14 @@
 
 import { APIResource } from '../../../resource';
 import * as AuditAPI from './audit';
-import { Audit, AuditListParams, AuditListResponse, AuditListResponsesCursorPaginationAfter } from './audit';
+import { Audit } from './audit';
 
 export class Logs extends APIResource {
   audit: AuditAPI.Audit = new AuditAPI.Audit(this._client);
 }
 
 Logs.Audit = Audit;
-Logs.AuditListResponsesCursorPaginationAfter = AuditListResponsesCursorPaginationAfter;
 
 export declare namespace Logs {
-  export {
-    Audit as Audit,
-    type AuditListResponse as AuditListResponse,
-    AuditListResponsesCursorPaginationAfter as AuditListResponsesCursorPaginationAfter,
-    type AuditListParams as AuditListParams,
-  };
+  export { Audit as Audit };
 }

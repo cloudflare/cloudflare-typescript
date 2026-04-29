@@ -1,14 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Quota, type QuotaGetResponse, type QuotaGetParams } from './quota';
+export { Quota } from './quota';
 export { SecretsStore } from './secrets-store';
-export {
-  StoreListResponsesV4PagePaginationArray,
-  Stores,
-  type StoreCreateResponse,
-  type StoreListResponse,
-  type StoreDeleteResponse,
-  type StoreCreateParams,
-  type StoreListParams,
-  type StoreDeleteParams,
-} from './stores/index';
+export { Stores } from './stores/index';

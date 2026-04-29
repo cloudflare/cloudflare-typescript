@@ -2,18 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as QuotaAPI from './quota';
-import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
+import { Quota } from './quota';
 import * as StoresAPI from './stores/stores';
-import {
-  StoreCreateParams,
-  StoreCreateResponse,
-  StoreDeleteParams,
-  StoreDeleteResponse,
-  StoreListParams,
-  StoreListResponse,
-  StoreListResponsesV4PagePaginationArray,
-  Stores,
-} from './stores/stores';
+import { Stores } from './stores/stores';
 
 export class SecretsStore extends APIResource {
   stores: StoresAPI.Stores = new StoresAPI.Stores(this._client);
@@ -21,20 +12,10 @@ export class SecretsStore extends APIResource {
 }
 
 SecretsStore.Stores = Stores;
-SecretsStore.StoreListResponsesV4PagePaginationArray = StoreListResponsesV4PagePaginationArray;
 SecretsStore.Quota = Quota;
 
 export declare namespace SecretsStore {
-  export {
-    Stores as Stores,
-    type StoreCreateResponse as StoreCreateResponse,
-    type StoreListResponse as StoreListResponse,
-    type StoreDeleteResponse as StoreDeleteResponse,
-    StoreListResponsesV4PagePaginationArray as StoreListResponsesV4PagePaginationArray,
-    type StoreCreateParams as StoreCreateParams,
-    type StoreListParams as StoreListParams,
-    type StoreDeleteParams as StoreDeleteParams,
-  };
+  export { Stores as Stores };
 
-  export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
+  export { Quota as Quota };
 }

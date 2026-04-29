@@ -1,20 +1,11 @@
 # Cache
 
-Types:
-
-- <code><a href="./src/resources/cache/cache.ts">CachePurgeResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purge</a>({ ...params }) -> CachePurgeResponse | null</code>
-
 ## CacheReserve
 
 Types:
 
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClear</a></code>
-- <code><a href="./src/resources/cache/cache-reserve.ts">State</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
@@ -45,7 +36,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cache/variants.ts">CacheVariant</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantDeleteResponse</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantEditResponse</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantGetResponse</a></code>
@@ -73,7 +63,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegion</a></code>
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionCreateResponse</a></code>
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionListResponse</a></code>
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionDeleteResponse</a></code>

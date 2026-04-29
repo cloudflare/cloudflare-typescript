@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class OriginCloudRegions extends APIResource {
   /**
@@ -12,16 +13,7 @@ export class OriginCloudRegions extends APIResource {
    * against the list from
    * `GET /zones/{zone_id}/cache/origin_cloud_regions/supported_regions`.
    *
-   * @example
-   * ```ts
-   * const originCloudRegion =
-   *   await client.cache.originCloudRegions.create({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     ip: '192.0.2.1',
-   *     region: 'us-east-1',
-   *     vendor: 'aws',
-   *   });
-   * ```
+   * @deprecated Use `PUT /zones/{zone_id}/origin/cloud_regions/{origin_ip}` instead.
    */
   create(
     params: OriginCloudRegionCreateParams,
@@ -42,13 +34,7 @@ export class OriginCloudRegions extends APIResource {
    * enabling the edge to route via the nearest Tiered Cache upper-tier co-located
    * with that cloud provider. Returns an empty array when no mappings exist.
    *
-   * @example
-   * ```ts
-   * const originCloudRegions =
-   *   await client.cache.originCloudRegions.list({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated Use `GET /zones/{zone_id}/origin/cloud_regions` instead.
    */
   list(
     params: OriginCloudRegionListParams,
@@ -68,14 +54,7 @@ export class OriginCloudRegions extends APIResource {
    * Returns 404 (code 1163) if no mapping exists for the specified IP. When the last
    * mapping for the zone is removed the underlying rule record is also deleted.
    *
-   * @example
-   * ```ts
-   * const originCloudRegion =
-   *   await client.cache.originCloudRegions.delete(
-   *     '192.0.2.1',
-   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
-   * ```
+   * @deprecated Use `DELETE /zones/{zone_id}/origin/cloud_regions/{origin_ip}` instead.
    */
   delete(
     originIP: string,
@@ -97,13 +76,7 @@ export class OriginCloudRegions extends APIResource {
    * `succeeded` array and IPs that could not be found or are invalid are returned in
    * the `failed` array.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.cache.originCloudRegions.bulkDelete({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated Use `DELETE /zones/{zone_id}/origin/cloud_regions/batch` instead.
    */
   bulkDelete(
     params: OriginCloudRegionBulkDeleteParams,
@@ -124,25 +97,7 @@ export class OriginCloudRegions extends APIResource {
    * validated against the list from
    * `GET /zones/{zone_id}/cache/origin_cloud_regions/supported_regions`.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.cache.originCloudRegions.bulkEdit({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: [
-   *       {
-   *         ip: '192.0.2.1',
-   *         region: 'us-east-1',
-   *         vendor: 'aws',
-   *       },
-   *       {
-   *         ip: '2001:db8::1',
-   *         region: 'us-central1',
-   *         vendor: 'gcp',
-   *       },
-   *     ],
-   *   });
-   * ```
+   * @deprecated Use `PUT /zones/{zone_id}/origin/cloud_regions/batch` instead.
    */
   bulkEdit(
     params: OriginCloudRegionBulkEditParams,
@@ -164,17 +119,7 @@ export class OriginCloudRegions extends APIResource {
    * Returns 403 (code 1164) when the zone has reached the limit of 3,500 IP
    * mappings.
    *
-   * @example
-   * ```ts
-   * const response = await client.cache.originCloudRegions.edit(
-   *   {
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     ip: '2001:db8::1',
-   *     region: 'us-central1',
-   *     vendor: 'gcp',
-   *   },
-   * );
-   * ```
+   * @deprecated Use `PUT /zones/{zone_id}/origin/cloud_regions/{origin_ip}` instead.
    */
   edit(
     params: OriginCloudRegionEditParams,
@@ -194,13 +139,7 @@ export class OriginCloudRegions extends APIResource {
    * parameter is normalized before lookup (RFC 5952 for IPv6). Returns 404
    * (code 1142) if the zone has no mappings or if the specified IP has no mapping.
    *
-   * @example
-   * ```ts
-   * const originCloudRegion =
-   *   await client.cache.originCloudRegions.get('192.0.2.1', {
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated Use `GET /zones/{zone_id}/origin/cloud_regions/{origin_ip}` instead.
    */
   get(
     originIP: string,
@@ -222,13 +161,7 @@ export class OriginCloudRegions extends APIResource {
    * codes that will be used for cache routing when a mapping targeting that region
    * is active. Requires the zone to have Tiered Cache enabled.
    *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.cache.originCloudRegions.supportedRegions({
-   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
+   * @deprecated Use `GET /zones/{zone_id}/origin/cloud_regions/supported_regions` instead.
    */
   supportedRegions(
     params: OriginCloudRegionSupportedRegionsParams,
@@ -245,31 +178,6 @@ export class OriginCloudRegions extends APIResource {
 }
 
 /**
- * A single origin IP-to-cloud-region mapping.
- */
-export interface OriginCloudRegion {
-  /**
-   * The origin IP address (IPv4 or IPv6, canonicalized).
-   */
-  'origin-ip': string;
-
-  /**
-   * Cloud vendor region identifier.
-   */
-  region: string;
-
-  /**
-   * Cloud vendor hosting the origin.
-   */
-  vendor: 'aws' | 'azure' | 'gcp' | 'oci';
-
-  /**
-   * Time this mapping was last modified.
-   */
-  modified_on?: string;
-}
-
-/**
  * Response result for a single origin cloud region mapping.
  */
 export interface OriginCloudRegionCreateResponse {
@@ -283,12 +191,39 @@ export interface OriginCloudRegionCreateResponse {
   /**
    * A single origin IP-to-cloud-region mapping.
    */
-  value: OriginCloudRegion;
+  value: OriginCloudRegionCreateResponse.Value;
 
   /**
    * Time the mapping was last modified.
    */
   modified_on?: string;
+}
+
+export namespace OriginCloudRegionCreateResponse {
+  /**
+   * A single origin IP-to-cloud-region mapping.
+   */
+  export interface Value {
+    /**
+     * The origin IP address (IPv4 or IPv6, canonicalized).
+     */
+    'origin-ip': string;
+
+    /**
+     * Cloud vendor region identifier.
+     */
+    region: string;
+
+    /**
+     * Cloud vendor hosting the origin.
+     */
+    vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+    /**
+     * Time this mapping was last modified.
+     */
+    modified_on?: string;
+  }
 }
 
 /**
@@ -302,12 +237,39 @@ export interface OriginCloudRegionListResponse {
    */
   editable: boolean;
 
-  value: Array<OriginCloudRegion>;
+  value: Array<OriginCloudRegionListResponse.Value>;
 
   /**
    * Time the mapping set was last modified. Null when no mappings exist.
    */
   modified_on?: string | null;
+}
+
+export namespace OriginCloudRegionListResponse {
+  /**
+   * A single origin IP-to-cloud-region mapping.
+   */
+  export interface Value {
+    /**
+     * The origin IP address (IPv4 or IPv6, canonicalized).
+     */
+    'origin-ip': string;
+
+    /**
+     * Cloud vendor region identifier.
+     */
+    region: string;
+
+    /**
+     * Cloud vendor hosting the origin.
+     */
+    vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+    /**
+     * Time this mapping was last modified.
+     */
+    modified_on?: string;
+  }
 }
 
 /**
@@ -324,12 +286,39 @@ export interface OriginCloudRegionDeleteResponse {
   /**
    * A single origin IP-to-cloud-region mapping.
    */
-  value: OriginCloudRegion;
+  value: OriginCloudRegionDeleteResponse.Value;
 
   /**
    * Time the mapping was last modified.
    */
   modified_on?: string;
+}
+
+export namespace OriginCloudRegionDeleteResponse {
+  /**
+   * A single origin IP-to-cloud-region mapping.
+   */
+  export interface Value {
+    /**
+     * The origin IP address (IPv4 or IPv6, canonicalized).
+     */
+    'origin-ip': string;
+
+    /**
+     * Cloud vendor region identifier.
+     */
+    region: string;
+
+    /**
+     * Cloud vendor hosting the origin.
+     */
+    vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+    /**
+     * Time this mapping was last modified.
+     */
+    modified_on?: string;
+  }
 }
 
 /**
@@ -515,12 +504,39 @@ export interface OriginCloudRegionEditResponse {
    */
   editable: boolean;
 
-  value: Array<OriginCloudRegion>;
+  value: Array<OriginCloudRegionEditResponse.Value>;
 
   /**
    * Time the mapping set was last modified. Null when no mappings exist.
    */
   modified_on?: string | null;
+}
+
+export namespace OriginCloudRegionEditResponse {
+  /**
+   * A single origin IP-to-cloud-region mapping.
+   */
+  export interface Value {
+    /**
+     * The origin IP address (IPv4 or IPv6, canonicalized).
+     */
+    'origin-ip': string;
+
+    /**
+     * Cloud vendor region identifier.
+     */
+    region: string;
+
+    /**
+     * Cloud vendor hosting the origin.
+     */
+    vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+    /**
+     * Time this mapping was last modified.
+     */
+    modified_on?: string;
+  }
 }
 
 /**
@@ -537,12 +553,39 @@ export interface OriginCloudRegionGetResponse {
   /**
    * A single origin IP-to-cloud-region mapping.
    */
-  value: OriginCloudRegion;
+  value: OriginCloudRegionGetResponse.Value;
 
   /**
    * Time the mapping was last modified.
    */
   modified_on?: string;
+}
+
+export namespace OriginCloudRegionGetResponse {
+  /**
+   * A single origin IP-to-cloud-region mapping.
+   */
+  export interface Value {
+    /**
+     * The origin IP address (IPv4 or IPv6, canonicalized).
+     */
+    'origin-ip': string;
+
+    /**
+     * Cloud vendor region identifier.
+     */
+    region: string;
+
+    /**
+     * Cloud vendor hosting the origin.
+     */
+    vendor: 'aws' | 'azure' | 'gcp' | 'oci';
+
+    /**
+     * Time this mapping was last modified.
+     */
+    modified_on?: string;
+  }
 }
 
 /**
@@ -586,7 +629,7 @@ export interface OriginCloudRegionCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Origin IP address (IPv4 or IPv6). Normalized to canonical form
@@ -611,28 +654,28 @@ export interface OriginCloudRegionListParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface OriginCloudRegionDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface OriginCloudRegionBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface OriginCloudRegionBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param
@@ -668,7 +711,7 @@ export interface OriginCloudRegionEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Origin IP address (IPv4 or IPv6). Normalized to canonical form
@@ -693,19 +736,18 @@ export interface OriginCloudRegionGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface OriginCloudRegionSupportedRegionsParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace OriginCloudRegions {
   export {
-    type OriginCloudRegion as OriginCloudRegion,
     type OriginCloudRegionCreateResponse as OriginCloudRegionCreateResponse,
     type OriginCloudRegionListResponse as OriginCloudRegionListResponse,
     type OriginCloudRegionDeleteResponse as OriginCloudRegionDeleteResponse,

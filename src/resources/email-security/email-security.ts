@@ -2,21 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as SubmissionsAPI from './submissions';
-import {
-  SubmissionListParams,
-  SubmissionListResponse,
-  SubmissionListResponsesV4PagePaginationArray,
-  Submissions,
-} from './submissions';
+import { Submissions } from './submissions';
 import * as InvestigateAPI from './investigate/investigate';
-import {
-  Investigate,
-  InvestigateGetParams,
-  InvestigateGetResponse,
-  InvestigateListParams,
-  InvestigateListResponse,
-  InvestigateListResponsesV4PagePaginationArray,
-} from './investigate/investigate';
+import { Investigate } from './investigate/investigate';
 import * as PhishguardAPI from './phishguard/phishguard';
 import { Phishguard } from './phishguard/phishguard';
 import * as SettingsAPI from './settings/settings';
@@ -30,30 +18,16 @@ export class EmailSecurity extends APIResource {
 }
 
 EmailSecurity.Investigate = Investigate;
-EmailSecurity.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
 EmailSecurity.Phishguard = Phishguard;
 EmailSecurity.Settings = Settings;
 EmailSecurity.Submissions = Submissions;
-EmailSecurity.SubmissionListResponsesV4PagePaginationArray = SubmissionListResponsesV4PagePaginationArray;
 
 export declare namespace EmailSecurity {
-  export {
-    Investigate as Investigate,
-    type InvestigateListResponse as InvestigateListResponse,
-    type InvestigateGetResponse as InvestigateGetResponse,
-    InvestigateListResponsesV4PagePaginationArray as InvestigateListResponsesV4PagePaginationArray,
-    type InvestigateListParams as InvestigateListParams,
-    type InvestigateGetParams as InvestigateGetParams,
-  };
+  export { Investigate as Investigate };
 
   export { Phishguard as Phishguard };
 
   export { Settings as Settings };
 
-  export {
-    Submissions as Submissions,
-    type SubmissionListResponse as SubmissionListResponse,
-    SubmissionListResponsesV4PagePaginationArray as SubmissionListResponsesV4PagePaginationArray,
-    type SubmissionListParams as SubmissionListParams,
-  };
+  export { Submissions as Submissions };
 }

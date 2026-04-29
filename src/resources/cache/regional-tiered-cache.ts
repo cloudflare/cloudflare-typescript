@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as Shared from '../shared';
 
 export class RegionalTieredCacheResource extends APIResource {
   /**
@@ -110,7 +111,7 @@ export interface RegionalTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Value of the Regional Tiered Cache zone setting.
@@ -122,7 +123,7 @@ export interface RegionalTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace RegionalTieredCacheResource {

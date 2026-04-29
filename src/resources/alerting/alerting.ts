@@ -2,107 +2,38 @@
 
 import { APIResource } from '../../resource';
 import * as AvailableAlertsAPI from './available-alerts';
-import { AvailableAlertListParams, AvailableAlertListResponse, AvailableAlerts } from './available-alerts';
+import { AvailableAlerts } from './available-alerts';
 import * as HistoryAPI from './history';
-import { HistoriesV4PagePaginationArray, History, HistoryListParams, HistoryResource } from './history';
+import { History } from './history';
 import * as PoliciesAPI from './policies';
-import {
-  Mechanism,
-  Policies,
-  PoliciesSinglePage,
-  Policy,
-  PolicyCreateParams,
-  PolicyCreateResponse,
-  PolicyDeleteParams,
-  PolicyDeleteResponse,
-  PolicyFilter,
-  PolicyGetParams,
-  PolicyListParams,
-  PolicyUpdateParams,
-  PolicyUpdateResponse,
-} from './policies';
+import { Policies } from './policies';
 import * as SilencesAPI from './silences';
-import {
-  SilenceCreateParams,
-  SilenceCreateResponse,
-  SilenceDeleteParams,
-  SilenceDeleteResponse,
-  SilenceGetParams,
-  SilenceGetResponse,
-  SilenceListParams,
-  SilenceListResponse,
-  SilenceListResponsesSinglePage,
-  SilenceUpdateParams,
-  SilenceUpdateResponse,
-  SilenceUpdateResponsesSinglePage,
-  Silences,
-} from './silences';
+import { Silences } from './silences';
 import * as DestinationsAPI from './destinations/destinations';
 import { Destinations } from './destinations/destinations';
 
 export class Alerting extends APIResource {
   availableAlerts: AvailableAlertsAPI.AvailableAlerts = new AvailableAlertsAPI.AvailableAlerts(this._client);
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
-  history: HistoryAPI.HistoryResource = new HistoryAPI.HistoryResource(this._client);
+  history: HistoryAPI.History = new HistoryAPI.History(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   silences: SilencesAPI.Silences = new SilencesAPI.Silences(this._client);
 }
 
 Alerting.AvailableAlerts = AvailableAlerts;
 Alerting.Destinations = Destinations;
-Alerting.HistoryResource = HistoryResource;
-Alerting.HistoriesV4PagePaginationArray = HistoriesV4PagePaginationArray;
+Alerting.History = History;
 Alerting.Policies = Policies;
-Alerting.PoliciesSinglePage = PoliciesSinglePage;
 Alerting.Silences = Silences;
-Alerting.SilenceUpdateResponsesSinglePage = SilenceUpdateResponsesSinglePage;
-Alerting.SilenceListResponsesSinglePage = SilenceListResponsesSinglePage;
 
 export declare namespace Alerting {
-  export {
-    AvailableAlerts as AvailableAlerts,
-    type AvailableAlertListResponse as AvailableAlertListResponse,
-    type AvailableAlertListParams as AvailableAlertListParams,
-  };
+  export { AvailableAlerts as AvailableAlerts };
 
   export { Destinations as Destinations };
 
-  export {
-    HistoryResource as HistoryResource,
-    type History as History,
-    HistoriesV4PagePaginationArray as HistoriesV4PagePaginationArray,
-    type HistoryListParams as HistoryListParams,
-  };
+  export { History as History };
 
-  export {
-    Policies as Policies,
-    type Mechanism as Mechanism,
-    type Policy as Policy,
-    type PolicyFilter as PolicyFilter,
-    type PolicyCreateResponse as PolicyCreateResponse,
-    type PolicyUpdateResponse as PolicyUpdateResponse,
-    type PolicyDeleteResponse as PolicyDeleteResponse,
-    PoliciesSinglePage as PoliciesSinglePage,
-    type PolicyCreateParams as PolicyCreateParams,
-    type PolicyUpdateParams as PolicyUpdateParams,
-    type PolicyListParams as PolicyListParams,
-    type PolicyDeleteParams as PolicyDeleteParams,
-    type PolicyGetParams as PolicyGetParams,
-  };
+  export { Policies as Policies };
 
-  export {
-    Silences as Silences,
-    type SilenceCreateResponse as SilenceCreateResponse,
-    type SilenceUpdateResponse as SilenceUpdateResponse,
-    type SilenceListResponse as SilenceListResponse,
-    type SilenceDeleteResponse as SilenceDeleteResponse,
-    type SilenceGetResponse as SilenceGetResponse,
-    SilenceUpdateResponsesSinglePage as SilenceUpdateResponsesSinglePage,
-    SilenceListResponsesSinglePage as SilenceListResponsesSinglePage,
-    type SilenceCreateParams as SilenceCreateParams,
-    type SilenceUpdateParams as SilenceUpdateParams,
-    type SilenceListParams as SilenceListParams,
-    type SilenceDeleteParams as SilenceDeleteParams,
-    type SilenceGetParams as SilenceGetParams,
-  };
+  export { Silences as Silences };
 }

@@ -2,31 +2,23 @@
 
 import { APIResource } from '../../resource';
 import * as ContentAPI from './content';
-import { Content, ContentCreateParams, ContentCreateResponse } from './content';
+import { Content } from './content';
 import * as CrawlAPI from './crawl';
-import {
-  Crawl,
-  CrawlCreateParams,
-  CrawlCreateResponse,
-  CrawlDeleteParams,
-  CrawlDeleteResponse,
-  CrawlGetParams,
-  CrawlGetResponse,
-} from './crawl';
+import { Crawl } from './crawl';
 import * as JsonAPI from './json';
-import { Json, JsonCreateParams, JsonCreateResponse } from './json';
+import { Json } from './json';
 import * as LinksAPI from './links';
-import { LinkCreateParams, LinkCreateResponse, Links } from './links';
+import { Links } from './links';
 import * as MarkdownAPI from './markdown';
-import { Markdown, MarkdownCreateParams, MarkdownCreateResponse } from './markdown';
+import { Markdown } from './markdown';
 import * as PDFAPI from './pdf';
-import { PDF, PDFCreateParams } from './pdf';
+import { PDF } from './pdf';
 import * as ScrapeAPI from './scrape';
-import { Scrape, ScrapeCreateParams, ScrapeCreateResponse } from './scrape';
+import { Scrape } from './scrape';
 import * as ScreenshotAPI from './screenshot';
-import { Screenshot, ScreenshotCreateParams, ScreenshotCreateResponse } from './screenshot';
+import { Screenshot } from './screenshot';
 import * as SnapshotAPI from './snapshot';
-import { Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapshot';
+import { Snapshot } from './snapshot';
 import * as DevtoolsAPI from './devtools/devtools';
 import { Devtools } from './devtools/devtools';
 
@@ -55,59 +47,23 @@ BrowserRendering.Crawl = Crawl;
 BrowserRendering.Devtools = Devtools;
 
 export declare namespace BrowserRendering {
-  export {
-    Content as Content,
-    type ContentCreateResponse as ContentCreateResponse,
-    type ContentCreateParams as ContentCreateParams,
-  };
+  export { Content as Content };
 
-  export { PDF as PDF, type PDFCreateParams as PDFCreateParams };
+  export { PDF as PDF };
 
-  export {
-    Scrape as Scrape,
-    type ScrapeCreateResponse as ScrapeCreateResponse,
-    type ScrapeCreateParams as ScrapeCreateParams,
-  };
+  export { Scrape as Scrape };
 
-  export {
-    Screenshot as Screenshot,
-    type ScreenshotCreateResponse as ScreenshotCreateResponse,
-    type ScreenshotCreateParams as ScreenshotCreateParams,
-  };
+  export { Screenshot as Screenshot };
 
-  export {
-    Snapshot as Snapshot,
-    type SnapshotCreateResponse as SnapshotCreateResponse,
-    type SnapshotCreateParams as SnapshotCreateParams,
-  };
+  export { Snapshot as Snapshot };
 
-  export {
-    Json as Json,
-    type JsonCreateResponse as JsonCreateResponse,
-    type JsonCreateParams as JsonCreateParams,
-  };
+  export { Json as Json };
 
-  export {
-    Links as Links,
-    type LinkCreateResponse as LinkCreateResponse,
-    type LinkCreateParams as LinkCreateParams,
-  };
+  export { Links as Links };
 
-  export {
-    Markdown as Markdown,
-    type MarkdownCreateResponse as MarkdownCreateResponse,
-    type MarkdownCreateParams as MarkdownCreateParams,
-  };
+  export { Markdown as Markdown };
 
-  export {
-    Crawl as Crawl,
-    type CrawlCreateResponse as CrawlCreateResponse,
-    type CrawlDeleteResponse as CrawlDeleteResponse,
-    type CrawlGetResponse as CrawlGetResponse,
-    type CrawlCreateParams as CrawlCreateParams,
-    type CrawlDeleteParams as CrawlDeleteParams,
-    type CrawlGetParams as CrawlGetParams,
-  };
+  export { Crawl as Crawl };
 
   export { Devtools as Devtools };
 }
