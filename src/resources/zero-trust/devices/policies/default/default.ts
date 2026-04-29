@@ -155,6 +155,11 @@ export interface DefaultEditResponse {
    * Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  virtual_networks?: DefaultEditResponse.VirtualNetworks | null;
 }
 
 export namespace DefaultEditResponse {
@@ -168,6 +173,22 @@ export namespace DefaultEditResponse {
      * The port number when used with proxy mode.
      */
     port?: number;
+  }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
   }
 }
 
@@ -264,6 +285,11 @@ export interface DefaultGetResponse {
    * Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  virtual_networks?: DefaultGetResponse.VirtualNetworks | null;
 }
 
 export namespace DefaultGetResponse {
@@ -277,6 +303,22 @@ export namespace DefaultGetResponse {
      * The port number when used with proxy mode.
      */
     port?: number;
+  }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
   }
 }
 
@@ -383,6 +425,11 @@ export interface DefaultEditParams {
    * Body param: Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Body param: Virtual network access settings for the device.
+   */
+  virtual_networks?: DefaultEditParams.VirtualNetworks | null;
 }
 
 export namespace DefaultEditParams {
@@ -396,6 +443,22 @@ export namespace DefaultEditParams {
      * The port number when used with proxy mode.
      */
     port?: number;
+  }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
   }
 }
 
