@@ -45,8 +45,14 @@ export {
   ImpersonationRegistry,
   type ImpersonationRegistryCreateResponse,
   type ImpersonationRegistryListResponse,
+  type ImpersonationRegistryDeleteResponse,
+  type ImpersonationRegistryEditResponse,
+  type ImpersonationRegistryGetResponse,
   type ImpersonationRegistryCreateParams,
   type ImpersonationRegistryListParams,
+  type ImpersonationRegistryDeleteParams,
+  type ImpersonationRegistryEditParams,
+  type ImpersonationRegistryGetParams,
 } from './impersonation-registry';
 export { Settings } from './settings';
 export {

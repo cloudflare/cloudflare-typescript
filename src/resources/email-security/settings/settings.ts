@@ -49,6 +49,12 @@ import {
   ImpersonationRegistry,
   ImpersonationRegistryCreateParams,
   ImpersonationRegistryCreateResponse,
+  ImpersonationRegistryDeleteParams,
+  ImpersonationRegistryDeleteResponse,
+  ImpersonationRegistryEditParams,
+  ImpersonationRegistryEditResponse,
+  ImpersonationRegistryGetParams,
+  ImpersonationRegistryGetResponse,
   ImpersonationRegistryListParams,
   ImpersonationRegistryListResponse,
   ImpersonationRegistryListResponsesV4PagePaginationArray,
@@ -138,9 +144,15 @@ export declare namespace Settings {
     ImpersonationRegistry as ImpersonationRegistry,
     type ImpersonationRegistryCreateResponse as ImpersonationRegistryCreateResponse,
     type ImpersonationRegistryListResponse as ImpersonationRegistryListResponse,
+    type ImpersonationRegistryDeleteResponse as ImpersonationRegistryDeleteResponse,
+    type ImpersonationRegistryEditResponse as ImpersonationRegistryEditResponse,
+    type ImpersonationRegistryGetResponse as ImpersonationRegistryGetResponse,
     ImpersonationRegistryListResponsesV4PagePaginationArray as ImpersonationRegistryListResponsesV4PagePaginationArray,
     type ImpersonationRegistryCreateParams as ImpersonationRegistryCreateParams,
     type ImpersonationRegistryListParams as ImpersonationRegistryListParams,
+    type ImpersonationRegistryDeleteParams as ImpersonationRegistryDeleteParams,
+    type ImpersonationRegistryEditParams as ImpersonationRegistryEditParams,
+    type ImpersonationRegistryGetParams as ImpersonationRegistryGetParams,
   };
 
   export {

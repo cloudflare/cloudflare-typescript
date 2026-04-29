@@ -5,7 +5,9 @@ export {
   InvestigateListResponsesV4PagePaginationArray,
   Investigate,
   type InvestigateListResponse,
+  type InvestigateGetResponse,
   type InvestigateListParams,
+  type InvestigateGetParams,
 } from './investigate/index';
 export { Phishguard } from './phishguard/index';
 export { Settings } from './settings/index';
