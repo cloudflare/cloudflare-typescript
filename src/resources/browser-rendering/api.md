@@ -135,6 +135,7 @@ Types:
 - <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetCreateResponse</a></code>
 - <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetListResponse</a></code>
 - <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetActivateResponse</a></code>
+- <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetCloseResponse</a></code>
 - <code><a href="./src/resources/browser-rendering/devtools/browser/targets.ts">TargetGetResponse</a></code>
 
 Methods:
@@ -142,4 +143,5 @@ Methods:
 - <code title="put /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/new">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">create</a>(sessionId, { ...params }) -> TargetCreateResponse</code>
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/list">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">list</a>(sessionId, { ...params }) -> TargetListResponse</code>
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/activate/{target_id}">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">activate</a>(sessionId, targetId, { ...params }) -> TargetActivateResponse</code>
+- <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/close/{target_id}">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">close</a>(sessionId, targetId, { ...params }) -> TargetCloseResponse</code>
 - <code title="get /accounts/{account_id}/browser-rendering/devtools/browser/{session_id}/json/list/{target_id}">client.browserRendering.devtools.browser.targets.<a href="./src/resources/browser-rendering/devtools/browser/targets.ts">get</a>(sessionId, targetId, { ...params }) -> TargetGetResponse</code>

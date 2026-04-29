@@ -28,7 +28,7 @@ describe('resource links', () => {
     const response = await client.browserRendering.links.create({
       account_id: 'account_id',
       html: '<h1>Hello World!</h1>',
-      cacheTTL: 86400,
+      cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
         {

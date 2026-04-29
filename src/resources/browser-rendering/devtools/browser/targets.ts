@@ -80,6 +80,33 @@ export class Targets extends APIResource {
   }
 
   /**
+   * Closes a specific browser target (tab, page, etc.) by its ID. Returns 'Target is
+   * closing' on success or an error if the target is not found.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.browserRendering.devtools.browser.targets.close(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'target_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  close(
+    sessionId: string,
+    targetId: string,
+    params: TargetCloseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TargetCloseResponse> {
+    const { account_id } = params;
+    return this._client.get(
+      `/accounts/${account_id}/browser-rendering/devtools/browser/${sessionId}/json/close/${targetId}`,
+      options,
+    );
+  }
+
+  /**
    * Returns the debuggable target with the given ID.
    *
    * @example
@@ -191,6 +218,13 @@ export interface TargetActivateResponse {
   message: string;
 }
 
+export interface TargetCloseResponse {
+  /**
+   * Target is closing.
+   */
+  message: string;
+}
+
 export interface TargetGetResponse {
   /**
    * Target ID.
@@ -254,6 +288,13 @@ export interface TargetActivateParams {
   account_id: string;
 }
 
+export interface TargetCloseParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 export interface TargetGetParams {
   /**
    * Account ID.
@@ -266,10 +307,12 @@ export declare namespace Targets {
     type TargetCreateResponse as TargetCreateResponse,
     type TargetListResponse as TargetListResponse,
     type TargetActivateResponse as TargetActivateResponse,
+    type TargetCloseResponse as TargetCloseResponse,
     type TargetGetResponse as TargetGetResponse,
     type TargetCreateParams as TargetCreateParams,
     type TargetListParams as TargetListParams,
     type TargetActivateParams as TargetActivateParams,
+    type TargetCloseParams as TargetCloseParams,
     type TargetGetParams as TargetGetParams,
   };
 }

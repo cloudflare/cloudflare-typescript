@@ -19,9 +19,11 @@ export {
   type TargetCreateResponse,
   type TargetListResponse,
   type TargetActivateResponse,
+  type TargetCloseResponse,
   type TargetGetResponse,
   type TargetCreateParams,
   type TargetListParams,
   type TargetActivateParams,
+  type TargetCloseParams,
   type TargetGetParams,
 } from './targets';
