@@ -267,6 +267,12 @@ export interface OperationCreateResponse {
     | OperationCreateResponse.APIShieldOperationFeatureAPIRouting
     | OperationCreateResponse.APIShieldOperationFeatureConfidenceIntervals
     | OperationCreateResponse.APIShieldOperationFeatureSchemaInfo;
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  schemas?: OperationCreateResponse.Schemas;
 }
 
 export namespace OperationCreateResponse {
@@ -507,6 +513,62 @@ export namespace OperationCreateResponse {
          */
         name?: string;
       }
+    }
+  }
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  export interface Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    learned?: Schemas.Learned | null;
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    uploaded?: Schemas.Uploaded | null;
+  }
+
+  export namespace Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Learned {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
+    }
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Uploaded {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
     }
   }
 }
@@ -1117,6 +1179,12 @@ export interface OperationGetResponse {
     | OperationGetResponse.APIShieldOperationFeatureAPIRouting
     | OperationGetResponse.APIShieldOperationFeatureConfidenceIntervals
     | OperationGetResponse.APIShieldOperationFeatureSchemaInfo;
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  schemas?: OperationGetResponse.Schemas;
 }
 
 export namespace OperationGetResponse {
@@ -1359,6 +1427,62 @@ export namespace OperationGetResponse {
       }
     }
   }
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  export interface Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    learned?: Schemas.Learned | null;
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    uploaded?: Schemas.Uploaded | null;
+  }
+
+  export namespace Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Learned {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
+    }
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Uploaded {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
+    }
+  }
 }
 
 export interface OperationCreateParams {
@@ -1487,6 +1611,13 @@ export interface OperationGetParams {
    * description for more details on the specific meaning.
    */
   feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
+
+  /**
+   * Query param: When true, includes OpenAPI schemas (both uploaded and learned) for
+   * the operation in the response. Due to the conversion overhead, this parameter is
+   * only supported on single-operation retrieval.
+   */
+  with_schemas?: boolean;
 }
 
 Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
