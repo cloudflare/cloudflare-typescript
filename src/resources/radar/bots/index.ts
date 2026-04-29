@@ -1,24 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Bots,
-  BaseBots,
-  type BotListResponse,
-  type BotGetResponse,
-  type BotSummaryResponse,
-  type BotTimeseriesResponse,
-  type BotTimeseriesGroupsResponse,
-  type BotListParams,
-  type BotGetParams,
-  type BotSummaryParams,
-  type BotTimeseriesParams,
-  type BotTimeseriesGroupsParams,
-} from './bots';
-export {
-  WebCrawlers,
-  BaseWebCrawlers,
-  type WebCrawlerSummaryResponse,
-  type WebCrawlerTimeseriesGroupsResponse,
-  type WebCrawlerSummaryParams,
-  type WebCrawlerTimeseriesGroupsParams,
-} from './web-crawlers';
+export { Bots, BaseBots } from './bots';
+export { WebCrawlers, BaseWebCrawlers } from './web-crawlers';

@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../core/resource';
 import * as RayIDAPI from './rayid';
-import { BaseRayID, RayID, RayIDGetParams, RayIDGetResponse } from './rayid';
+import { BaseRayID, RayID } from './rayid';
 import * as ControlAPI from './control/control';
 import { BaseControl, Control } from './control/control';
 import * as ReceivedAPI from './received/received';
-import { BaseReceived, Received, ReceivedGetParams, ReceivedGetResponse } from './received/received';
+import { BaseReceived, Received } from './received/received';
 
 export class BaseLogs extends APIResource {
   static override readonly _key: readonly ['logs'] = Object.freeze(['logs'] as const);
@@ -27,17 +27,7 @@ Logs.BaseReceived = BaseReceived;
 export declare namespace Logs {
   export { Control as Control, BaseControl as BaseControl };
 
-  export {
-    RayID as RayID,
-    BaseRayID as BaseRayID,
-    type RayIDGetResponse as RayIDGetResponse,
-    type RayIDGetParams as RayIDGetParams,
-  };
+  export { RayID as RayID, BaseRayID as BaseRayID };
 
-  export {
-    Received as Received,
-    BaseReceived as BaseReceived,
-    type ReceivedGetResponse as ReceivedGetResponse,
-    type ReceivedGetParams as ReceivedGetParams,
-  };
+  export { Received as Received, BaseReceived as BaseReceived };
 }

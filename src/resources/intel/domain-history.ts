@@ -1,85 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
-export class BaseDomainHistoryResource extends APIResource {
+export class BaseDomainHistory extends APIResource {
   static override readonly _key: readonly ['intel', 'domainHistory'] = Object.freeze([
     'intel',
     'domainHistory',
   ] as const);
-
-  /**
-   * Gets historical security threat and content categories currently and previously
-   * assigned to a domain.
-   *
-   * @example
-   * ```ts
-   * const domainHistories =
-   *   await client.intel.domainHistory.get({
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
-   * ```
-   */
-  get(
-    params: DomainHistoryGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DomainHistoryGetResponse | null> {
-    const { account_id = this._client.accountID, ...query } = params ?? {};
-    return (
-      this._client.get(path`/accounts/${account_id}/intel/domain-history`, {
-        query,
-        ...options,
-      }) as APIPromise<{ result: DomainHistoryGetResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
-export class DomainHistoryResource extends BaseDomainHistoryResource {}
-
-export interface DomainHistory {
-  categorizations?: Array<DomainHistory.Categorization>;
-
-  domain?: string;
-}
-
-export namespace DomainHistory {
-  export interface Categorization {
-    categories?: Array<Categorization.Category>;
-
-    end?: string;
-
-    start?: string;
-  }
-
-  export namespace Categorization {
-    export interface Category {
-      id?: number;
-
-      name?: string;
-    }
-  }
-}
-
-export type DomainHistoryGetResponse = Array<DomainHistory>;
-
-export interface DomainHistoryGetParams {
-  /**
-   * Path param: Identifier.
-   */
-  account_id?: string;
-
-  /**
-   * Query param
-   */
-  domain?: string;
-}
-
-export declare namespace DomainHistoryResource {
-  export {
-    type DomainHistory as DomainHistory,
-    type DomainHistoryGetResponse as DomainHistoryGetResponse,
-    type DomainHistoryGetParams as DomainHistoryGetParams,
-  };
-}
+export class DomainHistory extends BaseDomainHistory {}

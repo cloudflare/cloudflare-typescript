@@ -1,0 +1,5 @@
+# Snippets
+
+## Content
+
+## Rules

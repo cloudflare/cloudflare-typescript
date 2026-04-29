@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as UploadAPI from './upload';
-import { BaseUpload, Upload, UploadCreateParams, UploadCreateResponse } from './upload';
+import { BaseUpload, Upload } from './upload';
 
 export class BaseAssets extends APIResource {
   static override readonly _key: readonly ['workers', 'assets'] = Object.freeze([
@@ -18,10 +18,5 @@ Assets.Upload = Upload;
 Assets.BaseUpload = BaseUpload;
 
 export declare namespace Assets {
-  export {
-    Upload as Upload,
-    BaseUpload as BaseUpload,
-    type UploadCreateResponse as UploadCreateResponse,
-    type UploadCreateParams as UploadCreateParams,
-  };
+  export { Upload as Upload, BaseUpload as BaseUpload };
 }

@@ -2,73 +2,20 @@
 
 import { APIResource } from '../../core/resource';
 import * as AuditLogsAPI from './audit-logs';
-import { AuditLogListParams, AuditLogs, BaseAuditLogs } from './audit-logs';
+import { AuditLogs, BaseAuditLogs } from './audit-logs';
 import * as InvitesAPI from './invites';
-import { BaseInvites, Invite, InviteEditParams, Invites, InvitesSinglePage } from './invites';
+import { BaseInvites, Invites } from './invites';
 import * as OrganizationsAPI from './organizations';
-import {
-  BaseOrganizations,
-  Organization,
-  OrganizationDeleteResponse,
-  OrganizationGetResponse,
-  OrganizationListParams,
-  Organizations,
-  OrganizationsV4PagePaginationArray,
-} from './organizations';
+import { BaseOrganizations, Organizations } from './organizations';
 import * as SubscriptionsAPI from './subscriptions';
-import {
-  BaseSubscriptions,
-  SubscriptionDeleteResponse,
-  SubscriptionUpdateParams,
-  SubscriptionUpdateResponse,
-  Subscriptions,
-} from './subscriptions';
+import { BaseSubscriptions, Subscriptions } from './subscriptions';
 import * as BillingAPI from './billing/billing';
 import { BaseBilling, Billing } from './billing/billing';
 import * as TokensAPI from './tokens/tokens';
-import {
-  BaseTokens,
-  TokenCreateParams,
-  TokenCreateResponse,
-  TokenDeleteResponse,
-  TokenListParams,
-  TokenUpdateParams,
-  TokenVerifyResponse,
-  Tokens,
-} from './tokens/tokens';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
+import { BaseTokens, Tokens } from './tokens/tokens';
 
 export class BaseUser extends APIResource {
   static override readonly _key: readonly ['user'] = Object.freeze(['user'] as const);
-
-  /**
-   * Edit part of your user details.
-   *
-   * @example
-   * ```ts
-   * const response = await client.user.edit();
-   * ```
-   */
-  edit(body: UserEditParams, options?: RequestOptions): APIPromise<UserEditResponse> {
-    return (
-      this._client.patch('/user', { body, ...options }) as APIPromise<{ result: UserEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * User Details
-   *
-   * @example
-   * ```ts
-   * const user = await client.user.get();
-   * ```
-   */
-  get(options?: RequestOptions): APIPromise<UserGetResponse> {
-    return (this._client.get('/user', options) as APIPromise<{ result: UserGetResponse }>)._thenUnwrap(
-      (obj) => obj.result,
-    );
-  }
 }
 export class User extends BaseUser {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
@@ -77,175 +24,6 @@ export class User extends BaseUser {
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
-}
-
-export interface UserEditResponse {
-  /**
-   * Identifier of the user.
-   */
-  id?: string;
-
-  /**
-   * Lists the betas that the user is participating in.
-   */
-  betas?: Array<string>;
-
-  /**
-   * The country in which the user lives.
-   */
-  country?: string | null;
-
-  /**
-   * User's first name
-   */
-  first_name?: string | null;
-
-  /**
-   * Indicates whether user has any business zones
-   */
-  has_business_zones?: boolean;
-
-  /**
-   * Indicates whether user has any enterprise zones
-   */
-  has_enterprise_zones?: boolean;
-
-  /**
-   * Indicates whether user has any pro zones
-   */
-  has_pro_zones?: boolean;
-
-  /**
-   * User's last name
-   */
-  last_name?: string | null;
-
-  organizations?: Array<OrganizationsAPI.Organization>;
-
-  /**
-   * Indicates whether user has been suspended
-   */
-  suspended?: boolean;
-
-  /**
-   * User's telephone number
-   */
-  telephone?: string | null;
-
-  /**
-   * Indicates whether two-factor authentication is enabled for the user account.
-   * Does not apply to API authentication.
-   */
-  two_factor_authentication_enabled?: boolean;
-
-  /**
-   * Indicates whether two-factor authentication is required by one of the accounts
-   * that the user is a member of.
-   */
-  two_factor_authentication_locked?: boolean;
-
-  /**
-   * The zipcode or postal code where the user lives.
-   */
-  zipcode?: string | null;
-}
-
-export interface UserGetResponse {
-  /**
-   * Identifier of the user.
-   */
-  id?: string;
-
-  /**
-   * Lists the betas that the user is participating in.
-   */
-  betas?: Array<string>;
-
-  /**
-   * The country in which the user lives.
-   */
-  country?: string | null;
-
-  /**
-   * User's first name
-   */
-  first_name?: string | null;
-
-  /**
-   * Indicates whether user has any business zones
-   */
-  has_business_zones?: boolean;
-
-  /**
-   * Indicates whether user has any enterprise zones
-   */
-  has_enterprise_zones?: boolean;
-
-  /**
-   * Indicates whether user has any pro zones
-   */
-  has_pro_zones?: boolean;
-
-  /**
-   * User's last name
-   */
-  last_name?: string | null;
-
-  organizations?: Array<OrganizationsAPI.Organization>;
-
-  /**
-   * Indicates whether user has been suspended
-   */
-  suspended?: boolean;
-
-  /**
-   * User's telephone number
-   */
-  telephone?: string | null;
-
-  /**
-   * Indicates whether two-factor authentication is enabled for the user account.
-   * Does not apply to API authentication.
-   */
-  two_factor_authentication_enabled?: boolean;
-
-  /**
-   * Indicates whether two-factor authentication is required by one of the accounts
-   * that the user is a member of.
-   */
-  two_factor_authentication_locked?: boolean;
-
-  /**
-   * The zipcode or postal code where the user lives.
-   */
-  zipcode?: string | null;
-}
-
-export interface UserEditParams {
-  /**
-   * The country in which the user lives.
-   */
-  country?: string | null;
-
-  /**
-   * User's first name
-   */
-  first_name?: string | null;
-
-  /**
-   * User's last name
-   */
-  last_name?: string | null;
-
-  /**
-   * User's telephone number
-   */
-  telephone?: string | null;
-
-  /**
-   * The zipcode or postal code where the user lives.
-   */
-  zipcode?: string | null;
 }
 
 User.AuditLogs = AuditLogs;
@@ -262,54 +40,15 @@ User.Tokens = Tokens;
 User.BaseTokens = BaseTokens;
 
 export declare namespace User {
-  export {
-    type UserEditResponse as UserEditResponse,
-    type UserGetResponse as UserGetResponse,
-    type UserEditParams as UserEditParams,
-  };
-
-  export {
-    AuditLogs as AuditLogs,
-    BaseAuditLogs as BaseAuditLogs,
-    type AuditLogListParams as AuditLogListParams,
-  };
+  export { AuditLogs as AuditLogs, BaseAuditLogs as BaseAuditLogs };
 
   export { Billing as Billing, BaseBilling as BaseBilling };
 
-  export {
-    Invites as Invites,
-    BaseInvites as BaseInvites,
-    type Invite as Invite,
-    type InvitesSinglePage as InvitesSinglePage,
-    type InviteEditParams as InviteEditParams,
-  };
+  export { Invites as Invites, BaseInvites as BaseInvites };
 
-  export {
-    Organizations as Organizations,
-    BaseOrganizations as BaseOrganizations,
-    type Organization as Organization,
-    type OrganizationDeleteResponse as OrganizationDeleteResponse,
-    type OrganizationGetResponse as OrganizationGetResponse,
-    type OrganizationsV4PagePaginationArray as OrganizationsV4PagePaginationArray,
-    type OrganizationListParams as OrganizationListParams,
-  };
+  export { Organizations as Organizations, BaseOrganizations as BaseOrganizations };
 
-  export {
-    Subscriptions as Subscriptions,
-    BaseSubscriptions as BaseSubscriptions,
-    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
-    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionUpdateParams as SubscriptionUpdateParams,
-  };
+  export { Subscriptions as Subscriptions, BaseSubscriptions as BaseSubscriptions };
 
-  export {
-    Tokens as Tokens,
-    BaseTokens as BaseTokens,
-    type TokenCreateResponse as TokenCreateResponse,
-    type TokenDeleteResponse as TokenDeleteResponse,
-    type TokenVerifyResponse as TokenVerifyResponse,
-    type TokenCreateParams as TokenCreateParams,
-    type TokenUpdateParams as TokenUpdateParams,
-    type TokenListParams as TokenListParams,
-  };
+  export { Tokens as Tokens, BaseTokens as BaseTokens };
 }

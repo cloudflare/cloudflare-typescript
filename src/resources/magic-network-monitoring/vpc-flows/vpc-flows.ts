@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TokensAPI from './tokens';
-import { BaseTokens, TokenCreateParams, TokenCreateResponse, Tokens } from './tokens';
+import { BaseTokens, Tokens } from './tokens';
 
 export class BaseVPCFlows extends APIResource {
   static override readonly _key: readonly ['magicNetworkMonitoring', 'vpcFlows'] = Object.freeze([
@@ -18,10 +18,5 @@ VPCFlows.Tokens = Tokens;
 VPCFlows.BaseTokens = BaseTokens;
 
 export declare namespace VPCFlows {
-  export {
-    Tokens as Tokens,
-    BaseTokens as BaseTokens,
-    type TokenCreateResponse as TokenCreateResponse,
-    type TokenCreateParams as TokenCreateParams,
-  };
+  export { Tokens as Tokens, BaseTokens as BaseTokens };
 }

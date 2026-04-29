@@ -1,85 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
 export class BaseEvaluationTypes extends APIResource {
   static override readonly _key: readonly ['aiGateway', 'evaluationTypes'] = Object.freeze([
     'aiGateway',
     'evaluationTypes',
   ] as const);
-
-  /**
-   * List Evaluators
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const evaluationTypeListResponse of client.aiGateway.evaluationTypes.list(
-   *   { account_id: '0d37909e38d3e99c29fa2cd343ac421a' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params: EvaluationTypeListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<EvaluationTypeListResponsesV4PagePaginationArray, EvaluationTypeListResponse> {
-    const { account_id = this._client.accountID, ...query } = params ?? {};
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/ai-gateway/evaluation-types`,
-      V4PagePaginationArray<EvaluationTypeListResponse>,
-      { query, ...options },
-    );
-  }
 }
 export class EvaluationTypes extends BaseEvaluationTypes {}
-
-export type EvaluationTypeListResponsesV4PagePaginationArray =
-  V4PagePaginationArray<EvaluationTypeListResponse>;
-
-export interface EvaluationTypeListResponse {
-  id: string;
-
-  created_at: string;
-
-  description: string;
-
-  enable: boolean;
-
-  mandatory: boolean;
-
-  modified_at: string;
-
-  name: string;
-
-  type: string;
-}
-
-export interface EvaluationTypeListParams extends V4PagePaginationArrayParams {
-  /**
-   * Path param
-   */
-  account_id?: string;
-
-  /**
-   * Query param
-   */
-  order_by?: string;
-
-  /**
-   * Query param
-   */
-  order_by_direction?: 'asc' | 'desc';
-}
-
-export declare namespace EvaluationTypes {
-  export {
-    type EvaluationTypeListResponse as EvaluationTypeListResponse,
-    type EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
-    type EvaluationTypeListParams as EvaluationTypeListParams,
-  };
-}

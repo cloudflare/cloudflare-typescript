@@ -12,8 +12,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Use the Cloudflare MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=cloudflare-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImNsb3VkZmxhcmUtbWNwIl19)
-[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22cloudflare-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22cloudflare-mcp%22%5D%7D)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=cloudflare-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImNsb3VkZmxhcmUtbWNwIl0sImVudiI6eyJDTE9VREZMQVJFX0FQSV9UT0tFTiI6IlNuM2xaSlRCWDZra2c3T2RjQlVBeE9POTYzR0VJeUdRcW5GVE9GWVkiLCJDTE9VREZMQVJFX0FQSV9LRVkiOiIxNDRjOWRlZmFjMDQ5NjljN2JmYWQ4ZWZhYThlYTE5NCIsIkNMT1VERkxBUkVfRU1BSUwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiQ0xPVURGTEFSRV9BUElfVVNFUl9TRVJWSUNFX0tFWSI6InYxLjAtMTQ0YzlkZWZhYzA0OTY5YzdiZmFkOGVmLTYzMWE0MWQwMDNhMzJkMjVmZTg3ODA4MWVmMzY1YzQ5NTAzZjdmYWRhNjAwZGE5MzVlMjg1MWExYzczMjYwODRiODVjYmY2NDI5YzRiODU5ZGU4NDc1NzMxZGM5MmE5YzMyOTYzMWU2ZDU5ZTZjNzNkYTdiMTk4NDk3MTcyYjRjZWZlMDcxZDkwZDBmNWQyNzE5In19)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22cloudflare-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22cloudflare-mcp%22%5D%2C%22env%22%3A%7B%22CLOUDFLARE_API_TOKEN%22%3A%22Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY%22%2C%22CLOUDFLARE_API_KEY%22%3A%22144c9defac04969c7bfad8efaa8ea194%22%2C%22CLOUDFLARE_EMAIL%22%3A%22user%40example.com%22%2C%22CLOUDFLARE_API_USER_SERVICE_KEY%22%3A%22v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719%22%7D%7D)
 
 > Note: You may need to set environment variables in your MCP client.
 
@@ -38,13 +38,12 @@ const client = new Cloudflare({
   apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
-const zone = await client.zones.create({
-  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-  name: 'example.com',
-  type: 'full',
+const response = await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
 });
 
-console.log(zone.id);
+console.log(response.id);
 ```
 
 ### Request & Response types
@@ -59,64 +58,16 @@ const client = new Cloudflare({
   apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
-const params: Cloudflare.ZoneCreateParams = {
-  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-  name: 'example.com',
-  type: 'full',
+const params: Cloudflare.Cache.CacheReserveClearParams = {
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
 };
-const zone: Cloudflare.Zone = await client.zones.create(params);
+const response: Cloudflare.Cache.CacheReserveClearResponse = await client.cache.cacheReserve.clear(
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
-
-## File uploads
-
-Request parameters that correspond to file uploads can be passed in many different forms:
-
-- `File` (or an object with the same structure)
-- a `fetch` `Response` (or an object with the same structure)
-- an `fs.ReadStream`
-- the return value of our `toFile` helper
-
-```ts
-import fs from 'fs';
-import Cloudflare, { toFile } from 'cloudflare';
-
-const client = new Cloudflare();
-
-// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: fs.createReadStream('/path/to/file'),
-});
-
-// Or if you have the web `File` API you can pass a `File` instance:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: new File(['my bytes'], 'file'),
-});
-
-// You can also pass a `fetch` `Response`:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: await fetch('https://somesite/file'),
-});
-
-// Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: await toFile(Buffer.from('my bytes'), 'file'),
-});
-await client.kv.namespaces.values.update('My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  namespace_id: '0f2ac74b498b48028cb68387c421e279',
-  value: await toFile(new Uint8Array([0, 1, 2]), 'file'),
-});
-```
 
 ## Handling errors
 
@@ -126,8 +77,11 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const zone = await client.zones
-  .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
+const response = await client.cache.cacheReserve
+  .clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
+  })
   .catch(async (err) => {
     if (err instanceof Cloudflare.APIError) {
       console.log(err.status); // 400
@@ -168,7 +122,10 @@ const client = new Cloudflare({
 });
 
 // Or, configure per-request:
-await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
+}, {
   maxRetries: 5,
 });
 ```
@@ -185,7 +142,10 @@ const client = new Cloudflare({
 });
 
 // Override per-request:
-await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
+}, {
   timeout: 5 * 1000,
 });
 ```
@@ -193,37 +153,6 @@ await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
-
-## Auto-pagination
-
-List methods in the Cloudflare API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllAccounts(params) {
-  const allAccounts = [];
-  // Automatically fetches more pages as needed.
-  for await (const account of client.accounts.list()) {
-    allAccounts.push(account);
-  }
-  return allAccounts;
-}
-```
-
-Alternatively, you can request a single page at a time:
-
-```ts
-let page = await client.accounts.list();
-for (const account of page.result) {
-  console.log(account);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = await page.getNextPage();
-  // ...
-}
-```
 
 ## Advanced Usage
 
@@ -233,23 +162,26 @@ This library supports tree shaking to reduce bundle size. Instead of importing t
 
 ```ts
 import { createClient } from 'cloudflare/tree-shakable';
-import { Zones } from 'cloudflare/resources/zones/zones';
-import { BaseAccounts } from 'cloudflare/resources/accounts/accounts';
+import { CacheReserveResource } from 'cloudflare/resources/cache/cache-reserve';
+import { BaseOriginPostQuantumEncryption } from 'cloudflare/resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
 
 const client = createClient({
   // Specify the resources you'd like to use ...
-  resources: [Zones, BaseAccounts],
+  resources: [CacheReserveResource, BaseOriginPostQuantumEncryption],
 });
 
 // ... then make API calls as usual.
-const zone = await client.zones.create({
-  account: {},
-  name: 'example.com',
+const response = await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
 });
-const account = await client.accounts.create({ name: 'name' });
+const originPostQuantumEncryption = await client.originPostQuantumEncryption.update({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  value: 'preferred',
+});
 ```
 
-Each API resource has two versions, the full resource (e.g., `Zones`) which includes all subresources, and the base resource (e.g., `BaseZones`) which does not.
+Each API resource has two versions, the full resource (e.g., `CacheReserveResource`) which includes all subresources, and the base resource (e.g., `BaseCacheReserveResource`) which does not.
 
 The tree-shaken client is fully typed, so TypeScript will provide accurate autocomplete and prevent access to resources not included in your configuration.
 The `createClient` function automatically infers the correct type, but you can also use the `PartialCloudflare` type explicitly:
@@ -257,25 +189,25 @@ The `createClient` function automatically infers the correct type, but you can a
 ```ts
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
-import { BaseZones } from 'cloudflare/resources/zones/zones';
+import { BaseCacheReserveResource } from 'cloudflare/resources/cache/cache-reserve';
 
 // Explicit variable type
-const client: PartialCloudflare<{ zones: BaseZones }> = createClient({
-  resources: [BaseZones],
+const client: PartialCloudflare<{ cache: { cacheReserve: BaseCacheReserveResource } }> = createClient({
+  resources: [BaseCacheReserveResource],
   /* ... */
 });
 
 // Function parameter type
-async function main(client: PartialCloudflare<{ zones: BaseZones }>) {
-  const zone = await client.zones.create({
-    account: {},
-    name: 'example.com',
+async function main(client: PartialCloudflare<{ cache: { cacheReserve: BaseCacheReserveResource } }>) {
+  const response = await client.cache.cacheReserve.clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
   });
 }
 
-// Works with any client that has the zones resource
+// Works with any client that has the cacheReserve resource
 const treeShakableClient = createClient({
-  resources: [BaseZones],
+  resources: [BaseCacheReserveResource],
   /* ... */
 });
 const fullClient = new Cloudflare(/* ... */);
@@ -296,25 +228,23 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Cloudflare();
 
-const response = await client.zones
-  .create({
-    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    name: 'example.com',
-    type: 'full',
+const response = await client.cache.cacheReserve
+  .clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: zone, response: raw } = await client.zones
-  .create({
-    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    name: 'example.com',
-    type: 'full',
+const { data: response, response: raw } = await client.cache.cacheReserve
+  .clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(zone.id);
+console.log(response.id);
 ```
 
 ### Logging
@@ -394,7 +324,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.zones.create({
+client.cache.cacheReserve.clear({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

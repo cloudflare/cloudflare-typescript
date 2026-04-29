@@ -1,11 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Latest, BaseLatest, type LatestListResponse, type LatestListParams } from './latest';
-export {
-  Snapshots,
-  BaseSnapshots,
-  type SnapshotListResponse,
-  type SnapshotGetResponse,
-  type SnapshotListParams,
-  type SnapshotGetParams,
-} from './snapshots';
+export { Latest, BaseLatest } from './latest';
+export { Snapshots, BaseSnapshots } from './snapshots';

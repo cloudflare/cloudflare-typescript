@@ -8,6 +8,7 @@ export type WorkerInput = {
   client_opts: ClientOptions;
   intent?: string | undefined;
 };
+
 export type WorkerOutput = {
   is_error: boolean;
   result: unknown | null;

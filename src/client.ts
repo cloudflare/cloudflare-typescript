@@ -11,7 +11,7 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
+import { stringifyQuery } from './internal/utils/query';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
@@ -32,23 +32,6 @@ import {
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { AuditLogs } from './resources/audit-logs';
-import { BotManagement } from './resources/bot-management';
-import { ClientCertificates } from './resources/client-certificates';
-import { CustomNameservers } from './resources/custom-nameservers';
-import { DCVDelegation } from './resources/dcv-delegation';
-import { Filters } from './resources/filters';
-import { Fraud } from './resources/fraud';
-import { IPs } from './resources/ips';
-import { KeylessCertificates } from './resources/keyless-certificates';
-import { ManagedTransforms } from './resources/managed-transforms';
-import { Memberships } from './resources/memberships';
-import { OriginCACertificates } from './resources/origin-ca-certificates';
-import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
-import { PageRules } from './resources/page-rules';
-import { RateLimits } from './resources/rate-limits';
-import { SecurityTXT } from './resources/security-txt';
-import { URLNormalization } from './resources/url-normalization';
 import { AbuseReports } from './resources/abuse-reports/abuse-reports';
 import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
@@ -59,21 +42,26 @@ import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
+import { AuditLogs } from './resources/audit-logs/audit-logs';
 import { Billing } from './resources/billing/billing';
+import { BotManagement } from './resources/bot-management/bot-management';
 import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
 import { BrandProtection } from './resources/brand-protection/brand-protection';
 import { BrowserRendering } from './resources/browser-rendering/browser-rendering';
 import { Cache } from './resources/cache/cache';
 import { Calls } from './resources/calls/calls';
 import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
+import { ClientCertificates } from './resources/client-certificates/client-certificates';
 import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
 import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
+import { CustomNameservers } from './resources/custom-nameservers/custom-nameservers';
 import { CustomPages } from './resources/custom-pages/custom-pages';
-import { D1Resource } from './resources/d1/d1';
+import { D1 } from './resources/d1/d1';
+import { DCVDelegation } from './resources/dcv-delegation/dcv-delegation';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
@@ -81,14 +69,18 @@ import { DurableObjects } from './resources/durable-objects/durable-objects';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
 import { EmailSending } from './resources/email-sending/email-sending';
+import { Filters } from './resources/filters/filters';
 import { Firewall } from './resources/firewall/firewall';
+import { Fraud } from './resources/fraud/fraud';
 import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
 import { Hostnames } from './resources/hostnames/hostnames';
-import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
+import { Hyperdrive } from './resources/hyperdrive/hyperdrive';
 import { IAM } from './resources/iam/iam';
 import { Images } from './resources/images/images';
 import { Intel } from './resources/intel/intel';
+import { IPs } from './resources/ips/ips';
+import { KeylessCertificates } from './resources/keyless-certificates/keyless-certificates';
 import { KV } from './resources/kv/kv';
 import { LeakedCredentialChecks } from './resources/leaked-credential-checks/leaked-credential-checks';
 import { LoadBalancers } from './resources/load-balancers/load-balancers';
@@ -97,10 +89,15 @@ import { Logs } from './resources/logs/logs';
 import { MagicCloudNetworking } from './resources/magic-cloud-networking/magic-cloud-networking';
 import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
 import { MagicTransit } from './resources/magic-transit/magic-transit';
+import { ManagedTransforms } from './resources/managed-transforms/managed-transforms';
+import { Memberships } from './resources/memberships/memberships';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
 import { Organizations } from './resources/organizations/organizations';
+import { OriginCACertificates } from './resources/origin-ca-certificates/origin-ca-certificates';
+import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
+import { PageRules } from './resources/page-rules/page-rules';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
 import { Pipelines } from './resources/pipelines/pipelines';
@@ -108,6 +105,7 @@ import { Queues } from './resources/queues/queues';
 import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
 import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
+import { RateLimits } from './resources/rate-limits/rate-limits';
 import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
@@ -119,6 +117,7 @@ import { RUM } from './resources/rum/rum';
 import { SchemaValidation } from './resources/schema-validation/schema-validation';
 import { SecretsStore } from './resources/secrets-store/secrets-store';
 import { SecurityCenter } from './resources/security-center/security-center';
+import { SecurityTXT } from './resources/security-txt/security-txt';
 import { Snippets } from './resources/snippets/snippets';
 import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
@@ -126,6 +125,7 @@ import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
 import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
+import { URLNormalization } from './resources/url-normalization/url-normalization';
 import { URLScanner } from './resources/url-scanner/url-scanner';
 import { User } from './resources/user/user';
 import { Vectorize } from './resources/vectorize/vectorize';
@@ -171,16 +171,6 @@ export interface ClientOptions {
    * Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).
    */
   userServiceKey?: string | null | undefined;
-
-  /**
-   * Sets an account ID to be used with all account-scoped requests.
-   */
-  accountID?: string | null | undefined;
-
-  /**
-   * Sets a zone ID to be used with all zone-scoped requests.
-   */
-  zoneID?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -259,8 +249,6 @@ export class BaseCloudflare {
   apiKey: string | null;
   apiEmail: string | null;
   userServiceKey: string | null;
-  accountID: string | null;
-  zoneID: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -281,8 +269,6 @@ export class BaseCloudflare {
    * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.accountID=process.env['CLOUDFLARE_ACCOUNT_ID'] ?? null]
-   * @param {string | null | undefined} [opts.zoneID=process.env['CLOUDFLARE_ZONE_ID'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -297,8 +283,6 @@ export class BaseCloudflare {
     apiKey = readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = readEnv('CLOUDFLARE_EMAIL') ?? null,
     userServiceKey = readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
-    accountID = readEnv('CLOUDFLARE_ACCOUNT_ID') ?? null,
-    zoneID = readEnv('CLOUDFLARE_ZONE_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
@@ -306,8 +290,6 @@ export class BaseCloudflare {
       apiKey,
       apiEmail,
       userServiceKey,
-      accountID,
-      zoneID,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
     };
@@ -333,8 +315,6 @@ export class BaseCloudflare {
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
     this.userServiceKey = userServiceKey;
-    this.accountID = accountID;
-    this.zoneID = zoneID;
   }
 
   /**
@@ -354,8 +334,6 @@ export class BaseCloudflare {
       apiKey: this.apiKey,
       apiEmail: this.apiEmail,
       userServiceKey: this.userServiceKey,
-      accountID: this.accountID,
-      zoneID: this.zoneID,
       ...options,
     });
     return client;
@@ -373,10 +351,10 @@ export class BaseCloudflare {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    if (this.apiEmail && values.get('x-auth-email')) {
+    if (this.apiToken && values.get('authorization')) {
       return;
     }
-    if (nulls.has('x-auth-email')) {
+    if (nulls.has('authorization')) {
       return;
     }
 
@@ -387,10 +365,10 @@ export class BaseCloudflare {
       return;
     }
 
-    if (this.apiToken && values.get('authorization')) {
+    if (this.apiEmail && values.get('x-auth-email')) {
       return;
     }
-    if (nulls.has('authorization')) {
+    if (nulls.has('x-auth-email')) {
       return;
     }
 
@@ -402,31 +380,17 @@ export class BaseCloudflare {
     }
 
     throw new Error(
-      'Could not resolve authentication method. Expected one of apiEmail, apiKey, apiToken or userServiceKey to be set. Or for one of the "X-Auth-Email", "X-Auth-Key", "Authorization" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
+      'Could not resolve authentication method. Expected one of apiToken, apiKey, apiEmail or userServiceKey to be set. Or for one of the "Authorization", "X-Auth-Key", "X-Auth-Email" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
     );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     return buildHeaders([
-      await this.apiEmailAuth(opts),
-      await this.apiKeyAuth(opts),
       await this.apiTokenAuth(opts),
+      await this.apiKeyAuth(opts),
+      await this.apiEmailAuth(opts),
       await this.userServiceKeyAuth(opts),
     ]);
-  }
-
-  protected async apiEmailAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.apiEmail == null) {
-      return undefined;
-    }
-    return buildHeaders([{ 'X-Auth-Email': this.apiEmail }]);
-  }
-
-  protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.apiKey == null) {
-      return undefined;
-    }
-    return buildHeaders([{ 'X-Auth-Key': this.apiKey }]);
   }
 
   protected async apiTokenAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
@@ -436,6 +400,20 @@ export class BaseCloudflare {
     return buildHeaders([{ Authorization: `Bearer ${this.apiToken}` }]);
   }
 
+  protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.apiKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ 'X-Auth-Key': this.apiKey }]);
+  }
+
+  protected async apiEmailAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.apiEmail == null) {
+      return undefined;
+    }
+    return buildHeaders([{ 'X-Auth-Email': this.apiEmail }]);
+  }
+
   protected async userServiceKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     if (this.userServiceKey == null) {
       return undefined;
@@ -443,8 +421,11 @@ export class BaseCloudflare {
     return buildHeaders([{ 'X-Auth-User-Service-Key': this.userServiceKey }]);
   }
 
-  protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { allowDots: true, arrayFormat: 'repeat' });
+  /**
+   * Basic re-implementation of `qs.stringify` for primitive types.
+   */
+  protected stringifyQuery(query: object | Record<string, unknown>): string {
+    return stringifyQuery(query);
   }
 
   private getUserAgent(): string {
@@ -476,12 +457,13 @@ export class BaseCloudflare {
       : new URL(baseURL + (baseURL.endsWith('/') && path.startsWith('/') ? path.slice(1) : path));
 
     const defaultQuery = this.defaultQuery();
-    if (!isEmptyObj(defaultQuery)) {
-      query = { ...defaultQuery, ...query };
+    const pathQuery = Object.fromEntries(url.searchParams);
+    if (!isEmptyObj(defaultQuery) || !isEmptyObj(pathQuery)) {
+      query = { ...pathQuery, ...defaultQuery, ...query };
     }
 
     if (typeof query === 'object' && query && !Array.isArray(query)) {
-      url.search = this.stringifyQuery(query as Record<string, unknown>);
+      url.search = this.stringifyQuery(query);
     }
 
     return url.toString();
@@ -665,7 +647,7 @@ export class BaseCloudflare {
       loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
 
       const errText = await response.text().catch((err: any) => castToError(err).message);
-      const errJSON = safeJSON(errText);
+      const errJSON = safeJSON(errText) as any;
       const errMessage = errJSON ? undefined : errText;
 
       loggerFor(this).debug(
@@ -702,9 +684,14 @@ export class BaseCloudflare {
   getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
     path: string,
     Page: new (...args: any[]) => PageClass,
-    opts?: RequestOptions,
+    opts?: PromiseOrValue<RequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
-    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+    return this.requestAPIList(
+      Page,
+      opts && 'then' in opts ?
+        opts.then((opts) => ({ method: 'get', path, ...opts }))
+      : { method: 'get', path, ...opts },
+    );
   }
 
   requestAPIList<
@@ -712,7 +699,7 @@ export class BaseCloudflare {
     PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
   >(
     Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
-    options: FinalRequestOptions,
+    options: PromiseOrValue<FinalRequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
     const request = this.makeRequest(options, null, undefined);
     return new Pagination.PagePromise<PageClass, Item>(this as any as Cloudflare, request, Page);
@@ -725,9 +712,10 @@ export class BaseCloudflare {
     controller: AbortController,
   ): Promise<Response> {
     const { signal, method, ...options } = init || {};
-    if (signal) signal.addEventListener('abort', () => controller.abort());
+    const abort = this._makeAbort(controller);
+    if (signal) signal.addEventListener('abort', abort, { once: true });
 
-    const timeout = setTimeout(() => controller.abort(), ms);
+    const timeout = setTimeout(abort, ms);
 
     const isReadableBody =
       ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) ||
@@ -804,9 +792,9 @@ export class BaseCloudflare {
       }
     }
 
-    // If the API asks us to wait a certain amount of time (and it's a reasonable amount),
-    // just do what it says, but otherwise calculate a default
-    if (!(timeoutMillis && 0 <= timeoutMillis && timeoutMillis < 60 * 1000)) {
+    // If the API asks us to wait a certain amount of time, just do what it
+    // says, but otherwise calculate a default
+    if (timeoutMillis === undefined) {
       const maxRetries = options.maxRetries ?? this.maxRetries;
       timeoutMillis = this.calculateDefaultRetryTimeoutMillis(retriesRemaining, maxRetries);
     }
@@ -896,6 +884,12 @@ export class BaseCloudflare {
     return headers.values;
   }
 
+  private _makeAbort(controller: AbortController) {
+    // note: we can't just inline this method inside `fetchWithTimeout()` because then the closure
+    //       would capture all request options, and cause a memory leak.
+    return () => controller.abort();
+  }
+
   private buildBody({ options: { body, headers: rawHeaders } }: { options: FinalRequestOptions }): {
     bodyHeaders: HeadersLike;
     body: BodyInit | undefined;
@@ -928,6 +922,14 @@ export class BaseCloudflare {
         (Symbol.iterator in body && 'next' in body && typeof body.next === 'function'))
     ) {
       return { bodyHeaders: undefined, body: Shims.ReadableStreamFrom(body as AsyncIterable<Uint8Array>) };
+    } else if (
+      typeof body === 'object' &&
+      headers.values.get('content-type') === 'application/x-www-form-urlencoded'
+    ) {
+      return {
+        bodyHeaders: { 'content-type': 'application/x-www-form-urlencoded' },
+        body: this.stringifyQuery(body),
+      };
     } else {
       return this.#encoder({ body, headers });
     }
@@ -1019,14 +1021,14 @@ export class Cloudflare extends BaseCloudflare {
   rules: API.Rules = new API.Rules(this);
   stream: API.Stream = new API.Stream(this);
   alerting: API.Alerting = new API.Alerting(this);
-  d1: API.D1Resource = new API.D1Resource(this);
+  d1: API.D1 = new API.D1(this);
   r2: API.R2 = new API.R2(this);
   r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
   connectivity: API.Connectivity = new API.Connectivity(this);
-  hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
+  hyperdrive: API.Hyperdrive = new API.Hyperdrive(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
@@ -1127,14 +1129,14 @@ Cloudflare.RequestTracers = RequestTracers;
 Cloudflare.Rules = Rules;
 Cloudflare.Stream = Stream;
 Cloudflare.Alerting = Alerting;
-Cloudflare.D1Resource = D1Resource;
+Cloudflare.D1 = D1;
 Cloudflare.R2 = R2;
 Cloudflare.R2DataCatalog = R2DataCatalog;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
 Cloudflare.Connectivity = Connectivity;
-Cloudflare.HyperdriveResource = HyperdriveResource;
+Cloudflare.Hyperdrive = Hyperdrive;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
@@ -1331,7 +1333,7 @@ export declare namespace Cloudflare {
 
   export { Alerting as Alerting };
 
-  export { D1Resource as D1Resource };
+  export { D1 as D1 };
 
   export { R2 as R2 };
 
@@ -1345,7 +1347,7 @@ export declare namespace Cloudflare {
 
   export { Connectivity as Connectivity };
 
-  export { HyperdriveResource as HyperdriveResource };
+  export { Hyperdrive as Hyperdrive };
 
   export { RUM as RUM };
 
@@ -1421,28 +1423,7 @@ export declare namespace Cloudflare {
 
   export { TokenValidation as TokenValidation };
 
-  export type ASN = API.ASN;
-  export type AuditLog = API.AuditLog;
-  export type CertificateCA = API.CertificateCA;
-  export type CertificateRequestType = API.CertificateRequestType;
-  export type CloudflareTunnel = API.CloudflareTunnel;
   export type ErrorData = API.ErrorData;
   export type Identifier = API.Identifier;
-  export type LoadBalancerPreview = API.LoadBalancerPreview;
-  export type Member = API.Member;
   export type PaginationInfo = API.PaginationInfo;
-  export type Permission = API.Permission;
-  export type PermissionGrant = API.PermissionGrant;
-  export type RatePlan = API.RatePlan;
-  export type ResponseInfo = API.ResponseInfo;
-  export type Result = API.Result;
-  export type Role = API.Role;
-  export type SortDirection = API.SortDirection;
-  export type Subscription = API.Subscription;
-  export type SubscriptionComponent = API.SubscriptionComponent;
-  export type SubscriptionZone = API.SubscriptionZone;
-  export type Token = API.Token;
-  export type TokenConditionCIDRList = API.TokenConditionCIDRList;
-  export type TokenPolicy = API.TokenPolicy;
-  export type TokenValue = API.TokenValue;
 }

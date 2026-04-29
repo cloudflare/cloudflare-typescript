@@ -2,20 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as WidgetsAPI from './widgets';
-import {
-  BaseWidgets,
-  Widget,
-  WidgetCreateParams,
-  WidgetDeleteParams,
-  WidgetDomain,
-  WidgetGetParams,
-  WidgetListParams,
-  WidgetListResponse,
-  WidgetListResponsesV4PagePaginationArray,
-  WidgetRotateSecretParams,
-  WidgetUpdateParams,
-  Widgets,
-} from './widgets';
+import { BaseWidgets, Widgets } from './widgets';
 
 export class BaseTurnstile extends APIResource {
   static override readonly _key: readonly ['turnstile'] = Object.freeze(['turnstile'] as const);
@@ -28,18 +15,5 @@ Turnstile.Widgets = Widgets;
 Turnstile.BaseWidgets = BaseWidgets;
 
 export declare namespace Turnstile {
-  export {
-    Widgets as Widgets,
-    BaseWidgets as BaseWidgets,
-    type Widget as Widget,
-    type WidgetDomain as WidgetDomain,
-    type WidgetListResponse as WidgetListResponse,
-    type WidgetListResponsesV4PagePaginationArray as WidgetListResponsesV4PagePaginationArray,
-    type WidgetCreateParams as WidgetCreateParams,
-    type WidgetUpdateParams as WidgetUpdateParams,
-    type WidgetListParams as WidgetListParams,
-    type WidgetDeleteParams as WidgetDeleteParams,
-    type WidgetGetParams as WidgetGetParams,
-    type WidgetRotateSecretParams as WidgetRotateSecretParams,
-  };
+  export { Widgets as Widgets, BaseWidgets as BaseWidgets };
 }

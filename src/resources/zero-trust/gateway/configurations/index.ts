@@ -1,29 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Configurations,
-  BaseConfigurations,
-  type ActivityLogSettings,
-  type AntiVirusSettings,
-  type BlockPageSettings,
-  type BodyScanningSettings,
-  type BrowserIsolationSettings,
-  type CustomCertificateSettings,
-  type ExtendedEmailMatching,
-  type FipsSettings,
-  type GatewayConfigurationSettings,
-  type NotificationSettings,
-  type ProtocolDetection,
-  type TLSSettings,
-  type ConfigurationUpdateResponse,
-  type ConfigurationEditResponse,
-  type ConfigurationGetResponse,
-  type ConfigurationUpdateParams,
-  type ConfigurationEditParams,
-  type ConfigurationGetParams,
-} from './configurations';
-export {
-  CustomCertificate,
-  BaseCustomCertificate,
-  type CustomCertificateGetParams,
-} from './custom-certificate';
+export { Configurations, BaseConfigurations } from './configurations';
+export { CustomCertificate, BaseCustomCertificate } from './custom-certificate';

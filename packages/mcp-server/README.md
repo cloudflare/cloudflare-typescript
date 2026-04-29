@@ -23,8 +23,6 @@ export CLOUDFLARE_API_TOKEN="Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY"
 export CLOUDFLARE_API_KEY="144c9defac04969c7bfad8efaa8ea194"
 export CLOUDFLARE_EMAIL="user@example.com"
 export CLOUDFLARE_API_USER_SERVICE_KEY="v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719"
-export CLOUDFLARE_ACCOUNT_ID="f037e56e89293a057740de681ac9accp"
-export CLOUDFLARE_ZONE_ID="f037e56e89293a057740de681ac9accp"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -50,9 +48,7 @@ For clients with a configuration JSON, it might look something like this:
         "CLOUDFLARE_API_TOKEN": "Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY",
         "CLOUDFLARE_API_KEY": "144c9defac04969c7bfad8efaa8ea194",
         "CLOUDFLARE_EMAIL": "user@example.com",
-        "CLOUDFLARE_API_USER_SERVICE_KEY": "v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719",
-        "CLOUDFLARE_ACCOUNT_ID": "f037e56e89293a057740de681ac9accp",
-        "CLOUDFLARE_ZONE_ID": "f037e56e89293a057740de681ac9accp"
+        "CLOUDFLARE_API_USER_SERVICE_KEY": "v1.0-144c9defac04969c7bfad8ef-631a41d003a32d25fe878081ef365c49503f7fada600da935e2851a1c7326084b85cbf6429c4b859de8475731dc92a9c329631e6d59e6c73da7b198497172b4cefe071d90d0f5d2719"
       }
     }
   }
@@ -85,9 +81,9 @@ Authorization can be provided via the `Authorization` header using the Bearer sc
 Additionally, authorization can be provided via the following headers:
 | Header | Equivalent client option | Security scheme |
 | ------------------------- | ------------------------ | ---------------- |
-| `X-Auth-Email` | `apiEmail` | api_email |
-| `X-Auth-Key` | `apiKey` | api_key |
 | `x-cloudflare-api-token` | `apiToken` | api_token |
+| `X-Auth-Key` | `apiKey` | api_key |
+| `X-Auth-Email` | `apiEmail` | api_email |
 | `X-Auth-User-Service-Key` | `userServiceKey` | user_service_key |
 
 A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:

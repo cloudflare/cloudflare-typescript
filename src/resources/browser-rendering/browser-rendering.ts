@@ -2,32 +2,23 @@
 
 import { APIResource } from '../../core/resource';
 import * as ContentAPI from './content';
-import { BaseContent, Content, ContentCreateParams, ContentCreateResponse } from './content';
+import { BaseContent, Content } from './content';
 import * as CrawlAPI from './crawl';
-import {
-  BaseCrawl,
-  Crawl,
-  CrawlCreateParams,
-  CrawlCreateResponse,
-  CrawlDeleteParams,
-  CrawlDeleteResponse,
-  CrawlGetParams,
-  CrawlGetResponse,
-} from './crawl';
+import { BaseCrawl, Crawl } from './crawl';
 import * as JsonAPI from './json';
-import { BaseJson, Json, JsonCreateParams, JsonCreateResponse } from './json';
+import { BaseJson, Json } from './json';
 import * as LinksAPI from './links';
-import { BaseLinks, LinkCreateParams, LinkCreateResponse, Links } from './links';
+import { BaseLinks, Links } from './links';
 import * as MarkdownAPI from './markdown';
-import { BaseMarkdown, Markdown, MarkdownCreateParams, MarkdownCreateResponse } from './markdown';
+import { BaseMarkdown, Markdown } from './markdown';
 import * as PDFAPI from './pdf';
-import { BasePDF, PDF, PDFCreateParams } from './pdf';
+import { BasePDF, PDF } from './pdf';
 import * as ScrapeAPI from './scrape';
-import { BaseScrape, Scrape, ScrapeCreateParams, ScrapeCreateResponse } from './scrape';
+import { BaseScrape, Scrape } from './scrape';
 import * as ScreenshotAPI from './screenshot';
-import { BaseScreenshot, Screenshot, ScreenshotCreateParams, ScreenshotCreateResponse } from './screenshot';
+import { BaseScreenshot, Screenshot } from './screenshot';
 import * as SnapshotAPI from './snapshot';
-import { BaseSnapshot, Snapshot, SnapshotCreateParams, SnapshotCreateResponse } from './snapshot';
+import { BaseSnapshot, Snapshot } from './snapshot';
 import * as DevtoolsAPI from './devtools/devtools';
 import { BaseDevtools, Devtools } from './devtools/devtools';
 
@@ -69,67 +60,23 @@ BrowserRendering.Devtools = Devtools;
 BrowserRendering.BaseDevtools = BaseDevtools;
 
 export declare namespace BrowserRendering {
-  export {
-    Content as Content,
-    BaseContent as BaseContent,
-    type ContentCreateResponse as ContentCreateResponse,
-    type ContentCreateParams as ContentCreateParams,
-  };
+  export { Content as Content, BaseContent as BaseContent };
 
-  export { PDF as PDF, BasePDF as BasePDF, type PDFCreateParams as PDFCreateParams };
+  export { PDF as PDF, BasePDF as BasePDF };
 
-  export {
-    Scrape as Scrape,
-    BaseScrape as BaseScrape,
-    type ScrapeCreateResponse as ScrapeCreateResponse,
-    type ScrapeCreateParams as ScrapeCreateParams,
-  };
+  export { Scrape as Scrape, BaseScrape as BaseScrape };
 
-  export {
-    Screenshot as Screenshot,
-    BaseScreenshot as BaseScreenshot,
-    type ScreenshotCreateResponse as ScreenshotCreateResponse,
-    type ScreenshotCreateParams as ScreenshotCreateParams,
-  };
+  export { Screenshot as Screenshot, BaseScreenshot as BaseScreenshot };
 
-  export {
-    Snapshot as Snapshot,
-    BaseSnapshot as BaseSnapshot,
-    type SnapshotCreateResponse as SnapshotCreateResponse,
-    type SnapshotCreateParams as SnapshotCreateParams,
-  };
+  export { Snapshot as Snapshot, BaseSnapshot as BaseSnapshot };
 
-  export {
-    Json as Json,
-    BaseJson as BaseJson,
-    type JsonCreateResponse as JsonCreateResponse,
-    type JsonCreateParams as JsonCreateParams,
-  };
+  export { Json as Json, BaseJson as BaseJson };
 
-  export {
-    Links as Links,
-    BaseLinks as BaseLinks,
-    type LinkCreateResponse as LinkCreateResponse,
-    type LinkCreateParams as LinkCreateParams,
-  };
+  export { Links as Links, BaseLinks as BaseLinks };
 
-  export {
-    Markdown as Markdown,
-    BaseMarkdown as BaseMarkdown,
-    type MarkdownCreateResponse as MarkdownCreateResponse,
-    type MarkdownCreateParams as MarkdownCreateParams,
-  };
+  export { Markdown as Markdown, BaseMarkdown as BaseMarkdown };
 
-  export {
-    Crawl as Crawl,
-    BaseCrawl as BaseCrawl,
-    type CrawlCreateResponse as CrawlCreateResponse,
-    type CrawlDeleteResponse as CrawlDeleteResponse,
-    type CrawlGetResponse as CrawlGetResponse,
-    type CrawlCreateParams as CrawlCreateParams,
-    type CrawlDeleteParams as CrawlDeleteParams,
-    type CrawlGetParams as CrawlGetParams,
-  };
+  export { Crawl as Crawl, BaseCrawl as BaseCrawl };
 
   export { Devtools as Devtools, BaseDevtools as BaseDevtools };
 }

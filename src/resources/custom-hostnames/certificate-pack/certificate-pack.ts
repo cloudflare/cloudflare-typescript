@@ -2,14 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as CertificatesAPI from './certificates';
-import {
-  BaseCertificates,
-  CertificateDeleteParams,
-  CertificateDeleteResponse,
-  CertificateUpdateParams,
-  CertificateUpdateResponse,
-  Certificates,
-} from './certificates';
+import { BaseCertificates, Certificates } from './certificates';
 
 export class BaseCertificatePack extends APIResource {
   static override readonly _key: readonly ['customHostnames', 'certificatePack'] = Object.freeze([
@@ -25,12 +18,5 @@ CertificatePack.Certificates = Certificates;
 CertificatePack.BaseCertificates = BaseCertificates;
 
 export declare namespace CertificatePack {
-  export {
-    Certificates as Certificates,
-    BaseCertificates as BaseCertificates,
-    type CertificateUpdateResponse as CertificateUpdateResponse,
-    type CertificateDeleteResponse as CertificateDeleteResponse,
-    type CertificateUpdateParams as CertificateUpdateParams,
-    type CertificateDeleteParams as CertificateDeleteParams,
-  };
+  export { Certificates as Certificates, BaseCertificates as BaseCertificates };
 }

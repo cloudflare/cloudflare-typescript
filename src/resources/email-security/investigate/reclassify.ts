@@ -1,9 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import { APIPromise } from '../../../core/api-promise';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
 
 export class BaseReclassify extends APIResource {
   static override readonly _key: readonly ['emailSecurity', 'investigate', 'reclassify'] = Object.freeze([
@@ -11,73 +8,5 @@ export class BaseReclassify extends APIResource {
     'investigate',
     'reclassify',
   ] as const);
-
-  /**
-   * Submits an email message for reclassification, updating its threat assessment
-   * based on new analysis.
-   *
-   * @example
-   * ```ts
-   * const reclassify =
-   *   await client.emailSecurity.investigate.reclassify.create(
-   *     '4Njp3P0STMz2c02Q',
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       expected_disposition: 'NONE',
-   *     },
-   *   );
-   * ```
-   */
-  create(
-    postfixID: string,
-    params: ReclassifyCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<ReclassifyCreateResponse> {
-    const { account_id = this._client.accountID, submission, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/email-security/investigate/${postfixID}/reclassify`, {
-        query: { submission },
-        body,
-        ...options,
-      }) as APIPromise<{ result: ReclassifyCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Reclassify extends BaseReclassify {}
-
-export type ReclassifyCreateResponse = unknown;
-
-export interface ReclassifyCreateParams {
-  /**
-   * Path param: Account Identifier
-   */
-  account_id?: string;
-
-  /**
-   * Body param
-   */
-  expected_disposition: 'NONE' | 'BULK' | 'MALICIOUS' | 'SPAM' | 'SPOOF' | 'SUSPICIOUS';
-
-  /**
-   * Query param: When true, search the submissions datastore only. When false or
-   * omitted, search the regular datastore only.
-   */
-  submission?: boolean;
-
-  /**
-   * Body param: Base64 encoded content of the EML file
-   */
-  eml_content?: string;
-
-  /**
-   * Body param
-   */
-  escalated_submission_id?: string;
-}
-
-export declare namespace Reclassify {
-  export {
-    type ReclassifyCreateResponse as ReclassifyCreateResponse,
-    type ReclassifyCreateParams as ReclassifyCreateParams,
-  };
-}

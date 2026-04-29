@@ -2,51 +2,20 @@
 
 import { APIResource } from '../../core/resource';
 import * as ConfigAPI from './config';
-import { BaseConfig, Config, ConfigGetParams, ConfigUpdateParams, Configuration } from './config';
+import { BaseConfig, Config } from './config';
 import * as DefaultAPI from './default';
-import { BaseDefault, Default, DefaultGetParams } from './default';
+import { BaseDefault, Default } from './default';
 import * as ExportAPI from './export';
-import { BaseExport, Export, ExportGetParams } from './export';
+import { BaseExport, Export } from './export';
 import * as PublishAPI from './publish';
-import { BasePublish, Publish, PublishCreateParams, PublishCreateResponse } from './publish';
+import { BasePublish, Publish } from './publish';
 import * as WorkflowAPI from './workflow';
-import { BaseWorkflowResource, Workflow, WorkflowGetParams, WorkflowResource } from './workflow';
+import { BaseWorkflow, Workflow } from './workflow';
 import * as HistoryAPI from './history/history';
-import {
-  BaseHistory,
-  History,
-  HistoryListParams,
-  HistoryListResponse,
-  HistoryListResponsesSinglePage,
-  HistoryUpdateParams,
-} from './history/history';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { BaseHistory, History } from './history/history';
 
 export class BaseZaraz extends APIResource {
   static override readonly _key: readonly ['zaraz'] = Object.freeze(['zaraz'] as const);
-
-  /**
-   * Updates Zaraz workflow for a zone.
-   *
-   * @example
-   * ```ts
-   * const workflow = await client.zaraz.update({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   workflow: 'realtime',
-   * });
-   * ```
-   */
-  update(params: ZarazUpdateParams, options?: RequestOptions): APIPromise<WorkflowAPI.Workflow> {
-    const { zone_id = this._client.zoneID, workflow } = params;
-    return (
-      this._client.put(path`/zones/${zone_id}/settings/zaraz/workflow`, {
-        body: workflow,
-        ...options,
-      }) as APIPromise<{ result: WorkflowAPI.Workflow }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Zaraz extends BaseZaraz {
   config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
@@ -54,97 +23,7 @@ export class Zaraz extends BaseZaraz {
   export: ExportAPI.Export = new ExportAPI.Export(this._client);
   history: HistoryAPI.History = new HistoryAPI.History(this._client);
   publish: PublishAPI.Publish = new PublishAPI.Publish(this._client);
-  workflow: WorkflowAPI.WorkflowResource = new WorkflowAPI.WorkflowResource(this._client);
-}
-
-export interface ButtonTextTranslation {
-  /**
-   * Object where keys are language codes.
-   */
-  accept_all: { [key: string]: string };
-
-  /**
-   * Object where keys are language codes.
-   */
-  confirm_my_choices: { [key: string]: string };
-
-  /**
-   * Object where keys are language codes.
-   */
-  reject_all: { [key: string]: string };
-}
-
-export interface ButtonTextTranslationParam {
-  /**
-   * Object where keys are language codes.
-   */
-  accept_all: { [key: string]: string };
-
-  /**
-   * Object where keys are language codes.
-   */
-  confirm_my_choices: { [key: string]: string };
-
-  /**
-   * Object where keys are language codes.
-   */
-  reject_all: { [key: string]: string };
-}
-
-export interface NeoEvent {
-  /**
-   * Tool event type.
-   */
-  actionType: string;
-
-  /**
-   * List of blocking triggers IDs.
-   */
-  blockingTriggers: Array<string>;
-
-  /**
-   * Event payload.
-   */
-  data: unknown;
-
-  /**
-   * List of firing triggers IDs.
-   */
-  firingTriggers: Array<string>;
-}
-
-export interface NeoEventParam {
-  /**
-   * Tool event type.
-   */
-  actionType: string;
-
-  /**
-   * List of blocking triggers IDs.
-   */
-  blockingTriggers: Array<string>;
-
-  /**
-   * Event payload.
-   */
-  data: unknown;
-
-  /**
-   * List of firing triggers IDs.
-   */
-  firingTriggers: Array<string>;
-}
-
-export interface ZarazUpdateParams {
-  /**
-   * Path param: Identifier.
-   */
-  zone_id?: string;
-
-  /**
-   * Body param: Zaraz workflow.
-   */
-  workflow: WorkflowAPI.WorkflowParam;
+  workflow: WorkflowAPI.Workflow = new WorkflowAPI.Workflow(this._client);
 }
 
 Zaraz.Config = Config;
@@ -157,48 +36,19 @@ Zaraz.History = History;
 Zaraz.BaseHistory = BaseHistory;
 Zaraz.Publish = Publish;
 Zaraz.BasePublish = BasePublish;
-Zaraz.WorkflowResource = WorkflowResource;
-Zaraz.BaseWorkflowResource = BaseWorkflowResource;
+Zaraz.Workflow = Workflow;
+Zaraz.BaseWorkflow = BaseWorkflow;
 
 export declare namespace Zaraz {
-  export {
-    type ButtonTextTranslation as ButtonTextTranslation,
-    type NeoEvent as NeoEvent,
-    type ZarazUpdateParams as ZarazUpdateParams,
-  };
+  export { Config as Config, BaseConfig as BaseConfig };
 
-  export {
-    Config as Config,
-    BaseConfig as BaseConfig,
-    type Configuration as Configuration,
-    type ConfigUpdateParams as ConfigUpdateParams,
-    type ConfigGetParams as ConfigGetParams,
-  };
+  export { Default as Default, BaseDefault as BaseDefault };
 
-  export { Default as Default, BaseDefault as BaseDefault, type DefaultGetParams as DefaultGetParams };
+  export { Export as Export, BaseExport as BaseExport };
 
-  export { Export as Export, BaseExport as BaseExport, type ExportGetParams as ExportGetParams };
+  export { History as History, BaseHistory as BaseHistory };
 
-  export {
-    History as History,
-    BaseHistory as BaseHistory,
-    type HistoryListResponse as HistoryListResponse,
-    type HistoryListResponsesSinglePage as HistoryListResponsesSinglePage,
-    type HistoryUpdateParams as HistoryUpdateParams,
-    type HistoryListParams as HistoryListParams,
-  };
+  export { Publish as Publish, BasePublish as BasePublish };
 
-  export {
-    Publish as Publish,
-    BasePublish as BasePublish,
-    type PublishCreateResponse as PublishCreateResponse,
-    type PublishCreateParams as PublishCreateParams,
-  };
-
-  export {
-    WorkflowResource as WorkflowResource,
-    BaseWorkflowResource as BaseWorkflowResource,
-    type Workflow as Workflow,
-    type WorkflowGetParams as WorkflowGetParams,
-  };
+  export { Workflow as Workflow, BaseWorkflow as BaseWorkflow };
 }

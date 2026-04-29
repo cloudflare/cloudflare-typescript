@@ -2,239 +2,39 @@
 
 import { APIResource } from '../../core/resource';
 import * as AudioTracksAPI from './audio-tracks';
-import {
-  Audio,
-  AudioTrackCopyParams,
-  AudioTrackDeleteParams,
-  AudioTrackDeleteResponse,
-  AudioTrackEditParams,
-  AudioTrackGetParams,
-  AudioTrackGetResponse,
-  AudioTracks,
-  BaseAudioTracks,
-} from './audio-tracks';
+import { AudioTracks, BaseAudioTracks } from './audio-tracks';
 import * as ClipAPI from './clip';
-import { BaseClipResource, Clip, ClipCreateParams, ClipResource } from './clip';
+import { BaseClip, Clip } from './clip';
 import * as CopyAPI from './copy';
-import { BaseCopy, Copy, CopyCreateParams } from './copy';
+import { BaseCopy, Copy } from './copy';
 import * as DirectUploadAPI from './direct-upload';
-import {
-  BaseDirectUpload,
-  DirectUpload,
-  DirectUploadCreateParams,
-  DirectUploadCreateResponse,
-} from './direct-upload';
+import { BaseDirectUpload, DirectUpload } from './direct-upload';
 import * as DownloadsAPI from './downloads';
-import {
-  BaseDownloads,
-  DownloadCreateParams,
-  DownloadCreateResponse,
-  DownloadDeleteParams,
-  DownloadDeleteResponse,
-  DownloadGetParams,
-  DownloadGetResponse,
-  Downloads,
-} from './downloads';
+import { BaseDownloads, Downloads } from './downloads';
 import * as EmbedAPI from './embed';
-import { BaseEmbed, Embed, EmbedGetParams, EmbedGetResponse } from './embed';
+import { BaseEmbed, Embed } from './embed';
 import * as KeysAPI from './keys';
-import {
-  BaseKeys,
-  KeyCreateParams,
-  KeyDeleteParams,
-  KeyDeleteResponse,
-  KeyGetParams,
-  KeyGetResponse,
-  KeyGetResponsesSinglePage,
-  Keys,
-} from './keys';
+import { BaseKeys, Keys } from './keys';
 import * as TokenAPI from './token';
-import { BaseToken, Token, TokenCreateParams, TokenCreateResponse } from './token';
+import { BaseToken, Token } from './token';
 import * as VideosAPI from './videos';
-import { BaseVideos, VideoStorageUsageParams, VideoStorageUsageResponse, Videos } from './videos';
+import { BaseVideos, Videos } from './videos';
 import * as WatermarksAPI from './watermarks';
-import {
-  BaseWatermarks,
-  Watermark,
-  WatermarkCreateParams,
-  WatermarkDeleteParams,
-  WatermarkDeleteResponse,
-  WatermarkGetParams,
-  WatermarkListParams,
-  Watermarks,
-  WatermarksSinglePage,
-} from './watermarks';
+import { BaseWatermarks, Watermarks } from './watermarks';
 import * as WebhooksAPI from './webhooks';
-import {
-  BaseWebhooks,
-  WebhookDeleteParams,
-  WebhookDeleteResponse,
-  WebhookGetParams,
-  WebhookGetResponse,
-  WebhookUpdateParams,
-  WebhookUpdateResponse,
-  Webhooks,
-} from './webhooks';
+import { BaseWebhooks, Webhooks } from './webhooks';
 import * as CaptionsAPI from './captions/captions';
-import { BaseCaptions, Caption, CaptionGetParams, Captions, CaptionsSinglePage } from './captions/captions';
+import { BaseCaptions, Captions } from './captions/captions';
 import * as LiveInputsAPI from './live-inputs/live-inputs';
-import {
-  BaseLiveInputs,
-  LiveInput,
-  LiveInputCreateParams,
-  LiveInputDeleteParams,
-  LiveInputGetParams,
-  LiveInputListParams,
-  LiveInputListResponse,
-  LiveInputUpdateParams,
-  LiveInputs,
-} from './live-inputs/live-inputs';
-import { APIPromise } from '../../core/api-promise';
-import { PagePromise, SinglePage } from '../../core/pagination';
-import { buildHeaders } from '../../internal/headers';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { BaseLiveInputs, LiveInputs } from './live-inputs/live-inputs';
 
 export class BaseStream extends APIResource {
   static override readonly _key: readonly ['stream'] = Object.freeze(['stream'] as const);
-
-  /**
-   * Initiates a video upload using the TUS protocol. On success, the server responds
-   * with a status code 201 (created) and includes a `location` header to indicate
-   * where the content should be uploaded. Refer to https://tus.io for protocol
-   * details.
-   *
-   * @example
-   * ```ts
-   * await client.stream.create({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   'Tus-Resumable': '1.0.0',
-   *   'Upload-Length': 0,
-   * });
-   * ```
-   */
-  create(params: StreamCreateParams, options?: RequestOptions): APIPromise<void> {
-    const {
-      account_id = this._client.accountID,
-      'Tus-Resumable': tusResumable,
-      'Upload-Length': uploadLength,
-      direct_user,
-      'Upload-Creator': uploadCreator,
-      'Upload-Metadata': uploadMetadata,
-    } = params;
-    return this._client.post(path`/accounts/${account_id}/stream`, {
-      query: { direct_user },
-      ...options,
-      headers: buildHeaders([
-        {
-          Accept: '*/*',
-          'Tus-Resumable': tusResumable.toString(),
-          'Upload-Length': uploadLength.toString(),
-          ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
-          ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
-        },
-        options?.headers,
-      ]),
-    });
-  }
-
-  /**
-   * Lists up to 1000 videos from a single request. For a specific range, refer to
-   * the optional parameters.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const video of client.stream.list({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params: StreamListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<VideosSinglePage, Video> {
-    const { account_id = this._client.accountID, ...query } = params ?? {};
-    return this._client.getAPIList(path`/accounts/${account_id}/stream`, SinglePage<Video>, {
-      query,
-      ...options,
-    });
-  }
-
-  /**
-   * Deletes a video and its copies from Cloudflare Stream.
-   *
-   * @example
-   * ```ts
-   * await client.stream.delete(
-   *   'ea95132c15732412d22c1476fa83f27a',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
-   */
-  delete(
-    identifier: string,
-    params: StreamDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<void> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return this._client.delete(path`/accounts/${account_id}/stream/${identifier}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
-  }
-
-  /**
-   * Edit details for a single video.
-   *
-   * @example
-   * ```ts
-   * const video = await client.stream.edit(
-   *   'ea95132c15732412d22c1476fa83f27a',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
-   */
-  edit(identifier: string, params: StreamEditParams, options?: RequestOptions): APIPromise<Video> {
-    const { account_id = this._client.accountID, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/stream/${identifier}`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: Video }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches details for a single video.
-   *
-   * @example
-   * ```ts
-   * const video = await client.stream.get(
-   *   'ea95132c15732412d22c1476fa83f27a',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
-   */
-  get(
-    identifier: string,
-    params: StreamGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Video> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return (
-      this._client.get(path`/accounts/${account_id}/stream/${identifier}`, options) as APIPromise<{
-        result: Video;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Stream extends BaseStream {
   audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);
   videos: VideosAPI.Videos = new VideosAPI.Videos(this._client);
-  clip: ClipAPI.ClipResource = new ClipAPI.ClipResource(this._client);
+  clip: ClipAPI.Clip = new ClipAPI.Clip(this._client);
   copy: CopyAPI.Copy = new CopyAPI.Copy(this._client);
   directUpload: DirectUploadAPI.DirectUpload = new DirectUploadAPI.DirectUpload(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
@@ -247,478 +47,17 @@ export class Stream extends BaseStream {
   token: TokenAPI.Token = new TokenAPI.Token(this._client);
 }
 
-export type VideosSinglePage = SinglePage<Video>;
-
-export type AllowedOrigins = string;
-
-export type AllowedOriginsParam = string;
-
-export interface Video {
-  /**
-   * Lists the origins allowed to display the video. Enter allowed origin domains in
-   * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
-   * viewed on any origin.
-   */
-  allowedOrigins?: Array<AllowedOrigins>;
-
-  /**
-   * The unique identifier of the source video this video was clipped from.
-   */
-  clippedFrom?: string;
-
-  /**
-   * The date and time the media item was created.
-   */
-  created?: string;
-
-  /**
-   * A user-defined identifier for the media creator.
-   */
-  creator?: string;
-
-  /**
-   * The duration of the video in seconds. A value of `-1` means the duration is
-   * unknown. The duration becomes available after the upload and before the video is
-   * ready.
-   */
-  duration?: number;
-
-  input?: Video.Input;
-
-  /**
-   * The live input ID used to upload a video with Stream Live.
-   */
-  liveInput?: string;
-
-  /**
-   * The maximum duration in seconds for a video upload. Can be set for a video that
-   * is not yet uploaded to limit its duration. Uploads that exceed the specified
-   * duration will fail during processing. A value of `-1` means the value is
-   * unknown.
-   */
-  maxDurationSeconds?: number;
-
-  /**
-   * The maximum size in bytes for the video upload.
-   */
-  maxSizeBytes?: number;
-
-  /**
-   * A user modifiable key-value store used to reference other systems of record for
-   * managing videos.
-   */
-  meta?: unknown;
-
-  /**
-   * The date and time the media item was last modified.
-   */
-  modified?: string;
-
-  playback?: Video.Playback;
-
-  /**
-   * The video's preview page URI. This field is omitted until encoding is complete.
-   */
-  preview?: string;
-
-  /**
-   * Public details for the video including title, share link, channel link, and
-   * logo.
-   */
-  publicDetails?: Video.PublicDetails;
-
-  /**
-   * Indicates whether the video is playable. The field is empty if the video is not
-   * ready for viewing or the live stream is still in progress.
-   */
-  readyToStream?: boolean;
-
-  /**
-   * Indicates the time at which the video became playable. The field is empty if the
-   * video is not ready for viewing or the live stream is still in progress.
-   */
-  readyToStreamAt?: string;
-
-  /**
-   * Indicates whether the video can be a accessed using the UID. When set to `true`,
-   * a signed token must be generated with a signing key to view the video.
-   */
-  requireSignedURLs?: boolean;
-
-  /**
-   * Indicates the date and time at which the video will be deleted. Omit the field
-   * to indicate no change, or include with a `null` value to remove an existing
-   * scheduled deletion. If specified, must be at least 30 days from upload time.
-   */
-  scheduledDeletion?: string;
-
-  /**
-   * The size of the media item in bytes.
-   */
-  size?: number;
-
-  /**
-   * Specifies a detailed status for a video. If the `state` is `inprogress` or
-   * `error`, the `step` field returns `encoding` or `manifest`. If the `state` is
-   * `inprogress`, `pctComplete` returns a number between 0 and 100 to indicate the
-   * approximate percent of completion. If the `state` is `error`, `errorReasonCode`
-   * and `errorReasonText` provide additional details.
-   */
-  status?: Video.Status;
-
-  /**
-   * The media item's thumbnail URI. This field is omitted until encoding is
-   * complete.
-   */
-  thumbnail?: string;
-
-  /**
-   * The timestamp for a thumbnail image calculated as a percentage value of the
-   * video's duration. To convert from a second-wise timestamp to a percentage,
-   * divide the desired timestamp by the total duration of the video. If this value
-   * is not set, the default thumbnail image is taken from 0s of the video.
-   */
-  thumbnailTimestampPct?: number;
-
-  /**
-   * A Cloudflare-generated unique identifier for a media item.
-   */
-  uid?: string;
-
-  /**
-   * The date and time the media item was uploaded.
-   */
-  uploaded?: string;
-
-  /**
-   * The date and time when the video upload URL is no longer valid for direct user
-   * uploads.
-   */
-  uploadExpiry?: string;
-
-  watermark?: WatermarksAPI.Watermark;
-}
-
-export namespace Video {
-  export interface Input {
-    /**
-     * The video height in pixels. A value of `-1` means the height is unknown. The
-     * value becomes available after the upload and before the video is ready.
-     */
-    height?: number;
-
-    /**
-     * The video width in pixels. A value of `-1` means the width is unknown. The value
-     * becomes available after the upload and before the video is ready.
-     */
-    width?: number;
-  }
-
-  export interface Playback {
-    /**
-     * DASH Media Presentation Description for the video.
-     */
-    dash?: string;
-
-    /**
-     * The HLS manifest for the video.
-     */
-    hls?: string;
-  }
-
-  /**
-   * Public details for the video including title, share link, channel link, and
-   * logo.
-   */
-  export interface PublicDetails {
-    channel_link?: string | null;
-
-    logo?: string | null;
-
-    media_id?: number;
-
-    share_link?: string | null;
-
-    title?: string | null;
-  }
-
-  /**
-   * Specifies a detailed status for a video. If the `state` is `inprogress` or
-   * `error`, the `step` field returns `encoding` or `manifest`. If the `state` is
-   * `inprogress`, `pctComplete` returns a number between 0 and 100 to indicate the
-   * approximate percent of completion. If the `state` is `error`, `errorReasonCode`
-   * and `errorReasonText` provide additional details.
-   */
-  export interface Status {
-    /**
-     * Specifies why the video failed to encode. This field is empty if the video is
-     * not in an `error` state. Preferred for programmatic use.
-     */
-    errorReasonCode?: string;
-
-    /**
-     * Specifies why the video failed to encode using a human readable error message in
-     * English. This field is empty if the video is not in an `error` state.
-     */
-    errorReasonText?: string;
-
-    /**
-     * Indicates the progress as a percentage between 0 and 100.
-     */
-    pctComplete?: string;
-
-    /**
-     * Specifies the processing status for all quality levels for a video.
-     */
-    state?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error' | 'live-inprogress';
-  }
-}
-
-export interface StreamCreateParams {
-  /**
-   * Path param: The account identifier tag.
-   */
-  account_id?: string;
-
-  /**
-   * Header param: Specifies the TUS protocol version. This value must be included in
-   * every upload request. Notes: The only supported version of TUS protocol is
-   * 1.0.0.
-   */
-  'Tus-Resumable': '1.0.0';
-
-  /**
-   * Header param: Indicates the size of the entire upload in bytes. The value must
-   * be a non-negative integer.
-   */
-  'Upload-Length': number;
-
-  /**
-   * Query param: Provisions a URL to let your end users upload videos directly to
-   * Cloudflare Stream without exposing your API token to clients.
-   */
-  direct_user?: boolean;
-
-  /**
-   * Header param: A user-defined identifier for the media creator.
-   */
-  'Upload-Creator'?: string;
-
-  /**
-   * Header param: Comma-separated key-value pairs following the TUS protocol
-   * specification. Values are Base-64 encoded. Supported keys: `name`,
-   * `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`,
-   * `scheduleddeletion`, `maxdurationseconds`.
-   */
-  'Upload-Metadata'?: string;
-}
-
-export interface StreamListParams {
-  /**
-   * Path param: The account identifier tag.
-   */
-  account_id?: string;
-
-  /**
-   * Query param: Filter by video ID(s). Can be a single ID or a comma-separated list
-   * of IDs.
-   */
-  id?: string;
-
-  /**
-   * Query param: Alias for 'start'. Returns videos created after this date/time (RFC
-   * 3339 format).
-   */
-  after?: string;
-
-  /**
-   * Query param: Lists videos in ascending order of creation.
-   */
-  asc?: boolean;
-
-  /**
-   * Query param: Alias for 'end'. Returns videos created before this date/time (RFC
-   * 3339 format).
-   */
-  before?: string;
-
-  /**
-   * Query param: A user-defined identifier for the media creator.
-   */
-  creator?: string;
-
-  /**
-   * Query param: Lists videos created before the specified date.
-   */
-  end?: string;
-
-  /**
-   * Query param: Includes the total number of videos associated with the submitted
-   * query parameters.
-   */
-  include_counts?: boolean;
-
-  /**
-   * Query param: Maximum number of videos to return (default 1000, max 1000).
-   */
-  limit?: number;
-
-  /**
-   * Query param: Filter by live input ID to find videos associated with a specific
-   * live stream.
-   */
-  live_input_id?: string;
-
-  /**
-   * Query param: Filter by video name/UID(s). Can be a single name or a
-   * comma-separated list.
-   */
-  name?: string;
-
-  /**
-   * Query param: Provides a partial word match of the `name` key in the `meta`
-   * field. Slow for medium to large video libraries. May be unavailable for very
-   * large libraries.
-   */
-  search?: string;
-
-  /**
-   * Query param: Lists videos created after the specified date.
-   */
-  start?: string;
-
-  /**
-   * Query param: Specifies the processing status for all quality levels for a video.
-   */
-  status?: 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error' | 'live-inprogress';
-
-  /**
-   * Query param: Specifies whether the video is `vod` or `live`.
-   */
-  type?: string;
-
-  /**
-   * Query param: Provides a fast, exact string match on the `name` key in the `meta`
-   * field.
-   */
-  video_name?: string;
-}
-
-export interface StreamDeleteParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id?: string;
-}
-
-export interface StreamEditParams {
-  /**
-   * Path param: The account identifier tag.
-   */
-  account_id?: string;
-
-  /**
-   * Body param: Lists the origins allowed to display the video. Enter allowed origin
-   * domains in an array and use `*` for wildcard subdomains. Empty arrays allow the
-   * video to be viewed on any origin.
-   */
-  allowedOrigins?: Array<AllowedOriginsParam>;
-
-  /**
-   * Body param: A user-defined identifier for the media creator.
-   */
-  creator?: string;
-
-  /**
-   * Body param: The maximum duration in seconds for a video upload. Can be set for a
-   * video that is not yet uploaded to limit its duration. Uploads that exceed the
-   * specified duration will fail during processing. A value of `-1` means the value
-   * is unknown.
-   */
-  maxDurationSeconds?: number;
-
-  /**
-   * Body param: A user modifiable key-value store used to reference other systems of
-   * record for managing videos.
-   */
-  meta?: unknown;
-
-  /**
-   * Body param: Public details for the video including title, share link, channel
-   * link, and logo.
-   */
-  publicDetails?: StreamEditParams.PublicDetails;
-
-  /**
-   * Body param: Indicates whether the video can be a accessed using the UID. When
-   * set to `true`, a signed token must be generated with a signing key to view the
-   * video.
-   */
-  requireSignedURLs?: boolean;
-
-  /**
-   * Body param: Indicates the date and time at which the video will be deleted. Omit
-   * the field to indicate no change, or include with a `null` value to remove an
-   * existing scheduled deletion. If specified, must be at least 30 days from upload
-   * time.
-   */
-  scheduledDeletion?: string;
-
-  /**
-   * Body param: The timestamp for a thumbnail image calculated as a percentage value
-   * of the video's duration. To convert from a second-wise timestamp to a
-   * percentage, divide the desired timestamp by the total duration of the video. If
-   * this value is not set, the default thumbnail image is taken from 0s of the
-   * video.
-   */
-  thumbnailTimestampPct?: number;
-
-  /**
-   * Body param: The unique identifier for the video. Can be used to verify the video
-   * being updated.
-   */
-  uid?: string;
-
-  /**
-   * Body param: The date and time when the video upload URL is no longer valid for
-   * direct user uploads.
-   */
-  uploadExpiry?: string;
-}
-
-export namespace StreamEditParams {
-  /**
-   * Public details for the video including title, share link, channel link, and
-   * logo.
-   */
-  export interface PublicDetails {
-    channel_link?: string | null;
-
-    logo?: string | null;
-
-    share_link?: string | null;
-
-    title?: string | null;
-  }
-}
-
-export interface StreamGetParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id?: string;
-}
-
 Stream.AudioTracks = AudioTracks;
 Stream.BaseAudioTracks = BaseAudioTracks;
 Stream.Videos = Videos;
 Stream.BaseVideos = BaseVideos;
-Stream.ClipResource = ClipResource;
-Stream.BaseClipResource = BaseClipResource;
+Stream.Clip = Clip;
+Stream.BaseClip = BaseClip;
 Stream.Copy = Copy;
 Stream.BaseCopy = BaseCopy;
 Stream.DirectUpload = DirectUpload;
 Stream.BaseDirectUpload = BaseDirectUpload;
+Stream.Keys = Keys;
 Stream.BaseKeys = BaseKeys;
 Stream.LiveInputs = LiveInputs;
 Stream.BaseLiveInputs = BaseLiveInputs;
@@ -736,128 +75,29 @@ Stream.Token = Token;
 Stream.BaseToken = BaseToken;
 
 export declare namespace Stream {
-  export {
-    type AllowedOrigins as AllowedOrigins,
-    type Video as Video,
-    type VideosSinglePage as VideosSinglePage,
-    type StreamCreateParams as StreamCreateParams,
-    type StreamListParams as StreamListParams,
-    type StreamDeleteParams as StreamDeleteParams,
-    type StreamEditParams as StreamEditParams,
-    type StreamGetParams as StreamGetParams,
-  };
+  export { AudioTracks as AudioTracks, BaseAudioTracks as BaseAudioTracks };
 
-  export {
-    AudioTracks as AudioTracks,
-    BaseAudioTracks as BaseAudioTracks,
-    type Audio as Audio,
-    type AudioTrackDeleteResponse as AudioTrackDeleteResponse,
-    type AudioTrackGetResponse as AudioTrackGetResponse,
-    type AudioTrackDeleteParams as AudioTrackDeleteParams,
-    type AudioTrackCopyParams as AudioTrackCopyParams,
-    type AudioTrackEditParams as AudioTrackEditParams,
-    type AudioTrackGetParams as AudioTrackGetParams,
-  };
+  export { Videos as Videos, BaseVideos as BaseVideos };
 
-  export {
-    Videos as Videos,
-    BaseVideos as BaseVideos,
-    type VideoStorageUsageResponse as VideoStorageUsageResponse,
-    type VideoStorageUsageParams as VideoStorageUsageParams,
-  };
+  export { Clip as Clip, BaseClip as BaseClip };
 
-  export {
-    ClipResource as ClipResource,
-    BaseClipResource as BaseClipResource,
-    type Clip as Clip,
-    type ClipCreateParams as ClipCreateParams,
-  };
+  export { Copy as Copy, BaseCopy as BaseCopy };
 
-  export { Copy as Copy, BaseCopy as BaseCopy, type CopyCreateParams as CopyCreateParams };
+  export { DirectUpload as DirectUpload, BaseDirectUpload as BaseDirectUpload };
 
-  export {
-    DirectUpload as DirectUpload,
-    BaseDirectUpload as BaseDirectUpload,
-    type DirectUploadCreateResponse as DirectUploadCreateResponse,
-    type DirectUploadCreateParams as DirectUploadCreateParams,
-  };
+  export { Keys as Keys, BaseKeys as BaseKeys };
 
-  export {
-    type Keys as Keys,
-    BaseKeys as BaseKeys,
-    type KeyDeleteResponse as KeyDeleteResponse,
-    type KeyGetResponse as KeyGetResponse,
-    type KeyGetResponsesSinglePage as KeyGetResponsesSinglePage,
-    type KeyCreateParams as KeyCreateParams,
-    type KeyDeleteParams as KeyDeleteParams,
-    type KeyGetParams as KeyGetParams,
-  };
+  export { LiveInputs as LiveInputs, BaseLiveInputs as BaseLiveInputs };
 
-  export {
-    LiveInputs as LiveInputs,
-    BaseLiveInputs as BaseLiveInputs,
-    type LiveInput as LiveInput,
-    type LiveInputListResponse as LiveInputListResponse,
-    type LiveInputCreateParams as LiveInputCreateParams,
-    type LiveInputUpdateParams as LiveInputUpdateParams,
-    type LiveInputListParams as LiveInputListParams,
-    type LiveInputDeleteParams as LiveInputDeleteParams,
-    type LiveInputGetParams as LiveInputGetParams,
-  };
+  export { Watermarks as Watermarks, BaseWatermarks as BaseWatermarks };
 
-  export {
-    Watermarks as Watermarks,
-    BaseWatermarks as BaseWatermarks,
-    type Watermark as Watermark,
-    type WatermarkDeleteResponse as WatermarkDeleteResponse,
-    type WatermarksSinglePage as WatermarksSinglePage,
-    type WatermarkCreateParams as WatermarkCreateParams,
-    type WatermarkListParams as WatermarkListParams,
-    type WatermarkDeleteParams as WatermarkDeleteParams,
-    type WatermarkGetParams as WatermarkGetParams,
-  };
+  export { Webhooks as Webhooks, BaseWebhooks as BaseWebhooks };
 
-  export {
-    Webhooks as Webhooks,
-    BaseWebhooks as BaseWebhooks,
-    type WebhookUpdateResponse as WebhookUpdateResponse,
-    type WebhookDeleteResponse as WebhookDeleteResponse,
-    type WebhookGetResponse as WebhookGetResponse,
-    type WebhookUpdateParams as WebhookUpdateParams,
-    type WebhookDeleteParams as WebhookDeleteParams,
-    type WebhookGetParams as WebhookGetParams,
-  };
+  export { Captions as Captions, BaseCaptions as BaseCaptions };
 
-  export {
-    Captions as Captions,
-    BaseCaptions as BaseCaptions,
-    type Caption as Caption,
-    type CaptionsSinglePage as CaptionsSinglePage,
-    type CaptionGetParams as CaptionGetParams,
-  };
+  export { Downloads as Downloads, BaseDownloads as BaseDownloads };
 
-  export {
-    Downloads as Downloads,
-    BaseDownloads as BaseDownloads,
-    type DownloadCreateResponse as DownloadCreateResponse,
-    type DownloadDeleteResponse as DownloadDeleteResponse,
-    type DownloadGetResponse as DownloadGetResponse,
-    type DownloadCreateParams as DownloadCreateParams,
-    type DownloadDeleteParams as DownloadDeleteParams,
-    type DownloadGetParams as DownloadGetParams,
-  };
+  export { Embed as Embed, BaseEmbed as BaseEmbed };
 
-  export {
-    Embed as Embed,
-    BaseEmbed as BaseEmbed,
-    type EmbedGetResponse as EmbedGetResponse,
-    type EmbedGetParams as EmbedGetParams,
-  };
-
-  export {
-    Token as Token,
-    BaseToken as BaseToken,
-    type TokenCreateResponse as TokenCreateResponse,
-    type TokenCreateParams as TokenCreateParams,
-  };
+  export { Token as Token, BaseToken as BaseToken };
 }

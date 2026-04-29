@@ -2,21 +2,11 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as DevicesAPI from './devices';
-import {
-  BaseDevices,
-  DeviceListParams,
-  DeviceListResponse,
-  DeviceListResponsesV4PagePagination,
-  Devices,
-} from './devices';
+import { BaseDevices, Devices } from './devices';
 import * as DownloadsAPI from './downloads';
-import { BaseDownloads, DownloadGetParams, Downloads } from './downloads';
+import { BaseDownloads, Downloads } from './downloads';
 import * as QuotaAPI from './quota';
-import { BaseQuota, Quota, QuotaGetParams, QuotaGetResponse } from './quota';
-import { APIPromise } from '../../../../core/api-promise';
-import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../../core/pagination';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
+import { BaseQuota, Quota } from './quota';
 
 export class BaseCommands extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dex', 'commands'] = Object.freeze([
@@ -24,249 +14,11 @@ export class BaseCommands extends APIResource {
     'dex',
     'commands',
   ] as const);
-
-  /**
-   * Initiate commands for up to 10 devices per account
-   *
-   * @example
-   * ```ts
-   * const command = await client.zeroTrust.dex.commands.create({
-   *   account_id: '01a7362d577a6c3019a474fd6f485823',
-   *   commands: [
-   *     {
-   *       command_type: 'pcap',
-   *       device_id: 'device_id',
-   *       user_email: 'user_email',
-   *     },
-   *   ],
-   * });
-   * ```
-   */
-  create(params: CommandCreateParams, options?: RequestOptions): APIPromise<CommandCreateResponse> {
-    const { account_id = this._client.accountID, ...body } = params;
-    return (
-      this._client.post(path`/accounts/${account_id}/dex/commands`, { body, ...options }) as APIPromise<{
-        result: CommandCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Retrieves a paginated list of commands issued to devices under the specified
-   * account, optionally filtered by time range, device, or other parameters
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const commandListResponse of client.zeroTrust.dex.commands.list(
-   *   {
-   *     account_id: '01a7362d577a6c3019a474fd6f485823',
-   *     page: 1,
-   *     per_page: 50,
-   *   },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params: CommandListParams,
-    options?: RequestOptions,
-  ): PagePromise<CommandListResponsesV4PagePagination, CommandListResponse> {
-    const { account_id = this._client.accountID, ...query } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/dex/commands`,
-      V4PagePagination<CommandListResponse>,
-      { query, ...options },
-    );
-  }
 }
 export class Commands extends BaseCommands {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
-}
-
-export type CommandListResponsesV4PagePagination = V4PagePagination<CommandListResponse>;
-
-export interface CommandCreateResponse {
-  /**
-   * List of created commands
-   */
-  commands?: Array<CommandCreateResponse.Command>;
-}
-
-export namespace CommandCreateResponse {
-  export interface Command {
-    /**
-     * Unique identifier for the command
-     */
-    id?: string;
-
-    /**
-     * Command arguments
-     */
-    args?: { [key: string]: string };
-
-    /**
-     * Identifier for the device associated with the command
-     */
-    device_id?: string;
-
-    /**
-     * Unique identifier for the device registration
-     */
-    registration_id?: string;
-
-    /**
-     * Current status of the command
-     */
-    status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
-
-    /**
-     * Type of the command (e.g., "pcap" or "warp-diag")
-     */
-    type?: string;
-  }
-}
-
-export interface CommandListResponse {
-  commands?: Array<CommandListResponse.Command>;
-}
-
-export namespace CommandListResponse {
-  export interface Command {
-    id?: string;
-
-    completed_date?: string | null;
-
-    created_date?: string;
-
-    device_id?: string;
-
-    filename?: string | null;
-
-    /**
-     * Unique identifier for the device registration
-     */
-    registration_id?: string;
-
-    status?: string;
-
-    type?: string;
-
-    user_email?: string;
-  }
-}
-
-export interface CommandCreateParams {
-  /**
-   * Path param: unique identifier linked to an account in the API request path
-   */
-  account_id?: string;
-
-  /**
-   * Body param: List of device-level commands to execute
-   */
-  commands: Array<CommandCreateParams.Command>;
-}
-
-export namespace CommandCreateParams {
-  export interface Command {
-    /**
-     * Type of command to execute on the device
-     */
-    command_type: 'pcap' | 'warp-diag';
-
-    /**
-     * Unique identifier for the physical device
-     */
-    device_id: string;
-
-    /**
-     * Email tied to the device
-     */
-    user_email: string;
-
-    command_args?: Command.CommandArgs;
-
-    /**
-     * Unique identifier for the device registration. Required for multi-user devices
-     * to target the correct user session.
-     */
-    registration_id?: string;
-  }
-
-  export namespace Command {
-    export interface CommandArgs {
-      /**
-       * List of interfaces to capture packets on
-       */
-      interfaces?: Array<'default' | 'tunnel'>;
-
-      /**
-       * Maximum file size (in MB) for the capture file. Specifies the maximum file size
-       * of the warp-diag zip artifact that can be uploaded. If the zip artifact exceeds
-       * the specified max file size, it will NOT be uploaded
-       */
-      'max-file-size-mb'?: number;
-
-      /**
-       * Maximum number of bytes to save for each packet
-       */
-      'packet-size-bytes'?: number;
-
-      /**
-       * Test an IP address from all included or excluded ranges. Tests an IP address
-       * from all included or excluded ranges. Essentially the same as running 'route get
-       * <ip>'' and collecting the results. This option may increase the time taken to
-       * collect the warp-diag
-       */
-      'test-all-routes'?: boolean;
-
-      /**
-       * Limit on capture duration (in minutes)
-       */
-      'time-limit-min'?: number;
-    }
-  }
-}
-
-export interface CommandListParams extends V4PagePaginationParams {
-  /**
-   * Path param: unique identifier linked to an account in the API request path
-   */
-  account_id?: string;
-
-  /**
-   * Query param: Optionally filter executed commands by command type
-   */
-  command_type?: string;
-
-  /**
-   * Query param: Unique identifier for a device
-   */
-  device_id?: string;
-
-  /**
-   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
-   */
-  from?: string;
-
-  /**
-   * Query param: Optionally filter executed commands by status
-   */
-  status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
-
-  /**
-   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
-   */
-  to?: string;
-
-  /**
-   * Query param: Email tied to the device
-   */
-  user_email?: string;
 }
 
 Commands.Devices = Devices;
@@ -277,32 +29,9 @@ Commands.Quota = Quota;
 Commands.BaseQuota = BaseQuota;
 
 export declare namespace Commands {
-  export {
-    type CommandCreateResponse as CommandCreateResponse,
-    type CommandListResponse as CommandListResponse,
-    type CommandListResponsesV4PagePagination as CommandListResponsesV4PagePagination,
-    type CommandCreateParams as CommandCreateParams,
-    type CommandListParams as CommandListParams,
-  };
+  export { Devices as Devices, BaseDevices as BaseDevices };
 
-  export {
-    Devices as Devices,
-    BaseDevices as BaseDevices,
-    type DeviceListResponse as DeviceListResponse,
-    type DeviceListResponsesV4PagePagination as DeviceListResponsesV4PagePagination,
-    type DeviceListParams as DeviceListParams,
-  };
+  export { Downloads as Downloads, BaseDownloads as BaseDownloads };
 
-  export {
-    Downloads as Downloads,
-    BaseDownloads as BaseDownloads,
-    type DownloadGetParams as DownloadGetParams,
-  };
-
-  export {
-    Quota as Quota,
-    BaseQuota as BaseQuota,
-    type QuotaGetResponse as QuotaGetResponse,
-    type QuotaGetParams as QuotaGetParams,
-  };
+  export { Quota as Quota, BaseQuota as BaseQuota };
 }
