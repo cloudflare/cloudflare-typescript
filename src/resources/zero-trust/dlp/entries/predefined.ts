@@ -153,7 +153,10 @@ export interface PredefinedCreateResponse {
    */
   profile_id?: string | null;
 
-  variant?: PredefinedCreateResponse.Variant;
+  /**
+   * A Predefined AI prompt classification topic entry.
+   */
+  variant?: PredefinedCreateResponse.UnionMember0 | PredefinedCreateResponse.UnionMember1;
 }
 
 export namespace PredefinedCreateResponse {
@@ -170,11 +173,30 @@ export namespace PredefinedCreateResponse {
     available: boolean;
   }
 
-  export interface Variant {
+  /**
+   * A Predefined AI prompt classification topic entry.
+   */
+  export interface UnionMember0 {
     topic_type: 'Intent' | 'Content';
 
     type: 'PromptTopic';
 
+    /**
+     * A customer-facing explanation of what this predefined AI prompt topic
+     * represents.
+     */
+    description?: string | null;
+  }
+
+  /**
+   * A general predefined entry.
+   */
+  export interface UnionMember1 {
+    type: 'General';
+
+    /**
+     * A customer-facing explanation of what this predefined entry represents.
+     */
     description?: string | null;
   }
 }
@@ -193,7 +215,10 @@ export interface PredefinedUpdateResponse {
    */
   profile_id?: string | null;
 
-  variant?: PredefinedUpdateResponse.Variant;
+  /**
+   * A Predefined AI prompt classification topic entry.
+   */
+  variant?: PredefinedUpdateResponse.UnionMember0 | PredefinedUpdateResponse.UnionMember1;
 }
 
 export namespace PredefinedUpdateResponse {
@@ -210,11 +235,30 @@ export namespace PredefinedUpdateResponse {
     available: boolean;
   }
 
-  export interface Variant {
+  /**
+   * A Predefined AI prompt classification topic entry.
+   */
+  export interface UnionMember0 {
     topic_type: 'Intent' | 'Content';
 
     type: 'PromptTopic';
 
+    /**
+     * A customer-facing explanation of what this predefined AI prompt topic
+     * represents.
+     */
+    description?: string | null;
+  }
+
+  /**
+   * A general predefined entry.
+   */
+  export interface UnionMember1 {
+    type: 'General';
+
+    /**
+     * A customer-facing explanation of what this predefined entry represents.
+     */
     description?: string | null;
   }
 }
@@ -274,7 +318,10 @@ export namespace PredefinedListResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: UnionMember1.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
   }
 
   export namespace UnionMember1 {
@@ -291,11 +338,30 @@ export namespace PredefinedListResponse {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -451,7 +517,10 @@ export namespace PredefinedGetResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: UnionMember1.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
   }
 
   export namespace UnionMember1 {
@@ -477,11 +546,30 @@ export namespace PredefinedGetResponse {
       name: string;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
