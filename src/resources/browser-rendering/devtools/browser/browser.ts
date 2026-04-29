@@ -8,6 +8,8 @@ import * as TargetsAPI from './targets';
 import {
   TargetActivateParams,
   TargetActivateResponse,
+  TargetCloseParams,
+  TargetCloseResponse,
   TargetCreateParams,
   TargetCreateResponse,
   TargetGetParams,
@@ -382,10 +384,12 @@ export declare namespace Browser {
     type TargetCreateResponse as TargetCreateResponse,
     type TargetListResponse as TargetListResponse,
     type TargetActivateResponse as TargetActivateResponse,
+    type TargetCloseResponse as TargetCloseResponse,
     type TargetGetResponse as TargetGetResponse,
     type TargetCreateParams as TargetCreateParams,
     type TargetListParams as TargetListParams,
     type TargetActivateParams as TargetActivateParams,
+    type TargetCloseParams as TargetCloseParams,
     type TargetGetParams as TargetGetParams,
   };
 }

@@ -28,7 +28,7 @@ describe('resource crawl', () => {
     const response = await client.browserRendering.crawl.create({
       account_id: 'account_id',
       url: 'https://example.com',
-      cacheTTL: 86400,
+      cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
         {
@@ -141,7 +141,7 @@ describe('resource crawl', () => {
   test('get: required and optional params', async () => {
     const response = await client.browserRendering.crawl.get('x', {
       account_id: 'account_id',
-      cacheTTL: 86400,
+      cacheTTL: 0,
       cursor: 0,
       limit: 0,
       status: 'queued',
