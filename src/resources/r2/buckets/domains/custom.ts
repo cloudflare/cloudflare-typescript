@@ -183,6 +183,11 @@ export interface CustomCreateResponse {
   enabled: boolean;
 
   /**
+   * Zone ID of the custom domain.
+   */
+  zoneId: string;
+
+  /**
    * An allowlist of ciphers for TLS termination. These ciphers must be in the
    * BoringSSL format.
    */

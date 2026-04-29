@@ -10,7 +10,7 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/email-security/investigate">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">list</a>({ ...params }) -> InvestigateListResponsesV4PagePaginationArray</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">get</a>(postfixId, { ...params }) -> InvestigateGetResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">get</a>(investigateId, { ...params }) -> InvestigateGetResponse</code>
 
 ### Detections
 
@@ -20,7 +20,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/detections">client.emailSecurity.investigate.detections.<a href="./src/resources/email-security/investigate/detections.ts">get</a>(postfixId, { ...params }) -> DetectionGetResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/detections">client.emailSecurity.investigate.detections.<a href="./src/resources/email-security/investigate/detections.ts">get</a>(investigateId, { ...params }) -> DetectionGetResponse</code>
 
 ### Preview
 
@@ -32,7 +32,7 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/email-security/investigate/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">create</a>({ ...params }) -> PreviewCreateResponse</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">get</a>(postfixId, { ...params }) -> PreviewGetResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">get</a>(investigateId, { ...params }) -> PreviewGetResponse</code>
 
 ### Raw
 
@@ -42,7 +42,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/raw">client.emailSecurity.investigate.raw.<a href="./src/resources/email-security/investigate/raw.ts">get</a>(postfixId, { ...params }) -> RawGetResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/raw">client.emailSecurity.investigate.raw.<a href="./src/resources/email-security/investigate/raw.ts">get</a>(investigateId, { ...params }) -> RawGetResponse</code>
 
 ### Trace
 
@@ -52,7 +52,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/trace">client.emailSecurity.investigate.trace.<a href="./src/resources/email-security/investigate/trace.ts">get</a>(postfixId, { ...params }) -> TraceGetResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/trace">client.emailSecurity.investigate.trace.<a href="./src/resources/email-security/investigate/trace.ts">get</a>(investigateId, { ...params }) -> TraceGetResponse</code>
 
 ### Move
 
@@ -63,7 +63,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(postfixId, { ...params }) -> MoveCreateResponse</code>
+- <code title="post /accounts/{account_id}/email-security/investigate/{investigate_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(investigateId, { ...params }) -> MoveCreateResponsesSinglePage</code>
 - <code title="post /accounts/{account_id}/email-security/investigate/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">bulk</a>({ ...params }) -> MoveBulkResponsesSinglePage</code>
 
 ### Reclassify
@@ -74,7 +74,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify">client.emailSecurity.investigate.reclassify.<a href="./src/resources/email-security/investigate/reclassify.ts">create</a>(postfixId, { ...params }) -> ReclassifyCreateResponse</code>
+- <code title="post /accounts/{account_id}/email-security/investigate/{investigate_id}/reclassify">client.emailSecurity.investigate.reclassify.<a href="./src/resources/email-security/investigate/reclassify.ts">create</a>(investigateId, { ...params }) -> ReclassifyCreateResponse</code>
 
 ### Release
 
@@ -142,7 +142,6 @@ Types:
 
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainDeleteResponse</a></code>
-- <code><a href="./src/resources/email-security/settings/domains.ts">DomainBulkDeleteResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainEditResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainGetResponse</a></code>
 
@@ -150,7 +149,6 @@ Methods:
 
 - <code title="get /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">list</a>({ ...params }) -> DomainListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">delete</a>(domainId, { ...params }) -> DomainDeleteResponse</code>
-- <code title="delete /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">bulkDelete</a>({ ...params }) -> DomainBulkDeleteResponsesSinglePage</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">edit</a>(domainId, { ...params }) -> DomainEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">get</a>(domainId, { ...params }) -> DomainGetResponse</code>
 
@@ -168,9 +166,9 @@ Methods:
 
 - <code title="post /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">create</a>({ ...params }) -> ImpersonationRegistryCreateResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">list</a>({ ...params }) -> ImpersonationRegistryListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">delete</a>(displayNameId, { ...params }) -> ImpersonationRegistryDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">edit</a>(displayNameId, { ...params }) -> ImpersonationRegistryEditResponse</code>
-- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">get</a>(displayNameId, { ...params }) -> ImpersonationRegistryGetResponse</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">delete</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">edit</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">get</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryGetResponse</code>
 
 ### TrustedDomains
 

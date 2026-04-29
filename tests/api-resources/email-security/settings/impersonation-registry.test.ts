@@ -13,9 +13,9 @@ describe('resource impersonationRegistry', () => {
   test('create: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.impersonationRegistry.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      email: 'email',
-      is_email_regex: true,
-      name: 'name',
+      email: 'john.doe@example.com',
+      is_email_regex: false,
+      name: 'John Doe',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,9 +29,14 @@ describe('resource impersonationRegistry', () => {
   test('create: required and optional params', async () => {
     const response = await client.emailSecurity.settings.impersonationRegistry.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      email: 'email',
-      is_email_regex: true,
-      name: 'name',
+      email: 'john.doe@example.com',
+      is_email_regex: false,
+      name: 'John Doe',
+      comments: 'comments',
+      directory_id: 0,
+      directory_node_id: 0,
+      external_directory_node_id: 'external_directory_node_id',
+      provenance: 'A1S_INTERNAL',
     });
   });
 
@@ -54,16 +59,17 @@ describe('resource impersonationRegistry', () => {
       direction: 'asc',
       order: 'name',
       page: 1,
-      per_page: 1,
+      per_page: 20,
       provenance: 'A1S_INTERNAL',
       search: 'search',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.impersonationRegistry.delete(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.impersonationRegistry.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,15 +80,18 @@ describe('resource impersonationRegistry', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.impersonationRegistry.delete(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.settings.impersonationRegistry.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
-  test('edit: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.impersonationRegistry.edit(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  // HTTP 422 error from prism
+  test.skip('edit: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.impersonationRegistry.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,19 +101,29 @@ describe('resource impersonationRegistry', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.impersonationRegistry.edit(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      email: 'email',
-      is_email_regex: true,
-      name: 'name',
-    });
+  // HTTP 422 error from prism
+  test.skip('edit: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.impersonationRegistry.edit(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        comments: 'comments',
+        directory_id: 0,
+        directory_node_id: 0,
+        email: 'john.doe@example.com',
+        external_directory_node_id: 'external_directory_node_id',
+        is_email_regex: false,
+        name: 'John Doe',
+        provenance: 'A1S_INTERNAL',
+      },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.impersonationRegistry.get(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.settings.impersonationRegistry.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -115,8 +134,9 @@ describe('resource impersonationRegistry', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.impersonationRegistry.get(2403, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.settings.impersonationRegistry.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

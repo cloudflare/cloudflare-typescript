@@ -230,7 +230,10 @@ export namespace CustomProfile {
      */
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
   }
 
   export namespace PredefinedEntry {
@@ -247,11 +250,30 @@ export namespace CustomProfile {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -377,7 +399,10 @@ export namespace CustomProfile {
      */
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
   }
 
   export namespace PredefinedEntry {
@@ -394,11 +419,30 @@ export namespace CustomProfile {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }

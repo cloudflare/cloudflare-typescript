@@ -222,7 +222,10 @@ export namespace IntegrationListResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: UnionMember1.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
   }
 
   export namespace UnionMember1 {
@@ -239,11 +242,30 @@ export namespace IntegrationListResponse {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -399,7 +421,10 @@ export namespace IntegrationGetResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: UnionMember1.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
   }
 
   export namespace UnionMember1 {
@@ -425,11 +450,30 @@ export namespace IntegrationGetResponse {
       name: string;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }

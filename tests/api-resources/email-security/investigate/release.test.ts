@@ -13,7 +13,7 @@ describe('resource release', () => {
   test('bulk: only required params', async () => {
     const responsePromise = client.emailSecurity.investigate.release.bulk({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: ['4Njp3P0STMz2c02Q'],
+      body: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource release', () => {
   test('bulk: required and optional params', async () => {
     const response = await client.emailSecurity.investigate.release.bulk({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: ['4Njp3P0STMz2c02Q'],
+      body: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
     });
   });
 });

@@ -5,14 +5,15 @@ import * as Core from '../../../core';
 
 export class Reclassify extends APIResource {
   /**
-   * Submits an email message for reclassification, updating its threat assessment
-   * based on new analysis.
+   * Submits a request to reclassify an email's disposition. Use for reporting false
+   * positives or false negatives. Optionally provide the raw EML content for
+   * reanalysis. The reclassification is processed asynchronously.
    *
    * @example
    * ```ts
    * const reclassify =
    *   await client.emailSecurity.investigate.reclassify.create(
-   *     '4Njp3P0STMz2c02Q',
+   *     '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       expected_disposition: 'NONE',
@@ -21,14 +22,13 @@ export class Reclassify extends APIResource {
    * ```
    */
   create(
-    postfixId: string,
+    investigateId: string,
     params: ReclassifyCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ReclassifyCreateResponse> {
-    const { account_id, submission, ...body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/reclassify`, {
-        query: { submission },
+      this._client.post(`/accounts/${account_id}/email-security/investigate/${investigateId}/reclassify`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ReclassifyCreateResponse }>
@@ -40,7 +40,7 @@ export type ReclassifyCreateResponse = unknown;
 
 export interface ReclassifyCreateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -50,13 +50,7 @@ export interface ReclassifyCreateParams {
   expected_disposition: 'NONE' | 'BULK' | 'MALICIOUS' | 'SPAM' | 'SPOOF' | 'SUSPICIOUS';
 
   /**
-   * Query param: When true, search the submissions datastore only. When false or
-   * omitted, search the regular datastore only.
-   */
-  submission?: boolean;
-
-  /**
-   * Body param: Base64 encoded content of the EML file
+   * Body param: Base64 encoded content of the EML file.
    */
   eml_content?: string;
 

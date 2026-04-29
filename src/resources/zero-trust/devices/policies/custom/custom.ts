@@ -280,6 +280,11 @@ export interface CustomCreateParams {
    * Body param: Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Body param: Virtual network access settings for the device.
+   */
+  virtual_networks?: CustomCreateParams.VirtualNetworks | null;
 }
 
 export namespace CustomCreateParams {
@@ -293,6 +298,22 @@ export namespace CustomCreateParams {
      * The port number when used with proxy mode.
      */
     port?: number;
+  }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
   }
 }
 
@@ -436,6 +457,11 @@ export interface CustomEditParams {
    * Body param: Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Body param: Virtual network access settings for the device.
+   */
+  virtual_networks?: CustomEditParams.VirtualNetworks | null;
 }
 
 export namespace CustomEditParams {
@@ -449,6 +475,22 @@ export namespace CustomEditParams {
      * The port number when used with proxy mode.
      */
     port?: number;
+  }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
   }
 }
 

@@ -6,8 +6,9 @@ import { SinglePage } from '../../../pagination';
 
 export class Reports extends APIResource {
   /**
-   * Retrieves `PhishGuard` reports showing phishing attempts and suspicious email
-   * patterns detected.
+   * Retrieves PhishGuard security alert reports for a specified date range. Reports
+   * include detected threats, dispositions, and contextual information. Use for
+   * security monitoring and threat analysis.
    *
    * @example
    * ```ts
@@ -39,8 +40,6 @@ export interface ReportListResponse {
 
   content: string;
 
-  created_at: string;
-
   disposition:
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -59,22 +58,32 @@ export interface ReportListResponse {
 
   title: string;
 
-  ts: string;
-
-  updated_at: string;
+  created_at?: string | null;
 
   tags?: Array<ReportListResponse.Tag> | null;
+
+  /**
+   * @deprecated Deprecated, use `created_at` instead
+   */
+  ts?: string;
+
+  updated_at?: string | null;
 }
 
 export namespace ReportListResponse {
   export interface Fields {
     to: Array<string>;
 
-    ts: string;
-
     from?: string | null;
 
+    occurred_at?: string;
+
     postfix_id?: string | null;
+
+    /**
+     * @deprecated Deprecated, use `occurred_at` instead
+     */
+    ts?: string;
   }
 
   export interface Tag {
@@ -86,27 +95,27 @@ export namespace ReportListResponse {
 
 export interface ReportListParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Query param: The end of the search date range (RFC3339 format).
+   * Query param: End of the time range (RFC3339). Takes precedence over to_date.
    */
   end?: string;
 
   /**
-   * Query param
+   * Query param: Deprecated, use `start` instead. Start date in YYYY-MM-DD format.
    */
   from_date?: string;
 
   /**
-   * Query param: The beginning of the search date range (RFC3339 format).
+   * Query param: Start of the time range (RFC3339). Takes precedence over from_date.
    */
   start?: string;
 
   /**
-   * Query param
+   * Query param: Deprecated, use `end` instead. End date in YYYY-MM-DD format.
    */
   to_date?: string;
 }

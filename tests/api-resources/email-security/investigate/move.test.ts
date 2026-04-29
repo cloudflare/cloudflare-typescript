@@ -11,10 +11,10 @@ const client = new Cloudflare({
 
 describe('resource move', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.move.create('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      destination: 'Inbox',
-    });
+    const responsePromise = client.emailSecurity.investigate.move.create(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', destination: 'Inbox' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,11 +25,10 @@ describe('resource move', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.move.create('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      destination: 'Inbox',
-      submission: true,
-    });
+    const response = await client.emailSecurity.investigate.move.create(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', destination: 'Inbox' },
+    );
   });
 
   test('bulk: only required params', async () => {
@@ -50,7 +49,7 @@ describe('resource move', () => {
     const response = await client.emailSecurity.investigate.move.bulk({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: 'Inbox',
-      ids: ['string'],
+      ids: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
       postfix_ids: ['4Njp3P0STMz2c02Q'],
     });
   });

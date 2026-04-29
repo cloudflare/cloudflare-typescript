@@ -5,29 +5,30 @@ import * as Core from '../../../core';
 
 export class Trace extends APIResource {
   /**
-   * Gets the delivery trace for an email message, showing its path through email
-   * security processing.
+   * Retrieves delivery and processing trace information for an email message. Shows
+   * the delivery path, retraction history, and move operations performed on the
+   * message. Useful for debugging delivery issues.
    *
    * @example
    * ```ts
    * const trace =
    *   await client.emailSecurity.investigate.trace.get(
-   *     '4Njp3P0STMz2c02Q',
+   *     '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
-    postfixId: string,
+    investigateId: string,
     params: TraceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TraceGetResponse> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/trace`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TraceGetResponse }>
+      this._client.get(
+        `/accounts/${account_id}/email-security/investigate/${investigateId}/trace`,
+        options,
+      ) as Core.APIPromise<{ result: TraceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -47,11 +48,19 @@ export namespace TraceGetResponse {
 
   export namespace Inbound {
     export interface Line {
-      lineno: number;
+      /**
+       * Line number in the trace log
+       */
+      lineno?: number;
 
-      message: string;
+      logged_at?: string | null;
 
-      ts: string;
+      message?: string;
+
+      /**
+       * @deprecated Deprecated, use `logged_at` instead. End of life: November 1, 2026.
+       */
+      ts?: string;
     }
   }
 
@@ -63,26 +72,28 @@ export namespace TraceGetResponse {
 
   export namespace Outbound {
     export interface Line {
-      lineno: number;
+      /**
+       * Line number in the trace log
+       */
+      lineno?: number;
 
-      message: string;
+      logged_at?: string | null;
 
-      ts: string;
+      message?: string;
+
+      /**
+       * @deprecated Deprecated, use `logged_at` instead. End of life: November 1, 2026.
+       */
+      ts?: string;
     }
   }
 }
 
 export interface TraceGetParams {
   /**
-   * Path param: Account Identifier
+   * Identifier.
    */
   account_id: string;
-
-  /**
-   * Query param: When true, search the submissions datastore only. When false or
-   * omitted, search the regular datastore only.
-   */
-  submission?: boolean;
 }
 
 export declare namespace Trace {

@@ -12,6 +12,7 @@ import {
   MoveBulkResponsesSinglePage,
   MoveCreateParams,
   MoveCreateResponse,
+  MoveCreateResponsesSinglePage,
 } from './move';
 import * as PreviewAPI from './preview';
 import {
@@ -41,9 +42,7 @@ export class Investigate extends APIResource {
   release: ReleaseAPI.Release = new ReleaseAPI.Release(this._client);
 
   /**
-   * Returns information for each email that matches the search parameter(s). If the
-   * search takes too long, the endpoint returns 202 with a Location header pointing
-   * to a polling endpoint where results can be retrieved once ready.
+   * Returns information for each email that matches the search parameter(s).
    *
    * @example
    * ```ts
@@ -68,26 +67,27 @@ export class Investigate extends APIResource {
   }
 
   /**
-   * Retrieves detailed information about a specific email message, including
-   * headers, metadata, and security scan results.
+   * Retrieves comprehensive details for a specific email message including headers,
+   * recipients, sender information, and current quarantine status. Use the
+   * investigate_id from search results to fetch detailed information.
    *
    * @example
    * ```ts
    * const investigate =
    *   await client.emailSecurity.investigate.get(
-   *     '4Njp3P0STMz2c02Q',
+   *     '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
-    postfixId: string,
+    investigateId: string,
     params: InvestigateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InvestigateGetResponse> {
     const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}`, {
+      this._client.get(`/accounts/${account_id}/email-security/investigate/${investigateId}`, {
         query,
         ...options,
       }) as Core.APIPromise<{ result: InvestigateGetResponse }>
@@ -98,12 +98,16 @@ export class Investigate extends APIResource {
 export class InvestigateListResponsesV4PagePaginationArray extends V4PagePaginationArray<InvestigateListResponse> {}
 
 export interface InvestigateListResponse {
+  /**
+   * Unique identifier for a message retrieved from investigation
+   */
   id: string;
 
   /**
-   * @deprecated Deprecated: use `/investigate/{id}/action_log` instead.
+   * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
+   * instead. End of life: November 1, 2026.
    */
-  action_log: unknown;
+  action_log: Array<InvestigateListResponse.ActionLog>;
 
   client_recipients: Array<string>;
 
@@ -114,14 +118,17 @@ export interface InvestigateListResponse {
   is_quarantined: boolean;
 
   /**
-   * The identifier of the message.
+   * The identifier of the message
    */
   postfix_id: string;
 
+  /**
+   * Message processing properties
+   */
   properties: InvestigateListResponse.Properties;
 
   /**
-   * @deprecated Deprecated, use `scanned_at` instead
+   * @deprecated Deprecated, use `scanned_at` instead. End of life: November 1, 2026.
    */
   ts: string;
 
@@ -138,12 +145,11 @@ export interface InvestigateListResponse {
     | 'THREAT_INTEL_SUBMISSION'
     | 'SIMULATION_SUBMISSION'
     | 'API'
-    | 'RETRO_SCAN'
-    | null;
+    | 'RETRO_SCAN';
 
   delivery_status?: Array<
     'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued'
-  >;
+  > | null;
 
   edf_hash?: string | null;
 
@@ -161,11 +167,12 @@ export interface InvestigateListResponse {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE'
-    | null;
+    | 'NONE';
 
   /**
-   * @deprecated Deprecated: use `/investigate/{id}/detections` instead.
+   * @deprecated Deprecated, use the `findings` field from
+   * `GET /investigate/{investigate_id}/detections` instead. End of life: November
+   * 1, 2026. Detection findings for this message.
    */
   findings?: Array<InvestigateListResponse.Finding> | null;
 
@@ -177,19 +184,25 @@ export interface InvestigateListResponse {
 
   message_id?: string | null;
 
-  post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'>;
+  /**
+   * Post-delivery operations performed on this message
+   */
+  post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'> | null;
 
   postfix_id_outbound?: string | null;
 
   replyto?: string | null;
 
-  scanned_at?: string;
-
-  sent_at?: string;
+  /**
+   * When the message was scanned (UTC)
+   */
+  scanned_at?: string | null;
 
   /**
-   * @deprecated Deprecated, use `sent_at` instead
+   * When the message was sent (UTC)
    */
+  sent_at?: string | null;
+
   sent_date?: string | null;
 
   subject?: string | null;
@@ -200,13 +213,67 @@ export interface InvestigateListResponse {
 
   to_name?: Array<string> | null;
 
-  validation?: InvestigateListResponse.Validation | null;
+  validation?: InvestigateListResponse.Validation;
 }
 
 export namespace InvestigateListResponse {
-  export interface Properties {
-    allowlisted_pattern?: string;
+  export interface ActionLog {
+    /**
+     * Timestamp when action completed
+     */
+    completed_at: string;
 
+    /**
+     * Type of action performed
+     */
+    operation: 'MOVE' | 'RELEASE' | 'RECLASSIFY' | 'SUBMISSION' | 'QUARANTINE_RELEASE' | 'PREVIEW';
+
+    /**
+     * @deprecated Deprecated, use `completed_at` instead. End of life: November
+     * 1, 2026.
+     */
+    completed_timestamp?: string;
+
+    /**
+     * Additional properties for the action
+     */
+    properties?: ActionLog.Properties;
+
+    /**
+     * Status of the action
+     */
+    status?: string | null;
+  }
+
+  export namespace ActionLog {
+    /**
+     * Additional properties for the action
+     */
+    export interface Properties {
+      /**
+       * Target folder for move operations
+       */
+      folder?: string;
+
+      /**
+       * User who requested the action
+       */
+      requested_by?: string;
+    }
+  }
+
+  /**
+   * Message processing properties
+   */
+  export interface Properties {
+    /**
+     * Pattern that allowlisted this message
+     */
+    allowlisted_pattern?: string | null;
+
+    /**
+     * Type of allowlist pattern
+     */
     allowlisted_pattern_type?:
       | 'quarantine_release'
       | 'acceptable_sender'
@@ -215,12 +282,22 @@ export namespace InvestigateListResponse {
       | 'domain_similarity'
       | 'domain_recency'
       | 'managed_acceptable_sender'
-      | 'outbound_ndr';
+      | 'outbound_ndr'
+      | null;
 
-    blocklisted_message?: boolean;
+    /**
+     * Whether message was blocklisted
+     */
+    blocklisted_message?: boolean | null;
 
-    blocklisted_pattern?: string;
+    /**
+     * Pattern that blocklisted this message
+     */
+    blocklisted_pattern?: string | null;
 
+    /**
+     * Legacy field for allowlist pattern type
+     */
     whitelisted_pattern_type?:
       | 'quarantine_release'
       | 'acceptable_sender'
@@ -229,7 +306,8 @@ export namespace InvestigateListResponse {
       | 'domain_similarity'
       | 'domain_recency'
       | 'managed_acceptable_sender'
-      | 'outbound_ndr';
+      | 'outbound_ndr'
+      | null;
   }
 
   export interface Finding {
@@ -247,8 +325,7 @@ export namespace InvestigateListResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE'
-      | null;
+      | 'NONE';
 
     field?: string | null;
 
@@ -266,21 +343,25 @@ export namespace InvestigateListResponse {
   export interface Validation {
     comment?: string | null;
 
-    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
+    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
 
-    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
+    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
 
-    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
+    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
   }
 }
 
 export interface InvestigateGetResponse {
+  /**
+   * Unique identifier for a message retrieved from investigation
+   */
   id: string;
 
   /**
-   * @deprecated Deprecated: use `/investigate/{id}/action_log` instead.
+   * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
+   * instead. End of life: November 1, 2026.
    */
-  action_log: unknown;
+  action_log: Array<InvestigateGetResponse.ActionLog>;
 
   client_recipients: Array<string>;
 
@@ -291,14 +372,17 @@ export interface InvestigateGetResponse {
   is_quarantined: boolean;
 
   /**
-   * The identifier of the message.
+   * The identifier of the message
    */
   postfix_id: string;
 
+  /**
+   * Message processing properties
+   */
   properties: InvestigateGetResponse.Properties;
 
   /**
-   * @deprecated Deprecated, use `scanned_at` instead
+   * @deprecated Deprecated, use `scanned_at` instead. End of life: November 1, 2026.
    */
   ts: string;
 
@@ -315,12 +399,11 @@ export interface InvestigateGetResponse {
     | 'THREAT_INTEL_SUBMISSION'
     | 'SIMULATION_SUBMISSION'
     | 'API'
-    | 'RETRO_SCAN'
-    | null;
+    | 'RETRO_SCAN';
 
   delivery_status?: Array<
     'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued'
-  >;
+  > | null;
 
   edf_hash?: string | null;
 
@@ -338,11 +421,12 @@ export interface InvestigateGetResponse {
     | 'ENCRYPTED'
     | 'EXTERNAL'
     | 'UNKNOWN'
-    | 'NONE'
-    | null;
+    | 'NONE';
 
   /**
-   * @deprecated Deprecated: use `/investigate/{id}/detections` instead.
+   * @deprecated Deprecated, use the `findings` field from
+   * `GET /investigate/{investigate_id}/detections` instead. End of life: November
+   * 1, 2026. Detection findings for this message.
    */
   findings?: Array<InvestigateGetResponse.Finding> | null;
 
@@ -354,19 +438,25 @@ export interface InvestigateGetResponse {
 
   message_id?: string | null;
 
-  post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'>;
+  /**
+   * Post-delivery operations performed on this message
+   */
+  post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'> | null;
 
   postfix_id_outbound?: string | null;
 
   replyto?: string | null;
 
-  scanned_at?: string;
-
-  sent_at?: string;
+  /**
+   * When the message was scanned (UTC)
+   */
+  scanned_at?: string | null;
 
   /**
-   * @deprecated Deprecated, use `sent_at` instead
+   * When the message was sent (UTC)
    */
+  sent_at?: string | null;
+
   sent_date?: string | null;
 
   subject?: string | null;
@@ -377,13 +467,67 @@ export interface InvestigateGetResponse {
 
   to_name?: Array<string> | null;
 
-  validation?: InvestigateGetResponse.Validation | null;
+  validation?: InvestigateGetResponse.Validation;
 }
 
 export namespace InvestigateGetResponse {
-  export interface Properties {
-    allowlisted_pattern?: string;
+  export interface ActionLog {
+    /**
+     * Timestamp when action completed
+     */
+    completed_at: string;
 
+    /**
+     * Type of action performed
+     */
+    operation: 'MOVE' | 'RELEASE' | 'RECLASSIFY' | 'SUBMISSION' | 'QUARANTINE_RELEASE' | 'PREVIEW';
+
+    /**
+     * @deprecated Deprecated, use `completed_at` instead. End of life: November
+     * 1, 2026.
+     */
+    completed_timestamp?: string;
+
+    /**
+     * Additional properties for the action
+     */
+    properties?: ActionLog.Properties;
+
+    /**
+     * Status of the action
+     */
+    status?: string | null;
+  }
+
+  export namespace ActionLog {
+    /**
+     * Additional properties for the action
+     */
+    export interface Properties {
+      /**
+       * Target folder for move operations
+       */
+      folder?: string;
+
+      /**
+       * User who requested the action
+       */
+      requested_by?: string;
+    }
+  }
+
+  /**
+   * Message processing properties
+   */
+  export interface Properties {
+    /**
+     * Pattern that allowlisted this message
+     */
+    allowlisted_pattern?: string | null;
+
+    /**
+     * Type of allowlist pattern
+     */
     allowlisted_pattern_type?:
       | 'quarantine_release'
       | 'acceptable_sender'
@@ -392,12 +536,22 @@ export namespace InvestigateGetResponse {
       | 'domain_similarity'
       | 'domain_recency'
       | 'managed_acceptable_sender'
-      | 'outbound_ndr';
+      | 'outbound_ndr'
+      | null;
 
-    blocklisted_message?: boolean;
+    /**
+     * Whether message was blocklisted
+     */
+    blocklisted_message?: boolean | null;
 
-    blocklisted_pattern?: string;
+    /**
+     * Pattern that blocklisted this message
+     */
+    blocklisted_pattern?: string | null;
 
+    /**
+     * Legacy field for allowlist pattern type
+     */
     whitelisted_pattern_type?:
       | 'quarantine_release'
       | 'acceptable_sender'
@@ -406,7 +560,8 @@ export namespace InvestigateGetResponse {
       | 'domain_similarity'
       | 'domain_recency'
       | 'managed_acceptable_sender'
-      | 'outbound_ndr';
+      | 'outbound_ndr'
+      | null;
   }
 
   export interface Finding {
@@ -424,8 +579,7 @@ export namespace InvestigateGetResponse {
       | 'ENCRYPTED'
       | 'EXTERNAL'
       | 'UNKNOWN'
-      | 'NONE'
-      | null;
+      | 'NONE';
 
     field?: string | null;
 
@@ -443,22 +597,22 @@ export namespace InvestigateGetResponse {
   export interface Validation {
     comment?: string | null;
 
-    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
+    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
 
-    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
+    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
 
-    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
+    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none';
   }
 }
 
 export interface InvestigateListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Query param: Determines if the message action log is included in the response.
+   * Query param: Whether to include the message action log in the response.
    */
   action_log?: boolean;
 
@@ -473,36 +627,29 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   cursor?: string;
 
   /**
-   * Query param: Determines if the search results will include detections or not.
+   * Query param: Whether to include only detections in search results.
    */
   detections_only?: boolean;
 
   /**
-   * Query param: Filter by a domain found in the email: sender domain, recipient
-   * domain, or a domain in a link.
+   * Query param: Sender domains to filter by.
    */
   domain?: string;
 
   /**
-   * Query param: The end of the search date range. Defaults to `now` if not
-   * provided.
+   * Query param: The end of the search date range. Defaults to `now`.
    */
   end?: string;
 
   /**
-   * Query param: Search for messages with an exact subject match.
-   */
-  exact_subject?: string;
-
-  /**
-   * Query param: The dispositions the search filters by.
+   * Query param: Dispositions to filter by.
    */
   final_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param: The message actions the search filters by.
+   * Query param: Message actions to filter by.
    */
-  message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED' | 'SUBMITTED';
+  message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED';
 
   /**
    * Query param
@@ -515,65 +662,35 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   metric?: string;
 
   /**
-   * Query param: The space-delimited term used in the query. The search is
-   * case-insensitive.
-   *
-   * The content of the following email metadata fields are searched:
-   *
-   * - alert_id
-   * - CC
-   * - From (envelope_from)
-   * - From Name
-   * - final_disposition
-   * - md5 hash (of any attachment)
-   * - sha1 hash (of any attachment)
-   * - sha256 hash (of any attachment)
-   * - name (of any attachment)
-   * - Reason
-   * - Received DateTime (yyyy-mm-ddThh:mm:ss)
-   * - Sent DateTime (yyyy-mm-ddThh:mm:ss)
-   * - ReplyTo
-   * - To (envelope_to)
-   * - To Name
-   * - Message-ID
-   * - smtp_helo_server_ip
-   * - smtp_previous_hop_ip
-   * - x_originating_ip
-   * - Subject
+   * Query param: Space-delimited search term. Case-insensitive.
    */
   query?: string;
 
   /**
-   * Query param: Filter by recipient. Matches either an email address or a domain.
+   * Query param
    */
   recipient?: string;
 
   /**
-   * Query param: Filter by sender. Matches either an email address or a domain.
+   * Query param
    */
   sender?: string;
 
   /**
-   * Query param: The beginning of the search date range. Defaults to `now - 30 days`
-   * if not provided.
+   * Query param: The beginning of the search date range. Defaults to
+   * `now - 30 days`.
    */
   start?: string;
 
   /**
-   * Query param: Search for messages containing individual keywords in any order
-   * within the subject.
+   * Query param
    */
   subject?: string;
-
-  /**
-   * Query param: Search for submissions instead of original messages
-   */
-  submissions?: boolean;
 }
 
 export interface InvestigateGetParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -590,6 +707,7 @@ Investigate.Preview = Preview;
 Investigate.Raw = Raw;
 Investigate.Trace = Trace;
 Investigate.Move = Move;
+Investigate.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
 Investigate.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 Investigate.Reclassify = Reclassify;
 Investigate.Release = Release;
@@ -626,6 +744,7 @@ export declare namespace Investigate {
     Move as Move,
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
+    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,

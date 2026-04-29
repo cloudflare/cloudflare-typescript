@@ -47,7 +47,7 @@ export class Instances extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
 
   /**
-   * Create a new instances.
+   * Create a new instance.
    *
    * @example
    * ```ts
@@ -76,7 +76,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Update instances.
+   * Update instance.
    *
    * @example
    * ```ts
@@ -131,7 +131,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Delete instances.
+   * Delete instance.
    *
    * @example
    * ```ts
@@ -189,7 +189,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Read instances.
+   * Read instance.
    *
    * @example
    * ```ts
@@ -3365,22 +3365,22 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param
+   * Query param: Filter by namespace.
    */
-  namespace?: string | null;
+  namespace?: string;
 
   /**
-   * Query param: Order By Column Name
+   * Query param: Field to order results by.
    */
   order_by?: 'created_at';
 
   /**
-   * Query param: Order By Direction
+   * Query param: Order direction.
    */
   order_by_direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Search by id
+   * Query param: Filter instances whose id contains this string (case-insensitive).
    */
   search?: string;
 }

@@ -231,7 +231,8 @@ export interface GRETunnelCreateResponse {
 
   /**
    * True if automatic stateful return routing should be enabled for a tunnel, false
-   * otherwise.
+   * otherwise. Requires the `coupler_integration` account flag to be enabled;
+   * requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 
@@ -429,7 +430,8 @@ export namespace GRETunnelUpdateResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -626,7 +628,8 @@ export namespace GRETunnelListResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -825,7 +828,8 @@ export namespace GRETunnelDeleteResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -1024,7 +1028,8 @@ export namespace GRETunnelBulkUpdateResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -1221,7 +1226,8 @@ export namespace GRETunnelGetResponse {
 
     /**
      * True if automatic stateful return routing should be enabled for a tunnel, false
-     * otherwise.
+     * otherwise. Requires the `coupler_integration` account flag to be enabled;
+     * requests setting this to `true` without that flag will be rejected.
      */
     automatic_return_routing?: boolean;
 
@@ -1414,7 +1420,8 @@ export interface GRETunnelCreateParams {
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
-   * tunnel, false otherwise.
+   * tunnel, false otherwise. Requires the `coupler_integration` account flag to be
+   * enabled; requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 
@@ -1581,7 +1588,8 @@ export interface GRETunnelUpdateParams {
 
   /**
    * Body param: True if automatic stateful return routing should be enabled for a
-   * tunnel, false otherwise.
+   * tunnel, false otherwise. Requires the `coupler_integration` account flag to be
+   * enabled; requests setting this to `true` without that flag will be rejected.
    */
   automatic_return_routing?: boolean;
 
