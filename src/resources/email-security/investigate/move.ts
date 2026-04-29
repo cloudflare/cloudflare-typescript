@@ -6,6 +6,38 @@ import { SinglePage } from '../../../pagination';
 
 export class Move extends APIResource {
   /**
+   * Moves a single message to a specified mailbox folder (Inbox, JunkEmail,
+   * DeletedItems, RecoverableItemsDeletions, or RecoverableItemsPurges). Requires
+   * active integration.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const moveCreateResponse of client.emailSecurity.investigate.move.create(
+   *   '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination: 'Inbox',
+   *   },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  create(
+    investigateId: string,
+    params: MoveCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MoveCreateResponsesSinglePage, MoveCreateResponse> {
+    const { account_id, ...body } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/investigate/${investigateId}/move`,
+      MoveCreateResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
+  }
+
+  /**
    * Moves multiple messages to a specified mailbox folder (Inbox, JunkEmail,
    * DeletedItems, RecoverableItemsDeletions, or RecoverableItemsPurges). Requires
    * active integration.
@@ -36,7 +68,57 @@ export class Move extends APIResource {
   }
 }
 
+export class MoveCreateResponsesSinglePage extends SinglePage<MoveCreateResponse> {}
+
 export class MoveBulkResponsesSinglePage extends SinglePage<MoveBulkResponse> {}
+
+export interface MoveCreateResponse {
+  /**
+   * Whether the operation succeeded
+   */
+  success: boolean;
+
+  /**
+   * When the move operation completed (UTC)
+   */
+  completed_at?: string | null;
+
+  /**
+   * @deprecated Deprecated, use `completed_at` instead. End of life: November
+   * 1, 2026.
+   */
+  completed_timestamp?: string;
+
+  /**
+   * Destination folder for the message
+   */
+  destination?: string | null;
+
+  /**
+   * @deprecated Number of items moved. End of life: November 1, 2026.
+   */
+  item_count?: number;
+
+  /**
+   * Message identifier
+   */
+  message_id?: string | null;
+
+  /**
+   * Type of operation performed
+   */
+  operation?: string | null;
+
+  /**
+   * Recipient email address
+   */
+  recipient?: string | null;
+
+  /**
+   * Operation status
+   */
+  status?: string | null;
+}
 
 export interface MoveBulkResponse {
   /**
@@ -86,6 +168,23 @@ export interface MoveBulkResponse {
   status?: string | null;
 }
 
+export interface MoveCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  destination:
+    | 'Inbox'
+    | 'JunkEmail'
+    | 'DeletedItems'
+    | 'RecoverableItemsDeletions'
+    | 'RecoverableItemsPurges';
+}
+
 export interface MoveBulkParams {
   /**
    * Path param: Identifier.
@@ -114,12 +213,16 @@ export interface MoveBulkParams {
   postfix_ids?: Array<string>;
 }
 
+Move.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
 Move.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 
 export declare namespace Move {
   export {
+    type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
+    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
+    type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,
   };
 }

@@ -9,11 +9,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource users', () => {
-  test('list: only required params', async () => {
-    const responsePromise = client.zeroTrust.access.applications.policyTests.users.list(
-      'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+describe('resource reclassify', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.emailSecurity.investigate.reclassify.create(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', expected_disposition: 'NONE' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,14 +24,14 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.zeroTrust.access.applications.policyTests.users.list(
-      'f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6',
+  test('create: required and optional params', async () => {
+    const response = await client.emailSecurity.investigate.reclassify.create(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        page: 0,
-        per_page: 0,
-        status: 'success',
+        expected_disposition: 'NONE',
+        eml_content: 'eml_content',
+        escalated_submission_id: 'escalated_submission_id',
       },
     );
   });

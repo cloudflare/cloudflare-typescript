@@ -45,4 +45,25 @@ describe('resource investigate', () => {
       subject: 'subject',
     });
   });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.emailSecurity.investigate.get(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.emailSecurity.investigate.get(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', submission: true },
+    );
+  });
 });

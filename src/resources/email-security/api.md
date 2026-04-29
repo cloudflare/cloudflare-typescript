@@ -5,38 +5,76 @@
 Types:
 
 - <code><a href="./src/resources/email-security/investigate/investigate.ts">InvestigateListResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/investigate.ts">InvestigateGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/email-security/investigate">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">list</a>({ ...params }) -> InvestigateListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">get</a>(investigateId, { ...params }) -> InvestigateGetResponse</code>
 
 ### Detections
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/detections.ts">DetectionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/detections">client.emailSecurity.investigate.detections.<a href="./src/resources/email-security/investigate/detections.ts">get</a>(investigateId, { ...params }) -> DetectionGetResponse</code>
 
 ### Preview
 
 Types:
 
 - <code><a href="./src/resources/email-security/investigate/preview.ts">PreviewCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/preview.ts">PreviewGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/email-security/investigate/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">create</a>({ ...params }) -> PreviewCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">get</a>(investigateId, { ...params }) -> PreviewGetResponse</code>
 
 ### Raw
 
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/raw.ts">RawGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/raw">client.emailSecurity.investigate.raw.<a href="./src/resources/email-security/investigate/raw.ts">get</a>(investigateId, { ...params }) -> RawGetResponse</code>
+
 ### Trace
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/trace.ts">TraceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{investigate_id}/trace">client.emailSecurity.investigate.trace.<a href="./src/resources/email-security/investigate/trace.ts">get</a>(investigateId, { ...params }) -> TraceGetResponse</code>
 
 ### Move
 
 Types:
 
+- <code><a href="./src/resources/email-security/investigate/move.ts">MoveCreateResponse</a></code>
 - <code><a href="./src/resources/email-security/investigate/move.ts">MoveBulkResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/email-security/investigate/{investigate_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(investigateId, { ...params }) -> MoveCreateResponsesSinglePage</code>
 - <code title="post /accounts/{account_id}/email-security/investigate/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">bulk</a>({ ...params }) -> MoveBulkResponsesSinglePage</code>
 
 ### Reclassify
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/reclassify.ts">ReclassifyCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/{investigate_id}/reclassify">client.emailSecurity.investigate.reclassify.<a href="./src/resources/email-security/investigate/reclassify.ts">create</a>(investigateId, { ...params }) -> ReclassifyCreateResponse</code>
 
 ### Release
 
@@ -120,11 +158,17 @@ Types:
 
 - <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryCreateResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">create</a>({ ...params }) -> ImpersonationRegistryCreateResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">list</a>({ ...params }) -> ImpersonationRegistryListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">delete</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">edit</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">get</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryGetResponse</code>
 
 ### TrustedDomains
 

@@ -91,11 +91,11 @@ export class Connectors extends APIResource {
     params: ConnectorListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/connectors`,
       ConnectorListResponsesSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -219,6 +219,8 @@ export namespace ConnectorCreateResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -263,6 +265,8 @@ export namespace ConnectorUpdateResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -307,6 +311,8 @@ export namespace ConnectorListResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -351,6 +357,8 @@ export namespace ConnectorDeleteResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -395,6 +403,8 @@ export namespace ConnectorEditResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -439,6 +449,8 @@ export namespace ConnectorGetResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -559,9 +571,14 @@ export interface ConnectorUpdateParams {
 
 export interface ConnectorListParams {
   /**
-   * Account identifier
+   * Path param: Account identifier
    */
   account_id: string;
+
+  /**
+   * Query param: Filter connectors by device type.
+   */
+  device_type?: 'MANAGED' | 'LICENSED';
 }
 
 export interface ConnectorDeleteParams {

@@ -87,6 +87,7 @@ describe('resource connectors', () => {
   test('list: required and optional params', async () => {
     const response = await client.magicTransit.connectors.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      device_type: 'MANAGED',
     });
   });
 
