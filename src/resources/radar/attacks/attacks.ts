@@ -2,27 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as Layer3API from './layer3/layer3';
-import {
-  BaseLayer3,
-  Layer3,
-  Layer3SummaryV2Params,
-  Layer3SummaryV2Response,
-  Layer3TimeseriesGroupsV2Params,
-  Layer3TimeseriesGroupsV2Response,
-  Layer3TimeseriesParams,
-  Layer3TimeseriesResponse,
-} from './layer3/layer3';
+import { BaseLayer3, Layer3 } from './layer3/layer3';
 import * as Layer7API from './layer7/layer7';
-import {
-  BaseLayer7,
-  Layer7,
-  Layer7SummaryV2Params,
-  Layer7SummaryV2Response,
-  Layer7TimeseriesGroupsV2Params,
-  Layer7TimeseriesGroupsV2Response,
-  Layer7TimeseriesParams,
-  Layer7TimeseriesResponse,
-} from './layer7/layer7';
+import { BaseLayer7, Layer7 } from './layer7/layer7';
 
 export class BaseAttacks extends APIResource {
   static override readonly _key: readonly ['radar', 'attacks'] = Object.freeze(['radar', 'attacks'] as const);
@@ -38,25 +20,7 @@ Attacks.Layer7 = Layer7;
 Attacks.BaseLayer7 = BaseLayer7;
 
 export declare namespace Attacks {
-  export {
-    Layer3 as Layer3,
-    BaseLayer3 as BaseLayer3,
-    type Layer3SummaryV2Response as Layer3SummaryV2Response,
-    type Layer3TimeseriesResponse as Layer3TimeseriesResponse,
-    type Layer3TimeseriesGroupsV2Response as Layer3TimeseriesGroupsV2Response,
-    type Layer3SummaryV2Params as Layer3SummaryV2Params,
-    type Layer3TimeseriesParams as Layer3TimeseriesParams,
-    type Layer3TimeseriesGroupsV2Params as Layer3TimeseriesGroupsV2Params,
-  };
+  export { Layer3 as Layer3, BaseLayer3 as BaseLayer3 };
 
-  export {
-    Layer7 as Layer7,
-    BaseLayer7 as BaseLayer7,
-    type Layer7SummaryV2Response as Layer7SummaryV2Response,
-    type Layer7TimeseriesResponse as Layer7TimeseriesResponse,
-    type Layer7TimeseriesGroupsV2Response as Layer7TimeseriesGroupsV2Response,
-    type Layer7SummaryV2Params as Layer7SummaryV2Params,
-    type Layer7TimeseriesParams as Layer7TimeseriesParams,
-    type Layer7TimeseriesGroupsV2Params as Layer7TimeseriesGroupsV2Params,
-  };
+  export { Layer7 as Layer7, BaseLayer7 as BaseLayer7 };
 }

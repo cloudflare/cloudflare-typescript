@@ -1,32 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  ConnectivityPrecheck,
-  BaseConnectivityPrecheck,
-  type ConnectivityPrecheckSourceResponse,
-  type ConnectivityPrecheckTargetResponse,
-  type ConnectivityPrecheckSourceParams,
-  type ConnectivityPrecheckTargetParams,
-} from './connectivity-precheck';
-export {
-  Jobs,
-  BaseJobs,
-  type JobCreateResponse,
-  type JobListResponse,
-  type JobAbortResponse,
-  type JobAbortAllResponse,
-  type JobGetResponse,
-  type JobPauseResponse,
-  type JobProgressResponse,
-  type JobResumeResponse,
-  type JobCreateParams,
-  type JobListParams,
-  type JobAbortParams,
-  type JobAbortAllParams,
-  type JobGetParams,
-  type JobPauseParams,
-  type JobProgressParams,
-  type JobResumeParams,
-  type JobListResponsesSinglePage,
-} from './jobs/index';
+export { ConnectivityPrecheck, BaseConnectivityPrecheck } from './connectivity-precheck';
+export { Jobs, BaseJobs } from './jobs/index';
 export { SuperSlurper, BaseSuperSlurper } from './super-slurper';

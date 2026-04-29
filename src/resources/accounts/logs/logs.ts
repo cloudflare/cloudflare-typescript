@@ -2,13 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AuditAPI from './audit';
-import {
-  Audit,
-  AuditListParams,
-  AuditListResponse,
-  AuditListResponsesCursorPaginationAfter,
-  BaseAudit,
-} from './audit';
+import { Audit, BaseAudit } from './audit';
 
 export class BaseLogs extends APIResource {
   static override readonly _key: readonly ['accounts', 'logs'] = Object.freeze(['accounts', 'logs'] as const);
@@ -21,11 +15,5 @@ Logs.Audit = Audit;
 Logs.BaseAudit = BaseAudit;
 
 export declare namespace Logs {
-  export {
-    Audit as Audit,
-    BaseAudit as BaseAudit,
-    type AuditListResponse as AuditListResponse,
-    type AuditListResponsesCursorPaginationAfter as AuditListResponsesCursorPaginationAfter,
-    type AuditListParams as AuditListParams,
-  };
+  export { Audit as Audit, BaseAudit as BaseAudit };
 }

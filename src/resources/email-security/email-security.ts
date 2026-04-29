@@ -2,23 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as SubmissionsAPI from './submissions';
-import {
-  BaseSubmissions,
-  SubmissionListParams,
-  SubmissionListResponse,
-  SubmissionListResponsesV4PagePaginationArray,
-  Submissions,
-} from './submissions';
+import { BaseSubmissions, Submissions } from './submissions';
 import * as InvestigateAPI from './investigate/investigate';
-import {
-  BaseInvestigate,
-  Investigate,
-  InvestigateGetParams,
-  InvestigateGetResponse,
-  InvestigateListParams,
-  InvestigateListResponse,
-  InvestigateListResponsesV4PagePaginationArray,
-} from './investigate/investigate';
+import { BaseInvestigate, Investigate } from './investigate/investigate';
 import * as PhishguardAPI from './phishguard/phishguard';
 import { BasePhishguard, Phishguard } from './phishguard/phishguard';
 import * as SettingsAPI from './settings/settings';
@@ -44,25 +30,11 @@ EmailSecurity.Submissions = Submissions;
 EmailSecurity.BaseSubmissions = BaseSubmissions;
 
 export declare namespace EmailSecurity {
-  export {
-    Investigate as Investigate,
-    BaseInvestigate as BaseInvestigate,
-    type InvestigateListResponse as InvestigateListResponse,
-    type InvestigateGetResponse as InvestigateGetResponse,
-    type InvestigateListResponsesV4PagePaginationArray as InvestigateListResponsesV4PagePaginationArray,
-    type InvestigateListParams as InvestigateListParams,
-    type InvestigateGetParams as InvestigateGetParams,
-  };
+  export { Investigate as Investigate, BaseInvestigate as BaseInvestigate };
 
   export { Phishguard as Phishguard, BasePhishguard as BasePhishguard };
 
   export { Settings as Settings, BaseSettings as BaseSettings };
 
-  export {
-    Submissions as Submissions,
-    BaseSubmissions as BaseSubmissions,
-    type SubmissionListResponse as SubmissionListResponse,
-    type SubmissionListResponsesV4PagePaginationArray as SubmissionListResponsesV4PagePaginationArray,
-    type SubmissionListParams as SubmissionListParams,
-  };
+  export { Submissions as Submissions, BaseSubmissions as BaseSubmissions };
 }

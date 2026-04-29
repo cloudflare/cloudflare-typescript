@@ -2,24 +2,18 @@
 
 import { APIResource } from '../../core/resource';
 import * as ConfigAPI from './config';
-import { BaseConfigResource, Config, ConfigGetParams, ConfigResource, ConfigUpdateParams } from './config';
+import { BaseConfig, Config } from './config';
 
 export class BaseGoogleTagGateway extends APIResource {
   static override readonly _key: readonly ['googleTagGateway'] = Object.freeze(['googleTagGateway'] as const);
 }
 export class GoogleTagGateway extends BaseGoogleTagGateway {
-  config: ConfigAPI.ConfigResource = new ConfigAPI.ConfigResource(this._client);
+  config: ConfigAPI.Config = new ConfigAPI.Config(this._client);
 }
 
-GoogleTagGateway.ConfigResource = ConfigResource;
-GoogleTagGateway.BaseConfigResource = BaseConfigResource;
+GoogleTagGateway.Config = Config;
+GoogleTagGateway.BaseConfig = BaseConfig;
 
 export declare namespace GoogleTagGateway {
-  export {
-    ConfigResource as ConfigResource,
-    BaseConfigResource as BaseConfigResource,
-    type Config as Config,
-    type ConfigUpdateParams as ConfigUpdateParams,
-    type ConfigGetParams as ConfigGetParams,
-  };
+  export { Config as Config, BaseConfig as BaseConfig };
 }

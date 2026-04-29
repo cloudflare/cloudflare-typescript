@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -26,7 +27,7 @@ export class BaseCacheReserveResource extends APIResource {
    * ```
    */
   clear(params: CacheReserveClearParams, options?: RequestOptions): APIPromise<CacheReserveClearResponse> {
-    const { zone_id = this._client.zoneID, body } = params;
+    const { zone_id, body } = params;
     return (
       this._client.post(path`/zones/${zone_id}/cache/cache_reserve_clear`, {
         body: body,
@@ -52,7 +53,7 @@ export class BaseCacheReserveResource extends APIResource {
    * ```
    */
   edit(params: CacheReserveEditParams, options?: RequestOptions): APIPromise<CacheReserveEditResponse> {
-    const { zone_id = this._client.zoneID, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/cache_reserve`, { body, ...options }) as APIPromise<{
         result: CacheReserveEditResponse;
@@ -75,11 +76,8 @@ export class BaseCacheReserveResource extends APIResource {
    * });
    * ```
    */
-  get(
-    params: CacheReserveGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<CacheReserveGetResponse> {
-    const { zone_id = this._client.zoneID } = params ?? {};
+  get(params: CacheReserveGetParams, options?: RequestOptions): APIPromise<CacheReserveGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/cache/cache_reserve`, options) as APIPromise<{
         result: CacheReserveGetResponse;
@@ -100,11 +98,8 @@ export class BaseCacheReserveResource extends APIResource {
    * });
    * ```
    */
-  status(
-    params: CacheReserveStatusParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<CacheReserveStatusResponse> {
-    const { zone_id = this._client.zoneID } = params ?? {};
+  status(params: CacheReserveStatusParams, options?: RequestOptions): APIPromise<CacheReserveStatusResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/cache/cache_reserve_clear`, options) as APIPromise<{
         result: CacheReserveStatusResponse;
@@ -123,11 +118,6 @@ export type CacheReserve = 'cache_reserve';
  * ID of the zone setting.
  */
 export type CacheReserveClear = 'cache_reserve_clear';
-
-/**
- * The current state of the Cache Reserve Clear operation.
- */
-export type State = 'In-progress' | 'Completed';
 
 /**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
@@ -149,7 +139,7 @@ export interface CacheReserveClearResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -226,7 +216,7 @@ export interface CacheReserveStatusResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -243,7 +233,7 @@ export interface CacheReserveClearParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param
@@ -255,7 +245,7 @@ export interface CacheReserveEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Value of the Cache Reserve zone setting.
@@ -267,21 +257,20 @@ export interface CacheReserveGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface CacheReserveStatusParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace CacheReserveResource {
   export {
     type CacheReserve as CacheReserve,
     type CacheReserveClear as CacheReserveClear,
-    type State as State,
     type CacheReserveClearResponse as CacheReserveClearResponse,
     type CacheReserveEditResponse as CacheReserveEditResponse,
     type CacheReserveGetResponse as CacheReserveGetResponse,

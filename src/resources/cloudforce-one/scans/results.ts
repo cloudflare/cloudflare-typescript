@@ -1,9 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import { APIPromise } from '../../../core/api-promise';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
 
 export class BaseResults extends APIResource {
   static override readonly _key: readonly ['cloudforceOne', 'scans', 'results'] = Object.freeze([
@@ -11,57 +8,5 @@ export class BaseResults extends APIResource {
     'scans',
     'results',
   ] as const);
-
-  /**
-   * Get the Latest Scan Result
-   *
-   * @example
-   * ```ts
-   * const result = await client.cloudforceOne.scans.results.get(
-   *   'config_id',
-   *   { account_id: 'account_id' },
-   * );
-   * ```
-   */
-  get(
-    configID: string,
-    params: ResultGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ResultGetResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/cloudforce-one/scans/results/${configID}`,
-        options,
-      ) as APIPromise<{ result: ResultGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Results extends BaseResults {}
-
-export interface ScanResult {
-  number?: number;
-
-  proto?: string;
-
-  status?: string;
-}
-
-export interface ResultGetResponse {
-  '1.1.1.1': Array<ScanResult>;
-}
-
-export interface ResultGetParams {
-  /**
-   * Defines the Account ID.
-   */
-  account_id?: string;
-}
-
-export declare namespace Results {
-  export {
-    type ScanResult as ScanResult,
-    type ResultGetResponse as ResultGetResponse,
-    type ResultGetParams as ResultGetParams,
-  };
-}

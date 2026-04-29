@@ -1,79 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AllowPolicies,
-  BaseAllowPolicies,
-  type AllowPolicyCreateResponse,
-  type AllowPolicyListResponse,
-  type AllowPolicyDeleteResponse,
-  type AllowPolicyEditResponse,
-  type AllowPolicyGetResponse,
-  type AllowPolicyCreateParams,
-  type AllowPolicyListParams,
-  type AllowPolicyDeleteParams,
-  type AllowPolicyEditParams,
-  type AllowPolicyGetParams,
-  type AllowPolicyListResponsesV4PagePaginationArray,
-} from './allow-policies';
-export {
-  BlockSenders,
-  BaseBlockSenders,
-  type BlockSenderCreateResponse,
-  type BlockSenderListResponse,
-  type BlockSenderDeleteResponse,
-  type BlockSenderEditResponse,
-  type BlockSenderGetResponse,
-  type BlockSenderCreateParams,
-  type BlockSenderListParams,
-  type BlockSenderDeleteParams,
-  type BlockSenderEditParams,
-  type BlockSenderGetParams,
-  type BlockSenderListResponsesV4PagePaginationArray,
-} from './block-senders';
-export {
-  Domains,
-  BaseDomains,
-  type DomainListResponse,
-  type DomainDeleteResponse,
-  type DomainBulkDeleteResponse,
-  type DomainEditResponse,
-  type DomainGetResponse,
-  type DomainListParams,
-  type DomainDeleteParams,
-  type DomainBulkDeleteParams,
-  type DomainEditParams,
-  type DomainGetParams,
-  type DomainListResponsesV4PagePaginationArray,
-  type DomainBulkDeleteResponsesSinglePage,
-} from './domains';
-export {
-  ImpersonationRegistry,
-  BaseImpersonationRegistry,
-  type ImpersonationRegistryCreateResponse,
-  type ImpersonationRegistryListResponse,
-  type ImpersonationRegistryDeleteResponse,
-  type ImpersonationRegistryEditResponse,
-  type ImpersonationRegistryGetResponse,
-  type ImpersonationRegistryCreateParams,
-  type ImpersonationRegistryListParams,
-  type ImpersonationRegistryDeleteParams,
-  type ImpersonationRegistryEditParams,
-  type ImpersonationRegistryGetParams,
-  type ImpersonationRegistryListResponsesV4PagePaginationArray,
-} from './impersonation-registry';
+export { AllowPolicies, BaseAllowPolicies } from './allow-policies';
+export { BlockSenders, BaseBlockSenders } from './block-senders';
+export { Domains, BaseDomains } from './domains';
+export { ImpersonationRegistry, BaseImpersonationRegistry } from './impersonation-registry';
 export { Settings, BaseSettings } from './settings';
-export {
-  TrustedDomains,
-  BaseTrustedDomains,
-  type TrustedDomainCreateResponse,
-  type TrustedDomainListResponse,
-  type TrustedDomainDeleteResponse,
-  type TrustedDomainEditResponse,
-  type TrustedDomainGetResponse,
-  type TrustedDomainCreateParams,
-  type TrustedDomainListParams,
-  type TrustedDomainDeleteParams,
-  type TrustedDomainEditParams,
-  type TrustedDomainGetParams,
-  type TrustedDomainListResponsesV4PagePaginationArray,
-} from './trusted-domains';
+export { TrustedDomains, BaseTrustedDomains } from './trusted-domains';

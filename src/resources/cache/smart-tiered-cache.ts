@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -28,10 +29,10 @@ export class BaseSmartTieredCache extends APIResource {
    * ```
    */
   delete(
-    params: SmartTieredCacheDeleteParams | null | undefined = {},
+    params: SmartTieredCacheDeleteParams,
     options?: RequestOptions,
   ): APIPromise<SmartTieredCacheDeleteResponse> {
-    const { zone_id = this._client.zoneID } = params ?? {};
+    const { zone_id } = params;
     return (
       this._client.delete(
         path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
@@ -60,7 +61,7 @@ export class BaseSmartTieredCache extends APIResource {
     params: SmartTieredCacheEditParams,
     options?: RequestOptions,
   ): APIPromise<SmartTieredCacheEditResponse> {
-    const { zone_id = this._client.zoneID, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
         body,
@@ -85,11 +86,8 @@ export class BaseSmartTieredCache extends APIResource {
    *   });
    * ```
    */
-  get(
-    params: SmartTieredCacheGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SmartTieredCacheGetResponse> {
-    const { zone_id = this._client.zoneID } = params ?? {};
+  get(params: SmartTieredCacheGetParams, options?: RequestOptions): APIPromise<SmartTieredCacheGetResponse> {
+    const { zone_id } = params;
     return (
       this._client.get(
         path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
@@ -165,14 +163,14 @@ export interface SmartTieredCacheDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export interface SmartTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Enable or disable the Smart Tiered Cache.
@@ -184,7 +182,7 @@ export interface SmartTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace SmartTieredCache {

@@ -2,13 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as EventsAPI from './events';
-import {
-  BaseEvents,
-  EventListParams,
-  EventListResponse,
-  EventListResponsesV4PagePagination,
-  Events,
-} from './events';
+import { BaseEvents, Events } from './events';
 
 export class BaseLeaks extends APIResource {
   static override readonly _key: readonly ['radar', 'bgp', 'leaks'] = Object.freeze([
@@ -25,11 +19,5 @@ Leaks.Events = Events;
 Leaks.BaseEvents = BaseEvents;
 
 export declare namespace Leaks {
-  export {
-    Events as Events,
-    BaseEvents as BaseEvents,
-    type EventListResponse as EventListResponse,
-    type EventListResponsesV4PagePagination as EventListResponsesV4PagePagination,
-    type EventListParams as EventListParams,
-  };
+  export { Events as Events, BaseEvents as BaseEvents };
 }

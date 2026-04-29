@@ -2,14 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TopAPI from './top';
-import {
-  BaseTop,
-  Top,
-  TopBotsParams,
-  TopBotsResponse,
-  TopCategoriesParams,
-  TopCategoriesResponse,
-} from './top';
+import { BaseTop, Top } from './top';
 
 export class BaseVerifiedBots extends APIResource {
   static override readonly _key: readonly ['radar', 'verifiedBots'] = Object.freeze([
@@ -25,12 +18,5 @@ VerifiedBots.Top = Top;
 VerifiedBots.BaseTop = BaseTop;
 
 export declare namespace VerifiedBots {
-  export {
-    Top as Top,
-    BaseTop as BaseTop,
-    type TopBotsResponse as TopBotsResponse,
-    type TopCategoriesResponse as TopCategoriesResponse,
-    type TopBotsParams as TopBotsParams,
-    type TopCategoriesParams as TopCategoriesParams,
-  };
+  export { Top as Top, BaseTop as BaseTop };
 }

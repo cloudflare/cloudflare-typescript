@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as FieldsAPI from './fields';
-import { BaseFields, FieldGetParams, FieldGetResponse, Fields } from './fields';
+import { BaseFields, Fields } from './fields';
 import * as JobsAPI from './jobs';
-import { BaseJobs, JobGetParams, Jobs } from './jobs';
+import { BaseJobs, Jobs } from './jobs';
 
 export class BaseDatasets extends APIResource {
   static override readonly _key: readonly ['logpush', 'datasets'] = Object.freeze([
@@ -23,12 +23,7 @@ Datasets.Jobs = Jobs;
 Datasets.BaseJobs = BaseJobs;
 
 export declare namespace Datasets {
-  export {
-    Fields as Fields,
-    BaseFields as BaseFields,
-    type FieldGetResponse as FieldGetResponse,
-    type FieldGetParams as FieldGetParams,
-  };
+  export { Fields as Fields, BaseFields as BaseFields };
 
-  export { Jobs as Jobs, BaseJobs as BaseJobs, type JobGetParams as JobGetParams };
+  export { Jobs as Jobs, BaseJobs as BaseJobs };
 }

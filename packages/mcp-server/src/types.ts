@@ -42,10 +42,21 @@ export type ToolCallResult = {
   isError?: boolean;
 };
 
-export type HandlerFunction = (
-  client: Cloudflare,
-  args: Record<string, unknown> | undefined,
-) => Promise<ToolCallResult>;
+export type McpRequestContext = {
+  client: Cloudflare;
+  stainlessApiKey?: string | undefined;
+  upstreamClientEnvs?: Record<string, string> | undefined;
+  mcpSessionId?: string | undefined;
+  mcpClientInfo?: { name: string; version: string } | undefined;
+};
+
+export type HandlerFunction = ({
+  reqContext,
+  args,
+}: {
+  reqContext: McpRequestContext;
+  args: Record<string, unknown> | undefined;
+}) => Promise<ToolCallResult>;
 
 export function asTextContentResult(result: unknown): ToolCallResult {
   return {

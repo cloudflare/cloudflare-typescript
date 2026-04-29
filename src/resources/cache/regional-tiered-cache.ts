@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -29,7 +30,7 @@ export class BaseRegionalTieredCacheResource extends APIResource {
     params: RegionalTieredCacheEditParams,
     options?: RequestOptions,
   ): APIPromise<RegionalTieredCacheEditResponse> {
-    const { zone_id = this._client.zoneID, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/cache/regional_tiered_cache`, {
         body,
@@ -52,10 +53,10 @@ export class BaseRegionalTieredCacheResource extends APIResource {
    * ```
    */
   get(
-    params: RegionalTieredCacheGetParams | null | undefined = {},
+    params: RegionalTieredCacheGetParams,
     options?: RequestOptions,
   ): APIPromise<RegionalTieredCacheGetResponse> {
-    const { zone_id = this._client.zoneID } = params ?? {};
+    const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/cache/regional_tiered_cache`, options) as APIPromise<{
         result: RegionalTieredCacheGetResponse;
@@ -118,7 +119,7 @@ export interface RegionalTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 
   /**
    * Body param: Value of the Regional Tiered Cache zone setting.
@@ -130,7 +131,7 @@ export interface RegionalTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: Shared.IdentifierParam;
 }
 
 export declare namespace RegionalTieredCacheResource {

@@ -1,68 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AccountSettings,
-  BaseAccountSettings,
-  type AccountSettingUpdateResponse,
-  type AccountSettingGetResponse,
-  type AccountSettingUpdateParams,
-  type AccountSettingGetParams,
-} from './account-settings';
+export { AccountSettings, BaseAccountSettings } from './account-settings';
 export { Assets, BaseAssets } from './assets/index';
 export { Beta, BaseBeta } from './beta/index';
-export {
-  Domains,
-  BaseDomains,
-  type DomainUpdateResponse,
-  type DomainListResponse,
-  type DomainDeleteResponse,
-  type DomainGetResponse,
-  type DomainUpdateParams,
-  type DomainListParams,
-  type DomainDeleteParams,
-  type DomainGetParams,
-  type DomainListResponsesSinglePage,
-} from './domains';
+export { Domains, BaseDomains } from './domains';
 export { Observability, BaseObservability } from './observability/index';
-export {
-  Routes,
-  BaseRoutes,
-  type RouteCreateResponse,
-  type RouteUpdateResponse,
-  type RouteListResponse,
-  type RouteDeleteResponse,
-  type RouteGetResponse,
-  type RouteCreateParams,
-  type RouteUpdateParams,
-  type RouteListParams,
-  type RouteDeleteParams,
-  type RouteGetParams,
-  type RouteListResponsesSinglePage,
-} from './routes';
-export {
-  Scripts,
-  BaseScripts,
-  type Script,
-  type ScriptSetting,
-  type ScriptUpdateResponse,
-  type ScriptListResponse,
-  type ScriptDeleteResponse,
-  type ScriptGetResponse,
-  type ScriptSearchResponse,
-  type ScriptUpdateParams,
-  type ScriptListParams,
-  type ScriptDeleteParams,
-  type ScriptGetParams,
-  type ScriptSearchParams,
-  type ScriptListResponsesSinglePage,
-} from './scripts/index';
-export {
-  Subdomains,
-  BaseSubdomains,
-  type SubdomainUpdateResponse,
-  type SubdomainGetResponse,
-  type SubdomainUpdateParams,
-  type SubdomainDeleteParams,
-  type SubdomainGetParams,
-} from './subdomains';
+export { Routes, BaseRoutes } from './routes';
+export { Scripts, BaseScripts } from './scripts/index';
+export { Subdomains, BaseSubdomains } from './subdomains';
 export { Workers, BaseWorkers } from './workers';

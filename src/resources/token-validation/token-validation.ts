@@ -2,35 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as RulesAPI from './rules';
-import {
-  BaseRules,
-  RuleBulkCreateParams,
-  RuleBulkEditParams,
-  RuleCreateParams,
-  RuleDeleteParams,
-  RuleDeleteResponse,
-  RuleEditParams,
-  RuleGetParams,
-  RuleListParams,
-  Rules,
-  TokenValidationRule,
-  TokenValidationRulesSinglePage,
-  TokenValidationRulesV4PagePaginationArray,
-} from './rules';
+import { BaseRules, Rules } from './rules';
 import * as ConfigurationAPI from './configuration/configuration';
-import {
-  BaseConfiguration,
-  Configuration,
-  ConfigurationCreateParams,
-  ConfigurationDeleteParams,
-  ConfigurationDeleteResponse,
-  ConfigurationEditParams,
-  ConfigurationEditResponse,
-  ConfigurationGetParams,
-  ConfigurationListParams,
-  TokenConfig,
-  TokenConfigsV4PagePaginationArray,
-} from './configuration/configuration';
+import { BaseConfiguration, Configuration } from './configuration/configuration';
 
 export class BaseTokenValidation extends APIResource {
   static override readonly _key: readonly ['tokenValidation'] = Object.freeze(['tokenValidation'] as const);
@@ -46,33 +20,7 @@ TokenValidation.Rules = Rules;
 TokenValidation.BaseRules = BaseRules;
 
 export declare namespace TokenValidation {
-  export {
-    Configuration as Configuration,
-    BaseConfiguration as BaseConfiguration,
-    type TokenConfig as TokenConfig,
-    type ConfigurationDeleteResponse as ConfigurationDeleteResponse,
-    type ConfigurationEditResponse as ConfigurationEditResponse,
-    type TokenConfigsV4PagePaginationArray as TokenConfigsV4PagePaginationArray,
-    type ConfigurationCreateParams as ConfigurationCreateParams,
-    type ConfigurationListParams as ConfigurationListParams,
-    type ConfigurationDeleteParams as ConfigurationDeleteParams,
-    type ConfigurationEditParams as ConfigurationEditParams,
-    type ConfigurationGetParams as ConfigurationGetParams,
-  };
+  export { Configuration as Configuration, BaseConfiguration as BaseConfiguration };
 
-  export {
-    Rules as Rules,
-    BaseRules as BaseRules,
-    type TokenValidationRule as TokenValidationRule,
-    type RuleDeleteResponse as RuleDeleteResponse,
-    type TokenValidationRulesV4PagePaginationArray as TokenValidationRulesV4PagePaginationArray,
-    type TokenValidationRulesSinglePage as TokenValidationRulesSinglePage,
-    type RuleCreateParams as RuleCreateParams,
-    type RuleListParams as RuleListParams,
-    type RuleDeleteParams as RuleDeleteParams,
-    type RuleBulkCreateParams as RuleBulkCreateParams,
-    type RuleBulkEditParams as RuleBulkEditParams,
-    type RuleEditParams as RuleEditParams,
-    type RuleGetParams as RuleGetParams,
-  };
+  export { Rules as Rules, BaseRules as BaseRules };
 }

@@ -1,54 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
-export class BaseWorkflowResource extends APIResource {
+export class BaseWorkflow extends APIResource {
   static override readonly _key: readonly ['zaraz', 'workflow'] = Object.freeze([
     'zaraz',
     'workflow',
   ] as const);
-
-  /**
-   * Gets Zaraz workflow for a zone.
-   *
-   * @example
-   * ```ts
-   * const workflow = await client.zaraz.workflow.get({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
-   * ```
-   */
-  get(params: WorkflowGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<Workflow> {
-    const { zone_id = this._client.zoneID } = params ?? {};
-    return (
-      this._client.get(path`/zones/${zone_id}/settings/zaraz/workflow`, options) as APIPromise<{
-        result: Workflow;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
-export class WorkflowResource extends BaseWorkflowResource {}
-
-/**
- * Zaraz workflow.
- */
-export type Workflow = 'realtime' | 'preview';
-
-/**
- * Zaraz workflow.
- */
-export type WorkflowParam = 'realtime' | 'preview';
-
-export interface WorkflowGetParams {
-  /**
-   * Identifier.
-   */
-  zone_id?: string;
-}
-
-export declare namespace WorkflowResource {
-  export { type Workflow as Workflow, type WorkflowGetParams as WorkflowGetParams };
-}
+export class Workflow extends BaseWorkflow {}

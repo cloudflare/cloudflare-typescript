@@ -1,10 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as ConfigsAPI from './configs';
-import { APIPromise } from '../../../core/api-promise';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
 
 export class BaseFull extends APIResource {
   static override readonly _key: readonly ['magicNetworkMonitoring', 'configs', 'full'] = Object.freeze([
@@ -12,36 +8,5 @@ export class BaseFull extends APIResource {
     'configs',
     'full',
   ] as const);
-
-  /**
-   * Lists default sampling, router IPs, warp devices, and rules for account.
-   *
-   * @example
-   * ```ts
-   * const configuration =
-   *   await client.magicNetworkMonitoring.configs.full.get({
-   *     account_id: '6f91088a406011ed95aed352566e8d4c',
-   *   });
-   * ```
-   */
-  get(
-    params: FullGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ConfigsAPI.Configuration> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return (
-      this._client.get(path`/accounts/${account_id}/mnm/config/full`, options) as APIPromise<{
-        result: ConfigsAPI.Configuration;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Full extends BaseFull {}
-
-export interface FullGetParams {
-  account_id?: string;
-}
-
-export declare namespace Full {
-  export { type FullGetParams as FullGetParams };
-}

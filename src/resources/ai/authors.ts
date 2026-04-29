@@ -1,42 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import { PagePromise, SinglePage } from '../../core/pagination';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
 export class BaseAuthors extends APIResource {
   static override readonly _key: readonly ['ai', 'authors'] = Object.freeze(['ai', 'authors'] as const);
-
-  /**
-   * Searches Workers AI models by author or organization name.
-   */
-  list(
-    params: AuthorListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AuthorListResponsesSinglePage, AuthorListResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/ai/authors/search`,
-      SinglePage<AuthorListResponse>,
-      options,
-    );
-  }
 }
 export class Authors extends BaseAuthors {}
-
-export type AuthorListResponsesSinglePage = SinglePage<AuthorListResponse>;
-
-export type AuthorListResponse = unknown;
-
-export interface AuthorListParams {
-  account_id?: string;
-}
-
-export declare namespace Authors {
-  export {
-    type AuthorListResponse as AuthorListResponse,
-    type AuthorListResponsesSinglePage as AuthorListResponsesSinglePage,
-    type AuthorListParams as AuthorListParams,
-  };
-}

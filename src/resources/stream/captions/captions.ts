@@ -2,104 +2,21 @@
 
 import { APIResource } from '../../../core/resource';
 import * as LanguageAPI from './language/language';
-import {
-  BaseLanguage,
-  Language,
-  LanguageCreateParams,
-  LanguageDeleteParams,
-  LanguageDeleteResponse,
-  LanguageGetParams,
-  LanguageUpdateParams,
-} from './language/language';
-import { PagePromise, SinglePage } from '../../../core/pagination';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
+import { BaseLanguage, Language } from './language/language';
 
 export class BaseCaptions extends APIResource {
   static override readonly _key: readonly ['stream', 'captions'] = Object.freeze([
     'stream',
     'captions',
   ] as const);
-
-  /**
-   * Lists the available captions or subtitles for a specific video.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const caption of client.stream.captions.get(
-   *   'ea95132c15732412d22c1476fa83f27a',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  get(
-    identifier: string,
-    params: CaptionGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CaptionsSinglePage, Caption> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/stream/${identifier}/captions`,
-      SinglePage<Caption>,
-      options,
-    );
-  }
 }
 export class Captions extends BaseCaptions {
   language: LanguageAPI.Language = new LanguageAPI.Language(this._client);
-}
-
-export type CaptionsSinglePage = SinglePage<Caption>;
-
-export interface Caption {
-  /**
-   * Whether the caption was generated via AI.
-   */
-  generated?: boolean;
-
-  /**
-   * The language label displayed in the native language to users.
-   */
-  label?: string;
-
-  /**
-   * The language tag in BCP 47 format.
-   */
-  language?: string;
-
-  /**
-   * The status of a generated caption.
-   */
-  status?: 'ready' | 'inprogress' | 'error';
-}
-
-export interface CaptionGetParams {
-  /**
-   * Identifier.
-   */
-  account_id?: string;
 }
 
 Captions.Language = Language;
 Captions.BaseLanguage = BaseLanguage;
 
 export declare namespace Captions {
-  export {
-    type Caption as Caption,
-    type CaptionsSinglePage as CaptionsSinglePage,
-    type CaptionGetParams as CaptionGetParams,
-  };
-
-  export {
-    Language as Language,
-    BaseLanguage as BaseLanguage,
-    type LanguageDeleteResponse as LanguageDeleteResponse,
-    type LanguageCreateParams as LanguageCreateParams,
-    type LanguageUpdateParams as LanguageUpdateParams,
-    type LanguageDeleteParams as LanguageDeleteParams,
-    type LanguageGetParams as LanguageGetParams,
-  };
+  export { Language as Language, BaseLanguage as BaseLanguage };
 }

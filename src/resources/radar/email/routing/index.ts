@@ -1,42 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Routing,
-  BaseRouting,
-  type RoutingSummaryV2Response,
-  type RoutingTimeseriesGroupsV2Response,
-  type RoutingSummaryV2Params,
-  type RoutingTimeseriesGroupsV2Params,
-} from './routing';
-export {
-  Summary,
-  BaseSummary,
-  type SummaryARCResponse,
-  type SummaryDKIMResponse,
-  type SummaryDMARCResponse,
-  type SummaryEncryptedResponse,
-  type SummaryIPVersionResponse,
-  type SummarySPFResponse,
-  type SummaryARCParams,
-  type SummaryDKIMParams,
-  type SummaryDMARCParams,
-  type SummaryEncryptedParams,
-  type SummaryIPVersionParams,
-  type SummarySPFParams,
-} from './summary';
-export {
-  TimeseriesGroups,
-  BaseTimeseriesGroups,
-  type TimeseriesGroupARCResponse,
-  type TimeseriesGroupDKIMResponse,
-  type TimeseriesGroupDMARCResponse,
-  type TimeseriesGroupEncryptedResponse,
-  type TimeseriesGroupIPVersionResponse,
-  type TimeseriesGroupSPFResponse,
-  type TimeseriesGroupARCParams,
-  type TimeseriesGroupDKIMParams,
-  type TimeseriesGroupDMARCParams,
-  type TimeseriesGroupEncryptedParams,
-  type TimeseriesGroupIPVersionParams,
-  type TimeseriesGroupSPFParams,
-} from './timeseries-groups';
+export { Routing, BaseRouting } from './routing';
+export { Summary, BaseSummary } from './summary';
+export { TimeseriesGroups, BaseTimeseriesGroups } from './timeseries-groups';

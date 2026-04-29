@@ -2,13 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as UpdatesAPI from './updates';
-import {
-  BaseUpdates,
-  UpdateListParams,
-  UpdateListResponse,
-  UpdateListResponsesV4PagePaginationArray,
-  Updates,
-} from './updates';
+import { BaseUpdates, Updates } from './updates';
 
 export class BaseSCIM extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'access', 'logs', 'scim'] = Object.freeze([
@@ -22,61 +16,9 @@ export class SCIM extends BaseSCIM {
   updates: UpdatesAPI.Updates = new UpdatesAPI.Updates(this._client);
 }
 
-export interface AccessRequest {
-  /**
-   * The event that occurred, such as a login attempt.
-   */
-  action?: string;
-
-  /**
-   * The result of the authentication event.
-   */
-  allowed?: boolean;
-
-  /**
-   * The URL of the Access application.
-   */
-  app_domain?: string;
-
-  /**
-   * The unique identifier for the Access application.
-   */
-  app_uid?: string;
-
-  /**
-   * The IdP used to authenticate.
-   */
-  connection?: string;
-
-  created_at?: string;
-
-  /**
-   * The IP address of the authenticating user.
-   */
-  ip_address?: string;
-
-  /**
-   * The unique identifier for the request to Cloudflare.
-   */
-  ray_id?: string;
-
-  /**
-   * The email address of the authenticating user.
-   */
-  user_email?: string;
-}
-
 SCIM.Updates = Updates;
 SCIM.BaseUpdates = BaseUpdates;
 
 export declare namespace SCIM {
-  export { type AccessRequest as AccessRequest };
-
-  export {
-    Updates as Updates,
-    BaseUpdates as BaseUpdates,
-    type UpdateListResponse as UpdateListResponse,
-    type UpdateListResponsesV4PagePaginationArray as UpdateListResponsesV4PagePaginationArray,
-    type UpdateListParams as UpdateListParams,
-  };
+  export { Updates as Updates, BaseUpdates as BaseUpdates };
 }

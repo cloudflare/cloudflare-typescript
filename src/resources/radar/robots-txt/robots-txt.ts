@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TopAPI from './top/top';
-import { BaseTop, Top, TopDomainCategoriesParams, TopDomainCategoriesResponse } from './top/top';
+import { BaseTop, Top } from './top/top';
 
 export class BaseRobotsTXT extends APIResource {
   static override readonly _key: readonly ['radar', 'robotsTXT'] = Object.freeze([
@@ -18,10 +18,5 @@ RobotsTXT.Top = Top;
 RobotsTXT.BaseTop = BaseTop;
 
 export declare namespace RobotsTXT {
-  export {
-    Top as Top,
-    BaseTop as BaseTop,
-    type TopDomainCategoriesResponse as TopDomainCategoriesResponse,
-    type TopDomainCategoriesParams as TopDomainCategoriesParams,
-  };
+  export { Top as Top, BaseTop as BaseTop };
 }

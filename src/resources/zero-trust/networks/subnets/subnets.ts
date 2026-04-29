@@ -2,26 +2,9 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as CloudflareSourceAPI from './cloudflare-source';
-import { BaseCloudflareSource, CloudflareSource, CloudflareSourceUpdateParams } from './cloudflare-source';
+import { BaseCloudflareSource, CloudflareSource } from './cloudflare-source';
 import * as WARPAPI from './warp';
-import {
-  BaseWARP,
-  Subnet,
-  SubnetsV4PagePaginationArray,
-  WARP,
-  WARPCreateParams,
-  WARPDeleteParams,
-  WARPDeleteResponse,
-  WARPEditParams,
-  WARPGetParams,
-} from './warp';
-import {
-  PagePromise,
-  V4PagePaginationArray,
-  type V4PagePaginationArrayParams,
-} from '../../../../core/pagination';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
+import { BaseWARP, WARP } from './warp';
 
 export class BaseSubnets extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'networks', 'subnets'] = Object.freeze([
@@ -29,31 +12,6 @@ export class BaseSubnets extends APIResource {
     'networks',
     'subnets',
   ] as const);
-
-  /**
-   * Lists and filters subnets in an account.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const subnet of client.zeroTrust.networks.subnets.list(
-   *   { account_id: '699d98642c564d2e855e9661899b7252' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params: SubnetListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<SubnetsV4PagePaginationArray, WARPAPI.Subnet> {
-    const { account_id = this._client.accountID, ...query } = params ?? {};
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/zerotrust/subnets`,
-      V4PagePaginationArray<WARPAPI.Subnet>,
-      { query, ...options },
-    );
-  }
 }
 export class Subnets extends BaseSubnets {
   warp: WARPAPI.WARP = new WARPAPI.WARP(this._client);
@@ -62,88 +20,13 @@ export class Subnets extends BaseSubnets {
   );
 }
 
-export interface SubnetListParams extends V4PagePaginationArrayParams {
-  /**
-   * Path param: Cloudflare account ID
-   */
-  account_id?: string;
-
-  /**
-   * Query param: If set, only include subnets in the given address family - `v4` or
-   * `v6`
-   */
-  address_family?: 'v4' | 'v6';
-
-  /**
-   * Query param: If set, only list subnets with the given comment.
-   */
-  comment?: string;
-
-  /**
-   * Query param: If provided, include only resources that were created (and not
-   * deleted) before this time. URL encoded.
-   */
-  existed_at?: string;
-
-  /**
-   * Query param: If `true`, only include default subnets. If `false`, exclude
-   * default subnets subnets. If not set, all subnets will be included.
-   */
-  is_default_network?: boolean;
-
-  /**
-   * Query param: If `true`, only include deleted subnets. If `false`, exclude
-   * deleted subnets. If not set, all subnets will be included.
-   */
-  is_deleted?: boolean;
-
-  /**
-   * Query param: If set, only list subnets with the given name
-   */
-  name?: string;
-
-  /**
-   * Query param: If set, only list the subnet whose network exactly matches the
-   * given CIDR.
-   */
-  network?: string;
-
-  /**
-   * Query param: Sort order of the results. `asc` means oldest to newest, `desc`
-   * means newest to oldest. If not set, they will not be in any particular order.
-   */
-  sort_order?: 'asc' | 'desc';
-
-  /**
-   * Query param: If set, the types of subnets to include, separated by comma.
-   */
-  subnet_types?: 'cloudflare_source' | 'warp';
-}
-
 Subnets.WARP = WARP;
 Subnets.BaseWARP = BaseWARP;
 Subnets.CloudflareSource = CloudflareSource;
 Subnets.BaseCloudflareSource = BaseCloudflareSource;
 
 export declare namespace Subnets {
-  export { type SubnetListParams as SubnetListParams };
+  export { WARP as WARP, BaseWARP as BaseWARP };
 
-  export {
-    WARP as WARP,
-    BaseWARP as BaseWARP,
-    type Subnet as Subnet,
-    type WARPDeleteResponse as WARPDeleteResponse,
-    type WARPCreateParams as WARPCreateParams,
-    type WARPDeleteParams as WARPDeleteParams,
-    type WARPEditParams as WARPEditParams,
-    type WARPGetParams as WARPGetParams,
-  };
-
-  export {
-    CloudflareSource as CloudflareSource,
-    BaseCloudflareSource as BaseCloudflareSource,
-    type CloudflareSourceUpdateParams as CloudflareSourceUpdateParams,
-  };
+  export { CloudflareSource as CloudflareSource, BaseCloudflareSource as BaseCloudflareSource };
 }
-
-export { type SubnetsV4PagePaginationArray };

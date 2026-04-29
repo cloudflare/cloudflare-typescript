@@ -2,13 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as NamespacesAPI from './namespaces/namespaces';
-import {
-  BaseNamespaces,
-  Namespace,
-  NamespaceListParams,
-  Namespaces,
-  NamespacesV4PagePaginationArray,
-} from './namespaces/namespaces';
+import { BaseNamespaces, Namespaces } from './namespaces/namespaces';
 
 export class BaseDurableObjects extends APIResource {
   static override readonly _key: readonly ['durableObjects'] = Object.freeze(['durableObjects'] as const);
@@ -21,11 +15,5 @@ DurableObjects.Namespaces = Namespaces;
 DurableObjects.BaseNamespaces = BaseNamespaces;
 
 export declare namespace DurableObjects {
-  export {
-    Namespaces as Namespaces,
-    BaseNamespaces as BaseNamespaces,
-    type Namespace as Namespace,
-    type NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
-    type NamespaceListParams as NamespaceListParams,
-  };
+  export { Namespaces as Namespaces, BaseNamespaces as BaseNamespaces };
 }

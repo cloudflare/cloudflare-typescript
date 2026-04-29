@@ -1,89 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import { APIPromise } from '../../../../core/api-promise';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
 
 export class BaseReferences extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'riskScoring', 'integrations', 'references'] =
     Object.freeze(['zeroTrust', 'riskScoring', 'integrations', 'references'] as const);
-
-  /**
-   * Retrieves a Zero Trust risk score integration using its external reference ID.
-   *
-   * @example
-   * ```ts
-   * const reference =
-   *   await client.zeroTrust.riskScoring.integrations.references.get(
-   *     'reference_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  get(
-    referenceID: string,
-    params: ReferenceGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ReferenceGetResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return (
-      this._client.get(
-        path`/accounts/${account_id}/zt_risk_scoring/integrations/reference_id/${referenceID}`,
-        options,
-      ) as APIPromise<{ result: ReferenceGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class References extends BaseReferences {}
-
-export interface ReferenceGetResponse {
-  /**
-   * The id of the integration, a UUIDv4.
-   */
-  id: string;
-
-  /**
-   * The Cloudflare account tag.
-   */
-  account_tag: string;
-
-  /**
-   * Whether this integration is enabled and should export changes in risk score.
-   */
-  active: boolean;
-
-  /**
-   * When the integration was created in RFC3339 format.
-   */
-  created_at: string;
-
-  integration_type: 'Okta';
-
-  /**
-   * A reference ID defined by the client. Should be set to the Access-Okta IDP
-   * integration ID. Useful when the risk-score integration needs to be associated
-   * with a secondary asset and recalled using that ID.
-   */
-  reference_id: string;
-
-  /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com".
-   */
-  tenant_url: string;
-
-  /**
-   * The URL for the Shared Signals Framework configuration, e.g.
-   * "/.well-known/sse-configuration/{integration_uuid}/".
-   * https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
-   */
-  well_known_url: string;
-}
-
-export interface ReferenceGetParams {
-  account_id?: string;
-}
-
-export declare namespace References {
-  export { type ReferenceGetResponse as ReferenceGetResponse, type ReferenceGetParams as ReferenceGetParams };
-}

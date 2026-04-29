@@ -1,19 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseOriginPostQuantumEncryption } from 'cloudflare/resources/origin-post-quantum-encryption';
+import { BaseOriginPostQuantumEncryption } from 'cloudflare/resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
 
 const client = new Cloudflare({
-  apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'user@example.com',
+  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 const partialClient = createClient({
-  apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'user@example.com',
+  apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
   resources: [BaseOriginPostQuantumEncryption],
 });

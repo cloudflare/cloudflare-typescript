@@ -1,41 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Accounts,
-  BaseAccounts,
-  type AccountUpdateResponse,
-  type AccountDeleteResponse,
-  type AccountUpdateParams,
-  type AccountDeleteParams,
-} from './accounts';
-export {
-  AddressMaps,
-  BaseAddressMaps,
-  type AddressMap,
-  type Kind,
-  type AddressMapCreateResponse,
-  type AddressMapDeleteResponse,
-  type AddressMapGetResponse,
-  type AddressMapCreateParams,
-  type AddressMapListParams,
-  type AddressMapDeleteParams,
-  type AddressMapEditParams,
-  type AddressMapGetParams,
-  type AddressMapsSinglePage,
-} from './address-maps';
-export {
-  IPs,
-  BaseIPs,
-  type IPUpdateResponse,
-  type IPDeleteResponse,
-  type IPUpdateParams,
-  type IPDeleteParams,
-} from './ips';
-export {
-  Zones,
-  BaseZones,
-  type ZoneUpdateResponse,
-  type ZoneDeleteResponse,
-  type ZoneUpdateParams,
-  type ZoneDeleteParams,
-} from './zones';
+export { Accounts, BaseAccounts } from './accounts';
+export { AddressMaps, BaseAddressMaps } from './address-maps';
+export { IPs, BaseIPs } from './ips';
+export { Zones, BaseZones } from './zones';

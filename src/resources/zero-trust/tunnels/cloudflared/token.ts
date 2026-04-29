@@ -1,9 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import { APIPromise } from '../../../../core/api-promise';
-import { RequestOptions } from '../../../../internal/request-options';
-import { path } from '../../../../internal/utils/path';
 
 export class BaseToken extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'tunnels', 'cloudflared', 'token'] = Object.freeze([
@@ -12,47 +9,5 @@ export class BaseToken extends APIResource {
     'cloudflared',
     'token',
   ] as const);
-
-  /**
-   * Gets the token used to associate cloudflared with a specific tunnel.
-   *
-   * @example
-   * ```ts
-   * const token =
-   *   await client.zeroTrust.tunnels.cloudflared.token.get(
-   *     'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-   *     { account_id: '699d98642c564d2e855e9661899b7252' },
-   *   );
-   * ```
-   */
-  get(
-    tunnelID: string,
-    params: TokenGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<TokenGetResponse> {
-    const { account_id = this._client.accountID } = params ?? {};
-    return (
-      this._client.get(path`/accounts/${account_id}/cfd_tunnel/${tunnelID}/token`, options) as APIPromise<{
-        result: TokenGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Token extends BaseToken {}
-
-/**
- * The Tunnel Token is used as a mechanism to authenticate the operation of a
- * tunnel.
- */
-export type TokenGetResponse = string;
-
-export interface TokenGetParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id?: string;
-}
-
-export declare namespace Token {
-  export { type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
-}

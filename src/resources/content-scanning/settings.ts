@@ -1,62 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
 export class BaseSettings extends APIResource {
   static override readonly _key: readonly ['contentScanning', 'settings'] = Object.freeze([
     'contentScanning',
     'settings',
   ] as const);
-
-  /**
-   * Retrieve the current status of Content Scanning.
-   *
-   * @example
-   * ```ts
-   * const setting = await client.contentScanning.settings.get({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
-   * ```
-   */
-  get(
-    params: SettingGetParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<SettingGetResponse> {
-    const { zone_id = this._client.zoneID } = params ?? {};
-    return (
-      this._client.get(path`/zones/${zone_id}/content-upload-scan/settings`, options) as APIPromise<{
-        result: SettingGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Settings extends BaseSettings {}
-
-/**
- * Defines the status for Content Scanning.
- */
-export interface SettingGetResponse {
-  /**
-   * Defines the last modification date (ISO 8601) of the Content Scanning status.
-   */
-  modified?: string;
-
-  /**
-   * Defines the status of Content Scanning.
-   */
-  value?: string;
-}
-
-export interface SettingGetParams {
-  /**
-   * Defines an identifier.
-   */
-  zone_id?: string;
-}
-
-export declare namespace Settings {
-  export { type SettingGetResponse as SettingGetResponse, type SettingGetParams as SettingGetParams };
-}
