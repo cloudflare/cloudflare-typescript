@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { type Agent } from './_shims/index';
-import { stringifyQuery } from './internal/utils/query';
 import * as Core from './core';
 import * as Errors from './error';
 import * as Pagination from './pagination';
@@ -48,7 +47,7 @@ import { CustomCertificates } from './resources/custom-certificates/custom-certi
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
 import { CustomNameservers } from './resources/custom-nameservers/custom-nameservers';
 import { CustomPages } from './resources/custom-pages/custom-pages';
-import { D1Resource } from './resources/d1/d1';
+import { D1 } from './resources/d1/d1';
 import { DCVDelegation } from './resources/dcv-delegation/dcv-delegation';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
@@ -63,7 +62,7 @@ import { Fraud } from './resources/fraud/fraud';
 import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
 import { Hostnames } from './resources/hostnames/hostnames';
-import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
+import { Hyperdrive } from './resources/hyperdrive/hyperdrive';
 import { IAM } from './resources/iam/iam';
 import { Images } from './resources/images/images';
 import { Intel } from './resources/intel/intel';
@@ -337,14 +336,14 @@ export class Cloudflare extends Core.APIClient {
   rules: API.Rules = new API.Rules(this);
   stream: API.Stream = new API.Stream(this);
   alerting: API.Alerting = new API.Alerting(this);
-  d1: API.D1Resource = new API.D1Resource(this);
+  d1: API.D1 = new API.D1(this);
   r2: API.R2 = new API.R2(this);
   r2DataCatalog: API.R2DataCatalog = new API.R2DataCatalog(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
   connectivity: API.Connectivity = new API.Connectivity(this);
-  hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
+  hyperdrive: API.Hyperdrive = new API.Hyperdrive(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
@@ -408,10 +407,10 @@ export class Cloudflare extends Core.APIClient {
     customHeaders: Core.Headers,
     usingCustomFetch: boolean,
   ) {
-    if (this.apiEmail && headers['x-auth-email']) {
+    if (this.apiToken && headers['authorization']) {
       return;
     }
-    if (customHeaders['x-auth-email'] === null) {
+    if (customHeaders['authorization'] === null) {
       return;
     }
 
@@ -422,10 +421,10 @@ export class Cloudflare extends Core.APIClient {
       return;
     }
 
-    if (this.apiToken && headers['authorization']) {
+    if (this.apiEmail && headers['x-auth-email']) {
       return;
     }
-    if (customHeaders['authorization'] === null) {
+    if (customHeaders['x-auth-email'] === null) {
       return;
     }
 
@@ -442,7 +441,7 @@ export class Cloudflare extends Core.APIClient {
     }
 
     throw new Error(
-      'Could not resolve authentication method. Expected one of apiEmail, apiKey, apiToken or userServiceKey to be set. Or for one of the "X-Auth-Email", "X-Auth-Key", "Authorization" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
+      'Could not resolve authentication method. Expected one of apiToken, apiKey, apiEmail or userServiceKey to be set. Or for one of the "Authorization", "X-Auth-Key", "X-Auth-Email" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
     );
   }
 
@@ -471,11 +470,11 @@ export class Cloudflare extends Core.APIClient {
     return {};
   }
 
-  protected apiEmailAuth(opts: Core.FinalRequestOptions): Core.Headers {
-    if (this.apiEmail == null) {
+  protected apiTokenAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiToken == null) {
       return {};
     }
-    return { 'X-Auth-Email': this.apiEmail };
+    return { Authorization: `Bearer ${this.apiToken}` };
   }
 
   protected apiKeyAuth(opts: Core.FinalRequestOptions): Core.Headers {
@@ -485,11 +484,11 @@ export class Cloudflare extends Core.APIClient {
     return { 'X-Auth-Key': this.apiKey };
   }
 
-  protected apiTokenAuth(opts: Core.FinalRequestOptions): Core.Headers {
-    if (this.apiToken == null) {
+  protected apiEmailAuth(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.apiEmail == null) {
       return {};
     }
-    return { Authorization: `Bearer ${this.apiToken}` };
+    return { 'X-Auth-Email': this.apiEmail };
   }
 
   protected userServiceKeyAuth(opts: Core.FinalRequestOptions): Core.Headers {
@@ -497,10 +496,6 @@ export class Cloudflare extends Core.APIClient {
       return {};
     }
     return { 'X-Auth-User-Service-Key': this.userServiceKey };
-  }
-
-  protected override stringifyQuery(query: object | Record<string, unknown>): string {
-    return stringifyQuery(query);
   }
 
   static Cloudflare = this;
@@ -585,14 +580,14 @@ Cloudflare.RequestTracers = RequestTracers;
 Cloudflare.Rules = Rules;
 Cloudflare.Stream = Stream;
 Cloudflare.Alerting = Alerting;
-Cloudflare.D1Resource = D1Resource;
+Cloudflare.D1 = D1;
 Cloudflare.R2 = R2;
 Cloudflare.R2DataCatalog = R2DataCatalog;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
 Cloudflare.Connectivity = Connectivity;
-Cloudflare.HyperdriveResource = HyperdriveResource;
+Cloudflare.Hyperdrive = Hyperdrive;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
@@ -789,7 +784,7 @@ export declare namespace Cloudflare {
 
   export { Alerting as Alerting };
 
-  export { D1Resource as D1Resource };
+  export { D1 as D1 };
 
   export { R2 as R2 };
 
@@ -803,7 +798,7 @@ export declare namespace Cloudflare {
 
   export { Connectivity as Connectivity };
 
-  export { HyperdriveResource as HyperdriveResource };
+  export { Hyperdrive as Hyperdrive };
 
   export { RUM as RUM };
 
@@ -879,30 +874,9 @@ export declare namespace Cloudflare {
 
   export { TokenValidation as TokenValidation };
 
-  export type ASN = API.ASN;
-  export type AuditLog = API.AuditLog;
-  export type CertificateCA = API.CertificateCA;
-  export type CertificateRequestType = API.CertificateRequestType;
-  export type CloudflareTunnel = API.CloudflareTunnel;
   export type ErrorData = API.ErrorData;
   export type Identifier = API.Identifier;
-  export type LoadBalancerPreview = API.LoadBalancerPreview;
-  export type Member = API.Member;
   export type PaginationInfo = API.PaginationInfo;
-  export type Permission = API.Permission;
-  export type PermissionGrant = API.PermissionGrant;
-  export type RatePlan = API.RatePlan;
-  export type ResponseInfo = API.ResponseInfo;
-  export type Result = API.Result;
-  export type Role = API.Role;
-  export type SortDirection = API.SortDirection;
-  export type Subscription = API.Subscription;
-  export type SubscriptionComponent = API.SubscriptionComponent;
-  export type SubscriptionZone = API.SubscriptionZone;
-  export type Token = API.Token;
-  export type TokenConditionCIDRList = API.TokenConditionCIDRList;
-  export type TokenPolicy = API.TokenPolicy;
-  export type TokenValue = API.TokenValue;
 }
 
 export { toFile, fileFromPath } from './uploads';

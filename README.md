@@ -33,13 +33,12 @@ const client = new Cloudflare({
   apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
-const zone = await client.zones.create({
-  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-  name: 'example.com',
-  type: 'full',
+const response = await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
 });
 
-console.log(zone.id);
+console.log(response.id);
 ```
 
 ### Request & Response types
@@ -54,60 +53,16 @@ const client = new Cloudflare({
   apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
-const params: Cloudflare.ZoneCreateParams = {
-  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-  name: 'example.com',
-  type: 'full',
+const params: Cloudflare.Cache.CacheReserveClearParams = {
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
 };
-const zone: Cloudflare.Zone = await client.zones.create(params);
+const response: Cloudflare.Cache.CacheReserveClearResponse = await client.cache.cacheReserve.clear(
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
-
-## File uploads
-
-Request parameters that correspond to file uploads can be passed in many different forms:
-
-- `File` (or an object with the same structure)
-- a `fetch` `Response` (or an object with the same structure)
-- an `fs.ReadStream`
-- the return value of our `toFile` helper
-
-```ts
-import fs from 'fs';
-import fetch from 'node-fetch';
-import Cloudflare, { toFile } from 'cloudflare';
-
-const client = new Cloudflare();
-
-// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  value: fs.createReadStream('/path/to/file'),
-});
-
-// Or if you have the web `File` API you can pass a `File` instance:
-await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  value: new File(['my bytes'], 'file'),
-});
-
-// You can also pass a `fetch` `Response`:
-await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  value: await fetch('https://somesite/file'),
-});
-
-// Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  value: await toFile(Buffer.from('my bytes'), 'file'),
-});
-await client.kv.namespaces.values.update('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
-  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  value: await toFile(new Uint8Array([0, 1, 2]), 'file'),
-});
-```
 
 ## Handling errors
 
@@ -117,8 +72,11 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const zone = await client.zones
-  .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
+const response = await client.cache.cacheReserve
+  .clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
+  })
   .catch(async (err) => {
     if (err instanceof Cloudflare.APIError) {
       console.log(err.status); // 400
@@ -159,7 +117,10 @@ const client = new Cloudflare({
 });
 
 // Or, configure per-request:
-await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
+}, {
   maxRetries: 5,
 });
 ```
@@ -176,7 +137,10 @@ const client = new Cloudflare({
 });
 
 // Override per-request:
-await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.cache.cacheReserve.clear({
+  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  body: {},
+}, {
   timeout: 5 * 1000,
 });
 ```
@@ -184,37 +148,6 @@ await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
-
-## Auto-pagination
-
-List methods in the Cloudflare API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
-
-```ts
-async function fetchAllAccounts(params) {
-  const allAccounts = [];
-  // Automatically fetches more pages as needed.
-  for await (const account of client.accounts.list()) {
-    allAccounts.push(account);
-  }
-  return allAccounts;
-}
-```
-
-Alternatively, you can request a single page at a time:
-
-```ts
-let page = await client.accounts.list();
-for (const account of page.result) {
-  console.log(account);
-}
-
-// Convenience methods are provided for manually paginating:
-while (page.hasNextPage()) {
-  page = await page.getNextPage();
-  // ...
-}
-```
 
 ## Advanced Usage
 
@@ -228,25 +161,23 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Cloudflare();
 
-const response = await client.zones
-  .create({
-    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    name: 'example.com',
-    type: 'full',
+const response = await client.cache.cacheReserve
+  .clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: zone, response: raw } = await client.zones
-  .create({
-    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    name: 'example.com',
-    type: 'full',
+const { data: response, response: raw } = await client.cache.cacheReserve
+  .clear({
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(zone.id);
+console.log(response.id);
 ```
 
 ### Making custom/undocumented requests
@@ -350,8 +281,11 @@ const client = new Cloudflare({
 });
 
 // Override per-request:
-await client.zones.delete(
-  { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+await client.cache.cacheReserve.clear(
+  {
+    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    body: {},
+  },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },

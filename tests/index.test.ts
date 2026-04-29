@@ -23,8 +23,7 @@ describe('instantiate client', () => {
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
     });
 
     test('they are used in the request', async () => {
@@ -56,8 +55,7 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -66,8 +64,7 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -76,8 +73,7 @@ describe('instantiate client', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -86,8 +82,7 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -105,8 +100,7 @@ describe('instantiate client', () => {
     // make sure the global fetch type is assignable to our Fetch type
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: defaultFetch,
     });
   });
@@ -114,8 +108,7 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Cloudflare({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -147,8 +140,7 @@ describe('instantiate client', () => {
 
     const client = new Cloudflare({
       baseURL: 'http://localhost:5000/',
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: testFetch,
     });
 
@@ -160,8 +152,7 @@ describe('instantiate client', () => {
     test('trailing slash', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/custom/path/',
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -169,8 +160,7 @@ describe('instantiate client', () => {
     test('no trailing slash', () => {
       const client = new Cloudflare({
         baseURL: 'http://localhost:5000/custom/path',
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -182,44 +172,31 @@ describe('instantiate client', () => {
     test('explicit option', () => {
       const client = new Cloudflare({
         baseURL: 'https://example.com',
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-      });
+      const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = ''; // empty
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-      });
+      const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
 
     test('blank env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = '  '; // blank
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-      });
+      const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
       expect(client.baseURL).toEqual('https://api.cloudflare.com/client/v4');
     });
 
     test('in request options', () => {
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-      });
+      const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
@@ -227,8 +204,7 @@ describe('instantiate client', () => {
 
     test('in request options overridden by client options', () => {
       const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
+        apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
         baseURL: 'http://localhost:5000/client',
       });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
@@ -238,10 +214,7 @@ describe('instantiate client', () => {
 
     test('in request options overridden by env variable', () => {
       process.env['CLOUDFLARE_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new Cloudflare({
-        apiKey: '144c9defac04969c7bfad8efaa8ea194',
-        apiEmail: 'user@example.com',
-      });
+      const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -249,45 +222,31 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Cloudflare({
-      maxRetries: 4,
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-    });
+    const client = new Cloudflare({ maxRetries: 4, apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-    });
+    const client2 = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
     expect(client2.maxRetries).toEqual(2);
   });
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['CLOUDFLARE_API_KEY'] = '144c9defac04969c7bfad8efaa8ea194';
-    process.env['CLOUDFLARE_EMAIL'] = 'user@example.com';
+    process.env['CLOUDFLARE_API_TOKEN'] = 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY';
     const client = new Cloudflare();
-    expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
-    expect(client.apiEmail).toBe('user@example.com');
+    expect(client.apiToken).toBe('Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['CLOUDFLARE_API_KEY'] = 'another 144c9defac04969c7bfad8efaa8ea194';
-    process.env['CLOUDFLARE_EMAIL'] = 'another user@example.com';
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-    });
-    expect(client.apiKey).toBe('144c9defac04969c7bfad8efaa8ea194');
-    expect(client.apiEmail).toBe('user@example.com');
+    process.env['CLOUDFLARE_API_TOKEN'] = 'another Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY';
+    const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
+    expect(client.apiToken).toBe('Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY');
   });
 });
 
 describe('request building', () => {
-  const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com' });
+  const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY' });
 
   describe('Content-Length', () => {
     test('handles multi-byte characters', async () => {
@@ -330,8 +289,7 @@ describe('retries', () => {
     };
 
     const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       timeout: 10,
       fetch: testFetch,
     });
@@ -365,8 +323,7 @@ describe('retries', () => {
     };
 
     const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: testFetch,
       maxRetries: 4,
     });
@@ -394,8 +351,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: testFetch,
       maxRetries: 4,
     });
@@ -428,8 +384,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -462,8 +417,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
+      apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY',
       fetch: testFetch,
       maxRetries: 4,
     });
@@ -493,11 +447,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      fetch: testFetch,
-    });
+    const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -524,11 +474,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Cloudflare({
-      apiKey: '144c9defac04969c7bfad8efaa8ea194',
-      apiEmail: 'user@example.com',
-      fetch: testFetch,
-    });
+    const client = new Cloudflare({ apiToken: 'Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
