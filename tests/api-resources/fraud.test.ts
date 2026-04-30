@@ -24,6 +24,10 @@ describe('resource fraud', () => {
   test('update: required and optional params', async () => {
     const response = await client.fraud.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      authentication_settings: {
+        failure_criteria: { kind: 'status_code', status_codes: [200, 201] },
+        success_criteria: { kind: 'status_code', status_codes: [200, 201] },
+      },
       user_profiles: 'disabled',
       username_expressions: ['string'],
     });
