@@ -52,6 +52,17 @@ export class Fraud extends APIResource {
 
 export interface FraudSettings {
   /**
+   * Configuration for classifying login authentication outcomes based on the origin
+   * response. Requires `user_profiles` to be enabled.
+   *
+   * - Success and failure criteria are independently updatable — sending only
+   *   `success_criteria` leaves failure codes untouched, and vice versa.
+   * - Omit `authentication_settings` entirely to leave both unchanged.
+   * - Status codes must not overlap between success and failure criteria.
+   */
+  authentication_settings?: FraudSettings.AuthenticationSettings;
+
+  /**
    * Whether Fraud User Profiles is enabled for the zone.
    */
   user_profiles?: 'enabled' | 'disabled';
@@ -68,11 +79,89 @@ export interface FraudSettings {
   username_expressions?: Array<string>;
 }
 
+export namespace FraudSettings {
+  /**
+   * Configuration for classifying login authentication outcomes based on the origin
+   * response. Requires `user_profiles` to be enabled.
+   *
+   * - Success and failure criteria are independently updatable — sending only
+   *   `success_criteria` leaves failure codes untouched, and vice versa.
+   * - Omit `authentication_settings` entirely to leave both unchanged.
+   * - Status codes must not overlap between success and failure criteria.
+   */
+  export interface AuthenticationSettings {
+    /**
+     * Criterion for identifying failed login responses.
+     */
+    failure_criteria?: AuthenticationSettings.FailureCriteria;
+
+    /**
+     * Criterion for identifying successful login responses.
+     */
+    success_criteria?: AuthenticationSettings.SuccessCriteria;
+  }
+
+  export namespace AuthenticationSettings {
+    /**
+     * Criterion for identifying failed login responses.
+     */
+    export interface FailureCriteria {
+      /**
+       * The type of criterion. Currently only `status_code` is supported.
+       */
+      kind: 'status_code';
+
+      /**
+       * HTTP status codes to match against the origin response.
+       *
+       * - Maximum of 10 codes per criterion.
+       * - Each code must be a valid HTTP status code (100-599).
+       * - Codes are deduplicated and sorted on save.
+       * - Omit to leave unchanged on update.
+       * - Provide an empty array `[]` to clear codes on update.
+       */
+      status_codes?: Array<number>;
+    }
+
+    /**
+     * Criterion for identifying successful login responses.
+     */
+    export interface SuccessCriteria {
+      /**
+       * The type of criterion. Currently only `status_code` is supported.
+       */
+      kind: 'status_code';
+
+      /**
+       * HTTP status codes to match against the origin response.
+       *
+       * - Maximum of 10 codes per criterion.
+       * - Each code must be a valid HTTP status code (100-599).
+       * - Codes are deduplicated and sorted on save.
+       * - Omit to leave unchanged on update.
+       * - Provide an empty array `[]` to clear codes on update.
+       */
+      status_codes?: Array<number>;
+    }
+  }
+}
+
 export interface FraudUpdateParams {
   /**
    * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Body param: Configuration for classifying login authentication outcomes based on
+   * the origin response. Requires `user_profiles` to be enabled.
+   *
+   * - Success and failure criteria are independently updatable — sending only
+   *   `success_criteria` leaves failure codes untouched, and vice versa.
+   * - Omit `authentication_settings` entirely to leave both unchanged.
+   * - Status codes must not overlap between success and failure criteria.
+   */
+  authentication_settings?: FraudUpdateParams.AuthenticationSettings;
 
   /**
    * Body param: Whether Fraud User Profiles is enabled for the zone.
@@ -89,6 +178,73 @@ export interface FraudUpdateParams {
    *   `messages` array.
    */
   username_expressions?: Array<string>;
+}
+
+export namespace FraudUpdateParams {
+  /**
+   * Configuration for classifying login authentication outcomes based on the origin
+   * response. Requires `user_profiles` to be enabled.
+   *
+   * - Success and failure criteria are independently updatable — sending only
+   *   `success_criteria` leaves failure codes untouched, and vice versa.
+   * - Omit `authentication_settings` entirely to leave both unchanged.
+   * - Status codes must not overlap between success and failure criteria.
+   */
+  export interface AuthenticationSettings {
+    /**
+     * Criterion for identifying failed login responses.
+     */
+    failure_criteria?: AuthenticationSettings.FailureCriteria;
+
+    /**
+     * Criterion for identifying successful login responses.
+     */
+    success_criteria?: AuthenticationSettings.SuccessCriteria;
+  }
+
+  export namespace AuthenticationSettings {
+    /**
+     * Criterion for identifying failed login responses.
+     */
+    export interface FailureCriteria {
+      /**
+       * The type of criterion. Currently only `status_code` is supported.
+       */
+      kind: 'status_code';
+
+      /**
+       * HTTP status codes to match against the origin response.
+       *
+       * - Maximum of 10 codes per criterion.
+       * - Each code must be a valid HTTP status code (100-599).
+       * - Codes are deduplicated and sorted on save.
+       * - Omit to leave unchanged on update.
+       * - Provide an empty array `[]` to clear codes on update.
+       */
+      status_codes?: Array<number>;
+    }
+
+    /**
+     * Criterion for identifying successful login responses.
+     */
+    export interface SuccessCriteria {
+      /**
+       * The type of criterion. Currently only `status_code` is supported.
+       */
+      kind: 'status_code';
+
+      /**
+       * HTTP status codes to match against the origin response.
+       *
+       * - Maximum of 10 codes per criterion.
+       * - Each code must be a valid HTTP status code (100-599).
+       * - Codes are deduplicated and sorted on save.
+       * - Omit to leave unchanged on update.
+       * - Provide an empty array `[]` to clear codes on update.
+       */
+      status_codes?: Array<number>;
+    }
+  }
 }
 
 export interface FraudGetParams {
