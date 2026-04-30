@@ -476,19 +476,7 @@ export namespace InstanceCreateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -868,19 +856,7 @@ export namespace InstanceUpdateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -1260,19 +1236,7 @@ export namespace InstanceListResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -1652,19 +1616,7 @@ export namespace InstanceDeleteResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -2114,19 +2066,7 @@ export namespace InstanceReadResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -2675,19 +2615,7 @@ export namespace InstanceCreateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -3166,19 +3094,7 @@ export namespace InstanceUpdateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
