@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as ItemsAPI from './items';
-import { Items } from './items';
 import * as JobsAPI from './jobs';
 import {
   JobCreateParams,
@@ -22,11 +19,10 @@ import * as SippyAPI from '../../r2/buckets/sippy';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Instances extends APIResource {
-  items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
   jobs: JobsAPI.Jobs = new JobsAPI.Jobs(this._client);
 
   /**
-   * Create a new instances.
+   * Create a new instance.
    *
    * @example
    * ```ts
@@ -40,7 +36,7 @@ export class Instances extends APIResource {
     params: InstanceCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/instances`, {
         body,
@@ -50,7 +46,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Update instances.
+   * Update instance.
    *
    * @example
    * ```ts
@@ -62,19 +58,10 @@ export class Instances extends APIResource {
    */
   update(
     id: string,
-    params?: InstanceUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceUpdateResponse>;
-  update(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceUpdateResponse>;
-  update(
-    id: string,
-    params: InstanceUpdateParams | Core.RequestOptions = {},
+    params: InstanceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/ai-search/instances/${id}`, {
         body,
@@ -97,20 +84,10 @@ export class Instances extends APIResource {
    * ```
    */
   list(
-    params?: InstanceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse>;
-  list(
-    params: InstanceListParams | Core.RequestOptions = {},
+    params: InstanceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<InstanceListResponsesV4PagePaginationArray, InstanceListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-search/instances`,
       InstanceListResponsesV4PagePaginationArray,
@@ -119,7 +96,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Delete instances.
+   * Delete instance.
    *
    * @example
    * ```ts
@@ -131,19 +108,10 @@ export class Instances extends APIResource {
    */
   delete(
     id: string,
-    params?: InstanceDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceDeleteResponse>;
-  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceDeleteResponse>;
-  delete(
-    id: string,
-    params: InstanceDeleteParams | Core.RequestOptions = {},
+    params: InstanceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/ai-search/instances/${id}`, options) as Core.APIPromise<{
         result: InstanceDeleteResponse;
@@ -172,7 +140,7 @@ export class Instances extends APIResource {
     params: InstanceChatCompletionsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceChatCompletionsResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/chat/completions`, {
       body,
       ...options,
@@ -180,7 +148,7 @@ export class Instances extends APIResource {
   }
 
   /**
-   * Read instances.
+   * Read instance.
    *
    * @example
    * ```ts
@@ -192,19 +160,10 @@ export class Instances extends APIResource {
    */
   read(
     id: string,
-    params?: InstanceReadParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceReadResponse>;
-  read(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceReadResponse>;
-  read(
-    id: string,
-    params: InstanceReadParams | Core.RequestOptions = {},
+    params: InstanceReadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceReadResponse> {
-    if (isRequestOptions(params)) {
-      return this.read(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai-search/instances/${id}`, options) as Core.APIPromise<{
         result: InstanceReadResponse;
@@ -226,19 +185,10 @@ export class Instances extends APIResource {
    */
   search(
     id: string,
-    params?: InstanceSearchParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceSearchResponse>;
-  search(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceSearchResponse>;
-  search(
-    id: string,
-    params: InstanceSearchParams | Core.RequestOptions = {},
+    params: InstanceSearchParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceSearchResponse> {
-    if (isRequestOptions(params)) {
-      return this.search(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/search`, {
         body,
@@ -260,19 +210,10 @@ export class Instances extends APIResource {
    */
   stats(
     id: string,
-    params?: InstanceStatsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InstanceStatsResponse>;
-  stats(id: string, options?: Core.RequestOptions): Core.APIPromise<InstanceStatsResponse>;
-  stats(
-    id: string,
-    params: InstanceStatsParams | Core.RequestOptions = {},
+    params: InstanceStatsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<InstanceStatsResponse> {
-    if (isRequestOptions(params)) {
-      return this.stats(id, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-search/instances/${id}/stats`,
@@ -438,10 +379,10 @@ export interface InstanceCreateResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -484,19 +425,7 @@ export namespace InstanceCreateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -830,10 +759,10 @@ export interface InstanceUpdateResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -876,19 +805,7 @@ export namespace InstanceUpdateResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -1222,10 +1139,10 @@ export interface InstanceListResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -1268,19 +1185,7 @@ export namespace InstanceListResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -1614,10 +1519,10 @@ export interface InstanceDeleteResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -1660,19 +1565,7 @@ export namespace InstanceDeleteResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -2076,10 +1969,10 @@ export interface InstanceReadResponse {
   status?: string;
 
   /**
-   * Interval between automatic syncs, in seconds. Allowed values: 3600 (1h), 7200
-   * (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
+   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   token_id?: string;
 
@@ -2122,19 +2015,7 @@ export namespace InstanceReadResponse {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -2428,7 +2309,7 @@ export interface InstanceCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: AI Search instance ID. Lowercase alphanumeric, hyphens, and
@@ -2630,10 +2511,11 @@ export interface InstanceCreateParams {
   source_params?: InstanceCreateParams.SourceParams | null;
 
   /**
-   * Body param: Interval between automatic syncs, in seconds. Allowed values: 3600
-   * (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
+   * (15min), 1800 (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200
+   * (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   /**
    * Body param
@@ -2682,19 +2564,7 @@ export namespace InstanceCreateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -2878,7 +2748,7 @@ export interface InstanceUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -3110,10 +2980,11 @@ export interface InstanceUpdateParams {
     | null;
 
   /**
-   * Body param: Interval between automatic syncs, in seconds. Allowed values: 3600
-   * (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
+   * Body param: Interval between automatic syncs, in seconds. Allowed values: 900
+   * (15min), 1800 (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200
+   * (12h), 86400 (24h).
    */
-  sync_interval?: 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
+  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
   /**
    * Body param
@@ -3172,19 +3043,7 @@ export namespace InstanceUpdateParams {
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
-    search_for_agents?: Metadata.SearchForAgents;
-
     worker_domain?: string;
-  }
-
-  export namespace Metadata {
-    export interface SearchForAgents {
-      hostname: string;
-
-      zone_id: string;
-
-      zone_name: string;
-    }
   }
 
   export interface PublicEndpointParams {
@@ -3368,38 +3227,38 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
-   * Query param
+   * Query param: Filter by namespace.
    */
-  namespace?: string | null;
+  namespace?: string;
 
   /**
-   * Query param: Order By Column Name
+   * Query param: Field to order results by.
    */
   order_by?: 'created_at';
 
   /**
-   * Query param: Order By Direction
+   * Query param: Order direction.
    */
   order_by_direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Search by id
+   * Query param: Filter instances whose id contains this string (case-insensitive).
    */
   search?: string;
 }
 
 export interface InstanceDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface InstanceChatCompletionsParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -3579,14 +3438,14 @@ export namespace InstanceChatCompletionsParams {
 }
 
 export interface InstanceReadParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface InstanceSearchParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -3730,11 +3589,10 @@ export namespace InstanceSearchParams {
 }
 
 export interface InstanceStatsParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
-Instances.Items = Items;
 Instances.Jobs = Jobs;
 Instances.JobListResponsesV4PagePaginationArray = JobListResponsesV4PagePaginationArray;
 
@@ -3758,8 +3616,6 @@ export declare namespace Instances {
     type InstanceSearchParams as InstanceSearchParams,
     type InstanceStatsParams as InstanceStatsParams,
   };
-
-  export { Items as Items };
 
   export {
     Jobs as Jobs,

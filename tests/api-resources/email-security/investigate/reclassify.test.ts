@@ -11,10 +11,10 @@ const client = new Cloudflare({
 
 describe('resource reclassify', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.reclassify.create('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expected_disposition: 'NONE',
-    });
+    const responsePromise = client.emailSecurity.investigate.reclassify.create(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', expected_disposition: 'NONE' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,12 +25,14 @@ describe('resource reclassify', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.reclassify.create('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expected_disposition: 'NONE',
-      submission: true,
-      eml_content: 'eml_content',
-      escalated_submission_id: 'escalated_submission_id',
-    });
+    const response = await client.emailSecurity.investigate.reclassify.create(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        expected_disposition: 'NONE',
+        eml_content: 'eml_content',
+        escalated_submission_id: 'escalated_submission_id',
+      },
+    );
   });
 });

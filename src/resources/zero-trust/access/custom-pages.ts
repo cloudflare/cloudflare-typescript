@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -25,7 +24,7 @@ export class CustomPages extends APIResource {
     params: CustomPageCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageWithoutHTML> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/access/custom_pages`, {
         body,
@@ -57,7 +56,7 @@ export class CustomPages extends APIResource {
     params: CustomPageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageWithoutHTML> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/access/custom_pages/${customPageId}`, {
         body,
@@ -80,20 +79,10 @@ export class CustomPages extends APIResource {
    * ```
    */
   list(
-    params?: CustomPageListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomPageWithoutHTMLsV4PagePaginationArray, CustomPageWithoutHTML>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomPageWithoutHTMLsV4PagePaginationArray, CustomPageWithoutHTML>;
-  list(
-    params: CustomPageListParams | Core.RequestOptions = {},
+    params: CustomPageListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomPageWithoutHTMLsV4PagePaginationArray, CustomPageWithoutHTML> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/access/custom_pages`,
       CustomPageWithoutHTMLsV4PagePaginationArray,
@@ -115,19 +104,10 @@ export class CustomPages extends APIResource {
    */
   delete(
     customPageId: string,
-    params?: CustomPageDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomPageDeleteResponse>;
-  delete(customPageId: string, options?: Core.RequestOptions): Core.APIPromise<CustomPageDeleteResponse>;
-  delete(
-    customPageId: string,
-    params: CustomPageDeleteParams | Core.RequestOptions = {},
+    params: CustomPageDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(customPageId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/access/custom_pages/${customPageId}`,
@@ -150,19 +130,10 @@ export class CustomPages extends APIResource {
    */
   get(
     customPageId: string,
-    params?: CustomPageGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomPage>;
-  get(customPageId: string, options?: Core.RequestOptions): Core.APIPromise<CustomPage>;
-  get(
-    customPageId: string,
-    params: CustomPageGetParams | Core.RequestOptions = {},
+    params: CustomPageGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPage> {
-    if (isRequestOptions(params)) {
-      return this.get(customPageId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/access/custom_pages/${customPageId}`,
@@ -224,7 +195,7 @@ export interface CustomPageCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Custom page HTML.
@@ -246,7 +217,7 @@ export interface CustomPageUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Custom page HTML.
@@ -268,21 +239,21 @@ export interface CustomPageListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CustomPageDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CustomPageGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 CustomPages.CustomPageWithoutHTMLsV4PagePaginationArray = CustomPageWithoutHTMLsV4PagePaginationArray;

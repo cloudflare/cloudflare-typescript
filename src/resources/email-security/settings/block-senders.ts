@@ -1,14 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class BlockSenders extends APIResource {
   /**
-   * Adds a sender pattern to the email block list, preventing messages from matching
-   * senders from being delivered.
+   * Creates a new blocked sender pattern. Emails matching this pattern will be
+   * blocked from delivery. Patterns can be email addresses, domains, or IP
+   * addresses, and support regular expressions.
    *
    * @example
    * ```ts
@@ -25,7 +25,7 @@ export class BlockSenders extends APIResource {
     params: BlockSenderCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/settings/block_senders`, {
         body,
@@ -35,7 +35,9 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Lists all blocked sender entries with their patterns and block reasons.
+   * Returns a paginated list of blocked email sender patterns. These patterns
+   * prevent emails from matching senders from being delivered. Supports filtering by
+   * pattern type and searching across patterns.
    *
    * @example
    * ```ts
@@ -48,20 +50,10 @@ export class BlockSenders extends APIResource {
    * ```
    */
   list(
-    params?: BlockSenderListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse>;
-  list(
-    params: BlockSenderListParams | Core.RequestOptions = {},
+    params: BlockSenderListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/settings/block_senders`,
       BlockSenderListResponsesV4PagePaginationArray,
@@ -70,33 +62,24 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Removes a sender from the email block list, allowing their messages to be
-   * delivered normally.
+   * Removes a blocked sender pattern. After deletion, emails from this sender will
+   * no longer be automatically blocked based on this rule.
    *
    * @example
    * ```ts
    * const blockSender =
    *   await client.emailSecurity.settings.blockSenders.delete(
-   *     2402,
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   delete(
-    patternId: number,
-    params?: BlockSenderDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BlockSenderDeleteResponse>;
-  delete(patternId: number, options?: Core.RequestOptions): Core.APIPromise<BlockSenderDeleteResponse>;
-  delete(
-    patternId: number,
-    params: BlockSenderDeleteParams | Core.RequestOptions = {},
+    patternId: string,
+    params: BlockSenderDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(patternId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
@@ -106,23 +89,24 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Modifies a blocked sender entry, updating its pattern or block reason.
+   * Updates an existing blocked sender pattern. Only provided fields will be
+   * modified. The pattern will continue blocking emails until deleted.
    *
    * @example
    * ```ts
    * const response =
    *   await client.emailSecurity.settings.blockSenders.edit(
-   *     2402,
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   edit(
-    patternId: number,
+    patternId: string,
     params: BlockSenderEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, {
         body,
@@ -132,33 +116,24 @@ export class BlockSenders extends APIResource {
   }
 
   /**
-   * Gets information about a specific blocked sender entry, including the pattern
-   * and block reason.
+   * Retrieves details for a specific blocked sender pattern including its pattern
+   * type, value, and metadata.
    *
    * @example
    * ```ts
    * const blockSender =
    *   await client.emailSecurity.settings.blockSenders.get(
-   *     2402,
+   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
-    patternId: number,
-    params?: BlockSenderGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BlockSenderGetResponse>;
-  get(patternId: number, options?: Core.RequestOptions): Core.APIPromise<BlockSenderGetResponse>;
-  get(
-    patternId: number,
-    params: BlockSenderGetParams | Core.RequestOptions = {},
+    patternId: string,
+    params: BlockSenderGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BlockSenderGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(patternId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
@@ -170,94 +145,146 @@ export class BlockSenders extends APIResource {
 
 export class BlockSenderListResponsesV4PagePaginationArray extends V4PagePaginationArray<BlockSenderListResponse> {}
 
+/**
+ * A blocked sender pattern
+ */
 export interface BlockSenderCreateResponse {
   /**
-   * The unique identifier for the allow policy.
+   * Blocked sender pattern identifier
    */
-  id: number;
-
-  created_at: string;
-
-  is_regex: boolean;
-
-  last_modified: string;
-
-  pattern: string;
-
-  pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+  id?: string;
 
   comments?: string | null;
+
+  created_at?: string;
+
+  is_regex?: boolean;
+
+  /**
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
+   */
+  last_modified?: string;
+
+  modified_at?: string;
+
+  pattern?: string;
+
+  /**
+   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
+   * creating or updating policies, but may be returned for existing entries.
+   */
+  pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
+/**
+ * A blocked sender pattern
+ */
 export interface BlockSenderListResponse {
   /**
-   * The unique identifier for the allow policy.
+   * Blocked sender pattern identifier
    */
-  id: number;
-
-  created_at: string;
-
-  is_regex: boolean;
-
-  last_modified: string;
-
-  pattern: string;
-
-  pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+  id?: string;
 
   comments?: string | null;
+
+  created_at?: string;
+
+  is_regex?: boolean;
+
+  /**
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
+   */
+  last_modified?: string;
+
+  modified_at?: string;
+
+  pattern?: string;
+
+  /**
+   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
+   * creating or updating policies, but may be returned for existing entries.
+   */
+  pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
 export interface BlockSenderDeleteResponse {
   /**
-   * The unique identifier for the allow policy.
+   * Blocked sender pattern identifier
    */
-  id: number;
+  id: string;
 }
 
+/**
+ * A blocked sender pattern
+ */
 export interface BlockSenderEditResponse {
   /**
-   * The unique identifier for the allow policy.
+   * Blocked sender pattern identifier
    */
-  id: number;
-
-  created_at: string;
-
-  is_regex: boolean;
-
-  last_modified: string;
-
-  pattern: string;
-
-  pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+  id?: string;
 
   comments?: string | null;
+
+  created_at?: string;
+
+  is_regex?: boolean;
+
+  /**
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
+   */
+  last_modified?: string;
+
+  modified_at?: string;
+
+  pattern?: string;
+
+  /**
+   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
+   * creating or updating policies, but may be returned for existing entries.
+   */
+  pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
+/**
+ * A blocked sender pattern
+ */
 export interface BlockSenderGetResponse {
   /**
-   * The unique identifier for the allow policy.
+   * Blocked sender pattern identifier
    */
-  id: number;
-
-  created_at: string;
-
-  is_regex: boolean;
-
-  last_modified: string;
-
-  pattern: string;
-
-  pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
+  id?: string;
 
   comments?: string | null;
+
+  created_at?: string;
+
+  is_regex?: boolean;
+
+  /**
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
+   */
+  last_modified?: string;
+
+  modified_at?: string;
+
+  pattern?: string;
+
+  /**
+   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
+   * creating or updating policies, but may be returned for existing entries.
+   */
+  pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
 export interface BlockSenderCreateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -270,7 +297,9 @@ export interface BlockSenderCreateParams {
   pattern: string;
 
   /**
-   * Body param
+   * Body param: Type of pattern matching. Note: UNKNOWN is deprecated and cannot be
+   * used when creating or updating policies, but may be returned for existing
+   * entries.
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -282,9 +311,9 @@ export interface BlockSenderCreateParams {
 
 export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The sorting direction.
@@ -292,40 +321,38 @@ export interface BlockSenderListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The field to sort by.
+   * Query param: Field to sort by.
    */
   order?: 'pattern' | 'created_at';
 
   /**
-   * Query param
+   * Query param: Filter by pattern value.
    */
   pattern?: string;
 
   /**
-   * Query param
+   * Query param: Filter by pattern type.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
   /**
-   * Query param: Allows searching in multiple properties of a record simultaneously.
-   * This parameter is intended for human users, not automation. Its exact behavior
-   * is intentionally left unspecified and is subject to change in the future.
+   * Query param: Search term for filtering records. Behavior may change.
    */
   search?: string;
 }
 
 export interface BlockSenderDeleteParams {
   /**
-   * Account Identifier
+   * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface BlockSenderEditParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -335,24 +362,26 @@ export interface BlockSenderEditParams {
   /**
    * Body param
    */
-  is_regex?: boolean | null;
+  is_regex?: boolean;
 
   /**
    * Body param
    */
-  pattern?: string | null;
+  pattern?: string;
 
   /**
-   * Body param
+   * Body param: Type of pattern matching. Note: UNKNOWN is deprecated and cannot be
+   * used when creating or updating policies, but may be returned for existing
+   * entries.
    */
-  pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN' | null;
+  pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
 export interface BlockSenderGetParams {
   /**
-   * Account Identifier
+   * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 BlockSenders.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;

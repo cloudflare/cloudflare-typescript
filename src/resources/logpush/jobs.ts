@@ -40,11 +40,7 @@ export class Jobs extends APIResource {
    * ```
    */
   create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -104,11 +100,7 @@ export class Jobs extends APIResource {
     params: JobUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LogpushJob | null> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -158,8 +150,7 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -207,8 +198,7 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(jobId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -257,8 +247,7 @@ export class Jobs extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(jobId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -309,6 +298,7 @@ export interface LogpushJob {
     | 'dns_firewall_logs'
     | 'dns_logs'
     | 'email_security_alerts'
+    | 'email_security_post_delivery_events'
     | 'firewall_events'
     | 'gateway_dns'
     | 'gateway_http'
@@ -461,6 +451,12 @@ export interface OutputOptions {
   field_names?: Array<string>;
 
   /**
+   * If set to true, subrequests will be merged into the parent request. Only
+   * supported for the `http_requests` dataset.
+   */
+  merge_subrequests?: boolean | null;
+
+  /**
    * Specifies the output type, such as `ndjson` or `csv`. This sets default values
    * for the rest of the settings, depending on the chosen output type. Some
    * formatting rules, like string quoting, are different between output types.
@@ -535,6 +531,12 @@ export interface OutputOptionsParam {
    * you are interested in.
    */
   field_names?: Array<string>;
+
+  /**
+   * If set to true, subrequests will be merged into the parent request. Only
+   * supported for the `http_requests` dataset.
+   */
+  merge_subrequests?: boolean | null;
 
   /**
    * Specifies the output type, such as `ndjson` or `csv`. This sets default values
@@ -624,6 +626,7 @@ export interface JobCreateParams {
     | 'dns_firewall_logs'
     | 'dns_logs'
     | 'email_security_alerts'
+    | 'email_security_post_delivery_events'
     | 'firewall_events'
     | 'gateway_dns'
     | 'gateway_http'

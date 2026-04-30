@@ -6,38 +6,41 @@ import { SinglePage } from '../../../pagination';
 
 export class Move extends APIResource {
   /**
-   * Moves a single email message to a different folder or changes its quarantine
-   * status.
+   * Moves a single message to a specified mailbox folder (Inbox, JunkEmail,
+   * DeletedItems, RecoverableItemsDeletions, or RecoverableItemsPurges). Requires
+   * active integration.
    *
    * @example
    * ```ts
-   * const moves =
-   *   await client.emailSecurity.investigate.move.create(
-   *     '4Njp3P0STMz2c02Q',
-   *     {
-   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       destination: 'Inbox',
-   *     },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const moveCreateResponse of client.emailSecurity.investigate.move.create(
+   *   '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     destination: 'Inbox',
+   *   },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   create(
-    postfixId: string,
+    investigateId: string,
     params: MoveCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MoveCreateResponse> {
-    const { account_id = this._client.accountId, submission, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/investigate/${postfixId}/move`, {
-        query: { submission },
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MoveCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<MoveCreateResponsesSinglePage, MoveCreateResponse> {
+    const { account_id, ...body } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/investigate/${investigateId}/move`,
+      MoveCreateResponsesSinglePage,
+      { body, method: 'post', ...options },
+    );
   }
 
   /**
-   * Maximum batch size: 1000 messages per request
+   * Moves multiple messages to a specified mailbox folder (Inbox, JunkEmail,
+   * DeletedItems, RecoverableItemsDeletions, or RecoverableItemsPurges). Requires
+   * active integration.
    *
    * @example
    * ```ts
@@ -56,7 +59,7 @@ export class Move extends APIResource {
     params: MoveBulkParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MoveBulkResponsesSinglePage, MoveBulkResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/investigate/move`,
       MoveBulkResponsesSinglePage,
@@ -65,69 +68,111 @@ export class Move extends APIResource {
   }
 }
 
+export class MoveCreateResponsesSinglePage extends SinglePage<MoveCreateResponse> {}
+
 export class MoveBulkResponsesSinglePage extends SinglePage<MoveBulkResponse> {}
 
-export type MoveCreateResponse = Array<MoveCreateResponse.MoveCreateResponseItem>;
+export interface MoveCreateResponse {
+  /**
+   * Whether the operation succeeded
+   */
+  success: boolean;
 
-export namespace MoveCreateResponse {
-  export interface MoveCreateResponseItem {
-    /**
-     * @deprecated Deprecated, use `completed_at` instead
-     */
-    completed_timestamp: string;
+  /**
+   * When the move operation completed (UTC)
+   */
+  completed_at?: string | null;
 
-    /**
-     * @deprecated
-     */
-    item_count: number;
+  /**
+   * @deprecated Deprecated, use `completed_at` instead. End of life: November
+   * 1, 2026.
+   */
+  completed_timestamp?: string;
 
-    success: boolean;
+  /**
+   * Destination folder for the message
+   */
+  destination?: string | null;
 
-    completed_at?: string;
+  /**
+   * @deprecated Number of items moved. End of life: November 1, 2026.
+   */
+  item_count?: number;
 
-    destination?: string | null;
+  /**
+   * Message identifier
+   */
+  message_id?: string | null;
 
-    message_id?: string | null;
+  /**
+   * Type of operation performed
+   */
+  operation?: string | null;
 
-    operation?: string | null;
+  /**
+   * Recipient email address
+   */
+  recipient?: string | null;
 
-    recipient?: string | null;
-
-    status?: string | null;
-  }
+  /**
+   * Operation status
+   */
+  status?: string | null;
 }
 
 export interface MoveBulkResponse {
   /**
-   * @deprecated Deprecated, use `completed_at` instead
+   * Whether the operation succeeded
    */
-  completed_timestamp: string;
-
-  /**
-   * @deprecated
-   */
-  item_count: number;
-
   success: boolean;
 
-  completed_at?: string;
+  /**
+   * When the move operation completed (UTC)
+   */
+  completed_at?: string | null;
 
+  /**
+   * @deprecated Deprecated, use `completed_at` instead. End of life: November
+   * 1, 2026.
+   */
+  completed_timestamp?: string;
+
+  /**
+   * Destination folder for the message
+   */
   destination?: string | null;
 
+  /**
+   * @deprecated Number of items moved. End of life: November 1, 2026.
+   */
+  item_count?: number;
+
+  /**
+   * Message identifier
+   */
   message_id?: string | null;
 
+  /**
+   * Type of operation performed
+   */
   operation?: string | null;
 
+  /**
+   * Recipient email address
+   */
   recipient?: string | null;
 
+  /**
+   * Operation status
+   */
   status?: string | null;
 }
 
 export interface MoveCreateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -138,19 +183,13 @@ export interface MoveCreateParams {
     | 'DeletedItems'
     | 'RecoverableItemsDeletions'
     | 'RecoverableItemsPurges';
-
-  /**
-   * Query param: When true, search the submissions datastore only. When false or
-   * omitted, search the regular datastore only.
-   */
-  submission?: boolean;
 }
 
 export interface MoveBulkParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -163,23 +202,25 @@ export interface MoveBulkParams {
     | 'RecoverableItemsPurges';
 
   /**
-   * Body param: List of message IDs to move.
+   * Body param: List of message IDs to move
    */
   ids?: Array<string>;
 
   /**
-   * @deprecated Body param: Deprecated: Use `ids` instead. List of message IDs to
-   * move.
+   * @deprecated Body param: Deprecated, use `ids` instead. End of life: November
+   * 1, 2026. List of message IDs to move.
    */
   postfix_ids?: Array<string>;
 }
 
+Move.MoveCreateResponsesSinglePage = MoveCreateResponsesSinglePage;
 Move.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 
 export declare namespace Move {
   export {
     type MoveCreateResponse as MoveCreateResponse,
     type MoveBulkResponse as MoveBulkResponse,
+    MoveCreateResponsesSinglePage as MoveCreateResponsesSinglePage,
     MoveBulkResponsesSinglePage as MoveBulkResponsesSinglePage,
     type MoveCreateParams as MoveCreateParams,
     type MoveBulkParams as MoveBulkParams,

@@ -9,11 +9,14 @@ import {
   OrganizationProfileResource,
   OrganizationProfileUpdateParams,
 } from './organization-profile';
+import * as LogsAPI from './logs/logs';
+import { Logs } from './logs/logs';
 import { SinglePage } from '../../pagination';
 
 export class Organizations extends APIResource {
   organizationProfile: OrganizationProfileAPI.OrganizationProfileResource =
     new OrganizationProfileAPI.OrganizationProfileResource(this._client);
+  logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 
   /**
    * Create a new organization for a user. (Currently in Closed Beta - see
@@ -296,6 +299,7 @@ export namespace OrganizationListParams {
 
 Organizations.OrganizationsSinglePage = OrganizationsSinglePage;
 Organizations.OrganizationProfileResource = OrganizationProfileResource;
+Organizations.Logs = Logs;
 
 export declare namespace Organizations {
   export {
@@ -312,4 +316,6 @@ export declare namespace Organizations {
     type OrganizationProfile as OrganizationProfile,
     type OrganizationProfileUpdateParams as OrganizationProfileUpdateParams,
   };
+
+  export { Logs as Logs };
 }

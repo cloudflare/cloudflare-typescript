@@ -28,7 +28,7 @@ describe('resource v1', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'id',
       creator: 'creator',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       metadata: {},
       requireSignedURLs: true,
       url: 'https://example.com/path/to/logo.png',

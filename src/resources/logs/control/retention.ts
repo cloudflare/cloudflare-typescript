@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Retention extends APIResource {
@@ -17,18 +16,10 @@ export class Retention extends APIResource {
    * ```
    */
   create(
-    params?: RetentionCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RetentionCreateResponse | null>;
-  create(options?: Core.RequestOptions): Core.APIPromise<RetentionCreateResponse | null>;
-  create(
-    params: RetentionCreateParams | Core.RequestOptions = {},
+    params: RetentionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RetentionCreateResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/logs/control/retention/flag`, {
         body,
@@ -48,18 +39,10 @@ export class Retention extends APIResource {
    * ```
    */
   get(
-    params?: RetentionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RetentionGetResponse | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<RetentionGetResponse | null>;
-  get(
-    params: RetentionGetParams | Core.RequestOptions = {},
+    params: RetentionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RetentionGetResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/logs/control/retention/flag`, options) as Core.APIPromise<{
         result: RetentionGetResponse | null;
@@ -86,7 +69,7 @@ export interface RetentionCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The log retention flag for Logpull API.
@@ -98,7 +81,7 @@ export interface RetentionGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace Retention {

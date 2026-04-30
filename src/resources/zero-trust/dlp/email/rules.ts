@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { SinglePage } from '../../../../pagination';
 
@@ -28,7 +27,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/email/rules`, { body, ...options }) as Core.APIPromise<{
         result: RuleCreateResponse;
@@ -64,7 +63,7 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/email/rules/${ruleId}`, {
         body,
@@ -87,18 +86,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/email/rules`,
       RuleListResponsesSinglePage,
@@ -120,19 +111,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleId: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>;
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dlp/email/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleDeleteResponse;
@@ -154,7 +136,7 @@ export class Rules extends APIResource {
    * ```
    */
   bulkEdit(params: RuleBulkEditParams, options?: Core.RequestOptions): Core.APIPromise<RuleBulkEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/dlp/email/rules`, { body, ...options }) as Core.APIPromise<{
         result: RuleBulkEditResponse;
@@ -176,19 +158,10 @@ export class Rules extends APIResource {
    */
   get(
     ruleId: string,
-    params?: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleGetResponse>;
-  get(
-    ruleId: string,
-    params: RuleGetParams | Core.RequestOptions = {},
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/email/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleGetResponse;
@@ -437,7 +410,7 @@ export interface RuleCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -485,7 +458,7 @@ export interface RuleUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -530,18 +503,18 @@ export namespace RuleUpdateParams {
 }
 
 export interface RuleListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface RuleBulkEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -550,7 +523,7 @@ export interface RuleBulkEditParams {
 }
 
 export interface RuleGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;

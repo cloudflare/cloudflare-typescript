@@ -14,22 +14,14 @@ export class Groups extends APIResource {
    * @example
    * ```ts
    * const group = await client.zeroTrust.access.groups.create({
-   *   include: [
-   *     {
-   *       group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' },
-   *     },
-   *   ],
+   *   include: [{ certificate: {} }],
    *   name: 'Allow devs',
    *   account_id: 'account_id',
    * });
    * ```
    */
   create(params: GroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<GroupCreateResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -62,13 +54,7 @@ export class Groups extends APIResource {
    * const group = await client.zeroTrust.access.groups.update(
    *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *   {
-   *     include: [
-   *       {
-   *         group: {
-   *           id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f',
-   *         },
-   *       },
-   *     ],
+   *     include: [{ certificate: {} }],
    *     name: 'Allow devs',
    *     account_id: 'account_id',
    *   },
@@ -80,11 +66,7 @@ export class Groups extends APIResource {
     params: GroupUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupUpdateResponse> {
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...body
-    } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -136,11 +118,7 @@ export class Groups extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const {
-      account_id = this._client.accountId ?? undefined,
-      zone_id = this._client.zoneId ?? undefined,
-      ...query
-    } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -189,8 +167,7 @@ export class Groups extends APIResource {
     if (isRequestOptions(params)) {
       return this.delete(groupId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -240,8 +217,7 @@ export class Groups extends APIResource {
     if (isRequestOptions(params)) {
       return this.get(groupId, {}, params);
     }
-    const { account_id = this._client.accountId ?? undefined, zone_id = this._client.zoneId ?? undefined } =
-      params;
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }

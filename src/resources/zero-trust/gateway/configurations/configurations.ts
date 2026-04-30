@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomCertificateAPI from './custom-certificate';
 import { CustomCertificate, CustomCertificateGetParams } from './custom-certificate';
@@ -23,18 +22,10 @@ export class Configurations extends APIResource {
    * ```
    */
   update(
-    params?: ConfigurationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationUpdateResponse>;
-  update(options?: Core.RequestOptions): Core.APIPromise<ConfigurationUpdateResponse>;
-  update(
-    params: ConfigurationUpdateParams | Core.RequestOptions = {},
+    params: ConfigurationUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationUpdateResponse> {
-    if (isRequestOptions(params)) {
-      return this.update({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/configuration`, {
         body,
@@ -59,18 +50,10 @@ export class Configurations extends APIResource {
    * ```
    */
   edit(
-    params?: ConfigurationEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationEditResponse>;
-  edit(options?: Core.RequestOptions): Core.APIPromise<ConfigurationEditResponse>;
-  edit(
-    params: ConfigurationEditParams | Core.RequestOptions = {},
+    params: ConfigurationEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationEditResponse> {
-    if (isRequestOptions(params)) {
-      return this.edit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/configuration`, {
         body,
@@ -91,18 +74,10 @@ export class Configurations extends APIResource {
    * ```
    */
   get(
-    params?: ConfigurationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigurationGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<ConfigurationGetResponse>;
-  get(
-    params: ConfigurationGetParams | Core.RequestOptions = {},
+    params: ConfigurationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/configuration`, options) as Core.APIPromise<{
         result: ConfigurationGetResponse;
@@ -904,7 +879,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specify account settings.
@@ -916,7 +891,7 @@ export interface ConfigurationEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specify account settings.
@@ -925,7 +900,7 @@ export interface ConfigurationEditParams {
 }
 
 export interface ConfigurationGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Configurations.CustomCertificate = CustomCertificate;

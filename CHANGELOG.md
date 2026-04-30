@@ -1,5 +1,352 @@
 # Changelog
 
+## 6.0.0 (2026-04-30)
+
+This is a major version release of the Cloudflare TypeScript SDK. It includes 11 entirely new top-level API resources, new sub-resources and methods across 50+ existing resources, SDK infrastructure improvements, and breaking changes to the generated API surface from the v5.x line. The total API surface grew from ~96 resource sections to 106, with 885 source files changed.
+
+Full Changelog: [v6.0.0-beta.2...v6.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.0.0-beta.2...v6.0.0)
+
+### Breaking Changes
+
+#### SDK Infrastructure
+
+* **Retry-After handling changed**: The SDK now respects any server-specified `Retry-After` value for rate-limited requests. Previously, values over 60 seconds were ignored and a default backoff was used instead.
+* **Empty response handling**: Responses with `content-length: 0` now return `undefined` instead of attempting to parse the body. This may affect code that expected an empty object or null.
+* **Environment variable reading**: Empty string env vars (e.g., `CLOUDFLARE_API_TOKEN=""`) are now treated as unset. Previously, an empty string was considered a valid value.
+* **Path query parameter merging**: URL search params embedded in endpoint paths are now extracted and merged into the query object. This fixes edge cases but may change behavior if you were manually constructing URLs with query strings.
+
+#### Removed Endpoints (17)
+
+The following HTTP endpoints were removed from the SDK:
+
+* `DELETE /accounts/{account_id}/cloudforce-one/events/{event_id}`
+* `DELETE /accounts/{account_id}/email-security/settings/domains`
+* `DELETE /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}`
+* `GET /accounts/{account_id}/dlp/profiles/predefined/{profile_id}`
+* `GET /accounts/{account_id}/email-security/investigate/{postfix_id}` (and `/detections`, `/preview`, `/raw`, `/trace`)
+* `GET /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}`
+* `GET /accounts/{account_id}/intel/ip-list`
+* `PATCH /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}`
+* `POST /accounts/{account_id}/abuse-reports/{report_type}`
+* `POST /accounts/{account_id}/dlp/profiles/predefined`
+* `POST /accounts/{account_id}/email-security/investigate/{postfix_id}/move`
+* `POST /accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify`
+* `PUT /accounts/{account_id}/dlp/profiles/predefined/{profile_id}`
+
+#### Method Signature Changes (4)
+
+The following methods changed their positional argument signatures:
+
+* `client.ai.toMarkdown.transform(file, { ...params })` -> `client.ai.toMarkdown.transform({ ...params })` -- `file` moved from positional arg into params body
+* `client.radar.ai.toMarkdown.create(body, { ...params })` -> `client.radar.ai.toMarkdown.create({ ...params })` -- `body` moved from positional arg into params
+* `client.abuseReports.create(reportType, { ...params })` -> `client.abuseReports.create(reportParam, { ...params })` -- positional arg renamed
+* `client.iam.userGroups.members.create(userGroupId, [ ...body ])` -> `client.iam.userGroups.members.create(userGroupId, [ ...members ])` -- body array param renamed (same for `.update`)
+
+#### Removed Client Paths (1)
+
+* `client.intel.ipLists` -- removed entirely (endpoint `GET /accounts/{account_id}/intel/ip-list` removed)
+
+#### Renamed Client Paths (2)
+
+* `client.originTLSClientAuth.hostnames.certificates` -> `client.originTLSClientAuth.zoneCertificates`
+* `client.radar.netflows` -> `client.radar.netFlows` (casing change)
+
+#### Return Type Changes (179)
+
+179 methods changed their return type. The three categories:
+
+* **133 methods now return `null`** instead of a typed response object. This affects delete operations, some create/update operations, and several get operations across `accounts`, `cache`, `d1`, `filters`, `firewall`, `hyperdrive`, `iam`, `kv`, `logpush`, `logs`, `r2`, `stream`, `workers`, `zero-trust`, `zones`, and others. Example:
+  ```typescript
+  // Before (v5)
+  const result: AccountDeleteResponse = await client.accounts.delete({ ... });
+  // After (v6)
+  const result: null = await client.accounts.delete({ ... });
+  ```
+* **17 methods changed pagination type**. Example:
+  ```typescript
+  // Before (v5): KeysCursorPaginationAfter
+  // After (v6):  KeysCursorLimitPagination
+  const keys = await client.kv.namespaces.keys.list(namespaceId, { ... });
+  ```
+* **29 methods changed to a different named type**. Examples:
+    - `client.zeroTrust.tunnels.cloudflared.create()`: `CloudflaredCreateResponse` -> `CloudflareTunnel`
+    - `client.zeroTrust.dlp.profiles.predefined.get()`: `Profile` -> `PredefinedProfile`
+    - `client.apiGateway.userSchemas.edit()`: `PublicSchema` -> `OldPublicSchema`
+    - `client.zeroTrust.gateway.proxyEndpoints.get()`: `ProxyEndpointsSinglePage` -> `ProxyEndpoint` (pagination -> single)
+    - `client.zeroTrust.gateway.proxyEndpoints.list()`: `ProxyEndpoint` -> `ProxyEndpointsSinglePage` (single -> pagination)
+
+#### Removed Types (43)
+
+The following exported types were removed. Some were renamed, some consolidated into other types, some removed with their endpoints:
+
+* **Shared types removed from root**: `ASN`, `AuditLog`, `CertificateCA`, `CertificateRequestType`, `CloudflareTunnel`, `ErrorData`, `Identifier`, `LoadBalancerPreview`, `Member`, `PaginationInfo`, `Permission`, `PermissionGrant`, `RatePlan`, `ResponseInfo`, `Result`, `Role`, `SortDirection`, `Subscription`, `SubscriptionComponent`, `SubscriptionZone`, `Token`, `TokenConditionCIDRList`, `TokenPolicy`, `TokenValue`
+* **Response types consolidated**: `CloudflaredCreateResponse`, `CloudflaredDeleteResponse`, `CloudflaredEditResponse`, `CloudflaredGetResponse`, `CloudflaredListResponse` (all consolidated into `CloudflareTunnel`), `SchemaUpload` (-> `UserSchemaCreateResponse`), `TotalTLSCreateResponse`, `ThreatEventDeleteResponse`, `DomainBulkDeleteResponse`
+* **Renamed**: `NetflowSummaryResponse`/`NetflowTimeseriesResponse` (-> `NetFlows*`), `CtSummaryResponse`/`CtTimeseriesResponse`/`CtTimeseriesGroupsResponse` (casing fix), `SubnetListResponse` (-> `Subnet`), `CloudflareSourceUpdateResponse` (-> `Subnet`), `SchemaCreateResponse`/`SchemaEditResponse` (-> restructured), `TldGetResponse`
+
+#### API Surface Structure
+
+* **api.md restructured**: The monolithic `api.md` (8,897 lines) has been split into 106 per-resource `api.md` files under `src/resources/<name>/api.md`. The root `api.md` now contains only shared types.
+* **19 resources restructured from leaf to directory**: The following resources were previously single `.ts` files and are now directories with sub-modules. Import paths from `cloudflare/resources/<name>` are unchanged, but deep imports into internal files may break:
+    - `abuse-reports`, `audit-logs`, `bot-management`, `client-certificates`, `custom-nameservers`, `custom-pages`, `dcv-delegation`, `filters`, `ips`, `keyless-certificates`, `managed-transforms`, `memberships`, `origin-ca-certificates`, `origin-post-quantum-encryption`, `page-rules`, `pipelines`, `rate-limits`, `security-txt`, `url-normalization`
+* **`origin-tls-client-auth` restructured**: The `hostnames` sub-resource was removed and replaced with `zone-certificates` and flattened peer resources.
+
+#### Deprecations
+
+The following resources now include `@deprecated` annotations on some methods. The methods still work but will be removed in a future version:
+
+* `accounts`, `addressing`, `ai-gateway`, `aisearch`, `api-gateway`, `billing`, `cloudforce-one`, `custom-nameservers`, `dns`, `email-routing`, `email-security`, `filters`, `firewall`, `images`, `intel`, `keyless-certificates`, `kv`, `logpush`, `origin-tls-client-auth`, `page-shield`, `pages`, `pipelines`, `radar`, `rate-limits`, `registrar`, `rulesets`, `ssl`, `user`, `workers`, `workers-for-platforms`, `zero-trust`, `zones`
+
+---
+
+### New Top-Level Resources
+
+11 entirely new resources added to the client:
+
+| Resource | Client Path | Methods | Description |
+|----------|-------------|---------|-------------|
+| AI Search | `client.aiSearch` | 46 | Instances, namespaces, tokens, and items |
+| Connectivity | `client.connectivity` | 5 | Directory service APIs |
+| Email Sending | `client.emailSending` | 7 | Send and send_raw endpoints |
+| Fraud | `client.fraud` | 2 | Fraud detection API |
+| Google Tag Gateway | `client.googleTagGateway` | 2 | Google Tag Gateway management |
+| Organizations | `client.organizations` | 8 | Organization profiles and audit logs |
+| R2 Data Catalog | `client.r2DataCatalog` | 11 | R2 Data Catalog routes |
+| Realtime Kit | `client.realtimeKit` | 54 | Realtime Kit APIs |
+| Resource Tagging | `client.resourceTagging` | 9 | Resource tagging routes |
+| Token Validation | `client.tokenValidation` | 13 | Token validation rules |
+| Vulnerability Scanner | `client.vulnerabilityScanner` | 21 | Vulnerability scanning |
+
+---
+
+### New Sub-Resources on Existing Resources
+
+| Resource | New Sub-Resources | Description |
+|----------|-------------------|-------------|
+| `browser-rendering` | `crawl`, `devtools` | Crawl endpoints and DevTools methods (BRAPI-952, BRAPI-1051) |
+| `cache` | `origin-cloud-regions` | Origin cloud regions resource |
+| `dns` | `usage` | DNS records usage endpoints (DNS-12466) |
+| `d1` | `database` (with `time-travel`) | Time travel get_bookmark and restore |
+| `email-security` | `phishguard` | Phishguard reports endpoint |
+| `pipelines` | `sinks`, `streams` | Pipelines, Streams, Sinks restructure |
+| `radar` | `agent-readiness`, `geolocations`, `post-quantum` | AI agent readiness, geolocations, PQ endpoints |
+| `workers` | `observability` | Observability destinations (WO-989) |
+| `zones` | `environments` | Zone environments endpoints |
+| `api-gateway` | `labels` | Labels endpoints (WAM-1196) |
+| `brand-protection` | `v2` | V2 endpoints |
+| `alerting` | `silences` | Alert silencing API |
+| `billing` | `usage` | Billable usage PayGo endpoint |
+| `iam` | `sso` | SSO Connectors resource |
+| `queues` | new `getMetrics` method | Queues metrics endpoint |
+| `registrar` | `registration-status`, `update-status` | Registrar API convergence |
+| `zero-trust` | `access`, `devices`, `dex`, `dlp`, `gateway`, `networks`, `tunnels` | DLP settings, DEX rules, Access Users, WARP Connector, WARP Subnets, gateway PAC files, gateway tenants |
+
+---
+
+### Features
+
+* feat(queues): add queues metrics endpoint ([747654e](https://github.com/cloudflare/cloudflare-typescript/commit/747654ed0))
+* feat: add organization audit logs endpoint ([8e501c2](https://github.com/cloudflare/cloudflare-typescript/commit/8e501c282))
+* feat(iam): add user_groups and user_group_members terraform resources ([5f69d66](https://github.com/cloudflare/cloudflare-typescript/commit/5f69d661d))
+* feat(cache): add origin cloud regions resource ([9a2cd1d](https://github.com/cloudflare/cloudflare-typescript/commit/9a2cd1db9))
+* feat(ai_search): add namespace endpoints and remove non-namespaced items ([6471a39](https://github.com/cloudflare/cloudflare-typescript/commit/6471a3972))
+* feat(radar): add agent-readiness, ai/markdown-for-agents ([284c8b8](https://github.com/cloudflare/cloudflare-typescript/commit/284c8b8e7))
+* feat(zero-trust): add dlp/settings ([8c7c2f6](https://github.com/cloudflare/cloudflare-typescript/commit/8c7c2f67d))
+* feat(registrar): converge new registrar API into existing registrar resource ([b11848a](https://github.com/cloudflare/cloudflare-typescript/commit/b11848a49))
+* feat(vulnerability_scanner): add Vulnerability Scanner API ([05f77a2](https://github.com/cloudflare/cloudflare-typescript/commit/05f77a20f))
+* feat: add browser rendering devtools methods (BRAPI-1051) ([bc258cb](https://github.com/cloudflare/cloudflare-typescript/commit/bc258cb64))
+* feat: add browser_rendering crawl endpoints (BRAPI-952) ([929766e](https://github.com/cloudflare/cloudflare-typescript/commit/929766e9c))
+* feat(zones): onboard zone environments endpoints ([0d57ad8](https://github.com/cloudflare/cloudflare-typescript/commit/0d57ad8b1))
+* feat: add dns_records/usage endpoints (DNS-12466) ([7ce070a](https://github.com/cloudflare/cloudflare-typescript/commit/7ce070a20))
+* feat(api_gateway): add labels endpoints (WAM-1196) ([78d05a3](https://github.com/cloudflare/cloudflare-typescript/commit/78d05a3e6))
+* feat(email_sending): add send/send_raw endpoints (EMAIL-1451) ([aec9c6b](https://github.com/cloudflare/cloudflare-typescript/commit/aec9c6b91))
+* feat: add WARP Connector connections and failover endpoints ([efeb4b5](https://github.com/cloudflare/cloudflare-typescript/commit/efeb4b5b1))
+* feat(brand_protection): add v2 endpoints ([6e41414](https://github.com/cloudflare/cloudflare-typescript/commit/6e4141413))
+* feat: add google_tag_gateway resource (DISCO-101) ([d901d75](https://github.com/cloudflare/cloudflare-typescript/commit/d901d75b7))
+* feat: add billable usage PayGo endpoint to billing resource ([6cb49e7](https://github.com/cloudflare/cloudflare-typescript/commit/6cb49e7ab))
+* feat(tags): add resource_tagging routes (GRM-385) ([196cb6c](https://github.com/cloudflare/cloudflare-typescript/commit/196cb6c27))
+* feat(workers): add Observability Destinations resources (WO-989) ([0d74c56](https://github.com/cloudflare/cloudflare-typescript/commit/0d74c5622))
+* feat(custom_origin_trust_store): enable custom_origin_trust_store ([ed975cd](https://github.com/cloudflare/cloudflare-typescript/commit/ed975cdd4))
+* feat(email_security): add phishguard reports endpoint ([a104a53](https://github.com/cloudflare/cloudflare-typescript/commit/a104a53ef))
+* feat: Complete Access Users endpoint (AUTH-7071) ([4451dee](https://github.com/cloudflare/cloudflare-typescript/commit/4451deef9))
+* feat(radar): add Botnet and PQ Endpoints ([b9b327a](https://github.com/cloudflare/cloudflare-typescript/commit/b9b327a4e))
+* feat: add gateway PAC files (GIN-1439) ([6e92fda](https://github.com/cloudflare/cloudflare-typescript/commit/6e92fda23))
+* feat(dex): add DEX rules ([e8d580b](https://github.com/cloudflare/cloudflare-typescript/commit/e8d580b1a))
+* feat: add WARP Subnet endpoints (TUN-10249) ([7e208d6](https://github.com/cloudflare/cloudflare-typescript/commit/7e208d6d8))
+* feat(ip_profile): onboard zero_trust_device_ip_profile ([c636b71](https://github.com/cloudflare/cloudflare-typescript/commit/c636b7111))
+* feat(zero_trust_device_subnet): onboard zero_trust_device_subnet ([de898e8](https://github.com/cloudflare/cloudflare-typescript/commit/de898e8b9))
+* feat(terraform): add custom_page_asset resource ([e09c9c6](https://github.com/cloudflare/cloudflare-typescript/commit/e09c9c6b3))
+* feat(d1): add time travel get_bookmark and restore endpoints ([fdb0bb6](https://github.com/cloudflare/cloudflare-typescript/commit/fdb0bb645))
+* feat(ai): add AI Search endpoints (RAG-395) ([de5e7d8](https://github.com/cloudflare/cloudflare-typescript/commit/de5e7d897))
+* feat(ai): add AI Gateway Dynamic Routing endpoints ([94b9d1b](https://github.com/cloudflare/cloudflare-typescript/commit/94b9d1b7c))
+* feat(ai_search): enable terraform for AI Search instances and tokens (RAG-586) ([34b9e93](https://github.com/cloudflare/cloudflare-typescript/commit/34b9e9380))
+* feat(radar): add BGP RPKI ASPA endpoints ([8ebdc8c](https://github.com/cloudflare/cloudflare-typescript/commit/8ebdc8c88))
+* feat(leaked_credentials_check): add GET endpoint for detections ([f3c162e](https://github.com/cloudflare/cloudflare-typescript/commit/f3c162e17))
+* feat(r2_data_catalog): configure SDKs/Terraform for R2 Data Catalog ([da8a861](https://github.com/cloudflare/cloudflare-typescript/commit/da8a86122))
+* feat(silences): add alert silencing API ([60a4ce6](https://github.com/cloudflare/cloudflare-typescript/commit/60a4ce691))
+* feat(pipelines): configure SDKs/Terraform for Pipelines, Streams, Sinks ([da48453](https://github.com/cloudflare/cloudflare-typescript/commit/da4845352))
+* feat(abuse_reports): add abuse mitigations in Client API ([2af848f](https://github.com/cloudflare/cloudflare-typescript/commit/2af848fca))
+* feat(tomarkdown): add new markdown supported endpoint ([69c0700](https://github.com/cloudflare/cloudflare-typescript/commit/69c0700d9))
+* feat(abuse_reports): expose new abuse report endpoints ([9c2df6c](https://github.com/cloudflare/cloudflare-typescript/commit/9c2df6c5a))
+* feat: add token validation ([b8fe183](https://github.com/cloudflare/cloudflare-typescript/commit/b8fe1835d))
+* feat(iam): add SSO Connectors resource ([3d3e064](https://github.com/cloudflare/cloudflare-typescript/commit/3d3e064ee))
+* feat(mcp_portals): enable SDKs generation ([5e65ba4](https://github.com/cloudflare/cloudflare-typescript/commit/5e65ba4af))
+* feat: add connectivity directory service APIs ([b6a8bcc](https://github.com/cloudflare/cloudflare-typescript/commit/b6a8bcc33))
+* feat(radar): add new group by dimension endpoints; deprecate to_markdown ([51e1bed](https://github.com/cloudflare/cloudflare-typescript/commit/51e1bed59))
+* feat: add MCP portals endpoints ([65d94fe](https://github.com/cloudflare/cloudflare-typescript/commit/65d94fed3))
+* feat: add Organizations and OrganizationsProfile SDKs ([1525ebb](https://github.com/cloudflare/cloudflare-typescript/commit/1525ebb75))
+* feat(fraud): public docs for fraud API ([e0ae79f](https://github.com/cloudflare/cloudflare-typescript/commit/e0ae79f9e))
+* feat(dlp): switch DLP Predefined Profile endpoints (DLP-3878) ([1455208](https://github.com/cloudflare/cloudflare-typescript/commit/1455208cc))
+* feat(zero_trust_gateway_policy): add /rules/tenants endpoint ([6c245b1](https://github.com/cloudflare/cloudflare-typescript/commit/6c245b1cc))
+* feat(origin_tls_client_auth): restructure to peer subresources ([16b8e20](https://github.com/cloudflare/cloudflare-typescript/commit/16b8e2092))
+* feat: deprecate API Shield Schema Validation resources ([8a4b20f](https://github.com/cloudflare/cloudflare-typescript/commit/8a4b20f7a))
+* feat(workers): expose subdomain delete (WC-4152) ([4f7cc1f](https://github.com/cloudflare/cloudflare-typescript/commit/4f7cc1f2b))
+
+### Bug Fixes
+
+* fix: resolve type errors from codegen overwriting manual fixes ([1c07db8](https://github.com/cloudflare/cloudflare-typescript/commit/1c07db89e))
+* fix: use post() for to-markdown endpoints to resolve async type error ([cf0ad26](https://github.com/cloudflare/cloudflare-typescript/commit/cf0ad2683))
+* fix: add least-privilege permissions to all workflow jobs ([32a8b40](https://github.com/cloudflare/cloudflare-typescript/commit/32a8b40d3))
+* fix(rulesets): revert erroneous removal of rulesets resource methods and types ([a929479](https://github.com/cloudflare/cloudflare-typescript/commit/a92947938))
+* fix: resolve prettier formatting errors in codegen output ([2faa1f3](https://github.com/cloudflare/cloudflare-typescript/commit/2faa1f386))
+* fix(organization_profile): bad reference ([d84ea77](https://github.com/cloudflare/cloudflare-typescript/commit/d84ea7709))
+* fix(kv): use cursor_limit_pagination for KV list keys endpoint ([68433665](https://github.com/cloudflare/cloudflare-typescript/commit/68433665a))
+* fix(total_tls): use upsert pattern for singleton zone setting ([a742f87](https://github.com/cloudflare/cloudflare-typescript/commit/a742f871d))
+* fix(content_scanning): content scanning terraform resource ([9d74be8](https://github.com/cloudflare/cloudflare-typescript/commit/9d74be896))
+* fix(schema_validation): correctly reflect schema validation model mapping ([bb81516](https://github.com/cloudflare/cloudflare-typescript/commit/bb8615167))
+* fix(ai_controls): incorrect use of standalone_api ([f61e213](https://github.com/cloudflare/cloudflare-typescript/commit/f61e213d5))
+* fix: add 'rdp' as an initialism ([88f145a](https://github.com/cloudflare/cloudflare-typescript/commit/88f145a1b))
+* fix: broken reference for the queues 'consumer' model ([1b7c103](https://github.com/cloudflare/cloudflare-typescript/commit/1b7c103be))
+* fix(mcp): correct code tool API endpoint ([599703c](https://github.com/cloudflare/cloudflare-typescript/commit/599703c45))
+* fix(mcp): return correct lines on typescript errors ([5d6f999](https://github.com/cloudflare/cloudflare-typescript/commit/5d6f9998e))
+
+### Chores
+
+* 554 resource files modified with updated generated types and methods
+* 328 new resource files added (sub-resources, api.md files, barrel exports)
+* 2 resource files removed (`origin-tls-client-auth/hostnames`)
+
+---
+
+### Migration Guide
+
+This is a major version bump from v5 to v6. Key changes to be aware of:
+
+#### 1. Delete and many other methods now return `null`
+
+133 methods changed their return type to `null`. This primarily affects delete operations but also some create, update, and get methods. If your code assigns the result to a typed variable, you will get a type error.
+
+```typescript
+// Before (v5)
+const result: AccountDeleteResponse = await client.accounts.delete({ account_id: '...' });
+console.log(result.id);
+
+// After (v6)
+const result = await client.accounts.delete({ account_id: '...' });
+// result is null -- do not access properties on it
+```
+
+Affected resources include: `accounts`, `cache`, `d1`, `filters`, `firewall`, `hyperdrive`, `iam`, `intel`, `kv`, `logpush`, `logs`, `r2`, `stream`, `workers`, `zero-trust`, `zones`, and others. See the "Return Type Changes" section above for the full list.
+
+#### 2. Response type renames and consolidation
+
+29 methods changed to a different named return type. Common patterns:
+
+```typescript
+// Before (v5): per-operation response types
+const tunnel: CloudflaredCreateResponse = await client.zeroTrust.tunnels.cloudflared.create({ ... });
+
+// After (v6): consolidated into a single resource type
+const tunnel: CloudflareTunnel = await client.zeroTrust.tunnels.cloudflared.create({ ... });
+```
+
+Other examples:
+- `Profile` -> `PredefinedProfile` (DLP)
+- `PublicSchema` -> `OldPublicSchema` (API Gateway)
+- `Subscription` -> `SubscriptionCreateResponse` / `SubscriptionGetResponse` (Zones)
+
+#### 3. Pagination type changes
+
+17 methods changed their pagination type, which affects how you iterate results:
+
+```typescript
+// Before (v5)
+const keys: KeysCursorPaginationAfter = await client.kv.namespaces.keys.list(nsId, { ... });
+
+// After (v6)
+const keys: KeysCursorLimitPagination = await client.kv.namespaces.keys.list(nsId, { ... });
+```
+
+Also: `client.zeroTrust.gateway.proxyEndpoints.list()` changed from returning a single `ProxyEndpoint` to `ProxyEndpointsSinglePage` (now paginated), and `.get()` changed in the opposite direction.
+
+#### 4. Removed types (43)
+
+24 shared types were removed from the root namespace (`ASN`, `AuditLog`, `Member`, `Permission`, `Role`, `Subscription`, `Token`, etc.). These are now defined within their respective resource modules. Update imports:
+
+```typescript
+// Before (v5)
+import { type Member, type Role } from 'cloudflare';
+
+// After (v6) -- import from the resource namespace
+import { type Cloudflare } from 'cloudflare';
+// Use Cloudflare.Accounts.Member, etc.
+```
+
+19 response types were consolidated or renamed. See "Removed Types" section above.
+
+#### 5. Method signature changes
+
+Some methods changed their positional arguments:
+
+```typescript
+// Before (v5) -- file as positional arg
+await client.ai.toMarkdown.transform(file, { account_id: '...' });
+
+// After (v6) -- file in params body
+await client.ai.toMarkdown.transform({ account_id: '...', file: ... });
+```
+
+Similarly, `client.radar.ai.toMarkdown.create` no longer takes a positional `body` arg.
+
+#### 6. Renamed client paths
+
+Three client paths changed:
+
+```typescript
+// Before (v5)
+client.intel.ipLists.get(...)
+client.originTLSClientAuth.hostnames.certificates.list(...)
+client.radar.netflows.summary(...)
+
+// After (v6)
+client.intel.ipList.get(...)
+client.originTLSClientAuth.zoneCertificates.list(...)
+client.radar.netFlows.summary(...)
+```
+
+#### 7. Removed endpoints (17)
+
+17 HTTP endpoints were removed entirely. See "Removed Endpoints" section above. Affected areas: `abuse-reports`, `cloudforce-one`, `dlp/profiles/predefined`, `email-security/investigate`, `email-security/settings`, `intel/ip-list`.
+
+#### 8. Empty response handling
+
+Responses with `content-length: 0` now return `undefined` instead of attempting to parse the body.
+
+#### 9. Retry-After behavior
+
+The SDK now respects any `Retry-After` header value from the server, even values over 60 seconds. Previously, values >= 60s were ignored.
+
+#### 10. Environment variable handling
+
+Empty string environment variables (`CLOUDFLARE_API_TOKEN=""`) are now treated as unset.
+
+#### 11. Resource restructuring
+
+19 resources were restructured from single files to directories. Public API client paths are unchanged, but deep imports like `cloudflare/resources/pipelines` may need updating to `cloudflare/resources/pipelines/pipelines`.
+
+#### 12. Per-resource API documentation
+
+The monolithic `api.md` has been replaced with 106 per-resource files at `src/resources/<name>/api.md`.
+
 ## 6.0.0-beta.2 (2026-04-15)
 
 Full Changelog: [v6.0.0-beta.1...v6.0.0-beta.2](https://github.com/cloudflare/cloudflare-typescript/compare/v6.0.0-beta.1...v6.0.0-beta.2)

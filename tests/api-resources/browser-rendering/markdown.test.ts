@@ -28,7 +28,7 @@ describe('resource markdown', () => {
     const response = await client.browserRendering.markdown.create({
       account_id: 'account_id',
       url: 'https://example.com/',
-      cacheTTL: 86400,
+      cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
         {

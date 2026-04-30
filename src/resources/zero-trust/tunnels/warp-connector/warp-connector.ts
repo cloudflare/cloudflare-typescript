@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ConnectionsAPI from './connections';
 import {
@@ -40,7 +39,7 @@ export class WARPConnector extends APIResource {
     params: WARPConnectorCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPConnectorCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/warp_connector`, { body, ...options }) as Core.APIPromise<{
         result: WARPConnectorCreateResponse;
@@ -62,20 +61,10 @@ export class WARPConnector extends APIResource {
    * ```
    */
   list(
-    params?: WARPConnectorListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse>;
-  list(
-    params: WARPConnectorListParams | Core.RequestOptions = {},
+    params: WARPConnectorListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WARPConnectorListResponsesV4PagePaginationArray, WARPConnectorListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/warp_connector`,
       WARPConnectorListResponsesV4PagePaginationArray,
@@ -97,19 +86,10 @@ export class WARPConnector extends APIResource {
    */
   delete(
     tunnelId: string,
-    params?: WARPConnectorDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorDeleteResponse>;
-  delete(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<WARPConnectorDeleteResponse>;
-  delete(
-    tunnelId: string,
-    params: WARPConnectorDeleteParams | Core.RequestOptions = {},
+    params: WARPConnectorDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPConnectorDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(tunnelId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
         result: WARPConnectorDeleteResponse;
@@ -134,7 +114,7 @@ export class WARPConnector extends APIResource {
     params: WARPConnectorEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPConnectorEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/warp_connector/${tunnelId}`, {
         body,
@@ -157,19 +137,10 @@ export class WARPConnector extends APIResource {
    */
   get(
     tunnelId: string,
-    params?: WARPConnectorGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorGetResponse>;
-  get(tunnelId: string, options?: Core.RequestOptions): Core.APIPromise<WARPConnectorGetResponse>;
-  get(
-    tunnelId: string,
-    params: WARPConnectorGetParams | Core.RequestOptions = {},
+    params: WARPConnectorGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPConnectorGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(tunnelId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
         result: WARPConnectorGetResponse;
@@ -759,7 +730,7 @@ export interface WARPConnectorCreateParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -777,7 +748,7 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -835,14 +806,14 @@ export interface WARPConnectorDeleteParams {
   /**
    * Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface WARPConnectorEditParams {
   /**
    * Path param: Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A user-friendly name for a tunnel.
@@ -860,7 +831,7 @@ export interface WARPConnectorGetParams {
   /**
    * Cloudflare account ID
    */
-  account_id?: string;
+  account_id: string;
 }
 
 WARPConnector.WARPConnectorListResponsesV4PagePaginationArray =

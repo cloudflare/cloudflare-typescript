@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as MetadataIndexAPI from './metadata-index';
 import {
@@ -31,7 +30,7 @@ export class Indexes extends APIResource {
    * ```
    */
   create(params: IndexCreateParams, options?: Core.RequestOptions): Core.APIPromise<CreateIndex | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes`, {
         body,
@@ -54,18 +53,10 @@ export class Indexes extends APIResource {
    * ```
    */
   list(
-    params?: IndexListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CreateIndicesSinglePage, CreateIndex>;
-  list(options?: Core.RequestOptions): Core.PagePromise<CreateIndicesSinglePage, CreateIndex>;
-  list(
-    params: IndexListParams | Core.RequestOptions = {},
+    params: IndexListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CreateIndicesSinglePage, CreateIndex> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/vectorize/v2/indexes`,
       CreateIndicesSinglePage,
@@ -86,19 +77,10 @@ export class Indexes extends APIResource {
    */
   delete(
     indexName: string,
-    params?: IndexDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexDeleteResponse | null>;
-  delete(indexName: string, options?: Core.RequestOptions): Core.APIPromise<IndexDeleteResponse | null>;
-  delete(
-    indexName: string,
-    params: IndexDeleteParams | Core.RequestOptions = {},
+    params: IndexDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(indexName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/vectorize/v2/indexes/${indexName}`,
@@ -123,7 +105,7 @@ export class Indexes extends APIResource {
     params: IndexDeleteByIDsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexDeleteByIDsResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/delete_by_ids`, {
         body,
@@ -145,19 +127,10 @@ export class Indexes extends APIResource {
    */
   get(
     indexName: string,
-    params?: IndexGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CreateIndex | null>;
-  get(indexName: string, options?: Core.RequestOptions): Core.APIPromise<CreateIndex | null>;
-  get(
-    indexName: string,
-    params: IndexGetParams | Core.RequestOptions = {},
+    params: IndexGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CreateIndex | null> {
-    if (isRequestOptions(params)) {
-      return this.get(indexName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/vectorize/v2/indexes/${indexName}`,
@@ -182,7 +155,7 @@ export class Indexes extends APIResource {
     params: IndexGetByIDsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexGetByIDsResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/get_by_ids`, {
         body,
@@ -204,19 +177,10 @@ export class Indexes extends APIResource {
    */
   info(
     indexName: string,
-    params?: IndexInfoParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexInfoResponse | null>;
-  info(indexName: string, options?: Core.RequestOptions): Core.APIPromise<IndexInfoResponse | null>;
-  info(
-    indexName: string,
-    params: IndexInfoParams | Core.RequestOptions = {},
+    params: IndexInfoParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexInfoResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.info(indexName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/vectorize/v2/indexes/${indexName}/info`,
@@ -245,7 +209,7 @@ export class Indexes extends APIResource {
     params: IndexInsertParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexInsertResponse | null> {
-    const { account_id = this._client.accountId, body, 'unparsable-behavior': unparsableBehavior } = params;
+    const { account_id, body, 'unparsable-behavior': unparsableBehavior } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/insert`, {
         query: { 'unparsable-behavior': unparsableBehavior },
@@ -270,22 +234,10 @@ export class Indexes extends APIResource {
    */
   listVectors(
     indexName: string,
-    params?: IndexListVectorsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexListVectorsResponse | null>;
-  listVectors(
-    indexName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexListVectorsResponse | null>;
-  listVectors(
-    indexName: string,
-    params: IndexListVectorsParams | Core.RequestOptions = {},
+    params: IndexListVectorsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexListVectorsResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.listVectors(indexName, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/list`, {
         query,
@@ -313,7 +265,7 @@ export class Indexes extends APIResource {
     params: IndexQueryParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexQueryResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/query`, {
         body,
@@ -342,7 +294,7 @@ export class Indexes extends APIResource {
     params: IndexUpsertParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexUpsertResponse | null> {
-    const { account_id = this._client.accountId, body, 'unparsable-behavior': unparsableBehavior } = params;
+    const { account_id, body, 'unparsable-behavior': unparsableBehavior } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/upsert`, {
         query: { 'unparsable-behavior': unparsableBehavior },
@@ -597,7 +549,7 @@ export interface IndexCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Specifies the type of configuration to use for the index.
@@ -633,21 +585,21 @@ export interface IndexListParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IndexDeleteParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IndexDeleteByIDsParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A list of vector identifiers to delete from the index indicated by
@@ -660,14 +612,14 @@ export interface IndexGetParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IndexGetByIDsParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A list of vector identifiers to retrieve from the index indicated by
@@ -680,14 +632,14 @@ export interface IndexInfoParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface IndexInsertParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: ndjson file containing vectors to insert.
@@ -704,7 +656,7 @@ export interface IndexListVectorsParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Maximum number of vectors to return
@@ -721,7 +673,7 @@ export interface IndexQueryParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The search vector that will be used to find the nearest neighbors.
@@ -754,7 +706,7 @@ export interface IndexUpsertParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: ndjson file containing vectors to upsert.

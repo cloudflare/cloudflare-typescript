@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SettingsPoliciesSinglePage } from '../policies';
@@ -36,7 +35,7 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
         result: PoliciesAPI.SettingsPolicy | null;
@@ -58,20 +57,10 @@ export class Custom extends APIResource {
    * ```
    */
   list(
-    params?: CustomListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
-  list(
-    params: CustomListParams | Core.RequestOptions = {},
+    params: CustomListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policies`,
       SettingsPoliciesSinglePage,
@@ -96,22 +85,10 @@ export class Custom extends APIResource {
    */
   delete(
     policyId: string,
-    params?: CustomDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
-  delete(
-    policyId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy>;
-  delete(
-    policyId: string,
-    params: CustomDeleteParams | Core.RequestOptions = {},
+    params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SettingsPoliciesSinglePage, PoliciesAPI.SettingsPolicy> {
-    if (isRequestOptions(params)) {
-      return this.delete(policyId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/${policyId}`,
       SettingsPoliciesSinglePage,
@@ -136,7 +113,7 @@ export class Custom extends APIResource {
     params: CustomEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
         body,
@@ -159,19 +136,10 @@ export class Custom extends APIResource {
    */
   get(
     policyId: string,
-    params?: CustomGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null>;
-  get(policyId: string, options?: Core.RequestOptions): Core.APIPromise<PoliciesAPI.SettingsPolicy | null>;
-  get(
-    policyId: string,
-    params: CustomGetParams | Core.RequestOptions = {},
+    params: CustomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoliciesAPI.SettingsPolicy | null> {
-    if (isRequestOptions(params)) {
-      return this.get(policyId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
         result: PoliciesAPI.SettingsPolicy | null;
@@ -184,7 +152,7 @@ export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The wirefilter expression to match devices. Available values:
@@ -312,6 +280,11 @@ export interface CustomCreateParams {
    * Body param: Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Body param: Virtual network access settings for the device.
+   */
+  virtual_networks?: CustomCreateParams.VirtualNetworks | null;
 }
 
 export namespace CustomCreateParams {
@@ -326,21 +299,37 @@ export namespace CustomCreateParams {
      */
     port?: number;
   }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
+  }
 }
 
 export interface CustomListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CustomDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CustomEditParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Whether to allow the user to switch WARP between modes.
@@ -468,6 +457,11 @@ export interface CustomEditParams {
    * Body param: Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Body param: Virtual network access settings for the device.
+   */
+  virtual_networks?: CustomEditParams.VirtualNetworks | null;
 }
 
 export namespace CustomEditParams {
@@ -482,10 +476,26 @@ export namespace CustomEditParams {
      */
     port?: number;
   }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
+  }
 }
 
 export interface CustomGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Custom.Excludes = Excludes;

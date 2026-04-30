@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as IntegrationsAPI from './integrations';
 import {
@@ -37,7 +36,7 @@ export class Posture extends APIResource {
     params: PostureCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DevicePostureRule | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture`, { body, ...options }) as Core.APIPromise<{
         result: DevicePostureRule | null;
@@ -66,7 +65,7 @@ export class Posture extends APIResource {
     params: PostureUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DevicePostureRule | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/posture/${ruleId}`, {
         body,
@@ -89,18 +88,10 @@ export class Posture extends APIResource {
    * ```
    */
   list(
-    params?: PostureListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRule>;
-  list(options?: Core.RequestOptions): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRule>;
-  list(
-    params: PostureListParams | Core.RequestOptions = {},
+    params: PostureListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRule> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/posture`,
       DevicePostureRulesSinglePage,
@@ -122,19 +113,10 @@ export class Posture extends APIResource {
    */
   delete(
     ruleId: string,
-    params?: PostureDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureDeleteResponse | null>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<PostureDeleteResponse | null>;
-  delete(
-    ruleId: string,
-    params: PostureDeleteParams | Core.RequestOptions = {},
+    params: PostureDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
         result: PostureDeleteResponse | null;
@@ -156,19 +138,10 @@ export class Posture extends APIResource {
    */
   get(
     ruleId: string,
-    params?: PostureGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureRule | null>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<DevicePostureRule | null>;
-  get(
-    ruleId: string,
-    params: PostureGetParams | Core.RequestOptions = {},
+    params: PostureGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DevicePostureRule | null> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
         result: DevicePostureRule | null;
@@ -841,12 +814,12 @@ export interface KolideInput {
   /**
    * Count Operator.
    */
-  countOperator: '<' | '<=' | '>' | '>=' | '==';
+  countOperator?: '<' | '<=' | '>' | '>=' | '==';
 
   /**
    * The Number of Issues.
    */
-  issue_count: string;
+  issue_count?: string;
 }
 
 export interface KolideInputParam {
@@ -858,12 +831,12 @@ export interface KolideInputParam {
   /**
    * Count Operator.
    */
-  countOperator: '<' | '<=' | '>' | '>=' | '==';
+  countOperator?: '<' | '<=' | '>' | '>=' | '==';
 
   /**
    * The Number of Issues.
    */
-  issue_count: string;
+  issue_count?: string;
 }
 
 export interface OSVersionInput {
@@ -1189,7 +1162,7 @@ export interface PostureCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the device posture rule.
@@ -1256,7 +1229,7 @@ export interface PostureUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The name of the device posture rule.
@@ -1320,15 +1293,15 @@ export interface PostureUpdateParams {
 }
 
 export interface PostureListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PostureDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PostureGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Posture.DevicePostureRulesSinglePage = DevicePostureRulesSinglePage;

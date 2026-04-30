@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as UploadAPI from './upload';
 import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
@@ -33,7 +32,7 @@ export class Datasets extends APIResource {
    * ```
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as Core.APIPromise<{
         result: DatasetCreation;
@@ -58,7 +57,7 @@ export class Datasets extends APIResource {
     params: DatasetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Dataset> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
         body,
@@ -82,18 +81,10 @@ export class Datasets extends APIResource {
    * ```
    */
   list(
-    params?: DatasetListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DatasetsSinglePage, Dataset>;
-  list(options?: Core.RequestOptions): Core.PagePromise<DatasetsSinglePage, Dataset>;
-  list(
-    params: DatasetListParams | Core.RequestOptions = {},
+    params: DatasetListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<DatasetsSinglePage, Dataset> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/dlp/datasets`, DatasetsSinglePage, options);
   }
 
@@ -110,19 +101,10 @@ export class Datasets extends APIResource {
    */
   delete(
     datasetId: string,
-    params?: DatasetDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  delete(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    datasetId: string,
-    params: DatasetDeleteParams | Core.RequestOptions = {},
+    params: DatasetDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete(datasetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
@@ -140,17 +122,8 @@ export class Datasets extends APIResource {
    * );
    * ```
    */
-  get(datasetId: string, params?: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset>;
-  get(datasetId: string, options?: Core.RequestOptions): Core.APIPromise<Dataset>;
-  get(
-    datasetId: string,
-    params: DatasetGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Dataset> {
-    if (isRequestOptions(params)) {
-      return this.get(datasetId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(datasetId: string, params: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
         result: Dataset;
@@ -244,7 +217,7 @@ export interface DatasetCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -286,7 +259,7 @@ export interface DatasetUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Determines if the words should be matched in a case-sensitive
@@ -308,15 +281,15 @@ export interface DatasetUpdateParams {
 }
 
 export interface DatasetListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DatasetDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface DatasetGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Datasets.DatasetsSinglePage = DatasetsSinglePage;

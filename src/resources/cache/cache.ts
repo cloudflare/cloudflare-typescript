@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as CacheReserveAPI from './cache-reserve';
 import {
@@ -18,6 +17,27 @@ import {
   CacheReserveStatusResponse,
   State,
 } from './cache-reserve';
+import * as OriginCloudRegionsAPI from './origin-cloud-regions';
+import {
+  OriginCloudRegion,
+  OriginCloudRegionBulkDeleteParams,
+  OriginCloudRegionBulkDeleteResponse,
+  OriginCloudRegionBulkEditParams,
+  OriginCloudRegionBulkEditResponse,
+  OriginCloudRegionCreateParams,
+  OriginCloudRegionCreateResponse,
+  OriginCloudRegionDeleteParams,
+  OriginCloudRegionDeleteResponse,
+  OriginCloudRegionEditParams,
+  OriginCloudRegionEditResponse,
+  OriginCloudRegionGetParams,
+  OriginCloudRegionGetResponse,
+  OriginCloudRegionListParams,
+  OriginCloudRegionListResponse,
+  OriginCloudRegionSupportedRegionsParams,
+  OriginCloudRegionSupportedRegionsResponse,
+  OriginCloudRegions,
+} from './origin-cloud-regions';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 import {
   RegionalTieredCache,
@@ -57,6 +77,9 @@ export class Cache extends APIResource {
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
   regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource =
     new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
+  originCloudRegions: OriginCloudRegionsAPI.OriginCloudRegions = new OriginCloudRegionsAPI.OriginCloudRegions(
+    this._client,
+  );
 
   /**
    * ### Purge All Cached Content
@@ -128,16 +151,8 @@ export class Cache extends APIResource {
    * });
    * ```
    */
-  purge(params?: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null>;
-  purge(options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null>;
-  purge(
-    params: CachePurgeParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CachePurgeResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.purge({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...body } = params;
+  purge(params: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null> {
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/purge_cache`, { body, ...options }) as Core.APIPromise<{
         result: CachePurgeResponse | null;
@@ -163,7 +178,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on cache tags and purging by tags, please refer
@@ -177,7 +192,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information purging by hostnames, please refer to
@@ -190,7 +205,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on purging by prefixes, please refer to
@@ -203,7 +218,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information, please refer to
@@ -216,7 +231,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on purging files, please refer to
@@ -229,7 +244,7 @@ export declare namespace CachePurgeParams {
     /**
      * Path param
      */
-    zone_id?: string;
+    zone_id: string;
 
     /**
      * Body param: For more information on purging files with URL and headers, please
@@ -252,6 +267,7 @@ Cache.CacheReserveResource = CacheReserveResource;
 Cache.SmartTieredCache = SmartTieredCache;
 Cache.Variants = Variants;
 Cache.RegionalTieredCacheResource = RegionalTieredCacheResource;
+Cache.OriginCloudRegions = OriginCloudRegions;
 
 export declare namespace Cache {
   export { type CachePurgeResponse as CachePurgeResponse, type CachePurgeParams as CachePurgeParams };
@@ -299,5 +315,26 @@ export declare namespace Cache {
     type RegionalTieredCacheGetResponse as RegionalTieredCacheGetResponse,
     type RegionalTieredCacheEditParams as RegionalTieredCacheEditParams,
     type RegionalTieredCacheGetParams as RegionalTieredCacheGetParams,
+  };
+
+  export {
+    OriginCloudRegions as OriginCloudRegions,
+    type OriginCloudRegion as OriginCloudRegion,
+    type OriginCloudRegionCreateResponse as OriginCloudRegionCreateResponse,
+    type OriginCloudRegionListResponse as OriginCloudRegionListResponse,
+    type OriginCloudRegionDeleteResponse as OriginCloudRegionDeleteResponse,
+    type OriginCloudRegionBulkDeleteResponse as OriginCloudRegionBulkDeleteResponse,
+    type OriginCloudRegionBulkEditResponse as OriginCloudRegionBulkEditResponse,
+    type OriginCloudRegionEditResponse as OriginCloudRegionEditResponse,
+    type OriginCloudRegionGetResponse as OriginCloudRegionGetResponse,
+    type OriginCloudRegionSupportedRegionsResponse as OriginCloudRegionSupportedRegionsResponse,
+    type OriginCloudRegionCreateParams as OriginCloudRegionCreateParams,
+    type OriginCloudRegionListParams as OriginCloudRegionListParams,
+    type OriginCloudRegionDeleteParams as OriginCloudRegionDeleteParams,
+    type OriginCloudRegionBulkDeleteParams as OriginCloudRegionBulkDeleteParams,
+    type OriginCloudRegionBulkEditParams as OriginCloudRegionBulkEditParams,
+    type OriginCloudRegionEditParams as OriginCloudRegionEditParams,
+    type OriginCloudRegionGetParams as OriginCloudRegionGetParams,
+    type OriginCloudRegionSupportedRegionsParams as OriginCloudRegionSupportedRegionsParams,
   };
 }

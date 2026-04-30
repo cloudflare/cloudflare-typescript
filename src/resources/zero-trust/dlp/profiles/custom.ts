@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import * as ProfilesAPI from './profiles';
@@ -20,7 +19,7 @@ export class Custom extends APIResource {
    * ```
    */
   create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, {
         body,
@@ -46,7 +45,7 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
         body,
@@ -69,19 +68,10 @@ export class Custom extends APIResource {
    */
   delete(
     profileId: string,
-    params?: CustomDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomDeleteResponse | null>;
-  delete(profileId: string, options?: Core.RequestOptions): Core.APIPromise<CustomDeleteResponse | null>;
-  delete(
-    profileId: string,
-    params: CustomDeleteParams | Core.RequestOptions = {},
+    params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(profileId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
@@ -104,19 +94,10 @@ export class Custom extends APIResource {
    */
   get(
     profileId: string,
-    params?: CustomGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfilesAPI.Profile>;
-  get(profileId: string, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile>;
-  get(
-    profileId: string,
-    params: CustomGetParams | Core.RequestOptions = {},
+    params: CustomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfilesAPI.Profile> {
-    if (isRequestOptions(params)) {
-      return this.get(profileId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
@@ -249,7 +230,10 @@ export namespace CustomProfile {
      */
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
   }
 
   export namespace PredefinedEntry {
@@ -266,11 +250,30 @@ export namespace CustomProfile {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -396,7 +399,10 @@ export namespace CustomProfile {
      */
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
   }
 
   export namespace PredefinedEntry {
@@ -413,11 +419,30 @@ export namespace CustomProfile {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -517,7 +542,7 @@ export interface CustomCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -622,7 +647,7 @@ export interface CustomUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -730,11 +755,11 @@ export namespace CustomUpdateParams {
 }
 
 export interface CustomDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface CustomGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Custom {

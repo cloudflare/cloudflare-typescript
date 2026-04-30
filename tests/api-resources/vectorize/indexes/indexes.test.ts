@@ -150,7 +150,7 @@ describe('resource indexes', () => {
   test.skip('insert: only required params', async () => {
     const responsePromise = client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      body: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -165,7 +165,7 @@ describe('resource indexes', () => {
   test.skip('insert: required and optional params', async () => {
     const response = await client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      body: await toFile(Buffer.from('Example data'), 'README.md'),
       'unparsable-behavior': 'error',
     });
   });
@@ -223,7 +223,7 @@ describe('resource indexes', () => {
   test.skip('upsert: only required params', async () => {
     const responsePromise = client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      body: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -238,7 +238,7 @@ describe('resource indexes', () => {
   test.skip('upsert: required and optional params', async () => {
     const response = await client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      body: await toFile(Buffer.from('Example data'), 'README.md'),
       'unparsable-behavior': 'error',
     });
   });

@@ -8,7 +8,7 @@ export class Schema extends APIResource {
    * Retrieves the input and output JSON schema definition for a Workers AI model.
    */
   get(params: SchemaGetParams, options?: Core.RequestOptions): Core.APIPromise<SchemaGetResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai/models/schema`, { query, ...options }) as Core.APIPromise<{
         result: SchemaGetResponse;
@@ -45,7 +45,7 @@ export interface SchemaGetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Model Name

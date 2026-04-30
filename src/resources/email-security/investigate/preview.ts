@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Preview extends APIResource {
   /**
-   * Generates a preview of an email message for safe viewing without executing any
-   * embedded content.
+   * Generates a preview image for a message that was not flagged as a detection.
+   * Useful for investigating benign messages. Returns a base64-encoded PNG
+   * screenshot of the email body.
    *
    * @example
    * ```ts
@@ -19,10 +19,9 @@ export class Preview extends APIResource {
    * ```
    */
   create(params: PreviewCreateParams, options?: Core.RequestOptions): Core.APIPromise<PreviewCreateResponse> {
-    const { account_id = this._client.accountId, submission, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/investigate/preview`, {
-        query: { submission },
         body,
         ...options,
       }) as Core.APIPromise<{ result: PreviewCreateResponse }>
@@ -37,29 +36,20 @@ export class Preview extends APIResource {
    * ```ts
    * const preview =
    *   await client.emailSecurity.investigate.preview.get(
-   *     '4Njp3P0STMz2c02Q',
+   *     '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
-    postfixId: string,
-    params?: PreviewGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PreviewGetResponse>;
-  get(postfixId: string, options?: Core.RequestOptions): Core.APIPromise<PreviewGetResponse>;
-  get(
-    postfixId: string,
-    params: PreviewGetParams | Core.RequestOptions = {},
+    investigateId: string,
+    params: PreviewGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(postfixId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/preview`,
+        `/accounts/${account_id}/email-security/investigate/${investigateId}/preview`,
         options,
       ) as Core.APIPromise<{ result: PreviewGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -82,27 +72,21 @@ export interface PreviewGetResponse {
 
 export interface PreviewCreateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
-   * Body param: The identifier of the message.
+   * Body param: The identifier of the message
    */
   postfix_id: string;
-
-  /**
-   * Query param: When true, search the submissions datastore only. When false or
-   * omitted, search the regular datastore only.
-   */
-  submission?: boolean;
 }
 
 export interface PreviewGetParams {
   /**
-   * Account Identifier
+   * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Preview {

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Analytics extends APIResource {
@@ -21,22 +20,10 @@ export class Analytics extends APIResource {
    */
   getOrgAnalytics(
     appId: string,
-    params?: AnalyticsGetOrgAnalyticsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyticsGetOrgAnalyticsResponse>;
-  getOrgAnalytics(
-    appId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AnalyticsGetOrgAnalyticsResponse>;
-  getOrgAnalytics(
-    appId: string,
-    params: AnalyticsGetOrgAnalyticsParams | Core.RequestOptions = {},
+    params: AnalyticsGetOrgAnalyticsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AnalyticsGetOrgAnalyticsResponse> {
-    if (isRequestOptions(params)) {
-      return this.getOrgAnalytics(appId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/analytics/daywise`, {
       query,
       ...options,
@@ -142,7 +129,7 @@ export interface AnalyticsGetOrgAnalyticsParams {
   /**
    * Path param: The account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: end date in YYYY-MM-DD format

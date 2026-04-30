@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class Custom extends APIResource {
@@ -27,7 +26,7 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCreateResponse> {
-    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         body,
@@ -61,7 +60,7 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomUpdateResponse> {
-    const { account_id = this._client.accountId, jurisdiction, ...body } = params;
+    const { account_id, jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domain}`, {
         body,
@@ -89,19 +88,10 @@ export class Custom extends APIResource {
    */
   list(
     bucketName: string,
-    params?: CustomListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomListResponse>;
-  list(bucketName: string, options?: Core.RequestOptions): Core.APIPromise<CustomListResponse>;
-  list(
-    bucketName: string,
-    params: CustomListParams | Core.RequestOptions = {},
+    params: CustomListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(bucketName, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         ...options,
@@ -131,24 +121,10 @@ export class Custom extends APIResource {
   delete(
     bucketName: string,
     domain: string,
-    params?: CustomDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomDeleteResponse>;
-  delete(
-    bucketName: string,
-    domain: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomDeleteResponse>;
-  delete(
-    bucketName: string,
-    domain: string,
-    params: CustomDeleteParams | Core.RequestOptions = {},
+    params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(bucketName, domain, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domain}`, {
         ...options,
@@ -177,20 +153,10 @@ export class Custom extends APIResource {
   get(
     bucketName: string,
     domain: string,
-    params?: CustomGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomGetResponse>;
-  get(bucketName: string, domain: string, options?: Core.RequestOptions): Core.APIPromise<CustomGetResponse>;
-  get(
-    bucketName: string,
-    domain: string,
-    params: CustomGetParams | Core.RequestOptions = {},
+    params: CustomGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(bucketName, domain, {}, params);
-    }
-    const { account_id = this._client.accountId, jurisdiction } = params;
+    const { account_id, jurisdiction } = params;
     return (
       this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domain}`, {
         ...options,
@@ -215,6 +181,11 @@ export interface CustomCreateResponse {
    * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled: boolean;
+
+  /**
+   * Zone ID of the custom domain.
+   */
+  zoneId: string;
 
   /**
    * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -370,7 +341,7 @@ export interface CustomCreateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Name of the custom domain to be added.
@@ -411,7 +382,7 @@ export interface CustomUpdateParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: An allowlist of ciphers for TLS termination. These ciphers must be
@@ -442,7 +413,7 @@ export interface CustomListParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -455,7 +426,7 @@ export interface CustomDeleteParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be
@@ -468,7 +439,7 @@ export interface CustomGetParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: Jurisdiction where objects in this bucket are guaranteed to be

@@ -1,14 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
 export class Reports extends APIResource {
   /**
-   * Retrieves `PhishGuard` reports showing phishing attempts and suspicious email
-   * patterns detected.
+   * Retrieves PhishGuard security alert reports for a specified date range. Reports
+   * include detected threats, dispositions, and contextual information. Use for
+   * security monitoring and threat analysis.
    *
    * @example
    * ```ts
@@ -21,18 +21,10 @@ export class Reports extends APIResource {
    * ```
    */
   list(
-    params?: ReportListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ReportListResponsesSinglePage, ReportListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ReportListResponsesSinglePage, ReportListResponse>;
-  list(
-    params: ReportListParams | Core.RequestOptions = {},
+    params: ReportListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ReportListResponsesSinglePage, ReportListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/phishguard/reports`,
       ReportListResponsesSinglePage,
@@ -47,8 +39,6 @@ export interface ReportListResponse {
   id: number;
 
   content: string;
-
-  created_at: string;
 
   disposition:
     | 'MALICIOUS'
@@ -68,22 +58,32 @@ export interface ReportListResponse {
 
   title: string;
 
-  ts: string;
-
-  updated_at: string;
+  created_at?: string | null;
 
   tags?: Array<ReportListResponse.Tag> | null;
+
+  /**
+   * @deprecated Deprecated, use `created_at` instead
+   */
+  ts?: string;
+
+  updated_at?: string | null;
 }
 
 export namespace ReportListResponse {
   export interface Fields {
     to: Array<string>;
 
-    ts: string;
-
     from?: string | null;
 
+    occurred_at?: string;
+
     postfix_id?: string | null;
+
+    /**
+     * @deprecated Deprecated, use `occurred_at` instead
+     */
+    ts?: string;
   }
 
   export interface Tag {
@@ -95,27 +95,27 @@ export namespace ReportListResponse {
 
 export interface ReportListParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
-   * Query param: The end of the search date range (RFC3339 format).
+   * Query param: End of the time range (RFC3339). Takes precedence over to_date.
    */
   end?: string;
 
   /**
-   * Query param
+   * Query param: Deprecated, use `start` instead. Start date in YYYY-MM-DD format.
    */
   from_date?: string;
 
   /**
-   * Query param: The beginning of the search date range (RFC3339 format).
+   * Query param: Start of the time range (RFC3339). Takes precedence over from_date.
    */
   start?: string;
 
   /**
-   * Query param
+   * Query param: Deprecated, use `end` instead. End date in YYYY-MM-DD format.
    */
   to_date?: string;
 }

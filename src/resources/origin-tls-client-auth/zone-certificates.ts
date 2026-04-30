@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -29,7 +28,7 @@ export class ZoneCertificates extends APIResource {
     params: ZoneCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneCertificateCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
         result: ZoneCertificateCreateResponse;
@@ -52,20 +51,10 @@ export class ZoneCertificates extends APIResource {
    * ```
    */
   list(
-    params?: ZoneCertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneCertificateListResponsesSinglePage, ZoneCertificateListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneCertificateListResponsesSinglePage, ZoneCertificateListResponse>;
-  list(
-    params: ZoneCertificateListParams | Core.RequestOptions = {},
+    params: ZoneCertificateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ZoneCertificateListResponsesSinglePage, ZoneCertificateListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/origin_tls_client_auth`,
       ZoneCertificateListResponsesSinglePage,
@@ -87,22 +76,10 @@ export class ZoneCertificates extends APIResource {
    */
   delete(
     certificateId: string,
-    params?: ZoneCertificateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneCertificateDeleteResponse>;
-  delete(
-    certificateId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneCertificateDeleteResponse>;
-  delete(
-    certificateId: string,
-    params: ZoneCertificateDeleteParams | Core.RequestOptions = {},
+    params: ZoneCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneCertificateDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(certificateId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
@@ -126,19 +103,10 @@ export class ZoneCertificates extends APIResource {
    */
   get(
     certificateId: string,
-    params?: ZoneCertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneCertificateGetResponse>;
-  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<ZoneCertificateGetResponse>;
-  get(
-    certificateId: string,
-    params: ZoneCertificateGetParams | Core.RequestOptions = {},
+    params: ZoneCertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneCertificateGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(certificateId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
@@ -286,7 +254,7 @@ export interface ZoneCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The zone's leaf certificate.
@@ -303,21 +271,21 @@ export interface ZoneCertificateListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface ZoneCertificateDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface ZoneCertificateGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 ZoneCertificates.ZoneCertificateListResponsesSinglePage = ZoneCertificateListResponsesSinglePage;

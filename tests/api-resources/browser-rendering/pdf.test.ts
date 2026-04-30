@@ -9,11 +9,12 @@ const client = new Cloudflare({
 });
 
 describe('resource pdf', () => {
-  test('create: required and optional params', async () => {
+  // Mock server doesn't support application/pdf responses
+  test.skip('create: required and optional params', async () => {
     const response = await client.browserRendering.pdf.create({
       account_id: 'account_id',
       html: '<h1>Hello World!</h1>',
-      cacheTTL: 86400,
+      cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
         {

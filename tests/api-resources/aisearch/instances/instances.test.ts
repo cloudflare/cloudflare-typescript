@@ -42,15 +42,7 @@ describe('resource instances', () => {
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: {
-        created_from_aisearch_wizard: true,
-        search_for_agents: {
-          hostname: 'hostname',
-          zone_id: 'zone_id',
-          zone_name: 'zone_name',
-        },
-        worker_domain: 'worker_domain',
-      },
+      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
@@ -98,7 +90,7 @@ describe('resource instances', () => {
           },
         },
       },
-      sync_interval: 3600,
+      sync_interval: 900,
       token_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       type: 'r2',
     });
@@ -133,15 +125,7 @@ describe('resource instances', () => {
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: {
-        created_from_aisearch_wizard: true,
-        search_for_agents: {
-          hostname: 'hostname',
-          zone_id: 'zone_id',
-          zone_name: 'zone_name',
-        },
-        worker_domain: 'worker_domain',
-      },
+      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],
@@ -191,7 +175,7 @@ describe('resource instances', () => {
       },
       summarization: true,
       summarization_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
-      sync_interval: 3600,
+      sync_interval: 900,
       system_prompt_ai_search: 'system_prompt_ai_search',
       system_prompt_index_summarization: 'system_prompt_index_summarization',
       system_prompt_rewrite_query: 'system_prompt_rewrite_query',
@@ -219,7 +203,7 @@ describe('resource instances', () => {
       order_by: 'created_at',
       order_by_direction: 'asc',
       page: 1,
-      per_page: 1,
+      per_page: 20,
       search: 'search',
     });
   });

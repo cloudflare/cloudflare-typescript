@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as WorkersAPI from '../../workers';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -24,7 +23,7 @@ export class Versions extends APIResource {
     params: VersionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    const { account_id = this._client.accountId, deploy, ...body } = params;
+    const { account_id, deploy, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/workers/${workerId}/versions`, {
         query: { deploy },
@@ -50,22 +49,10 @@ export class Versions extends APIResource {
    */
   list(
     workerId: string,
-    params?: VersionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionsV4PagePaginationArray, Version>;
-  list(
-    workerId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionsV4PagePaginationArray, Version>;
-  list(
-    workerId: string,
-    params: VersionListParams | Core.RequestOptions = {},
+    params: VersionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<VersionsV4PagePaginationArray, Version> {
-    if (isRequestOptions(params)) {
-      return this.list(workerId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workers/workers/${workerId}/versions`,
       VersionsV4PagePaginationArray,
@@ -89,24 +76,10 @@ export class Versions extends APIResource {
   delete(
     workerId: string,
     versionId: string,
-    params?: VersionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionDeleteResponse>;
-  delete(
-    workerId: string,
-    versionId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionDeleteResponse>;
-  delete(
-    workerId: string,
-    versionId: string,
-    params: VersionDeleteParams | Core.RequestOptions = {},
+    params: VersionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(workerId, versionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/workers/${workerId}/versions/${versionId}`,
       options,
@@ -129,20 +102,10 @@ export class Versions extends APIResource {
   get(
     workerId: string,
     versionId: string,
-    params?: VersionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Version>;
-  get(workerId: string, versionId: string, options?: Core.RequestOptions): Core.APIPromise<Version>;
-  get(
-    workerId: string,
-    versionId: string,
-    params: VersionGetParams | Core.RequestOptions = {},
+    params: VersionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Version> {
-    if (isRequestOptions(params)) {
-      return this.get(workerId, versionId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/workers/workers/${workerId}/versions/${versionId}`, {
         query,
@@ -840,6 +803,13 @@ export namespace Version {
        * The period in seconds.
        */
       period: number;
+
+      /**
+       * Duration in seconds to apply the mitigation action after the rate limit is
+       * exceeded. Valid values are 0 (disabled), 10, or multiples of 60 up to 86400.
+       * Must be greater than or equal to the period when non-zero.
+       */
+      mitigation_timeout?: number;
     }
   }
 
@@ -1332,7 +1302,7 @@ export interface VersionCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: If true, a deployment will be created that sends 100% of traffic to
@@ -1983,6 +1953,13 @@ export namespace VersionCreateParams {
        * The period in seconds.
        */
       period: number;
+
+      /**
+       * Duration in seconds to apply the mitigation action after the rate limit is
+       * exceeded. Valid values are 0 (disabled), 10, or multiples of 60 up to 86400.
+       * Must be greater than or equal to the period when non-zero.
+       */
+      mitigation_timeout?: number;
     }
   }
 
@@ -2463,21 +2440,21 @@ export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface VersionDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface VersionGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Whether to include the `modules` property of the version in the

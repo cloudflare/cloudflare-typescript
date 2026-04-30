@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Session extends APIResource {
@@ -16,16 +15,8 @@ export class Session extends APIResource {
    *   });
    * ```
    */
-  list(params?: SessionListParams, options?: Core.RequestOptions): Core.APIPromise<SessionListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SessionListResponse>;
-  list(
-    params: SessionListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: SessionListParams, options?: Core.RequestOptions): Core.APIPromise<SessionListResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/browser-rendering/devtools/session`, {
       query,
       ...options,
@@ -46,19 +37,10 @@ export class Session extends APIResource {
    */
   get(
     sessionId: string,
-    params?: SessionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionGetResponse | null>;
-  get(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<SessionGetResponse | null>;
-  get(
-    sessionId: string,
-    params: SessionGetParams | Core.RequestOptions = {},
+    params: SessionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.get(sessionId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/browser-rendering/devtools/session/${sessionId}`,
       options,
@@ -188,7 +170,7 @@ export interface SessionListParams {
   /**
    * Path param: Account ID.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param
@@ -205,7 +187,7 @@ export interface SessionGetParams {
   /**
    * Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Session {

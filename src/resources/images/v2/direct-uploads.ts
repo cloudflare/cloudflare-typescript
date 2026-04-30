@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class DirectUploads extends APIResource {
@@ -23,18 +22,10 @@ export class DirectUploads extends APIResource {
    * ```
    */
   create(
-    params?: DirectUploadCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DirectUploadCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<DirectUploadCreateResponse>;
-  create(
-    params: DirectUploadCreateParams | Core.RequestOptions = {},
+    params: DirectUploadCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DirectUploadCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/images/v2/direct_upload`,
@@ -61,7 +52,7 @@ export interface DirectUploadCreateParams {
   /**
    * Path param: Account identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Optional Image Custom ID. Up to 1024 chars. Can include any number

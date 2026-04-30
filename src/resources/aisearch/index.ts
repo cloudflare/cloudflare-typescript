@@ -22,6 +22,24 @@ export {
   type InstanceStatsParams,
 } from './instances/index';
 export {
+  NamespaceListResponsesV4PagePaginationArray,
+  Namespaces,
+  type NamespaceCreateResponse,
+  type NamespaceUpdateResponse,
+  type NamespaceListResponse,
+  type NamespaceDeleteResponse,
+  type NamespaceChatCompletionsResponse,
+  type NamespaceReadResponse,
+  type NamespaceSearchResponse,
+  type NamespaceCreateParams,
+  type NamespaceUpdateParams,
+  type NamespaceListParams,
+  type NamespaceDeleteParams,
+  type NamespaceChatCompletionsParams,
+  type NamespaceReadParams,
+  type NamespaceSearchParams,
+} from './namespaces/index';
+export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
   type TokenCreateResponse,

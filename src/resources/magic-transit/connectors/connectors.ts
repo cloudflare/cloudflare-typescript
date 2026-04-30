@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as EventsAPI from './events/events';
 import {
@@ -41,7 +40,7 @@ export class Connectors extends APIResource {
     params: ConnectorCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/connectors`, { body, ...options }) as Core.APIPromise<{
         result: ConnectorCreateResponse;
@@ -66,7 +65,7 @@ export class Connectors extends APIResource {
     params: ConnectorUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/connectors/${connectorId}`, {
         body,
@@ -89,24 +88,14 @@ export class Connectors extends APIResource {
    * ```
    */
   list(
-    params?: ConnectorListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse>;
-  list(
-    params: ConnectorListParams | Core.RequestOptions = {},
+    params: ConnectorListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/connectors`,
       ConnectorListResponsesSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -124,19 +113,10 @@ export class Connectors extends APIResource {
    */
   delete(
     connectorId: string,
-    params?: ConnectorDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectorDeleteResponse>;
-  delete(connectorId: string, options?: Core.RequestOptions): Core.APIPromise<ConnectorDeleteResponse>;
-  delete(
-    connectorId: string,
-    params: ConnectorDeleteParams | Core.RequestOptions = {},
+    params: ConnectorDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(connectorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/connectors/${connectorId}`,
@@ -161,7 +141,7 @@ export class Connectors extends APIResource {
     params: ConnectorEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorEditResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/connectors/${connectorId}`, {
         body,
@@ -183,19 +163,10 @@ export class Connectors extends APIResource {
    */
   get(
     connectorId: string,
-    params?: ConnectorGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectorGetResponse>;
-  get(connectorId: string, options?: Core.RequestOptions): Core.APIPromise<ConnectorGetResponse>;
-  get(
-    connectorId: string,
-    params: ConnectorGetParams | Core.RequestOptions = {},
+    params: ConnectorGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectorGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(connectorId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/connectors/${connectorId}`,
@@ -248,6 +219,8 @@ export namespace ConnectorCreateResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -292,6 +265,8 @@ export namespace ConnectorUpdateResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -336,6 +311,8 @@ export namespace ConnectorListResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -380,6 +357,8 @@ export namespace ConnectorDeleteResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -424,6 +403,8 @@ export namespace ConnectorEditResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -468,6 +449,8 @@ export namespace ConnectorGetResponse {
     id: string;
 
     serial_number?: string;
+
+    type?: 'MANAGED' | 'LICENSED';
   }
 }
 
@@ -475,7 +458,7 @@ export interface ConnectorCreateParams {
   /**
    * Path param: Account identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Exactly one of id, serial_number, or provision_license must be
@@ -541,7 +524,7 @@ export interface ConnectorUpdateParams {
   /**
    * Path param: Account identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -588,23 +571,28 @@ export interface ConnectorUpdateParams {
 
 export interface ConnectorListParams {
   /**
-   * Account identifier
+   * Path param: Account identifier
    */
-  account_id?: string;
+  account_id: string;
+
+  /**
+   * Query param: Filter connectors by device type.
+   */
+  device_type?: 'MANAGED' | 'LICENSED';
 }
 
 export interface ConnectorDeleteParams {
   /**
    * Account identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface ConnectorEditParams {
   /**
    * Path param: Account identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -653,7 +641,7 @@ export interface ConnectorGetParams {
   /**
    * Account identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Connectors.ConnectorListResponsesSinglePage = ConnectorListResponsesSinglePage;

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 
@@ -25,7 +24,7 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedProfile> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}/config`, {
         body,
@@ -49,19 +48,10 @@ export class Predefined extends APIResource {
    */
   delete(
     profileId: string,
-    params?: PredefinedDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PredefinedDeleteResponse | null>;
-  delete(profileId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedDeleteResponse | null>;
-  delete(
-    profileId: string,
-    params: PredefinedDeleteParams | Core.RequestOptions = {},
+    params: PredefinedDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(profileId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
@@ -85,19 +75,10 @@ export class Predefined extends APIResource {
    */
   get(
     profileId: string,
-    params?: PredefinedGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PredefinedProfile>;
-  get(profileId: string, options?: Core.RequestOptions): Core.APIPromise<PredefinedProfile>;
-  get(
-    profileId: string,
-    params: PredefinedGetParams | Core.RequestOptions = {},
+    params: PredefinedGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PredefinedProfile> {
-    if (isRequestOptions(params)) {
-      return this.get(profileId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/predefined/${profileId}/config`,
@@ -193,7 +174,10 @@ export namespace PredefinedProfile {
      */
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
   }
 
   export namespace PredefinedEntry {
@@ -210,11 +194,30 @@ export namespace PredefinedProfile {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -296,7 +299,7 @@ export interface PredefinedUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -338,11 +341,11 @@ export namespace PredefinedUpdateParams {
 }
 
 export interface PredefinedDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PredefinedGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Predefined {

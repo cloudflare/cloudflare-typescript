@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as Shared from '../shared';
 import * as ConsumersAPI from './consumers';
@@ -65,7 +64,7 @@ export class Queues extends APIResource {
    * ```
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
         result: Queue;
@@ -86,17 +85,8 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  update(queueId: string, params?: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
-  update(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
-  update(
-    queueId: string,
-    params: QueueUpdateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Queue> {
-    if (isRequestOptions(params)) {
-      return this.update(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  update(queueId: string, params: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/queues/${queueId}`, { body, ...options }) as Core.APIPromise<{
         result: Queue;
@@ -117,16 +107,8 @@ export class Queues extends APIResource {
    * }
    * ```
    */
-  list(params?: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue>;
-  list(options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue>;
-  list(
-    params: QueueListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<QueuesSinglePage, Queue> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  list(params: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue> {
+    const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/queues`, QueuesSinglePage, options);
   }
 
@@ -143,19 +125,10 @@ export class Queues extends APIResource {
    */
   delete(
     queueId: string,
-    params?: QueueDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueDeleteResponse>;
-  delete(queueId: string, options?: Core.RequestOptions): Core.APIPromise<QueueDeleteResponse>;
-  delete(
-    queueId: string,
-    params: QueueDeleteParams | Core.RequestOptions = {},
+    params: QueueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options);
   }
 
@@ -170,17 +143,8 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  edit(queueId: string, params?: QueueEditParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
-  edit(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
-  edit(
-    queueId: string,
-    params: QueueEditParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Queue> {
-    if (isRequestOptions(params)) {
-      return this.edit(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+  edit(queueId: string, params: QueueEditParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/queues/${queueId}`, {
         body,
@@ -200,20 +164,36 @@ export class Queues extends APIResource {
    * );
    * ```
    */
-  get(queueId: string, params?: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue>;
-  get(queueId: string, options?: Core.RequestOptions): Core.APIPromise<Queue>;
-  get(
-    queueId: string,
-    params: QueueGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Queue> {
-    if (isRequestOptions(params)) {
-      return this.get(queueId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
         result: Queue;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Return best-effort metrics for a queue. Values may be approximate due to the
+   * distributed nature of queues.
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.getMetrics(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  getMetrics(
+    queueId: string,
+    params: QueueGetMetricsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueGetMetricsResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/queues/${queueId}/metrics`, options) as Core.APIPromise<{
+        result: QueueGetMetricsResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -283,11 +263,33 @@ export interface QueueDeleteResponse {
   success?: true;
 }
 
+/**
+ * Best-effort metrics for the queue. Values may be approximate due to the
+ * distributed nature of queues.
+ */
+export interface QueueGetMetricsResponse {
+  /**
+   * The size in bytes of unacknowledged messages in the queue.
+   */
+  backlog_bytes: number;
+
+  /**
+   * The number of unacknowledged messages in the queue.
+   */
+  backlog_count: number;
+
+  /**
+   * Unix timestamp in milliseconds of the oldest unacknowledged message in the
+   * queue. Returns 0 if unknown.
+   */
+  oldest_message_timestamp_ms: number;
+}
+
 export interface QueueCreateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -299,7 +301,7 @@ export interface QueueUpdateParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -335,21 +337,21 @@ export interface QueueListParams {
   /**
    * A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface QueueDeleteParams {
   /**
    * A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface QueueEditParams {
   /**
    * Path param: A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -385,7 +387,14 @@ export interface QueueGetParams {
   /**
    * A Resource identifier.
    */
-  account_id?: string;
+  account_id: string;
+}
+
+export interface QueueGetMetricsParams {
+  /**
+   * A Resource identifier.
+   */
+  account_id: string;
 }
 
 Queues.QueuesSinglePage = QueuesSinglePage;
@@ -400,6 +409,7 @@ export declare namespace Queues {
   export {
     type Queue as Queue,
     type QueueDeleteResponse as QueueDeleteResponse,
+    type QueueGetMetricsResponse as QueueGetMetricsResponse,
     QueuesSinglePage as QueuesSinglePage,
     type QueueCreateParams as QueueCreateParams,
     type QueueUpdateParams as QueueUpdateParams,
@@ -407,6 +417,7 @@ export declare namespace Queues {
     type QueueDeleteParams as QueueDeleteParams,
     type QueueEditParams as QueueEditParams,
     type QueueGetParams as QueueGetParams,
+    type QueueGetMetricsParams as QueueGetMetricsParams,
   };
 
   export {

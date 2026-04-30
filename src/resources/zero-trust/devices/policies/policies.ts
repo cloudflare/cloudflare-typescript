@@ -210,6 +210,11 @@ export interface SettingsPolicy {
    * Determines which tunnel protocol to use.
    */
   tunnel_protocol?: string;
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  virtual_networks?: SettingsPolicy.VirtualNetworks | null;
 }
 
 export namespace SettingsPolicy {
@@ -235,6 +240,22 @@ export namespace SettingsPolicy {
      * The name of the DEX test targeting this policy.
      */
     name?: string;
+  }
+
+  /**
+   * Virtual network access settings for the device.
+   */
+  export interface VirtualNetworks {
+    /**
+     * List of virtual network IDs the device is allowed to access. When
+     * virtual_networks is set, at least one entry is required.
+     */
+    allowed: Array<string>;
+
+    /**
+     * The default virtual network ID. Must be included in the `allowed` list.
+     */
+    default: string;
   }
 }
 

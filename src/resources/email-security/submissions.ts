@@ -1,13 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Submissions extends APIResource {
   /**
-   * This endpoint returns information for submissions to made to reclassify emails.
+   * Returns information for submissions made to reclassify emails. Shows the status,
+   * outcome, and disposition changes for reclassification requests made by users or
+   * the security team. Useful for tracking false positive/negative reports.
    *
    * @example
    * ```ts
@@ -20,20 +21,10 @@ export class Submissions extends APIResource {
    * ```
    */
   list(
-    params?: SubmissionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse>;
-  list(
-    params: SubmissionListParams | Core.RequestOptions = {},
+    params: SubmissionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubmissionListResponsesV4PagePaginationArray, SubmissionListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/submissions`,
       SubmissionListResponsesV4PagePaginationArray,
@@ -46,26 +37,15 @@ export class SubmissionListResponsesV4PagePaginationArray extends V4PagePaginati
 
 export interface SubmissionListResponse {
   /**
-   * @deprecated deprecated as of 2026-04-01, use `requested_at` instead.
+   * When the submission was requested (UTC).
    */
-  requested_ts: string;
+  requested_at: string;
 
   submission_id: string;
 
   customer_status?: 'escalated' | 'reviewed' | 'unreviewed' | null;
 
-  escalated_as?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
+  escalated_as?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
   escalated_at?: string | null;
 
@@ -73,76 +53,46 @@ export interface SubmissionListResponse {
 
   escalated_submission_id?: string | null;
 
-  original_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
+  original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
   original_edf_hash?: string | null;
 
+  /**
+   * The postfix ID of the original message that was submitted
+   */
   original_postfix_id?: string | null;
 
   outcome?: string | null;
 
-  outcome_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
-
-  requested_at?: string | null;
+  outcome_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
   requested_by?: string | null;
 
-  requested_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
+  requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
+
+  /**
+   * @deprecated Deprecated, use `requested_at` instead
+   */
+  requested_ts?: string;
 
   status?: string | null;
 
   subject?: string | null;
 
-  type?: string | null;
+  /**
+   * Whether the submission was created by a team member or an end user.
+   */
+  type?: 'Team' | 'User' | null;
 }
 
 export interface SubmissionListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
-   * Query param
-   */
-  customer_status?: 'escalated' | 'reviewed' | 'unreviewed';
-
-  /**
-   * Query param: The end of the search date range. Defaults to `now` if not
-   * provided.
+   * Query param: The end of the search date range. Defaults to `now`.
    */
   end?: string;
 
@@ -167,8 +117,8 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
 
   /**
-   * Query param: The beginning of the search date range. Defaults to `now - 30 days`
-   * if not provided.
+   * Query param: The beginning of the search date range. Defaults to
+   * `now - 30 days`.
    */
   start?: string;
 

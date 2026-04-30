@@ -1,11 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BytimesAPI from './bytimes';
 import { BytimeGetParams, Bytimes } from './bytimes';
-import * as ReportsReportsAPI from '../../../dns/analytics/reports/reports';
+import * as AnalyticsReportsAPI from '../../../dns/analytics/reports/reports';
 
 export class Reports extends APIResource {
   bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);
@@ -28,24 +27,15 @@ export class Reports extends APIResource {
    */
   get(
     dnsFirewallId: string,
-    params?: ReportGetParams,
+    params: ReportGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsReportsAPI.Report>;
-  get(dnsFirewallId: string, options?: Core.RequestOptions): Core.APIPromise<ReportsReportsAPI.Report>;
-  get(
-    dnsFirewallId: string,
-    params: ReportGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ReportsReportsAPI.Report> {
-    if (isRequestOptions(params)) {
-      return this.get(dnsFirewallId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  ): Core.APIPromise<AnalyticsReportsAPI.Report> {
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: ReportsReportsAPI.Report }>
+      }) as Core.APIPromise<{ result: AnalyticsReportsAPI.Report }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -54,7 +44,7 @@ export interface ReportGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: A comma-separated list of dimensions to group results by.

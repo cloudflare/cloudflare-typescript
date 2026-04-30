@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as ScriptsAPI from './scripts';
 import * as TailAPI from './tail';
@@ -26,7 +25,7 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, {
         body,
@@ -51,19 +50,10 @@ export class Settings extends APIResource {
    */
   get(
     scriptName: string,
-    params?: SettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.ScriptSetting>;
-  get(scriptName: string, options?: Core.RequestOptions): Core.APIPromise<ScriptsAPI.ScriptSetting>;
-  get(
-    scriptName: string,
-    params: SettingGetParams | Core.RequestOptions = {},
+    params: SettingGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
-    if (isRequestOptions(params)) {
-      return this.get(scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`,
@@ -77,7 +67,7 @@ export interface SettingEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Whether Logpush is turned on for the Worker.
@@ -191,7 +181,7 @@ export interface SettingGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Settings {

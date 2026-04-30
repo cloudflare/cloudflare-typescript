@@ -8,7 +8,7 @@ export class LogoMatches extends APIResource {
    * Get paginated list of logo matches for a specific brand protection logo query
    */
   get(params: LogoMatchGetParams, options?: Core.RequestOptions): Core.APIPromise<LogoMatchGetResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cloudforce-one/v2/brand-protection/logo/matches`, {
       query,
       ...options,
@@ -48,7 +48,7 @@ export interface LogoMatchGetParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param

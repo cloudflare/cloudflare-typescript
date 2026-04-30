@@ -11,9 +11,10 @@ const client = new Cloudflare({
 
 describe('resource raw', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.raw.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.investigate.raw.get(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,8 +25,9 @@ describe('resource raw', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.raw.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.emailSecurity.investigate.raw.get(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

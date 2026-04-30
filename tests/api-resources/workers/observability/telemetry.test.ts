@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource telemetry', () => {
-  test('keys: only required params', async () => {
+  // HTTP 400 error from prism
+  test.skip('keys: only required params', async () => {
     const responsePromise = client.workers.observability.telemetry.keys({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,21 @@ describe('resource telemetry', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('keys: required and optional params', async () => {
+  // HTTP 400 error from prism
+  test.skip('keys: required and optional params', async () => {
     const response = await client.workers.observability.telemetry.keys({
       account_id: 'account_id',
       datasets: ['string'],
       filters: [
         {
           filterCombination: 'and',
-          filters: [{}],
+          filters: [
+            {
+              filterCombination: 'and',
+              filters: [{}],
+              kind: 'group',
+            },
+          ],
           kind: 'group',
         },
       ],
@@ -48,7 +56,8 @@ describe('resource telemetry', () => {
     });
   });
 
-  test('query: only required params', async () => {
+  // HTTP 400 error from prism
+  test.skip('query: only required params', async () => {
     const responsePromise = client.workers.observability.telemetry.query({
       account_id: 'account_id',
       queryId: 'queryId',
@@ -63,7 +72,8 @@ describe('resource telemetry', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('query: required and optional params', async () => {
+  // HTTP 400 error from prism
+  test.skip('query: required and optional params', async () => {
     const response = await client.workers.observability.telemetry.query({
       account_id: 'account_id',
       queryId: 'queryId',
@@ -91,7 +101,13 @@ describe('resource telemetry', () => {
         filters: [
           {
             filterCombination: 'and',
-            filters: [{}],
+            filters: [
+              {
+                filterCombination: 'and',
+                filters: [{}],
+                kind: 'group',
+              },
+            ],
             kind: 'group',
           },
         ],
@@ -115,7 +131,8 @@ describe('resource telemetry', () => {
     });
   });
 
-  test('values: only required params', async () => {
+  // HTTP 400 error from prism
+  test.skip('values: only required params', async () => {
     const responsePromise = client.workers.observability.telemetry.values({
       account_id: 'account_id',
       datasets: ['string'],
@@ -132,7 +149,8 @@ describe('resource telemetry', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('values: required and optional params', async () => {
+  // HTTP 400 error from prism
+  test.skip('values: required and optional params', async () => {
     const response = await client.workers.observability.telemetry.values({
       account_id: 'account_id',
       datasets: ['string'],
@@ -142,7 +160,13 @@ describe('resource telemetry', () => {
       filters: [
         {
           filterCombination: 'and',
-          filters: [{}],
+          filters: [
+            {
+              filterCombination: 'and',
+              filters: [{}],
+              kind: 'group',
+            },
+          ],
           kind: 'group',
         },
       ],

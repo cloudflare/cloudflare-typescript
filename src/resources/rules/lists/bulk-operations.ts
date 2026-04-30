@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class BulkOperations extends APIResource {
@@ -23,19 +22,10 @@ export class BulkOperations extends APIResource {
    */
   get(
     operationId: string,
-    params?: BulkOperationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkOperationGetResponse>;
-  get(operationId: string, options?: Core.RequestOptions): Core.APIPromise<BulkOperationGetResponse>;
-  get(
-    operationId: string,
-    params: BulkOperationGetParams | Core.RequestOptions = {},
+    params: BulkOperationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BulkOperationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(operationId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/rules/lists/bulk_operations/${operationId}`,
@@ -107,7 +97,7 @@ export interface BulkOperationGetParams {
   /**
    * The Account ID for this resource.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace BulkOperations {

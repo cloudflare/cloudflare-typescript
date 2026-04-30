@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -18,7 +17,7 @@ export class Routes extends APIResource {
    * ```
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/workers/routes`, { body, ...options }) as Core.APIPromise<{
         result: RouteCreateResponse;
@@ -45,7 +44,7 @@ export class Routes extends APIResource {
     params: RouteUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteUpdateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/workers/routes/${routeId}`, {
         body,
@@ -68,18 +67,10 @@ export class Routes extends APIResource {
    * ```
    */
   list(
-    params?: RouteListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RouteListResponsesSinglePage, RouteListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RouteListResponsesSinglePage, RouteListResponse>;
-  list(
-    params: RouteListParams | Core.RequestOptions = {},
+    params: RouteListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RouteListResponsesSinglePage, RouteListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(`/zones/${zone_id}/workers/routes`, RouteListResponsesSinglePage, options);
   }
 
@@ -96,19 +87,10 @@ export class Routes extends APIResource {
    */
   delete(
     routeId: string,
-    params?: RouteDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteDeleteResponse>;
-  delete(routeId: string, options?: Core.RequestOptions): Core.APIPromise<RouteDeleteResponse>;
-  delete(
-    routeId: string,
-    params: RouteDeleteParams | Core.RequestOptions = {},
+    params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(routeId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteDeleteResponse;
@@ -129,19 +111,10 @@ export class Routes extends APIResource {
    */
   get(
     routeId: string,
-    params?: RouteGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteGetResponse>;
-  get(routeId: string, options?: Core.RequestOptions): Core.APIPromise<RouteGetResponse>;
-  get(
-    routeId: string,
-    params: RouteGetParams | Core.RequestOptions = {},
+    params: RouteGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(routeId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/workers/routes/${routeId}`, options) as Core.APIPromise<{
         result: RouteGetResponse;
@@ -235,7 +208,7 @@ export interface RouteCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Pattern to match incoming requests against.
@@ -253,7 +226,7 @@ export interface RouteUpdateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Pattern to match incoming requests against.
@@ -271,21 +244,21 @@ export interface RouteListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RouteDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RouteGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Routes.RouteListResponsesSinglePage = RouteListResponsesSinglePage;

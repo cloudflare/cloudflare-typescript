@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import { SplitTunnelExcludesSinglePage } from '../policies';
@@ -30,7 +29,7 @@ export class Excludes extends APIResource {
     params: ExcludeUpdateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/${policyId}/exclude`,
       SplitTunnelExcludesSinglePage,
@@ -55,22 +54,10 @@ export class Excludes extends APIResource {
    */
   get(
     policyId: string,
-    params?: ExcludeGetParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude>;
-  get(
-    policyId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude>;
-  get(
-    policyId: string,
-    params: ExcludeGetParams | Core.RequestOptions = {},
+    params: ExcludeGetParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SplitTunnelExcludesSinglePage, PoliciesAPI.SplitTunnelExclude> {
-    if (isRequestOptions(params)) {
-      return this.get(policyId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/policy/${policyId}/exclude`,
       SplitTunnelExcludesSinglePage,
@@ -83,7 +70,7 @@ export interface ExcludeUpdateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -92,7 +79,7 @@ export interface ExcludeUpdateParams {
 }
 
 export interface ExcludeGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Excludes {

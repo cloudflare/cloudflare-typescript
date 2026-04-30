@@ -13,7 +13,7 @@ export class ToMarkdown extends APIResource {
     params: ToMarkdownCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ToMarkdownCreateResponse[]> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/ai/tomarkdown`,
@@ -39,7 +39,7 @@ export interface ToMarkdownCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param

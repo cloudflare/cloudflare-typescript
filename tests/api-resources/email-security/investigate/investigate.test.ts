@@ -32,26 +32,25 @@ describe('resource investigate', () => {
       detections_only: true,
       domain: 'domain',
       end: '2019-12-27T18:11:19.117Z',
-      exact_subject: 'exact_subject',
       final_disposition: 'MALICIOUS',
       message_action: 'PREVIEW',
       message_id: 'message_id',
       metric: 'metric',
       page: 1,
-      per_page: 1,
+      per_page: 20,
       query: 'query',
       recipient: 'recipient',
       sender: 'sender',
       start: '2019-12-27T18:11:19.117Z',
       subject: 'subject',
-      submissions: true,
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.emailSecurity.investigate.get(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,9 +61,9 @@ describe('resource investigate', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      submission: true,
-    });
+    const response = await client.emailSecurity.investigate.get(
+      '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', submission: true },
+    );
   });
 });

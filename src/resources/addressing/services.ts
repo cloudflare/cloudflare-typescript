@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
@@ -23,18 +22,10 @@ export class Services extends APIResource {
    * ```
    */
   list(
-    params?: ServiceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ServiceListResponsesSinglePage, ServiceListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ServiceListResponsesSinglePage, ServiceListResponse>;
-  list(
-    params: ServiceListParams | Core.RequestOptions = {},
+    params: ServiceListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ServiceListResponsesSinglePage, ServiceListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/addressing/services`,
       ServiceListResponsesSinglePage,
@@ -62,7 +53,7 @@ export interface ServiceListParams {
   /**
    * Identifier of a Cloudflare account.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Services.ServiceListResponsesSinglePage = ServiceListResponsesSinglePage;

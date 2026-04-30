@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -19,19 +18,10 @@ export class Jobs extends APIResource {
    */
   create(
     id: string,
-    params?: JobCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobCreateResponse>;
-  create(id: string, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse>;
-  create(
-    id: string,
-    params: JobCreateParams | Core.RequestOptions = {},
+    params: JobCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobCreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai-search/instances/${id}/jobs`, {
         body,
@@ -56,22 +46,10 @@ export class Jobs extends APIResource {
    */
   list(
     id: string,
-    params?: JobListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse>;
-  list(
-    id: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse>;
-  list(
-    id: string,
-    params: JobListParams | Core.RequestOptions = {},
+    params: JobListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list(id, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/ai-search/instances/${id}/jobs`,
       JobListResponsesV4PagePaginationArray,
@@ -94,20 +72,10 @@ export class Jobs extends APIResource {
   get(
     id: string,
     jobId: string,
-    params?: JobGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobGetResponse>;
-  get(id: string, jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse>;
-  get(
-    id: string,
-    jobId: string,
-    params: JobGetParams | Core.RequestOptions = {},
+    params: JobGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(id, jobId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/ai-search/instances/${id}/jobs/${jobId}`,
@@ -131,20 +99,10 @@ export class Jobs extends APIResource {
   logs(
     id: string,
     jobId: string,
-    params?: JobLogsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobLogsResponse>;
-  logs(id: string, jobId: string, options?: Core.RequestOptions): Core.APIPromise<JobLogsResponse>;
-  logs(
-    id: string,
-    jobId: string,
-    params: JobLogsParams | Core.RequestOptions = {},
+    params: JobLogsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<JobLogsResponse> {
-    if (isRequestOptions(params)) {
-      return this.logs(id, jobId, {}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/ai-search/instances/${id}/jobs/${jobId}/logs`, {
         query,
@@ -222,7 +180,7 @@ export interface JobCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -234,18 +192,18 @@ export interface JobListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface JobGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface JobLogsParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param

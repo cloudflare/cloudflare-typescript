@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ProfilesAPI from './profiles';
 import * as CustomAPI from './custom';
@@ -44,18 +43,10 @@ export class Profiles extends APIResource {
    * ```
    */
   list(
-    params?: ProfileListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ProfilesSinglePage, Profile>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ProfilesSinglePage, Profile>;
-  list(
-    params: ProfileListParams | Core.RequestOptions = {},
+    params: ProfileListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ProfilesSinglePage, Profile> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, {
       query,
       ...options,
@@ -73,17 +64,8 @@ export class Profiles extends APIResource {
    * );
    * ```
    */
-  get(profileId: string, params?: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<Profile>;
-  get(profileId: string, options?: Core.RequestOptions): Core.APIPromise<Profile>;
-  get(
-    profileId: string,
-    params: ProfileGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Profile> {
-    if (isRequestOptions(params)) {
-      return this.get(profileId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(profileId: string, params: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<Profile> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/profiles/${profileId}`, options) as Core.APIPromise<{
         result: Profile;
@@ -256,7 +238,10 @@ export namespace Profile {
        */
       profile_id?: string | null;
 
-      variant?: PredefinedEntry.Variant;
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
     }
 
     export namespace PredefinedEntry {
@@ -273,11 +258,30 @@ export namespace Profile {
         available: boolean;
       }
 
-      export interface Variant {
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      export interface UnionMember0 {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
 
+        /**
+         * A customer-facing explanation of what this predefined AI prompt topic
+         * represents.
+         */
+        description?: string | null;
+      }
+
+      /**
+       * A general predefined entry.
+       */
+      export interface UnionMember1 {
+        type: 'General';
+
+        /**
+         * A customer-facing explanation of what this predefined entry represents.
+         */
         description?: string | null;
       }
     }
@@ -403,7 +407,10 @@ export namespace Profile {
        */
       profile_id?: string | null;
 
-      variant?: PredefinedEntry.Variant;
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
     }
 
     export namespace PredefinedEntry {
@@ -420,11 +427,30 @@ export namespace Profile {
         available: boolean;
       }
 
-      export interface Variant {
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      export interface UnionMember0 {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
 
+        /**
+         * A customer-facing explanation of what this predefined AI prompt topic
+         * represents.
+         */
+        description?: string | null;
+      }
+
+      /**
+       * A general predefined entry.
+       */
+      export interface UnionMember1 {
+        type: 'General';
+
+        /**
+         * A customer-facing explanation of what this predefined entry represents.
+         */
         description?: string | null;
       }
     }
@@ -588,7 +614,10 @@ export namespace Profile {
        */
       profile_id?: string | null;
 
-      variant?: PredefinedEntry.Variant;
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
     }
 
     export namespace PredefinedEntry {
@@ -605,11 +634,30 @@ export namespace Profile {
         available: boolean;
       }
 
-      export interface Variant {
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      export interface UnionMember0 {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
 
+        /**
+         * A customer-facing explanation of what this predefined AI prompt topic
+         * represents.
+         */
+        description?: string | null;
+      }
+
+      /**
+       * A general predefined entry.
+       */
+      export interface UnionMember1 {
+        type: 'General';
+
+        /**
+         * A customer-facing explanation of what this predefined entry represents.
+         */
         description?: string | null;
       }
     }
@@ -766,7 +814,10 @@ export namespace Profile {
        */
       profile_id?: string | null;
 
-      variant?: PredefinedEntry.Variant;
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
     }
 
     export namespace PredefinedEntry {
@@ -783,11 +834,30 @@ export namespace Profile {
         available: boolean;
       }
 
-      export interface Variant {
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      export interface UnionMember0 {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
 
+        /**
+         * A customer-facing explanation of what this predefined AI prompt topic
+         * represents.
+         */
+        description?: string | null;
+      }
+
+      /**
+       * A general predefined entry.
+       */
+      export interface UnionMember1 {
+        type: 'General';
+
+        /**
+         * A customer-facing explanation of what this predefined entry represents.
+         */
         description?: string | null;
       }
     }
@@ -904,7 +974,10 @@ export namespace Profile {
        */
       profile_id?: string | null;
 
-      variant?: PredefinedEntry.Variant;
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
     }
 
     export namespace PredefinedEntry {
@@ -921,11 +994,30 @@ export namespace Profile {
         available: boolean;
       }
 
-      export interface Variant {
+      /**
+       * A Predefined AI prompt classification topic entry.
+       */
+      export interface UnionMember0 {
         topic_type: 'Intent' | 'Content';
 
         type: 'PromptTopic';
 
+        /**
+         * A customer-facing explanation of what this predefined AI prompt topic
+         * represents.
+         */
+        description?: string | null;
+      }
+
+      /**
+       * A general predefined entry.
+       */
+      export interface UnionMember1 {
+        type: 'General';
+
+        /**
+         * A customer-facing explanation of what this predefined entry represents.
+         */
         description?: string | null;
       }
     }
@@ -1026,7 +1118,7 @@ export interface ProfileListParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Return all profiles, including those that current account does not
@@ -1036,7 +1128,7 @@ export interface ProfileListParams {
 }
 
 export interface ProfileGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Profiles.ProfilesSinglePage = ProfilesSinglePage;

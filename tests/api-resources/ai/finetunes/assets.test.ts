@@ -13,6 +13,8 @@ describe('resource assets', () => {
   test('create: only required params', async () => {
     const responsePromise = client.ai.finetunes.assets.create('bc451aef-f723-4b26-a6b2-901afd2e7a8a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
+      file_name: 'file_name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,7 +28,7 @@ describe('resource assets', () => {
   test('create: required and optional params', async () => {
     const response = await client.ai.finetunes.assets.create('bc451aef-f723-4b26-a6b2-901afd2e7a8a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       file_name: 'file_name',
     });
   });

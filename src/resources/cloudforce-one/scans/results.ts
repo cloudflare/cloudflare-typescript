@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 
 export class Results extends APIResource {
@@ -18,19 +17,10 @@ export class Results extends APIResource {
    */
   get(
     configId: string,
-    params?: ResultGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ResultGetResponse>;
-  get(configId: string, options?: Core.RequestOptions): Core.APIPromise<ResultGetResponse>;
-  get(
-    configId: string,
-    params: ResultGetParams | Core.RequestOptions = {},
+    params: ResultGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResultGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(configId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/cloudforce-one/scans/results/${configId}`,
@@ -56,7 +46,7 @@ export interface ResultGetParams {
   /**
    * Defines the Account ID.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Results {

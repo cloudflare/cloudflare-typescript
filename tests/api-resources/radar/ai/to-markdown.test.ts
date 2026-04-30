@@ -14,7 +14,7 @@ describe('resource toMarkdown', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.radar.ai.toMarkdown.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      files: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource toMarkdown', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.radar.ai.toMarkdown.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      files: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
   });
 });

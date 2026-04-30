@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Slots extends APIResource {
@@ -15,16 +14,8 @@ export class Slots extends APIResource {
    * });
    * ```
    */
-  list(params?: SlotListParams, options?: Core.RequestOptions): Core.APIPromise<SlotListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SlotListResponse>;
-  list(
-    params: SlotListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SlotListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: SlotListParams, options?: Core.RequestOptions): Core.APIPromise<SlotListResponse> {
+    const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/cni/slots`, { query, ...options });
   }
 
@@ -39,17 +30,8 @@ export class Slots extends APIResource {
    * );
    * ```
    */
-  get(slot: string, params?: SlotGetParams, options?: Core.RequestOptions): Core.APIPromise<SlotGetResponse>;
-  get(slot: string, options?: Core.RequestOptions): Core.APIPromise<SlotGetResponse>;
-  get(
-    slot: string,
-    params: SlotGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SlotGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(slot, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(slot: string, params: SlotGetParams, options?: Core.RequestOptions): Core.APIPromise<SlotGetResponse> {
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/cni/slots/${slot}`, options);
   }
 }
@@ -128,7 +110,7 @@ export interface SlotListParams {
   /**
    * Path param: Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: If specified, only show slots with the given text in their address
@@ -167,7 +149,7 @@ export interface SlotGetParams {
   /**
    * Customer account tag
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Slots {

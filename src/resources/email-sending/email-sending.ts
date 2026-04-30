@@ -36,7 +36,7 @@ export class EmailSending extends APIResource {
     params: EmailSendingSendParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailSendingSendResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email/sending/send`, {
         body,
@@ -63,7 +63,7 @@ export class EmailSending extends APIResource {
     params: EmailSendingSendRawParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EmailSendingSendRawResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email/sending/send_raw`, {
         body,
@@ -111,7 +111,7 @@ export interface EmailSendingSendParams {
   /**
    * Path param: Identifier of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Sender email address. Either a plain string or an object with
@@ -252,7 +252,7 @@ export interface EmailSendingSendRawParams {
   /**
    * Path param: Identifier of the account.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Sender email address.

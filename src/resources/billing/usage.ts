@@ -1,25 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Usage extends APIResource {
   /**
    * Returns billable usage data for PayGo (self-serve) accounts. When no query
    * parameters are provided, returns usage for the current billing period. This
-   * endpoint is currently in beta and access is restricted to select accounts.
+   * endpoint is currently in alpha and access is restricted to select accounts.
+   * While in alpha, the endpoint may get breaking changes.
    */
-  paygo(params?: UsagePaygoParams, options?: Core.RequestOptions): Core.APIPromise<UsagePaygoResponse>;
-  paygo(options?: Core.RequestOptions): Core.APIPromise<UsagePaygoResponse>;
-  paygo(
-    params: UsagePaygoParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<UsagePaygoResponse> {
-    if (isRequestOptions(params)) {
-      return this.paygo({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  paygo(params: UsagePaygoParams, options?: Core.RequestOptions): Core.APIPromise<UsagePaygoResponse> {
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/billing/usage/paygo`, {
         query,
@@ -100,7 +92,7 @@ export interface UsagePaygoParams {
   /**
    * Path param: Represents a Cloudflare resource identifier tag.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Defines the start date for the usage query (e.g., 2025-02-01).

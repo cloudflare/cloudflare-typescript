@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class RegionalTieredCacheResource extends APIResource {
@@ -23,7 +22,7 @@ export class RegionalTieredCacheResource extends APIResource {
     params: RegionalTieredCacheEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalTieredCacheEditResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/cache/regional_tiered_cache`, {
         body,
@@ -46,18 +45,10 @@ export class RegionalTieredCacheResource extends APIResource {
    * ```
    */
   get(
-    params?: RegionalTieredCacheGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionalTieredCacheGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<RegionalTieredCacheGetResponse>;
-  get(
-    params: RegionalTieredCacheGetParams | Core.RequestOptions = {},
+    params: RegionalTieredCacheGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RegionalTieredCacheGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/regional_tiered_cache`, options) as Core.APIPromise<{
         result: RegionalTieredCacheGetResponse;
@@ -119,7 +110,7 @@ export interface RegionalTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Value of the Regional Tiered Cache zone setting.
@@ -131,7 +122,7 @@ export interface RegionalTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export declare namespace RegionalTieredCacheResource {

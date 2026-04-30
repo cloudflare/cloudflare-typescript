@@ -1,0 +1,307 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
+
+export class Jobs extends APIResource {
+  /**
+   * Creates a new indexing job for an AI Search instance.
+   *
+   * @example
+   * ```ts
+   * const job =
+   *   await client.aiSearch.namespaces.instances.jobs.create(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
+   * ```
+   */
+  create(
+    name: string,
+    id: string,
+    params: JobCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: JobCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates the status of an AI Search indexing job.
+   *
+   * @example
+   * ```ts
+   * const job =
+   *   await client.aiSearch.namespaces.instances.jobs.update(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     'job_id',
+   *     {
+   *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
+   *       action: 'cancel',
+   *     },
+   *   );
+   * ```
+   */
+  update(
+    name: string,
+    id: string,
+    jobId: string,
+    params: JobUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(
+        `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs/${jobId}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: JobUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists indexing jobs for an AI Search instance.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const jobListResponse of client.aiSearch.namespaces.instances.jobs.list(
+   *   'my-namespace',
+   *   'my-ai-search',
+   *   { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    name: string,
+    id: string,
+    params: JobListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<JobListResponsesV4PagePaginationArray, JobListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs`,
+      JobListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Retrieves details for a specific AI Search indexing job.
+   *
+   * @example
+   * ```ts
+   * const job =
+   *   await client.aiSearch.namespaces.instances.jobs.get(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     'job_id',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
+   * ```
+   */
+  get(
+    name: string,
+    id: string,
+    jobId: string,
+    params: JobGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs/${jobId}`,
+        options,
+      ) as Core.APIPromise<{ result: JobGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists log entries for an AI Search indexing job.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.aiSearch.namespaces.instances.jobs.logs(
+   *     'my-namespace',
+   *     'my-ai-search',
+   *     'job_id',
+   *     { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22' },
+   *   );
+   * ```
+   */
+  logs(
+    name: string,
+    id: string,
+    jobId: string,
+    params: JobLogsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<JobLogsResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/ai-search/namespaces/${name}/instances/${id}/jobs/${jobId}/logs`,
+        { query, ...options },
+      ) as Core.APIPromise<{ result: JobLogsResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export class JobListResponsesV4PagePaginationArray extends V4PagePaginationArray<JobListResponse> {}
+
+export interface JobCreateResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export interface JobUpdateResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export interface JobListResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export interface JobGetResponse {
+  id: string;
+
+  source: 'user' | 'schedule';
+
+  description?: string;
+
+  end_reason?: string;
+
+  ended_at?: string;
+
+  last_seen_at?: string;
+
+  started_at?: string;
+}
+
+export type JobLogsResponse = Array<JobLogsResponse.JobLogsResponseItem>;
+
+export namespace JobLogsResponse {
+  export interface JobLogsResponseItem {
+    id: number;
+
+    created_at: number;
+
+    message: string;
+
+    message_type: number;
+  }
+}
+
+export interface JobCreateParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  description?: string;
+}
+
+export interface JobUpdateParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  action: 'cancel';
+}
+
+export interface JobListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+}
+
+export interface JobGetParams {
+  account_id: string;
+}
+
+export interface JobLogsParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Query param
+   */
+  page?: number;
+
+  /**
+   * Query param
+   */
+  per_page?: number;
+}
+
+Jobs.JobListResponsesV4PagePaginationArray = JobListResponsesV4PagePaginationArray;
+
+export declare namespace Jobs {
+  export {
+    type JobCreateResponse as JobCreateResponse,
+    type JobUpdateResponse as JobUpdateResponse,
+    type JobListResponse as JobListResponse,
+    type JobGetResponse as JobGetResponse,
+    type JobLogsResponse as JobLogsResponse,
+    JobListResponsesV4PagePaginationArray as JobListResponsesV4PagePaginationArray,
+    type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
+    type JobListParams as JobListParams,
+    type JobGetParams as JobGetParams,
+    type JobLogsParams as JobLogsParams,
+  };
+}

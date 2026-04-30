@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -26,7 +25,7 @@ export class Rules extends APIResource {
    * ```
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenValidationRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/token_validation/rules`, { body, ...options }) as Core.APIPromise<{
         result: TokenValidationRule;
@@ -48,20 +47,10 @@ export class Rules extends APIResource {
    * ```
    */
   list(
-    params?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TokenValidationRulesV4PagePaginationArray, TokenValidationRule>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TokenValidationRulesV4PagePaginationArray, TokenValidationRule>;
-  list(
-    params: RuleListParams | Core.RequestOptions = {},
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TokenValidationRulesV4PagePaginationArray, TokenValidationRule> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/token_validation/rules`,
       TokenValidationRulesV4PagePaginationArray,
@@ -82,19 +71,10 @@ export class Rules extends APIResource {
    */
   delete(
     ruleId: string,
-    params?: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>;
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams | Core.RequestOptions = {},
+    params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/token_validation/rules/${ruleId}`, options) as Core.APIPromise<{
         result: RuleDeleteResponse;
@@ -135,7 +115,7 @@ export class Rules extends APIResource {
     params: RuleBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TokenValidationRulesSinglePage, TokenValidationRule> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/token_validation/rules/bulk`,
       TokenValidationRulesSinglePage,
@@ -169,7 +149,7 @@ export class Rules extends APIResource {
     params: RuleBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<TokenValidationRulesSinglePage, TokenValidationRule> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/token_validation/rules/bulk`,
       TokenValidationRulesSinglePage,
@@ -194,7 +174,7 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenValidationRule> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/token_validation/rules/${ruleId}`, {
         body,
@@ -217,19 +197,10 @@ export class Rules extends APIResource {
    */
   get(
     ruleId: string,
-    params?: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenValidationRule>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<TokenValidationRule>;
-  get(
-    ruleId: string,
-    params: RuleGetParams | Core.RequestOptions = {},
+    params: RuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenValidationRule> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/token_validation/rules/${ruleId}`, options) as Core.APIPromise<{
         result: TokenValidationRule;
@@ -336,7 +307,7 @@ export interface RuleCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Action to take on requests that match operations included in
@@ -417,7 +388,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Select rules with these IDs.
@@ -460,14 +431,14 @@ export interface RuleDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface RuleBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -560,7 +531,7 @@ export interface RuleBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -687,7 +658,7 @@ export interface RuleEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: Action to take on requests that match operations included in
@@ -800,7 +771,7 @@ export interface RuleGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Rules.TokenValidationRulesV4PagePaginationArray = TokenValidationRulesV4PagePaginationArray;

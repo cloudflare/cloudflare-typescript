@@ -30,7 +30,7 @@ describe('resource scrape', () => {
       account_id: 'account_id',
       elements: [{ selector: 'selector' }],
       html: '<h1>Hello World!</h1>',
-      cacheTTL: 86400,
+      cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
         {

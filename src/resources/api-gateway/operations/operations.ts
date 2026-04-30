@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as LabelsAPI from './labels';
 import {
@@ -64,7 +63,7 @@ export class Operations extends APIResource {
     params: OperationCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/api_gateway/operations/item`, {
         body,
@@ -88,20 +87,10 @@ export class Operations extends APIResource {
    * ```
    */
   list(
-    params?: OperationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse>;
-  list(
-    params: OperationListParams | Core.RequestOptions = {},
+    params: OperationListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/operations`,
       OperationListResponsesV4PagePaginationArray,
@@ -123,19 +112,10 @@ export class Operations extends APIResource {
    */
   delete(
     operationId: string,
-    params?: OperationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationDeleteResponse>;
-  delete(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationDeleteResponse>;
-  delete(
-    operationId: string,
-    params: OperationDeleteParams | Core.RequestOptions = {},
+    params: OperationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(operationId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/operations/${operationId}`, options);
   }
 
@@ -169,7 +149,7 @@ export class Operations extends APIResource {
     params: OperationBulkCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<OperationBulkCreateResponsesSinglePage, OperationBulkCreateResponse> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/operations`,
       OperationBulkCreateResponsesSinglePage,
@@ -190,18 +170,10 @@ export class Operations extends APIResource {
    * ```
    */
   bulkDelete(
-    params?: OperationBulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationBulkDeleteResponse>;
-  bulkDelete(options?: Core.RequestOptions): Core.APIPromise<OperationBulkDeleteResponse>;
-  bulkDelete(
-    params: OperationBulkDeleteParams | Core.RequestOptions = {},
+    params: OperationBulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationBulkDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.bulkDelete({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/operations`, options);
   }
 
@@ -219,19 +191,10 @@ export class Operations extends APIResource {
    */
   get(
     operationId: string,
-    params?: OperationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationGetResponse>;
-  get(operationId: string, options?: Core.RequestOptions): Core.APIPromise<OperationGetResponse>;
-  get(
-    operationId: string,
-    params: OperationGetParams | Core.RequestOptions = {},
+    params: OperationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OperationGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(operationId, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return (
       this._client.get(`/zones/${zone_id}/api_gateway/operations/${operationId}`, {
         query,
@@ -304,6 +267,12 @@ export interface OperationCreateResponse {
     | OperationCreateResponse.APIShieldOperationFeatureAPIRouting
     | OperationCreateResponse.APIShieldOperationFeatureConfidenceIntervals
     | OperationCreateResponse.APIShieldOperationFeatureSchemaInfo;
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  schemas?: OperationCreateResponse.Schemas;
 }
 
 export namespace OperationCreateResponse {
@@ -544,6 +513,62 @@ export namespace OperationCreateResponse {
          */
         name?: string;
       }
+    }
+  }
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  export interface Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    learned?: Schemas.Learned | null;
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    uploaded?: Schemas.Uploaded | null;
+  }
+
+  export namespace Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Learned {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
+    }
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Uploaded {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
     }
   }
 }
@@ -1154,6 +1179,12 @@ export interface OperationGetResponse {
     | OperationGetResponse.APIShieldOperationFeatureAPIRouting
     | OperationGetResponse.APIShieldOperationFeatureConfidenceIntervals
     | OperationGetResponse.APIShieldOperationFeatureSchemaInfo;
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  schemas?: OperationGetResponse.Schemas;
 }
 
 export namespace OperationGetResponse {
@@ -1396,13 +1427,69 @@ export namespace OperationGetResponse {
       }
     }
   }
+
+  /**
+   * OpenAPI JSON schemas for an operation, including both user-uploaded and
+   * Cloudflare-learned schemas.
+   */
+  export interface Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    learned?: Schemas.Learned | null;
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    uploaded?: Schemas.Uploaded | null;
+  }
+
+  export namespace Schemas {
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Learned {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
+    }
+
+    /**
+     * An OpenAPI operation object fragment containing schema information for an
+     * operation. May include parameter definitions, request body specifications, and a
+     * component schema extension.
+     */
+    export interface Uploaded {
+      /**
+       * OpenAPI parameter objects describing path, query, header, or cookie parameters.
+       */
+      parameters?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * OpenAPI request body object describing the expected request payload.
+       */
+      requestBody?: { [key: string]: unknown };
+    }
+  }
 }
 
 export interface OperationCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The endpoint which can contain path parameter templates in curly
@@ -1428,7 +1515,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Direction to order results.
@@ -1468,14 +1555,14 @@ export interface OperationDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OperationBulkCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param
@@ -1509,14 +1596,14 @@ export interface OperationBulkDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface OperationGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: Add feature(s) to the results. The feature name that is given here
@@ -1524,6 +1611,13 @@ export interface OperationGetParams {
    * description for more details on the specific meaning.
    */
   feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
+
+  /**
+   * Query param: When true, includes OpenAPI schemas (both uploaded and learned) for
+   * the operation in the response. Due to the conversion overhead, this parameter is
+   * only supported on single-operation retrieval.
+   */
+  with_schemas?: boolean;
 }
 
 Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;

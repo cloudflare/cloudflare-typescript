@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class AccountTags extends APIResource {
@@ -23,7 +22,7 @@ export class AccountTags extends APIResource {
     params: AccountTagUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountTagUpdateResponse> {
-    const { account_id = this._client.accountId, 'If-Match': ifMatch, ...body } = params;
+    const { account_id, 'If-Match': ifMatch, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/tags`, {
         body,
@@ -36,16 +35,8 @@ export class AccountTags extends APIResource {
   /**
    * Removes all tags from a specific account-level resource.
    */
-  delete(params?: AccountTagDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    params: AccountTagDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
-    if (isRequestOptions(params)) {
-      return this.delete({}, params);
-    }
-    const { account_id = this._client.accountId, 'If-Match': ifMatch } = params;
+  delete(params: AccountTagDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+    const { account_id, 'If-Match': ifMatch } = params;
     return this._client.delete(`/accounts/${account_id}/tags`, {
       ...options,
       headers: {
@@ -60,7 +51,7 @@ export class AccountTags extends APIResource {
    * Retrieves tags for a specific account-level resource.
    */
   get(params: AccountTagGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountTagGetResponse> {
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/tags`, { query, ...options }) as Core.APIPromise<{
         result: AccountTagGetResponse;
@@ -1910,7 +1901,7 @@ export declare namespace AccountTagUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: Identifies the unique resource.
@@ -1966,7 +1957,7 @@ export declare namespace AccountTagUpdateParams {
     /**
      * Path param: Identifier.
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param: Identifies the unique resource.
@@ -2017,7 +2008,7 @@ export interface AccountTagDeleteParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Header param: ETag value for optimistic concurrency control. When provided, the
@@ -2032,7 +2023,7 @@ export interface AccountTagGetParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The ID of the resource to retrieve tags for.

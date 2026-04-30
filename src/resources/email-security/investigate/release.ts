@@ -6,8 +6,9 @@ import { SinglePage } from '../../../pagination';
 
 export class Release extends APIResource {
   /**
-   * Releases a quarantined email message, allowing it to be delivered to the
-   * recipient.
+   * Releases one or more quarantined messages, delivering them to the intended
+   * recipients. Use when a message was incorrectly quarantined. Returns delivery
+   * status for each recipient.
    *
    * @example
    * ```ts
@@ -15,7 +16,7 @@ export class Release extends APIResource {
    * for await (const releaseBulkResponse of client.emailSecurity.investigate.release.bulk(
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     body: ['4Njp3P0STMz2c02Q'],
+   *     body: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
    *   },
    * )) {
    *   // ...
@@ -26,7 +27,7 @@ export class Release extends APIResource {
     params: ReleaseBulkParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ReleaseBulkResponsesSinglePage, ReleaseBulkResponse> {
-    const { account_id = this._client.accountId, body } = params;
+    const { account_id, body } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/email-security/investigate/release`,
       ReleaseBulkResponsesSinglePage,
@@ -38,29 +39,31 @@ export class Release extends APIResource {
 export class ReleaseBulkResponsesSinglePage extends SinglePage<ReleaseBulkResponse> {}
 
 export interface ReleaseBulkResponse {
-  id: string;
-
   /**
-   * The identifier of the message.
+   * Unique identifier for a message retrieved from investigation
    */
-  postfix_id: string;
+  id: string;
 
   delivered?: Array<string> | null;
 
   failed?: Array<string> | null;
+
+  /**
+   * @deprecated Deprecated, use `id` instead. End of life: November 1, 2026.
+   */
+  postfix_id?: string;
 
   undelivered?: Array<string> | null;
 }
 
 export interface ReleaseBulkParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
-   * Body param: A list of messages identfied by their `postfix_id`s that should be
-   * released.
+   * Body param
    */
   body: Array<string>;
 }

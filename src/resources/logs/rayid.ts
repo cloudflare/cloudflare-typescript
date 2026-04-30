@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class RayID extends APIResource {
@@ -19,19 +18,10 @@ export class RayID extends APIResource {
    */
   get(
     RayID: string,
-    params?: RayIDGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RayIDGetResponse>;
-  get(RayID: string, options?: Core.RequestOptions): Core.APIPromise<RayIDGetResponse>;
-  get(
-    RayID: string,
-    params: RayIDGetParams | Core.RequestOptions = {},
+    params: RayIDGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RayIDGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(RayID, {}, params);
-    }
-    const { zone_id = this._client.zoneId, ...query } = params;
+    const { zone_id, ...query } = params;
     return this._client.get(`/zones/${zone_id}/logs/rayids/${RayID}`, { query, ...options });
   }
 }
@@ -42,7 +32,7 @@ export interface RayIDGetParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Query param: The `/received` route by default returns a limited set of fields,

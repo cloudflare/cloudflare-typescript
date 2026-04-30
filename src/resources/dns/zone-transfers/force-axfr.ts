@@ -17,7 +17,7 @@ export class ForceAXFRResource extends APIResource {
    * ```
    */
   create(params: ForceAXFRCreateParams, options?: Core.RequestOptions): Core.APIPromise<ForceAXFR> {
-    const { zone_id = this._client.zoneId, body } = params;
+    const { zone_id, body } = params;
     return (
       this._client.post(`/zones/${zone_id}/secondary_dns/force_axfr`, {
         body: body,
@@ -36,7 +36,7 @@ export interface ForceAXFRCreateParams {
   /**
    * Path param
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param

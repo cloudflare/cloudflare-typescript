@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as DNSAPI from './dns';
 import { DNS, DNSGetParams } from './dns';
@@ -28,7 +27,7 @@ export class Subdomains extends APIResource {
     params: SubdomainCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubdomainCreateResponse> {
-    const { zone_id = this._client.zoneId, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/email/sending/subdomains`, {
         body,
@@ -51,20 +50,10 @@ export class Subdomains extends APIResource {
    * ```
    */
   list(
-    params?: SubdomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubdomainListResponsesSinglePage, SubdomainListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubdomainListResponsesSinglePage, SubdomainListResponse>;
-  list(
-    params: SubdomainListParams | Core.RequestOptions = {},
+    params: SubdomainListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubdomainListResponsesSinglePage, SubdomainListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/email/sending/subdomains`,
       SubdomainListResponsesSinglePage,
@@ -87,19 +76,10 @@ export class Subdomains extends APIResource {
    */
   delete(
     subdomainId: string,
-    params?: SubdomainDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubdomainDeleteResponse>;
-  delete(subdomainId: string, options?: Core.RequestOptions): Core.APIPromise<SubdomainDeleteResponse>;
-  delete(
-    subdomainId: string,
-    params: SubdomainDeleteParams | Core.RequestOptions = {},
+    params: SubdomainDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubdomainDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(subdomainId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/email/sending/subdomains/${subdomainId}`, options);
   }
 
@@ -116,19 +96,10 @@ export class Subdomains extends APIResource {
    */
   get(
     subdomainId: string,
-    params?: SubdomainGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubdomainGetResponse>;
-  get(subdomainId: string, options?: Core.RequestOptions): Core.APIPromise<SubdomainGetResponse>;
-  get(
-    subdomainId: string,
-    params: SubdomainGetParams | Core.RequestOptions = {},
+    params: SubdomainGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubdomainGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(subdomainId, {}, params);
-    }
-    const { zone_id = this._client.zoneId } = params;
+    const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/email/sending/subdomains/${subdomainId}`,
@@ -300,7 +271,7 @@ export interface SubdomainCreateParams {
   /**
    * Path param: Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 
   /**
    * Body param: The subdomain name. Must be within the zone.
@@ -312,21 +283,21 @@ export interface SubdomainListParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SubdomainDeleteParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 export interface SubdomainGetParams {
   /**
    * Identifier.
    */
-  zone_id?: string;
+  zone_id: string;
 }
 
 Subdomains.SubdomainListResponsesSinglePage = SubdomainListResponsesSinglePage;

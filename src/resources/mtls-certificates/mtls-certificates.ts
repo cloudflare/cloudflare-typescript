@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AssociationsAPI from './associations';
 import {
@@ -36,7 +35,7 @@ export class MTLSCertificates extends APIResource {
     params: MTLSCertificateCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificateCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mtls_certificates`, {
         body,
@@ -62,18 +61,10 @@ export class MTLSCertificates extends APIResource {
    * ```
    */
   list(
-    params?: MTLSCertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate>;
-  list(options?: Core.RequestOptions): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate>;
-  list(
-    params: MTLSCertificateListParams | Core.RequestOptions = {},
+    params: MTLSCertificateListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/mtls_certificates`, MTLSCertificatesSinglePage, {
       query,
       ...options,
@@ -95,19 +86,10 @@ export class MTLSCertificates extends APIResource {
    */
   delete(
     mtlsCertificateId: string,
-    params?: MTLSCertificateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificate>;
-  delete(mtlsCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<MTLSCertificate>;
-  delete(
-    mtlsCertificateId: string,
-    params: MTLSCertificateDeleteParams | Core.RequestOptions = {},
+    params: MTLSCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificate> {
-    if (isRequestOptions(params)) {
-      return this.delete(mtlsCertificateId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
@@ -131,19 +113,10 @@ export class MTLSCertificates extends APIResource {
    */
   get(
     mtlsCertificateId: string,
-    params?: MTLSCertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MTLSCertificate>;
-  get(mtlsCertificateId: string, options?: Core.RequestOptions): Core.APIPromise<MTLSCertificate>;
-  get(
-    mtlsCertificateId: string,
-    params: MTLSCertificateGetParams | Core.RequestOptions = {},
+    params: MTLSCertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MTLSCertificate> {
-    if (isRequestOptions(params)) {
-      return this.get(mtlsCertificateId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
@@ -268,7 +241,7 @@ export interface MTLSCertificateCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Indicates whether the certificate is a CA or leaf certificate.
@@ -298,7 +271,7 @@ export interface MTLSCertificateListParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: Filters results by certificate type. Multiple types can be
@@ -311,14 +284,14 @@ export interface MTLSCertificateDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface MTLSCertificateGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 MTLSCertificates.MTLSCertificatesSinglePage = MTLSCertificatesSinglePage;

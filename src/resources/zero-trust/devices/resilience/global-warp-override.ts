@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 
 export class GlobalWARPOverride extends APIResource {
@@ -23,7 +22,7 @@ export class GlobalWARPOverride extends APIResource {
     params: GlobalWARPOverrideCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GlobalWARPOverrideCreateResponse | null> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/resilience/disconnect`, {
         body,
@@ -44,18 +43,10 @@ export class GlobalWARPOverride extends APIResource {
    * ```
    */
   get(
-    params?: GlobalWARPOverrideGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GlobalWARPOverrideGetResponse | null>;
-  get(options?: Core.RequestOptions): Core.APIPromise<GlobalWARPOverrideGetResponse | null>;
-  get(
-    params: GlobalWARPOverrideGetParams | Core.RequestOptions = {},
+    params: GlobalWARPOverrideGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GlobalWARPOverrideGetResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.get({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/resilience/disconnect`, options) as Core.APIPromise<{
         result: GlobalWARPOverrideGetResponse | null;
@@ -92,7 +83,7 @@ export interface GlobalWARPOverrideCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: Disconnects all devices on the account using Global WARP override.
@@ -107,7 +98,7 @@ export interface GlobalWARPOverrideCreateParams {
 }
 
 export interface GlobalWARPOverrideGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace GlobalWARPOverride {

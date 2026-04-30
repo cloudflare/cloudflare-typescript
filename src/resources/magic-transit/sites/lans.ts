@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { SinglePage } from '../../../pagination';
 
@@ -26,7 +25,7 @@ export class LANs extends APIResource {
     params: LANCreateParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LANsSinglePage, LAN> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/lans`, LANsSinglePage, {
       body,
       method: 'post',
@@ -52,7 +51,7 @@ export class LANs extends APIResource {
     params: LANUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
@@ -77,19 +76,10 @@ export class LANs extends APIResource {
    */
   list(
     siteId: string,
-    params?: LANListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LANsSinglePage, LAN>;
-  list(siteId: string, options?: Core.RequestOptions): Core.PagePromise<LANsSinglePage, LAN>;
-  list(
-    siteId: string,
-    params: LANListParams | Core.RequestOptions = {},
+    params: LANListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<LANsSinglePage, LAN> {
-    if (isRequestOptions(params)) {
-      return this.list(siteId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/magic/sites/${siteId}/lans`,
       LANsSinglePage,
@@ -112,20 +102,10 @@ export class LANs extends APIResource {
   delete(
     siteId: string,
     lanId: string,
-    params?: LANDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LAN>;
-  delete(siteId: string, lanId: string, options?: Core.RequestOptions): Core.APIPromise<LAN>;
-  delete(
-    siteId: string,
-    lanId: string,
-    params: LANDeleteParams | Core.RequestOptions = {},
+    params: LANDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    if (isRequestOptions(params)) {
-      return this.delete(siteId, lanId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
@@ -152,7 +132,7 @@ export class LANs extends APIResource {
     params: LANEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
@@ -176,20 +156,10 @@ export class LANs extends APIResource {
   get(
     siteId: string,
     lanId: string,
-    params?: LANGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LAN>;
-  get(siteId: string, lanId: string, options?: Core.RequestOptions): Core.APIPromise<LAN>;
-  get(
-    siteId: string,
-    lanId: string,
-    params: LANGetParams | Core.RequestOptions = {},
+    params: LANGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    if (isRequestOptions(params)) {
-      return this.get(siteId, lanId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
@@ -217,6 +187,12 @@ export interface DHCPRelayParam {
 
 export interface DHCPServer {
   /**
+   * Optional list of custom DHCP options to include in DHCP responses. Only valid
+   * when DHCP server is enabled.
+   */
+  dhcp_options?: Array<DHCPServer.DHCPOption>;
+
+  /**
    * A valid IPv4 address.
    */
   dhcp_pool_end?: string;
@@ -239,7 +215,41 @@ export interface DHCPServer {
   reservations?: { [key: string]: string };
 }
 
+export namespace DHCPServer {
+  /**
+   * A custom DHCP option to include in DHCP responses.
+   */
+  export interface DHCPOption {
+    /**
+     * DHCP option number (1-254). Options 0 and 255 are reserved by RFC 2132. Options
+     * 3, 6, and 51 are not allowed because they conflict with connector-managed
+     * configuration.
+     */
+    code: number;
+
+    /**
+     * The type of the option value. text: a string (max 255 bytes). hex:
+     * colon-separated hex bytes (e.g. "01:04:aa:bb:cc", max 255 bytes). ip: an IPv4
+     * address (e.g. "10.20.30.40"). byte: an unsigned integer 0-255 (1 byte). short:
+     * an unsigned integer 0-65535 (2 bytes). integer: an unsigned integer 0-4294967295
+     * (4 bytes).
+     */
+    type: 'text' | 'hex' | 'ip' | 'byte' | 'short' | 'integer';
+
+    /**
+     * The option value, interpreted according to the type field.
+     */
+    value: string;
+  }
+}
+
 export interface DHCPServerParam {
+  /**
+   * Optional list of custom DHCP options to include in DHCP responses. Only valid
+   * when DHCP server is enabled.
+   */
+  dhcp_options?: Array<DHCPServerParam.DHCPOption>;
+
   /**
    * A valid IPv4 address.
    */
@@ -261,6 +271,34 @@ export interface DHCPServerParam {
    * Mapping of MAC addresses to IP addresses
    */
   reservations?: { [key: string]: string };
+}
+
+export namespace DHCPServerParam {
+  /**
+   * A custom DHCP option to include in DHCP responses.
+   */
+  export interface DHCPOption {
+    /**
+     * DHCP option number (1-254). Options 0 and 255 are reserved by RFC 2132. Options
+     * 3, 6, and 51 are not allowed because they conflict with connector-managed
+     * configuration.
+     */
+    code: number;
+
+    /**
+     * The type of the option value. text: a string (max 255 bytes). hex:
+     * colon-separated hex bytes (e.g. "01:04:aa:bb:cc", max 255 bytes). ip: an IPv4
+     * address (e.g. "10.20.30.40"). byte: an unsigned integer 0-255 (1 byte). short:
+     * an unsigned integer 0-65535 (2 bytes). integer: an unsigned integer 0-4294967295
+     * (4 bytes).
+     */
+    type: 'text' | 'hex' | 'ip' | 'byte' | 'short' | 'integer';
+
+    /**
+     * The option value, interpreted according to the type field.
+     */
+    value: string;
+  }
 }
 
 export interface LAN {
@@ -411,7 +449,7 @@ export interface LANCreateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -472,7 +510,7 @@ export interface LANUpdateParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -527,21 +565,21 @@ export interface LANListParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface LANDeleteParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface LANEditParams {
   /**
    * Path param: Identifier
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -596,7 +634,7 @@ export interface LANGetParams {
   /**
    * Identifier
    */
-  account_id?: string;
+  account_id: string;
 }
 
 LANs.LANsSinglePage = LANsSinglePage;

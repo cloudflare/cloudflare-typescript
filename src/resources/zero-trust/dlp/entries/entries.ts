@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import {
@@ -70,7 +69,7 @@ export class Entries extends APIResource {
    * ```
    */
   create(params: EntryCreateParams, options?: Core.RequestOptions): Core.APIPromise<EntryCreateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/entries`, { body, ...options }) as Core.APIPromise<{
         result: EntryCreateResponse;
@@ -99,7 +98,7 @@ export class Entries extends APIResource {
     params: EntryUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryUpdateResponse> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/dlp/entries/${entryId}`, {
         body,
@@ -122,18 +121,10 @@ export class Entries extends APIResource {
    * ```
    */
   list(
-    params?: EntryListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse>;
-  list(options?: Core.RequestOptions): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse>;
-  list(
-    params: EntryListParams | Core.RequestOptions = {},
+    params: EntryListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<EntryListResponsesSinglePage, EntryListResponse> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/dlp/entries`,
       EntryListResponsesSinglePage,
@@ -154,19 +145,10 @@ export class Entries extends APIResource {
    */
   delete(
     entryId: string,
-    params?: EntryDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryDeleteResponse | null>;
-  delete(entryId: string, options?: Core.RequestOptions): Core.APIPromise<EntryDeleteResponse | null>;
-  delete(
-    entryId: string,
-    params: EntryDeleteParams | Core.RequestOptions = {},
+    params: EntryDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(entryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: EntryDeleteResponse | null;
@@ -187,19 +169,10 @@ export class Entries extends APIResource {
    */
   get(
     entryId: string,
-    params?: EntryGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<EntryGetResponse>;
-  get(entryId: string, options?: Core.RequestOptions): Core.APIPromise<EntryGetResponse>;
-  get(
-    entryId: string,
-    params: EntryGetParams | Core.RequestOptions = {},
+    params: EntryGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(entryId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/entries/${entryId}`, options) as Core.APIPromise<{
         result: EntryGetResponse;
@@ -285,7 +258,10 @@ export namespace EntryUpdateResponse {
      */
     profile_id?: string | null;
 
-    variant?: PredefinedEntry.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: PredefinedEntry.UnionMember0 | PredefinedEntry.UnionMember1;
   }
 
   export namespace PredefinedEntry {
@@ -302,11 +278,30 @@ export namespace EntryUpdateResponse {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -437,7 +432,10 @@ export namespace EntryListResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: UnionMember1.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
   }
 
   export namespace UnionMember1 {
@@ -454,11 +452,30 @@ export namespace EntryListResponse {
       available: boolean;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -614,7 +631,10 @@ export namespace EntryGetResponse {
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
-    variant?: UnionMember1.Variant;
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
   }
 
   export namespace UnionMember1 {
@@ -640,11 +660,30 @@ export namespace EntryGetResponse {
       name: string;
     }
 
-    export interface Variant {
+    /**
+     * A Predefined AI prompt classification topic entry.
+     */
+    export interface UnionMember0 {
       topic_type: 'Intent' | 'Content';
 
       type: 'PromptTopic';
 
+      /**
+       * A customer-facing explanation of what this predefined AI prompt topic
+       * represents.
+       */
+      description?: string | null;
+    }
+
+    /**
+     * A general predefined entry.
+     */
+    export interface UnionMember1 {
+      type: 'General';
+
+      /**
+       * A customer-facing explanation of what this predefined entry represents.
+       */
       description?: string | null;
     }
   }
@@ -784,7 +823,7 @@ export interface EntryCreateParams {
   /**
    * Path param
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param
@@ -822,7 +861,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -854,7 +893,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -871,7 +910,7 @@ export declare namespace EntryUpdateParams {
     /**
      * Path param
      */
-    account_id?: string;
+    account_id: string;
 
     /**
      * Body param
@@ -886,15 +925,15 @@ export declare namespace EntryUpdateParams {
 }
 
 export interface EntryListParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface EntryDeleteParams {
-  account_id?: string;
+  account_id: string;
 }
 
 export interface EntryGetParams {
-  account_id?: string;
+  account_id: string;
 }
 
 Entries.EntryListResponsesSinglePage = EntryListResponsesSinglePage;

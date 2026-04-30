@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as LoadBalancersAPI from '../load-balancers';
 import * as HealthAPI from './health';
@@ -38,7 +37,7 @@ export class Pools extends APIResource {
    * ```
    */
   create(params: PoolCreateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/load_balancers/pools`, {
         body,
@@ -63,7 +62,7 @@ export class Pools extends APIResource {
    * ```
    */
   update(poolId: string, params: PoolUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
@@ -85,16 +84,8 @@ export class Pools extends APIResource {
    * }
    * ```
    */
-  list(params?: PoolListParams, options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool>;
-  list(options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool>;
-  list(
-    params: PoolListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PoolsSinglePage, Pool> {
-    if (isRequestOptions(params)) {
-      return this.list({}, params);
-    }
-    const { account_id = this._client.accountId, ...query } = params;
+  list(params: PoolListParams, options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, {
       query,
       ...options,
@@ -114,19 +105,10 @@ export class Pools extends APIResource {
    */
   delete(
     poolId: string,
-    params?: PoolDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PoolDeleteResponse>;
-  delete(poolId: string, options?: Core.RequestOptions): Core.APIPromise<PoolDeleteResponse>;
-  delete(
-    poolId: string,
-    params: PoolDeleteParams | Core.RequestOptions = {},
+    params: PoolDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoolDeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(poolId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/load_balancers/pools/${poolId}`,
@@ -152,18 +134,10 @@ export class Pools extends APIResource {
    * ```
    */
   bulkEdit(
-    params?: PoolBulkEditParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PoolsSinglePage, Pool>;
-  bulkEdit(options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool>;
-  bulkEdit(
-    params: PoolBulkEditParams | Core.RequestOptions = {},
+    params: PoolBulkEditParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<PoolsSinglePage, Pool> {
-    if (isRequestOptions(params)) {
-      return this.bulkEdit({}, params);
-    }
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, {
       body,
       method: 'patch',
@@ -183,7 +157,7 @@ export class Pools extends APIResource {
    * ```
    */
   edit(poolId: string, params: PoolEditParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
-    const { account_id = this._client.accountId, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
         body,
@@ -203,17 +177,8 @@ export class Pools extends APIResource {
    * );
    * ```
    */
-  get(poolId: string, params?: PoolGetParams, options?: Core.RequestOptions): Core.APIPromise<Pool>;
-  get(poolId: string, options?: Core.RequestOptions): Core.APIPromise<Pool>;
-  get(
-    poolId: string,
-    params: PoolGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Pool> {
-    if (isRequestOptions(params)) {
-      return this.get(poolId, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+  get(poolId: string, params: PoolGetParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
+    const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
         result: Pool;
@@ -338,7 +303,7 @@ export interface PoolCreateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,
@@ -427,7 +392,7 @@ export interface PoolUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,
@@ -522,7 +487,7 @@ export interface PoolListParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Query param: The ID of the Monitor to use for checking the health of origins
@@ -535,14 +500,14 @@ export interface PoolDeleteParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export interface PoolBulkEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: The email address to send health status notifications to. This field
@@ -556,7 +521,7 @@ export interface PoolEditParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: A list of regions from which to run health checks. Null means every
@@ -651,7 +616,7 @@ export interface PoolGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 Pools.PoolsSinglePage = PoolsSinglePage;

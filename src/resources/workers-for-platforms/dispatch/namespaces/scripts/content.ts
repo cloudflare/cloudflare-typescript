@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
@@ -31,7 +30,7 @@ export class Content extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScriptsAPI.Script> {
     const {
-      account_id = this._client.accountId,
+      account_id,
       'CF-WORKER-BODY-PART': cfWorkerBodyPart,
       'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
       ...body
@@ -75,24 +74,10 @@ export class Content extends APIResource {
   get(
     dispatchNamespace: string,
     scriptName: string,
-    params?: ContentGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: ContentGetParams | Core.RequestOptions = {},
+    params: ContentGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Response> {
-    if (isRequestOptions(params)) {
-      return this.get(dispatchNamespace, scriptName, {}, params);
-    }
-    const { account_id = this._client.accountId } = params;
+    const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
       { ...options, headers: { Accept: 'string', ...options?.headers }, __binaryResponse: true },
@@ -104,7 +89,7 @@ export interface ContentUpdateParams {
   /**
    * Path param: Identifier.
    */
-  account_id?: string;
+  account_id: string;
 
   /**
    * Body param: JSON-encoded metadata about the uploaded parts and Worker
@@ -140,7 +125,7 @@ export interface ContentGetParams {
   /**
    * Identifier.
    */
-  account_id?: string;
+  account_id: string;
 }
 
 export declare namespace Content {
