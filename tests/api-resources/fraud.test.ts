@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource fraud', () => {
-  test('update: only required params', async () => {
+  // HTTP 422 error from prism
+  test.skip('update: only required params', async () => {
     const responsePromise = client.fraud.update({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource fraud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // HTTP 422 error from prism
+  test.skip('update: required and optional params', async () => {
     const response = await client.fraud.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       authentication_settings: {
