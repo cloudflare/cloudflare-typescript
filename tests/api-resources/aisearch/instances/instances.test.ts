@@ -42,15 +42,7 @@ describe('resource instances', () => {
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: {
-        created_from_aisearch_wizard: true,
-        search_for_agents: {
-          hostname: 'hostname',
-          zone_id: 'zone_id',
-          zone_name: 'zone_name',
-        },
-        worker_domain: 'worker_domain',
-      },
+      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
@@ -133,15 +125,7 @@ describe('resource instances', () => {
       index_method: { keyword: true, vector: true },
       indexing_options: { keyword_tokenizer: 'porter' },
       max_num_results: 1,
-      metadata: {
-        created_from_aisearch_wizard: true,
-        search_for_agents: {
-          hostname: 'hostname',
-          zone_id: 'zone_id',
-          zone_name: 'zone_name',
-        },
-        worker_domain: 'worker_domain',
-      },
+      metadata: { created_from_aisearch_wizard: true, worker_domain: 'worker_domain' },
       paused: true,
       public_endpoint_params: {
         authorized_hosts: ['string'],
