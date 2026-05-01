@@ -2,6 +2,18 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as DeploymentGroupsAPI from './deployment-groups';
+import {
+  DeploymentGroup,
+  DeploymentGroupCreateParams,
+  DeploymentGroupDeleteParams,
+  DeploymentGroupDeleteResponse,
+  DeploymentGroupEditParams,
+  DeploymentGroupGetParams,
+  DeploymentGroupListParams,
+  DeploymentGroups,
+  DeploymentGroupsV4PagePaginationArray,
+} from './deployment-groups';
 import * as DevicesDevicesAPI from './devices_';
 import {
   DeviceDeleteParams,
@@ -142,6 +154,9 @@ export class Devices extends APIResource {
   registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
   ipProfiles: IPProfilesAPI.IPProfiles = new IPProfilesAPI.IPProfiles(this._client);
+  deploymentGroups: DeploymentGroupsAPI.DeploymentGroups = new DeploymentGroupsAPI.DeploymentGroups(
+    this._client,
+  );
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
@@ -457,6 +472,8 @@ Devices.DEXTests = DEXTests;
 Devices.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;
 Devices.IPProfiles = IPProfiles;
 Devices.IPProfilesSinglePage = IPProfilesSinglePage;
+Devices.DeploymentGroups = DeploymentGroups;
+Devices.DeploymentGroupsV4PagePaginationArray = DeploymentGroupsV4PagePaginationArray;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.FleetStatus = FleetStatus;
@@ -534,6 +551,18 @@ export declare namespace Devices {
     type IPProfileListParams as IPProfileListParams,
     type IPProfileDeleteParams as IPProfileDeleteParams,
     type IPProfileGetParams as IPProfileGetParams,
+  };
+
+  export {
+    DeploymentGroups as DeploymentGroups,
+    type DeploymentGroup as DeploymentGroup,
+    type DeploymentGroupDeleteResponse as DeploymentGroupDeleteResponse,
+    DeploymentGroupsV4PagePaginationArray as DeploymentGroupsV4PagePaginationArray,
+    type DeploymentGroupCreateParams as DeploymentGroupCreateParams,
+    type DeploymentGroupListParams as DeploymentGroupListParams,
+    type DeploymentGroupDeleteParams as DeploymentGroupDeleteParams,
+    type DeploymentGroupEditParams as DeploymentGroupEditParams,
+    type DeploymentGroupGetParams as DeploymentGroupGetParams,
   };
 
   export {
