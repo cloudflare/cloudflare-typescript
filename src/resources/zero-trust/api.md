@@ -97,6 +97,21 @@ Methods:
 - <code title="delete /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">delete</a>(profileId, { ...params }) -> IPProfileDeleteResponse</code>
 - <code title="get /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">get</a>(profileId, { ...params }) -> IPProfile</code>
 
+### DeploymentGroups
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/deployment-groups.ts">DeploymentGroup</a></code>
+- <code><a href="./src/resources/zero-trust/devices/deployment-groups.ts">DeploymentGroupDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/deployment-groups">client.zeroTrust.devices.deploymentGroups.<a href="./src/resources/zero-trust/devices/deployment-groups.ts">create</a>({ ...params }) -> DeploymentGroup</code>
+- <code title="get /accounts/{account_id}/devices/deployment-groups">client.zeroTrust.devices.deploymentGroups.<a href="./src/resources/zero-trust/devices/deployment-groups.ts">list</a>({ ...params }) -> DeploymentGroupsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/devices/deployment-groups/{group_id}">client.zeroTrust.devices.deploymentGroups.<a href="./src/resources/zero-trust/devices/deployment-groups.ts">delete</a>(groupId, { ...params }) -> DeploymentGroupDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/devices/deployment-groups/{group_id}">client.zeroTrust.devices.deploymentGroups.<a href="./src/resources/zero-trust/devices/deployment-groups.ts">edit</a>(groupId, { ...params }) -> DeploymentGroup</code>
+- <code title="get /accounts/{account_id}/devices/deployment-groups/{group_id}">client.zeroTrust.devices.deploymentGroups.<a href="./src/resources/zero-trust/devices/deployment-groups.ts">get</a>(groupId, { ...params }) -> DeploymentGroup</code>
+
 ### Networks
 
 Types:

@@ -17,6 +17,17 @@ export {
   type DEXTestGetParams,
 } from './dex-tests';
 export {
+  DeploymentGroupsV4PagePaginationArray,
+  DeploymentGroups,
+  type DeploymentGroup,
+  type DeploymentGroupDeleteResponse,
+  type DeploymentGroupCreateParams,
+  type DeploymentGroupListParams,
+  type DeploymentGroupDeleteParams,
+  type DeploymentGroupEditParams,
+  type DeploymentGroupGetParams,
+} from './deployment-groups';
+export {
   DeviceListResponsesCursorPagination,
   type DeviceListResponse,
   type DeviceDeleteResponse,
