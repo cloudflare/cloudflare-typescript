@@ -608,6 +608,13 @@ export interface ZoneListParams extends V4PagePaginationArrayParams {
    * Specify a zone status to filter by.
    */
   status?: 'initializing' | 'pending' | 'active' | 'moved';
+
+  /**
+   * Zone types to filter by. Multiple types can be specified as a comma-separated
+   * list (e.g., ?type=full,partial,secondary). When this parameter is not provided,
+   * zones with type "internal" are excluded from the results.
+   */
+  type?: Array<'full' | 'partial' | 'secondary' | 'internal'>;
 }
 
 export namespace ZoneListParams {
