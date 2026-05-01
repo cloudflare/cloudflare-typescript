@@ -63,6 +63,7 @@ describe('resource zones', () => {
           page: 1,
           per_page: 5,
           status: 'initializing',
+          type: ['full'],
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -1596,6 +1596,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesSchemasResponseBuffering
   | SettingEditResponse.ZonesSchemasRocketLoader
   | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization
+  | SettingEditResponse.ZonesSearchForAgents
   | SecurityHeaders
   | SettingEditResponse.ZonesSchemasSecurityLevel
   | ServerSideExcludes
@@ -2373,6 +2374,35 @@ export namespace SettingEditResponse {
   }
 
   /**
+   * When enabled, Cloudflare provisions an AI Search instance for the zone and
+   * exposes a /.well-known/ai-search endpoint that AI agents can query. Markdown
+   * responses also receive an agent: YAML capability block advertising the search
+   * endpoint.
+   */
+  export interface ZonesSearchForAgents {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'search_for_agents';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
    * Choose the appropriate security profile for your website, which will
    * automatically adjust each of the security settings. If you choose to customize
    * an individual security setting, the profile will become Custom.
@@ -2697,6 +2727,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesSchemasResponseBuffering
   | SettingGetResponse.ZonesSchemasRocketLoader
   | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization
+  | SettingGetResponse.ZonesSearchForAgents
   | SecurityHeaders
   | SettingGetResponse.ZonesSchemasSecurityLevel
   | ServerSideExcludes
@@ -3460,6 +3491,35 @@ export namespace SettingGetResponse {
      * Current value of the zone setting.
      */
     value: SettingsAPI.AutomaticPlatformOptimization;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * When enabled, Cloudflare provisions an AI Search instance for the zone and
+   * exposes a /.well-known/ai-search endpoint that AI agents can query. Markdown
+   * responses also receive an agent: YAML capability block advertising the search
+   * endpoint.
+   */
+  export interface ZonesSearchForAgents {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'search_for_agents';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
