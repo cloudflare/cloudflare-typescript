@@ -186,7 +186,8 @@ export class DNS extends APIResource {
       | 'QUERY_TYPE'
       | 'RESPONSE_CODE'
       | 'RESPONSE_TTL'
-      | 'TLD',
+      | 'TLD'
+      | 'TLD_DNS_MAGNITUDE',
     query?: DNSTimeseriesGroupsV2Params,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSTimeseriesGroupsV2Response>;
@@ -204,7 +205,8 @@ export class DNS extends APIResource {
       | 'QUERY_TYPE'
       | 'RESPONSE_CODE'
       | 'RESPONSE_TTL'
-      | 'TLD',
+      | 'TLD'
+      | 'TLD_DNS_MAGNITUDE',
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSTimeseriesGroupsV2Response>;
   timeseriesGroupsV2(
@@ -221,7 +223,8 @@ export class DNS extends APIResource {
       | 'QUERY_TYPE'
       | 'RESPONSE_CODE'
       | 'RESPONSE_TTL'
-      | 'TLD',
+      | 'TLD'
+      | 'TLD_DNS_MAGNITUDE',
     query: DNSTimeseriesGroupsV2Params | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<DNSTimeseriesGroupsV2Response> {
@@ -1213,7 +1216,7 @@ export interface DNSTimeseriesGroupsV2Params {
    * Normalization method applied to the results. Refer to
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
-  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX' | 'RANK';
 
   /**
    * Filters results by DNS transport protocol.
