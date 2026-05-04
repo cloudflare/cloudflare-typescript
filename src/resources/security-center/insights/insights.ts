@@ -4,8 +4,22 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as IssuesAPI from '../../intel/attack-surface-report/issues';
+import * as AuditLogsAPI from './audit-logs';
+import {
+  AuditLogListByInsightParams,
+  AuditLogListByInsightResponse,
+  AuditLogListByInsightResponsesCursorPagination,
+  AuditLogListParams,
+  AuditLogListResponse,
+  AuditLogListResponsesCursorPagination,
+  AuditLogs,
+} from './audit-logs';
 import * as ClassAPI from './class';
 import { Class, ClassGetParams, ClassGetResponse } from './class';
+import * as ClassificationAPI from './classification';
+import { Classification, ClassificationUpdateParams, ClassificationUpdateResponse } from './classification';
+import * as ContextAPI from './context';
+import { Context, ContextGetParams, ContextGetResponse } from './context';
 import * as SeverityAPI from './severity';
 import { Severity, SeverityGetParams, SeverityGetResponse } from './severity';
 import * as TypeAPI from './type';
@@ -17,10 +31,23 @@ export class Insights extends APIResource {
   class: ClassAPI.Class = new ClassAPI.Class(this._client);
   severity: SeverityAPI.Severity = new SeverityAPI.Severity(this._client);
   type: TypeAPI.Type = new TypeAPI.Type(this._client);
+  auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
+  classification: ClassificationAPI.Classification = new ClassificationAPI.Classification(this._client);
+  context: ContextAPI.Context = new ContextAPI.Context(this._client);
 
   /**
    * Lists all Security Center insights for the account or zone, showing security
    * findings and recommendations.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const insightListResponse of client.securityCenter.insights.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params?: InsightListParams,
@@ -63,6 +90,14 @@ export class Insights extends APIResource {
   /**
    * Archives a Security Center insight for an account or zone, removing it from the
    * active insights list while preserving historical data.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.securityCenter.insights.dismiss('issue_id', {
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   dismiss(
     issueId: string,
@@ -305,6 +340,11 @@ Insights.InsightListResponsesV4PagePagination = InsightListResponsesV4PagePagina
 Insights.Class = Class;
 Insights.Severity = Severity;
 Insights.Type = Type;
+Insights.AuditLogs = AuditLogs;
+Insights.AuditLogListResponsesCursorPagination = AuditLogListResponsesCursorPagination;
+Insights.AuditLogListByInsightResponsesCursorPagination = AuditLogListByInsightResponsesCursorPagination;
+Insights.Classification = Classification;
+Insights.Context = Context;
 
 export declare namespace Insights {
   export {
@@ -324,4 +364,26 @@ export declare namespace Insights {
   };
 
   export { Type as Type, type TypeGetResponse as TypeGetResponse, type TypeGetParams as TypeGetParams };
+
+  export {
+    AuditLogs as AuditLogs,
+    type AuditLogListResponse as AuditLogListResponse,
+    type AuditLogListByInsightResponse as AuditLogListByInsightResponse,
+    AuditLogListResponsesCursorPagination as AuditLogListResponsesCursorPagination,
+    AuditLogListByInsightResponsesCursorPagination as AuditLogListByInsightResponsesCursorPagination,
+    type AuditLogListParams as AuditLogListParams,
+    type AuditLogListByInsightParams as AuditLogListByInsightParams,
+  };
+
+  export {
+    Classification as Classification,
+    type ClassificationUpdateResponse as ClassificationUpdateResponse,
+    type ClassificationUpdateParams as ClassificationUpdateParams,
+  };
+
+  export {
+    Context as Context,
+    type ContextGetResponse as ContextGetResponse,
+    type ContextGetParams as ContextGetParams,
+  };
 }

@@ -9,6 +9,13 @@ import { CloudflareError } from '../../../error';
 export class Type extends APIResource {
   /**
    * Retrieves Security Center insight counts aggregated by insight type.
+   *
+   * @example
+   * ```ts
+   * const types = await client.securityCenter.insights.type.get(
+   *   { account_id: 'account_id' },
+   * );
+   * ```
    */
   get(params?: TypeGetParams, options?: Core.RequestOptions): Core.APIPromise<TypeGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<TypeGetResponse>;
