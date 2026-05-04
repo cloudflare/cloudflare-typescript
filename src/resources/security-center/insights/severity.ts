@@ -10,6 +10,14 @@ export class Severity extends APIResource {
   /**
    * Retrieves Security Center insight counts aggregated by severity level (critical,
    * high, medium, low).
+   *
+   * @example
+   * ```ts
+   * const severities =
+   *   await client.securityCenter.insights.severity.get({
+   *     account_id: 'account_id',
+   *   });
+   * ```
    */
   get(params?: SeverityGetParams, options?: Core.RequestOptions): Core.APIPromise<SeverityGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<SeverityGetResponse>;

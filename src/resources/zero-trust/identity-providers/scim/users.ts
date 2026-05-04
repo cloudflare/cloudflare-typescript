@@ -44,9 +44,12 @@ export interface UserListParams extends V4PagePaginationArrayParams {
 
   /**
    * Query param: The unique Cloudflare-generated Id of the SCIM User resource; also
-   * known as the "Id".
+   * known as the "Id". Pass once for a single lookup (`?cf_resource_id=A`) or repeat
+   * the parameter (`?cf_resource_id=A&cf_resource_id=B`) to look up multiple users
+   * in one request, up to 50 values. Mutually exclusive with `idp_resource_id`,
+   * `username`, `email`, `name`, `search_contains`, and `search_starts_with`.
    */
-  cf_resource_id?: string;
+  cf_resource_id?: Array<string>;
 
   /**
    * Query param: The email address of the SCIM User resource.
@@ -55,9 +58,12 @@ export interface UserListParams extends V4PagePaginationArrayParams {
 
   /**
    * Query param: The IdP-generated Id of the SCIM User resource; also known as the
-   * "external Id".
+   * "external Id". Pass once for a single lookup (`?idp_resource_id=A`) or repeat
+   * the parameter (`?idp_resource_id=A&idp_resource_id=B`) to look up multiple users
+   * in one request, up to 50 values. Mutually exclusive with `cf_resource_id`,
+   * `username`, `email`, `name`, `search_contains`, and `search_starts_with`.
    */
-  idp_resource_id?: string;
+  idp_resource_id?: Array<string>;
 
   /**
    * Query param: The name of the SCIM User resource.

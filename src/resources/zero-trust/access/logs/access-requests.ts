@@ -64,10 +64,17 @@ export interface AccessRequestListParams {
   direction?: 'desc' | 'asc';
 
   /**
-   * Query param: Filter by user email. Defaults to substring matching. To force
-   * exact matching, set `email_exact=true`. Example (default): `email=@example.com`
-   * returns all events with that domain. Example (exact):
-   * `email=user@example.com&email_exact=true` returns only that user.
+   * Query param: Filter by user email. Match mode is controlled by `emailOp`
+   * (preferred) or the legacy `email_exact` flag.
+   *
+   * - Default (no `emailOp`, `email_exact=false` or unset): substring match —
+   *   `email=@example.com` returns all events with that domain.
+   * - Exact match: set `emailOp=eq` (preferred) or `email_exact=true` — e.g.
+   *   `email=user@example.com&email_exact=true` returns only that user.
+   * - Explicit substring match: set `emailOp=contains` (without `email_exact=true`).
+   *   When both are set, `email_exact=true` takes precedence and the match is exact.
+   * - Exclusion: set `emailOp=neq`. With `email_exact=true` this is an exact-value
+   *   exclusion; without it, a fuzzy substring exclusion.
    */
   email?: string;
 
@@ -78,9 +85,11 @@ export interface AccessRequestListParams {
   email_exact?: boolean;
 
   /**
-   * Query param: Operator for the `email` filter.
+   * Query param: Operator for the `email` filter. `contains` performs a substring
+   * (case-sensitive) match. When `email_exact=true` is also set, `email_exact` takes
+   * precedence and `contains` is ignored.
    */
-  emailOp?: 'eq' | 'neq';
+  emailOp?: 'eq' | 'neq' | 'contains';
 
   /**
    * Query param: Comma-separated list of fields to include in the response. When
@@ -129,12 +138,14 @@ export interface AccessRequestListParams {
   until?: string;
 
   /**
-   * Query param: Filter by user UUID.
+   * Query param: Deprecated. Accepted for backward compatibility but no longer
+   * applied as a filter. Use `email` instead.
    */
   user_id?: string;
 
   /**
-   * Query param: Operator for the `user_id` filter.
+   * Query param: Deprecated. Accepted for backward compatibility but no longer
+   * applied as a filter (the `user_id` parameter is itself deprecated).
    */
   user_idOp?: 'eq' | 'neq';
 }

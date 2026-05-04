@@ -108,9 +108,12 @@ export interface UpdateListParams extends V4PagePaginationArrayParams {
   idp_id: Array<string>;
 
   /**
-   * Query param: The unique Cloudflare-generated Id of the SCIM resource.
+   * Query param: The unique Cloudflare-generated Id of the SCIM resource. Pass once
+   * for a single lookup (`?cf_resource_id=A`) or repeat the parameter
+   * (`?cf_resource_id=A&cf_resource_id=B`) to filter by multiple resources in one
+   * request.
    */
-  cf_resource_id?: string;
+  cf_resource_id?: Array<string>;
 
   /**
    * Query param: The chronological order used to sort the logs.
@@ -118,9 +121,12 @@ export interface UpdateListParams extends V4PagePaginationArrayParams {
   direction?: 'desc' | 'asc';
 
   /**
-   * Query param: The IdP-generated Id of the SCIM resource.
+   * Query param: The IdP-generated Id of the SCIM resource. Pass once for a single
+   * lookup (`?idp_resource_id=A`) or repeat the parameter
+   * (`?idp_resource_id=A&idp_resource_id=B`) to filter by multiple resources in one
+   * request.
    */
-  idp_resource_id?: string;
+  idp_resource_id?: Array<string>;
 
   /**
    * Query param: The maximum number of update logs to retrieve.
@@ -133,9 +139,12 @@ export interface UpdateListParams extends V4PagePaginationArrayParams {
   request_method?: Array<'DELETE' | 'PATCH' | 'POST' | 'PUT'>;
 
   /**
-   * Query param: The display name of the SCIM Group resource.
+   * Query param: The display name of the SCIM Group resource. Pass once for a single
+   * lookup (`?resource_group_name=A`) or repeat the parameter
+   * (`?resource_group_name=A&resource_group_name=B`) to filter by multiple group
+   * names in one request.
    */
-  resource_group_name?: string;
+  resource_group_name?: Array<string>;
 
   /**
    * Query param: The resource type of the SCIM request.
@@ -143,9 +152,12 @@ export interface UpdateListParams extends V4PagePaginationArrayParams {
   resource_type?: Array<'USER' | 'GROUP'>;
 
   /**
-   * Query param: The email address of the SCIM User resource.
+   * Query param: The email address of the SCIM User resource. Pass once for a single
+   * lookup (`?resource_user_email=A`) or repeat the parameter
+   * (`?resource_user_email=A&resource_user_email=B`) to filter by multiple emails in
+   * one request.
    */
-  resource_user_email?: string;
+  resource_user_email?: Array<string>;
 
   /**
    * Query param: the timestamp of the earliest update log.

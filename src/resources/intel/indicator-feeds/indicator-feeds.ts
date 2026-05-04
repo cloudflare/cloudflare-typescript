@@ -308,6 +308,16 @@ export interface IndicatorFeedGetResponse {
   is_public?: boolean;
 
   /**
+   * Summary of indicator counts from the last successful upload to this feed.
+   * Populated by the custom-threat-feeds loader at the end of each successful load.
+   * Absent (omitted) when no upload has completed successfully or the upload errored
+   * before the summary write. Surfaces silent-failure paths so operators can see
+   * when their indicators were dropped (popularity allowlist, expired valid_until,
+   * etc.) without reading loader logs.
+   */
+  last_upload_summary?: IndicatorFeedGetResponse.LastUploadSummary;
+
+  /**
    * Status of the latest snapshot uploaded
    */
   latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
@@ -325,12 +335,108 @@ export interface IndicatorFeedGetResponse {
   /**
    * The unique identifier for the provider
    */
-  provider_id?: string;
+  provider_id?: number;
 
   /**
    * The provider of the indicator feed
    */
   provider_name?: string;
+}
+
+export namespace IndicatorFeedGetResponse {
+  /**
+   * Summary of indicator counts from the last successful upload to this feed.
+   * Populated by the custom-threat-feeds loader at the end of each successful load.
+   * Absent (omitted) when no upload has completed successfully or the upload errored
+   * before the summary write. Surfaces silent-failure paths so operators can see
+   * when their indicators were dropped (popularity allowlist, expired valid_until,
+   * etc.) without reading loader logs.
+   */
+  export interface LastUploadSummary {
+    /**
+     * Net delta applied to feed indicators by this upload. Snapshot uploads emit both
+     * _\_added and _\_removed; delta-add emits only _\_added; delta-remove emits only
+     * _\_removed.
+     */
+    persisted?: LastUploadSummary.Persisted;
+
+    /**
+     * Counts of indicators that were uploaded but did not reach QuickSilver, broken
+     * down by reason.
+     */
+    skipped?: LastUploadSummary.Skipped;
+
+    /**
+     * Indicator counts from the unified file the loader received
+     */
+    uploaded?: LastUploadSummary.Uploaded;
+  }
+
+  export namespace LastUploadSummary {
+    /**
+     * Net delta applied to feed indicators by this upload. Snapshot uploads emit both
+     * _\_added and _\_removed; delta-add emits only _\_added; delta-remove emits only
+     * _\_removed.
+     */
+    export interface Persisted {
+      domains_added?: number;
+
+      domains_removed?: number;
+
+      ips_added?: number;
+
+      ips_removed?: number;
+
+      urls_added?: number;
+
+      urls_removed?: number;
+    }
+
+    /**
+     * Counts of indicators that were uploaded but did not reach QuickSilver, broken
+     * down by reason.
+     */
+    export interface Skipped {
+      /**
+       * Domains filtered by the global popularity allowlist at QS provisioning time.
+       * Popular domains (bing.com, naver.com, etc.) are protected from
+       * custom-threat-feed enforcement.
+       */
+      allowlisted_domains?: number;
+
+      /**
+       * Indicators in the upload whose valid_until is already in the past. These are not
+       * added to QS; the expiration cron handles cleanup.
+       */
+      expired_indicators?: number;
+
+      /**
+       * Reserved for future use. Currently always 0 — the unifier aborts the entire
+       * upload on a single bad indicator.
+       */
+      invalid_indicators?: number;
+    }
+
+    /**
+     * Indicator counts from the unified file the loader received
+     */
+    export interface Uploaded {
+      /**
+       * Number of domain indicators in the upload
+       */
+      domains?: number;
+
+      /**
+       * Number of IP indicators in the upload
+       */
+      ips?: number;
+
+      /**
+       * Number of URL indicators in the upload
+       */
+      urls?: number;
+    }
+  }
 }
 
 export interface IndicatorFeedCreateParams {
