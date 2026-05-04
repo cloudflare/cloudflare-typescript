@@ -325,7 +325,7 @@ export interface IndicatorFeedGetResponse {
   /**
    * The unique identifier for the provider
    */
-  provider_id?: string;
+  provider_id?: number;
 
   /**
    * The provider of the indicator feed
