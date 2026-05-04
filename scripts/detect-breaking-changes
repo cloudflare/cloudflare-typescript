@@ -832,6 +832,9 @@ TEST_PATHS=(
 	tests/api-resources/security-center/insights/class.test.ts
 	tests/api-resources/security-center/insights/severity.test.ts
 	tests/api-resources/security-center/insights/type.test.ts
+	tests/api-resources/security-center/insights/audit-logs.test.ts
+	tests/api-resources/security-center/insights/classification.test.ts
+	tests/api-resources/security-center/insights/context.test.ts
 	tests/api-resources/browser-rendering/browser-rendering.test.ts
 	tests/api-resources/browser-rendering/content.test.ts
 	tests/api-resources/browser-rendering/pdf.test.ts
