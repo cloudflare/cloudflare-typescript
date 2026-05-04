@@ -44,15 +44,21 @@ export interface GroupListParams extends V4PagePaginationArrayParams {
 
   /**
    * Query param: The unique Cloudflare-generated Id of the SCIM Group resource; also
-   * known as the "Id".
+   * known as the "Id". Pass once for a single lookup (`?cf_resource_id=A`) or repeat
+   * the parameter (`?cf_resource_id=A&cf_resource_id=B`) to look up multiple groups
+   * in one request, up to 50 values. Mutually exclusive with `idp_resource_id`,
+   * `name`, `search_contains`, and `search_starts_with`.
    */
-  cf_resource_id?: string;
+  cf_resource_id?: Array<string>;
 
   /**
    * Query param: The IdP-generated Id of the SCIM Group resource; also known as the
-   * "external Id".
+   * "external Id". Pass once for a single lookup (`?idp_resource_id=A`) or repeat
+   * the parameter (`?idp_resource_id=A&idp_resource_id=B`) to look up multiple
+   * groups in one request, up to 50 values. Mutually exclusive with
+   * `cf_resource_id`, `name`, `search_contains`, and `search_starts_with`.
    */
-  idp_resource_id?: string;
+  idp_resource_id?: Array<string>;
 
   /**
    * Query param: The display name of the SCIM Group resource.
