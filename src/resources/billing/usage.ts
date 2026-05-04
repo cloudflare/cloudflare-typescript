@@ -57,7 +57,9 @@ export namespace UsagePaygoResponse {
     ConsumedQuantity: number;
 
     /**
-     * Specifies the unit of measurement for consumed quantity.
+     * A display name for the unit of measurement used for the product (for example,
+     * "GB-months", "GB-seconds"). May be empty when the unit is implicit in the
+     * service name.
      */
     ConsumedUnit: string;
 

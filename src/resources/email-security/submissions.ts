@@ -97,6 +97,13 @@ export interface SubmissionListParams extends V4PagePaginationArrayParams {
   end?: string;
 
   /**
+   * Query param: When true, return only submissions that were escalated by an end
+   * user (vs. by the security team). When false, return only submissions that were
+   * not escalated by an end user. When omitted, no filter is applied.
+   */
+  escalated_from_user?: boolean;
+
+  /**
    * Query param
    */
   original_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';

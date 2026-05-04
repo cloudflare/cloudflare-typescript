@@ -27,6 +27,7 @@ describe('resource submissions', () => {
     const response = await client.emailSecurity.submissions.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       end: '2019-12-27T18:11:19.117Z',
+      escalated_from_user: true,
       original_disposition: 'MALICIOUS',
       outcome_disposition: 'MALICIOUS',
       page: 1,
