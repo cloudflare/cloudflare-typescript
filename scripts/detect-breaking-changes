@@ -577,6 +577,9 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/risk-scoring/summary.test.ts
 	tests/api-resources/zero-trust/risk-scoring/integrations/integrations.test.ts
 	tests/api-resources/zero-trust/risk-scoring/integrations/references.test.ts
+	tests/api-resources/zero-trust/resource-library/resource-library.test.ts
+	tests/api-resources/zero-trust/resource-library/applications.test.ts
+	tests/api-resources/zero-trust/resource-library/categories.test.ts
 	tests/api-resources/turnstile/turnstile.test.ts
 	tests/api-resources/turnstile/widgets.test.ts
 	tests/api-resources/connectivity/connectivity.test.ts

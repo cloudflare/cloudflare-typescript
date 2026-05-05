@@ -58,6 +58,7 @@ export {
   type OrganizationListParams,
   type OrganizationRevokeUsersParams,
 } from './organizations/index';
+export { ResourceLibrary } from './resource-library/index';
 export {
   RiskScoring,
   type RiskScoringGetResponse,
