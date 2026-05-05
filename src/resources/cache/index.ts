@@ -41,9 +41,11 @@ export {
 } from './regional-tiered-cache';
 export {
   SmartTieredCache,
+  type SmartTieredCacheCreateResponse,
   type SmartTieredCacheDeleteResponse,
   type SmartTieredCacheEditResponse,
   type SmartTieredCacheGetResponse,
+  type SmartTieredCacheCreateParams,
   type SmartTieredCacheDeleteParams,
   type SmartTieredCacheEditParams,
   type SmartTieredCacheGetParams,

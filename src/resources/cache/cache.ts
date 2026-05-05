@@ -46,6 +46,8 @@ import {
 import * as SmartTieredCacheAPI from './smart-tiered-cache';
 import {
   SmartTieredCache,
+  SmartTieredCacheCreateParams,
+  SmartTieredCacheCreateResponse,
   SmartTieredCacheDeleteParams,
   SmartTieredCacheDeleteResponse,
   SmartTieredCacheEditParams,
@@ -286,9 +288,11 @@ export declare namespace Cache {
 
   export {
     SmartTieredCache as SmartTieredCache,
+    type SmartTieredCacheCreateResponse as SmartTieredCacheCreateResponse,
     type SmartTieredCacheDeleteResponse as SmartTieredCacheDeleteResponse,
     type SmartTieredCacheEditResponse as SmartTieredCacheEditResponse,
     type SmartTieredCacheGetResponse as SmartTieredCacheGetResponse,
+    type SmartTieredCacheCreateParams as SmartTieredCacheCreateParams,
     type SmartTieredCacheDeleteParams as SmartTieredCacheDeleteParams,
     type SmartTieredCacheEditParams as SmartTieredCacheEditParams,
     type SmartTieredCacheGetParams as SmartTieredCacheGetParams,
