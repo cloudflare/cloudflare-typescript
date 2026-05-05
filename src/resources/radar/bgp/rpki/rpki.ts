@@ -12,6 +12,8 @@ import {
   ASPATimeseriesResponse,
   BaseASPA,
 } from './aspa';
+import * as RoasAPI from './roas';
+import { BaseRoas, RoaTimeseriesParams, RoaTimeseriesResponse, Roas } from './roas';
 
 export class BaseRPKI extends APIResource {
   static override readonly _key: readonly ['radar', 'bgp', 'rpki'] = Object.freeze([
@@ -22,10 +24,13 @@ export class BaseRPKI extends APIResource {
 }
 export class RPKI extends BaseRPKI {
   aspa: ASPAAPI.ASPA = new ASPAAPI.ASPA(this._client);
+  roas: RoasAPI.Roas = new RoasAPI.Roas(this._client);
 }
 
 RPKI.ASPA = ASPA;
 RPKI.BaseASPA = BaseASPA;
+RPKI.Roas = Roas;
+RPKI.BaseRoas = BaseRoas;
 
 export declare namespace RPKI {
   export {
@@ -37,5 +42,12 @@ export declare namespace RPKI {
     type ASPAChangesParams as ASPAChangesParams,
     type ASPASnapshotParams as ASPASnapshotParams,
     type ASPATimeseriesParams as ASPATimeseriesParams,
+  };
+
+  export {
+    Roas as Roas,
+    BaseRoas as BaseRoas,
+    type RoaTimeseriesResponse as RoaTimeseriesResponse,
+    type RoaTimeseriesParams as RoaTimeseriesParams,
   };
 }
