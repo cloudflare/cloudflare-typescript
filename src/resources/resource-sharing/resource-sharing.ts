@@ -291,7 +291,8 @@ export namespace ResourceSharingCreateResponse {
       | 'gateway-policy'
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+      | 'gateway-extended-email-matching'
+      | 'idp-federation-grant';
 
     /**
      * Resource Version.
@@ -418,7 +419,8 @@ export namespace ResourceSharingUpdateResponse {
       | 'gateway-policy'
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+      | 'gateway-extended-email-matching'
+      | 'idp-federation-grant';
 
     /**
      * Resource Version.
@@ -545,7 +547,8 @@ export namespace ResourceSharingListResponse {
       | 'gateway-policy'
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+      | 'gateway-extended-email-matching'
+      | 'idp-federation-grant';
 
     /**
      * Resource Version.
@@ -672,7 +675,8 @@ export namespace ResourceSharingDeleteResponse {
       | 'gateway-policy'
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+      | 'gateway-extended-email-matching'
+      | 'idp-federation-grant';
 
     /**
      * Resource Version.
@@ -799,7 +803,8 @@ export namespace ResourceSharingGetResponse {
       | 'gateway-policy'
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+      | 'gateway-extended-email-matching'
+      | 'idp-federation-grant';
 
     /**
      * Resource Version.
@@ -875,7 +880,8 @@ export namespace ResourceSharingCreateParams {
       | 'gateway-policy'
       | 'gateway-destination-ip'
       | 'gateway-block-page-settings'
-      | 'gateway-extended-email-matching';
+      | 'gateway-extended-email-matching'
+      | 'idp-federation-grant';
   }
 }
 
@@ -931,6 +937,7 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
     | 'gateway-extended-email-matching'
+    | 'idp-federation-grant'
   >;
 
   /**
