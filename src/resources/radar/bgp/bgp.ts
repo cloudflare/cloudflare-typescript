@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as IPsAPI from './ips';
-import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips';
 import * as RoutesAPI from './routes';
 import {
   BaseRoutes,
@@ -20,6 +18,8 @@ import {
 } from './routes';
 import * as HijacksAPI from './hijacks/hijacks';
 import { BaseHijacks, Hijacks } from './hijacks/hijacks';
+import * as IPsAPI from './ips/ips';
+import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips/ips';
 import * as LeaksAPI from './leaks/leaks';
 import { BaseLeaks, Leaks } from './leaks/leaks';
 import * as RPKIAPI from './rpki/rpki';

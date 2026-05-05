@@ -250,11 +250,21 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/radar/bgp/ips.ts">IPTimeseriesResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/ips/ips.ts">IPTimeseriesResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/ips/timeseries">client.radar.bgp.ips.<a href="./src/resources/radar/bgp/ips.ts">timeseries</a>({ ...params }) -> IPTimeseriesResponse</code>
+- <code title="get /radar/bgp/ips/timeseries">client.radar.bgp.ips.<a href="./src/resources/radar/bgp/ips/ips.ts">timeseries</a>({ ...params }) -> IPTimeseriesResponse</code>
+
+#### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/ips/top.ts">TopAsesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/ips/top/ases">client.radar.bgp.ips.top.<a href="./src/resources/radar/bgp/ips/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
 
 ### RPKI
 
@@ -271,6 +281,16 @@ Methods:
 - <code title="get /radar/bgp/rpki/aspa/changes">client.radar.bgp.rpki.aspa.<a href="./src/resources/radar/bgp/rpki/aspa.ts">changes</a>({ ...params }) -> ASPAChangesResponse</code>
 - <code title="get /radar/bgp/rpki/aspa/snapshot">client.radar.bgp.rpki.aspa.<a href="./src/resources/radar/bgp/rpki/aspa.ts">snapshot</a>({ ...params }) -> ASPASnapshotResponse</code>
 - <code title="get /radar/bgp/rpki/aspa/timeseries">client.radar.bgp.rpki.aspa.<a href="./src/resources/radar/bgp/rpki/aspa.ts">timeseries</a>({ ...params }) -> ASPATimeseriesResponse</code>
+
+#### Roas
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/rpki/roas.ts">RoaTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/rpki/roas/timeseries">client.radar.bgp.rpki.roas.<a href="./src/resources/radar/bgp/rpki/roas.ts">timeseries</a>({ ...params }) -> RoaTimeseriesResponse</code>
 
 ## Bots
 

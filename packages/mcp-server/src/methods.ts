@@ -9465,6 +9465,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/radar/bgp/ips/timeseries',
   },
   {
+    clientCallName: 'client.radar.bgp.ips.top.ases',
+    fullyQualifiedName: 'radar.bgp.ips.top.ases',
+    httpMethod: 'get',
+    httpPath: '/radar/bgp/ips/top/ases',
+  },
+  {
     clientCallName: 'client.radar.bgp.rpki.aspa.changes',
     fullyQualifiedName: 'radar.bgp.rpki.aspa.changes',
     httpMethod: 'get',
@@ -9481,6 +9487,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'radar.bgp.rpki.aspa.timeseries',
     httpMethod: 'get',
     httpPath: '/radar/bgp/rpki/aspa/timeseries',
+  },
+  {
+    clientCallName: 'client.radar.bgp.rpki.roas.timeseries',
+    fullyQualifiedName: 'radar.bgp.rpki.roas.timeseries',
+    httpMethod: 'get',
+    httpPath: '/radar/bgp/rpki/roas/timeseries',
   },
   {
     clientCallName: 'client.radar.bots.list',
