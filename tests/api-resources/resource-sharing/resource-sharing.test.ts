@@ -98,6 +98,7 @@ describe('resource resourceSharing', () => {
       per_page: 20,
       resource_types: ['custom-ruleset'],
       status: 'active',
+      tag: ['env=production'],
       target_type: 'account',
     });
   });
