@@ -30,7 +30,6 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
   test('create: only required params', async () => {
     const responsePromise = client.loadBalancers.monitorGroups.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'id',
       description: 'Primary datacenter monitors',
       members: [
         {
@@ -53,7 +52,6 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
   test('create: required and optional params', async () => {
     const response = await client.loadBalancers.monitorGroups.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'id',
       description: 'Primary datacenter monitors',
       members: [
         {
@@ -69,7 +67,6 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
   test('update: only required params', async () => {
     const responsePromise = client.loadBalancers.monitorGroups.update('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'id',
       description: 'Primary datacenter monitors',
       members: [
         {
@@ -92,7 +89,6 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
   test('update: required and optional params', async () => {
     const response = await client.loadBalancers.monitorGroups.update('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'id',
       description: 'Primary datacenter monitors',
       members: [
         {
@@ -146,7 +142,6 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
   test('edit: only required params', async () => {
     const responsePromise = client.loadBalancers.monitorGroups.edit('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'id',
       description: 'Primary datacenter monitors',
       members: [
         {
@@ -169,7 +164,6 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
   test('edit: required and optional params', async () => {
     const response = await client.loadBalancers.monitorGroups.edit('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: 'id',
       description: 'Primary datacenter monitors',
       members: [
         {
