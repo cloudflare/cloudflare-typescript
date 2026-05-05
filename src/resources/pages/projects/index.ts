@@ -1,5 +1,45 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Deployments, BaseDeployments } from './deployments/index';
-export { Domains, BaseDomains } from './domains';
-export { Projects, BaseProjects } from './projects';
+export {
+  Deployments,
+  BaseDeployments,
+  type DeploymentDeleteResponse,
+  type DeploymentCreateParams,
+  type DeploymentListParams,
+  type DeploymentDeleteParams,
+  type DeploymentGetParams,
+  type DeploymentRetryParams,
+  type DeploymentRollbackParams,
+} from './deployments/index';
+export {
+  Domains,
+  BaseDomains,
+  type DomainCreateResponse,
+  type DomainListResponse,
+  type DomainDeleteResponse,
+  type DomainEditResponse,
+  type DomainGetResponse,
+  type DomainCreateParams,
+  type DomainListParams,
+  type DomainDeleteParams,
+  type DomainEditParams,
+  type DomainGetParams,
+  type DomainListResponsesSinglePage,
+} from './domains';
+export {
+  Projects,
+  BaseProjects,
+  type Deployment,
+  type Project,
+  type Stage,
+  type ProjectDeleteResponse,
+  type ProjectPurgeBuildCacheResponse,
+  type ProjectCreateParams,
+  type ProjectListParams,
+  type ProjectDeleteParams,
+  type ProjectEditParams,
+  type ProjectGetParams,
+  type ProjectPurgeBuildCacheParams,
+  type DeploymentsV4PagePaginationArray,
+  type ProjectsV4PagePaginationArray,
+} from './projects';

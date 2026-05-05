@@ -2,19 +2,165 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AdvertisementStatusAPI from './advertisement-status';
-import { AdvertisementStatus, BaseAdvertisementStatus } from './advertisement-status';
+import {
+  AdvertisementStatus,
+  AdvertisementStatusEditParams,
+  AdvertisementStatusEditResponse,
+  AdvertisementStatusGetParams,
+  AdvertisementStatusGetResponse,
+  BaseAdvertisementStatus,
+} from './advertisement-status';
 import * as BGPPrefixesAPI from './bgp-prefixes';
-import { BGPPrefixes, BaseBGPPrefixes } from './bgp-prefixes';
+import {
+  BGPPrefix,
+  BGPPrefixCreateParams,
+  BGPPrefixEditParams,
+  BGPPrefixGetParams,
+  BGPPrefixListParams,
+  BGPPrefixes,
+  BGPPrefixesSinglePage,
+  BaseBGPPrefixes,
+} from './bgp-prefixes';
 import * as DelegationsAPI from './delegations';
-import { BaseDelegations, Delegations } from './delegations';
+import {
+  BaseDelegations,
+  DelegationCreateParams,
+  DelegationDeleteParams,
+  DelegationDeleteResponse,
+  DelegationListParams,
+  Delegations,
+  DelegationsSinglePage,
+} from './delegations';
 import * as ServiceBindingsAPI from './service-bindings';
-import { BaseServiceBindings, ServiceBindings } from './service-bindings';
+import {
+  BaseServiceBindings,
+  ServiceBinding,
+  ServiceBindingCreateParams,
+  ServiceBindingDeleteParams,
+  ServiceBindingDeleteResponse,
+  ServiceBindingGetParams,
+  ServiceBindingListParams,
+  ServiceBindings,
+  ServiceBindingsSinglePage,
+} from './service-bindings';
+import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class BasePrefixes extends APIResource {
   static override readonly _key: readonly ['addressing', 'prefixes'] = Object.freeze([
     'addressing',
     'prefixes',
   ] as const);
+
+  /**
+   * Add a new prefix under the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.create({
+   *   account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *   asn: 13335,
+   *   cidr: '192.0.2.0/24',
+   * });
+   * ```
+   */
+  create(params: PrefixCreateParams, options?: RequestOptions): APIPromise<Prefix> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/addressing/prefixes`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Prefix }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List all prefixes owned by the account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const prefix of client.addressing.prefixes.list({
+   *   account_id: '258def64c72dae45f3e4c8516e2111f2',
+   * })) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(params: PrefixListParams, options?: RequestOptions): PagePromise<PrefixesSinglePage, Prefix> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/addressing/prefixes`,
+      SinglePage<Prefix>,
+      options,
+    );
+  }
+
+  /**
+   * Delete an unapproved prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.delete(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
+   */
+  delete(
+    prefixID: string,
+    params: PrefixDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<PrefixDeleteResponse> {
+    const { account_id } = params;
+    return this._client.delete(path`/accounts/${account_id}/addressing/prefixes/${prefixID}`, options);
+  }
+
+  /**
+   * Modify the description for a prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.edit(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   {
+   *     account_id: '258def64c72dae45f3e4c8516e2111f2',
+   *     description: 'Internal test prefix',
+   *   },
+   * );
+   * ```
+   */
+  edit(prefixID: string, params: PrefixEditParams, options?: RequestOptions): APIPromise<Prefix> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/addressing/prefixes/${prefixID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Prefix }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List a particular prefix owned by the account.
+   *
+   * @example
+   * ```ts
+   * const prefix = await client.addressing.prefixes.get(
+   *   '2af39739cc4e3b5910c918468bb89828',
+   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
+   * );
+   * ```
+   */
+  get(prefixID: string, params: PrefixGetParams, options?: RequestOptions): APIPromise<Prefix> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/addressing/prefixes/${prefixID}`, options) as APIPromise<{
+        result: Prefix;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Prefixes extends BasePrefixes {
   serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
@@ -24,21 +170,277 @@ export class Prefixes extends BasePrefixes {
   delegations: DelegationsAPI.Delegations = new DelegationsAPI.Delegations(this._client);
 }
 
+export type PrefixesSinglePage = SinglePage<Prefix>;
+
+export interface Prefix {
+  /**
+   * Identifier of an IP Prefix.
+   */
+  id?: string;
+
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id?: string;
+
+  /**
+   * @deprecated Prefer the
+   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
+   * instead, which allows for advertising multiple BGP routes within a single IP
+   * Prefix.
+   */
+  advertised?: boolean | null;
+
+  /**
+   * @deprecated Prefer the
+   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
+   * instead, which allows for advertising multiple BGP routes within a single IP
+   * Prefix.
+   */
+  advertised_modified_at?: string | null;
+
+  /**
+   * Approval state of the prefix (P = pending, V = active).
+   */
+  approved?: string;
+
+  /**
+   * Autonomous System Number (ASN) the prefix will be advertised under.
+   */
+  asn?: number;
+
+  /**
+   * IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr?: string;
+
+  created_at?: string;
+
+  /**
+   * Whether Cloudflare is allowed to generate the LOA document on behalf of the
+   * prefix owner.
+   */
+  delegate_loa_creation?: boolean;
+
+  /**
+   * Description of the prefix.
+   */
+  description?: string;
+
+  /**
+   * State of one kind of validation for an IP prefix.
+   */
+  irr_validation_state?: string;
+
+  /**
+   * Identifier for the uploaded LOA document.
+   */
+  loa_document_id?: string | null;
+
+  modified_at?: string;
+
+  /**
+   * @deprecated Prefer the
+   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
+   * instead, which allows for advertising multiple BGP routes within a single IP
+   * Prefix.
+   */
+  on_demand_enabled?: boolean;
+
+  /**
+   * @deprecated Prefer the
+   * [BGP Prefixes API](https://developers.cloudflare.com/api/resources/addressing/subresources/prefixes/subresources/bgp_prefixes/)
+   * instead, which allows for advertising multiple BGP routes within a single IP
+   * Prefix.
+   */
+  on_demand_locked?: boolean;
+
+  /**
+   * State of one kind of validation for an IP prefix.
+   */
+  ownership_validation_state?: string;
+
+  /**
+   * Token provided to demonstrate ownership of the prefix.
+   */
+  ownership_validation_token?: string;
+
+  /**
+   * State of one kind of validation for an IP prefix.
+   */
+  rpki_validation_state?: string;
+}
+
+export interface PrefixDeleteResponse {
+  errors: Array<PrefixDeleteResponse.Error>;
+
+  messages: Array<PrefixDeleteResponse.Message>;
+
+  /**
+   * Whether the API call was successful.
+   */
+  success: true;
+}
+
+export namespace PrefixDeleteResponse {
+  export interface Error {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Error.Source;
+  }
+
+  export namespace Error {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+
+  export interface Message {
+    code: number;
+
+    message: string;
+
+    documentation_url?: string;
+
+    source?: Message.Source;
+  }
+
+  export namespace Message {
+    export interface Source {
+      pointer?: string;
+    }
+  }
+}
+
+export interface PrefixCreateParams {
+  /**
+   * Path param: Identifier of a Cloudflare account.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Autonomous System Number (ASN) the prefix will be advertised under.
+   */
+  asn: number;
+
+  /**
+   * Body param: IP Prefix in Classless Inter-Domain Routing format.
+   */
+  cidr: string;
+
+  /**
+   * Body param: Whether Cloudflare is allowed to generate the LOA document on behalf
+   * of the prefix owner.
+   */
+  delegate_loa_creation?: boolean;
+
+  /**
+   * Body param: Description of the prefix.
+   */
+  description?: string;
+
+  /**
+   * Body param: Identifier for the uploaded LOA document.
+   */
+  loa_document_id?: string | null;
+}
+
+export interface PrefixListParams {
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
+}
+
+export interface PrefixDeleteParams {
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
+}
+
+export interface PrefixEditParams {
+  /**
+   * Path param: Identifier of a Cloudflare account.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Description of the prefix.
+   */
+  description: string;
+}
+
+export interface PrefixGetParams {
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
+}
+
 Prefixes.ServiceBindings = ServiceBindings;
 Prefixes.BaseServiceBindings = BaseServiceBindings;
 Prefixes.BGPPrefixes = BGPPrefixes;
 Prefixes.BaseBGPPrefixes = BaseBGPPrefixes;
 Prefixes.AdvertisementStatus = AdvertisementStatus;
 Prefixes.BaseAdvertisementStatus = BaseAdvertisementStatus;
-Prefixes.Delegations = Delegations;
 Prefixes.BaseDelegations = BaseDelegations;
 
 export declare namespace Prefixes {
-  export { ServiceBindings as ServiceBindings, BaseServiceBindings as BaseServiceBindings };
+  export {
+    type Prefix as Prefix,
+    type PrefixDeleteResponse as PrefixDeleteResponse,
+    type PrefixesSinglePage as PrefixesSinglePage,
+    type PrefixCreateParams as PrefixCreateParams,
+    type PrefixListParams as PrefixListParams,
+    type PrefixDeleteParams as PrefixDeleteParams,
+    type PrefixEditParams as PrefixEditParams,
+    type PrefixGetParams as PrefixGetParams,
+  };
 
-  export { BGPPrefixes as BGPPrefixes, BaseBGPPrefixes as BaseBGPPrefixes };
+  export {
+    ServiceBindings as ServiceBindings,
+    BaseServiceBindings as BaseServiceBindings,
+    type ServiceBinding as ServiceBinding,
+    type ServiceBindingDeleteResponse as ServiceBindingDeleteResponse,
+    type ServiceBindingsSinglePage as ServiceBindingsSinglePage,
+    type ServiceBindingCreateParams as ServiceBindingCreateParams,
+    type ServiceBindingListParams as ServiceBindingListParams,
+    type ServiceBindingDeleteParams as ServiceBindingDeleteParams,
+    type ServiceBindingGetParams as ServiceBindingGetParams,
+  };
 
-  export { AdvertisementStatus as AdvertisementStatus, BaseAdvertisementStatus as BaseAdvertisementStatus };
+  export {
+    BGPPrefixes as BGPPrefixes,
+    BaseBGPPrefixes as BaseBGPPrefixes,
+    type BGPPrefix as BGPPrefix,
+    type BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type BGPPrefixCreateParams as BGPPrefixCreateParams,
+    type BGPPrefixListParams as BGPPrefixListParams,
+    type BGPPrefixEditParams as BGPPrefixEditParams,
+    type BGPPrefixGetParams as BGPPrefixGetParams,
+  };
 
-  export { Delegations as Delegations, BaseDelegations as BaseDelegations };
+  export {
+    AdvertisementStatus as AdvertisementStatus,
+    BaseAdvertisementStatus as BaseAdvertisementStatus,
+    type AdvertisementStatusEditResponse as AdvertisementStatusEditResponse,
+    type AdvertisementStatusGetResponse as AdvertisementStatusGetResponse,
+    type AdvertisementStatusEditParams as AdvertisementStatusEditParams,
+    type AdvertisementStatusGetParams as AdvertisementStatusGetParams,
+  };
+
+  export {
+    type Delegations as Delegations,
+    BaseDelegations as BaseDelegations,
+    type DelegationDeleteResponse as DelegationDeleteResponse,
+    type DelegationsSinglePage as DelegationsSinglePage,
+    type DelegationCreateParams as DelegationCreateParams,
+    type DelegationListParams as DelegationListParams,
+    type DelegationDeleteParams as DelegationDeleteParams,
+  };
 }

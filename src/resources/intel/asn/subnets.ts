@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class BaseSubnets extends APIResource {
   static override readonly _key: readonly ['intel', 'asn', 'subnets'] = Object.freeze([
@@ -8,5 +12,58 @@ export class BaseSubnets extends APIResource {
     'asn',
     'subnets',
   ] as const);
+
+  /**
+   * Get ASN Subnets.
+   *
+   * @example
+   * ```ts
+   * const subnet = await client.intel.asn.subnets.get(0, {
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  get(
+    asn: Shared.ASNParam,
+    params: SubnetGetParams,
+    options?: RequestOptions,
+  ): APIPromise<SubnetGetResponse> {
+    const { account_id } = params;
+    return this._client.get(path`/accounts/${account_id}/intel/asn/${asn}/subnets`, options);
+  }
 }
 export class Subnets extends BaseSubnets {}
+
+export interface SubnetGetResponse {
+  asn?: Shared.ASN;
+
+  /**
+   * Total results returned based on your search parameters.
+   */
+  count?: number;
+
+  ip_count_total?: number;
+
+  /**
+   * Current page within paginated list of results.
+   */
+  page?: number;
+
+  /**
+   * Number of results per page of results.
+   */
+  per_page?: number;
+
+  subnets?: Array<string>;
+}
+
+export interface SubnetGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export declare namespace Subnets {
+  export { type SubnetGetResponse as SubnetGetResponse, type SubnetGetParams as SubnetGetParams };
+}

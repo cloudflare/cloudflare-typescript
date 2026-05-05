@@ -2,9 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as OriginAPI from './origin';
-import { BaseOrigin, Origin } from './origin';
+import {
+  BaseOrigin,
+  Origin,
+  OriginSummaryParams,
+  OriginSummaryResponse,
+  OriginTimeseriesGroupsParams,
+  OriginTimeseriesGroupsResponse,
+} from './origin';
 import * as TLSAPI from './tls';
-import { BaseTLS, TLS } from './tls';
+import { BaseTLS, TLS, TLSSupportParams, TLSSupportResponse } from './tls';
 
 export class BasePostQuantum extends APIResource {
   static override readonly _key: readonly ['radar', 'postQuantum'] = Object.freeze([
@@ -23,7 +30,19 @@ PostQuantum.TLS = TLS;
 PostQuantum.BaseTLS = BaseTLS;
 
 export declare namespace PostQuantum {
-  export { Origin as Origin, BaseOrigin as BaseOrigin };
+  export {
+    Origin as Origin,
+    BaseOrigin as BaseOrigin,
+    type OriginSummaryResponse as OriginSummaryResponse,
+    type OriginTimeseriesGroupsResponse as OriginTimeseriesGroupsResponse,
+    type OriginSummaryParams as OriginSummaryParams,
+    type OriginTimeseriesGroupsParams as OriginTimeseriesGroupsParams,
+  };
 
-  export { TLS as TLS, BaseTLS as BaseTLS };
+  export {
+    TLS as TLS,
+    BaseTLS as BaseTLS,
+    type TLSSupportResponse as TLSSupportResponse,
+    type TLSSupportParams as TLSSupportParams,
+  };
 }

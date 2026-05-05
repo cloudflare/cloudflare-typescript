@@ -2,13 +2,48 @@
 
 import { APIResource } from '../../core/resource';
 import * as EdgeAPI from './edge';
-import { BaseEdge, Edge } from './edge';
+import {
+  BaseEdge,
+  Edge,
+  EdgeCreateParams,
+  EdgeGetParams,
+  InstantLogpushJob,
+  InstantLogpushJobsSinglePage,
+} from './edge';
 import * as JobsAPI from './jobs';
-import { BaseJobs, Jobs } from './jobs';
+import {
+  BaseJobs,
+  JobCreateParams,
+  JobDeleteParams,
+  JobDeleteResponse,
+  JobGetParams,
+  JobListParams,
+  JobUpdateParams,
+  Jobs,
+  LogpushJob,
+  LogpushJobsSinglePage,
+  OutputOptions,
+} from './jobs';
 import * as OwnershipAPI from './ownership';
-import { BaseOwnership, Ownership } from './ownership';
+import {
+  BaseOwnership,
+  Ownership,
+  OwnershipCreateParams,
+  OwnershipCreateResponse,
+  OwnershipValidateParams,
+  OwnershipValidation,
+} from './ownership';
 import * as ValidateAPI from './validate';
-import { BaseValidate, Validate } from './validate';
+import {
+  BaseValidate,
+  Validate,
+  ValidateDestinationExistsParams,
+  ValidateDestinationExistsResponse,
+  ValidateDestinationParams,
+  ValidateDestinationResponse,
+  ValidateOriginParams,
+  ValidateOriginResponse,
+} from './validate';
 import * as DatasetsAPI from './datasets/datasets';
 import { BaseDatasets, Datasets } from './datasets/datasets';
 
@@ -37,11 +72,46 @@ Logpush.BaseValidate = BaseValidate;
 export declare namespace Logpush {
   export { Datasets as Datasets, BaseDatasets as BaseDatasets };
 
-  export { Edge as Edge, BaseEdge as BaseEdge };
+  export {
+    Edge as Edge,
+    BaseEdge as BaseEdge,
+    type InstantLogpushJob as InstantLogpushJob,
+    type InstantLogpushJobsSinglePage as InstantLogpushJobsSinglePage,
+    type EdgeCreateParams as EdgeCreateParams,
+    type EdgeGetParams as EdgeGetParams,
+  };
 
-  export { Jobs as Jobs, BaseJobs as BaseJobs };
+  export {
+    Jobs as Jobs,
+    BaseJobs as BaseJobs,
+    type LogpushJob as LogpushJob,
+    type OutputOptions as OutputOptions,
+    type JobDeleteResponse as JobDeleteResponse,
+    type LogpushJobsSinglePage as LogpushJobsSinglePage,
+    type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
+    type JobListParams as JobListParams,
+    type JobDeleteParams as JobDeleteParams,
+    type JobGetParams as JobGetParams,
+  };
 
-  export { Ownership as Ownership, BaseOwnership as BaseOwnership };
+  export {
+    Ownership as Ownership,
+    BaseOwnership as BaseOwnership,
+    type OwnershipValidation as OwnershipValidation,
+    type OwnershipCreateResponse as OwnershipCreateResponse,
+    type OwnershipCreateParams as OwnershipCreateParams,
+    type OwnershipValidateParams as OwnershipValidateParams,
+  };
 
-  export { Validate as Validate, BaseValidate as BaseValidate };
+  export {
+    Validate as Validate,
+    BaseValidate as BaseValidate,
+    type ValidateDestinationResponse as ValidateDestinationResponse,
+    type ValidateDestinationExistsResponse as ValidateDestinationExistsResponse,
+    type ValidateOriginResponse as ValidateOriginResponse,
+    type ValidateDestinationParams as ValidateDestinationParams,
+    type ValidateDestinationExistsParams as ValidateDestinationExistsParams,
+    type ValidateOriginParams as ValidateOriginParams,
+  };
 }

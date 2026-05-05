@@ -4,7 +4,7 @@ import { APIResource } from '../../../core/resource';
 import * as AggregatesAPI from './aggregates/aggregates';
 import { Aggregates, BaseAggregates } from './aggregates/aggregates';
 import * as EventsAPI from './events/events';
-import { BaseEvents, Events } from './events/events';
+import { BaseEvents, Dimension, Events } from './events/events';
 
 export class BaseAnalytics extends APIResource {
   static override readonly _key: readonly ['spectrum', 'analytics'] = Object.freeze([
@@ -25,5 +25,5 @@ Analytics.BaseEvents = BaseEvents;
 export declare namespace Analytics {
   export { Aggregates as Aggregates, BaseAggregates as BaseAggregates };
 
-  export { Events as Events, BaseEvents as BaseEvents };
+  export { Events as Events, BaseEvents as BaseEvents, type Dimension as Dimension };
 }

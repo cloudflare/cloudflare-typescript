@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../core/resource';
 import * as ASNAPI from './asn';
-import { ASN, BaseASN } from './asn';
+import {
+  ASN,
+  ASNDayReportParams,
+  ASNDayReportResponse,
+  ASNFullReportParams,
+  ASNFullReportResponse,
+  BaseASN,
+} from './asn';
 import * as ConfigsAPI from './configs/configs';
 import { BaseConfigs, Configs } from './configs/configs';
 
@@ -20,7 +27,14 @@ BotnetFeed.Configs = Configs;
 BotnetFeed.BaseConfigs = BaseConfigs;
 
 export declare namespace BotnetFeed {
-  export { ASN as ASN, BaseASN as BaseASN };
+  export {
+    ASN as ASN,
+    BaseASN as BaseASN,
+    type ASNDayReportResponse as ASNDayReportResponse,
+    type ASNFullReportResponse as ASNFullReportResponse,
+    type ASNDayReportParams as ASNDayReportParams,
+    type ASNFullReportParams as ASNFullReportParams,
+  };
 
   export { Configs as Configs, BaseConfigs as BaseConfigs };
 }

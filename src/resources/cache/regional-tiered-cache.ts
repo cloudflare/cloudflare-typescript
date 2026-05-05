@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -119,7 +118,7 @@ export interface RegionalTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Value of the Regional Tiered Cache zone setting.
@@ -131,7 +130,7 @@ export interface RegionalTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export declare namespace RegionalTieredCacheResource {

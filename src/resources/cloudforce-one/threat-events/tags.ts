@@ -1,6 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class BaseTags extends APIResource {
   static override readonly _key: readonly ['cloudforceOne', 'threatEvents', 'tags'] = Object.freeze([
@@ -8,5 +11,154 @@ export class BaseTags extends APIResource {
     'threatEvents',
     'tags',
   ] as const);
+
+  /**
+   * Creates a new tag to be used accross threat events.
+   *
+   * @example
+   * ```ts
+   * const tag =
+   *   await client.cloudforceOne.threatEvents.tags.create({
+   *     account_id: 'account_id',
+   *     value: 'APT28',
+   *   });
+   * ```
+   */
+  create(params: TagCreateParams, options?: RequestOptions): APIPromise<TagCreateResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/tags/create`, {
+      body,
+      ...options,
+    });
+  }
 }
 export class Tags extends BaseTags {}
+
+export interface TagCreateResponse {
+  uuid: string;
+
+  value: string;
+
+  activeDuration?: string;
+
+  actorCategory?: string;
+
+  aliasGroupNames?: Array<string>;
+
+  aliasGroupNamesInternal?: Array<string>;
+
+  analyticPriority?: number;
+
+  attributionConfidence?: string;
+
+  attributionOrganization?: string;
+
+  categoryName?: string;
+
+  categoryUuid?: string;
+
+  externalReferenceLinks?: Array<string>;
+
+  internalDescription?: string;
+
+  motive?: string;
+
+  opsecLevel?: string;
+
+  originCountryISO?: string;
+
+  priority?: number;
+
+  sophisticationLevel?: string;
+}
+
+export interface TagCreateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  value: string;
+
+  /**
+   * Body param
+   */
+  activeDuration?: string;
+
+  /**
+   * Body param
+   */
+  actorCategory?: string;
+
+  /**
+   * Body param
+   */
+  aliasGroupNames?: Array<string>;
+
+  /**
+   * Body param
+   */
+  aliasGroupNamesInternal?: Array<string>;
+
+  /**
+   * Body param
+   */
+  analyticPriority?: number;
+
+  /**
+   * Body param
+   */
+  attributionConfidence?: string;
+
+  /**
+   * Body param
+   */
+  attributionOrganization?: string;
+
+  /**
+   * Body param
+   */
+  categoryUuid?: string;
+
+  /**
+   * Body param
+   */
+  externalReferenceLinks?: Array<string>;
+
+  /**
+   * Body param
+   */
+  internalDescription?: string;
+
+  /**
+   * Body param
+   */
+  motive?: string;
+
+  /**
+   * Body param
+   */
+  opsecLevel?: string;
+
+  /**
+   * Body param
+   */
+  originCountryISO?: string;
+
+  /**
+   * Body param
+   */
+  priority?: number;
+
+  /**
+   * Body param
+   */
+  sophisticationLevel?: string;
+}
+
+export declare namespace Tags {
+  export { type TagCreateResponse as TagCreateResponse, type TagCreateParams as TagCreateParams };
+}

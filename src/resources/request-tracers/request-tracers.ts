@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import * as TracesAPI from './traces';
-import { BaseTraces, Traces } from './traces';
+import { BaseTraces, Trace, TraceCreateParams, TraceCreateResponse, TraceItem, Traces } from './traces';
 
 export class BaseRequestTracers extends APIResource {
   static override readonly _key: readonly ['requestTracers'] = Object.freeze(['requestTracers'] as const);
@@ -15,5 +15,12 @@ RequestTracers.Traces = Traces;
 RequestTracers.BaseTraces = BaseTraces;
 
 export declare namespace RequestTracers {
-  export { Traces as Traces, BaseTraces as BaseTraces };
+  export {
+    Traces as Traces,
+    BaseTraces as BaseTraces,
+    type Trace as Trace,
+    type TraceItem as TraceItem,
+    type TraceCreateResponse as TraceCreateResponse,
+    type TraceCreateParams as TraceCreateParams,
+  };
 }

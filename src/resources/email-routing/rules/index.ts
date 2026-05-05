@@ -1,4 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { CatchAlls, BaseCatchAlls } from './catch-alls';
-export { Rules, BaseRules } from './rules';
+export {
+  CatchAlls,
+  BaseCatchAlls,
+  type CatchAllAction,
+  type CatchAllMatcher,
+  type CatchAllUpdateResponse,
+  type CatchAllGetResponse,
+  type CatchAllUpdateParams,
+  type CatchAllGetParams,
+} from './catch-alls';
+export {
+  Rules,
+  BaseRules,
+  type Action,
+  type EmailRoutingRule,
+  type Matcher,
+  type RuleCreateParams,
+  type RuleUpdateParams,
+  type RuleListParams,
+  type RuleDeleteParams,
+  type RuleGetParams,
+  type EmailRoutingRulesV4PagePaginationArray,
+} from './rules';

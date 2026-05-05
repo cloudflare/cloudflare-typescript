@@ -32,7 +32,7 @@ export { CustomCertificates, BaseCustomCertificates } from './custom-certificate
 export { CustomHostnames, BaseCustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers, BaseCustomNameservers } from './custom-nameservers';
 export { CustomPages, BaseCustomPages } from './custom-pages/custom-pages';
-export { D1, BaseD1 } from './d1/d1';
+export { D1Resource, BaseD1Resource } from './d1/d1';
 export { DCVDelegation, BaseDCVDelegation } from './dcv-delegation';
 export { DNS, BaseDNS } from './dns/dns';
 export { DNSFirewall, BaseDNSFirewall } from './dns-firewall/dns-firewall';
@@ -47,7 +47,7 @@ export { Fraud, BaseFraud } from './fraud';
 export { GoogleTagGateway, BaseGoogleTagGateway } from './google-tag-gateway/google-tag-gateway';
 export { Healthchecks, BaseHealthchecks } from './healthchecks/healthchecks';
 export { Hostnames, BaseHostnames } from './hostnames/hostnames';
-export { Hyperdrive, BaseHyperdrive } from './hyperdrive/hyperdrive';
+export { HyperdriveResource, BaseHyperdriveResource } from './hyperdrive/hyperdrive';
 export { IAM, BaseIAM } from './iam/iam';
 export { IPs, BaseIPs } from './ips';
 export { Images, BaseImages } from './images/images';

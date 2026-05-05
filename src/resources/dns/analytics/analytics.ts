@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as ReportsAPI from './reports/reports';
-import { BaseReports, Reports } from './reports/reports';
+import { BaseReports, Report, ReportGetParams, Reports } from './reports/reports';
 
 export class BaseAnalytics extends APIResource {
   static override readonly _key: readonly ['dns', 'analytics'] = Object.freeze(['dns', 'analytics'] as const);
@@ -15,5 +15,10 @@ Analytics.Reports = Reports;
 Analytics.BaseReports = BaseReports;
 
 export declare namespace Analytics {
-  export { Reports as Reports, BaseReports as BaseReports };
+  export {
+    Reports as Reports,
+    BaseReports as BaseReports,
+    type Report as Report,
+    type ReportGetParams as ReportGetParams,
+  };
 }

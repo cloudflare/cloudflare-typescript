@@ -1,7 +1,44 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Connections, BaseConnections } from './connections';
-export { Cookies, BaseCookies } from './cookies';
+export {
+  Connections,
+  BaseConnections,
+  type Connection,
+  type ConnectionListParams,
+  type ConnectionGetParams,
+  type ConnectionsSinglePage,
+} from './connections';
+export {
+  Cookies,
+  BaseCookies,
+  type CookieListResponse,
+  type CookieGetResponse,
+  type CookieListParams,
+  type CookieGetParams,
+  type CookieListResponsesSinglePage,
+} from './cookies';
 export { PageShield, BasePageShield } from './page-shield';
-export { Policies, BasePolicies } from './policies';
-export { Scripts, BaseScripts } from './scripts';
+export {
+  Policies,
+  BasePolicies,
+  type Policy,
+  type PolicyCreateResponse,
+  type PolicyUpdateResponse,
+  type PolicyListResponse,
+  type PolicyGetResponse,
+  type PolicyCreateParams,
+  type PolicyUpdateParams,
+  type PolicyListParams,
+  type PolicyDeleteParams,
+  type PolicyGetParams,
+  type PolicyListResponsesSinglePage,
+} from './policies';
+export {
+  Scripts,
+  BaseScripts,
+  type Script,
+  type ScriptGetResponse,
+  type ScriptListParams,
+  type ScriptGetParams,
+  type ScriptsSinglePage,
+} from './scripts';

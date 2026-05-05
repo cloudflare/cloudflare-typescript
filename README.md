@@ -38,12 +38,13 @@ const client = new Cloudflare({
   apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
-const response = await client.cache.cacheReserve.clear({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  body: {},
+const zone = await client.zones.create({
+  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  name: 'example.com',
+  type: 'full',
 });
 
-console.log(response.id);
+console.log(zone.id);
 ```
 
 ### Request & Response types
@@ -58,16 +59,64 @@ const client = new Cloudflare({
   apiToken: process.env['CLOUDFLARE_API_TOKEN'], // This is the default and can be omitted
 });
 
-const params: Cloudflare.Cache.CacheReserveClearParams = {
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  body: {},
+const params: Cloudflare.ZoneCreateParams = {
+  account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+  name: 'example.com',
+  type: 'full',
 };
-const response: Cloudflare.Cache.CacheReserveClearResponse = await client.cache.cacheReserve.clear(
-  params,
-);
+const zone: Cloudflare.Zone = await client.zones.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed in many different forms:
+
+- `File` (or an object with the same structure)
+- a `fetch` `Response` (or an object with the same structure)
+- an `fs.ReadStream`
+- the return value of our `toFile` helper
+
+```ts
+import fs from 'fs';
+import Cloudflare, { toFile } from 'cloudflare';
+
+const client = new Cloudflare();
+
+// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
+await client.kv.namespaces.values.update('My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  namespace_id: '0f2ac74b498b48028cb68387c421e279',
+  value: fs.createReadStream('/path/to/file'),
+});
+
+// Or if you have the web `File` API you can pass a `File` instance:
+await client.kv.namespaces.values.update('My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  namespace_id: '0f2ac74b498b48028cb68387c421e279',
+  value: new File(['my bytes'], 'file'),
+});
+
+// You can also pass a `fetch` `Response`:
+await client.kv.namespaces.values.update('My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  namespace_id: '0f2ac74b498b48028cb68387c421e279',
+  value: await fetch('https://somesite/file'),
+});
+
+// Finally, if none of the above are convenient, you can use our `toFile` helper:
+await client.kv.namespaces.values.update('My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  namespace_id: '0f2ac74b498b48028cb68387c421e279',
+  value: await toFile(Buffer.from('my bytes'), 'file'),
+});
+await client.kv.namespaces.values.update('My-Key', {
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  namespace_id: '0f2ac74b498b48028cb68387c421e279',
+  value: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+});
+```
 
 ## Handling errors
 
@@ -77,11 +126,8 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.cache.cacheReserve
-  .clear({
-    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    body: {},
-  })
+const zone = await client.zones
+  .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
   .catch(async (err) => {
     if (err instanceof Cloudflare.APIError) {
       console.log(err.status); // 400
@@ -122,10 +168,7 @@ const client = new Cloudflare({
 });
 
 // Or, configure per-request:
-await client.cache.cacheReserve.clear({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  body: {},
-}, {
+await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   maxRetries: 5,
 });
 ```
@@ -142,10 +185,7 @@ const client = new Cloudflare({
 });
 
 // Override per-request:
-await client.cache.cacheReserve.clear({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  body: {},
-}, {
+await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -153,6 +193,37 @@ await client.cache.cacheReserve.clear({
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the Cloudflare API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllAccounts(params) {
+  const allAccounts = [];
+  // Automatically fetches more pages as needed.
+  for await (const account of client.accounts.list()) {
+    allAccounts.push(account);
+  }
+  return allAccounts;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.accounts.list();
+for (const account of page.result) {
+  console.log(account);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -162,26 +233,23 @@ This library supports tree shaking to reduce bundle size. Instead of importing t
 
 ```ts
 import { createClient } from 'cloudflare/tree-shakable';
-import { CacheReserveResource } from 'cloudflare/resources/cache/cache-reserve';
-import { BaseOriginPostQuantumEncryption } from 'cloudflare/resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
+import { Zones } from 'cloudflare/resources/zones/zones';
+import { BaseAccounts } from 'cloudflare/resources/accounts/accounts';
 
 const client = createClient({
   // Specify the resources you'd like to use ...
-  resources: [CacheReserveResource, BaseOriginPostQuantumEncryption],
+  resources: [Zones, BaseAccounts],
 });
 
 // ... then make API calls as usual.
-const response = await client.cache.cacheReserve.clear({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  body: {},
+const zone = await client.zones.create({
+  account: {},
+  name: 'example.com',
 });
-const originPostQuantumEncryption = await client.originPostQuantumEncryption.update({
-  zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-  value: 'preferred',
-});
+const account = await client.accounts.create({ name: 'name' });
 ```
 
-Each API resource has two versions, the full resource (e.g., `CacheReserveResource`) which includes all subresources, and the base resource (e.g., `BaseCacheReserveResource`) which does not.
+Each API resource has two versions, the full resource (e.g., `Zones`) which includes all subresources, and the base resource (e.g., `BaseZones`) which does not.
 
 The tree-shaken client is fully typed, so TypeScript will provide accurate autocomplete and prevent access to resources not included in your configuration.
 The `createClient` function automatically infers the correct type, but you can also use the `PartialCloudflare` type explicitly:
@@ -189,25 +257,25 @@ The `createClient` function automatically infers the correct type, but you can a
 ```ts
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
-import { BaseCacheReserveResource } from 'cloudflare/resources/cache/cache-reserve';
+import { BaseZones } from 'cloudflare/resources/zones/zones';
 
 // Explicit variable type
-const client: PartialCloudflare<{ cache: { cacheReserve: BaseCacheReserveResource } }> = createClient({
-  resources: [BaseCacheReserveResource],
+const client: PartialCloudflare<{ zones: BaseZones }> = createClient({
+  resources: [BaseZones],
   /* ... */
 });
 
 // Function parameter type
-async function main(client: PartialCloudflare<{ cache: { cacheReserve: BaseCacheReserveResource } }>) {
-  const response = await client.cache.cacheReserve.clear({
-    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    body: {},
+async function main(client: PartialCloudflare<{ zones: BaseZones }>) {
+  const zone = await client.zones.create({
+    account: {},
+    name: 'example.com',
   });
 }
 
-// Works with any client that has the cacheReserve resource
+// Works with any client that has the zones resource
 const treeShakableClient = createClient({
-  resources: [BaseCacheReserveResource],
+  resources: [BaseZones],
   /* ... */
 });
 const fullClient = new Cloudflare(/* ... */);
@@ -228,23 +296,25 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Cloudflare();
 
-const response = await client.cache.cacheReserve
-  .clear({
-    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    body: {},
+const response = await client.zones
+  .create({
+    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    name: 'example.com',
+    type: 'full',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.cache.cacheReserve
-  .clear({
-    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    body: {},
+const { data: zone, response: raw } = await client.zones
+  .create({
+    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    name: 'example.com',
+    type: 'full',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.id);
+console.log(zone.id);
 ```
 
 ### Logging
@@ -324,7 +394,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.cache.cacheReserve.clear({
+client.zones.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

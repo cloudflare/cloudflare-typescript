@@ -1,5 +1,42 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { BulkOperations, BaseBulkOperations } from './bulk-operations';
-export { Items, BaseItems } from './items';
-export { Lists, BaseLists } from './lists';
+export {
+  BulkOperations,
+  BaseBulkOperations,
+  type BulkOperationGetResponse,
+  type BulkOperationGetParams,
+} from './bulk-operations';
+export {
+  Items,
+  BaseItems,
+  type ListCursor,
+  type ListItem,
+  type ItemCreateResponse,
+  type ItemUpdateResponse,
+  type ItemListResponse,
+  type ItemDeleteResponse,
+  type ItemGetResponse,
+  type ItemCreateParams,
+  type ItemUpdateParams,
+  type ItemListParams,
+  type ItemDeleteParams,
+  type ItemGetParams,
+  type ItemListResponsesCursorPaginationAfter,
+} from './items';
+export {
+  Lists,
+  BaseLists,
+  type Hostname,
+  type ListsList,
+  type Redirect,
+  type ListCreateResponse,
+  type ListUpdateResponse,
+  type ListDeleteResponse,
+  type ListGetResponse,
+  type ListCreateParams,
+  type ListUpdateParams,
+  type ListListParams,
+  type ListDeleteParams,
+  type ListGetParams,
+  type ListsListsSinglePage,
+} from './lists';

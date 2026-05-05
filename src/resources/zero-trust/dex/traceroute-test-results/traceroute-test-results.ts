@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as NetworkPathAPI from './network-path';
-import { BaseNetworkPath, NetworkPath } from './network-path';
+import { BaseNetworkPath, NetworkPath, NetworkPathGetParams, NetworkPathGetResponse } from './network-path';
 
 export class BaseTracerouteTestResults extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dex', 'tracerouteTestResults'] = Object.freeze([
@@ -19,5 +19,10 @@ TracerouteTestResults.NetworkPath = NetworkPath;
 TracerouteTestResults.BaseNetworkPath = BaseNetworkPath;
 
 export declare namespace TracerouteTestResults {
-  export { NetworkPath as NetworkPath, BaseNetworkPath as BaseNetworkPath };
+  export {
+    NetworkPath as NetworkPath,
+    BaseNetworkPath as BaseNetworkPath,
+    type NetworkPathGetResponse as NetworkPathGetResponse,
+    type NetworkPathGetParams as NetworkPathGetParams,
+  };
 }

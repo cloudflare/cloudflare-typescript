@@ -1,4 +1,42 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Instances, BaseInstances } from './instances/index';
-export { Namespaces, BaseNamespaces } from './namespaces';
+export {
+  Instances,
+  BaseInstances,
+  type InstanceCreateResponse,
+  type InstanceUpdateResponse,
+  type InstanceListResponse,
+  type InstanceDeleteResponse,
+  type InstanceChatCompletionsResponse,
+  type InstanceReadResponse,
+  type InstanceSearchResponse,
+  type InstanceStatsResponse,
+  type InstanceCreateParams,
+  type InstanceUpdateParams,
+  type InstanceListParams,
+  type InstanceDeleteParams,
+  type InstanceChatCompletionsParams,
+  type InstanceReadParams,
+  type InstanceSearchParams,
+  type InstanceStatsParams,
+  type InstanceListResponsesV4PagePaginationArray,
+} from './instances/index';
+export {
+  Namespaces,
+  BaseNamespaces,
+  type NamespaceCreateResponse,
+  type NamespaceUpdateResponse,
+  type NamespaceListResponse,
+  type NamespaceDeleteResponse,
+  type NamespaceChatCompletionsResponse,
+  type NamespaceReadResponse,
+  type NamespaceSearchResponse,
+  type NamespaceCreateParams,
+  type NamespaceUpdateParams,
+  type NamespaceListParams,
+  type NamespaceDeleteParams,
+  type NamespaceChatCompletionsParams,
+  type NamespaceReadParams,
+  type NamespaceSearchParams,
+  type NamespaceListResponsesV4PagePaginationArray,
+} from './namespaces';

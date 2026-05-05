@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../core/resource';
 import * as SmartRoutingAPI from './smart-routing';
-import { BaseSmartRouting, SmartRouting } from './smart-routing';
+import {
+  BaseSmartRouting,
+  SmartRouting,
+  SmartRoutingEditParams,
+  SmartRoutingEditResponse,
+  SmartRoutingGetParams,
+  SmartRoutingGetResponse,
+} from './smart-routing';
 import * as TieredCachingAPI from './tiered-caching';
 import {
   BaseTieredCaching,
@@ -27,7 +34,14 @@ Argo.TieredCaching = TieredCaching;
 Argo.BaseTieredCaching = BaseTieredCaching;
 
 export declare namespace Argo {
-  export { SmartRouting as SmartRouting, BaseSmartRouting as BaseSmartRouting };
+  export {
+    SmartRouting as SmartRouting,
+    BaseSmartRouting as BaseSmartRouting,
+    type SmartRoutingEditResponse as SmartRoutingEditResponse,
+    type SmartRoutingGetResponse as SmartRoutingGetResponse,
+    type SmartRoutingEditParams as SmartRoutingEditParams,
+    type SmartRoutingGetParams as SmartRoutingGetParams,
+  };
 
   export {
     TieredCaching as TieredCaching,

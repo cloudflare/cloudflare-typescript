@@ -2,21 +2,155 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TablesAPI from './tables/tables';
-import { BaseTables, Tables } from './tables/tables';
+import { BaseTables, TableListParams, TableListResponse, Tables } from './tables/tables';
+import { APIPromise } from '../../../core/api-promise';
+import { RequestOptions } from '../../../internal/request-options';
+import { path } from '../../../internal/utils/path';
 
 export class BaseNamespaces extends APIResource {
   static override readonly _key: readonly ['r2DataCatalog', 'namespaces'] = Object.freeze([
     'r2DataCatalog',
     'namespaces',
   ] as const);
+
+  /**
+   * Returns a list of namespaces in the specified R2 catalog. Supports hierarchical
+   * filtering and pagination for efficient traversal of large namespace hierarchies.
+   *
+   * @example
+   * ```ts
+   * const namespaces =
+   *   await client.r2DataCatalog.namespaces.list(
+   *     'my-data-bucket',
+   *     { account_id: '0123456789abcdef0123456789abcdef' },
+   *   );
+   * ```
+   */
+  list(
+    bucketName: string,
+    params: NamespaceListParams,
+    options?: RequestOptions,
+  ): APIPromise<NamespaceListResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/r2-catalog/${bucketName}/namespaces`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: NamespaceListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Namespaces extends BaseNamespaces {
   tables: TablesAPI.Tables = new TablesAPI.Tables(this._client);
+}
+
+/**
+ * Contains the list of namespaces with optional pagination.
+ */
+export interface NamespaceListResponse {
+  /**
+   * Lists namespaces in the catalog.
+   */
+  namespaces: Array<Array<string>>;
+
+  /**
+   * Contains detailed metadata for each namespace when return_details is true. Each
+   * object includes the namespace, UUID, and timestamps.
+   */
+  details?: Array<NamespaceListResponse.Detail> | null;
+
+  /**
+   * Contains UUIDs for each namespace when return_uuids is true. The order
+   * corresponds to the namespaces array.
+   */
+  namespace_uuids?: Array<string> | null;
+
+  /**
+   * Use this opaque token to fetch the next page of results. A null or absent value
+   * indicates the last page.
+   */
+  next_page_token?: string | null;
+}
+
+export namespace NamespaceListResponse {
+  /**
+   * Contains namespace with metadata details.
+   */
+  export interface Detail {
+    /**
+     * Specifies the hierarchical namespace parts as an array of strings. For example,
+     * ["bronze", "analytics"] represents the namespace "bronze.analytics".
+     */
+    namespace: Array<string>;
+
+    /**
+     * Contains the UUID that persists across renames.
+     */
+    namespace_uuid: string;
+
+    /**
+     * Indicates the creation timestamp in ISO 8601 format.
+     */
+    created_at?: string | null;
+
+    /**
+     * Shows the last update timestamp in ISO 8601 format. Null if never updated.
+     */
+    updated_at?: string | null;
+  }
+}
+
+export interface NamespaceListParams {
+  /**
+   * Path param: Use this to identify the account.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Maximum number of namespaces to return per page. Defaults to 100,
+   * maximum 1000.
+   */
+  page_size?: number;
+
+  /**
+   * Query param: Opaque pagination token from a previous response. Use this to fetch
+   * the next page of results.
+   */
+  page_token?: string;
+
+  /**
+   * Query param: Parent namespace to filter by. Only returns direct children of this
+   * namespace. For nested namespaces, use %1F as separator (e.g.,
+   * "bronze%1Fanalytics"). Omit this parameter to list top-level namespaces.
+   */
+  parent?: string;
+
+  /**
+   * Query param: Whether to include additional metadata (timestamps). When true,
+   * response includes created_at and updated_at arrays.
+   */
+  return_details?: boolean;
+
+  /**
+   * Query param: Whether to include namespace UUIDs in the response. Set to true to
+   * receive the namespace_uuids array.
+   */
+  return_uuids?: boolean;
 }
 
 Namespaces.Tables = Tables;
 Namespaces.BaseTables = BaseTables;
 
 export declare namespace Namespaces {
-  export { Tables as Tables, BaseTables as BaseTables };
+  export {
+    type NamespaceListResponse as NamespaceListResponse,
+    type NamespaceListParams as NamespaceListParams,
+  };
+
+  export {
+    Tables as Tables,
+    BaseTables as BaseTables,
+    type TableListResponse as TableListResponse,
+    type TableListParams as TableListParams,
+  };
 }

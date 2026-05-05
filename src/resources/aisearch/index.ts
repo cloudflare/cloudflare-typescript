@@ -1,6 +1,58 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { AISearch, BaseAISearch } from './aisearch';
-export { Instances, BaseInstances } from './instances/index';
-export { Namespaces, BaseNamespaces } from './namespaces/index';
-export { Tokens, BaseTokens } from './tokens';
+export {
+  Instances,
+  BaseInstances,
+  type InstanceCreateResponse,
+  type InstanceUpdateResponse,
+  type InstanceListResponse,
+  type InstanceDeleteResponse,
+  type InstanceChatCompletionsResponse,
+  type InstanceReadResponse,
+  type InstanceSearchResponse,
+  type InstanceStatsResponse,
+  type InstanceCreateParams,
+  type InstanceUpdateParams,
+  type InstanceListParams,
+  type InstanceDeleteParams,
+  type InstanceChatCompletionsParams,
+  type InstanceReadParams,
+  type InstanceSearchParams,
+  type InstanceStatsParams,
+  type InstanceListResponsesV4PagePaginationArray,
+} from './instances/index';
+export {
+  Namespaces,
+  BaseNamespaces,
+  type NamespaceCreateResponse,
+  type NamespaceUpdateResponse,
+  type NamespaceListResponse,
+  type NamespaceDeleteResponse,
+  type NamespaceChatCompletionsResponse,
+  type NamespaceReadResponse,
+  type NamespaceSearchResponse,
+  type NamespaceCreateParams,
+  type NamespaceUpdateParams,
+  type NamespaceListParams,
+  type NamespaceDeleteParams,
+  type NamespaceChatCompletionsParams,
+  type NamespaceReadParams,
+  type NamespaceSearchParams,
+  type NamespaceListResponsesV4PagePaginationArray,
+} from './namespaces/index';
+export {
+  Tokens,
+  BaseTokens,
+  type TokenCreateResponse,
+  type TokenUpdateResponse,
+  type TokenListResponse,
+  type TokenDeleteResponse,
+  type TokenReadResponse,
+  type TokenCreateParams,
+  type TokenUpdateParams,
+  type TokenListParams,
+  type TokenDeleteParams,
+  type TokenReadParams,
+  type TokenListResponsesV4PagePaginationArray,
+} from './tokens';

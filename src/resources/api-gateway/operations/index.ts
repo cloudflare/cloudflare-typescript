@@ -1,5 +1,50 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Labels, BaseLabels } from './labels';
-export { Operations, BaseOperations } from './operations';
-export { SchemaValidation, BaseSchemaValidation } from './schema-validation';
+export {
+  Labels,
+  BaseLabels,
+  type LabelCreateResponse,
+  type LabelUpdateResponse,
+  type LabelDeleteResponse,
+  type LabelBulkCreateResponse,
+  type LabelBulkDeleteResponse,
+  type LabelBulkUpdateResponse,
+  type LabelCreateParams,
+  type LabelUpdateParams,
+  type LabelDeleteParams,
+  type LabelBulkCreateParams,
+  type LabelBulkDeleteParams,
+  type LabelBulkUpdateParams,
+  type LabelBulkCreateResponsesSinglePage,
+  type LabelBulkDeleteResponsesSinglePage,
+  type LabelBulkUpdateResponsesSinglePage,
+} from './labels';
+export {
+  Operations,
+  BaseOperations,
+  type APIShield,
+  type OperationCreateResponse,
+  type OperationListResponse,
+  type OperationDeleteResponse,
+  type OperationBulkCreateResponse,
+  type OperationBulkDeleteResponse,
+  type OperationGetResponse,
+  type OperationCreateParams,
+  type OperationListParams,
+  type OperationDeleteParams,
+  type OperationBulkCreateParams,
+  type OperationBulkDeleteParams,
+  type OperationGetParams,
+  type OperationListResponsesV4PagePaginationArray,
+  type OperationBulkCreateResponsesSinglePage,
+} from './operations';
+export {
+  SchemaValidation,
+  BaseSchemaValidation,
+  type SettingsMultipleRequest,
+  type SchemaValidationUpdateResponse,
+  type SchemaValidationGetResponse,
+  type SchemaValidationUpdateParams,
+  type SchemaValidationEditParams,
+  type SchemaValidationGetParams,
+} from './schema-validation';

@@ -2,9 +2,26 @@
 
 import { APIResource } from '../../core/resource';
 import * as TemporaryCredentialsAPI from './temporary-credentials';
-import { BaseTemporaryCredentials, TemporaryCredentials } from './temporary-credentials';
+import {
+  BaseTemporaryCredentials,
+  TemporaryCredential,
+  TemporaryCredentialCreateParams,
+  TemporaryCredentialCreateResponse,
+  TemporaryCredentials,
+} from './temporary-credentials';
 import * as BucketsAPI from './buckets/buckets';
-import { BaseBuckets, Buckets } from './buckets/buckets';
+import {
+  BaseBuckets,
+  Bucket,
+  BucketCreateParams,
+  BucketDeleteParams,
+  BucketDeleteResponse,
+  BucketEditParams,
+  BucketGetParams,
+  BucketListParams,
+  BucketListResponse,
+  Buckets,
+} from './buckets/buckets';
 import * as SuperSlurperAPI from './super-slurper/super-slurper';
 import { BaseSuperSlurper, SuperSlurper } from './super-slurper/super-slurper';
 
@@ -26,11 +43,25 @@ R2.SuperSlurper = SuperSlurper;
 R2.BaseSuperSlurper = BaseSuperSlurper;
 
 export declare namespace R2 {
-  export { Buckets as Buckets, BaseBuckets as BaseBuckets };
+  export {
+    Buckets as Buckets,
+    BaseBuckets as BaseBuckets,
+    type Bucket as Bucket,
+    type BucketListResponse as BucketListResponse,
+    type BucketDeleteResponse as BucketDeleteResponse,
+    type BucketCreateParams as BucketCreateParams,
+    type BucketListParams as BucketListParams,
+    type BucketDeleteParams as BucketDeleteParams,
+    type BucketEditParams as BucketEditParams,
+    type BucketGetParams as BucketGetParams,
+  };
 
   export {
     TemporaryCredentials as TemporaryCredentials,
     BaseTemporaryCredentials as BaseTemporaryCredentials,
+    type TemporaryCredential as TemporaryCredential,
+    type TemporaryCredentialCreateResponse as TemporaryCredentialCreateResponse,
+    type TemporaryCredentialCreateParams as TemporaryCredentialCreateParams,
   };
 
   export { SuperSlurper as SuperSlurper, BaseSuperSlurper as BaseSuperSlurper };

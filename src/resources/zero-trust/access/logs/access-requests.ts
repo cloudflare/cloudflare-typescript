@@ -1,6 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as SCIMAPI from './scim/scim';
+import { APIPromise } from '../../../../core/api-promise';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class BaseAccessRequests extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'access', 'logs', 'accessRequests'] = Object.freeze([
@@ -9,5 +13,153 @@ export class BaseAccessRequests extends APIResource {
     'logs',
     'accessRequests',
   ] as const);
+
+  /**
+   * Gets a list of Access authentication audit logs for an account.
+   *
+   * @example
+   * ```ts
+   * const accessRequests =
+   *   await client.zeroTrust.access.logs.accessRequests.list({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
+   */
+  list(params: AccessRequestListParams, options?: RequestOptions): APIPromise<AccessRequestListResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/access/logs/access_requests`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: AccessRequestListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class AccessRequests extends BaseAccessRequests {}
+
+export type AccessRequestListResponse = Array<SCIMAPI.AccessRequest>;
+
+export interface AccessRequestListParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Operator for the `allowed` filter.
+   */
+  allowedOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Operator for the `app_type` filter.
+   */
+  app_typeOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Operator for the `app_uid` filter.
+   */
+  app_uidOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Operator for the `country_code` filter.
+   */
+  country_codeOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: The chronological sorting order for the logs.
+   */
+  direction?: 'desc' | 'asc';
+
+  /**
+   * Query param: Filter by user email. Match mode is controlled by `emailOp`
+   * (preferred) or the legacy `email_exact` flag.
+   *
+   * - Default (no `emailOp`, `email_exact=false` or unset): substring match —
+   *   `email=@example.com` returns all events with that domain.
+   * - Exact match: set `emailOp=eq` (preferred) or `email_exact=true` — e.g.
+   *   `email=user@example.com&email_exact=true` returns only that user.
+   * - Explicit substring match: set `emailOp=contains` (without `email_exact=true`).
+   *   When both are set, `email_exact=true` takes precedence and the match is exact.
+   * - Exclusion: set `emailOp=neq`. With `email_exact=true` this is an exact-value
+   *   exclusion; without it, a fuzzy substring exclusion.
+   */
+  email?: string;
+
+  /**
+   * Query param: When true, `email` is matched exactly instead of substring
+   * matching.
+   */
+  email_exact?: boolean;
+
+  /**
+   * Query param: Operator for the `email` filter. `contains` performs a substring
+   * (case-sensitive) match. When `email_exact=true` is also set, `email_exact` takes
+   * precedence and `contains` is ignored.
+   */
+  emailOp?: 'eq' | 'neq' | 'contains';
+
+  /**
+   * Query param: Comma-separated list of fields to include in the response. When
+   * omitted, all fields are returned.
+   */
+  fields?: string;
+
+  /**
+   * Query param: Operator for the `idp` filter.
+   */
+  idpOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: The maximum number of log entries to retrieve.
+   */
+  limit?: number;
+
+  /**
+   * Query param: Operator for the `non_identity` filter.
+   */
+  non_identityOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: Page number of results.
+   */
+  page?: number;
+
+  /**
+   * Query param: Number of results per page.
+   */
+  per_page?: number;
+
+  /**
+   * Query param: Operator for the `ray_id` filter.
+   */
+  ray_idOp?: 'eq' | 'neq';
+
+  /**
+   * Query param: The earliest event timestamp to query.
+   */
+  since?: string;
+
+  /**
+   * Query param: The latest event timestamp to query.
+   */
+  until?: string;
+
+  /**
+   * Query param: Deprecated. Accepted for backward compatibility but no longer
+   * applied as a filter. Use `email` instead.
+   */
+  user_id?: string;
+
+  /**
+   * Query param: Deprecated. Accepted for backward compatibility but no longer
+   * applied as a filter (the `user_id` parameter is itself deprecated).
+   */
+  user_idOp?: 'eq' | 'neq';
+}
+
+export declare namespace AccessRequests {
+  export {
+    type AccessRequestListResponse as AccessRequestListResponse,
+    type AccessRequestListParams as AccessRequestListParams,
+  };
+}

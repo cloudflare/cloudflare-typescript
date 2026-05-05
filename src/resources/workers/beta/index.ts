@@ -1,4 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Beta, BaseBeta } from './beta';
-export { Workers, BaseWorkers } from './workers/index';
+export {
+  Workers,
+  BaseWorkers,
+  type Worker,
+  type WorkerDeleteResponse,
+  type WorkerCreateParams,
+  type WorkerUpdateParams,
+  type WorkerListParams,
+  type WorkerDeleteParams,
+  type WorkerEditParams,
+  type WorkerGetParams,
+  type WorkersV4PagePaginationArray,
+} from './workers/index';

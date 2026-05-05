@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -120,6 +119,11 @@ export type CacheReserve = 'cache_reserve';
 export type CacheReserveClear = 'cache_reserve_clear';
 
 /**
+ * The current state of the Cache Reserve Clear operation.
+ */
+export type State = 'In-progress' | 'Completed';
+
+/**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
  * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
  * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -139,7 +143,7 @@ export interface CacheReserveClearResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: 'In-progress' | 'Completed';
+  state: State;
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -216,7 +220,7 @@ export interface CacheReserveStatusResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: 'In-progress' | 'Completed';
+  state: State;
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -233,7 +237,7 @@ export interface CacheReserveClearParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 
   /**
    * Body param
@@ -245,7 +249,7 @@ export interface CacheReserveEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Value of the Cache Reserve zone setting.
@@ -257,20 +261,21 @@ export interface CacheReserveGetParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export interface CacheReserveStatusParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export declare namespace CacheReserveResource {
   export {
     type CacheReserve as CacheReserve,
     type CacheReserveClear as CacheReserveClear,
+    type State as State,
     type CacheReserveClearResponse as CacheReserveClearResponse,
     type CacheReserveEditResponse as CacheReserveEditResponse,
     type CacheReserveGetResponse as CacheReserveGetResponse,

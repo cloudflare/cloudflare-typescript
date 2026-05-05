@@ -2,7 +2,15 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ConfigAPI from './config';
-import { BaseConfig, Config } from './config';
+import {
+  BaseConfig,
+  CmbConfig,
+  Config,
+  ConfigCreateParams,
+  ConfigDeleteParams,
+  ConfigDeleteResponse,
+  ConfigGetParams,
+} from './config';
 
 export class BaseCmb extends APIResource {
   static override readonly _key: readonly ['logs', 'control', 'cmb'] = Object.freeze([
@@ -19,5 +27,13 @@ Cmb.Config = Config;
 Cmb.BaseConfig = BaseConfig;
 
 export declare namespace Cmb {
-  export { Config as Config, BaseConfig as BaseConfig };
+  export {
+    Config as Config,
+    BaseConfig as BaseConfig,
+    type CmbConfig as CmbConfig,
+    type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigCreateParams as ConfigCreateParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
+    type ConfigGetParams as ConfigGetParams,
+  };
 }

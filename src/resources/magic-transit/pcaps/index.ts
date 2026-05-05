@@ -1,5 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Download, BaseDownload } from './download';
-export { Ownership, BaseOwnership } from './ownership';
-export { PCAPs, BasePCAPs } from './pcaps';
+export { Download, BaseDownload, type DownloadGetParams } from './download';
+export {
+  OwnershipResource,
+  BaseOwnershipResource,
+  type Ownership,
+  type OwnershipCreateParams,
+  type OwnershipDeleteParams,
+  type OwnershipGetParams,
+  type OwnershipValidateParams,
+  type OwnershipsSinglePage,
+} from './ownership';
+export {
+  PCAPs,
+  BasePCAPs,
+  type PCAP,
+  type PCAPFilter,
+  type PCAPCreateResponse,
+  type PCAPListResponse,
+  type PCAPGetResponse,
+  type PCAPCreateParams,
+  type PCAPListParams,
+  type PCAPGetParams,
+  type PCAPStopParams,
+  type PCAPListResponsesSinglePage,
+} from './pcaps';

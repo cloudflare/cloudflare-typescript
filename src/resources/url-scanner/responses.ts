@@ -1,11 +1,51 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class BaseResponses extends APIResource {
   static override readonly _key: readonly ['urlScanner', 'responses'] = Object.freeze([
     'urlScanner',
     'responses',
   ] as const);
+
+  /**
+   * Returns the raw response of the network request. Find the `response_id` in the
+   * `data.requests.response.hash`.
+   *
+   * @example
+   * ```ts
+   * const response = await client.urlScanner.responses.get(
+   *   'response_id',
+   *   { account_id: 'account_id' },
+   * );
+   * ```
+   */
+  get(responseID: string, params: ResponseGetParams, options?: RequestOptions): APIPromise<string> {
+    const { account_id } = params;
+    return this._client.get(path`/accounts/${account_id}/urlscanner/v2/responses/${responseID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: 'text/plain' }, options?.headers]),
+    });
+  }
 }
 export class Responses extends BaseResponses {}
+
+/**
+ * Web resource or image.
+ */
+export type ResponseGetResponse = string;
+
+export interface ResponseGetParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
+export declare namespace Responses {
+  export { type ResponseGetResponse as ResponseGetResponse, type ResponseGetParams as ResponseGetParams };
+}
