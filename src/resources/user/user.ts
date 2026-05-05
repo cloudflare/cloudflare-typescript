@@ -76,7 +76,12 @@ export interface UserEditResponse {
   /**
    * Identifier of the user.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * Current email address of the user.
+   */
+  email: string;
 
   /**
    * Lists the betas that the user is participating in.
@@ -147,7 +152,12 @@ export interface UserGetResponse {
   /**
    * Identifier of the user.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * Current email address of the user.
+   */
+  email: string;
 
   /**
    * Lists the betas that the user is participating in.
