@@ -1,8 +1,73 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AccessRules, BaseAccessRules } from './access-rules';
+export {
+  AccessRules,
+  BaseAccessRules,
+  type AccessRuleCIDRConfiguration,
+  type AccessRuleIPConfiguration,
+  type ASNConfiguration,
+  type CountryConfiguration,
+  type IPV6Configuration,
+  type AccessRuleCreateResponse,
+  type AccessRuleListResponse,
+  type AccessRuleDeleteResponse,
+  type AccessRuleEditResponse,
+  type AccessRuleGetResponse,
+  type AccessRuleCreateParams,
+  type AccessRuleListParams,
+  type AccessRuleDeleteParams,
+  type AccessRuleEditParams,
+  type AccessRuleGetParams,
+  type AccessRuleListResponsesV4PagePaginationArray,
+} from './access-rules';
 export { Firewall, BaseFirewall } from './firewall';
-export { Lockdowns, BaseLockdowns } from './lockdowns';
-export { Rules, BaseRules } from './rules';
-export { UARules, BaseUARules } from './ua-rules';
+export {
+  Lockdowns,
+  BaseLockdowns,
+  type Configuration,
+  type Lockdown,
+  type LockdownCIDRConfiguration,
+  type LockdownIPConfiguration,
+  type LockdownURL,
+  type LockdownDeleteResponse,
+  type LockdownCreateParams,
+  type LockdownUpdateParams,
+  type LockdownListParams,
+  type LockdownDeleteParams,
+  type LockdownGetParams,
+  type LockdownsV4PagePaginationArray,
+} from './lockdowns';
+export {
+  Rules,
+  BaseRules,
+  type DeletedFilter,
+  type FirewallRule,
+  type Product,
+  type RuleCreateParams,
+  type RuleUpdateParams,
+  type RuleListParams,
+  type RuleDeleteParams,
+  type RuleBulkDeleteParams,
+  type RuleBulkEditParams,
+  type RuleBulkUpdateParams,
+  type RuleEditParams,
+  type RuleGetParams,
+  type FirewallRulesSinglePage,
+  type FirewallRulesV4PagePaginationArray,
+} from './rules';
+export {
+  UARules,
+  BaseUARules,
+  type UARuleCreateResponse,
+  type UARuleUpdateResponse,
+  type UARuleListResponse,
+  type UARuleDeleteResponse,
+  type UARuleGetResponse,
+  type UARuleCreateParams,
+  type UARuleUpdateParams,
+  type UARuleListParams,
+  type UARuleDeleteParams,
+  type UARuleGetParams,
+  type UARuleListResponsesV4PagePaginationArray,
+} from './ua-rules';
 export { WAF, BaseWAF } from './waf/index';

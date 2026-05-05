@@ -2,16 +2,178 @@
 
 export { AIControls, BaseAIControls } from './ai-controls/index';
 export { Access, BaseAccess } from './access';
-export { Applications, BaseApplications } from './applications/index';
-export { Bookmarks, BaseBookmarks } from './bookmarks';
-export { Certificates, BaseCertificates } from './certificates/index';
-export { CustomPages, BaseCustomPages } from './custom-pages';
-export { GatewayCA, BaseGatewayCA } from './gateway-ca';
-export { Groups, BaseGroups } from './groups';
+export {
+  Applications,
+  BaseApplications,
+  type AllowedHeaders,
+  type AllowedIdPs,
+  type AllowedMethods,
+  type AllowedOrigins,
+  type AppID,
+  type Application,
+  type ApplicationPolicy,
+  type ApplicationSCIMConfig,
+  type ApplicationType,
+  type CORSHeaders,
+  type Decision,
+  type OIDCSaaSApp,
+  type SaaSAppNameIDFormat,
+  type SAMLSaaSApp,
+  type SCIMConfigAuthenticationHTTPBasic,
+  type SCIMConfigAuthenticationOAuthBearerToken,
+  type SCIMConfigAuthenticationOauth2,
+  type SCIMConfigMapping,
+  type SelfHostedDomains,
+  type ApplicationCreateResponse,
+  type ApplicationUpdateResponse,
+  type ApplicationListResponse,
+  type ApplicationDeleteResponse,
+  type ApplicationGetResponse,
+  type ApplicationRevokeTokensResponse,
+  type ApplicationCreateParams,
+  type ApplicationUpdateParams,
+  type ApplicationListParams,
+  type ApplicationDeleteParams,
+  type ApplicationGetParams,
+  type ApplicationRevokeTokensParams,
+  type ApplicationListResponsesV4PagePaginationArray,
+} from './applications/index';
+export {
+  Bookmarks,
+  BaseBookmarks,
+  type Bookmark,
+  type BookmarkDeleteResponse,
+  type BookmarkCreateParams,
+  type BookmarkUpdateParams,
+  type BookmarkListParams,
+  type BookmarkDeleteParams,
+  type BookmarkGetParams,
+  type BookmarksSinglePage,
+} from './bookmarks';
+export {
+  Certificates,
+  BaseCertificates,
+  type AssociatedHostnames,
+  type Certificate,
+  type CertificateDeleteResponse,
+  type CertificateCreateParams,
+  type CertificateUpdateParams,
+  type CertificateListParams,
+  type CertificateDeleteParams,
+  type CertificateGetParams,
+  type CertificatesV4PagePaginationArray,
+} from './certificates/index';
+export {
+  CustomPages,
+  BaseCustomPages,
+  type CustomPage,
+  type CustomPageWithoutHTML,
+  type CustomPageDeleteResponse,
+  type CustomPageCreateParams,
+  type CustomPageUpdateParams,
+  type CustomPageListParams,
+  type CustomPageDeleteParams,
+  type CustomPageGetParams,
+  type CustomPageWithoutHTMLsV4PagePaginationArray,
+} from './custom-pages';
+export {
+  GatewayCA,
+  BaseGatewayCA,
+  type GatewayCACreateResponse,
+  type GatewayCAListResponse,
+  type GatewayCADeleteResponse,
+  type GatewayCACreateParams,
+  type GatewayCAListParams,
+  type GatewayCADeleteParams,
+  type GatewayCAListResponsesSinglePage,
+} from './gateway-ca';
+export {
+  Groups,
+  BaseGroups,
+  type ZeroTrustGroup,
+  type GroupCreateResponse,
+  type GroupUpdateResponse,
+  type GroupListResponse,
+  type GroupDeleteResponse,
+  type GroupGetResponse,
+  type GroupCreateParams,
+  type GroupUpdateParams,
+  type GroupListParams,
+  type GroupDeleteParams,
+  type GroupGetParams,
+  type ZeroTrustGroupsV4PagePaginationArray,
+  type GroupListResponsesV4PagePaginationArray,
+} from './groups';
 export { Infrastructure, BaseInfrastructure } from './infrastructure/index';
-export { Keys, BaseKeys } from './keys';
+export {
+  Keys,
+  BaseKeys,
+  type KeyUpdateResponse,
+  type KeyGetResponse,
+  type KeyRotateResponse,
+  type KeyUpdateParams,
+  type KeyGetParams,
+  type KeyRotateParams,
+} from './keys';
 export { Logs, BaseLogs } from './logs/index';
-export { Policies, BasePolicies } from './policies';
-export { ServiceTokens, BaseServiceTokens } from './service-tokens';
-export { Tags, BaseTags } from './tags';
-export { Users, BaseUsers } from './users/index';
+export {
+  Policies,
+  BasePolicies,
+  type ApprovalGroup,
+  type Policy,
+  type PolicyCreateResponse,
+  type PolicyUpdateResponse,
+  type PolicyListResponse,
+  type PolicyDeleteResponse,
+  type PolicyGetResponse,
+  type PolicyCreateParams,
+  type PolicyUpdateParams,
+  type PolicyListParams,
+  type PolicyDeleteParams,
+  type PolicyGetParams,
+  type PolicyListResponsesV4PagePaginationArray,
+} from './policies';
+export {
+  ServiceTokens,
+  BaseServiceTokens,
+  type ServiceToken,
+  type ServiceTokenCreateResponse,
+  type ServiceTokenRotateResponse,
+  type ServiceTokenCreateParams,
+  type ServiceTokenUpdateParams,
+  type ServiceTokenListParams,
+  type ServiceTokenDeleteParams,
+  type ServiceTokenGetParams,
+  type ServiceTokenRefreshParams,
+  type ServiceTokenRotateParams,
+  type ServiceTokensV4PagePaginationArray,
+} from './service-tokens';
+export {
+  Tags,
+  BaseTags,
+  type Tag,
+  type TagDeleteResponse,
+  type TagCreateParams,
+  type TagUpdateParams,
+  type TagListParams,
+  type TagDeleteParams,
+  type TagGetParams,
+  type TagsV4PagePaginationArray,
+} from './tags';
+export {
+  Users,
+  BaseUsers,
+  type AccessUser,
+  type UserCreateResponse,
+  type UserUpdateResponse,
+  type UserListResponse,
+  type UserDeleteResponse,
+  type UserGetResponse,
+  type UserCreateParams,
+  type UserUpdateParams,
+  type UserListParams,
+  type UserDeleteParams,
+  type UserGetParams,
+  type AccessUsersV4PagePaginationArray,
+  type UserListResponsesV4PagePaginationArray,
+} from './users/index';

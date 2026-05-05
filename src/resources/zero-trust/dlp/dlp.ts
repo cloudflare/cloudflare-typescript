@@ -2,21 +2,71 @@
 
 import { APIResource } from '../../../core/resource';
 import * as LimitsAPI from './limits';
-import { BaseLimits, Limits } from './limits';
+import { BaseLimits, LimitListParams, LimitListResponse, Limits } from './limits';
 import * as PatternsAPI from './patterns';
-import { BasePatterns, Patterns } from './patterns';
+import { BasePatterns, PatternValidateParams, PatternValidateResponse, Patterns } from './patterns';
 import * as PayloadLogsAPI from './payload-logs';
-import { BasePayloadLogs, PayloadLogs } from './payload-logs';
+import {
+  BasePayloadLogs,
+  PayloadLogGetParams,
+  PayloadLogGetResponse,
+  PayloadLogUpdateParams,
+  PayloadLogUpdateResponse,
+  PayloadLogs,
+} from './payload-logs';
 import * as SettingsAPI from './settings';
-import { BaseSettings, Settings } from './settings';
+import {
+  BaseSettings,
+  DLPSettings,
+  SettingDeleteParams,
+  SettingEditParams,
+  SettingGetParams,
+  SettingUpdateParams,
+  Settings,
+} from './settings';
 import * as DatasetsAPI from './datasets/datasets';
-import { BaseDatasets, Datasets } from './datasets/datasets';
+import {
+  BaseDatasets,
+  Dataset,
+  DatasetArray,
+  DatasetCreateParams,
+  DatasetCreation,
+  DatasetDeleteParams,
+  DatasetGetParams,
+  DatasetListParams,
+  DatasetUpdateParams,
+  Datasets,
+  DatasetsSinglePage,
+} from './datasets/datasets';
 import * as EmailAPI from './email/email';
 import { BaseEmail, Email } from './email/email';
 import * as EntriesAPI from './entries/entries';
-import { BaseEntries, Entries } from './entries/entries';
+import {
+  BaseEntries,
+  Entries,
+  EntryCreateParams,
+  EntryCreateResponse,
+  EntryDeleteParams,
+  EntryDeleteResponse,
+  EntryGetParams,
+  EntryGetResponse,
+  EntryListParams,
+  EntryListResponse,
+  EntryListResponsesSinglePage,
+  EntryUpdateParams,
+  EntryUpdateResponse,
+} from './entries/entries';
 import * as ProfilesAPI from './profiles/profiles';
-import { BaseProfiles, Profiles } from './profiles/profiles';
+import {
+  BaseProfiles,
+  ContextAwareness,
+  Profile,
+  ProfileGetParams,
+  ProfileListParams,
+  Profiles,
+  ProfilesSinglePage,
+  SkipConfiguration,
+} from './profiles/profiles';
 
 export class BaseDLP extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dlp'] = Object.freeze(['zeroTrust', 'dlp'] as const);
@@ -50,19 +100,79 @@ DLP.Entries = Entries;
 DLP.BaseEntries = BaseEntries;
 
 export declare namespace DLP {
-  export { Datasets as Datasets, BaseDatasets as BaseDatasets };
+  export {
+    Datasets as Datasets,
+    BaseDatasets as BaseDatasets,
+    type Dataset as Dataset,
+    type DatasetArray as DatasetArray,
+    type DatasetCreation as DatasetCreation,
+    type DatasetsSinglePage as DatasetsSinglePage,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
 
-  export { Patterns as Patterns, BasePatterns as BasePatterns };
+  export {
+    Patterns as Patterns,
+    BasePatterns as BasePatterns,
+    type PatternValidateResponse as PatternValidateResponse,
+    type PatternValidateParams as PatternValidateParams,
+  };
 
-  export { PayloadLogs as PayloadLogs, BasePayloadLogs as BasePayloadLogs };
+  export {
+    PayloadLogs as PayloadLogs,
+    BasePayloadLogs as BasePayloadLogs,
+    type PayloadLogUpdateResponse as PayloadLogUpdateResponse,
+    type PayloadLogGetResponse as PayloadLogGetResponse,
+    type PayloadLogUpdateParams as PayloadLogUpdateParams,
+    type PayloadLogGetParams as PayloadLogGetParams,
+  };
 
-  export { Settings as Settings, BaseSettings as BaseSettings };
+  export {
+    Settings as Settings,
+    BaseSettings as BaseSettings,
+    type DLPSettings as DLPSettings,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingDeleteParams as SettingDeleteParams,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 
   export { Email as Email, BaseEmail as BaseEmail };
 
-  export { Profiles as Profiles, BaseProfiles as BaseProfiles };
+  export {
+    Profiles as Profiles,
+    BaseProfiles as BaseProfiles,
+    type ContextAwareness as ContextAwareness,
+    type Profile as Profile,
+    type SkipConfiguration as SkipConfiguration,
+    type ProfilesSinglePage as ProfilesSinglePage,
+    type ProfileListParams as ProfileListParams,
+    type ProfileGetParams as ProfileGetParams,
+  };
 
-  export { Limits as Limits, BaseLimits as BaseLimits };
+  export {
+    Limits as Limits,
+    BaseLimits as BaseLimits,
+    type LimitListResponse as LimitListResponse,
+    type LimitListParams as LimitListParams,
+  };
 
-  export { Entries as Entries, BaseEntries as BaseEntries };
+  export {
+    Entries as Entries,
+    BaseEntries as BaseEntries,
+    type EntryCreateResponse as EntryCreateResponse,
+    type EntryUpdateResponse as EntryUpdateResponse,
+    type EntryListResponse as EntryListResponse,
+    type EntryDeleteResponse as EntryDeleteResponse,
+    type EntryGetResponse as EntryGetResponse,
+    type EntryListResponsesSinglePage as EntryListResponsesSinglePage,
+    type EntryCreateParams as EntryCreateParams,
+    type EntryUpdateParams as EntryUpdateParams,
+    type EntryListParams as EntryListParams,
+    type EntryDeleteParams as EntryDeleteParams,
+    type EntryGetParams as EntryGetParams,
+  };
 }

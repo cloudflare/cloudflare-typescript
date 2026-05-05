@@ -20,19 +20,19 @@ export const parseClientAuthHeaders = (req: IncomingMessage, required?: boolean)
     throw new Error('Missing required Authorization header; see WWW-Authenticate header for details.');
   }
 
+  const apiEmail =
+    Array.isArray(req.headers['x-auth-email']) ? req.headers['x-auth-email'][0] : req.headers['x-auth-email'];
+  const apiKey =
+    Array.isArray(req.headers['x-auth-key']) ? req.headers['x-auth-key'][0] : req.headers['x-auth-key'];
   const apiToken =
     Array.isArray(req.headers['x-cloudflare-api-token']) ?
       req.headers['x-cloudflare-api-token'][0]
     : req.headers['x-cloudflare-api-token'];
-  const apiKey =
-    Array.isArray(req.headers['x-auth-key']) ? req.headers['x-auth-key'][0] : req.headers['x-auth-key'];
-  const apiEmail =
-    Array.isArray(req.headers['x-auth-email']) ? req.headers['x-auth-email'][0] : req.headers['x-auth-email'];
   const userServiceKey =
     Array.isArray(req.headers['x-auth-user-service-key']) ?
       req.headers['x-auth-user-service-key'][0]
     : req.headers['x-auth-user-service-key'];
-  return { apiToken, apiKey, apiEmail, userServiceKey };
+  return { apiEmail, apiKey, apiToken, userServiceKey };
 };
 
 export const getStainlessApiKey = (req: IncomingMessage, mcpOptions: McpOptions): string | undefined => {

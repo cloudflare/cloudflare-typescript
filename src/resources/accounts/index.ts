@@ -2,7 +2,37 @@
 
 export { Accounts, BaseAccounts } from './accounts';
 export { Logs, BaseLogs } from './logs/index';
-export { Members, BaseMembers } from './members';
-export { Roles, BaseRoles } from './roles';
-export { Subscriptions, BaseSubscriptions } from './subscriptions';
-export { Tokens, BaseTokens } from './tokens/index';
+export {
+  Members,
+  BaseMembers,
+  type Status,
+  type MemberDeleteResponse,
+  type MemberCreateParams,
+  type MemberUpdateParams,
+  type MemberListParams,
+  type MemberDeleteParams,
+  type MemberGetParams,
+} from './members';
+export { Roles, BaseRoles, type RoleListParams, type RoleGetParams } from './roles';
+export {
+  Subscriptions,
+  BaseSubscriptions,
+  type SubscriptionDeleteResponse,
+  type SubscriptionCreateParams,
+  type SubscriptionUpdateParams,
+  type SubscriptionDeleteParams,
+  type SubscriptionGetParams,
+} from './subscriptions';
+export {
+  Tokens,
+  BaseTokens,
+  type TokenCreateResponse,
+  type TokenDeleteResponse,
+  type TokenVerifyResponse,
+  type TokenCreateParams,
+  type TokenUpdateParams,
+  type TokenListParams,
+  type TokenDeleteParams,
+  type TokenGetParams,
+  type TokenVerifyParams,
+} from './tokens/index';

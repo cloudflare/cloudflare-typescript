@@ -2,13 +2,65 @@
 
 import { APIResource } from '../../core/resource';
 import * as PermissionGroupsAPI from './permission-groups';
-import { BasePermissionGroups, PermissionGroups } from './permission-groups';
+import {
+  BasePermissionGroups,
+  PermissionGroupGetParams,
+  PermissionGroupGetResponse,
+  PermissionGroupListParams,
+  PermissionGroupListResponse,
+  PermissionGroupListResponsesV4PagePaginationArray,
+  PermissionGroups,
+} from './permission-groups';
 import * as ResourceGroupsAPI from './resource-groups';
-import { BaseResourceGroups, ResourceGroups } from './resource-groups';
+import {
+  BaseResourceGroups,
+  ResourceGroupCreateParams,
+  ResourceGroupCreateResponse,
+  ResourceGroupDeleteParams,
+  ResourceGroupDeleteResponse,
+  ResourceGroupGetParams,
+  ResourceGroupGetResponse,
+  ResourceGroupListParams,
+  ResourceGroupListResponse,
+  ResourceGroupListResponsesSinglePage,
+  ResourceGroupUpdateParams,
+  ResourceGroupUpdateResponse,
+  ResourceGroups,
+} from './resource-groups';
 import * as SSOAPI from './sso';
-import { BaseSSO, SSO } from './sso';
+import {
+  BaseSSO,
+  SSO,
+  SSOBeginVerificationParams,
+  SSOBeginVerificationResponse,
+  SSOCreateParams,
+  SSOCreateResponse,
+  SSODeleteParams,
+  SSODeleteResponse,
+  SSOGetParams,
+  SSOGetResponse,
+  SSOListParams,
+  SSOListResponse,
+  SSOListResponsesSinglePage,
+  SSOUpdateParams,
+  SSOUpdateResponse,
+} from './sso';
 import * as UserGroupsAPI from './user-groups/user-groups';
-import { BaseUserGroups, UserGroups } from './user-groups/user-groups';
+import {
+  BaseUserGroups,
+  UserGroupCreateParams,
+  UserGroupCreateResponse,
+  UserGroupDeleteParams,
+  UserGroupDeleteResponse,
+  UserGroupGetParams,
+  UserGroupGetResponse,
+  UserGroupListParams,
+  UserGroupListResponse,
+  UserGroupListResponsesV4PagePaginationArray,
+  UserGroupUpdateParams,
+  UserGroupUpdateResponse,
+  UserGroups,
+} from './user-groups/user-groups';
 
 export class BaseIAM extends APIResource {
   static override readonly _key: readonly ['iam'] = Object.freeze(['iam'] as const);
@@ -32,11 +84,63 @@ IAM.SSO = SSO;
 IAM.BaseSSO = BaseSSO;
 
 export declare namespace IAM {
-  export { PermissionGroups as PermissionGroups, BasePermissionGroups as BasePermissionGroups };
+  export {
+    PermissionGroups as PermissionGroups,
+    BasePermissionGroups as BasePermissionGroups,
+    type PermissionGroupListResponse as PermissionGroupListResponse,
+    type PermissionGroupGetResponse as PermissionGroupGetResponse,
+    type PermissionGroupListResponsesV4PagePaginationArray as PermissionGroupListResponsesV4PagePaginationArray,
+    type PermissionGroupListParams as PermissionGroupListParams,
+    type PermissionGroupGetParams as PermissionGroupGetParams,
+  };
 
-  export { ResourceGroups as ResourceGroups, BaseResourceGroups as BaseResourceGroups };
+  export {
+    ResourceGroups as ResourceGroups,
+    BaseResourceGroups as BaseResourceGroups,
+    type ResourceGroupCreateResponse as ResourceGroupCreateResponse,
+    type ResourceGroupUpdateResponse as ResourceGroupUpdateResponse,
+    type ResourceGroupListResponse as ResourceGroupListResponse,
+    type ResourceGroupDeleteResponse as ResourceGroupDeleteResponse,
+    type ResourceGroupGetResponse as ResourceGroupGetResponse,
+    type ResourceGroupListResponsesSinglePage as ResourceGroupListResponsesSinglePage,
+    type ResourceGroupCreateParams as ResourceGroupCreateParams,
+    type ResourceGroupUpdateParams as ResourceGroupUpdateParams,
+    type ResourceGroupListParams as ResourceGroupListParams,
+    type ResourceGroupDeleteParams as ResourceGroupDeleteParams,
+    type ResourceGroupGetParams as ResourceGroupGetParams,
+  };
 
-  export { UserGroups as UserGroups, BaseUserGroups as BaseUserGroups };
+  export {
+    UserGroups as UserGroups,
+    BaseUserGroups as BaseUserGroups,
+    type UserGroupCreateResponse as UserGroupCreateResponse,
+    type UserGroupUpdateResponse as UserGroupUpdateResponse,
+    type UserGroupListResponse as UserGroupListResponse,
+    type UserGroupDeleteResponse as UserGroupDeleteResponse,
+    type UserGroupGetResponse as UserGroupGetResponse,
+    type UserGroupListResponsesV4PagePaginationArray as UserGroupListResponsesV4PagePaginationArray,
+    type UserGroupCreateParams as UserGroupCreateParams,
+    type UserGroupUpdateParams as UserGroupUpdateParams,
+    type UserGroupListParams as UserGroupListParams,
+    type UserGroupDeleteParams as UserGroupDeleteParams,
+    type UserGroupGetParams as UserGroupGetParams,
+  };
 
-  export { SSO as SSO, BaseSSO as BaseSSO };
+  export {
+    SSO as SSO,
+    BaseSSO as BaseSSO,
+    type SSOCreateResponse as SSOCreateResponse,
+    type SSOUpdateResponse as SSOUpdateResponse,
+    type SSOListResponse as SSOListResponse,
+    type SSODeleteResponse as SSODeleteResponse,
+    type SSOBeginVerificationResponse as SSOBeginVerificationResponse,
+    type SSOGetResponse as SSOGetResponse,
+    type SSOListResponsesSinglePage as SSOListResponsesSinglePage,
+    type SSOCreateParams as SSOCreateParams,
+    type SSOUpdateParams as SSOUpdateParams,
+    type SSOListParams as SSOListParams,
+    type SSODeleteParams as SSODeleteParams,
+    type SSOBeginVerificationParams as SSOBeginVerificationParams,
+    type SSOGetParams as SSOGetParams,
+  };
 }

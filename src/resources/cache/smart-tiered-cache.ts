@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -11,6 +10,36 @@ export class BaseSmartTieredCache extends APIResource {
     'cache',
     'smartTieredCache',
   ] as const);
+
+  /**
+   * Smart Tiered Cache dynamically selects the single closest upper tier for each of
+   * your website's origins with no configuration required, using our in-house
+   * performance and routing data. Cloudflare collects latency data for each request
+   * to an origin, and uses the latency data to determine how well any upper-tier
+   * data center is connected with an origin. As a result, Cloudflare can select the
+   * data center with the lowest latency to be the upper-tier for an origin.
+   *
+   * @example
+   * ```ts
+   * const smartTieredCache =
+   *   await client.cache.smartTieredCache.create({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     value: 'on',
+   *   });
+   * ```
+   */
+  create(
+    params: SmartTieredCacheCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<SmartTieredCacheCreateResponse> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(path`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: SmartTieredCacheCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * Smart Tiered Cache dynamically selects the single closest upper tier for each of
@@ -98,6 +127,28 @@ export class BaseSmartTieredCache extends APIResource {
 }
 export class SmartTieredCache extends BaseSmartTieredCache {}
 
+export interface SmartTieredCacheCreateResponse {
+  /**
+   * The identifier of the caching setting.
+   */
+  id: 'tiered_cache_smart_topology_enable';
+
+  /**
+   * Whether the setting is editable.
+   */
+  editable: boolean;
+
+  /**
+   * Value of the Smart Tiered Cache zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
+
 export interface SmartTieredCacheDeleteResponse {
   /**
    * The identifier of the caching setting.
@@ -159,18 +210,30 @@ export interface SmartTieredCacheGetResponse {
   modified_on?: string | null;
 }
 
+export interface SmartTieredCacheCreateParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Enable or disable the Smart Tiered Cache.
+   */
+  value: 'on' | 'off';
+}
+
 export interface SmartTieredCacheDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export interface SmartTieredCacheEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Enable or disable the Smart Tiered Cache.
@@ -182,14 +245,16 @@ export interface SmartTieredCacheGetParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export declare namespace SmartTieredCache {
   export {
+    type SmartTieredCacheCreateResponse as SmartTieredCacheCreateResponse,
     type SmartTieredCacheDeleteResponse as SmartTieredCacheDeleteResponse,
     type SmartTieredCacheEditResponse as SmartTieredCacheEditResponse,
     type SmartTieredCacheGetResponse as SmartTieredCacheGetResponse,
+    type SmartTieredCacheCreateParams as SmartTieredCacheCreateParams,
     type SmartTieredCacheDeleteParams as SmartTieredCacheDeleteParams,
     type SmartTieredCacheEditParams as SmartTieredCacheEditParams,
     type SmartTieredCacheGetParams as SmartTieredCacheGetParams,

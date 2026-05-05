@@ -1,8 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as FleetStatusAPI from './fleet-status';
 import * as DevicesAPI from './devices';
-import { BaseDevices, Devices } from './devices';
+import {
+  BaseDevices,
+  DeviceListParams,
+  DeviceListResponse,
+  DeviceListResponsesV4PagePaginationArray,
+  Devices,
+} from './devices';
+import { APIPromise } from '../../../../core/api-promise';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class BaseFleetStatus extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dex', 'fleetStatus'] = Object.freeze([
@@ -10,14 +20,194 @@ export class BaseFleetStatus extends APIResource {
     'dex',
     'fleetStatus',
   ] as const);
+
+  /**
+   * List details for live (up to 60 minutes) devices using WARP
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.dex.fleetStatus.live({
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     since_minutes: 10,
+   *   });
+   * ```
+   */
+  live(params: FleetStatusLiveParams, options?: RequestOptions): APIPromise<FleetStatusLiveResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/dex/fleet-status/live`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: FleetStatusLiveResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * List details for devices using WARP, up to 7 days
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.zeroTrust.dex.fleetStatus.overTime({
+   *     account_id: '01a7362d577a6c3019a474fd6f485823',
+   *     from: '2023-10-11T00:00:00Z',
+   *     to: '2023-10-11T00:00:00Z',
+   *   });
+   * ```
+   */
+  overTime(
+    params: FleetStatusOverTimeParams,
+    options?: RequestOptions,
+  ): APIPromise<FleetStatusOverTimeResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/dex/fleet-status/over-time`, {
+        query,
+        ...options,
+      }) as APIPromise<{ result: FleetStatusOverTimeResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class FleetStatus extends BaseFleetStatus {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
+}
+
+export interface LiveStat {
+  /**
+   * Number of unique devices
+   */
+  uniqueDevicesTotal?: number;
+
+  value?: string;
+}
+
+export interface FleetStatusLiveResponse {
+  deviceStats?: FleetStatusLiveResponse.DeviceStats;
+}
+
+export namespace FleetStatusLiveResponse {
+  export interface DeviceStats {
+    byColo?: Array<FleetStatusAPI.LiveStat> | null;
+
+    byMode?: Array<FleetStatusAPI.LiveStat> | null;
+
+    byPlatform?: Array<FleetStatusAPI.LiveStat> | null;
+
+    byStatus?: Array<FleetStatusAPI.LiveStat> | null;
+
+    byVersion?: Array<FleetStatusAPI.LiveStat> | null;
+
+    /**
+     * Number of unique devices
+     */
+    uniqueDevicesTotal?: number;
+  }
+}
+
+export interface FleetStatusOverTimeResponse {
+  deviceStats?: FleetStatusOverTimeResponse.DeviceStats;
+}
+
+export namespace FleetStatusOverTimeResponse {
+  export interface DeviceStats {
+    byMode?: Array<DeviceStats.ByMode>;
+
+    byStatus?: Array<DeviceStats.ByStatus>;
+
+    /**
+     * Number of unique devices
+     */
+    uniqueDevicesTotal?: number;
+  }
+
+  export namespace DeviceStats {
+    export interface ByMode {
+      /**
+       * Timestamp in ISO format
+       */
+      timestamp?: string;
+
+      /**
+       * Number of unique devices
+       */
+      uniqueDevicesTotal?: number;
+
+      value?: string;
+    }
+
+    export interface ByStatus {
+      /**
+       * Timestamp in ISO format
+       */
+      timestamp?: string;
+
+      /**
+       * Number of unique devices
+       */
+      uniqueDevicesTotal?: number;
+
+      value?: string;
+    }
+  }
+}
+
+export interface FleetStatusLiveParams {
+  /**
+   * Path param: Unique identifier for account
+   */
+  account_id: string;
+
+  /**
+   * Query param: Number of minutes before current time
+   */
+  since_minutes: number;
+}
+
+export interface FleetStatusOverTimeParams {
+  /**
+   * Path param: Unique identifier for account
+   */
+  account_id: string;
+
+  /**
+   * Query param: Time range beginning in ISO format
+   */
+  from: string;
+
+  /**
+   * Query param: Time range end in ISO format
+   */
+  to: string;
+
+  /**
+   * Query param: Cloudflare colo
+   */
+  colo?: string;
+
+  /**
+   * Query param: Device-specific ID, given as UUID v4
+   */
+  device_id?: string;
 }
 
 FleetStatus.Devices = Devices;
 FleetStatus.BaseDevices = BaseDevices;
 
 export declare namespace FleetStatus {
-  export { Devices as Devices, BaseDevices as BaseDevices };
+  export {
+    type LiveStat as LiveStat,
+    type FleetStatusLiveResponse as FleetStatusLiveResponse,
+    type FleetStatusOverTimeResponse as FleetStatusOverTimeResponse,
+    type FleetStatusLiveParams as FleetStatusLiveParams,
+    type FleetStatusOverTimeParams as FleetStatusOverTimeParams,
+  };
+
+  export {
+    Devices as Devices,
+    BaseDevices as BaseDevices,
+    type DeviceListResponse as DeviceListResponse,
+    type DeviceListResponsesV4PagePaginationArray as DeviceListResponsesV4PagePaginationArray,
+    type DeviceListParams as DeviceListParams,
+  };
 }

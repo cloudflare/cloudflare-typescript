@@ -1,4 +1,33 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Indexes, BaseIndexes } from './indexes/index';
+export {
+  Indexes,
+  BaseIndexes,
+  type CreateIndex,
+  type IndexDeleteVectorsByID,
+  type IndexDimensionConfiguration,
+  type IndexInsert,
+  type IndexQuery,
+  type IndexUpsert,
+  type IndexDeleteResponse,
+  type IndexDeleteByIDsResponse,
+  type IndexGetByIDsResponse,
+  type IndexInfoResponse,
+  type IndexInsertResponse,
+  type IndexListVectorsResponse,
+  type IndexQueryResponse,
+  type IndexUpsertResponse,
+  type IndexCreateParams,
+  type IndexListParams,
+  type IndexDeleteParams,
+  type IndexDeleteByIDsParams,
+  type IndexGetParams,
+  type IndexGetByIDsParams,
+  type IndexInfoParams,
+  type IndexInsertParams,
+  type IndexListVectorsParams,
+  type IndexQueryParams,
+  type IndexUpsertParams,
+  type CreateIndicesSinglePage,
+} from './indexes/index';
 export { Vectorize, BaseVectorize } from './vectorize';

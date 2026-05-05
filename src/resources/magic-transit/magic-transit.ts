@@ -2,21 +2,138 @@
 
 import { APIResource } from '../../core/resource';
 import * as AppsAPI from './apps';
-import { Apps, BaseApps } from './apps';
+import {
+  AppCreateParams,
+  AppCreateResponse,
+  AppDeleteParams,
+  AppDeleteResponse,
+  AppEditParams,
+  AppEditResponse,
+  AppListParams,
+  AppListResponse,
+  AppListResponsesSinglePage,
+  AppUpdateParams,
+  AppUpdateResponse,
+  Apps,
+  BaseApps,
+} from './apps';
 import * as CfInterconnectsAPI from './cf-interconnects';
-import { BaseCfInterconnects, CfInterconnects } from './cf-interconnects';
+import {
+  BaseCfInterconnects,
+  CfInterconnectBulkUpdateParams,
+  CfInterconnectBulkUpdateResponse,
+  CfInterconnectGetParams,
+  CfInterconnectGetResponse,
+  CfInterconnectListParams,
+  CfInterconnectListResponse,
+  CfInterconnectUpdateParams,
+  CfInterconnectUpdateResponse,
+  CfInterconnects,
+} from './cf-interconnects';
 import * as GRETunnelsAPI from './gre-tunnels';
-import { BaseGRETunnels, GRETunnels } from './gre-tunnels';
+import {
+  BaseGRETunnels,
+  GRETunnelBulkUpdateParams,
+  GRETunnelBulkUpdateResponse,
+  GRETunnelCreateParams,
+  GRETunnelCreateResponse,
+  GRETunnelDeleteParams,
+  GRETunnelDeleteResponse,
+  GRETunnelGetParams,
+  GRETunnelGetResponse,
+  GRETunnelListParams,
+  GRETunnelListResponse,
+  GRETunnelUpdateParams,
+  GRETunnelUpdateResponse,
+  GRETunnels,
+} from './gre-tunnels';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
-import { BaseIPSECTunnels, IPSECTunnels } from './ipsec-tunnels';
+import {
+  BaseIPSECTunnels,
+  IPSECTunnelBulkUpdateParams,
+  IPSECTunnelBulkUpdateResponse,
+  IPSECTunnelCreateParams,
+  IPSECTunnelCreateResponse,
+  IPSECTunnelDeleteParams,
+  IPSECTunnelDeleteResponse,
+  IPSECTunnelGetParams,
+  IPSECTunnelGetResponse,
+  IPSECTunnelListParams,
+  IPSECTunnelListResponse,
+  IPSECTunnelPSKGenerateParams,
+  IPSECTunnelPSKGenerateResponse,
+  IPSECTunnelUpdateParams,
+  IPSECTunnelUpdateResponse,
+  IPSECTunnels,
+  PSKMetadata,
+} from './ipsec-tunnels';
 import * as RoutesAPI from './routes';
-import { BaseRoutes, Routes } from './routes';
+import {
+  BaseRoutes,
+  RouteBulkUpdateParams,
+  RouteBulkUpdateResponse,
+  RouteCreateParams,
+  RouteCreateResponse,
+  RouteDeleteParams,
+  RouteDeleteResponse,
+  RouteEmptyParams,
+  RouteEmptyResponse,
+  RouteGetParams,
+  RouteGetResponse,
+  RouteListParams,
+  RouteListResponse,
+  RouteUpdateParams,
+  RouteUpdateResponse,
+  Routes,
+  Scope,
+} from './routes';
 import * as ConnectorsAPI from './connectors/connectors';
-import { BaseConnectors, Connectors } from './connectors/connectors';
+import {
+  BaseConnectors,
+  ConnectorCreateParams,
+  ConnectorCreateResponse,
+  ConnectorDeleteParams,
+  ConnectorDeleteResponse,
+  ConnectorEditParams,
+  ConnectorEditResponse,
+  ConnectorGetParams,
+  ConnectorGetResponse,
+  ConnectorListParams,
+  ConnectorListResponse,
+  ConnectorListResponsesSinglePage,
+  ConnectorUpdateParams,
+  ConnectorUpdateResponse,
+  Connectors,
+} from './connectors/connectors';
 import * as PCAPsAPI from './pcaps/pcaps';
-import { BasePCAPs, PCAPs } from './pcaps/pcaps';
+import {
+  BasePCAPs,
+  PCAP,
+  PCAPCreateParams,
+  PCAPCreateResponse,
+  PCAPFilter,
+  PCAPGetParams,
+  PCAPGetResponse,
+  PCAPListParams,
+  PCAPListResponse,
+  PCAPListResponsesSinglePage,
+  PCAPStopParams,
+  PCAPs,
+} from './pcaps/pcaps';
 import * as SitesAPI from './sites/sites';
-import { BaseSites, Sites } from './sites/sites';
+import {
+  BaseSites,
+  Site,
+  SiteCreateParams,
+  SiteDeleteParams,
+  SiteEditParams,
+  SiteGetParams,
+  SiteListParams,
+  SiteLocation,
+  SiteUpdateParams,
+  Sites,
+  SitesSinglePage,
+} from './sites/sites';
 
 export class BaseMagicTransit extends APIResource {
   static override readonly _key: readonly ['magicTransit'] = Object.freeze(['magicTransit'] as const);
@@ -31,6 +148,123 @@ export class MagicTransit extends BaseMagicTransit {
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
   pcaps: PCAPsAPI.PCAPs = new PCAPsAPI.PCAPs(this._client);
 }
+
+export interface HealthCheck {
+  /**
+   * Determines whether to run healthchecks for a tunnel.
+   */
+  enabled?: boolean;
+
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: HealthCheckRate;
+
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+   * object form if the x-magic-new-hc-target header is set to true and string form
+   * if x-magic-new-hc-target is absent or set to false.
+   */
+  target?: HealthCheck.MagicHealthCheckTarget | string;
+
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: HealthCheckType;
+}
+
+export namespace HealthCheck {
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target.
+   */
+  export interface MagicHealthCheckTarget {
+    /**
+     * The effective health check target. If 'saved' is empty, then this field will be
+     * populated with the calculated default value on GET requests. Ignored in POST,
+     * PUT, and PATCH requests.
+     */
+    effective?: string;
+
+    /**
+     * The saved health check target. Setting the value to the empty string indicates
+     * that the calculated default value will be used.
+     */
+    saved?: string;
+  }
+}
+
+export interface HealthCheckParam {
+  /**
+   * Determines whether to run healthchecks for a tunnel.
+   */
+  enabled?: boolean;
+
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: HealthCheckRateParam;
+
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+   * object form if the x-magic-new-hc-target header is set to true and string form
+   * if x-magic-new-hc-target is absent or set to false.
+   */
+  target?: HealthCheckParam.MagicHealthCheckTarget | string;
+
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: HealthCheckTypeParam;
+}
+
+export namespace HealthCheckParam {
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target.
+   */
+  export interface MagicHealthCheckTarget {
+    /**
+     * The saved health check target. Setting the value to the empty string indicates
+     * that the calculated default value will be used.
+     */
+    saved?: string;
+  }
+}
+
+/**
+ * How frequent the health check is run. The default value is `mid`.
+ */
+export type HealthCheckRate = 'low' | 'mid' | 'high';
+
+/**
+ * How frequent the health check is run. The default value is `mid`.
+ */
+export type HealthCheckRateParam = 'low' | 'mid' | 'high';
+
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type HealthCheckType = 'reply' | 'request';
+
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type HealthCheckTypeParam = 'reply' | 'request';
 
 MagicTransit.Apps = Apps;
 MagicTransit.BaseApps = BaseApps;
@@ -50,19 +284,142 @@ MagicTransit.PCAPs = PCAPs;
 MagicTransit.BasePCAPs = BasePCAPs;
 
 export declare namespace MagicTransit {
-  export { Apps as Apps, BaseApps as BaseApps };
+  export {
+    type HealthCheck as HealthCheck,
+    type HealthCheckRate as HealthCheckRate,
+    type HealthCheckType as HealthCheckType,
+  };
 
-  export { CfInterconnects as CfInterconnects, BaseCfInterconnects as BaseCfInterconnects };
+  export {
+    Apps as Apps,
+    BaseApps as BaseApps,
+    type AppCreateResponse as AppCreateResponse,
+    type AppUpdateResponse as AppUpdateResponse,
+    type AppListResponse as AppListResponse,
+    type AppDeleteResponse as AppDeleteResponse,
+    type AppEditResponse as AppEditResponse,
+    type AppListResponsesSinglePage as AppListResponsesSinglePage,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppDeleteParams as AppDeleteParams,
+    type AppEditParams as AppEditParams,
+  };
 
-  export { GRETunnels as GRETunnels, BaseGRETunnels as BaseGRETunnels };
+  export {
+    CfInterconnects as CfInterconnects,
+    BaseCfInterconnects as BaseCfInterconnects,
+    type CfInterconnectUpdateResponse as CfInterconnectUpdateResponse,
+    type CfInterconnectListResponse as CfInterconnectListResponse,
+    type CfInterconnectBulkUpdateResponse as CfInterconnectBulkUpdateResponse,
+    type CfInterconnectGetResponse as CfInterconnectGetResponse,
+    type CfInterconnectUpdateParams as CfInterconnectUpdateParams,
+    type CfInterconnectListParams as CfInterconnectListParams,
+    type CfInterconnectBulkUpdateParams as CfInterconnectBulkUpdateParams,
+    type CfInterconnectGetParams as CfInterconnectGetParams,
+  };
 
-  export { IPSECTunnels as IPSECTunnels, BaseIPSECTunnels as BaseIPSECTunnels };
+  export {
+    GRETunnels as GRETunnels,
+    BaseGRETunnels as BaseGRETunnels,
+    type GRETunnelCreateResponse as GRETunnelCreateResponse,
+    type GRETunnelUpdateResponse as GRETunnelUpdateResponse,
+    type GRETunnelListResponse as GRETunnelListResponse,
+    type GRETunnelDeleteResponse as GRETunnelDeleteResponse,
+    type GRETunnelBulkUpdateResponse as GRETunnelBulkUpdateResponse,
+    type GRETunnelGetResponse as GRETunnelGetResponse,
+    type GRETunnelCreateParams as GRETunnelCreateParams,
+    type GRETunnelUpdateParams as GRETunnelUpdateParams,
+    type GRETunnelListParams as GRETunnelListParams,
+    type GRETunnelDeleteParams as GRETunnelDeleteParams,
+    type GRETunnelBulkUpdateParams as GRETunnelBulkUpdateParams,
+    type GRETunnelGetParams as GRETunnelGetParams,
+  };
 
-  export { Routes as Routes, BaseRoutes as BaseRoutes };
+  export {
+    IPSECTunnels as IPSECTunnels,
+    BaseIPSECTunnels as BaseIPSECTunnels,
+    type PSKMetadata as PSKMetadata,
+    type IPSECTunnelCreateResponse as IPSECTunnelCreateResponse,
+    type IPSECTunnelUpdateResponse as IPSECTunnelUpdateResponse,
+    type IPSECTunnelListResponse as IPSECTunnelListResponse,
+    type IPSECTunnelDeleteResponse as IPSECTunnelDeleteResponse,
+    type IPSECTunnelBulkUpdateResponse as IPSECTunnelBulkUpdateResponse,
+    type IPSECTunnelGetResponse as IPSECTunnelGetResponse,
+    type IPSECTunnelPSKGenerateResponse as IPSECTunnelPSKGenerateResponse,
+    type IPSECTunnelCreateParams as IPSECTunnelCreateParams,
+    type IPSECTunnelUpdateParams as IPSECTunnelUpdateParams,
+    type IPSECTunnelListParams as IPSECTunnelListParams,
+    type IPSECTunnelDeleteParams as IPSECTunnelDeleteParams,
+    type IPSECTunnelBulkUpdateParams as IPSECTunnelBulkUpdateParams,
+    type IPSECTunnelGetParams as IPSECTunnelGetParams,
+    type IPSECTunnelPSKGenerateParams as IPSECTunnelPSKGenerateParams,
+  };
 
-  export { Sites as Sites, BaseSites as BaseSites };
+  export {
+    Routes as Routes,
+    BaseRoutes as BaseRoutes,
+    type Scope as Scope,
+    type RouteCreateResponse as RouteCreateResponse,
+    type RouteUpdateResponse as RouteUpdateResponse,
+    type RouteListResponse as RouteListResponse,
+    type RouteDeleteResponse as RouteDeleteResponse,
+    type RouteBulkUpdateResponse as RouteBulkUpdateResponse,
+    type RouteEmptyResponse as RouteEmptyResponse,
+    type RouteGetResponse as RouteGetResponse,
+    type RouteCreateParams as RouteCreateParams,
+    type RouteUpdateParams as RouteUpdateParams,
+    type RouteListParams as RouteListParams,
+    type RouteDeleteParams as RouteDeleteParams,
+    type RouteBulkUpdateParams as RouteBulkUpdateParams,
+    type RouteEmptyParams as RouteEmptyParams,
+    type RouteGetParams as RouteGetParams,
+  };
 
-  export { Connectors as Connectors, BaseConnectors as BaseConnectors };
+  export {
+    Sites as Sites,
+    BaseSites as BaseSites,
+    type Site as Site,
+    type SiteLocation as SiteLocation,
+    type SitesSinglePage as SitesSinglePage,
+    type SiteCreateParams as SiteCreateParams,
+    type SiteUpdateParams as SiteUpdateParams,
+    type SiteListParams as SiteListParams,
+    type SiteDeleteParams as SiteDeleteParams,
+    type SiteEditParams as SiteEditParams,
+    type SiteGetParams as SiteGetParams,
+  };
 
-  export { PCAPs as PCAPs, BasePCAPs as BasePCAPs };
+  export {
+    Connectors as Connectors,
+    BaseConnectors as BaseConnectors,
+    type ConnectorCreateResponse as ConnectorCreateResponse,
+    type ConnectorUpdateResponse as ConnectorUpdateResponse,
+    type ConnectorListResponse as ConnectorListResponse,
+    type ConnectorDeleteResponse as ConnectorDeleteResponse,
+    type ConnectorEditResponse as ConnectorEditResponse,
+    type ConnectorGetResponse as ConnectorGetResponse,
+    type ConnectorListResponsesSinglePage as ConnectorListResponsesSinglePage,
+    type ConnectorCreateParams as ConnectorCreateParams,
+    type ConnectorUpdateParams as ConnectorUpdateParams,
+    type ConnectorListParams as ConnectorListParams,
+    type ConnectorDeleteParams as ConnectorDeleteParams,
+    type ConnectorEditParams as ConnectorEditParams,
+    type ConnectorGetParams as ConnectorGetParams,
+  };
+
+  export {
+    PCAPs as PCAPs,
+    BasePCAPs as BasePCAPs,
+    type PCAP as PCAP,
+    type PCAPFilter as PCAPFilter,
+    type PCAPCreateResponse as PCAPCreateResponse,
+    type PCAPListResponse as PCAPListResponse,
+    type PCAPGetResponse as PCAPGetResponse,
+    type PCAPListResponsesSinglePage as PCAPListResponsesSinglePage,
+    type PCAPCreateParams as PCAPCreateParams,
+    type PCAPListParams as PCAPListParams,
+    type PCAPGetParams as PCAPGetParams,
+    type PCAPStopParams as PCAPStopParams,
+  };
 }

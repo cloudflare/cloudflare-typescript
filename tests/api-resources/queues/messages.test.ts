@@ -1,0 +1,134 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { BaseMessages } from 'cloudflare/resources/queues/messages';
+import { Queues } from 'cloudflare/resources/queues/queues';
+
+import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
+
+const client = new Cloudflare({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
+
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseMessages],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [Queues],
+});
+
+const runTests = (client: PartialCloudflare<{ queues: { messages: BaseMessages } }>) => {
+  test('ack: only required params', async () => {
+    const responsePromise = client.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('ack: required and optional params', async () => {
+    const response = await client.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      acks: [
+        {
+          lease_id:
+            'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIn0..Q8p21d7dceR6vUfwftONdQ.JVqZgAS-Zk7MqmqccYtTHeeMElNHaOMigeWdb8LyMOg.T2_HV99CYzGaQuhTyW8RsgbnpTRZHRM6N7UoSaAKeK0',
+        },
+      ],
+      retries: [
+        {
+          delay_seconds: 10,
+          lease_id:
+            'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIn0..Q8p21d7dceR6vUfwftONdQ.JVqZgAS-Zk7MqmqccYtTHeeMElNHaOMigeWdb8LyMOg.T2_HV99CYzGaQuhTyW8RsgbnpTRZHRM6N7UoSaAKeK0',
+        },
+      ],
+    });
+  });
+
+  test('bulkPush: only required params', async () => {
+    const responsePromise = client.queues.messages.bulkPush('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkPush: required and optional params', async () => {
+    const response = await client.queues.messages.bulkPush('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      delay_seconds: 0,
+      messages: [
+        {
+          body: 'body',
+          content_type: 'text',
+          delay_seconds: 0,
+        },
+      ],
+    });
+  });
+
+  test('pull: only required params', async () => {
+    const responsePromise = client.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('pull: required and optional params', async () => {
+    const response = await client.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      batch_size: 50,
+      visibility_timeout_ms: 6000,
+    });
+  });
+
+  test('push: only required params', async () => {
+    const responsePromise = client.queues.messages.push('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('push: required and optional params', async () => {
+    const response = await client.queues.messages.push('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: 'body',
+      content_type: 'text',
+      delay_seconds: 0,
+    });
+  });
+};
+describe('resource messages', () => runTests(client));
+describe('resource messages (tree shakable, base)', () => runTests(partialClient));
+describe('resource messages (tree shakable, subresource)', () => runTests(parentPartialClient));

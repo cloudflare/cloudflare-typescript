@@ -25,12 +25,13 @@ For example:
 
 \`\`\`
 async function run(client) {
-  const response = await client.cache.cacheReserve.clear({
-    zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    body: {},
+  const zone = await client.zones.create({
+    account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    name: 'example.com',
+    type: 'full',
   });
 
-  console.log(response.id);
+  console.log(zone.id);
 }
 \`\`\`
 

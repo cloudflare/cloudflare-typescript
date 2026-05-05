@@ -1,11 +1,103 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class BaseAccountSettings extends APIResource {
   static override readonly _key: readonly ['workers', 'accountSettings'] = Object.freeze([
     'workers',
     'accountSettings',
   ] as const);
+
+  /**
+   * Creates Worker account settings for an account.
+   *
+   * @example
+   * ```ts
+   * const accountSetting =
+   *   await client.workers.accountSettings.update({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
+   */
+  update(
+    params: AccountSettingUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountSettingUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/workers/account-settings`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: AccountSettingUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches Worker account settings for an account.
+   *
+   * @example
+   * ```ts
+   * const accountSetting =
+   *   await client.workers.accountSettings.get({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
+   * ```
+   */
+  get(params: AccountSettingGetParams, options?: RequestOptions): APIPromise<AccountSettingGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/workers/account-settings`, options) as APIPromise<{
+        result: AccountSettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class AccountSettings extends BaseAccountSettings {}
+
+export interface AccountSettingUpdateResponse {
+  default_usage_model?: string;
+
+  green_compute?: boolean;
+}
+
+export interface AccountSettingGetResponse {
+  default_usage_model?: string;
+
+  green_compute?: boolean;
+}
+
+export interface AccountSettingUpdateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  default_usage_model?: string;
+
+  /**
+   * Body param
+   */
+  green_compute?: boolean;
+}
+
+export interface AccountSettingGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export declare namespace AccountSettings {
+  export {
+    type AccountSettingUpdateResponse as AccountSettingUpdateResponse,
+    type AccountSettingGetResponse as AccountSettingGetResponse,
+    type AccountSettingUpdateParams as AccountSettingUpdateParams,
+    type AccountSettingGetParams as AccountSettingGetParams,
+  };
+}

@@ -81,9 +81,9 @@ Authorization can be provided via the `Authorization` header using the Bearer sc
 Additionally, authorization can be provided via the following headers:
 | Header | Equivalent client option | Security scheme |
 | ------------------------- | ------------------------ | ---------------- |
-| `x-cloudflare-api-token` | `apiToken` | api_token |
-| `X-Auth-Key` | `apiKey` | api_key |
 | `X-Auth-Email` | `apiEmail` | api_email |
+| `X-Auth-Key` | `apiKey` | api_key |
+| `x-cloudflare-api-token` | `apiToken` | api_token |
 | `X-Auth-User-Service-Key` | `userServiceKey` | user_service_key |
 
 A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:

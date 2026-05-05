@@ -1,0 +1,205 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { BaseGRETunnels } from 'cloudflare/resources/magic-transit/gre-tunnels';
+import { MagicTransit } from 'cloudflare/resources/magic-transit/magic-transit';
+
+import Cloudflare from 'cloudflare';
+import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
+
+const client = new Cloudflare({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
+
+const partialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [BaseGRETunnels],
+});
+
+const parentPartialClient = createClient({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  resources: [MagicTransit],
+});
+
+const runTests = (client: PartialCloudflare<{ magicTransit: { greTunnels: BaseGRETunnels } }>) => {
+  // TODO: investigate broken test
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.magicTransit.greTunnels.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_gre_endpoint: '203.0.113.1',
+      customer_gre_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'GRE_1',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test
+  test.skip('create: required and optional params', async () => {
+    const response = await client.magicTransit.greTunnels.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_gre_endpoint: '203.0.113.1',
+      customer_gre_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'GRE_1',
+      automatic_return_routing: true,
+      bgp: {
+        customer_asn: 0,
+        extra_prefixes: ['string'],
+        md5_key: 'md5_key',
+      },
+      description: 'Tunnel for ISP X',
+      health_check: {
+        direction: 'bidirectional',
+        enabled: true,
+        rate: 'low',
+        target: { saved: '203.0.113.1' },
+        type: 'request',
+      },
+      interface_address6: '2606:54c1:7:0:a9fe:12d2:1:200/127',
+      mtu: 0,
+      ttl: 0,
+      'x-magic-new-hc-target': true,
+    });
+  });
+
+  // TODO: investigate broken test
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.magicTransit.greTunnels.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_gre_endpoint: '203.0.113.1',
+      customer_gre_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'GRE_1',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test
+  test.skip('update: required and optional params', async () => {
+    const response = await client.magicTransit.greTunnels.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_gre_endpoint: '203.0.113.1',
+      customer_gre_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'GRE_1',
+      automatic_return_routing: true,
+      description: 'Tunnel for ISP X',
+      health_check: {
+        direction: 'bidirectional',
+        enabled: true,
+        rate: 'low',
+        target: { saved: '203.0.113.1' },
+        type: 'request',
+      },
+      interface_address6: '2606:54c1:7:0:a9fe:12d2:1:200/127',
+      mtu: 0,
+      ttl: 0,
+      'x-magic-new-hc-target': true,
+    });
+  });
+
+  test('list: only required params', async () => {
+    const responsePromise = client.magicTransit.greTunnels.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.magicTransit.greTunnels.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.magicTransit.greTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.magicTransit.greTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
+    });
+  });
+
+  // TODO: investigate broken test
+  test.skip('bulkUpdate: only required params', async () => {
+    const responsePromise = client.magicTransit.greTunnels.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: investigate broken test
+  test.skip('bulkUpdate: required and optional params', async () => {
+    const response = await client.magicTransit.greTunnels.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+      'x-magic-new-hc-target': true,
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.magicTransit.greTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.magicTransit.greTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
+    });
+  });
+};
+describe('resource greTunnels', () => runTests(client));
+describe('resource greTunnels (tree shakable, base)', () => runTests(partialClient));
+describe('resource greTunnels (tree shakable, subresource)', () => runTests(parentPartialClient));

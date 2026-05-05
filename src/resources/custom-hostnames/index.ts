@@ -2,4 +2,13 @@
 
 export { CertificatePack, BaseCertificatePack } from './certificate-pack/index';
 export { CustomHostnames, BaseCustomHostnames } from './custom-hostnames';
-export { FallbackOrigin, BaseFallbackOrigin } from './fallback-origin';
+export {
+  FallbackOrigin,
+  BaseFallbackOrigin,
+  type FallbackOriginUpdateResponse,
+  type FallbackOriginDeleteResponse,
+  type FallbackOriginGetResponse,
+  type FallbackOriginUpdateParams,
+  type FallbackOriginDeleteParams,
+  type FallbackOriginGetParams,
+} from './fallback-origin';

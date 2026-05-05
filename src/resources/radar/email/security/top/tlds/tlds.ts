@@ -2,11 +2,13 @@
 
 import { APIResource } from '../../../../../../core/resource';
 import * as MaliciousAPI from './malicious';
-import { BaseMalicious, Malicious } from './malicious';
+import { BaseMalicious, Malicious, MaliciousGetParams, MaliciousGetResponse } from './malicious';
 import * as SpamAPI from './spam';
-import { BaseSpam, Spam } from './spam';
+import { BaseSpam, Spam, SpamGetParams, SpamGetResponse } from './spam';
 import * as SpoofAPI from './spoof';
-import { BaseSpoof, Spoof } from './spoof';
+import { BaseSpoof, Spoof, SpoofGetParams, SpoofGetResponse } from './spoof';
+import { APIPromise } from '../../../../../../core/api-promise';
+import { RequestOptions } from '../../../../../../internal/request-options';
 
 export class BaseTLDs extends APIResource {
   static override readonly _key: readonly ['radar', 'email', 'security', 'top', 'tlds'] = Object.freeze([
@@ -16,11 +18,230 @@ export class BaseTLDs extends APIResource {
     'top',
     'tlds',
   ] as const);
+
+  /**
+   * Retrieves the top TLDs by number of email messages.
+   *
+   * @example
+   * ```ts
+   * const tld =
+   *   await client.radar.email.security.top.tlds.get();
+   * ```
+   */
+  get(query: TLDGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<TLDGetResponse> {
+    return (
+      this._client.get('/radar/email/security/top/tlds', { query, ...options }) as APIPromise<{
+        result: TLDGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class TLDs extends BaseTLDs {
   malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);
   spam: SpamAPI.Spam = new SpamAPI.Spam(this._client);
   spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
+}
+
+export interface TLDGetResponse {
+  /**
+   * Metadata for the results.
+   */
+  meta: TLDGetResponse.Meta;
+
+  top_0: Array<TLDGetResponse.Top0>;
+}
+
+export namespace TLDGetResponse {
+  /**
+   * Metadata for the results.
+   */
+  export interface Meta {
+    confidenceInfo: Meta.ConfidenceInfo | null;
+
+    dateRange: Array<Meta.DateRange>;
+
+    /**
+     * Timestamp of the last dataset update.
+     */
+    lastUpdated: string;
+
+    /**
+     * Normalization method applied to the results. Refer to
+     * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+     */
+    normalization:
+      | 'PERCENTAGE'
+      | 'MIN0_MAX'
+      | 'MIN_MAX'
+      | 'RAW_VALUES'
+      | 'PERCENTAGE_CHANGE'
+      | 'ROLLING_AVERAGE'
+      | 'OVERLAPPED_PERCENTAGE'
+      | 'RATIO';
+
+    /**
+     * Measurement units for the results.
+     */
+    units: Array<Meta.Unit>;
+  }
+
+  export namespace Meta {
+    export interface ConfidenceInfo {
+      annotations: Array<ConfidenceInfo.Annotation>;
+
+      /**
+       * Provides an indication of how much confidence Cloudflare has in the data.
+       */
+      level: number;
+    }
+
+    export namespace ConfidenceInfo {
+      /**
+       * Annotation associated with the result (e.g. outage or other type of event).
+       */
+      export interface Annotation {
+        /**
+         * Data source for annotations.
+         */
+        dataSource:
+          | 'ALL'
+          | 'AI_BOTS'
+          | 'AI_GATEWAY'
+          | 'BGP'
+          | 'BOTS'
+          | 'CONNECTION_ANOMALY'
+          | 'CT'
+          | 'DNS'
+          | 'DNS_MAGNITUDE'
+          | 'DNS_AS112'
+          | 'DOS'
+          | 'EMAIL_ROUTING'
+          | 'EMAIL_SECURITY'
+          | 'FW'
+          | 'FW_PG'
+          | 'HTTP'
+          | 'HTTP_CONTROL'
+          | 'HTTP_CRAWLER_REFERER'
+          | 'HTTP_ORIGINS'
+          | 'IQI'
+          | 'LEAKED_CREDENTIALS'
+          | 'NET'
+          | 'ROBOTS_TXT'
+          | 'SPEED'
+          | 'WORKERS_AI';
+
+        description: string;
+
+        endDate: string;
+
+        /**
+         * Event type for annotations.
+         */
+        eventType: 'EVENT' | 'GENERAL' | 'OUTAGE' | 'PARTIAL_PROJECTION' | 'PIPELINE' | 'TRAFFIC_ANOMALY';
+
+        /**
+         * Whether event is a single point in time or a time range.
+         */
+        isInstantaneous: boolean;
+
+        linkedUrl: string;
+
+        startDate: string;
+      }
+    }
+
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
+    export interface Unit {
+      name: string;
+
+      value: string;
+    }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    /**
+     * A numeric string.
+     */
+    value: string;
+  }
+}
+
+export interface TLDGetParams {
+  /**
+   * Filters results by ARC (Authenticated Received Chain) validation.
+   */
+  arc?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * End of the date range (inclusive).
+   */
+  dateEnd?: Array<string>;
+
+  /**
+   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
+   * this week with the previous week. Use this parameter or set specific start and
+   * end dates (`dateStart` and `dateEnd` parameters).
+   */
+  dateRange?: Array<string>;
+
+  /**
+   * Start of the date range.
+   */
+  dateStart?: Array<string>;
+
+  /**
+   * Filters results by DKIM (DomainKeys Identified Mail) validation status.
+   */
+  dkim?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filters results by DMARC (Domain-based Message Authentication, Reporting and
+   * Conformance) validation status.
+   */
+  dmarc?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Format in which results will be returned.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limits the number of objects returned in the response.
+   */
+  limit?: number;
+
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: Array<string>;
+
+  /**
+   * Filters results by SPF (Sender Policy Framework) validation status.
+   */
+  spf?: Array<'PASS' | 'NONE' | 'FAIL'>;
+
+  /**
+   * Filters results by TLD category.
+   */
+  tldCategory?: 'CLASSIC' | 'COUNTRY';
+
+  /**
+   * Filters results by TLS version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
 TLDs.Malicious = Malicious;
@@ -31,9 +252,26 @@ TLDs.Spoof = Spoof;
 TLDs.BaseSpoof = BaseSpoof;
 
 export declare namespace TLDs {
-  export { Malicious as Malicious, BaseMalicious as BaseMalicious };
+  export { type TLDGetResponse as TLDGetResponse, type TLDGetParams as TLDGetParams };
 
-  export { Spam as Spam, BaseSpam as BaseSpam };
+  export {
+    Malicious as Malicious,
+    BaseMalicious as BaseMalicious,
+    type MaliciousGetResponse as MaliciousGetResponse,
+    type MaliciousGetParams as MaliciousGetParams,
+  };
 
-  export { Spoof as Spoof, BaseSpoof as BaseSpoof };
+  export {
+    Spam as Spam,
+    BaseSpam as BaseSpam,
+    type SpamGetResponse as SpamGetResponse,
+    type SpamGetParams as SpamGetParams,
+  };
+
+  export {
+    Spoof as Spoof,
+    BaseSpoof as BaseSpoof,
+    type SpoofGetResponse as SpoofGetResponse,
+    type SpoofGetParams as SpoofGetParams,
+  };
 }

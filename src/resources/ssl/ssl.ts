@@ -2,13 +2,44 @@
 
 import { APIResource } from '../../core/resource';
 import * as AnalyzeAPI from './analyze';
-import { Analyze, BaseAnalyze } from './analyze';
+import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse, BaseAnalyze } from './analyze';
 import * as RecommendationsAPI from './recommendations';
-import { BaseRecommendations, Recommendations } from './recommendations';
+import {
+  BaseRecommendations,
+  RecommendationGetParams,
+  RecommendationGetResponse,
+  Recommendations,
+} from './recommendations';
 import * as VerificationAPI from './verification';
-import { BaseVerification, Verification } from './verification';
+import {
+  BaseVerificationResource,
+  Verification,
+  VerificationEditParams,
+  VerificationEditResponse,
+  VerificationGetParams,
+  VerificationGetResponse,
+  VerificationResource,
+} from './verification';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
-import { BaseCertificatePacks, CertificatePacks } from './certificate-packs/certificate-packs';
+import {
+  BaseCertificatePacks,
+  CertificatePackCreateParams,
+  CertificatePackCreateResponse,
+  CertificatePackDeleteParams,
+  CertificatePackDeleteResponse,
+  CertificatePackEditParams,
+  CertificatePackEditResponse,
+  CertificatePackGetParams,
+  CertificatePackGetResponse,
+  CertificatePackListParams,
+  CertificatePackListResponse,
+  CertificatePackListResponsesV4PagePaginationArray,
+  CertificatePacks,
+  Host,
+  RequestValidity,
+  Status,
+  ValidationMethod,
+} from './certificate-packs/certificate-packs';
 import * as UniversalAPI from './universal/universal';
 import { BaseUniversal, Universal } from './universal/universal';
 
@@ -22,7 +53,7 @@ export class SSL extends BaseSSL {
   );
   recommendations: RecommendationsAPI.Recommendations = new RecommendationsAPI.Recommendations(this._client);
   universal: UniversalAPI.Universal = new UniversalAPI.Universal(this._client);
-  verification: VerificationAPI.Verification = new VerificationAPI.Verification(this._client);
+  verification: VerificationAPI.VerificationResource = new VerificationAPI.VerificationResource(this._client);
 }
 
 SSL.Analyze = Analyze;
@@ -33,17 +64,53 @@ SSL.Recommendations = Recommendations;
 SSL.BaseRecommendations = BaseRecommendations;
 SSL.Universal = Universal;
 SSL.BaseUniversal = BaseUniversal;
-SSL.Verification = Verification;
-SSL.BaseVerification = BaseVerification;
+SSL.VerificationResource = VerificationResource;
+SSL.BaseVerificationResource = BaseVerificationResource;
 
 export declare namespace SSL {
-  export { Analyze as Analyze, BaseAnalyze as BaseAnalyze };
+  export {
+    Analyze as Analyze,
+    BaseAnalyze as BaseAnalyze,
+    type AnalyzeCreateResponse as AnalyzeCreateResponse,
+    type AnalyzeCreateParams as AnalyzeCreateParams,
+  };
 
-  export { CertificatePacks as CertificatePacks, BaseCertificatePacks as BaseCertificatePacks };
+  export {
+    CertificatePacks as CertificatePacks,
+    BaseCertificatePacks as BaseCertificatePacks,
+    type Host as Host,
+    type RequestValidity as RequestValidity,
+    type Status as Status,
+    type ValidationMethod as ValidationMethod,
+    type CertificatePackCreateResponse as CertificatePackCreateResponse,
+    type CertificatePackListResponse as CertificatePackListResponse,
+    type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
+    type CertificatePackEditResponse as CertificatePackEditResponse,
+    type CertificatePackGetResponse as CertificatePackGetResponse,
+    type CertificatePackListResponsesV4PagePaginationArray as CertificatePackListResponsesV4PagePaginationArray,
+    type CertificatePackCreateParams as CertificatePackCreateParams,
+    type CertificatePackListParams as CertificatePackListParams,
+    type CertificatePackDeleteParams as CertificatePackDeleteParams,
+    type CertificatePackEditParams as CertificatePackEditParams,
+    type CertificatePackGetParams as CertificatePackGetParams,
+  };
 
-  export { Recommendations as Recommendations, BaseRecommendations as BaseRecommendations };
+  export {
+    Recommendations as Recommendations,
+    BaseRecommendations as BaseRecommendations,
+    type RecommendationGetResponse as RecommendationGetResponse,
+    type RecommendationGetParams as RecommendationGetParams,
+  };
 
   export { Universal as Universal, BaseUniversal as BaseUniversal };
 
-  export { Verification as Verification, BaseVerification as BaseVerification };
+  export {
+    VerificationResource as VerificationResource,
+    BaseVerificationResource as BaseVerificationResource,
+    type Verification as Verification,
+    type VerificationEditResponse as VerificationEditResponse,
+    type VerificationGetResponse as VerificationGetResponse,
+    type VerificationEditParams as VerificationEditParams,
+    type VerificationGetParams as VerificationGetParams,
+  };
 }

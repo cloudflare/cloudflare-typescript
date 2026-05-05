@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as Shared from '../shared';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -83,6 +82,25 @@ export class BaseVariants extends APIResource {
   }
 }
 export class Variants extends BaseVariants {}
+
+/**
+ * Variant support enables caching variants of images with certain file extensions
+ * in addition to the original. This only applies when the origin server sends the
+ * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
+ * does not serve the variant requested, the response will not be cached. This will
+ * be indicated with BYPASS cache status in the response headers.
+ */
+export interface CacheVariant {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'variants';
+
+  /**
+   * Last time this setting was modified.
+   */
+  modified_on?: string | null;
+}
 
 export interface VariantDeleteResponse {
   /**
@@ -295,14 +313,14 @@ export interface VariantDeleteParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Value of the zone setting.
@@ -387,11 +405,12 @@ export interface VariantGetParams {
   /**
    * Identifier.
    */
-  zone_id: Shared.IdentifierParam;
+  zone_id: string;
 }
 
 export declare namespace Variants {
   export {
+    type CacheVariant as CacheVariant,
     type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,

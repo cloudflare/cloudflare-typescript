@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../../core/resource';
 import * as RetentionAPI from './retention';
-import { BaseRetention, Retention } from './retention';
+import {
+  BaseRetention,
+  Retention,
+  RetentionCreateParams,
+  RetentionCreateResponse,
+  RetentionGetParams,
+  RetentionGetResponse,
+} from './retention';
 import * as CmbAPI from './cmb/cmb';
 import { BaseCmb, Cmb } from './cmb/cmb';
 
@@ -20,7 +27,14 @@ Control.Cmb = Cmb;
 Control.BaseCmb = BaseCmb;
 
 export declare namespace Control {
-  export { Retention as Retention, BaseRetention as BaseRetention };
+  export {
+    Retention as Retention,
+    BaseRetention as BaseRetention,
+    type RetentionCreateResponse as RetentionCreateResponse,
+    type RetentionGetResponse as RetentionGetResponse,
+    type RetentionCreateParams as RetentionCreateParams,
+    type RetentionGetParams as RetentionGetParams,
+  };
 
   export { Cmb as Cmb, BaseCmb as BaseCmb };
 }

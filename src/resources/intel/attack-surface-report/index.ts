@@ -1,5 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { AttackSurfaceReport, BaseAttackSurfaceReport } from './attack-surface-report';
-export { IssueTypes, BaseIssueTypes } from './issue-types';
-export { Issues, BaseIssues } from './issues';
+export {
+  IssueTypes,
+  BaseIssueTypes,
+  type IssueTypeGetResponse,
+  type IssueTypeGetParams,
+  type IssueTypeGetResponsesSinglePage,
+} from './issue-types';
+export {
+  Issues,
+  BaseIssues,
+  type IssueType,
+  type SeverityQueryParam,
+  type IssueListResponse,
+  type IssueClassResponse,
+  type IssueDismissResponse,
+  type IssueSeverityResponse,
+  type IssueTypeResponse,
+  type IssueListParams,
+  type IssueClassParams,
+  type IssueDismissParams,
+  type IssueSeverityParams,
+  type IssueTypeParams,
+  type IssueListResponsesV4PagePagination,
+} from './issues';

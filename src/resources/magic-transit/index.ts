@@ -1,11 +1,128 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Apps, BaseApps } from './apps';
-export { CfInterconnects, BaseCfInterconnects } from './cf-interconnects';
-export { Connectors, BaseConnectors } from './connectors/index';
-export { GRETunnels, BaseGRETunnels } from './gre-tunnels';
-export { IPSECTunnels, BaseIPSECTunnels } from './ipsec-tunnels';
+export {
+  Apps,
+  BaseApps,
+  type AppCreateResponse,
+  type AppUpdateResponse,
+  type AppListResponse,
+  type AppDeleteResponse,
+  type AppEditResponse,
+  type AppCreateParams,
+  type AppUpdateParams,
+  type AppListParams,
+  type AppDeleteParams,
+  type AppEditParams,
+  type AppListResponsesSinglePage,
+} from './apps';
+export {
+  CfInterconnects,
+  BaseCfInterconnects,
+  type CfInterconnectUpdateResponse,
+  type CfInterconnectListResponse,
+  type CfInterconnectBulkUpdateResponse,
+  type CfInterconnectGetResponse,
+  type CfInterconnectUpdateParams,
+  type CfInterconnectListParams,
+  type CfInterconnectBulkUpdateParams,
+  type CfInterconnectGetParams,
+} from './cf-interconnects';
+export {
+  Connectors,
+  BaseConnectors,
+  type ConnectorCreateResponse,
+  type ConnectorUpdateResponse,
+  type ConnectorListResponse,
+  type ConnectorDeleteResponse,
+  type ConnectorEditResponse,
+  type ConnectorGetResponse,
+  type ConnectorCreateParams,
+  type ConnectorUpdateParams,
+  type ConnectorListParams,
+  type ConnectorDeleteParams,
+  type ConnectorEditParams,
+  type ConnectorGetParams,
+  type ConnectorListResponsesSinglePage,
+} from './connectors/index';
+export {
+  GRETunnels,
+  BaseGRETunnels,
+  type GRETunnelCreateResponse,
+  type GRETunnelUpdateResponse,
+  type GRETunnelListResponse,
+  type GRETunnelDeleteResponse,
+  type GRETunnelBulkUpdateResponse,
+  type GRETunnelGetResponse,
+  type GRETunnelCreateParams,
+  type GRETunnelUpdateParams,
+  type GRETunnelListParams,
+  type GRETunnelDeleteParams,
+  type GRETunnelBulkUpdateParams,
+  type GRETunnelGetParams,
+} from './gre-tunnels';
+export {
+  IPSECTunnels,
+  BaseIPSECTunnels,
+  type PSKMetadata,
+  type IPSECTunnelCreateResponse,
+  type IPSECTunnelUpdateResponse,
+  type IPSECTunnelListResponse,
+  type IPSECTunnelDeleteResponse,
+  type IPSECTunnelBulkUpdateResponse,
+  type IPSECTunnelGetResponse,
+  type IPSECTunnelPSKGenerateResponse,
+  type IPSECTunnelCreateParams,
+  type IPSECTunnelUpdateParams,
+  type IPSECTunnelListParams,
+  type IPSECTunnelDeleteParams,
+  type IPSECTunnelBulkUpdateParams,
+  type IPSECTunnelGetParams,
+  type IPSECTunnelPSKGenerateParams,
+} from './ipsec-tunnels';
 export { MagicTransit, BaseMagicTransit } from './magic-transit';
-export { PCAPs, BasePCAPs } from './pcaps/index';
-export { Routes, BaseRoutes } from './routes';
-export { Sites, BaseSites } from './sites/index';
+export {
+  PCAPs,
+  BasePCAPs,
+  type PCAP,
+  type PCAPFilter,
+  type PCAPCreateResponse,
+  type PCAPListResponse,
+  type PCAPGetResponse,
+  type PCAPCreateParams,
+  type PCAPListParams,
+  type PCAPGetParams,
+  type PCAPStopParams,
+  type PCAPListResponsesSinglePage,
+} from './pcaps/index';
+export {
+  Routes,
+  BaseRoutes,
+  type Scope,
+  type RouteCreateResponse,
+  type RouteUpdateResponse,
+  type RouteListResponse,
+  type RouteDeleteResponse,
+  type RouteBulkUpdateResponse,
+  type RouteEmptyResponse,
+  type RouteGetResponse,
+  type RouteCreateParams,
+  type RouteUpdateParams,
+  type RouteListParams,
+  type RouteDeleteParams,
+  type RouteBulkUpdateParams,
+  type RouteEmptyParams,
+  type RouteGetParams,
+} from './routes';
+export {
+  Sites,
+  BaseSites,
+  type Site,
+  type SiteLocation,
+  type SiteCreateParams,
+  type SiteUpdateParams,
+  type SiteListParams,
+  type SiteDeleteParams,
+  type SiteEditParams,
+  type SiteGetParams,
+  type SitesSinglePage,
+} from './sites/index';

@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as DatasetsAPI from './datasets';
+import { APIPromise } from '../../../../core/api-promise';
+import { buildHeaders } from '../../../../internal/headers';
+import { RequestOptions } from '../../../../internal/request-options';
+import { path } from '../../../../internal/utils/path';
 
 export class BaseUpload extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dlp', 'datasets', 'upload'] = Object.freeze([
@@ -9,5 +14,113 @@ export class BaseUpload extends APIResource {
     'datasets',
     'upload',
   ] as const);
+
+  /**
+   * Creates a new version of a DLP dataset, allowing you to stage changes before
+   * activation. Used for single-column EDM and custom word lists.
+   *
+   * @example
+   * ```ts
+   * const newVersion =
+   *   await client.zeroTrust.dlp.datasets.upload.create(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  create(datasetID: string, params: UploadCreateParams, options?: RequestOptions): APIPromise<NewVersion> {
+    const { account_id } = params;
+    return (
+      this._client.post(
+        path`/accounts/${account_id}/dlp/datasets/${datasetID}/upload`,
+        options,
+      ) as APIPromise<{ result: NewVersion }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * This is used for single-column EDMv1 and Custom Word Lists. The EDM format can
+   * only be created in the Cloudflare dashboard. For other clients, this operation
+   * can only be used for non-secret Custom Word Lists. The body must be a UTF-8
+   * encoded, newline (NL or CRNL) separated list of words to be matched.
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.zeroTrust.dlp.datasets.upload.edit(
+   *     0,
+   *     fs.createReadStream('path/to/file'),
+   *     {
+   *       account_id: 'account_id',
+   *       dataset_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     },
+   *   );
+   * ```
+   */
+  edit(
+    version: number,
+    dataset: string | ArrayBuffer | ArrayBufferView | Blob | DataView,
+    params: UploadEditParams,
+    options?: RequestOptions,
+  ): APIPromise<DatasetsAPI.Dataset> {
+    const { account_id, dataset_id } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/dlp/datasets/${dataset_id}/upload/${version}`, {
+        body: dataset,
+        ...options,
+        headers: buildHeaders([{ 'Content-Type': 'application/octet-stream' }, options?.headers]),
+      }) as APIPromise<{ result: DatasetsAPI.Dataset }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Upload extends BaseUpload {}
+
+export interface NewVersion {
+  encoding_version: number;
+
+  max_cells: number;
+
+  version: number;
+
+  case_sensitive?: boolean;
+
+  columns?: Array<NewVersion.Column>;
+
+  secret?: string;
+}
+
+export namespace NewVersion {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+}
+
+export interface UploadCreateParams {
+  account_id: string;
+}
+
+export interface UploadEditParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Path param
+   */
+  dataset_id: string;
+}
+
+export declare namespace Upload {
+  export {
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
+}

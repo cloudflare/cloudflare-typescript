@@ -2,9 +2,31 @@
 
 import { APIResource } from '../../../core/resource';
 import * as OverridesAPI from './overrides';
-import { BaseOverrides, Overrides } from './overrides';
+import {
+  BaseOverrides,
+  Override,
+  OverrideCreateParams,
+  OverrideDeleteParams,
+  OverrideDeleteResponse,
+  OverrideGetParams,
+  OverrideListParams,
+  OverrideURL,
+  OverrideUpdateParams,
+  Overrides,
+  OverridesV4PagePaginationArray,
+  RewriteAction,
+  WAFRule,
+} from './overrides';
 import * as PackagesAPI from './packages/packages';
-import { BasePackages, Packages } from './packages/packages';
+import {
+  BasePackages,
+  PackageGetParams,
+  PackageGetResponse,
+  PackageListParams,
+  PackageListResponse,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages/packages';
 
 /**
  * @deprecated WAF managed rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#waf-managed-rules-apis-previous-version for full details.
@@ -26,7 +48,29 @@ WAF.Packages = Packages;
 WAF.BasePackages = BasePackages;
 
 export declare namespace WAF {
-  export { Overrides as Overrides, BaseOverrides as BaseOverrides };
+  export {
+    Overrides as Overrides,
+    BaseOverrides as BaseOverrides,
+    type Override as Override,
+    type OverrideURL as OverrideURL,
+    type RewriteAction as RewriteAction,
+    type WAFRule as WAFRule,
+    type OverrideDeleteResponse as OverrideDeleteResponse,
+    type OverridesV4PagePaginationArray as OverridesV4PagePaginationArray,
+    type OverrideCreateParams as OverrideCreateParams,
+    type OverrideUpdateParams as OverrideUpdateParams,
+    type OverrideListParams as OverrideListParams,
+    type OverrideDeleteParams as OverrideDeleteParams,
+    type OverrideGetParams as OverrideGetParams,
+  };
 
-  export { Packages as Packages, BasePackages as BasePackages };
+  export {
+    Packages as Packages,
+    BasePackages as BasePackages,
+    type PackageListResponse as PackageListResponse,
+    type PackageGetResponse as PackageGetResponse,
+    type PackageListResponsesV4PagePaginationArray as PackageListResponsesV4PagePaginationArray,
+    type PackageListParams as PackageListParams,
+    type PackageGetParams as PackageGetParams,
+  };
 }

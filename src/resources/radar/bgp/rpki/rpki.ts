@@ -2,7 +2,16 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ASPAAPI from './aspa';
-import { ASPA, BaseASPA } from './aspa';
+import {
+  ASPA,
+  ASPAChangesParams,
+  ASPAChangesResponse,
+  ASPASnapshotParams,
+  ASPASnapshotResponse,
+  ASPATimeseriesParams,
+  ASPATimeseriesResponse,
+  BaseASPA,
+} from './aspa';
 
 export class BaseRPKI extends APIResource {
   static override readonly _key: readonly ['radar', 'bgp', 'rpki'] = Object.freeze([
@@ -19,5 +28,14 @@ RPKI.ASPA = ASPA;
 RPKI.BaseASPA = BaseASPA;
 
 export declare namespace RPKI {
-  export { ASPA as ASPA, BaseASPA as BaseASPA };
+  export {
+    ASPA as ASPA,
+    BaseASPA as BaseASPA,
+    type ASPAChangesResponse as ASPAChangesResponse,
+    type ASPASnapshotResponse as ASPASnapshotResponse,
+    type ASPATimeseriesResponse as ASPATimeseriesResponse,
+    type ASPAChangesParams as ASPAChangesParams,
+    type ASPASnapshotParams as ASPASnapshotParams,
+    type ASPATimeseriesParams as ASPATimeseriesParams,
+  };
 }

@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../../core/resource';
 import * as OperationAPI from './operation';
-import { BaseOperation, Operation } from './operation';
+import { BaseOperation, Operation, OperationUpdateParams, OperationUpdateResponse } from './operation';
 
 export class BaseResources extends APIResource {
   static override readonly _key: readonly ['apiGateway', 'labels', 'managed', 'resources'] = Object.freeze([
@@ -20,5 +20,10 @@ Resources.Operation = Operation;
 Resources.BaseOperation = BaseOperation;
 
 export declare namespace Resources {
-  export { Operation as Operation, BaseOperation as BaseOperation };
+  export {
+    Operation as Operation,
+    BaseOperation as BaseOperation,
+    type OperationUpdateResponse as OperationUpdateResponse,
+    type OperationUpdateParams as OperationUpdateParams,
+  };
 }

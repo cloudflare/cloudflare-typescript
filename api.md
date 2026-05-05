@@ -2,9 +2,30 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">ASN</a></code>
+- <code><a href="./src/resources/shared.ts">AuditLog</a></code>
+- <code><a href="./src/resources/shared.ts">CertificateCA</a></code>
+- <code><a href="./src/resources/shared.ts">CertificateRequestType</a></code>
+- <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
+- <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
+- <code><a href="./src/resources/shared.ts">Member</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Permission</a></code>
+- <code><a href="./src/resources/shared.ts">PermissionGrant</a></code>
+- <code><a href="./src/resources/shared.ts">RatePlan</a></code>
+- <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Result</a></code>
+- <code><a href="./src/resources/shared.ts">Role</a></code>
+- <code><a href="./src/resources/shared.ts">SortDirection</a></code>
+- <code><a href="./src/resources/shared.ts">Subscription</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionComponent</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionZone</a></code>
+- <code><a href="./src/resources/shared.ts">Token</a></code>
+- <code><a href="./src/resources/shared.ts">TokenConditionCIDRList</a></code>
+- <code><a href="./src/resources/shared.ts">TokenPolicy</a></code>
+- <code><a href="./src/resources/shared.ts">TokenValue</a></code>
 
 # [Accounts](src/resources/accounts/api.md)
 

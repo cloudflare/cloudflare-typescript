@@ -1,11 +1,116 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
+import { buildHeaders } from '../../internal/headers';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class BaseSubdomains extends APIResource {
   static override readonly _key: readonly ['workers', 'subdomains'] = Object.freeze([
     'workers',
     'subdomains',
   ] as const);
+
+  /**
+   * Creates a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * const subdomain = await client.workers.subdomains.update({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   subdomain: 'my-subdomain',
+   * });
+   * ```
+   */
+  update(params: SubdomainUpdateParams, options?: RequestOptions): APIPromise<SubdomainUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/workers/subdomain`, { body, ...options }) as APIPromise<{
+        result: SubdomainUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Deletes a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * await client.workers.subdomains.delete({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  delete(params: SubdomainDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id } = params;
+    return this._client.delete(path`/accounts/${account_id}/workers/subdomain`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Returns a Workers subdomain for an account.
+   *
+   * @example
+   * ```ts
+   * const subdomain = await client.workers.subdomains.get({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  get(params: SubdomainGetParams, options?: RequestOptions): APIPromise<SubdomainGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/workers/subdomain`, options) as APIPromise<{
+        result: SubdomainGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Subdomains extends BaseSubdomains {}
+
+export interface SubdomainUpdateResponse {
+  subdomain: string;
+}
+
+export interface SubdomainGetResponse {
+  subdomain: string;
+}
+
+export interface SubdomainUpdateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  subdomain: string;
+}
+
+export interface SubdomainDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export interface SubdomainGetParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export declare namespace Subdomains {
+  export {
+    type SubdomainUpdateResponse as SubdomainUpdateResponse,
+    type SubdomainGetResponse as SubdomainGetResponse,
+    type SubdomainUpdateParams as SubdomainUpdateParams,
+    type SubdomainDeleteParams as SubdomainDeleteParams,
+    type SubdomainGetParams as SubdomainGetParams,
+  };
+}

@@ -1,6 +1,61 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Assets, BaseAssets } from './assets';
-export { Message, BaseMessage } from './message';
-export { Priority, BasePriority } from './priority';
-export { Requests, BaseRequests } from './requests';
+export {
+  Assets,
+  BaseAssets,
+  type AssetCreateResponse,
+  type AssetUpdateResponse,
+  type AssetDeleteResponse,
+  type AssetGetResponse,
+  type AssetCreateParams,
+  type AssetUpdateParams,
+  type AssetDeleteParams,
+  type AssetGetParams,
+  type AssetCreateResponsesSinglePage,
+  type AssetGetResponsesSinglePage,
+} from './assets';
+export {
+  MessageResource,
+  BaseMessageResource,
+  type Message,
+  type MessageDeleteResponse,
+  type MessageCreateParams,
+  type MessageUpdateParams,
+  type MessageDeleteParams,
+  type MessageGetParams,
+  type MessagesSinglePage,
+} from './message';
+export {
+  PriorityResource,
+  BasePriorityResource,
+  type Label,
+  type Priority,
+  type PriorityEdit,
+  type PriorityDeleteResponse,
+  type PriorityCreateParams,
+  type PriorityUpdateParams,
+  type PriorityDeleteParams,
+  type PriorityGetParams,
+  type PriorityQuotaParams,
+} from './priority';
+export {
+  Requests,
+  BaseRequests,
+  type Item,
+  type ListItem,
+  type Quota,
+  type RequestConstants,
+  type RequestTypes,
+  type RequestDeleteResponse,
+  type RequestTypesResponse,
+  type RequestCreateParams,
+  type RequestUpdateParams,
+  type RequestListParams,
+  type RequestDeleteParams,
+  type RequestConstantsParams,
+  type RequestGetParams,
+  type RequestQuotaParams,
+  type RequestTypesParams,
+  type ListItemsSinglePage,
+  type RequestTypesResponsesSinglePage,
+} from './requests';
