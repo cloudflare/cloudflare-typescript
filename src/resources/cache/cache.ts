@@ -22,21 +22,17 @@ import {
   OriginCloudRegion,
   OriginCloudRegionBulkDeleteParams,
   OriginCloudRegionBulkDeleteResponse,
-  OriginCloudRegionBulkEditParams,
-  OriginCloudRegionBulkEditResponse,
-  OriginCloudRegionCreateParams,
-  OriginCloudRegionCreateResponse,
+  OriginCloudRegionBulkUpdateParams,
+  OriginCloudRegionBulkUpdateResponse,
   OriginCloudRegionDeleteParams,
   OriginCloudRegionDeleteResponse,
-  OriginCloudRegionEditParams,
-  OriginCloudRegionEditResponse,
   OriginCloudRegionGetParams,
-  OriginCloudRegionGetResponse,
   OriginCloudRegionListParams,
-  OriginCloudRegionListResponse,
   OriginCloudRegionSupportedRegionsParams,
   OriginCloudRegionSupportedRegionsResponse,
+  OriginCloudRegionUpdateParams,
   OriginCloudRegions,
+  OriginCloudRegionsV4PagePaginationArray,
 } from './origin-cloud-regions';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 import {
@@ -268,6 +264,7 @@ Cache.SmartTieredCache = SmartTieredCache;
 Cache.Variants = Variants;
 Cache.RegionalTieredCacheResource = RegionalTieredCacheResource;
 Cache.OriginCloudRegions = OriginCloudRegions;
+Cache.OriginCloudRegionsV4PagePaginationArray = OriginCloudRegionsV4PagePaginationArray;
 
 export declare namespace Cache {
   export { type CachePurgeResponse as CachePurgeResponse, type CachePurgeParams as CachePurgeParams };
@@ -320,20 +317,16 @@ export declare namespace Cache {
   export {
     OriginCloudRegions as OriginCloudRegions,
     type OriginCloudRegion as OriginCloudRegion,
-    type OriginCloudRegionCreateResponse as OriginCloudRegionCreateResponse,
-    type OriginCloudRegionListResponse as OriginCloudRegionListResponse,
     type OriginCloudRegionDeleteResponse as OriginCloudRegionDeleteResponse,
     type OriginCloudRegionBulkDeleteResponse as OriginCloudRegionBulkDeleteResponse,
-    type OriginCloudRegionBulkEditResponse as OriginCloudRegionBulkEditResponse,
-    type OriginCloudRegionEditResponse as OriginCloudRegionEditResponse,
-    type OriginCloudRegionGetResponse as OriginCloudRegionGetResponse,
+    type OriginCloudRegionBulkUpdateResponse as OriginCloudRegionBulkUpdateResponse,
     type OriginCloudRegionSupportedRegionsResponse as OriginCloudRegionSupportedRegionsResponse,
-    type OriginCloudRegionCreateParams as OriginCloudRegionCreateParams,
+    OriginCloudRegionsV4PagePaginationArray as OriginCloudRegionsV4PagePaginationArray,
+    type OriginCloudRegionUpdateParams as OriginCloudRegionUpdateParams,
     type OriginCloudRegionListParams as OriginCloudRegionListParams,
     type OriginCloudRegionDeleteParams as OriginCloudRegionDeleteParams,
     type OriginCloudRegionBulkDeleteParams as OriginCloudRegionBulkDeleteParams,
-    type OriginCloudRegionBulkEditParams as OriginCloudRegionBulkEditParams,
-    type OriginCloudRegionEditParams as OriginCloudRegionEditParams,
+    type OriginCloudRegionBulkUpdateParams as OriginCloudRegionBulkUpdateParams,
     type OriginCloudRegionGetParams as OriginCloudRegionGetParams,
     type OriginCloudRegionSupportedRegionsParams as OriginCloudRegionSupportedRegionsParams,
   };

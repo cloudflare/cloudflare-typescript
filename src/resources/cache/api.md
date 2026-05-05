@@ -74,22 +74,17 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegion</a></code>
-- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionCreateResponse</a></code>
-- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionListResponse</a></code>
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionDeleteResponse</a></code>
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionBulkDeleteResponse</a></code>
-- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionBulkEditResponse</a></code>
-- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionEditResponse</a></code>
-- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionGetResponse</a></code>
+- <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionBulkUpdateResponse</a></code>
 - <code><a href="./src/resources/cache/origin-cloud-regions.ts">OriginCloudRegionSupportedRegionsResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/cache/origin_cloud_regions">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">create</a>({ ...params }) -> OriginCloudRegionCreateResponse</code>
-- <code title="get /zones/{zone_id}/cache/origin_cloud_regions">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">list</a>({ ...params }) -> OriginCloudRegionListResponse</code>
-- <code title="delete /zones/{zone_id}/cache/origin_cloud_regions/{origin_ip}">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">delete</a>(originIP, { ...params }) -> OriginCloudRegionDeleteResponse</code>
-- <code title="delete /zones/{zone_id}/cache/origin_cloud_regions/batch">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">bulkDelete</a>({ ...params }) -> OriginCloudRegionBulkDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/cache/origin_cloud_regions/batch">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">bulkEdit</a>([ ...body ]) -> OriginCloudRegionBulkEditResponse</code>
-- <code title="patch /zones/{zone_id}/cache/origin_cloud_regions">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">edit</a>({ ...params }) -> OriginCloudRegionEditResponse</code>
-- <code title="get /zones/{zone_id}/cache/origin_cloud_regions/{origin_ip}">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">get</a>(originIP, { ...params }) -> OriginCloudRegionGetResponse</code>
-- <code title="get /zones/{zone_id}/cache/origin_cloud_regions/supported_regions">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">supportedRegions</a>({ ...params }) -> OriginCloudRegionSupportedRegionsResponse</code>
+- <code title="put /zones/{zone_id}/origin/cloud_regions/{origin_ip}">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">update</a>(originIP, { ...params }) -> OriginCloudRegion</code>
+- <code title="get /zones/{zone_id}/origin/cloud_regions">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">list</a>({ ...params }) -> OriginCloudRegionsV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_id}/origin/cloud_regions/{origin_ip}">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">delete</a>(originIP, { ...params }) -> OriginCloudRegionDeleteResponse</code>
+- <code title="delete /zones/{zone_id}/origin/cloud_regions/batch">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">bulkDelete</a>({ ...params }) -> OriginCloudRegionBulkDeleteResponse</code>
+- <code title="put /zones/{zone_id}/origin/cloud_regions/batch">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">bulkUpdate</a>([ ...body ]) -> OriginCloudRegionBulkUpdateResponse</code>
+- <code title="get /zones/{zone_id}/origin/cloud_regions/{origin_ip}">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">get</a>(originIP, { ...params }) -> OriginCloudRegion</code>
+- <code title="get /zones/{zone_id}/origin/cloud_regions/supported_regions">client.cache.originCloudRegions.<a href="./src/resources/cache/origin-cloud-regions.ts">supportedRegions</a>({ ...params }) -> OriginCloudRegionSupportedRegionsResponse</code>
