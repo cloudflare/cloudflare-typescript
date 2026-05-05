@@ -195,7 +195,8 @@ export interface ResourceCreateResponse {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 
   /**
    * Resource Version.
@@ -247,7 +248,8 @@ export interface ResourceUpdateResponse {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 
   /**
    * Resource Version.
@@ -299,7 +301,8 @@ export interface ResourceListResponse {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 
   /**
    * Resource Version.
@@ -351,7 +354,8 @@ export interface ResourceDeleteResponse {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 
   /**
    * Resource Version.
@@ -403,7 +407,8 @@ export interface ResourceGetResponse {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 
   /**
    * Resource Version.
@@ -445,7 +450,8 @@ export interface ResourceCreateParams {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 }
 
 export interface ResourceUpdateParams {
@@ -474,7 +480,8 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
     | 'gateway-policy'
     | 'gateway-destination-ip'
     | 'gateway-block-page-settings'
-    | 'gateway-extended-email-matching';
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
 
   /**
    * Query param: Filter share resources by status.

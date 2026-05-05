@@ -22,7 +22,6 @@ export class MonitorGroups extends APIResource {
    * const monitorGroup =
    *   await client.loadBalancers.monitorGroups.create({
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     id: 'id',
    *     description: 'Primary datacenter monitors',
    *     members: [
    *       {
@@ -55,7 +54,6 @@ export class MonitorGroups extends APIResource {
    *     '17b5962d775c646f3f9725cbc7a53df4',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       id: 'id',
    *       description: 'Primary datacenter monitors',
    *       members: [
    *         {
@@ -144,7 +142,6 @@ export class MonitorGroups extends APIResource {
    *     '17b5962d775c646f3f9725cbc7a53df4',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       id: 'id',
    *       description: 'Primary datacenter monitors',
    *       members: [
    *         {
@@ -221,12 +218,12 @@ export interface MonitorGroup {
   /**
    * The timestamp of when the monitor group was created
    */
-  created_at?: string;
+  created_on?: string;
 
   /**
    * The timestamp of when the monitor group was last updated
    */
-  updated_at?: string;
+  modified_on?: string;
 }
 
 export namespace MonitorGroup {
@@ -271,12 +268,6 @@ export interface MonitorGroupCreateParams {
   account_id: string;
 
   /**
-   * Body param: The ID of the Monitor Group to use for checking the health of
-   * origins within this pool.
-   */
-  id: string;
-
-  /**
    * Body param: A short description of the monitor group
    */
   description: string;
@@ -317,12 +308,6 @@ export interface MonitorGroupUpdateParams {
    * Path param: Identifier.
    */
   account_id: string;
-
-  /**
-   * Body param: The ID of the Monitor Group to use for checking the health of
-   * origins within this pool.
-   */
-  id: string;
 
   /**
    * Body param: A short description of the monitor group
@@ -379,12 +364,6 @@ export interface MonitorGroupEditParams {
    * Path param: Identifier.
    */
   account_id: string;
-
-  /**
-   * Body param: The ID of the Monitor Group to use for checking the health of
-   * origins within this pool.
-   */
-  id: string;
 
   /**
    * Body param: A short description of the monitor group
