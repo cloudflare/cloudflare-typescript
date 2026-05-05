@@ -939,6 +939,14 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
   status?: 'active' | 'deleting' | 'deleted';
 
   /**
+   * Query param: Filter shares by tag. Each value is either `key=value` (matches
+   * shares whose tags contain that key/value pair) or `key` alone (matches shares
+   * that have any value for that key). May be repeated; multiple `tag` parameters
+   * are ANDed together. Maximum 20 `tag` parameters per request.
+   */
+  tag?: Array<string>;
+
+  /**
    * Query param: Filter shares by target_type.
    */
   target_type?: 'account' | 'organization';
