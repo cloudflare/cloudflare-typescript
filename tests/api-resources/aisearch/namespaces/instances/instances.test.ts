@@ -77,8 +77,11 @@ describe('resource instances', () => {
             source: 'all',
           },
           parse_options: {
-            content_selector: [{ path: '**/blog/**', selector: 'article .post-body' }],
-            include_headers: { foo: 'string' },
+            content_selector: [
+              { path: '**/blog/**', selector: 'article div.post-body' },
+              { path: '**/docs/**', selector: 'main' },
+            ],
+            include_headers: { 'cache-control': 'no-cache, no-store' },
             include_images: true,
             specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
             use_browser_rendering: true,
@@ -161,8 +164,11 @@ describe('resource instances', () => {
             source: 'all',
           },
           parse_options: {
-            content_selector: [{ path: '**/blog/**', selector: 'article .post-body' }],
-            include_headers: { foo: 'string' },
+            content_selector: [
+              { path: '**/blog/**', selector: 'article div.post-body' },
+              { path: '**/docs/**', selector: 'main' },
+            ],
+            include_headers: { 'cache-control': 'no-cache, no-store' },
             include_images: true,
             specific_sitemaps: ['https://example.com/sitemap.xml', 'https://example.com/blog-sitemap.xml'],
             use_browser_rendering: true,
