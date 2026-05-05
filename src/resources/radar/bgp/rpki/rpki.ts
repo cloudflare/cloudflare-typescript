@@ -11,12 +11,16 @@ import {
   ASPATimeseriesParams,
   ASPATimeseriesResponse,
 } from './aspa';
+import * as RoasAPI from './roas';
+import { RoaTimeseriesParams, RoaTimeseriesResponse, Roas } from './roas';
 
 export class RPKI extends APIResource {
   aspa: ASPAAPI.ASPA = new ASPAAPI.ASPA(this._client);
+  roas: RoasAPI.Roas = new RoasAPI.Roas(this._client);
 }
 
 RPKI.ASPA = ASPA;
+RPKI.Roas = Roas;
 
 export declare namespace RPKI {
   export {
@@ -27,5 +31,11 @@ export declare namespace RPKI {
     type ASPAChangesParams as ASPAChangesParams,
     type ASPASnapshotParams as ASPASnapshotParams,
     type ASPATimeseriesParams as ASPATimeseriesParams,
+  };
+
+  export {
+    Roas as Roas,
+    type RoaTimeseriesResponse as RoaTimeseriesResponse,
+    type RoaTimeseriesParams as RoaTimeseriesParams,
   };
 }

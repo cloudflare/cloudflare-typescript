@@ -10,3 +10,4 @@ export {
   type ASPATimeseriesParams,
 } from './aspa';
 export { RPKI } from './rpki';
+export { Roas, type RoaTimeseriesResponse, type RoaTimeseriesParams } from './roas';
