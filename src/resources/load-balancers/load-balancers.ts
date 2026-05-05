@@ -3,18 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as LoadBalancersAPI from './load-balancers';
-import * as MonitorGroupsAPI from './monitor-groups';
-import {
-  MonitorGroup,
-  MonitorGroupCreateParams,
-  MonitorGroupDeleteParams,
-  MonitorGroupEditParams,
-  MonitorGroupGetParams,
-  MonitorGroupListParams,
-  MonitorGroupUpdateParams,
-  MonitorGroups,
-  MonitorGroupsSinglePage,
-} from './monitor-groups';
 import * as PreviewsAPI from './previews';
 import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
@@ -26,6 +14,18 @@ import {
   SearchListResponsesV4PagePagination,
   Searches,
 } from './searches';
+import * as MonitorGroupsAPI from './monitor-groups/monitor-groups';
+import {
+  MonitorGroup,
+  MonitorGroupCreateParams,
+  MonitorGroupDeleteParams,
+  MonitorGroupEditParams,
+  MonitorGroupGetParams,
+  MonitorGroupListParams,
+  MonitorGroupUpdateParams,
+  MonitorGroups,
+  MonitorGroupsSinglePage,
+} from './monitor-groups/monitor-groups';
 import * as MonitorsAPI from './monitors/monitors';
 import {
   Monitor,
