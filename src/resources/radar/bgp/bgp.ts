@@ -3,8 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as IPsAPI from './ips';
-import { IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips';
 import * as RoutesAPI from './routes';
 import {
   RouteAsesParams,
@@ -21,6 +19,8 @@ import {
 } from './routes';
 import * as HijacksAPI from './hijacks/hijacks';
 import { Hijacks } from './hijacks/hijacks';
+import * as IPsAPI from './ips/ips';
+import { IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips/ips';
 import * as LeaksAPI from './leaks/leaks';
 import { Leaks } from './leaks/leaks';
 import * as RPKIAPI from './rpki/rpki';
