@@ -94,6 +94,19 @@ import {
 } from './provider-configs';
 import * as URLsAPI from './urls';
 import { BaseURLs, URLGetParams, URLGetResponse, URLs } from './urls';
+import * as BillingAPI from './billing/billing';
+import {
+  BaseBilling,
+  Billing,
+  BillingCreditBalanceParams,
+  BillingCreditBalanceResponse,
+  BillingInvoiceHistoryParams,
+  BillingInvoiceHistoryResponse,
+  BillingInvoicePreviewParams,
+  BillingInvoicePreviewResponse,
+  BillingUsageHistoryParams,
+  BillingUsageHistoryResponse,
+} from './billing/billing';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -236,6 +249,7 @@ export class AIGateway extends BaseAIGateway {
   dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
   providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
+  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
 }
 
 export type AIGatewayListResponsesV4PagePaginationArray = V4PagePaginationArray<AIGatewayListResponse>;
@@ -1117,6 +1131,8 @@ AIGateway.ProviderConfigs = ProviderConfigs;
 AIGateway.BaseProviderConfigs = BaseProviderConfigs;
 AIGateway.URLs = URLs;
 AIGateway.BaseURLs = BaseURLs;
+AIGateway.Billing = Billing;
+AIGateway.BaseBilling = BaseBilling;
 
 export declare namespace AIGateway {
   export {
@@ -1229,5 +1245,18 @@ export declare namespace AIGateway {
     BaseURLs as BaseURLs,
     type URLGetResponse as URLGetResponse,
     type URLGetParams as URLGetParams,
+  };
+
+  export {
+    Billing as Billing,
+    BaseBilling as BaseBilling,
+    type BillingCreditBalanceResponse as BillingCreditBalanceResponse,
+    type BillingInvoiceHistoryResponse as BillingInvoiceHistoryResponse,
+    type BillingInvoicePreviewResponse as BillingInvoicePreviewResponse,
+    type BillingUsageHistoryResponse as BillingUsageHistoryResponse,
+    type BillingCreditBalanceParams as BillingCreditBalanceParams,
+    type BillingInvoiceHistoryParams as BillingInvoiceHistoryParams,
+    type BillingInvoicePreviewParams as BillingInvoicePreviewParams,
+    type BillingUsageHistoryParams as BillingUsageHistoryParams,
   };
 }
