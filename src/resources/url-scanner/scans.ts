@@ -1058,6 +1058,8 @@ export namespace ScanGetResponse {
 
             ap2: Commerce.Ap2;
 
+            mpp: Commerce.Mpp;
+
             ucp: Commerce.Ucp;
 
             x402: Commerce.X402;
@@ -1133,6 +1135,62 @@ export namespace ScanGetResponse {
             }
 
             export namespace Ap2 {
+              export interface Evidence {
+                action: string;
+
+                label: string;
+
+                finding?: Evidence.Finding;
+
+                request?: Evidence.Request;
+
+                response?: Evidence.Response;
+              }
+
+              export namespace Evidence {
+                export interface Finding {
+                  outcome: string;
+
+                  summary: string;
+                }
+
+                export interface Request {
+                  method: string;
+
+                  url: string;
+
+                  headers?: unknown;
+                }
+
+                export interface Response {
+                  status: number;
+
+                  statusText: string;
+
+                  bodyPreview?: string;
+
+                  bodySize?: number;
+
+                  headers?: unknown;
+
+                  redirectedTo?: string;
+                }
+              }
+            }
+
+            export interface Mpp {
+              status: string;
+
+              details?: unknown;
+
+              durationMs?: number;
+
+              evidence?: Array<Mpp.Evidence>;
+
+              message?: string;
+            }
+
+            export namespace Mpp {
               export interface Evidence {
                 action: string;
 
