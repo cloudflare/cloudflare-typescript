@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource billing', () => {
-  test('creditBalance: only required params', async () => {
+  // HTTP 404 error from prism -- route not in spec
+  test.skip('creditBalance: only required params', async () => {
     const responsePromise = client.aiGateway.billing.creditBalance({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource billing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('creditBalance: required and optional params', async () => {
+  // HTTP 404 error from prism -- route not in spec
+  test.skip('creditBalance: required and optional params', async () => {
     const response = await client.aiGateway.billing.creditBalance({ account_id: 'account_id' });
   });
 
