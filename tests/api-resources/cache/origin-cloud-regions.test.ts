@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ cache: { originCloudRegions: BaseOriginCloudRegions } }>) => {
-  test('update: only required params', async () => {
+  // HTTP 404 error from prism -- route not in spec
+  test.skip('update: only required params', async () => {
     const responsePromise = client.cache.originCloudRegions.update('192.0.2.1', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       origin_ip: '192.0.2.1',
@@ -43,7 +44,8 @@ const runTests = (client: PartialCloudflare<{ cache: { originCloudRegions: BaseO
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // HTTP 404 error from prism -- route not in spec
+  test.skip('update: required and optional params', async () => {
     const response = await client.cache.originCloudRegions.update('192.0.2.1', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       origin_ip: '192.0.2.1',
