@@ -92,8 +92,8 @@ const runTests = (client: PartialCloudflare<{ aiGateway: { billing: BaseBilling 
     const response = await client.aiGateway.billing.usageHistory({
       account_id: 'account_id',
       value_grouping_window: 'day',
-      end_time: 1700086400,
-      start_time: 1700000000,
+      end_time: 1700086400000,
+      start_time: 1700000000000,
     });
   });
 };
