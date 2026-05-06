@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: BaseMonitorGroups } }>) => {
-  test('create: only required params', async () => {
+  // HTTP 422 error from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.loadBalancers.monitorGroups.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'Primary datacenter monitors',
@@ -49,7 +50,8 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { monitorGroups: Ba
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 422 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.loadBalancers.monitorGroups.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'Primary datacenter monitors',

@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ aiGateway: { billing: BaseBilling } }>) => {
-  test('creditBalance: only required params', async () => {
+  // HTTP 404 error from prism -- route not in spec
+  test.skip('creditBalance: only required params', async () => {
     const responsePromise = client.aiGateway.billing.creditBalance({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -38,7 +39,8 @@ const runTests = (client: PartialCloudflare<{ aiGateway: { billing: BaseBilling 
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('creditBalance: required and optional params', async () => {
+  // HTTP 404 error from prism -- route not in spec
+  test.skip('creditBalance: required and optional params', async () => {
     const response = await client.aiGateway.billing.creditBalance({ account_id: 'account_id' });
   });
 
