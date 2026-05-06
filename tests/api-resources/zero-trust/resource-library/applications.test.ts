@@ -49,6 +49,7 @@ const runTests = (
       limit: 0,
       offset: 0,
       order_by: 'order_by',
+      search: 'xx',
     });
   });
 
