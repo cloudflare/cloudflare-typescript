@@ -2,6 +2,17 @@
 
 export { AIGateway } from './ai-gateway';
 export {
+  Billing,
+  type BillingCreditBalanceResponse,
+  type BillingInvoiceHistoryResponse,
+  type BillingInvoicePreviewResponse,
+  type BillingUsageHistoryResponse,
+  type BillingCreditBalanceParams,
+  type BillingInvoiceHistoryParams,
+  type BillingInvoicePreviewParams,
+  type BillingUsageHistoryParams,
+} from './billing/index';
+export {
   DatasetListResponsesV4PagePaginationArray,
   Datasets,
   type DatasetCreateResponse,

@@ -89,6 +89,18 @@ import {
 } from './provider-configs';
 import * as URLsAPI from './urls';
 import { URLGetParams, URLGetResponse, URLs } from './urls';
+import * as BillingAPI from './billing/billing';
+import {
+  Billing,
+  BillingCreditBalanceParams,
+  BillingCreditBalanceResponse,
+  BillingInvoiceHistoryParams,
+  BillingInvoiceHistoryResponse,
+  BillingInvoicePreviewParams,
+  BillingInvoicePreviewResponse,
+  BillingUsageHistoryParams,
+  BillingUsageHistoryResponse,
+} from './billing/billing';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
@@ -99,6 +111,7 @@ export class AIGateway extends APIResource {
   dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
   providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
+  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
 
   /**
    * Creates a new AI Gateway.
@@ -1112,6 +1125,7 @@ AIGateway.DynamicRouting = DynamicRouting;
 AIGateway.ProviderConfigs = ProviderConfigs;
 AIGateway.ProviderConfigListResponsesV4PagePaginationArray = ProviderConfigListResponsesV4PagePaginationArray;
 AIGateway.URLs = URLs;
+AIGateway.Billing = Billing;
 
 export declare namespace AIGateway {
   export {
@@ -1214,4 +1228,16 @@ export declare namespace AIGateway {
   };
 
   export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };
+
+  export {
+    Billing as Billing,
+    type BillingCreditBalanceResponse as BillingCreditBalanceResponse,
+    type BillingInvoiceHistoryResponse as BillingInvoiceHistoryResponse,
+    type BillingInvoicePreviewResponse as BillingInvoicePreviewResponse,
+    type BillingUsageHistoryResponse as BillingUsageHistoryResponse,
+    type BillingCreditBalanceParams as BillingCreditBalanceParams,
+    type BillingInvoiceHistoryParams as BillingInvoiceHistoryParams,
+    type BillingInvoicePreviewParams as BillingInvoicePreviewParams,
+    type BillingUsageHistoryParams as BillingUsageHistoryParams,
+  };
 }
