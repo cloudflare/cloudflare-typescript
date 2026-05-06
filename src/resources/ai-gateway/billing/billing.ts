@@ -328,12 +328,12 @@ export interface BillingUsageHistoryParams {
   value_grouping_window: 'day' | 'hour';
 
   /**
-   * Query param: End time (Unix timestamp).
+   * Query param: End time as Unix timestamp in milliseconds.
    */
   end_time?: number | null;
 
   /**
-   * Query param: Start time (Unix timestamp).
+   * Query param: Start time as Unix timestamp in milliseconds.
    */
   start_time?: number | null;
 }
