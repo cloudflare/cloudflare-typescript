@@ -129,3 +129,59 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/url/{provider}">client.aiGateway.urls.<a href="./src/resources/ai-gateway/urls.ts">get</a>(gatewayId, provider, { ...params }) -> URLGetResponse</code>
+
+## Billing
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/billing/billing.ts">BillingCreditBalanceResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/billing.ts">BillingInvoiceHistoryResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/billing.ts">BillingInvoicePreviewResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/billing.ts">BillingUsageHistoryResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/billing/credit-balance">client.aiGateway.billing.<a href="./src/resources/ai-gateway/billing/billing.ts">creditBalance</a>({ ...params }) -> BillingCreditBalanceResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/billing/invoice-history">client.aiGateway.billing.<a href="./src/resources/ai-gateway/billing/billing.ts">invoiceHistory</a>({ ...params }) -> BillingInvoiceHistoryResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/billing/invoice-preview">client.aiGateway.billing.<a href="./src/resources/ai-gateway/billing/billing.ts">invoicePreview</a>({ ...params }) -> BillingInvoicePreviewResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/billing/usage-history">client.aiGateway.billing.<a href="./src/resources/ai-gateway/billing/billing.ts">usageHistory</a>({ ...params }) -> BillingUsageHistoryResponse</code>
+
+### Topup
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/billing/topup/topup.ts">TopupCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/topup/topup.ts">TopupStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/billing/topup">client.aiGateway.billing.topup.<a href="./src/resources/ai-gateway/billing/topup/topup.ts">create</a>({ ...params }) -> TopupCreateResponse</code>
+- <code title="post /accounts/{account_id}/ai-gateway/billing/topup/status">client.aiGateway.billing.topup.<a href="./src/resources/ai-gateway/billing/topup/topup.ts">status</a>({ ...params }) -> TopupStatusResponse</code>
+
+#### Config
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/billing/topup/config.ts">ConfigCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/topup/config.ts">ConfigDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/topup/config.ts">ConfigGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/billing/topup/config">client.aiGateway.billing.topup.config.<a href="./src/resources/ai-gateway/billing/topup/config.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/billing/topup/config">client.aiGateway.billing.topup.config.<a href="./src/resources/ai-gateway/billing/topup/config.ts">delete</a>({ ...params }) -> ConfigDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/billing/topup/config">client.aiGateway.billing.topup.config.<a href="./src/resources/ai-gateway/billing/topup/config.ts">get</a>({ ...params }) -> ConfigGetResponse</code>
+
+### SpendingLimit
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/billing/spending-limit.ts">SpendingLimitCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/spending-limit.ts">SpendingLimitDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/billing/spending-limit.ts">SpendingLimitGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/billing/spending-limit">client.aiGateway.billing.spendingLimit.<a href="./src/resources/ai-gateway/billing/spending-limit.ts">create</a>({ ...params }) -> SpendingLimitCreateResponse</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/billing/spending-limit">client.aiGateway.billing.spendingLimit.<a href="./src/resources/ai-gateway/billing/spending-limit.ts">delete</a>({ ...params }) -> SpendingLimitDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/billing/spending-limit">client.aiGateway.billing.spendingLimit.<a href="./src/resources/ai-gateway/billing/spending-limit.ts">get</a>({ ...params }) -> SpendingLimitGetResponse</code>
