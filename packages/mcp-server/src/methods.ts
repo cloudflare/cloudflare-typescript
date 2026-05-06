@@ -773,6 +773,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/purge_cache',
   },
   {
+    clientCallName: 'client.cache.purgeEnvironment',
+    fullyQualifiedName: 'cache.purgeEnvironment',
+    httpMethod: 'post',
+    httpPath: '/zones/{zone_id}/environments/{environment_id}/purge_cache',
+  },
+  {
     clientCallName: 'client.cache.cacheReserve.clear',
     fullyQualifiedName: 'cache.cacheReserve.clear',
     httpMethod: 'post',

@@ -3,10 +3,12 @@
 Types:
 
 - <code><a href="./src/resources/cache/cache.ts">CachePurgeResponse</a></code>
+- <code><a href="./src/resources/cache/cache.ts">CachePurgeEnvironmentResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purge</a>({ ...params }) -> CachePurgeResponse | null</code>
+- <code title="post /zones/{zone_id}/environments/{environment_id}/purge_cache">client.cache.<a href="./src/resources/cache/cache.ts">purgeEnvironment</a>(environmentID, { ...params }) -> CachePurgeEnvironmentResponse | null</code>
 
 ## CacheReserve
 

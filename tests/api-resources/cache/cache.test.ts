@@ -36,6 +36,26 @@ const runTests = (client: PartialCloudflare<{ cache: BaseCache }>) => {
       tags: ['a-cache-tag', 'another-cache-tag'],
     });
   });
+
+  test('purgeEnvironment: only required params', async () => {
+    const responsePromise = client.cache.purgeEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('purgeEnvironment: required and optional params', async () => {
+    const response = await client.cache.purgeEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      tags: ['a-cache-tag', 'another-cache-tag'],
+    });
+  });
 };
 describe('resource cache', () => runTests(client));
 describe('resource cache (tree shakable, base)', () => runTests(partialClient));

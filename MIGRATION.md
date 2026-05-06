@@ -95,6 +95,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.loadBalancers.pools.references.get()`
 - `client.loadBalancers.previews.get()`
 - `client.loadBalancers.regions.get()`
+- `client.cache.purgeEnvironment()`
 - `client.cache.originCloudRegions.update()`
 - `client.cache.originCloudRegions.delete()`
 - `client.cache.originCloudRegions.get()`
