@@ -15,6 +15,7 @@ jobs:
   semgrep:
     name: semgrep-oss
     runs-on: ubuntu-slim
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v5
         with:
