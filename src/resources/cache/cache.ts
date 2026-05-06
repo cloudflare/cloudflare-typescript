@@ -109,7 +109,7 @@ export class BaseCache extends APIResource {
    * Single file purge example with url and header pairs:
    *
    * ```
-   * {"files": [{url: "http://www.example.com/cat_picture.jpg", headers: { "CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN" }}, {url: "http://www.example.com/dog_picture.jpg", headers: { "CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US" }}]}
+   * {"files": [{"url": "http://www.example.com/cat_picture.jpg", "headers": {"CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN"}}, {"url": "http://www.example.com/dog_picture.jpg", "headers": {"CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US"}}]}
    * ```
    *
    * ### Purge Cached Content by Tag, Host or Prefix
@@ -137,7 +137,7 @@ export class BaseCache extends APIResource {
    *
    * ### Availability and limits
    *
-   * please refer to
+   * Please refer to
    * [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
    *
    * @example
@@ -155,6 +155,38 @@ export class BaseCache extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Purge cached content scoped to a specific environment. Supports the same purge
+   * types as the zone-level endpoint (purge everything, by URL, by tag, host, or
+   * prefix).
+   *
+   * ### Availability and limits
+   *
+   * Please refer to
+   * [purge cache availability and limits documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).
+   *
+   * @example
+   * ```ts
+   * const response = await client.cache.purgeEnvironment(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  purgeEnvironment(
+    environmentID: string,
+    params: CachePurgeEnvironmentParams,
+    options?: RequestOptions,
+  ): APIPromise<CachePurgeEnvironmentResponse | null> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(path`/zones/${zone_id}/environments/${environmentID}/purge_cache`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: CachePurgeEnvironmentResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Cache extends BaseCache {
   cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
@@ -170,6 +202,10 @@ export class Cache extends BaseCache {
 }
 
 export interface CachePurgeResponse {
+  id: string;
+}
+
+export interface CachePurgeEnvironmentResponse {
   id: string;
 }
 
@@ -271,6 +307,104 @@ export declare namespace CachePurgeParams {
   }
 }
 
+export type CachePurgeEnvironmentParams =
+  | CachePurgeEnvironmentParams.CachePurgeFlexPurgeByTags
+  | CachePurgeEnvironmentParams.CachePurgeFlexPurgeByHostnames
+  | CachePurgeEnvironmentParams.CachePurgeFlexPurgeByPrefixes
+  | CachePurgeEnvironmentParams.CachePurgeEverything
+  | CachePurgeEnvironmentParams.CachePurgeSingleFile
+  | CachePurgeEnvironmentParams.CachePurgeSingleFileWithURLAndHeaders;
+
+export declare namespace CachePurgeEnvironmentParams {
+  export interface CachePurgeFlexPurgeByTags {
+    /**
+     * Path param
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information on cache tags and purging by tags, please refer
+     * to
+     * [purge by cache-tags documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-tags/).
+     */
+    tags?: Array<string>;
+  }
+
+  export interface CachePurgeFlexPurgeByHostnames {
+    /**
+     * Path param
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information purging by hostnames, please refer to
+     * [purge by hostname documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-hostname/).
+     */
+    hosts?: Array<string>;
+  }
+
+  export interface CachePurgeFlexPurgeByPrefixes {
+    /**
+     * Path param
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information on purging by prefixes, please refer to
+     * [purge by prefix documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge_by_prefix/).
+     */
+    prefixes?: Array<string>;
+  }
+
+  export interface CachePurgeEverything {
+    /**
+     * Path param
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information, please refer to
+     * [purge everything documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-everything/).
+     */
+    purge_everything?: boolean;
+  }
+
+  export interface CachePurgeSingleFile {
+    /**
+     * Path param
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information on purging files, please refer to
+     * [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
+     */
+    files?: Array<string>;
+  }
+
+  export interface CachePurgeSingleFileWithURLAndHeaders {
+    /**
+     * Path param
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information on purging files with URL and headers, please
+     * refer to
+     * [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
+     */
+    files?: Array<CachePurgeSingleFileWithURLAndHeaders.File>;
+  }
+
+  export namespace CachePurgeSingleFileWithURLAndHeaders {
+    export interface File {
+      headers?: { [key: string]: string };
+
+      url?: string;
+    }
+  }
+}
+
 Cache.CacheReserveResource = CacheReserveResource;
 Cache.BaseCacheReserveResource = BaseCacheReserveResource;
 Cache.SmartTieredCache = SmartTieredCache;
@@ -283,7 +417,12 @@ Cache.OriginCloudRegions = OriginCloudRegions;
 Cache.BaseOriginCloudRegions = BaseOriginCloudRegions;
 
 export declare namespace Cache {
-  export { type CachePurgeResponse as CachePurgeResponse, type CachePurgeParams as CachePurgeParams };
+  export {
+    type CachePurgeResponse as CachePurgeResponse,
+    type CachePurgeEnvironmentResponse as CachePurgeEnvironmentResponse,
+    type CachePurgeParams as CachePurgeParams,
+    type CachePurgeEnvironmentParams as CachePurgeEnvironmentParams,
+  };
 
   export {
     CacheReserveResource as CacheReserveResource,

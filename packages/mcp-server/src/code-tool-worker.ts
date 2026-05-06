@@ -235,6 +235,7 @@ const fuse = new Fuse(
     'client.loadBalancers.regions.list',
     'client.loadBalancers.searches.list',
     'client.cache.purge',
+    'client.cache.purgeEnvironment',
     'client.cache.cacheReserve.clear',
     'client.cache.cacheReserve.edit',
     'client.cache.cacheReserve.get',
