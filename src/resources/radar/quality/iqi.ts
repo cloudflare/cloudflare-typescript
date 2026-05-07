@@ -326,13 +326,9 @@ export namespace IQITimeseriesGroupsResponse {
   }
 
   export interface Serie0 {
-    p25: Array<string>;
-
-    p50: Array<string>;
-
-    p75: Array<string>;
-
     timestamps: Array<string>;
+
+    [k: string]: Array<string> | Array<string> | undefined;
   }
 }
 
