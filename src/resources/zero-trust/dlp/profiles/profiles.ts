@@ -173,6 +173,7 @@ export namespace Profile {
      */
     entries?: Array<
       | CustomProfile.CustomEntry
+      | CustomProfile.CustomPromptTopicEntry
       | CustomProfile.PredefinedEntry
       | CustomProfile.IntegrationEntry
       | CustomProfile.ExactDataEntry
@@ -187,6 +188,7 @@ export namespace Profile {
 
     shared_entries?: Array<
       | CustomProfile.CustomEntry
+      | CustomProfile.CustomPromptTopicEntry
       | CustomProfile.PredefinedEntry
       | CustomProfile.IntegrationEntry
       | CustomProfile.ExactDataEntry
@@ -220,6 +222,23 @@ export namespace Profile {
        * @deprecated
        */
       profile_id?: string | null;
+    }
+
+    export interface CustomPromptTopicEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      type: 'custom_prompt_topic';
+
+      updated_at: string;
     }
 
     export interface PredefinedEntry {
@@ -391,6 +410,23 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
+    export interface CustomPromptTopicEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      type: 'custom_prompt_topic';
+
+      updated_at: string;
+    }
+
     export interface PredefinedEntry {
       id: string;
 
@@ -539,6 +575,7 @@ export namespace Profile {
      */
     entries: Array<
       | PredefinedProfile.CustomEntry
+      | PredefinedProfile.CustomPromptTopicEntry
       | PredefinedProfile.PredefinedEntry
       | PredefinedProfile.IntegrationEntry
       | PredefinedProfile.ExactDataEntry
@@ -596,6 +633,23 @@ export namespace Profile {
        * @deprecated
        */
       profile_id?: string | null;
+    }
+
+    export interface CustomPromptTopicEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      type: 'custom_prompt_topic';
+
+      updated_at: string;
     }
 
     export interface PredefinedEntry {
@@ -743,6 +797,7 @@ export namespace Profile {
      */
     entries: Array<
       | IntegrationProfile.CustomEntry
+      | IntegrationProfile.CustomPromptTopicEntry
       | IntegrationProfile.PredefinedEntry
       | IntegrationProfile.IntegrationEntry
       | IntegrationProfile.ExactDataEntry
@@ -754,6 +809,7 @@ export namespace Profile {
 
     shared_entries: Array<
       | IntegrationProfile.CustomEntry
+      | IntegrationProfile.CustomPromptTopicEntry
       | IntegrationProfile.PredefinedEntry
       | IntegrationProfile.IntegrationEntry
       | IntegrationProfile.ExactDataEntry
@@ -796,6 +852,23 @@ export namespace Profile {
        * @deprecated
        */
       profile_id?: string | null;
+    }
+
+    export interface CustomPromptTopicEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      type: 'custom_prompt_topic';
+
+      updated_at: string;
     }
 
     export interface PredefinedEntry {
@@ -956,6 +1029,23 @@ export namespace Profile {
        * @deprecated
        */
       profile_id?: string | null;
+    }
+
+    export interface CustomPromptTopicEntry {
+      id: string;
+
+      created_at: string;
+
+      /**
+       * @deprecated
+       */
+      enabled: boolean;
+
+      name: string;
+
+      type: 'custom_prompt_topic';
+
+      updated_at: string;
     }
 
     export interface PredefinedEntry {
