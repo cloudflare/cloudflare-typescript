@@ -165,6 +165,7 @@ export interface CustomProfile {
    */
   entries?: Array<
     | CustomProfile.CustomEntry
+    | CustomProfile.CustomPromptTopicEntry
     | CustomProfile.PredefinedEntry
     | CustomProfile.IntegrationEntry
     | CustomProfile.ExactDataEntry
@@ -179,6 +180,7 @@ export interface CustomProfile {
 
   shared_entries?: Array<
     | CustomProfile.CustomEntry
+    | CustomProfile.CustomPromptTopicEntry
     | CustomProfile.PredefinedEntry
     | CustomProfile.IntegrationEntry
     | CustomProfile.ExactDataEntry
@@ -212,6 +214,23 @@ export namespace CustomProfile {
      * @deprecated
      */
     profile_id?: string | null;
+  }
+
+  export interface CustomPromptTopicEntry {
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    type: 'custom_prompt_topic';
+
+    updated_at: string;
   }
 
   export interface PredefinedEntry {
@@ -381,6 +400,23 @@ export namespace CustomProfile {
      * @deprecated
      */
     profile_id?: string | null;
+  }
+
+  export interface CustomPromptTopicEntry {
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    type: 'custom_prompt_topic';
+
+    updated_at: string;
   }
 
   export interface PredefinedEntry {
