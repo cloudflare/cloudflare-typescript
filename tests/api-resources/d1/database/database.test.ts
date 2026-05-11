@@ -47,6 +47,7 @@ const runTests = (client: PartialCloudflare<{ d1: { database: BaseDatabase } }>)
       name: 'my-database',
       jurisdiction: 'eu',
       primary_location_hint: 'wnam',
+      read_replication: { mode: 'auto' },
     });
   });
 
