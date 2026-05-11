@@ -13,7 +13,8 @@ export class BaseCustomTrustStore extends APIResource {
   ] as const);
 
   /**
-   * Add Custom Origin Trust Store for a Zone.
+   * Upload a root CA certificate to the Custom Origin Trust Store for a Zone. Only
+   * root CA certificates are accepted.
    *
    * @example
    * ```ts
@@ -60,7 +61,7 @@ export class BaseCustomTrustStore extends APIResource {
   }
 
   /**
-   * Removes a CA certificate from the custom origin trust store. Origins using
+   * Removes a root CA certificate from the custom origin trust store. Origins using
    * certificates signed by this CA will no longer be trusted.
    *
    * @example
@@ -87,8 +88,8 @@ export class BaseCustomTrustStore extends APIResource {
   }
 
   /**
-   * Retrieves details about a specific certificate in the custom origin trust store,
-   * including expiration and subject information.
+   * Retrieves details about a specific root CA certificate in the custom origin
+   * trust store, including expiration and subject information.
    *
    * @example
    * ```ts
@@ -124,7 +125,8 @@ export interface CustomTrustStore {
   id: string;
 
   /**
-   * The zone's SSL certificate or certificate and the intermediate(s).
+   * The root CA certificate in PEM format. Only root CA certificates are accepted;
+   * intermediate and leaf certificates are not supported.
    */
   certificate: string;
 
@@ -173,7 +175,8 @@ export interface CustomTrustStoreCreateParams {
   zone_id: string;
 
   /**
-   * Body param: The zone's SSL certificate or certificate and the intermediate(s).
+   * Body param: The root CA certificate in PEM format. Only root CA certificates are
+   * accepted; intermediate and leaf certificates are not supported.
    */
   certificate: string;
 }
