@@ -101,6 +101,11 @@ export interface FleetStatusGetResponse {
    */
   deviceName?: string;
 
+  /**
+   * @deprecated Use `registrationId` instead.
+   */
+  deviceRegistration?: string | null;
+
   diskReadBps?: number | null;
 
   diskUsagePct?: number | null;
