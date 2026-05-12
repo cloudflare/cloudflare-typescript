@@ -1,24 +1,5 @@
 # Changelog
 
-## 6.1.0 (2026-05-04)
-
-Full Changelog: [v6.0.0...v6.1.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.0.0...v6.1.0)
-
-### Features
-
-* chore: skip failing deployment_groups tests ([f4ce98e](https://github.com/cloudflare/cloudflare-typescript/commit/f4ce98e62e99932ee19e99f2f00ac2b21571767e))
-* feat(api): add zero_trust_device_deployment_groups resource ([c05f6d6](https://github.com/cloudflare/cloudflare-typescript/commit/c05f6d6e131080fc5760ff203535c9228409abe6))
-* feat(SCTR): add audit log, classification, and context endpoints to Security Center API ([3791b84](https://github.com/cloudflare/cloudflare-typescript/commit/3791b84b95e0c3c75f711afba089797b7ac1ac23))
-
-
-### Chores
-
-* **api:** update composite API spec ([64244be](https://github.com/cloudflare/cloudflare-typescript/commit/64244be9776cb641b210eb098ba2cd80d68d63ac))
-* **api:** update composite API spec ([7cb65d5](https://github.com/cloudflare/cloudflare-typescript/commit/7cb65d5a12b2ab6aa0682d7daed585fcb2d1826f))
-* **api:** update composite API spec ([8533ac8](https://github.com/cloudflare/cloudflare-typescript/commit/8533ac86bf04e5fac809fe4a678119ba9e09c7a2))
-* **api:** update composite API spec ([04ebcc4](https://github.com/cloudflare/cloudflare-typescript/commit/04ebcc4a76ca2b3921482a757e195840da10b03e))
-* **api:** update composite API spec ([fb5ef8f](https://github.com/cloudflare/cloudflare-typescript/commit/fb5ef8fd097043fe3b538435cdeba7827cd0df38))
-
 ## 6.0.0 (2026-04-30)
 
 This is a major version release of the Cloudflare TypeScript SDK. It includes 11 entirely new top-level API resources, new sub-resources and methods across 50+ existing resources, SDK infrastructure improvements, and breaking changes to the generated API surface from the v5.x line. The total API surface grew from ~96 resource sections to 106, with 885 source files changed.

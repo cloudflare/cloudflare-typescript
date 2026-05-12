@@ -47,7 +47,8 @@ TEST_PATHS=(
 	tests/api-resources/load-balancers/monitors/monitors.test.ts
 	tests/api-resources/load-balancers/monitors/previews.test.ts
 	tests/api-resources/load-balancers/monitors/references.test.ts
-	tests/api-resources/load-balancers/monitor-groups.test.ts
+	tests/api-resources/load-balancers/monitor-groups/monitor-groups.test.ts
+	tests/api-resources/load-balancers/monitor-groups/references.test.ts
 	tests/api-resources/load-balancers/pools/pools.test.ts
 	tests/api-resources/load-balancers/pools/health.test.ts
 	tests/api-resources/load-balancers/pools/references.test.ts
@@ -577,6 +578,9 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/risk-scoring/summary.test.ts
 	tests/api-resources/zero-trust/risk-scoring/integrations/integrations.test.ts
 	tests/api-resources/zero-trust/risk-scoring/integrations/references.test.ts
+	tests/api-resources/zero-trust/resource-library/resource-library.test.ts
+	tests/api-resources/zero-trust/resource-library/applications.test.ts
+	tests/api-resources/zero-trust/resource-library/categories.test.ts
 	tests/api-resources/turnstile/turnstile.test.ts
 	tests/api-resources/turnstile/widgets.test.ts
 	tests/api-resources/connectivity/connectivity.test.ts
@@ -623,9 +627,11 @@ TEST_PATHS=(
 	tests/api-resources/radar/bgp/hijacks/hijacks.test.ts
 	tests/api-resources/radar/bgp/hijacks/events.test.ts
 	tests/api-resources/radar/bgp/routes.test.ts
-	tests/api-resources/radar/bgp/ips.test.ts
+	tests/api-resources/radar/bgp/ips/ips.test.ts
+	tests/api-resources/radar/bgp/ips/top.test.ts
 	tests/api-resources/radar/bgp/rpki/rpki.test.ts
 	tests/api-resources/radar/bgp/rpki/aspa.test.ts
+	tests/api-resources/radar/bgp/rpki/roas.test.ts
 	tests/api-resources/radar/bots/bots.test.ts
 	tests/api-resources/radar/bots/web-crawlers.test.ts
 	tests/api-resources/radar/datasets.test.ts
@@ -777,6 +783,10 @@ TEST_PATHS=(
 	tests/api-resources/ai-gateway/dynamic-routing.test.ts
 	tests/api-resources/ai-gateway/provider-configs.test.ts
 	tests/api-resources/ai-gateway/urls.test.ts
+	tests/api-resources/ai-gateway/billing/billing.test.ts
+	tests/api-resources/ai-gateway/billing/topup/topup.test.ts
+	tests/api-resources/ai-gateway/billing/topup/config.test.ts
+	tests/api-resources/ai-gateway/billing/spending-limit.test.ts
 	tests/api-resources/iam/iam.test.ts
 	tests/api-resources/iam/permission-groups.test.ts
 	tests/api-resources/iam/resource-groups.test.ts
@@ -808,6 +818,8 @@ TEST_PATHS=(
 	tests/api-resources/content-scanning/content-scanning.test.ts
 	tests/api-resources/content-scanning/payloads.test.ts
 	tests/api-resources/content-scanning/settings.test.ts
+	tests/api-resources/ai-security/ai-security.test.ts
+	tests/api-resources/ai-security/custom-topics.test.ts
 	tests/api-resources/abuse-reports/abuse-reports.test.ts
 	tests/api-resources/abuse-reports/mitigations.test.ts
 	tests/api-resources/ai/ai.test.ts
