@@ -30,6 +30,7 @@ describe('resource database', () => {
       name: 'my-database',
       jurisdiction: 'eu',
       primary_location_hint: 'wnam',
+      read_replication: { mode: 'auto' },
     });
   });
 
