@@ -5,6 +5,7 @@ export { ACM, BaseACM } from './acm/acm';
 export { AI, BaseAI } from './ai/ai';
 export { AIGateway, BaseAIGateway } from './ai-gateway/ai-gateway';
 export { AISearch, BaseAISearch } from './aisearch/aisearch';
+export { AISecurity, BaseAISecurity } from './ai-security/ai-security';
 export { APIGateway, BaseAPIGateway } from './api-gateway/api-gateway';
 export { AbuseReports, BaseAbuseReports } from './abuse-reports/abuse-reports';
 export { Accounts, BaseAccounts } from './accounts/accounts';
