@@ -82,6 +82,8 @@ describe('resource dynamicRouting', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiGateway.dynamicRouting.list('54442216', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+      page: 1,
+      per_page: 20,
     });
   });
 
