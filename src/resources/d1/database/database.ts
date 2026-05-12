@@ -701,6 +701,25 @@ export interface DatabaseCreateParams {
    * user.
    */
   primary_location_hint?: 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
+
+  /**
+   * Body param: Configuration for D1 read replication.
+   */
+  read_replication?: DatabaseCreateParams.ReadReplication;
+}
+
+export namespace DatabaseCreateParams {
+  /**
+   * Configuration for D1 read replication.
+   */
+  export interface ReadReplication {
+    /**
+     * The read replication mode for the database. Use 'auto' to create replicas and
+     * allow D1 automatically place them around the world, or 'disabled' to not use any
+     * database replicas (it can take a few hours for all replicas to be deleted).
+     */
+    mode: 'auto' | 'disabled';
+  }
 }
 
 export interface DatabaseUpdateParams {
