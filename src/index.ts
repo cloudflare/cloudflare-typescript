@@ -25,6 +25,7 @@ import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
+import { AISecurity } from './resources/ai-security/ai-security';
 import { AI } from './resources/ai/ai';
 import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
@@ -372,6 +373,7 @@ export class Cloudflare extends Core.APIClient {
   resourceTagging: API.ResourceTagging = new API.ResourceTagging(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
+  aiSecurity: API.AISecurity = new API.AISecurity(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
   aiSearch: API.AISearch = new API.AISearch(this);
@@ -620,6 +622,7 @@ Cloudflare.ResourceSharing = ResourceSharing;
 Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
+Cloudflare.AISecurity = AISecurity;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.AISearch = AISearch;
@@ -858,6 +861,8 @@ export declare namespace Cloudflare {
   export { LeakedCredentialChecks as LeakedCredentialChecks };
 
   export { ContentScanning as ContentScanning };
+
+  export { AISecurity as AISecurity };
 
   export { AbuseReports as AbuseReports };
 
