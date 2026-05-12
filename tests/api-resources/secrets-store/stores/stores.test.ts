@@ -93,6 +93,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: BaseStores
   test.skip('delete: required and optional params', async () => {
     const response = await client.secretsStore.stores.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+      force: true,
     });
   });
 };
