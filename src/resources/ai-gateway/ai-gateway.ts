@@ -89,6 +89,18 @@ import {
 } from './provider-configs';
 import * as URLsAPI from './urls';
 import { URLGetParams, URLGetResponse, URLs } from './urls';
+import * as BillingAPI from './billing/billing';
+import {
+  Billing,
+  BillingCreditBalanceParams,
+  BillingCreditBalanceResponse,
+  BillingInvoiceHistoryParams,
+  BillingInvoiceHistoryResponse,
+  BillingInvoicePreviewParams,
+  BillingInvoicePreviewResponse,
+  BillingUsageHistoryParams,
+  BillingUsageHistoryResponse,
+} from './billing/billing';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
@@ -99,6 +111,7 @@ export class AIGateway extends APIResource {
   dynamicRouting: DynamicRoutingAPI.DynamicRouting = new DynamicRoutingAPI.DynamicRouting(this._client);
   providerConfigs: ProviderConfigsAPI.ProviderConfigs = new ProviderConfigsAPI.ProviderConfigs(this._client);
   urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
+  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
 
   /**
    * Creates a new AI Gateway.
@@ -260,6 +273,8 @@ export interface AIGatewayCreateResponse {
 
   dlp?: AIGatewayCreateResponse.UnionMember0 | AIGatewayCreateResponse.UnionMember1;
 
+  guardrails?: AIGatewayCreateResponse.Guardrails | null;
+
   is_default?: boolean;
 
   log_management?: number | null;
@@ -331,6 +346,74 @@ export namespace AIGatewayCreateResponse {
     }
   }
 
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+  }
+
   export interface Otel {
     authorization: string;
 
@@ -377,6 +460,8 @@ export interface AIGatewayUpdateResponse {
   authentication?: boolean;
 
   dlp?: AIGatewayUpdateResponse.UnionMember0 | AIGatewayUpdateResponse.UnionMember1;
+
+  guardrails?: AIGatewayUpdateResponse.Guardrails | null;
 
   is_default?: boolean;
 
@@ -449,6 +534,74 @@ export namespace AIGatewayUpdateResponse {
     }
   }
 
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+  }
+
   export interface Otel {
     authorization: string;
 
@@ -495,6 +648,8 @@ export interface AIGatewayListResponse {
   authentication?: boolean;
 
   dlp?: AIGatewayListResponse.UnionMember0 | AIGatewayListResponse.UnionMember1;
+
+  guardrails?: AIGatewayListResponse.Guardrails | null;
 
   is_default?: boolean;
 
@@ -567,6 +722,74 @@ export namespace AIGatewayListResponse {
     }
   }
 
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+  }
+
   export interface Otel {
     authorization: string;
 
@@ -613,6 +836,8 @@ export interface AIGatewayDeleteResponse {
   authentication?: boolean;
 
   dlp?: AIGatewayDeleteResponse.UnionMember0 | AIGatewayDeleteResponse.UnionMember1;
+
+  guardrails?: AIGatewayDeleteResponse.Guardrails | null;
 
   is_default?: boolean;
 
@@ -685,6 +910,74 @@ export namespace AIGatewayDeleteResponse {
     }
   }
 
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+  }
+
   export interface Otel {
     authorization: string;
 
@@ -731,6 +1024,8 @@ export interface AIGatewayGetResponse {
   authentication?: boolean;
 
   dlp?: AIGatewayGetResponse.UnionMember0 | AIGatewayGetResponse.UnionMember1;
+
+  guardrails?: AIGatewayGetResponse.Guardrails | null;
 
   is_default?: boolean;
 
@@ -800,6 +1095,74 @@ export namespace AIGatewayGetResponse {
       enabled: boolean;
 
       profiles: Array<string>;
+    }
+  }
+
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
     }
   }
 
@@ -963,6 +1326,11 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param
    */
+  guardrails?: AIGatewayUpdateParams.Guardrails | null;
+
+  /**
+   * Body param
+   */
   log_management?: number | null;
 
   /**
@@ -1056,6 +1424,74 @@ export namespace AIGatewayUpdateParams {
     }
   }
 
+  export interface Guardrails {
+    prompt: Guardrails.Prompt;
+
+    response: Guardrails.Response;
+  }
+
+  export namespace Guardrails {
+    export interface Prompt {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+
+    export interface Response {
+      P1?: 'FLAG' | 'BLOCK';
+
+      S1?: 'FLAG' | 'BLOCK';
+
+      S10?: 'FLAG' | 'BLOCK';
+
+      S11?: 'FLAG' | 'BLOCK';
+
+      S12?: 'FLAG' | 'BLOCK';
+
+      S13?: 'FLAG' | 'BLOCK';
+
+      S2?: 'FLAG' | 'BLOCK';
+
+      S3?: 'FLAG' | 'BLOCK';
+
+      S4?: 'FLAG' | 'BLOCK';
+
+      S5?: 'FLAG' | 'BLOCK';
+
+      S6?: 'FLAG' | 'BLOCK';
+
+      S7?: 'FLAG' | 'BLOCK';
+
+      S8?: 'FLAG' | 'BLOCK';
+
+      S9?: 'FLAG' | 'BLOCK';
+    }
+  }
+
   export interface Otel {
     authorization: string;
 
@@ -1112,6 +1548,7 @@ AIGateway.DynamicRouting = DynamicRouting;
 AIGateway.ProviderConfigs = ProviderConfigs;
 AIGateway.ProviderConfigListResponsesV4PagePaginationArray = ProviderConfigListResponsesV4PagePaginationArray;
 AIGateway.URLs = URLs;
+AIGateway.Billing = Billing;
 
 export declare namespace AIGateway {
   export {
@@ -1214,4 +1651,16 @@ export declare namespace AIGateway {
   };
 
   export { URLs as URLs, type URLGetResponse as URLGetResponse, type URLGetParams as URLGetParams };
+
+  export {
+    Billing as Billing,
+    type BillingCreditBalanceResponse as BillingCreditBalanceResponse,
+    type BillingInvoiceHistoryResponse as BillingInvoiceHistoryResponse,
+    type BillingInvoicePreviewResponse as BillingInvoicePreviewResponse,
+    type BillingUsageHistoryResponse as BillingUsageHistoryResponse,
+    type BillingCreditBalanceParams as BillingCreditBalanceParams,
+    type BillingInvoiceHistoryParams as BillingInvoiceHistoryParams,
+    type BillingInvoicePreviewParams as BillingInvoicePreviewParams,
+    type BillingUsageHistoryParams as BillingUsageHistoryParams,
+  };
 }
