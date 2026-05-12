@@ -19,7 +19,8 @@ const partialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ aiSecurity: BaseAISecurity }>) => {
-  test('update: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('update: only required params', async () => {
     const responsePromise = client.aiSecurity.update({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,14 +31,16 @@ const runTests = (client: PartialCloudflare<{ aiSecurity: BaseAISecurity }>) => 
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('update: required and optional params', async () => {
     const response = await client.aiSecurity.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
     });
   });
 
-  test('get: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.aiSecurity.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +51,8 @@ const runTests = (client: PartialCloudflare<{ aiSecurity: BaseAISecurity }>) => 
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.aiSecurity.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 };
