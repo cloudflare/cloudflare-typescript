@@ -27,7 +27,8 @@ describe('resource billing', () => {
     const response = await client.aiGateway.billing.creditBalance({ account_id: 'account_id' });
   });
 
-  test('invoiceHistory: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('invoiceHistory: only required params', async () => {
     const responsePromise = client.aiGateway.billing.invoiceHistory({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -38,11 +39,13 @@ describe('resource billing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('invoiceHistory: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('invoiceHistory: required and optional params', async () => {
     const response = await client.aiGateway.billing.invoiceHistory({ account_id: 'account_id', type: 'all' });
   });
 
-  test('invoicePreview: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('invoicePreview: only required params', async () => {
     const responsePromise = client.aiGateway.billing.invoicePreview({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -53,11 +56,13 @@ describe('resource billing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('invoicePreview: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('invoicePreview: required and optional params', async () => {
     const response = await client.aiGateway.billing.invoicePreview({ account_id: 'account_id' });
   });
 
-  test('usageHistory: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('usageHistory: only required params', async () => {
     const responsePromise = client.aiGateway.billing.usageHistory({
       account_id: 'account_id',
       value_grouping_window: 'day',
@@ -71,7 +76,8 @@ describe('resource billing', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('usageHistory: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('usageHistory: required and optional params', async () => {
     const response = await client.aiGateway.billing.usageHistory({
       account_id: 'account_id',
       value_grouping_window: 'day',
