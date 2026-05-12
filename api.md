@@ -219,6 +219,8 @@ Types:
 
 # [ContentScanning](src/resources/content-scanning/api.md)
 
+# [AISecurity](src/resources/ai-security/api.md)
+
 # [AbuseReports](src/resources/abuse-reports/api.md)
 
 # [AI](src/resources/ai/api.md)
