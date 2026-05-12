@@ -17,4 +17,3 @@ jobs:
       - name: Check release environment
         run: |
           bash ./bin/check-release-environment
-
