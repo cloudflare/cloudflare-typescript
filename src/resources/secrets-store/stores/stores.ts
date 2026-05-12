@@ -74,7 +74,10 @@ export class Stores extends APIResource {
   }
 
   /**
-   * Deletes a single store
+   * Deletes a single store. By default, a store that still contains secrets cannot
+   * be deleted and returns HTTP 409 (Conflict) with the "store_not_empty" error.
+   * Pass `force=true` to cascade-delete all secrets in the store. Empty stores are
+   * always deleted regardless of the force parameter.
    *
    * @example
    * ```ts
@@ -89,12 +92,12 @@ export class Stores extends APIResource {
     params: StoreDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<StoreDeleteResponse | null> {
-    const { account_id } = params;
+    const { account_id, force } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/secrets_store/stores/${storeId}`,
-        options,
-      ) as Core.APIPromise<{ result: StoreDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/secrets_store/stores/${storeId}`, {
+        query: { force },
+        ...options,
+      }) as Core.APIPromise<{ result: StoreDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -191,9 +194,16 @@ export interface StoreListParams extends V4PagePaginationArrayParams {
 
 export interface StoreDeleteParams {
   /**
-   * Account Identifier
+   * Path param: Account Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: When true, cascade-deletes all secrets in the store before deleting
+   * the store itself. Required when deleting a non-empty store. Without this
+   * parameter, attempting to delete a non-empty store returns 409.
+   */
+  force?: boolean;
 }
 
 Stores.StoreListResponsesV4PagePaginationArray = StoreListResponsesV4PagePaginationArray;
