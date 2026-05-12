@@ -192,7 +192,8 @@ export type CustomListResponse =
   | CustomListResponse.UnionMember2
   | CustomListResponse.UnionMember3
   | CustomListResponse.UnionMember4
-  | CustomListResponse.UnionMember5;
+  | CustomListResponse.UnionMember5
+  | CustomListResponse.UnionMember6;
 
 export namespace CustomListResponse {
   export interface UnionMember0 {
@@ -226,7 +227,26 @@ export namespace CustomListResponse {
   export interface UnionMember1 {
     id: string;
 
-    confidence: UnionMember1.Confidence;
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    type: 'custom_prompt_topic';
+
+    updated_at: string;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export interface UnionMember2 {
+    id: string;
+
+    confidence: UnionMember2.Confidence;
 
     enabled: boolean;
 
@@ -244,10 +264,10 @@ export namespace CustomListResponse {
     /**
      * A Predefined AI prompt classification topic entry.
      */
-    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
+    variant?: UnionMember2.UnionMember0 | UnionMember2.UnionMember1;
   }
 
-  export namespace UnionMember1 {
+  export namespace UnionMember2 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -289,7 +309,7 @@ export namespace CustomListResponse {
     }
   }
 
-  export interface UnionMember2 {
+  export interface UnionMember3 {
     id: string;
 
     created_at: string;
@@ -307,7 +327,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface UnionMember3 {
+  export interface UnionMember4 {
     id: string;
 
     /**
@@ -331,7 +351,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface UnionMember4 {
+  export interface UnionMember5 {
     id: string;
 
     created_at: string;
@@ -347,7 +367,7 @@ export namespace CustomListResponse {
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export interface UnionMember5 {
+  export interface UnionMember6 {
     id: string;
 
     created_at: string;
@@ -376,7 +396,8 @@ export type CustomGetResponse =
   | CustomGetResponse.UnionMember2
   | CustomGetResponse.UnionMember3
   | CustomGetResponse.UnionMember4
-  | CustomGetResponse.UnionMember5;
+  | CustomGetResponse.UnionMember5
+  | CustomGetResponse.UnionMember6;
 
 export namespace CustomGetResponse {
   export interface UnionMember0 {
@@ -423,7 +444,39 @@ export namespace CustomGetResponse {
   export interface UnionMember1 {
     id: string;
 
-    confidence: UnionMember1.Confidence;
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    type: 'custom_prompt_topic';
+
+    updated_at: string;
+
+    profiles?: Array<UnionMember1.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export namespace UnionMember1 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember2 {
+    id: string;
+
+    confidence: UnionMember2.Confidence;
 
     enabled: boolean;
 
@@ -436,17 +489,17 @@ export namespace CustomGetResponse {
      */
     profile_id?: string | null;
 
-    profiles?: Array<UnionMember1.Profile>;
+    profiles?: Array<UnionMember2.Profile>;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
 
     /**
      * A Predefined AI prompt classification topic entry.
      */
-    variant?: UnionMember1.UnionMember0 | UnionMember1.UnionMember1;
+    variant?: UnionMember2.UnionMember0 | UnionMember2.UnionMember1;
   }
 
-  export namespace UnionMember1 {
+  export namespace UnionMember2 {
     export interface Confidence {
       /**
        * Indicates whether this entry has AI remote service validation.
@@ -497,7 +550,7 @@ export namespace CustomGetResponse {
     }
   }
 
-  export interface UnionMember2 {
+  export interface UnionMember3 {
     id: string;
 
     created_at: string;
@@ -511,43 +564,6 @@ export namespace CustomGetResponse {
     updated_at: string;
 
     profile_id?: string | null;
-
-    profiles?: Array<UnionMember2.Profile>;
-
-    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
-  }
-
-  export namespace UnionMember2 {
-    /**
-     * Computed entry field for a profile that an entry is shared into.
-     */
-    export interface Profile {
-      id: string;
-
-      name: string;
-    }
-  }
-
-  export interface UnionMember3 {
-    id: string;
-
-    /**
-     * Only applies to custom word lists. Determines if the words should be matched in
-     * a case-sensitive manner Cannot be set to false if secret is true
-     */
-    case_sensitive: boolean;
-
-    created_at: string;
-
-    enabled: boolean;
-
-    name: string;
-
-    secret: boolean;
-
-    type: 'exact_data';
-
-    updated_at: string;
 
     profiles?: Array<UnionMember3.Profile>;
 
@@ -568,13 +584,21 @@ export namespace CustomGetResponse {
   export interface UnionMember4 {
     id: string;
 
+    /**
+     * Only applies to custom word lists. Determines if the words should be matched in
+     * a case-sensitive manner Cannot be set to false if secret is true
+     */
+    case_sensitive: boolean;
+
     created_at: string;
 
     enabled: boolean;
 
     name: string;
 
-    type: 'document_fingerprint';
+    secret: boolean;
+
+    type: 'exact_data';
 
     updated_at: string;
 
@@ -603,6 +627,35 @@ export namespace CustomGetResponse {
 
     name: string;
 
+    type: 'document_fingerprint';
+
+    updated_at: string;
+
+    profiles?: Array<UnionMember5.Profile>;
+
+    upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+  }
+
+  export namespace UnionMember5 {
+    /**
+     * Computed entry field for a profile that an entry is shared into.
+     */
+    export interface Profile {
+      id: string;
+
+      name: string;
+    }
+  }
+
+  export interface UnionMember6 {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
     type: 'word_list';
 
     updated_at: string;
@@ -611,12 +664,12 @@ export namespace CustomGetResponse {
 
     profile_id?: string | null;
 
-    profiles?: Array<UnionMember5.Profile>;
+    profiles?: Array<UnionMember6.Profile>;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
-  export namespace UnionMember5 {
+  export namespace UnionMember6 {
     /**
      * Computed entry field for a profile that an entry is shared into.
      */
