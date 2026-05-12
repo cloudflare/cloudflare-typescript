@@ -37,7 +37,8 @@ const runTests = (client: PartialCloudflare<{ cache: BaseCache }>) => {
     });
   });
 
-  test('purgeEnvironment: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('purgeEnvironment: only required params', async () => {
     const responsePromise = client.cache.purgeEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -50,7 +51,8 @@ const runTests = (client: PartialCloudflare<{ cache: BaseCache }>) => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('purgeEnvironment: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('purgeEnvironment: required and optional params', async () => {
     const response = await client.cache.purgeEnvironment('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       tags: ['a-cache-tag', 'another-cache-tag'],

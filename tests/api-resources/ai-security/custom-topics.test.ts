@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ aiSecurity: { customTopics: BaseCustomTopics } }>) => {
-  test('update: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('update: only required params', async () => {
     const responsePromise = client.aiSecurity.customTopics.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -40,14 +41,16 @@ const runTests = (client: PartialCloudflare<{ aiSecurity: { customTopics: BaseCu
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('update: required and optional params', async () => {
     const response = await client.aiSecurity.customTopics.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       topics: [{ label: 'credit-cards', topic: 'credit card numbers' }],
     });
   });
 
-  test('get: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.aiSecurity.customTopics.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -60,7 +63,8 @@ const runTests = (client: PartialCloudflare<{ aiSecurity: { customTopics: BaseCu
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.aiSecurity.customTopics.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

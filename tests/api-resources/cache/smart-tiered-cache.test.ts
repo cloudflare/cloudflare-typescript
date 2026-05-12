@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ cache: { smartTieredCache: BaseSmartTieredCache } }>) => {
-  test('create: only required params', async () => {
+  // HTTP 405 error from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.cache.smartTieredCache.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'on',
@@ -41,7 +42,8 @@ const runTests = (client: PartialCloudflare<{ cache: { smartTieredCache: BaseSma
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 405 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.cache.smartTieredCache.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: 'on',
