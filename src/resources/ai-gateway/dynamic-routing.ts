@@ -82,8 +82,11 @@ export class DynamicRouting extends APIResource {
     params: DynamicRoutingListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DynamicRoutingListResponse> {
-    const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/routes`, options);
+    const { account_id, ...query } = params;
+    return this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/routes`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -491,6 +494,8 @@ export namespace DynamicRoutingCreateResponse {
     data: string;
 
     version_id: string;
+
+    is_valid?: boolean;
   }
 }
 
@@ -701,6 +706,8 @@ export namespace DynamicRoutingUpdateResponse {
       data: string;
 
       version_id: string;
+
+      is_valid?: boolean;
     }
   }
 }
@@ -925,6 +932,8 @@ export namespace DynamicRoutingListResponse {
         data: string;
 
         version_id: string;
+
+        is_valid?: boolean;
       }
     }
   }
@@ -1665,6 +1674,8 @@ export namespace DynamicRoutingGetResponse {
     data: string;
 
     version_id: string;
+
+    is_valid?: boolean;
   }
 }
 
@@ -1693,6 +1704,8 @@ export interface DynamicRoutingGetVersionResponse {
   name: string;
 
   version_id: string;
+
+  is_valid?: boolean;
 }
 
 export namespace DynamicRoutingGetVersionResponse {
@@ -1911,6 +1924,8 @@ export namespace DynamicRoutingListVersionsResponse {
       data: string;
 
       version_id: string;
+
+      is_valid?: boolean;
     }
   }
 }
@@ -2110,7 +2125,20 @@ export interface DynamicRoutingUpdateParams {
 }
 
 export interface DynamicRoutingListParams {
+  /**
+   * Path param
+   */
   account_id: string;
+
+  /**
+   * Query param: Page number
+   */
+  page?: number;
+
+  /**
+   * Query param: Number of routes per page
+   */
+  per_page?: number;
 }
 
 export interface DynamicRoutingDeleteParams {
