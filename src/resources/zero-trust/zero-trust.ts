@@ -64,6 +64,8 @@ import {
   OrganizationUpdateParams,
   Organizations,
 } from './organizations/organizations';
+import * as ResourceLibraryAPI from './resource-library/resource-library';
+import { ResourceLibrary } from './resource-library/resource-library';
 import * as RiskScoringAPI from './risk-scoring/risk-scoring';
 import {
   RiskScoring,
@@ -97,6 +99,7 @@ export class ZeroTrust extends APIResource {
   gateway: GatewayAPI.Gateway = new GatewayAPI.Gateway(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
   riskScoring: RiskScoringAPI.RiskScoring = new RiskScoringAPI.RiskScoring(this._client);
+  resourceLibrary: ResourceLibraryAPI.ResourceLibrary = new ResourceLibraryAPI.ResourceLibrary(this._client);
 }
 
 ZeroTrust.Devices = Devices;
@@ -116,6 +119,7 @@ ZeroTrust.DLP = DLP;
 ZeroTrust.Gateway = Gateway;
 ZeroTrust.Networks = Networks;
 ZeroTrust.RiskScoring = RiskScoring;
+ZeroTrust.ResourceLibrary = ResourceLibrary;
 
 export declare namespace ZeroTrust {
   export {
@@ -207,4 +211,6 @@ export declare namespace ZeroTrust {
     type RiskScoringGetParams as RiskScoringGetParams,
     type RiskScoringResetParams as RiskScoringResetParams,
   };
+
+  export { ResourceLibrary as ResourceLibrary };
 }

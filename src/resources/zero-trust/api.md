@@ -1738,3 +1738,29 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/zt_risk_scoring/integrations/reference_id/{reference_id}">client.zeroTrust.riskScoring.integrations.references.<a href="./src/resources/zero-trust/risk-scoring/integrations/references.ts">get</a>(referenceId, { ...params }) -> ReferenceGetResponse</code>
+
+## ResourceLibrary
+
+### Applications
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/resource-library/applications">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">get</a>(id, { ...params }) -> ApplicationGetResponse</code>
+
+### Categories
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/resource-library/categories.ts">CategoryListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/resource-library/categories.ts">CategoryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/resource-library/categories">client.zeroTrust.resourceLibrary.categories.<a href="./src/resources/zero-trust/resource-library/categories.ts">list</a>({ ...params }) -> CategoryListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/resource-library/categories/{id}">client.zeroTrust.resourceLibrary.categories.<a href="./src/resources/zero-trust/resource-library/categories.ts">get</a>(id, { ...params }) -> CategoryGetResponse</code>

@@ -109,6 +109,7 @@ export interface PredefinedProfile {
    */
   entries: Array<
     | PredefinedProfile.CustomEntry
+    | PredefinedProfile.CustomPromptTopicEntry
     | PredefinedProfile.PredefinedEntry
     | PredefinedProfile.IntegrationEntry
     | PredefinedProfile.ExactDataEntry
@@ -156,6 +157,23 @@ export namespace PredefinedProfile {
      * @deprecated
      */
     profile_id?: string | null;
+  }
+
+  export interface CustomPromptTopicEntry {
+    id: string;
+
+    created_at: string;
+
+    /**
+     * @deprecated
+     */
+    enabled: boolean;
+
+    name: string;
+
+    type: 'custom_prompt_topic';
+
+    updated_at: string;
   }
 
   export interface PredefinedEntry {
