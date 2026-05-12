@@ -11,7 +11,7 @@ export {
   type MonitorGroupDeleteParams,
   type MonitorGroupEditParams,
   type MonitorGroupGetParams,
-} from './monitor-groups';
+} from './monitor-groups/index';
 export {
   MonitorsSinglePage,
   Monitors,
