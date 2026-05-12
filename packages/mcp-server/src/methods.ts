@@ -12573,6 +12573,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/content-upload-scan/settings',
   },
   {
+    clientCallName: 'client.aiSecurity.update',
+    fullyQualifiedName: 'aiSecurity.update',
+    httpMethod: 'put',
+    httpPath: '/zones/{zone_id}/ai-security/settings',
+  },
+  {
+    clientCallName: 'client.aiSecurity.get',
+    fullyQualifiedName: 'aiSecurity.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/ai-security/settings',
+  },
+  {
+    clientCallName: 'client.aiSecurity.customTopics.update',
+    fullyQualifiedName: 'aiSecurity.customTopics.update',
+    httpMethod: 'put',
+    httpPath: '/zones/{zone_id}/ai-security/custom-topics',
+  },
+  {
+    clientCallName: 'client.aiSecurity.customTopics.get',
+    fullyQualifiedName: 'aiSecurity.customTopics.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/ai-security/custom-topics',
+  },
+  {
     clientCallName: 'client.abuseReports.create',
     fullyQualifiedName: 'abuseReports.create',
     httpMethod: 'post',
