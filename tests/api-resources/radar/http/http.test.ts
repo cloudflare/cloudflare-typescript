@@ -44,6 +44,7 @@ const runTests = (client: PartialCloudflare<{ radar: { http: BaseHTTP } }>) => {
       client.radar.http.summaryV2(
         'ADM1',
         {
+          apiTraffic: ['API'],
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
@@ -84,6 +85,7 @@ const runTests = (client: PartialCloudflare<{ radar: { http: BaseHTTP } }>) => {
       client.radar.http.timeseries(
         {
           aggInterval: '1h',
+          apiTraffic: ['API'],
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -126,6 +128,7 @@ const runTests = (client: PartialCloudflare<{ radar: { http: BaseHTTP } }>) => {
         'ADM1',
         {
           aggInterval: '1h',
+          apiTraffic: ['API'],
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],

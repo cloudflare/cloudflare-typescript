@@ -46,6 +46,7 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { investigate: Base
       action_log: true,
       alert_id: 'alert_id',
       cursor: 'cursor',
+      delivery_status: 'delivered',
       detections_only: true,
       domain: 'domain',
       end: '2019-12-27T18:11:19.117Z',
