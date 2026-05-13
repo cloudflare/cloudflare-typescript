@@ -80,6 +80,7 @@ export class HTTP extends APIResource {
   summaryV2(
     dimension:
       | 'ADM1'
+      | 'API_TRAFFIC'
       | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
@@ -98,6 +99,7 @@ export class HTTP extends APIResource {
   summaryV2(
     dimension:
       | 'ADM1'
+      | 'API_TRAFFIC'
       | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
@@ -115,6 +117,7 @@ export class HTTP extends APIResource {
   summaryV2(
     dimension:
       | 'ADM1'
+      | 'API_TRAFFIC'
       | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
@@ -180,6 +183,7 @@ export class HTTP extends APIResource {
   timeseriesGroupsV2(
     dimension:
       | 'ADM1'
+      | 'API_TRAFFIC'
       | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
@@ -198,6 +202,7 @@ export class HTTP extends APIResource {
   timeseriesGroupsV2(
     dimension:
       | 'ADM1'
+      | 'API_TRAFFIC'
       | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
@@ -215,6 +220,7 @@ export class HTTP extends APIResource {
   timeseriesGroupsV2(
     dimension:
       | 'ADM1'
+      | 'API_TRAFFIC'
       | 'AS'
       | 'BOT_CLASS'
       | 'BROWSER'
@@ -657,6 +663,12 @@ export namespace HTTPTimeseriesGroupsV2Response {
 
 export interface HTTPSummaryV2Params {
   /**
+   * Filters results by API traffic classification. API traffic is identified by JSON
+   * or XML response content types on dynamic (non-cacheable) HTTP requests.
+   */
+  apiTraffic?: Array<'API' | 'NON_API'>;
+
+  /**
    * Filters results by Autonomous System. Specify one or more Autonomous System
    * Numbers (ASNs) as a comma-separated list. Prefix with `-` to exclude ASNs from
    * results. For example, `-174, 3356` excludes results from AS174, but includes
@@ -764,6 +776,12 @@ export interface HTTPTimeseriesParams {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Filters results by API traffic classification. API traffic is identified by JSON
+   * or XML response content types on dynamic (non-cacheable) HTTP requests.
+   */
+  apiTraffic?: Array<'API' | 'NON_API'>;
 
   /**
    * Filters results by Autonomous System. Specify one or more Autonomous System
@@ -877,6 +895,12 @@ export interface HTTPTimeseriesGroupsV2Params {
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
+
+  /**
+   * Filters results by API traffic classification. API traffic is identified by JSON
+   * or XML response content types on dynamic (non-cacheable) HTTP requests.
+   */
+  apiTraffic?: Array<'API' | 'NON_API'>;
 
   /**
    * Filters results by Autonomous System. Specify one or more Autonomous System

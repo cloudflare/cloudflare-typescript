@@ -205,6 +205,10 @@ export interface InvestigateListResponse {
 
   sent_date?: string | null;
 
+  smtp_helo_server_ip?: string | null;
+
+  smtp_previous_hop_ip?: string | null;
+
   subject?: string | null;
 
   threat_categories?: Array<string> | null;
@@ -214,6 +218,8 @@ export interface InvestigateListResponse {
   to_name?: Array<string> | null;
 
   validation?: InvestigateListResponse.Validation;
+
+  x_originating_ip?: string | null;
 }
 
 export namespace InvestigateListResponse {
@@ -459,6 +465,10 @@ export interface InvestigateGetResponse {
 
   sent_date?: string | null;
 
+  smtp_helo_server_ip?: string | null;
+
+  smtp_previous_hop_ip?: string | null;
+
   subject?: string | null;
 
   threat_categories?: Array<string> | null;
@@ -468,6 +478,8 @@ export interface InvestigateGetResponse {
   to_name?: Array<string> | null;
 
   validation?: InvestigateGetResponse.Validation;
+
+  x_originating_ip?: string | null;
 }
 
 export namespace InvestigateGetResponse {
@@ -625,6 +637,11 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
    * Query param
    */
   cursor?: string;
+
+  /**
+   * Query param: Delivery status to filter by.
+   */
+  delivery_status?: 'delivered' | 'moved' | 'quarantined' | 'rejected' | 'deferred' | 'bounced' | 'queued';
 
   /**
    * Query param: Whether to include only detections in search results.
