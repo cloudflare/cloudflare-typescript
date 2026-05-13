@@ -34,6 +34,7 @@ describe('resource http', () => {
       client.radar.http.summaryV2(
         'ADM1',
         {
+          apiTraffic: ['API'],
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
@@ -81,6 +82,7 @@ describe('resource http', () => {
       client.radar.http.timeseries(
         {
           aggInterval: '1h',
+          apiTraffic: ['API'],
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           browserFamily: ['CHROME'],
@@ -130,6 +132,7 @@ describe('resource http', () => {
         'ADM1',
         {
           aggInterval: '1h',
+          apiTraffic: ['API'],
           asn: ['string'],
           botClass: ['LIKELY_AUTOMATED'],
           continent: ['string'],
