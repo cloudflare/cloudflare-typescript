@@ -4,6 +4,8 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as IdentityProvidersAPI from './identity-providers';
+import * as SAMLCertificateAPI from './saml-certificate';
+import { SAMLCertificate } from './saml-certificate';
 import * as SCIMAPI from './scim/scim';
 import { SCIM } from './scim/scim';
 import { CloudflareError } from '../../../error';
@@ -11,6 +13,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class IdentityProviders extends APIResource {
   scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
+  samlCertificate: SAMLCertificateAPI.SAMLCertificate = new SAMLCertificateAPI.SAMLCertificate(this._client);
 
   /**
    * Adds a new identity provider to Access.
@@ -4736,6 +4739,7 @@ export interface IdentityProviderGetParams {
 IdentityProviders.IdentityProviderListResponsesV4PagePaginationArray =
   IdentityProviderListResponsesV4PagePaginationArray;
 IdentityProviders.SCIM = SCIM;
+IdentityProviders.SAMLCertificate = SAMLCertificate;
 
 export declare namespace IdentityProviders {
   export {
@@ -4755,4 +4759,6 @@ export declare namespace IdentityProviders {
   };
 
   export { SCIM as SCIM };
+
+  export { SAMLCertificate as SAMLCertificate };
 }
