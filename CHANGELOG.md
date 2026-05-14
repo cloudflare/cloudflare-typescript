@@ -6,34 +6,273 @@ Full Changelog: [v6.1.0...v6.2.0](https://github.com/cloudflare/cloudflare-types
 
 ### Features
 
-* **ai-gateway:** add billing, billing/billing, billing/index ([6f4c052](https://github.com/cloudflare/cloudflare-typescript/commit/6f4c0529c7c0a562a7ce1d9c8b35bef6bba9616c))
-* **ai-security:** add ai-security resource ([4959946](https://github.com/cloudflare/cloudflare-typescript/commit/4959946779e9979969e0cfe37524a89ed1e3e46b))
-* **ddos-protection:** add ddos-protection resource ([0cd6242](https://github.com/cloudflare/cloudflare-typescript/commit/0cd62421cd9977c2d24c1691cc08acb8b3597607))
-* **load-balancers:** add monitor-groups/index, monitor-groups/monitor-groups, monitor-groups/references ([00f63c7](https://github.com/cloudflare/cloudflare-typescript/commit/00f63c7e22ed068dd8bf4a636a70238df301b80f))
-* **radar:** add bgp/ips/index, bgp/ips/ips, bgp/ips/top ([9af4cde](https://github.com/cloudflare/cloudflare-typescript/commit/9af4cdefbf1f5f26a509bd43cb192aa77e25f830))
-* **zero-trust:** add resource-library, resource-library/applications, resource-library/categories ([5e7609f](https://github.com/cloudflare/cloudflare-typescript/commit/5e7609f9c83828edf8ef9102d660e994c70cf608))
+#### New Resources
 
+* **api:** add DDoS Protection resource with Advanced TCP Protection endpoints -- allowlist (CRUD + bulk delete), prefixes (CRUD + bulk create/delete), syn-protection filters/rules (CRUD + bulk delete), tcp-flow-protection filters/rules (CRUD + bulk delete), status (edit/get) ([0cd6242](https://github.com/cloudflare/cloudflare-typescript/commit/0cd62421c))
+* **api:** add AI Security resource with settings (update/get) and custom topics (update/get) endpoints ([4959946](https://github.com/cloudflare/cloudflare-typescript/commit/495994677))
+
+#### New Sub-Resources
+
+* **ai-gateway:** add billing sub-resource -- credit balance, invoice history, invoice preview, usage history, spending limit (create/delete/get), topup config (create/delete/get), topup (create/status) ([6f4c052](https://github.com/cloudflare/cloudflare-typescript/commit/6f4c0529c))
+* **ai-gateway:** add `guardrails` configuration to all AI Gateway response and param types with prompt/response safety classification (P1, S1-S13 categories, FLAG/BLOCK actions) ([6f4c052](https://github.com/cloudflare/cloudflare-typescript/commit/6f4c0529c))
+* **ai-gateway:** add `is_valid` field to dynamic routing response types ([6f4c052](https://github.com/cloudflare/cloudflare-typescript/commit/6f4c0529c))
+* **load-balancers:** add monitor group references sub-resource (get) ([00f63c7](https://github.com/cloudflare/cloudflare-typescript/commit/00f63c7e2))
+* **radar:** add BGP IPs top ASes sub-resource ([9af4cde](https://github.com/cloudflare/cloudflare-typescript/commit/9af4cdefb))
+* **radar:** add BGP RPKI ROAs timeseries sub-resource ([9af4cde](https://github.com/cloudflare/cloudflare-typescript/commit/9af4cdefb))
+* **zero-trust:** add resource library sub-resource -- applications (create/update/list/delete/get) and categories (list) ([5e7609f](https://github.com/cloudflare/cloudflare-typescript/commit/5e7609f9c))
+
+#### New Fields and Parameters
+
+* **cloudforce-one:** add `taxii` format option for threat event exports ([1ff832a](https://github.com/cloudflare/cloudflare-typescript/commit/1ff832aa1))
+* **d1:** add `read_replication` configuration param to `DatabaseCreateParams` with `mode: 'auto' | 'disabled'` ([450e0f0](https://github.com/cloudflare/cloudflare-typescript/commit/450e0f0c2))
+* **email-security:** add `smtp_helo_server_ip`, `smtp_previous_hop_ip`, `x_originating_ip` response fields; add `delivery_status` filter param ([083fe7f](https://github.com/cloudflare/cloudflare-typescript/commit/083fe7f08))
+* **intel:** add `latest_upload_error` field to indicator feed responses ([a612880](https://github.com/cloudflare/cloudflare-typescript/commit/a6128802c))
+* **radar:** add `apiTraffic` filter param (`API` | `NON_API`) to HTTP summary, timeseries groups, and top endpoints ([c3a2fb0](https://github.com/cloudflare/cloudflare-typescript/commit/c3a2fb08c))
+* **resource-sharing:** add `idp-federation-grant` sharing type; add `tag` query param for filtering shares by key/value pairs ([fd7d870](https://github.com/cloudflare/cloudflare-typescript/commit/fd7d870e0))
+* **secrets-store:** add `force` query param to store delete for cascade-deleting secrets ([e046da9](https://github.com/cloudflare/cloudflare-typescript/commit/e046da98b))
+* **url-scanner:** add `mpp` (Malicious Payment Page) detection to commerce scan results with evidence, findings, request/response details ([19ab611](https://github.com/cloudflare/cloudflare-typescript/commit/19ab6118f))
+* **workflows:** add `sensitive: 'output'` option to step configuration for redacting step output from logs ([069930b](https://github.com/cloudflare/cloudflare-typescript/commit/069930bc3))
+* **zero-trust:** add `custom_prompt_topic` DLP entry type with `upload_status`, `profiles` fields across DLP entry and profile types ([5e7609f](https://github.com/cloudflare/cloudflare-typescript/commit/5e7609f9c))
+* **zero-trust:** add deprecated `deviceRegistration` field to fleet status responses (use `registrationId` instead) ([5e7609f](https://github.com/cloudflare/cloudflare-typescript/commit/5e7609f9c))
+* **zones:** add `total_pages` field to zone listing pagination metadata ([1c444a3](https://github.com/cloudflare/cloudflare-typescript/commit/1c444a35b))
 
 ### Chores
 
-* **acm:** update generated types and methods ([cf1329e](https://github.com/cloudflare/cloudflare-typescript/commit/cf1329e68b561c03d28d852bf52ee81c5f905078))
-* **aisearch:** update generated types and methods ([f282d9b](https://github.com/cloudflare/cloudflare-typescript/commit/f282d9b3db9dcace369cf37489757aeaecd792a2))
-* **cloudforce-one:** update generated types and methods ([1ff832a](https://github.com/cloudflare/cloudflare-typescript/commit/1ff832aa1b86243177c4102fa84778b0c4342657))
-* **d1:** update generated types and methods ([450e0f0](https://github.com/cloudflare/cloudflare-typescript/commit/450e0f0c2f70da0b5b1f472e9476427b09827031))
-* **email-security:** update generated types and methods ([083fe7f](https://github.com/cloudflare/cloudflare-typescript/commit/083fe7f0853da6989dfe1567aa1e921aa8f75aea))
-* **intel:** update generated types and methods ([60480bc](https://github.com/cloudflare/cloudflare-typescript/commit/60480bcfaa979bbeea96addda1adcb3f7e64fa9a))
-* **intel:** update generated types and methods ([a612880](https://github.com/cloudflare/cloudflare-typescript/commit/a6128802cbc9f3b600b1d16826b35ded7127394c))
-* **internal:** restore version update ([02afac7](https://github.com/cloudflare/cloudflare-typescript/commit/02afac73c5d750ef3707e795636bed4abfa4138c))
-* **radar:** update generated types and methods ([c3a2fb0](https://github.com/cloudflare/cloudflare-typescript/commit/c3a2fb08c9a4c75646b7c5c178c926a9a7d3c1fd))
-* **resource-sharing:** update generated types and methods ([fd7d870](https://github.com/cloudflare/cloudflare-typescript/commit/fd7d870e04b97467d6115d281e5c5da57b5289f6))
-* **secrets-store:** update generated types and methods ([223e724](https://github.com/cloudflare/cloudflare-typescript/commit/223e72471554ab61b172adee2f52b48856095753))
-* sync shared codegen files from staging-next ([792b57e](https://github.com/cloudflare/cloudflare-typescript/commit/792b57e64732a0523afcc65318fd0857f7160ff0))
-* sync shared codegen files from staging-next ([0661ae1](https://github.com/cloudflare/cloudflare-typescript/commit/0661ae1de6516b9b87a52b3f2b4a8d454f9de236))
-* sync shared codegen files from staging-next ([abbc1da](https://github.com/cloudflare/cloudflare-typescript/commit/abbc1da277b2392329f992a24ad465339737540f))
-* **url-scanner:** update generated types and methods ([6a099f5](https://github.com/cloudflare/cloudflare-typescript/commit/6a099f52951124a793a2019d82366cacfc3c25ad))
-* **user:** update generated types and methods ([4893309](https://github.com/cloudflare/cloudflare-typescript/commit/48933097b03cda68a13f5f796a4aeafdb306f20e))
-* **workflows:** update generated types and methods ([228c4ff](https://github.com/cloudflare/cloudflare-typescript/commit/228c4ff778b7536ab3c3cfaad0bbaf37ada03560))
-* **zones:** update generated types and methods ([1c444a3](https://github.com/cloudflare/cloudflare-typescript/commit/1c444a35b870e77a4c854f6c85af34fd07347ee7))
+* **acm:** update custom origin trust store documentation (root CA only, no intermediate/leaf) ([cf1329e](https://github.com/cloudflare/cloudflare-typescript/commit/cf1329e68))
+* **ai-gateway:** add `page` and `per_page` params to dynamic routing list ([6f4c052](https://github.com/cloudflare/cloudflare-typescript/commit/6f4c0529c))
+* **ci:** restore breaking change detection and semgrep timeout ([02f41cb](https://github.com/cloudflare/cloudflare-typescript/commit/02f41cbaf))
+* **d1:** update read replication mode documentation ([450e0f0](https://github.com/cloudflare/cloudflare-typescript/commit/450e0f0c2))
+* **intel:** add documentation for rejected category IDs (169, 177) in indicator feed update params ([a612880](https://github.com/cloudflare/cloudflare-typescript/commit/a6128802c))
+* **aisearch:** improve content selection and custom headers documentation for crawl instance config ([f282d9b](https://github.com/cloudflare/cloudflare-typescript/commit/f282d9b3d))
+* **radar:** update post-quantum TLS support response documentation ([c3a2fb0](https://github.com/cloudflare/cloudflare-typescript/commit/c3a2fb08c))
+
+### Breaking Changes
+
+* **load-balancers:** `id` field removed from `MonitorGroupCreateParams`, `MonitorGroupUpdateParams`, and `MonitorGroupEditParams`. Code passing `id` in these params will fail type-check.
+* **radar:** `IQITimeseriesGroupsResponse.Serie0` replaced named fields `p25`, `p50`, `p75` with an index signature `[k: string]: Array<string> | undefined`. Code accessing `result.serie_0.p25` will now receive `string[] | undefined` instead of `string[]`, and field names are no longer auto-completed by TypeScript.
+* **radar:** `TLSSupportResponse` added new required field `bugs: TLSSupportResponse.Bugs` with `hrrFailure`, `splitClientHello`, and `unknownKeyshare` booleans. Code constructing this response type without `bugs` will fail type-check.
+* **user:** `UserEditResponse.id` and `UserGetResponse.id` changed from optional to required (`id?: string` -> `id: string`). New required field `email: string` added to both types. Code constructing these types without `id` or `email` will fail type-check.
+* **zero-trust:** DLP entry union types renumbered -- a new `custom_prompt_topic` variant was inserted into all DLP entry response unions (`EntryListResponse`, `EntryGetResponse`, `CustomListResponse`, `CustomGetResponse`, `IntegrationListResponse`, `IntegrationGetResponse`, `PredefinedListResponse`, `PredefinedGetResponse`). Previous `UnionMember1` through `UnionMember5` are now `UnionMember2` through `UnionMember6`. Code referencing specific union member types by number (e.g., `EntryListResponse.UnionMember1`) will get a different type than before.
+
+## Migration Guide
+
+This guide covers the breaking changes in v6.2.0 and how to update your code.
+
+---
+
+### 1. Load Balancers: `id` removed from monitor group params
+
+**What changed:**
+The `id` field was removed from `MonitorGroupCreateParams`, `MonitorGroupUpdateParams`,
+and `MonitorGroupEditParams`. The monitor group ID is now only accepted as a path
+parameter (positional argument), not in the request body.
+
+**Impact:**
+Code passing `id` in the params object will fail type-check.
+
+**Affected Types:**
+- `MonitorGroupCreateParams`
+- `MonitorGroupUpdateParams`
+- `MonitorGroupEditParams`
+
+**Before (v6.1.0):**
+```typescript
+await client.loadBalancers.monitorGroups.create({
+  account_id: 'account-id',
+  id: 'monitor-group-id',
+  description: 'My monitor group',
+  members: [{ enabled: true, monitor_id: 'mon-id', monitoring_only: false, must_be_healthy: true }],
+});
+```
+
+**After (v6.2.0):**
+```typescript
+await client.loadBalancers.monitorGroups.create({
+  account_id: 'account-id',
+  description: 'My monitor group',
+  members: [{ enabled: true, monitor_id: 'mon-id', monitoring_only: false, must_be_healthy: true }],
+});
+```
+
+**Actions Needed:**
+1. Remove the `id` field from any `monitorGroups.create()`, `.update()`, or `.edit()` calls.
+
+---
+
+### 2. Radar: `IQITimeseriesGroupsResponse.Serie0` fields replaced with index signature
+
+**What changed:**
+The named fields `p25`, `p50`, and `p75` on `IQITimeseriesGroupsResponse.Serie0` were
+replaced with an index signature `[k: string]: Array<string> | undefined`. The data is
+still present at runtime, but TypeScript no longer provides static typing for these
+specific field names.
+
+**Impact:**
+Code that accesses `serie_0.p25`, `serie_0.p50`, or `serie_0.p75` directly will now
+receive `Array<string> | undefined` instead of `Array<string>`. Field names are no longer
+auto-completed by TypeScript.
+
+**Affected Types:**
+- `IQITimeseriesGroupsResponse.Serie0`
+
+**Before (v6.1.0):**
+```typescript
+const result = await client.radar.quality.iqi.timeseriesGroups({ metric: 'BANDWIDTH' });
+const p50: Array<string> = result.serie_0.p50; // typed as Array<string>
+```
+
+**After (v6.2.0):**
+```typescript
+const result = await client.radar.quality.iqi.timeseriesGroups({ metric: 'BANDWIDTH' });
+const p50 = result.serie_0['p50']; // typed as Array<string> | undefined
+// or with assertion if you know the field exists:
+const p50 = result.serie_0['p50']!;
+```
+
+**Actions Needed:**
+1. Access percentile fields via index notation or add non-null assertions.
+2. Update any code that destructures `{ p25, p50, p75 }` from `serie_0`.
+
+---
+
+### 3. Radar: `TLSSupportResponse` new required `bugs` field
+
+**What changed:**
+A new required field `bugs: TLSSupportResponse.Bugs` was added to `TLSSupportResponse`.
+The `Bugs` type has three boolean fields: `hrrFailure`, `splitClientHello`, and
+`unknownKeyshare`.
+
+**Impact:**
+Code that constructs a `TLSSupportResponse` manually (e.g., in tests or mocks) without
+the `bugs` field will fail type-check. Normal API consumers reading responses from the
+SDK are unaffected -- the field is always present in API responses.
+
+**Affected Types:**
+- `TLSSupportResponse`
+
+**Before (v6.1.0):**
+```typescript
+const mock: TLSSupportResponse = {
+  key_exchange: 'X25519',
+  pq: true,
+};
+```
+
+**After (v6.2.0):**
+```typescript
+const mock: TLSSupportResponse = {
+  key_exchange: 'X25519MLKEM768',
+  pq: true,
+  bugs: {
+    hrrFailure: false,
+    splitClientHello: false,
+    unknownKeyshare: false,
+  },
+};
+```
+
+**Actions Needed:**
+1. Add `bugs` field to any manually-constructed `TLSSupportResponse` objects.
+
+---
+
+### 4. User: `id` now required, `email` added as required
+
+**What changed:**
+`UserEditResponse.id` and `UserGetResponse.id` changed from optional (`id?: string`) to
+required (`id: string`). A new required field `email: string` was added to both types.
+
+**Impact:**
+Code that constructs these types manually without `id` or `email` will fail type-check.
+Normal API consumers are unaffected -- both fields were always present in API responses;
+the types now reflect that accurately.
+
+**Affected Types:**
+- `UserEditResponse`
+- `UserGetResponse`
+
+**Before (v6.1.0):**
+```typescript
+const mock: UserGetResponse = {
+  // id was optional, email didn't exist
+};
+```
+
+**After (v6.2.0):**
+```typescript
+const mock: UserGetResponse = {
+  id: 'user-id',
+  email: 'user@example.com',
+};
+```
+
+**Actions Needed:**
+1. Add `id` and `email` to any manually-constructed `UserEditResponse` or `UserGetResponse` objects.
+
+---
+
+### 5. Zero Trust DLP: union member indices shifted
+
+**What changed:**
+A new `custom_prompt_topic` entry type was inserted into all DLP entry response unions.
+This shifted the indices of all subsequent union members. What was `UnionMember1` is now
+`UnionMember2`, `UnionMember2` is now `UnionMember3`, and so on through `UnionMember6`.
+
+**Impact:**
+Code that references specific union member types by their numbered name will get a
+different type than before. For example, `EntryListResponse.UnionMember1` was previously
+a `PredefinedEntry` type but is now the new `custom_prompt_topic` type.
+
+**Affected Types:**
+- `EntryListResponse.UnionMember1` through `UnionMember5` (now `UnionMember2` through `UnionMember6`)
+- `EntryGetResponse.UnionMember1` through `UnionMember5` (now `UnionMember2` through `UnionMember6`)
+- `CustomListResponse.UnionMember1` through `UnionMember5`
+- `CustomGetResponse.UnionMember1` through `UnionMember5`
+- `IntegrationListResponse.UnionMember1` through `UnionMember5`
+- `IntegrationGetResponse.UnionMember1` through `UnionMember5`
+- `PredefinedListResponse.UnionMember1` through `UnionMember5`
+- `PredefinedGetResponse.UnionMember1` through `UnionMember5`
+
+**Before (v6.1.0):**
+```typescript
+import type { EntryListResponse } from 'cloudflare/resources/zero-trust/dlp/entries/entries';
+
+// UnionMember1 was PredefinedEntry
+function handlePredefined(entry: EntryListResponse.UnionMember1) {
+  console.log(entry.confidence);
+}
+```
+
+**After (v6.2.0):**
+```typescript
+import type { EntryListResponse } from 'cloudflare/resources/zero-trust/dlp/entries/entries';
+
+// UnionMember1 is now custom_prompt_topic; PredefinedEntry moved to UnionMember2
+function handlePredefined(entry: EntryListResponse.UnionMember2) {
+  console.log(entry.confidence);
+}
+```
+
+**Actions Needed:**
+1. Increment all `UnionMemberN` references by 1 (e.g., `UnionMember1` -> `UnionMember2`).
+2. Prefer discriminating on the `type` field instead of relying on union member indices:
+   ```typescript
+   if (entry.type === 'predefined') { /* ... */ }
+   ```
+
+---
+
+### Summary
+
+| # | Resource | Change | Action |
+|---|----------|--------|--------|
+| 1 | Load Balancers | `id` removed from monitor group params | Remove `id` from create/update/edit calls |
+| 2 | Radar Quality | `Serie0` named fields -> index signature | Use index access for p25/p50/p75 |
+| 3 | Radar PQ TLS | New required `bugs` field | Add `bugs` to mock/test objects |
+| 4 | User | `id` required, `email` added | Add both to mock/test objects |
+| 5 | Zero Trust DLP | Union member indices shifted | Increment UnionMemberN by 1, or use `type` discriminator |
+
+
 
 ## 6.1.0 (2026-05-04)
 
