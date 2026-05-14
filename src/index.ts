@@ -51,6 +51,7 @@ import { CustomNameservers } from './resources/custom-nameservers/custom-nameser
 import { CustomPages } from './resources/custom-pages/custom-pages';
 import { D1Resource } from './resources/d1/d1';
 import { DCVDelegation } from './resources/dcv-delegation/dcv-delegation';
+import { DDoSProtection } from './resources/ddos-protection/ddos-protection';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
@@ -319,6 +320,7 @@ export class Cloudflare extends Core.APIClient {
   images: API.Images = new API.Images(this);
   intel: API.Intel = new API.Intel(this);
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
+  DDoSProtection: API.DDoSProtection = new API.DDoSProtection(this);
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
   magicCloudNetworking: API.MagicCloudNetworking = new API.MagicCloudNetworking(this);
   networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
@@ -543,6 +545,7 @@ Cloudflare.Diagnostics = Diagnostics;
 Cloudflare.Images = Images;
 Cloudflare.Intel = Intel;
 Cloudflare.MagicTransit = MagicTransit;
+Cloudflare.DDoSProtection = DDoSProtection;
 Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
 Cloudflare.MagicCloudNetworking = MagicCloudNetworking;
 Cloudflare.NetworkInterconnects = NetworkInterconnects;
@@ -737,6 +740,8 @@ export declare namespace Cloudflare {
   export { Intel as Intel };
 
   export { MagicTransit as MagicTransit };
+
+  export { DDoSProtection as DDoSProtection };
 
   export { MagicNetworkMonitoring as MagicNetworkMonitoring };
 

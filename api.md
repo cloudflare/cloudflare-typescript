@@ -129,6 +129,8 @@ Types:
 
 # [MagicTransit](src/resources/magic-transit/api.md)
 
+# [DDoSProtection](src/resources/ddos-protection/api.md)
+
 # [MagicNetworkMonitoring](src/resources/magic-network-monitoring/api.md)
 
 # [MagicCloudNetworking](src/resources/magic-cloud-networking/api.md)
