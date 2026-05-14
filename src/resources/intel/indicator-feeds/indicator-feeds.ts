@@ -318,6 +318,17 @@ export interface IndicatorFeedGetResponse {
   last_upload_summary?: IndicatorFeedGetResponse.LastUploadSummary;
 
   /**
+   * Human-readable error message describing why the latest upload failed. Populated
+   * only when `latest_upload_status` is `Error`. Returns one of a small fixed set of
+   * category-level messages (invalid domain / IP / URL entries, malformed row or
+   * header, invalid valid_until timestamp, etc.) or the generic `Upload failed` for
+   * unknown or infrastructure-level errors. Never echoes raw error text from the
+   * underlying loader. Intel accounts receive the verbatim loader/API error text
+   * (including specific offending values) instead of these category-level messages.
+   */
+  latest_upload_error?: string;
+
+  /**
    * Status of the latest snapshot uploaded
    */
   latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
