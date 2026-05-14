@@ -125,6 +125,7 @@ export {
   type PolicyDeleteParams,
   type PolicyGetParams,
 } from './policies';
+export { SAMLCertificates } from './saml-certificates';
 export {
   ServiceTokensV4PagePaginationArray,
   ServiceTokens,

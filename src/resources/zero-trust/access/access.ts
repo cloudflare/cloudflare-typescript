@@ -80,6 +80,8 @@ import {
   PolicyUpdateParams,
   PolicyUpdateResponse,
 } from './policies';
+import * as SAMLCertificatesAPI from './saml-certificates';
+import { SAMLCertificates } from './saml-certificates';
 import * as ServiceTokensAPI from './service-tokens';
 import {
   ServiceToken,
@@ -182,6 +184,9 @@ import {
 export class Access extends APIResource {
   aiControls: AIControlsAPI.AIControls = new AIControlsAPI.AIControls(this._client);
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
+  samlCertificates: SAMLCertificatesAPI.SAMLCertificates = new SAMLCertificatesAPI.SAMLCertificates(
+    this._client,
+  );
   infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
@@ -199,6 +204,7 @@ export class Access extends APIResource {
 Access.AIControls = AIControls;
 Access.GatewayCA = GatewayCA;
 Access.GatewayCAListResponsesSinglePage = GatewayCAListResponsesSinglePage;
+Access.SAMLCertificates = SAMLCertificates;
 Access.Infrastructure = Infrastructure;
 Access.Applications = Applications;
 Access.ApplicationListResponsesV4PagePaginationArray = ApplicationListResponsesV4PagePaginationArray;
@@ -234,6 +240,8 @@ export declare namespace Access {
     type GatewayCAListParams as GatewayCAListParams,
     type GatewayCADeleteParams as GatewayCADeleteParams,
   };
+
+  export { SAMLCertificates as SAMLCertificates };
 
   export { Infrastructure as Infrastructure };
 
