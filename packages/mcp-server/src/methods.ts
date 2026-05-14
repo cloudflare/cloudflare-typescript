@@ -5018,6 +5018,249 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/pcaps/{pcap_id}/download',
   },
   {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.allowlist.create',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.allowlist.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/allowlist',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.allowlist.list',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.allowlist.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/allowlist',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.allowlist.bulkDelete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.allowlist.bulkDelete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/allowlist',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.allowlist.items.delete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.allowlist.items.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/allowlist/{prefix_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.allowlist.items.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.allowlist.items.edit',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/allowlist/{prefix_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.allowlist.items.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.allowlist.items.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/allowlist/{prefix_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.create',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.list',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.bulkCreate',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.bulkCreate',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes/bulk',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.bulkDelete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.bulkDelete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.items.delete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.items.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes/{prefix_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.items.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.items.edit',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes/{prefix_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.prefixes.items.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.prefixes.items.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/prefixes/{prefix_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.filters.create',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.filters.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/filters',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.filters.list',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.filters.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/filters',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.filters.bulkDelete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.filters.bulkDelete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/filters',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.filters.items.delete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.filters.items.delete',
+    httpMethod: 'delete',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/filters/{filter_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.filters.items.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.filters.items.edit',
+    httpMethod: 'patch',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/filters/{filter_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.filters.items.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.filters.items.get',
+    httpMethod: 'get',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/filters/{filter_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.rules.create',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.rules.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/rules',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.rules.list',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.rules.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/rules',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.rules.bulkDelete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.rules.bulkDelete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/rules',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.rules.items.delete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.rules.items.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/rules/{rule_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.rules.items.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.rules.items.edit',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/rules/{rule_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.synProtection.rules.items.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.synProtection.rules.items.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/syn_protection/rules/{rule_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.create',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/filters',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.list',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/filters',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.bulkDelete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.bulkDelete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/filters',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.items.delete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.items.delete',
+    httpMethod: 'delete',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/filters/{filter_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.items.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.items.edit',
+    httpMethod: 'patch',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/filters/{filter_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.items.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.filters.items.get',
+    httpMethod: 'get',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/filters/{filter_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.create',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/rules',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.list',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/rules',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.bulkDelete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.bulkDelete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/rules',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.items.delete',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.items.delete',
+    httpMethod: 'delete',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/rules/{rule_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.items.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.items.edit',
+    httpMethod: 'patch',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/rules/{rule_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.items.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.tcpFlowProtection.rules.items.get',
+    httpMethod: 'get',
+    httpPath:
+      '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_flow_protection/rules/{rule_id}',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.status.edit',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.status.edit',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_protection_status',
+  },
+  {
+    clientCallName: 'client.DDoSProtection.advancedTCPProtection.status.get',
+    fullyQualifiedName: 'DDoSProtection.advancedTCPProtection.status.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/advanced_tcp_protection/configs/tcp_protection_status',
+  },
+  {
     clientCallName: 'client.magicNetworkMonitoring.vpcFlows.tokens.create',
     fullyQualifiedName: 'magicNetworkMonitoring.vpcFlows.tokens.create',
     httpMethod: 'post',
