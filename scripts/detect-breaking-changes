@@ -337,6 +337,23 @@ TEST_PATHS=(
 	tests/api-resources/magic-transit/pcaps/pcaps.test.ts
 	tests/api-resources/magic-transit/pcaps/ownership.test.ts
 	tests/api-resources/magic-transit/pcaps/download.test.ts
+	tests/api-resources/ddos-protection/ddos-protection.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/advanced-tcp-protection.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/allowlist/allowlist.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/allowlist/items.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/prefixes/prefixes.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/prefixes/items.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/syn-protection/syn-protection.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/syn-protection/filters/filters.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/syn-protection/filters/items.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/syn-protection/rules/rules.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/syn-protection/rules/items.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/tcp-flow-protection/tcp-flow-protection.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/tcp-flow-protection/filters/filters.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/tcp-flow-protection/filters/items.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/tcp-flow-protection/rules/rules.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/tcp-flow-protection/rules/items.test.ts
+	tests/api-resources/ddos-protection/advanced-tcp-protection/status.test.ts
 	tests/api-resources/magic-network-monitoring/magic-network-monitoring.test.ts
 	tests/api-resources/magic-network-monitoring/vpc-flows/vpc-flows.test.ts
 	tests/api-resources/magic-network-monitoring/vpc-flows/tokens.test.ts

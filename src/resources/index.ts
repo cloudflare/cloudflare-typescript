@@ -35,6 +35,7 @@ export { CustomNameservers, BaseCustomNameservers } from './custom-nameservers';
 export { CustomPages, BaseCustomPages } from './custom-pages/custom-pages';
 export { D1Resource, BaseD1Resource } from './d1/d1';
 export { DCVDelegation, BaseDCVDelegation } from './dcv-delegation';
+export { DDoSProtection, BaseDDoSProtection } from './ddos-protection/ddos-protection';
 export { DNS, BaseDNS } from './dns/dns';
 export { DNSFirewall, BaseDNSFirewall } from './dns-firewall/dns-firewall';
 export { Diagnostics, BaseDiagnostics } from './diagnostics/diagnostics';
