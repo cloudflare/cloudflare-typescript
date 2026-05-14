@@ -12,8 +12,6 @@ export {
   Operations,
   BaseOperations,
   type OperationBulkEditResponse,
-  type OperationEditResponse,
   type OperationListParams,
   type OperationBulkEditParams,
-  type OperationEditParams,
 } from './operations';
