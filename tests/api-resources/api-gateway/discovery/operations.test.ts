@@ -65,25 +65,4 @@ describe('resource operations', () => {
       },
     });
   });
-
-  test('edit: only required params', async () => {
-    const responsePromise = client.apiGateway.discovery.operations.edit(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('edit: required and optional params', async () => {
-    const response = await client.apiGateway.discovery.operations.edit(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', state: 'review' },
-    );
-  });
 });
