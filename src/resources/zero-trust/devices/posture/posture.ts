@@ -812,6 +812,12 @@ export interface KolideInput {
   connection_id: string;
 
   /**
+   * The set of Kolide device authentication states that pass the posture check.
+   * Device must match one of the specified states.
+   */
+  auth_state?: Array<'Good' | 'Notified' | 'Will Block' | 'Blocked'>;
+
+  /**
    * Count Operator.
    */
   countOperator?: '<' | '<=' | '>' | '>=' | '==';
@@ -827,6 +833,12 @@ export interface KolideInputParam {
    * Posture Integration ID.
    */
   connection_id: string;
+
+  /**
+   * The set of Kolide device authentication states that pass the posture check.
+   * Device must match one of the specified states.
+   */
+  auth_state?: Array<'Good' | 'Notified' | 'Will Block' | 'Blocked'>;
 
   /**
    * Count Operator.

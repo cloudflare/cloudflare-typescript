@@ -346,6 +346,14 @@ Methods:
 
 ### SAMLCertificate
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/identity-providers/saml-certificate.ts">SAMLCertificateCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/identity_providers/{identity_provider_id}/saml_certificate">client.zeroTrust.identityProviders.samlCertificate.<a href="./src/resources/zero-trust/identity-providers/saml-certificate.ts">create</a>(identityProviderId, { ...params }) -> SAMLCertificateCreateResponse</code>
+
 ## Organizations
 
 Types:
@@ -442,6 +450,19 @@ Methods:
 - <code title="delete /accounts/{account_id}/access/gateway_ca/{certificate_id}">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">delete</a>(certificateId, { ...params }) -> GatewayCADeleteResponse</code>
 
 ### SAMLCertificates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/saml-certificates.ts">SAMLCertificateListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/saml-certificates.ts">SAMLCertificateGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/saml-certificates.ts">SAMLCertificateRotateResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/saml_certificates">client.zeroTrust.access.samlCertificates.<a href="./src/resources/zero-trust/access/saml-certificates.ts">list</a>({ ...params }) -> SAMLCertificateListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/access/saml_certificates/{saml_cert_set_id}">client.zeroTrust.access.samlCertificates.<a href="./src/resources/zero-trust/access/saml-certificates.ts">get</a>(samlCERTSetId, { ...params }) -> SAMLCertificateGetResponse</code>
+- <code title="get /accounts/{account_id}/access/saml_certificates/{saml_cert_set_id}/pem">client.zeroTrust.access.samlCertificates.<a href="./src/resources/zero-trust/access/saml-certificates.ts">getPem</a>(samlCERTSetId, { ...params }) -> Response</code>
+- <code title="post /accounts/{account_id}/access/saml_certificates/{saml_cert_set_id}/rotate">client.zeroTrust.access.samlCertificates.<a href="./src/resources/zero-trust/access/saml-certificates.ts">rotate</a>(samlCERTSetId, { ...params }) -> SAMLCertificateRotateResponse</code>
 
 ### Infrastructure
 
