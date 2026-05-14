@@ -3463,12 +3463,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/api_gateway/discovery/operations',
   },
   {
-    clientCallName: 'client.apiGateway.discovery.operations.edit',
-    fullyQualifiedName: 'apiGateway.discovery.operations.edit',
-    httpMethod: 'patch',
-    httpPath: '/zones/{zone_id}/api_gateway/discovery/operations/{operation_id}',
-  },
-  {
     clientCallName: 'client.apiGateway.labels.list',
     fullyQualifiedName: 'apiGateway.labels.list',
     httpMethod: 'get',

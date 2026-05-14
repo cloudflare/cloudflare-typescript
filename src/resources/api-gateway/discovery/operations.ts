@@ -68,32 +68,6 @@ export class BaseOperations extends APIResource {
       }) as APIPromise<{ result: OperationBulkEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Update the `state` on a discovered operation
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.apiGateway.discovery.operations.edit(
-   *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-   *     { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
-   * ```
-   */
-  edit(
-    operationID: string,
-    params: OperationEditParams,
-    options?: RequestOptions,
-  ): APIPromise<OperationEditResponse> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(path`/zones/${zone_id}/api_gateway/discovery/operations/${operationID}`, {
-        body,
-        ...options,
-      }) as APIPromise<{ result: OperationEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Operations extends BaseOperations {}
 
@@ -112,17 +86,6 @@ export namespace OperationBulkEditResponse {
      */
     state?: 'review' | 'ignored';
   }
-}
-
-export interface OperationEditResponse {
-  /**
-   * State of operation in API Discovery
-   *
-   * - `review` - Operation is not saved into API Shield Endpoint Management
-   * - `saved` - Operation is saved into API Shield Endpoint Management
-   * - `ignored` - Operation is marked as ignored
-   */
-  state?: 'review' | 'saved' | 'ignored';
 }
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
@@ -212,28 +175,11 @@ export namespace OperationBulkEditParams {
   }
 }
 
-export interface OperationEditParams {
-  /**
-   * Path param: Identifier.
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Mark state of operation in API Discovery
-   *
-   * - `review` - Mark operation as for review
-   * - `ignored` - Mark operation as ignored
-   */
-  state?: 'review' | 'ignored';
-}
-
 export declare namespace Operations {
   export {
     type OperationBulkEditResponse as OperationBulkEditResponse,
-    type OperationEditResponse as OperationEditResponse,
     type OperationListParams as OperationListParams,
     type OperationBulkEditParams as OperationBulkEditParams,
-    type OperationEditParams as OperationEditParams,
   };
 }
 

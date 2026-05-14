@@ -340,7 +340,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.subscriptions.update()`
 - `client.queues.subscriptions.delete()`
 - `client.queues.subscriptions.get()`
-- `client.apiGateway.discovery.operations.edit()`
 - `client.apiGateway.labels.user.update()`
 - `client.apiGateway.labels.user.delete()`
 - `client.apiGateway.labels.user.edit()`

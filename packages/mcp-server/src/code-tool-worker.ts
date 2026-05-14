@@ -681,7 +681,6 @@ const fuse = new Fuse(
     'client.apiGateway.configurations.update',
     'client.apiGateway.discovery.get',
     'client.apiGateway.discovery.operations.bulkEdit',
-    'client.apiGateway.discovery.operations.edit',
     'client.apiGateway.discovery.operations.list',
     'client.apiGateway.labels.list',
     'client.apiGateway.labels.user.bulkCreate',
