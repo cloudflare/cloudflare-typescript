@@ -1,5 +1,40 @@
 # Changelog
 
+## 6.2.0 (2026-05-14)
+
+Full Changelog: [v6.1.0...v6.2.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.1.0...v6.2.0)
+
+### Features
+
+* **ai-gateway:** add billing, billing/billing, billing/index ([6f4c052](https://github.com/cloudflare/cloudflare-typescript/commit/6f4c0529c7c0a562a7ce1d9c8b35bef6bba9616c))
+* **ai-security:** add ai-security resource ([4959946](https://github.com/cloudflare/cloudflare-typescript/commit/4959946779e9979969e0cfe37524a89ed1e3e46b))
+* **ddos-protection:** add ddos-protection resource ([0cd6242](https://github.com/cloudflare/cloudflare-typescript/commit/0cd62421cd9977c2d24c1691cc08acb8b3597607))
+* **load-balancers:** add monitor-groups/index, monitor-groups/monitor-groups, monitor-groups/references ([00f63c7](https://github.com/cloudflare/cloudflare-typescript/commit/00f63c7e22ed068dd8bf4a636a70238df301b80f))
+* **radar:** add bgp/ips/index, bgp/ips/ips, bgp/ips/top ([9af4cde](https://github.com/cloudflare/cloudflare-typescript/commit/9af4cdefbf1f5f26a509bd43cb192aa77e25f830))
+* **zero-trust:** add resource-library, resource-library/applications, resource-library/categories ([5e7609f](https://github.com/cloudflare/cloudflare-typescript/commit/5e7609f9c83828edf8ef9102d660e994c70cf608))
+
+
+### Chores
+
+* **acm:** update generated types and methods ([cf1329e](https://github.com/cloudflare/cloudflare-typescript/commit/cf1329e68b561c03d28d852bf52ee81c5f905078))
+* **aisearch:** update generated types and methods ([f282d9b](https://github.com/cloudflare/cloudflare-typescript/commit/f282d9b3db9dcace369cf37489757aeaecd792a2))
+* **cloudforce-one:** update generated types and methods ([1ff832a](https://github.com/cloudflare/cloudflare-typescript/commit/1ff832aa1b86243177c4102fa84778b0c4342657))
+* **d1:** update generated types and methods ([450e0f0](https://github.com/cloudflare/cloudflare-typescript/commit/450e0f0c2f70da0b5b1f472e9476427b09827031))
+* **email-security:** update generated types and methods ([083fe7f](https://github.com/cloudflare/cloudflare-typescript/commit/083fe7f0853da6989dfe1567aa1e921aa8f75aea))
+* **intel:** update generated types and methods ([60480bc](https://github.com/cloudflare/cloudflare-typescript/commit/60480bcfaa979bbeea96addda1adcb3f7e64fa9a))
+* **intel:** update generated types and methods ([a612880](https://github.com/cloudflare/cloudflare-typescript/commit/a6128802cbc9f3b600b1d16826b35ded7127394c))
+* **internal:** restore version update ([02afac7](https://github.com/cloudflare/cloudflare-typescript/commit/02afac73c5d750ef3707e795636bed4abfa4138c))
+* **radar:** update generated types and methods ([c3a2fb0](https://github.com/cloudflare/cloudflare-typescript/commit/c3a2fb08c9a4c75646b7c5c178c926a9a7d3c1fd))
+* **resource-sharing:** update generated types and methods ([fd7d870](https://github.com/cloudflare/cloudflare-typescript/commit/fd7d870e04b97467d6115d281e5c5da57b5289f6))
+* **secrets-store:** update generated types and methods ([223e724](https://github.com/cloudflare/cloudflare-typescript/commit/223e72471554ab61b172adee2f52b48856095753))
+* sync shared codegen files from staging-next ([792b57e](https://github.com/cloudflare/cloudflare-typescript/commit/792b57e64732a0523afcc65318fd0857f7160ff0))
+* sync shared codegen files from staging-next ([0661ae1](https://github.com/cloudflare/cloudflare-typescript/commit/0661ae1de6516b9b87a52b3f2b4a8d454f9de236))
+* sync shared codegen files from staging-next ([abbc1da](https://github.com/cloudflare/cloudflare-typescript/commit/abbc1da277b2392329f992a24ad465339737540f))
+* **url-scanner:** update generated types and methods ([6a099f5](https://github.com/cloudflare/cloudflare-typescript/commit/6a099f52951124a793a2019d82366cacfc3c25ad))
+* **user:** update generated types and methods ([4893309](https://github.com/cloudflare/cloudflare-typescript/commit/48933097b03cda68a13f5f796a4aeafdb306f20e))
+* **workflows:** update generated types and methods ([228c4ff](https://github.com/cloudflare/cloudflare-typescript/commit/228c4ff778b7536ab3c3cfaad0bbaf37ada03560))
+* **zones:** update generated types and methods ([1c444a3](https://github.com/cloudflare/cloudflare-typescript/commit/1c444a35b870e77a4c854f6c85af34fd07347ee7))
+
 ## 6.1.0 (2026-05-04)
 
 Full Changelog: [v6.0.0...v6.1.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.0.0...v6.1.0)
