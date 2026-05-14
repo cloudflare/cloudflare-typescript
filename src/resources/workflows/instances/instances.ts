@@ -236,6 +236,12 @@ export namespace InstanceGetResponse {
        * Specifies the timeout duration.
        */
       timeout: string | number;
+
+      /**
+       * When set to 'output', step output is redacted from log and step output
+       * responses.
+       */
+      sensitive?: 'output';
     }
 
     export namespace Config {

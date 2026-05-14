@@ -9,9 +9,6 @@ jobs:
   detect_breaking_changes:
     runs-on: 'ubuntu-latest'
     name: detect-breaking-changes
-    # Temporarily disabled: major version bump in progress — breaking changes are expected.
-    # Re-enable once the v<next> release is cut.
-    if: false
     steps:
       - name: Calculate fetch-depth
         run: |

@@ -25,6 +25,7 @@ import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
+import { AISecurity } from './resources/ai-security/ai-security';
 import { AI } from './resources/ai/ai';
 import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
@@ -50,6 +51,7 @@ import { CustomNameservers } from './resources/custom-nameservers/custom-nameser
 import { CustomPages } from './resources/custom-pages/custom-pages';
 import { D1Resource } from './resources/d1/d1';
 import { DCVDelegation } from './resources/dcv-delegation/dcv-delegation';
+import { DDoSProtection } from './resources/ddos-protection/ddos-protection';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
@@ -327,6 +329,7 @@ export class Cloudflare extends Core.APIClient {
   images: API.Images = new API.Images(this);
   intel: API.Intel = new API.Intel(this);
   magicTransit: API.MagicTransit = new API.MagicTransit(this);
+  DDoSProtection: API.DDoSProtection = new API.DDoSProtection(this);
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
   magicCloudNetworking: API.MagicCloudNetworking = new API.MagicCloudNetworking(this);
   networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
@@ -372,6 +375,7 @@ export class Cloudflare extends Core.APIClient {
   resourceTagging: API.ResourceTagging = new API.ResourceTagging(this);
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
+  aiSecurity: API.AISecurity = new API.AISecurity(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
   aiSearch: API.AISearch = new API.AISearch(this);
@@ -575,6 +579,7 @@ Cloudflare.Diagnostics = Diagnostics;
 Cloudflare.Images = Images;
 Cloudflare.Intel = Intel;
 Cloudflare.MagicTransit = MagicTransit;
+Cloudflare.DDoSProtection = DDoSProtection;
 Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
 Cloudflare.MagicCloudNetworking = MagicCloudNetworking;
 Cloudflare.NetworkInterconnects = NetworkInterconnects;
@@ -620,6 +625,7 @@ Cloudflare.ResourceSharing = ResourceSharing;
 Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
+Cloudflare.AISecurity = AISecurity;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.AISearch = AISearch;
@@ -769,6 +775,8 @@ export declare namespace Cloudflare {
 
   export { MagicTransit as MagicTransit };
 
+  export { DDoSProtection as DDoSProtection };
+
   export { MagicNetworkMonitoring as MagicNetworkMonitoring };
 
   export { MagicCloudNetworking as MagicCloudNetworking };
@@ -858,6 +866,8 @@ export declare namespace Cloudflare {
   export { LeakedCredentialChecks as LeakedCredentialChecks };
 
   export { ContentScanning as ContentScanning };
+
+  export { AISecurity as AISecurity };
 
   export { AbuseReports as AbuseReports };
 

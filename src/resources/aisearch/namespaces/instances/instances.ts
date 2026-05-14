@@ -619,10 +619,16 @@ export namespace InstanceCreateResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -645,8 +651,9 @@ export namespace InstanceCreateResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }
@@ -1006,10 +1013,16 @@ export namespace InstanceUpdateResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -1032,8 +1045,9 @@ export namespace InstanceUpdateResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }
@@ -1393,10 +1407,16 @@ export namespace InstanceListResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -1419,8 +1439,9 @@ export namespace InstanceListResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }
@@ -1780,10 +1801,16 @@ export namespace InstanceDeleteResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -1806,8 +1833,9 @@ export namespace InstanceDeleteResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }
@@ -2237,10 +2265,16 @@ export namespace InstanceReadResponse {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -2263,8 +2297,9 @@ export namespace InstanceReadResponse {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }
@@ -2793,10 +2828,16 @@ export namespace InstanceCreateParams {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -2819,8 +2860,9 @@ export namespace InstanceCreateParams {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }
@@ -3279,10 +3321,16 @@ export namespace InstanceUpdateParams {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
          * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed.
+         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
+         * the field to disable content selection — empty arrays are rejected.
          */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
+        /**
+         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
+         * token characters (no spaces, colons, or control characters); values must be
+         * HTAB + printable ASCII (no CR/LF).
+         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
@@ -3305,8 +3353,9 @@ export namespace InstanceUpdateParams {
           path: string;
 
           /**
-           * CSS selector to extract content from pages matching the path pattern. Supports
-           * standard CSS selectors including class, ID, element, and attribute selectors.
+           * CSS selector to extract content from pages matching the path pattern. Must not
+           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
+           * if multiple elements match, the selector is ignored and the full page is used.
            */
           selector: string;
         }

@@ -2,7 +2,7 @@
 
 export { BGP, type BGPTimeseriesResponse, type BGPTimeseriesParams } from './bgp';
 export { Hijacks } from './hijacks/index';
-export { IPs, type IPTimeseriesResponse, type IPTimeseriesParams } from './ips';
+export { IPs, type IPTimeseriesResponse, type IPTimeseriesParams } from './ips/index';
 export { Leaks } from './leaks/index';
 export { RPKI } from './rpki/index';
 export {

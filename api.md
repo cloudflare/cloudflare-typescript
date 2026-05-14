@@ -129,6 +129,8 @@ Types:
 
 # [MagicTransit](src/resources/magic-transit/api.md)
 
+# [DDoSProtection](src/resources/ddos-protection/api.md)
+
 # [MagicNetworkMonitoring](src/resources/magic-network-monitoring/api.md)
 
 # [MagicCloudNetworking](src/resources/magic-cloud-networking/api.md)
@@ -218,6 +220,8 @@ Types:
 # [LeakedCredentialChecks](src/resources/leaked-credential-checks/api.md)
 
 # [ContentScanning](src/resources/content-scanning/api.md)
+
+# [AISecurity](src/resources/ai-security/api.md)
 
 # [AbuseReports](src/resources/abuse-reports/api.md)
 

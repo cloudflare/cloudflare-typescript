@@ -638,7 +638,7 @@ export interface ThreatEventListParams {
   /**
    * Query param
    */
-  format?: 'json' | 'stix2';
+  format?: 'json' | 'stix2' | 'taxii';
 
   /**
    * Query param
