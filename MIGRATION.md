@@ -714,6 +714,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.identityProviders.get()`
 - `client.zeroTrust.identityProviders.scim.groups.list()`
 - `client.zeroTrust.identityProviders.scim.users.list()`
+- `client.zeroTrust.identityProviders.samlCertificate.create()`
 - `client.zeroTrust.organizations.create()`
 - `client.zeroTrust.organizations.update()`
 - `client.zeroTrust.organizations.list()`
@@ -726,6 +727,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.access.aiControls.mcp.servers.read()`
 - `client.zeroTrust.access.aiControls.mcp.servers.sync()`
 - `client.zeroTrust.access.gatewayCA.delete()`
+- `client.zeroTrust.access.samlCertificates.get()`
+- `client.zeroTrust.access.samlCertificates.getPem()`
+- `client.zeroTrust.access.samlCertificates.rotate()`
 - `client.zeroTrust.access.infrastructure.targets.update()`
 - `client.zeroTrust.access.infrastructure.targets.delete()`
 - `client.zeroTrust.access.infrastructure.targets.get()`
