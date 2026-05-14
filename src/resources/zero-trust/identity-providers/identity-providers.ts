@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../../core/resource';
 import * as IdentityProvidersAPI from './identity-providers';
+import * as SAMLCertificateAPI from './saml-certificate';
+import { BaseSAMLCertificate, SAMLCertificate } from './saml-certificate';
 import * as SCIMAPI from './scim/scim';
 import { BaseSCIM, SCIM } from './scim/scim';
 import { APIPromise } from '../../../core/api-promise';
@@ -234,6 +236,7 @@ export class BaseIdentityProviders extends APIResource {
 }
 export class IdentityProviders extends BaseIdentityProviders {
   scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
+  samlCertificate: SAMLCertificateAPI.SAMLCertificate = new SAMLCertificateAPI.SAMLCertificate(this._client);
 }
 
 export type IdentityProviderListResponsesV4PagePaginationArray =
@@ -4713,6 +4716,8 @@ export interface IdentityProviderGetParams {
 
 IdentityProviders.SCIM = SCIM;
 IdentityProviders.BaseSCIM = BaseSCIM;
+IdentityProviders.SAMLCertificate = SAMLCertificate;
+IdentityProviders.BaseSAMLCertificate = BaseSAMLCertificate;
 
 export declare namespace IdentityProviders {
   export {
@@ -4732,4 +4737,6 @@ export declare namespace IdentityProviders {
   };
 
   export { SCIM as SCIM, BaseSCIM as BaseSCIM };
+
+  export { SAMLCertificate as SAMLCertificate, BaseSAMLCertificate as BaseSAMLCertificate };
 }

@@ -344,6 +344,8 @@ Methods:
 
 - <code title="get /accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/users">client.zeroTrust.identityProviders.scim.users.<a href="./src/resources/zero-trust/identity-providers/scim/users.ts">list</a>(identityProviderID, { ...params }) -> AccessUsersV4PagePaginationArray</code>
 
+### SAMLCertificate
+
 ## Organizations
 
 Types:
@@ -438,6 +440,8 @@ Methods:
 - <code title="post /accounts/{account_id}/access/gateway_ca">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">create</a>({ ...params }) -> GatewayCACreateResponse</code>
 - <code title="get /accounts/{account_id}/access/gateway_ca">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">list</a>({ ...params }) -> GatewayCAListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/access/gateway_ca/{certificate_id}">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">delete</a>(certificateID, { ...params }) -> GatewayCADeleteResponse</code>
+
+### SAMLCertificates
 
 ### Infrastructure
 
