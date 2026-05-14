@@ -87,7 +87,18 @@ import {
   PolicyUpdateResponse,
 } from './policies';
 import * as SAMLCertificatesAPI from './saml-certificates';
-import { BaseSAMLCertificates, SAMLCertificates } from './saml-certificates';
+import {
+  BaseSAMLCertificates,
+  SAMLCertificateGetParams,
+  SAMLCertificateGetPemParams,
+  SAMLCertificateGetResponse,
+  SAMLCertificateListParams,
+  SAMLCertificateListResponse,
+  SAMLCertificateListResponsesV4PagePaginationArray,
+  SAMLCertificateRotateParams,
+  SAMLCertificateRotateResponse,
+  SAMLCertificates,
+} from './saml-certificates';
 import * as ServiceTokensAPI from './service-tokens';
 import {
   BaseServiceTokens,
@@ -264,7 +275,18 @@ export declare namespace Access {
     type GatewayCADeleteParams as GatewayCADeleteParams,
   };
 
-  export { SAMLCertificates as SAMLCertificates, BaseSAMLCertificates as BaseSAMLCertificates };
+  export {
+    SAMLCertificates as SAMLCertificates,
+    BaseSAMLCertificates as BaseSAMLCertificates,
+    type SAMLCertificateListResponse as SAMLCertificateListResponse,
+    type SAMLCertificateGetResponse as SAMLCertificateGetResponse,
+    type SAMLCertificateRotateResponse as SAMLCertificateRotateResponse,
+    type SAMLCertificateListResponsesV4PagePaginationArray as SAMLCertificateListResponsesV4PagePaginationArray,
+    type SAMLCertificateListParams as SAMLCertificateListParams,
+    type SAMLCertificateGetParams as SAMLCertificateGetParams,
+    type SAMLCertificateGetPemParams as SAMLCertificateGetPemParams,
+    type SAMLCertificateRotateParams as SAMLCertificateRotateParams,
+  };
 
   export { Infrastructure as Infrastructure, BaseInfrastructure as BaseInfrastructure };
 

@@ -7292,6 +7292,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/users',
   },
   {
+    clientCallName: 'client.zeroTrust.identityProviders.samlCertificate.create',
+    fullyQualifiedName: 'zeroTrust.identityProviders.samlCertificate.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/access/identity_providers/{identity_provider_id}/saml_certificate',
+  },
+  {
     clientCallName: 'client.zeroTrust.organizations.create',
     fullyQualifiedName: 'zeroTrust.organizations.create',
     httpMethod: 'post',
@@ -7416,6 +7422,30 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'zeroTrust.access.gatewayCA.delete',
     httpMethod: 'delete',
     httpPath: '/accounts/{account_id}/access/gateway_ca/{certificate_id}',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.samlCertificates.list',
+    fullyQualifiedName: 'zeroTrust.access.samlCertificates.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/access/saml_certificates',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.samlCertificates.get',
+    fullyQualifiedName: 'zeroTrust.access.samlCertificates.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/access/saml_certificates/{saml_cert_set_id}',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.samlCertificates.getPem',
+    fullyQualifiedName: 'zeroTrust.access.samlCertificates.getPem',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/access/saml_certificates/{saml_cert_set_id}/pem',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.samlCertificates.rotate',
+    fullyQualifiedName: 'zeroTrust.access.samlCertificates.rotate',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/access/saml_certificates/{saml_cert_set_id}/rotate',
   },
   {
     clientCallName: 'client.zeroTrust.access.infrastructure.targets.create',
