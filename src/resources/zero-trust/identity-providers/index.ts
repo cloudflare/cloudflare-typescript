@@ -17,4 +17,5 @@ export {
   type IdentityProviderGetParams,
   type IdentityProviderListResponsesV4PagePaginationArray,
 } from './identity-providers';
+export { SAMLCertificate, BaseSAMLCertificate } from './saml-certificate';
 export { SCIM, BaseSCIM } from './scim/index';

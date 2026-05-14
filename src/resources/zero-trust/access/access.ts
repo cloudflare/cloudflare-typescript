@@ -86,6 +86,8 @@ import {
   PolicyUpdateParams,
   PolicyUpdateResponse,
 } from './policies';
+import * as SAMLCertificatesAPI from './saml-certificates';
+import { BaseSAMLCertificates, SAMLCertificates } from './saml-certificates';
 import * as ServiceTokensAPI from './service-tokens';
 import {
   BaseServiceTokens,
@@ -199,6 +201,9 @@ export class BaseAccess extends APIResource {
 export class Access extends BaseAccess {
   aiControls: AIControlsAPI.AIControls = new AIControlsAPI.AIControls(this._client);
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
+  samlCertificates: SAMLCertificatesAPI.SAMLCertificates = new SAMLCertificatesAPI.SAMLCertificates(
+    this._client,
+  );
   infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
@@ -217,6 +222,8 @@ Access.AIControls = AIControls;
 Access.BaseAIControls = BaseAIControls;
 Access.GatewayCA = GatewayCA;
 Access.BaseGatewayCA = BaseGatewayCA;
+Access.SAMLCertificates = SAMLCertificates;
+Access.BaseSAMLCertificates = BaseSAMLCertificates;
 Access.Infrastructure = Infrastructure;
 Access.BaseInfrastructure = BaseInfrastructure;
 Access.Applications = Applications;
@@ -256,6 +263,8 @@ export declare namespace Access {
     type GatewayCAListParams as GatewayCAListParams,
     type GatewayCADeleteParams as GatewayCADeleteParams,
   };
+
+  export { SAMLCertificates as SAMLCertificates, BaseSAMLCertificates as BaseSAMLCertificates };
 
   export { Infrastructure as Infrastructure, BaseInfrastructure as BaseInfrastructure };
 
