@@ -112,6 +112,38 @@ const runTests = (
     });
   });
 
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate(
+      'this-is_my_script-01',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', dispatch_namespace: 'my-dispatch-namespace' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate(
+      'this-is_my_script-01',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        dispatch_namespace: 'my-dispatch-namespace',
+        secrets: {
+          foo: {
+            name: 'myBinding',
+            text: 'My secret.',
+            type: 'secret_text',
+          },
+        },
+        version_tags: { foo: 'bar' },
+      },
+    );
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get('mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

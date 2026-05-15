@@ -299,6 +299,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workers.scripts.secrets.update()`
 - `client.workers.scripts.secrets.list()`
 - `client.workers.scripts.secrets.delete()`
+- `client.workers.scripts.secrets.bulkUpdate()`
 - `client.workers.scripts.secrets.get()`
 - `client.workers.scripts.scriptAndVersionSettings.edit()`
 - `client.workers.scripts.scriptAndVersionSettings.get()`
@@ -667,6 +668,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workersForPlatforms.dispatch.namespaces.scripts.secrets.update()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.secrets.list()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.secrets.delete()`
+- `client.workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.list()`

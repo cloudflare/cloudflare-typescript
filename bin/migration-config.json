@@ -3588,6 +3588,43 @@
     },
     {
       "base": "workersForPlatforms.dispatch.namespaces.scripts.secrets",
+      "name": "bulkUpdate",
+      "params": [
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dispatch_namespace",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "script_name",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "workersForPlatforms.dispatch.namespaces.scripts.secrets",
       "name": "get",
       "params": [
         {

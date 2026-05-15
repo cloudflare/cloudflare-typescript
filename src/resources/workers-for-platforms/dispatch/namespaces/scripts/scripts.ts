@@ -24,6 +24,8 @@ import { BaseContent, Content, ContentGetParams, ContentUpdateParams } from './c
 import * as SecretsAPI from './secrets';
 import {
   BaseSecrets,
+  SecretBulkUpdateParams,
+  SecretBulkUpdateResponse,
   SecretDeleteParams,
   SecretDeleteResponse,
   SecretGetParams,
@@ -1939,11 +1941,13 @@ export declare namespace Scripts {
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
+    type SecretBulkUpdateResponse as SecretBulkUpdateResponse,
     type SecretGetResponse as SecretGetResponse,
     type SecretListResponsesSinglePage as SecretListResponsesSinglePage,
     type SecretUpdateParams as SecretUpdateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
+    type SecretBulkUpdateParams as SecretBulkUpdateParams,
     type SecretGetParams as SecretGetParams,
   };
 
