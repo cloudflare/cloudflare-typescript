@@ -191,6 +191,7 @@ Types:
 - <code><a href="./src/resources/workers/scripts/secrets.ts">SecretUpdateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/secrets.ts">SecretListResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/secrets.ts">SecretDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/secrets.ts">SecretBulkUpdateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/secrets.ts">SecretGetResponse</a></code>
 
 Methods:
@@ -198,6 +199,7 @@ Methods:
 - <code title="put /accounts/{account_id}/workers/scripts/{script_name}/secrets">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">update</a>(scriptName, { ...params }) -> SecretUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/secrets">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">list</a>(scriptName, { ...params }) -> SecretListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">delete</a>(scriptName, secretName, { ...params }) -> SecretDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/workers/scripts/{script_name}/secrets-bulk">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">bulkUpdate</a>(scriptName, { ...params }) -> SecretBulkUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}">client.workers.scripts.secrets.<a href="./src/resources/workers/scripts/secrets.ts">get</a>(scriptName, secretName, { ...params }) -> SecretGetResponse</code>
 
 ### ScriptAndVersionSettings
