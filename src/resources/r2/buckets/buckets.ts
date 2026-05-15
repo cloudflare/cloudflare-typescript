@@ -36,6 +36,18 @@ import * as LocksAPI from './locks';
 import { LockGetParams, LockGetResponse, LockUpdateParams, LockUpdateResponse, Locks } from './locks';
 import * as MetricsAPI from './metrics';
 import { MetricListParams, MetricListResponse, Metrics } from './metrics';
+import * as ObjectsAPI from './objects';
+import {
+  ObjectDeleteParams,
+  ObjectDeleteResponse,
+  ObjectGetParams,
+  ObjectListParams,
+  ObjectListResponse,
+  ObjectListResponsesCursorPagination,
+  ObjectUploadParams,
+  ObjectUploadResponse,
+  Objects,
+} from './objects';
 import * as SippyAPI from './sippy';
 import {
   Provider,
@@ -59,6 +71,7 @@ export class Buckets extends APIResource {
   locks: LocksAPI.Locks = new LocksAPI.Locks(this._client);
   metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
+  objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
 
   /**
    * Creates a new R2 bucket.
@@ -363,6 +376,8 @@ Buckets.EventNotifications = EventNotifications;
 Buckets.Locks = Locks;
 Buckets.Metrics = Metrics;
 Buckets.SippyResource = SippyResource;
+Buckets.Objects = Objects;
+Buckets.ObjectListResponsesCursorPagination = ObjectListResponsesCursorPagination;
 
 export declare namespace Buckets {
   export {
@@ -430,5 +445,17 @@ export declare namespace Buckets {
     type SippyUpdateParams as SippyUpdateParams,
     type SippyDeleteParams as SippyDeleteParams,
     type SippyGetParams as SippyGetParams,
+  };
+
+  export {
+    Objects as Objects,
+    type ObjectListResponse as ObjectListResponse,
+    type ObjectDeleteResponse as ObjectDeleteResponse,
+    type ObjectUploadResponse as ObjectUploadResponse,
+    ObjectListResponsesCursorPagination as ObjectListResponsesCursorPagination,
+    type ObjectListParams as ObjectListParams,
+    type ObjectDeleteParams as ObjectDeleteParams,
+    type ObjectGetParams as ObjectGetParams,
+    type ObjectUploadParams as ObjectUploadParams,
   };
 }
