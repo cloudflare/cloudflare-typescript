@@ -3017,6 +3017,127 @@
       ]
     },
     {
+      "base": "r2.buckets.objects",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "object_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "object_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.objects",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "object_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "object_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "r2.buckets.objects",
+      "name": "upload",
+      "params": [
+        {
+          "type": "param",
+          "key": "object_key",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "body",
+          "location": "body"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "bucket_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "object_key",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "body",
+          "location": "body"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "r2DataCatalog.namespaces.tables",
       "name": "list",
       "params": [

@@ -53,6 +53,18 @@ export {
 } from './locks';
 export { Metrics, BaseMetrics, type MetricListResponse, type MetricListParams } from './metrics';
 export {
+  Objects,
+  BaseObjects,
+  type ObjectListResponse,
+  type ObjectDeleteResponse,
+  type ObjectUploadResponse,
+  type ObjectListParams,
+  type ObjectDeleteParams,
+  type ObjectGetParams,
+  type ObjectUploadParams,
+  type ObjectListResponsesCursorPagination,
+} from './objects';
+export {
   SippyResource,
   BaseSippyResource,
   type Provider,

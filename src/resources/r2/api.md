@@ -126,6 +126,21 @@ Methods:
 - <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">delete</a>(bucketName, { ...params }) -> SippyDeleteResponse</code>
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">get</a>(bucketName, { ...params }) -> Sippy</code>
 
+### Objects
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/objects.ts">ObjectListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/objects.ts">ObjectDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/objects.ts">ObjectUploadResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/objects">client.r2.buckets.objects.<a href="./src/resources/r2/buckets/objects.ts">list</a>(bucketName, { ...params }) -> ObjectListResponsesCursorPagination</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}">client.r2.buckets.objects.<a href="./src/resources/r2/buckets/objects.ts">delete</a>(objectKey, { ...params }) -> ObjectDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}">client.r2.buckets.objects.<a href="./src/resources/r2/buckets/objects.ts">get</a>(objectKey, { ...params }) -> Response</code>
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}">client.r2.buckets.objects.<a href="./src/resources/r2/buckets/objects.ts">upload</a>(objectKey, body, { ...params }) -> ObjectUploadResponse</code>
+
 ## TemporaryCredentials
 
 Types:

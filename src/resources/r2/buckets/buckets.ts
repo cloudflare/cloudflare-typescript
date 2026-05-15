@@ -45,6 +45,19 @@ import {
 } from './locks';
 import * as MetricsAPI from './metrics';
 import { BaseMetrics, MetricListParams, MetricListResponse, Metrics } from './metrics';
+import * as ObjectsAPI from './objects';
+import {
+  BaseObjects,
+  ObjectDeleteParams,
+  ObjectDeleteResponse,
+  ObjectGetParams,
+  ObjectListParams,
+  ObjectListResponse,
+  ObjectListResponsesCursorPagination,
+  ObjectUploadParams,
+  ObjectUploadResponse,
+  Objects,
+} from './objects';
 import * as SippyAPI from './sippy';
 import {
   BaseSippyResource,
@@ -225,6 +238,7 @@ export class Buckets extends BaseBuckets {
   locks: LocksAPI.Locks = new LocksAPI.Locks(this._client);
   metrics: MetricsAPI.Metrics = new MetricsAPI.Metrics(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
+  objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);
 }
 
 /**
@@ -397,6 +411,8 @@ Buckets.Metrics = Metrics;
 Buckets.BaseMetrics = BaseMetrics;
 Buckets.SippyResource = SippyResource;
 Buckets.BaseSippyResource = BaseSippyResource;
+Buckets.Objects = Objects;
+Buckets.BaseObjects = BaseObjects;
 
 export declare namespace Buckets {
   export {
@@ -470,5 +486,18 @@ export declare namespace Buckets {
     type SippyUpdateParams as SippyUpdateParams,
     type SippyDeleteParams as SippyDeleteParams,
     type SippyGetParams as SippyGetParams,
+  };
+
+  export {
+    Objects as Objects,
+    BaseObjects as BaseObjects,
+    type ObjectListResponse as ObjectListResponse,
+    type ObjectDeleteResponse as ObjectDeleteResponse,
+    type ObjectUploadResponse as ObjectUploadResponse,
+    type ObjectListResponsesCursorPagination as ObjectListResponsesCursorPagination,
+    type ObjectListParams as ObjectListParams,
+    type ObjectDeleteParams as ObjectDeleteParams,
+    type ObjectGetParams as ObjectGetParams,
+    type ObjectUploadParams as ObjectUploadParams,
   };
 }

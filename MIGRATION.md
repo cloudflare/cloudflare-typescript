@@ -638,6 +638,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.r2.buckets.sippy.update()`
 - `client.r2.buckets.sippy.delete()`
 - `client.r2.buckets.sippy.get()`
+- `client.r2.buckets.objects.list()`
+- `client.r2.buckets.objects.delete()`
+- `client.r2.buckets.objects.get()`
+- `client.r2.buckets.objects.upload()`
 - `client.r2.superSlurper.jobs.abort()`
 - `client.r2.superSlurper.jobs.get()`
 - `client.r2.superSlurper.jobs.pause()`
@@ -1316,6 +1320,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.stream.keys.create()`
 - `client.alerting.silences.create()`
 - `client.alerting.silences.update()`
+- `client.r2.buckets.objects.upload()`
 - `client.workersForPlatforms.dispatch.namespaces.scripts.tags.update()`
 - `client.zeroTrust.devices.policies.default.excludes.update()`
 - `client.zeroTrust.devices.policies.default.includes.update()`
