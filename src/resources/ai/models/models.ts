@@ -49,6 +49,12 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
   author?: string;
 
   /**
+   * Query param: If set, return models in the requested marketplace format instead
+   * of the default response.
+   */
+  format?: 'openrouter';
+
+  /**
    * Query param: Filter to hide experimental models
    */
   hide_experimental?: boolean;
