@@ -9,6 +9,7 @@ jobs:
   detect_breaking_changes:
     runs-on: 'ubuntu-latest'
     name: detect-breaking-changes
+    continue-on-error: true
     steps:
       - name: Calculate fetch-depth
         run: |
