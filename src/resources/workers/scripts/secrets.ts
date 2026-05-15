@@ -3,6 +3,7 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -95,6 +96,40 @@ export class BaseSecrets extends APIResource {
         path`/accounts/${account_id}/workers/scripts/${script_name}/secrets/${secretName}`,
         { query: { url_encoded }, ...options },
       ) as APIPromise<{ result: SecretDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Create, update, or delete multiple secrets on a script in a single operation
+   * using JSON Merge Patch (RFC 7396).
+   *
+   * Usage:
+   *
+   * - To create or update a secret, set its value to a secret object.
+   * - To delete a secret, set its value to `null`.
+   * - Secrets not included in the request are left unchanged.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.workers.scripts.secrets.bulkUpdate(
+   *     'this-is_my_script-01',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  bulkUpdate(
+    scriptName: string,
+    params: SecretBulkUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<SecretBulkUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/workers/scripts/${scriptName}/secrets-bulk`, {
+        body,
+        ...options,
+        headers: buildHeaders([{ 'Content-Type': 'application/merge-patch+json' }, options?.headers]),
+      }) as APIPromise<{ result: SecretBulkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -233,6 +268,61 @@ export namespace SecretListResponse {
 }
 
 export type SecretDeleteResponse = unknown;
+
+/**
+ * Map of secret names to secret metadata for resulting secrets.
+ */
+export type SecretBulkUpdateResponse = {
+  [key: string]:
+    | SecretBulkUpdateResponse.WorkersBindingKindSecretText
+    | SecretBulkUpdateResponse.WorkersBindingKindSecretKey;
+};
+
+export namespace SecretBulkUpdateResponse {
+  export interface WorkersBindingKindSecretText {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'secret_text';
+  }
+
+  export interface WorkersBindingKindSecretKey {
+    /**
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
+     */
+    algorithm: unknown;
+
+    /**
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
+     */
+    format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'secret_key';
+
+    /**
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
+     */
+    usages: Array<
+      'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
+    >;
+  }
+}
 
 /**
  * A secret value accessible through a binding.
@@ -389,6 +479,95 @@ export interface SecretDeleteParams {
   url_encoded?: boolean;
 }
 
+export interface SecretBulkUpdateParams {
+  /**
+   * Path param: Identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Map of secret names to secret values:
+   *
+   * - Set to a secret object to create or update.
+   * - Set to `null` to delete.
+   * - Omit to leave unchanged.
+   */
+  secrets?: {
+    [key: string]:
+      | SecretBulkUpdateParams.WorkersBindingKindSecretText
+      | SecretBulkUpdateParams.WorkersBindingKindSecretKey
+      | null;
+  };
+
+  /**
+   * Body param: Optional version tags to apply to the new script version.
+   */
+  version_tags?: { [key: string]: unknown };
+}
+
+export namespace SecretBulkUpdateParams {
+  export interface WorkersBindingKindSecretText {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The secret value to use.
+     */
+    text: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'secret_text';
+  }
+
+  export interface WorkersBindingKindSecretKey {
+    /**
+     * Algorithm-specific key parameters.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
+     */
+    algorithm: unknown;
+
+    /**
+     * Data format of the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
+     */
+    format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'secret_key';
+
+    /**
+     * Allowed operations with the key.
+     * [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
+     */
+    usages: Array<
+      'encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey'
+    >;
+
+    /**
+     * Base64-encoded key data. Required if `format` is "raw", "pkcs8", or "spki".
+     */
+    key_base64?: string;
+
+    /**
+     * Key data in
+     * [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key)
+     * format. Required if `format` is "jwk".
+     */
+    key_jwk?: unknown;
+  }
+}
+
 export interface SecretGetParams {
   /**
    * Path param: Identifier.
@@ -411,11 +590,13 @@ export declare namespace Secrets {
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
+    type SecretBulkUpdateResponse as SecretBulkUpdateResponse,
     type SecretGetResponse as SecretGetResponse,
     type SecretListResponsesSinglePage as SecretListResponsesSinglePage,
     type SecretUpdateParams as SecretUpdateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
+    type SecretBulkUpdateParams as SecretBulkUpdateParams,
     type SecretGetParams as SecretGetParams,
   };
 }

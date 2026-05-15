@@ -3073,6 +3073,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}',
   },
   {
+    clientCallName: 'client.workers.scripts.secrets.bulkUpdate',
+    fullyQualifiedName: 'workers.scripts.secrets.bulkUpdate',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/workers/scripts/{script_name}/secrets-bulk',
+  },
+  {
     clientCallName: 'client.workers.scripts.secrets.get',
     fullyQualifiedName: 'workers.scripts.secrets.get',
     httpMethod: 'get',
@@ -6776,6 +6782,13 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'delete',
     httpPath:
       '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}',
+  },
+  {
+    clientCallName: 'client.workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate',
+    fullyQualifiedName: 'workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate',
+    httpMethod: 'patch',
+    httpPath:
+      '/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets-bulk',
   },
   {
     clientCallName: 'client.workersForPlatforms.dispatch.namespaces.scripts.secrets.get',
