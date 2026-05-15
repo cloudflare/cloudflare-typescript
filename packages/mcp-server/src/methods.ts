@@ -6539,6 +6539,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/sippy',
   },
   {
+    clientCallName: 'client.r2.buckets.objects.list',
+    fullyQualifiedName: 'r2.buckets.objects.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/objects',
+  },
+  {
+    clientCallName: 'client.r2.buckets.objects.delete',
+    fullyQualifiedName: 'r2.buckets.objects.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}',
+  },
+  {
+    clientCallName: 'client.r2.buckets.objects.get',
+    fullyQualifiedName: 'r2.buckets.objects.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}',
+  },
+  {
+    clientCallName: 'client.r2.buckets.objects.upload',
+    fullyQualifiedName: 'r2.buckets.objects.upload',
+    httpMethod: 'put',
+    httpPath: '/accounts/{account_id}/r2/buckets/{bucket_name}/objects/{object_key}',
+  },
+  {
     clientCallName: 'client.r2.temporaryCredentials.create',
     fullyQualifiedName: 'r2.temporaryCredentials.create',
     httpMethod: 'post',
