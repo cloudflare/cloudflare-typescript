@@ -431,6 +431,7 @@ TEST_PATHS=(
 	tests/api-resources/r2/buckets/locks.test.ts
 	tests/api-resources/r2/buckets/metrics.test.ts
 	tests/api-resources/r2/buckets/sippy.test.ts
+	tests/api-resources/r2/buckets/objects.test.ts
 	tests/api-resources/r2/temporary-credentials.test.ts
 	tests/api-resources/r2/super-slurper/super-slurper.test.ts
 	tests/api-resources/r2/super-slurper/jobs/jobs.test.ts
