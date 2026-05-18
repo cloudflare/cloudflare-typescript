@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObjects } } }>) => {
-  test('list: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('list: only required params', async () => {
     const responsePromise = client.r2.buckets.objects.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -40,7 +41,8 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('list: required and optional params', async () => {
     const response = await client.r2.buckets.objects.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor: 'cursor',
@@ -52,7 +54,8 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     });
   });
 
-  test('delete: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('delete: only required params', async () => {
     const responsePromise = client.r2.buckets.objects.delete('path/to/my-object.txt', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
@@ -66,7 +69,8 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.objects.delete('path/to/my-object.txt', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       bucket_name: 'example-bucket',
@@ -85,7 +89,8 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     });
   });
 
-  test('upload: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('upload: only required params', async () => {
     const responsePromise = client.r2.buckets.objects.upload(
       'path/to/my-object.txt',
       await toFile(Buffer.from('Example data'), 'README.md'),
@@ -100,7 +105,8 @@ const runTests = (client: PartialCloudflare<{ r2: { buckets: { objects: BaseObje
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('upload: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('upload: required and optional params', async () => {
     const response = await client.r2.buckets.objects.upload(
       'path/to/my-object.txt',
       await toFile(Buffer.from('Example data'), 'README.md'),
