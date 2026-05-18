@@ -15,6 +15,15 @@ export {
 } from './destinations';
 export { Observability, BaseObservability } from './observability';
 export {
+  Queries,
+  BaseQueries,
+  type QueryCreateResponse,
+  type QueryListResponse,
+  type QueryCreateParams,
+  type QueryListParams,
+  type QueryListResponsesSinglePage,
+} from './queries';
+export {
   Telemetry,
   BaseTelemetry,
   type TelemetryKeysResponse,

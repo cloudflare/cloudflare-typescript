@@ -3193,6 +3193,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/workers/observability/destinations/{slug}',
   },
   {
+    clientCallName: 'client.workers.observability.queries.create',
+    fullyQualifiedName: 'workers.observability.queries.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/workers/observability/queries',
+  },
+  {
+    clientCallName: 'client.workers.observability.queries.list',
+    fullyQualifiedName: 'workers.observability.queries.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/workers/observability/queries',
+  },
+  {
     clientCallName: 'client.kv.namespaces.create',
     fullyQualifiedName: 'kv.namespaces.create',
     httpMethod: 'post',
