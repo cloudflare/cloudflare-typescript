@@ -83,7 +83,6 @@ jobs:
   test:
     timeout-minutes: 10
     name: test
-    continue-on-error: true
     runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
     permissions:
@@ -100,6 +99,7 @@ jobs:
         run: ./scripts/bootstrap
 
       - name: Run tests
+        continue-on-error: true
         run: ./scripts/test
   examples:
     timeout-minutes: 10
