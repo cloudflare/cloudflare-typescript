@@ -46,6 +46,7 @@ describe('resource apps', () => {
       origin_port: 22,
       proxy_protocol: 'off',
       tls: 'off',
+      virtual_network_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
@@ -85,6 +86,7 @@ describe('resource apps', () => {
       origin_port: 22,
       proxy_protocol: 'off',
       tls: 'off',
+      virtual_network_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
