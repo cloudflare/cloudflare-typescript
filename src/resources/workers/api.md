@@ -286,3 +286,15 @@ Methods:
 - <code title="patch /accounts/{account_id}/workers/observability/destinations/{slug}">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">update</a>(slug, { ...params }) -> DestinationUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/observability/destinations">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">list</a>({ ...params }) -> DestinationListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/observability/destinations/{slug}">client.workers.observability.destinations.<a href="./src/resources/workers/observability/destinations.ts">delete</a>(slug, { ...params }) -> DestinationDeleteResponse</code>
+
+### Queries
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/queries.ts">QueryCreateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/queries.ts">QueryListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/queries">client.workers.observability.queries.<a href="./src/resources/workers/observability/queries.ts">create</a>({ ...params }) -> QueryCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/observability/queries">client.workers.observability.queries.<a href="./src/resources/workers/observability/queries.ts">list</a>({ ...params }) -> QueryListResponsesSinglePage</code>
