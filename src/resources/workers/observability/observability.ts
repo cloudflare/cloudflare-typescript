@@ -15,6 +15,16 @@ import {
   DestinationUpdateResponse,
   Destinations,
 } from './destinations';
+import * as QueriesAPI from './queries';
+import {
+  BaseQueries,
+  Queries,
+  QueryCreateParams,
+  QueryCreateResponse,
+  QueryListParams,
+  QueryListResponse,
+  QueryListResponsesSinglePage,
+} from './queries';
 import * as TelemetryAPI from './telemetry';
 import {
   BaseTelemetry,
@@ -38,12 +48,15 @@ export class BaseObservability extends APIResource {
 export class Observability extends BaseObservability {
   telemetry: TelemetryAPI.Telemetry = new TelemetryAPI.Telemetry(this._client);
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
+  queries: QueriesAPI.Queries = new QueriesAPI.Queries(this._client);
 }
 
 Observability.Telemetry = Telemetry;
 Observability.BaseTelemetry = BaseTelemetry;
 Observability.Destinations = Destinations;
 Observability.BaseDestinations = BaseDestinations;
+Observability.Queries = Queries;
+Observability.BaseQueries = BaseQueries;
 
 export declare namespace Observability {
   export {
@@ -71,5 +84,15 @@ export declare namespace Observability {
     type DestinationUpdateParams as DestinationUpdateParams,
     type DestinationListParams as DestinationListParams,
     type DestinationDeleteParams as DestinationDeleteParams,
+  };
+
+  export {
+    Queries as Queries,
+    BaseQueries as BaseQueries,
+    type QueryCreateResponse as QueryCreateResponse,
+    type QueryListResponse as QueryListResponse,
+    type QueryListResponsesSinglePage as QueryListResponsesSinglePage,
+    type QueryCreateParams as QueryCreateParams,
+    type QueryListParams as QueryListParams,
   };
 }
