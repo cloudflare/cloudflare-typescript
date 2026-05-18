@@ -383,9 +383,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.spectrum.apps.update()`
 - `client.spectrum.apps.delete()`
 - `client.spectrum.apps.get()`
-- `client.addressing.regionalHostnames.delete()`
-- `client.addressing.regionalHostnames.edit()`
-- `client.addressing.regionalHostnames.get()`
 - `client.addressing.addressMaps.delete()`
 - `client.addressing.addressMaps.edit()`
 - `client.addressing.addressMaps.get()`
