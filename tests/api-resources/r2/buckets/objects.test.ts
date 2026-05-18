@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource objects', () => {
-  test('list: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('list: only required params', async () => {
     const responsePromise = client.r2.buckets.objects.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource objects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('list: required and optional params', async () => {
     const response = await client.r2.buckets.objects.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor: 'cursor',
@@ -35,7 +37,8 @@ describe('resource objects', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('delete: only required params', async () => {
     const responsePromise = client.r2.buckets.objects.delete('example-bucket', 'path/to/my-object.txt', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -48,7 +51,8 @@ describe('resource objects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('delete: required and optional params', async () => {
     const response = await client.r2.buckets.objects.delete('example-bucket', 'path/to/my-object.txt', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       jurisdiction: 'default',
@@ -65,7 +69,8 @@ describe('resource objects', () => {
     });
   });
 
-  test('upload: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('upload: only required params', async () => {
     const responsePromise = client.r2.buckets.objects.upload(
       'example-bucket',
       'path/to/my-object.txt',
@@ -81,7 +86,8 @@ describe('resource objects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('upload: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('upload: required and optional params', async () => {
     const response = await client.r2.buckets.objects.upload(
       'example-bucket',
       'path/to/my-object.txt',
