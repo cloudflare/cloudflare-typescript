@@ -7,12 +7,14 @@ Types:
 - <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreCreateResponse</a></code>
 - <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreListResponse</a></code>
 - <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreDeleteResponse</a></code>
+- <code><a href="./src/resources/secrets-store/stores/stores.ts">StoreGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">create</a>({ ...params }) -> StoreCreateResponse</code>
 - <code title="get /accounts/{account_id}/secrets_store/stores">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">list</a>({ ...params }) -> StoreListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/secrets_store/stores/{store_id}">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">delete</a>(storeId, { ...params }) -> StoreDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/secrets_store/stores/{store_id}">client.secretsStore.stores.<a href="./src/resources/secrets-store/stores/stores.ts">get</a>(storeId, { ...params }) -> StoreGetResponse</code>
 
 ### Secrets
 
