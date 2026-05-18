@@ -26,8 +26,10 @@ export {
   type StoreCreateResponse,
   type StoreListResponse,
   type StoreDeleteResponse,
+  type StoreGetResponse,
   type StoreCreateParams,
   type StoreListParams,
   type StoreDeleteParams,
+  type StoreGetParams,
   type StoreListResponsesV4PagePaginationArray,
 } from './stores';

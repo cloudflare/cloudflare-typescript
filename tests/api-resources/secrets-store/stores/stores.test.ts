@@ -96,6 +96,27 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: BaseStores
       force: true,
     });
   });
+
+  // SKIP: prism error for 422 Unprocessable Entity
+  test.skip('get: only required params', async () => {
+    const responsePromise = client.secretsStore.stores.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // SKIP: prism error for 422 Unprocessable Entity
+  test.skip('get: required and optional params', async () => {
+    const response = await client.secretsStore.stores.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '985e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
 };
 describe('resource stores', () => runTests(client));
 describe('resource stores (tree shakable, base)', () => runTests(partialClient));

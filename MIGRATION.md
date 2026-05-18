@@ -1208,6 +1208,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.customPages.assets.delete()`
 - `client.customPages.assets.get()`
 - `client.secretsStore.stores.delete()`
+- `client.secretsStore.stores.get()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.secretsStore.stores.secrets.list()`
 - `client.secretsStore.stores.secrets.delete()`

@@ -2351,6 +2351,7 @@ const fuse = new Fuse(
     'client.customPages.assets.update',
     'client.secretsStore.stores.create',
     'client.secretsStore.stores.delete',
+    'client.secretsStore.stores.get',
     'client.secretsStore.stores.list',
     'client.secretsStore.stores.secrets.bulkDelete',
     'client.secretsStore.stores.secrets.create',

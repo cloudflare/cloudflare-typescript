@@ -13520,6 +13520,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/secrets_store/stores/{store_id}',
   },
   {
+    clientCallName: 'client.secretsStore.stores.get',
+    fullyQualifiedName: 'secretsStore.stores.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/secrets_store/stores/{store_id}',
+  },
+  {
     clientCallName: 'client.secretsStore.stores.secrets.create',
     fullyQualifiedName: 'secretsStore.stores.secrets.create',
     httpMethod: 'post',
