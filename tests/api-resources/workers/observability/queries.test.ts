@@ -27,7 +27,8 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ workers: { observability: { queries: BaseQueries } } }>) => {
-  test('create: only required params', async () => {
+  // HTTP 422 error from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.workers.observability.queries.create({
       account_id: 'account_id',
       description: 'Query description',
@@ -43,7 +44,8 @@ const runTests = (client: PartialCloudflare<{ workers: { observability: { querie
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 422 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.workers.observability.queries.create({
       account_id: 'account_id',
       description: 'Query description',

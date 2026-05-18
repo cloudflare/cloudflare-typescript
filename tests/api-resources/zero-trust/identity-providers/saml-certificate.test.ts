@@ -29,7 +29,8 @@ const parentPartialClient = createClient({
 const runTests = (
   client: PartialCloudflare<{ zeroTrust: { identityProviders: { samlCertificate: BaseSAMLCertificate } } }>,
 ) => {
-  test('create: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.identityProviders.samlCertificate.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -43,7 +44,8 @@ const runTests = (
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.zeroTrust.identityProviders.samlCertificate.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
