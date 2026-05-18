@@ -10,7 +10,8 @@ const client = new Cloudflare({
 });
 
 describe('resource samlCertificates', () => {
-  test('list: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('list: only required params', async () => {
     const responsePromise = client.zeroTrust.access.samlCertificates.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource samlCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('list: required and optional params', async () => {
     const response = await client.zeroTrust.access.samlCertificates.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'a5bb4b3f-c2d1-4e6a-8f9b-1d3e4f5a6b7c,f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -32,7 +34,8 @@ describe('resource samlCertificates', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('get: only required params', async () => {
     const responsePromise = client.zeroTrust.access.samlCertificates.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -46,21 +49,24 @@ describe('resource samlCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('get: required and optional params', async () => {
     const response = await client.zeroTrust.access.samlCertificates.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
-  test('getPem: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('getPem: required and optional params', async () => {
     const response = await client.zeroTrust.access.samlCertificates.getPem(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
-  test('rotate: only required params', async () => {
+  // HTTP 404 error from prism
+  test.skip('rotate: only required params', async () => {
     const responsePromise = client.zeroTrust.access.samlCertificates.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -74,7 +80,8 @@ describe('resource samlCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('rotate: required and optional params', async () => {
+  // HTTP 404 error from prism
+  test.skip('rotate: required and optional params', async () => {
     const response = await client.zeroTrust.access.samlCertificates.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
