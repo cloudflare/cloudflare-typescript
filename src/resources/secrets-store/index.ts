@@ -8,7 +8,9 @@ export {
   type StoreCreateResponse,
   type StoreListResponse,
   type StoreDeleteResponse,
+  type StoreGetResponse,
   type StoreCreateParams,
   type StoreListParams,
   type StoreDeleteParams,
+  type StoreGetParams,
 } from './stores/index';
