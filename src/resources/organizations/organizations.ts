@@ -19,7 +19,7 @@ export class BaseOrganizations extends APIResource {
   static override readonly _key: readonly ['organizations'] = Object.freeze(['organizations'] as const);
 
   /**
-   * Create a new organization for a user. (Currently in Closed Beta - see
+   * Create a new organization for a user. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   create(body: OrganizationCreateParams, options?: RequestOptions): APIPromise<Organization> {
@@ -29,7 +29,7 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Modify organization. (Currently in Closed Beta - see
+   * Modify organization. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   update(
@@ -46,7 +46,7 @@ export class BaseOrganizations extends APIResource {
 
   /**
    * Retrieve a list of organizations a particular user has access to. (Currently in
-   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    */
   list(
     query: OrganizationListParams | null | undefined = {},
@@ -58,7 +58,7 @@ export class BaseOrganizations extends APIResource {
   /**
    * Delete an organization. The organization MUST be empty before deleting. It must
    * not contain any sub-organizations, accounts, members or users. (Currently in
-   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    */
   delete(organizationID: string, options?: RequestOptions): APIPromise<OrganizationDeleteResponse> {
     return (
@@ -69,7 +69,7 @@ export class BaseOrganizations extends APIResource {
   }
 
   /**
-   * Retrieve the details of a certain organization. (Currently in Closed Beta - see
+   * Retrieve the details of a certain organization. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<Organization> {
