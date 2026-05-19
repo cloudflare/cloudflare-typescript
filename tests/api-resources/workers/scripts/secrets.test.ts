@@ -74,6 +74,33 @@ describe('resource secrets', () => {
     });
   });
 
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.workers.scripts.secrets.bulkUpdate('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.workers.scripts.secrets.bulkUpdate('this-is_my_script-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      secrets: {
+        foo: {
+          name: 'myBinding',
+          text: 'My secret.',
+          type: 'secret_text',
+        },
+      },
+      version_tags: { foo: 'bar' },
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.workers.scripts.secrets.get('this-is_my_script-01', 'mySecret', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
