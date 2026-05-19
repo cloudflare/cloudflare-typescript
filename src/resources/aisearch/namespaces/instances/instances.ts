@@ -2381,6 +2381,12 @@ export interface InstanceStatsResponse {
   completed?: number;
 
   /**
+   * True when status counts are unavailable (e.g. legacy stats query exceeded D1
+   * statement-size limit). Counts are omitted in this case.
+   */
+  degraded?: boolean;
+
+  /**
    * Engine-specific metadata. Present only for managed (v3) instances.
    */
   engine?: InstanceStatsResponse.Engine;
