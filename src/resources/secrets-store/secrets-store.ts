@@ -9,6 +9,8 @@ import {
   StoreCreateResponse,
   StoreDeleteParams,
   StoreDeleteResponse,
+  StoreGetParams,
+  StoreGetResponse,
   StoreListParams,
   StoreListResponse,
   StoreListResponsesV4PagePaginationArray,
@@ -30,10 +32,12 @@ export declare namespace SecretsStore {
     type StoreCreateResponse as StoreCreateResponse,
     type StoreListResponse as StoreListResponse,
     type StoreDeleteResponse as StoreDeleteResponse,
+    type StoreGetResponse as StoreGetResponse,
     StoreListResponsesV4PagePaginationArray as StoreListResponsesV4PagePaginationArray,
     type StoreCreateParams as StoreCreateParams,
     type StoreListParams as StoreListParams,
     type StoreDeleteParams as StoreDeleteParams,
+    type StoreGetParams as StoreGetParams,
   };
 
   export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };

@@ -100,6 +100,31 @@ export class Stores extends APIResource {
       }) as Core.APIPromise<{ result: StoreDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Returns details of a single store
+   *
+   * @example
+   * ```ts
+   * const store = await client.secretsStore.stores.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '985e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  get(
+    storeId: string,
+    params: StoreGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<StoreGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/secrets_store/stores/${storeId}`,
+        options,
+      ) as Core.APIPromise<{ result: StoreGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class StoreListResponsesV4PagePaginationArray extends V4PagePaginationArray<StoreListResponse> {}
@@ -163,6 +188,33 @@ export interface StoreListResponse {
  */
 export type StoreDeleteResponse = unknown;
 
+export interface StoreGetResponse {
+  /**
+   * Store Identifier
+   */
+  id: string;
+
+  /**
+   * Whenthe secret was created.
+   */
+  created: string;
+
+  /**
+   * When the secret was modified.
+   */
+  modified: string;
+
+  /**
+   * The name of the store
+   */
+  name: string;
+
+  /**
+   * Account Identifier
+   */
+  account_id?: string;
+}
+
 export interface StoreCreateParams {
   /**
    * Path param: Account Identifier
@@ -206,6 +258,13 @@ export interface StoreDeleteParams {
   force?: boolean;
 }
 
+export interface StoreGetParams {
+  /**
+   * Account Identifier
+   */
+  account_id: string;
+}
+
 Stores.StoreListResponsesV4PagePaginationArray = StoreListResponsesV4PagePaginationArray;
 Stores.Secrets = Secrets;
 Stores.SecretCreateResponsesSinglePage = SecretCreateResponsesSinglePage;
@@ -216,10 +275,12 @@ export declare namespace Stores {
     type StoreCreateResponse as StoreCreateResponse,
     type StoreListResponse as StoreListResponse,
     type StoreDeleteResponse as StoreDeleteResponse,
+    type StoreGetResponse as StoreGetResponse,
     StoreListResponsesV4PagePaginationArray as StoreListResponsesV4PagePaginationArray,
     type StoreCreateParams as StoreCreateParams,
     type StoreListParams as StoreListParams,
     type StoreDeleteParams as StoreDeleteParams,
+    type StoreGetParams as StoreGetParams,
   };
 
   export {
