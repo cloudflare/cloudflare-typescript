@@ -106,12 +106,14 @@ export const formatRequestDetails = (details: {
         ([name, value]) => [
           name,
           (
+            name.toLowerCase() === 'authorization' ||
+            name.toLowerCase() === 'api-key' ||
+            name.toLowerCase() === 'x-api-key' ||
+            name.toLowerCase() === 'cookie' ||
+            name.toLowerCase() === 'set-cookie' ||
             name.toLowerCase() === 'x-auth-email' ||
             name.toLowerCase() === 'x-auth-key' ||
-            name.toLowerCase() === 'authorization' ||
-            name.toLowerCase() === 'x-auth-user-service-key' ||
-            name.toLowerCase() === 'cookie' ||
-            name.toLowerCase() === 'set-cookie'
+            name.toLowerCase() === 'x-auth-user-service-key'
           ) ?
             '***'
           : value,

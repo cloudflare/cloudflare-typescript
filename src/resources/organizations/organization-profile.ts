@@ -32,13 +32,10 @@ export class BaseOrganizationProfileResource extends APIResource {
    * Get an organizations profile if it exists. (Currently in Closed Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
-  get(
-    organizationID: string,
-    options?: RequestOptions,
-  ): APIPromise<organizations_api_ProfileResponse.Result> {
+  get(organizationID: string, options?: RequestOptions): APIPromise<OrganizationProfile> {
     return (
       this._client.get(path`/organizations/${organizationID}/profile`, options) as APIPromise<{
-        result: organizations_api_ProfileResponse.Result;
+        result: OrganizationProfile;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,6 +43,18 @@ export class BaseOrganizationProfileResource extends APIResource {
 export class OrganizationProfileResource extends BaseOrganizationProfileResource {}
 
 export interface OrganizationProfile {
+  business_address: string;
+
+  business_email: string;
+
+  business_name: string;
+
+  business_phone: string;
+
+  external_metadata: string;
+}
+
+export interface OrganizationProfileParam {
   business_address: string;
 
   business_email: string;
