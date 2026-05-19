@@ -4,7 +4,7 @@ import { APIResource } from '../../resource';
 import * as ProfilesAPI from './profiles';
 import { ProfileGetParams, ProfileGetResponse, Profiles } from './profiles';
 import * as UsageAPI from './usage';
-import { Usage, UsagePaygoParams, UsagePaygoResponse } from './usage';
+import { Usage } from './usage';
 
 export class Billing extends APIResource {
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
@@ -21,9 +21,5 @@ export declare namespace Billing {
     type ProfileGetParams as ProfileGetParams,
   };
 
-  export {
-    Usage as Usage,
-    type UsagePaygoResponse as UsagePaygoResponse,
-    type UsagePaygoParams as UsagePaygoParams,
-  };
+  export { Usage as Usage };
 }
