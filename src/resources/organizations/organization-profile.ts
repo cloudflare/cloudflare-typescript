@@ -13,7 +13,7 @@ export class BaseOrganizationProfileResource extends APIResource {
   ] as const);
 
   /**
-   * Modify organization profile. (Currently in Closed Beta - see
+   * Modify organization profile. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   update(
@@ -29,7 +29,7 @@ export class BaseOrganizationProfileResource extends APIResource {
   }
 
   /**
-   * Get an organizations profile if it exists. (Currently in Closed Beta - see
+   * Get an organizations profile if it exists. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   get(organizationID: string, options?: RequestOptions): APIPromise<OrganizationProfile> {
