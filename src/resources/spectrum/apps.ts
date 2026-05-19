@@ -194,6 +194,12 @@ export namespace AppCreateResponse {
      * The type of TLS termination associated with the application.
      */
     tls?: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Optional UUID of a virtual network for routing origin traffic through tunnel
+     * virtual networks.
+     */
+    virtual_network_id?: string;
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -321,6 +327,12 @@ export namespace AppUpdateResponse {
      * The type of TLS termination associated with the application.
      */
     tls?: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Optional UUID of a virtual network for routing origin traffic through tunnel
+     * virtual networks.
+     */
+    virtual_network_id?: string;
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -448,6 +460,12 @@ export namespace AppListResponse {
      * The type of TLS termination associated with the application.
      */
     tls?: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Optional UUID of a virtual network for routing origin traffic through tunnel
+     * virtual networks.
+     */
+    virtual_network_id?: string;
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -582,6 +600,12 @@ export namespace AppGetResponse {
      * The type of TLS termination associated with the application.
      */
     tls?: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Optional UUID of a virtual network for routing origin traffic through tunnel
+     * virtual networks.
+     */
+    virtual_network_id?: string;
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -701,6 +725,12 @@ export declare namespace AppCreateParams {
      * Body param: The type of TLS termination associated with the application.
      */
     tls?: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Body param: Optional UUID of a virtual network for routing origin traffic
+     * through tunnel virtual networks.
+     */
+    virtual_network_id?: string;
   }
 
   export interface SpectrumConfigPaygoAppConfig {
@@ -811,6 +841,12 @@ export declare namespace AppUpdateParams {
      * Body param: The type of TLS termination associated with the application.
      */
     tls?: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Body param: Optional UUID of a virtual network for routing origin traffic
+     * through tunnel virtual networks.
+     */
+    virtual_network_id?: string;
   }
 
   export interface SpectrumConfigPaygoAppConfig {
