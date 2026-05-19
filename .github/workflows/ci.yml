@@ -99,7 +99,6 @@ jobs:
         run: ./scripts/bootstrap
 
       - name: Run tests
-        continue-on-error: true
         run: ./scripts/test
   examples:
     timeout-minutes: 10
