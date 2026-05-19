@@ -85,6 +85,7 @@ export class HTTP extends APIResource {
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
+      | 'CONTENT_TYPE'
       | 'DEVICE_TYPE'
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
@@ -104,6 +105,7 @@ export class HTTP extends APIResource {
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
+      | 'CONTENT_TYPE'
       | 'DEVICE_TYPE'
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
@@ -122,6 +124,7 @@ export class HTTP extends APIResource {
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
+      | 'CONTENT_TYPE'
       | 'DEVICE_TYPE'
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
@@ -188,6 +191,7 @@ export class HTTP extends APIResource {
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
+      | 'CONTENT_TYPE'
       | 'DEVICE_TYPE'
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
@@ -207,6 +211,7 @@ export class HTTP extends APIResource {
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
+      | 'CONTENT_TYPE'
       | 'DEVICE_TYPE'
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
@@ -225,6 +230,7 @@ export class HTTP extends APIResource {
       | 'BOT_CLASS'
       | 'BROWSER'
       | 'BROWSER_FAMILY'
+      | 'CONTENT_TYPE'
       | 'DEVICE_TYPE'
       | 'HTTP_PROTOCOL'
       | 'HTTP_VERSION'
@@ -683,6 +689,28 @@ export interface HTTPSummaryV2Params {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
+
+  /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
    * Prefix with `-` to exclude continents from results. For example, `-EU,NA`
    * excludes results from EU, but includes results from NA.
@@ -915,6 +943,28 @@ export interface HTTPTimeseriesGroupsV2Params {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filters results by content type category.
+   */
+  contentType?: Array<
+    | 'HTML'
+    | 'IMAGES'
+    | 'JSON'
+    | 'JAVASCRIPT'
+    | 'CSS'
+    | 'PLAIN_TEXT'
+    | 'FONTS'
+    | 'XML'
+    | 'YAML'
+    | 'VIDEO'
+    | 'AUDIO'
+    | 'MARKDOWN'
+    | 'DOCUMENTS'
+    | 'BINARY'
+    | 'SERIALIZATION'
+    | 'OTHER'
+  >;
 
   /**
    * Filters results by continent. Specify a comma-separated list of alpha-2 codes.
