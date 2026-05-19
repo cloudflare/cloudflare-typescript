@@ -798,7 +798,6 @@ const fuse = new Fuse(
     'client.addressing.prefixes.delegations.list',
     'client.auditLogs.list',
     'client.billing.profiles.get',
-    'client.billing.usage.paygo',
     'client.brandProtection.submit',
     'client.brandProtection.urlInfo',
     'client.brandProtection.queries.bulk',

@@ -4160,12 +4160,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/billing/profile',
   },
   {
-    clientCallName: 'client.billing.usage.paygo',
-    fullyQualifiedName: 'billing.usage.paygo',
-    httpMethod: 'get',
-    httpPath: '/accounts/{account_id}/billing/usage/paygo',
-  },
-  {
     clientCallName: 'client.brandProtection.submit',
     fullyQualifiedName: 'brandProtection.submit',
     httpMethod: 'post',
