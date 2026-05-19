@@ -23,10 +23,12 @@ export {
   type SecretUpdateResponse,
   type SecretListResponse,
   type SecretDeleteResponse,
+  type SecretBulkUpdateResponse,
   type SecretGetResponse,
   type SecretUpdateParams,
   type SecretListParams,
   type SecretDeleteParams,
+  type SecretBulkUpdateParams,
   type SecretGetParams,
 } from './secrets';
 export {
