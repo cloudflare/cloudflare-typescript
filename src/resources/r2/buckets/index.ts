@@ -48,6 +48,17 @@ export {
 } from './locks';
 export { Metrics, type MetricListResponse, type MetricListParams } from './metrics';
 export {
+  ObjectListResponsesCursorPagination,
+  Objects,
+  type ObjectListResponse,
+  type ObjectDeleteResponse,
+  type ObjectUploadResponse,
+  type ObjectListParams,
+  type ObjectDeleteParams,
+  type ObjectGetParams,
+  type ObjectUploadParams,
+} from './objects';
+export {
   SippyResource,
   type Provider,
   type Sippy,

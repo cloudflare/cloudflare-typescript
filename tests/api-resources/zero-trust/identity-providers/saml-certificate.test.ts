@@ -9,9 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource models', () => {
-  test('list: only required params', async () => {
-    const responsePromise = client.ai.models.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+describe('resource samlCertificate', () => {
+  // HTTP 404 error from prism
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.zeroTrust.identityProviders.samlCertificate.create(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,17 +25,11 @@ describe('resource models', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.ai.models.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      author: 'author',
-      format: 'openrouter',
-      hide_experimental: true,
-      page: 0,
-      per_page: 0,
-      search: 'search',
-      source: 0,
-      task: 'Text Generation',
-    });
+  // HTTP 404 error from prism
+  test.skip('create: required and optional params', async () => {
+    const response = await client.zeroTrust.identityProviders.samlCertificate.create(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

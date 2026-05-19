@@ -126,6 +126,17 @@ export {
   type PolicyGetParams,
 } from './policies';
 export {
+  SAMLCertificateListResponsesV4PagePaginationArray,
+  SAMLCertificates,
+  type SAMLCertificateListResponse,
+  type SAMLCertificateGetResponse,
+  type SAMLCertificateRotateResponse,
+  type SAMLCertificateListParams,
+  type SAMLCertificateGetParams,
+  type SAMLCertificateGetPemParams,
+  type SAMLCertificateRotateParams,
+} from './saml-certificates';
+export {
   ServiceTokensV4PagePaginationArray,
   ServiceTokens,
   type ServiceToken,

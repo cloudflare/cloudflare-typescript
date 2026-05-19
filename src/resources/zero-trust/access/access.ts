@@ -80,6 +80,18 @@ import {
   PolicyUpdateParams,
   PolicyUpdateResponse,
 } from './policies';
+import * as SAMLCertificatesAPI from './saml-certificates';
+import {
+  SAMLCertificateGetParams,
+  SAMLCertificateGetPemParams,
+  SAMLCertificateGetResponse,
+  SAMLCertificateListParams,
+  SAMLCertificateListResponse,
+  SAMLCertificateListResponsesV4PagePaginationArray,
+  SAMLCertificateRotateParams,
+  SAMLCertificateRotateResponse,
+  SAMLCertificates,
+} from './saml-certificates';
 import * as ServiceTokensAPI from './service-tokens';
 import {
   ServiceToken,
@@ -182,6 +194,9 @@ import {
 export class Access extends APIResource {
   aiControls: AIControlsAPI.AIControls = new AIControlsAPI.AIControls(this._client);
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
+  samlCertificates: SAMLCertificatesAPI.SAMLCertificates = new SAMLCertificatesAPI.SAMLCertificates(
+    this._client,
+  );
   infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
@@ -199,6 +214,8 @@ export class Access extends APIResource {
 Access.AIControls = AIControls;
 Access.GatewayCA = GatewayCA;
 Access.GatewayCAListResponsesSinglePage = GatewayCAListResponsesSinglePage;
+Access.SAMLCertificates = SAMLCertificates;
+Access.SAMLCertificateListResponsesV4PagePaginationArray = SAMLCertificateListResponsesV4PagePaginationArray;
 Access.Infrastructure = Infrastructure;
 Access.Applications = Applications;
 Access.ApplicationListResponsesV4PagePaginationArray = ApplicationListResponsesV4PagePaginationArray;
@@ -233,6 +250,18 @@ export declare namespace Access {
     type GatewayCACreateParams as GatewayCACreateParams,
     type GatewayCAListParams as GatewayCAListParams,
     type GatewayCADeleteParams as GatewayCADeleteParams,
+  };
+
+  export {
+    SAMLCertificates as SAMLCertificates,
+    type SAMLCertificateListResponse as SAMLCertificateListResponse,
+    type SAMLCertificateGetResponse as SAMLCertificateGetResponse,
+    type SAMLCertificateRotateResponse as SAMLCertificateRotateResponse,
+    SAMLCertificateListResponsesV4PagePaginationArray as SAMLCertificateListResponsesV4PagePaginationArray,
+    type SAMLCertificateListParams as SAMLCertificateListParams,
+    type SAMLCertificateGetParams as SAMLCertificateGetParams,
+    type SAMLCertificateGetPemParams as SAMLCertificateGetPemParams,
+    type SAMLCertificateRotateParams as SAMLCertificateRotateParams,
   };
 
   export { Infrastructure as Infrastructure };
