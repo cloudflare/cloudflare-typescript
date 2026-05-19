@@ -4,6 +4,12 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as IdentityProvidersAPI from './identity-providers';
+import * as SAMLCertificateAPI from './saml-certificate';
+import {
+  SAMLCertificate,
+  SAMLCertificateCreateParams,
+  SAMLCertificateCreateResponse,
+} from './saml-certificate';
 import * as SCIMAPI from './scim/scim';
 import { SCIM } from './scim/scim';
 import { CloudflareError } from '../../../error';
@@ -11,6 +17,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class IdentityProviders extends APIResource {
   scim: SCIMAPI.SCIM = new SCIMAPI.SCIM(this._client);
+  samlCertificate: SAMLCertificateAPI.SAMLCertificate = new SAMLCertificateAPI.SAMLCertificate(this._client);
 
   /**
    * Adds a new identity provider to Access.
@@ -287,6 +294,21 @@ export interface AzureAD {
   id?: string;
 
   /**
+   * The SAML encryption certificate set details, including current and previous
+   * certificates. Only present for SAML identity providers with a certificate set
+   * assigned.
+   */
+  saml_certificate_set?: AzureAD.SAMLCertificateSet;
+
+  /**
+   * The UID of the SAML encryption certificate set assigned to this Identity
+   * Provider. Only present for SAML identity providers with encryption configured.
+   * Create a certificate set via POST to
+   * `/identity_providers/{id}/saml_certificate`.
+   */
+  saml_certificate_set_id?: string;
+
+  /**
    * The configuration settings for enabling a System for Cross-Domain Identity
    * Management (SCIM) with the identity provider.
    */
@@ -347,6 +369,68 @@ export namespace AzureAD {
      */
     support_groups?: boolean;
   }
+
+  /**
+   * The SAML encryption certificate set details, including current and previous
+   * certificates. Only present for SAML identity providers with a certificate set
+   * assigned.
+   */
+  export interface SAMLCertificateSet {
+    /**
+     * Timestamp when the certificate set was created
+     */
+    created_at: string;
+
+    /**
+     * Unique identifier for the certificate set
+     */
+    uid: string;
+
+    /**
+     * Timestamp when the certificate set was last updated (e.g., during rotation)
+     */
+    updated_at: string;
+
+    /**
+     * The currently active certificate used for encrypting SAML assertions
+     */
+    current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+    /**
+     * The previous certificate, maintained during rotation to ensure continuity. Null
+     * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+     */
+    previous_certificate?: unknown | null;
+  }
+
+  export namespace SAMLCertificateSet {
+    /**
+     * The currently active certificate used for encrypting SAML assertions
+     */
+    export interface CurrentCertificate {
+      /**
+       * Indicates whether this is the currently active certificate
+       */
+      is_current: boolean;
+
+      /**
+       * Certificate expiration date. Certificates are automatically rotated 30 days
+       * before expiration.
+       */
+      not_after: string;
+
+      /**
+       * PEM-encoded X.509 certificate containing the public key. Configure this
+       * certificate in your external SAML Identity Provider to enable encryption.
+       */
+      public_certificate: string;
+
+      /**
+       * Unique identifier for the certificate
+       */
+      uid: string;
+    }
+  }
 }
 
 export interface AzureADParam {
@@ -368,6 +452,14 @@ export interface AzureADParam {
    * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
   type: IdentityProviderTypeParam;
+
+  /**
+   * The UID of the SAML encryption certificate set assigned to this Identity
+   * Provider. Only present for SAML identity providers with encryption configured.
+   * Create a certificate set via POST to
+   * `/identity_providers/{id}/saml_certificate`.
+   */
+  saml_certificate_set_id?: string;
 
   /**
    * The configuration settings for enabling a System for Cross-Domain Identity
@@ -499,6 +591,21 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessCentrify.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -542,6 +649,68 @@ export namespace IdentityProvider {
        */
       email_claim_name?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessFacebook {
@@ -570,10 +739,89 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessFacebook.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessFacebook {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessGitHub {
@@ -602,10 +850,89 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessGitHub.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessGitHub {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessGoogle {
@@ -632,6 +959,21 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessGoogle.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -667,6 +1009,68 @@ export namespace IdentityProvider {
        */
       email_claim_name?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessGoogleApps {
@@ -693,6 +1097,21 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessGoogleApps.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -733,6 +1152,68 @@ export namespace IdentityProvider {
        */
       email_claim_name?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessLinkedin {
@@ -761,10 +1242,89 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessLinkedin.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessLinkedin {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOIDC {
@@ -791,6 +1351,21 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOIDC.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -851,6 +1426,68 @@ export namespace IdentityProvider {
        */
       token_url?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOkta {
@@ -877,6 +1514,21 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOkta.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -922,6 +1574,68 @@ export namespace IdentityProvider {
        */
       okta_account?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOnelogin {
@@ -948,6 +1662,21 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOnelogin.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -988,6 +1717,68 @@ export namespace IdentityProvider {
        */
       onelogin_account?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessPingone {
@@ -1014,6 +1805,21 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessPingone.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -1054,6 +1860,68 @@ export namespace IdentityProvider {
        */
       ping_env_id?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessSAML {
@@ -1082,6 +1950,21 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessSAML.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1105,6 +1988,22 @@ export namespace IdentityProvider {
        * The attribute name for email in the SAML response.
        */
       email_attribute_name?: string;
+
+      /**
+       * Enable SAML assertion encryption. When enabled, the Identity Provider will
+       * encrypt SAML assertions using the certificate from the assigned certificate set.
+       *
+       * To enable encryption:
+       *
+       * 1. Create a certificate set via POST to
+       *    `/identity_providers/{id}/saml_certificate`
+       * 2. Set this field to `true` and include `saml_certificate_set_id` in the PUT
+       *    request
+       * 3. Configure the public certificate in your external Identity Provider
+       *
+       * Note: Requires `saml_certificate_set_id` to be set when `true`.
+       */
+      enable_encryption?: boolean;
 
       /**
        * Add a list of attribute names that will be returned in the response header from
@@ -1147,6 +2046,68 @@ export namespace IdentityProvider {
         header_name?: string;
       }
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessYandex {
@@ -1175,10 +2136,89 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessYandex.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessYandex {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOnetimepin {
@@ -1207,6 +2247,21 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOnetimepin.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1221,6 +2276,68 @@ export namespace IdentityProvider {
      */
     export interface Config {
       redirect_url?: string;
+    }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
     }
   }
 }
@@ -1263,6 +2380,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1329,6 +2454,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1356,6 +2489,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1381,6 +2522,14 @@ export namespace IdentityProviderParam {
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -1437,6 +2586,14 @@ export namespace IdentityProviderParam {
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -1500,6 +2657,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1525,6 +2690,14 @@ export namespace IdentityProviderParam {
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -1608,6 +2781,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1674,6 +2855,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1733,6 +2922,14 @@ export namespace IdentityProviderParam {
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -1796,6 +2993,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1819,6 +3024,22 @@ export namespace IdentityProviderParam {
        * The attribute name for email in the SAML response.
        */
       email_attribute_name?: string;
+
+      /**
+       * Enable SAML assertion encryption. When enabled, the Identity Provider will
+       * encrypt SAML assertions using the certificate from the assigned certificate set.
+       *
+       * To enable encryption:
+       *
+       * 1. Create a certificate set via POST to
+       *    `/identity_providers/{id}/saml_certificate`
+       * 2. Set this field to `true` and include `saml_certificate_set_id` in the PUT
+       *    request
+       * 3. Configure the public certificate in your external Identity Provider
+       *
+       * Note: Requires `saml_certificate_set_id` to be set when `true`.
+       */
+      enable_encryption?: boolean;
 
       /**
        * Add a list of attribute names that will be returned in the response header from
@@ -1884,6 +3105,14 @@ export namespace IdentityProviderParam {
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
 
     /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -1909,6 +3138,14 @@ export namespace IdentityProviderParam {
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
     type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2093,6 +3330,21 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessCentrify.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -2136,6 +3388,68 @@ export namespace IdentityProviderListResponse {
        */
       email_claim_name?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessFacebook {
@@ -2164,10 +3478,89 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessFacebook.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessFacebook {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessGitHub {
@@ -2196,10 +3589,89 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessGitHub.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessGitHub {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessGoogle {
@@ -2226,6 +3698,21 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessGoogle.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2261,6 +3748,68 @@ export namespace IdentityProviderListResponse {
        */
       email_claim_name?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessGoogleApps {
@@ -2287,6 +3836,21 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessGoogleApps.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2327,6 +3891,68 @@ export namespace IdentityProviderListResponse {
        */
       email_claim_name?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessLinkedin {
@@ -2355,10 +3981,89 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessLinkedin.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessLinkedin {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOIDC {
@@ -2385,6 +4090,21 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOIDC.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2445,6 +4165,68 @@ export namespace IdentityProviderListResponse {
        */
       token_url?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOkta {
@@ -2471,6 +4253,21 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOkta.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2516,6 +4313,68 @@ export namespace IdentityProviderListResponse {
        */
       okta_account?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessOnelogin {
@@ -2542,6 +4401,21 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOnelogin.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2582,6 +4456,68 @@ export namespace IdentityProviderListResponse {
        */
       onelogin_account?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessPingone {
@@ -2608,6 +4544,21 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessPingone.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * The configuration settings for enabling a System for Cross-Domain Identity
@@ -2648,6 +4599,68 @@ export namespace IdentityProviderListResponse {
        */
       ping_env_id?: string;
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessSAML {
@@ -2676,6 +4689,21 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessSAML.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
@@ -2699,6 +4727,22 @@ export namespace IdentityProviderListResponse {
        * The attribute name for email in the SAML response.
        */
       email_attribute_name?: string;
+
+      /**
+       * Enable SAML assertion encryption. When enabled, the Identity Provider will
+       * encrypt SAML assertions using the certificate from the assigned certificate set.
+       *
+       * To enable encryption:
+       *
+       * 1. Create a certificate set via POST to
+       *    `/identity_providers/{id}/saml_certificate`
+       * 2. Set this field to `true` and include `saml_certificate_set_id` in the PUT
+       *    request
+       * 3. Configure the public certificate in your external Identity Provider
+       *
+       * Note: Requires `saml_certificate_set_id` to be set when `true`.
+       */
+      enable_encryption?: boolean;
 
       /**
        * Add a list of attribute names that will be returned in the response header from
@@ -2741,6 +4785,68 @@ export namespace IdentityProviderListResponse {
         header_name?: string;
       }
     }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 
   export interface AccessYandex {
@@ -2769,10 +4875,89 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessYandex.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessYandex {
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
   }
 }
 
@@ -2831,6 +5016,14 @@ export declare namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2928,6 +5121,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3006,6 +5207,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3045,6 +5254,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3082,6 +5299,14 @@ export declare namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3150,6 +5375,14 @@ export declare namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3225,6 +5458,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3262,6 +5503,14 @@ export declare namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3357,6 +5606,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3435,6 +5692,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3506,6 +5771,14 @@ export declare namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3581,6 +5854,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3604,6 +5885,22 @@ export declare namespace IdentityProviderCreateParams {
        * The attribute name for email in the SAML response.
        */
       email_attribute_name?: string;
+
+      /**
+       * Enable SAML assertion encryption. When enabled, the Identity Provider will
+       * encrypt SAML assertions using the certificate from the assigned certificate set.
+       *
+       * To enable encryption:
+       *
+       * 1. Create a certificate set via POST to
+       *    `/identity_providers/{id}/saml_certificate`
+       * 2. Set this field to `true` and include `saml_certificate_set_id` in the PUT
+       *    request
+       * 3. Configure the public certificate in your external Identity Provider
+       *
+       * Note: Requires `saml_certificate_set_id` to be set when `true`.
+       */
+      enable_encryption?: boolean;
 
       /**
        * Add a list of attribute names that will be returned in the response header from
@@ -3681,6 +5978,14 @@ export declare namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3718,6 +6023,14 @@ export declare namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3786,6 +6099,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3881,6 +6202,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3959,6 +6288,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3998,6 +6335,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -4035,6 +6380,14 @@ export declare namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -4103,6 +6456,14 @@ export declare namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -4178,6 +6539,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -4215,6 +6584,14 @@ export declare namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -4310,6 +6687,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -4388,6 +6773,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -4459,6 +6852,14 @@ export declare namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -4534,6 +6935,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -4557,6 +6966,22 @@ export declare namespace IdentityProviderUpdateParams {
        * The attribute name for email in the SAML response.
        */
       email_attribute_name?: string;
+
+      /**
+       * Enable SAML assertion encryption. When enabled, the Identity Provider will
+       * encrypt SAML assertions using the certificate from the assigned certificate set.
+       *
+       * To enable encryption:
+       *
+       * 1. Create a certificate set via POST to
+       *    `/identity_providers/{id}/saml_certificate`
+       * 2. Set this field to `true` and include `saml_certificate_set_id` in the PUT
+       *    request
+       * 3. Configure the public certificate in your external Identity Provider
+       *
+       * Note: Requires `saml_certificate_set_id` to be set when `true`.
+       */
+      enable_encryption?: boolean;
 
       /**
        * Add a list of attribute names that will be returned in the response header from
@@ -4634,6 +7059,14 @@ export declare namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -4671,6 +7104,14 @@ export declare namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -4736,6 +7177,7 @@ export interface IdentityProviderGetParams {
 IdentityProviders.IdentityProviderListResponsesV4PagePaginationArray =
   IdentityProviderListResponsesV4PagePaginationArray;
 IdentityProviders.SCIM = SCIM;
+IdentityProviders.SAMLCertificate = SAMLCertificate;
 
 export declare namespace IdentityProviders {
   export {
@@ -4755,4 +7197,10 @@ export declare namespace IdentityProviders {
   };
 
   export { SCIM as SCIM };
+
+  export {
+    SAMLCertificate as SAMLCertificate,
+    type SAMLCertificateCreateResponse as SAMLCertificateCreateResponse,
+    type SAMLCertificateCreateParams as SAMLCertificateCreateParams,
+  };
 }
