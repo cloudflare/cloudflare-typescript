@@ -106,8 +106,8 @@ export interface TelemetryKeysResponse {
  */
 export interface TelemetryQueryResponse {
   /**
-   * The query run metadata including the query definition, execution status, and
-   * timeframe.
+   * Represents a single execution of a query against Workers Observability data,
+   * including the query definition, execution status, and performance statistics.
    */
   run: TelemetryQueryResponse.Run;
 
@@ -159,8 +159,8 @@ export interface TelemetryQueryResponse {
 
 export namespace TelemetryQueryResponse {
   /**
-   * The query run metadata including the query definition, execution status, and
-   * timeframe.
+   * Represents a single execution of a query against Workers Observability data,
+   * including the query definition, execution status, and performance statistics.
    */
   export interface Run {
     /**
@@ -373,13 +373,14 @@ export namespace TelemetryQueryResponse {
 
           /**
            * Comparison operator. String operators: includes, not_includes, starts_with,
-           * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-           * values). Numeric: eq, neq, gt, gte, lt, lte.
+           * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+           * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
            */
           operation:
             | 'includes'
             | 'not_includes'
             | 'starts_with'
+            | 'ends_with'
             | 'regex'
             | 'exists'
             | 'is_null'
@@ -404,7 +405,8 @@ export namespace TelemetryQueryResponse {
             | 'DOES_NOT_EXIST'
             | 'IN'
             | 'NOT_IN'
-            | 'STARTS_WITH';
+            | 'STARTS_WITH'
+            | 'ENDS_WITH';
 
           /**
            * Data type of the filter field. Must match the actual type of the key being
@@ -763,7 +765,7 @@ export namespace TelemetryQueryResponse {
        * Raw log payload. May be a string or a structured object depending on how the log
        * was emitted.
        */
-      source: string | unknown;
+      source: string | { [key: string]: unknown };
 
       /**
        * Event timestamp as a Unix epoch in milliseconds.
@@ -774,7 +776,7 @@ export namespace TelemetryQueryResponse {
        * Cloudflare Containers event information that enriches your logs for identifying
        * and debugging issues.
        */
-      $containers?: unknown;
+      $containers?: { [key: string]: unknown };
 
       /**
        * Cloudflare Workers event information that enriches your logs for identifying and
@@ -804,9 +806,6 @@ export namespace TelemetryQueryResponse {
          */
         cloudService?: string;
 
-        /**
-         * Whether this was a cold start (1) or warm invocation (0).
-         */
         coldStart?: number;
 
         /**
@@ -973,6 +972,8 @@ export namespace TelemetryQueryResponse {
 
         outcome?: string;
 
+        preview?: UnionMember0.Preview;
+
         scriptVersion?: UnionMember0.ScriptVersion;
 
         spanId?: string;
@@ -983,6 +984,14 @@ export namespace TelemetryQueryResponse {
       }
 
       export namespace UnionMember0 {
+        export interface Preview {
+          id?: string;
+
+          name?: string;
+
+          slug?: string;
+        }
+
         export interface ScriptVersion {
           id?: string;
 
@@ -1028,6 +1037,8 @@ export namespace TelemetryQueryResponse {
 
         executionModel?: 'durableObject' | 'stateless';
 
+        preview?: UnionMember1.Preview;
+
         scriptVersion?: UnionMember1.ScriptVersion;
 
         spanId?: string;
@@ -1044,6 +1055,14 @@ export namespace TelemetryQueryResponse {
           message: string;
 
           timestamp: number;
+        }
+
+        export interface Preview {
+          id?: string;
+
+          name?: string;
+
+          slug?: string;
         }
 
         export interface ScriptVersion {
@@ -1143,7 +1162,7 @@ export namespace TelemetryQueryResponse {
      * Raw log payload. May be a string or a structured object depending on how the log
      * was emitted.
      */
-    source: string | unknown;
+    source: string | { [key: string]: unknown };
 
     /**
      * Event timestamp as a Unix epoch in milliseconds.
@@ -1154,7 +1173,7 @@ export namespace TelemetryQueryResponse {
      * Cloudflare Containers event information that enriches your logs for identifying
      * and debugging issues.
      */
-    $containers?: unknown;
+    $containers?: { [key: string]: unknown };
 
     /**
      * Cloudflare Workers event information that enriches your logs for identifying and
@@ -1184,9 +1203,6 @@ export namespace TelemetryQueryResponse {
        */
       cloudService?: string;
 
-      /**
-       * Whether this was a cold start (1) or warm invocation (0).
-       */
       coldStart?: number;
 
       /**
@@ -1353,6 +1369,8 @@ export namespace TelemetryQueryResponse {
 
       outcome?: string;
 
+      preview?: UnionMember0.Preview;
+
       scriptVersion?: UnionMember0.ScriptVersion;
 
       spanId?: string;
@@ -1363,6 +1381,14 @@ export namespace TelemetryQueryResponse {
     }
 
     export namespace UnionMember0 {
+      export interface Preview {
+        id?: string;
+
+        name?: string;
+
+        slug?: string;
+      }
+
       export interface ScriptVersion {
         id?: string;
 
@@ -1408,6 +1434,8 @@ export namespace TelemetryQueryResponse {
 
       executionModel?: 'durableObject' | 'stateless';
 
+      preview?: UnionMember1.Preview;
+
       scriptVersion?: UnionMember1.ScriptVersion;
 
       spanId?: string;
@@ -1424,6 +1452,14 @@ export namespace TelemetryQueryResponse {
         message: string;
 
         timestamp: number;
+      }
+
+      export interface Preview {
+        id?: string;
+
+        name?: string;
+
+        slug?: string;
       }
 
       export interface ScriptVersion {
@@ -1571,13 +1607,14 @@ export namespace TelemetryKeysParams {
 
       /**
        * Comparison operator. String operators: includes, not_includes, starts_with,
-       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
        */
       operation:
         | 'includes'
         | 'not_includes'
         | 'starts_with'
+        | 'ends_with'
         | 'regex'
         | 'exists'
         | 'is_null'
@@ -1602,7 +1639,8 @@ export namespace TelemetryKeysParams {
         | 'DOES_NOT_EXIST'
         | 'IN'
         | 'NOT_IN'
-        | 'STARTS_WITH';
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
 
       /**
        * Data type of the filter field. Must match the actual type of the key being
@@ -1640,13 +1678,14 @@ export namespace TelemetryKeysParams {
 
     /**
      * Comparison operator. String operators: includes, not_includes, starts_with,
-     * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-     * values). Numeric: eq, neq, gt, gte, lt, lte.
+     * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+     * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
      */
     operation:
       | 'includes'
       | 'not_includes'
       | 'starts_with'
+      | 'ends_with'
       | 'regex'
       | 'exists'
       | 'is_null'
@@ -1671,7 +1710,8 @@ export namespace TelemetryKeysParams {
       | 'DOES_NOT_EXIST'
       | 'IN'
       | 'NOT_IN'
-      | 'STARTS_WITH';
+      | 'STARTS_WITH'
+      | 'ENDS_WITH';
 
     /**
      * Data type of the filter field. Must match the actual type of the key being
@@ -1908,7 +1948,7 @@ export namespace TelemetryQueryParams {
   export namespace Parameters {
     export interface Calculation {
       /**
-       * Aggregation operator to apply. Examples: count, avg, sum, min, max, p50, p90,
+       * Aggregation operator to apply. Examples: count, avg, sum, min, max, median, p90,
        * p95, p99, uniq, stddev, variance.
        */
       operator:
@@ -2001,13 +2041,14 @@ export namespace TelemetryQueryParams {
 
         /**
          * Comparison operator. String operators: includes, not_includes, starts_with,
-         * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-         * values). Numeric: eq, neq, gt, gte, lt, lte.
+         * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+         * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
          */
         operation:
           | 'includes'
           | 'not_includes'
           | 'starts_with'
+          | 'ends_with'
           | 'regex'
           | 'exists'
           | 'is_null'
@@ -2032,7 +2073,8 @@ export namespace TelemetryQueryParams {
           | 'DOES_NOT_EXIST'
           | 'IN'
           | 'NOT_IN'
-          | 'STARTS_WITH';
+          | 'STARTS_WITH'
+          | 'ENDS_WITH';
 
         /**
          * Data type of the filter field. Must match the actual type of the key being
@@ -2070,13 +2112,14 @@ export namespace TelemetryQueryParams {
 
       /**
        * Comparison operator. String operators: includes, not_includes, starts_with,
-       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
        */
       operation:
         | 'includes'
         | 'not_includes'
         | 'starts_with'
+        | 'ends_with'
         | 'regex'
         | 'exists'
         | 'is_null'
@@ -2101,7 +2144,8 @@ export namespace TelemetryQueryParams {
         | 'DOES_NOT_EXIST'
         | 'IN'
         | 'NOT_IN'
-        | 'STARTS_WITH';
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
 
       /**
        * Data type of the filter field. Must match the actual type of the key being
@@ -2275,13 +2319,14 @@ export namespace TelemetryValuesParams {
 
       /**
        * Comparison operator. String operators: includes, not_includes, starts_with,
-       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
        */
       operation:
         | 'includes'
         | 'not_includes'
         | 'starts_with'
+        | 'ends_with'
         | 'regex'
         | 'exists'
         | 'is_null'
@@ -2306,7 +2351,8 @@ export namespace TelemetryValuesParams {
         | 'DOES_NOT_EXIST'
         | 'IN'
         | 'NOT_IN'
-        | 'STARTS_WITH';
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
 
       /**
        * Data type of the filter field. Must match the actual type of the key being
@@ -2344,13 +2390,14 @@ export namespace TelemetryValuesParams {
 
     /**
      * Comparison operator. String operators: includes, not_includes, starts_with,
-     * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-     * values). Numeric: eq, neq, gt, gte, lt, lte.
+     * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+     * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
      */
     operation:
       | 'includes'
       | 'not_includes'
       | 'starts_with'
+      | 'ends_with'
       | 'regex'
       | 'exists'
       | 'is_null'
@@ -2375,7 +2422,8 @@ export namespace TelemetryValuesParams {
       | 'DOES_NOT_EXIST'
       | 'IN'
       | 'NOT_IN'
-      | 'STARTS_WITH';
+      | 'STARTS_WITH'
+      | 'ENDS_WITH';
 
     /**
      * Data type of the filter field. Must match the actual type of the key being

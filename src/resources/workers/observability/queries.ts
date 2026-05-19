@@ -203,13 +203,14 @@ export namespace QueryCreateResponse {
 
       /**
        * Comparison operator. String operators: includes, not_includes, starts_with,
-       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
        */
       operation:
         | 'includes'
         | 'not_includes'
         | 'starts_with'
+        | 'ends_with'
         | 'regex'
         | 'exists'
         | 'is_null'
@@ -234,7 +235,8 @@ export namespace QueryCreateResponse {
         | 'DOES_NOT_EXIST'
         | 'IN'
         | 'NOT_IN'
-        | 'STARTS_WITH';
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
 
       /**
        * Data type of the filter field. Must match the actual type of the key being
@@ -445,13 +447,14 @@ export namespace QueryListResponse {
 
       /**
        * Comparison operator. String operators: includes, not_includes, starts_with,
-       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
        */
       operation:
         | 'includes'
         | 'not_includes'
         | 'starts_with'
+        | 'ends_with'
         | 'regex'
         | 'exists'
         | 'is_null'
@@ -476,7 +479,8 @@ export namespace QueryListResponse {
         | 'DOES_NOT_EXIST'
         | 'IN'
         | 'NOT_IN'
-        | 'STARTS_WITH';
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
 
       /**
        * Data type of the filter field. Must match the actual type of the key being
@@ -683,13 +687,14 @@ export namespace QueryCreateParams {
 
       /**
        * Comparison operator. String operators: includes, not_includes, starts_with,
-       * regex. Existence: exists, is_null. Set membership: in, not_in (comma-separated
-       * values). Numeric: eq, neq, gt, gte, lt, lte.
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
        */
       operation:
         | 'includes'
         | 'not_includes'
         | 'starts_with'
+        | 'ends_with'
         | 'regex'
         | 'exists'
         | 'is_null'
@@ -714,7 +719,8 @@ export namespace QueryCreateParams {
         | 'DOES_NOT_EXIST'
         | 'IN'
         | 'NOT_IN'
-        | 'STARTS_WITH';
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
 
       /**
        * Data type of the filter field. Must match the actual type of the key being
