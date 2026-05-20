@@ -10,7 +10,7 @@ const client = new Cloudflare({
 });
 
 describe('resource audit', () => {
-  // TODO: required params 'since' and 'before' not populated by Prism mock
+  // TODO DS-16345: required params 'since' and 'before' not populated by Prism mock
   test.skip('list: only required params', async () => {
     const responsePromise = client.organizations.logs.audit.list('a67e14daa5f8dceeb91fe5449ba496ef', {
       before: '2024-10-31',
@@ -25,7 +25,7 @@ describe('resource audit', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: required params 'since' and 'before' not populated by Prism mock
+  // TODO DS-16345: required params 'since' and 'before' not populated by Prism mock
   test.skip('list: required and optional params', async () => {
     const response = await client.organizations.logs.audit.list('a67e14daa5f8dceeb91fe5449ba496ef', {
       before: '2024-10-31',
