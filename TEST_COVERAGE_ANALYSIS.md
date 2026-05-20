@@ -24,8 +24,9 @@ exhaustive audit.
 
 > Note: every file under `tests/` carries the `// File generated from our OpenAPI spec by Stainless` banner because Stainless re-emits the entire `tests/` tree. For the rows above, the distinction is whether the content is hand-authored (top-level runtime tests, qs vendored tests) or codegen-templated per endpoint (`tests/api-resources/**`).
 
-Source side: `src/` has ~1,360 TS files (most are auto-generated resource
-modules and types). The hand-maintained "runtime" surface is concentrated in:
+Source side: `src/` has ~1,570 TypeScript files (most are auto-generated
+resource modules and types). The hand-maintained "runtime" surface is
+concentrated in:
 
 - `src/core.ts` (~1,250 LOC) — `APIClient`, request/retry pipeline, `APIPromise`,
   `AbstractPage`, `PagePromise`, helper utilities (`safeJSON`, `castToError`,
@@ -68,7 +69,7 @@ They do **not** assert:
 - That request bodies are encoded the way the OpenAPI spec describes.
 - Anything about the parsed response shape.
 - Pagination iteration on `list` endpoints.
-- Any error-path behavior (only ~107 of the 677 files have any
+- Any error-path behavior (only 114 of the 677 files have any
   `rejects.toThrow`, and those only check that `path: '/_stainless_unknown_path'`
   yields a `NotFoundError`).
 
@@ -112,11 +113,12 @@ custom `fetch`):
   - `nextPageInfo()` returns the right `params` for page 1 → 2.
   - `hasNextPage()` correctness on empty result vs. populated result.
 - `for await (const item of client.x.list())` walks across pages and stops.
-- `getNextPage()` throws when `hasNextPage()` is false (CloudflareError path
-  in `core.ts:700`).
+- `getNextPage()` throws a `CloudflareError` when `hasNextPage()` is false
+  (`AbstractPage.getNextPage`).
 - `nextPageInfo` returning a `url` (the alternate branch in
-  `getNextPage` at `core.ts:707-714`) — currently no pagination class returns
-  this shape, but the code path exists and should be locked down.
+  `AbstractPage.getNextPage` that copies query params onto the URL) — currently
+  no pagination class returns this shape, but the code path exists and should
+  be locked down.
 
 ### 2. Error class generation (`src/error.ts`) — **zero tests**
 
@@ -133,7 +135,7 @@ into the right typed error. Tests should pin:
   status-only "no body", neither).
 - `errors` array is populated from `error.errors` and falls back to `[]`.
 
-### 3. Auth resolution (`src/index.ts:439-490`) — **no direct tests**
+### 3. Auth resolution (`Cloudflare.authHeaders` + `*Auth` helpers in `src/index.ts`) — **no direct tests**
 
 The client supports four auth modes (`apiKey + apiEmail`, `apiToken`,
 `userServiceKey`, custom headers) and `validateHeaders` has a precedence
@@ -150,9 +152,9 @@ Recommended tests:
 - `validateHeaders` throws when no auth method is set (and a custom fetch is
   not used).
 - Explicitly setting any auth header to `null` opts out of validation
-  (`customHeaders[…] === null` branches at `index.ts:404,411,418,425`).
+  (the four `customHeaders[…] === null` early returns in `Cloudflare.validateHeaders`).
 
-### 4. Retry logic (`src/core.ts:582-656`) — partially tested
+### 4. Retry logic (`APIClient.shouldRetry` + `retryRequest` + `calculateDefaultRetryTimeoutMillis`) — partially tested
 
 `shouldRetry` covers `x-should-retry` (true/false), 408, 409, 429, ≥500. Today
 the suite only covers 429 + `Retry-After[-Ms]` and request timeouts.
@@ -162,16 +164,18 @@ Recommended tests:
 - `x-should-retry: false` on a 500 stops retries.
 - `x-should-retry: true` on a 200 (would not normally retry) does not retry —
   it only matters on errors; lock down the precedence.
-- `Retry-After: <HTTP-date>` is honored (`core.ts:628`,
-  `Date.parse(retryAfterHeader) - Date.now()`).
-- `Retry-After-Ms` clamps to ≤ 60s (the `0 <= x < 60_000` guard at
-  `core.ts:634`).
-- Exponential backoff cap at 8s and jitter range (`core.ts:643-655`) — at
-  minimum verify "5 retries doesn't exceed N seconds" and that delays are
-  monotonic-ish given a fixed RNG.
+- `Retry-After: <HTTP-date>` is honored (the `Date.parse(retryAfterHeader) - Date.now()`
+  branch in `APIClient.retryRequest`).
+- `Retry-After-Ms` clamps to ≤ 60s (the `0 <= x < 60_000` guard in
+  `APIClient.retryRequest`).
+- Exponential backoff cap at 8s and jitter range
+  (`APIClient.calculateDefaultRetryTimeoutMillis`) — at minimum verify
+  "5 retries cap total wait under ~16 s" (the worst case is
+  `0.5 + 1 + 2 + 4 + 8 = 15.5 s`, jitter only ever reduces it), and that
+  delays are monotonic-ish given a fixed RNG.
 - `AbortSignal` aborting *during* a retry sleep cancels the whole chain.
 
-### 5. `defaultParseResponse` (`src/core.ts:58-85`) — **zero tests**
+### 5. `defaultParseResponse` (top of `src/core.ts`) — **zero tests**
 
 This is the response decoder for every request. Branches:
 - `response.status === 204` → `null`.
@@ -182,7 +186,7 @@ This is the response decoder for every request. Branches:
 
 All four branches deserve a unit test against a custom `fetch`.
 
-### 6. `APIPromise` (`src/core.ts:91-…`) — indirectly tested
+### 6. `APIPromise` (`src/core.ts`) — indirectly tested
 
 `asResponse` / `withResponse` are touched by every generated test, but
 `_thenUnwrap`, repeated `await` (the cached `parsedPromise`), and the
@@ -190,7 +194,7 @@ overridden `then`/`catch`/`finally` semantics are not. A small dedicated
 `apiPromise.test.ts` would catch regressions in this very-easy-to-break Promise
 subclass.
 
-### 7. Coercion + helper utilities (`src/core.ts:1050-1230`) — **zero tests**
+### 7. Coercion + helper utilities (bottom of `src/core.ts`) — **zero tests**
 
 These are exported and used by generated code: `coerceInteger`, `coerceFloat`,
 `coerceBoolean`, `maybeCoerceInteger`, `maybeCoerceFloat`, `maybeCoerceBoolean`,
@@ -219,21 +223,22 @@ Currently **not** tested:
 - Async-iterable `toFile` input (`Symbol.asyncIterator`).
 - `ArrayBuffer` / `DataView` / `Uint8Array` `toFile` input.
 
-### 9. URL building & query stringification (`src/core.ts:510-551`, `src/index.ts:492`)
+### 9. URL building & query stringification (`APIClient.buildURL` + the two `stringifyQuery` implementations)
 
 There are two `stringifyQuery` implementations:
 
-- `Core.APIClient.stringifyQuery` (`src/core.ts:536`) — a minimal flat
+- `Core.APIClient.stringifyQuery` (in `src/core.ts`) — a minimal flat
   serializer that throws a `CloudflareError` on nested objects. **Not directly
   covered by any test.**
-- `Cloudflare.stringifyQuery` (`src/index.ts:492`) — overrides the parent and
-  delegates to `qs.stringify` with `allowDots: true, arrayFormat: 'repeat'`.
-  `tests/stringifyQuery.test.ts` exercises this override (4 happy-path cases).
+- `Cloudflare.stringifyQuery` (the override in `src/index.ts`) — overrides
+  the parent and delegates to `qs.stringify` with
+  `allowDots: true, arrayFormat: 'repeat'`. `tests/stringifyQuery.test.ts`
+  exercises this override (4 happy-path cases).
 
 Uncovered branches:
 
 - `buildURL`: an absolute `path` (starts with a scheme) bypasses `baseURL`
-  (`core.ts:520`).
+  (the `isAbsoluteURL(path)` branch).
 - `buildURL`: `defaultQuery` merging with explicit `query`.
 - `Core.APIClient.stringifyQuery`: the `CloudflareError` branch for nested
   values. A pure unit test against the parent class (or a subclass that does
@@ -257,15 +262,22 @@ something that compiles and matches the spec," but they don't catch:
 Because they depend on Prism, they are also slow and add a hard external
 dependency to local dev (`scripts/test` boots Prism on :4010).
 
-Recommendations:
-- Add a small set of **non-Prism** tests per "shape" (one for each pagination
-  type, one for `delete` returning 204, one for binary download, one for
-  `__binaryRequest` upload, one with a path param, one with a deep nested body)
-  using a custom `fetch` that captures the request and returns canned data.
-  This gives real assertion power on what the SDK *actually* sends and parses.
-- The 5 tests under `tests/api-resources` that lack any `expect()` (e.g.
-  `browser-rendering/pdf.test.ts`, `snippets/content.test.ts`) should be
-  flagged in codegen — they currently only assert that the call doesn't throw.
+Recommendations (two complementary levers):
+- **Richer codegen templates.** Stainless owns the test templates that emit
+  `tests/api-resources/**`. Asserting the HTTP method/path, validating path-param
+  substitution, and snapshotting body shape are template-level changes — applied
+  once, they apply to all 677 files. This is the bigger-bang lever.
+- **Hand-written shape tests.** A small set of **non-Prism** tests per "shape"
+  (one for each pagination type, one for `delete` returning 204, one for binary
+  download, one for `__binaryRequest` upload, one with a path param, one with a
+  deep nested body) using a custom `fetch` that captures the request and returns
+  canned data. Faster to land and gives real assertion power on what the SDK
+  *actually* sends and parses.
+- The 5 tests under `tests/api-resources` that lack any `expect()` —
+  `browser-rendering/pdf.test.ts`, `images/v1/blobs.test.ts`,
+  `magic-transit/pcaps/download.test.ts`, `snippets/content.test.ts`,
+  `zero-trust/dex/commands/downloads.test.ts` — should be flagged in codegen;
+  they currently only assert that the call doesn't throw.
 
 ### 11. Streaming, binary, and `prepareRequest` hooks
 
@@ -305,18 +317,18 @@ have a separate `*.web.test.ts` that loads the web shim and asserts
 
 ## Suggested first PRs
 
-In rough priority order:
+In rough priority order. LOC figures are pre-implementation estimates only.
+
 1. `tests/pagination.test.ts` — covers all six pagination classes plus
-   `iterPages` / async-iterator. (~150 LOC, no Prism.)
+   `iterPages` / async-iterator. No Prism.
 2. `tests/error.test.ts` — covers `APIError.generate` and `makeMessage`.
-   (~80 LOC, no Prism.)
+   No Prism.
 3. `tests/auth.test.ts` — covers all four auth modes + `validateHeaders`
-   precedence. (~100 LOC, no Prism.)
+   precedence. No Prism.
 4. `tests/retry.test.ts` — extends the existing retry tests to cover
    408/409/500, `x-should-retry`, HTTP-date `Retry-After`, the 60s clamp,
-   and abort-during-retry. (~150 LOC.)
+   and abort-during-retry.
 5. `tests/parseResponse.test.ts` — covers `defaultParseResponse` branches.
-   (~50 LOC.)
 6. `tests/coerce.test.ts` + `tests/headers.test.ts` — covers the helper
-   utilities. (~100 LOC combined.)
+   utilities.
 7. Enable coverage with thresholds on the hand-written runtime modules.
