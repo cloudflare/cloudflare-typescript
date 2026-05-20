@@ -158,7 +158,7 @@ export interface EmailSendingSendParams {
 
   /**
    * Body param: HTML body of the email. At least one of text or html must be
-   * provided.
+   * provided (non-empty).
    */
   html?: string;
 
@@ -170,7 +170,7 @@ export interface EmailSendingSendParams {
 
   /**
    * Body param: Plain text body of the email. At least one of text or html must be
-   * provided.
+   * provided (non-empty).
    */
   text?: string;
 }
