@@ -309,6 +309,11 @@ export namespace UsagePaygoResponse {
      * Identifies the Cloudflare service.
      */
     ServiceName: string;
+
+    /**
+     * Identifies the product family for the Cloudflare service.
+     */
+    ServiceFamilyName?: string;
   }
 }
 
