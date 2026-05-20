@@ -8,6 +8,8 @@ import {
   OrganizationProfileResource,
   OrganizationProfileUpdateParams,
 } from './organization-profile';
+import * as BillingAPI from './billing/billing';
+import { BaseBilling, Billing } from './billing/billing';
 import * as LogsAPI from './logs/logs';
 import { BaseLogs, Logs } from './logs/logs';
 import { APIPromise } from '../../core/api-promise';
@@ -84,6 +86,7 @@ export class Organizations extends BaseOrganizations {
   organizationProfile: OrganizationProfileAPI.OrganizationProfileResource =
     new OrganizationProfileAPI.OrganizationProfileResource(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
 }
 
 export type OrganizationsSinglePage = SinglePage<Organization>;
@@ -262,6 +265,8 @@ Organizations.OrganizationProfileResource = OrganizationProfileResource;
 Organizations.BaseOrganizationProfileResource = BaseOrganizationProfileResource;
 Organizations.Logs = Logs;
 Organizations.BaseLogs = BaseLogs;
+Organizations.Billing = Billing;
+Organizations.BaseBilling = BaseBilling;
 
 export declare namespace Organizations {
   export {
@@ -281,4 +286,6 @@ export declare namespace Organizations {
   };
 
   export { Logs as Logs, BaseLogs as BaseLogs };
+
+  export { Billing as Billing, BaseBilling as BaseBilling };
 }

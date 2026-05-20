@@ -20,6 +20,8 @@ TEST_PATHS=(
 	tests/api-resources/organizations/organization-profile.test.ts
 	tests/api-resources/organizations/logs/logs.test.ts
 	tests/api-resources/organizations/logs/audit.test.ts
+	tests/api-resources/organizations/billing/billing.test.ts
+	tests/api-resources/organizations/billing/usage.test.ts
 	tests/api-resources/origin-ca-certificates.test.ts
 	tests/api-resources/ips.test.ts
 	tests/api-resources/memberships.test.ts
@@ -279,6 +281,7 @@ TEST_PATHS=(
 	tests/api-resources/audit-logs.test.ts
 	tests/api-resources/billing/billing.test.ts
 	tests/api-resources/billing/profiles.test.ts
+	tests/api-resources/billing/usage.test.ts
 	tests/api-resources/brand-protection/brand-protection.test.ts
 	tests/api-resources/brand-protection/queries.test.ts
 	tests/api-resources/brand-protection/matches.test.ts

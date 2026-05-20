@@ -215,6 +215,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/organizations/{organization_id}/logs/audit',
   },
   {
+    clientCallName: 'client.organizations.billing.usage.get',
+    fullyQualifiedName: 'organizations.billing.usage.get',
+    httpMethod: 'get',
+    httpPath: '/organizations/{organization_id}/billable/usage',
+  },
+  {
     clientCallName: 'client.originCACertificates.create',
     fullyQualifiedName: 'originCACertificates.create',
     httpMethod: 'post',
@@ -4158,6 +4164,18 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'billing.profiles.get',
     httpMethod: 'get',
     httpPath: '/accounts/{account_id}/billing/profile',
+  },
+  {
+    clientCallName: 'client.billing.usage.get',
+    fullyQualifiedName: 'billing.usage.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/billable/usage',
+  },
+  {
+    clientCallName: 'client.billing.usage.paygo',
+    fullyQualifiedName: 'billing.usage.paygo',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/paygo-usage',
   },
   {
     clientCallName: 'client.brandProtection.submit',
