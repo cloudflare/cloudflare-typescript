@@ -1,17 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as Core from '../../../core';
 
 export class Usage extends APIResource {
   /**
-   * Returns cost and usage data for a single Cloudflare account, aligned with the
-   * [FinOps FOCUS v1.3](https://focus.finops.org/focus-specification/v1-3/) Cost and
-   * Usage dataset specification.
+   * Returns cost and usage data for all accounts within an organization, aligned
+   * with the [FinOps FOCUS v1.3](https://focus.finops.org/focus-specification/v1-3/)
+   * Cost and Usage dataset specification.
    *
    * Each record represents one billable metric for one account on one day. This
    * includes all metered usage, including usage that falls within free-tier
-   * allowances and may result in zero cost.
+   * allowances and may result in zero cost. The response includes usage for every
+   * account belonging to the specified organization.
    *
    * **Note:** Cost and pricing fields are not yet populated and will be absent from
    * responses until billing integration is complete.
@@ -19,27 +21,25 @@ export class Usage extends APIResource {
    * When `from` and `to` are omitted, defaults to the start of the current month
    * through today. The maximum date range is 31 days.
    */
-  get(params: UsageGetParams, options?: Core.RequestOptions): Core.APIPromise<UsageGetResponse> {
-    const { account_id, ...query } = params;
+  get(
+    organizationId: string,
+    query?: UsageGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UsageGetResponse>;
+  get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<UsageGetResponse>;
+  get(
+    organizationId: string,
+    query: UsageGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UsageGetResponse> {
+    if (isRequestOptions(query)) {
+      return this.get(organizationId, {}, query);
+    }
     return (
-      this._client.get(`/accounts/${account_id}/billable/usage`, { query, ...options }) as Core.APIPromise<{
-        result: UsageGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns billable usage data for PayGo (self-serve) accounts. When no query
-   * parameters are provided, returns usage for the current billing period. This
-   * endpoint is currently in alpha and access is restricted to select accounts.
-   * While in alpha, the endpoint may get breaking changes.
-   */
-  paygo(params: UsagePaygoParams, options?: Core.RequestOptions): Core.APIPromise<UsagePaygoResponse> {
-    const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/paygo-usage`, { query, ...options }) as Core.APIPromise<{
-        result: UsagePaygoResponse;
-      }>
+      this._client.get(`/organizations/${organizationId}/billable/usage`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: UsageGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -243,126 +243,28 @@ export namespace UsageGetResponse {
   }
 }
 
-/**
- * Contains the array of billable usage records.
- */
-export type UsagePaygoResponse = Array<UsagePaygoResponse.UsagePaygoResponseItem>;
-
-export namespace UsagePaygoResponse {
-  /**
-   * Represents a single billable usage record.
-   */
-  export interface UsagePaygoResponseItem {
-    /**
-     * Specifies the billing currency code (ISO 4217).
-     */
-    BillingCurrency: string;
-
-    /**
-     * Indicates the start of the billing period.
-     */
-    BillingPeriodStart: string;
-
-    /**
-     * Indicates the end of the charge period.
-     */
-    ChargePeriodEnd: string;
-
-    /**
-     * Indicates the start of the charge period.
-     */
-    ChargePeriodStart: string;
-
-    /**
-     * Specifies the quantity consumed during this charge period.
-     */
-    ConsumedQuantity: number;
-
-    /**
-     * A display name for the unit of measurement used for the product (for example,
-     * "GB-months", "GB-seconds"). May be empty when the unit is implicit in the
-     * service name.
-     */
-    ConsumedUnit: string;
-
-    /**
-     * Specifies the cost for this charge period in the billing currency.
-     */
-    ContractedCost: number;
-
-    /**
-     * Specifies the cumulated cost for the billing period in the billing currency.
-     */
-    CumulatedContractedCost: number;
-
-    /**
-     * Specifies the cumulated pricing quantity for the billing period.
-     */
-    CumulatedPricingQuantity: number;
-
-    /**
-     * Specifies the pricing quantity for this charge period.
-     */
-    PricingQuantity: number;
-
-    /**
-     * Identifies the Cloudflare service.
-     */
-    ServiceName: string;
-  }
-}
-
 export interface UsageGetParams {
   /**
-   * Path param: Represents a Cloudflare resource identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Query param: Start date for the usage query (ISO 8601). Required if `to` is set.
-   * When omitted along with `to`, defaults to the start of the current month.
-   * Filters by charge period (when consumption happened), not billing period. The
-   * maximum date range is 31 days.
+   * Start date for the usage query (ISO 8601). Required if `to` is set. When omitted
+   * along with `to`, defaults to the start of the current month. Filters by charge
+   * period (when consumption happened), not billing period. The maximum date range
+   * is 31 days.
    */
   from?: string;
 
   /**
-   * Query param: Filter results by billable metric id (e.g.,
-   * workers_standard_requests).
+   * Filter results by billable metric id (e.g., workers_standard_requests).
    */
   metric?: string;
 
   /**
-   * Query param: End date for the usage query (ISO 8601). Required if `from` is set.
-   * When omitted along with `from`, defaults to today. Filters by charge period
-   * (when consumption happened), not billing period. The maximum date range is 31
-   * days.
-   */
-  to?: string;
-}
-
-export interface UsagePaygoParams {
-  /**
-   * Path param: Represents a Cloudflare resource identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Query param: Start date for the usage query (ISO 8601).
-   */
-  from?: string;
-
-  /**
-   * Query param: End date for the usage query (ISO 8601).
+   * End date for the usage query (ISO 8601). Required if `from` is set. When omitted
+   * along with `from`, defaults to today. Filters by charge period (when consumption
+   * happened), not billing period. The maximum date range is 31 days.
    */
   to?: string;
 }
 
 export declare namespace Usage {
-  export {
-    type UsageGetResponse as UsageGetResponse,
-    type UsagePaygoResponse as UsagePaygoResponse,
-    type UsageGetParams as UsageGetParams,
-    type UsagePaygoParams as UsagePaygoParams,
-  };
+  export { type UsageGetResponse as UsageGetResponse, type UsageGetParams as UsageGetParams };
 }
