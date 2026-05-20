@@ -35,3 +35,15 @@ Types:
 Methods:
 
 - <code title="get /organizations/{organization_id}/logs/audit">client.organizations.logs.audit.<a href="./src/resources/organizations/logs/audit.ts">list</a>(organizationID, { ...params }) -> AuditListResponsesCursorPaginationAfter</code>
+
+## Billing
+
+### Usage
+
+Types:
+
+- <code><a href="./src/resources/organizations/billing/usage.ts">UsageGetResponse</a></code>
+
+Methods:
+
+- <code title="get /organizations/{organization_id}/billable/usage">client.organizations.billing.usage.<a href="./src/resources/organizations/billing/usage.ts">get</a>(organizationID, { ...params }) -> UsageGetResponse</code>

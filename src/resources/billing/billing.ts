@@ -4,7 +4,14 @@ import { APIResource } from '../../core/resource';
 import * as ProfilesAPI from './profiles';
 import { BaseProfiles, ProfileGetParams, ProfileGetResponse, Profiles } from './profiles';
 import * as UsageAPI from './usage';
-import { BaseUsage, Usage } from './usage';
+import {
+  BaseUsage,
+  Usage,
+  UsageGetParams,
+  UsageGetResponse,
+  UsagePaygoParams,
+  UsagePaygoResponse,
+} from './usage';
 
 export class BaseBilling extends APIResource {
   static override readonly _key: readonly ['billing'] = Object.freeze(['billing'] as const);
@@ -27,5 +34,12 @@ export declare namespace Billing {
     type ProfileGetParams as ProfileGetParams,
   };
 
-  export { Usage as Usage, BaseUsage as BaseUsage };
+  export {
+    Usage as Usage,
+    BaseUsage as BaseUsage,
+    type UsageGetResponse as UsageGetResponse,
+    type UsagePaygoResponse as UsagePaygoResponse,
+    type UsageGetParams as UsageGetParams,
+    type UsagePaygoParams as UsagePaygoParams,
+  };
 }

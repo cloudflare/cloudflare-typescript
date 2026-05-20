@@ -1377,6 +1377,7 @@ client.example.list(undefined, { headers: { ... } });
 
 - `client.accounts.list()`
 - `client.organizations.list()`
+- `client.organizations.billing.usage.get()`
 - `client.ips.list()`
 - `client.memberships.list()`
 - `client.user.auditLogs.list()`
