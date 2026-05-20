@@ -624,11 +624,6 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: Whether to include the message action log in the response.
-   */
-  action_log?: boolean;
-
-  /**
    * Query param
    */
   alert_id?: string;
