@@ -562,7 +562,8 @@ export type IdentityProvider =
   | IdentityProvider.AccessPingone
   | IdentityProvider.AccessSAML
   | IdentityProvider.AccessYandex
-  | IdentityProvider.AccessOnetimepin;
+  | IdentityProvider.AccessOnetimepin
+  | IdentityProvider.AccessCloudflare;
 
 export namespace IdentityProvider {
   export interface AccessCentrify {
@@ -2340,6 +2341,133 @@ export namespace IdentityProvider {
       }
     }
   }
+
+  export interface AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCloudflare.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessCloudflare.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      redirect_url?: string;
+
+      /**
+       * When enabled, only users who are members of your Cloudflare account can
+       * authenticate through this identity provider. When disabled, any user with a
+       * Cloudflare account can authenticate, subject to your Access policies.
+       */
+      restrict_to_account_members?: boolean;
+    }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
+  }
 }
 
 export type IdentityProviderParam =
@@ -2356,7 +2484,8 @@ export type IdentityProviderParam =
   | IdentityProviderParam.AccessPingone
   | IdentityProviderParam.AccessSAML
   | IdentityProviderParam.AccessYandex
-  | IdentityProviderParam.AccessOnetimepin;
+  | IdentityProviderParam.AccessOnetimepin
+  | IdentityProviderParam.AccessCloudflare;
 
 export namespace IdentityProviderParam {
   export interface AccessCentrify {
@@ -3162,6 +3291,57 @@ export namespace IdentityProviderParam {
      */
     export interface Config {}
   }
+
+  export interface AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCloudflare.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderTypeParam;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * When enabled, only users who are members of your Cloudflare account can
+       * authenticate through this identity provider. When disabled, any user with a
+       * Cloudflare account can authenticate, subject to your Access policies.
+       */
+      restrict_to_account_members?: boolean;
+    }
+  }
 }
 
 /**
@@ -3265,7 +3445,8 @@ export type IdentityProviderType =
   | 'okta'
   | 'onelogin'
   | 'pingone'
-  | 'yandex';
+  | 'yandex'
+  | 'cloudflare';
 
 /**
  * The type of identity provider. To determine the value for a specific provider,
@@ -3286,7 +3467,8 @@ export type IdentityProviderTypeParam =
   | 'okta'
   | 'onelogin'
   | 'pingone'
-  | 'yandex';
+  | 'yandex'
+  | 'cloudflare';
 
 export type IdentityProviderListResponse =
   | AzureAD
@@ -3301,7 +3483,9 @@ export type IdentityProviderListResponse =
   | IdentityProviderListResponse.AccessOnelogin
   | IdentityProviderListResponse.AccessPingone
   | IdentityProviderListResponse.AccessSAML
-  | IdentityProviderListResponse.AccessYandex;
+  | IdentityProviderListResponse.AccessYandex
+  | IdentityProviderListResponse.AccessOnetimepin
+  | IdentityProviderListResponse.AccessCloudflare;
 
 export namespace IdentityProviderListResponse {
   export interface AccessCentrify {
@@ -4959,6 +5143,253 @@ export namespace IdentityProviderListResponse {
       }
     }
   }
+
+  export interface AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessOnetimepin.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessOnetimepin.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      redirect_url?: string;
+    }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
+  }
+
+  export interface AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCloudflare.Config;
+
+    /**
+     * The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * The type of identity provider. To determine the value for a specific provider,
+     * refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProvidersAPI.IdentityProviderType;
+
+    /**
+     * UUID.
+     */
+    id?: string;
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    saml_certificate_set?: AccessCloudflare.SAMLCertificateSet;
+
+    /**
+     * The UID of the SAML encryption certificate set assigned to this Identity
+     * Provider. Only present for SAML identity providers with encryption configured.
+     * Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
+     * The configuration settings for enabling a System for Cross-Domain Identity
+     * Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      redirect_url?: string;
+
+      /**
+       * When enabled, only users who are members of your Cloudflare account can
+       * authenticate through this identity provider. When disabled, any user with a
+       * Cloudflare account can authenticate, subject to your Access policies.
+       */
+      restrict_to_account_members?: boolean;
+    }
+
+    /**
+     * The SAML encryption certificate set details, including current and previous
+     * certificates. Only present for SAML identity providers with a certificate set
+     * assigned.
+     */
+    export interface SAMLCertificateSet {
+      /**
+       * Timestamp when the certificate set was created
+       */
+      created_at: string;
+
+      /**
+       * Unique identifier for the certificate set
+       */
+      uid: string;
+
+      /**
+       * Timestamp when the certificate set was last updated (e.g., during rotation)
+       */
+      updated_at: string;
+
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      current_certificate?: SAMLCertificateSet.CurrentCertificate;
+
+      /**
+       * The previous certificate, maintained during rotation to ensure continuity. Null
+       * if no rotation has occurred. Mirrors the structure of `saml_certificate`.
+       */
+      previous_certificate?: unknown | null;
+    }
+
+    export namespace SAMLCertificateSet {
+      /**
+       * The currently active certificate used for encrypting SAML assertions
+       */
+      export interface CurrentCertificate {
+        /**
+         * Indicates whether this is the currently active certificate
+         */
+        is_current: boolean;
+
+        /**
+         * Certificate expiration date. Certificates are automatically rotated 30 days
+         * before expiration.
+         */
+        not_after: string;
+
+        /**
+         * PEM-encoded X.509 certificate containing the public key. Configure this
+         * certificate in your external SAML Identity Provider to enable encryption.
+         */
+        public_certificate: string;
+
+        /**
+         * Unique identifier for the certificate
+         */
+        uid: string;
+      }
+    }
+  }
 }
 
 export interface IdentityProviderDeleteResponse {
@@ -4982,7 +5413,8 @@ export type IdentityProviderCreateParams =
   | IdentityProviderCreateParams.AccessPingone
   | IdentityProviderCreateParams.AccessSAML
   | IdentityProviderCreateParams.AccessYandex
-  | IdentityProviderCreateParams.AccessOnetimepin;
+  | IdentityProviderCreateParams.AccessOnetimepin
+  | IdentityProviderCreateParams.AccessCloudflare;
 
 export declare namespace IdentityProviderCreateParams {
   export interface AzureAD {
@@ -6047,6 +6479,69 @@ export declare namespace IdentityProviderCreateParams {
      */
     export interface Config {}
   }
+
+  export interface AccessCloudflare {
+    /**
+     * Body param: The configuration parameters for the identity provider. To view the
+     * required parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCloudflare.Config;
+
+    /**
+     * Body param: The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * Body param: The type of identity provider. To determine the value for a specific
+     * provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProviderTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
+     * Body param: The configuration settings for enabling a System for Cross-Domain
+     * Identity Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * When enabled, only users who are members of your Cloudflare account can
+       * authenticate through this identity provider. When disabled, any user with a
+       * Cloudflare account can authenticate, subject to your Access policies.
+       */
+      restrict_to_account_members?: boolean;
+    }
+  }
 }
 
 export type IdentityProviderUpdateParams =
@@ -6063,7 +6558,8 @@ export type IdentityProviderUpdateParams =
   | IdentityProviderUpdateParams.AccessPingone
   | IdentityProviderUpdateParams.AccessSAML
   | IdentityProviderUpdateParams.AccessYandex
-  | IdentityProviderUpdateParams.AccessOnetimepin;
+  | IdentityProviderUpdateParams.AccessOnetimepin
+  | IdentityProviderUpdateParams.AccessCloudflare;
 
 export declare namespace IdentityProviderUpdateParams {
   export interface AzureAD {
@@ -7127,6 +7623,69 @@ export declare namespace IdentityProviderUpdateParams {
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
     export interface Config {}
+  }
+
+  export interface AccessCloudflare {
+    /**
+     * Body param: The configuration parameters for the identity provider. To view the
+     * required parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    config: AccessCloudflare.Config;
+
+    /**
+     * Body param: The name of the identity provider, shown to users on the login page.
+     */
+    name: string;
+
+    /**
+     * Body param: The type of identity provider. To determine the value for a specific
+     * provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    type: IdentityProviderTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The UID of the SAML encryption certificate set assigned to this
+     * Identity Provider. Only present for SAML identity providers with encryption
+     * configured. Create a certificate set via POST to
+     * `/identity_providers/{id}/saml_certificate`.
+     */
+    saml_certificate_set_id?: string;
+
+    /**
+     * Body param: The configuration settings for enabling a System for Cross-Domain
+     * Identity Management (SCIM) with the identity provider.
+     */
+    scim_config?: IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessCloudflare {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      /**
+       * When enabled, only users who are members of your Cloudflare account can
+       * authenticate through this identity provider. When disabled, any user with a
+       * Cloudflare account can authenticate, subject to your Access policies.
+       */
+      restrict_to_account_members?: boolean;
+    }
   }
 }
 
