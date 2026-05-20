@@ -305,7 +305,8 @@ export type AccessRule =
   | AccessRule.AccessOIDCClaimRule
   | ServiceTokenRule
   | AccessRule.AccessLinkedAppTokenRule
-  | AccessRule.AccessUserRiskScoreRule;
+  | AccessRule.AccessUserRiskScoreRule
+  | AccessRule.AccessCloudflareAccountMemberRule;
 
 export namespace AccessRule {
   /**
@@ -425,6 +426,23 @@ export namespace AccessRule {
       user_risk_score: Array<'low' | 'medium' | 'high' | 'unscored'>;
     }
   }
+
+  /**
+   * Matches users who are members of a specific Cloudflare account. Requires a
+   * Cloudflare identity provider.
+   */
+  export interface AccessCloudflareAccountMemberRule {
+    cloudflare_account_member: AccessCloudflareAccountMemberRule.CloudflareAccountMember;
+  }
+
+  export namespace AccessCloudflareAccountMemberRule {
+    export interface CloudflareAccountMember {
+      /**
+       * Identifier.
+       */
+      account_id?: string;
+    }
+  }
 }
 
 /**
@@ -455,7 +473,8 @@ export type AccessRuleParam =
   | AccessRuleParam.AccessOIDCClaimRule
   | ServiceTokenRuleParam
   | AccessRuleParam.AccessLinkedAppTokenRule
-  | AccessRuleParam.AccessUserRiskScoreRule;
+  | AccessRuleParam.AccessUserRiskScoreRule
+  | AccessRuleParam.AccessCloudflareAccountMemberRule;
 
 export namespace AccessRuleParam {
   /**
@@ -573,6 +592,23 @@ export namespace AccessRuleParam {
        * unscored.
        */
       user_risk_score: Array<'low' | 'medium' | 'high' | 'unscored'>;
+    }
+  }
+
+  /**
+   * Matches users who are members of a specific Cloudflare account. Requires a
+   * Cloudflare identity provider.
+   */
+  export interface AccessCloudflareAccountMemberRule {
+    cloudflare_account_member: AccessCloudflareAccountMemberRule.CloudflareAccountMember;
+  }
+
+  export namespace AccessCloudflareAccountMemberRule {
+    export interface CloudflareAccountMember {
+      /**
+       * Identifier.
+       */
+      account_id?: string;
     }
   }
 }
