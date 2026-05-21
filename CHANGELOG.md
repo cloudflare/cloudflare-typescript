@@ -6,37 +6,130 @@ Full Changelog: [v6.2.0...v6.3.0](https://github.com/cloudflare/cloudflare-types
 
 ### Features
 
-* **billing:** add usage.get method, update usage.paygo endpoint ([665f6ea](https://github.com/cloudflare/cloudflare-typescript/commit/665f6ea2ab4a21934226fa5464ee7ab0ce66d6f6))
-* **dls:** add DLS resource with regional-services and prefix-bindings ([4dcf0db](https://github.com/cloudflare/cloudflare-typescript/commit/4dcf0db7e0f0163bfaefebc32f263c59a28dd642))
-* **organizations:** add billing sub-resource ([2c93faf](https://github.com/cloudflare/cloudflare-typescript/commit/2c93faf7528942340b7baaa322903a68b0274b2d))
-* **r2:** add objects sub-resource ([94a26fc](https://github.com/cloudflare/cloudflare-typescript/commit/94a26fcd9d316f31557530799f449f202f372661))
-* **secrets-store:** add stores.get method ([542f312](https://github.com/cloudflare/cloudflare-typescript/commit/542f312097c920c73cb0a6934033483cb4052c64))
-* **workers-for-platforms:** add scripts.secrets.bulkUpdate ([840cea9](https://github.com/cloudflare/cloudflare-typescript/commit/840cea9310ae4b9744e98ff13c57061c173e188e))
-* **workers:** add observability.queries sub-resource ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e71125cce1c27287603c8c11845edf574))
-* **zero-trust:** add saml-certificates resource ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567d8b94c6466bacf75357a2f049b839b0))
+#### New Resources
 
+* **dls:** add DLS (Data Localization Suite) resource with regions (list/get) and regionalServices.prefixBindings (create/list/delete/edit/get) sub-resources ([4dcf0db](https://github.com/cloudflare/cloudflare-typescript/commit/4dcf0db7e))
+
+#### New Sub-Resources
+
+* **organizations:** add billing.usage sub-resource — FOCUS v1.3 cost-and-usage dataset (get) at `/organizations/{organization_id}/billable/usage` ([2c93faf](https://github.com/cloudflare/cloudflare-typescript/commit/2c93faf75))
+* **r2:** add buckets.objects sub-resource — list, delete, get, upload (PUT) for direct R2 object operations ([94a26fc](https://github.com/cloudflare/cloudflare-typescript/commit/94a26fcd9))
+* **workers:** add observability.queries sub-resource — create and list saved telemetry queries ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e7))
+* **zero-trust:** add access.samlCertificates sub-resource — list, get, getPem, rotate SAML signing certificate sets at the account level ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567))
+* **zero-trust:** add identityProviders.samlCertificate sub-resource — create a SAML encryption certificate set bound to an Identity Provider ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567))
+
+#### New Methods
+
+* **billing:** add `usage.get` method — FOCUS v1.3 cost-and-usage dataset at `/accounts/{account_id}/billable/usage` (returns `UsageGetResponse` with `BillingAccountId`, `ChargeCategory`, `ConsumedQuantity`, `BilledCost`, `EffectiveCost`, etc.) ([665f6ea](https://github.com/cloudflare/cloudflare-typescript/commit/665f6ea2a))
+* **secrets-store:** add `stores.get` method — fetch a single store by ID (`GET /accounts/{account_id}/secrets_store/stores/{store_id}`) returning `StoreGetResponse` ([542f312](https://github.com/cloudflare/cloudflare-typescript/commit/542f312097))
+* **workers:** add `scripts.secrets.bulkUpdate` method — `PATCH /accounts/{account_id}/workers/scripts/{script_name}/secrets-bulk` for bulk secret updates ([840cea9](https://github.com/cloudflare/cloudflare-typescript/commit/840cea9310))
+* **workers-for-platforms:** add `dispatch.namespaces.scripts.secrets.bulkUpdate` method — same bulk-update endpoint for dispatch-namespace scripts ([840cea9](https://github.com/cloudflare/cloudflare-typescript/commit/840cea9310))
+
+#### New Fields and Parameters
+
+* **ai:** add `format?: 'openrouter'` query param to `models.list` for returning models in the OpenRouter marketplace format ([a3ba7fc](https://github.com/cloudflare/cloudflare-typescript/commit/a3ba7fc0b))
+* **aisearch:** add `degraded?: boolean` response field to `InstanceStatsResponse` and `namespaces.instances.InstanceStatsResponse` — set when status counts are unavailable (e.g. legacy stats query exceeded D1 statement-size limit) ([49c2987](https://github.com/cloudflare/cloudflare-typescript/commit/49c298724))
+* **cloudforce-one:** add `alpha2: string` field to `threatEvents.countries.list` response items (`CountryListResponseItem.Result`) alongside the existing `alpha3`/`name` fields ([0aa9ae0](https://github.com/cloudflare/cloudflare-typescript/commit/0aa9ae06a))
+* **custom-certificates:** `private_key` on `CustomCertificateCreateParams` is now optional when `custom_csr_id` is provided (previously always required) ([6e90245](https://github.com/cloudflare/cloudflare-typescript/commit/6e9024567))
+* **logpush:** add `mnm_flow_logs` to the dataset enum on `datasets.fields.get`, `datasets.jobs.get`, `LogpushJob.dataset`, and `JobCreateParams.dataset` ([5bc2413](https://github.com/cloudflare/cloudflare-typescript/commit/5bc241366))
+* **organizations:** Organizations API moved from Closed Beta to Public Beta — affects `organizations.create`, `update`, `list`, `delete`, `get`, and `organizationProfile.update`/`get` docstrings ([54b7f07](https://github.com/cloudflare/cloudflare-typescript/commit/54b7f0744))
+* **radar:** add `CONTENT_TYPE` dimension and `contentType?: Array<'HTML' | 'IMAGES' | 'JSON' | 'JAVASCRIPT' | 'CSS' | 'PLAIN_TEXT' | 'FONTS' | 'XML' | 'YAML' | 'VIDEO' | 'AUDIO' | 'MARKDOWN' | 'DOCUMENTS' | 'BINARY' | 'SERIALIZATION' | 'OTHER'>` filter param to `radar.http.summaryV2`, `timeseriesGroups`, and related HTTP analytics methods ([d5bc24a](https://github.com/cloudflare/cloudflare-typescript/commit/d5bc24acb))
+* **spectrum:** add `virtual_network_id?: string` field to `OriginDNS` config on `AppCreateResponse`, `AppUpdateResponse`, `AppListResponse`, `AppGetResponse`, `AppCreateParams`, and `AppUpdateParams` — routes origin traffic through tunnel virtual networks ([1afad1f](https://github.com/cloudflare/cloudflare-typescript/commit/1afad1fca))
+* **workers:** add `'opentelemetry-metrics'` enum value to `logpushDataset` field on `observability.destinations` (`DestinationCreateResponse.Configuration`, `DestinationUpdateResponse.Configuration`, `DestinationListResponse.Configuration`) ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e7))
+* **workers:** add `observability.traces.propagation_policy?: 'authenticated' | 'accept'` field on `Worker`, `WorkerCreateParams`, `WorkerUpdateParams`, `ScriptSetting`, `SettingEditParams`, and `script-and-version-settings` — controls how inbound `traceparent`/`tracestate` headers are honored ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e7))
+* **workers:** add `ends_with` filter operation and `ENDS_WITH` comparison enum value to `observability.telemetry.query` filters ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e7))
+* **workers:** add `preview?: { id?: string; name?: string; slug?: string }` field to `TelemetryQueryResponse.UnionMember0` and `UnionMember1` event items — surfaces preview deployment metadata on telemetry results ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e7))
+* **workers:** narrow `observability.telemetry` `source` field type from `string | unknown` to `string | { [key: string]: unknown }` — non-breaking type refinement that gives consumers better inference ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e7))
+* **zero-trust:** add Cloudflare-as-Identity-Provider — new `'cloudflare'` value in `IdentityProviderType` and `IdentityProviderTypeParam` unions, plus a new `AccessCloudflare` interface variant added to `IdentityProvider`, `IdentityProviderParam`, `IdentityProviderListResponse`, `IdentityProviderCreateParams`, and `IdentityProviderUpdateParams` unions ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567))
+* **zero-trust:** add `AccessCloudflareAccountMemberRule` policy rule type to `AccessRule` union (and `AccessRuleParam`) — matches users who are members of a specific Cloudflare account; pairs with the new Cloudflare IdP type ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567))
+* **zero-trust:** add `saml_certificate_set?` and `saml_certificate_set_id?` fields across all 16 Identity Provider variants (AzureAD, AccessCentrify, AccessCloudflare, AccessFacebook, AccessGitHub, AccessGoogle, AccessGoogleApps, AccessLinkedin, AccessOIDC, AccessOkta, AccessOnelogin, AccessOnetimepin, AccessPingone, AccessSAML, AccessYandex, and the new AccessCloudflare) — references the bound SAML encryption certificate set ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567))
+* **zero-trust:** add `error_details?` (with `cause`, `is_upstream`, `mcp_code`, `retryable`, `status_code` fields) and `is_shared_oauth_callback_enabled?: boolean` to `access.aiControls.mcp.portals` and `mcp.servers` response types — surfaces MCP gateway error details and shared-OAuth-callback rollout state ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3))
+* **zero-trust:** add `portal_description?` and `server_description?` fields to `access.aiControls.mcp.portals` `Server.UpdatedPrompt` (Create/Update/List/Get response variants); the older `description?` field is now `@deprecated` in favor of these — portal-level wins when present, otherwise falls back to server-level ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3))
+* **zero-trust:** refine `access.aiControls.mcp.servers.ServerSyncResponse` from `unknown` to `{ error?: string; error_details?: ServerSyncResponse.ErrorDetails; status?: string }` — gives consumers a typed shape with MCP error details ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3))
+* **zero-trust:** add `auth_state?: Array<'Good' | 'Notified' | 'Will Block' | 'Blocked'>` field to `KolideInput` and `KolideInputParam` device-posture types — restricts the posture check to specific Kolide auth states ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3))
+
+#### Deprecations
+
+* **zero-trust:** `access.aiControls.mcp.portals` `Server.UpdatedPrompt.description?` is now `@deprecated`. Use the new `portal_description?` or `server_description?` fields instead. The deprecated field is still populated for backward compatibility (portal-level wins when present, otherwise falls back to server-level) and will be removed after a deprecation window. ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3))
+
+### Breaking Changes
+
+* **billing:** the underlying API endpoint for `client.billing.usage.paygo()` changed from `GET /accounts/{account_id}/billing/usage/paygo` to `GET /accounts/{account_id}/paygo-usage`. **The SDK call site, method signature, params, and return type are unchanged** — existing code does not need to be modified. This is recorded as a breaking change because the underlying API contract moved; users on older SDK versions may see 404s if the old URL is retired by the Cloudflare API server. ([665f6ea](https://github.com/cloudflare/cloudflare-typescript/commit/665f6ea2a))
 
 ### Chores
 
-* **aisearch:** update codegen output ([49c2987](https://github.com/cloudflare/cloudflare-typescript/commit/49c2987241552917a780fabc05953b1c6358353c))
-* **ai:** update codegen output ([a3ba7fc](https://github.com/cloudflare/cloudflare-typescript/commit/a3ba7fc0bd0f2913169fc4de1b2278aa9052f6f6))
-* **cloudforce-one:** update codegen output ([0aa9ae0](https://github.com/cloudflare/cloudflare-typescript/commit/0aa9ae06af4a4e09eea8f0a51f37fb22c94ed003))
-* **custom-certificates:** update codegen output ([6e90245](https://github.com/cloudflare/cloudflare-typescript/commit/6e9024567fe8fb85d9e243845efd2377d0c91de7))
-* **email-sending:** update codegen output ([1199217](https://github.com/cloudflare/cloudflare-typescript/commit/1199217befdefca34c403c46fcea9ae9280c882f))
-* **intel:** update codegen output ([b471160](https://github.com/cloudflare/cloudflare-typescript/commit/b471160c54197be75971f3467165c244cd998d57))
-* **logpush:** update codegen output ([5bc2413](https://github.com/cloudflare/cloudflare-typescript/commit/5bc24136687dcfa7deea0a35c2eb7e9a3371040c))
-* **organizations:** update codegen output ([54b7f07](https://github.com/cloudflare/cloudflare-typescript/commit/54b7f0744b3616df974954382692af0d8d45f284))
-* **radar:** update codegen output ([6446c29](https://github.com/cloudflare/cloudflare-typescript/commit/6446c29f7935d76025ef67e8922d06a92ce96d4c))
-* **radar:** update codegen output ([d5bc24a](https://github.com/cloudflare/cloudflare-typescript/commit/d5bc24acb9898fcb40e66690d87808186a03788e))
-* **spectrum:** update codegen output ([1afad1f](https://github.com/cloudflare/cloudflare-typescript/commit/1afad1fcad0f6d6804e8f1bb91aa02346d14967f))
-* sync codegen metadata from staging-next ([fdef412](https://github.com/cloudflare/cloudflare-typescript/commit/fdef4124ac49e07c1406de920ce98b56f9daf764))
-* sync codegen metadata from staging-next ([22e2a09](https://github.com/cloudflare/cloudflare-typescript/commit/22e2a094dabbe5ac001eb32545c553edc271c497))
-* sync codegen metadata from staging-next ([7e4b075](https://github.com/cloudflare/cloudflare-typescript/commit/7e4b0750d9ffcd43896856f0079d76cfcae02d5f))
-* sync shared codegen files from staging-next ([4d7dd4d](https://github.com/cloudflare/cloudflare-typescript/commit/4d7dd4dd637d0c937326b1ec4bbf7b21605d9a2d))
-* **workers-for-platforms:** update codegen output ([074b214](https://github.com/cloudflare/cloudflare-typescript/commit/074b214b847a6ad198cb620ca3fea338ec324df7))
-* **workers:** update codegen output ([9ade5ca](https://github.com/cloudflare/cloudflare-typescript/commit/9ade5ca94d8831e3729298c4c674444045cf111b))
-* **zero-trust:** update codegen output ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3aa585f93e9c8f0fd2428ed13fadd503))
-* **zero-trust:** update codegen output ([40ea4d5](https://github.com/cloudflare/cloudflare-typescript/commit/40ea4d5d065fb4e0bd9c2b335f5df24f8b8a5617))
+* **ai:** documentation tightening across model list responses ([a3ba7fc](https://github.com/cloudflare/cloudflare-typescript/commit/a3ba7fc0b))
+* **cloudforce-one:** documentation refresh on threat-events country fields ([0aa9ae0](https://github.com/cloudflare/cloudflare-typescript/commit/0aa9ae06a))
+* **email-sending:** internal client-name string update ([1199217](https://github.com/cloudflare/cloudflare-typescript/commit/1199217be))
+* **intel:** rephrase sinkhole field descriptions for clarity ([b471160](https://github.com/cloudflare/cloudflare-typescript/commit/b471160c5))
+* **radar:** trailing chore from previous sync round ([6446c29](https://github.com/cloudflare/cloudflare-typescript/commit/6446c29f7))
+* **workers-for-platforms:** documentation updates on existing dispatch endpoints alongside the `bulkUpdate` addition ([074b214](https://github.com/cloudflare/cloudflare-typescript/commit/074b214b8))
+* **zero-trust:** generated-output churn alongside the SAML certificate work ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3)), ([40ea4d5](https://github.com/cloudflare/cloudflare-typescript/commit/40ea4d5d0))
+* sync codegen shared files (`api.md`, `.stats.yml`, `scripts/detect-breaking-changes`, `src/index.ts`, `src/resources/index.ts`) across multiple sync rounds ([4d7dd4d](https://github.com/cloudflare/cloudflare-typescript/commit/4d7dd4dd6)), ([fdef412](https://github.com/cloudflare/cloudflare-typescript/commit/fdef4124a)), ([22e2a09](https://github.com/cloudflare/cloudflare-typescript/commit/22e2a094d)), ([7e4b075](https://github.com/cloudflare/cloudflare-typescript/commit/7e4b0750d))
+
+## Migration Guide
+
+This guide covers the breaking change in v6.3.0 and how to update your code.
+
+---
+
+### 1. Billing: `usage.paygo` endpoint URL changed
+
+**What changed:**
+The HTTP endpoint that backs `client.billing.usage.paygo()` was renamed from
+`/accounts/{account_id}/billing/usage/paygo` to `/accounts/{account_id}/paygo-usage`.
+
+**Impact:**
+None at the SDK level. The method name, parameter shape (`UsagePaygoParams`),
+and return type (`UsagePaygoResponse`) are all unchanged. Existing code
+calling `client.billing.usage.paygo({ account_id, from, to })` continues to
+work without modification.
+
+The "breaking change" label is conservative: it acknowledges that the
+underlying API path moved, so users who pin to an older SDK version may
+eventually see `404` responses if the Cloudflare API team retires the old
+path. If the API team keeps both paths alive during the transition (the usual
+behaviour), there is no user-visible breakage.
+
+**Affected Method:**
+- `client.billing.usage.paygo`
+
+**Before (v6.2.0):**
+```typescript
+const usage = await client.billing.usage.paygo({
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  from: '2025-05-01',
+  to: '2025-05-31',
+});
+// SDK calls: GET /accounts/023e105f4ecef8ad9ca31a8372d0c353/billing/usage/paygo
+```
+
+**After (v6.3.0):**
+```typescript
+const usage = await client.billing.usage.paygo({
+  account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  from: '2025-05-01',
+  to: '2025-05-31',
+});
+// SDK calls: GET /accounts/023e105f4ecef8ad9ca31a8372d0c353/paygo-usage
+```
+
+**Actions Needed:**
+1. No code changes required for normal SDK consumers.
+2. If you maintain a proxy or URL allow-list that filters Cloudflare API
+   requests by path, add `/accounts/*/paygo-usage` to the allow-list.
+3. Consider also adopting the new `client.billing.usage.get()` method, which
+   returns the FinOps FOCUS v1.3 cost-and-usage dataset for more detailed
+   cost reporting.
+
+---
+
+### Summary
+
+| # | Resource | Change | Action |
+|---|----------|--------|--------|
+| 1 | Billing | `usage.paygo` endpoint URL moved from `/billing/usage/paygo` to `/paygo-usage` | None at SDK level; update proxy/URL allow-lists if applicable |
+
 
 ## 6.2.0 (2026-05-14)
 
