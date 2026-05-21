@@ -124,6 +124,13 @@ const usage = await client.billing.usage.paygo({
 
 ---
 
+### Summary
+
+| # | Resource | Change | Action |
+|---|----------|--------|--------|
+| 1 | Billing | `usage.paygo` endpoint URL moved from `/billing/usage/paygo` to `/paygo-usage` | None at SDK level; update proxy/URL allow-lists if applicable |
+
+
 ## 6.2.0 (2026-05-14)
 
 Full Changelog: [v6.1.0...v6.2.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.1.0...v6.2.0)
