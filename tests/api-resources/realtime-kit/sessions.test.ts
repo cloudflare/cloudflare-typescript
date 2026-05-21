@@ -29,10 +29,10 @@ const parentPartialClient = createClient({
 const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessions } }>) => {
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('generateSummaryOfTranscripts: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.generateSummaryOfTranscripts('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.generateSummaryOfTranscripts(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,18 +44,18 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('generateSummaryOfTranscripts: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.generateSummaryOfTranscripts('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const response = await client.realtimeKit.sessions.generateSummaryOfTranscripts(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getParticipantDataFromPeerID: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getParticipantDataFromPeerID('peer_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getParticipantDataFromPeerID(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,19 +67,22 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getParticipantDataFromPeerID: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getParticipantDataFromPeerID('peer_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-      filters: 'device_info',
-    });
+    const response = await client.realtimeKit.sessions.getParticipantDataFromPeerID(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        app_id: 'app_id',
+        filters: 'device_info',
+      },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionChat: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getSessionChat('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getSessionChat(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,18 +94,18 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionChat: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getSessionChat('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const response = await client.realtimeKit.sessions.getSessionChat(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionDetails: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getSessionDetails('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getSessionDetails(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,20 +117,26 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionDetails: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getSessionDetails('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-      include_breakout_rooms: true,
-    });
+    const response = await client.realtimeKit.sessions.getSessionDetails(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        app_id: 'app_id',
+        include_breakout_rooms: true,
+      },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionParticipantDetails: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getSessionParticipantDetails('participant_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-      session_id: 'session_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getSessionParticipantDetails(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        app_id: 'app_id',
+        session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -139,21 +148,24 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionParticipantDetails: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getSessionParticipantDetails('participant_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-      session_id: 'session_id',
-      filters: 'device_info',
-      include_peer_events: true,
-    });
+    const response = await client.realtimeKit.sessions.getSessionParticipantDetails(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        app_id: 'app_id',
+        session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        filters: 'device_info',
+        include_peer_events: true,
+      },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionParticipants: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getSessionParticipants('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getSessionParticipants(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -165,25 +177,28 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionParticipants: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getSessionParticipants('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-      include_peer_events: true,
-      page_no: 0,
-      per_page: 0,
-      search: 'search',
-      sort_by: 'joinedAt',
-      sort_order: 'ASC',
-      view: 'raw',
-    });
+    const response = await client.realtimeKit.sessions.getSessionParticipants(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        app_id: 'app_id',
+        include_peer_events: true,
+        page_no: 0,
+        per_page: 0,
+        search: 'search',
+        sort_by: 'joinedAt',
+        sort_order: 'ASC',
+        view: 'raw',
+      },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionSummary: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getSessionSummary('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getSessionSummary(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -195,18 +210,18 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionSummary: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getSessionSummary('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const response = await client.realtimeKit.sessions.getSessionSummary(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionTranscripts: only required params', async () => {
-    const responsePromise = client.realtimeKit.sessions.getSessionTranscripts('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const responsePromise = client.realtimeKit.sessions.getSessionTranscripts(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -218,10 +233,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getSessionTranscripts: required and optional params', async () => {
-    const response = await client.realtimeKit.sessions.getSessionTranscripts('session_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app_id: 'app_id',
-    });
+    const response = await client.realtimeKit.sessions.getSessionTranscripts(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
@@ -242,7 +257,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
   test.skip('getSessions: required and optional params', async () => {
     const response = await client.realtimeKit.sessions.getSessions('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      associated_id: 'associated_id',
+      associated_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       end_time: '2019-12-27T18:11:19.117Z',
       page_no: 0,
       participants: '1:10',

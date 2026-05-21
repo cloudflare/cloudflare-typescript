@@ -22,8 +22,8 @@ export class BaseApps extends APIResource {
    * ```
    */
   get(params: AppGetParams, options?: RequestOptions): APIPromise<AppGetResponse> {
-    const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/realtime/kit/apps`, options);
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/realtime/kit/apps`, { query, ...options });
   }
 
   /**
@@ -32,8 +32,8 @@ export class BaseApps extends APIResource {
    * @example
    * ```ts
    * const response = await client.realtimeKit.apps.post({
-   *   account_id: 'account_id',
-   *   name: 'name',
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   name: 'x',
    * });
    * ```
    */
@@ -47,6 +47,8 @@ export class Apps extends BaseApps {}
 export interface AppGetResponse {
   data?: Array<AppGetResponse.Data>;
 
+  paging?: AppGetResponse.Paging;
+
   success?: boolean;
 }
 
@@ -57,6 +59,14 @@ export namespace AppGetResponse {
     created_at?: string;
 
     name?: string;
+  }
+
+  export interface Paging {
+    end_offset?: number;
+
+    start_offset?: number;
+
+    total_count?: number;
   }
 }
 
@@ -84,14 +94,35 @@ export namespace AppPostResponse {
 
 export interface AppGetParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: The page number from which you want your page search results to be
+   * displayed.
+   */
+  page_no?: number;
+
+  /**
+   * Query param: Number of results per page.
+   */
+  per_page?: number;
+
+  /**
+   * Query param: Search string that matches apps by name.
+   */
+  search?: string;
+
+  /**
+   * Query param: Sort order for apps by creation time.
+   */
+  sort_order?: 'ASC' | 'DESC';
 }
 
 export interface AppPostParams {
   /**
-   * Path param
+   * Path param: The account identifier tag.
    */
   account_id: string;
 

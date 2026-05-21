@@ -1009,6 +1009,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.realtimeKit.livestreams.getActiveLivestreamsForLivestreamID()`
 - `client.realtimeKit.livestreams.getAllLivestreams()`
 - `client.realtimeKit.livestreams.getLivestreamAnalyticsComplete()`
+- `client.realtimeKit.livestreams.getLivestreamAnalyticsDaywise()`
 - `client.realtimeKit.livestreams.getLivestreamSessionDetailsForSessionID()`
 - `client.realtimeKit.livestreams.getLivestreamSessionForLivestreamID()`
 - `client.realtimeKit.livestreams.getMeetingActiveLivestreams()`
