@@ -409,6 +409,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.prefixes.delegations.create()`
 - `client.addressing.prefixes.delegations.list()`
 - `client.addressing.prefixes.delegations.delete()`
+- `client.dls.regions.get()`
+- `client.dls.regionalServices.prefixBindings.delete()`
+- `client.dls.regionalServices.prefixBindings.edit()`
+- `client.dls.regionalServices.prefixBindings.get()`
 - `client.brandProtection.logos.delete()`
 - `client.brandProtection.v2.logos.delete()`
 - `client.diagnostics.endpointHealthchecks.update()`

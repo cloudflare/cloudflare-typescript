@@ -4154,6 +4154,48 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations/{delegation_id}',
   },
   {
+    clientCallName: 'client.dls.regions.list',
+    fullyQualifiedName: 'dls.regions.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dls/regions',
+  },
+  {
+    clientCallName: 'client.dls.regions.get',
+    fullyQualifiedName: 'dls.regions.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dls/regions/{region_id}',
+  },
+  {
+    clientCallName: 'client.dls.regionalServices.prefixBindings.create',
+    fullyQualifiedName: 'dls.regionalServices.prefixBindings.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/dls/regional_services/prefix_bindings',
+  },
+  {
+    clientCallName: 'client.dls.regionalServices.prefixBindings.list',
+    fullyQualifiedName: 'dls.regionalServices.prefixBindings.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dls/regional_services/prefix_bindings',
+  },
+  {
+    clientCallName: 'client.dls.regionalServices.prefixBindings.delete',
+    fullyQualifiedName: 'dls.regionalServices.prefixBindings.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/dls/regional_services/prefix_bindings/{binding_id}',
+  },
+  {
+    clientCallName: 'client.dls.regionalServices.prefixBindings.edit',
+    fullyQualifiedName: 'dls.regionalServices.prefixBindings.edit',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/dls/regional_services/prefix_bindings/{binding_id}',
+  },
+  {
+    clientCallName: 'client.dls.regionalServices.prefixBindings.get',
+    fullyQualifiedName: 'dls.regionalServices.prefixBindings.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dls/regional_services/prefix_bindings/{binding_id}',
+  },
+  {
     clientCallName: 'client.auditLogs.list',
     fullyQualifiedName: 'auditLogs.list',
     httpMethod: 'get',
