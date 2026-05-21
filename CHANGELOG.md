@@ -1,5 +1,43 @@
 # Changelog
 
+## 6.3.0 (2026-05-21)
+
+Full Changelog: [v6.2.0...v6.3.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.2.0...v6.3.0)
+
+### Features
+
+* **billing:** add usage.get method, update usage.paygo endpoint ([665f6ea](https://github.com/cloudflare/cloudflare-typescript/commit/665f6ea2ab4a21934226fa5464ee7ab0ce66d6f6))
+* **dls:** add DLS resource with regional-services and prefix-bindings ([4dcf0db](https://github.com/cloudflare/cloudflare-typescript/commit/4dcf0db7e0f0163bfaefebc32f263c59a28dd642))
+* **organizations:** add billing sub-resource ([2c93faf](https://github.com/cloudflare/cloudflare-typescript/commit/2c93faf7528942340b7baaa322903a68b0274b2d))
+* **r2:** add objects sub-resource ([94a26fc](https://github.com/cloudflare/cloudflare-typescript/commit/94a26fcd9d316f31557530799f449f202f372661))
+* **secrets-store:** add stores.get method ([542f312](https://github.com/cloudflare/cloudflare-typescript/commit/542f312097c920c73cb0a6934033483cb4052c64))
+* **workers-for-platforms:** add scripts.secrets.bulkUpdate ([840cea9](https://github.com/cloudflare/cloudflare-typescript/commit/840cea9310ae4b9744e98ff13c57061c173e188e))
+* **workers:** add observability.queries sub-resource ([d1f8d27](https://github.com/cloudflare/cloudflare-typescript/commit/d1f8d27e71125cce1c27287603c8c11845edf574))
+* **zero-trust:** add saml-certificates resource ([4d75785](https://github.com/cloudflare/cloudflare-typescript/commit/4d7578567d8b94c6466bacf75357a2f049b839b0))
+
+
+### Chores
+
+* **aisearch:** update codegen output ([49c2987](https://github.com/cloudflare/cloudflare-typescript/commit/49c2987241552917a780fabc05953b1c6358353c))
+* **ai:** update codegen output ([a3ba7fc](https://github.com/cloudflare/cloudflare-typescript/commit/a3ba7fc0bd0f2913169fc4de1b2278aa9052f6f6))
+* **cloudforce-one:** update codegen output ([0aa9ae0](https://github.com/cloudflare/cloudflare-typescript/commit/0aa9ae06af4a4e09eea8f0a51f37fb22c94ed003))
+* **custom-certificates:** update codegen output ([6e90245](https://github.com/cloudflare/cloudflare-typescript/commit/6e9024567fe8fb85d9e243845efd2377d0c91de7))
+* **email-sending:** update codegen output ([1199217](https://github.com/cloudflare/cloudflare-typescript/commit/1199217befdefca34c403c46fcea9ae9280c882f))
+* **intel:** update codegen output ([b471160](https://github.com/cloudflare/cloudflare-typescript/commit/b471160c54197be75971f3467165c244cd998d57))
+* **logpush:** update codegen output ([5bc2413](https://github.com/cloudflare/cloudflare-typescript/commit/5bc24136687dcfa7deea0a35c2eb7e9a3371040c))
+* **organizations:** update codegen output ([54b7f07](https://github.com/cloudflare/cloudflare-typescript/commit/54b7f0744b3616df974954382692af0d8d45f284))
+* **radar:** update codegen output ([6446c29](https://github.com/cloudflare/cloudflare-typescript/commit/6446c29f7935d76025ef67e8922d06a92ce96d4c))
+* **radar:** update codegen output ([d5bc24a](https://github.com/cloudflare/cloudflare-typescript/commit/d5bc24acb9898fcb40e66690d87808186a03788e))
+* **spectrum:** update codegen output ([1afad1f](https://github.com/cloudflare/cloudflare-typescript/commit/1afad1fcad0f6d6804e8f1bb91aa02346d14967f))
+* sync codegen metadata from staging-next ([fdef412](https://github.com/cloudflare/cloudflare-typescript/commit/fdef4124ac49e07c1406de920ce98b56f9daf764))
+* sync codegen metadata from staging-next ([22e2a09](https://github.com/cloudflare/cloudflare-typescript/commit/22e2a094dabbe5ac001eb32545c553edc271c497))
+* sync codegen metadata from staging-next ([7e4b075](https://github.com/cloudflare/cloudflare-typescript/commit/7e4b0750d9ffcd43896856f0079d76cfcae02d5f))
+* sync shared codegen files from staging-next ([4d7dd4d](https://github.com/cloudflare/cloudflare-typescript/commit/4d7dd4dd637d0c937326b1ec4bbf7b21605d9a2d))
+* **workers-for-platforms:** update codegen output ([074b214](https://github.com/cloudflare/cloudflare-typescript/commit/074b214b847a6ad198cb620ca3fea338ec324df7))
+* **workers:** update codegen output ([9ade5ca](https://github.com/cloudflare/cloudflare-typescript/commit/9ade5ca94d8831e3729298c4c674444045cf111b))
+* **zero-trust:** update codegen output ([dc1c78c](https://github.com/cloudflare/cloudflare-typescript/commit/dc1c78cc3aa585f93e9c8f0fd2428ed13fadd503))
+* **zero-trust:** update codegen output ([40ea4d5](https://github.com/cloudflare/cloudflare-typescript/commit/40ea4d5d065fb4e0bd9c2b335f5df24f8b8a5617))
+
 ## 6.2.0 (2026-05-14)
 
 Full Changelog: [v6.1.0...v6.2.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.1.0...v6.2.0)
