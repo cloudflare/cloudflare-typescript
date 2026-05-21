@@ -10,6 +10,26 @@ const client = new Cloudflare({
 });
 
 describe('resource usage', () => {
+  test('get: only required params', async () => {
+    const responsePromise = client.billing.usage.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.billing.usage.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      from: '2025-05-01',
+      metric: 'workers_standard_requests',
+      to: '2025-05-31',
+    });
+  });
+
   test('paygo: only required params', async () => {
     const responsePromise = client.billing.usage.paygo({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -24,8 +44,8 @@ describe('resource usage', () => {
   test('paygo: required and optional params', async () => {
     const response = await client.billing.usage.paygo({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      from: '2025-02-01',
-      to: '2025-03-01',
+      from: '2025-05-01',
+      to: '2025-05-31',
     });
   });
 });
