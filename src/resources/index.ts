@@ -33,6 +33,7 @@ export { CustomPages } from './custom-pages/custom-pages';
 export { D1Resource } from './d1/d1';
 export { DCVDelegation } from './dcv-delegation';
 export { DDoSProtection } from './ddos-protection/ddos-protection';
+export { DLS } from './dls/dls';
 export { DNS } from './dns/dns';
 export { DNSFirewall } from './dns-firewall/dns-firewall';
 export { Diagnostics } from './diagnostics/diagnostics';
