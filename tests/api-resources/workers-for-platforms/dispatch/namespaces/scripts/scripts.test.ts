@@ -112,6 +112,7 @@ const runTests = (
               enabled: true,
               head_sampling_rate: 0.1,
               persist: true,
+              propagation_policy: 'authenticated',
             },
           },
           placement: { mode: 'smart' },

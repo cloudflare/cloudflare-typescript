@@ -1054,6 +1054,15 @@ export namespace ScriptAndVersionSettingEditResponse {
        * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
+
+      /**
+       * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+       * requests are handled. "authenticated" (default) honors inbound trace context
+       * only when accompanied by a valid trace auth token. "accept" unconditionally
+       * accepts inbound trace context. Requires the trace propagation feature to be
+       * enabled.
+       */
+      propagation_policy?: 'authenticated' | 'accept';
     }
   }
 
@@ -2143,6 +2152,15 @@ export namespace ScriptAndVersionSettingGetResponse {
        * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
+
+      /**
+       * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+       * requests are handled. "authenticated" (default) honors inbound trace context
+       * only when accompanied by a valid trace auth token. "accept" unconditionally
+       * accepts inbound trace context. Requires the trace propagation feature to be
+       * enabled.
+       */
+      propagation_policy?: 'authenticated' | 'accept';
     }
   }
 
@@ -3279,6 +3297,15 @@ export namespace ScriptAndVersionSettingEditParams {
          * Whether trace persistence is enabled for the Worker.
          */
         persist?: boolean;
+
+        /**
+         * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+         * requests are handled. "authenticated" (default) honors inbound trace context
+         * only when accompanied by a valid trace auth token. "accept" unconditionally
+         * accepts inbound trace context. Requires the trace propagation feature to be
+         * enabled.
+         */
+        propagation_policy?: 'authenticated' | 'accept';
       }
     }
 
