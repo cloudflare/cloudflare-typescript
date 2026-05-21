@@ -278,6 +278,10 @@ TEST_PATHS=(
 	tests/api-resources/addressing/prefixes/bgp-prefixes.test.ts
 	tests/api-resources/addressing/prefixes/advertisement-status.test.ts
 	tests/api-resources/addressing/prefixes/delegations.test.ts
+	tests/api-resources/dls/dls.test.ts
+	tests/api-resources/dls/regions.test.ts
+	tests/api-resources/dls/regional-services/regional-services.test.ts
+	tests/api-resources/dls/regional-services/prefix-bindings.test.ts
 	tests/api-resources/audit-logs.test.ts
 	tests/api-resources/billing/billing.test.ts
 	tests/api-resources/billing/profiles.test.ts
