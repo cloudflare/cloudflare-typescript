@@ -58,6 +58,7 @@ const runTests = (
         {
           server_id: 'my-mcp-server',
           default_disabled: true,
+          is_shared_oauth_callback_enabled: true,
           on_behalf: true,
           updated_prompts: [
             {
@@ -105,6 +106,7 @@ const runTests = (
         {
           server_id: 'my-mcp-server',
           default_disabled: true,
+          is_shared_oauth_callback_enabled: true,
           on_behalf: true,
           updated_prompts: [
             {
