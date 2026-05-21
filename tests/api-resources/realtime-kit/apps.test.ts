@@ -41,12 +41,21 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { apps: BaseApps } }>
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('get: required and optional params', async () => {
-    const response = await client.realtimeKit.apps.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.realtimeKit.apps.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      page_no: 1,
+      per_page: 1,
+      search: 'search',
+      sort_order: 'ASC',
+    });
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('post: only required params', async () => {
-    const responsePromise = client.realtimeKit.apps.post({ account_id: 'account_id', name: 'name' });
+    const responsePromise = client.realtimeKit.apps.post({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'x',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,7 +67,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { apps: BaseApps } }>
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('post: required and optional params', async () => {
-    const response = await client.realtimeKit.apps.post({ account_id: 'account_id', name: 'name' });
+    const response = await client.realtimeKit.apps.post({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'x',
+    });
   });
 };
 describe('resource apps', () => runTests(client));

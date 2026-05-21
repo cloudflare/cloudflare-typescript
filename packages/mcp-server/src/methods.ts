@@ -11671,6 +11671,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/overall',
   },
   {
+    clientCallName: 'client.realtimeKit.livestreams.getLivestreamAnalyticsDaywise',
+    fullyQualifiedName: 'realtimeKit.livestreams.getLivestreamAnalyticsDaywise',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/daywise',
+  },
+  {
     clientCallName: 'client.realtimeKit.livestreams.getLivestreamSessionDetailsForSessionID',
     fullyQualifiedName: 'realtimeKit.livestreams.getLivestreamSessionDetailsForSessionID',
     httpMethod: 'get',

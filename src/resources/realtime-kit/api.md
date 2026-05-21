@@ -148,6 +148,7 @@ Types:
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetActiveLivestreamsForLivestreamIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetAllLivestreamsResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamAnalyticsCompleteResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamAnalyticsDaywiseResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamSessionDetailsForSessionIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamSessionForLivestreamIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetMeetingActiveLivestreamsResponse</a></code>
@@ -161,6 +162,7 @@ Methods:
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/active-livestream-session">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getActiveLivestreamsForLivestreamID</a>(livestreamID, { ...params }) -> LivestreamGetActiveLivestreamsForLivestreamIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getAllLivestreams</a>(appID, { ...params }) -> LivestreamGetAllLivestreamsResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/overall">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamAnalyticsComplete</a>(appID, { ...params }) -> LivestreamGetLivestreamAnalyticsCompleteResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/daywise">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamAnalyticsDaywise</a>(appID, { ...params }) -> LivestreamGetLivestreamAnalyticsDaywiseResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/sessions/{livestream-session-id}">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamSessionDetailsForSessionID</a>(livestreamSessionID, { ...params }) -> LivestreamGetLivestreamSessionDetailsForSessionIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamSessionForLivestreamID</a>(livestreamID, { ...params }) -> LivestreamGetLivestreamSessionForLivestreamIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-livestream">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getMeetingActiveLivestreams</a>(meetingID, { ...params }) -> LivestreamGetMeetingActiveLivestreamsResponse</code>
