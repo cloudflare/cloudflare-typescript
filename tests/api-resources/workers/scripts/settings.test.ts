@@ -42,6 +42,7 @@ describe('resource settings', () => {
           enabled: true,
           head_sampling_rate: 0.1,
           persist: true,
+          propagation_policy: 'authenticated',
         },
       },
       tags: ['my-team', 'my-public-api'],
