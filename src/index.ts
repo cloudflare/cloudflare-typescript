@@ -53,6 +53,7 @@ import { D1Resource } from './resources/d1/d1';
 import { DCVDelegation } from './resources/dcv-delegation/dcv-delegation';
 import { DDoSProtection } from './resources/ddos-protection/ddos-protection';
 import { Diagnostics } from './resources/diagnostics/diagnostics';
+import { DLS } from './resources/dls/dls';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
@@ -322,6 +323,7 @@ export class Cloudflare extends Core.APIClient {
   urlNormalization: API.URLNormalization = new API.URLNormalization(this);
   spectrum: API.Spectrum = new API.Spectrum(this);
   addressing: API.Addressing = new API.Addressing(this);
+  dls: API.DLS = new API.DLS(this);
   auditLogs: API.AuditLogs = new API.AuditLogs(this);
   billing: API.Billing = new API.Billing(this);
   brandProtection: API.BrandProtection = new API.BrandProtection(this);
@@ -572,6 +574,7 @@ Cloudflare.Rulesets = Rulesets;
 Cloudflare.URLNormalization = URLNormalization;
 Cloudflare.Spectrum = Spectrum;
 Cloudflare.Addressing = Addressing;
+Cloudflare.DLS = DLS;
 Cloudflare.AuditLogs = AuditLogs;
 Cloudflare.Billing = Billing;
 Cloudflare.BrandProtection = BrandProtection;
@@ -760,6 +763,8 @@ export declare namespace Cloudflare {
   export { Spectrum as Spectrum };
 
   export { Addressing as Addressing };
+
+  export { DLS as DLS };
 
   export { AuditLogs as AuditLogs };
 
