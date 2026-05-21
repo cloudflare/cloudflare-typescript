@@ -6,7 +6,7 @@ import { SinglePage } from '../../pagination';
 
 export class Sinkholes extends APIResource {
   /**
-   * List sinkholes owned by this account
+   * Lists sinkholes owned by the account for redirecting malicious traffic.
    *
    * @example
    * ```ts
@@ -31,44 +31,44 @@ export class SinkholesSinglePage extends SinglePage<Sinkhole> {}
 
 export interface Sinkhole {
   /**
-   * The unique identifier for the sinkhole
+   * The unique identifier for the sinkhole.
    */
   id?: number;
 
   /**
-   * The account tag that owns this sinkhole
+   * The account tag that owns this sinkhole.
    */
   account_tag?: string;
 
   /**
-   * The date and time when the sinkhole was created
+   * The date and time when the sinkhole was created.
    */
   created_on?: string;
 
   /**
-   * The date and time when the sinkhole was last modified
+   * The date and time when the sinkhole was last modified.
    */
   modified_on?: string;
 
   /**
-   * The name of the sinkhole
+   * The name of the sinkhole.
    */
   name?: string;
 
   /**
-   * The name of the R2 bucket to store results
+   * The name of the R2 bucket to store results.
    */
   r2_bucket?: string;
 
   /**
-   * The id of the R2 instance
+   * The id of the R2 instance.
    */
   r2_id?: string;
 }
 
 export interface SinkholeListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

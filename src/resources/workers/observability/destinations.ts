@@ -141,7 +141,7 @@ export namespace DestinationCreateResponse {
   export interface Configuration {
     destination_conf: string;
 
-    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs';
+    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
 
     logpushJob: number;
 
@@ -167,7 +167,7 @@ export namespace DestinationUpdateResponse {
   export interface Configuration {
     destination_conf: string;
 
-    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs';
+    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
 
     logpushJob: number;
 
@@ -197,7 +197,7 @@ export namespace DestinationListResponse {
 
     jobStatus: Configuration.JobStatus;
 
-    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs';
+    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
 
     type: 'logpush';
 
@@ -231,7 +231,7 @@ export namespace DestinationDeleteResponse {
   export interface Configuration {
     destination_conf: string;
 
-    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs';
+    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
 
     logpushJob: number;
 
@@ -272,7 +272,7 @@ export namespace DestinationCreateParams {
   export interface Configuration {
     headers: { [key: string]: string };
 
-    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs';
+    logpushDataset: 'opentelemetry-traces' | 'opentelemetry-logs' | 'opentelemetry-metrics';
 
     type: 'logpush';
 

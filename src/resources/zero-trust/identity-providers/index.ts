@@ -16,4 +16,9 @@ export {
   type IdentityProviderDeleteParams,
   type IdentityProviderGetParams,
 } from './identity-providers';
+export {
+  SAMLCertificate,
+  type SAMLCertificateCreateResponse,
+  type SAMLCertificateCreateParams,
+} from './saml-certificate';
 export { SCIM } from './scim/index';

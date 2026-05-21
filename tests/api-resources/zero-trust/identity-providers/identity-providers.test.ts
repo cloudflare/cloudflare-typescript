@@ -43,6 +43,7 @@ describe('resource identityProviders', () => {
       name: 'Widget Corps IDP',
       type: 'onetimepin',
       account_id: 'account_id',
+      saml_certificate_set_id: 'c409ef44-e72c-41c8-8c0b-278c8a6f4fd8',
       scim_config: {
         enabled: true,
         identity_update_behavior: 'automatic',
@@ -88,6 +89,7 @@ describe('resource identityProviders', () => {
       name: 'Widget Corps IDP',
       type: 'onetimepin',
       account_id: 'account_id',
+      saml_certificate_set_id: 'c409ef44-e72c-41c8-8c0b-278c8a6f4fd8',
       scim_config: {
         enabled: true,
         identity_update_behavior: 'automatic',

@@ -25,6 +25,7 @@ describe('resource models', () => {
     const response = await client.ai.models.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       author: 'author',
+      format: 'openrouter',
       hide_experimental: true,
       page: 0,
       per_page: 0,

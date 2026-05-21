@@ -9,6 +9,8 @@ import {
   OrganizationProfileResource,
   OrganizationProfileUpdateParams,
 } from './organization-profile';
+import * as BillingAPI from './billing/billing';
+import { Billing } from './billing/billing';
 import * as LogsAPI from './logs/logs';
 import { Logs } from './logs/logs';
 import { SinglePage } from '../../pagination';
@@ -17,9 +19,10 @@ export class Organizations extends APIResource {
   organizationProfile: OrganizationProfileAPI.OrganizationProfileResource =
     new OrganizationProfileAPI.OrganizationProfileResource(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
 
   /**
-   * Create a new organization for a user. (Currently in Closed Beta - see
+   * Create a new organization for a user. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   create(body: OrganizationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Organization> {
@@ -29,7 +32,7 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Modify organization. (Currently in Closed Beta - see
+   * Modify organization. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   update(
@@ -46,7 +49,7 @@ export class Organizations extends APIResource {
 
   /**
    * Retrieve a list of organizations a particular user has access to. (Currently in
-   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    */
   list(
     query?: OrganizationListParams,
@@ -66,7 +69,7 @@ export class Organizations extends APIResource {
   /**
    * Delete an organization. The organization MUST be empty before deleting. It must
    * not contain any sub-organizations, accounts, members or users. (Currently in
-   * Closed Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    */
   delete(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationDeleteResponse> {
     return (
@@ -77,7 +80,7 @@ export class Organizations extends APIResource {
   }
 
   /**
-   * Retrieve the details of a certain organization. (Currently in Closed Beta - see
+   * Retrieve the details of a certain organization. (Currently in Public Beta - see
    * https://developers.cloudflare.com/fundamentals/organizations/)
    */
   get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<Organization> {
@@ -300,6 +303,7 @@ export namespace OrganizationListParams {
 Organizations.OrganizationsSinglePage = OrganizationsSinglePage;
 Organizations.OrganizationProfileResource = OrganizationProfileResource;
 Organizations.Logs = Logs;
+Organizations.Billing = Billing;
 
 export declare namespace Organizations {
   export {
@@ -318,4 +322,6 @@ export declare namespace Organizations {
   };
 
   export { Logs as Logs };
+
+  export { Billing as Billing };
 }
