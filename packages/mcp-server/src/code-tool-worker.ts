@@ -2002,6 +2002,7 @@ const fuse = new Fuse(
     'client.snippets.update',
     'client.snippets.content.get',
     'client.snippets.rules.delete',
+    'client.snippets.rules.get',
     'client.snippets.rules.list',
     'client.snippets.rules.update',
     'client.realtimeKit.apps.get',

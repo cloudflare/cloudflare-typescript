@@ -46,6 +46,18 @@ export class BaseRules extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Fetches all snippet rules belonging to the zone.
+   */
+  get(params: RuleGetParams, options?: RequestOptions): APIPromise<RuleGetResponse> {
+    const { zone_id } = params;
+    return (
+      this._client.get(path`/zones/${zone_id}/snippets/snippet_rules`, options) as APIPromise<{
+        result: RuleGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Rules extends BaseRules {}
 
@@ -63,6 +75,11 @@ export type RuleListResponse = unknown;
  * Contain the response result.
  */
 export type RuleDeleteResponse = unknown;
+
+/**
+ * Contain the response result.
+ */
+export type RuleGetResponse = unknown;
 
 export interface RuleUpdateParams {
   /**
@@ -117,13 +134,22 @@ export interface RuleDeleteParams {
   zone_id: string;
 }
 
+export interface RuleGetParams {
+  /**
+   * Use this field to specify the unique ID of the zone.
+   */
+  zone_id: string;
+}
+
 export declare namespace Rules {
   export {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleGetResponse as RuleGetResponse,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
   };
 }
