@@ -11425,6 +11425,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/snippets/snippet_rules',
   },
   {
+    clientCallName: 'client.snippets.rules.get',
+    fullyQualifiedName: 'snippets.rules.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/snippets/snippet_rules',
+  },
+  {
     clientCallName: 'client.realtimeKit.apps.get',
     fullyQualifiedName: 'realtimeKit.apps.get',
     httpMethod: 'get',

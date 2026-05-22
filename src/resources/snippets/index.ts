@@ -7,8 +7,10 @@ export {
   type RuleUpdateResponse,
   type RuleListResponse,
   type RuleDeleteResponse,
+  type RuleGetResponse,
   type RuleUpdateParams,
   type RuleListParams,
   type RuleDeleteParams,
+  type RuleGetParams,
 } from './rules';
 export { Snippets, BaseSnippets } from './snippets';
