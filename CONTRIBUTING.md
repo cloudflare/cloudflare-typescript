@@ -75,6 +75,20 @@ $ ./scripts/mock
 $ yarn run test
 ```
 
+### Skipped tests
+
+CI enforces a ratchet on the number of `test.skip` / `it.skip` / `describe.skip`
+invocations under `tests/`. The current count is tracked in
+[`tests/.skip-baseline`](./tests/.skip-baseline) and validated by
+[`scripts/utils/check-skip-baseline.sh`](./scripts/utils/check-skip-baseline.sh).
+
+- If your change *unskips* tests, lower the number in `tests/.skip-baseline`
+  to match the new count (the script will tell you what to set it to).
+- If your change adds a *new* skip, raise the number with a comment in the PR
+  explaining why the skip is necessary.
+
+This prevents the skip backlog from silently growing.
+
 ## Linting and formatting
 
 This repository uses [prettier](https://www.npmjs.com/package/prettier) and
