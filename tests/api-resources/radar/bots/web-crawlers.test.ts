@@ -89,6 +89,7 @@ const runTests = (client: PartialCloudflare<{ radar: { bots: { webCrawlers: Base
           industry: ['string'],
           limitPerGroup: 10,
           name: ['main_series'],
+          normalization: 'PERCENTAGE',
           responseStatus: ['string'],
           responseStatusCategory: ['INFORMATIONAL'],
           vertical: ['string'],
