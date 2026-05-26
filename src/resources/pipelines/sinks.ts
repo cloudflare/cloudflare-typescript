@@ -1547,6 +1547,11 @@ export interface SinkListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
+   * Query param: Filters sinks by name (case-insensitive substring).
+   */
+  name?: string;
+
+  /**
    * Query param
    */
   pipeline_id?: string;
