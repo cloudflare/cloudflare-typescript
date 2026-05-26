@@ -1499,13 +1499,9 @@ Methods:
 
 #### Items
 
-Types:
-
-- <code><a href="./src/resources/zero-trust/gateway/lists/items.ts">ItemListResponse</a></code>
-
 Methods:
 
-- <code title="get /accounts/{account_id}/gateway/lists/{list_id}/items">client.zeroTrust.gateway.lists.items.<a href="./src/resources/zero-trust/gateway/lists/items.ts">list</a>(listID, { ...params }) -> ItemListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/gateway/lists/{list_id}/items">client.zeroTrust.gateway.lists.items.<a href="./src/resources/zero-trust/gateway/lists/items.ts">list</a>(listID, { ...params }) -> GatewayItemsSinglePage</code>
 
 ### Locations
 
