@@ -1241,6 +1241,11 @@ export interface StreamListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
+   * Query param: Filters streams by name (case-insensitive substring).
+   */
+  name?: string;
+
+  /**
    * Query param: Specifies the public ID of the pipeline.
    */
   pipeline_id?: string;
