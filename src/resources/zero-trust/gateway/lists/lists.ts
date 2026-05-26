@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ItemsAPI from './items';
-import { BaseItems, ItemListParams, ItemListResponse, ItemListResponsesSinglePage, Items } from './items';
+import { BaseItems, ItemListParams, Items } from './items';
 import { APIPromise } from '../../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
@@ -151,6 +151,8 @@ export class Lists extends BaseLists {
 }
 
 export type GatewayListsSinglePage = SinglePage<GatewayList>;
+
+export type GatewayItemsSinglePage = SinglePage<GatewayItem>;
 
 export interface GatewayItem {
   created_at?: string;
@@ -381,11 +383,5 @@ export declare namespace Lists {
     type ListGetParams as ListGetParams,
   };
 
-  export {
-    Items as Items,
-    BaseItems as BaseItems,
-    type ItemListResponse as ItemListResponse,
-    type ItemListResponsesSinglePage as ItemListResponsesSinglePage,
-    type ItemListParams as ItemListParams,
-  };
+  export { Items as Items, BaseItems as BaseItems, type ItemListParams as ItemListParams };
 }

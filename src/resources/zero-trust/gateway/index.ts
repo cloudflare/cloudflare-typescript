@@ -82,6 +82,7 @@ export {
   type ListDeleteParams,
   type ListEditParams,
   type ListGetParams,
+  type GatewayItemsSinglePage,
   type GatewayListsSinglePage,
 } from './lists/index';
 export {
