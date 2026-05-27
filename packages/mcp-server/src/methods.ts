@@ -12757,28 +12757,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/shares/{share_id}/resources',
   },
   {
-    clientCallName: 'client.resourceSharing.resources.update',
-    fullyQualifiedName: 'resourceSharing.resources.update',
-    httpMethod: 'put',
-    httpPath: '/accounts/{account_id}/shares/{share_id}/resources/{resource_id}',
-  },
-  {
     clientCallName: 'client.resourceSharing.resources.list',
     fullyQualifiedName: 'resourceSharing.resources.list',
     httpMethod: 'get',
     httpPath: '/accounts/{account_id}/shares/{share_id}/resources',
-  },
-  {
-    clientCallName: 'client.resourceSharing.resources.delete',
-    fullyQualifiedName: 'resourceSharing.resources.delete',
-    httpMethod: 'delete',
-    httpPath: '/accounts/{account_id}/shares/{share_id}/resources/{resource_id}',
-  },
-  {
-    clientCallName: 'client.resourceSharing.resources.get',
-    fullyQualifiedName: 'resourceSharing.resources.get',
-    httpMethod: 'get',
-    httpPath: '/accounts/{account_id}/shares/{share_id}/resources/{resource_id}',
   },
   {
     clientCallName: 'client.resourceTagging.list',
