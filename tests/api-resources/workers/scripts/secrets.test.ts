@@ -93,7 +93,8 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { secrets: Bas
     });
   });
 
-  test('bulkUpdate: only required params', async () => {
+  // prism returns HTTP 422 for bulk secret update request shape
+  test.skip('bulkUpdate: only required params', async () => {
     const responsePromise = client.workers.scripts.secrets.bulkUpdate('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -106,7 +107,8 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { secrets: Bas
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('bulkUpdate: required and optional params', async () => {
+  // prism returns HTTP 422 for bulk secret update request shape
+  test.skip('bulkUpdate: required and optional params', async () => {
     const response = await client.workers.scripts.secrets.bulkUpdate('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       secrets: {
