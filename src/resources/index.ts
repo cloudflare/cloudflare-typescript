@@ -3,6 +3,7 @@
 export * from './shared';
 export { ACM } from './acm/acm';
 export { AI } from './ai/ai';
+export { AIAudit } from './ai-audit/ai-audit';
 export { AIGateway } from './ai-gateway/ai-gateway';
 export { AISearch } from './aisearch/aisearch';
 export { AISecurity } from './ai-security/ai-security';
