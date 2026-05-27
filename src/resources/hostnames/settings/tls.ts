@@ -85,11 +85,11 @@ export interface Setting {
    * path:
    *
    * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
-   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
    * - `min_tls_version`: a string indicating the minimum TLS version — one of
-   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`).
    * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
-   *   (e.g., `"on"`)
+   *   (e.g., `"on"`).
    */
   value?: SettingValue;
 }
@@ -99,11 +99,11 @@ export interface Setting {
  * path:
  *
  * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
- *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+ *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
  * - `min_tls_version`: a string indicating the minimum TLS version — one of
- *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+ *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`).
  * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
- *   (e.g., `"on"`)
+ *   (e.g., `"on"`).
  */
 export type SettingValue = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<string>;
 
@@ -112,11 +112,11 @@ export type SettingValue = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<
  * path:
  *
  * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
- *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+ *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
  * - `min_tls_version`: a string indicating the minimum TLS version — one of
- *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+ *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`).
  * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
- *   (e.g., `"on"`)
+ *   (e.g., `"on"`).
  */
 export type SettingValueParam = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<string>;
 
@@ -146,11 +146,11 @@ export interface TLSDeleteResponse {
    * path:
    *
    * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
-   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
    * - `min_tls_version`: a string indicating the minimum TLS version — one of
-   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`).
    * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
-   *   (e.g., `"on"`)
+   *   (e.g., `"on"`).
    */
   value?: SettingValue;
 }
@@ -181,11 +181,11 @@ export interface TLSGetResponse {
    * path:
    *
    * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
-   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
    * - `min_tls_version`: a string indicating the minimum TLS version — one of
-   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`).
    * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
-   *   (e.g., `"on"`)
+   *   (e.g., `"on"`).
    */
   value?: SettingValue;
 }
@@ -200,10 +200,10 @@ export interface TLSUpdateParams {
    * Path param: The TLS Setting name. The value type depends on the setting:
    *
    * - `ciphers`: value is an array of cipher suite strings (e.g.,
-   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
    * - `min_tls_version`: value is a TLS version string (`"1.0"`, `"1.1"`, `"1.2"`,
-   *   or `"1.3"`)
-   * - `http2`: value is `"on"` or `"off"`
+   *   or `"1.3"`).
+   * - `http2`: value is `"on"` or `"off"`.
    */
   setting_id: 'ciphers' | 'min_tls_version' | 'http2';
 
@@ -212,11 +212,11 @@ export interface TLSUpdateParams {
    * the request path:
    *
    * - `ciphers`: an array of allowed cipher suite strings in BoringSSL format (e.g.,
-   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
    * - `min_tls_version`: a string indicating the minimum TLS version — one of
-   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`)
+   *   `"1.0"`, `"1.1"`, `"1.2"`, or `"1.3"` (e.g., `"1.2"`).
    * - `http2`: a string indicating whether HTTP/2 is enabled — `"on"` or `"off"`
-   *   (e.g., `"on"`)
+   *   (e.g., `"on"`).
    */
   value: SettingValueParam;
 }
@@ -231,10 +231,10 @@ export interface TLSDeleteParams {
    * The TLS Setting name. The value type depends on the setting:
    *
    * - `ciphers`: value is an array of cipher suite strings (e.g.,
-   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`)
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
    * - `min_tls_version`: value is a TLS version string (`"1.0"`, `"1.1"`, `"1.2"`,
-   *   or `"1.3"`)
-   * - `http2`: value is `"on"` or `"off"`
+   *   or `"1.3"`).
+   * - `http2`: value is `"on"` or `"off"`.
    */
   setting_id: 'ciphers' | 'min_tls_version' | 'http2';
 }

@@ -12,7 +12,7 @@ export class BaseHostnameAssociations extends APIResource {
   ] as const);
 
   /**
-   * Replace Hostname Associations
+   * Replace Hostname Associations.
    */
   update(
     params: HostnameAssociationUpdateParams,
@@ -28,7 +28,7 @@ export class BaseHostnameAssociations extends APIResource {
   }
 
   /**
-   * List Hostname Associations
+   * List Hostname Associations.
    */
   get(
     params: HostnameAssociationGetParams,

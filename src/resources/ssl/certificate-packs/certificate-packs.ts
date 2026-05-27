@@ -248,7 +248,7 @@ export interface CertificatePackCreateResponse {
   /**
    * Certificate Authority selected for the order. For information on any certificate
    * authority specific details or restrictions
-   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   * [see this page for more details](https://developers.cloudflare.com/ssl/reference/certificate-authorities).
    */
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -512,7 +512,7 @@ export interface CertificatePackListResponse {
   /**
    * Certificate Authority selected for the order. For information on any certificate
    * authority specific details or restrictions
-   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   * [see this page for more details](https://developers.cloudflare.com/ssl/reference/certificate-authorities).
    */
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -783,7 +783,7 @@ export interface CertificatePackEditResponse {
   /**
    * Certificate Authority selected for the order. For information on any certificate
    * authority specific details or restrictions
-   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   * [see this page for more details](https://developers.cloudflare.com/ssl/reference/certificate-authorities).
    */
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -1047,7 +1047,7 @@ export interface CertificatePackGetResponse {
   /**
    * Certificate Authority selected for the order. For information on any certificate
    * authority specific details or restrictions
-   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   * [see this page for more details](https://developers.cloudflare.com/ssl/reference/certificate-authorities).
    */
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -1279,7 +1279,7 @@ export interface CertificatePackCreateParams {
   /**
    * Body param: Certificate Authority selected for the order. For information on any
    * certificate authority specific details or restrictions
-   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   * [see this page for more details](https://developers.cloudflare.com/ssl/reference/certificate-authorities).
    */
   certificate_authority: 'google' | 'lets_encrypt' | 'ssl_com';
 
