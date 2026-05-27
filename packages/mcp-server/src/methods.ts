@@ -3163,6 +3163,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/workers/observability/telemetry/keys',
   },
   {
+    clientCallName: 'client.workers.observability.telemetry.liveTail',
+    fullyQualifiedName: 'workers.observability.telemetry.liveTail',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/workers/observability/telemetry/live-tail',
+  },
+  {
+    clientCallName: 'client.workers.observability.telemetry.liveTailHeartbeat',
+    fullyQualifiedName: 'workers.observability.telemetry.liveTailHeartbeat',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/workers/observability/telemetry/live-tail/heartbeat',
+  },
+  {
     clientCallName: 'client.workers.observability.telemetry.query',
     fullyQualifiedName: 'workers.observability.telemetry.query',
     httpMethod: 'post',

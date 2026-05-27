@@ -632,6 +632,8 @@ const fuse = new Fuse(
     'client.workers.subdomains.get',
     'client.workers.subdomains.update',
     'client.workers.observability.telemetry.keys',
+    'client.workers.observability.telemetry.liveTail',
+    'client.workers.observability.telemetry.liveTailHeartbeat',
     'client.workers.observability.telemetry.query',
     'client.workers.observability.telemetry.values',
     'client.workers.observability.destinations.create',
