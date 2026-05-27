@@ -490,9 +490,9 @@ export namespace InstanceCreateResponse {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -508,15 +508,16 @@ export namespace InstanceCreateResponse {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -884,9 +885,9 @@ export namespace InstanceUpdateResponse {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -902,15 +903,16 @@ export namespace InstanceUpdateResponse {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -1278,9 +1280,9 @@ export namespace InstanceListResponse {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -1296,15 +1298,16 @@ export namespace InstanceListResponse {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -1672,9 +1675,9 @@ export namespace InstanceDeleteResponse {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -1690,15 +1693,16 @@ export namespace InstanceDeleteResponse {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -2136,9 +2140,9 @@ export namespace InstanceReadResponse {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -2154,15 +2158,16 @@ export namespace InstanceReadResponse {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -2705,9 +2710,9 @@ export namespace InstanceCreateParams {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -2723,15 +2728,16 @@ export namespace InstanceCreateParams {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -3198,9 +3204,9 @@ export namespace InstanceUpdateParams {
   export interface RetrievalOptions {
     /**
      * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for numeric fields
-     * and 'exists' for text/boolean fields. Fields must match 'timestamp' or a defined
-     * custom_metadata field.
+     * field and an optional direction. Direction defaults to 'asc' for
+     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
+     * 'timestamp' or a defined custom_metadata field.
      */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
@@ -3216,15 +3222,16 @@ export namespace InstanceUpdateParams {
     export interface BoostBy {
       /**
        * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-       * text/boolean fields support exists/not_exists.
+       * custom_metadata field. Numeric and datetime fields support all four directions
+       * (asc, desc, exists, not_exists); text/boolean fields only support
+       * exists/not_exists.
        */
       field: string;
 
       /**
        * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
        * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
        * for numeric/datetime fields, 'exists' for text/boolean fields.
        */
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -3529,15 +3536,16 @@ export namespace InstanceChatCompletionsParams {
       export interface BoostBy {
         /**
          * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-         * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-         * text/boolean fields support exists/not_exists.
+         * custom_metadata field. Numeric and datetime fields support all four directions
+         * (asc, desc, exists, not_exists); text/boolean fields only support
+         * exists/not_exists.
          */
         field: string;
 
         /**
          * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
          * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-         * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+         * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
          * for numeric/datetime fields, 'exists' for text/boolean fields.
          */
         direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -3672,15 +3680,16 @@ export namespace InstanceSearchParams {
       export interface BoostBy {
         /**
          * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-         * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-         * text/boolean fields support exists/not_exists.
+         * custom_metadata field. Numeric and datetime fields support all four directions
+         * (asc, desc, exists, not_exists); text/boolean fields only support
+         * exists/not_exists.
          */
         field: string;
 
         /**
          * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
          * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-         * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+         * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
          * for numeric/datetime fields, 'exists' for text/boolean fields.
          */
         direction?: 'asc' | 'desc' | 'exists' | 'not_exists';

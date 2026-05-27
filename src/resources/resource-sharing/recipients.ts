@@ -348,7 +348,8 @@ export interface RecipientCreateParams {
   path_account_id: string;
 
   /**
-   * Body param: Account identifier.
+   * @deprecated This field has been renamed to `recipient_account_id`. Both names
+   * are accepted during the deprecation period.
    */
   body_account_id?: string;
 
@@ -356,6 +357,11 @@ export interface RecipientCreateParams {
    * Body param: Organization identifier.
    */
   organization_id?: string;
+
+  /**
+   * Body param: The account that will receive the share.
+   */
+  recipient_account_id?: string;
 }
 
 export interface RecipientListParams extends V4PagePaginationArrayParams {
