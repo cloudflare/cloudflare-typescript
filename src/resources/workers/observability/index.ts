@@ -26,9 +26,13 @@ export {
   TelemetryValuesResponsesSinglePage,
   Telemetry,
   type TelemetryKeysResponse,
+  type TelemetryLiveTailResponse,
+  type TelemetryLiveTailHeartbeatResponse,
   type TelemetryQueryResponse,
   type TelemetryValuesResponse,
   type TelemetryKeysParams,
+  type TelemetryLiveTailParams,
+  type TelemetryLiveTailHeartbeatParams,
   type TelemetryQueryParams,
   type TelemetryValuesParams,
 } from './telemetry';
