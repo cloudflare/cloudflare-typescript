@@ -207,7 +207,7 @@ export namespace InstanceGetResponse {
 
     success: boolean | null;
 
-    type: 'step';
+    type: 'step' | 'rollback';
   }
 
   export namespace UnionMember0 {
