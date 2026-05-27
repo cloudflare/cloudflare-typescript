@@ -114,6 +114,12 @@ export interface DefaultEditResponse {
   disable_auto_fallback?: boolean;
 
   /**
+   * List of DNS search suffixes to apply to clients. Suffixes are evaluated in
+   * order. Use an empty array to clear.
+   */
+  dns_search_suffixes?: Array<DefaultEditResponse.DNSSearchSuffix>;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -175,6 +181,18 @@ export interface DefaultEditResponse {
 }
 
 export namespace DefaultEditResponse {
+  export interface DNSSearchSuffix {
+    /**
+     * The DNS search suffix to append when resolving short hostnames.
+     */
+    suffix: string;
+
+    /**
+     * A description of the DNS search suffix.
+     */
+    description?: string;
+  }
+
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
@@ -244,6 +262,12 @@ export interface DefaultGetResponse {
   disable_auto_fallback?: boolean;
 
   /**
+   * List of DNS search suffixes to apply to clients. Suffixes are evaluated in
+   * order. Use an empty array to clear.
+   */
+  dns_search_suffixes?: Array<DefaultGetResponse.DNSSearchSuffix>;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -305,6 +329,18 @@ export interface DefaultGetResponse {
 }
 
 export namespace DefaultGetResponse {
+  export interface DNSSearchSuffix {
+    /**
+     * The DNS search suffix to append when resolving short hostnames.
+     */
+    suffix: string;
+
+    /**
+     * A description of the DNS search suffix.
+     */
+    description?: string;
+  }
+
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
@@ -373,6 +409,12 @@ export interface DefaultEditParams {
    * this policy option is set to `true`.
    */
   disable_auto_fallback?: boolean;
+
+  /**
+   * Body param: List of DNS search suffixes to apply to clients. Suffixes are
+   * evaluated in order. Use an empty array to clear.
+   */
+  dns_search_suffixes?: Array<DefaultEditParams.DNSSearchSuffix>;
 
   /**
    * Body param: List of routes excluded in the WARP client's tunnel. Both 'exclude'
@@ -445,6 +487,18 @@ export interface DefaultEditParams {
 }
 
 export namespace DefaultEditParams {
+  export interface DNSSearchSuffix {
+    /**
+     * The DNS search suffix to append when resolving short hostnames.
+     */
+    suffix: string;
+
+    /**
+     * A description of the DNS search suffix.
+     */
+    description?: string;
+  }
+
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
