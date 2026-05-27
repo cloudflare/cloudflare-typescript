@@ -13,7 +13,7 @@ export class BaseClientCertificates extends APIResource {
   ] as const);
 
   /**
-   * Create a new API Shield mTLS Client Certificate
+   * Create a new API Shield mTLS Client Certificate.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export class BaseClientCertificates extends APIResource {
 
   /**
    * List all of your Zone's API Shield mTLS Client Certificates by Status and/or
-   * using Pagination
+   * using Pagination.
    *
    * @example
    * ```ts
@@ -115,7 +115,7 @@ export class BaseClientCertificates extends APIResource {
   }
 
   /**
-   * Get Details for a single mTLS API Shield Client Certificate
+   * Get Details for a single mTLS API Shield Client Certificate.
    *
    * @example
    * ```ts
@@ -151,22 +151,22 @@ export interface ClientCertificate {
   id?: string;
 
   /**
-   * The Client Certificate PEM
+   * The Client Certificate PEM.
    */
   certificate?: string;
 
   /**
-   * Certificate Authority used to issue the Client Certificate
+   * Certificate Authority used to issue the Client Certificate.
    */
   certificate_authority?: ClientCertificate.CertificateAuthority;
 
   /**
-   * Common Name of the Client Certificate
+   * Common Name of the Client Certificate.
    */
   common_name?: string;
 
   /**
-   * Country, provided by the CSR
+   * Country, provided by the CSR.
    */
   country?: string;
 
@@ -176,32 +176,32 @@ export interface ClientCertificate {
   csr?: string;
 
   /**
-   * Date that the Client Certificate expires
+   * Date that the Client Certificate expires.
    */
   expires_on?: string;
 
   /**
-   * Unique identifier of the Client Certificate
+   * Unique identifier of the Client Certificate.
    */
   fingerprint_sha256?: string;
 
   /**
-   * Date that the Client Certificate was issued by the Certificate Authority
+   * Date that the Client Certificate was issued by the Certificate Authority.
    */
   issued_on?: string;
 
   /**
-   * Location, provided by the CSR
+   * Location, provided by the CSR.
    */
   location?: string;
 
   /**
-   * Organization, provided by the CSR
+   * Organization, provided by the CSR.
    */
   organization?: string;
 
   /**
-   * Organizational Unit, provided by the CSR
+   * Organizational Unit, provided by the CSR.
    */
   organizational_unit?: string;
 
@@ -216,30 +216,31 @@ export interface ClientCertificate {
   signature?: string;
 
   /**
-   * Subject Key Identifier
+   * Subject Key Identifier.
    */
   ski?: string;
 
   /**
-   * State, provided by the CSR
+   * State, provided by the CSR.
    */
   state?: string;
 
   /**
    * Client Certificates may be active or revoked, and the pending_reactivation or
-   * pending_revocation represent in-progress asynchronous transitions
+   * pending_revocation represent in-progress asynchronous transitions.
    */
   status?: CustomCertificatesAPI.Status;
 
   /**
-   * The number of days the Client Certificate will be valid after the issued_on date
+   * The number of days the Client Certificate will be valid after the issued_on
+   * date.
    */
   validity_days?: number;
 }
 
 export namespace ClientCertificate {
   /**
-   * Certificate Authority used to issue the Client Certificate
+   * Certificate Authority used to issue the Client Certificate.
    */
   export interface CertificateAuthority {
     id?: string;
@@ -261,7 +262,7 @@ export interface ClientCertificateCreateParams {
 
   /**
    * Body param: The number of days the Client Certificate will be valid after the
-   * issued_on date
+   * issued_on date.
    */
   validity_days: number;
 }
@@ -278,7 +279,7 @@ export interface ClientCertificateListParams extends V4PagePaginationArrayParams
   limit?: number;
 
   /**
-   * Query param: Offset the results
+   * Query param: Offset the results.
    */
   offset?: number;
 

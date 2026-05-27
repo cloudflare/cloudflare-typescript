@@ -193,7 +193,7 @@ export interface CustomTrustStoreListParams extends V4PagePaginationArrayParams 
   limit?: number;
 
   /**
-   * Query param: Offset the results
+   * Query param: Offset the results.
    */
   offset?: number;
 }

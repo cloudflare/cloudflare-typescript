@@ -312,7 +312,7 @@ export namespace CustomHostname {
     bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCA;
 
@@ -701,7 +701,7 @@ export namespace CustomHostnameCreateResponse {
     bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCA;
 
@@ -1068,7 +1068,7 @@ export namespace CustomHostnameListResponse {
     bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCA;
 
@@ -1442,7 +1442,7 @@ export namespace CustomHostnameEditResponse {
     bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCA;
 
@@ -1809,7 +1809,7 @@ export namespace CustomHostnameGetResponse {
     bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCA;
 
@@ -2083,18 +2083,18 @@ export namespace CustomHostnameCreateParams {
     bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCAParam;
 
     /**
      * Whether or not to add Cloudflare Branding for the order. This will add a
-     * subdomain of sni.cloudflaressl.com as the Common Name if set to true
+     * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
      */
     cloudflare_branding?: boolean;
 
     /**
-     * Array of custom certificate and key pairs (1 or 2 pairs allowed)
+     * Array of custom certificate and key pairs (1 or 2 pairs allowed).
      */
     custom_cert_bundle?: Array<SSL.CustomCERTBundle>;
 
@@ -2342,18 +2342,18 @@ export namespace CustomHostnameEditParams {
     bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCAParam;
 
     /**
      * Whether or not to add Cloudflare Branding for the order. This will add a
-     * subdomain of sni.cloudflaressl.com as the Common Name if set to true
+     * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
      */
     cloudflare_branding?: boolean;
 
     /**
-     * Array of custom certificate and key pairs (1 or 2 pairs allowed)
+     * Array of custom certificate and key pairs (1 or 2 pairs allowed).
      */
     custom_cert_bundle?: Array<SSL.CustomCERTBundle>;
 
