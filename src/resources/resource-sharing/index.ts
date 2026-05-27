@@ -16,14 +16,8 @@ export {
   ResourceListResponsesV4PagePaginationArray,
   Resources,
   type ResourceCreateResponse,
-  type ResourceUpdateResponse,
   type ResourceListResponse,
-  type ResourceDeleteResponse,
-  type ResourceGetResponse,
   type ResourceCreateParams,
-  type ResourceUpdateParams,
   type ResourceListParams,
-  type ResourceDeleteParams,
-  type ResourceGetParams,
 } from './resources';
 export { ResourceSharing } from './resource-sharing';
