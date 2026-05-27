@@ -229,6 +229,12 @@ export interface CustomCreateParams {
   disable_auto_fallback?: boolean;
 
   /**
+   * Body param: List of DNS search suffixes to apply to clients. Suffixes are
+   * evaluated in order. Use an empty array to clear.
+   */
+  dns_search_suffixes?: Array<CustomCreateParams.DNSSearchSuffix>;
+
+  /**
    * Body param: Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -304,6 +310,18 @@ export interface CustomCreateParams {
 }
 
 export namespace CustomCreateParams {
+  export interface DNSSearchSuffix {
+    /**
+     * The DNS search suffix to append when resolving short hostnames.
+     */
+    suffix: string;
+
+    /**
+     * A description of the DNS search suffix.
+     */
+    description?: string;
+  }
+
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
@@ -385,6 +403,12 @@ export interface CustomEditParams {
    * this policy option is set to `true`.
    */
   disable_auto_fallback?: boolean;
+
+  /**
+   * Body param: List of DNS search suffixes to apply to clients. Suffixes are
+   * evaluated in order. Use an empty array to clear.
+   */
+  dns_search_suffixes?: Array<CustomEditParams.DNSSearchSuffix>;
 
   /**
    * Body param: Whether the policy will be applied to matching devices.
@@ -481,6 +505,18 @@ export interface CustomEditParams {
 }
 
 export namespace CustomEditParams {
+  export interface DNSSearchSuffix {
+    /**
+     * The DNS search suffix to append when resolving short hostnames.
+     */
+    suffix: string;
+
+    /**
+     * A description of the DNS search suffix.
+     */
+    description?: string;
+  }
+
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.
