@@ -36,6 +36,7 @@ import { AbuseReports } from './resources/abuse-reports/abuse-reports';
 import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
+import { AIAudit } from './resources/ai-audit/ai-audit';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
 import { AISecurity } from './resources/ai-security/ai-security';
 import { AI } from './resources/ai/ai';
@@ -1073,6 +1074,7 @@ export class Cloudflare extends BaseCloudflare {
   aiSecurity: API.AISecurity = new API.AISecurity(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  aiAudit: API.AIAudit = new API.AIAudit(this);
   aiSearch: API.AISearch = new API.AISearch(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
@@ -1184,6 +1186,7 @@ Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AISecurity = AISecurity;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.AIAudit = AIAudit;
 Cloudflare.AISearch = AISearch;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
@@ -1430,6 +1433,8 @@ export declare namespace Cloudflare {
   export { AbuseReports as AbuseReports };
 
   export { AI as AI };
+
+  export { AIAudit as AIAudit };
 
   export { AISearch as AISearch };
 
