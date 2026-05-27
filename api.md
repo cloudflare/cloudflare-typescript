@@ -229,6 +229,8 @@ Types:
 
 # [AI](src/resources/ai/api.md)
 
+# [AIAudit](src/resources/ai-audit/api.md)
+
 # [AISearch](src/resources/aisearch/api.md)
 
 # [SecurityCenter](src/resources/security-center/api.md)
