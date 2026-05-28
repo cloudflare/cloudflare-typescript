@@ -31,6 +31,7 @@ export { CloudforceOne, BaseCloudforceOne } from './cloudforce-one/cloudforce-on
 export { Connectivity, BaseConnectivity } from './connectivity/connectivity';
 export { ContentScanning, BaseContentScanning } from './content-scanning/content-scanning';
 export { CustomCertificates, BaseCustomCertificates } from './custom-certificates/custom-certificates';
+export { CustomCsrs, BaseCustomCsrs } from './custom-csrs';
 export { CustomHostnames, BaseCustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers, BaseCustomNameservers } from './custom-nameservers';
 export { CustomPages, BaseCustomPages } from './custom-pages/custom-pages';

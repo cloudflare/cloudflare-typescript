@@ -1121,6 +1121,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/custom_certificates/prioritize',
   },
   {
+    clientCallName: 'client.customCsrs.create',
+    fullyQualifiedName: 'customCsrs.create',
+    httpMethod: 'post',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs',
+  },
+  {
+    clientCallName: 'client.customCsrs.list',
+    fullyQualifiedName: 'customCsrs.list',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs',
+  },
+  {
+    clientCallName: 'client.customCsrs.delete',
+    fullyQualifiedName: 'customCsrs.delete',
+    httpMethod: 'delete',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs/{custom_csr_id}',
+  },
+  {
+    clientCallName: 'client.customCsrs.get',
+    fullyQualifiedName: 'customCsrs.get',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs/{custom_csr_id}',
+  },
+  {
     clientCallName: 'client.customHostnames.create',
     fullyQualifiedName: 'customHostnames.create',
     httpMethod: 'post',
@@ -3221,6 +3245,18 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'workers.observability.queries.list',
     httpMethod: 'get',
     httpPath: '/accounts/{account_id}/workers/observability/queries',
+  },
+  {
+    clientCallName: 'client.workers.observability.sharedQueries.create',
+    fullyQualifiedName: 'workers.observability.sharedQueries.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/workers/observability/shared/query',
+  },
+  {
+    clientCallName: 'client.workers.observability.sharedQueries.get',
+    fullyQualifiedName: 'workers.observability.sharedQueries.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/workers/observability/shared/query/{id}',
   },
   {
     clientCallName: 'client.kv.namespaces.create',

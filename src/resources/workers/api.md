@@ -302,3 +302,15 @@ Methods:
 
 - <code title="post /accounts/{account_id}/workers/observability/queries">client.workers.observability.queries.<a href="./src/resources/workers/observability/queries.ts">create</a>({ ...params }) -> QueryCreateResponse</code>
 - <code title="get /accounts/{account_id}/workers/observability/queries">client.workers.observability.queries.<a href="./src/resources/workers/observability/queries.ts">list</a>({ ...params }) -> QueryListResponsesSinglePage</code>
+
+### SharedQueries
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/shared-queries.ts">SharedQueryCreateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/shared-queries.ts">SharedQueryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/shared/query">client.workers.observability.sharedQueries.<a href="./src/resources/workers/observability/shared-queries.ts">create</a>({ ...params }) -> SharedQueryCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/observability/shared/query/{id}">client.workers.observability.sharedQueries.<a href="./src/resources/workers/observability/shared-queries.ts">get</a>(id, { ...params }) -> SharedQueryGetResponse</code>

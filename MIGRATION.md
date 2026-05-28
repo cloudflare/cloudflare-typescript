@@ -111,6 +111,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.customCertificates.delete()`
 - `client.customCertificates.edit()`
 - `client.customCertificates.get()`
+- `client.customCsrs.create()`
+- `client.customCsrs.list()`
+- `client.customCsrs.delete()`
+- `client.customCsrs.get()`
 - `client.customHostnames.delete()`
 - `client.customHostnames.edit()`
 - `client.customHostnames.get()`
@@ -307,6 +311,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workers.domains.get()`
 - `client.workers.observability.destinations.update()`
 - `client.workers.observability.destinations.delete()`
+- `client.workers.observability.sharedQueries.get()`
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
 - `client.kv.namespaces.bulkDelete()`
@@ -1388,6 +1393,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.user.tokens.list()`
 - `client.user.tokens.permissionGroups.list()`
 - `client.zones.list()`
+- `client.customCsrs.list()`
+- `client.customCsrs.delete()`
+- `client.customCsrs.get()`
 - `client.firewall.accessRules.list()`
 - `client.firewall.accessRules.delete()`
 - `client.firewall.accessRules.get()`

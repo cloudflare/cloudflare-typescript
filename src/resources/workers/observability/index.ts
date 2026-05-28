@@ -24,6 +24,14 @@ export {
   type QueryListResponsesSinglePage,
 } from './queries';
 export {
+  SharedQueries,
+  BaseSharedQueries,
+  type SharedQueryCreateResponse,
+  type SharedQueryGetResponse,
+  type SharedQueryCreateParams,
+  type SharedQueryGetParams,
+} from './shared-queries';
+export {
   Telemetry,
   BaseTelemetry,
   type TelemetryKeysResponse,

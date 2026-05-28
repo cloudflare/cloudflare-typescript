@@ -59,6 +59,7 @@ import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
 import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
+import { CustomCsrs } from './resources/custom-csrs/custom-csrs';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
 import { CustomNameservers } from './resources/custom-nameservers/custom-nameservers';
 import { CustomPages } from './resources/custom-pages/custom-pages';
@@ -988,6 +989,7 @@ export class Cloudflare extends BaseCloudflare {
   certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
   clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
   customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
+  customCsrs: API.CustomCsrs = new API.CustomCsrs(this);
   customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
   dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
@@ -1100,6 +1102,7 @@ Cloudflare.Argo = Argo;
 Cloudflare.CertificateAuthorities = CertificateAuthorities;
 Cloudflare.ClientCertificates = ClientCertificates;
 Cloudflare.CustomCertificates = CustomCertificates;
+Cloudflare.CustomCsrs = CustomCsrs;
 Cloudflare.CustomHostnames = CustomHostnames;
 Cloudflare.CustomNameservers = CustomNameservers;
 Cloudflare.DNSFirewall = DNSFirewall;
@@ -1261,6 +1264,8 @@ export declare namespace Cloudflare {
   export { ClientCertificates as ClientCertificates };
 
   export { CustomCertificates as CustomCertificates };
+
+  export { CustomCsrs as CustomCsrs };
 
   export { CustomHostnames as CustomHostnames };
 
