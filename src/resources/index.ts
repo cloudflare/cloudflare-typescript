@@ -28,6 +28,7 @@ export { CloudforceOne } from './cloudforce-one/cloudforce-one';
 export { Connectivity } from './connectivity/connectivity';
 export { ContentScanning } from './content-scanning/content-scanning';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
+export { CustomCsrs } from './custom-csrs';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';
 export { CustomNameservers } from './custom-nameservers';
 export { CustomPages } from './custom-pages/custom-pages';
