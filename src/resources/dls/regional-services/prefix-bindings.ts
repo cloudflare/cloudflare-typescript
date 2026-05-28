@@ -21,7 +21,7 @@ export class BasePrefixBindings extends APIResource {
    * ```ts
    * const prefixBinding =
    *   await client.dls.regionalServices.prefixBindings.create({
-   *     account_id: 0,
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     cidr: '10.0.1.0/24',
    *     prefix_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
    *     region_key: 'eu',
@@ -48,7 +48,7 @@ export class BasePrefixBindings extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const prefixBindingListResponse of client.dls.regionalServices.prefixBindings.list(
-   *   { account_id: 0 },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -74,7 +74,7 @@ export class BasePrefixBindings extends APIResource {
    * const prefixBinding =
    *   await client.dls.regionalServices.prefixBindings.delete(
    *     'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-   *     { account_id: 0 },
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -98,7 +98,10 @@ export class BasePrefixBindings extends APIResource {
    * const response =
    *   await client.dls.regionalServices.prefixBindings.edit(
    *     'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-   *     { account_id: 0, region_key: 'eu' },
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       region_key: 'eu',
+   *     },
    *   );
    * ```
    */
@@ -124,7 +127,7 @@ export class BasePrefixBindings extends APIResource {
    * const prefixBinding =
    *   await client.dls.regionalServices.prefixBindings.get(
    *     'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-   *     { account_id: 0 },
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
@@ -244,9 +247,9 @@ export interface PrefixBindingGetResponse {
 
 export interface PrefixBindingCreateParams {
   /**
-   * Path param
+   * Path param: Identifier of a Cloudflare account.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param: IP prefix in CIDR notation to bind.
@@ -266,20 +269,23 @@ export interface PrefixBindingCreateParams {
 
 export interface PrefixBindingListParams extends CursorPaginationParams {
   /**
-   * Path param
+   * Path param: Identifier of a Cloudflare account.
    */
-  account_id: number;
+  account_id: string;
 }
 
 export interface PrefixBindingDeleteParams {
-  account_id: number;
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
 }
 
 export interface PrefixBindingEditParams {
   /**
-   * Path param
+   * Path param: Identifier of a Cloudflare account.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Body param: New region key to assign (e.g., "us", "eu", "cfcanary").
@@ -288,7 +294,10 @@ export interface PrefixBindingEditParams {
 }
 
 export interface PrefixBindingGetParams {
-  account_id: number;
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
 }
 
 export declare namespace PrefixBindings {

@@ -28,7 +28,7 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ dls: { regions: BaseRegions } }>) => {
   test('list: only required params', async () => {
-    const responsePromise = client.dls.regions.list({ account_id: 0 });
+    const responsePromise = client.dls.regions.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -40,7 +40,7 @@ const runTests = (client: PartialCloudflare<{ dls: { regions: BaseRegions } }>) 
 
   test('list: required and optional params', async () => {
     const response = await client.dls.regions.list({
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor: 'cursor',
       per_page: 1,
       type: 'managed',
@@ -48,7 +48,9 @@ const runTests = (client: PartialCloudflare<{ dls: { regions: BaseRegions } }>) 
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.dls.regions.get('a1b2c3d4-e5f6-7890-abcd-ef1234567890', { account_id: 0 });
+    const responsePromise = client.dls.regions.get('a1b2c3d4-e5f6-7890-abcd-ef1234567890', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,7 +61,9 @@ const runTests = (client: PartialCloudflare<{ dls: { regions: BaseRegions } }>) 
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.dls.regions.get('a1b2c3d4-e5f6-7890-abcd-ef1234567890', { account_id: 0 });
+    const response = await client.dls.regions.get('a1b2c3d4-e5f6-7890-abcd-ef1234567890', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 };
 describe('resource regions', () => runTests(client));
