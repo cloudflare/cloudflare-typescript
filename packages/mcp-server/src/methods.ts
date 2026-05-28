@@ -1121,6 +1121,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/custom_certificates/prioritize',
   },
   {
+    clientCallName: 'client.customCsrs.create',
+    fullyQualifiedName: 'customCsrs.create',
+    httpMethod: 'post',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs',
+  },
+  {
+    clientCallName: 'client.customCsrs.list',
+    fullyQualifiedName: 'customCsrs.list',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs',
+  },
+  {
+    clientCallName: 'client.customCsrs.delete',
+    fullyQualifiedName: 'customCsrs.delete',
+    httpMethod: 'delete',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs/{custom_csr_id}',
+  },
+  {
+    clientCallName: 'client.customCsrs.get',
+    fullyQualifiedName: 'customCsrs.get',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/custom_csrs/{custom_csr_id}',
+  },
+  {
     clientCallName: 'client.customHostnames.create',
     fullyQualifiedName: 'customHostnames.create',
     httpMethod: 'post',

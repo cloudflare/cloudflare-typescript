@@ -57,6 +57,8 @@ Types:
 
 # [CustomCertificates](src/resources/custom-certificates/api.md)
 
+# [CustomCsrs](src/resources/custom-csrs/api.md)
+
 # [CustomHostnames](src/resources/custom-hostnames/api.md)
 
 # [CustomNameservers](src/resources/custom-nameservers/api.md)
