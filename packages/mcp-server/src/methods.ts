@@ -3223,6 +3223,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/workers/observability/queries',
   },
   {
+    clientCallName: 'client.workers.observability.sharedQueries.create',
+    fullyQualifiedName: 'workers.observability.sharedQueries.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/workers/observability/shared/query',
+  },
+  {
+    clientCallName: 'client.workers.observability.sharedQueries.get',
+    fullyQualifiedName: 'workers.observability.sharedQueries.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/workers/observability/shared/query/{id}',
+  },
+  {
     clientCallName: 'client.kv.namespaces.create',
     fullyQualifiedName: 'kv.namespaces.create',
     httpMethod: 'post',

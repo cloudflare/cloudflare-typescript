@@ -307,6 +307,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workers.domains.get()`
 - `client.workers.observability.destinations.update()`
 - `client.workers.observability.destinations.delete()`
+- `client.workers.observability.sharedQueries.get()`
 - `client.kv.namespaces.update()`
 - `client.kv.namespaces.delete()`
 - `client.kv.namespaces.bulkDelete()`

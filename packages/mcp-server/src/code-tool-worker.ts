@@ -642,6 +642,8 @@ const fuse = new Fuse(
     'client.workers.observability.destinations.update',
     'client.workers.observability.queries.create',
     'client.workers.observability.queries.list',
+    'client.workers.observability.sharedQueries.create',
+    'client.workers.observability.sharedQueries.get',
     'client.kv.namespaces.bulkDelete',
     'client.kv.namespaces.bulkGet',
     'client.kv.namespaces.bulkUpdate',
