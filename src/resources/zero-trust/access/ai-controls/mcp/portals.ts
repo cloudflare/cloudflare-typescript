@@ -256,14 +256,6 @@ export namespace PortalCreateResponse {
     export interface UpdatedPrompt {
       name: string;
 
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
-
       enabled?: boolean;
 
       portal_alias?: string;
@@ -277,14 +269,6 @@ export namespace PortalCreateResponse {
 
     export interface UpdatedTool {
       name: string;
-
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
 
       enabled?: boolean;
 
@@ -418,14 +402,6 @@ export namespace PortalUpdateResponse {
     export interface UpdatedPrompt {
       name: string;
 
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
-
       enabled?: boolean;
 
       portal_alias?: string;
@@ -439,14 +415,6 @@ export namespace PortalUpdateResponse {
 
     export interface UpdatedTool {
       name: string;
-
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
 
       enabled?: boolean;
 
@@ -580,14 +548,6 @@ export namespace PortalListResponse {
     export interface UpdatedPrompt {
       name: string;
 
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
-
       enabled?: boolean;
 
       portal_alias?: string;
@@ -601,14 +561,6 @@ export namespace PortalListResponse {
 
     export interface UpdatedTool {
       name: string;
-
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
 
       enabled?: boolean;
 
@@ -773,14 +725,6 @@ export namespace PortalReadResponse {
     export interface UpdatedPrompt {
       name: string;
 
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
-
       enabled?: boolean;
 
       portal_alias?: string;
@@ -794,14 +738,6 @@ export namespace PortalReadResponse {
 
     export interface UpdatedTool {
       name: string;
-
-      /**
-       * @deprecated Deprecated: use `portal_description` or `server_description`
-       * instead. Populated for backward compatibility — portal-level wins when present,
-       * otherwise falls back to server-level. Will be removed after the deprecation
-       * window.
-       */
-      description?: string;
 
       enabled?: boolean;
 
