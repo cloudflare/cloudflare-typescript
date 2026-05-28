@@ -82,6 +82,7 @@ TEST_PATHS=(
 	tests/api-resources/client-certificates.test.ts
 	tests/api-resources/custom-certificates/custom-certificates.test.ts
 	tests/api-resources/custom-certificates/prioritize.test.ts
+	tests/api-resources/custom-csrs.test.ts
 	tests/api-resources/custom-hostnames/custom-hostnames.test.ts
 	tests/api-resources/custom-hostnames/fallback-origin.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificate-pack.test.ts
