@@ -16,7 +16,7 @@ export class BaseRegions extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const regionListResponse of client.dls.regions.list(
-   *   { account_id: 0 },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * )) {
    *   // ...
    * }
@@ -41,7 +41,7 @@ export class BaseRegions extends APIResource {
    * ```ts
    * const region = await client.dls.regions.get(
    *   'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-   *   { account_id: 0 },
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    * );
    * ```
    */
@@ -92,9 +92,9 @@ export interface RegionGetResponse {
 
 export interface RegionListParams extends CursorPaginationParams {
   /**
-   * Path param
+   * Path param: Identifier of a Cloudflare account.
    */
-  account_id: number;
+  account_id: string;
 
   /**
    * Query param: Filter regions by type. Omit to return all regions.
@@ -103,7 +103,10 @@ export interface RegionListParams extends CursorPaginationParams {
 }
 
 export interface RegionGetParams {
-  account_id: number;
+  /**
+   * Identifier of a Cloudflare account.
+   */
+  account_id: string;
 }
 
 export declare namespace Regions {
