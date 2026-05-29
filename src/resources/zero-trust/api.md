@@ -1164,6 +1164,21 @@ Methods:
 
 ## DLP
 
+### CustomPromptTopics
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">CustomPromptTopic</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">CustomPromptTopicDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/custom_prompt_topics">client.zeroTrust.dlp.customPromptTopics.<a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">create</a>({ ...params }) -> CustomPromptTopic</code>
+- <code title="put /accounts/{account_id}/dlp/custom_prompt_topics/{entry_id}">client.zeroTrust.dlp.customPromptTopics.<a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">update</a>(entryId, { ...params }) -> CustomPromptTopic</code>
+- <code title="get /accounts/{account_id}/dlp/custom_prompt_topics">client.zeroTrust.dlp.customPromptTopics.<a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">list</a>({ ...params }) -> CustomPromptTopicsSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/custom_prompt_topics/{entry_id}">client.zeroTrust.dlp.customPromptTopics.<a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">delete</a>(entryId, { ...params }) -> CustomPromptTopicDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/custom_prompt_topics/{entry_id}">client.zeroTrust.dlp.customPromptTopics.<a href="./src/resources/zero-trust/dlp/custom-prompt-topics.ts">get</a>(entryId, { ...params }) -> CustomPromptTopic</code>
+
 ### Datasets
 
 Types:
