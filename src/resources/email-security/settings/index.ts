@@ -54,6 +54,20 @@ export {
   type ImpersonationRegistryEditParams,
   type ImpersonationRegistryGetParams,
 } from './impersonation-registry';
+export {
+  SendingDomainRestrictionListResponsesV4PagePaginationArray,
+  SendingDomainRestrictions,
+  type SendingDomainRestrictionCreateResponse,
+  type SendingDomainRestrictionListResponse,
+  type SendingDomainRestrictionDeleteResponse,
+  type SendingDomainRestrictionEditResponse,
+  type SendingDomainRestrictionGetResponse,
+  type SendingDomainRestrictionCreateParams,
+  type SendingDomainRestrictionListParams,
+  type SendingDomainRestrictionDeleteParams,
+  type SendingDomainRestrictionEditParams,
+  type SendingDomainRestrictionGetParams,
+} from './sending-domain-restrictions';
 export { Settings } from './settings';
 export {
   TrustedDomainListResponsesV4PagePaginationArray,
@@ -69,3 +83,17 @@ export {
   type TrustedDomainEditParams,
   type TrustedDomainGetParams,
 } from './trusted-domains';
+export {
+  URLIgnorePatternListResponsesV4PagePaginationArray,
+  URLIgnorePatterns,
+  type URLIgnorePatternCreateResponse,
+  type URLIgnorePatternListResponse,
+  type URLIgnorePatternDeleteResponse,
+  type URLIgnorePatternEditResponse,
+  type URLIgnorePatternGetResponse,
+  type URLIgnorePatternCreateParams,
+  type URLIgnorePatternListParams,
+  type URLIgnorePatternDeleteParams,
+  type URLIgnorePatternEditParams,
+  type URLIgnorePatternGetParams,
+} from './url-ignore-patterns';
