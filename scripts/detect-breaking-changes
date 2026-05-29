@@ -127,7 +127,9 @@ TEST_PATHS=(
 	tests/api-resources/email-security/settings/block-senders.test.ts
 	tests/api-resources/email-security/settings/domains.test.ts
 	tests/api-resources/email-security/settings/impersonation-registry.test.ts
+	tests/api-resources/email-security/settings/sending-domain-restrictions.test.ts
 	tests/api-resources/email-security/settings/trusted-domains.test.ts
+	tests/api-resources/email-security/settings/url-ignore-patterns.test.ts
 	tests/api-resources/email-security/submissions.test.ts
 	tests/api-resources/email-routing/email-routing.test.ts
 	tests/api-resources/email-routing/dns.test.ts
