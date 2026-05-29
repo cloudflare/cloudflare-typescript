@@ -163,9 +163,15 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailSecurity.settings.impersonationRegistry.delete()`
 - `client.emailSecurity.settings.impersonationRegistry.edit()`
 - `client.emailSecurity.settings.impersonationRegistry.get()`
+- `client.emailSecurity.settings.sendingDomainRestrictions.delete()`
+- `client.emailSecurity.settings.sendingDomainRestrictions.edit()`
+- `client.emailSecurity.settings.sendingDomainRestrictions.get()`
 - `client.emailSecurity.settings.trustedDomains.delete()`
 - `client.emailSecurity.settings.trustedDomains.edit()`
 - `client.emailSecurity.settings.trustedDomains.get()`
+- `client.emailSecurity.settings.urlIgnorePatterns.delete()`
+- `client.emailSecurity.settings.urlIgnorePatterns.edit()`
+- `client.emailSecurity.settings.urlIgnorePatterns.get()`
 - `client.emailRouting.rules.update()`
 - `client.emailRouting.rules.delete()`
 - `client.emailRouting.rules.get()`

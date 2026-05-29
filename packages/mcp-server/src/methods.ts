@@ -1798,6 +1798,39 @@ export const sdkMethods: SdkMethod[] = [
       '/accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}',
   },
   {
+    clientCallName: 'client.emailSecurity.settings.sendingDomainRestrictions.create',
+    fullyQualifiedName: 'emailSecurity.settings.sendingDomainRestrictions.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/email-security/settings/sending_domain_restrictions',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.sendingDomainRestrictions.list',
+    fullyQualifiedName: 'emailSecurity.settings.sendingDomainRestrictions.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/email-security/settings/sending_domain_restrictions',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.sendingDomainRestrictions.delete',
+    fullyQualifiedName: 'emailSecurity.settings.sendingDomainRestrictions.delete',
+    httpMethod: 'delete',
+    httpPath:
+      '/accounts/{account_id}/email-security/settings/sending_domain_restrictions/{sending_domain_restriction_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.sendingDomainRestrictions.edit',
+    fullyQualifiedName: 'emailSecurity.settings.sendingDomainRestrictions.edit',
+    httpMethod: 'patch',
+    httpPath:
+      '/accounts/{account_id}/email-security/settings/sending_domain_restrictions/{sending_domain_restriction_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.sendingDomainRestrictions.get',
+    fullyQualifiedName: 'emailSecurity.settings.sendingDomainRestrictions.get',
+    httpMethod: 'get',
+    httpPath:
+      '/accounts/{account_id}/email-security/settings/sending_domain_restrictions/{sending_domain_restriction_id}',
+  },
+  {
     clientCallName: 'client.emailSecurity.settings.trustedDomains.create',
     fullyQualifiedName: 'emailSecurity.settings.trustedDomains.create',
     httpMethod: 'post',
@@ -1826,6 +1859,36 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'emailSecurity.settings.trustedDomains.get',
     httpMethod: 'get',
     httpPath: '/accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.urlIgnorePatterns.create',
+    fullyQualifiedName: 'emailSecurity.settings.urlIgnorePatterns.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/email-security/settings/url_ignore_patterns',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.urlIgnorePatterns.list',
+    fullyQualifiedName: 'emailSecurity.settings.urlIgnorePatterns.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/email-security/settings/url_ignore_patterns',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.urlIgnorePatterns.delete',
+    fullyQualifiedName: 'emailSecurity.settings.urlIgnorePatterns.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/email-security/settings/url_ignore_patterns/{pattern_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.urlIgnorePatterns.edit',
+    fullyQualifiedName: 'emailSecurity.settings.urlIgnorePatterns.edit',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/email-security/settings/url_ignore_patterns/{pattern_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.settings.urlIgnorePatterns.get',
+    fullyQualifiedName: 'emailSecurity.settings.urlIgnorePatterns.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/email-security/settings/url_ignore_patterns/{pattern_id}',
   },
   {
     clientCallName: 'client.emailSecurity.submissions.list',
