@@ -1,5 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  CustomPromptTopics,
+  BaseCustomPromptTopics,
+  type CustomPromptTopic,
+  type CustomPromptTopicDeleteResponse,
+  type CustomPromptTopicCreateParams,
+  type CustomPromptTopicUpdateParams,
+  type CustomPromptTopicListParams,
+  type CustomPromptTopicDeleteParams,
+  type CustomPromptTopicGetParams,
+  type CustomPromptTopicsSinglePage,
+} from './custom-prompt-topics';
 export { DLP, BaseDLP } from './dlp';
 export {
   Datasets,

@@ -562,6 +562,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/tunnels/warp-connector/failover.test.ts
 	tests/api-resources/zero-trust/connectivity-settings.test.ts
 	tests/api-resources/zero-trust/dlp/dlp.test.ts
+	tests/api-resources/zero-trust/dlp/custom-prompt-topics.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/datasets.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/upload.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/versions/versions.test.ts
