@@ -1,6 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as CustomPromptTopicsAPI from './custom-prompt-topics';
+import {
+  BaseCustomPromptTopics,
+  CustomPromptTopic,
+  CustomPromptTopicCreateParams,
+  CustomPromptTopicDeleteParams,
+  CustomPromptTopicDeleteResponse,
+  CustomPromptTopicGetParams,
+  CustomPromptTopicListParams,
+  CustomPromptTopicUpdateParams,
+  CustomPromptTopics,
+  CustomPromptTopicsSinglePage,
+} from './custom-prompt-topics';
 import * as LimitsAPI from './limits';
 import { BaseLimits, LimitListParams, LimitListResponse, Limits } from './limits';
 import * as PatternsAPI from './patterns';
@@ -72,6 +85,9 @@ export class BaseDLP extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dlp'] = Object.freeze(['zeroTrust', 'dlp'] as const);
 }
 export class DLP extends BaseDLP {
+  customPromptTopics: CustomPromptTopicsAPI.CustomPromptTopics = new CustomPromptTopicsAPI.CustomPromptTopics(
+    this._client,
+  );
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   patterns: PatternsAPI.Patterns = new PatternsAPI.Patterns(this._client);
   payloadLogs: PayloadLogsAPI.PayloadLogs = new PayloadLogsAPI.PayloadLogs(this._client);
@@ -82,6 +98,8 @@ export class DLP extends BaseDLP {
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
 }
 
+DLP.CustomPromptTopics = CustomPromptTopics;
+DLP.BaseCustomPromptTopics = BaseCustomPromptTopics;
 DLP.Datasets = Datasets;
 DLP.BaseDatasets = BaseDatasets;
 DLP.Patterns = Patterns;
@@ -100,6 +118,19 @@ DLP.Entries = Entries;
 DLP.BaseEntries = BaseEntries;
 
 export declare namespace DLP {
+  export {
+    CustomPromptTopics as CustomPromptTopics,
+    BaseCustomPromptTopics as BaseCustomPromptTopics,
+    type CustomPromptTopic as CustomPromptTopic,
+    type CustomPromptTopicDeleteResponse as CustomPromptTopicDeleteResponse,
+    type CustomPromptTopicsSinglePage as CustomPromptTopicsSinglePage,
+    type CustomPromptTopicCreateParams as CustomPromptTopicCreateParams,
+    type CustomPromptTopicUpdateParams as CustomPromptTopicUpdateParams,
+    type CustomPromptTopicListParams as CustomPromptTopicListParams,
+    type CustomPromptTopicDeleteParams as CustomPromptTopicDeleteParams,
+    type CustomPromptTopicGetParams as CustomPromptTopicGetParams,
+  };
+
   export {
     Datasets as Datasets,
     BaseDatasets as BaseDatasets,

@@ -8400,6 +8400,36 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/zerotrust/connectivity_settings',
   },
   {
+    clientCallName: 'client.zeroTrust.dlp.customPromptTopics.create',
+    fullyQualifiedName: 'zeroTrust.dlp.customPromptTopics.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/dlp/custom_prompt_topics',
+  },
+  {
+    clientCallName: 'client.zeroTrust.dlp.customPromptTopics.update',
+    fullyQualifiedName: 'zeroTrust.dlp.customPromptTopics.update',
+    httpMethod: 'put',
+    httpPath: '/accounts/{account_id}/dlp/custom_prompt_topics/{entry_id}',
+  },
+  {
+    clientCallName: 'client.zeroTrust.dlp.customPromptTopics.list',
+    fullyQualifiedName: 'zeroTrust.dlp.customPromptTopics.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dlp/custom_prompt_topics',
+  },
+  {
+    clientCallName: 'client.zeroTrust.dlp.customPromptTopics.delete',
+    fullyQualifiedName: 'zeroTrust.dlp.customPromptTopics.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/dlp/custom_prompt_topics/{entry_id}',
+  },
+  {
+    clientCallName: 'client.zeroTrust.dlp.customPromptTopics.get',
+    fullyQualifiedName: 'zeroTrust.dlp.customPromptTopics.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dlp/custom_prompt_topics/{entry_id}',
+  },
+  {
     clientCallName: 'client.zeroTrust.dlp.datasets.create',
     fullyQualifiedName: 'zeroTrust.dlp.datasets.create',
     httpMethod: 'post',
