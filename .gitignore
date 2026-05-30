@@ -12,3 +12,13 @@ dist-deno
 .env
 .env.local
 
+# security — block common secret-bearing files from accidental commits
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+credentials.json
+

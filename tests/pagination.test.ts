@@ -23,7 +23,7 @@ const baseOptions = (query?: Record<string, unknown>) => ({
   query,
 });
 
-const mockResponse = () => new Response(null) as any;
+const mockResponse = () => new Response(undefined) as any;
 
 describe('V4PagePaginationArray', () => {
   test('getPaginatedItems returns the result array', () => {
@@ -273,9 +273,7 @@ describe('auto-pagination via real list endpoint', () => {
     const firstPage = await client.zones.list({ page: 1 });
     const collected: string[][] = [];
     for await (const page of firstPage.iterPages()) {
-      collected.push(
-        page.getPaginatedItems().map((i: any) => i.id),
-      );
+      collected.push(page.getPaginatedItems().map((i: any) => i.id));
     }
     expect(collected).toEqual([['a', 'b'], ['c'], []]);
   });

@@ -35,6 +35,13 @@ $ chmod +x examples/<your-example>.ts
 $ yarn tsn -T examples/<your-example>.ts
 ```
 
+As a shortcut for the Workers AI demo, run:
+
+```sh
+$ yarn run
+# equivalent to: yarn tsn examples/ai/demo.ts
+```
+
 ## Using the repository from source
 
 If you’d like to use the repository from source, you can either install from git or link to a cloned repository:

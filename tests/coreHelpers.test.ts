@@ -16,6 +16,7 @@ import {
   maybeCoerceInteger,
   readEnv,
   safeJSON,
+  redactSensitiveHeaders,
   toBase64,
 } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
@@ -332,5 +333,58 @@ describe('toBase64', () => {
 
   test('handles multi-byte characters', () => {
     expect(toBase64('héllo')).toBe(Buffer.from('héllo').toString('base64'));
+  });
+});
+
+describe('redactSensitiveHeaders', () => {
+  test('redacts the canonical credential-bearing headers', () => {
+    const redacted = redactSensitiveHeaders({
+      Authorization: 'Bearer secret',
+      'X-Auth-Key': 'apikey',
+      'X-Auth-Email': 'user@example.com',
+      'X-Auth-User-Service-Key': 'svc',
+      Cookie: 'session=abc',
+      'content-type': 'application/json',
+      'user-agent': 'cloudflare-ts/1.0',
+    }) as Record<string, unknown>;
+
+    expect(redacted['Authorization']).toBe('[REDACTED]');
+    expect(redacted['X-Auth-Key']).toBe('[REDACTED]');
+    expect(redacted['X-Auth-Email']).toBe('[REDACTED]');
+    expect(redacted['X-Auth-User-Service-Key']).toBe('[REDACTED]');
+    expect(redacted['Cookie']).toBe('[REDACTED]');
+    expect(redacted['content-type']).toBe('application/json');
+    expect(redacted['user-agent']).toBe('cloudflare-ts/1.0');
+  });
+
+  test('is case-insensitive on header names', () => {
+    const redacted = redactSensitiveHeaders({
+      AUTHORIZATION: 'Bearer s',
+      'x-AUTH-key': 'k',
+    }) as Record<string, unknown>;
+    expect(redacted['AUTHORIZATION']).toBe('[REDACTED]');
+    expect(redacted['x-AUTH-key']).toBe('[REDACTED]');
+  });
+
+  test('redacts entries on a Headers-like instance', () => {
+    const headers = new Headers({ Authorization: 'Bearer s', Accept: 'application/json' });
+    const redacted = redactSensitiveHeaders(headers) as Record<string, unknown>;
+    // Headers normalizes to lowercase
+    expect(redacted['authorization']).toBe('[REDACTED]');
+    expect(redacted['accept']).toBe('application/json');
+  });
+
+  test('passes through nullish and non-object input unchanged', () => {
+    expect(redactSensitiveHeaders(null)).toBeNull();
+    expect(redactSensitiveHeaders(undefined)).toBeUndefined();
+    expect(redactSensitiveHeaders('not-an-object')).toBe('not-an-object');
+    expect(redactSensitiveHeaders(42)).toBe(42);
+  });
+
+  test('returns a fresh object — does not mutate input', () => {
+    const input = { Authorization: 'Bearer s', Accept: 'json' };
+    const redacted = redactSensitiveHeaders(input) as Record<string, unknown>;
+    expect(redacted).not.toBe(input);
+    expect(input['Authorization']).toBe('Bearer s');
   });
 });

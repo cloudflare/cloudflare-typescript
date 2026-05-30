@@ -26,6 +26,7 @@
     "format": "prettier --write --cache --cache-strategy metadata . !dist",
     "prepare": "if ./scripts/utils/check-is-in-git-install.sh; then ./scripts/build && ./scripts/utils/git-swap.sh; fi",
     "tsn": "ts-node -r tsconfig-paths/register",
+    "run": "ts-node -r tsconfig-paths/register examples/ai/demo.ts",
     "lint": "./scripts/lint",
     "fix": "./scripts/format"
   },
