@@ -358,6 +358,15 @@ await client.zones.delete(
 );
 ```
 
+### Data residency
+
+By default this library connects to `https://api.cloudflare.com/client/v4`,
+Cloudflare's global API endpoint (operated from the United States). If you are
+subject to regulations that restrict cross-border data transfers — for example
+LGPD (Brazil) or similar regimes — consult Cloudflare's Data Processing
+Addendum and override the endpoint via the `baseURL` option (or the
+`CLOUDFLARE_BASE_URL` environment variable) when appropriate.
+
 ## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:

@@ -10,3 +10,13 @@ dist-deno
 .idea/
 .eslintcache
 
+# security — block common secret-bearing files from accidental commits
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+credentials.json
+

@@ -40,6 +40,17 @@ jobs:
       - name: Check types
         run: ./scripts/lint
 
+  skip-baseline:
+    timeout-minutes: 2
+    name: skip-baseline
+    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check skipped-test baseline
+        run: ./scripts/utils/check-skip-baseline.sh
+
   build:
     timeout-minutes: 5
     name: build

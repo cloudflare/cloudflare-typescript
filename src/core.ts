@@ -79,13 +79,13 @@ async function defaultParseResponse<T>(props: APIResponseProps): Promise<T> {
 
     const json = await response.json();
 
-    debug('response', response.status, response.url, response.headers, json);
+    debug('response', response.status, response.url, redactSensitiveHeaders(response.headers), json);
 
     return json as T;
   }
 
   const text = await response.text();
-  debug('response', response.status, response.url, response.headers, text);
+  debug('response', response.status, response.url, redactSensitiveHeaders(response.headers), text);
 
   // TODO handle blob, arraybuffer, other content types, etc.
   return text as unknown as T;
@@ -230,7 +230,7 @@ export abstract class APIClient {
       Accept: 'application/json',
       ...(['head', 'get'].includes(opts.method) ? {} : { 'Content-Type': 'application/json' }),
       'User-Agent': this.getUserAgent(),
-      'api-version': this.getAPIVerson(),
+      'api-version': this.getAPIVersion(),
       ...getPlatformHeaders(),
       ...this.authHeaders(opts),
     };
@@ -468,7 +468,7 @@ export abstract class APIClient {
 
     await this.prepareRequest(req, { url, options });
 
-    debug('request', url, options, req.headers);
+    debug('request', url, options, redactSensitiveHeaders(req.headers));
 
     if (options.signal?.aborted) {
       throw new APIUserAbortError();
@@ -495,7 +495,12 @@ export abstract class APIClient {
     if (!response.ok) {
       if (retriesRemaining && this.shouldRetry(response)) {
         const retryMessage = `retrying, ${retriesRemaining} attempts remaining`;
-        debug(`response (error; ${retryMessage})`, response.status, url, responseHeaders);
+        debug(
+          `response (error; ${retryMessage})`,
+          response.status,
+          url,
+          redactSensitiveHeaders(responseHeaders),
+        );
         return this.retryRequest(options, retriesRemaining, responseHeaders);
       }
 
@@ -504,7 +509,13 @@ export abstract class APIClient {
       const errMessage = errJSON ? undefined : errText;
       const retryMessage = retriesRemaining ? `(error; no more retries left)` : `(error; not retryable)`;
 
-      debug(`response (error; ${retryMessage})`, response.status, url, responseHeaders, errMessage);
+      debug(
+        `response (error; ${retryMessage})`,
+        response.status,
+        url,
+        redactSensitiveHeaders(responseHeaders),
+        errMessage,
+      );
 
       const err = this.makeStatusError(response.status, errJSON, errMessage, responseHeaders);
       throw err;
@@ -654,7 +665,7 @@ export abstract class APIClient {
     return `${this.constructor.name}/JS ${VERSION}`;
   }
 
-  private getAPIVerson(): string {
+  private getAPIVersion(): string {
     return this.apiVersion;
   }
 }
@@ -1060,16 +1071,20 @@ export const ensurePresent = <T>(value: T | null | undefined): T => {
 /**
  * Read an environment variable.
  *
- * Trims beginning and trailing whitespace.
+ * Trims beginning and trailing whitespace. Whitespace-only values become
+ * `''` so that misconfigurations (e.g. `CLOUDFLARE_API_TOKEN='   '`)
+ * surface as an explicit authentication failure rather than silently
+ * falling back through `?? null` at the call site.
  *
- * Will return undefined if the environment variable doesn't exist or cannot be accessed.
+ * Returns `undefined` when the variable is not set or no environment
+ * source is available (neither `process.env` nor `Deno.env`).
  */
 export const readEnv = (env: string): string | undefined => {
   if (typeof process !== 'undefined') {
-    return process.env?.[env]?.trim() || undefined;
+    return process.env?.[env]?.trim() ?? undefined;
   }
   if (typeof Deno !== 'undefined') {
-    return Deno.env?.get?.(env)?.trim() || undefined;
+    return Deno.env?.get?.(env)?.trim() ?? undefined;
   }
   return undefined;
 };
@@ -1151,9 +1166,62 @@ function applyHeadersMut(targetHeaders: Headers, newHeaders: Headers): void {
 
 export function debug(action: string, ...args: any[]) {
   if (typeof process !== 'undefined' && process?.env?.['DEBUG'] === 'true') {
-    console.log(`Cloudflare:DEBUG:${action}`, ...args);
+    console.log(`Cloudflare:DEBUG:${action}`, ...args.map(redactForDebug));
   }
 }
+
+const SENSITIVE_HEADER_NAMES = new Set([
+  'authorization',
+  'x-auth-key',
+  'x-auth-email',
+  'x-auth-user-service-key',
+  'cookie',
+  'set-cookie',
+]);
+
+/**
+ * Returns a shallow copy of `headers` with values for credential-bearing
+ * header names replaced with `[REDACTED]`. Used by debug logging so that
+ * setting `DEBUG=true` never leaks API tokens or auth keys to stdout.
+ *
+ * Accepts a `Headers`-like instance (anything with `entries()`), a plain
+ * object record, or `null`/`undefined`/non-objects (returned unchanged).
+ */
+export const redactSensitiveHeaders = (headers: unknown): unknown => {
+  if (!headers || typeof headers !== 'object') return headers;
+  const isHeadersLike =
+    !Array.isArray(headers) && typeof (headers as { entries?: unknown }).entries === 'function';
+  const entries: Iterable<[unknown, unknown]> =
+    isHeadersLike ?
+      ((headers as { entries: () => Iterable<[unknown, unknown]> }).entries() as Iterable<[unknown, unknown]>)
+    : (Object.entries(headers as Record<string, unknown>) as Iterable<[unknown, unknown]>);
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of entries) {
+    const key = String(k);
+    out[key] = SENSITIVE_HEADER_NAMES.has(key.toLowerCase()) ? '[REDACTED]' : v;
+  }
+  return out;
+};
+
+/**
+ * Backstop used inside `debug()`. Walks a single argument one level deep:
+ * if it has a `headers` property, the headers are redacted; if the value
+ * itself is a Headers-like object, it is redacted. Non-object values pass
+ * through unchanged. Pure (returns a copy when it changes anything).
+ */
+const redactForDebug = (arg: unknown): unknown => {
+  if (!arg || typeof arg !== 'object' || Array.isArray(arg)) return arg;
+  if (typeof (arg as { entries?: unknown }).entries === 'function') {
+    return redactSensitiveHeaders(arg);
+  }
+  if ('headers' in (arg as Record<string, unknown>)) {
+    return {
+      ...(arg as Record<string, unknown>),
+      headers: redactSensitiveHeaders((arg as { headers?: unknown }).headers),
+    };
+  }
+  return arg;
+};
 
 /**
  * https://stackoverflow.com/a/2117523
