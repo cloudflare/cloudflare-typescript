@@ -115,6 +115,8 @@ Types:
 
 # [Addressing](src/resources/addressing/api.md)
 
+# [DLS](src/resources/dls/api.md)
+
 # [AuditLogs](src/resources/audit-logs/api.md)
 
 # [Billing](src/resources/billing/api.md)

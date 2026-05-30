@@ -20,6 +20,8 @@ TEST_PATHS=(
 	tests/api-resources/organizations/organization-profile.test.ts
 	tests/api-resources/organizations/logs/logs.test.ts
 	tests/api-resources/organizations/logs/audit.test.ts
+	tests/api-resources/organizations/billing/billing.test.ts
+	tests/api-resources/organizations/billing/usage.test.ts
 	tests/api-resources/origin-ca-certificates.test.ts
 	tests/api-resources/ips.test.ts
 	tests/api-resources/memberships.test.ts
@@ -208,6 +210,7 @@ TEST_PATHS=(
 	tests/api-resources/workers/observability/observability.test.ts
 	tests/api-resources/workers/observability/telemetry.test.ts
 	tests/api-resources/workers/observability/destinations.test.ts
+	tests/api-resources/workers/observability/queries.test.ts
 	tests/api-resources/kv/kv.test.ts
 	tests/api-resources/kv/namespaces/namespaces.test.ts
 	tests/api-resources/kv/namespaces/keys.test.ts
@@ -264,8 +267,6 @@ TEST_PATHS=(
 	tests/api-resources/spectrum/analytics/events/summaries.test.ts
 	tests/api-resources/spectrum/apps.test.ts
 	tests/api-resources/addressing/addressing.test.ts
-	tests/api-resources/addressing/regional-hostnames/regional-hostnames.test.ts
-	tests/api-resources/addressing/regional-hostnames/regions.test.ts
 	tests/api-resources/addressing/services.test.ts
 	tests/api-resources/addressing/address-maps/address-maps.test.ts
 	tests/api-resources/addressing/address-maps/accounts.test.ts
@@ -277,6 +278,10 @@ TEST_PATHS=(
 	tests/api-resources/addressing/prefixes/bgp-prefixes.test.ts
 	tests/api-resources/addressing/prefixes/advertisement-status.test.ts
 	tests/api-resources/addressing/prefixes/delegations.test.ts
+	tests/api-resources/dls/dls.test.ts
+	tests/api-resources/dls/regions.test.ts
+	tests/api-resources/dls/regional-services/regional-services.test.ts
+	tests/api-resources/dls/regional-services/prefix-bindings.test.ts
 	tests/api-resources/audit-logs.test.ts
 	tests/api-resources/billing/billing.test.ts
 	tests/api-resources/billing/profiles.test.ts
@@ -431,6 +436,7 @@ TEST_PATHS=(
 	tests/api-resources/r2/buckets/locks.test.ts
 	tests/api-resources/r2/buckets/metrics.test.ts
 	tests/api-resources/r2/buckets/sippy.test.ts
+	tests/api-resources/r2/buckets/objects.test.ts
 	tests/api-resources/r2/temporary-credentials.test.ts
 	tests/api-resources/r2/super-slurper/super-slurper.test.ts
 	tests/api-resources/r2/super-slurper/jobs/jobs.test.ts
@@ -483,6 +489,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/identity-providers/scim/scim.test.ts
 	tests/api-resources/zero-trust/identity-providers/scim/groups.test.ts
 	tests/api-resources/zero-trust/identity-providers/scim/users.test.ts
+	tests/api-resources/zero-trust/identity-providers/saml-certificate.test.ts
 	tests/api-resources/zero-trust/organizations/organizations.test.ts
 	tests/api-resources/zero-trust/organizations/doh.test.ts
 	tests/api-resources/zero-trust/seats.test.ts
@@ -492,6 +499,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/access/ai-controls/mcp/portals.test.ts
 	tests/api-resources/zero-trust/access/ai-controls/mcp/servers.test.ts
 	tests/api-resources/zero-trust/access/gateway-ca.test.ts
+	tests/api-resources/zero-trust/access/saml-certificates.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/infrastructure.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/targets.test.ts
 	tests/api-resources/zero-trust/access/applications/applications.test.ts

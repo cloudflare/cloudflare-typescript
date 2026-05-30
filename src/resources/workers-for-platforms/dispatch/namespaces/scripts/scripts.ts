@@ -13,6 +13,8 @@ import * as ContentAPI from './content';
 import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as SecretsAPI from './secrets';
 import {
+  SecretBulkUpdateParams,
+  SecretBulkUpdateResponse,
   SecretDeleteParams,
   SecretDeleteResponse,
   SecretGetParams,
@@ -396,6 +398,15 @@ export namespace ScriptUpdateResponse {
        * Whether trace persistence is enabled for the Worker.
        */
       persist?: boolean;
+
+      /**
+       * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+       * requests are handled. "authenticated" (default) honors inbound trace context
+       * only when accompanied by a valid trace auth token. "accept" unconditionally
+       * accepts inbound trace context. Requires the trace propagation feature to be
+       * enabled.
+       */
+      propagation_policy?: 'authenticated' | 'accept';
     }
   }
 
@@ -1716,6 +1727,15 @@ export namespace ScriptUpdateParams {
          * Whether trace persistence is enabled for the Worker.
          */
         persist?: boolean;
+
+        /**
+         * Controls how inbound trace context (traceparent/tracestate) headers on incoming
+         * requests are handled. "authenticated" (default) honors inbound trace context
+         * only when accompanied by a valid trace auth token. "accept" unconditionally
+         * accepts inbound trace context. Requires the trace propagation feature to be
+         * enabled.
+         */
+        propagation_policy?: 'authenticated' | 'accept';
       }
     }
 
@@ -1895,11 +1915,13 @@ export declare namespace Scripts {
     type SecretUpdateResponse as SecretUpdateResponse,
     type SecretListResponse as SecretListResponse,
     type SecretDeleteResponse as SecretDeleteResponse,
+    type SecretBulkUpdateResponse as SecretBulkUpdateResponse,
     type SecretGetResponse as SecretGetResponse,
     SecretListResponsesSinglePage as SecretListResponsesSinglePage,
     type SecretUpdateParams as SecretUpdateParams,
     type SecretListParams as SecretListParams,
     type SecretDeleteParams as SecretDeleteParams,
+    type SecretBulkUpdateParams as SecretBulkUpdateParams,
     type SecretGetParams as SecretGetParams,
   };
 

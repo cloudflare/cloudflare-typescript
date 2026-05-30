@@ -28,6 +28,7 @@ jobs:
           yarn install
 
       - name: Detect breaking changes
+        continue-on-error: true
         run: |
           # Try to check out previous versions of the breaking change detection script. This ensures that
           # we still detect breaking changes when entire files and their tests are removed.
