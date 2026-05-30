@@ -9,4 +9,6 @@ dist-deno
 /*.tgz
 .idea/
 .eslintcache
+.env
+.env.local
 
