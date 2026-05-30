@@ -9,8 +9,6 @@ dist-deno
 /*.tgz
 .idea/
 .eslintcache
-.env
-.env.local
 
 # security — block common secret-bearing files from accidental commits
 .env
