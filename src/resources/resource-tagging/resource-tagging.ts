@@ -19,6 +19,8 @@ import {
   KeyListResponsesCursorPaginationAfter,
   Keys,
 } from './keys';
+import * as SummaryAPI from './summary';
+import { BaseSummary, Summary } from './summary';
 import * as ValuesAPI from './values';
 import {
   BaseValues,
@@ -64,6 +66,7 @@ export class ResourceTagging extends BaseResourceTagging {
   zoneTags: ZoneTagsAPI.ZoneTags = new ZoneTagsAPI.ZoneTags(this._client);
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
   values: ValuesAPI.Values = new ValuesAPI.Values(this._client);
+  summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
 }
 
 export type ResourceTaggingListResponsesCursorPaginationAfter =
@@ -1055,6 +1058,8 @@ ResourceTagging.Keys = Keys;
 ResourceTagging.BaseKeys = BaseKeys;
 ResourceTagging.Values = Values;
 ResourceTagging.BaseValues = BaseValues;
+ResourceTagging.Summary = Summary;
+ResourceTagging.BaseSummary = BaseSummary;
 
 export declare namespace ResourceTagging {
   export {
@@ -1098,4 +1103,6 @@ export declare namespace ResourceTagging {
     type ValueListResponsesCursorPaginationAfter as ValueListResponsesCursorPaginationAfter,
     type ValueListParams as ValueListParams,
   };
+
+  export { Summary as Summary, BaseSummary as BaseSummary };
 }
