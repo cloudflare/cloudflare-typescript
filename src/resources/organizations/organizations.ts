@@ -111,7 +111,7 @@ export interface Organization {
 
   parent?: Organization.Parent;
 
-  profile?: Organization.Profile;
+  profile?: OrganizationProfileAPI.OrganizationProfile;
 }
 
 export namespace Organization {
@@ -148,18 +148,6 @@ export namespace Organization {
 
     name: string;
   }
-
-  export interface Profile {
-    business_address: string;
-
-    business_email: string;
-
-    business_name: string;
-
-    business_phone: string;
-
-    external_metadata: string;
-  }
 }
 
 export interface OrganizationDeleteResponse {
@@ -171,24 +159,12 @@ export interface OrganizationCreateParams {
 
   parent?: OrganizationCreateParams.Parent;
 
-  profile?: OrganizationCreateParams.Profile;
+  profile?: OrganizationProfileAPI.OrganizationProfileParam;
 }
 
 export namespace OrganizationCreateParams {
   export interface Parent {
     id: string;
-  }
-
-  export interface Profile {
-    business_address: string;
-
-    business_email: string;
-
-    business_name: string;
-
-    business_phone: string;
-
-    external_metadata: string;
   }
 }
 
@@ -197,24 +173,12 @@ export interface OrganizationUpdateParams {
 
   parent?: OrganizationUpdateParams.Parent;
 
-  profile?: OrganizationUpdateParams.Profile;
+  profile?: OrganizationProfileAPI.OrganizationProfileParam;
 }
 
 export namespace OrganizationUpdateParams {
   export interface Parent {
     id: string;
-  }
-
-  export interface Profile {
-    business_address: string;
-
-    business_email: string;
-
-    business_name: string;
-
-    business_phone: string;
-
-    external_metadata: string;
   }
 }
 
