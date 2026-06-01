@@ -53,3 +53,5 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/tags/values/{tag_key}">client.resourceTagging.values.<a href="./src/resources/resource-tagging/values.ts">list</a>(tagKey, { ...params }) -> ValueListResponsesCursorPaginationAfter</code>
+
+## Summary
