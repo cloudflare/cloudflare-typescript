@@ -266,6 +266,11 @@ export namespace EntryUpdateResponse {
     type: 'custom_prompt_topic';
 
     updated_at: string;
+
+    /**
+     * The optional description of the custom prompt topic entry.
+     */
+    description?: string | null;
   }
 
   export interface PredefinedEntry {
@@ -368,6 +373,11 @@ export namespace EntryUpdateResponse {
     type: 'exact_data';
 
     updated_at: string;
+
+    /**
+     * The optional description of the exact data entry.
+     */
+    description?: string | null;
   }
 
   export interface DocumentFingerprintEntry {
@@ -382,6 +392,11 @@ export namespace EntryUpdateResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    /**
+     * The optional description of the document fingerprint entry.
+     */
+    description?: string | null;
   }
 
   export interface WordListEntry {
@@ -456,6 +471,11 @@ export namespace EntryListResponse {
     type: 'custom_prompt_topic';
 
     updated_at: string;
+
+    /**
+     * The optional description of the custom prompt topic entry.
+     */
+    description?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
@@ -565,6 +585,11 @@ export namespace EntryListResponse {
 
     updated_at: string;
 
+    /**
+     * The optional description of the exact data entry.
+     */
+    description?: string | null;
+
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
@@ -580,6 +605,11 @@ export namespace EntryListResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    /**
+     * The optional description of the document fingerprint entry.
+     */
+    description?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
@@ -673,6 +703,11 @@ export namespace EntryGetResponse {
     type: 'custom_prompt_topic';
 
     updated_at: string;
+
+    /**
+     * The optional description of the custom prompt topic entry.
+     */
+    description?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;
 
@@ -819,6 +854,11 @@ export namespace EntryGetResponse {
 
     updated_at: string;
 
+    /**
+     * The optional description of the exact data entry.
+     */
+    description?: string | null;
+
     profiles?: Array<UnionMember4.Profile>;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
@@ -847,6 +887,11 @@ export namespace EntryGetResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    /**
+     * The optional description of the document fingerprint entry.
+     */
+    description?: string | null;
 
     profiles?: Array<UnionMember5.Profile>;
 

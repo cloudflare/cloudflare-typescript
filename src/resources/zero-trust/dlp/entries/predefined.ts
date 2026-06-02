@@ -324,6 +324,11 @@ export namespace PredefinedListResponse {
 
     updated_at: string;
 
+    /**
+     * The optional description of the custom prompt topic entry.
+     */
+    description?: string | null;
+
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
@@ -432,6 +437,11 @@ export namespace PredefinedListResponse {
 
     updated_at: string;
 
+    /**
+     * The optional description of the exact data entry.
+     */
+    description?: string | null;
+
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
 
@@ -447,6 +457,11 @@ export namespace PredefinedListResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    /**
+     * The optional description of the document fingerprint entry.
+     */
+    description?: string | null;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
   }
@@ -540,6 +555,11 @@ export namespace PredefinedGetResponse {
     type: 'custom_prompt_topic';
 
     updated_at: string;
+
+    /**
+     * The optional description of the custom prompt topic entry.
+     */
+    description?: string | null;
 
     profiles?: Array<UnionMember1.Profile>;
 
@@ -686,6 +706,11 @@ export namespace PredefinedGetResponse {
 
     updated_at: string;
 
+    /**
+     * The optional description of the exact data entry.
+     */
+    description?: string | null;
+
     profiles?: Array<UnionMember4.Profile>;
 
     upload_status?: 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
@@ -714,6 +739,11 @@ export namespace PredefinedGetResponse {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    /**
+     * The optional description of the document fingerprint entry.
+     */
+    description?: string | null;
 
     profiles?: Array<UnionMember5.Profile>;
 
