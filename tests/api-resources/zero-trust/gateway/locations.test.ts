@@ -58,7 +58,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { locations:
         ipv4: { enabled: true },
         ipv6: { enabled: true, networks: [{ network: '2001:85a3::/64' }] },
       },
-      max_ttl_secs: 3600,
       networks: [{ network: '192.0.2.1/32' }],
     });
   });
@@ -94,7 +93,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { locations:
         ipv4: { enabled: true },
         ipv6: { enabled: true, networks: [{ network: '2001:85a3::/64' }] },
       },
-      max_ttl_secs: 3600,
       networks: [{ network: '192.0.2.1/32' }],
     });
   });

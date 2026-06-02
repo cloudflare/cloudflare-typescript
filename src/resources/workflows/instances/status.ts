@@ -41,7 +41,8 @@ export interface StatusEditResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting';
+    | 'waiting'
+    | 'rollingBack';
 
   /**
    * Accepts ISO 8601 with no timezone offsets and in UTC.
@@ -49,38 +50,102 @@ export interface StatusEditResponse {
   timestamp: string;
 }
 
-export interface StatusEditParams {
-  /**
-   * Path param
-   */
-  account_id: string;
+export type StatusEditParams =
+  | StatusEditParams.Variant0
+  | StatusEditParams.Variant1
+  | StatusEditParams.Variant2
+  | StatusEditParams.Variant3;
 
-  /**
-   * Path param
-   */
-  workflow_name: string;
+export declare namespace StatusEditParams {
+  export interface Variant0 {
+    /**
+     * Path param
+     */
+    account_id: string;
 
-  /**
-   * Body param: Apply action to instance.
-   */
-  status: 'resume' | 'pause' | 'terminate' | 'restart';
+    /**
+     * Path param
+     */
+    workflow_name: string;
 
-  /**
-   * Body param: Step to restart from. Only applicable when status is "restart".
-   */
-  from?: StatusEditParams.From;
-}
+    /**
+     * Body param
+     */
+    status: 'pause';
+  }
 
-export namespace StatusEditParams {
-  /**
-   * Step to restart from. Only applicable when status is "restart".
-   */
-  export interface From {
-    name: string;
+  export interface Variant1 {
+    /**
+     * Path param
+     */
+    account_id: string;
 
-    count?: number;
+    /**
+     * Path param
+     */
+    workflow_name: string;
 
-    type?: 'do' | 'sleep' | 'waitForEvent';
+    /**
+     * Body param
+     */
+    status: 'resume';
+  }
+
+  export interface Variant2 {
+    /**
+     * Path param
+     */
+    account_id: string;
+
+    /**
+     * Path param
+     */
+    workflow_name: string;
+
+    /**
+     * Body param
+     */
+    status: 'terminate';
+
+    /**
+     * Body param: Run rollback before terminating.
+     */
+    rollback?: boolean;
+  }
+
+  export interface Variant3 {
+    /**
+     * Path param
+     */
+    account_id: string;
+
+    /**
+     * Path param
+     */
+    workflow_name: string;
+
+    /**
+     * Body param
+     */
+    status: 'restart';
+
+    /**
+     * Body param: Step to restart from.
+     */
+    from?: Variant3.From;
+  }
+
+  export namespace Variant3 {
+    /**
+     * Step to restart from.
+     */
+    export interface From {
+      name: string;
+
+      count?: number;
+
+      type?: 'do' | 'sleep' | 'waitForEvent';
+    }
   }
 }
 

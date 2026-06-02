@@ -273,6 +273,12 @@ export interface AzureAD {
   id?: string;
 
   /**
+   * Indicates that the identity provider is immutable and cannot be updated or
+   * deleted via the API.
+   */
+  read_only?: boolean;
+
+  /**
    * The SAML encryption certificate set details, including current and previous
    * certificates. Only present for SAML identity providers with a certificate set
    * assigned.
@@ -571,6 +577,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -719,6 +731,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -830,6 +848,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -939,6 +963,12 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -1077,6 +1107,12 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -1222,6 +1258,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -1331,6 +1373,12 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -1496,6 +1544,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -1644,6 +1698,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -1787,6 +1847,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -1928,6 +1994,12 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -2116,6 +2188,12 @@ export namespace IdentityProvider {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -2225,6 +2303,12 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -2345,6 +2429,12 @@ export namespace IdentityProvider {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -3493,6 +3583,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -3641,6 +3737,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -3752,6 +3854,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -3861,6 +3969,12 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -3999,6 +4113,12 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -4144,6 +4264,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -4253,6 +4379,12 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -4418,6 +4550,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -4566,6 +4704,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -4709,6 +4853,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -4850,6 +5000,12 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -5038,6 +5194,12 @@ export namespace IdentityProviderListResponse {
     id?: string;
 
     /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
+
+    /**
      * The SAML encryption certificate set details, including current and previous
      * certificates. Only present for SAML identity providers with a certificate set
      * assigned.
@@ -5147,6 +5309,12 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous
@@ -5267,6 +5435,12 @@ export namespace IdentityProviderListResponse {
      * UUID.
      */
     id?: string;
+
+    /**
+     * Indicates that the identity provider is immutable and cannot be updated or
+     * deleted via the API.
+     */
+    read_only?: boolean;
 
     /**
      * The SAML encryption certificate set details, including current and previous

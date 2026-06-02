@@ -45,7 +45,7 @@ const runTests = (client: PartialCloudflare<{ intel: { indicatorFeeds: { snapsho
   test.skip('update: required and optional params', async () => {
     const response = await client.intel.indicatorFeeds.snapshots.update(12, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      source: '@/Users/me/test.stix2',
+      source: '@/Users/me/test.stix2.gz',
     });
   });
 };

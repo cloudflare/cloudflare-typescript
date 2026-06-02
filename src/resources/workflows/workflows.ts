@@ -156,6 +156,8 @@ export namespace WorkflowListResponse {
 
     queued?: number;
 
+    rollingBack?: number;
+
     running?: number;
 
     terminated?: number;
@@ -199,6 +201,8 @@ export namespace WorkflowGetResponse {
     paused?: number;
 
     queued?: number;
+
+    rollingBack?: number;
 
     running?: number;
 
