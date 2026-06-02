@@ -15,8 +15,8 @@ describe('resource commands', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       commands: [
         {
-          command_type: 'pcap',
           device_id: 'device_id',
+          type: 'pcap',
           user_email: 'user_email',
         },
       ],
@@ -35,16 +35,10 @@ describe('resource commands', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       commands: [
         {
-          command_type: 'pcap',
           device_id: 'device_id',
+          type: 'pcap',
           user_email: 'user_email',
-          command_args: {
-            interfaces: ['default'],
-            'max-file-size-mb': 1,
-            'packet-size-bytes': 1,
-            'test-all-routes': true,
-            'time-limit-min': 1,
-          },
+          args: { 'test-all-routes': true },
           registration_id: 'registration_id',
         },
       ],
@@ -71,7 +65,7 @@ describe('resource commands', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
       per_page: 50,
-      command_type: 'command_type',
+      command_type: 'pcap',
       device_id: 'device_id',
       from: '2023-08-20T20:45:00Z',
       status: 'PENDING_EXEC',
