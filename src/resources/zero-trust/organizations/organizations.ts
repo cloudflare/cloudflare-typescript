@@ -281,7 +281,9 @@ export interface Organization {
   /**
    * Determines whether global MFA settings apply to applications by default. The
    * organization must have MFA enabled with at least one authentication method and a
-   * session duration configured.
+   * session duration configured. Note: 'allowed_authenticators' cannot only contain
+   * 'ssh_piv_key' if the organization has any non-infrastructure applications
+   * because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -481,7 +483,9 @@ export interface OrganizationCreateParams {
   /**
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
-   * method and a session duration configured.
+   * method and a session duration configured. Note: 'allowed_authenticators' cannot
+   * only contain 'ssh_piv_key' if the organization has any non-infrastructure
+   * applications because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -663,7 +667,9 @@ export interface OrganizationUpdateParams {
   /**
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
-   * method and a session duration configured.
+   * method and a session duration configured. Note: 'allowed_authenticators' cannot
+   * only contain 'ssh_piv_key' if the organization has any non-infrastructure
+   * applications because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
 

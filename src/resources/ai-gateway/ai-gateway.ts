@@ -415,11 +415,11 @@ export namespace AIGatewayCreateResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
+
+    authorization?: string;
 
     content_type?: 'json' | 'protobuf';
   }
@@ -603,11 +603,11 @@ export namespace AIGatewayUpdateResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
+
+    authorization?: string;
 
     content_type?: 'json' | 'protobuf';
   }
@@ -791,11 +791,11 @@ export namespace AIGatewayListResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
+
+    authorization?: string;
 
     content_type?: 'json' | 'protobuf';
   }
@@ -979,11 +979,11 @@ export namespace AIGatewayDeleteResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
+
+    authorization?: string;
 
     content_type?: 'json' | 'protobuf';
   }
@@ -1167,11 +1167,11 @@ export namespace AIGatewayGetResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
+
+    authorization?: string;
 
     content_type?: 'json' | 'protobuf';
   }
@@ -1493,11 +1493,11 @@ export namespace AIGatewayUpdateParams {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
+
+    authorization?: string;
 
     content_type?: 'json' | 'protobuf';
   }

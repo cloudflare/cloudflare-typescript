@@ -95,7 +95,8 @@ export interface InstanceCreateResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting';
+    | 'waiting'
+    | 'rollingBack';
 
   version_id: string;
 
@@ -121,7 +122,8 @@ export interface InstanceListResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting';
+    | 'waiting'
+    | 'rollingBack';
 
   version_id: string;
 
@@ -139,7 +141,8 @@ export interface InstanceBulkResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting';
+    | 'waiting'
+    | 'rollingBack';
 
   version_id: string;
 
@@ -157,6 +160,8 @@ export interface InstanceGetResponse {
 
   queued: string;
 
+  rollback: InstanceGetResponse.Rollback | null;
+
   start: string | null;
 
   status:
@@ -167,7 +172,8 @@ export interface InstanceGetResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting';
+    | 'waiting'
+    | 'rollingBack';
 
   step_count: number;
 
@@ -190,6 +196,20 @@ export namespace InstanceGetResponse {
     message: string;
 
     name: string;
+  }
+
+  export interface Rollback {
+    error: Rollback.Error | null;
+
+    outcome: 'complete' | 'failed';
+  }
+
+  export namespace Rollback {
+    export interface Error {
+      message: string;
+
+      name: string;
+    }
   }
 
   export interface UnionMember0 {
@@ -395,7 +415,8 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting';
+    | 'waiting'
+    | 'rollingBack';
 }
 
 export interface InstanceBulkParams {
