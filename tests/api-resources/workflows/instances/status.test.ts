@@ -31,7 +31,7 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: { status: 
     const responsePromise = client.workflows.instances.status.edit('x', {
       account_id: 'account_id',
       workflow_name: 'x',
-      status: 'resume',
+      status: 'pause',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -46,12 +46,7 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: { status: 
     const response = await client.workflows.instances.status.edit('x', {
       account_id: 'account_id',
       workflow_name: 'x',
-      status: 'resume',
-      from: {
-        name: 'x',
-        count: 1,
-        type: 'do',
-      },
+      status: 'pause',
     });
   });
 };

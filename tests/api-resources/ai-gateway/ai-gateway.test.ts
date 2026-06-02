@@ -133,9 +133,9 @@ const runTests = (client: PartialCloudflare<{ aiGateway: BaseAIGateway }>) => {
       logpush_public_key: 'xxxxxxxxxxxxxxxx',
       otel: [
         {
-          authorization: 'authorization',
           headers: { foo: 'string' },
           url: 'https://example.com',
+          authorization: 'authorization',
           content_type: 'json',
         },
       ],

@@ -352,13 +352,6 @@ export interface Location {
   ipv4_destination_backup?: string;
 
   /**
-   * Specify the maximum TTL, in seconds, applied to DNS response records. Records
-   * whose upstream TTL exceeds this value are served with the capped value. When
-   * null or absent, no cap is applied at this tier.
-   */
-  max_ttl_secs?: number | null;
-
-  /**
    * Specify the location name.
    */
   name?: string;
@@ -420,13 +413,6 @@ export interface LocationCreateParams {
   endpoints?: EndpointParam | null;
 
   /**
-   * Body param: Specify the maximum TTL, in seconds, applied to DNS response
-   * records. Records whose upstream TTL exceeds this value are served with the
-   * capped value. When null or absent, no cap is applied at this tier.
-   */
-  max_ttl_secs?: number | null;
-
-  /**
    * Body param: Specify the list of network ranges from which requests at this
    * location originate. The list takes effect only if it is non-empty and the IPv4
    * endpoint is enabled for this location.
@@ -477,13 +463,6 @@ export interface LocationUpdateParams {
    * Body param: Configure the destination endpoints for this location.
    */
   endpoints?: EndpointParam | null;
-
-  /**
-   * Body param: Specify the maximum TTL, in seconds, applied to DNS response
-   * records. Records whose upstream TTL exceeds this value are served with the
-   * capped value. When null or absent, no cap is applied at this tier.
-   */
-  max_ttl_secs?: number | null;
 
   /**
    * Body param: Specify the list of network ranges from which requests at this
