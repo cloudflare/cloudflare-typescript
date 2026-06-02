@@ -46,7 +46,7 @@ const runTests = (client: PartialCloudflare<{ r2: { superSlurper: { jobs: BaseJo
         bucket: 'bucket',
         secret: { accessKeyId: 'accessKeyId', secretAccessKey: 'secretAccessKey' },
         vendor: 's3',
-        endpoint: 'endpoint',
+        endpoint: 'https://example.com',
         keys: ['string'],
         pathPrefix: 'pathPrefix',
         region: 'region',
