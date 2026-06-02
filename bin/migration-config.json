@@ -89,6 +89,39 @@
       ]
     },
     {
+      "base": "tenantCustomNameservers",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "custom_ns_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "tenant_tag",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "custom_ns_id",
+          "location": "path"
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "firewall.waf.packages.groups",
       "name": "edit",
       "params": [

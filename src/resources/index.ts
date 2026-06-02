@@ -118,6 +118,7 @@ export { Snippets, BaseSnippets } from './snippets/snippets';
 export { Spectrum, BaseSpectrum } from './spectrum/spectrum';
 export { Speed, BaseSpeed } from './speed/speed';
 export { Stream, BaseStream } from './stream/stream';
+export { TenantCustomNameservers, BaseTenantCustomNameservers } from './tenant-custom-nameservers';
 export { TokenValidation, BaseTokenValidation } from './token-validation/token-validation';
 export { Turnstile, BaseTurnstile } from './turnstile/turnstile';
 export { URLNormalization, BaseURLNormalization } from './url-normalization';

@@ -63,6 +63,8 @@ Types:
 
 # [CustomNameservers](src/resources/custom-nameservers/api.md)
 
+# [TenantCustomNameservers](src/resources/tenant-custom-nameservers/api.md)
+
 # [DNSFirewall](src/resources/dns-firewall/api.md)
 
 # [DNS](src/resources/dns/api.md)

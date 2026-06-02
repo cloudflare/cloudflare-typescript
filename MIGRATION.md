@@ -121,6 +121,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.customHostnames.certificatePack.certificates.update()`
 - `client.customHostnames.certificatePack.certificates.delete()`
 - `client.customNameservers.delete()`
+- `client.tenantCustomNameservers.delete()`
 - `client.dnsFirewall.delete()`
 - `client.dnsFirewall.edit()`
 - `client.dnsFirewall.get()`
