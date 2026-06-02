@@ -102,7 +102,7 @@ export declare namespace ConnectivityPrecheckSourceParams {
     vendor: 's3';
 
     /**
-     * Body param
+     * Body param: Custom S3-compatible endpoint that must use https://.
      */
     endpoint?: string | null;
 
