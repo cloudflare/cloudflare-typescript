@@ -128,6 +128,7 @@ import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
+import { TenantCustomNameservers } from './resources/tenant-custom-nameservers/tenant-custom-nameservers';
 import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLNormalization } from './resources/url-normalization/url-normalization';
@@ -992,6 +993,7 @@ export class Cloudflare extends BaseCloudflare {
   customCsrs: API.CustomCsrs = new API.CustomCsrs(this);
   customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
+  tenantCustomNameservers: API.TenantCustomNameservers = new API.TenantCustomNameservers(this);
   dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
@@ -1105,6 +1107,7 @@ Cloudflare.CustomCertificates = CustomCertificates;
 Cloudflare.CustomCsrs = CustomCsrs;
 Cloudflare.CustomHostnames = CustomHostnames;
 Cloudflare.CustomNameservers = CustomNameservers;
+Cloudflare.TenantCustomNameservers = TenantCustomNameservers;
 Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
@@ -1270,6 +1273,8 @@ export declare namespace Cloudflare {
   export { CustomHostnames as CustomHostnames };
 
   export { CustomNameservers as CustomNameservers };
+
+  export { TenantCustomNameservers as TenantCustomNameservers };
 
   export { DNSFirewall as DNSFirewall };
 

@@ -1225,6 +1225,24 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/custom_ns',
   },
   {
+    clientCallName: 'client.tenantCustomNameservers.create',
+    fullyQualifiedName: 'tenantCustomNameservers.create',
+    httpMethod: 'post',
+    httpPath: '/tenants/{tenant_tag}/custom_ns',
+  },
+  {
+    clientCallName: 'client.tenantCustomNameservers.delete',
+    fullyQualifiedName: 'tenantCustomNameservers.delete',
+    httpMethod: 'delete',
+    httpPath: '/tenants/{tenant_tag}/custom_ns/{custom_ns_id}',
+  },
+  {
+    clientCallName: 'client.tenantCustomNameservers.get',
+    fullyQualifiedName: 'tenantCustomNameservers.get',
+    httpMethod: 'get',
+    httpPath: '/tenants/{tenant_tag}/custom_ns',
+  },
+  {
     clientCallName: 'client.dnsFirewall.create',
     fullyQualifiedName: 'dnsFirewall.create',
     httpMethod: 'post',
