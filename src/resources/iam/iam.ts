@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as OAuthClientsAPI from './oauth-clients';
+import { BaseOAuthClients, OAuthClients } from './oauth-clients';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   BasePermissionGroups,
@@ -45,6 +47,8 @@ import {
   SSOUpdateParams,
   SSOUpdateResponse,
 } from './sso';
+import * as OAuthScopesAPI from './oauth-scopes/oauth-scopes';
+import { BaseOAuthScopes, OAuthScopes } from './oauth-scopes/oauth-scopes';
 import * as UserGroupsAPI from './user-groups/user-groups';
 import {
   BaseUserGroups,
@@ -72,6 +76,8 @@ export class IAM extends BaseIAM {
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
   userGroups: UserGroupsAPI.UserGroups = new UserGroupsAPI.UserGroups(this._client);
   sso: SSOAPI.SSO = new SSOAPI.SSO(this._client);
+  oauthClients: OAuthClientsAPI.OAuthClients = new OAuthClientsAPI.OAuthClients(this._client);
+  oauthScopes: OAuthScopesAPI.OAuthScopes = new OAuthScopesAPI.OAuthScopes(this._client);
 }
 
 IAM.PermissionGroups = PermissionGroups;
@@ -82,6 +88,10 @@ IAM.UserGroups = UserGroups;
 IAM.BaseUserGroups = BaseUserGroups;
 IAM.SSO = SSO;
 IAM.BaseSSO = BaseSSO;
+IAM.OAuthClients = OAuthClients;
+IAM.BaseOAuthClients = BaseOAuthClients;
+IAM.OAuthScopes = OAuthScopes;
+IAM.BaseOAuthScopes = BaseOAuthScopes;
 
 export declare namespace IAM {
   export {
@@ -143,4 +153,8 @@ export declare namespace IAM {
     type SSOBeginVerificationParams as SSOBeginVerificationParams,
     type SSOGetParams as SSOGetParams,
   };
+
+  export { OAuthClients as OAuthClients, BaseOAuthClients as BaseOAuthClients };
+
+  export { OAuthScopes as OAuthScopes, BaseOAuthScopes as BaseOAuthScopes };
 }
