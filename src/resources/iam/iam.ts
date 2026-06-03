@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as OAuthClientsAPI from './oauth-clients';
+import { OAuthClients } from './oauth-clients';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   PermissionGroupGetParams,
@@ -42,6 +44,8 @@ import {
   SSOUpdateParams,
   SSOUpdateResponse,
 } from './sso';
+import * as OAuthScopesAPI from './oauth-scopes/oauth-scopes';
+import { OAuthScopes } from './oauth-scopes/oauth-scopes';
 import * as UserGroupsAPI from './user-groups/user-groups';
 import {
   UserGroupCreateParams,
@@ -65,6 +69,8 @@ export class IAM extends APIResource {
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
   userGroups: UserGroupsAPI.UserGroups = new UserGroupsAPI.UserGroups(this._client);
   sso: SSOAPI.SSO = new SSOAPI.SSO(this._client);
+  oauthClients: OAuthClientsAPI.OAuthClients = new OAuthClientsAPI.OAuthClients(this._client);
+  oauthScopes: OAuthScopesAPI.OAuthScopes = new OAuthScopesAPI.OAuthScopes(this._client);
 }
 
 IAM.PermissionGroups = PermissionGroups;
@@ -75,6 +81,8 @@ IAM.UserGroups = UserGroups;
 IAM.UserGroupListResponsesV4PagePaginationArray = UserGroupListResponsesV4PagePaginationArray;
 IAM.SSO = SSO;
 IAM.SSOListResponsesSinglePage = SSOListResponsesSinglePage;
+IAM.OAuthClients = OAuthClients;
+IAM.OAuthScopes = OAuthScopes;
 
 export declare namespace IAM {
   export {
@@ -132,4 +140,8 @@ export declare namespace IAM {
     type SSOBeginVerificationParams as SSOBeginVerificationParams,
     type SSOGetParams as SSOGetParams,
   };
+
+  export { OAuthClients as OAuthClients };
+
+  export { OAuthScopes as OAuthScopes };
 }
