@@ -851,6 +851,7 @@ TEST_PATHS=(
 	tests/api-resources/content-scanning/settings.test.ts
 	tests/api-resources/ai-security/ai-security.test.ts
 	tests/api-resources/ai-security/custom-topics.test.ts
+	tests/api-resources/csam-scanner.test.ts
 	tests/api-resources/abuse-reports/abuse-reports.test.ts
 	tests/api-resources/abuse-reports/mitigations.test.ts
 	tests/api-resources/ai/ai.test.ts
