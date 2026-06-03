@@ -62,8 +62,7 @@ export class BaseOrganizations extends APIResource {
    * not contain any sub-organizations, accounts, members or users. (Currently in
    * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
    *
-   * **Access Control:** Restricted to enterprise organizations. Non-admin callers
-   * also require the `account_deletion` tenant flag.
+   * **Access Control:** Restricted to enterprise organizations.
    */
   delete(organizationID: string, options?: RequestOptions): APIPromise<OrganizationDeleteResponse> {
     return (
