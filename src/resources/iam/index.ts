@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { IAM } from './iam';
+export { OAuthClients } from './oauth-clients';
+export { OAuthScopes } from './oauth-scopes';
 export {
   PermissionGroupListResponsesV4PagePaginationArray,
   PermissionGroups,
