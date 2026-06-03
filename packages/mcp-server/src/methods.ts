@@ -13084,6 +13084,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/ai-security/custom-topics',
   },
   {
+    clientCallName: 'client.csamScanner.edit',
+    fullyQualifiedName: 'csamScanner.edit',
+    httpMethod: 'patch',
+    httpPath: '/zones/{zone_id}/settings/csam_scanner_third_party',
+  },
+  {
+    clientCallName: 'client.csamScanner.get',
+    fullyQualifiedName: 'csamScanner.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/settings/csam_scanner_third_party',
+  },
+  {
     clientCallName: 'client.abuseReports.create',
     fullyQualifiedName: 'abuseReports.create',
     httpMethod: 'post',

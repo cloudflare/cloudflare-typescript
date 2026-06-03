@@ -2279,6 +2279,8 @@ const fuse = new Fuse(
     'client.aiSecurity.update',
     'client.aiSecurity.customTopics.get',
     'client.aiSecurity.customTopics.update',
+    'client.csamScanner.edit',
+    'client.csamScanner.get',
     'client.abuseReports.create',
     'client.abuseReports.get',
     'client.abuseReports.list',
