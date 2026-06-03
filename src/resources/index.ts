@@ -30,6 +30,7 @@ export { CloudConnector, BaseCloudConnector } from './cloud-connector/cloud-conn
 export { CloudforceOne, BaseCloudforceOne } from './cloudforce-one/cloudforce-one';
 export { Connectivity, BaseConnectivity } from './connectivity/connectivity';
 export { ContentScanning, BaseContentScanning } from './content-scanning/content-scanning';
+export { CsamScanner, BaseCsamScanner } from './csam-scanner';
 export { CustomCertificates, BaseCustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomCsrs, BaseCustomCsrs } from './custom-csrs';
 export { CustomHostnames, BaseCustomHostnames } from './custom-hostnames/custom-hostnames';
