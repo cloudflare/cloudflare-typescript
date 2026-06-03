@@ -73,6 +73,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         app_id: 'app_id',
         filters: 'device_info',
+        include_peer_events: true,
       },
     );
   });
@@ -235,7 +236,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
   test.skip('getSessionTranscripts: required and optional params', async () => {
     const response = await client.realtimeKit.sessions.getSessionTranscripts(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        app_id: 'app_id',
+        format: 'SRT',
+      },
     );
   });
 

@@ -25,6 +25,29 @@ export class BasePresets extends APIResource {
    *     view_type: 'GROUP_CALL',
    *   },
    *   name: 'name',
+   *   permissions: {
+   *     accept_waiting_requests: true,
+   *     can_accept_production_requests: true,
+   *     can_change_participant_permissions: true,
+   *     can_edit_display_name: true,
+   *     can_livestream: true,
+   *     can_record: true,
+   *     can_spotlight: true,
+   *     chat: { ... },
+   *     connected_meetings: { ... },
+   *     disable_participant_audio: true,
+   *     disable_participant_screensharing: true,
+   *     disable_participant_video: true,
+   *     hidden_participant: true,
+   *     kick_participant: true,
+   *     media: { ... },
+   *     pin_participant: true,
+   *     plugins: { ... },
+   *     polls: { ... },
+   *     recorder_type: 'RECORDER',
+   *     show_participant_list: true,
+   *     waiting_room_type: 'SKIP',
+   *   },
    *   ui: {
    *     design_tokens: { ... },
    *   },
@@ -49,7 +72,7 @@ export class BasePresets extends APIResource {
    * @example
    * ```ts
    * const preset = await client.realtimeKit.presets.update(
-   *   'preset_id',
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     app_id: 'app_id',
@@ -75,7 +98,7 @@ export class BasePresets extends APIResource {
    * @example
    * ```ts
    * const preset = await client.realtimeKit.presets.delete(
-   *   'preset_id',
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     app_id: 'app_id',
@@ -121,7 +144,7 @@ export class BasePresets extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.presets.getPresetByID(
-   *     'preset_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       app_id: 'app_id',
@@ -168,13 +191,23 @@ export namespace PresetCreateResponse {
     config: Data.Config;
 
     /**
+     * Timestamp this preset was created at
+     */
+    created_at: string;
+
+    /**
      * Name of the preset
      */
     name: string;
 
+    permissions: Data.Permissions;
+
     ui: Data.UI;
 
-    permissions?: Data.Permissions;
+    /**
+     * Timestamp this preset was last updated
+     */
+    updated_at: string;
   }
 
   export namespace Data {
@@ -197,7 +230,12 @@ export namespace PresetCreateResponse {
       /**
        * Type of the meeting
        */
-      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM';
+      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM';
+
+      /**
+       * Livestream viewer quality levels.
+       */
+      livestream_viewer_qualities?: Array<number> | null;
     }
 
     export namespace Config {
@@ -249,7 +287,7 @@ export namespace PresetCreateResponse {
           /**
            * Quality of screen share
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
         }
 
         /**
@@ -264,7 +302,12 @@ export namespace PresetCreateResponse {
           /**
            * Video quality of participants
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
+
+          /**
+           * Enable simulcast for participant videos.
+           */
+          simulcast?: boolean;
         }
 
         /**
@@ -280,74 +323,6 @@ export namespace PresetCreateResponse {
            * Enable Stereo for your meetings
            */
           enable_stereo?: boolean;
-        }
-      }
-    }
-
-    export interface UI {
-      design_tokens: UI.DesignTokens;
-
-      config_diff?: unknown;
-    }
-
-    export namespace UI {
-      export interface DesignTokens {
-        border_radius: 'rounded';
-
-        border_width: 'thin';
-
-        colors: DesignTokens.Colors;
-
-        logo: string;
-
-        spacing_base: number;
-
-        theme: 'dark';
-      }
-
-      export namespace DesignTokens {
-        export interface Colors {
-          background: Colors.Background;
-
-          brand: Colors.Brand;
-
-          danger: string;
-
-          success: string;
-
-          text: string;
-
-          text_on_brand: string;
-
-          video_bg: string;
-
-          warning: string;
-        }
-
-        export namespace Colors {
-          export interface Background {
-            '1000': string;
-
-            '600': string;
-
-            '700': string;
-
-            '800': string;
-
-            '900': string;
-          }
-
-          export interface Brand {
-            '300': string;
-
-            '400': string;
-
-            '500': string;
-
-            '600': string;
-
-            '700': string;
-          }
         }
       }
     }
@@ -370,9 +345,6 @@ export namespace PresetCreateResponse {
 
       can_spotlight: boolean;
 
-      /**
-       * Chat permissions
-       */
       chat: Permissions.Chat;
 
       connected_meetings: Permissions.ConnectedMeetings;
@@ -419,13 +391,18 @@ export namespace PresetCreateResponse {
        */
       waiting_room_type: 'SKIP' | 'ON_PRIVILEGED_USER_ENTRY' | 'SKIP_ON_ACCEPT';
 
+      accept_stage_requests?: boolean;
+
       is_recorder?: boolean;
+
+      stage_access?: 'ALLOWED' | 'NOT_ALLOWED' | 'CAN_REQUEST';
+
+      stage_enabled?: boolean;
+
+      transcription_enabled?: boolean;
     }
 
     export namespace Permissions {
-      /**
-       * Chat permissions
-       */
       export interface Chat {
         private: Chat.Private;
 
@@ -540,14 +517,19 @@ export namespace PresetCreateResponse {
          */
         can_start: boolean;
 
-        config: string | Plugins.UnionMember1;
+        /**
+         * Plugin configuration keyed by plugin UUID.
+         */
+        config: { [key: string]: Plugins.Config };
       }
 
       export namespace Plugins {
-        export interface UnionMember1 {
-          access_control: 'FULL_ACCESS' | 'VIEW_ONLY';
+        export interface Config {
+          access_control?: 'FULL_ACCESS' | 'VIEW_ONLY';
 
-          handles_view_only: boolean;
+          handles_view_only?: boolean;
+
+          [k: string]: unknown;
         }
       }
 
@@ -569,6 +551,76 @@ export namespace PresetCreateResponse {
          * Can vote on polls
          */
         can_vote: boolean;
+      }
+    }
+
+    export interface UI {
+      design_tokens: UI.DesignTokens;
+    }
+
+    export namespace UI {
+      export interface DesignTokens {
+        border_radius: 'sharp' | 'rounded' | 'extra-rounded' | 'circular';
+
+        border_width: 'none' | 'thin' | 'fat';
+
+        colors: DesignTokens.Colors;
+
+        spacing_base: number;
+
+        theme: 'darkest' | 'dark' | 'light';
+
+        font_family?: string;
+
+        google_font?: string;
+
+        logo?: string;
+      }
+
+      export namespace DesignTokens {
+        export interface Colors {
+          background: Colors.Background;
+
+          brand: Colors.Brand;
+
+          danger: string;
+
+          success: string;
+
+          text: string;
+
+          text_on_brand: string;
+
+          video_bg: string;
+
+          warning: string;
+        }
+
+        export namespace Colors {
+          export interface Background {
+            '1000': string;
+
+            '600': string;
+
+            '700': string;
+
+            '800': string;
+
+            '900': string;
+          }
+
+          export interface Brand {
+            '300': string;
+
+            '400': string;
+
+            '500': string;
+
+            '600': string;
+
+            '700': string;
+          }
+        }
       }
     }
   }
@@ -599,13 +651,23 @@ export namespace PresetUpdateResponse {
     config: Data.Config;
 
     /**
+     * Timestamp this preset was created at
+     */
+    created_at: string;
+
+    /**
      * Name of the preset
      */
     name: string;
 
+    permissions: Data.Permissions;
+
     ui: Data.UI;
 
-    permissions?: Data.Permissions;
+    /**
+     * Timestamp this preset was last updated
+     */
+    updated_at: string;
   }
 
   export namespace Data {
@@ -628,7 +690,12 @@ export namespace PresetUpdateResponse {
       /**
        * Type of the meeting
        */
-      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM';
+      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM';
+
+      /**
+       * Livestream viewer quality levels.
+       */
+      livestream_viewer_qualities?: Array<number> | null;
     }
 
     export namespace Config {
@@ -680,7 +747,7 @@ export namespace PresetUpdateResponse {
           /**
            * Quality of screen share
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
         }
 
         /**
@@ -695,7 +762,12 @@ export namespace PresetUpdateResponse {
           /**
            * Video quality of participants
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
+
+          /**
+           * Enable simulcast for participant videos.
+           */
+          simulcast?: boolean;
         }
 
         /**
@@ -711,74 +783,6 @@ export namespace PresetUpdateResponse {
            * Enable Stereo for your meetings
            */
           enable_stereo?: boolean;
-        }
-      }
-    }
-
-    export interface UI {
-      design_tokens: UI.DesignTokens;
-
-      config_diff?: unknown;
-    }
-
-    export namespace UI {
-      export interface DesignTokens {
-        border_radius: 'rounded';
-
-        border_width: 'thin';
-
-        colors: DesignTokens.Colors;
-
-        logo: string;
-
-        spacing_base: number;
-
-        theme: 'dark';
-      }
-
-      export namespace DesignTokens {
-        export interface Colors {
-          background: Colors.Background;
-
-          brand: Colors.Brand;
-
-          danger: string;
-
-          success: string;
-
-          text: string;
-
-          text_on_brand: string;
-
-          video_bg: string;
-
-          warning: string;
-        }
-
-        export namespace Colors {
-          export interface Background {
-            '1000': string;
-
-            '600': string;
-
-            '700': string;
-
-            '800': string;
-
-            '900': string;
-          }
-
-          export interface Brand {
-            '300': string;
-
-            '400': string;
-
-            '500': string;
-
-            '600': string;
-
-            '700': string;
-          }
         }
       }
     }
@@ -801,9 +805,6 @@ export namespace PresetUpdateResponse {
 
       can_spotlight: boolean;
 
-      /**
-       * Chat permissions
-       */
       chat: Permissions.Chat;
 
       connected_meetings: Permissions.ConnectedMeetings;
@@ -850,13 +851,18 @@ export namespace PresetUpdateResponse {
        */
       waiting_room_type: 'SKIP' | 'ON_PRIVILEGED_USER_ENTRY' | 'SKIP_ON_ACCEPT';
 
+      accept_stage_requests?: boolean;
+
       is_recorder?: boolean;
+
+      stage_access?: 'ALLOWED' | 'NOT_ALLOWED' | 'CAN_REQUEST';
+
+      stage_enabled?: boolean;
+
+      transcription_enabled?: boolean;
     }
 
     export namespace Permissions {
-      /**
-       * Chat permissions
-       */
       export interface Chat {
         private: Chat.Private;
 
@@ -971,14 +977,19 @@ export namespace PresetUpdateResponse {
          */
         can_start: boolean;
 
-        config: string | Plugins.UnionMember1;
+        /**
+         * Plugin configuration keyed by plugin UUID.
+         */
+        config: { [key: string]: Plugins.Config };
       }
 
       export namespace Plugins {
-        export interface UnionMember1 {
-          access_control: 'FULL_ACCESS' | 'VIEW_ONLY';
+        export interface Config {
+          access_control?: 'FULL_ACCESS' | 'VIEW_ONLY';
 
-          handles_view_only: boolean;
+          handles_view_only?: boolean;
+
+          [k: string]: unknown;
         }
       }
 
@@ -1000,6 +1011,76 @@ export namespace PresetUpdateResponse {
          * Can vote on polls
          */
         can_vote: boolean;
+      }
+    }
+
+    export interface UI {
+      design_tokens: UI.DesignTokens;
+    }
+
+    export namespace UI {
+      export interface DesignTokens {
+        border_radius: 'sharp' | 'rounded' | 'extra-rounded' | 'circular';
+
+        border_width: 'none' | 'thin' | 'fat';
+
+        colors: DesignTokens.Colors;
+
+        spacing_base: number;
+
+        theme: 'darkest' | 'dark' | 'light';
+
+        font_family?: string;
+
+        google_font?: string;
+
+        logo?: string;
+      }
+
+      export namespace DesignTokens {
+        export interface Colors {
+          background: Colors.Background;
+
+          brand: Colors.Brand;
+
+          danger: string;
+
+          success: string;
+
+          text: string;
+
+          text_on_brand: string;
+
+          video_bg: string;
+
+          warning: string;
+        }
+
+        export namespace Colors {
+          export interface Background {
+            '1000': string;
+
+            '600': string;
+
+            '700': string;
+
+            '800': string;
+
+            '900': string;
+          }
+
+          export interface Brand {
+            '300': string;
+
+            '400': string;
+
+            '500': string;
+
+            '600': string;
+
+            '700': string;
+          }
+        }
       }
     }
   }
@@ -1030,13 +1111,23 @@ export namespace PresetDeleteResponse {
     config: Data.Config;
 
     /**
+     * Timestamp this preset was created at
+     */
+    created_at: string;
+
+    /**
      * Name of the preset
      */
     name: string;
 
+    permissions: Data.Permissions;
+
     ui: Data.UI;
 
-    permissions?: Data.Permissions;
+    /**
+     * Timestamp this preset was last updated
+     */
+    updated_at: string;
   }
 
   export namespace Data {
@@ -1059,7 +1150,12 @@ export namespace PresetDeleteResponse {
       /**
        * Type of the meeting
        */
-      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM';
+      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM';
+
+      /**
+       * Livestream viewer quality levels.
+       */
+      livestream_viewer_qualities?: Array<number> | null;
     }
 
     export namespace Config {
@@ -1111,7 +1207,7 @@ export namespace PresetDeleteResponse {
           /**
            * Quality of screen share
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
         }
 
         /**
@@ -1126,7 +1222,12 @@ export namespace PresetDeleteResponse {
           /**
            * Video quality of participants
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
+
+          /**
+           * Enable simulcast for participant videos.
+           */
+          simulcast?: boolean;
         }
 
         /**
@@ -1142,74 +1243,6 @@ export namespace PresetDeleteResponse {
            * Enable Stereo for your meetings
            */
           enable_stereo?: boolean;
-        }
-      }
-    }
-
-    export interface UI {
-      design_tokens: UI.DesignTokens;
-
-      config_diff?: unknown;
-    }
-
-    export namespace UI {
-      export interface DesignTokens {
-        border_radius: 'rounded';
-
-        border_width: 'thin';
-
-        colors: DesignTokens.Colors;
-
-        logo: string;
-
-        spacing_base: number;
-
-        theme: 'dark';
-      }
-
-      export namespace DesignTokens {
-        export interface Colors {
-          background: Colors.Background;
-
-          brand: Colors.Brand;
-
-          danger: string;
-
-          success: string;
-
-          text: string;
-
-          text_on_brand: string;
-
-          video_bg: string;
-
-          warning: string;
-        }
-
-        export namespace Colors {
-          export interface Background {
-            '1000': string;
-
-            '600': string;
-
-            '700': string;
-
-            '800': string;
-
-            '900': string;
-          }
-
-          export interface Brand {
-            '300': string;
-
-            '400': string;
-
-            '500': string;
-
-            '600': string;
-
-            '700': string;
-          }
         }
       }
     }
@@ -1232,9 +1265,6 @@ export namespace PresetDeleteResponse {
 
       can_spotlight: boolean;
 
-      /**
-       * Chat permissions
-       */
       chat: Permissions.Chat;
 
       connected_meetings: Permissions.ConnectedMeetings;
@@ -1281,13 +1311,18 @@ export namespace PresetDeleteResponse {
        */
       waiting_room_type: 'SKIP' | 'ON_PRIVILEGED_USER_ENTRY' | 'SKIP_ON_ACCEPT';
 
+      accept_stage_requests?: boolean;
+
       is_recorder?: boolean;
+
+      stage_access?: 'ALLOWED' | 'NOT_ALLOWED' | 'CAN_REQUEST';
+
+      stage_enabled?: boolean;
+
+      transcription_enabled?: boolean;
     }
 
     export namespace Permissions {
-      /**
-       * Chat permissions
-       */
       export interface Chat {
         private: Chat.Private;
 
@@ -1402,14 +1437,19 @@ export namespace PresetDeleteResponse {
          */
         can_start: boolean;
 
-        config: string | Plugins.UnionMember1;
+        /**
+         * Plugin configuration keyed by plugin UUID.
+         */
+        config: { [key: string]: Plugins.Config };
       }
 
       export namespace Plugins {
-        export interface UnionMember1 {
-          access_control: 'FULL_ACCESS' | 'VIEW_ONLY';
+        export interface Config {
+          access_control?: 'FULL_ACCESS' | 'VIEW_ONLY';
 
-          handles_view_only: boolean;
+          handles_view_only?: boolean;
+
+          [k: string]: unknown;
         }
       }
 
@@ -1431,6 +1471,76 @@ export namespace PresetDeleteResponse {
          * Can vote on polls
          */
         can_vote: boolean;
+      }
+    }
+
+    export interface UI {
+      design_tokens: UI.DesignTokens;
+    }
+
+    export namespace UI {
+      export interface DesignTokens {
+        border_radius: 'sharp' | 'rounded' | 'extra-rounded' | 'circular';
+
+        border_width: 'none' | 'thin' | 'fat';
+
+        colors: DesignTokens.Colors;
+
+        spacing_base: number;
+
+        theme: 'darkest' | 'dark' | 'light';
+
+        font_family?: string;
+
+        google_font?: string;
+
+        logo?: string;
+      }
+
+      export namespace DesignTokens {
+        export interface Colors {
+          background: Colors.Background;
+
+          brand: Colors.Brand;
+
+          danger: string;
+
+          success: string;
+
+          text: string;
+
+          text_on_brand: string;
+
+          video_bg: string;
+
+          warning: string;
+        }
+
+        export namespace Colors {
+          export interface Background {
+            '1000': string;
+
+            '600': string;
+
+            '700': string;
+
+            '800': string;
+
+            '900': string;
+          }
+
+          export interface Brand {
+            '300': string;
+
+            '400': string;
+
+            '500': string;
+
+            '600': string;
+
+            '700': string;
+          }
+        }
       }
     }
   }
@@ -1504,13 +1614,23 @@ export namespace PresetGetPresetByIDResponse {
     config: Data.Config;
 
     /**
+     * Timestamp this preset was created at
+     */
+    created_at: string;
+
+    /**
      * Name of the preset
      */
     name: string;
 
+    permissions: Data.Permissions;
+
     ui: Data.UI;
 
-    permissions?: Data.Permissions;
+    /**
+     * Timestamp this preset was last updated
+     */
+    updated_at: string;
   }
 
   export namespace Data {
@@ -1533,7 +1653,12 @@ export namespace PresetGetPresetByIDResponse {
       /**
        * Type of the meeting
        */
-      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM';
+      view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM';
+
+      /**
+       * Livestream viewer quality levels.
+       */
+      livestream_viewer_qualities?: Array<number> | null;
     }
 
     export namespace Config {
@@ -1585,7 +1710,7 @@ export namespace PresetGetPresetByIDResponse {
           /**
            * Quality of screen share
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
         }
 
         /**
@@ -1600,7 +1725,12 @@ export namespace PresetGetPresetByIDResponse {
           /**
            * Video quality of participants
            */
-          quality: 'hd' | 'vga' | 'qvga';
+          quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
+
+          /**
+           * Enable simulcast for participant videos.
+           */
+          simulcast?: boolean;
         }
 
         /**
@@ -1616,74 +1746,6 @@ export namespace PresetGetPresetByIDResponse {
            * Enable Stereo for your meetings
            */
           enable_stereo?: boolean;
-        }
-      }
-    }
-
-    export interface UI {
-      design_tokens: UI.DesignTokens;
-
-      config_diff?: unknown;
-    }
-
-    export namespace UI {
-      export interface DesignTokens {
-        border_radius: 'rounded';
-
-        border_width: 'thin';
-
-        colors: DesignTokens.Colors;
-
-        logo: string;
-
-        spacing_base: number;
-
-        theme: 'dark';
-      }
-
-      export namespace DesignTokens {
-        export interface Colors {
-          background: Colors.Background;
-
-          brand: Colors.Brand;
-
-          danger: string;
-
-          success: string;
-
-          text: string;
-
-          text_on_brand: string;
-
-          video_bg: string;
-
-          warning: string;
-        }
-
-        export namespace Colors {
-          export interface Background {
-            '1000': string;
-
-            '600': string;
-
-            '700': string;
-
-            '800': string;
-
-            '900': string;
-          }
-
-          export interface Brand {
-            '300': string;
-
-            '400': string;
-
-            '500': string;
-
-            '600': string;
-
-            '700': string;
-          }
         }
       }
     }
@@ -1706,9 +1768,6 @@ export namespace PresetGetPresetByIDResponse {
 
       can_spotlight: boolean;
 
-      /**
-       * Chat permissions
-       */
       chat: Permissions.Chat;
 
       connected_meetings: Permissions.ConnectedMeetings;
@@ -1755,13 +1814,18 @@ export namespace PresetGetPresetByIDResponse {
        */
       waiting_room_type: 'SKIP' | 'ON_PRIVILEGED_USER_ENTRY' | 'SKIP_ON_ACCEPT';
 
+      accept_stage_requests?: boolean;
+
       is_recorder?: boolean;
+
+      stage_access?: 'ALLOWED' | 'NOT_ALLOWED' | 'CAN_REQUEST';
+
+      stage_enabled?: boolean;
+
+      transcription_enabled?: boolean;
     }
 
     export namespace Permissions {
-      /**
-       * Chat permissions
-       */
       export interface Chat {
         private: Chat.Private;
 
@@ -1876,14 +1940,19 @@ export namespace PresetGetPresetByIDResponse {
          */
         can_start: boolean;
 
-        config: string | Plugins.UnionMember1;
+        /**
+         * Plugin configuration keyed by plugin UUID.
+         */
+        config: { [key: string]: Plugins.Config };
       }
 
       export namespace Plugins {
-        export interface UnionMember1 {
-          access_control: 'FULL_ACCESS' | 'VIEW_ONLY';
+        export interface Config {
+          access_control?: 'FULL_ACCESS' | 'VIEW_ONLY';
 
-          handles_view_only: boolean;
+          handles_view_only?: boolean;
+
+          [k: string]: unknown;
         }
       }
 
@@ -1905,6 +1974,76 @@ export namespace PresetGetPresetByIDResponse {
          * Can vote on polls
          */
         can_vote: boolean;
+      }
+    }
+
+    export interface UI {
+      design_tokens: UI.DesignTokens;
+    }
+
+    export namespace UI {
+      export interface DesignTokens {
+        border_radius: 'sharp' | 'rounded' | 'extra-rounded' | 'circular';
+
+        border_width: 'none' | 'thin' | 'fat';
+
+        colors: DesignTokens.Colors;
+
+        spacing_base: number;
+
+        theme: 'darkest' | 'dark' | 'light';
+
+        font_family?: string;
+
+        google_font?: string;
+
+        logo?: string;
+      }
+
+      export namespace DesignTokens {
+        export interface Colors {
+          background: Colors.Background;
+
+          brand: Colors.Brand;
+
+          danger: string;
+
+          success: string;
+
+          text: string;
+
+          text_on_brand: string;
+
+          video_bg: string;
+
+          warning: string;
+        }
+
+        export namespace Colors {
+          export interface Background {
+            '1000': string;
+
+            '600': string;
+
+            '700': string;
+
+            '800': string;
+
+            '900': string;
+          }
+
+          export interface Brand {
+            '300': string;
+
+            '400': string;
+
+            '500': string;
+
+            '600': string;
+
+            '700': string;
+          }
+        }
       }
     }
   }
@@ -1929,12 +2068,12 @@ export interface PresetCreateParams {
   /**
    * Body param
    */
-  ui: PresetCreateParams.UI;
+  permissions: PresetCreateParams.Permissions;
 
   /**
    * Body param
    */
-  permissions?: PresetCreateParams.Permissions;
+  ui: PresetCreateParams.UI;
 }
 
 export namespace PresetCreateParams {
@@ -1957,7 +2096,12 @@ export namespace PresetCreateParams {
     /**
      * Type of the meeting
      */
-    view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM';
+    view_type: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM';
+
+    /**
+     * Livestream viewer quality levels.
+     */
+    livestream_viewer_qualities?: Array<number> | null;
   }
 
   export namespace Config {
@@ -2009,7 +2153,7 @@ export namespace PresetCreateParams {
         /**
          * Quality of screen share
          */
-        quality: 'hd' | 'vga' | 'qvga';
+        quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
       }
 
       /**
@@ -2024,7 +2168,12 @@ export namespace PresetCreateParams {
         /**
          * Video quality of participants
          */
-        quality: 'hd' | 'vga' | 'qvga';
+        quality: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
+
+        /**
+         * Enable simulcast for participant videos.
+         */
+        simulcast?: boolean;
       }
 
       /**
@@ -2040,74 +2189,6 @@ export namespace PresetCreateParams {
          * Enable Stereo for your meetings
          */
         enable_stereo?: boolean;
-      }
-    }
-  }
-
-  export interface UI {
-    design_tokens: UI.DesignTokens;
-
-    config_diff?: unknown;
-  }
-
-  export namespace UI {
-    export interface DesignTokens {
-      border_radius: 'rounded';
-
-      border_width: 'thin';
-
-      colors: DesignTokens.Colors;
-
-      logo: string;
-
-      spacing_base: number;
-
-      theme: 'dark';
-    }
-
-    export namespace DesignTokens {
-      export interface Colors {
-        background: Colors.Background;
-
-        brand: Colors.Brand;
-
-        danger: string;
-
-        success: string;
-
-        text: string;
-
-        text_on_brand: string;
-
-        video_bg: string;
-
-        warning: string;
-      }
-
-      export namespace Colors {
-        export interface Background {
-          '1000': string;
-
-          '600': string;
-
-          '700': string;
-
-          '800': string;
-
-          '900': string;
-        }
-
-        export interface Brand {
-          '300': string;
-
-          '400': string;
-
-          '500': string;
-
-          '600': string;
-
-          '700': string;
-        }
       }
     }
   }
@@ -2130,9 +2211,6 @@ export namespace PresetCreateParams {
 
     can_spotlight: boolean;
 
-    /**
-     * Chat permissions
-     */
     chat: Permissions.Chat;
 
     connected_meetings: Permissions.ConnectedMeetings;
@@ -2179,13 +2257,18 @@ export namespace PresetCreateParams {
      */
     waiting_room_type: 'SKIP' | 'ON_PRIVILEGED_USER_ENTRY' | 'SKIP_ON_ACCEPT';
 
+    accept_stage_requests?: boolean;
+
     is_recorder?: boolean;
+
+    stage_access?: 'ALLOWED' | 'NOT_ALLOWED' | 'CAN_REQUEST';
+
+    stage_enabled?: boolean;
+
+    transcription_enabled?: boolean;
   }
 
   export namespace Permissions {
-    /**
-     * Chat permissions
-     */
     export interface Chat {
       private: Chat.Private;
 
@@ -2300,14 +2383,19 @@ export namespace PresetCreateParams {
        */
       can_start: boolean;
 
-      config: string | Plugins.UnionMember1;
+      /**
+       * Plugin configuration keyed by plugin UUID.
+       */
+      config: { [key: string]: Plugins.Config };
     }
 
     export namespace Plugins {
-      export interface UnionMember1 {
-        access_control: 'FULL_ACCESS' | 'VIEW_ONLY';
+      export interface Config {
+        access_control?: 'FULL_ACCESS' | 'VIEW_ONLY';
 
-        handles_view_only: boolean;
+        handles_view_only?: boolean;
+
+        [k: string]: unknown;
       }
     }
 
@@ -2329,6 +2417,76 @@ export namespace PresetCreateParams {
        * Can vote on polls
        */
       can_vote: boolean;
+    }
+  }
+
+  export interface UI {
+    design_tokens: UI.DesignTokens;
+  }
+
+  export namespace UI {
+    export interface DesignTokens {
+      border_radius: 'sharp' | 'rounded' | 'extra-rounded' | 'circular';
+
+      border_width: 'none' | 'thin' | 'fat';
+
+      colors: DesignTokens.Colors;
+
+      spacing_base: number;
+
+      theme: 'darkest' | 'dark' | 'light';
+
+      font_family?: string;
+
+      google_font?: string;
+
+      logo?: string;
+    }
+
+    export namespace DesignTokens {
+      export interface Colors {
+        background: Colors.Background;
+
+        brand: Colors.Brand;
+
+        danger: string;
+
+        success: string;
+
+        text: string;
+
+        text_on_brand: string;
+
+        video_bg: string;
+
+        warning: string;
+      }
+
+      export namespace Colors {
+        export interface Background {
+          '1000': string;
+
+          '600': string;
+
+          '700': string;
+
+          '800': string;
+
+          '900': string;
+        }
+
+        export interface Brand {
+          '300': string;
+
+          '400': string;
+
+          '500': string;
+
+          '600': string;
+
+          '700': string;
+        }
+      }
     }
   }
 }
@@ -2368,6 +2526,11 @@ export interface PresetUpdateParams {
 export namespace PresetUpdateParams {
   export interface Config {
     /**
+     * Livestream viewer quality levels.
+     */
+    livestream_viewer_qualities?: Array<number> | null;
+
+    /**
      * Maximum number of screen shares that can be active at a given time
      */
     max_screenshare_count?: number;
@@ -2385,7 +2548,7 @@ export namespace PresetUpdateParams {
     /**
      * Type of the meeting
      */
-    view_type?: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM';
+    view_type?: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM';
   }
 
   export namespace Config {
@@ -2409,6 +2572,11 @@ export namespace PresetUpdateParams {
      */
     export interface Media {
       /**
+       * Control options for Audio quality.
+       */
+      audio?: Media.Audio;
+
+      /**
        * Configuration options for participant screen shares
        */
       screenshare?: Media.Screenshare;
@@ -2421,6 +2589,21 @@ export namespace PresetUpdateParams {
 
     export namespace Media {
       /**
+       * Control options for Audio quality.
+       */
+      export interface Audio {
+        /**
+         * Enable High Quality Audio for your meetings
+         */
+        enable_high_bitrate?: boolean;
+
+        /**
+         * Enable Stereo for your meetings
+         */
+        enable_stereo?: boolean;
+      }
+
+      /**
        * Configuration options for participant screen shares
        */
       export interface Screenshare {
@@ -2432,7 +2615,7 @@ export namespace PresetUpdateParams {
         /**
          * Quality of screen share
          */
-        quality?: 'hd' | 'vga' | 'qvga';
+        quality?: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
       }
 
       /**
@@ -2447,12 +2630,19 @@ export namespace PresetUpdateParams {
         /**
          * Video quality of participants
          */
-        quality?: 'hd' | 'vga' | 'qvga';
+        quality?: 'hd' | 'vga' | 'qvga' | 'fhd' | 'uhd';
+
+        /**
+         * Enable simulcast for participant videos.
+         */
+        simulcast?: boolean;
       }
     }
   }
 
   export interface Permissions {
+    accept_stage_requests?: boolean;
+
     /**
      * Whether this participant can accept waiting requests
      */
@@ -2470,9 +2660,6 @@ export namespace PresetUpdateParams {
 
     can_spotlight?: boolean;
 
-    /**
-     * Chat permissions
-     */
     chat?: Permissions.Chat;
 
     connected_meetings?: Permissions.ConnectedMeetings;
@@ -2516,6 +2703,12 @@ export namespace PresetUpdateParams {
 
     show_participant_list?: boolean;
 
+    stage_access?: 'ALLOWED' | 'NOT_ALLOWED' | 'CAN_REQUEST';
+
+    stage_enabled?: boolean;
+
+    transcription_enabled?: boolean;
+
     /**
      * Waiting room type
      */
@@ -2523,9 +2716,6 @@ export namespace PresetUpdateParams {
   }
 
   export namespace Permissions {
-    /**
-     * Chat permissions
-     */
     export interface Chat {
       private?: Chat.Private;
 
@@ -2640,14 +2830,19 @@ export namespace PresetUpdateParams {
        */
       can_start?: boolean;
 
-      config?: string | Plugins.UnionMember1;
+      /**
+       * Plugin configuration keyed by plugin UUID.
+       */
+      config?: { [key: string]: Plugins.Config };
     }
 
     export namespace Plugins {
-      export interface UnionMember1 {
+      export interface Config {
         access_control?: 'FULL_ACCESS' | 'VIEW_ONLY';
 
         handles_view_only?: boolean;
+
+        [k: string]: unknown;
       }
     }
 
@@ -2673,24 +2868,26 @@ export namespace PresetUpdateParams {
   }
 
   export interface UI {
-    config_diff?: unknown;
-
     design_tokens?: UI.DesignTokens;
   }
 
   export namespace UI {
     export interface DesignTokens {
-      border_radius?: 'rounded';
+      border_radius?: 'sharp' | 'rounded' | 'extra-rounded' | 'circular';
 
-      border_width?: 'thin';
+      border_width?: 'none' | 'thin' | 'fat';
 
       colors?: DesignTokens.Colors;
+
+      font_family?: string;
+
+      google_font?: string;
 
       logo?: string;
 
       spacing_base?: number;
 
-      theme?: 'dark';
+      theme?: 'darkest' | 'dark' | 'light';
     }
 
     export namespace DesignTokens {
@@ -2769,6 +2966,11 @@ export interface PresetGetParams {
    * Query param: Number of results per page
    */
   per_page?: number;
+
+  /**
+   * Query param: Search presets by name.
+   */
+  search?: string;
 }
 
 export interface PresetGetPresetByIDParams {

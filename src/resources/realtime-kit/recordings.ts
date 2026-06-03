@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
-import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -169,43 +168,32 @@ export class BaseRecordings extends APIResource {
   }
 
   /**
-   * Starts a track recording in a meeting. Track recordings consist of "layers".
-   * Layers are used to map audio/video tracks in a meeting to output destinations.
-   * More information about track recordings is available in the
-   * [Track Recordings Guide Page](https://docs.realtime.cloudflare.com/guides/capabilities/recording/recording-overview).
+   * Starts track recording for a meeting. Track recording currently records separate
+   * participant audio tracks as WebM files in the RealtimeKit bucket. Video track
+   * recording is in development. For more information, refer to
+   * [Track recording](/realtime/realtimekit/recording-guide/track-recording/).
    *
    * @example
    * ```ts
-   * await client.realtimeKit.recordings.startTrackRecording(
-   *   'app_id',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     layers: {
-   *       default: {
-   *         file_name_prefix: 'string',
-   *         outputs: [{ type: 'REALTIMEKIT_BUCKET' }],
-   *       },
-   *       'default-video': {
-   *         file_name_prefix: 'string',
-   *         outputs: [{ type: 'REALTIMEKIT_BUCKET' }],
-   *       },
+   * const response =
+   *   await client.realtimeKit.recordings.startTrackRecording(
+   *     'app_id',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
    *     },
-   *     meeting_id: 'string',
-   *     max_seconds: 60,
-   *   },
-   * );
+   *   );
    * ```
    */
   startTrackRecording(
     appID: string,
     params: RecordingStartTrackRecordingParams,
     options?: RequestOptions,
-  ): APIPromise<void> {
+  ): APIPromise<RecordingStartTrackRecordingResponse> {
     const { account_id, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/realtime/kit/${appID}/recordings/track`, {
       body,
       ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 }
@@ -1350,6 +1338,94 @@ export namespace RecordingStartRecordingsResponse {
   }
 }
 
+export interface RecordingStartTrackRecordingResponse {
+  /**
+   * Success status of the operation
+   */
+  success: boolean;
+
+  /**
+   * Data returned by the operation
+   */
+  data?: RecordingStartTrackRecordingResponse.Data;
+}
+
+export namespace RecordingStartTrackRecordingResponse {
+  /**
+   * Data returned by the operation
+   */
+  export interface Data {
+    recording: Data.Recording;
+  }
+
+  export namespace Data {
+    export interface Recording {
+      /**
+       * ID of the recording
+       */
+      id: string;
+
+      /**
+       * If the audio_config is passed, the URL for downloading the audio recording is
+       * returned.
+       */
+      audio_download_url: string | null;
+
+      /**
+       * URL where the recording can be downloaded.
+       */
+      download_url: string | null;
+
+      /**
+       * Timestamp when the download URL expires.
+       */
+      download_url_expiry: string | null;
+
+      /**
+       * File size of the recording, in bytes.
+       */
+      file_size: number | null;
+
+      /**
+       * Timestamp when this recording was invoked.
+       */
+      invoked_time: string;
+
+      /**
+       * File name of the recording.
+       */
+      output_file_name: string;
+
+      /**
+       * ID of the meeting session this recording is for.
+       */
+      session_id: string | null;
+
+      /**
+       * Timestamp when this recording actually started after being invoked. Usually a
+       * few seconds after `invoked_time`.
+       */
+      started_time: string | null;
+
+      /**
+       * Current status of the recording.
+       */
+      status: 'INVOKED' | 'RECORDING' | 'UPLOADING' | 'UPLOADED' | 'ERRORED' | 'PAUSED';
+
+      /**
+       * Timestamp when this recording was stopped. Optional; is present only when the
+       * recording has actually been stopped.
+       */
+      stopped_time: string | null;
+
+      /**
+       * Total recording time in seconds.
+       */
+      recording_duration?: number;
+    }
+  }
+}
+
 export interface RecordingGetActiveRecordingsParams {
   /**
    * The account identifier tag.
@@ -1722,19 +1798,21 @@ export interface RecordingStartTrackRecordingParams {
   account_id: string;
 
   /**
-   * Body param
-   */
-  layers: { [key: string]: RecordingStartTrackRecordingParams.Layers };
-
-  /**
    * Body param: ID of the meeting to record.
    */
   meeting_id: string;
 
   /**
-   * Body param: Maximum seconds this recording should be active for (beta)
+   * Body param: Optional audio layer configuration. If omitted, RealtimeKit records
+   * all participant audio using the default file name prefix.
    */
-  max_seconds?: number;
+  layers?: { [key: string]: RecordingStartTrackRecordingParams.Layers };
+
+  /**
+   * Body param: Optional list of participant user IDs to record. Selective track
+   * recording (`user_ids`) is in early beta contact support to use this feature.
+   */
+  user_ids?: Array<string>;
 }
 
 export namespace RecordingStartTrackRecordingParams {
@@ -1744,89 +1822,10 @@ export namespace RecordingStartTrackRecordingParams {
      */
     file_name_prefix?: string;
 
-    outputs?: Array<Layers.Output>;
-  }
-
-  export namespace Layers {
-    export interface Output {
-      storage_config?: Output.StorageConfig | null;
-
-      /**
-       * The type of output destination this layer is being exported to.
-       */
-      type?: 'REALTIMEKIT_BUCKET' | 'STORAGE_CONFIG';
-    }
-
-    export namespace Output {
-      export interface StorageConfig {
-        /**
-         * Type of storage media.
-         */
-        type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
-
-        /**
-         * Access key of the storage medium. Access key is not required for the `gcs`
-         * storage media type.
-         *
-         * Note that this field is not readable by clients, only writeable.
-         */
-        access_key?: string;
-
-        /**
-         * Authentication method used for "sftp" type storage medium
-         */
-        auth_method?: 'KEY' | 'PASSWORD';
-
-        /**
-         * Name of the storage medium's bucket.
-         */
-        bucket?: string;
-
-        /**
-         * SSH destination server host for SFTP type storage medium
-         */
-        host?: string;
-
-        /**
-         * SSH destination server password for SFTP type storage medium when auth_method is
-         * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-         * private key.
-         */
-        password?: string;
-
-        /**
-         * Path relative to the bucket root at which the recording will be placed.
-         */
-        path?: string;
-
-        /**
-         * SSH destination server port for SFTP type storage medium
-         */
-        port?: number;
-
-        /**
-         * Private key used to login to destination SSH server for SFTP type storage
-         * medium, when auth_method used is "KEY"
-         */
-        private_key?: string;
-
-        /**
-         * Region of the storage medium.
-         */
-        region?: string;
-
-        /**
-         * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-         * by clients, not readable.
-         */
-        secret?: string;
-
-        /**
-         * SSH destination server username for SFTP type storage medium
-         */
-        username?: string;
-      }
-    }
+    /**
+     * Media kind to record. Track recording currently supports audio only.
+     */
+    media_kind?: 'audio';
   }
 }
 
@@ -1837,6 +1836,7 @@ export declare namespace Recordings {
     type RecordingGetRecordingsResponse as RecordingGetRecordingsResponse,
     type RecordingPauseResumeStopRecordingResponse as RecordingPauseResumeStopRecordingResponse,
     type RecordingStartRecordingsResponse as RecordingStartRecordingsResponse,
+    type RecordingStartTrackRecordingResponse as RecordingStartTrackRecordingResponse,
     type RecordingGetActiveRecordingsParams as RecordingGetActiveRecordingsParams,
     type RecordingGetOneRecordingParams as RecordingGetOneRecordingParams,
     type RecordingGetRecordingsParams as RecordingGetRecordingsParams,
