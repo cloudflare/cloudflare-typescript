@@ -9,11 +9,12 @@ export class Sessions extends APIResource {
    *
    * @example
    * ```ts
-   * await client.realtimeKit.sessions.generateSummaryOfTranscripts(
-   *   'app_id',
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
+   * const response =
+   *   await client.realtimeKit.sessions.generateSummaryOfTranscripts(
+   *     'app_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
    * ```
    */
   generateSummaryOfTranscripts(
@@ -21,12 +22,12 @@ export class Sessions extends APIResource {
     sessionId: string,
     params: SessionGenerateSummaryOfTranscriptsParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  ): Core.APIPromise<SessionGenerateSummaryOfTranscriptsResponse> {
     const { account_id } = params;
-    return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/summary`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return this._client.post(
+      `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/summary`,
+      options,
+    );
   }
 
   /**
@@ -209,10 +210,10 @@ export class Sessions extends APIResource {
     params: SessionGetSessionTranscriptsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionTranscriptsResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/transcript`,
-      options,
+      { query, ...options },
     );
   }
 
@@ -234,6 +235,20 @@ export class Sessions extends APIResource {
   ): Core.APIPromise<SessionGetSessionsResponse> {
     const { account_id, ...query } = params;
     return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/sessions`, { query, ...options });
+  }
+}
+
+export interface SessionGenerateSummaryOfTranscriptsResponse {
+  data?: SessionGenerateSummaryOfTranscriptsResponse.Data;
+
+  success?: boolean;
+}
+
+export namespace SessionGenerateSummaryOfTranscriptsResponse {
+  export interface Data {
+    session_id?: string;
+
+    status?: string;
   }
 }
 
@@ -717,6 +732,11 @@ export interface SessionGetParticipantDataFromPeerIDParams {
    * no spaces between the filters.
    */
   filters?: 'device_info' | 'ip_information' | 'precall_network_information' | 'events' | 'quality_stats';
+
+  /**
+   * Query param: if true, response includes all the peer events of participant.
+   */
+  include_peer_events?: boolean;
 }
 
 export interface SessionGetSessionChatParams {
@@ -779,8 +799,8 @@ export interface SessionGetSessionParticipantsParams {
   per_page?: number;
 
   /**
-   * Query param: The search query string. You can search using the meeting ID or
-   * title.
+   * Query param: The search query string. You can search using participant ID,
+   * custom participant ID, or display name.
    */
   search?: string;
 
@@ -811,9 +831,14 @@ export interface SessionGetSessionSummaryParams {
 
 export interface SessionGetSessionTranscriptsParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: Transcript file format to fetch.
+   */
+  format?: 'SRT' | 'VTT' | 'JSON' | 'CSV';
 }
 
 export interface SessionGetSessionsParams {
@@ -879,6 +904,7 @@ export interface SessionGetSessionsParams {
 
 export declare namespace Sessions {
   export {
+    type SessionGenerateSummaryOfTranscriptsResponse as SessionGenerateSummaryOfTranscriptsResponse,
     type SessionGetParticipantDataFromPeerIDResponse as SessionGetParticipantDataFromPeerIDResponse,
     type SessionGetSessionChatResponse as SessionGetSessionChatResponse,
     type SessionGetSessionDetailsResponse as SessionGetSessionDetailsResponse,

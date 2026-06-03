@@ -94,6 +94,7 @@ export {
   type RecordingGetRecordingsResponse,
   type RecordingPauseResumeStopRecordingResponse,
   type RecordingStartRecordingsResponse,
+  type RecordingStartTrackRecordingResponse,
   type RecordingGetActiveRecordingsParams,
   type RecordingGetOneRecordingParams,
   type RecordingGetRecordingsParams,
@@ -103,6 +104,7 @@ export {
 } from './recordings';
 export {
   Sessions,
+  type SessionGenerateSummaryOfTranscriptsResponse,
   type SessionGetParticipantDataFromPeerIDResponse,
   type SessionGetSessionChatResponse,
   type SessionGetSessionDetailsResponse,

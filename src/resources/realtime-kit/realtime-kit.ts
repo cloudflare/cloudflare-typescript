@@ -96,11 +96,13 @@ import {
   RecordingStartRecordingsParams,
   RecordingStartRecordingsResponse,
   RecordingStartTrackRecordingParams,
+  RecordingStartTrackRecordingResponse,
   Recordings,
 } from './recordings';
 import * as SessionsAPI from './sessions';
 import {
   SessionGenerateSummaryOfTranscriptsParams,
+  SessionGenerateSummaryOfTranscriptsResponse,
   SessionGetParticipantDataFromPeerIDParams,
   SessionGetParticipantDataFromPeerIDResponse,
   SessionGetSessionChatParams,
@@ -209,6 +211,7 @@ export declare namespace RealtimeKit {
 
   export {
     Sessions as Sessions,
+    type SessionGenerateSummaryOfTranscriptsResponse as SessionGenerateSummaryOfTranscriptsResponse,
     type SessionGetParticipantDataFromPeerIDResponse as SessionGetParticipantDataFromPeerIDResponse,
     type SessionGetSessionChatResponse as SessionGetSessionChatResponse,
     type SessionGetSessionDetailsResponse as SessionGetSessionDetailsResponse,
@@ -235,6 +238,7 @@ export declare namespace RealtimeKit {
     type RecordingGetRecordingsResponse as RecordingGetRecordingsResponse,
     type RecordingPauseResumeStopRecordingResponse as RecordingPauseResumeStopRecordingResponse,
     type RecordingStartRecordingsResponse as RecordingStartRecordingsResponse,
+    type RecordingStartTrackRecordingResponse as RecordingStartTrackRecordingResponse,
     type RecordingGetActiveRecordingsParams as RecordingGetActiveRecordingsParams,
     type RecordingGetOneRecordingParams as RecordingGetOneRecordingParams,
     type RecordingGetRecordingsParams as RecordingGetRecordingsParams,
