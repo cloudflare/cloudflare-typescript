@@ -229,6 +229,8 @@ Types:
 
 # [AISecurity](src/resources/ai-security/api.md)
 
+# [CsamScanner](src/resources/csam-scanner/api.md)
+
 # [AbuseReports](src/resources/abuse-reports/api.md)
 
 # [AI](src/resources/ai/api.md)

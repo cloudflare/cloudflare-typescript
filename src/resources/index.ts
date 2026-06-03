@@ -27,6 +27,7 @@ export { CloudConnector } from './cloud-connector/cloud-connector';
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
 export { Connectivity } from './connectivity/connectivity';
 export { ContentScanning } from './content-scanning/content-scanning';
+export { CsamScanner } from './csam-scanner';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomCsrs } from './custom-csrs';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';

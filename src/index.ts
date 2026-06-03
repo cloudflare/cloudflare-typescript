@@ -46,6 +46,7 @@ import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
 import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
+import { CsamScanner } from './resources/csam-scanner/csam-scanner';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
 import { CustomCsrs } from './resources/custom-csrs/custom-csrs';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
@@ -395,6 +396,7 @@ export class Cloudflare extends Core.APIClient {
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   aiSecurity: API.AISecurity = new API.AISecurity(this);
+  csamScanner: API.CsamScanner = new API.CsamScanner(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
   aiAudit: API.AIAudit = new API.AIAudit(this);
@@ -649,6 +651,7 @@ Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AISecurity = AISecurity;
+Cloudflare.CsamScanner = CsamScanner;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
 Cloudflare.AIAudit = AIAudit;
@@ -898,6 +901,8 @@ export declare namespace Cloudflare {
   export { ContentScanning as ContentScanning };
 
   export { AISecurity as AISecurity };
+
+  export { CsamScanner as CsamScanner };
 
   export { AbuseReports as AbuseReports };
 
