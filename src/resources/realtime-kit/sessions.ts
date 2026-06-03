@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
-import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -17,24 +16,25 @@ export class BaseSessions extends APIResource {
    *
    * @example
    * ```ts
-   * await client.realtimeKit.sessions.generateSummaryOfTranscripts(
-   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     app_id: 'app_id',
-   *   },
-   * );
+   * const response =
+   *   await client.realtimeKit.sessions.generateSummaryOfTranscripts(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       app_id: 'app_id',
+   *     },
+   *   );
    * ```
    */
   generateSummaryOfTranscripts(
     sessionID: string,
     params: SessionGenerateSummaryOfTranscriptsParams,
     options?: RequestOptions,
-  ): APIPromise<void> {
+  ): APIPromise<SessionGenerateSummaryOfTranscriptsResponse> {
     const { account_id, app_id } = params;
     return this._client.post(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/summary`,
-      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+      options,
     );
   }
 
@@ -224,10 +224,10 @@ export class BaseSessions extends APIResource {
     params: SessionGetSessionTranscriptsParams,
     options?: RequestOptions,
   ): APIPromise<SessionGetSessionTranscriptsResponse> {
-    const { account_id, app_id } = params;
+    const { account_id, app_id, ...query } = params;
     return this._client.get(
       path`/accounts/${account_id}/realtime/kit/${app_id}/sessions/${sessionID}/transcript`,
-      options,
+      { query, ...options },
     );
   }
 
@@ -255,6 +255,20 @@ export class BaseSessions extends APIResource {
   }
 }
 export class Sessions extends BaseSessions {}
+
+export interface SessionGenerateSummaryOfTranscriptsResponse {
+  data?: SessionGenerateSummaryOfTranscriptsResponse.Data;
+
+  success?: boolean;
+}
+
+export namespace SessionGenerateSummaryOfTranscriptsResponse {
+  export interface Data {
+    session_id?: string;
+
+    status?: string;
+  }
+}
 
 export interface SessionGetParticipantDataFromPeerIDResponse {
   data?: SessionGetParticipantDataFromPeerIDResponse.Data;
@@ -746,6 +760,11 @@ export interface SessionGetParticipantDataFromPeerIDParams {
    * no spaces between the filters.
    */
   filters?: 'device_info' | 'ip_information' | 'precall_network_information' | 'events' | 'quality_stats';
+
+  /**
+   * Query param: if true, response includes all the peer events of participant.
+   */
+  include_peer_events?: boolean;
 }
 
 export interface SessionGetSessionChatParams {
@@ -833,8 +852,8 @@ export interface SessionGetSessionParticipantsParams {
   per_page?: number;
 
   /**
-   * Query param: The search query string. You can search using the meeting ID or
-   * title.
+   * Query param: The search query string. You can search using participant ID,
+   * custom participant ID, or display name.
    */
   search?: string;
 
@@ -870,14 +889,19 @@ export interface SessionGetSessionSummaryParams {
 
 export interface SessionGetSessionTranscriptsParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
 
   /**
-   * The app identifier tag.
+   * Path param: The app identifier tag.
    */
   app_id: string;
+
+  /**
+   * Query param: Transcript file format to fetch.
+   */
+  format?: 'SRT' | 'VTT' | 'JSON' | 'CSV';
 }
 
 export interface SessionGetSessionsParams {
@@ -943,6 +967,7 @@ export interface SessionGetSessionsParams {
 
 export declare namespace Sessions {
   export {
+    type SessionGenerateSummaryOfTranscriptsResponse as SessionGenerateSummaryOfTranscriptsResponse,
     type SessionGetParticipantDataFromPeerIDResponse as SessionGetParticipantDataFromPeerIDResponse,
     type SessionGetSessionChatResponse as SessionGetSessionChatResponse,
     type SessionGetSessionDetailsResponse as SessionGetSessionDetailsResponse,

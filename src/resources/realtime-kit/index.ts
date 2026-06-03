@@ -101,6 +101,7 @@ export {
   type RecordingGetRecordingsResponse,
   type RecordingPauseResumeStopRecordingResponse,
   type RecordingStartRecordingsResponse,
+  type RecordingStartTrackRecordingResponse,
   type RecordingGetActiveRecordingsParams,
   type RecordingGetOneRecordingParams,
   type RecordingGetRecordingsParams,
@@ -111,6 +112,7 @@ export {
 export {
   Sessions,
   BaseSessions,
+  type SessionGenerateSummaryOfTranscriptsResponse,
   type SessionGetParticipantDataFromPeerIDResponse,
   type SessionGetSessionChatResponse,
   type SessionGetSessionDetailsResponse,
