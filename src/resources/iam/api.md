@@ -85,3 +85,7 @@ Methods:
 - <code title="delete /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">delete</a>(ssoConnectorID, { ...params }) -> SSODeleteResponse | null</code>
 - <code title="post /accounts/{account_id}/sso_connectors/{sso_connector_id}/begin_verification">client.iam.sso.<a href="./src/resources/iam/sso.ts">beginVerification</a>(ssoConnectorID, { ...params }) -> SSOBeginVerificationResponse</code>
 - <code title="get /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">get</a>(ssoConnectorID, { ...params }) -> SSOGetResponse</code>
+
+## OAuthClients
+
+## [OAuthScopes](src/resources/iam/oauth-scopes/api.md)
