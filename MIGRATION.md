@@ -1120,6 +1120,11 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.iam.sso.delete()`
 - `client.iam.sso.beginVerification()`
 - `client.iam.sso.get()`
+- `client.iam.oauthClients.update()`
+- `client.iam.oauthClients.delete()`
+- `client.iam.oauthClients.deleteRotatedSecret()`
+- `client.iam.oauthClients.get()`
+- `client.iam.oauthClients.rotateSecret()`
 - `client.botnetFeed.asn.dayReport()`
 - `client.botnetFeed.asn.fullReport()`
 - `client.botnetFeed.configs.asn.delete()`

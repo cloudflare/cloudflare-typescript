@@ -1,7 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { IAM, BaseIAM } from './iam';
-export { OAuthClients, BaseOAuthClients } from './oauth-clients';
+export {
+  OAuthClients,
+  BaseOAuthClients,
+  type OAuthClientCreateResponse,
+  type OAuthClientUpdateResponse,
+  type OAuthClientListResponse,
+  type OAuthClientDeleteResponse,
+  type OAuthClientDeleteRotatedSecretResponse,
+  type OAuthClientGetResponse,
+  type OAuthClientRotateSecretResponse,
+  type OAuthClientCreateParams,
+  type OAuthClientUpdateParams,
+  type OAuthClientListParams,
+  type OAuthClientDeleteParams,
+  type OAuthClientDeleteRotatedSecretParams,
+  type OAuthClientGetParams,
+  type OAuthClientRotateSecretParams,
+  type OAuthClientListResponsesSinglePage,
+} from './oauth-clients';
 export { OAuthScopes, BaseOAuthScopes } from './oauth-scopes';
 export {
   PermissionGroups,

@@ -2,7 +2,25 @@
 
 import { APIResource } from '../../core/resource';
 import * as OAuthClientsAPI from './oauth-clients';
-import { BaseOAuthClients, OAuthClients } from './oauth-clients';
+import {
+  BaseOAuthClients,
+  OAuthClientCreateParams,
+  OAuthClientCreateResponse,
+  OAuthClientDeleteParams,
+  OAuthClientDeleteResponse,
+  OAuthClientDeleteRotatedSecretParams,
+  OAuthClientDeleteRotatedSecretResponse,
+  OAuthClientGetParams,
+  OAuthClientGetResponse,
+  OAuthClientListParams,
+  OAuthClientListResponse,
+  OAuthClientListResponsesSinglePage,
+  OAuthClientRotateSecretParams,
+  OAuthClientRotateSecretResponse,
+  OAuthClientUpdateParams,
+  OAuthClientUpdateResponse,
+  OAuthClients,
+} from './oauth-clients';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   BasePermissionGroups,
@@ -48,7 +66,12 @@ import {
   SSOUpdateResponse,
 } from './sso';
 import * as OAuthScopesAPI from './oauth-scopes/oauth-scopes';
-import { BaseOAuthScopes, OAuthScopes } from './oauth-scopes/oauth-scopes';
+import {
+  BaseOAuthScopes,
+  OAuthScopeListResponse,
+  OAuthScopeListResponsesSinglePage,
+  OAuthScopes,
+} from './oauth-scopes/oauth-scopes';
 import * as UserGroupsAPI from './user-groups/user-groups';
 import {
   BaseUserGroups,
@@ -154,7 +177,30 @@ export declare namespace IAM {
     type SSOGetParams as SSOGetParams,
   };
 
-  export { OAuthClients as OAuthClients, BaseOAuthClients as BaseOAuthClients };
+  export {
+    OAuthClients as OAuthClients,
+    BaseOAuthClients as BaseOAuthClients,
+    type OAuthClientCreateResponse as OAuthClientCreateResponse,
+    type OAuthClientUpdateResponse as OAuthClientUpdateResponse,
+    type OAuthClientListResponse as OAuthClientListResponse,
+    type OAuthClientDeleteResponse as OAuthClientDeleteResponse,
+    type OAuthClientDeleteRotatedSecretResponse as OAuthClientDeleteRotatedSecretResponse,
+    type OAuthClientGetResponse as OAuthClientGetResponse,
+    type OAuthClientRotateSecretResponse as OAuthClientRotateSecretResponse,
+    type OAuthClientListResponsesSinglePage as OAuthClientListResponsesSinglePage,
+    type OAuthClientCreateParams as OAuthClientCreateParams,
+    type OAuthClientUpdateParams as OAuthClientUpdateParams,
+    type OAuthClientListParams as OAuthClientListParams,
+    type OAuthClientDeleteParams as OAuthClientDeleteParams,
+    type OAuthClientDeleteRotatedSecretParams as OAuthClientDeleteRotatedSecretParams,
+    type OAuthClientGetParams as OAuthClientGetParams,
+    type OAuthClientRotateSecretParams as OAuthClientRotateSecretParams,
+  };
 
-  export { OAuthScopes as OAuthScopes, BaseOAuthScopes as BaseOAuthScopes };
+  export {
+    OAuthScopes as OAuthScopes,
+    BaseOAuthScopes as BaseOAuthScopes,
+    type OAuthScopeListResponse as OAuthScopeListResponse,
+    type OAuthScopeListResponsesSinglePage as OAuthScopeListResponsesSinglePage,
+  };
 }
