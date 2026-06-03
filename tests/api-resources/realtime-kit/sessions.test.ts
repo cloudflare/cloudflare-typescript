@@ -56,7 +56,11 @@ describe('resource sessions', () => {
     const response = await client.realtimeKit.sessions.getParticipantDataFromPeerId(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', filters: 'device_info' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        filters: 'device_info',
+        include_peer_events: true,
+      },
     );
   });
 
@@ -221,7 +225,7 @@ describe('resource sessions', () => {
     const response = await client.realtimeKit.sessions.getSessionTranscripts(
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', format: 'SRT' },
     );
   });
 
