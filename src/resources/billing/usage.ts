@@ -314,6 +314,16 @@ export namespace UsagePaygoResponse {
      * Identifies the product family for the Cloudflare service.
      */
     ServiceFamilyName?: string;
+
+    /**
+     * The identifier for the Cloudflare zone (zone tag).
+     */
+    ZoneId?: string | null;
+
+    /**
+     * The display name of the Cloudflare zone.
+     */
+    ZoneName?: string | null;
   }
 }
 
