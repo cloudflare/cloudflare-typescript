@@ -965,7 +965,7 @@ export interface NetFlowsTimeseriesGroupsParams {
    * Normalization method applied to the results. Refer to
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
-  normalization?: 'PERCENTAGE' | 'MIN0_MAX';
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX' | 'PERCENTAGE_CHANGE';
 
   /**
    * Filters the results by network traffic product types.

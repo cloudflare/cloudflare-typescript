@@ -82,11 +82,13 @@ TEST_PATHS=(
 	tests/api-resources/client-certificates.test.ts
 	tests/api-resources/custom-certificates/custom-certificates.test.ts
 	tests/api-resources/custom-certificates/prioritize.test.ts
+	tests/api-resources/custom-csrs.test.ts
 	tests/api-resources/custom-hostnames/custom-hostnames.test.ts
 	tests/api-resources/custom-hostnames/fallback-origin.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificate-pack.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificates.test.ts
 	tests/api-resources/custom-nameservers.test.ts
+	tests/api-resources/tenant-custom-nameservers.test.ts
 	tests/api-resources/dns-firewall/dns-firewall.test.ts
 	tests/api-resources/dns-firewall/analytics/analytics.test.ts
 	tests/api-resources/dns-firewall/analytics/reports/reports.test.ts
@@ -126,7 +128,9 @@ TEST_PATHS=(
 	tests/api-resources/email-security/settings/block-senders.test.ts
 	tests/api-resources/email-security/settings/domains.test.ts
 	tests/api-resources/email-security/settings/impersonation-registry.test.ts
+	tests/api-resources/email-security/settings/sending-domain-restrictions.test.ts
 	tests/api-resources/email-security/settings/trusted-domains.test.ts
+	tests/api-resources/email-security/settings/url-ignore-patterns.test.ts
 	tests/api-resources/email-security/submissions.test.ts
 	tests/api-resources/email-routing/email-routing.test.ts
 	tests/api-resources/email-routing/dns.test.ts
@@ -211,6 +215,7 @@ TEST_PATHS=(
 	tests/api-resources/workers/observability/telemetry.test.ts
 	tests/api-resources/workers/observability/destinations.test.ts
 	tests/api-resources/workers/observability/queries.test.ts
+	tests/api-resources/workers/observability/shared-queries.test.ts
 	tests/api-resources/kv/kv.test.ts
 	tests/api-resources/kv/namespaces/namespaces.test.ts
 	tests/api-resources/kv/namespaces/keys.test.ts
@@ -557,6 +562,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/tunnels/warp-connector/failover.test.ts
 	tests/api-resources/zero-trust/connectivity-settings.test.ts
 	tests/api-resources/zero-trust/dlp/dlp.test.ts
+	tests/api-resources/zero-trust/dlp/custom-prompt-topics.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/datasets.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/upload.test.ts
 	tests/api-resources/zero-trust/dlp/datasets/versions/versions.test.ts
@@ -818,6 +824,8 @@ TEST_PATHS=(
 	tests/api-resources/iam/user-groups/user-groups.test.ts
 	tests/api-resources/iam/user-groups/members.test.ts
 	tests/api-resources/iam/sso.test.ts
+	tests/api-resources/iam/oauth-clients.test.ts
+	tests/api-resources/iam/oauth-scopes.test.ts
 	tests/api-resources/cloud-connector/cloud-connector.test.ts
 	tests/api-resources/cloud-connector/rules.test.ts
 	tests/api-resources/botnet-feed/botnet-feed.test.ts
@@ -845,6 +853,7 @@ TEST_PATHS=(
 	tests/api-resources/content-scanning/settings.test.ts
 	tests/api-resources/ai-security/ai-security.test.ts
 	tests/api-resources/ai-security/custom-topics.test.ts
+	tests/api-resources/csam-scanner.test.ts
 	tests/api-resources/abuse-reports/abuse-reports.test.ts
 	tests/api-resources/abuse-reports/mitigations.test.ts
 	tests/api-resources/ai/ai.test.ts

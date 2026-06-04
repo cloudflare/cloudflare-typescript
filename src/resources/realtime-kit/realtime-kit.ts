@@ -27,6 +27,8 @@ import {
   LivestreamGetAllLivestreamsResponse,
   LivestreamGetLivestreamAnalyticsCompleteParams,
   LivestreamGetLivestreamAnalyticsCompleteResponse,
+  LivestreamGetLivestreamAnalyticsDaywiseParams,
+  LivestreamGetLivestreamAnalyticsDaywiseResponse,
   LivestreamGetLivestreamSessionDetailsForSessionIDParams,
   LivestreamGetLivestreamSessionDetailsForSessionIDResponse,
   LivestreamGetLivestreamSessionForLivestreamIDParams,
@@ -94,11 +96,13 @@ import {
   RecordingStartRecordingsParams,
   RecordingStartRecordingsResponse,
   RecordingStartTrackRecordingParams,
+  RecordingStartTrackRecordingResponse,
   Recordings,
 } from './recordings';
 import * as SessionsAPI from './sessions';
 import {
   SessionGenerateSummaryOfTranscriptsParams,
+  SessionGenerateSummaryOfTranscriptsResponse,
   SessionGetParticipantDataFromPeerIDParams,
   SessionGetParticipantDataFromPeerIDResponse,
   SessionGetSessionChatParams,
@@ -207,6 +211,7 @@ export declare namespace RealtimeKit {
 
   export {
     Sessions as Sessions,
+    type SessionGenerateSummaryOfTranscriptsResponse as SessionGenerateSummaryOfTranscriptsResponse,
     type SessionGetParticipantDataFromPeerIDResponse as SessionGetParticipantDataFromPeerIDResponse,
     type SessionGetSessionChatResponse as SessionGetSessionChatResponse,
     type SessionGetSessionDetailsResponse as SessionGetSessionDetailsResponse,
@@ -233,6 +238,7 @@ export declare namespace RealtimeKit {
     type RecordingGetRecordingsResponse as RecordingGetRecordingsResponse,
     type RecordingPauseResumeStopRecordingResponse as RecordingPauseResumeStopRecordingResponse,
     type RecordingStartRecordingsResponse as RecordingStartRecordingsResponse,
+    type RecordingStartTrackRecordingResponse as RecordingStartTrackRecordingResponse,
     type RecordingGetActiveRecordingsParams as RecordingGetActiveRecordingsParams,
     type RecordingGetOneRecordingParams as RecordingGetOneRecordingParams,
     type RecordingGetRecordingsParams as RecordingGetRecordingsParams,
@@ -275,6 +281,7 @@ export declare namespace RealtimeKit {
     type LivestreamGetActiveLivestreamsForLivestreamIDResponse as LivestreamGetActiveLivestreamsForLivestreamIDResponse,
     type LivestreamGetAllLivestreamsResponse as LivestreamGetAllLivestreamsResponse,
     type LivestreamGetLivestreamAnalyticsCompleteResponse as LivestreamGetLivestreamAnalyticsCompleteResponse,
+    type LivestreamGetLivestreamAnalyticsDaywiseResponse as LivestreamGetLivestreamAnalyticsDaywiseResponse,
     type LivestreamGetLivestreamSessionDetailsForSessionIDResponse as LivestreamGetLivestreamSessionDetailsForSessionIDResponse,
     type LivestreamGetLivestreamSessionForLivestreamIDResponse as LivestreamGetLivestreamSessionForLivestreamIDResponse,
     type LivestreamGetMeetingActiveLivestreamsResponse as LivestreamGetMeetingActiveLivestreamsResponse,
@@ -285,6 +292,7 @@ export declare namespace RealtimeKit {
     type LivestreamGetActiveLivestreamsForLivestreamIDParams as LivestreamGetActiveLivestreamsForLivestreamIDParams,
     type LivestreamGetAllLivestreamsParams as LivestreamGetAllLivestreamsParams,
     type LivestreamGetLivestreamAnalyticsCompleteParams as LivestreamGetLivestreamAnalyticsCompleteParams,
+    type LivestreamGetLivestreamAnalyticsDaywiseParams as LivestreamGetLivestreamAnalyticsDaywiseParams,
     type LivestreamGetLivestreamSessionDetailsForSessionIDParams as LivestreamGetLivestreamSessionDetailsForSessionIDParams,
     type LivestreamGetLivestreamSessionForLivestreamIDParams as LivestreamGetLivestreamSessionForLivestreamIDParams,
     type LivestreamGetMeetingActiveLivestreamsParams as LivestreamGetMeetingActiveLivestreamsParams,

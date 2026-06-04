@@ -191,37 +191,37 @@ export interface KeylessCertificate {
   status: 'active' | 'deleted';
 
   /**
-   * Configuration for using Keyless SSL through a Cloudflare Tunnel
+   * Configuration for using Keyless SSL through a Cloudflare Tunnel.
    */
   tunnel?: Tunnel;
 }
 
 /**
- * Configuration for using Keyless SSL through a Cloudflare Tunnel
+ * Configuration for using Keyless SSL through a Cloudflare Tunnel.
  */
 export interface Tunnel {
   /**
-   * Private IP of the Key Server Host
+   * Private IP of the Key Server Host.
    */
   private_ip: string;
 
   /**
-   * Cloudflare Tunnel Virtual Network ID
+   * Cloudflare Tunnel Virtual Network ID.
    */
   vnet_id: string;
 }
 
 /**
- * Configuration for using Keyless SSL through a Cloudflare Tunnel
+ * Configuration for using Keyless SSL through a Cloudflare Tunnel.
  */
 export interface TunnelParam {
   /**
-   * Private IP of the Key Server Host
+   * Private IP of the Key Server Host.
    */
   private_ip: string;
 
   /**
-   * Cloudflare Tunnel Virtual Network ID
+   * Cloudflare Tunnel Virtual Network ID.
    */
   vnet_id: string;
 }
@@ -269,7 +269,7 @@ export interface KeylessCertificateCreateParams {
   name?: string;
 
   /**
-   * Body param: Configuration for using Keyless SSL through a Cloudflare Tunnel
+   * Body param: Configuration for using Keyless SSL through a Cloudflare Tunnel.
    */
   tunnel?: TunnelParam;
 }
@@ -316,7 +316,7 @@ export interface KeylessCertificateEditParams {
   port?: number;
 
   /**
-   * Body param: Configuration for using Keyless SSL through a Cloudflare Tunnel
+   * Body param: Configuration for using Keyless SSL through a Cloudflare Tunnel.
    */
   tunnel?: TunnelParam;
 }

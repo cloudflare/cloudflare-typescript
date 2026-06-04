@@ -171,11 +171,7 @@ describe('resource recordings', () => {
   test.skip('startTrackRecording: only required params', async () => {
     const responsePromise = client.realtimeKit.recordings.startTrackRecording('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      layers: {
-        default: {},
-        'default-video': {},
-      },
-      meeting_id: 'string',
+      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -190,54 +186,9 @@ describe('resource recordings', () => {
   test.skip('startTrackRecording: required and optional params', async () => {
     const response = await client.realtimeKit.recordings.startTrackRecording('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      layers: {
-        default: {
-          file_name_prefix: 'string',
-          outputs: [
-            {
-              storage_config: {
-                type: 'aws',
-                access_key: 'access_key',
-                auth_method: 'KEY',
-                bucket: 'bucket',
-                host: 'host',
-                password: 'password',
-                path: 'path',
-                port: 0,
-                private_key: 'private_key',
-                region: 'us-east-1',
-                secret: 'secret',
-                username: 'username',
-              },
-              type: 'REALTIMEKIT_BUCKET',
-            },
-          ],
-        },
-        'default-video': {
-          file_name_prefix: 'string',
-          outputs: [
-            {
-              storage_config: {
-                type: 'aws',
-                access_key: 'access_key',
-                auth_method: 'KEY',
-                bucket: 'bucket',
-                host: 'host',
-                password: 'password',
-                path: 'path',
-                port: 0,
-                private_key: 'private_key',
-                region: 'us-east-1',
-                secret: 'secret',
-                username: 'username',
-              },
-              type: 'REALTIMEKIT_BUCKET',
-            },
-          ],
-        },
-      },
-      meeting_id: 'string',
-      max_seconds: 60,
+      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
+      layers: { foo: { file_name_prefix: 'file_name_prefix', media_kind: 'audio' } },
+      user_ids: ['x'],
     });
   });
 });

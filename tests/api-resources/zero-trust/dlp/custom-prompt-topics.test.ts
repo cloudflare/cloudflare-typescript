@@ -9,12 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource regionalHostnames', () => {
+describe('resource customPromptTopics', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.addressing.regionalHostnames.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      hostname: 'foo.example.com',
-      region_key: 'ca',
+    const responsePromise = client.zeroTrust.dlp.customPromptTopics.create({
+      account_id: 'account_id',
+      enabled: true,
+      name: 'name',
+      topic: 'topic',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,18 +27,50 @@ describe('resource regionalHostnames', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.addressing.regionalHostnames.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      hostname: 'foo.example.com',
-      region_key: 'ca',
-      routing: 'dns',
+    const response = await client.zeroTrust.dlp.customPromptTopics.create({
+      account_id: 'account_id',
+      enabled: true,
+      name: 'name',
+      topic: 'topic',
+      description: 'description',
+      profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = client.zeroTrust.dlp.customPromptTopics.update(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: 'account_id',
+        enabled: true,
+        name: 'name',
+        topic: 'topic',
+      },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.zeroTrust.dlp.customPromptTopics.update(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: 'account_id',
+        enabled: true,
+        name: 'name',
+        topic: 'topic',
+        description: 'description',
+      },
+    );
+  });
+
   test('list: only required params', async () => {
-    const responsePromise = client.addressing.regionalHostnames.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.zeroTrust.dlp.customPromptTopics.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,15 +81,14 @@ describe('resource regionalHostnames', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.addressing.regionalHostnames.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.zeroTrust.dlp.customPromptTopics.list({ account_id: 'account_id' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.addressing.regionalHostnames.delete('foo.example.com', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.zeroTrust.dlp.customPromptTopics.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,36 +99,17 @@ describe('resource regionalHostnames', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.addressing.regionalHostnames.delete('foo.example.com', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('edit: only required params', async () => {
-    const responsePromise = client.addressing.regionalHostnames.edit('foo.example.com', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      region_key: 'ca',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('edit: required and optional params', async () => {
-    const response = await client.addressing.regionalHostnames.edit('foo.example.com', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      region_key: 'ca',
-    });
+    const response = await client.zeroTrust.dlp.customPromptTopics.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.addressing.regionalHostnames.get('foo.example.com', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.zeroTrust.dlp.customPromptTopics.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -107,8 +120,9 @@ describe('resource regionalHostnames', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.addressing.regionalHostnames.get('foo.example.com', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.zeroTrust.dlp.customPromptTopics.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 });

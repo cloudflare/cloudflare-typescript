@@ -103,8 +103,33 @@ describe('resource livestreams', () => {
   test.skip('getLivestreamAnalyticsComplete: required and optional params', async () => {
     const response = await client.realtimeKit.livestreams.getLivestreamAnalyticsComplete('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      end_time: '2019-12-27T18:11:19.117Z',
-      start_time: '2019-12-27T18:11:19.117Z',
+      end_time: 0,
+      filters: 'filters',
+      start_time: 0,
+    });
+  });
+
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getLivestreamAnalyticsDaywise: only required params', async () => {
+    const responsePromise = client.realtimeKit.livestreams.getLivestreamAnalyticsDaywise('app_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // TODO: HTTP 401 from prism, support api tokens
+  test.skip('getLivestreamAnalyticsDaywise: required and optional params', async () => {
+    const response = await client.realtimeKit.livestreams.getLivestreamAnalyticsDaywise('app_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      end_time: 0,
+      filters: 'filters',
+      start_time: 0,
     });
   });
 

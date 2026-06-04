@@ -82,6 +82,7 @@ describe('resource meetings', () => {
       session_keep_alive_time_in_secs: 60,
       summarize_on_end: true,
       title: 'title',
+      transcribe_on_end: true,
     });
   });
 
@@ -202,6 +203,7 @@ describe('resource meetings', () => {
       per_page: 0,
       search: 'search',
       start_time: '2019-12-27T18:11:19.117Z',
+      status: 'ACTIVE',
     });
   });
 
@@ -390,6 +392,7 @@ describe('resource meetings', () => {
         session_keep_alive_time_in_secs: 60,
         summarize_on_end: true,
         title: 'title',
+        transcribe_on_end: true,
       },
     );
   });
@@ -432,10 +435,47 @@ describe('resource meetings', () => {
         live_stream_on_start: true,
         persist_chat: true,
         record_on_start: true,
+        recording_config: {
+          audio_config: {
+            channel: 'mono',
+            codec: 'MP3',
+            export_file: true,
+          },
+          file_name_prefix: 'file_name_prefix',
+          live_streaming_config: { rtmp_url: 'rtmp://a.rtmp.youtube.com/live2' },
+          max_seconds: 60,
+          realtimekit_bucket_config: { enabled: true },
+          storage_config: {
+            type: 'aws',
+            access_key: 'access_key',
+            auth_method: 'KEY',
+            bucket: 'bucket',
+            host: 'host',
+            password: 'password',
+            path: 'path',
+            port: 0,
+            private_key: 'private_key',
+            region: 'us-east-1',
+            secret: 'secret',
+            username: 'username',
+          },
+          video_config: {
+            codec: 'H264',
+            export_file: true,
+            height: 720,
+            watermark: {
+              position: 'left top',
+              size: { height: 1, width: 1 },
+              url: 'https://example.com',
+            },
+            width: 1280,
+          },
+        },
         session_keep_alive_time_in_secs: 60,
         status: 'INACTIVE',
         summarize_on_end: true,
         title: 'title',
+        transcribe_on_end: true,
       },
     );
   });

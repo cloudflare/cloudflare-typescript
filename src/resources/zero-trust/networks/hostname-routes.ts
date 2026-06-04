@@ -160,6 +160,11 @@ export interface HostnameRoute {
   hostname?: string;
 
   /**
+   * The type of tunnel.
+   */
+  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
+
+  /**
    * UUID of the tunnel.
    */
   tunnel_id?: string;

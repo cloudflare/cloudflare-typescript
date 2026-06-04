@@ -67,4 +67,19 @@ describe('resource rules', () => {
   test('delete: required and optional params', async () => {
     const response = await client.snippets.rules.delete({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
   });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.snippets.rules.get({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.snippets.rules.get({ zone_id: '9f1839b6152d298aca64c4e906b6d074' });
+  });
 });

@@ -45,6 +45,18 @@ export interface OrganizationProfile {
   external_metadata: string;
 }
 
+export interface OrganizationProfileParam {
+  business_address: string;
+
+  business_email: string;
+
+  business_name: string;
+
+  business_phone: string;
+
+  external_metadata: string;
+}
+
 export interface OrganizationProfileUpdateParams {
   business_address: string;
 

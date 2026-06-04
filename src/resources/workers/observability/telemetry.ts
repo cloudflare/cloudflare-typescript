@@ -31,6 +31,54 @@ export class Telemetry extends APIResource {
   }
 
   /**
+   * Prepare websocket server for live tail.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.workers.observability.telemetry.liveTail({
+   *     account_id: 'account_id',
+   *   });
+   * ```
+   */
+  liveTail(
+    params: TelemetryLiveTailParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TelemetryLiveTailResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/workers/observability/telemetry/live-tail`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: TelemetryLiveTailResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Notify live tail that user is still eligible to receive live events.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.workers.observability.telemetry.liveTailHeartbeat(
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  liveTailHeartbeat(
+    params: TelemetryLiveTailHeartbeatParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TelemetryLiveTailHeartbeatResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/workers/observability/telemetry/live-tail/heartbeat`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: TelemetryLiveTailHeartbeatResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Run a temporary or saved query.
    *
    * @example
@@ -99,6 +147,15 @@ export interface TelemetryKeysResponse {
 
   type: 'string' | 'boolean' | 'number';
 }
+
+export interface TelemetryLiveTailResponse {
+  /**
+   * WebSocket URL clients connect to in order to stream live tail events.
+   */
+  wsUrl: string;
+}
+
+export type TelemetryLiveTailHeartbeatResponse = unknown;
 
 /**
  * Complete results of a query run. The populated fields depend on the requested
@@ -1776,6 +1833,203 @@ export namespace TelemetryKeysParams {
   }
 }
 
+export interface TelemetryLiveTailParams {
+  /**
+   * Path param: Your Cloudflare account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Set a flag to describe how to combine the filters on the query.
+   */
+  filterCombination?: 'and' | 'or' | 'AND' | 'OR';
+
+  /**
+   * Body param: Apply filters to the query. Supports nested groups via kind:
+   * 'group'.
+   */
+  filters?: Array<
+    TelemetryLiveTailParams.UnionMember0 | TelemetryLiveTailParams.WorkersObservabilityFilterLeaf
+  >;
+
+  /**
+   * Body param
+   */
+  scriptId?: string;
+}
+
+export namespace TelemetryLiveTailParams {
+  export interface UnionMember0 {
+    filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+    filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
+
+    kind: 'group';
+  }
+
+  export namespace UnionMember0 {
+    export interface UnionMember0 {
+      filterCombination: 'and' | 'or' | 'AND' | 'OR';
+
+      filters: Array<unknown>;
+
+      kind: 'group';
+    }
+
+    /**
+     * A filter condition applied to query results. Use the keys and values endpoints
+     * to discover available fields and their values before constructing filters.
+     */
+    export interface WorkersObservabilityFilterLeaf {
+      /**
+       * Filter field name. Use verified keys from previous query results or the keys
+       * endpoint. Common keys include $metadata.service, $metadata.origin,
+       * $metadata.trigger, $metadata.message, and $metadata.error.
+       */
+      key: string;
+
+      /**
+       * Comparison operator. String operators: includes, not_includes, starts_with,
+       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
+       */
+      operation:
+        | 'includes'
+        | 'not_includes'
+        | 'starts_with'
+        | 'ends_with'
+        | 'regex'
+        | 'exists'
+        | 'is_null'
+        | 'in'
+        | 'not_in'
+        | 'eq'
+        | 'neq'
+        | 'gt'
+        | 'gte'
+        | 'lt'
+        | 'lte'
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'INCLUDES'
+        | 'DOES_NOT_INCLUDE'
+        | 'MATCH_REGEX'
+        | 'EXISTS'
+        | 'DOES_NOT_EXIST'
+        | 'IN'
+        | 'NOT_IN'
+        | 'STARTS_WITH'
+        | 'ENDS_WITH';
+
+      /**
+       * Data type of the filter field. Must match the actual type of the key being
+       * filtered.
+       */
+      type: 'string' | 'number' | 'boolean';
+
+      /**
+       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+       * omitted.
+       */
+      kind?: 'filter';
+
+      /**
+       * Comparison value. Must match actual values in your data — verify with the values
+       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+       * lookaheads/lookbehinds).
+       */
+      value?: string | number | boolean;
+    }
+  }
+
+  /**
+   * A filter condition applied to query results. Use the keys and values endpoints
+   * to discover available fields and their values before constructing filters.
+   */
+  export interface WorkersObservabilityFilterLeaf {
+    /**
+     * Filter field name. Use verified keys from previous query results or the keys
+     * endpoint. Common keys include $metadata.service, $metadata.origin,
+     * $metadata.trigger, $metadata.message, and $metadata.error.
+     */
+    key: string;
+
+    /**
+     * Comparison operator. String operators: includes, not_includes, starts_with,
+     * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
+     * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
+     */
+    operation:
+      | 'includes'
+      | 'not_includes'
+      | 'starts_with'
+      | 'ends_with'
+      | 'regex'
+      | 'exists'
+      | 'is_null'
+      | 'in'
+      | 'not_in'
+      | 'eq'
+      | 'neq'
+      | 'gt'
+      | 'gte'
+      | 'lt'
+      | 'lte'
+      | '='
+      | '!='
+      | '>'
+      | '>='
+      | '<'
+      | '<='
+      | 'INCLUDES'
+      | 'DOES_NOT_INCLUDE'
+      | 'MATCH_REGEX'
+      | 'EXISTS'
+      | 'DOES_NOT_EXIST'
+      | 'IN'
+      | 'NOT_IN'
+      | 'STARTS_WITH'
+      | 'ENDS_WITH';
+
+    /**
+     * Data type of the filter field. Must match the actual type of the key being
+     * filtered.
+     */
+    type: 'string' | 'number' | 'boolean';
+
+    /**
+     * Discriminator for leaf filter nodes. Always 'filter' when present; may be
+     * omitted.
+     */
+    kind?: 'filter';
+
+    /**
+     * Comparison value. Must match actual values in your data — verify with the values
+     * endpoint. Ensure the value type (string/number/boolean) matches the field type.
+     * String comparisons are case-sensitive. Regex uses RE2 syntax (no
+     * lookaheads/lookbehinds).
+     */
+    value?: string | number | boolean;
+  }
+}
+
+export interface TelemetryLiveTailHeartbeatParams {
+  /**
+   * Path param: Your Cloudflare account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  scriptId?: string;
+}
+
 export interface TelemetryQueryParams {
   /**
    * Path param: Your Cloudflare account ID.
@@ -2474,11 +2728,15 @@ Telemetry.TelemetryValuesResponsesSinglePage = TelemetryValuesResponsesSinglePag
 export declare namespace Telemetry {
   export {
     type TelemetryKeysResponse as TelemetryKeysResponse,
+    type TelemetryLiveTailResponse as TelemetryLiveTailResponse,
+    type TelemetryLiveTailHeartbeatResponse as TelemetryLiveTailHeartbeatResponse,
     type TelemetryQueryResponse as TelemetryQueryResponse,
     type TelemetryValuesResponse as TelemetryValuesResponse,
     TelemetryKeysResponsesSinglePage as TelemetryKeysResponsesSinglePage,
     TelemetryValuesResponsesSinglePage as TelemetryValuesResponsesSinglePage,
     type TelemetryKeysParams as TelemetryKeysParams,
+    type TelemetryLiveTailParams as TelemetryLiveTailParams,
+    type TelemetryLiveTailHeartbeatParams as TelemetryLiveTailHeartbeatParams,
     type TelemetryQueryParams as TelemetryQueryParams,
     type TelemetryValuesParams as TelemetryValuesParams,
   };

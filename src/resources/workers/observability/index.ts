@@ -22,13 +22,24 @@ export {
   type QueryListParams,
 } from './queries';
 export {
+  SharedQueries,
+  type SharedQueryCreateResponse,
+  type SharedQueryGetResponse,
+  type SharedQueryCreateParams,
+  type SharedQueryGetParams,
+} from './shared-queries';
+export {
   TelemetryKeysResponsesSinglePage,
   TelemetryValuesResponsesSinglePage,
   Telemetry,
   type TelemetryKeysResponse,
+  type TelemetryLiveTailResponse,
+  type TelemetryLiveTailHeartbeatResponse,
   type TelemetryQueryResponse,
   type TelemetryValuesResponse,
   type TelemetryKeysParams,
+  type TelemetryLiveTailParams,
+  type TelemetryLiveTailHeartbeatParams,
   type TelemetryQueryParams,
   type TelemetryValuesParams,
 } from './telemetry';

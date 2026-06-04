@@ -122,6 +122,12 @@ export interface SettingsPolicy {
   disable_auto_fallback?: boolean;
 
   /**
+   * List of DNS search suffixes to apply to clients. Suffixes are evaluated in
+   * order. Use an empty array to clear.
+   */
+  dns_search_suffixes?: Array<SettingsPolicy.DNSSearchSuffix>;
+
+  /**
    * Whether the policy will be applied to matching devices.
    */
   enabled?: boolean;
@@ -218,6 +224,18 @@ export interface SettingsPolicy {
 }
 
 export namespace SettingsPolicy {
+  export interface DNSSearchSuffix {
+    /**
+     * The DNS search suffix to append when resolving short hostnames.
+     */
+    suffix: string;
+
+    /**
+     * A description of the DNS search suffix.
+     */
+    description?: string;
+  }
+
   export interface ServiceModeV2 {
     /**
      * The mode to run the WARP client under.

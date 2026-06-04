@@ -170,6 +170,24 @@ Methods:
 - <code title="patch /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">edit</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry/{impersonation_registry_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">get</a>(impersonationRegistryId, { ...params }) -> ImpersonationRegistryGetResponse</code>
 
+### SendingDomainRestrictions
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">SendingDomainRestrictionCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">SendingDomainRestrictionListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">SendingDomainRestrictionDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">SendingDomainRestrictionEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">SendingDomainRestrictionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/sending_domain_restrictions">client.emailSecurity.settings.sendingDomainRestrictions.<a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">create</a>({ ...params }) -> SendingDomainRestrictionCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/sending_domain_restrictions">client.emailSecurity.settings.sendingDomainRestrictions.<a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">list</a>({ ...params }) -> SendingDomainRestrictionListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/sending_domain_restrictions/{sending_domain_restriction_id}">client.emailSecurity.settings.sendingDomainRestrictions.<a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">delete</a>(sendingDomainRestrictionId, { ...params }) -> SendingDomainRestrictionDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/sending_domain_restrictions/{sending_domain_restriction_id}">client.emailSecurity.settings.sendingDomainRestrictions.<a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">edit</a>(sendingDomainRestrictionId, { ...params }) -> SendingDomainRestrictionEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/sending_domain_restrictions/{sending_domain_restriction_id}">client.emailSecurity.settings.sendingDomainRestrictions.<a href="./src/resources/email-security/settings/sending-domain-restrictions.ts">get</a>(sendingDomainRestrictionId, { ...params }) -> SendingDomainRestrictionGetResponse</code>
+
 ### TrustedDomains
 
 Types:
@@ -187,6 +205,24 @@ Methods:
 - <code title="delete /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">delete</a>(trustedDomainId, { ...params }) -> TrustedDomainDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">edit</a>(trustedDomainId, { ...params }) -> TrustedDomainEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">get</a>(trustedDomainId, { ...params }) -> TrustedDomainGetResponse</code>
+
+### URLIgnorePatterns
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/url-ignore-patterns.ts">URLIgnorePatternCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/url-ignore-patterns.ts">URLIgnorePatternListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/url-ignore-patterns.ts">URLIgnorePatternDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/url-ignore-patterns.ts">URLIgnorePatternEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/url-ignore-patterns.ts">URLIgnorePatternGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/url_ignore_patterns">client.emailSecurity.settings.urlIgnorePatterns.<a href="./src/resources/email-security/settings/url-ignore-patterns.ts">create</a>({ ...params }) -> URLIgnorePatternCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/url_ignore_patterns">client.emailSecurity.settings.urlIgnorePatterns.<a href="./src/resources/email-security/settings/url-ignore-patterns.ts">list</a>({ ...params }) -> URLIgnorePatternListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/url_ignore_patterns/{pattern_id}">client.emailSecurity.settings.urlIgnorePatterns.<a href="./src/resources/email-security/settings/url-ignore-patterns.ts">delete</a>(patternId, { ...params }) -> URLIgnorePatternDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/url_ignore_patterns/{pattern_id}">client.emailSecurity.settings.urlIgnorePatterns.<a href="./src/resources/email-security/settings/url-ignore-patterns.ts">edit</a>(patternId, { ...params }) -> URLIgnorePatternEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/url_ignore_patterns/{pattern_id}">client.emailSecurity.settings.urlIgnorePatterns.<a href="./src/resources/email-security/settings/url-ignore-patterns.ts">get</a>(patternId, { ...params }) -> URLIgnorePatternGetResponse</code>
 
 ## Submissions
 

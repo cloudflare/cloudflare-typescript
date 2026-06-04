@@ -59,6 +59,21 @@ import {
   ImpersonationRegistryListResponse,
   ImpersonationRegistryListResponsesV4PagePaginationArray,
 } from './impersonation-registry';
+import * as SendingDomainRestrictionsAPI from './sending-domain-restrictions';
+import {
+  SendingDomainRestrictionCreateParams,
+  SendingDomainRestrictionCreateResponse,
+  SendingDomainRestrictionDeleteParams,
+  SendingDomainRestrictionDeleteResponse,
+  SendingDomainRestrictionEditParams,
+  SendingDomainRestrictionEditResponse,
+  SendingDomainRestrictionGetParams,
+  SendingDomainRestrictionGetResponse,
+  SendingDomainRestrictionListParams,
+  SendingDomainRestrictionListResponse,
+  SendingDomainRestrictionListResponsesV4PagePaginationArray,
+  SendingDomainRestrictions,
+} from './sending-domain-restrictions';
 import * as TrustedDomainsAPI from './trusted-domains';
 import {
   TrustedDomainCreateParams,
@@ -74,6 +89,21 @@ import {
   TrustedDomainListResponsesV4PagePaginationArray,
   TrustedDomains,
 } from './trusted-domains';
+import * as URLIgnorePatternsAPI from './url-ignore-patterns';
+import {
+  URLIgnorePatternCreateParams,
+  URLIgnorePatternCreateResponse,
+  URLIgnorePatternDeleteParams,
+  URLIgnorePatternDeleteResponse,
+  URLIgnorePatternEditParams,
+  URLIgnorePatternEditResponse,
+  URLIgnorePatternGetParams,
+  URLIgnorePatternGetResponse,
+  URLIgnorePatternListParams,
+  URLIgnorePatternListResponse,
+  URLIgnorePatternListResponsesV4PagePaginationArray,
+  URLIgnorePatterns,
+} from './url-ignore-patterns';
 
 export class Settings extends APIResource {
   allowPolicies: AllowPoliciesAPI.AllowPolicies = new AllowPoliciesAPI.AllowPolicies(this._client);
@@ -81,7 +111,12 @@ export class Settings extends APIResource {
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   impersonationRegistry: ImpersonationRegistryAPI.ImpersonationRegistry =
     new ImpersonationRegistryAPI.ImpersonationRegistry(this._client);
+  sendingDomainRestrictions: SendingDomainRestrictionsAPI.SendingDomainRestrictions =
+    new SendingDomainRestrictionsAPI.SendingDomainRestrictions(this._client);
   trustedDomains: TrustedDomainsAPI.TrustedDomains = new TrustedDomainsAPI.TrustedDomains(this._client);
+  urlIgnorePatterns: URLIgnorePatternsAPI.URLIgnorePatterns = new URLIgnorePatternsAPI.URLIgnorePatterns(
+    this._client,
+  );
 }
 
 Settings.AllowPolicies = AllowPolicies;
@@ -93,8 +128,14 @@ Settings.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePag
 Settings.ImpersonationRegistry = ImpersonationRegistry;
 Settings.ImpersonationRegistryListResponsesV4PagePaginationArray =
   ImpersonationRegistryListResponsesV4PagePaginationArray;
+Settings.SendingDomainRestrictions = SendingDomainRestrictions;
+Settings.SendingDomainRestrictionListResponsesV4PagePaginationArray =
+  SendingDomainRestrictionListResponsesV4PagePaginationArray;
 Settings.TrustedDomains = TrustedDomains;
 Settings.TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainListResponsesV4PagePaginationArray;
+Settings.URLIgnorePatterns = URLIgnorePatterns;
+Settings.URLIgnorePatternListResponsesV4PagePaginationArray =
+  URLIgnorePatternListResponsesV4PagePaginationArray;
 
 export declare namespace Settings {
   export {
@@ -156,6 +197,21 @@ export declare namespace Settings {
   };
 
   export {
+    SendingDomainRestrictions as SendingDomainRestrictions,
+    type SendingDomainRestrictionCreateResponse as SendingDomainRestrictionCreateResponse,
+    type SendingDomainRestrictionListResponse as SendingDomainRestrictionListResponse,
+    type SendingDomainRestrictionDeleteResponse as SendingDomainRestrictionDeleteResponse,
+    type SendingDomainRestrictionEditResponse as SendingDomainRestrictionEditResponse,
+    type SendingDomainRestrictionGetResponse as SendingDomainRestrictionGetResponse,
+    SendingDomainRestrictionListResponsesV4PagePaginationArray as SendingDomainRestrictionListResponsesV4PagePaginationArray,
+    type SendingDomainRestrictionCreateParams as SendingDomainRestrictionCreateParams,
+    type SendingDomainRestrictionListParams as SendingDomainRestrictionListParams,
+    type SendingDomainRestrictionDeleteParams as SendingDomainRestrictionDeleteParams,
+    type SendingDomainRestrictionEditParams as SendingDomainRestrictionEditParams,
+    type SendingDomainRestrictionGetParams as SendingDomainRestrictionGetParams,
+  };
+
+  export {
     TrustedDomains as TrustedDomains,
     type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
     type TrustedDomainListResponse as TrustedDomainListResponse,
@@ -168,5 +224,20 @@ export declare namespace Settings {
     type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
     type TrustedDomainEditParams as TrustedDomainEditParams,
     type TrustedDomainGetParams as TrustedDomainGetParams,
+  };
+
+  export {
+    URLIgnorePatterns as URLIgnorePatterns,
+    type URLIgnorePatternCreateResponse as URLIgnorePatternCreateResponse,
+    type URLIgnorePatternListResponse as URLIgnorePatternListResponse,
+    type URLIgnorePatternDeleteResponse as URLIgnorePatternDeleteResponse,
+    type URLIgnorePatternEditResponse as URLIgnorePatternEditResponse,
+    type URLIgnorePatternGetResponse as URLIgnorePatternGetResponse,
+    URLIgnorePatternListResponsesV4PagePaginationArray as URLIgnorePatternListResponsesV4PagePaginationArray,
+    type URLIgnorePatternCreateParams as URLIgnorePatternCreateParams,
+    type URLIgnorePatternListParams as URLIgnorePatternListParams,
+    type URLIgnorePatternDeleteParams as URLIgnorePatternDeleteParams,
+    type URLIgnorePatternEditParams as URLIgnorePatternEditParams,
+    type URLIgnorePatternGetParams as URLIgnorePatternGetParams,
   };
 }

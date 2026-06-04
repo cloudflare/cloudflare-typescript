@@ -385,6 +385,9 @@ export namespace JobCreateParams {
 
     vendor: 's3';
 
+    /**
+     * Custom S3-compatible endpoint that must use https://.
+     */
     endpoint?: string | null;
 
     keys?: Array<string> | null;

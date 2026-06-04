@@ -8,6 +8,8 @@ import * as RulesAPI from './rules';
 import {
   RuleDeleteParams,
   RuleDeleteResponse,
+  RuleGetParams,
+  RuleGetResponse,
   RuleListParams,
   RuleListResponse,
   RuleUpdateParams,
@@ -222,8 +224,10 @@ export declare namespace Snippets {
     type RuleUpdateResponse as RuleUpdateResponse,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleGetResponse as RuleGetResponse,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
   };
 }

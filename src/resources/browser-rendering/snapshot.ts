@@ -15,6 +15,7 @@ export class Snapshot extends APIResource {
    *   await client.browserRendering.snapshot.create({
    *     account_id: 'account_id',
    *     html: '<h1>Hello World!</h1>',
+   *     formats: ['content', 'screenshot'],
    *   });
    * ```
    */
@@ -35,14 +36,83 @@ export class Snapshot extends APIResource {
 
 export interface SnapshotCreateResponse {
   /**
+   * Accessibility tree node
+   */
+  accessibilityTree?: SnapshotCreateResponse.AccessibilityTree;
+
+  /**
    * HTML content.
    */
-  content: string;
+  content?: string;
+
+  /**
+   * Markdown content.
+   */
+  markdown?: string;
 
   /**
    * Base64 encoded image.
    */
-  screenshot: string;
+  screenshot?: string;
+}
+
+export namespace SnapshotCreateResponse {
+  /**
+   * Accessibility tree node
+   */
+  export interface AccessibilityTree {
+    role: string;
+
+    autocomplete?: string;
+
+    checked?: boolean | 'mixed';
+
+    children?: Array<unknown>;
+
+    description?: string;
+
+    disabled?: boolean;
+
+    expanded?: boolean;
+
+    focused?: boolean;
+
+    haspopup?: string;
+
+    invalid?: string;
+
+    keyshortcuts?: string;
+
+    level?: number;
+
+    modal?: boolean;
+
+    multiline?: boolean;
+
+    multiselectable?: boolean;
+
+    name?: string;
+
+    orientation?: string;
+
+    pressed?: boolean | 'mixed';
+
+    readonly?: boolean;
+
+    required?: boolean;
+
+    roledescription?: string;
+
+    selected?: boolean;
+
+    value?: string | number;
+
+    valuemax?: number;
+
+    valuemin?: number;
+
+    valuetext?: string;
+  }
 }
 
 export type SnapshotCreateParams = SnapshotCreateParams.Variant0 | SnapshotCreateParams.Variant1;
@@ -134,6 +204,11 @@ export declare namespace SnapshotCreateParams {
      * Body param
      */
     emulateMediaType?: string;
+
+    /**
+     * Body param
+     */
+    formats?: Array<'content' | 'screenshot' | 'markdown' | 'accessibilityTree'>;
 
     /**
      * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).
@@ -434,6 +509,11 @@ export declare namespace SnapshotCreateParams {
      * Body param
      */
     emulateMediaType?: string;
+
+    /**
+     * Body param
+     */
+    formats?: Array<'content' | 'screenshot' | 'markdown' | 'accessibilityTree'>;
 
     /**
      * Body param: Check [options](https://pptr.dev/api/puppeteer.gotooptions).

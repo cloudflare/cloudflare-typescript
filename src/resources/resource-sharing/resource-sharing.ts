@@ -19,15 +19,9 @@ import * as ResourcesAPI from './resources';
 import {
   ResourceCreateParams,
   ResourceCreateResponse,
-  ResourceDeleteParams,
-  ResourceDeleteResponse,
-  ResourceGetParams,
-  ResourceGetResponse,
   ResourceListParams,
   ResourceListResponse,
   ResourceListResponsesV4PagePaginationArray,
-  ResourceUpdateParams,
-  ResourceUpdateResponse,
   Resources,
 } from './resources';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -842,11 +836,16 @@ export interface ResourceSharingCreateParams {
 
 export namespace ResourceSharingCreateParams {
   /**
-   * Account or organization ID must be provided.
+   * Optionally specify `recipient_account_id` to target a specific account, or
+   * `organization_id` to target the caller's whole organization. If neither is
+   * provided, the caller's organization is used. The legacy field `account_id` is
+   * accepted as a synonym for `recipient_account_id` during the deprecation period
+   * (see `x-sunset` on that field).
    */
   export interface Recipient {
     /**
-     * Account identifier.
+     * @deprecated This field has been renamed to `recipient_account_id`. Both names
+     * are accepted during the deprecation period.
      */
     account_id?: string;
 
@@ -854,6 +853,11 @@ export namespace ResourceSharingCreateParams {
      * Organization identifier.
      */
     organization_id?: string;
+
+    /**
+     * The account that will receive the share.
+     */
+    recipient_account_id?: string;
   }
 
   export interface Resource {
@@ -1021,15 +1025,9 @@ export declare namespace ResourceSharing {
   export {
     Resources as Resources,
     type ResourceCreateResponse as ResourceCreateResponse,
-    type ResourceUpdateResponse as ResourceUpdateResponse,
     type ResourceListResponse as ResourceListResponse,
-    type ResourceDeleteResponse as ResourceDeleteResponse,
-    type ResourceGetResponse as ResourceGetResponse,
     ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
     type ResourceCreateParams as ResourceCreateParams,
-    type ResourceUpdateParams as ResourceUpdateParams,
     type ResourceListParams as ResourceListParams,
-    type ResourceDeleteParams as ResourceDeleteParams,
-    type ResourceGetParams as ResourceGetParams,
   };
 }

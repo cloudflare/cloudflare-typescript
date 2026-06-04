@@ -27,13 +27,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/api-gateway/discovery/operations.ts">OperationBulkEditResponse</a></code>
-- <code><a href="./src/resources/api-gateway/discovery/operations.ts">OperationEditResponse</a></code>
 
 Methods:
 
 - <code title="get /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">list</a>({ ...params }) -> DiscoveryOperationsV4PagePaginationArray</code>
 - <code title="patch /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">bulkEdit</a>({ ...params }) -> OperationBulkEditResponse</code>
-- <code title="patch /zones/{zone_id}/api_gateway/discovery/operations/{operation_id}">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">edit</a>(operationId, { ...params }) -> OperationEditResponse</code>
 
 ## Labels
 

@@ -375,6 +375,11 @@ export namespace MeetingCreateResponse {
      * Title of the meeting.
      */
     title?: string;
+
+    /**
+     * Automatically generate transcripts when the meeting ends.
+     */
+    transcribe_on_end?: boolean;
   }
 
   export namespace Data {
@@ -846,6 +851,13 @@ export namespace MeetingGetResponse {
     record_on_start?: boolean;
 
     /**
+     * Recording Configurations to be used for this meeting. This level of configs
+     * takes higher preference over App level configs on the RealtimeKit developer
+     * portal.
+     */
+    recording_config?: Data.RecordingConfig;
+
+    /**
      * Time in seconds, for which a session remains active, after the last participant
      * has left the meeting.
      */
@@ -867,6 +879,211 @@ export namespace MeetingGetResponse {
      * Title of the meeting.
      */
     title?: string;
+
+    /**
+     * Automatically generate transcripts when the meeting ends.
+     */
+    transcribe_on_end?: boolean;
+  }
+
+  export namespace Data {
+    /**
+     * Recording Configurations to be used for this meeting. This level of configs
+     * takes higher preference over App level configs on the RealtimeKit developer
+     * portal.
+     */
+    export interface RecordingConfig {
+      /**
+       * Object containing configuration regarding the audio that is being recorded.
+       */
+      audio_config?: RecordingConfig.AudioConfig;
+
+      /**
+       * Adds a prefix to the beginning of the file name of the recording.
+       */
+      file_name_prefix?: string;
+
+      live_streaming_config?: RecordingConfig.LiveStreamingConfig;
+
+      /**
+       * Specifies the maximum duration for recording in seconds, ranging from a minimum
+       * of 60 seconds to a maximum of 24 hours.
+       */
+      max_seconds?: number;
+
+      realtimekit_bucket_config?: RecordingConfig.RealtimekitBucketConfig;
+
+      storage_config?: RecordingConfig.StorageConfig | null;
+
+      video_config?: RecordingConfig.VideoConfig;
+    }
+
+    export namespace RecordingConfig {
+      /**
+       * Object containing configuration regarding the audio that is being recorded.
+       */
+      export interface AudioConfig {
+        /**
+         * Audio signal pathway within an audio file that carries a specific sound source.
+         */
+        channel?: 'mono' | 'stereo';
+
+        /**
+         * Codec using which the recording will be encoded. If VP8/VP9 is selected for
+         * videoConfig, changing audioConfig is not allowed. In this case, the codec in the
+         * audioConfig is automatically set to vorbis.
+         */
+        codec?: 'MP3' | 'AAC';
+
+        /**
+         * Controls whether to export audio file seperately
+         */
+        export_file?: boolean;
+      }
+
+      export interface LiveStreamingConfig {
+        /**
+         * RTMP URL to stream to
+         */
+        rtmp_url?: string;
+      }
+
+      export interface RealtimekitBucketConfig {
+        /**
+         * Controls whether recordings are uploaded to RealtimeKit's bucket. If set to
+         * false, `download_url`, `audio_download_url`, `download_url_expiry` won't be
+         * generated for a recording.
+         */
+        enabled: boolean;
+      }
+
+      export interface StorageConfig {
+        /**
+         * Type of storage media.
+         */
+        type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+        /**
+         * Authentication method used for "sftp" type storage medium
+         */
+        auth_method?: 'KEY' | 'PASSWORD';
+
+        /**
+         * Name of the storage medium's bucket.
+         */
+        bucket?: string;
+
+        /**
+         * SSH destination server host for SFTP type storage medium
+         */
+        host?: string;
+
+        /**
+         * SSH destination server password for SFTP type storage medium when auth_method is
+         * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
+         * private key.
+         */
+        password?: string;
+
+        /**
+         * Path relative to the bucket root at which the recording will be placed.
+         */
+        path?: string;
+
+        /**
+         * SSH destination server port for SFTP type storage medium
+         */
+        port?: number;
+
+        /**
+         * Private key used to login to destination SSH server for SFTP type storage
+         * medium, when auth_method used is "KEY"
+         */
+        private_key?: string;
+
+        /**
+         * Region of the storage medium.
+         */
+        region?: string;
+
+        /**
+         * Secret key of the storage medium. Similar to `access_key`, it is only writeable
+         * by clients, not readable.
+         */
+        secret?: string;
+
+        /**
+         * SSH destination server username for SFTP type storage medium
+         */
+        username?: string;
+      }
+
+      export interface VideoConfig {
+        /**
+         * Codec using which the recording will be encoded.
+         */
+        codec?: 'H264' | 'VP8';
+
+        /**
+         * Controls whether to export video file seperately
+         */
+        export_file?: boolean;
+
+        /**
+         * Height of the recording video in pixels
+         */
+        height?: number;
+
+        /**
+         * Watermark to be added to the recording
+         */
+        watermark?: VideoConfig.Watermark;
+
+        /**
+         * Width of the recording video in pixels
+         */
+        width?: number;
+      }
+
+      export namespace VideoConfig {
+        /**
+         * Watermark to be added to the recording
+         */
+        export interface Watermark {
+          /**
+           * Position of the watermark
+           */
+          position?: 'left top' | 'right top' | 'left bottom' | 'right bottom';
+
+          /**
+           * Size of the watermark
+           */
+          size?: Watermark.Size;
+
+          /**
+           * URL of the watermark image
+           */
+          url?: string;
+        }
+
+        export namespace Watermark {
+          /**
+           * Size of the watermark
+           */
+          export interface Size {
+            /**
+             * Height of the watermark in px
+             */
+            height?: number;
+
+            /**
+             * Width of the watermark in px
+             */
+            width?: number;
+          }
+        }
+      }
+    }
   }
 
   export interface Paging {
@@ -961,6 +1178,11 @@ export namespace MeetingGetMeetingByIDResponse {
      * Title of the meeting.
      */
     title?: string;
+
+    /**
+     * Automatically generate transcripts when the meeting ends.
+     */
+    transcribe_on_end?: boolean;
   }
 
   export namespace Data {
@@ -1450,6 +1672,11 @@ export namespace MeetingReplaceMeetingByIDResponse {
      * Title of the meeting.
      */
     title?: string;
+
+    /**
+     * Automatically generate transcripts when the meeting ends.
+     */
+    transcribe_on_end?: boolean;
   }
 
   export namespace Data {
@@ -1803,6 +2030,11 @@ export namespace MeetingUpdateMeetingByIDResponse {
      * Title of the meeting.
      */
     title?: string;
+
+    /**
+     * Automatically generate transcripts when the meeting ends.
+     */
+    transcribe_on_end?: boolean;
   }
 
   export namespace Data {
@@ -2126,6 +2358,11 @@ export interface MeetingCreateParams {
    * Body param: Title of the meeting
    */
   title?: string | null;
+
+  /**
+   * Body param: Automatically generate transcripts when the meeting ends.
+   */
+  transcribe_on_end?: boolean;
 }
 
 export namespace MeetingCreateParams {
@@ -2494,6 +2731,11 @@ export interface MeetingGetParams {
    * The time must be specified in ISO format.
    */
   start_time?: string;
+
+  /**
+   * Query param: Filter meetings by status.
+   */
+  status?: 'ACTIVE' | 'INACTIVE';
 }
 
 export interface MeetingGetMeetingByIDParams {
@@ -2593,6 +2835,11 @@ export interface MeetingReplaceMeetingByIDParams {
    * Body param: Title of the meeting
    */
   title?: string | null;
+
+  /**
+   * Body param: Automatically generate transcripts when the meeting ends.
+   */
+  transcribe_on_end?: boolean;
 }
 
 export namespace MeetingReplaceMeetingByIDParams {
@@ -2900,6 +3147,13 @@ export interface MeetingUpdateMeetingByIDParams {
   record_on_start?: boolean;
 
   /**
+   * Body param: Recording Configurations to be used for this meeting. This level of
+   * configs takes higher preference over App level configs on the RealtimeKit
+   * developer portal.
+   */
+  recording_config?: MeetingUpdateMeetingByIDParams.RecordingConfig;
+
+  /**
    * Body param: Time in seconds, for which a session remains active, after the last
    * participant has left the meeting.
    */
@@ -2922,6 +3176,11 @@ export interface MeetingUpdateMeetingByIDParams {
    * Body param: Title of the meeting
    */
   title?: string;
+
+  /**
+   * Body param: Automatically generate transcripts when the meeting ends.
+   */
+  transcribe_on_end?: boolean;
 }
 
 export namespace MeetingUpdateMeetingByIDParams {
@@ -2989,6 +3248,212 @@ export namespace MeetingUpdateMeetingByIDParams {
        * Control the inclusion of offensive language in transcriptions.
        */
       profanity_filter?: boolean;
+    }
+  }
+
+  /**
+   * Recording Configurations to be used for this meeting. This level of configs
+   * takes higher preference over App level configs on the RealtimeKit developer
+   * portal.
+   */
+  export interface RecordingConfig {
+    /**
+     * Object containing configuration regarding the audio that is being recorded.
+     */
+    audio_config?: RecordingConfig.AudioConfig;
+
+    /**
+     * Adds a prefix to the beginning of the file name of the recording.
+     */
+    file_name_prefix?: string;
+
+    live_streaming_config?: RecordingConfig.LiveStreamingConfig;
+
+    /**
+     * Specifies the maximum duration for recording in seconds, ranging from a minimum
+     * of 60 seconds to a maximum of 24 hours.
+     */
+    max_seconds?: number;
+
+    realtimekit_bucket_config?: RecordingConfig.RealtimekitBucketConfig;
+
+    storage_config?: RecordingConfig.StorageConfig | null;
+
+    video_config?: RecordingConfig.VideoConfig;
+  }
+
+  export namespace RecordingConfig {
+    /**
+     * Object containing configuration regarding the audio that is being recorded.
+     */
+    export interface AudioConfig {
+      /**
+       * Audio signal pathway within an audio file that carries a specific sound source.
+       */
+      channel?: 'mono' | 'stereo';
+
+      /**
+       * Codec using which the recording will be encoded. If VP8/VP9 is selected for
+       * videoConfig, changing audioConfig is not allowed. In this case, the codec in the
+       * audioConfig is automatically set to vorbis.
+       */
+      codec?: 'MP3' | 'AAC';
+
+      /**
+       * Controls whether to export audio file seperately
+       */
+      export_file?: boolean;
+    }
+
+    export interface LiveStreamingConfig {
+      /**
+       * RTMP URL to stream to
+       */
+      rtmp_url?: string;
+    }
+
+    export interface RealtimekitBucketConfig {
+      /**
+       * Controls whether recordings are uploaded to RealtimeKit's bucket. If set to
+       * false, `download_url`, `audio_download_url`, `download_url_expiry` won't be
+       * generated for a recording.
+       */
+      enabled: boolean;
+    }
+
+    export interface StorageConfig {
+      /**
+       * Type of storage media.
+       */
+      type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+      /**
+       * Access key of the storage medium. Access key is not required for the `gcs`
+       * storage media type.
+       *
+       * Note that this field is not readable by clients, only writeable.
+       */
+      access_key?: string;
+
+      /**
+       * Authentication method used for "sftp" type storage medium
+       */
+      auth_method?: 'KEY' | 'PASSWORD';
+
+      /**
+       * Name of the storage medium's bucket.
+       */
+      bucket?: string;
+
+      /**
+       * SSH destination server host for SFTP type storage medium
+       */
+      host?: string;
+
+      /**
+       * SSH destination server password for SFTP type storage medium when auth_method is
+       * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
+       * private key.
+       */
+      password?: string;
+
+      /**
+       * Path relative to the bucket root at which the recording will be placed.
+       */
+      path?: string;
+
+      /**
+       * SSH destination server port for SFTP type storage medium
+       */
+      port?: number;
+
+      /**
+       * Private key used to login to destination SSH server for SFTP type storage
+       * medium, when auth_method used is "KEY"
+       */
+      private_key?: string;
+
+      /**
+       * Region of the storage medium.
+       */
+      region?: string;
+
+      /**
+       * Secret key of the storage medium. Similar to `access_key`, it is only writeable
+       * by clients, not readable.
+       */
+      secret?: string;
+
+      /**
+       * SSH destination server username for SFTP type storage medium
+       */
+      username?: string;
+    }
+
+    export interface VideoConfig {
+      /**
+       * Codec using which the recording will be encoded.
+       */
+      codec?: 'H264' | 'VP8';
+
+      /**
+       * Controls whether to export video file seperately
+       */
+      export_file?: boolean;
+
+      /**
+       * Height of the recording video in pixels
+       */
+      height?: number;
+
+      /**
+       * Watermark to be added to the recording
+       */
+      watermark?: VideoConfig.Watermark;
+
+      /**
+       * Width of the recording video in pixels
+       */
+      width?: number;
+    }
+
+    export namespace VideoConfig {
+      /**
+       * Watermark to be added to the recording
+       */
+      export interface Watermark {
+        /**
+         * Position of the watermark
+         */
+        position?: 'left top' | 'right top' | 'left bottom' | 'right bottom';
+
+        /**
+         * Size of the watermark
+         */
+        size?: Watermark.Size;
+
+        /**
+         * URL of the watermark image
+         */
+        url?: string;
+      }
+
+      export namespace Watermark {
+        /**
+         * Size of the watermark
+         */
+        export interface Size {
+          /**
+           * Height of the watermark in px
+           */
+          height?: number;
+
+          /**
+           * Width of the watermark in px
+           */
+          width?: number;
+        }
+      }
     }
   }
 }

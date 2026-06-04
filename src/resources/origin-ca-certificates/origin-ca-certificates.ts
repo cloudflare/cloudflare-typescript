@@ -208,7 +208,7 @@ export interface OriginCACertificateListParams extends V4PagePaginationArrayPara
   limit?: number;
 
   /**
-   * Offset the results
+   * Offset the results.
    */
   offset?: number;
 }

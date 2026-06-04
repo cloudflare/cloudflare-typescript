@@ -599,15 +599,16 @@ export namespace NamespaceChatCompletionsParams {
       export interface BoostBy {
         /**
          * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-         * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-         * text/boolean fields support exists/not_exists.
+         * custom_metadata field. Numeric and datetime fields support all four directions
+         * (asc, desc, exists, not_exists); text/boolean fields only support
+         * exists/not_exists.
          */
         field: string;
 
         /**
          * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
          * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-         * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+         * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
          * for numeric/datetime fields, 'exists' for text/boolean fields.
          */
         direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
@@ -752,15 +753,16 @@ export namespace NamespaceSearchParams {
       export interface BoostBy {
         /**
          * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-         * custom_metadata field. Numeric and datetime fields support asc/desc directions;
-         * text/boolean fields support exists/not_exists.
+         * custom_metadata field. Numeric and datetime fields support all four directions
+         * (asc, desc, exists, not_exists); text/boolean fields only support
+         * exists/not_exists.
          */
         field: string;
 
         /**
          * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
          * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-         * 'not_exists' = boost chunks that lack the field. Optional ��� defaults to 'asc'
+         * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
          * for numeric/datetime fields, 'exists' for text/boolean fields.
          */
         direction?: 'asc' | 'desc' | 'exists' | 'not_exists';

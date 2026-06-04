@@ -16,22 +16,18 @@ export {
   type CacheReserveStatusParams,
 } from './cache-reserve';
 export {
+  OriginCloudRegionsV4PagePaginationArray,
   OriginCloudRegions,
   type OriginCloudRegion,
-  type OriginCloudRegionCreateResponse,
-  type OriginCloudRegionListResponse,
   type OriginCloudRegionDeleteResponse,
   type OriginCloudRegionBulkDeleteResponse,
-  type OriginCloudRegionBulkEditResponse,
-  type OriginCloudRegionEditResponse,
-  type OriginCloudRegionGetResponse,
+  type OriginCloudRegionBulkUpdateResponse,
   type OriginCloudRegionSupportedRegionsResponse,
-  type OriginCloudRegionCreateParams,
+  type OriginCloudRegionUpdateParams,
   type OriginCloudRegionListParams,
   type OriginCloudRegionDeleteParams,
   type OriginCloudRegionBulkDeleteParams,
-  type OriginCloudRegionBulkEditParams,
-  type OriginCloudRegionEditParams,
+  type OriginCloudRegionBulkUpdateParams,
   type OriginCloudRegionGetParams,
   type OriginCloudRegionSupportedRegionsParams,
 } from './origin-cloud-regions';
@@ -45,9 +41,11 @@ export {
 } from './regional-tiered-cache';
 export {
   SmartTieredCache,
+  type SmartTieredCacheCreateResponse,
   type SmartTieredCacheDeleteResponse,
   type SmartTieredCacheEditResponse,
   type SmartTieredCacheGetResponse,
+  type SmartTieredCacheCreateParams,
   type SmartTieredCacheDeleteParams,
   type SmartTieredCacheEditParams,
   type SmartTieredCacheGetParams,

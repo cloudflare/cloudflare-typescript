@@ -29,8 +29,8 @@ export class Commands extends APIResource {
    *   account_id: '01a7362d577a6c3019a474fd6f485823',
    *   commands: [
    *     {
-   *       command_type: 'pcap',
    *       device_id: 'device_id',
+   *       type: 'pcap',
    *       user_email: 'user_email',
    *     },
    *   ],
@@ -114,7 +114,7 @@ export namespace CommandCreateResponse {
     status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
 
     /**
-     * Type of the command (e.g., "pcap" or "warp-diag")
+     * Type of the command (e.g., "pcap", "speed-test", or "warp-diag")
      */
     type?: string;
   }
@@ -164,21 +164,24 @@ export interface CommandCreateParams {
 export namespace CommandCreateParams {
   export interface Command {
     /**
-     * Type of command to execute on the device
-     */
-    command_type: 'pcap' | 'warp-diag';
-
-    /**
      * Unique identifier for the physical device
      */
     device_id: string;
+
+    /**
+     * Type of command to execute on the device
+     */
+    type: 'pcap' | 'speed-test' | 'warp-diag';
 
     /**
      * Email tied to the device
      */
     user_email: string;
 
-    command_args?: Command.CommandArgs;
+    /**
+     * Command arguments. Allowed fields depend on `type`.
+     */
+    args?: Command.WARPDiagArgs | Command.PCAPArgs | Command.SpeedTestArgs;
 
     /**
      * Unique identifier for the device registration. Required for multi-user devices
@@ -188,16 +191,19 @@ export namespace CommandCreateParams {
   }
 
   export namespace Command {
-    export interface CommandArgs {
+    export interface WARPDiagArgs {
       /**
-       * List of interfaces to capture packets on
+       * Test an IP address from all included or excluded ranges. Essentially the same as
+       * running 'route get <ip>' and collecting the results. This option may increase
+       * the time taken to collect the warp-diag.
        */
-      interfaces?: Array<'default' | 'tunnel'>;
+      'test-all-routes'?: boolean;
+    }
 
+    export interface PCAPArgs {
       /**
-       * Maximum file size (in MB) for the capture file. Specifies the maximum file size
-       * of the warp-diag zip artifact that can be uploaded. If the zip artifact exceeds
-       * the specified max file size, it will NOT be uploaded
+       * Maximum file size (in MB) for the capture file. If the capture artifact exceeds
+       * the specified max file size, it will NOT be uploaded.
        */
       'max-file-size-mb'?: number;
 
@@ -207,17 +213,16 @@ export namespace CommandCreateParams {
       'packet-size-bytes'?: number;
 
       /**
-       * Test an IP address from all included or excluded ranges. Tests an IP address
-       * from all included or excluded ranges. Essentially the same as running 'route get
-       * <ip>'' and collecting the results. This option may increase the time taken to
-       * collect the warp-diag
-       */
-      'test-all-routes'?: boolean;
-
-      /**
        * Limit on capture duration (in minutes)
        */
       'time-limit-min'?: number;
+    }
+
+    export interface SpeedTestArgs {
+      /**
+       * List of interfaces to run the speed test on
+       */
+      interfaces?: Array<'default' | 'tunnel'>;
     }
   }
 }
@@ -231,7 +236,7 @@ export interface CommandListParams extends V4PagePaginationParams {
   /**
    * Query param: Optionally filter executed commands by command type
    */
-  command_type?: string;
+  command_type?: 'pcap' | 'speed-test' | 'warp-diag';
 
   /**
    * Query param: Unique identifier for a device

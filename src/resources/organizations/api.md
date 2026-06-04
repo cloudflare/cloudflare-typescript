@@ -22,7 +22,7 @@ Types:
 Methods:
 
 - <code title="put /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">update</a>(organizationId, { ...params }) -> void</code>
-- <code title="get /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">get</a>(organizationId) -> organizations_api_ProfileResponse.Result</code>
+- <code title="get /organizations/{organization_id}/profile">client.organizations.organizationProfile.<a href="./src/resources/organizations/organization-profile.ts">get</a>(organizationId) -> OrganizationProfile</code>
 
 ## Logs
 

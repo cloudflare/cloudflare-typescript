@@ -2,31 +2,7 @@
 
 ## RegionalHostnames
 
-Types:
-
-- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameCreateResponse</a></code>
-- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameListResponse</a></code>
-- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameDeleteResponse</a></code>
-- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameEditResponse</a></code>
-- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/addressing/regional_hostnames">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">create</a>({ ...params }) -> RegionalHostnameCreateResponse</code>
-- <code title="get /zones/{zone_id}/addressing/regional_hostnames">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">list</a>({ ...params }) -> RegionalHostnameListResponsesSinglePage</code>
-- <code title="delete /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">delete</a>(hostname, { ...params }) -> RegionalHostnameDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">edit</a>(hostname, { ...params }) -> RegionalHostnameEditResponse</code>
-- <code title="get /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">get</a>(hostname, { ...params }) -> RegionalHostnameGetResponse</code>
-
 ### Regions
-
-Types:
-
-- <code><a href="./src/resources/addressing/regional-hostnames/regions.ts">RegionListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/addressing/regional_hostnames/regions">client.addressing.regionalHostnames.regions.<a href="./src/resources/addressing/regional-hostnames/regions.ts">list</a>({ ...params }) -> RegionListResponsesSinglePage</code>
 
 ## Services
 

@@ -41,6 +41,7 @@ describe('resource resourceSharing', () => {
         {
           account_id: '023e105f4ecef8ad9ca31a8372d0c353',
           organization_id: '023e105f4ecef8ad9ca31a8372d0c353',
+          recipient_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         },
       ],
       resources: [

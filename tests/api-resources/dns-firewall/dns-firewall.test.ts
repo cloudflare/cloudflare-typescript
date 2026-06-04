@@ -34,6 +34,7 @@ describe('resource dnsFirewall', () => {
       upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
       attack_mitigation: { enabled: true, only_when_upstream_unhealthy: false },
       deprecate_any_requests: true,
+      dns_firewall_ip_count: 2,
       ecs_fallback: false,
       maximum_cache_ttl: 900,
       minimum_cache_ttl: 60,

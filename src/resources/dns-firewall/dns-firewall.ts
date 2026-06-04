@@ -262,8 +262,11 @@ export interface DNSFirewallCreateResponse {
   negative_cache_ttl: number | null;
 
   /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster)
+   * Maximum number of DNS queries per second that will be forwarded to your upstream
+   * nameservers. The limit is enforced per server, where each server receives a
+   * fraction of the configured value. The actual aggregate rate for a data center
+   * may vary depending on how many servers are present. Responses served from cache
+   * do not count toward this limit. Set to null to disable rate limiting.
    */
   ratelimit: number | null;
 
@@ -348,8 +351,11 @@ export interface DNSFirewallListResponse {
   negative_cache_ttl: number | null;
 
   /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster)
+   * Maximum number of DNS queries per second that will be forwarded to your upstream
+   * nameservers. The limit is enforced per server, where each server receives a
+   * fraction of the configured value. The actual aggregate rate for a data center
+   * may vary depending on how many servers are present. Responses served from cache
+   * do not count toward this limit. Set to null to disable rate limiting.
    */
   ratelimit: number | null;
 
@@ -441,8 +447,11 @@ export interface DNSFirewallEditResponse {
   negative_cache_ttl: number | null;
 
   /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster)
+   * Maximum number of DNS queries per second that will be forwarded to your upstream
+   * nameservers. The limit is enforced per server, where each server receives a
+   * fraction of the configured value. The actual aggregate rate for a data center
+   * may vary depending on how many servers are present. Responses served from cache
+   * do not count toward this limit. Set to null to disable rate limiting.
    */
   ratelimit: number | null;
 
@@ -527,8 +536,11 @@ export interface DNSFirewallGetResponse {
   negative_cache_ttl: number | null;
 
   /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster)
+   * Maximum number of DNS queries per second that will be forwarded to your upstream
+   * nameservers. The limit is enforced per server, where each server receives a
+   * fraction of the configured value. The actual aggregate rate for a data center
+   * may vary depending on how many servers are present. Responses served from cache
+   * do not count toward this limit. Set to null to disable rate limiting.
    */
   ratelimit: number | null;
 
@@ -571,6 +583,12 @@ export interface DNSFirewallCreateParams {
    * Body param: Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests?: boolean;
+
+  /**
+   * Body param: Number of IPv4 addresses to assign to the DNS Firewall cluster. Only
+   * used during cluster creation and cannot be changed later.
+   */
+  dns_firewall_ip_count?: number;
 
   /**
    * Body param: Whether to forward client IP (resolver) subnet if no EDNS Client
@@ -617,8 +635,11 @@ export interface DNSFirewallCreateParams {
   negative_cache_ttl?: number | null;
 
   /**
-   * Body param: Ratelimit in queries per second per datacenter (applies to DNS
-   * queries sent to the upstream nameservers configured on the cluster)
+   * Body param: Maximum number of DNS queries per second that will be forwarded to
+   * your upstream nameservers. The limit is enforced per server, where each server
+   * receives a fraction of the configured value. The actual aggregate rate for a
+   * data center may vary depending on how many servers are present. Responses served
+   * from cache do not count toward this limit. Set to null to disable rate limiting.
    */
   ratelimit?: number | null;
 
@@ -709,8 +730,11 @@ export interface DNSFirewallEditParams {
   negative_cache_ttl?: number | null;
 
   /**
-   * Body param: Ratelimit in queries per second per datacenter (applies to DNS
-   * queries sent to the upstream nameservers configured on the cluster)
+   * Body param: Maximum number of DNS queries per second that will be forwarded to
+   * your upstream nameservers. The limit is enforced per server, where each server
+   * receives a fraction of the configured value. The actual aggregate rate for a
+   * data center may vary depending on how many servers are present. Responses served
+   * from cache do not count toward this limit. Set to null to disable rate limiting.
    */
   ratelimit?: number | null;
 

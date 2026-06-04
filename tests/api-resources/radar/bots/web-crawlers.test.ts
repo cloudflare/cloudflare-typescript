@@ -86,6 +86,7 @@ describe('resource webCrawlers', () => {
           industry: ['string'],
           limitPerGroup: 10,
           name: ['main_series'],
+          normalization: 'PERCENTAGE',
           responseStatus: ['string'],
           responseStatusCategory: ['INFORMATIONAL'],
           vertical: ['string'],

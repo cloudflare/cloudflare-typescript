@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource prefixBindings', () => {
   test('create: only required params', async () => {
     const responsePromise = client.dls.regionalServices.prefixBindings.create({
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cidr: '10.0.1.0/24',
       prefix_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
       region_key: 'eu',
@@ -28,7 +28,7 @@ describe('resource prefixBindings', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.dls.regionalServices.prefixBindings.create({
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cidr: '10.0.1.0/24',
       prefix_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
       region_key: 'eu',
@@ -36,7 +36,9 @@ describe('resource prefixBindings', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.dls.regionalServices.prefixBindings.list({ account_id: 0 });
+    const responsePromise = client.dls.regionalServices.prefixBindings.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,7 +50,7 @@ describe('resource prefixBindings', () => {
 
   test('list: required and optional params', async () => {
     const response = await client.dls.regionalServices.prefixBindings.list({
-      account_id: 0,
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor: 'cursor',
       per_page: 1,
     });
@@ -57,7 +59,7 @@ describe('resource prefixBindings', () => {
   test('delete: only required params', async () => {
     const responsePromise = client.dls.regionalServices.prefixBindings.delete(
       'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      { account_id: 0 },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -71,14 +73,14 @@ describe('resource prefixBindings', () => {
   test('delete: required and optional params', async () => {
     const response = await client.dls.regionalServices.prefixBindings.delete(
       'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      { account_id: 0 },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
   test('edit: only required params', async () => {
     const responsePromise = client.dls.regionalServices.prefixBindings.edit(
       'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      { account_id: 0, region_key: 'eu' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', region_key: 'eu' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,14 +94,14 @@ describe('resource prefixBindings', () => {
   test('edit: required and optional params', async () => {
     const response = await client.dls.regionalServices.prefixBindings.edit(
       'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      { account_id: 0, region_key: 'eu' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', region_key: 'eu' },
     );
   });
 
   test('get: only required params', async () => {
     const responsePromise = client.dls.regionalServices.prefixBindings.get(
       'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      { account_id: 0 },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -113,7 +115,7 @@ describe('resource prefixBindings', () => {
   test('get: required and optional params', async () => {
     const response = await client.dls.regionalServices.prefixBindings.get(
       'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
-      { account_id: 0 },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 });

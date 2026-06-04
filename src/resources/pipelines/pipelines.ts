@@ -1406,6 +1406,11 @@ export interface PipelineListV1Params extends V4PagePaginationArrayParams {
    * Path param: Specifies the public ID of the account.
    */
   account_id: string;
+
+  /**
+   * Query param: Filters pipelines by name (case-insensitive substring).
+   */
+  name?: string;
 }
 
 export interface PipelineValidateSqlParams {

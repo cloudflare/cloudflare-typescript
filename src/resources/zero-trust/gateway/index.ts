@@ -54,6 +54,7 @@ export {
   type GatewayListParams,
 } from './gateway';
 export {
+  GatewayItemsSinglePage,
   GatewayListsSinglePage,
   Lists,
   type GatewayItem,

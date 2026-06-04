@@ -262,12 +262,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryKeysResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryLiveTailResponse</a></code>
+- <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryLiveTailHeartbeatResponse</a></code>
 - <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryQueryResponse</a></code>
 - <code><a href="./src/resources/workers/observability/telemetry.ts">TelemetryValuesResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/keys">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">keys</a>({ ...params }) -> TelemetryKeysResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/live-tail">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">liveTail</a>({ ...params }) -> TelemetryLiveTailResponse</code>
+- <code title="post /accounts/{account_id}/workers/observability/telemetry/live-tail/heartbeat">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">liveTailHeartbeat</a>({ ...params }) -> TelemetryLiveTailHeartbeatResponse</code>
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/query">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">query</a>({ ...params }) -> TelemetryQueryResponse</code>
 - <code title="post /accounts/{account_id}/workers/observability/telemetry/values">client.workers.observability.telemetry.<a href="./src/resources/workers/observability/telemetry.ts">values</a>({ ...params }) -> TelemetryValuesResponsesSinglePage</code>
 
@@ -298,3 +302,15 @@ Methods:
 
 - <code title="post /accounts/{account_id}/workers/observability/queries">client.workers.observability.queries.<a href="./src/resources/workers/observability/queries.ts">create</a>({ ...params }) -> QueryCreateResponse</code>
 - <code title="get /accounts/{account_id}/workers/observability/queries">client.workers.observability.queries.<a href="./src/resources/workers/observability/queries.ts">list</a>({ ...params }) -> QueryListResponsesSinglePage</code>
+
+### SharedQueries
+
+Types:
+
+- <code><a href="./src/resources/workers/observability/shared-queries.ts">SharedQueryCreateResponse</a></code>
+- <code><a href="./src/resources/workers/observability/shared-queries.ts">SharedQueryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/observability/shared/query">client.workers.observability.sharedQueries.<a href="./src/resources/workers/observability/shared-queries.ts">create</a>({ ...params }) -> SharedQueryCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/observability/shared/query/{id}">client.workers.observability.sharedQueries.<a href="./src/resources/workers/observability/shared-queries.ts">get</a>(id, { ...params }) -> SharedQueryGetResponse</code>
