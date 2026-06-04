@@ -85,3 +85,27 @@ Methods:
 - <code title="delete /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">delete</a>(ssoConnectorId, { ...params }) -> SSODeleteResponse | null</code>
 - <code title="post /accounts/{account_id}/sso_connectors/{sso_connector_id}/begin_verification">client.iam.sso.<a href="./src/resources/iam/sso.ts">beginVerification</a>(ssoConnectorId, { ...params }) -> SSOBeginVerificationResponse</code>
 - <code title="get /accounts/{account_id}/sso_connectors/{sso_connector_id}">client.iam.sso.<a href="./src/resources/iam/sso.ts">get</a>(ssoConnectorId, { ...params }) -> SSOGetResponse</code>
+
+## OAuthClients
+
+Types:
+
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientCreateResponse</a></code>
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientListResponse</a></code>
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientDeleteResponse</a></code>
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientDeleteRotatedSecretResponse</a></code>
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientGetResponse</a></code>
+- <code><a href="./src/resources/iam/oauth-clients.ts">OAuthClientRotateSecretResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/oauth_clients">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">create</a>({ ...params }) -> OAuthClientCreateResponse</code>
+- <code title="patch /accounts/{account_id}/oauth_clients/{oauth_client_id}">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">update</a>(oauthClientId, { ...params }) -> OAuthClientUpdateResponse</code>
+- <code title="get /accounts/{account_id}/oauth_clients">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">list</a>({ ...params }) -> OAuthClientListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/oauth_clients/{oauth_client_id}">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">delete</a>(oauthClientId, { ...params }) -> OAuthClientDeleteResponse | null</code>
+- <code title="delete /accounts/{account_id}/oauth_clients/{oauth_client_id}/rotate_secret">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">deleteRotatedSecret</a>(oauthClientId, { ...params }) -> OAuthClientDeleteRotatedSecretResponse | null</code>
+- <code title="get /accounts/{account_id}/oauth_clients/{oauth_client_id}">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">get</a>(oauthClientId, { ...params }) -> OAuthClientGetResponse</code>
+- <code title="post /accounts/{account_id}/oauth_clients/{oauth_client_id}/rotate_secret">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">rotateSecret</a>(oauthClientId, { ...params }) -> OAuthClientRotateSecretResponse</code>
+
+## [OAuthScopes](src/resources/iam/oauth-scopes/api.md)

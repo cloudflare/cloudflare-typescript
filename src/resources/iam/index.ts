@@ -2,6 +2,25 @@
 
 export { IAM } from './iam';
 export {
+  OAuthClientListResponsesSinglePage,
+  OAuthClients,
+  type OAuthClientCreateResponse,
+  type OAuthClientUpdateResponse,
+  type OAuthClientListResponse,
+  type OAuthClientDeleteResponse,
+  type OAuthClientDeleteRotatedSecretResponse,
+  type OAuthClientGetResponse,
+  type OAuthClientRotateSecretResponse,
+  type OAuthClientCreateParams,
+  type OAuthClientUpdateParams,
+  type OAuthClientListParams,
+  type OAuthClientDeleteParams,
+  type OAuthClientDeleteRotatedSecretParams,
+  type OAuthClientGetParams,
+  type OAuthClientRotateSecretParams,
+} from './oauth-clients';
+export { OAuthScopes } from './oauth-scopes';
+export {
   PermissionGroupListResponsesV4PagePaginationArray,
   PermissionGroups,
   type PermissionGroupListResponse,
