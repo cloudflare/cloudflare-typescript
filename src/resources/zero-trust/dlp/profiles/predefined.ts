@@ -174,6 +174,11 @@ export namespace PredefinedProfile {
     type: 'custom_prompt_topic';
 
     updated_at: string;
+
+    /**
+     * The optional description of the custom prompt topic entry.
+     */
+    description?: string | null;
   }
 
   export interface PredefinedEntry {
@@ -276,6 +281,11 @@ export namespace PredefinedProfile {
     type: 'exact_data';
 
     updated_at: string;
+
+    /**
+     * The optional description of the exact data entry.
+     */
+    description?: string | null;
   }
 
   export interface DocumentFingerprintEntry {
@@ -290,6 +300,11 @@ export namespace PredefinedProfile {
     type: 'document_fingerprint';
 
     updated_at: string;
+
+    /**
+     * The optional description of the document fingerprint entry.
+     */
+    description?: string | null;
   }
 
   export interface WordListEntry {
