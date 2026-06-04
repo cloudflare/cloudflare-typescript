@@ -207,7 +207,7 @@ export namespace CertificateUpdateResponse {
     bundle_method?: CustomHostnamesAPI.BundleMethod;
 
     /**
-     * The Certificate Authority that will issue the certificate
+     * The Certificate Authority that will issue the certificate.
      */
     certificate_authority?: Shared.CertificateCA;
 
