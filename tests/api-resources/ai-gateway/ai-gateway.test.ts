@@ -143,6 +143,22 @@ const runTests = (client: PartialCloudflare<{ aiGateway: BaseAIGateway }>) => {
       retry_backoff: 'constant',
       retry_delay: 0,
       retry_max_attempts: 1,
+      spend_limits: {
+        enabled: true,
+        rules: [
+          {
+            id: 'x',
+            limit: 1,
+            limitType: 'cost',
+            window: 1,
+            enabled: true,
+            metadata: { foo: { mode: 'partition' } },
+            model: 'partition',
+            provider: 'partition',
+            technique: 'fixed',
+          },
+        ],
+      },
       store_id: 'store_id',
       stripe: { authorization: 'authorization', usage_events: [{ payload: 'payload' }] },
       workers_ai_billing_mode: 'postpaid',
