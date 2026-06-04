@@ -89,6 +89,7 @@ describe('resource sinks', () => {
   test('list: required and optional params', async () => {
     const response = await client.pipelines.sinks.list({
       account_id: '0123105f4ecef8ad9ca31a8372d0c353',
+      name: 'x',
       page: 0,
       per_page: 0,
       pipeline_id: 'pipeline_id',
