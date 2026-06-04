@@ -304,6 +304,8 @@ export interface AIGatewayCreateResponse {
    */
   retry_max_attempts?: number | null;
 
+  spend_limits?: AIGatewayCreateResponse.SpendLimits | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
@@ -424,6 +426,54 @@ export namespace AIGatewayCreateResponse {
     content_type?: 'json' | 'protobuf';
   }
 
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      id: string;
+
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: 'partition' | Rule.Match;
+
+      provider?: 'partition' | Rule.Match;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'match';
+
+        value: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+    }
+  }
+
   export interface Stripe {
     authorization: string;
 
@@ -491,6 +541,8 @@ export interface AIGatewayUpdateResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayUpdateResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -612,6 +664,54 @@ export namespace AIGatewayUpdateResponse {
     content_type?: 'json' | 'protobuf';
   }
 
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      id: string;
+
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: 'partition' | Rule.Match;
+
+      provider?: 'partition' | Rule.Match;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'match';
+
+        value: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+    }
+  }
+
   export interface Stripe {
     authorization: string;
 
@@ -679,6 +779,8 @@ export interface AIGatewayListResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayListResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -800,6 +902,54 @@ export namespace AIGatewayListResponse {
     content_type?: 'json' | 'protobuf';
   }
 
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      id: string;
+
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: 'partition' | Rule.Match;
+
+      provider?: 'partition' | Rule.Match;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'match';
+
+        value: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+    }
+  }
+
   export interface Stripe {
     authorization: string;
 
@@ -867,6 +1017,8 @@ export interface AIGatewayDeleteResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayDeleteResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -988,6 +1140,54 @@ export namespace AIGatewayDeleteResponse {
     content_type?: 'json' | 'protobuf';
   }
 
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      id: string;
+
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: 'partition' | Rule.Match;
+
+      provider?: 'partition' | Rule.Match;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'match';
+
+        value: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+    }
+  }
+
   export interface Stripe {
     authorization: string;
 
@@ -1055,6 +1255,8 @@ export interface AIGatewayGetResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayGetResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -1174,6 +1376,54 @@ export namespace AIGatewayGetResponse {
     authorization?: string;
 
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      id: string;
+
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: 'partition' | Rule.Match;
+
+      provider?: 'partition' | Rule.Match;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'match';
+
+        value: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+    }
   }
 
   export interface Stripe {
@@ -1376,6 +1626,11 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param
    */
+  spend_limits?: AIGatewayUpdateParams.SpendLimits | null;
+
+  /**
+   * Body param
+   */
   store_id?: string | null;
 
   /**
@@ -1500,6 +1755,54 @@ export namespace AIGatewayUpdateParams {
     authorization?: string;
 
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      id: string;
+
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: 'partition' | Rule.Match;
+
+      provider?: 'partition' | Rule.Match;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'match';
+
+        value: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+
+      export interface Match {
+        match: string;
+      }
+    }
   }
 
   export interface Stripe {
