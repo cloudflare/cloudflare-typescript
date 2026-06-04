@@ -9,11 +9,12 @@ export class Sessions extends APIResource {
    *
    * @example
    * ```ts
-   * await client.realtimeKit.sessions.generateSummaryOfTranscripts(
-   *   'app_id',
-   *   'session_id',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
+   * const response =
+   *   await client.realtimeKit.sessions.generateSummaryOfTranscripts(
+   *     'app_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
    * ```
    */
   generateSummaryOfTranscripts(
@@ -21,12 +22,12 @@ export class Sessions extends APIResource {
     sessionId: string,
     params: SessionGenerateSummaryOfTranscriptsParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  ): Core.APIPromise<SessionGenerateSummaryOfTranscriptsResponse> {
     const { account_id } = params;
-    return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/summary`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return this._client.post(
+      `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/summary`,
+      options,
+    );
   }
 
   /**
@@ -38,7 +39,7 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getParticipantDataFromPeerId(
    *     'app_id',
-   *     'peer_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -64,7 +65,7 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getSessionChat(
    *     'app_id',
-   *     'session_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -90,7 +91,7 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getSessionDetails(
    *     'app_id',
-   *     'session_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -117,8 +118,8 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getSessionParticipantDetails(
    *     'app_id',
-   *     'session_id',
-   *     'participant_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -145,7 +146,7 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getSessionParticipants(
    *     'app_id',
-   *     'session_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -172,7 +173,7 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getSessionSummary(
    *     'app_id',
-   *     'session_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -198,7 +199,7 @@ export class Sessions extends APIResource {
    * const response =
    *   await client.realtimeKit.sessions.getSessionTranscripts(
    *     'app_id',
-   *     'session_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -209,10 +210,10 @@ export class Sessions extends APIResource {
     params: SessionGetSessionTranscriptsParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionGetSessionTranscriptsResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.get(
       `/accounts/${account_id}/realtime/kit/${appId}/sessions/${sessionId}/transcript`,
-      options,
+      { query, ...options },
     );
   }
 
@@ -237,6 +238,20 @@ export class Sessions extends APIResource {
   }
 }
 
+export interface SessionGenerateSummaryOfTranscriptsResponse {
+  data?: SessionGenerateSummaryOfTranscriptsResponse.Data;
+
+  success?: boolean;
+}
+
+export namespace SessionGenerateSummaryOfTranscriptsResponse {
+  export interface Data {
+    session_id?: string;
+
+    status?: string;
+  }
+}
+
 export interface SessionGetParticipantDataFromPeerIDResponse {
   data?: SessionGetParticipantDataFromPeerIDResponse.Data;
 
@@ -245,494 +260,76 @@ export interface SessionGetParticipantDataFromPeerIDResponse {
 
 export namespace SessionGetParticipantDataFromPeerIDResponse {
   export interface Data {
-    participant?: Data.Participant;
+    /**
+     * Participant ID. This maps to the corresponding peerId.
+     */
+    id?: string;
+
+    /**
+     * timestamp when this participant was created.
+     */
+    created_at?: string;
+
+    /**
+     * ID passed by client to create this participant.
+     */
+    custom_participant_id?: string;
+
+    /**
+     * Display name of participant when joining the session.
+     */
+    display_name?: string;
+
+    /**
+     * number of minutes for which the participant was in the session.
+     */
+    duration?: number;
+
+    /**
+     * timestamp at which participant joined the session.
+     */
+    joined_at?: string;
+
+    /**
+     * timestamp at which participant left the session.
+     */
+    left_at?: string;
+
+    peer_events?: Array<{ [key: string]: unknown }>;
+
+    /**
+     * Peer call statistics report.
+     */
+    peer_report?: Data.PeerReport;
+
+    /**
+     * Name of the preset associated with the participant.
+     */
+    preset_name?: string;
+
+    session_id?: string;
+
+    /**
+     * timestamp when this participant's data was last updated.
+     */
+    updated_at?: string;
+
+    /**
+     * User id for this participant.
+     */
+    user_id?: string;
   }
 
   export namespace Data {
-    export interface Participant {
-      id?: string;
-
-      created_at?: string;
-
-      custom_participant_id?: string;
-
-      display_name?: string;
-
-      duration?: number;
-
-      joined_at?: string;
-
-      left_at?: string;
-
-      peer_report?: Participant.PeerReport;
-
-      peer_stats?: Participant.PeerStats;
-
-      quality_stats?: Participant.QualityStats;
-
-      role?: string;
-
-      updated_at?: string;
-
-      user_id?: string;
-    }
-
-    export namespace Participant {
-      export interface PeerReport {
-        metadata?: PeerReport.Metadata;
-
-        quality?: PeerReport.Quality;
-      }
-
-      export namespace PeerReport {
-        export interface Metadata {
-          audio_devices_updates?: Array<unknown>;
-
-          browser_metadata?: Metadata.BrowserMetadata;
-
-          candidate_pairs?: Metadata.CandidatePairs;
-
-          device_info?: Metadata.DeviceInfo;
-
-          events?: Array<Metadata.Event>;
-
-          ip_information?: Metadata.IPInformation;
-
-          pc_metadata?: Array<Metadata.PcMetadata>;
-
-          room_view_type?: string;
-
-          sdk_name?: string;
-
-          sdk_version?: string;
-
-          selected_device_updates?: Array<unknown>;
-
-          speaker_devices_updates?: Array<unknown>;
-
-          video_devices_updates?: Array<unknown>;
-        }
-
-        export namespace Metadata {
-          export interface BrowserMetadata {
-            browser?: string;
-
-            browser_version?: string;
-
-            engine?: string;
-
-            user_agent?: string;
-
-            webgl_support?: string;
-          }
-
-          export interface CandidatePairs {
-            consuming_transport?: Array<unknown>;
-
-            producing_transport?: Array<CandidatePairs.ProducingTransport>;
-          }
-
-          export namespace CandidatePairs {
-            export interface ProducingTransport {
-              available_outgoing_bitrate?: number;
-
-              bytes_discarded_on_send?: number;
-
-              bytes_received?: number;
-
-              bytes_sent?: number;
-
-              current_round_trip_time?: number;
-
-              last_packet_received_timestamp?: number;
-
-              last_packet_sent_timestamp?: number;
-
-              local_candidate_address?: string;
-
-              local_candidate_id?: string;
-
-              local_candidate_network_type?: string;
-
-              local_candidate_port?: number;
-
-              local_candidate_protocol?: string;
-
-              local_candidate_related_address?: string;
-
-              local_candidate_related_port?: number;
-
-              local_candidate_type?: string;
-
-              nominated?: boolean;
-
-              packets_discarded_on_send?: number;
-
-              packets_received?: number;
-
-              packets_sent?: number;
-
-              remote_candidate_address?: string;
-
-              remote_candidate_id?: string;
-
-              remote_candidate_port?: number;
-
-              remote_candidate_protocol?: string;
-
-              remote_candidate_type?: string;
-
-              total_round_trip_time?: number;
-            }
-          }
-
-          export interface DeviceInfo {
-            cpus?: number;
-
-            is_mobile?: boolean;
-
-            os?: string;
-
-            os_version?: string;
-          }
-
-          export interface Event {
-            name?: string;
-
-            timestamp?: string;
-          }
-
-          export interface IPInformation {
-            asn?: IPInformation.ASN;
-
-            city?: string;
-
-            country?: string;
-
-            ipv4?: string;
-
-            region?: string;
-
-            timezone?: string;
-          }
-
-          export namespace IPInformation {
-            export interface ASN {
-              asn?: string;
-            }
-          }
-
-          export interface PcMetadata {
-            effective_network_type?: string;
-
-            reflexive_connectivity?: boolean;
-
-            relay_connectivity?: boolean;
-
-            timestamp?: string;
-
-            turn_connectivity?: boolean;
-          }
-        }
-
-        export interface Quality {
-          audio_consumer?: Array<unknown>;
-
-          audio_consumer_cumulative?: unknown;
-
-          audio_producer?: Array<Quality.AudioProducer>;
-
-          audio_producer_cumulative?: Quality.AudioProducerCumulative;
-
-          screenshare_audio_consumer?: Array<unknown>;
-
-          screenshare_audio_consumer_cumulative?: unknown;
-
-          screenshare_audio_producer?: Array<unknown>;
-
-          screenshare_audio_producer_cumulative?: unknown;
-
-          screenshare_video_consumer?: Array<unknown>;
-
-          screenshare_video_consumer_cumulative?: unknown;
-
-          screenshare_video_producer?: Array<unknown>;
-
-          screenshare_video_producer_cumulative?: unknown;
-
-          video_consumer?: Array<unknown>;
-
-          video_consumer_cumulative?: unknown;
-
-          video_producer?: Array<unknown>;
-
-          video_producer_cumulative?: unknown;
-        }
-
-        export namespace Quality {
-          export interface AudioProducer {
-            bytes_sent?: number;
-
-            jitter?: number;
-
-            mid?: string;
-
-            mos_quality?: number;
-
-            packets_lost?: number;
-
-            packets_sent?: number;
-
-            producer_id?: string;
-
-            rtt?: number;
-
-            ssrc?: number;
-
-            timestamp?: string;
-          }
-
-          export interface AudioProducerCumulative {
-            packet_loss?: AudioProducerCumulative.PacketLoss;
-
-            quality_mos?: AudioProducerCumulative.QualityMos;
-
-            rtt?: AudioProducerCumulative.RTT;
-          }
-
-          export namespace AudioProducerCumulative {
-            export interface PacketLoss {
-              '10_or_greater_event_fraction'?: number;
-
-              '25_or_greater_event_fraction'?: number;
-
-              '5_or_greater_event_fraction'?: number;
-
-              '50_or_greater_event_fraction'?: number;
-
-              avg?: number;
-            }
-
-            export interface QualityMos {
-              avg?: number;
-
-              p50?: number;
-
-              p75?: number;
-
-              p90?: number;
-            }
-
-            export interface RTT {
-              '100ms_or_greater_event_fraction'?: number;
-
-              '250ms_or_greater_event_fraction'?: number;
-
-              '500ms_or_greater_event_fraction'?: number;
-
-              avg?: number;
-            }
-          }
-        }
-      }
-
-      export interface PeerStats {
-        device_info?: PeerStats.DeviceInfo;
-
-        events?: Array<PeerStats.Event>;
-
-        ip_information?: PeerStats.IPInformation;
-
-        precall_network_information?: PeerStats.PrecallNetworkInformation;
-      }
-
-      export namespace PeerStats {
-        export interface DeviceInfo {
-          browser?: string;
-
-          browser_version?: string;
-
-          cpus?: number;
-
-          engine?: string;
-
-          is_mobile?: boolean;
-
-          os?: string;
-
-          os_version?: string;
-
-          sdk_name?: string;
-
-          sdk_version?: string;
-
-          user_agent?: string;
-
-          webgl_support?: string;
-        }
-
-        export interface Event {
-          metadata?: Event.Metadata;
-
-          timestamp?: string;
-
-          type?: string;
-        }
-
-        export namespace Event {
-          export interface Metadata {
-            connection_info?: Metadata.ConnectionInfo;
-          }
-
-          export namespace Metadata {
-            export interface ConnectionInfo {
-              backend_r_t_t?: number;
-
-              connectivity?: ConnectionInfo.Connectivity;
-
-              effective_network_type?: string;
-
-              fractional_loss?: number;
-
-              ip_details?: ConnectionInfo.IPDetails;
-
-              jitter?: number;
-
-              location?: ConnectionInfo.Location;
-
-              r_t_t?: number;
-
-              throughput?: number;
-
-              turn_connectivity?: boolean;
-            }
-
-            export namespace ConnectionInfo {
-              export interface Connectivity {
-                host?: boolean;
-
-                reflexive?: boolean;
-
-                relay?: boolean;
-              }
-
-              export interface IPDetails {
-                asn?: IPDetails.ASN;
-
-                city?: string;
-
-                country?: string;
-
-                ip?: string;
-
-                loc?: string;
-
-                postal?: string;
-
-                region?: string;
-
-                timezone?: string;
-              }
-
-              export namespace IPDetails {
-                export interface ASN {
-                  asn?: string;
-                }
-              }
-
-              export interface Location {
-                coords?: Location.Coords;
-              }
-
-              export namespace Location {
-                export interface Coords {
-                  latitude?: number;
-
-                  longitude?: number;
-                }
-              }
-            }
-          }
-        }
-
-        export interface IPInformation {
-          asn?: IPInformation.ASN;
-
-          city?: string;
-
-          country?: string;
-
-          ip_location?: string;
-
-          ipv4?: string;
-
-          org?: string;
-
-          region?: string;
-
-          timezone?: string;
-        }
-
-        export namespace IPInformation {
-          export interface ASN {
-            asn?: string;
-          }
-        }
-
-        export interface PrecallNetworkInformation {
-          backend_rtt?: number;
-
-          effective_networktype?: string;
-
-          fractional_loss?: number;
-
-          jitter?: number;
-
-          reflexive_connectivity?: boolean;
-
-          relay_connectivity?: boolean;
-
-          rtt?: number;
-
-          throughput?: number;
-
-          turn_connectivity?: boolean;
-        }
-      }
-
-      export interface QualityStats {
-        audio_bandwidth?: number;
-
-        audio_stats?: Array<unknown>;
-
-        average_quality?: number;
-
-        end?: string | null;
-
-        first_audio_packet_received?: string;
-
-        first_video_packet_received?: string;
-
-        last_audio_packet_received?: string;
-
-        last_video_packet_received?: string;
-
-        peer_ids?: Array<string>;
-
-        start?: string | null;
-
-        total_audio_packets?: number;
-
-        total_audio_packets_lost?: number;
-
-        total_video_packets?: number;
-
-        total_video_packets_lost?: number;
-
-        video_bandwidth?: number;
-
-        video_stats?: Array<unknown>;
-      }
+    /**
+     * Peer call statistics report.
+     */
+    export interface PeerReport {
+      metadata?: { [key: string]: unknown };
+
+      quality?: { [key: string]: unknown };
+
+      [k: string]: unknown;
     }
   }
 }
@@ -765,85 +362,79 @@ export interface SessionGetSessionDetailsResponse {
 
 export namespace SessionGetSessionDetailsResponse {
   export interface Data {
-    session?: Data.Session;
-  }
+    /**
+     * ID of the session
+     */
+    id: string;
 
-  export namespace Data {
-    export interface Session {
-      /**
-       * ID of the session
-       */
-      id: string;
+    /**
+     * ID of the meeting this session is associated with. In the case of V2 meetings,
+     * it is always a UUID. In V1 meetings, it is a room name of the form
+     * `abcdef-ghijkl`
+     */
+    associated_id: string;
 
-      /**
-       * ID of the meeting this session is associated with. In the case of V2 meetings,
-       * it is always a UUID. In V1 meetings, it is a room name of the form
-       * `abcdef-ghijkl`
-       */
-      associated_id: string;
+    /**
+     * timestamp when session created
+     */
+    created_at: string;
 
-      /**
-       * timestamp when session created
-       */
-      created_at: string;
+    /**
+     * number of participants currently in the session
+     */
+    live_participants: number;
 
-      /**
-       * number of participants currently in the session
-       */
-      live_participants: number;
+    /**
+     * number of maximum participants that were in the session
+     */
+    max_concurrent_participants: number;
 
-      /**
-       * number of maximum participants that were in the session
-       */
-      max_concurrent_participants: number;
+    /**
+     * Title of the meeting this session belongs to
+     */
+    meeting_display_name: string;
 
-      /**
-       * Title of the meeting this session belongs to
-       */
-      meeting_display_name: string;
+    /**
+     * number of minutes consumed since the session started
+     */
+    minutes_consumed: number;
 
-      /**
-       * number of minutes consumed since the session started
-       */
-      minutes_consumed: number;
+    /**
+     * App id that hosted this session
+     */
+    organization_id: string;
 
-      /**
-       * App id that hosted this session
-       */
-      organization_id: string;
+    /**
+     * timestamp when session started
+     */
+    started_at: string;
 
-      /**
-       * timestamp when session started
-       */
-      started_at: string;
+    /**
+     * current status of session
+     */
+    status: 'LIVE' | 'ENDED';
 
-      /**
-       * current status of session
-       */
-      status: 'LIVE' | 'ENDED';
+    /**
+     * type of session
+     */
+    type: 'meeting' | 'livestream' | 'participant';
 
-      /**
-       * type of session
-       */
-      type: 'meeting' | 'livestream' | 'participant';
+    /**
+     * timestamp when session was last updated
+     */
+    updated_at: string;
 
-      /**
-       * timestamp when session was last updated
-       */
-      updated_at: string;
+    breakout_rooms?: Array<unknown>;
 
-      breakout_rooms?: Array<unknown>;
+    /**
+     * timestamp when session ended
+     */
+    ended_at?: string;
 
-      /**
-       * timestamp when session ended
-       */
-      ended_at?: string;
-
-      /**
-       * Any meta data about session.
-       */
-      meta?: unknown;
-    }
+    /**
+     * Any meta data about session.
+     */
+    meta?: unknown;
   }
 }
 
@@ -895,14 +486,10 @@ export namespace SessionGetSessionParticipantDetailsResponse {
        */
       left_at?: string;
 
-      peer_stats?: Participant.PeerStats;
-
       /**
        * Name of the preset associated with the participant.
        */
       preset_name?: string;
-
-      quality_stats?: Array<Participant.QualityStat>;
 
       /**
        * timestamp when this participant's data was last updated.
@@ -913,148 +500,6 @@ export namespace SessionGetSessionParticipantDetailsResponse {
        * User id for this participant.
        */
       user_id?: string;
-    }
-
-    export namespace Participant {
-      export interface PeerStats {
-        config?: string;
-
-        device_info?: PeerStats.DeviceInfo;
-
-        events?: Array<PeerStats.Event>;
-
-        ip_information?: PeerStats.IPInformation;
-
-        precall_network_information?: PeerStats.PrecallNetworkInformation;
-
-        status?: string;
-      }
-
-      export namespace PeerStats {
-        export interface DeviceInfo {
-          browser?: string;
-
-          browser_version?: string;
-
-          cpus?: number;
-
-          engine?: string;
-
-          is_mobile?: boolean;
-
-          memory?: number;
-
-          os?: string;
-
-          os_version?: string;
-
-          sdk_name?: string;
-
-          sdk_version?: string;
-
-          user_agent?: string;
-
-          webgl_support?: string;
-        }
-
-        export interface Event {
-          timestamp?: string;
-
-          type?: string;
-        }
-
-        export interface IPInformation {
-          city?: string;
-
-          country?: string;
-
-          ip_location?: string;
-
-          ipv4?: string;
-
-          org?: string;
-
-          portal?: string;
-
-          region?: string;
-
-          timezone?: string;
-        }
-
-        export interface PrecallNetworkInformation {
-          backend_rtt?: number;
-
-          effective_networktype?: string;
-
-          fractional_loss?: number;
-
-          jitter?: number;
-
-          reflexive_connectivity?: boolean;
-
-          relay_connectivity?: boolean;
-
-          rtt?: number;
-
-          throughtput?: number;
-
-          turn_connectivity?: boolean;
-        }
-      }
-
-      export interface QualityStat {
-        audio_bandwidth?: number;
-
-        audio_packet_loss?: number;
-
-        audio_stats?: Array<QualityStat.AudioStat>;
-
-        average_quality?: number;
-
-        end?: string;
-
-        peer_id?: string;
-
-        start?: string;
-
-        video_bandwidth?: number;
-
-        video_packet_loss?: number;
-
-        video_stats?: Array<QualityStat.VideoStat>;
-      }
-
-      export namespace QualityStat {
-        export interface AudioStat {
-          concealment_events?: number;
-
-          jitter?: number;
-
-          packets_lost?: number;
-
-          quality?: number;
-
-          timestamp?: string;
-        }
-
-        export interface VideoStat {
-          frame_height?: number;
-
-          frame_width?: number;
-
-          frames_dropped?: number;
-
-          frames_per_second?: number;
-
-          jitter?: number;
-
-          packets_lost?: number;
-
-          quality?: number;
-
-          timestamp?: string;
-        }
-      }
     }
   }
 }
@@ -1172,6 +617,8 @@ export namespace SessionGetSessionTranscriptsResponse {
 export interface SessionGetSessionsResponse {
   data?: SessionGetSessionsResponse.Data;
 
+  paging?: SessionGetSessionsResponse.Paging;
+
   success?: boolean;
 }
 
@@ -1257,6 +704,14 @@ export namespace SessionGetSessionsResponse {
       meta?: unknown;
     }
   }
+
+  export interface Paging {
+    end_offset?: number;
+
+    start_offset?: number;
+
+    total_count?: number;
+  }
 }
 
 export interface SessionGenerateSummaryOfTranscriptsParams {
@@ -1277,6 +732,11 @@ export interface SessionGetParticipantDataFromPeerIDParams {
    * no spaces between the filters.
    */
   filters?: 'device_info' | 'ip_information' | 'precall_network_information' | 'events' | 'quality_stats';
+
+  /**
+   * Query param: if true, response includes all the peer events of participant.
+   */
+  include_peer_events?: boolean;
 }
 
 export interface SessionGetSessionChatParams {
@@ -1339,8 +799,8 @@ export interface SessionGetSessionParticipantsParams {
   per_page?: number;
 
   /**
-   * Query param: The search query string. You can search using the meeting ID or
-   * title.
+   * Query param: The search query string. You can search using participant ID,
+   * custom participant ID, or display name.
    */
   search?: string;
 
@@ -1371,9 +831,14 @@ export interface SessionGetSessionSummaryParams {
 
 export interface SessionGetSessionTranscriptsParams {
   /**
-   * The account identifier tag.
+   * Path param: The account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: Transcript file format to fetch.
+   */
+  format?: 'SRT' | 'VTT' | 'JSON' | 'CSV';
 }
 
 export interface SessionGetSessionsParams {
@@ -1439,6 +904,7 @@ export interface SessionGetSessionsParams {
 
 export declare namespace Sessions {
   export {
+    type SessionGenerateSummaryOfTranscriptsResponse as SessionGenerateSummaryOfTranscriptsResponse,
     type SessionGetParticipantDataFromPeerIDResponse as SessionGetParticipantDataFromPeerIDResponse,
     type SessionGetSessionChatResponse as SessionGetSessionChatResponse,
     type SessionGetSessionDetailsResponse as SessionGetSessionDetailsResponse,

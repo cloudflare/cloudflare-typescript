@@ -64,6 +64,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGenerateSummaryOfTranscriptsResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetParticipantDataFromPeerIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionChatResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/sessions.ts">SessionGetSessionDetailsResponse</a></code>
@@ -75,7 +76,7 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/summary">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">generateSummaryOfTranscripts</a>(appId, sessionId, { ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/summary">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">generateSummaryOfTranscripts</a>(appId, sessionId, { ...params }) -> SessionGenerateSummaryOfTranscriptsResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/peer-report/{peer_id}">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getParticipantDataFromPeerId</a>(appId, peerId, { ...params }) -> SessionGetParticipantDataFromPeerIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}/chat">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionChat</a>(appId, sessionId, { ...params }) -> SessionGetSessionChatResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/sessions/{session_id}">client.realtimeKit.sessions.<a href="./src/resources/realtime-kit/sessions.ts">getSessionDetails</a>(appId, sessionId, { ...params }) -> SessionGetSessionDetailsResponse</code>
@@ -94,6 +95,7 @@ Types:
 - <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingGetRecordingsResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingPauseResumeStopRecordingResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingStartRecordingsResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/recordings.ts">RecordingStartTrackRecordingResponse</a></code>
 
 Methods:
 
@@ -102,7 +104,7 @@ Methods:
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/recordings">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">getRecordings</a>(appId, { ...params }) -> RecordingGetRecordingsResponse</code>
 - <code title="put /accounts/{account_id}/realtime/kit/{app_id}/recordings/{recording_id}">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">pauseResumeStopRecording</a>(appId, recordingId, { ...params }) -> RecordingPauseResumeStopRecordingResponse</code>
 - <code title="post /accounts/{account_id}/realtime/kit/{app_id}/recordings">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">startRecordings</a>(appId, { ...params }) -> RecordingStartRecordingsResponse</code>
-- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/recordings/track">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">startTrackRecording</a>(appId, { ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/realtime/kit/{app_id}/recordings/track">client.realtimeKit.recordings.<a href="./src/resources/realtime-kit/recordings.ts">startTrackRecording</a>(appId, { ...params }) -> RecordingStartTrackRecordingResponse</code>
 
 ## Webhooks
 
@@ -148,6 +150,7 @@ Types:
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetActiveLivestreamsForLivestreamIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetAllLivestreamsResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamAnalyticsCompleteResponse</a></code>
+- <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamAnalyticsDaywiseResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamSessionDetailsForSessionIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetLivestreamSessionForLivestreamIDResponse</a></code>
 - <code><a href="./src/resources/realtime-kit/livestreams.ts">LivestreamGetMeetingActiveLivestreamsResponse</a></code>
@@ -161,6 +164,7 @@ Methods:
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}/active-livestream-session">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getActiveLivestreamsForLivestreamId</a>(appId, livestreamId, { ...params }) -> LivestreamGetActiveLivestreamsForLivestreamIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getAllLivestreams</a>(appId, { ...params }) -> LivestreamGetAllLivestreamsResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/overall">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamAnalyticsComplete</a>(appId, { ...params }) -> LivestreamGetLivestreamAnalyticsCompleteResponse</code>
+- <code title="get /accounts/{account_id}/realtime/kit/{app_id}/analytics/livestreams/daywise">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamAnalyticsDaywise</a>(appId, { ...params }) -> LivestreamGetLivestreamAnalyticsDaywiseResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/sessions/{livestream-session-id}">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamSessionDetailsForSessionId</a>(appId, livestreamSessionId, { ...params }) -> LivestreamGetLivestreamSessionDetailsForSessionIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/livestreams/{livestream_id}">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getLivestreamSessionForLivestreamId</a>(appId, livestreamId, { ...params }) -> LivestreamGetLivestreamSessionForLivestreamIDResponse</code>
 - <code title="get /accounts/{account_id}/realtime/kit/{app_id}/meetings/{meeting_id}/active-livestream">client.realtimeKit.livestreams.<a href="./src/resources/realtime-kit/livestreams.ts">getMeetingActiveLivestreams</a>(appId, meetingId, { ...params }) -> LivestreamGetMeetingActiveLivestreamsResponse</code>
