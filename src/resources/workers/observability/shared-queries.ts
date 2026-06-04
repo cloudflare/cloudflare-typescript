@@ -2,219 +2,128 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { SinglePage } from '../../../pagination';
 
-export class Telemetry extends APIResource {
+export class SharedQueries extends APIResource {
   /**
-   * List all the keys in your telemetry events.
+   * Shared queries store the results of a previously run query, allowing you to
+   * share the results with others.
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const telemetryKeysResponse of client.workers.observability.telemetry.keys(
-   *   { account_id: 'account_id' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  keys(
-    params: TelemetryKeysParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TelemetryKeysResponsesSinglePage, TelemetryKeysResponse> {
-    const { account_id, ...body } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/workers/observability/telemetry/keys`,
-      TelemetryKeysResponsesSinglePage,
-      { body, method: 'post', ...options },
-    );
-  }
-
-  /**
-   * Prepare websocket server for live tail.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.workers.observability.telemetry.liveTail({
-   *     account_id: 'account_id',
-   *   });
-   * ```
-   */
-  liveTail(
-    params: TelemetryLiveTailParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TelemetryLiveTailResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/workers/observability/telemetry/live-tail`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TelemetryLiveTailResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Notify live tail that user is still eligible to receive live events.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.workers.observability.telemetry.liveTailHeartbeat(
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  liveTailHeartbeat(
-    params: TelemetryLiveTailHeartbeatParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TelemetryLiveTailHeartbeatResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/workers/observability/telemetry/live-tail/heartbeat`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TelemetryLiveTailHeartbeatResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Run a temporary or saved query.
-   *
-   * @example
-   * ```ts
-   * const response =
-   *   await client.workers.observability.telemetry.query({
+   * const sharedQuery =
+   *   await client.workers.observability.sharedQueries.create({
    *     account_id: 'account_id',
    *     queryId: 'queryId',
    *     timeframe: { from: 0, to: 0 },
    *   });
    * ```
    */
-  query(
-    params: TelemetryQueryParams,
+  create(
+    params: SharedQueryCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TelemetryQueryResponse> {
+  ): Core.APIPromise<SharedQueryCreateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/workers/observability/telemetry/query`, {
+      this._client.post(`/accounts/${account_id}/workers/observability/shared/query`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: TelemetryQueryResponse }>
+      }) as Core.APIPromise<{ result: SharedQueryCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * List unique values found in your events.
+   * Shared queries store the results of a previously run query, allowing you to
+   * share the results with others.
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const telemetryValuesResponse of client.workers.observability.telemetry.values(
-   *   {
-   *     account_id: 'account_id',
-   *     datasets: ['string'],
-   *     key: 'key',
-   *     timeframe: { from: 0, to: 0 },
-   *     type: 'string',
-   *   },
-   * )) {
-   *   // ...
-   * }
+   * const sharedQuery =
+   *   await client.workers.observability.sharedQueries.get(
+   *     'id',
+   *     { account_id: 'account_id' },
+   *   );
    * ```
    */
-  values(
-    params: TelemetryValuesParams,
+  get(
+    id: string,
+    params: SharedQueryGetParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<TelemetryValuesResponsesSinglePage, TelemetryValuesResponse> {
-    const { account_id, ...body } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/workers/observability/telemetry/values`,
-      TelemetryValuesResponsesSinglePage,
-      { body, method: 'post', ...options },
-    );
+  ): Core.APIPromise<SharedQueryGetResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/workers/observability/shared/query/${id}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: SharedQueryGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TelemetryKeysResponsesSinglePage extends SinglePage<TelemetryKeysResponse> {}
-
-export class TelemetryValuesResponsesSinglePage extends SinglePage<TelemetryValuesResponse> {}
-
-export interface TelemetryKeysResponse {
-  key: string;
-
-  lastSeenAt: number;
-
-  type: 'string' | 'boolean' | 'number';
-}
-
-export interface TelemetryLiveTailResponse {
+export interface SharedQueryCreateResponse {
   /**
-   * WebSocket URL clients connect to in order to stream live tail events.
+   * Specify the ID of the shared query.
    */
-  wsUrl: string;
+  id: string;
 }
-
-export type TelemetryLiveTailHeartbeatResponse = unknown;
 
 /**
  * Complete results of a query run. The populated fields depend on the requested
  * view type (events, calculations, invocations, traces, or agents).
  */
-export interface TelemetryQueryResponse {
+export interface SharedQueryGetResponse {
   /**
    * Represents a single execution of a query against Workers Observability data,
    * including the query definition, execution status, and performance statistics.
    */
-  run: TelemetryQueryResponse.Run;
+  run: SharedQueryGetResponse.Run;
 
   /**
    * Query performance statistics from the database. Includes execution time, rows
    * scanned, and bytes read. Does not include network latency.
    */
-  statistics: TelemetryQueryResponse.Statistics;
+  statistics: SharedQueryGetResponse.Statistics;
 
   /**
    * Durable Object agent summaries. Present when the query view is 'agents'. Each
    * entry represents an agent with its event counts and status.
    */
-  agents?: Array<TelemetryQueryResponse.Agent>;
+  agents?: Array<SharedQueryGetResponse.Agent>;
 
   /**
    * Aggregated calculation results. Present when the query view is 'calculations'.
    * Contains computed metrics (count, avg, p99, etc.) with optional group-by
    * breakdowns and time-series data.
    */
-  calculations?: Array<TelemetryQueryResponse.Calculation>;
+  calculations?: Array<SharedQueryGetResponse.Calculation>;
 
   /**
    * Comparison calculation results from the previous time period. Present when the
    * compare option is enabled. Same structure as calculations.
    */
-  compare?: Array<TelemetryQueryResponse.Compare>;
+  compare?: Array<SharedQueryGetResponse.Compare>;
 
   /**
    * Individual event results. Present when the query view is 'events'. Contains the
    * matching log lines and their metadata.
    */
-  events?: TelemetryQueryResponse.Events;
+  events?: SharedQueryGetResponse.Events;
 
   /**
    * Events grouped by invocation (request ID). Present when the query view is
    * 'invocations'. Each key is a request ID mapping to all events from that
    * invocation.
    */
-  invocations?: { [key: string]: Array<TelemetryQueryResponse.Invocation> };
+  invocations?: { [key: string]: Array<SharedQueryGetResponse.Invocation> };
 
   /**
    * Trace summaries matching the query. Present when the query view is 'traces'.
    * Each entry represents a distributed trace with its spans, duration, and services
    * involved.
    */
-  traces?: Array<TelemetryQueryResponse.Trace>;
+  traces?: Array<SharedQueryGetResponse.Trace>;
 }
 
-export namespace TelemetryQueryResponse {
+export namespace SharedQueryGetResponse {
   /**
    * Represents a single execution of a query against Workers Observability data,
    * including the query definition, execution status, and performance statistics.
@@ -1577,460 +1486,7 @@ export namespace TelemetryQueryResponse {
   }
 }
 
-export interface TelemetryValuesResponse {
-  dataset: string;
-
-  key: string;
-
-  type: 'string' | 'boolean' | 'number';
-
-  value: string | number | boolean;
-}
-
-export interface TelemetryKeysParams {
-  /**
-   * Path param: Your Cloudflare account ID.
-   */
-  account_id: string;
-
-  /**
-   * Body param: Leave this empty to use the default datasets
-   */
-  datasets?: Array<string>;
-
-  /**
-   * Body param: Apply filters to narrow key discovery. Supports nested groups via
-   * kind: 'group'. Maximum nesting depth is 4.
-   */
-  filters?: Array<TelemetryKeysParams.UnionMember0 | TelemetryKeysParams.WorkersObservabilityFilterLeaf>;
-
-  /**
-   * Body param
-   */
-  from?: number;
-
-  /**
-   * Body param: If the user suggests a key, use this to narrow down the list of keys
-   * returned. Make sure matchCase is false to avoid case sensitivity issues.
-   */
-  keyNeedle?: TelemetryKeysParams.KeyNeedle;
-
-  /**
-   * Body param: Advanced usage: set limit=1000+ to retrieve comprehensive key
-   * options without needing additional filtering.
-   */
-  limit?: number;
-
-  /**
-   * Body param: Search for a specific substring in any of the events
-   */
-  needle?: TelemetryKeysParams.Needle;
-
-  /**
-   * Body param
-   */
-  to?: number;
-}
-
-export namespace TelemetryKeysParams {
-  export interface UnionMember0 {
-    filterCombination: 'and' | 'or' | 'AND' | 'OR';
-
-    filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
-
-    kind: 'group';
-  }
-
-  export namespace UnionMember0 {
-    export interface UnionMember0 {
-      filterCombination: 'and' | 'or' | 'AND' | 'OR';
-
-      filters: Array<unknown>;
-
-      kind: 'group';
-    }
-
-    /**
-     * A filter condition applied to query results. Use the keys and values endpoints
-     * to discover available fields and their values before constructing filters.
-     */
-    export interface WorkersObservabilityFilterLeaf {
-      /**
-       * Filter field name. Use verified keys from previous query results or the keys
-       * endpoint. Common keys include $metadata.service, $metadata.origin,
-       * $metadata.trigger, $metadata.message, and $metadata.error.
-       */
-      key: string;
-
-      /**
-       * Comparison operator. String operators: includes, not_includes, starts_with,
-       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
-       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
-       */
-      operation:
-        | 'includes'
-        | 'not_includes'
-        | 'starts_with'
-        | 'ends_with'
-        | 'regex'
-        | 'exists'
-        | 'is_null'
-        | 'in'
-        | 'not_in'
-        | 'eq'
-        | 'neq'
-        | 'gt'
-        | 'gte'
-        | 'lt'
-        | 'lte'
-        | '='
-        | '!='
-        | '>'
-        | '>='
-        | '<'
-        | '<='
-        | 'INCLUDES'
-        | 'DOES_NOT_INCLUDE'
-        | 'MATCH_REGEX'
-        | 'EXISTS'
-        | 'DOES_NOT_EXIST'
-        | 'IN'
-        | 'NOT_IN'
-        | 'STARTS_WITH'
-        | 'ENDS_WITH';
-
-      /**
-       * Data type of the filter field. Must match the actual type of the key being
-       * filtered.
-       */
-      type: 'string' | 'number' | 'boolean';
-
-      /**
-       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
-       * omitted.
-       */
-      kind?: 'filter';
-
-      /**
-       * Comparison value. Must match actual values in your data — verify with the values
-       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
-       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
-       * lookaheads/lookbehinds).
-       */
-      value?: string | number | boolean;
-    }
-  }
-
-  /**
-   * A filter condition applied to query results. Use the keys and values endpoints
-   * to discover available fields and their values before constructing filters.
-   */
-  export interface WorkersObservabilityFilterLeaf {
-    /**
-     * Filter field name. Use verified keys from previous query results or the keys
-     * endpoint. Common keys include $metadata.service, $metadata.origin,
-     * $metadata.trigger, $metadata.message, and $metadata.error.
-     */
-    key: string;
-
-    /**
-     * Comparison operator. String operators: includes, not_includes, starts_with,
-     * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
-     * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
-     */
-    operation:
-      | 'includes'
-      | 'not_includes'
-      | 'starts_with'
-      | 'ends_with'
-      | 'regex'
-      | 'exists'
-      | 'is_null'
-      | 'in'
-      | 'not_in'
-      | 'eq'
-      | 'neq'
-      | 'gt'
-      | 'gte'
-      | 'lt'
-      | 'lte'
-      | '='
-      | '!='
-      | '>'
-      | '>='
-      | '<'
-      | '<='
-      | 'INCLUDES'
-      | 'DOES_NOT_INCLUDE'
-      | 'MATCH_REGEX'
-      | 'EXISTS'
-      | 'DOES_NOT_EXIST'
-      | 'IN'
-      | 'NOT_IN'
-      | 'STARTS_WITH'
-      | 'ENDS_WITH';
-
-    /**
-     * Data type of the filter field. Must match the actual type of the key being
-     * filtered.
-     */
-    type: 'string' | 'number' | 'boolean';
-
-    /**
-     * Discriminator for leaf filter nodes. Always 'filter' when present; may be
-     * omitted.
-     */
-    kind?: 'filter';
-
-    /**
-     * Comparison value. Must match actual values in your data — verify with the values
-     * endpoint. Ensure the value type (string/number/boolean) matches the field type.
-     * String comparisons are case-sensitive. Regex uses RE2 syntax (no
-     * lookaheads/lookbehinds).
-     */
-    value?: string | number | boolean;
-  }
-
-  /**
-   * If the user suggests a key, use this to narrow down the list of keys returned.
-   * Make sure matchCase is false to avoid case sensitivity issues.
-   */
-  export interface KeyNeedle {
-    /**
-     * The text or pattern to search for.
-     */
-    value: string | number | boolean;
-
-    /**
-     * When true, treats the value as a regular expression (RE2 syntax).
-     */
-    isRegex?: boolean;
-
-    /**
-     * When true, performs a case-sensitive search. Defaults to case-insensitive.
-     */
-    matchCase?: boolean;
-  }
-
-  /**
-   * Search for a specific substring in any of the events
-   */
-  export interface Needle {
-    /**
-     * The text or pattern to search for.
-     */
-    value: string | number | boolean;
-
-    /**
-     * When true, treats the value as a regular expression (RE2 syntax).
-     */
-    isRegex?: boolean;
-
-    /**
-     * When true, performs a case-sensitive search. Defaults to case-insensitive.
-     */
-    matchCase?: boolean;
-  }
-}
-
-export interface TelemetryLiveTailParams {
-  /**
-   * Path param: Your Cloudflare account ID.
-   */
-  account_id: string;
-
-  /**
-   * Body param: Set a flag to describe how to combine the filters on the query.
-   */
-  filterCombination?: 'and' | 'or' | 'AND' | 'OR';
-
-  /**
-   * Body param: Apply filters to the query. Supports nested groups via kind:
-   * 'group'.
-   */
-  filters?: Array<
-    TelemetryLiveTailParams.UnionMember0 | TelemetryLiveTailParams.WorkersObservabilityFilterLeaf
-  >;
-
-  /**
-   * Body param
-   */
-  scriptId?: string;
-}
-
-export namespace TelemetryLiveTailParams {
-  export interface UnionMember0 {
-    filterCombination: 'and' | 'or' | 'AND' | 'OR';
-
-    filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
-
-    kind: 'group';
-  }
-
-  export namespace UnionMember0 {
-    export interface UnionMember0 {
-      filterCombination: 'and' | 'or' | 'AND' | 'OR';
-
-      filters: Array<unknown>;
-
-      kind: 'group';
-    }
-
-    /**
-     * A filter condition applied to query results. Use the keys and values endpoints
-     * to discover available fields and their values before constructing filters.
-     */
-    export interface WorkersObservabilityFilterLeaf {
-      /**
-       * Filter field name. Use verified keys from previous query results or the keys
-       * endpoint. Common keys include $metadata.service, $metadata.origin,
-       * $metadata.trigger, $metadata.message, and $metadata.error.
-       */
-      key: string;
-
-      /**
-       * Comparison operator. String operators: includes, not_includes, starts_with,
-       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
-       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
-       */
-      operation:
-        | 'includes'
-        | 'not_includes'
-        | 'starts_with'
-        | 'ends_with'
-        | 'regex'
-        | 'exists'
-        | 'is_null'
-        | 'in'
-        | 'not_in'
-        | 'eq'
-        | 'neq'
-        | 'gt'
-        | 'gte'
-        | 'lt'
-        | 'lte'
-        | '='
-        | '!='
-        | '>'
-        | '>='
-        | '<'
-        | '<='
-        | 'INCLUDES'
-        | 'DOES_NOT_INCLUDE'
-        | 'MATCH_REGEX'
-        | 'EXISTS'
-        | 'DOES_NOT_EXIST'
-        | 'IN'
-        | 'NOT_IN'
-        | 'STARTS_WITH'
-        | 'ENDS_WITH';
-
-      /**
-       * Data type of the filter field. Must match the actual type of the key being
-       * filtered.
-       */
-      type: 'string' | 'number' | 'boolean';
-
-      /**
-       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
-       * omitted.
-       */
-      kind?: 'filter';
-
-      /**
-       * Comparison value. Must match actual values in your data — verify with the values
-       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
-       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
-       * lookaheads/lookbehinds).
-       */
-      value?: string | number | boolean;
-    }
-  }
-
-  /**
-   * A filter condition applied to query results. Use the keys and values endpoints
-   * to discover available fields and their values before constructing filters.
-   */
-  export interface WorkersObservabilityFilterLeaf {
-    /**
-     * Filter field name. Use verified keys from previous query results or the keys
-     * endpoint. Common keys include $metadata.service, $metadata.origin,
-     * $metadata.trigger, $metadata.message, and $metadata.error.
-     */
-    key: string;
-
-    /**
-     * Comparison operator. String operators: includes, not_includes, starts_with,
-     * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
-     * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
-     */
-    operation:
-      | 'includes'
-      | 'not_includes'
-      | 'starts_with'
-      | 'ends_with'
-      | 'regex'
-      | 'exists'
-      | 'is_null'
-      | 'in'
-      | 'not_in'
-      | 'eq'
-      | 'neq'
-      | 'gt'
-      | 'gte'
-      | 'lt'
-      | 'lte'
-      | '='
-      | '!='
-      | '>'
-      | '>='
-      | '<'
-      | '<='
-      | 'INCLUDES'
-      | 'DOES_NOT_INCLUDE'
-      | 'MATCH_REGEX'
-      | 'EXISTS'
-      | 'DOES_NOT_EXIST'
-      | 'IN'
-      | 'NOT_IN'
-      | 'STARTS_WITH'
-      | 'ENDS_WITH';
-
-    /**
-     * Data type of the filter field. Must match the actual type of the key being
-     * filtered.
-     */
-    type: 'string' | 'number' | 'boolean';
-
-    /**
-     * Discriminator for leaf filter nodes. Always 'filter' when present; may be
-     * omitted.
-     */
-    kind?: 'filter';
-
-    /**
-     * Comparison value. Must match actual values in your data — verify with the values
-     * endpoint. Ensure the value type (string/number/boolean) matches the field type.
-     * String comparisons are case-sensitive. Regex uses RE2 syntax (no
-     * lookaheads/lookbehinds).
-     */
-    value?: string | number | boolean;
-  }
-}
-
-export interface TelemetryLiveTailHeartbeatParams {
-  /**
-   * Path param: Your Cloudflare account ID.
-   */
-  account_id: string;
-
-  /**
-   * Body param
-   */
-  scriptId?: string;
-}
-
-export interface TelemetryQueryParams {
+export interface SharedQueryCreateParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
@@ -2047,7 +1503,7 @@ export interface TelemetryQueryParams {
    * Body param: Timeframe for the query using Unix timestamps in milliseconds.
    * Narrower timeframes produce faster responses and more specific results.
    */
-  timeframe: TelemetryQueryParams.Timeframe;
+  timeframe: SharedQueryCreateParams.Timeframe;
 
   /**
    * Body param: When true, includes time-series data in the response.
@@ -2108,7 +1564,7 @@ export interface TelemetryQueryParams {
    * by queryId. Use the keys and values endpoints to discover available fields
    * before building filters.
    */
-  parameters?: TelemetryQueryParams.Parameters;
+  parameters?: SharedQueryCreateParams.Parameters;
 
   /**
    * Body param: Controls the shape of the response. 'events': individual log lines
@@ -2120,7 +1576,7 @@ export interface TelemetryQueryParams {
   view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'agents';
 }
 
-export namespace TelemetryQueryParams {
+export namespace SharedQueryCreateParams {
   /**
    * Timeframe for the query using Unix timestamps in milliseconds. Narrower
    * timeframes produce faster responses and more specific results.
@@ -2491,253 +1947,23 @@ export namespace TelemetryQueryParams {
   }
 }
 
-export interface TelemetryValuesParams {
+export interface SharedQueryGetParams {
   /**
    * Path param: Your Cloudflare account ID.
    */
   account_id: string;
 
   /**
-   * Body param: Leave this empty to use the default datasets
+   * Query param: Select the view of the query result to return, defaults to events.
    */
-  datasets: Array<string>;
-
-  /**
-   * Body param
-   */
-  key: string;
-
-  /**
-   * Body param
-   */
-  timeframe: TelemetryValuesParams.Timeframe;
-
-  /**
-   * Body param
-   */
-  type: 'string' | 'boolean' | 'number';
-
-  /**
-   * Body param: Apply filters before listing values. Supports nested groups via
-   * kind: 'group'. Maximum nesting depth is 4.
-   */
-  filters?: Array<TelemetryValuesParams.UnionMember0 | TelemetryValuesParams.WorkersObservabilityFilterLeaf>;
-
-  /**
-   * Body param
-   */
-  limit?: number;
-
-  /**
-   * Body param: Full-text search expression to match events containing the specified
-   * text or pattern.
-   */
-  needle?: TelemetryValuesParams.Needle;
+  view?: 'events' | 'invocations' | 'calculations';
 }
 
-export namespace TelemetryValuesParams {
-  export interface Timeframe {
-    from: number;
-
-    to: number;
-  }
-
-  export interface UnionMember0 {
-    filterCombination: 'and' | 'or' | 'AND' | 'OR';
-
-    filters: Array<UnionMember0.UnionMember0 | UnionMember0.WorkersObservabilityFilterLeaf>;
-
-    kind: 'group';
-  }
-
-  export namespace UnionMember0 {
-    export interface UnionMember0 {
-      filterCombination: 'and' | 'or' | 'AND' | 'OR';
-
-      filters: Array<unknown>;
-
-      kind: 'group';
-    }
-
-    /**
-     * A filter condition applied to query results. Use the keys and values endpoints
-     * to discover available fields and their values before constructing filters.
-     */
-    export interface WorkersObservabilityFilterLeaf {
-      /**
-       * Filter field name. Use verified keys from previous query results or the keys
-       * endpoint. Common keys include $metadata.service, $metadata.origin,
-       * $metadata.trigger, $metadata.message, and $metadata.error.
-       */
-      key: string;
-
-      /**
-       * Comparison operator. String operators: includes, not_includes, starts_with,
-       * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
-       * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
-       */
-      operation:
-        | 'includes'
-        | 'not_includes'
-        | 'starts_with'
-        | 'ends_with'
-        | 'regex'
-        | 'exists'
-        | 'is_null'
-        | 'in'
-        | 'not_in'
-        | 'eq'
-        | 'neq'
-        | 'gt'
-        | 'gte'
-        | 'lt'
-        | 'lte'
-        | '='
-        | '!='
-        | '>'
-        | '>='
-        | '<'
-        | '<='
-        | 'INCLUDES'
-        | 'DOES_NOT_INCLUDE'
-        | 'MATCH_REGEX'
-        | 'EXISTS'
-        | 'DOES_NOT_EXIST'
-        | 'IN'
-        | 'NOT_IN'
-        | 'STARTS_WITH'
-        | 'ENDS_WITH';
-
-      /**
-       * Data type of the filter field. Must match the actual type of the key being
-       * filtered.
-       */
-      type: 'string' | 'number' | 'boolean';
-
-      /**
-       * Discriminator for leaf filter nodes. Always 'filter' when present; may be
-       * omitted.
-       */
-      kind?: 'filter';
-
-      /**
-       * Comparison value. Must match actual values in your data — verify with the values
-       * endpoint. Ensure the value type (string/number/boolean) matches the field type.
-       * String comparisons are case-sensitive. Regex uses RE2 syntax (no
-       * lookaheads/lookbehinds).
-       */
-      value?: string | number | boolean;
-    }
-  }
-
-  /**
-   * A filter condition applied to query results. Use the keys and values endpoints
-   * to discover available fields and their values before constructing filters.
-   */
-  export interface WorkersObservabilityFilterLeaf {
-    /**
-     * Filter field name. Use verified keys from previous query results or the keys
-     * endpoint. Common keys include $metadata.service, $metadata.origin,
-     * $metadata.trigger, $metadata.message, and $metadata.error.
-     */
-    key: string;
-
-    /**
-     * Comparison operator. String operators: includes, not_includes, starts_with,
-     * ends_with, regex. Existence: exists, is_null. Set membership: in, not_in
-     * (comma-separated values). Numeric: eq, neq, gt, gte, lt, lte.
-     */
-    operation:
-      | 'includes'
-      | 'not_includes'
-      | 'starts_with'
-      | 'ends_with'
-      | 'regex'
-      | 'exists'
-      | 'is_null'
-      | 'in'
-      | 'not_in'
-      | 'eq'
-      | 'neq'
-      | 'gt'
-      | 'gte'
-      | 'lt'
-      | 'lte'
-      | '='
-      | '!='
-      | '>'
-      | '>='
-      | '<'
-      | '<='
-      | 'INCLUDES'
-      | 'DOES_NOT_INCLUDE'
-      | 'MATCH_REGEX'
-      | 'EXISTS'
-      | 'DOES_NOT_EXIST'
-      | 'IN'
-      | 'NOT_IN'
-      | 'STARTS_WITH'
-      | 'ENDS_WITH';
-
-    /**
-     * Data type of the filter field. Must match the actual type of the key being
-     * filtered.
-     */
-    type: 'string' | 'number' | 'boolean';
-
-    /**
-     * Discriminator for leaf filter nodes. Always 'filter' when present; may be
-     * omitted.
-     */
-    kind?: 'filter';
-
-    /**
-     * Comparison value. Must match actual values in your data — verify with the values
-     * endpoint. Ensure the value type (string/number/boolean) matches the field type.
-     * String comparisons are case-sensitive. Regex uses RE2 syntax (no
-     * lookaheads/lookbehinds).
-     */
-    value?: string | number | boolean;
-  }
-
-  /**
-   * Full-text search expression to match events containing the specified text or
-   * pattern.
-   */
-  export interface Needle {
-    /**
-     * The text or pattern to search for.
-     */
-    value: string | number | boolean;
-
-    /**
-     * When true, treats the value as a regular expression (RE2 syntax).
-     */
-    isRegex?: boolean;
-
-    /**
-     * When true, performs a case-sensitive search. Defaults to case-insensitive.
-     */
-    matchCase?: boolean;
-  }
-}
-
-Telemetry.TelemetryKeysResponsesSinglePage = TelemetryKeysResponsesSinglePage;
-Telemetry.TelemetryValuesResponsesSinglePage = TelemetryValuesResponsesSinglePage;
-
-export declare namespace Telemetry {
+export declare namespace SharedQueries {
   export {
-    type TelemetryKeysResponse as TelemetryKeysResponse,
-    type TelemetryLiveTailResponse as TelemetryLiveTailResponse,
-    type TelemetryLiveTailHeartbeatResponse as TelemetryLiveTailHeartbeatResponse,
-    type TelemetryQueryResponse as TelemetryQueryResponse,
-    type TelemetryValuesResponse as TelemetryValuesResponse,
-    TelemetryKeysResponsesSinglePage as TelemetryKeysResponsesSinglePage,
-    TelemetryValuesResponsesSinglePage as TelemetryValuesResponsesSinglePage,
-    type TelemetryKeysParams as TelemetryKeysParams,
-    type TelemetryLiveTailParams as TelemetryLiveTailParams,
-    type TelemetryLiveTailHeartbeatParams as TelemetryLiveTailHeartbeatParams,
-    type TelemetryQueryParams as TelemetryQueryParams,
-    type TelemetryValuesParams as TelemetryValuesParams,
+    type SharedQueryCreateResponse as SharedQueryCreateResponse,
+    type SharedQueryGetResponse as SharedQueryGetResponse,
+    type SharedQueryCreateParams as SharedQueryCreateParams,
+    type SharedQueryGetParams as SharedQueryGetParams,
   };
 }
