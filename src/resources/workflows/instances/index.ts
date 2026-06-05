@@ -9,9 +9,11 @@ export {
   type InstanceListResponse,
   type InstanceBulkResponse,
   type InstanceGetResponse,
+  type InstanceStepResponse,
   type InstanceCreateParams,
   type InstanceListParams,
   type InstanceBulkParams,
   type InstanceGetParams,
+  type InstanceStepParams,
 } from './instances';
 export { Status, type StatusEditResponse, type StatusEditParams } from './status';
