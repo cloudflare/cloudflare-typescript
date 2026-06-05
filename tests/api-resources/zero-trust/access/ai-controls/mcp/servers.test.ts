@@ -55,6 +55,7 @@ const runTests = (
       name: 'My MCP Server',
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
+      is_shared_oauth_callback_enabled: true,
       updated_prompts: [
         {
           name: 'name',
@@ -92,6 +93,7 @@ const runTests = (
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
+      is_shared_oauth_callback_enabled: true,
       name: 'My MCP Server',
       updated_prompts: [
         {
