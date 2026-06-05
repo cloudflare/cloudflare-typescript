@@ -73,6 +73,9 @@ export namespace MitigationListResponse {
 
     entity_id: string;
 
+    /**
+     * The type of entity targeted by a mitigation.
+     */
     entity_type: 'url_pattern' | 'account' | 'zone';
 
     /**
@@ -81,16 +84,28 @@ export namespace MitigationListResponse {
     status: 'pending' | 'active' | 'in_review' | 'cancelled' | 'removed';
 
     /**
-     * The type of mitigation
+     * The type of mitigation applied to a reported entity.
      */
     type:
-      | 'legal_block'
-      | 'misleading_interstitial'
-      | 'phishing_interstitial'
-      | 'network_block'
-      | 'rate_limit_cache'
       | 'account_suspend'
-      | 'redirect_video_stream';
+      | 'copyright_interstitial'
+      | 'geo_block'
+      | 'legal_block'
+      | 'malware_interstitial'
+      | 'misleading_interstitial'
+      | 'network_block'
+      | 'phishing_interstitial'
+      | 'playfairite_enforce'
+      | 'r2_takedown_account'
+      | 'r2_takedown_bucket'
+      | 'r2_takedown_object'
+      | 'rate_limit_cache'
+      | 'redirect_video_stream'
+      | 'registrar_freeze'
+      | 'registrar_parking'
+      | 'stream_block_account'
+      | 'user_suspend'
+      | 'workers_takedown_by_zone_id';
   }
 }
 
@@ -108,6 +123,9 @@ export interface MitigationReviewResponse {
 
   entity_id: string;
 
+  /**
+   * The type of entity targeted by a mitigation.
+   */
   entity_type: 'url_pattern' | 'account' | 'zone';
 
   /**
@@ -116,16 +134,28 @@ export interface MitigationReviewResponse {
   status: 'pending' | 'active' | 'in_review' | 'cancelled' | 'removed';
 
   /**
-   * The type of mitigation
+   * The type of mitigation applied to a reported entity.
    */
   type:
-    | 'legal_block'
-    | 'misleading_interstitial'
-    | 'phishing_interstitial'
-    | 'network_block'
-    | 'rate_limit_cache'
     | 'account_suspend'
-    | 'redirect_video_stream';
+    | 'copyright_interstitial'
+    | 'geo_block'
+    | 'legal_block'
+    | 'malware_interstitial'
+    | 'misleading_interstitial'
+    | 'network_block'
+    | 'phishing_interstitial'
+    | 'playfairite_enforce'
+    | 'r2_takedown_account'
+    | 'r2_takedown_bucket'
+    | 'r2_takedown_object'
+    | 'rate_limit_cache'
+    | 'redirect_video_stream'
+    | 'registrar_freeze'
+    | 'registrar_parking'
+    | 'stream_block_account'
+    | 'user_suspend'
+    | 'workers_takedown_by_zone_id';
 }
 
 export interface MitigationListParams extends V4PagePaginationParams {
@@ -173,13 +203,25 @@ export interface MitigationListParams extends V4PagePaginationParams {
    * set, e.g. ?type=rate_limit_cache&type=legal_block.
    */
   type?:
-    | 'legal_block'
-    | 'misleading_interstitial'
-    | 'phishing_interstitial'
-    | 'network_block'
-    | 'rate_limit_cache'
     | 'account_suspend'
-    | 'redirect_video_stream';
+    | 'copyright_interstitial'
+    | 'geo_block'
+    | 'legal_block'
+    | 'malware_interstitial'
+    | 'misleading_interstitial'
+    | 'network_block'
+    | 'phishing_interstitial'
+    | 'playfairite_enforce'
+    | 'r2_takedown_account'
+    | 'r2_takedown_bucket'
+    | 'r2_takedown_object'
+    | 'rate_limit_cache'
+    | 'redirect_video_stream'
+    | 'registrar_freeze'
+    | 'registrar_parking'
+    | 'stream_block_account'
+    | 'user_suspend'
+    | 'workers_takedown_by_zone_id';
 }
 
 export interface MitigationReviewParams {
