@@ -1137,10 +1137,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.workflows.instances.list()`
 - `client.workflows.instances.bulk()`
 - `client.workflows.instances.get()`
+- `client.workflows.instances.step()`
 - `client.workflows.instances.status.edit()`
 - `client.workflows.instances.events.create()`
 - `client.workflows.versions.list()`
 - `client.workflows.versions.get()`
+- `client.workflows.versions.graph()`
 - `client.resourceSharing.update()`
 - `client.resourceSharing.delete()`
 - `client.resourceSharing.get()`

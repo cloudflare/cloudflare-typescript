@@ -66,6 +66,27 @@ const runTests = (client: PartialCloudflare<{ workflows: { versions: BaseVersion
       workflow_name: 'x',
     });
   });
+
+  test('graph: only required params', async () => {
+    const responsePromise = client.workflows.versions.graph('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+      workflow_name: 'x',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('graph: required and optional params', async () => {
+    const response = await client.workflows.versions.graph('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+      workflow_name: 'x',
+    });
+  });
 };
 describe('resource versions', () => runTests(client));
 describe('resource versions (tree shakable, base)', () => runTests(partialClient));
