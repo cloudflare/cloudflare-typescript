@@ -434,21 +434,21 @@ export namespace AIGatewayCreateResponse {
 
   export namespace SpendLimits {
     export interface Rule {
-      id: string;
-
       limit: number;
 
       limitType: 'cost';
 
       window: number;
 
+      id?: string;
+
       enabled?: boolean;
 
       metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
 
-      model?: 'partition' | Rule.Match;
+      model?: Rule.Model;
 
-      provider?: 'partition' | Rule.Match;
+      provider?: Rule.Provider;
 
       technique?: 'fixed' | 'sliding';
     }
@@ -459,17 +459,21 @@ export namespace AIGatewayCreateResponse {
       }
 
       export interface UnionMember1 {
-        mode: 'match';
+        mode: 'filter';
 
-        value: string;
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
       }
     }
   }
@@ -672,21 +676,21 @@ export namespace AIGatewayUpdateResponse {
 
   export namespace SpendLimits {
     export interface Rule {
-      id: string;
-
       limit: number;
 
       limitType: 'cost';
 
       window: number;
 
+      id?: string;
+
       enabled?: boolean;
 
       metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
 
-      model?: 'partition' | Rule.Match;
+      model?: Rule.Model;
 
-      provider?: 'partition' | Rule.Match;
+      provider?: Rule.Provider;
 
       technique?: 'fixed' | 'sliding';
     }
@@ -697,17 +701,21 @@ export namespace AIGatewayUpdateResponse {
       }
 
       export interface UnionMember1 {
-        mode: 'match';
+        mode: 'filter';
 
-        value: string;
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
       }
     }
   }
@@ -910,21 +918,21 @@ export namespace AIGatewayListResponse {
 
   export namespace SpendLimits {
     export interface Rule {
-      id: string;
-
       limit: number;
 
       limitType: 'cost';
 
       window: number;
 
+      id?: string;
+
       enabled?: boolean;
 
       metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
 
-      model?: 'partition' | Rule.Match;
+      model?: Rule.Model;
 
-      provider?: 'partition' | Rule.Match;
+      provider?: Rule.Provider;
 
       technique?: 'fixed' | 'sliding';
     }
@@ -935,17 +943,21 @@ export namespace AIGatewayListResponse {
       }
 
       export interface UnionMember1 {
-        mode: 'match';
+        mode: 'filter';
 
-        value: string;
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
       }
     }
   }
@@ -1148,21 +1160,21 @@ export namespace AIGatewayDeleteResponse {
 
   export namespace SpendLimits {
     export interface Rule {
-      id: string;
-
       limit: number;
 
       limitType: 'cost';
 
       window: number;
 
+      id?: string;
+
       enabled?: boolean;
 
       metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
 
-      model?: 'partition' | Rule.Match;
+      model?: Rule.Model;
 
-      provider?: 'partition' | Rule.Match;
+      provider?: Rule.Provider;
 
       technique?: 'fixed' | 'sliding';
     }
@@ -1173,17 +1185,21 @@ export namespace AIGatewayDeleteResponse {
       }
 
       export interface UnionMember1 {
-        mode: 'match';
+        mode: 'filter';
 
-        value: string;
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
       }
     }
   }
@@ -1386,21 +1402,21 @@ export namespace AIGatewayGetResponse {
 
   export namespace SpendLimits {
     export interface Rule {
-      id: string;
-
       limit: number;
 
       limitType: 'cost';
 
       window: number;
 
+      id?: string;
+
       enabled?: boolean;
 
       metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
 
-      model?: 'partition' | Rule.Match;
+      model?: Rule.Model;
 
-      provider?: 'partition' | Rule.Match;
+      provider?: Rule.Provider;
 
       technique?: 'fixed' | 'sliding';
     }
@@ -1411,17 +1427,21 @@ export namespace AIGatewayGetResponse {
       }
 
       export interface UnionMember1 {
-        mode: 'match';
+        mode: 'filter';
 
-        value: string;
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
       }
     }
   }
@@ -1765,21 +1785,21 @@ export namespace AIGatewayUpdateParams {
 
   export namespace SpendLimits {
     export interface Rule {
-      id: string;
-
       limit: number;
 
       limitType: 'cost';
 
       window: number;
 
+      id?: string;
+
       enabled?: boolean;
 
       metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
 
-      model?: 'partition' | Rule.Match;
+      model?: Rule.Model;
 
-      provider?: 'partition' | Rule.Match;
+      provider?: Rule.Provider;
 
       technique?: 'fixed' | 'sliding';
     }
@@ -1790,17 +1810,21 @@ export namespace AIGatewayUpdateParams {
       }
 
       export interface UnionMember1 {
-        mode: 'match';
+        mode: 'filter';
 
-        value: string;
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
       }
 
-      export interface Match {
-        match: string;
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
       }
     }
   }
