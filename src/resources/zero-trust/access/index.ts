@@ -98,6 +98,16 @@ export {
   type GatewayCAListParams,
   type GatewayCADeleteParams,
 } from './gateway-ca';
+export {
+  IdPFederationGrants,
+  type IdPFederationGrant,
+  type IdPFederationGrantListResponse,
+  type IdPFederationGrantDeleteResponse,
+  type IdPFederationGrantCreateParams,
+  type IdPFederationGrantListParams,
+  type IdPFederationGrantDeleteParams,
+  type IdPFederationGrantGetParams,
+} from './idp-federation-grants';
 export { Infrastructure } from './infrastructure/index';
 export {
   Keys,
