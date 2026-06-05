@@ -7632,6 +7632,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/access/gateway_ca/{certificate_id}',
   },
   {
+    clientCallName: 'client.zeroTrust.access.IdPFederationGrants.create',
+    fullyQualifiedName: 'zeroTrust.access.IdPFederationGrants.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/access/idp_federation_grants',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.IdPFederationGrants.list',
+    fullyQualifiedName: 'zeroTrust.access.IdPFederationGrants.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/access/idp_federation_grants',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.IdPFederationGrants.delete',
+    fullyQualifiedName: 'zeroTrust.access.IdPFederationGrants.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/access/idp_federation_grants/{grant_id}',
+  },
+  {
+    clientCallName: 'client.zeroTrust.access.IdPFederationGrants.get',
+    fullyQualifiedName: 'zeroTrust.access.IdPFederationGrants.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/access/idp_federation_grants/{grant_id}',
+  },
+  {
     clientCallName: 'client.zeroTrust.access.samlCertificates.list',
     fullyQualifiedName: 'zeroTrust.access.samlCertificates.list',
     httpMethod: 'get',
