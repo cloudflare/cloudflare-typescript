@@ -78,6 +78,31 @@ export class Instances extends APIResource {
       }) as Core.APIPromise<{ result: InstanceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Retrieves the full, untruncated output for a specific step on a workflow
+   * instance. Returns a flat status-shaped JSON body with step `status` ('running' |
+   * 'waiting' | 'complete' | 'errored'), `error` (nullable), and `output` (the step
+   * value, or null while running/waiting/errored). When the step returned a
+   * ReadableStream from step.do, the response is served as
+   * 'application/octet-stream' with the raw bytes as the body instead of JSON. A
+   * `status='running'` response with non-null `error` indicates the step is
+   * currently retrying after a prior attempt failed.
+   */
+  step(
+    workflowName: string,
+    instanceId: string,
+    params: InstanceStepParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<InstanceStepResponse> {
+    const { account_id, ...query } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/workflows/${workflowName}/instances/${instanceId}/step`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: InstanceStepResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class InstanceListResponsesV4PagePaginationArray extends V4PagePaginationArray<InstanceListResponse> {}
@@ -355,6 +380,43 @@ export namespace InstanceGetResponse {
   }
 }
 
+export interface InstanceStepResponse {
+  /**
+   * Error details when status='errored'; null otherwise.
+   */
+  error: InstanceStepResponse.Error | null;
+
+  status:
+    | 'queued'
+    | 'running'
+    | 'paused'
+    | 'errored'
+    | 'terminated'
+    | 'complete'
+    | 'waitingForPause'
+    | 'waiting'
+    | 'rollingBack';
+
+  /**
+   * Full step output or waitForEvent payload without truncation. Sensitive outputs
+   * are returned as '[REDACTED]'. Populated when status='complete'. May be a
+   * ReadableStream when the step returned one from step.do; stream outputs are
+   * served as application/octet-stream rather than JSON.
+   */
+  output?: unknown;
+}
+
+export namespace InstanceStepResponse {
+  /**
+   * Error details when status='errored'; null otherwise.
+   */
+  export interface Error {
+    message: string;
+
+    name: string;
+  }
+}
+
 export interface InstanceCreateParams {
   /**
    * Path param
@@ -488,6 +550,30 @@ export interface InstanceGetParams {
   simple?: 'true' | 'false';
 }
 
+export interface InstanceStepParams {
+  /**
+   * Path param
+   */
+  account_id: string;
+
+  /**
+   * Query param: Exact step name from the instance logs response, including the
+   * generated counter suffix.
+   */
+  name: string;
+
+  /**
+   * Query param: Step type to disambiguate step.do and waitForEvent entries that
+   * share the same name.
+   */
+  type: 'step' | 'waitForEvent';
+
+  /**
+   * Query param: Specific attempt number to retrieve output or error for.
+   */
+  attempt?: number;
+}
+
 Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Instances.InstanceBulkResponsesSinglePage = InstanceBulkResponsesSinglePage;
 Instances.Status = Status;
@@ -499,12 +585,14 @@ export declare namespace Instances {
     type InstanceListResponse as InstanceListResponse,
     type InstanceBulkResponse as InstanceBulkResponse,
     type InstanceGetResponse as InstanceGetResponse,
+    type InstanceStepResponse as InstanceStepResponse,
     InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
     InstanceBulkResponsesSinglePage as InstanceBulkResponsesSinglePage,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceListParams as InstanceListParams,
     type InstanceBulkParams as InstanceBulkParams,
     type InstanceGetParams as InstanceGetParams,
+    type InstanceStepParams as InstanceStepParams,
   };
 
   export {

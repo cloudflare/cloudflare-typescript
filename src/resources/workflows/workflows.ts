@@ -6,6 +6,8 @@ import * as VersionsAPI from './versions';
 import {
   VersionGetParams,
   VersionGetResponse,
+  VersionGraphParams,
+  VersionGraphResponse,
   VersionListParams,
   VersionListResponse,
   VersionListResponsesV4PagePaginationArray,
@@ -23,6 +25,8 @@ import {
   InstanceListParams,
   InstanceListResponse,
   InstanceListResponsesV4PagePaginationArray,
+  InstanceStepParams,
+  InstanceStepResponse,
   Instances as InstancesAPIInstances,
 } from './instances/instances';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -306,20 +310,24 @@ export declare namespace Workflows {
     type InstanceListResponse as InstanceListResponse,
     type InstanceBulkResponse as InstanceBulkResponse,
     type InstanceGetResponse as InstanceGetResponse,
+    type InstanceStepResponse as InstanceStepResponse,
     InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
     InstanceBulkResponsesSinglePage as InstanceBulkResponsesSinglePage,
     type InstanceCreateParams as InstanceCreateParams,
     type InstanceListParams as InstanceListParams,
     type InstanceBulkParams as InstanceBulkParams,
     type InstanceGetParams as InstanceGetParams,
+    type InstanceStepParams as InstanceStepParams,
   };
 
   export {
     Versions as Versions,
     type VersionListResponse as VersionListResponse,
     type VersionGetResponse as VersionGetResponse,
+    type VersionGraphResponse as VersionGraphResponse,
     VersionListResponsesV4PagePaginationArray as VersionListResponsesV4PagePaginationArray,
     type VersionListParams as VersionListParams,
     type VersionGetParams as VersionGetParams,
+    type VersionGraphParams as VersionGraphParams,
   };
 }
