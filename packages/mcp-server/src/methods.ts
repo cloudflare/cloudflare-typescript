@@ -1393,6 +1393,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/dns_records/scan/trigger',
   },
   {
+    clientCallName: 'client.dns.usage.zone.get',
+    fullyQualifiedName: 'dns.usage.zone.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/dns_records/usage',
+  },
+  {
+    clientCallName: 'client.dns.usage.account.get',
+    fullyQualifiedName: 'dns.usage.account.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dns_records/usage',
+  },
+  {
     clientCallName: 'client.dns.settings.zone.edit',
     fullyQualifiedName: 'dns.settings.zone.edit',
     httpMethod: 'patch',
