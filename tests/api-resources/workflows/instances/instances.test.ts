@@ -117,6 +117,32 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: BaseInstan
       simple: 'true',
     });
   });
+
+  test('step: only required params', async () => {
+    const responsePromise = client.workflows.instances.step('x', {
+      account_id: 'account_id',
+      workflow_name: 'x',
+      name: 'x',
+      type: 'step',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('step: required and optional params', async () => {
+    const response = await client.workflows.instances.step('x', {
+      account_id: 'account_id',
+      workflow_name: 'x',
+      name: 'x',
+      type: 'step',
+      attempt: 1,
+    });
+  });
 };
 describe('resource instances', () => runTests(client));
 describe('resource instances (tree shakable, base)', () => runTests(partialClient));

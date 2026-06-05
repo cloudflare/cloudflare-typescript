@@ -12904,6 +12904,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}',
   },
   {
+    clientCallName: 'client.workflows.instances.step',
+    fullyQualifiedName: 'workflows.instances.step',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/step',
+  },
+  {
     clientCallName: 'client.workflows.instances.status.edit',
     fullyQualifiedName: 'workflows.instances.status.edit',
     httpMethod: 'patch',
@@ -12926,6 +12932,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'workflows.versions.get',
     httpMethod: 'get',
     httpPath: '/accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}',
+  },
+  {
+    clientCallName: 'client.workflows.versions.graph',
+    fullyQualifiedName: 'workflows.versions.graph',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}/graph',
   },
   {
     clientCallName: 'client.resourceSharing.create',
