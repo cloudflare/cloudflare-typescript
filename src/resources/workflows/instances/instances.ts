@@ -113,6 +113,8 @@ export interface InstanceCreateResponse {
   version_id: string;
 
   workflow_id: string;
+
+  trigger_source?: 'unknown' | 'api' | 'binding' | 'event' | 'cron';
 }
 
 export interface InstanceListResponse {
@@ -140,6 +142,8 @@ export interface InstanceListResponse {
   version_id: string;
 
   workflow_id: string;
+
+  trigger_source?: 'unknown' | 'api' | 'binding' | 'event' | 'cron';
 }
 
 export interface InstanceBulkResponse {
@@ -159,6 +163,8 @@ export interface InstanceBulkResponse {
   version_id: string;
 
   workflow_id: string;
+
+  trigger_source?: 'unknown' | 'api' | 'binding' | 'event' | 'cron';
 }
 
 export interface InstanceGetResponse {
@@ -201,6 +207,8 @@ export interface InstanceGetResponse {
   trigger: InstanceGetResponse.Trigger;
 
   versionId: string;
+
+  schedule?: InstanceGetResponse.Schedule;
 }
 
 export namespace InstanceGetResponse {
@@ -350,6 +358,12 @@ export namespace InstanceGetResponse {
 
   export interface Trigger {
     source: 'unknown' | 'api' | 'binding' | 'event' | 'cron';
+  }
+
+  export interface Schedule {
+    cron: string;
+
+    scheduledTime: number;
   }
 }
 

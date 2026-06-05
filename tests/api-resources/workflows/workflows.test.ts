@@ -40,6 +40,7 @@ const runTests = (client: PartialCloudflare<{ workflows: BaseWorkflows }>) => {
       class_name: 'x',
       script_name: 'x',
       limits: { steps: 1 },
+      schedules: [{ cron: 'x' }],
     });
   });
 
