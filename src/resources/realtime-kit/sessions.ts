@@ -39,8 +39,7 @@ export class BaseSessions extends APIResource {
   }
 
   /**
-   * Returns details of the given peer ID along with call statistics for the given
-   * session ID.
+   * Returns participant details for the given peer ID along with call statistics.
    *
    * @example
    * ```ts
@@ -278,76 +277,82 @@ export interface SessionGetParticipantDataFromPeerIDResponse {
 
 export namespace SessionGetParticipantDataFromPeerIDResponse {
   export interface Data {
-    /**
-     * Participant ID. This maps to the corresponding peerId.
-     */
-    id?: string;
-
-    /**
-     * timestamp when this participant was created.
-     */
-    created_at?: string;
-
-    /**
-     * ID passed by client to create this participant.
-     */
-    custom_participant_id?: string;
-
-    /**
-     * Display name of participant when joining the session.
-     */
-    display_name?: string;
-
-    /**
-     * number of minutes for which the participant was in the session.
-     */
-    duration?: number;
-
-    /**
-     * timestamp at which participant joined the session.
-     */
-    joined_at?: string;
-
-    /**
-     * timestamp at which participant left the session.
-     */
-    left_at?: string;
-
-    peer_events?: Array<{ [key: string]: unknown }>;
-
-    /**
-     * Peer call statistics report.
-     */
-    peer_report?: Data.PeerReport;
-
-    /**
-     * Name of the preset associated with the participant.
-     */
-    preset_name?: string;
-
-    session_id?: string;
-
-    /**
-     * timestamp when this participant's data was last updated.
-     */
-    updated_at?: string;
-
-    /**
-     * User id for this participant.
-     */
-    user_id?: string;
+    participant?: Data.Participant;
   }
 
   export namespace Data {
-    /**
-     * Peer call statistics report.
-     */
-    export interface PeerReport {
-      metadata?: { [key: string]: unknown };
+    export interface Participant {
+      /**
+       * ID of the participant.
+       */
+      id?: string;
 
-      quality?: { [key: string]: unknown };
+      /**
+       * timestamp when this participant was created.
+       */
+      created_at?: string;
 
-      [k: string]: unknown;
+      /**
+       * ID passed by client to create this participant.
+       */
+      custom_participant_id?: string;
+
+      /**
+       * Display name of participant when joining the session.
+       */
+      display_name?: string;
+
+      /**
+       * number of minutes for which the participant was in the session.
+       */
+      duration?: number;
+
+      /**
+       * timestamp at which participant joined the session.
+       */
+      joined_at?: string;
+
+      /**
+       * timestamp at which participant left the session.
+       */
+      left_at?: string;
+
+      peer_events?: Array<{ [key: string]: unknown }>;
+
+      /**
+       * Peer call statistics report.
+       */
+      peer_report?: Participant.PeerReport;
+
+      /**
+       * Name of the preset associated with the participant.
+       */
+      role?: string;
+
+      session_id?: string;
+
+      /**
+       * timestamp when this participant's data was last updated.
+       */
+      updated_at?: string;
+
+      /**
+       * User id for this participant.
+       */
+      user_id?: string;
+    }
+
+    export namespace Participant {
+      /**
+       * Peer call statistics report.
+       */
+      export interface PeerReport {
+        metadata?: { [key: string]: unknown };
+
+        quality?: { [key: string]: unknown };
+
+        [k: string]: unknown;
+      }
     }
   }
 }
@@ -756,8 +761,7 @@ export interface SessionGetParticipantDataFromPeerIDParams {
   app_id: string;
 
   /**
-   * Query param: Comma separated list of filters to apply. Note that there must be
-   * no spaces between the filters.
+   * Query param: Filter to apply to the peer report.
    */
   filters?: 'device_info' | 'ip_information' | 'precall_network_information' | 'events' | 'quality_stats';
 
