@@ -97,6 +97,9 @@ TEST_PATHS=(
 	tests/api-resources/dns/dns.test.ts
 	tests/api-resources/dns/dnssec.test.ts
 	tests/api-resources/dns/records.test.ts
+	tests/api-resources/dns/usage/usage.test.ts
+	tests/api-resources/dns/usage/zone.test.ts
+	tests/api-resources/dns/usage/account.test.ts
 	tests/api-resources/dns/settings/settings.test.ts
 	tests/api-resources/dns/settings/zone.test.ts
 	tests/api-resources/dns/settings/account/account.test.ts

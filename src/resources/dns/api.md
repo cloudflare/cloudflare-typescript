@@ -71,7 +71,23 @@ Methods:
 
 ### Zone
 
+Types:
+
+- <code><a href="./src/resources/dns/usage/zone.ts">ZoneGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/dns_records/usage">client.dns.usage.zone.<a href="./src/resources/dns/usage/zone.ts">get</a>({ ...params }) -> ZoneGetResponse</code>
+
 ### Account
+
+Types:
+
+- <code><a href="./src/resources/dns/usage/account.ts">AccountGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dns_records/usage">client.dns.usage.account.<a href="./src/resources/dns/usage/account.ts">get</a>({ ...params }) -> AccountGetResponse</code>
 
 ## Settings
 
