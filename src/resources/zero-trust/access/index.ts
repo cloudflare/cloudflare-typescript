@@ -104,6 +104,17 @@ export {
   type ZeroTrustGroupsV4PagePaginationArray,
   type GroupListResponsesV4PagePaginationArray,
 } from './groups';
+export {
+  IdPFederationGrants,
+  BaseIdPFederationGrants,
+  type IdPFederationGrant,
+  type IdPFederationGrantListResponse,
+  type IdPFederationGrantDeleteResponse,
+  type IdPFederationGrantCreateParams,
+  type IdPFederationGrantListParams,
+  type IdPFederationGrantDeleteParams,
+  type IdPFederationGrantGetParams,
+} from './idp-federation-grants';
 export { Infrastructure, BaseInfrastructure } from './infrastructure/index';
 export {
   Keys,

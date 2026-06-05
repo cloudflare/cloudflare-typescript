@@ -746,6 +746,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.access.aiControls.mcp.servers.read()`
 - `client.zeroTrust.access.aiControls.mcp.servers.sync()`
 - `client.zeroTrust.access.gatewayCA.delete()`
+- `client.zeroTrust.access.IdPFederationGrants.delete()`
+- `client.zeroTrust.access.IdPFederationGrants.get()`
 - `client.zeroTrust.access.samlCertificates.get()`
 - `client.zeroTrust.access.samlCertificates.getPem()`
 - `client.zeroTrust.access.samlCertificates.rotate()`
