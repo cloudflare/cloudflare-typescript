@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AccountAPI from './account';
-import { Account, BaseAccount } from './account';
+import { Account, AccountGetParams, AccountGetResponse, BaseAccount } from './account';
 import * as ZoneAPI from './zone';
-import { BaseZone, Zone } from './zone';
+import { BaseZone, Zone, ZoneGetParams, ZoneGetResponse } from './zone';
 
 export class BaseUsage extends APIResource {
   static override readonly _key: readonly ['dns', 'usage'] = Object.freeze(['dns', 'usage'] as const);
@@ -20,7 +20,17 @@ Usage.Account = Account;
 Usage.BaseAccount = BaseAccount;
 
 export declare namespace Usage {
-  export { Zone as Zone, BaseZone as BaseZone };
+  export {
+    Zone as Zone,
+    BaseZone as BaseZone,
+    type ZoneGetResponse as ZoneGetResponse,
+    type ZoneGetParams as ZoneGetParams,
+  };
 
-  export { Account as Account, BaseAccount as BaseAccount };
+  export {
+    Account as Account,
+    BaseAccount as BaseAccount,
+    type AccountGetResponse as AccountGetResponse,
+    type AccountGetParams as AccountGetParams,
+  };
 }

@@ -338,6 +338,8 @@ const fuse = new Fuse(
     'client.dns.records.scanReview',
     'client.dns.records.scanTrigger',
     'client.dns.records.update',
+    'client.dns.usage.zone.get',
+    'client.dns.usage.account.get',
     'client.dns.settings.zone.edit',
     'client.dns.settings.zone.get',
     'client.dns.settings.account.edit',
