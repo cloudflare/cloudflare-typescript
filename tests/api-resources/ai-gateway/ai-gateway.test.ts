@@ -147,14 +147,14 @@ const runTests = (client: PartialCloudflare<{ aiGateway: BaseAIGateway }>) => {
         enabled: true,
         rules: [
           {
-            id: 'x',
             limit: 1,
             limitType: 'cost',
             window: 1,
+            id: 'x',
             enabled: true,
             metadata: { foo: { mode: 'partition' } },
-            model: 'partition',
-            provider: 'partition',
+            model: { mode: 'filter', values: ['string'] },
+            provider: { mode: 'filter', values: ['string'] },
             technique: 'fixed',
           },
         ],
