@@ -449,6 +449,21 @@ Methods:
 - <code title="get /accounts/{account_id}/access/gateway_ca">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">list</a>({ ...params }) -> GatewayCAListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/access/gateway_ca/{certificate_id}">client.zeroTrust.access.gatewayCA.<a href="./src/resources/zero-trust/access/gateway-ca.ts">delete</a>(certificateId, { ...params }) -> GatewayCADeleteResponse</code>
 
+### IdPFederationGrants
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/idp-federation-grants.ts">IdPFederationGrant</a></code>
+- <code><a href="./src/resources/zero-trust/access/idp-federation-grants.ts">IdPFederationGrantListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/idp-federation-grants.ts">IdPFederationGrantDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/idp_federation_grants">client.zeroTrust.access.IdPFederationGrants.<a href="./src/resources/zero-trust/access/idp-federation-grants.ts">create</a>({ ...params }) -> IdPFederationGrant</code>
+- <code title="get /accounts/{account_id}/access/idp_federation_grants">client.zeroTrust.access.IdPFederationGrants.<a href="./src/resources/zero-trust/access/idp-federation-grants.ts">list</a>({ ...params }) -> IdPFederationGrantListResponse</code>
+- <code title="delete /accounts/{account_id}/access/idp_federation_grants/{grant_id}">client.zeroTrust.access.IdPFederationGrants.<a href="./src/resources/zero-trust/access/idp-federation-grants.ts">delete</a>(grantId, { ...params }) -> IdPFederationGrantDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/idp_federation_grants/{grant_id}">client.zeroTrust.access.IdPFederationGrants.<a href="./src/resources/zero-trust/access/idp-federation-grants.ts">get</a>(grantId, { ...params }) -> IdPFederationGrant</code>
+
 ### SAMLCertificates
 
 Types:

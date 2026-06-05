@@ -507,6 +507,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/access/ai-controls/mcp/portals.test.ts
 	tests/api-resources/zero-trust/access/ai-controls/mcp/servers.test.ts
 	tests/api-resources/zero-trust/access/gateway-ca.test.ts
+	tests/api-resources/zero-trust/access/idp-federation-grants.test.ts
 	tests/api-resources/zero-trust/access/saml-certificates.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/infrastructure.test.ts
 	tests/api-resources/zero-trust/access/infrastructure/targets.test.ts
