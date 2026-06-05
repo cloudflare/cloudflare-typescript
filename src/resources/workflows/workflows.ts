@@ -137,6 +137,8 @@ export interface WorkflowListResponse {
   script_name: string;
 
   triggered_on: string | null;
+
+  schedules?: Array<WorkflowListResponse.Schedule>;
 }
 
 export namespace WorkflowListResponse {
@@ -158,6 +160,12 @@ export namespace WorkflowListResponse {
     waiting?: number;
 
     waitingForPause?: number;
+  }
+
+  export interface Schedule {
+    cron: string;
+
+    next_instance: string;
   }
 }
 
@@ -183,6 +191,8 @@ export interface WorkflowGetResponse {
   script_name: string;
 
   triggered_on: string | null;
+
+  schedules?: Array<WorkflowGetResponse.Schedule>;
 }
 
 export namespace WorkflowGetResponse {
@@ -204,6 +214,12 @@ export namespace WorkflowGetResponse {
     waiting?: number;
 
     waitingForPause?: number;
+  }
+
+  export interface Schedule {
+    cron: string;
+
+    next_instance: string;
   }
 }
 
@@ -227,11 +243,20 @@ export interface WorkflowUpdateParams {
    * Body param
    */
   limits?: WorkflowUpdateParams.Limits;
+
+  /**
+   * Body param
+   */
+  schedules?: Array<WorkflowUpdateParams.Schedule>;
 }
 
 export namespace WorkflowUpdateParams {
   export interface Limits {
     steps?: number;
+  }
+
+  export interface Schedule {
+    cron: string;
   }
 }
 
