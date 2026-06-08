@@ -24,6 +24,7 @@ export {
   type NetworkPathResponse,
   type Percentiles,
 } from './dex';
+export { Devices, BaseDevices } from './devices/index';
 export {
   FleetStatus,
   BaseFleetStatus,

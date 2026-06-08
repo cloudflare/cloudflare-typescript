@@ -8310,6 +8310,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/dex/rules/{rule_id}',
   },
   {
+    clientCallName: 'client.zeroTrust.dex.devices.isps.list',
+    fullyQualifiedName: 'zeroTrust.dex.devices.isps.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/dex/devices/{device_id}/isps',
+  },
+  {
     clientCallName: 'client.zeroTrust.tunnels.list',
     fullyQualifiedName: 'zeroTrust.tunnels.list',
     httpMethod: 'get',
