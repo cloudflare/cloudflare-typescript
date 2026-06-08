@@ -37,9 +37,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/resource-sharing/resources.ts">ResourceCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceUpdateResponse</a></code>
 - <code><a href="./src/resources/resource-sharing/resources.ts">ResourceListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/shares/{share_id}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">create</a>(shareId, { ...params }) -> ResourceCreateResponse</code>
+- <code title="put /accounts/{account_id}/shares/{share_id}/resources/{share_resource_id}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">update</a>(shareId, shareResourceId, { ...params }) -> ResourceUpdateResponse</code>
 - <code title="get /accounts/{account_id}/shares/{share_id}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">list</a>(shareId, { ...params }) -> ResourceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_id}/resources/{share_resource_id}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">delete</a>(shareId, shareResourceId, { ...params }) -> ResourceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_id}/resources/{share_resource_id}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">get</a>(shareId, shareResourceId, { ...params }) -> ResourceGetResponse</code>

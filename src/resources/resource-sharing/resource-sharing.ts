@@ -19,9 +19,15 @@ import * as ResourcesAPI from './resources';
 import {
   ResourceCreateParams,
   ResourceCreateResponse,
+  ResourceDeleteParams,
+  ResourceDeleteResponse,
+  ResourceGetParams,
+  ResourceGetResponse,
   ResourceListParams,
   ResourceListResponse,
   ResourceListResponsesV4PagePaginationArray,
+  ResourceUpdateParams,
+  ResourceUpdateResponse,
   Resources,
 } from './resources';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -1025,9 +1031,15 @@ export declare namespace ResourceSharing {
   export {
     Resources as Resources,
     type ResourceCreateResponse as ResourceCreateResponse,
+    type ResourceUpdateResponse as ResourceUpdateResponse,
     type ResourceListResponse as ResourceListResponse,
+    type ResourceDeleteResponse as ResourceDeleteResponse,
+    type ResourceGetResponse as ResourceGetResponse,
     ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
     type ResourceCreateParams as ResourceCreateParams,
+    type ResourceUpdateParams as ResourceUpdateParams,
     type ResourceListParams as ResourceListParams,
+    type ResourceDeleteParams as ResourceDeleteParams,
+    type ResourceGetParams as ResourceGetParams,
   };
 }
