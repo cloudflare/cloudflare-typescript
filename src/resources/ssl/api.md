@@ -52,6 +52,8 @@ Methods:
 
 - <code title="get /zones/{zone_id}/ssl/recommendation">client.ssl.recommendations.<a href="./src/resources/ssl/recommendations.ts">get</a>({ ...params }) -> RecommendationGetResponse</code>
 
+## AutoOriginTLSKex
+
 ## Universal
 
 ### Settings
