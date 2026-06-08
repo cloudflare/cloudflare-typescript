@@ -7400,6 +7400,117 @@
       ]
     },
     {
+      "base": "resourceSharing.resources",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "share_resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "share_resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.resources",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "share_resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "share_resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "resourceSharing.resources",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "share_resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "share_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "share_resource_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "aiSearch.namespaces.instances",
       "name": "update",
       "params": [

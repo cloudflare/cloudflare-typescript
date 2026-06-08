@@ -20,9 +20,15 @@ import {
   BaseResources,
   ResourceCreateParams,
   ResourceCreateResponse,
+  ResourceDeleteParams,
+  ResourceDeleteResponse,
+  ResourceGetParams,
+  ResourceGetResponse,
   ResourceListParams,
   ResourceListResponse,
   ResourceListResponsesV4PagePaginationArray,
+  ResourceUpdateParams,
+  ResourceUpdateResponse,
   Resources,
 } from './resources';
 import { APIPromise } from '../../core/api-promise';
@@ -1032,9 +1038,15 @@ export declare namespace ResourceSharing {
     Resources as Resources,
     BaseResources as BaseResources,
     type ResourceCreateResponse as ResourceCreateResponse,
+    type ResourceUpdateResponse as ResourceUpdateResponse,
     type ResourceListResponse as ResourceListResponse,
+    type ResourceDeleteResponse as ResourceDeleteResponse,
+    type ResourceGetResponse as ResourceGetResponse,
     type ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
     type ResourceCreateParams as ResourceCreateParams,
+    type ResourceUpdateParams as ResourceUpdateParams,
     type ResourceListParams as ResourceListParams,
+    type ResourceDeleteParams as ResourceDeleteParams,
+    type ResourceGetParams as ResourceGetParams,
   };
 }
