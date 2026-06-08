@@ -91,6 +91,7 @@ import { Organizations } from './resources/organizations/organizations';
 import { OriginCACertificates } from './resources/origin-ca-certificates/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
+import { OriginTLSComplianceModes } from './resources/origin-tls-compliance-modes/origin-tls-compliance-modes';
 import { PageRules } from './resources/page-rules/page-rules';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
@@ -367,6 +368,7 @@ export class Cloudflare extends Core.APIClient {
   botManagement: API.BotManagement = new API.BotManagement(this);
   fraud: API.Fraud = new API.Fraud(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  originTLSComplianceModes: API.OriginTLSComplianceModes = new API.OriginTLSComplianceModes(this);
   googleTagGateway: API.GoogleTagGateway = new API.GoogleTagGateway(this);
   zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
@@ -597,6 +599,7 @@ Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.Fraud = Fraud;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.OriginTLSComplianceModes = OriginTLSComplianceModes;
 Cloudflare.GoogleTagGateway = GoogleTagGateway;
 Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
@@ -827,6 +830,8 @@ export declare namespace Cloudflare {
   export { Fraud as Fraud };
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
+
+  export { OriginTLSComplianceModes as OriginTLSComplianceModes };
 
   export { GoogleTagGateway as GoogleTagGateway };
 

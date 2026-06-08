@@ -189,6 +189,8 @@ Types:
 
 # [OriginPostQuantumEncryption](src/resources/origin-post-quantum-encryption/api.md)
 
+# [OriginTLSComplianceModes](src/resources/origin-tls-compliance-modes/api.md)
+
 # [GoogleTagGateway](src/resources/google-tag-gateway/api.md)
 
 # [Zaraz](src/resources/zaraz/api.md)

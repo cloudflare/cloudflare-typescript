@@ -72,6 +72,7 @@ export { Organizations } from './organizations/organizations';
 export { OriginCACertificates } from './origin-ca-certificates';
 export { OriginPostQuantumEncryption } from './origin-post-quantum-encryption';
 export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-auth';
+export { OriginTLSComplianceModes } from './origin-tls-compliance-modes';
 export { PageRules } from './page-rules';
 export { PageShield } from './page-shield/page-shield';
 export { Pages } from './pages/pages';
