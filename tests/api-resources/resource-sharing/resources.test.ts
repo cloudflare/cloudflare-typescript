@@ -54,6 +54,29 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: { resources: Base
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = client.resourceSharing.resources.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      share_id: '3fd85f74b32742f1bff64a85009dda07',
+      meta: {},
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.resourceSharing.resources.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      share_id: '3fd85f74b32742f1bff64a85009dda07',
+      meta: {},
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = client.resourceSharing.resources.list('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -74,6 +97,48 @@ const runTests = (client: PartialCloudflare<{ resourceSharing: { resources: Base
       per_page: 20,
       resource_type: 'custom-ruleset',
       status: 'active',
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.resourceSharing.resources.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      share_id: '3fd85f74b32742f1bff64a85009dda07',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.resourceSharing.resources.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      share_id: '3fd85f74b32742f1bff64a85009dda07',
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.resourceSharing.resources.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      share_id: '3fd85f74b32742f1bff64a85009dda07',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.resourceSharing.resources.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      share_id: '3fd85f74b32742f1bff64a85009dda07',
     });
   });
 };

@@ -46,6 +46,37 @@ export class BaseResources extends APIResource {
   }
 
   /**
+   * Update is not immediate, an updated share resource object with a new status will
+   * be returned.
+   *
+   * @example
+   * ```ts
+   * const resource =
+   *   await client.resourceSharing.resources.update(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *       meta: {},
+   *     },
+   *   );
+   * ```
+   */
+  update(
+    shareResourceID: string,
+    params: ResourceUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ResourceUpdateResponse> {
+    const { account_id, share_id, ...body } = params;
+    return (
+      this._client.put(path`/accounts/${account_id}/shares/${share_id}/resources/${shareResourceID}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ResourceUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List share resources by share ID.
    *
    * @example
@@ -71,12 +102,123 @@ export class BaseResources extends APIResource {
       { query, ...options },
     );
   }
+
+  /**
+   * Deletion is not immediate, an updated share resource object with a new status
+   * will be returned.
+   *
+   * @example
+   * ```ts
+   * const resource =
+   *   await client.resourceSharing.resources.delete(
+   *     '023e105f4ecef8ad9ca31a8372d0c353',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *     },
+   *   );
+   * ```
+   */
+  delete(
+    shareResourceID: string,
+    params: ResourceDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ResourceDeleteResponse> {
+    const { account_id, share_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/shares/${share_id}/resources/${shareResourceID}`,
+        options,
+      ) as APIPromise<{ result: ResourceDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get share resource by ID.
+   *
+   * @example
+   * ```ts
+   * const resource = await client.resourceSharing.resources.get(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     share_id: '3fd85f74b32742f1bff64a85009dda07',
+   *   },
+   * );
+   * ```
+   */
+  get(
+    shareResourceID: string,
+    params: ResourceGetParams,
+    options?: RequestOptions,
+  ): APIPromise<ResourceGetResponse> {
+    const { account_id, share_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/shares/${share_id}/resources/${shareResourceID}`,
+        options,
+      ) as APIPromise<{ result: ResourceGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Resources extends BaseResources {}
 
 export type ResourceListResponsesV4PagePaginationArray = V4PagePaginationArray<ResourceListResponse>;
 
 export interface ResourceCreateResponse {
+  /**
+   * Share Resource identifier.
+   */
+  id: string;
+
+  /**
+   * When the share was created.
+   */
+  created: string;
+
+  /**
+   * Resource Metadata.
+   */
+  meta: unknown;
+
+  /**
+   * When the share was modified.
+   */
+  modified: string;
+
+  /**
+   * Account identifier.
+   */
+  resource_account_id: string;
+
+  /**
+   * Share Resource identifier.
+   */
+  resource_id: string;
+
+  /**
+   * Resource Type.
+   */
+  resource_type:
+    | 'custom-ruleset'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
+
+  /**
+   * Resource Version.
+   */
+  resource_version: number;
+
+  /**
+   * Resource Status.
+   */
+  status: 'active' | 'deleting' | 'deleted';
+}
+
+export interface ResourceUpdateResponse {
   /**
    * Share Resource identifier.
    */
@@ -182,6 +324,112 @@ export interface ResourceListResponse {
   status: 'active' | 'deleting' | 'deleted';
 }
 
+export interface ResourceDeleteResponse {
+  /**
+   * Share Resource identifier.
+   */
+  id: string;
+
+  /**
+   * When the share was created.
+   */
+  created: string;
+
+  /**
+   * Resource Metadata.
+   */
+  meta: unknown;
+
+  /**
+   * When the share was modified.
+   */
+  modified: string;
+
+  /**
+   * Account identifier.
+   */
+  resource_account_id: string;
+
+  /**
+   * Share Resource identifier.
+   */
+  resource_id: string;
+
+  /**
+   * Resource Type.
+   */
+  resource_type:
+    | 'custom-ruleset'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
+
+  /**
+   * Resource Version.
+   */
+  resource_version: number;
+
+  /**
+   * Resource Status.
+   */
+  status: 'active' | 'deleting' | 'deleted';
+}
+
+export interface ResourceGetResponse {
+  /**
+   * Share Resource identifier.
+   */
+  id: string;
+
+  /**
+   * When the share was created.
+   */
+  created: string;
+
+  /**
+   * Resource Metadata.
+   */
+  meta: unknown;
+
+  /**
+   * When the share was modified.
+   */
+  modified: string;
+
+  /**
+   * Account identifier.
+   */
+  resource_account_id: string;
+
+  /**
+   * Share Resource identifier.
+   */
+  resource_id: string;
+
+  /**
+   * Resource Type.
+   */
+  resource_type:
+    | 'custom-ruleset'
+    | 'gateway-policy'
+    | 'gateway-destination-ip'
+    | 'gateway-block-page-settings'
+    | 'gateway-extended-email-matching'
+    | 'idp-federation-grant';
+
+  /**
+   * Resource Version.
+   */
+  resource_version: number;
+
+  /**
+   * Resource Status.
+   */
+  status: 'active' | 'deleting' | 'deleted';
+}
+
 export interface ResourceCreateParams {
   /**
    * Path param: Account identifier.
@@ -215,6 +463,23 @@ export interface ResourceCreateParams {
     | 'idp-federation-grant';
 }
 
+export interface ResourceUpdateParams {
+  /**
+   * Path param: Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * Path param: Share identifier tag.
+   */
+  share_id: string;
+
+  /**
+   * Body param: Resource Metadata.
+   */
+  meta: unknown;
+}
+
 export interface ResourceListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
@@ -238,12 +503,42 @@ export interface ResourceListParams extends V4PagePaginationArrayParams {
   status?: 'active' | 'deleting' | 'deleted';
 }
 
+export interface ResourceDeleteParams {
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * Share identifier tag.
+   */
+  share_id: string;
+}
+
+export interface ResourceGetParams {
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * Share identifier tag.
+   */
+  share_id: string;
+}
+
 export declare namespace Resources {
   export {
     type ResourceCreateResponse as ResourceCreateResponse,
+    type ResourceUpdateResponse as ResourceUpdateResponse,
     type ResourceListResponse as ResourceListResponse,
+    type ResourceDeleteResponse as ResourceDeleteResponse,
+    type ResourceGetResponse as ResourceGetResponse,
     type ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
     type ResourceCreateParams as ResourceCreateParams,
+    type ResourceUpdateParams as ResourceUpdateParams,
     type ResourceListParams as ResourceListParams,
+    type ResourceDeleteParams as ResourceDeleteParams,
+    type ResourceGetParams as ResourceGetParams,
   };
 }
