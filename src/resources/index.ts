@@ -93,6 +93,7 @@ export {
   OriginTLSClientAuth,
   BaseOriginTLSClientAuth,
 } from './origin-tls-client-auth/origin-tls-client-auth';
+export { OriginTLSComplianceModes, BaseOriginTLSComplianceModes } from './origin-tls-compliance-modes';
 export { PageRules, BasePageRules } from './page-rules';
 export { PageShield, BasePageShield } from './page-shield/page-shield';
 export { Pages, BasePages } from './pages/pages';
