@@ -1485,6 +1485,7 @@ const fuse = new Fuse(
     'client.zeroTrust.dex.rules.get',
     'client.zeroTrust.dex.rules.list',
     'client.zeroTrust.dex.rules.update',
+    'client.zeroTrust.dex.devices.isps.list',
     'client.zeroTrust.tunnels.list',
     'client.zeroTrust.tunnels.cloudflared.create',
     'client.zeroTrust.tunnels.cloudflared.delete',
