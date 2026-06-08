@@ -1036,6 +1036,18 @@ Methods:
 - <code title="delete /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/dex/rules/{rule_id}">client.zeroTrust.dex.rules.<a href="./src/resources/zero-trust/dex/rules.ts">get</a>(ruleId, { ...params }) -> RuleGetResponse</code>
 
+### Devices
+
+#### ISPs
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dex/devices/isps.ts">ISPs</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/devices/{device_id}/isps">client.zeroTrust.dex.devices.isps.<a href="./src/resources/zero-trust/dex/devices/isps.ts">list</a>(deviceId, { ...params }) -> ISPsV4PagePagination</code>
+
 ## Tunnels
 
 Types:
