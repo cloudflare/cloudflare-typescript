@@ -7025,6 +7025,154 @@
       ]
     },
     {
+      "base": "flagship.apps.flags",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "flagship.apps.flags",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "flagship.apps.flags",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "flagship.apps.flags.changelog",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "app_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "flag_key",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "iam.userGroups.members",
       "name": "delete",
       "params": [
