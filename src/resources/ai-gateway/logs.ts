@@ -426,7 +426,8 @@ export namespace LogListParams {
       | 'authentication'
       | 'wholesale'
       | 'compatibilityMode'
-      | 'dlp_action';
+      | 'dlp_action'
+      | 'user_agent';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
@@ -497,7 +498,8 @@ export namespace LogDeleteParams {
       | 'authentication'
       | 'wholesale'
       | 'compatibilityMode'
-      | 'dlp_action';
+      | 'dlp_action'
+      | 'user_agent';
 
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
 
