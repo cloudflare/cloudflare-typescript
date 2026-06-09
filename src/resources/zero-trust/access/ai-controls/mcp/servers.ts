@@ -202,6 +202,11 @@ export interface ServerCreateResponse {
 
   modified_by?: string;
 
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
+
   status?: string;
 
   updated_prompts?: Array<ServerCreateResponse.UpdatedPrompt>;
@@ -300,6 +305,11 @@ export interface ServerUpdateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -400,6 +410,11 @@ export interface ServerListResponse {
 
   modified_by?: string;
 
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
+
   status?: string;
 
   updated_prompts?: Array<ServerListResponse.UpdatedPrompt>;
@@ -499,6 +514,11 @@ export interface ServerDeleteResponse {
 
   modified_by?: string;
 
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
+
   status?: string;
 
   updated_prompts?: Array<ServerDeleteResponse.UpdatedPrompt>;
@@ -597,6 +617,11 @@ export interface ServerReadResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -737,6 +762,12 @@ export interface ServerCreateParams {
   is_shared_oauth_callback_enabled?: boolean;
 
   /**
+   * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
+   * Web Gateway
+   */
+  secure_web_gateway?: boolean;
+
+  /**
    * Body param
    */
   updated_prompts?: Array<ServerCreateParams.UpdatedPrompt>;
@@ -798,6 +829,12 @@ export interface ServerUpdateParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
+   * Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   /**
    * Body param

@@ -8484,6 +8484,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/warp_connector/{tunnel_id}/failover',
   },
   {
+    clientCallName: 'client.zeroTrust.tunnels.warpConnector.configurations.update',
+    fullyQualifiedName: 'zeroTrust.tunnels.warpConnector.configurations.update',
+    httpMethod: 'put',
+    httpPath: '/accounts/{account_id}/warp_connector/{tunnel_id}/configurations',
+  },
+  {
+    clientCallName: 'client.zeroTrust.tunnels.warpConnector.configurations.get',
+    fullyQualifiedName: 'zeroTrust.tunnels.warpConnector.configurations.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/warp_connector/{tunnel_id}/configurations',
+  },
+  {
     clientCallName: 'client.zeroTrust.connectivitySettings.edit',
     fullyQualifiedName: 'zeroTrust.connectivitySettings.edit',
     httpMethod: 'patch',

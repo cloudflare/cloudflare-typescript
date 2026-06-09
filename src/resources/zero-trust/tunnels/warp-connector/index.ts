@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Configurations, BaseConfigurations } from './configurations';
+export {
+  Configurations,
+  BaseConfigurations,
+  type ConfigurationUpdateResponse,
+  type ConfigurationGetResponse,
+  type ConfigurationUpdateParams,
+  type ConfigurationGetParams,
+} from './configurations';
 export {
   Connections,
   BaseConnections,

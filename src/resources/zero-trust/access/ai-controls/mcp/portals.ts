@@ -216,6 +216,11 @@ export namespace PortalCreateResponse {
 
     on_behalf?: boolean;
 
+    /**
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     */
+    secure_web_gateway?: boolean;
+
     status?: string;
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
@@ -362,6 +367,11 @@ export namespace PortalUpdateResponse {
 
     on_behalf?: boolean;
 
+    /**
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     */
+    secure_web_gateway?: boolean;
+
     status?: string;
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
@@ -507,6 +517,11 @@ export namespace PortalListResponse {
     modified_by?: string;
 
     on_behalf?: boolean;
+
+    /**
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     */
+    secure_web_gateway?: boolean;
 
     status?: string;
 
@@ -684,6 +699,11 @@ export namespace PortalReadResponse {
     modified_by?: string;
 
     on_behalf?: boolean;
+
+    /**
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     */
+    secure_web_gateway?: boolean;
 
     status?: string;
 
