@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as ConfigurationsAPI from './configurations';
+import { BaseConfigurations, Configurations } from './configurations';
 import * as ConnectionsAPI from './connections';
 import {
   BaseConnections,
@@ -161,6 +163,7 @@ export class WARPConnector extends BaseWARPConnector {
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
   failover: FailoverAPI.Failover = new FailoverAPI.Failover(this._client);
+  configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
 }
 
 export type WARPConnectorListResponsesV4PagePaginationArray =
@@ -857,6 +860,8 @@ WARPConnector.Connectors = Connectors;
 WARPConnector.BaseConnectors = BaseConnectors;
 WARPConnector.Failover = Failover;
 WARPConnector.BaseFailover = BaseFailover;
+WARPConnector.Configurations = Configurations;
+WARPConnector.BaseConfigurations = BaseConfigurations;
 
 export declare namespace WARPConnector {
   export {
@@ -901,4 +906,6 @@ export declare namespace WARPConnector {
     type FailoverUpdateResponse as FailoverUpdateResponse,
     type FailoverUpdateParams as FailoverUpdateParams,
   };
+
+  export { Configurations as Configurations, BaseConfigurations as BaseConfigurations };
 }
