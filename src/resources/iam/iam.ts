@@ -21,6 +21,13 @@ import {
   OAuthClientUpdateResponse,
   OAuthClients,
 } from './oauth-clients';
+import * as OAuthScopesAPI from './oauth-scopes';
+import {
+  BaseOAuthScopes,
+  OAuthScopeListResponse,
+  OAuthScopeListResponsesSinglePage,
+  OAuthScopes,
+} from './oauth-scopes';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   BasePermissionGroups,
@@ -65,13 +72,6 @@ import {
   SSOUpdateParams,
   SSOUpdateResponse,
 } from './sso';
-import * as OAuthScopesAPI from './oauth-scopes/oauth-scopes';
-import {
-  BaseOAuthScopes,
-  OAuthScopeListResponse,
-  OAuthScopeListResponsesSinglePage,
-  OAuthScopes,
-} from './oauth-scopes/oauth-scopes';
 import * as UserGroupsAPI from './user-groups/user-groups';
 import {
   BaseUserGroups,

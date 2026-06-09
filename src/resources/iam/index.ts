@@ -20,7 +20,12 @@ export {
   type OAuthClientRotateSecretParams,
   type OAuthClientListResponsesSinglePage,
 } from './oauth-clients';
-export { OAuthScopes, BaseOAuthScopes } from './oauth-scopes';
+export {
+  OAuthScopes,
+  BaseOAuthScopes,
+  type OAuthScopeListResponse,
+  type OAuthScopeListResponsesSinglePage,
+} from './oauth-scopes';
 export {
   PermissionGroups,
   BasePermissionGroups,
