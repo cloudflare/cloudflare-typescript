@@ -47,7 +47,21 @@ import {
   PrefixesSinglePage,
 } from './prefixes/prefixes';
 import * as RegionalHostnamesAPI from './regional-hostnames/regional-hostnames';
-import { BaseRegionalHostnames, RegionalHostnames } from './regional-hostnames/regional-hostnames';
+import {
+  BaseRegionalHostnames,
+  RegionalHostnameCreateParams,
+  RegionalHostnameCreateResponse,
+  RegionalHostnameDeleteParams,
+  RegionalHostnameDeleteResponse,
+  RegionalHostnameEditParams,
+  RegionalHostnameEditResponse,
+  RegionalHostnameGetParams,
+  RegionalHostnameGetResponse,
+  RegionalHostnameListParams,
+  RegionalHostnameListResponse,
+  RegionalHostnameListResponsesSinglePage,
+  RegionalHostnames,
+} from './regional-hostnames/regional-hostnames';
 
 export class BaseAddressing extends APIResource {
   static override readonly _key: readonly ['addressing'] = Object.freeze(['addressing'] as const);
@@ -74,7 +88,21 @@ Addressing.Prefixes = Prefixes;
 Addressing.BasePrefixes = BasePrefixes;
 
 export declare namespace Addressing {
-  export { RegionalHostnames as RegionalHostnames, BaseRegionalHostnames as BaseRegionalHostnames };
+  export {
+    RegionalHostnames as RegionalHostnames,
+    BaseRegionalHostnames as BaseRegionalHostnames,
+    type RegionalHostnameCreateResponse as RegionalHostnameCreateResponse,
+    type RegionalHostnameListResponse as RegionalHostnameListResponse,
+    type RegionalHostnameDeleteResponse as RegionalHostnameDeleteResponse,
+    type RegionalHostnameEditResponse as RegionalHostnameEditResponse,
+    type RegionalHostnameGetResponse as RegionalHostnameGetResponse,
+    type RegionalHostnameListResponsesSinglePage as RegionalHostnameListResponsesSinglePage,
+    type RegionalHostnameCreateParams as RegionalHostnameCreateParams,
+    type RegionalHostnameListParams as RegionalHostnameListParams,
+    type RegionalHostnameDeleteParams as RegionalHostnameDeleteParams,
+    type RegionalHostnameEditParams as RegionalHostnameEditParams,
+    type RegionalHostnameGetParams as RegionalHostnameGetParams,
+  };
 
   export {
     Services as Services,
