@@ -1110,6 +1110,16 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.aiGateway.providerConfigs.create()`
 - `client.aiGateway.providerConfigs.list()`
 - `client.aiGateway.urls.get()`
+- `client.flagship.apps.update()`
+- `client.flagship.apps.delete()`
+- `client.flagship.apps.get()`
+- `client.flagship.apps.flags.create()`
+- `client.flagship.apps.flags.update()`
+- `client.flagship.apps.flags.list()`
+- `client.flagship.apps.flags.delete()`
+- `client.flagship.apps.flags.get()`
+- `client.flagship.apps.flags.changelog.list()`
+- `client.flagship.apps.evaluate.get()`
 - `client.iam.permissionGroups.get()`
 - `client.iam.resourceGroups.update()`
 - `client.iam.resourceGroups.delete()`

@@ -49,6 +49,7 @@ export { EmailSecurity, BaseEmailSecurity } from './email-security/email-securit
 export { EmailSending, BaseEmailSending } from './email-sending/email-sending';
 export { Filters, BaseFilters } from './filters';
 export { Firewall, BaseFirewall } from './firewall/firewall';
+export { Flagship, BaseFlagship } from './flagship/flagship';
 export { Fraud, BaseFraud } from './fraud';
 export { GoogleTagGateway, BaseGoogleTagGateway } from './google-tag-gateway/google-tag-gateway';
 export { Healthchecks, BaseHealthchecks } from './healthchecks/healthchecks';
