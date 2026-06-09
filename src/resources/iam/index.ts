@@ -19,7 +19,7 @@ export {
   type OAuthClientGetParams,
   type OAuthClientRotateSecretParams,
 } from './oauth-clients';
-export { OAuthScopes } from './oauth-scopes';
+export { OAuthScopeListResponsesSinglePage, OAuthScopes, type OAuthScopeListResponse } from './oauth-scopes';
 export {
   PermissionGroupListResponsesV4PagePaginationArray,
   PermissionGroups,
