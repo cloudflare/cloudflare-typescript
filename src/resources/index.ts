@@ -46,6 +46,7 @@ export { EmailSecurity } from './email-security/email-security';
 export { EmailSending } from './email-sending/email-sending';
 export { Filters } from './filters';
 export { Firewall } from './firewall/firewall';
+export { Flagship } from './flagship/flagship';
 export { Fraud } from './fraud';
 export { GoogleTagGateway } from './google-tag-gateway/google-tag-gateway';
 export { Healthchecks } from './healthchecks/healthchecks';

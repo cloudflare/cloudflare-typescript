@@ -65,6 +65,7 @@ import { EmailSecurity } from './resources/email-security/email-security';
 import { EmailSending } from './resources/email-sending/email-sending';
 import { Filters } from './resources/filters/filters';
 import { Firewall } from './resources/firewall/firewall';
+import { Flagship } from './resources/flagship/flagship';
 import { Fraud } from './resources/fraud/fraud';
 import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
@@ -379,6 +380,7 @@ export class Cloudflare extends Core.APIClient {
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
+  flagship: API.Flagship = new API.Flagship(this);
   iam: API.IAM = new API.IAM(this);
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
   botnetFeed: API.BotnetFeed = new API.BotnetFeed(this);
@@ -610,6 +612,7 @@ Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
+Cloudflare.Flagship = Flagship;
 Cloudflare.IAM = IAM;
 Cloudflare.CloudConnector = CloudConnector;
 Cloudflare.BotnetFeed = BotnetFeed;
@@ -852,6 +855,8 @@ export declare namespace Cloudflare {
   export { CloudforceOne as CloudforceOne };
 
   export { AIGateway as AIGateway };
+
+  export { Flagship as Flagship };
 
   export { IAM as IAM };
 
