@@ -157,6 +157,7 @@ describe('resource database', () => {
   test('get: required and optional params', async () => {
     const response = await client.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      fields: ['uuid'],
     });
   });
 
