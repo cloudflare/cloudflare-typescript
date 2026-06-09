@@ -4103,6 +4103,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/spectrum/apps/{app_id}',
   },
   {
+    clientCallName: 'client.addressing.regionalHostnames.create',
+    fullyQualifiedName: 'addressing.regionalHostnames.create',
+    httpMethod: 'post',
+    httpPath: '/zones/{zone_id}/addressing/regional_hostnames',
+  },
+  {
+    clientCallName: 'client.addressing.regionalHostnames.list',
+    fullyQualifiedName: 'addressing.regionalHostnames.list',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/addressing/regional_hostnames',
+  },
+  {
+    clientCallName: 'client.addressing.regionalHostnames.delete',
+    fullyQualifiedName: 'addressing.regionalHostnames.delete',
+    httpMethod: 'delete',
+    httpPath: '/zones/{zone_id}/addressing/regional_hostnames/{hostname}',
+  },
+  {
+    clientCallName: 'client.addressing.regionalHostnames.edit',
+    fullyQualifiedName: 'addressing.regionalHostnames.edit',
+    httpMethod: 'patch',
+    httpPath: '/zones/{zone_id}/addressing/regional_hostnames/{hostname}',
+  },
+  {
+    clientCallName: 'client.addressing.regionalHostnames.get',
+    fullyQualifiedName: 'addressing.regionalHostnames.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/addressing/regional_hostnames/{hostname}',
+  },
+  {
+    clientCallName: 'client.addressing.regionalHostnames.regions.list',
+    fullyQualifiedName: 'addressing.regionalHostnames.regions.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/addressing/regional_hostnames/regions',
+  },
+  {
     clientCallName: 'client.addressing.services.list',
     fullyQualifiedName: 'addressing.services.list',
     httpMethod: 'get',
