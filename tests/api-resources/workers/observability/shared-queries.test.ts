@@ -56,7 +56,7 @@ describe('resource sharedQueries', () => {
             filters: [
               {
                 filterCombination: 'and',
-                filters: [{}],
+                filters: [],
                 kind: 'group',
               },
             ],
