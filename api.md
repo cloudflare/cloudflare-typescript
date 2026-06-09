@@ -211,6 +211,8 @@ Types:
 
 # [AIGateway](src/resources/ai-gateway/api.md)
 
+# [Flagship](src/resources/flagship/api.md)
+
 # [IAM](src/resources/iam/api.md)
 
 # [CloudConnector](src/resources/cloud-connector/api.md)

@@ -826,6 +826,11 @@ TEST_PATHS=(
 	tests/api-resources/ai-gateway/billing/topup/topup.test.ts
 	tests/api-resources/ai-gateway/billing/topup/config.test.ts
 	tests/api-resources/ai-gateway/billing/spending-limit.test.ts
+	tests/api-resources/flagship/flagship.test.ts
+	tests/api-resources/flagship/apps/apps.test.ts
+	tests/api-resources/flagship/apps/flags/flags.test.ts
+	tests/api-resources/flagship/apps/flags/changelog.test.ts
+	tests/api-resources/flagship/apps/evaluate.test.ts
 	tests/api-resources/iam/iam.test.ts
 	tests/api-resources/iam/permission-groups.test.ts
 	tests/api-resources/iam/resource-groups.test.ts
