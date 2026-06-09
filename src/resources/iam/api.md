@@ -108,4 +108,12 @@ Methods:
 - <code title="get /accounts/{account_id}/oauth_clients/{oauth_client_id}">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">get</a>(oauthClientId, { ...params }) -> OAuthClientGetResponse</code>
 - <code title="post /accounts/{account_id}/oauth_clients/{oauth_client_id}/rotate_secret">client.iam.oauthClients.<a href="./src/resources/iam/oauth-clients.ts">rotateSecret</a>(oauthClientId, { ...params }) -> OAuthClientRotateSecretResponse</code>
 
-## [OAuthScopes](src/resources/iam/oauth-scopes/api.md)
+## OAuthScopes
+
+Types:
+
+- <code><a href="./src/resources/iam/oauth-scopes.ts">OAuthScopeListResponse</a></code>
+
+Methods:
+
+- <code title="get /oauth/scopes">client.iam.oauthScopes.<a href="./src/resources/iam/oauth-scopes.ts">list</a>() -> OAuthScopeListResponsesSinglePage</code>
