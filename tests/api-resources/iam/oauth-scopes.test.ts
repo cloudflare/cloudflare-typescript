@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { IAM } from 'cloudflare/resources/iam/iam';
-import { BaseOAuthScopes } from 'cloudflare/resources/iam/oauth-scopes/oauth-scopes';
+import { BaseOAuthScopes } from 'cloudflare/resources/iam/oauth-scopes';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
