@@ -32,7 +32,20 @@ export {
   type PrefixEditParams,
   type PrefixGetParams,
 } from './prefixes/index';
-export { RegionalHostnames } from './regional-hostnames/index';
+export {
+  RegionalHostnameListResponsesSinglePage,
+  RegionalHostnames,
+  type RegionalHostnameCreateResponse,
+  type RegionalHostnameListResponse,
+  type RegionalHostnameDeleteResponse,
+  type RegionalHostnameEditResponse,
+  type RegionalHostnameGetResponse,
+  type RegionalHostnameCreateParams,
+  type RegionalHostnameListParams,
+  type RegionalHostnameDeleteParams,
+  type RegionalHostnameEditParams,
+  type RegionalHostnameGetParams,
+} from './regional-hostnames/index';
 export {
   ServiceListResponsesSinglePage,
   Services,

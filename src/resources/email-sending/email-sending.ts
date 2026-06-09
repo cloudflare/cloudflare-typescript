@@ -28,7 +28,6 @@ export class EmailSending extends APIResource {
    *   account_id: 'account_id',
    *   from: 'sender@example.com',
    *   subject: 'Monthly Report',
-   *   to: ['recipient@example.com'],
    * });
    * ```
    */
@@ -80,6 +79,11 @@ export interface EmailSendingSendResponse {
   delivered: Array<string>;
 
   /**
+   * Message ID of the sent email.
+   */
+  message_id: string;
+
+  /**
    * Email addresses that permanently bounced.
    */
   permanent_bounces: Array<string>;
@@ -95,6 +99,11 @@ export interface EmailSendingSendRawResponse {
    * Email addresses to which the message was delivered immediately.
    */
   delivered: Array<string>;
+
+  /**
+   * Message ID of the sent email.
+   */
+  message_id: string;
 
   /**
    * Email addresses that permanently bounced.
@@ -123,11 +132,6 @@ export interface EmailSendingSendParams {
    * Body param: Email subject line.
    */
   subject: string;
-
-  /**
-   * Body param: Recipient(s). A single email string or an array of email strings.
-   */
-  to: string | Array<string>;
 
   /**
    * Body param: File attachments and inline images.
@@ -170,6 +174,12 @@ export interface EmailSendingSendParams {
    * provided (non-empty).
    */
   text?: string;
+
+  /**
+   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
+   * string or an array of email strings.
+   */
+  to?: string | Array<string>;
 }
 
 export namespace EmailSendingSendParams {
