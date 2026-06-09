@@ -38,7 +38,20 @@ import {
   PrefixesSinglePage,
 } from './prefixes/prefixes';
 import * as RegionalHostnamesAPI from './regional-hostnames/regional-hostnames';
-import { RegionalHostnames } from './regional-hostnames/regional-hostnames';
+import {
+  RegionalHostnameCreateParams,
+  RegionalHostnameCreateResponse,
+  RegionalHostnameDeleteParams,
+  RegionalHostnameDeleteResponse,
+  RegionalHostnameEditParams,
+  RegionalHostnameEditResponse,
+  RegionalHostnameGetParams,
+  RegionalHostnameGetResponse,
+  RegionalHostnameListParams,
+  RegionalHostnameListResponse,
+  RegionalHostnameListResponsesSinglePage,
+  RegionalHostnames,
+} from './regional-hostnames/regional-hostnames';
 
 export class Addressing extends APIResource {
   regionalHostnames: RegionalHostnamesAPI.RegionalHostnames = new RegionalHostnamesAPI.RegionalHostnames(
@@ -51,6 +64,7 @@ export class Addressing extends APIResource {
 }
 
 Addressing.RegionalHostnames = RegionalHostnames;
+Addressing.RegionalHostnameListResponsesSinglePage = RegionalHostnameListResponsesSinglePage;
 Addressing.Services = Services;
 Addressing.ServiceListResponsesSinglePage = ServiceListResponsesSinglePage;
 Addressing.AddressMaps = AddressMaps;
@@ -60,7 +74,20 @@ Addressing.Prefixes = Prefixes;
 Addressing.PrefixesSinglePage = PrefixesSinglePage;
 
 export declare namespace Addressing {
-  export { RegionalHostnames as RegionalHostnames };
+  export {
+    RegionalHostnames as RegionalHostnames,
+    type RegionalHostnameCreateResponse as RegionalHostnameCreateResponse,
+    type RegionalHostnameListResponse as RegionalHostnameListResponse,
+    type RegionalHostnameDeleteResponse as RegionalHostnameDeleteResponse,
+    type RegionalHostnameEditResponse as RegionalHostnameEditResponse,
+    type RegionalHostnameGetResponse as RegionalHostnameGetResponse,
+    RegionalHostnameListResponsesSinglePage as RegionalHostnameListResponsesSinglePage,
+    type RegionalHostnameCreateParams as RegionalHostnameCreateParams,
+    type RegionalHostnameListParams as RegionalHostnameListParams,
+    type RegionalHostnameDeleteParams as RegionalHostnameDeleteParams,
+    type RegionalHostnameEditParams as RegionalHostnameEditParams,
+    type RegionalHostnameGetParams as RegionalHostnameGetParams,
+  };
 
   export {
     Services as Services,

@@ -275,6 +275,8 @@ TEST_PATHS=(
 	tests/api-resources/spectrum/analytics/events/summaries.test.ts
 	tests/api-resources/spectrum/apps.test.ts
 	tests/api-resources/addressing/addressing.test.ts
+	tests/api-resources/addressing/regional-hostnames/regional-hostnames.test.ts
+	tests/api-resources/addressing/regional-hostnames/regions.test.ts
 	tests/api-resources/addressing/services.test.ts
 	tests/api-resources/addressing/address-maps/address-maps.test.ts
 	tests/api-resources/addressing/address-maps/accounts.test.ts

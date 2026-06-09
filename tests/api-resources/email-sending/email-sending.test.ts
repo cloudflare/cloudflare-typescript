@@ -15,7 +15,6 @@ describe('resource emailSending', () => {
       account_id: 'account_id',
       from: 'sender@example.com',
       subject: 'Monthly Report',
-      to: ['recipient@example.com'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +30,6 @@ describe('resource emailSending', () => {
       account_id: 'account_id',
       from: 'sender@example.com',
       subject: 'Monthly Report',
-      to: ['recipient@example.com'],
       attachments: [
         {
           content: 'JVBERi0xLjQK...',
@@ -46,6 +44,7 @@ describe('resource emailSending', () => {
       html: '<h1>Hello</h1><p>Please find your report attached.</p>',
       reply_to: 'user@example.com',
       text: 'Hello\n\nPlease find your report attached.',
+      to: ['recipient@example.com'],
     });
   });
 
