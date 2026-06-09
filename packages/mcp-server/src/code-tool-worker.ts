@@ -1514,6 +1514,8 @@ const fuse = new Fuse(
     'client.zeroTrust.tunnels.warpConnector.connections.get',
     'client.zeroTrust.tunnels.warpConnector.connectors.get',
     'client.zeroTrust.tunnels.warpConnector.failover.update',
+    'client.zeroTrust.tunnels.warpConnector.configurations.get',
+    'client.zeroTrust.tunnels.warpConnector.configurations.update',
     'client.zeroTrust.connectivitySettings.edit',
     'client.zeroTrust.connectivitySettings.get',
     'client.zeroTrust.dlp.customPromptTopics.create',

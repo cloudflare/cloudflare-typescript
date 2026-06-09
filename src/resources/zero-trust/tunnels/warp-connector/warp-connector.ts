@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../../../core/resource';
 import * as ConfigurationsAPI from './configurations';
-import { BaseConfigurations, Configurations } from './configurations';
+import {
+  BaseConfigurations,
+  ConfigurationGetParams,
+  ConfigurationGetResponse,
+  ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
+  Configurations,
+} from './configurations';
 import * as ConnectionsAPI from './connections';
 import {
   BaseConnections,
@@ -907,5 +914,12 @@ export declare namespace WARPConnector {
     type FailoverUpdateParams as FailoverUpdateParams,
   };
 
-  export { Configurations as Configurations, BaseConfigurations as BaseConfigurations };
+  export {
+    Configurations as Configurations,
+    BaseConfigurations as BaseConfigurations,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
 }
