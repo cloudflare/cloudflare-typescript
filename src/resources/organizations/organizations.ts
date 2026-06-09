@@ -120,6 +120,15 @@ export namespace Organization {
      */
     flags?: Meta.Flags;
 
+    /**
+     * Ordered chain of organization tags from the root organization down to (and
+     * including) this organization itself. Root organizations return a single-element
+     * array containing their own tag; sub-organizations return
+     * `[rootTag, ...intermediateTags, parentTag, selfTag]`. Useful for constructing
+     * authorization scopes that need to cover every ancestor in the hierarchy.
+     */
+    hierarchy_tags?: Array<string>;
+
     managed_by?: string;
 
     [k: string]: unknown;
