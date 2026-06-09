@@ -174,6 +174,7 @@ const runTests = (client: PartialCloudflare<{ d1: { database: BaseDatabase } }>)
   test('get: required and optional params', async () => {
     const response = await client.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      fields: ['uuid'],
     });
   });
 
