@@ -1177,6 +1177,8 @@ Methods:
 
 - <code title="put /accounts/{account_id}/warp_connector/{tunnel_id}/failover">client.zeroTrust.tunnels.warpConnector.failover.<a href="./src/resources/zero-trust/tunnels/warp-connector/failover.ts">update</a>(tunnelId, { ...params }) -> FailoverUpdateResponse | null</code>
 
+#### Configurations
+
 ## ConnectivitySettings
 
 Types:
