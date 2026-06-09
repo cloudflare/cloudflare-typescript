@@ -1179,6 +1179,16 @@ Methods:
 
 #### Configurations
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/configurations.ts">ConfigurationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector/configurations.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/warp_connector/{tunnel_id}/configurations">client.zeroTrust.tunnels.warpConnector.configurations.<a href="./src/resources/zero-trust/tunnels/warp-connector/configurations.ts">update</a>(tunnelId, { ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/configurations">client.zeroTrust.tunnels.warpConnector.configurations.<a href="./src/resources/zero-trust/tunnels/warp-connector/configurations.ts">get</a>(tunnelId, { ...params }) -> ConfigurationGetResponse</code>
+
 ## ConnectivitySettings
 
 Types:

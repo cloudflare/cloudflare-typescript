@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Configurations } from './configurations';
+export {
+  Configurations,
+  type ConfigurationUpdateResponse,
+  type ConfigurationGetResponse,
+  type ConfigurationUpdateParams,
+  type ConfigurationGetParams,
+} from './configurations';
 export {
   ConnectionGetResponsesSinglePage,
   Connections,
