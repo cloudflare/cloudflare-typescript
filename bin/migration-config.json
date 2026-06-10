@@ -4331,6 +4331,228 @@
       ]
     },
     {
+      "base": "zeroTrust.dlp.sensitivityGroups.levels",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "sensitivity_level_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sensitivity_group_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "sensitivity_level_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.sensitivityGroups.levels",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "sensitivity_level_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sensitivity_group_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "sensitivity_level_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.sensitivityGroups.levels",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "sensitivity_level_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sensitivity_group_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "sensitivity_level_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.dataTagCategories.dataTags",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "category_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.dataTagCategories.dataTags",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "category_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "zeroTrust.dlp.dataTagCategories.dataTags",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "category_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "rum.rules",
       "name": "update",
       "params": [
