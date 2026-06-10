@@ -13,6 +13,34 @@ export {
 } from './custom-prompt-topics';
 export { DLP } from './dlp';
 export {
+  DataClassListResponsesSinglePage,
+  DataClasses,
+  type DataClassCreateResponse,
+  type DataClassUpdateResponse,
+  type DataClassListResponse,
+  type DataClassDeleteResponse,
+  type DataClassGetResponse,
+  type DataClassCreateParams,
+  type DataClassUpdateParams,
+  type DataClassListParams,
+  type DataClassDeleteParams,
+  type DataClassGetParams,
+} from './data-classes';
+export {
+  DataTagCategoryListResponsesSinglePage,
+  DataTagCategories,
+  type DataTagCategoryCreateResponse,
+  type DataTagCategoryUpdateResponse,
+  type DataTagCategoryListResponse,
+  type DataTagCategoryDeleteResponse,
+  type DataTagCategoryGetResponse,
+  type DataTagCategoryCreateParams,
+  type DataTagCategoryUpdateParams,
+  type DataTagCategoryListParams,
+  type DataTagCategoryDeleteParams,
+  type DataTagCategoryGetParams,
+} from './data-tag-categories/index';
+export {
   DatasetsSinglePage,
   Datasets,
   type Dataset,
@@ -57,6 +85,20 @@ export {
   type ProfileListParams,
   type ProfileGetParams,
 } from './profiles/index';
+export {
+  SensitivityGroupListResponsesSinglePage,
+  SensitivityGroups,
+  type SensitivityGroupCreateResponse,
+  type SensitivityGroupUpdateResponse,
+  type SensitivityGroupListResponse,
+  type SensitivityGroupDeleteResponse,
+  type SensitivityGroupGetResponse,
+  type SensitivityGroupCreateParams,
+  type SensitivityGroupUpdateParams,
+  type SensitivityGroupListParams,
+  type SensitivityGroupDeleteParams,
+  type SensitivityGroupGetParams,
+} from './sensitivity-groups/index';
 export {
   Settings,
   type DLPSettings,

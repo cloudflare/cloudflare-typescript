@@ -1457,6 +1457,108 @@ Methods:
 - <code title="delete /accounts/{account_id}/dlp/entries/integration/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">delete</a>(entryId, { ...params }) -> IntegrationDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.integration.<a href="./src/resources/zero-trust/dlp/entries/integration.ts">get</a>(entryId, { ...params }) -> IntegrationGetResponse</code>
 
+### SensitivityGroups
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">SensitivityGroupCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">SensitivityGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">SensitivityGroupListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">SensitivityGroupDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">SensitivityGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/sensitivity_groups">client.zeroTrust.dlp.sensitivityGroups.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">create</a>({ ...params }) -> SensitivityGroupCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}">client.zeroTrust.dlp.sensitivityGroups.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">update</a>(sensitivityGroupId, { ...params }) -> SensitivityGroupUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/sensitivity_groups">client.zeroTrust.dlp.sensitivityGroups.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">list</a>({ ...params }) -> SensitivityGroupListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}">client.zeroTrust.dlp.sensitivityGroups.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">delete</a>(sensitivityGroupId, { ...params }) -> SensitivityGroupDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}">client.zeroTrust.dlp.sensitivityGroups.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.ts">get</a>(sensitivityGroupId, { ...params }) -> SensitivityGroupGetResponse</code>
+
+#### Levels
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">LevelCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">LevelUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">LevelListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">LevelDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">LevelGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/levels">client.zeroTrust.dlp.sensitivityGroups.levels.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">create</a>(sensitivityGroupId, { ...params }) -> LevelCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/levels/{sensitivity_level_id}">client.zeroTrust.dlp.sensitivityGroups.levels.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">update</a>(sensitivityGroupId, sensitivityLevelId, { ...params }) -> LevelUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/levels">client.zeroTrust.dlp.sensitivityGroups.levels.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">list</a>(sensitivityGroupId, { ...params }) -> LevelListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/levels/{sensitivity_level_id}">client.zeroTrust.dlp.sensitivityGroups.levels.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">delete</a>(sensitivityGroupId, sensitivityLevelId, { ...params }) -> LevelDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/levels/{sensitivity_level_id}">client.zeroTrust.dlp.sensitivityGroups.levels.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/levels.ts">get</a>(sensitivityGroupId, sensitivityLevelId, { ...params }) -> LevelGetResponse</code>
+
+##### Order
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/order.ts">OrderUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/order.ts">OrderGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/level_order">client.zeroTrust.dlp.sensitivityGroups.levels.order.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/order.ts">update</a>(sensitivityGroupId, { ...params }) -> OrderUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/sensitivity_groups/{sensitivity_group_id}/level_order">client.zeroTrust.dlp.sensitivityGroups.levels.order.<a href="./src/resources/zero-trust/dlp/sensitivity-groups/levels/order.ts">get</a>(sensitivityGroupId, { ...params }) -> OrderGetResponse</code>
+
+### DataTagCategories
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">DataTagCategoryCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">DataTagCategoryUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">DataTagCategoryListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">DataTagCategoryDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">DataTagCategoryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/data_tag_categories">client.zeroTrust.dlp.dataTagCategories.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">create</a>({ ...params }) -> DataTagCategoryCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/data_tag_categories/{category_id}">client.zeroTrust.dlp.dataTagCategories.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">update</a>(categoryId, { ...params }) -> DataTagCategoryUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/data_tag_categories">client.zeroTrust.dlp.dataTagCategories.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">list</a>({ ...params }) -> DataTagCategoryListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/data_tag_categories/{category_id}">client.zeroTrust.dlp.dataTagCategories.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">delete</a>(categoryId, { ...params }) -> DataTagCategoryDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/data_tag_categories/{category_id}">client.zeroTrust.dlp.dataTagCategories.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tag-categories.ts">get</a>(categoryId, { ...params }) -> DataTagCategoryGetResponse</code>
+
+#### DataTags
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">DataTagCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">DataTagUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">DataTagListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">DataTagDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">DataTagGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/data_tag_categories/{category_id}/data_tags">client.zeroTrust.dlp.dataTagCategories.dataTags.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">create</a>(categoryId, { ...params }) -> DataTagCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/data_tag_categories/{category_id}/data_tags/{tag_id}">client.zeroTrust.dlp.dataTagCategories.dataTags.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">update</a>(categoryId, tagId, { ...params }) -> DataTagUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/data_tag_categories/{category_id}/data_tags">client.zeroTrust.dlp.dataTagCategories.dataTags.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">list</a>(categoryId, { ...params }) -> DataTagListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/data_tag_categories/{category_id}/data_tags/{tag_id}">client.zeroTrust.dlp.dataTagCategories.dataTags.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">delete</a>(categoryId, tagId, { ...params }) -> DataTagDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/data_tag_categories/{category_id}/data_tags/{tag_id}">client.zeroTrust.dlp.dataTagCategories.dataTags.<a href="./src/resources/zero-trust/dlp/data-tag-categories/data-tags.ts">get</a>(categoryId, tagId, { ...params }) -> DataTagGetResponse</code>
+
+### DataClasses
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/data-classes.ts">DataClassCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-classes.ts">DataClassUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-classes.ts">DataClassListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-classes.ts">DataClassDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/data-classes.ts">DataClassGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/data_classes">client.zeroTrust.dlp.dataClasses.<a href="./src/resources/zero-trust/dlp/data-classes.ts">create</a>({ ...params }) -> DataClassCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/data_classes/{data_class_id}">client.zeroTrust.dlp.dataClasses.<a href="./src/resources/zero-trust/dlp/data-classes.ts">update</a>(dataClassId, { ...params }) -> DataClassUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/data_classes">client.zeroTrust.dlp.dataClasses.<a href="./src/resources/zero-trust/dlp/data-classes.ts">list</a>({ ...params }) -> DataClassListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/data_classes/{data_class_id}">client.zeroTrust.dlp.dataClasses.<a href="./src/resources/zero-trust/dlp/data-classes.ts">delete</a>(dataClassId, { ...params }) -> DataClassDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/data_classes/{data_class_id}">client.zeroTrust.dlp.dataClasses.<a href="./src/resources/zero-trust/dlp/data-classes.ts">get</a>(dataClassId, { ...params }) -> DataClassGetResponse</code>
+
 ## Gateway
 
 Types:

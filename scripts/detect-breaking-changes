@@ -590,6 +590,12 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/dlp/entries/custom.test.ts
 	tests/api-resources/zero-trust/dlp/entries/predefined.test.ts
 	tests/api-resources/zero-trust/dlp/entries/integration.test.ts
+	tests/api-resources/zero-trust/dlp/sensitivity-groups/sensitivity-groups.test.ts
+	tests/api-resources/zero-trust/dlp/sensitivity-groups/levels/levels.test.ts
+	tests/api-resources/zero-trust/dlp/sensitivity-groups/levels/order.test.ts
+	tests/api-resources/zero-trust/dlp/data-tag-categories/data-tag-categories.test.ts
+	tests/api-resources/zero-trust/dlp/data-tag-categories/data-tags.test.ts
+	tests/api-resources/zero-trust/dlp/data-classes.test.ts
 	tests/api-resources/zero-trust/gateway/gateway.test.ts
 	tests/api-resources/zero-trust/gateway/audit-ssh-settings.test.ts
 	tests/api-resources/zero-trust/gateway/categories.test.ts
