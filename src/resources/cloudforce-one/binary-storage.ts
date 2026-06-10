@@ -15,7 +15,8 @@ export class BaseBinaryStorage extends APIResource {
   ] as const);
 
   /**
-   * Posts a file to Binary Storage
+   * Uploads a binary file to Cloudforce One's binary database for malware analysis
+   * and threat intelligence correlation.
    *
    * @example
    * ```ts
@@ -38,7 +39,7 @@ export class BaseBinaryStorage extends APIResource {
   }
 
   /**
-   * Retrieves a file from Binary Storage
+   * Retrieves a binary file from the Cloudforce One binary storage for analysis.
    *
    * @example
    * ```ts
