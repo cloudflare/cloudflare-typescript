@@ -14,6 +14,22 @@ import {
   CustomPromptTopics,
   CustomPromptTopicsSinglePage,
 } from './custom-prompt-topics';
+import * as DataClassesAPI from './data-classes';
+import {
+  BaseDataClasses,
+  DataClassCreateParams,
+  DataClassCreateResponse,
+  DataClassDeleteParams,
+  DataClassDeleteResponse,
+  DataClassGetParams,
+  DataClassGetResponse,
+  DataClassListParams,
+  DataClassListResponse,
+  DataClassListResponsesSinglePage,
+  DataClassUpdateParams,
+  DataClassUpdateResponse,
+  DataClasses,
+} from './data-classes';
 import * as LimitsAPI from './limits';
 import { BaseLimits, LimitListParams, LimitListResponse, Limits } from './limits';
 import * as PatternsAPI from './patterns';
@@ -37,6 +53,22 @@ import {
   SettingUpdateParams,
   Settings,
 } from './settings';
+import * as DataTagCategoriesAPI from './data-tag-categories/data-tag-categories';
+import {
+  BaseDataTagCategories,
+  DataTagCategories,
+  DataTagCategoryCreateParams,
+  DataTagCategoryCreateResponse,
+  DataTagCategoryDeleteParams,
+  DataTagCategoryDeleteResponse,
+  DataTagCategoryGetParams,
+  DataTagCategoryGetResponse,
+  DataTagCategoryListParams,
+  DataTagCategoryListResponse,
+  DataTagCategoryListResponsesSinglePage,
+  DataTagCategoryUpdateParams,
+  DataTagCategoryUpdateResponse,
+} from './data-tag-categories/data-tag-categories';
 import * as DatasetsAPI from './datasets/datasets';
 import {
   BaseDatasets,
@@ -80,6 +112,22 @@ import {
   ProfilesSinglePage,
   SkipConfiguration,
 } from './profiles/profiles';
+import * as SensitivityGroupsAPI from './sensitivity-groups/sensitivity-groups';
+import {
+  BaseSensitivityGroups,
+  SensitivityGroupCreateParams,
+  SensitivityGroupCreateResponse,
+  SensitivityGroupDeleteParams,
+  SensitivityGroupDeleteResponse,
+  SensitivityGroupGetParams,
+  SensitivityGroupGetResponse,
+  SensitivityGroupListParams,
+  SensitivityGroupListResponse,
+  SensitivityGroupListResponsesSinglePage,
+  SensitivityGroupUpdateParams,
+  SensitivityGroupUpdateResponse,
+  SensitivityGroups,
+} from './sensitivity-groups/sensitivity-groups';
 
 export class BaseDLP extends APIResource {
   static override readonly _key: readonly ['zeroTrust', 'dlp'] = Object.freeze(['zeroTrust', 'dlp'] as const);
@@ -96,6 +144,13 @@ export class DLP extends BaseDLP {
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
+  sensitivityGroups: SensitivityGroupsAPI.SensitivityGroups = new SensitivityGroupsAPI.SensitivityGroups(
+    this._client,
+  );
+  dataTagCategories: DataTagCategoriesAPI.DataTagCategories = new DataTagCategoriesAPI.DataTagCategories(
+    this._client,
+  );
+  dataClasses: DataClassesAPI.DataClasses = new DataClassesAPI.DataClasses(this._client);
 }
 
 DLP.CustomPromptTopics = CustomPromptTopics;
@@ -116,6 +171,12 @@ DLP.Limits = Limits;
 DLP.BaseLimits = BaseLimits;
 DLP.Entries = Entries;
 DLP.BaseEntries = BaseEntries;
+DLP.SensitivityGroups = SensitivityGroups;
+DLP.BaseSensitivityGroups = BaseSensitivityGroups;
+DLP.DataTagCategories = DataTagCategories;
+DLP.BaseDataTagCategories = BaseDataTagCategories;
+DLP.DataClasses = DataClasses;
+DLP.BaseDataClasses = BaseDataClasses;
 
 export declare namespace DLP {
   export {
@@ -205,5 +266,53 @@ export declare namespace DLP {
     type EntryListParams as EntryListParams,
     type EntryDeleteParams as EntryDeleteParams,
     type EntryGetParams as EntryGetParams,
+  };
+
+  export {
+    SensitivityGroups as SensitivityGroups,
+    BaseSensitivityGroups as BaseSensitivityGroups,
+    type SensitivityGroupCreateResponse as SensitivityGroupCreateResponse,
+    type SensitivityGroupUpdateResponse as SensitivityGroupUpdateResponse,
+    type SensitivityGroupListResponse as SensitivityGroupListResponse,
+    type SensitivityGroupDeleteResponse as SensitivityGroupDeleteResponse,
+    type SensitivityGroupGetResponse as SensitivityGroupGetResponse,
+    type SensitivityGroupListResponsesSinglePage as SensitivityGroupListResponsesSinglePage,
+    type SensitivityGroupCreateParams as SensitivityGroupCreateParams,
+    type SensitivityGroupUpdateParams as SensitivityGroupUpdateParams,
+    type SensitivityGroupListParams as SensitivityGroupListParams,
+    type SensitivityGroupDeleteParams as SensitivityGroupDeleteParams,
+    type SensitivityGroupGetParams as SensitivityGroupGetParams,
+  };
+
+  export {
+    DataTagCategories as DataTagCategories,
+    BaseDataTagCategories as BaseDataTagCategories,
+    type DataTagCategoryCreateResponse as DataTagCategoryCreateResponse,
+    type DataTagCategoryUpdateResponse as DataTagCategoryUpdateResponse,
+    type DataTagCategoryListResponse as DataTagCategoryListResponse,
+    type DataTagCategoryDeleteResponse as DataTagCategoryDeleteResponse,
+    type DataTagCategoryGetResponse as DataTagCategoryGetResponse,
+    type DataTagCategoryListResponsesSinglePage as DataTagCategoryListResponsesSinglePage,
+    type DataTagCategoryCreateParams as DataTagCategoryCreateParams,
+    type DataTagCategoryUpdateParams as DataTagCategoryUpdateParams,
+    type DataTagCategoryListParams as DataTagCategoryListParams,
+    type DataTagCategoryDeleteParams as DataTagCategoryDeleteParams,
+    type DataTagCategoryGetParams as DataTagCategoryGetParams,
+  };
+
+  export {
+    DataClasses as DataClasses,
+    BaseDataClasses as BaseDataClasses,
+    type DataClassCreateResponse as DataClassCreateResponse,
+    type DataClassUpdateResponse as DataClassUpdateResponse,
+    type DataClassListResponse as DataClassListResponse,
+    type DataClassDeleteResponse as DataClassDeleteResponse,
+    type DataClassGetResponse as DataClassGetResponse,
+    type DataClassListResponsesSinglePage as DataClassListResponsesSinglePage,
+    type DataClassCreateParams as DataClassCreateParams,
+    type DataClassUpdateParams as DataClassUpdateParams,
+    type DataClassListParams as DataClassListParams,
+    type DataClassDeleteParams as DataClassDeleteParams,
+    type DataClassGetParams as DataClassGetParams,
   };
 }
