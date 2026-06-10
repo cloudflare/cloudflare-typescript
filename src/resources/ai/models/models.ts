@@ -52,6 +52,16 @@ export interface ModelListParams extends V4PagePaginationArrayParams {
   hide_experimental?: boolean;
 
   /**
+   * Query param: If true, include models whose planned_deprecation_date is in the
+   * past — but only within a three-month grace window after that date. Models whose
+   * planned_deprecation_date is more than three months in the past remain hidden
+   * regardless of this flag. Future planned-deprecation dates are always included
+   * regardless of this flag. Defaults to false, preserving the existing behavior of
+   * hiding all past-dated deprecations.
+   */
+  include_deprecated?: boolean;
+
+  /**
    * Query param: Search
    */
   search?: string;
