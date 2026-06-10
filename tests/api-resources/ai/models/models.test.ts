@@ -27,6 +27,7 @@ describe('resource models', () => {
       author: 'author',
       format: 'openrouter',
       hide_experimental: true,
+      include_deprecated: true,
       page: 0,
       per_page: 0,
       search: 'search',
