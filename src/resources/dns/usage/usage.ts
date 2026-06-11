@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import * as AccountAPI from './account';
-import { Account } from './account';
+import { Account, AccountGetParams, AccountGetResponse } from './account';
 import * as ZoneAPI from './zone';
-import { Zone } from './zone';
+import { Zone, ZoneGetParams, ZoneGetResponse } from './zone';
 
 export class Usage extends APIResource {
   zone: ZoneAPI.Zone = new ZoneAPI.Zone(this._client);
@@ -15,7 +15,11 @@ Usage.Zone = Zone;
 Usage.Account = Account;
 
 export declare namespace Usage {
-  export { Zone as Zone };
+  export { Zone as Zone, type ZoneGetResponse as ZoneGetResponse, type ZoneGetParams as ZoneGetParams };
 
-  export { Account as Account };
+  export {
+    Account as Account,
+    type AccountGetResponse as AccountGetResponse,
+    type AccountGetParams as AccountGetParams,
+  };
 }

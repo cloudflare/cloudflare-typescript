@@ -3,7 +3,7 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as ItemsAPI from './items';
-import { ItemListParams, ItemListResponse, ItemListResponsesSinglePage, Items } from './items';
+import { ItemListParams, Items } from './items';
 import { SinglePage } from '../../../../pagination';
 
 export class Lists extends APIResource {
@@ -153,6 +153,8 @@ export class Lists extends APIResource {
 }
 
 export class GatewayListsSinglePage extends SinglePage<GatewayList> {}
+
+export class GatewayItemsSinglePage extends SinglePage<GatewayItem> {}
 
 export interface GatewayItem {
   created_at?: string;
@@ -367,7 +369,6 @@ export interface ListGetParams {
 
 Lists.GatewayListsSinglePage = GatewayListsSinglePage;
 Lists.Items = Items;
-Lists.ItemListResponsesSinglePage = ItemListResponsesSinglePage;
 
 export declare namespace Lists {
   export {
@@ -384,10 +385,5 @@ export declare namespace Lists {
     type ListGetParams as ListGetParams,
   };
 
-  export {
-    Items as Items,
-    type ItemListResponse as ItemListResponse,
-    ItemListResponsesSinglePage as ItemListResponsesSinglePage,
-    type ItemListParams as ItemListParams,
-  };
+  export { Items as Items, type ItemListParams as ItemListParams };
 }

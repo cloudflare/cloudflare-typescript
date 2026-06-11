@@ -70,6 +70,8 @@ export class Organizations extends APIResource {
    * Delete an organization. The organization MUST be empty before deleting. It must
    * not contain any sub-organizations, accounts, members or users. (Currently in
    * Public Beta - see https://developers.cloudflare.com/fundamentals/organizations/)
+   *
+   * **Access Control:** Restricted to enterprise organizations.
    */
   delete(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationDeleteResponse> {
     return (
@@ -108,7 +110,7 @@ export interface Organization {
 
   parent?: Organization.Parent;
 
-  profile?: Organization.Profile;
+  profile?: OrganizationProfileAPI.OrganizationProfile;
 }
 
 export namespace Organization {
@@ -117,6 +119,15 @@ export namespace Organization {
      * Enable features for Organizations.
      */
     flags?: Meta.Flags;
+
+    /**
+     * Ordered chain of organization tags from the root organization down to (and
+     * including) this organization itself. Root organizations return a single-element
+     * array containing their own tag; sub-organizations return
+     * `[rootTag, ...intermediateTags, parentTag, selfTag]`. Useful for constructing
+     * authorization scopes that need to cover every ancestor in the hierarchy.
+     */
+    hierarchy_tags?: Array<string>;
 
     managed_by?: string;
 
@@ -145,18 +156,6 @@ export namespace Organization {
 
     name: string;
   }
-
-  export interface Profile {
-    business_address: string;
-
-    business_email: string;
-
-    business_name: string;
-
-    business_phone: string;
-
-    external_metadata: string;
-  }
 }
 
 export interface OrganizationDeleteResponse {
@@ -168,24 +167,12 @@ export interface OrganizationCreateParams {
 
   parent?: OrganizationCreateParams.Parent;
 
-  profile?: OrganizationCreateParams.Profile;
+  profile?: OrganizationProfileAPI.OrganizationProfileParam;
 }
 
 export namespace OrganizationCreateParams {
   export interface Parent {
     id: string;
-  }
-
-  export interface Profile {
-    business_address: string;
-
-    business_email: string;
-
-    business_name: string;
-
-    business_phone: string;
-
-    external_metadata: string;
   }
 }
 
@@ -194,24 +181,12 @@ export interface OrganizationUpdateParams {
 
   parent?: OrganizationUpdateParams.Parent;
 
-  profile?: OrganizationUpdateParams.Profile;
+  profile?: OrganizationProfileAPI.OrganizationProfileParam;
 }
 
 export namespace OrganizationUpdateParams {
   export interface Parent {
     id: string;
-  }
-
-  export interface Profile {
-    business_address: string;
-
-    business_email: string;
-
-    business_name: string;
-
-    business_phone: string;
-
-    external_metadata: string;
   }
 }
 

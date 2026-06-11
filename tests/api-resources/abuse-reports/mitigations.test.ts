@@ -35,7 +35,7 @@ describe('resource mitigations', () => {
       per_page: 0,
       sort: 'type,asc',
       status: 'pending',
-      type: 'legal_block',
+      type: 'account_suspend',
     });
   });
 

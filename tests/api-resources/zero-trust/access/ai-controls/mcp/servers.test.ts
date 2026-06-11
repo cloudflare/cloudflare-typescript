@@ -37,6 +37,7 @@ describe('resource servers', () => {
       auth_credentials: 'auth_credentials',
       description: 'This is one remote mcp server',
       is_shared_oauth_callback_enabled: true,
+      secure_web_gateway: false,
       updated_prompts: [
         {
           name: 'name',
@@ -76,6 +77,7 @@ describe('resource servers', () => {
       description: 'This is one remote mcp server',
       is_shared_oauth_callback_enabled: true,
       name: 'My MCP Server',
+      secure_web_gateway: false,
       updated_prompts: [
         {
           name: 'name',

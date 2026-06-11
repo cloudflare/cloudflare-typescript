@@ -33,7 +33,7 @@ export interface Sinkhole {
   /**
    * The unique identifier for the sinkhole.
    */
-  id?: number;
+  id?: string;
 
   /**
    * The account tag that owns this sinkhole.

@@ -842,11 +842,16 @@ export interface ResourceSharingCreateParams {
 
 export namespace ResourceSharingCreateParams {
   /**
-   * Account or organization ID must be provided.
+   * Optionally specify `recipient_account_id` to target a specific account, or
+   * `organization_id` to target the caller's whole organization. If neither is
+   * provided, the caller's organization is used. The legacy field `account_id` is
+   * accepted as a synonym for `recipient_account_id` during the deprecation period
+   * (see `x-sunset` on that field).
    */
   export interface Recipient {
     /**
-     * Account identifier.
+     * @deprecated This field has been renamed to `recipient_account_id`. Both names
+     * are accepted during the deprecation period.
      */
     account_id?: string;
 
@@ -854,6 +859,11 @@ export namespace ResourceSharingCreateParams {
      * Organization identifier.
      */
     organization_id?: string;
+
+    /**
+     * The account that will receive the share.
+     */
+    recipient_account_id?: string;
   }
 
   export interface Resource {

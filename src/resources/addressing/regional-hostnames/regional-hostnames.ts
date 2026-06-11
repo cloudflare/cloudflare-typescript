@@ -163,7 +163,7 @@ export interface RegionalHostnameCreateResponse {
   /**
    * Configure which routing method to use for the regional hostname
    */
-  routing?: string;
+  routing: string;
 }
 
 export interface RegionalHostnameListResponse {
@@ -186,7 +186,7 @@ export interface RegionalHostnameListResponse {
   /**
    * Configure which routing method to use for the regional hostname
    */
-  routing?: string;
+  routing: string;
 }
 
 export interface RegionalHostnameDeleteResponse {
@@ -254,7 +254,7 @@ export interface RegionalHostnameEditResponse {
   /**
    * Configure which routing method to use for the regional hostname
    */
-  routing?: string;
+  routing: string;
 }
 
 export interface RegionalHostnameGetResponse {
@@ -277,7 +277,7 @@ export interface RegionalHostnameGetResponse {
   /**
    * Configure which routing method to use for the regional hostname
    */
-  routing?: string;
+  routing: string;
 }
 
 export interface RegionalHostnameCreateParams {

@@ -113,6 +113,30 @@ export class Livestreams extends APIResource {
   }
 
   /**
+   * Returns day-wise livestream analytics for the specified time range.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.realtimeKit.livestreams.getLivestreamAnalyticsDaywise(
+   *     'app_id',
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  getLivestreamAnalyticsDaywise(
+    appId: string,
+    params: LivestreamGetLivestreamAnalyticsDaywiseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LivestreamGetLivestreamAnalyticsDaywiseResponse> {
+    const { account_id, ...query } = params;
+    return this._client.get(`/accounts/${account_id}/realtime/kit/${appId}/analytics/livestreams/daywise`, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Returns livestream session details for the given livestream session ID. Retrieve
    * the `livestream_session_id`using the
    * `Fetch livestream session details using a session ID` API.
@@ -504,6 +528,36 @@ export namespace LivestreamGetLivestreamAnalyticsCompleteResponse {
      * Count of total livestreams.
      */
     count?: number;
+
+    /**
+     * Total time duration for which the input was given or the meeting was streamed.
+     */
+    total_ingest_seconds?: number;
+
+    /**
+     * Total view time for which the viewers watched the stream.
+     */
+    total_viewer_seconds?: number;
+  }
+}
+
+export interface LivestreamGetLivestreamAnalyticsDaywiseResponse {
+  data?: Array<LivestreamGetLivestreamAnalyticsDaywiseResponse.Data>;
+
+  success?: boolean;
+}
+
+export namespace LivestreamGetLivestreamAnalyticsDaywiseResponse {
+  export interface Data {
+    /**
+     * Count of total livestream sessions.
+     */
+    count?: number;
+
+    /**
+     * Analytics date.
+     */
+    date?: string | null;
 
     /**
      * Total time duration for which the input was given or the meeting was streamed.
@@ -952,16 +1006,45 @@ export interface LivestreamGetLivestreamAnalyticsCompleteParams {
   account_id: string;
 
   /**
-   * Query param: Specify the end time range in ISO format to access the livestream
-   * analytics.
+   * Query param: Specify the end time as a Unix timestamp in seconds to access the
+   * livestream analytics.
    */
-  end_time?: string;
+  end_time?: number;
 
   /**
-   * Query param: Specify the start time range in ISO format to access the livestream
-   * analytics.
+   * Query param: Optional filters for livestream analytics.
    */
-  start_time?: string;
+  filters?: string;
+
+  /**
+   * Query param: Specify the start time as a Unix timestamp in seconds to access the
+   * livestream analytics.
+   */
+  start_time?: number;
+}
+
+export interface LivestreamGetLivestreamAnalyticsDaywiseParams {
+  /**
+   * Path param: The account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Specify the end time as a Unix timestamp in seconds to access the
+   * livestream analytics.
+   */
+  end_time?: number;
+
+  /**
+   * Query param: Optional filters for livestream analytics.
+   */
+  filters?: string;
+
+  /**
+   * Query param: Specify the start time as a Unix timestamp in seconds to access the
+   * livestream analytics.
+   */
+  start_time?: number;
 }
 
 export interface LivestreamGetLivestreamSessionDetailsForSessionIDParams {
@@ -1057,6 +1140,7 @@ export declare namespace Livestreams {
     type LivestreamGetActiveLivestreamsForLivestreamIDResponse as LivestreamGetActiveLivestreamsForLivestreamIDResponse,
     type LivestreamGetAllLivestreamsResponse as LivestreamGetAllLivestreamsResponse,
     type LivestreamGetLivestreamAnalyticsCompleteResponse as LivestreamGetLivestreamAnalyticsCompleteResponse,
+    type LivestreamGetLivestreamAnalyticsDaywiseResponse as LivestreamGetLivestreamAnalyticsDaywiseResponse,
     type LivestreamGetLivestreamSessionDetailsForSessionIDResponse as LivestreamGetLivestreamSessionDetailsForSessionIDResponse,
     type LivestreamGetLivestreamSessionForLivestreamIDResponse as LivestreamGetLivestreamSessionForLivestreamIDResponse,
     type LivestreamGetMeetingActiveLivestreamsResponse as LivestreamGetMeetingActiveLivestreamsResponse,
@@ -1067,6 +1151,7 @@ export declare namespace Livestreams {
     type LivestreamGetActiveLivestreamsForLivestreamIDParams as LivestreamGetActiveLivestreamsForLivestreamIDParams,
     type LivestreamGetAllLivestreamsParams as LivestreamGetAllLivestreamsParams,
     type LivestreamGetLivestreamAnalyticsCompleteParams as LivestreamGetLivestreamAnalyticsCompleteParams,
+    type LivestreamGetLivestreamAnalyticsDaywiseParams as LivestreamGetLivestreamAnalyticsDaywiseParams,
     type LivestreamGetLivestreamSessionDetailsForSessionIDParams as LivestreamGetLivestreamSessionDetailsForSessionIDParams,
     type LivestreamGetLivestreamSessionForLivestreamIDParams as LivestreamGetLivestreamSessionForLivestreamIDParams,
     type LivestreamGetMeetingActiveLivestreamsParams as LivestreamGetMeetingActiveLivestreamsParams,

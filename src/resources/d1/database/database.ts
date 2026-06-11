@@ -185,11 +185,12 @@ export class Database extends APIResource {
     params: DatabaseGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<D1API.D1> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{
-        result: D1API.D1;
-      }>
+      this._client.get(`/accounts/${account_id}/d1/database/${databaseId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: D1API.D1 }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -839,9 +840,25 @@ export namespace DatabaseExportParams {
 
 export interface DatabaseGetParams {
   /**
-   * Account identifier tag.
+   * Path param: Account identifier tag.
    */
   account_id: string;
+
+  /**
+   * Query param: Comma-separated list of fields to include in the response. When
+   * omitted, all fields are returned.
+   */
+  fields?: Array<
+    | 'uuid'
+    | 'name'
+    | 'created_at'
+    | 'version'
+    | 'jurisdiction'
+    | 'num_tables'
+    | 'file_size'
+    | 'running_in_region'
+    | 'read_replication'
+  >;
 }
 
 export type DatabaseImportParams =

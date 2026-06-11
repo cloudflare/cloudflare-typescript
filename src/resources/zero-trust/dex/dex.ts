@@ -38,6 +38,8 @@ import {
   CommandListResponsesV4PagePagination,
   Commands,
 } from './commands/commands';
+import * as DevicesAPI from './devices/devices';
+import { Devices } from './devices/devices';
 import * as FleetStatusAPI from './fleet-status/fleet-status';
 import {
   FleetStatus,
@@ -67,6 +69,7 @@ export class DEX extends APIResource {
     new TracerouteTestResultsAPI.TracerouteTestResults(this._client);
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+  devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
 }
 
 export interface DigitalExperienceMonitor {
@@ -195,6 +198,7 @@ DEX.TracerouteTestResults = TracerouteTestResults;
 DEX.TracerouteTests = TracerouteTests;
 DEX.Rules = Rules;
 DEX.RuleListResponsesV4PagePagination = RuleListResponsesV4PagePagination;
+DEX.Devices = Devices;
 
 export declare namespace DEX {
   export {
@@ -273,4 +277,6 @@ export declare namespace DEX {
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
   };
+
+  export { Devices as Devices };
 }

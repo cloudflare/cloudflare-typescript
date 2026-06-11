@@ -5,7 +5,7 @@ import * as Core from '../../core';
 
 export class HostnameAssociations extends APIResource {
   /**
-   * Replace Hostname Associations
+   * Replace Hostname Associations.
    */
   update(
     params: HostnameAssociationUpdateParams,
@@ -21,7 +21,7 @@ export class HostnameAssociations extends APIResource {
   }
 
   /**
-   * List Hostname Associations
+   * List Hostname Associations.
    */
   get(
     params: HostnameAssociationGetParams,

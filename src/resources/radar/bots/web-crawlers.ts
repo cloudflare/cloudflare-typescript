@@ -525,6 +525,12 @@ export interface WebCrawlerTimeseriesGroupsParams {
   name?: Array<string>;
 
   /**
+   * Normalization method applied to the results. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE' | 'MIN0_MAX' | 'PERCENTAGE_CHANGE';
+
+  /**
    * Filters results by HTTP response status code (e.g. 200, 403, 404). Only
    * [IANA-registered codes](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml)
    * are accepted.

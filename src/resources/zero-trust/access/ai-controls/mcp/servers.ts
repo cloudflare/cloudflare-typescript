@@ -194,9 +194,9 @@ export interface ServerCreateResponse {
   /**
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-   * customer portal hostname. New servers default to true; existing servers default
-   * to false. Effective behavior is gated by the gateway worker's per-env rollout
-   * mode KV key.
+   * customer portal hostname. New public server creates default to true; existing
+   * servers default to false from migration until explicitly updated. Effective
+   * behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -207,6 +207,11 @@ export interface ServerCreateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -293,9 +298,9 @@ export interface ServerUpdateResponse {
   /**
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-   * customer portal hostname. New servers default to true; existing servers default
-   * to false. Effective behavior is gated by the gateway worker's per-env rollout
-   * mode KV key.
+   * customer portal hostname. New public server creates default to true; existing
+   * servers default to false from migration until explicitly updated. Effective
+   * behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -306,6 +311,11 @@ export interface ServerUpdateResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -392,9 +402,9 @@ export interface ServerListResponse {
   /**
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-   * customer portal hostname. New servers default to true; existing servers default
-   * to false. Effective behavior is gated by the gateway worker's per-env rollout
-   * mode KV key.
+   * customer portal hostname. New public server creates default to true; existing
+   * servers default to false from migration until explicitly updated. Effective
+   * behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -405,6 +415,11 @@ export interface ServerListResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -491,9 +506,9 @@ export interface ServerDeleteResponse {
   /**
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-   * customer portal hostname. New servers default to true; existing servers default
-   * to false. Effective behavior is gated by the gateway worker's per-env rollout
-   * mode KV key.
+   * customer portal hostname. New public server creates default to true; existing
+   * servers default to false from migration until explicitly updated. Effective
+   * behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -504,6 +519,11 @@ export interface ServerDeleteResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -590,9 +610,9 @@ export interface ServerReadResponse {
   /**
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-   * customer portal hostname. New servers default to true; existing servers default
-   * to false. Effective behavior is gated by the gateway worker's per-env rollout
-   * mode KV key.
+   * customer portal hostname. New public server creates default to true; existing
+   * servers default to false from migration until explicitly updated. Effective
+   * behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -603,6 +623,11 @@ export interface ServerReadResponse {
   modified_at?: string;
 
   modified_by?: string;
+
+  /**
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   status?: string;
 
@@ -736,11 +761,17 @@ export interface ServerCreateParams {
   /**
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
-   * the customer portal hostname. New servers default to true; existing servers
-   * default to false. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * the customer portal hostname. New public server creates default to true;
+   * existing servers default to false from migration until explicitly updated.
+   * Effective behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
+
+  /**
+   * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
+   * Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   /**
    * Body param
@@ -794,9 +825,9 @@ export interface ServerUpdateParams {
   /**
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
-   * the customer portal hostname. New servers default to true; existing servers
-   * default to false. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * the customer portal hostname. New public server creates default to true;
+   * existing servers default to false from migration until explicitly updated.
+   * Effective behavior is gated by the gateway worker's per-env rollout mode KV key.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -804,6 +835,12 @@ export interface ServerUpdateParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
+   * Web Gateway
+   */
+  secure_web_gateway?: boolean;
 
   /**
    * Body param

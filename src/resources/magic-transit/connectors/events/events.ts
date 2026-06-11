@@ -121,7 +121,12 @@ export interface EventGetResponse {
     | EventGetResponse.FinishUpgradeSuccess
     | EventGetResponse.FinishUpgradeFailure
     | EventGetResponse.Reconcile
-    | EventGetResponse.ConfigureCloudflaredTunnel;
+    | EventGetResponse.ConfigureCloudflaredTunnel
+    | EventGetResponse.RekeyInstallBoth
+    | EventGetResponse.RekeyStart
+    | EventGetResponse.RekeyAdvance
+    | EventGetResponse.RekeyComplete
+    | EventGetResponse.RekeyReset;
 
   /**
    * Sequence number, used to order events with the same timestamp
@@ -255,6 +260,66 @@ export namespace EventGetResponse {
      * Configured Cloudflared tunnel
      */
     k: 'ConfigureCloudflaredTunnel';
+  }
+
+  export interface RekeyInstallBoth {
+    /**
+     * Installed initial inbound and outbound keys
+     */
+    k: 'RekeyInstallBoth';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyStart {
+    /**
+     * Installed new inbound key, kept old outbound
+     */
+    k: 'RekeyStart';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyAdvance {
+    /**
+     * Confirmed traffic on new inbound key, swapped outbound to new
+     */
+    k: 'RekeyAdvance';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyComplete {
+    /**
+     * Deleted old keys
+     */
+    k: 'RekeyComplete';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyReset {
+    /**
+     * Deleted all keys after receiving an unexpected key
+     */
+    k: 'RekeyReset';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
   }
 }
 

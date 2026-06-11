@@ -47,7 +47,7 @@ describe('resource queries', () => {
         filters: [
           {
             filterCombination: 'and',
-            filters: [{}],
+            filters: [],
             kind: 'group',
           },
         ],

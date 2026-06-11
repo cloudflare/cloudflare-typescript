@@ -33,7 +33,7 @@ describe('resource telemetry', () => {
           filters: [
             {
               filterCombination: 'and',
-              filters: [{}],
+              filters: [],
               kind: 'group',
             },
           ],
@@ -53,6 +53,62 @@ describe('resource telemetry', () => {
         matchCase: true,
       },
       to: 0,
+    });
+  });
+
+  // HTTP 400 error from prism
+  test.skip('liveTail: only required params', async () => {
+    const responsePromise = client.workers.observability.telemetry.liveTail({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // HTTP 400 error from prism
+  test.skip('liveTail: required and optional params', async () => {
+    const response = await client.workers.observability.telemetry.liveTail({
+      account_id: 'account_id',
+      filterCombination: 'and',
+      filters: [
+        {
+          filterCombination: 'and',
+          filters: [
+            {
+              filterCombination: 'and',
+              filters: [],
+              kind: 'group',
+            },
+          ],
+          kind: 'group',
+        },
+      ],
+      scriptId: 'scriptId',
+    });
+  });
+
+  // HTTP 400 error from prism
+  test.skip('liveTailHeartbeat: only required params', async () => {
+    const responsePromise = client.workers.observability.telemetry.liveTailHeartbeat({
+      account_id: 'account_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // HTTP 400 error from prism
+  test.skip('liveTailHeartbeat: required and optional params', async () => {
+    const response = await client.workers.observability.telemetry.liveTailHeartbeat({
+      account_id: 'account_id',
+      scriptId: 'scriptId',
     });
   });
 
@@ -104,7 +160,7 @@ describe('resource telemetry', () => {
             filters: [
               {
                 filterCombination: 'and',
-                filters: [{}],
+                filters: [],
                 kind: 'group',
               },
             ],
@@ -163,7 +219,7 @@ describe('resource telemetry', () => {
           filters: [
             {
               filterCombination: 'and',
-              filters: [{}],
+              filters: [],
               kind: 'group',
             },
           ],

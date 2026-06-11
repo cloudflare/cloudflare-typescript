@@ -267,7 +267,7 @@ export interface GeoRestrictionsParam {
 
 /**
  * Client Certificates may be active or revoked, and the pending_reactivation or
- * pending_revocation represent in-progress asynchronous transitions
+ * pending_revocation represent in-progress asynchronous transitions.
  */
 export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
 
@@ -303,7 +303,8 @@ export interface CustomCertificateCreateParams {
   custom_csr_id?: string;
 
   /**
-   * Body param: The environment to deploy the certificate to, defaults to production
+   * Body param: The environment to deploy the certificate to, defaults to
+   * production.
    */
   deploy?: 'staging' | 'production';
 
@@ -396,7 +397,8 @@ export interface CustomCertificateEditParams {
   custom_csr_id?: string;
 
   /**
-   * Body param: The environment to deploy the certificate to, defaults to production
+   * Body param: The environment to deploy the certificate to, defaults to
+   * production.
    */
   deploy?: 'staging' | 'production';
 

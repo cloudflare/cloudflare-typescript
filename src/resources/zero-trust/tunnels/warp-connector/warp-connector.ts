@@ -2,6 +2,14 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
+import * as ConfigurationsAPI from './configurations';
+import {
+  ConfigurationGetParams,
+  ConfigurationGetResponse,
+  ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
+  Configurations,
+} from './configurations';
 import * as ConnectionsAPI from './connections';
 import {
   ConnectionGetParams,
@@ -22,6 +30,7 @@ export class WARPConnector extends APIResource {
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
   failover: FailoverAPI.Failover = new FailoverAPI.Failover(this._client);
+  configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
 
   /**
    * Creates a new Warp Connector Tunnel in an account.
@@ -841,6 +850,7 @@ WARPConnector.Connections = Connections;
 WARPConnector.ConnectionGetResponsesSinglePage = ConnectionGetResponsesSinglePage;
 WARPConnector.Connectors = Connectors;
 WARPConnector.Failover = Failover;
+WARPConnector.Configurations = Configurations;
 
 export declare namespace WARPConnector {
   export {
@@ -876,5 +886,13 @@ export declare namespace WARPConnector {
     Failover as Failover,
     type FailoverUpdateResponse as FailoverUpdateResponse,
     type FailoverUpdateParams as FailoverUpdateParams,
+  };
+
+  export {
+    Configurations as Configurations,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
   };
 }
