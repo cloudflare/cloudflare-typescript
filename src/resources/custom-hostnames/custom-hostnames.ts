@@ -2183,7 +2183,8 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Hostname ID to match against. This ID was generated and returned
    * during the initial custom_hostname creation. This parameter cannot be used with
-   * the 'hostname' parameter.
+   * the 'hostname', 'hostname.exact', 'hostname.contain', or 'hostname.startsWith'
+   * parameters.
    */
   id?: string;
 
@@ -2275,9 +2276,23 @@ export namespace CustomHostnameListParams {
   export interface Hostname {
     /**
      * Filters hostnames by a substring match on the hostname value. This parameter
-     * cannot be used with the 'id' parameter.
+     * cannot be used with the 'id', 'hostname', 'hostname.exact', or
+     * 'hostname.startsWith' parameters.
      */
     contain?: string;
+
+    /**
+     * Fully qualified domain name to match against. This parameter cannot be used with
+     * the 'id', 'hostname', 'hostname.contain', or 'hostname.startsWith' parameters.
+     */
+    exact?: string;
+
+    /**
+     * Filters hostnames by a prefix match on the hostname value. This parameter cannot
+     * be used with the 'id', 'hostname', 'hostname.exact', or 'hostname.contain'
+     * parameters.
+     */
+    startsWith?: string;
   }
 }
 
