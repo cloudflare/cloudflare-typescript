@@ -207,12 +207,12 @@ export interface ManagedTransformEditParams {
   /**
    * Body param: The list of Managed Request Transforms.
    */
-  managed_request_headers: Array<ManagedTransformEditParams.ManagedRequestHeader>;
+  managed_request_headers?: Array<ManagedTransformEditParams.ManagedRequestHeader>;
 
   /**
    * Body param: The list of Managed Response Transforms.
    */
-  managed_response_headers: Array<ManagedTransformEditParams.ManagedResponseHeader>;
+  managed_response_headers?: Array<ManagedTransformEditParams.ManagedResponseHeader>;
 }
 
 export namespace ManagedTransformEditParams {

@@ -18,8 +18,6 @@ export class ProviderConfigs extends APIResource {
    *       alias: 'alias',
    *       default_config: true,
    *       provider_slug: 'provider_slug',
-   *       secret: 'secret',
-   *       secret_id: 'secret_id',
    *     },
    *   );
    * ```
@@ -142,22 +140,22 @@ export interface ProviderConfigCreateParams {
   /**
    * Body param
    */
-  secret: string;
-
-  /**
-   * Body param
-   */
-  secret_id: string;
-
-  /**
-   * Body param
-   */
   rate_limit?: number;
 
   /**
    * Body param
    */
   rate_limit_period?: number;
+
+  /**
+   * Body param
+   */
+  secret?: string;
+
+  /**
+   * Body param
+   */
+  secret_id?: string;
 }
 
 export interface ProviderConfigListParams extends V4PagePaginationArrayParams {

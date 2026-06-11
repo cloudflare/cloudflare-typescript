@@ -304,6 +304,8 @@ export interface AIGatewayCreateResponse {
    */
   retry_max_attempts?: number | null;
 
+  spend_limits?: AIGatewayCreateResponse.SpendLimits | null;
+
   store_id?: string | null;
 
   stripe?: AIGatewayCreateResponse.Stripe | null;
@@ -415,13 +417,65 @@ export namespace AIGatewayCreateResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
 
+    authorization?: string;
+
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
   }
 
   export interface Stripe {
@@ -491,6 +545,8 @@ export interface AIGatewayUpdateResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayUpdateResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -603,13 +659,65 @@ export namespace AIGatewayUpdateResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
 
+    authorization?: string;
+
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
   }
 
   export interface Stripe {
@@ -679,6 +787,8 @@ export interface AIGatewayListResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayListResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -791,13 +901,65 @@ export namespace AIGatewayListResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
 
+    authorization?: string;
+
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
   }
 
   export interface Stripe {
@@ -867,6 +1029,8 @@ export interface AIGatewayDeleteResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayDeleteResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -979,13 +1143,65 @@ export namespace AIGatewayDeleteResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
 
+    authorization?: string;
+
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
   }
 
   export interface Stripe {
@@ -1055,6 +1271,8 @@ export interface AIGatewayGetResponse {
    * Maximum number of retry attempts for failed requests (1-5)
    */
   retry_max_attempts?: number | null;
+
+  spend_limits?: AIGatewayGetResponse.SpendLimits | null;
 
   store_id?: string | null;
 
@@ -1167,13 +1385,65 @@ export namespace AIGatewayGetResponse {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
 
+    authorization?: string;
+
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
   }
 
   export interface Stripe {
@@ -1376,6 +1646,11 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param
    */
+  spend_limits?: AIGatewayUpdateParams.SpendLimits | null;
+
+  /**
+   * Body param
+   */
   store_id?: string | null;
 
   /**
@@ -1493,13 +1768,65 @@ export namespace AIGatewayUpdateParams {
   }
 
   export interface Otel {
-    authorization: string;
-
     headers: { [key: string]: string };
 
     url: string;
 
+    authorization?: string;
+
     content_type?: 'json' | 'protobuf';
+  }
+
+  export interface SpendLimits {
+    enabled?: boolean;
+
+    rules?: Array<SpendLimits.Rule>;
+  }
+
+  export namespace SpendLimits {
+    export interface Rule {
+      limit: number;
+
+      limitType: 'cost';
+
+      window: number;
+
+      id?: string;
+
+      enabled?: boolean;
+
+      metadata?: { [key: string]: Rule.Mode | Rule.UnionMember1 };
+
+      model?: Rule.Model;
+
+      provider?: Rule.Provider;
+
+      technique?: 'fixed' | 'sliding';
+    }
+
+    export namespace Rule {
+      export interface Mode {
+        mode: 'partition';
+      }
+
+      export interface UnionMember1 {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Model {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+
+      export interface Provider {
+        mode: 'filter';
+
+        values: Array<string>;
+      }
+    }
   }
 
   export interface Stripe {

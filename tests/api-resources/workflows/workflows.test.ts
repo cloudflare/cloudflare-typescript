@@ -31,6 +31,7 @@ describe('resource workflows', () => {
       class_name: 'x',
       script_name: 'x',
       limits: { steps: 1 },
+      schedules: [{ cron: 'x' }],
     });
   });
 

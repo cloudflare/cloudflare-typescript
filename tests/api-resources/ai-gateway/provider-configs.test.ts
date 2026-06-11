@@ -16,8 +16,6 @@ describe('resource providerConfigs', () => {
       alias: 'alias',
       default_config: true,
       provider_slug: 'provider_slug',
-      secret: 'secret',
-      secret_id: 'secret_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -34,10 +32,10 @@ describe('resource providerConfigs', () => {
       alias: 'alias',
       default_config: true,
       provider_slug: 'provider_slug',
-      secret: 'secret',
-      secret_id: 'secret_id',
       rate_limit: 0,
       rate_limit_period: 0,
+      secret: 'secret',
+      secret_id: 'secret_id',
     });
   });
 

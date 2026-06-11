@@ -3,6 +3,8 @@
 import { APIResource } from '../../resource';
 import * as AnalyzeAPI from './analyze';
 import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse } from './analyze';
+import * as AutoOriginTLSKexAPI from './auto-origin-tls-kex';
+import { AutoOriginTLSKex } from './auto-origin-tls-kex';
 import * as RecommendationsAPI from './recommendations';
 import { RecommendationGetParams, RecommendationGetResponse, Recommendations } from './recommendations';
 import * as VerificationAPI from './verification';
@@ -42,6 +44,9 @@ export class SSL extends APIResource {
     this._client,
   );
   recommendations: RecommendationsAPI.Recommendations = new RecommendationsAPI.Recommendations(this._client);
+  autoOriginTLSKex: AutoOriginTLSKexAPI.AutoOriginTLSKex = new AutoOriginTLSKexAPI.AutoOriginTLSKex(
+    this._client,
+  );
   universal: UniversalAPI.Universal = new UniversalAPI.Universal(this._client);
   verification: VerificationAPI.VerificationResource = new VerificationAPI.VerificationResource(this._client);
 }
@@ -50,6 +55,7 @@ SSL.Analyze = Analyze;
 SSL.CertificatePacks = CertificatePacks;
 SSL.CertificatePackListResponsesV4PagePaginationArray = CertificatePackListResponsesV4PagePaginationArray;
 SSL.Recommendations = Recommendations;
+SSL.AutoOriginTLSKex = AutoOriginTLSKex;
 SSL.Universal = Universal;
 SSL.VerificationResource = VerificationResource;
 
@@ -84,6 +90,8 @@ export declare namespace SSL {
     type RecommendationGetResponse as RecommendationGetResponse,
     type RecommendationGetParams as RecommendationGetParams,
   };
+
+  export { AutoOriginTLSKex as AutoOriginTLSKex };
 
   export { Universal as Universal };
 

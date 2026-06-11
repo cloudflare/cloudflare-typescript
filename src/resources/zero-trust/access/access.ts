@@ -53,6 +53,17 @@ import {
   Groups,
   ZeroTrustGroup,
 } from './groups';
+import * as IdPFederationGrantsAPI from './idp-federation-grants';
+import {
+  IdPFederationGrant,
+  IdPFederationGrantCreateParams,
+  IdPFederationGrantDeleteParams,
+  IdPFederationGrantDeleteResponse,
+  IdPFederationGrantGetParams,
+  IdPFederationGrantListParams,
+  IdPFederationGrantListResponse,
+  IdPFederationGrants,
+} from './idp-federation-grants';
 import * as KeysAPI from './keys';
 import {
   KeyGetParams,
@@ -194,6 +205,8 @@ import {
 export class Access extends APIResource {
   aiControls: AIControlsAPI.AIControls = new AIControlsAPI.AIControls(this._client);
   gatewayCA: GatewayCAAPI.GatewayCA = new GatewayCAAPI.GatewayCA(this._client);
+  IdPFederationGrants: IdPFederationGrantsAPI.IdPFederationGrants =
+    new IdPFederationGrantsAPI.IdPFederationGrants(this._client);
   samlCertificates: SAMLCertificatesAPI.SAMLCertificates = new SAMLCertificatesAPI.SAMLCertificates(
     this._client,
   );
@@ -214,6 +227,7 @@ export class Access extends APIResource {
 Access.AIControls = AIControls;
 Access.GatewayCA = GatewayCA;
 Access.GatewayCAListResponsesSinglePage = GatewayCAListResponsesSinglePage;
+Access.IdPFederationGrants = IdPFederationGrants;
 Access.SAMLCertificates = SAMLCertificates;
 Access.SAMLCertificateListResponsesV4PagePaginationArray = SAMLCertificateListResponsesV4PagePaginationArray;
 Access.Infrastructure = Infrastructure;
@@ -250,6 +264,17 @@ export declare namespace Access {
     type GatewayCACreateParams as GatewayCACreateParams,
     type GatewayCAListParams as GatewayCAListParams,
     type GatewayCADeleteParams as GatewayCADeleteParams,
+  };
+
+  export {
+    IdPFederationGrants as IdPFederationGrants,
+    type IdPFederationGrant as IdPFederationGrant,
+    type IdPFederationGrantListResponse as IdPFederationGrantListResponse,
+    type IdPFederationGrantDeleteResponse as IdPFederationGrantDeleteResponse,
+    type IdPFederationGrantCreateParams as IdPFederationGrantCreateParams,
+    type IdPFederationGrantListParams as IdPFederationGrantListParams,
+    type IdPFederationGrantDeleteParams as IdPFederationGrantDeleteParams,
+    type IdPFederationGrantGetParams as IdPFederationGrantGetParams,
   };
 
   export {

@@ -15,6 +15,7 @@ export {
   type KeyListParams,
 } from './keys';
 export { ResourceTagging } from './resource-tagging';
+export { Summary } from './summary';
 export {
   ValueListResponsesCursorPaginationAfter,
   Values,

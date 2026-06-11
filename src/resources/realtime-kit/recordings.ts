@@ -160,43 +160,32 @@ export class Recordings extends APIResource {
   }
 
   /**
-   * Starts a track recording in a meeting. Track recordings consist of "layers".
-   * Layers are used to map audio/video tracks in a meeting to output destinations.
-   * More information about track recordings is available in the
-   * [Track Recordings Guide Page](https://docs.realtime.cloudflare.com/guides/capabilities/recording/recording-overview).
+   * Starts track recording for a meeting. Track recording currently records separate
+   * participant audio tracks as WebM files in the RealtimeKit bucket. Video track
+   * recording is in development. For more information, refer to
+   * [Track recording](/realtime/realtimekit/recording-guide/track-recording/).
    *
    * @example
    * ```ts
-   * await client.realtimeKit.recordings.startTrackRecording(
-   *   'app_id',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     layers: {
-   *       default: {
-   *         file_name_prefix: 'string',
-   *         outputs: [{ type: 'REALTIMEKIT_BUCKET' }],
-   *       },
-   *       'default-video': {
-   *         file_name_prefix: 'string',
-   *         outputs: [{ type: 'REALTIMEKIT_BUCKET' }],
-   *       },
+   * const response =
+   *   await client.realtimeKit.recordings.startTrackRecording(
+   *     'app_id',
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
    *     },
-   *     meeting_id: 'string',
-   *     max_seconds: 60,
-   *   },
-   * );
+   *   );
    * ```
    */
   startTrackRecording(
     appId: string,
     params: RecordingStartTrackRecordingParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  ): Core.APIPromise<RecordingStartTrackRecordingResponse> {
     const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/realtime/kit/${appId}/recordings/track`, {
       body,
       ...options,
-      headers: { Accept: '*/*', ...options?.headers },
     });
   }
 }
@@ -608,6 +597,13 @@ export namespace RecordingGetRecordingsResponse {
       record_on_start?: boolean;
 
       /**
+       * Recording Configurations to be used for this meeting. This level of configs
+       * takes higher preference over App level configs on the RealtimeKit developer
+       * portal.
+       */
+      recording_config?: Meeting.RecordingConfig;
+
+      /**
        * Time in seconds, for which a session remains active, after the last participant
        * has left the meeting.
        */
@@ -629,6 +625,211 @@ export namespace RecordingGetRecordingsResponse {
        * Title of the meeting.
        */
       title?: string;
+
+      /**
+       * Automatically generate transcripts when the meeting ends.
+       */
+      transcribe_on_end?: boolean;
+    }
+
+    export namespace Meeting {
+      /**
+       * Recording Configurations to be used for this meeting. This level of configs
+       * takes higher preference over App level configs on the RealtimeKit developer
+       * portal.
+       */
+      export interface RecordingConfig {
+        /**
+         * Object containing configuration regarding the audio that is being recorded.
+         */
+        audio_config?: RecordingConfig.AudioConfig;
+
+        /**
+         * Adds a prefix to the beginning of the file name of the recording.
+         */
+        file_name_prefix?: string;
+
+        live_streaming_config?: RecordingConfig.LiveStreamingConfig;
+
+        /**
+         * Specifies the maximum duration for recording in seconds, ranging from a minimum
+         * of 60 seconds to a maximum of 24 hours.
+         */
+        max_seconds?: number;
+
+        realtimekit_bucket_config?: RecordingConfig.RealtimekitBucketConfig;
+
+        storage_config?: RecordingConfig.StorageConfig | null;
+
+        video_config?: RecordingConfig.VideoConfig;
+      }
+
+      export namespace RecordingConfig {
+        /**
+         * Object containing configuration regarding the audio that is being recorded.
+         */
+        export interface AudioConfig {
+          /**
+           * Audio signal pathway within an audio file that carries a specific sound source.
+           */
+          channel?: 'mono' | 'stereo';
+
+          /**
+           * Codec using which the recording will be encoded. If VP8/VP9 is selected for
+           * videoConfig, changing audioConfig is not allowed. In this case, the codec in the
+           * audioConfig is automatically set to vorbis.
+           */
+          codec?: 'MP3' | 'AAC';
+
+          /**
+           * Controls whether to export audio file seperately
+           */
+          export_file?: boolean;
+        }
+
+        export interface LiveStreamingConfig {
+          /**
+           * RTMP URL to stream to
+           */
+          rtmp_url?: string;
+        }
+
+        export interface RealtimekitBucketConfig {
+          /**
+           * Controls whether recordings are uploaded to RealtimeKit's bucket. If set to
+           * false, `download_url`, `audio_download_url`, `download_url_expiry` won't be
+           * generated for a recording.
+           */
+          enabled: boolean;
+        }
+
+        export interface StorageConfig {
+          /**
+           * Type of storage media.
+           */
+          type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
+
+          /**
+           * Authentication method used for "sftp" type storage medium
+           */
+          auth_method?: 'KEY' | 'PASSWORD';
+
+          /**
+           * Name of the storage medium's bucket.
+           */
+          bucket?: string;
+
+          /**
+           * SSH destination server host for SFTP type storage medium
+           */
+          host?: string;
+
+          /**
+           * SSH destination server password for SFTP type storage medium when auth_method is
+           * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
+           * private key.
+           */
+          password?: string;
+
+          /**
+           * Path relative to the bucket root at which the recording will be placed.
+           */
+          path?: string;
+
+          /**
+           * SSH destination server port for SFTP type storage medium
+           */
+          port?: number;
+
+          /**
+           * Private key used to login to destination SSH server for SFTP type storage
+           * medium, when auth_method used is "KEY"
+           */
+          private_key?: string;
+
+          /**
+           * Region of the storage medium.
+           */
+          region?: string;
+
+          /**
+           * Secret key of the storage medium. Similar to `access_key`, it is only writeable
+           * by clients, not readable.
+           */
+          secret?: string;
+
+          /**
+           * SSH destination server username for SFTP type storage medium
+           */
+          username?: string;
+        }
+
+        export interface VideoConfig {
+          /**
+           * Codec using which the recording will be encoded.
+           */
+          codec?: 'H264' | 'VP8';
+
+          /**
+           * Controls whether to export video file seperately
+           */
+          export_file?: boolean;
+
+          /**
+           * Height of the recording video in pixels
+           */
+          height?: number;
+
+          /**
+           * Watermark to be added to the recording
+           */
+          watermark?: VideoConfig.Watermark;
+
+          /**
+           * Width of the recording video in pixels
+           */
+          width?: number;
+        }
+
+        export namespace VideoConfig {
+          /**
+           * Watermark to be added to the recording
+           */
+          export interface Watermark {
+            /**
+             * Position of the watermark
+             */
+            position?: 'left top' | 'right top' | 'left bottom' | 'right bottom';
+
+            /**
+             * Size of the watermark
+             */
+            size?: Watermark.Size;
+
+            /**
+             * URL of the watermark image
+             */
+            url?: string;
+          }
+
+          export namespace Watermark {
+            /**
+             * Size of the watermark
+             */
+            export interface Size {
+              /**
+               * Height of the watermark in px
+               */
+              height?: number;
+
+              /**
+               * Width of the watermark in px
+               */
+              width?: number;
+            }
+          }
+        }
+      }
     }
 
     export interface StorageConfig {
@@ -1128,6 +1329,94 @@ export namespace RecordingStartRecordingsResponse {
   }
 }
 
+export interface RecordingStartTrackRecordingResponse {
+  /**
+   * Success status of the operation
+   */
+  success: boolean;
+
+  /**
+   * Data returned by the operation
+   */
+  data?: RecordingStartTrackRecordingResponse.Data;
+}
+
+export namespace RecordingStartTrackRecordingResponse {
+  /**
+   * Data returned by the operation
+   */
+  export interface Data {
+    recording: Data.Recording;
+  }
+
+  export namespace Data {
+    export interface Recording {
+      /**
+       * ID of the recording
+       */
+      id: string;
+
+      /**
+       * If the audio_config is passed, the URL for downloading the audio recording is
+       * returned.
+       */
+      audio_download_url: string | null;
+
+      /**
+       * URL where the recording can be downloaded.
+       */
+      download_url: string | null;
+
+      /**
+       * Timestamp when the download URL expires.
+       */
+      download_url_expiry: string | null;
+
+      /**
+       * File size of the recording, in bytes.
+       */
+      file_size: number | null;
+
+      /**
+       * Timestamp when this recording was invoked.
+       */
+      invoked_time: string;
+
+      /**
+       * File name of the recording.
+       */
+      output_file_name: string;
+
+      /**
+       * ID of the meeting session this recording is for.
+       */
+      session_id: string | null;
+
+      /**
+       * Timestamp when this recording actually started after being invoked. Usually a
+       * few seconds after `invoked_time`.
+       */
+      started_time: string | null;
+
+      /**
+       * Current status of the recording.
+       */
+      status: 'INVOKED' | 'RECORDING' | 'UPLOADING' | 'UPLOADED' | 'ERRORED' | 'PAUSED';
+
+      /**
+       * Timestamp when this recording was stopped. Optional; is present only when the
+       * recording has actually been stopped.
+       */
+      stopped_time: string | null;
+
+      /**
+       * Total recording time in seconds.
+       */
+      recording_duration?: number;
+    }
+  }
+}
+
 export interface RecordingGetActiveRecordingsParams {
   /**
    * The account identifier tag.
@@ -1485,19 +1774,21 @@ export interface RecordingStartTrackRecordingParams {
   account_id: string;
 
   /**
-   * Body param
-   */
-  layers: { [key: string]: RecordingStartTrackRecordingParams.Layers };
-
-  /**
    * Body param: ID of the meeting to record.
    */
   meeting_id: string;
 
   /**
-   * Body param: Maximum seconds this recording should be active for (beta)
+   * Body param: Optional audio layer configuration. If omitted, RealtimeKit records
+   * all participant audio using the default file name prefix.
    */
-  max_seconds?: number;
+  layers?: { [key: string]: RecordingStartTrackRecordingParams.Layers };
+
+  /**
+   * Body param: Optional list of participant user IDs to record. Selective track
+   * recording (`user_ids`) is in early beta contact support to use this feature.
+   */
+  user_ids?: Array<string>;
 }
 
 export namespace RecordingStartTrackRecordingParams {
@@ -1507,89 +1798,10 @@ export namespace RecordingStartTrackRecordingParams {
      */
     file_name_prefix?: string;
 
-    outputs?: Array<Layers.Output>;
-  }
-
-  export namespace Layers {
-    export interface Output {
-      storage_config?: Output.StorageConfig | null;
-
-      /**
-       * The type of output destination this layer is being exported to.
-       */
-      type?: 'REALTIMEKIT_BUCKET' | 'STORAGE_CONFIG';
-    }
-
-    export namespace Output {
-      export interface StorageConfig {
-        /**
-         * Type of storage media.
-         */
-        type: 'aws' | 'azure' | 'digitalocean' | 'gcs' | 'sftp';
-
-        /**
-         * Access key of the storage medium. Access key is not required for the `gcs`
-         * storage media type.
-         *
-         * Note that this field is not readable by clients, only writeable.
-         */
-        access_key?: string;
-
-        /**
-         * Authentication method used for "sftp" type storage medium
-         */
-        auth_method?: 'KEY' | 'PASSWORD';
-
-        /**
-         * Name of the storage medium's bucket.
-         */
-        bucket?: string;
-
-        /**
-         * SSH destination server host for SFTP type storage medium
-         */
-        host?: string;
-
-        /**
-         * SSH destination server password for SFTP type storage medium when auth_method is
-         * "PASSWORD". If auth_method is "KEY", this specifies the password for the ssh
-         * private key.
-         */
-        password?: string;
-
-        /**
-         * Path relative to the bucket root at which the recording will be placed.
-         */
-        path?: string;
-
-        /**
-         * SSH destination server port for SFTP type storage medium
-         */
-        port?: number;
-
-        /**
-         * Private key used to login to destination SSH server for SFTP type storage
-         * medium, when auth_method used is "KEY"
-         */
-        private_key?: string;
-
-        /**
-         * Region of the storage medium.
-         */
-        region?: string;
-
-        /**
-         * Secret key of the storage medium. Similar to `access_key`, it is only writeable
-         * by clients, not readable.
-         */
-        secret?: string;
-
-        /**
-         * SSH destination server username for SFTP type storage medium
-         */
-        username?: string;
-      }
-    }
+    /**
+     * Media kind to record. Track recording currently supports audio only.
+     */
+    media_kind?: 'audio';
   }
 }
 
@@ -1600,6 +1812,7 @@ export declare namespace Recordings {
     type RecordingGetRecordingsResponse as RecordingGetRecordingsResponse,
     type RecordingPauseResumeStopRecordingResponse as RecordingPauseResumeStopRecordingResponse,
     type RecordingStartRecordingsResponse as RecordingStartRecordingsResponse,
+    type RecordingStartTrackRecordingResponse as RecordingStartTrackRecordingResponse,
     type RecordingGetActiveRecordingsParams as RecordingGetActiveRecordingsParams,
     type RecordingGetOneRecordingParams as RecordingGetOneRecordingParams,
     type RecordingGetRecordingsParams as RecordingGetRecordingsParams,

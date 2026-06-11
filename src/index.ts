@@ -24,6 +24,7 @@ import { AbuseReports } from './resources/abuse-reports/abuse-reports';
 import { Accounts } from './resources/accounts/accounts';
 import { ACM } from './resources/acm/acm';
 import { Addressing } from './resources/addressing/addressing';
+import { AIAudit } from './resources/ai-audit/ai-audit';
 import { AIGateway } from './resources/ai-gateway/ai-gateway';
 import { AISecurity } from './resources/ai-security/ai-security';
 import { AI } from './resources/ai/ai';
@@ -45,7 +46,9 @@ import { CloudConnector } from './resources/cloud-connector/cloud-connector';
 import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
 import { Connectivity } from './resources/connectivity/connectivity';
 import { ContentScanning } from './resources/content-scanning/content-scanning';
+import { CsamScanner } from './resources/csam-scanner/csam-scanner';
 import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
+import { CustomCsrs } from './resources/custom-csrs/custom-csrs';
 import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
 import { CustomNameservers } from './resources/custom-nameservers/custom-nameservers';
 import { CustomPages } from './resources/custom-pages/custom-pages';
@@ -62,6 +65,7 @@ import { EmailSecurity } from './resources/email-security/email-security';
 import { EmailSending } from './resources/email-sending/email-sending';
 import { Filters } from './resources/filters/filters';
 import { Firewall } from './resources/firewall/firewall';
+import { Flagship } from './resources/flagship/flagship';
 import { Fraud } from './resources/fraud/fraud';
 import { GoogleTagGateway } from './resources/google-tag-gateway/google-tag-gateway';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
@@ -88,6 +92,7 @@ import { Organizations } from './resources/organizations/organizations';
 import { OriginCACertificates } from './resources/origin-ca-certificates/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption/origin-post-quantum-encryption';
 import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
+import { OriginTLSComplianceModes } from './resources/origin-tls-compliance-modes/origin-tls-compliance-modes';
 import { PageRules } from './resources/page-rules/page-rules';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
@@ -114,6 +119,7 @@ import { Spectrum } from './resources/spectrum/spectrum';
 import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
+import { TenantCustomNameservers } from './resources/tenant-custom-nameservers/tenant-custom-nameservers';
 import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLNormalization } from './resources/url-normalization/url-normalization';
@@ -271,6 +277,18 @@ export class Cloudflare extends Core.APIClient {
       fetch: options.fetch,
     });
 
+    const customHeadersEnv = Core.readEnv('CLOUDFLARE_CUSTOM_HEADERS');
+    if (customHeadersEnv) {
+      const parsed: Record<string, string> = {};
+      for (const line of customHeadersEnv.split('\n')) {
+        const colon = line.indexOf(':');
+        if (colon >= 0) {
+          parsed[line.substring(0, colon).trim()] = line.substring(colon + 1).trim();
+        }
+      }
+      options.defaultHeaders = { ...parsed, ...options.defaultHeaders };
+    }
+
     this._options = options;
 
     this.apiToken = apiToken;
@@ -294,8 +312,10 @@ export class Cloudflare extends Core.APIClient {
   certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
   clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
   customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
+  customCsrs: API.CustomCsrs = new API.CustomCsrs(this);
   customHostnames: API.CustomHostnames = new API.CustomHostnames(this);
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
+  tenantCustomNameservers: API.TenantCustomNameservers = new API.TenantCustomNameservers(this);
   dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
@@ -358,6 +378,7 @@ export class Cloudflare extends Core.APIClient {
   botManagement: API.BotManagement = new API.BotManagement(this);
   fraud: API.Fraud = new API.Fraud(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
+  originTLSComplianceModes: API.OriginTLSComplianceModes = new API.OriginTLSComplianceModes(this);
   googleTagGateway: API.GoogleTagGateway = new API.GoogleTagGateway(this);
   zaraz: API.Zaraz = new API.Zaraz(this);
   speed: API.Speed = new API.Speed(this);
@@ -368,6 +389,7 @@ export class Cloudflare extends Core.APIClient {
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
+  flagship: API.Flagship = new API.Flagship(this);
   iam: API.IAM = new API.IAM(this);
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
   botnetFeed: API.BotnetFeed = new API.BotnetFeed(this);
@@ -378,8 +400,10 @@ export class Cloudflare extends Core.APIClient {
   leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
   contentScanning: API.ContentScanning = new API.ContentScanning(this);
   aiSecurity: API.AISecurity = new API.AISecurity(this);
+  csamScanner: API.CsamScanner = new API.CsamScanner(this);
   abuseReports: API.AbuseReports = new API.AbuseReports(this);
   ai: API.AI = new API.AI(this);
+  aiAudit: API.AIAudit = new API.AIAudit(this);
   aiSearch: API.AISearch = new API.AISearch(this);
   securityCenter: API.SecurityCenter = new API.SecurityCenter(this);
   browserRendering: API.BrowserRendering = new API.BrowserRendering(this);
@@ -545,8 +569,10 @@ Cloudflare.Argo = Argo;
 Cloudflare.CertificateAuthorities = CertificateAuthorities;
 Cloudflare.ClientCertificates = ClientCertificates;
 Cloudflare.CustomCertificates = CustomCertificates;
+Cloudflare.CustomCsrs = CustomCsrs;
 Cloudflare.CustomHostnames = CustomHostnames;
 Cloudflare.CustomNameservers = CustomNameservers;
+Cloudflare.TenantCustomNameservers = TenantCustomNameservers;
 Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
@@ -609,6 +635,7 @@ Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.Fraud = Fraud;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.OriginTLSComplianceModes = OriginTLSComplianceModes;
 Cloudflare.GoogleTagGateway = GoogleTagGateway;
 Cloudflare.Zaraz = Zaraz;
 Cloudflare.Speed = Speed;
@@ -619,6 +646,7 @@ Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
+Cloudflare.Flagship = Flagship;
 Cloudflare.IAM = IAM;
 Cloudflare.CloudConnector = CloudConnector;
 Cloudflare.BotnetFeed = BotnetFeed;
@@ -629,8 +657,10 @@ Cloudflare.ResourceTagging = ResourceTagging;
 Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 Cloudflare.ContentScanning = ContentScanning;
 Cloudflare.AISecurity = AISecurity;
+Cloudflare.CsamScanner = CsamScanner;
 Cloudflare.AbuseReports = AbuseReports;
 Cloudflare.AI = AI;
+Cloudflare.AIAudit = AIAudit;
 Cloudflare.AISearch = AISearch;
 Cloudflare.SecurityCenter = SecurityCenter;
 Cloudflare.BrowserRendering = BrowserRendering;
@@ -706,9 +736,13 @@ export declare namespace Cloudflare {
 
   export { CustomCertificates as CustomCertificates };
 
+  export { CustomCsrs as CustomCsrs };
+
   export { CustomHostnames as CustomHostnames };
 
   export { CustomNameservers as CustomNameservers };
+
+  export { TenantCustomNameservers as TenantCustomNameservers };
 
   export { DNSFirewall as DNSFirewall };
 
@@ -834,6 +868,8 @@ export declare namespace Cloudflare {
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
 
+  export { OriginTLSComplianceModes as OriginTLSComplianceModes };
+
   export { GoogleTagGateway as GoogleTagGateway };
 
   export { Zaraz as Zaraz };
@@ -853,6 +889,8 @@ export declare namespace Cloudflare {
   export { CloudforceOne as CloudforceOne };
 
   export { AIGateway as AIGateway };
+
+  export { Flagship as Flagship };
 
   export { IAM as IAM };
 
@@ -874,9 +912,13 @@ export declare namespace Cloudflare {
 
   export { AISecurity as AISecurity };
 
+  export { CsamScanner as CsamScanner };
+
   export { AbuseReports as AbuseReports };
 
   export { AI as AI };
+
+  export { AIAudit as AIAudit };
 
   export { AISearch as AISearch };
 

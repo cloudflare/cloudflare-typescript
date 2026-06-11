@@ -91,7 +91,8 @@ describe('resource secrets', () => {
     );
   });
 
-  test('bulkUpdate: only required params', async () => {
+  // prism returns HTTP 422 for bulk secret update request shape
+  test.skip('bulkUpdate: only required params', async () => {
     const responsePromise = client.workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -106,7 +107,8 @@ describe('resource secrets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('bulkUpdate: required and optional params', async () => {
+  // prism returns HTTP 422 for bulk secret update request shape
+  test.skip('bulkUpdate: required and optional params', async () => {
     const response = await client.workersForPlatforms.dispatch.namespaces.scripts.secrets.bulkUpdate(
       'my-dispatch-namespace',
       'this-is_my_script-01',

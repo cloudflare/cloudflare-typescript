@@ -57,13 +57,13 @@ export class Resources extends APIResource {
    */
   update(
     shareId: string,
-    resourceId: string,
+    shareResourceId: string,
     params: ResourceUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceUpdateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/shares/${shareId}/resources/${resourceId}`, {
+      this._client.put(`/accounts/${account_id}/shares/${shareId}/resources/${shareResourceId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ResourceUpdateResponse }>
@@ -113,14 +113,14 @@ export class Resources extends APIResource {
    */
   delete(
     shareId: string,
-    resourceId: string,
+    shareResourceId: string,
     params: ResourceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${account_id}/shares/${shareId}/resources/${resourceId}`,
+        `/accounts/${account_id}/shares/${shareId}/resources/${shareResourceId}`,
         options,
       ) as Core.APIPromise<{ result: ResourceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -140,14 +140,14 @@ export class Resources extends APIResource {
    */
   get(
     shareId: string,
-    resourceId: string,
+    shareResourceId: string,
     params: ResourceGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ResourceGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/shares/${shareId}/resources/${resourceId}`,
+        `/accounts/${account_id}/shares/${shareId}/resources/${shareResourceId}`,
         options,
       ) as Core.APIPromise<{ result: ResourceGetResponse }>
     )._thenUnwrap((obj) => obj.result);

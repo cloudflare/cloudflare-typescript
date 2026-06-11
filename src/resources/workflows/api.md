@@ -22,6 +22,7 @@ Types:
 - <code><a href="./src/resources/workflows/instances/instances.ts">InstanceListResponse</a></code>
 - <code><a href="./src/resources/workflows/instances/instances.ts">InstanceBulkResponse</a></code>
 - <code><a href="./src/resources/workflows/instances/instances.ts">InstanceGetResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceStepResponse</a></code>
 
 Methods:
 
@@ -29,6 +30,7 @@ Methods:
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">list</a>(workflowName, { ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
 - <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances/batch">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">bulk</a>(workflowName, [ ...body ]) -> InstanceBulkResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">get</a>(workflowName, instanceId, { ...params }) -> InstanceGetResponse</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/step">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">step</a>(workflowName, instanceId, { ...params }) -> InstanceStepResponse</code>
 
 ### Status
 
@@ -56,8 +58,10 @@ Types:
 
 - <code><a href="./src/resources/workflows/versions.ts">VersionListResponse</a></code>
 - <code><a href="./src/resources/workflows/versions.ts">VersionGetResponse</a></code>
+- <code><a href="./src/resources/workflows/versions.ts">VersionGraphResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">list</a>(workflowName, { ...params }) -> VersionListResponsesV4PagePaginationArray</code>
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">get</a>(workflowName, versionId, { ...params }) -> VersionGetResponse</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}/graph">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">graph</a>(workflowName, versionId, { ...params }) -> VersionGraphResponse</code>

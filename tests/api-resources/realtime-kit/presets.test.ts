@@ -24,10 +24,62 @@ describe('resource presets', () => {
         view_type: 'GROUP_CALL',
       },
       name: 'name',
+      permissions: {
+        accept_waiting_requests: true,
+        can_accept_production_requests: true,
+        can_change_participant_permissions: true,
+        can_edit_display_name: true,
+        can_livestream: true,
+        can_record: true,
+        can_spotlight: true,
+        chat: {
+          private: {
+            can_receive: true,
+            can_send: true,
+            files: true,
+            text: true,
+          },
+          public: {
+            can_send: true,
+            files: true,
+            text: true,
+          },
+        },
+        connected_meetings: {
+          can_alter_connected_meetings: true,
+          can_switch_connected_meetings: true,
+          can_switch_to_parent_meeting: true,
+        },
+        disable_participant_audio: true,
+        disable_participant_screensharing: true,
+        disable_participant_video: true,
+        hidden_participant: true,
+        kick_participant: true,
+        media: {
+          audio: { can_produce: 'ALLOWED' },
+          screenshare: { can_produce: 'ALLOWED' },
+          video: { can_produce: 'ALLOWED' },
+        },
+        pin_participant: true,
+        plugins: {
+          can_close: true,
+          can_edit_config: true,
+          can_start: true,
+          config: { foo: {} },
+        },
+        polls: {
+          can_create: true,
+          can_view: true,
+          can_vote: true,
+        },
+        recorder_type: 'RECORDER',
+        show_participant_list: true,
+        waiting_room_type: 'SKIP',
+      },
       ui: {
         design_tokens: {
-          border_radius: 'rounded',
-          border_width: 'thin',
+          border_radius: 'sharp',
+          border_width: 'none',
           colors: {
             background: {
               '600': '600',
@@ -50,9 +102,8 @@ describe('resource presets', () => {
             video_bg: 'video_bg',
             warning: 'warning',
           },
-          logo: 'logo',
           spacing_base: 0,
-          theme: 'dark',
+          theme: 'darkest',
         },
       },
     });
@@ -74,44 +125,17 @@ describe('resource presets', () => {
         max_video_streams: { desktop: 0, mobile: 0 },
         media: {
           screenshare: { frame_rate: 0, quality: 'hd' },
-          video: { frame_rate: 30, quality: 'hd' },
+          video: {
+            frame_rate: 30,
+            quality: 'hd',
+            simulcast: true,
+          },
           audio: { enable_high_bitrate: true, enable_stereo: true },
         },
         view_type: 'GROUP_CALL',
+        livestream_viewer_qualities: [0],
       },
       name: 'name',
-      ui: {
-        design_tokens: {
-          border_radius: 'rounded',
-          border_width: 'thin',
-          colors: {
-            background: {
-              '600': '600',
-              '700': '700',
-              '800': '800',
-              '900': '900',
-              '1000': '1000',
-            },
-            brand: {
-              '300': '300',
-              '400': '400',
-              '500': '500',
-              '600': '600',
-              '700': '700',
-            },
-            danger: 'danger',
-            success: 'success',
-            text: 'text',
-            text_on_brand: 'text_on_brand',
-            video_bg: 'video_bg',
-            warning: 'warning',
-          },
-          logo: 'logo',
-          spacing_base: 0,
-          theme: 'dark',
-        },
-        config_diff: {},
-      },
       permissions: {
         accept_waiting_requests: true,
         can_accept_production_requests: true,
@@ -153,7 +177,7 @@ describe('resource presets', () => {
           can_close: true,
           can_edit_config: true,
           can_start: true,
-          config: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          config: { foo: { access_control: 'FULL_ACCESS', handles_view_only: true } },
         },
         polls: {
           can_create: true,
@@ -163,16 +187,55 @@ describe('resource presets', () => {
         recorder_type: 'RECORDER',
         show_participant_list: true,
         waiting_room_type: 'SKIP',
+        accept_stage_requests: true,
         is_recorder: true,
+        stage_access: 'ALLOWED',
+        stage_enabled: true,
+        transcription_enabled: true,
+      },
+      ui: {
+        design_tokens: {
+          border_radius: 'sharp',
+          border_width: 'none',
+          colors: {
+            background: {
+              '600': '600',
+              '700': '700',
+              '800': '800',
+              '900': '900',
+              '1000': '1000',
+            },
+            brand: {
+              '300': '300',
+              '400': '400',
+              '500': '500',
+              '600': '600',
+              '700': '700',
+            },
+            danger: 'danger',
+            success: 'success',
+            text: 'text',
+            text_on_brand: 'text_on_brand',
+            video_bg: 'video_bg',
+            warning: 'warning',
+          },
+          spacing_base: 0,
+          theme: 'darkest',
+          font_family: 'font_family',
+          google_font: 'google_font',
+          logo: 'https://example.com',
+        },
       },
     });
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('update: only required params', async () => {
-    const responsePromise = client.realtimeKit.presets.update('app_id', 'preset_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.presets.update(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -184,111 +247,128 @@ describe('resource presets', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('update: required and optional params', async () => {
-    const response = await client.realtimeKit.presets.update('app_id', 'preset_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      config: {
-        max_screenshare_count: 0,
-        max_video_streams: { desktop: 0, mobile: 0 },
-        media: {
-          screenshare: { frame_rate: 0, quality: 'hd' },
-          video: { frame_rate: 30, quality: 'hd' },
-        },
-        view_type: 'GROUP_CALL',
-      },
-      name: 'name',
-      permissions: {
-        accept_waiting_requests: true,
-        can_accept_production_requests: true,
-        can_change_participant_permissions: true,
-        can_edit_display_name: true,
-        can_livestream: true,
-        can_record: true,
-        can_spotlight: true,
-        chat: {
-          private: {
-            can_receive: true,
-            can_send: true,
-            files: true,
-            text: true,
-          },
-          public: {
-            can_send: true,
-            files: true,
-            text: true,
-          },
-        },
-        connected_meetings: {
-          can_alter_connected_meetings: true,
-          can_switch_connected_meetings: true,
-          can_switch_to_parent_meeting: true,
-        },
-        disable_participant_audio: true,
-        disable_participant_screensharing: true,
-        disable_participant_video: true,
-        hidden_participant: true,
-        is_recorder: true,
-        kick_participant: true,
-        media: {
-          audio: { can_produce: 'ALLOWED' },
-          screenshare: { can_produce: 'ALLOWED' },
-          video: { can_produce: 'ALLOWED' },
-        },
-        pin_participant: true,
-        plugins: {
-          can_close: true,
-          can_edit_config: true,
-          can_start: true,
-          config: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        },
-        polls: {
-          can_create: true,
-          can_view: true,
-          can_vote: true,
-        },
-        recorder_type: 'RECORDER',
-        show_participant_list: true,
-        waiting_room_type: 'SKIP',
-      },
-      ui: {
-        config_diff: {},
-        design_tokens: {
-          border_radius: 'rounded',
-          border_width: 'thin',
-          colors: {
-            background: {
-              '600': '600',
-              '700': '700',
-              '800': '800',
-              '900': '900',
-              '1000': '1000',
+    const response = await client.realtimeKit.presets.update(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        config: {
+          livestream_viewer_qualities: [0],
+          max_screenshare_count: 0,
+          max_video_streams: { desktop: 0, mobile: 0 },
+          media: {
+            audio: { enable_high_bitrate: true, enable_stereo: true },
+            screenshare: { frame_rate: 0, quality: 'hd' },
+            video: {
+              frame_rate: 30,
+              quality: 'hd',
+              simulcast: true,
             },
-            brand: {
-              '300': '300',
-              '400': '400',
-              '500': '500',
-              '600': '600',
-              '700': '700',
-            },
-            danger: 'danger',
-            success: 'success',
-            text: 'text',
-            text_on_brand: 'text_on_brand',
-            video_bg: 'video_bg',
-            warning: 'warning',
           },
-          logo: 'logo',
-          spacing_base: 0,
-          theme: 'dark',
+          view_type: 'GROUP_CALL',
+        },
+        name: 'name',
+        permissions: {
+          accept_stage_requests: true,
+          accept_waiting_requests: true,
+          can_accept_production_requests: true,
+          can_change_participant_permissions: true,
+          can_edit_display_name: true,
+          can_livestream: true,
+          can_record: true,
+          can_spotlight: true,
+          chat: {
+            private: {
+              can_receive: true,
+              can_send: true,
+              files: true,
+              text: true,
+            },
+            public: {
+              can_send: true,
+              files: true,
+              text: true,
+            },
+          },
+          connected_meetings: {
+            can_alter_connected_meetings: true,
+            can_switch_connected_meetings: true,
+            can_switch_to_parent_meeting: true,
+          },
+          disable_participant_audio: true,
+          disable_participant_screensharing: true,
+          disable_participant_video: true,
+          hidden_participant: true,
+          is_recorder: true,
+          kick_participant: true,
+          media: {
+            audio: { can_produce: 'ALLOWED' },
+            screenshare: { can_produce: 'ALLOWED' },
+            video: { can_produce: 'ALLOWED' },
+          },
+          pin_participant: true,
+          plugins: {
+            can_close: true,
+            can_edit_config: true,
+            can_start: true,
+            config: { foo: { access_control: 'FULL_ACCESS', handles_view_only: true } },
+          },
+          polls: {
+            can_create: true,
+            can_view: true,
+            can_vote: true,
+          },
+          recorder_type: 'RECORDER',
+          show_participant_list: true,
+          stage_access: 'ALLOWED',
+          stage_enabled: true,
+          transcription_enabled: true,
+          waiting_room_type: 'SKIP',
+        },
+        ui: {
+          design_tokens: {
+            border_radius: 'sharp',
+            border_width: 'none',
+            colors: {
+              background: {
+                '600': '600',
+                '700': '700',
+                '800': '800',
+                '900': '900',
+                '1000': '1000',
+              },
+              brand: {
+                '300': '300',
+                '400': '400',
+                '500': '500',
+                '600': '600',
+                '700': '700',
+              },
+              danger: 'danger',
+              success: 'success',
+              text: 'text',
+              text_on_brand: 'text_on_brand',
+              video_bg: 'video_bg',
+              warning: 'warning',
+            },
+            font_family: 'font_family',
+            google_font: 'google_font',
+            logo: 'https://example.com',
+            spacing_base: 0,
+            theme: 'darkest',
+          },
         },
       },
-    });
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.realtimeKit.presets.delete('app_id', 'preset_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.presets.delete(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -300,9 +380,11 @@ describe('resource presets', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('delete: required and optional params', async () => {
-    const response = await client.realtimeKit.presets.delete('app_id', 'preset_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.realtimeKit.presets.delete(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
@@ -325,14 +407,17 @@ describe('resource presets', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page_no: 0,
       per_page: 0,
+      search: 'search',
     });
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getPresetById: only required params', async () => {
-    const responsePromise = client.realtimeKit.presets.getPresetById('app_id', 'preset_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.presets.getPresetById(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -344,8 +429,10 @@ describe('resource presets', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getPresetById: required and optional params', async () => {
-    const response = await client.realtimeKit.presets.getPresetById('app_id', 'preset_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.realtimeKit.presets.getPresetById(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

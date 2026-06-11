@@ -52,8 +52,10 @@ export class Jobs extends APIResource {
       | 'sinkhole_http_logs'
       | 'spectrum_events'
       | 'ssh_logs'
+      | 'turnstile_events'
       | 'warp_config_changes'
       | 'warp_toggle_changes'
+      | 'websocket_analytics'
       | 'workers_trace_events'
       | 'zaraz_events'
       | 'zero_trust_network_sessions',
@@ -90,8 +92,10 @@ export class Jobs extends APIResource {
       | 'sinkhole_http_logs'
       | 'spectrum_events'
       | 'ssh_logs'
+      | 'turnstile_events'
       | 'warp_config_changes'
       | 'warp_toggle_changes'
+      | 'websocket_analytics'
       | 'workers_trace_events'
       | 'zaraz_events'
       | 'zero_trust_network_sessions',
@@ -127,8 +131,10 @@ export class Jobs extends APIResource {
       | 'sinkhole_http_logs'
       | 'spectrum_events'
       | 'ssh_logs'
+      | 'turnstile_events'
       | 'warp_config_changes'
       | 'warp_toggle_changes'
+      | 'websocket_analytics'
       | 'workers_trace_events'
       | 'zaraz_events'
       | 'zero_trust_network_sessions',

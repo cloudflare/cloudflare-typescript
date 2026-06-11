@@ -57,9 +57,13 @@ Types:
 
 # [CustomCertificates](src/resources/custom-certificates/api.md)
 
+# [CustomCsrs](src/resources/custom-csrs/api.md)
+
 # [CustomHostnames](src/resources/custom-hostnames/api.md)
 
 # [CustomNameservers](src/resources/custom-nameservers/api.md)
+
+# [TenantCustomNameservers](src/resources/tenant-custom-nameservers/api.md)
 
 # [DNSFirewall](src/resources/dns-firewall/api.md)
 
@@ -185,6 +189,8 @@ Types:
 
 # [OriginPostQuantumEncryption](src/resources/origin-post-quantum-encryption/api.md)
 
+# [OriginTLSComplianceModes](src/resources/origin-tls-compliance-modes/api.md)
+
 # [GoogleTagGateway](src/resources/google-tag-gateway/api.md)
 
 # [Zaraz](src/resources/zaraz/api.md)
@@ -204,6 +210,8 @@ Types:
 # [CloudforceOne](src/resources/cloudforce-one/api.md)
 
 # [AIGateway](src/resources/ai-gateway/api.md)
+
+# [Flagship](src/resources/flagship/api.md)
 
 # [IAM](src/resources/iam/api.md)
 
@@ -225,9 +233,13 @@ Types:
 
 # [AISecurity](src/resources/ai-security/api.md)
 
+# [CsamScanner](src/resources/csam-scanner/api.md)
+
 # [AbuseReports](src/resources/abuse-reports/api.md)
 
 # [AI](src/resources/ai/api.md)
+
+# [AIAudit](src/resources/ai-audit/api.md)
 
 # [AISearch](src/resources/aisearch/api.md)
 

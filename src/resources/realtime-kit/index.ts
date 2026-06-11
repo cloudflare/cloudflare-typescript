@@ -29,6 +29,7 @@ export {
   type LivestreamGetActiveLivestreamsForLivestreamIDResponse,
   type LivestreamGetAllLivestreamsResponse,
   type LivestreamGetLivestreamAnalyticsCompleteResponse,
+  type LivestreamGetLivestreamAnalyticsDaywiseResponse,
   type LivestreamGetLivestreamSessionDetailsForSessionIDResponse,
   type LivestreamGetLivestreamSessionForLivestreamIDResponse,
   type LivestreamGetMeetingActiveLivestreamsResponse,
@@ -39,6 +40,7 @@ export {
   type LivestreamGetActiveLivestreamsForLivestreamIDParams,
   type LivestreamGetAllLivestreamsParams,
   type LivestreamGetLivestreamAnalyticsCompleteParams,
+  type LivestreamGetLivestreamAnalyticsDaywiseParams,
   type LivestreamGetLivestreamSessionDetailsForSessionIDParams,
   type LivestreamGetLivestreamSessionForLivestreamIDParams,
   type LivestreamGetMeetingActiveLivestreamsParams,
@@ -92,6 +94,7 @@ export {
   type RecordingGetRecordingsResponse,
   type RecordingPauseResumeStopRecordingResponse,
   type RecordingStartRecordingsResponse,
+  type RecordingStartTrackRecordingResponse,
   type RecordingGetActiveRecordingsParams,
   type RecordingGetOneRecordingParams,
   type RecordingGetRecordingsParams,
@@ -101,6 +104,7 @@ export {
 } from './recordings';
 export {
   Sessions,
+  type SessionGenerateSummaryOfTranscriptsResponse,
   type SessionGetParticipantDataFromPeerIDResponse,
   type SessionGetSessionChatResponse,
   type SessionGetSessionDetailsResponse,

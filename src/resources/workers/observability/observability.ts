@@ -23,12 +23,24 @@ import {
   QueryListResponse,
   QueryListResponsesSinglePage,
 } from './queries';
+import * as SharedQueriesAPI from './shared-queries';
+import {
+  SharedQueries,
+  SharedQueryCreateParams,
+  SharedQueryCreateResponse,
+  SharedQueryGetParams,
+  SharedQueryGetResponse,
+} from './shared-queries';
 import * as TelemetryAPI from './telemetry';
 import {
   Telemetry,
   TelemetryKeysParams,
   TelemetryKeysResponse,
   TelemetryKeysResponsesSinglePage,
+  TelemetryLiveTailHeartbeatParams,
+  TelemetryLiveTailHeartbeatResponse,
+  TelemetryLiveTailParams,
+  TelemetryLiveTailResponse,
   TelemetryQueryParams,
   TelemetryQueryResponse,
   TelemetryValuesParams,
@@ -40,6 +52,7 @@ export class Observability extends APIResource {
   telemetry: TelemetryAPI.Telemetry = new TelemetryAPI.Telemetry(this._client);
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
   queries: QueriesAPI.Queries = new QueriesAPI.Queries(this._client);
+  sharedQueries: SharedQueriesAPI.SharedQueries = new SharedQueriesAPI.SharedQueries(this._client);
 }
 
 Observability.Telemetry = Telemetry;
@@ -49,16 +62,21 @@ Observability.Destinations = Destinations;
 Observability.DestinationListResponsesSinglePage = DestinationListResponsesSinglePage;
 Observability.Queries = Queries;
 Observability.QueryListResponsesSinglePage = QueryListResponsesSinglePage;
+Observability.SharedQueries = SharedQueries;
 
 export declare namespace Observability {
   export {
     Telemetry as Telemetry,
     type TelemetryKeysResponse as TelemetryKeysResponse,
+    type TelemetryLiveTailResponse as TelemetryLiveTailResponse,
+    type TelemetryLiveTailHeartbeatResponse as TelemetryLiveTailHeartbeatResponse,
     type TelemetryQueryResponse as TelemetryQueryResponse,
     type TelemetryValuesResponse as TelemetryValuesResponse,
     TelemetryKeysResponsesSinglePage as TelemetryKeysResponsesSinglePage,
     TelemetryValuesResponsesSinglePage as TelemetryValuesResponsesSinglePage,
     type TelemetryKeysParams as TelemetryKeysParams,
+    type TelemetryLiveTailParams as TelemetryLiveTailParams,
+    type TelemetryLiveTailHeartbeatParams as TelemetryLiveTailHeartbeatParams,
     type TelemetryQueryParams as TelemetryQueryParams,
     type TelemetryValuesParams as TelemetryValuesParams,
   };
@@ -83,5 +101,13 @@ export declare namespace Observability {
     QueryListResponsesSinglePage as QueryListResponsesSinglePage,
     type QueryCreateParams as QueryCreateParams,
     type QueryListParams as QueryListParams,
+  };
+
+  export {
+    SharedQueries as SharedQueries,
+    type SharedQueryCreateResponse as SharedQueryCreateResponse,
+    type SharedQueryGetResponse as SharedQueryGetResponse,
+    type SharedQueryCreateParams as SharedQueryCreateParams,
+    type SharedQueryGetParams as SharedQueryGetParams,
   };
 }
