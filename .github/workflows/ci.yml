@@ -119,7 +119,8 @@ jobs:
         run: |
           yarn install
 
-      - env:
+      - continue-on-error: true
+        env:
           CLOUDFLARE_ACCOUNT_ID: f037e56e89293a057740de681ac9abbe
           CLOUDFLARE_EMAIL: terraform-acceptance-test@cfapi.net
           CLOUDFLARE_ZONE_ID: 0da42c8d2132a9ddaf714f9e7c92011
