@@ -6,6 +6,7 @@ export {
   type ActivationCheckTriggerResponse,
   type ActivationCheckTriggerParams,
 } from './activation-check';
+export { CT, BaseCT } from './ct/index';
 export {
   CustomNameservers,
   BaseCustomNameservers,

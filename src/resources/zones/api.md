@@ -165,3 +165,17 @@ Types:
 Methods:
 
 - <code title="get /zones/{zone_id}/available_rate_plans">client.zones.ratePlans.<a href="./src/resources/zones/rate-plans.ts">get</a>({ ...params }) -> RatePlanGetResponsesSinglePage</code>
+
+## CT
+
+### Alerting
+
+Types:
+
+- <code><a href="./src/resources/zones/ct/alerting.ts">AlertingEditResponse</a></code>
+- <code><a href="./src/resources/zones/ct/alerting.ts">AlertingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">edit</a>({ ...params }) -> AlertingEditResponse</code>
+- <code title="get /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">get</a>({ ...params }) -> AlertingGetResponse</code>

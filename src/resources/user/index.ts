@@ -19,6 +19,7 @@ export {
   type SubscriptionDeleteResponse,
   type SubscriptionUpdateParams,
 } from './subscriptions';
+export { Tenants, BaseTenants } from './tenants';
 export {
   Tokens,
   BaseTokens,

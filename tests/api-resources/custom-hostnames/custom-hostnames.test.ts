@@ -87,7 +87,11 @@ const runTests = (client: PartialCloudflare<{ customHostnames: BaseCustomHostnam
       certificate_authority: 'google',
       custom_origin_server: 'origin2.example.com',
       direction: 'desc',
-      hostname: { contain: 'example.com' },
+      hostname: {
+        contain: 'example.com',
+        exact: 'app.example.com',
+        startsWith: 'app',
+      },
       hostname_status: 'provisioned',
       order: 'ssl',
       page: 1,

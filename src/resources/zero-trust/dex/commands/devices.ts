@@ -24,7 +24,7 @@ export class BaseDevices extends APIResource {
    *   {
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
    *     page: 1,
-   *     per_page: 1,
+   *     per_page: 10,
    *   },
    * )) {
    *   // ...
@@ -82,7 +82,7 @@ export namespace DeviceListResponse {
     personEmail?: string;
 
     /**
-     * Operating system
+     * Operating system.
      */
     platform?: string;
 
@@ -93,17 +93,14 @@ export namespace DeviceListResponse {
     registrationId?: string;
 
     /**
-     * Network status
+     * Network status.
      */
     status?: string;
 
-    /**
-     * Timestamp in ISO format
-     */
     timestamp?: string;
 
     /**
-     * WARP client version
+     * WARP client version.
      */
     version?: string;
   }
@@ -111,12 +108,12 @@ export namespace DeviceListResponse {
 
 export interface DeviceListParams extends V4PagePaginationParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Filter devices by name or email
+   * Query param: Filter devices by name or email.
    */
   search?: string;
 }

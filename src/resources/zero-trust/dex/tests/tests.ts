@@ -17,7 +17,7 @@ export class BaseTests extends APIResource {
   ] as const);
 
   /**
-   * List DEX tests with overview metrics
+   * List DEX tests with overview metrics.
    *
    * @example
    * ```ts
@@ -67,12 +67,12 @@ export namespace Tests {
     testsTotal: number;
 
     /**
-     * percentage availability for all HTTP test results in response
+     * percentage availability for all HTTP test results in response.
      */
     avgHttpAvailabilityPct?: number | null;
 
     /**
-     * percentage availability for all traceroutes results in response
+     * percentage availability for all traceroutes results in response.
      */
     avgTracerouteAvailabilityPct?: number | null;
   }
@@ -303,7 +303,7 @@ export namespace Tests {
 
 export interface TestListParams extends V4PagePaginationParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path.
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -320,7 +320,7 @@ export interface TestListParams extends V4PagePaginationParams {
   deviceId?: Array<string>;
 
   /**
-   * Query param: Filter by test type
+   * Query param: Filter by test type.
    */
   kind?: 'http' | 'traceroute';
 
@@ -331,7 +331,7 @@ export interface TestListParams extends V4PagePaginationParams {
   registration_id?: string;
 
   /**
-   * Query param: Optionally filter results by test name
+   * Query param: Optionally filter results by test name.
    */
   testName?: string;
 }

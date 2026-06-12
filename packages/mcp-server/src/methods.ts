@@ -221,6 +221,36 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/organizations/{organization_id}/billable/usage',
   },
   {
+    clientCallName: 'client.tenants.get',
+    fullyQualifiedName: 'tenants.get',
+    httpMethod: 'get',
+    httpPath: '/tenants/{tenant_id}',
+  },
+  {
+    clientCallName: 'client.tenants.accountTypes.list',
+    fullyQualifiedName: 'tenants.accountTypes.list',
+    httpMethod: 'get',
+    httpPath: '/tenants/{tenant_id}/account_types',
+  },
+  {
+    clientCallName: 'client.tenants.accounts.list',
+    fullyQualifiedName: 'tenants.accounts.list',
+    httpMethod: 'get',
+    httpPath: '/tenants/{tenant_id}/accounts',
+  },
+  {
+    clientCallName: 'client.tenants.entitlements.get',
+    fullyQualifiedName: 'tenants.entitlements.get',
+    httpMethod: 'get',
+    httpPath: '/tenants/{tenant_id}/entitlements',
+  },
+  {
+    clientCallName: 'client.tenants.memberships.list',
+    fullyQualifiedName: 'tenants.memberships.list',
+    httpMethod: 'get',
+    httpPath: '/tenants/{tenant_id}/memberships',
+  },
+  {
     clientCallName: 'client.originCACertificates.create',
     fullyQualifiedName: 'originCACertificates.create',
     httpMethod: 'post',
@@ -357,6 +387,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'user.subscriptions.get',
     httpMethod: 'get',
     httpPath: '/user/subscriptions',
+  },
+  {
+    clientCallName: 'client.user.tenants.list',
+    fullyQualifiedName: 'user.tenants.list',
+    httpMethod: 'get',
+    httpPath: '/user/tenants',
   },
   {
     clientCallName: 'client.user.tokens.create',
@@ -561,6 +597,18 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'zones.ratePlans.get',
     httpMethod: 'get',
     httpPath: '/zones/{zone_id}/available_rate_plans',
+  },
+  {
+    clientCallName: 'client.zones.ct.alerting.edit',
+    fullyQualifiedName: 'zones.ct.alerting.edit',
+    httpMethod: 'patch',
+    httpPath: '/zones/{zone_id}/ct/alerting',
+  },
+  {
+    clientCallName: 'client.zones.ct.alerting.get',
+    fullyQualifiedName: 'zones.ct.alerting.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/ct/alerting',
   },
   {
     clientCallName: 'client.loadBalancers.create',

@@ -77,6 +77,12 @@ Methods:
 - <code title="delete /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">delete</a>(identifier) -> SubscriptionDeleteResponse</code>
 - <code title="get /user/subscriptions">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">get</a>() -> SubscriptionsSinglePage</code>
 
+## Tenants
+
+Methods:
+
+- <code title="get /user/tenants">client.user.tenants.<a href="./src/resources/user/tenants.ts">list</a>() -> OrganizationsSinglePage</code>
+
 ## Tokens
 
 Types:

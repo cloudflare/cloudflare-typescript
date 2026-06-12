@@ -31,6 +31,8 @@ Types:
 
 # [Organizations](src/resources/organizations/api.md)
 
+# [Tenants](src/resources/tenants/api.md)
+
 # [OriginCACertificates](src/resources/origin-ca-certificates/api.md)
 
 # [IPs](src/resources/ips/api.md)

@@ -14,7 +14,7 @@ export class BaseRules extends APIResource {
   ] as const);
 
   /**
-   * Create a DEX Rule
+   * Create a DEX Rule.
    *
    * @example
    * ```ts
@@ -35,7 +35,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Update a DEX Rule
+   * Update a DEX Rule.
    *
    * @example
    * ```ts
@@ -56,7 +56,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * List DEX Rules
+   * List DEX Rules.
    *
    * @example
    * ```ts
@@ -65,7 +65,7 @@ export class BaseRules extends APIResource {
    *   {
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
    *     page: 1,
-   *     per_page: 1,
+   *     per_page: 10,
    *   },
    * )) {
    *   // ...
@@ -85,7 +85,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Delete a DEX Rule
+   * Delete a DEX Rule.
    *
    * @example
    * ```ts
@@ -109,7 +109,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Get details for a DEX Rule
+   * Get details for a DEX Rule.
    *
    * @example
    * ```ts
@@ -374,7 +374,7 @@ export namespace RuleGetResponse {
 
 export interface RuleCreateParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -396,7 +396,7 @@ export interface RuleCreateParams {
 
 export interface RuleUpdateParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -418,36 +418,36 @@ export interface RuleUpdateParams {
 
 export interface RuleListParams extends V4PagePaginationParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Filter results by rule name
+   * Query param: Filter results by rule name.
    */
   name?: string;
 
   /**
-   * Query param: Which property to sort results by
+   * Query param: Which property to sort results by.
    */
   sort_by?: 'name' | 'created_at' | 'updated_at';
 
   /**
-   * Query param: Sort direction for sort_by property
+   * Query param: Sort direction for sort_by property.
    */
   sort_order?: 'ASC' | 'DESC';
 }
 
 export interface RuleDeleteParams {
   /**
-   * unique identifier linked to an account in the API request path
+   * Unique identifier linked to an account.
    */
   account_id: string;
 }
 
 export interface RuleGetParams {
   /**
-   * unique identifier linked to an account in the API request path
+   * Unique identifier linked to an account.
    */
   account_id: string;
 }

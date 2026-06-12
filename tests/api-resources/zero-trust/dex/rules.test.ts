@@ -77,7 +77,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { dex: { rules: BaseRul
     const responsePromise = client.zeroTrust.dex.rules.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
-      per_page: 1,
+      per_page: 10,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,7 +92,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { dex: { rules: BaseRul
     const response = await client.zeroTrust.dex.rules.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
-      per_page: 1,
+      per_page: 10,
       name: 'name',
       sort_by: 'name',
       sort_order: 'ASC',
