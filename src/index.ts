@@ -120,6 +120,7 @@ import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
 import { TenantCustomNameservers } from './resources/tenant-custom-nameservers/tenant-custom-nameservers';
+import { Tenants } from './resources/tenants/tenants';
 import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLNormalization } from './resources/url-normalization/url-normalization';
@@ -299,6 +300,7 @@ export class Cloudflare extends Core.APIClient {
 
   accounts: API.Accounts = new API.Accounts(this);
   organizations: API.Organizations = new API.Organizations(this);
+  tenants: API.Tenants = new API.Tenants(this);
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
@@ -556,6 +558,7 @@ export class Cloudflare extends Core.APIClient {
 
 Cloudflare.Accounts = Accounts;
 Cloudflare.Organizations = Organizations;
+Cloudflare.Tenants = Tenants;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
 Cloudflare.Memberships = Memberships;
@@ -709,6 +712,8 @@ export declare namespace Cloudflare {
   export { Accounts as Accounts };
 
   export { Organizations as Organizations };
+
+  export { Tenants as Tenants };
 
   export { OriginCACertificates as OriginCACertificates };
 

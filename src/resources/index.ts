@@ -101,6 +101,7 @@ export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';
 export { Stream } from './stream/stream';
 export { TenantCustomNameservers } from './tenant-custom-nameservers';
+export { Tenants } from './tenants/tenants';
 export { TokenValidation } from './token-validation/token-validation';
 export { Turnstile } from './turnstile/turnstile';
 export { URLNormalization } from './url-normalization';

@@ -22,6 +22,8 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
+import * as TenantsAPI from './tenants';
+import { Tenants } from './tenants';
 import * as BillingAPI from './billing/billing';
 import { Billing } from './billing/billing';
 import * as TokensAPI from './tokens/tokens';
@@ -41,6 +43,7 @@ export class User extends APIResource {
   invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  tenants: TenantsAPI.Tenants = new TenantsAPI.Tenants(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 
   /**
@@ -258,6 +261,7 @@ User.InvitesSinglePage = InvitesSinglePage;
 User.Organizations = Organizations;
 User.OrganizationsV4PagePaginationArray = OrganizationsV4PagePaginationArray;
 User.Subscriptions = Subscriptions;
+User.Tenants = Tenants;
 User.Tokens = Tokens;
 
 export declare namespace User {
@@ -293,6 +297,8 @@ export declare namespace User {
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
   };
+
+  export { Tenants as Tenants };
 
   export {
     Tokens as Tokens,

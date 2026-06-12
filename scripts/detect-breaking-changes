@@ -22,6 +22,11 @@ TEST_PATHS=(
 	tests/api-resources/organizations/logs/audit.test.ts
 	tests/api-resources/organizations/billing/billing.test.ts
 	tests/api-resources/organizations/billing/usage.test.ts
+	tests/api-resources/tenants/tenants.test.ts
+	tests/api-resources/tenants/account-types.test.ts
+	tests/api-resources/tenants/accounts.test.ts
+	tests/api-resources/tenants/entitlements.test.ts
+	tests/api-resources/tenants/memberships.test.ts
 	tests/api-resources/origin-ca-certificates.test.ts
 	tests/api-resources/ips.test.ts
 	tests/api-resources/memberships.test.ts
@@ -33,6 +38,7 @@ TEST_PATHS=(
 	tests/api-resources/user/invites.test.ts
 	tests/api-resources/user/organizations.test.ts
 	tests/api-resources/user/subscriptions.test.ts
+	tests/api-resources/user/tenants.test.ts
 	tests/api-resources/user/tokens/tokens.test.ts
 	tests/api-resources/user/tokens/permission-groups.test.ts
 	tests/api-resources/user/tokens/value.test.ts
