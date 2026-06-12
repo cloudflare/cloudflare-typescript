@@ -27,24 +27,24 @@ export class Quota extends APIResource {
 
 export interface QuotaGetResponse {
   /**
-   * The remaining number of commands that can be initiated for an account
+   * The total number of commands that can be initiated for an account.
    */
   quota: number;
 
   /**
-   * The number of commands that have been initiated for an account
+   * The number of commands that have been initiated for an account.
    */
   quota_usage: number;
 
   /**
-   * The time when the quota resets
+   * The time when the quota resets.
    */
   reset_time: string;
 }
 
 export interface QuotaGetParams {
   /**
-   * unique identifier linked to an account in the API request path
+   * Unique identifier linked to an account.
    */
   account_id: string;
 }

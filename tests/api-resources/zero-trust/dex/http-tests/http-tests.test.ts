@@ -32,8 +32,8 @@ describe('resource httpTests', () => {
       from: '1689520412000',
       interval: 'minute',
       to: '1689606812000',
-      colo: 'colo',
-      deviceId: ['string'],
+      colo: 'SJC',
+      deviceId: ['cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7'],
     });
   });
 });

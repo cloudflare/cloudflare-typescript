@@ -108,7 +108,7 @@ describe('resource dexTests', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       kind: 'http',
       page: 1,
-      per_page: 1,
+      per_page: 10,
       testName: 'testName',
     });
   });
