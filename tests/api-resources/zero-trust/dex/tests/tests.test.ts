@@ -26,12 +26,12 @@ describe('resource tests', () => {
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.dex.tests.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      colo: 'colo',
-      deviceId: ['string'],
+      colo: 'SJC',
+      deviceId: ['cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7'],
       kind: 'http',
       page: 1,
-      per_page: 1,
-      registration_id: 'registration_id',
+      per_page: 10,
+      registration_id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
       testName: 'testName',
     });
   });

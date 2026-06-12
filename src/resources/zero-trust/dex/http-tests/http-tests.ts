@@ -44,7 +44,7 @@ export class HTTPTests extends APIResource {
 
 export interface HTTPDetails {
   /**
-   * The url of the HTTP synthetic application test
+   * The url of the HTTP synthetic application test.
    */
   host?: string;
 
@@ -60,12 +60,12 @@ export interface HTTPDetails {
   kind?: 'http';
 
   /**
-   * The HTTP method to use when running the test
+   * The HTTP method to use when running the test.
    */
   method?: string;
 
   /**
-   * The name of the HTTP synthetic application test
+   * The name of the HTTP synthetic application test.
    */
   name?: string;
 
@@ -87,7 +87,7 @@ export namespace HTTPDetails {
     serverResponseTimeMs: PercentilesAPI.TestStatOverTime;
 
     /**
-     * Count of unique devices that have run this test in the given time period
+     * Count of unique devices that have run this test in the given time period.
      */
     uniqueDevicesTotal: number;
   }
@@ -97,17 +97,17 @@ export namespace HTTPDetails {
       slots: Array<AvailabilityPct.Slot>;
 
       /**
-       * average observed in the time period
+       * average observed in the time period.
        */
       avg?: number | null;
 
       /**
-       * highest observed in the time period
+       * highest observed in the time period.
        */
       max?: number | null;
 
       /**
-       * lowest observed in the time period
+       * lowest observed in the time period.
        */
       min?: number | null;
     }
@@ -147,7 +147,7 @@ export namespace HTTPDetails {
     serverResponseTimeMs: PercentilesAPI.TestStatOverTime;
 
     /**
-     * Count of unique devices that have run this test in the given time period
+     * Count of unique devices that have run this test in the given time period.
      */
     uniqueDevicesTotal: number;
   }
@@ -157,17 +157,17 @@ export namespace HTTPDetails {
       slots: Array<AvailabilityPct.Slot>;
 
       /**
-       * average observed in the time period
+       * average observed in the time period.
        */
       avg?: number | null;
 
       /**
-       * highest observed in the time period
+       * highest observed in the time period.
        */
       max?: number | null;
 
       /**
-       * lowest observed in the time period
+       * lowest observed in the time period.
        */
       min?: number | null;
     }
@@ -196,12 +196,12 @@ export namespace HTTPDetails {
 
 export interface HTTPTestGetParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path.
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Start time for aggregate metrics in ISO ms
+   * Query param: Start time for aggregate metrics in ISO ms.
    */
   from: string;
 
@@ -211,7 +211,7 @@ export interface HTTPTestGetParams {
   interval: 'minute' | 'hour';
 
   /**
-   * Query param: End time for aggregate metrics in ISO ms
+   * Query param: End time for aggregate metrics in ISO ms.
    */
   to: string;
 

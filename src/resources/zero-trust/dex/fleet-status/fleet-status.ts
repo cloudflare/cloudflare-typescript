@@ -15,7 +15,7 @@ export class FleetStatus extends APIResource {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
 
   /**
-   * List details for live (up to 60 minutes) devices using WARP
+   * List details for live (up to 60 minutes) devices using WARP.
    *
    * @example
    * ```ts
@@ -40,15 +40,15 @@ export class FleetStatus extends APIResource {
   }
 
   /**
-   * List details for devices using WARP, up to 7 days
+   * List details for devices using WARP, up to 7 days.
    *
    * @example
    * ```ts
    * const response =
    *   await client.zeroTrust.dex.fleetStatus.overTime({
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
-   *     from: '2023-10-11T00:00:00Z',
-   *     to: '2023-10-11T00:00:00Z',
+   *     from: '2023-10-11 00:00:00+00',
+   *     to: '2023-10-11 00:00:00+00',
    *   });
    * ```
    */
@@ -116,9 +116,6 @@ export namespace FleetStatusOverTimeResponse {
 
   export namespace DeviceStats {
     export interface ByMode {
-      /**
-       * Timestamp in ISO format
-       */
       timestamp?: string;
 
       /**
@@ -130,9 +127,6 @@ export namespace FleetStatusOverTimeResponse {
     }
 
     export interface ByStatus {
-      /**
-       * Timestamp in ISO format
-       */
       timestamp?: string;
 
       /**
@@ -147,39 +141,41 @@ export namespace FleetStatusOverTimeResponse {
 
 export interface FleetStatusLiveParams {
   /**
-   * Path param: Unique identifier for account
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Number of minutes before current time
+   * Query param: Number of minutes before current time.
    */
   since_minutes: number;
 }
 
 export interface FleetStatusOverTimeParams {
   /**
-   * Path param: Unique identifier for account
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Time range beginning in ISO format
+   * Query param: Start of the time range to query. Timestamp can be provided in ISO
+   * 8601 datetime format or milliseconds since epoch.
    */
   from: string;
 
   /**
-   * Query param: Time range end in ISO format
+   * Query param: End of the time range to query. Timestamp can be provided in ISO
+   * 8601 datetime format or milliseconds since epoch.
    */
   to: string;
 
   /**
-   * Query param: Cloudflare colo
+   * Query param: Cloudflare colo airport code.
    */
   colo?: string;
 
   /**
-   * Query param: Device-specific ID, given as UUID v4
+   * Query param: Device-specific ID, given as UUID.
    */
   device_id?: string;
 }

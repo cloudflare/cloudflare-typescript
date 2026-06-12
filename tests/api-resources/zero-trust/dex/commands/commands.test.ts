@@ -49,7 +49,7 @@ describe('resource commands', () => {
     const responsePromise = client.zeroTrust.dex.commands.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
-      per_page: 50,
+      per_page: 10,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,7 +64,7 @@ describe('resource commands', () => {
     const response = await client.zeroTrust.dex.commands.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
-      per_page: 50,
+      per_page: 10,
       command_type: 'pcap',
       device_id: 'device_id',
       from: '2023-08-20T20:45:00Z',

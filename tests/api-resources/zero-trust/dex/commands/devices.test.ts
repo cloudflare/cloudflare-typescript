@@ -14,7 +14,7 @@ describe('resource devices', () => {
     const responsePromise = client.zeroTrust.dex.commands.devices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
-      per_page: 1,
+      per_page: 10,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource devices', () => {
     const response = await client.zeroTrust.dex.commands.devices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       page: 1,
-      per_page: 1,
+      per_page: 10,
       search: 'search',
     });
   });
