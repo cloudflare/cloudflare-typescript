@@ -51,6 +51,8 @@ TEST_PATHS=(
 	tests/api-resources/zones/subscriptions.test.ts
 	tests/api-resources/zones/plans.test.ts
 	tests/api-resources/zones/rate-plans.test.ts
+	tests/api-resources/zones/ct/ct.test.ts
+	tests/api-resources/zones/ct/alerting.test.ts
 	tests/api-resources/load-balancers/load-balancers.test.ts
 	tests/api-resources/load-balancers/monitors/monitors.test.ts
 	tests/api-resources/load-balancers/monitors/previews.test.ts

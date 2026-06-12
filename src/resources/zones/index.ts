@@ -12,6 +12,7 @@ export {
   type PlanListParams,
   type PlanGetParams,
 } from './plans';
+export { CT } from './ct/index';
 export {
   CustomNameserverUpdateResponsesSinglePage,
   CustomNameservers,
