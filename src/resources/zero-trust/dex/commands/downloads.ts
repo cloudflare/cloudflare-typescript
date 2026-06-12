@@ -45,7 +45,7 @@ export class Downloads extends BaseDownloads {}
 
 export interface DownloadGetParams {
   /**
-   * unique identifier linked to an account in the API request path
+   * Unique identifier linked to an account.
    */
   account_id: string;
 

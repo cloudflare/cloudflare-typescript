@@ -18,7 +18,7 @@ export class BaseDevices extends APIResource {
   ] as const);
 
   /**
-   * List details for devices using WARP
+   * List details for devices using WARP.
    *
    * @example
    * ```ts
@@ -26,10 +26,10 @@ export class BaseDevices extends APIResource {
    * for await (const deviceListResponse of client.zeroTrust.dex.fleetStatus.devices.list(
    *   {
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
-   *     from: '2023-10-11T00:00:00Z',
+   *     from: '2023-10-11 00:00:00+00',
    *     page: 1,
    *     per_page: 10,
-   *     to: '2023-10-11T00:00:00Z',
+   *     to: '2023-10-11 00:00:00+00',
    *   },
    * )) {
    *   // ...
@@ -54,7 +54,7 @@ export type DeviceListResponsesV4PagePaginationArray = V4PagePaginationArray<Dev
 
 export interface DeviceListResponse {
   /**
-   * Cloudflare colo
+   * Cloudflare colo airport code.
    */
   colo: string;
 
@@ -64,27 +64,24 @@ export interface DeviceListResponse {
   deviceId: string;
 
   /**
-   * The mode under which the WARP client is run
+   * The mode under which the WARP client is run.
    */
   mode: string;
 
   /**
-   * Operating system
+   * Operating system.
    */
   platform: string;
 
   /**
-   * Network status
+   * Network status.
    */
   status: string;
 
-  /**
-   * Timestamp in ISO format
-   */
   timestamp: string;
 
   /**
-   * WARP client version
+   * WARP client version.
    */
   version: string;
 
@@ -100,14 +97,14 @@ export interface DeviceListResponse {
 
   cpuPct?: number | null;
 
-  cpuPctByApp?: Array<Array<DeviceListResponse.CPUPctByApp>> | null;
+  cpuPctByApp?: Array<DeviceListResponse.CPUPctByApp> | null;
 
-  deviceIpv4?: DeviceListResponse.DeviceIPV4;
+  deviceIpv4?: DeviceListResponse.DeviceIPV4 | null;
 
-  deviceIpv6?: DeviceListResponse.DeviceIPV6;
+  deviceIpv6?: DeviceListResponse.DeviceIPV6 | null;
 
   /**
-   * Device identifier (human readable)
+   * Device identifier (human readable).
    */
   deviceName?: string;
 
@@ -128,15 +125,15 @@ export interface DeviceListResponse {
 
   firewallEnabled?: boolean | null;
 
-  gatewayIpv4?: DeviceListResponse.GatewayIPV4;
+  gatewayIpv4?: DeviceListResponse.GatewayIPV4 | null;
 
-  gatewayIpv6?: DeviceListResponse.GatewayIPV6;
+  gatewayIpv6?: DeviceListResponse.GatewayIPV6 | null;
 
   handshakeLatencyMs?: number | null;
 
-  ispIpv4?: DeviceListResponse.ISPIPV4;
+  ispIpv4?: DeviceListResponse.ISPIPV4 | null;
 
-  ispIpv6?: DeviceListResponse.ISPIPV6;
+  ispIpv6?: DeviceListResponse.ISPIPV6 | null;
 
   metal?: string | null;
 
@@ -155,7 +152,7 @@ export interface DeviceListResponse {
 
   ramUsedPct?: number | null;
 
-  ramUsedPctByApp?: Array<Array<DeviceListResponse.RamUsedPctByApp>> | null;
+  ramUsedPctByApp?: Array<DeviceListResponse.RamUsedPctByApp> | null;
 
   /**
    * Device registration identifier (UUID v4). On multi-user devices, this uniquely
@@ -163,16 +160,34 @@ export interface DeviceListResponse {
    */
   registrationId?: string | null;
 
+  /**
+   * Round-trip time statistics for the WARP tunnel.
+   */
+  rtt?: DeviceListResponse.RTT | null;
+
   switchLocked?: boolean | null;
+
+  /**
+   * WARP tunnel packet and byte counters.
+   */
+  tunnelStats?: DeviceListResponse.TunnelStats | null;
+
+  tunnelType?: string | null;
 
   wifiStrengthDbm?: number | null;
 }
 
 export namespace DeviceListResponse {
   export interface CPUPctByApp {
-    cpu_pct?: number;
+    /**
+     * CPU usage percentage, on a scale of 0 to 100.
+     */
+    cpu_pct?: number | null;
 
-    name?: string;
+    /**
+     * Application name.
+     */
+    name?: string | null;
   }
 
   export interface DeviceIPV4 {
@@ -184,9 +199,14 @@ export namespace DeviceListResponse {
 
     location?: DeviceIPV4.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace DeviceIPV4 {
@@ -210,9 +230,14 @@ export namespace DeviceListResponse {
 
     location?: DeviceIPV6.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace DeviceIPV6 {
@@ -236,9 +261,14 @@ export namespace DeviceListResponse {
 
     location?: GatewayIPV4.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace GatewayIPV4 {
@@ -262,9 +292,14 @@ export namespace DeviceListResponse {
 
     location?: GatewayIPV6.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace GatewayIPV6 {
@@ -288,9 +323,14 @@ export namespace DeviceListResponse {
 
     location?: ISPIPV4.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace ISPIPV4 {
@@ -314,9 +354,14 @@ export namespace DeviceListResponse {
 
     location?: ISPIPV6.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace ISPIPV6 {
@@ -332,50 +377,231 @@ export namespace DeviceListResponse {
   }
 
   export interface RamUsedPctByApp {
-    name?: string;
+    /**
+     * Application name.
+     */
+    name?: string | null;
 
-    ram_used_pct?: number;
+    /**
+     * RAM usage percentage, on a scale of 0 to 100.
+     */
+    ram_used_pct?: number | null;
+  }
+
+  /**
+   * Round-trip time statistics for the WARP tunnel.
+   */
+  export interface RTT {
+    /**
+     * Minimum round-trip time in microseconds.
+     */
+    minRttUs?: RTT.MinRTTUs | null;
+
+    /**
+     * Round-trip time in microseconds.
+     */
+    rttUs?: RTT.RTTUs | null;
+
+    /**
+     * Round-trip time variance in microseconds.
+     */
+    rttVarUs?: RTT.RTTVarUs | null;
+  }
+
+  export namespace RTT {
+    /**
+     * Minimum round-trip time in microseconds.
+     */
+    export interface MinRTTUs {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Round-trip time in microseconds.
+     */
+    export interface RTTUs {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Round-trip time variance in microseconds.
+     */
+    export interface RTTVarUs {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+  }
+
+  /**
+   * WARP tunnel packet and byte counters.
+   */
+  export interface TunnelStats {
+    /**
+     * Number of bytes lost, split by direction.
+     */
+    bytesLost?: TunnelStats.BytesLost | null;
+
+    /**
+     * Number of bytes received, split by direction.
+     */
+    bytesReceived?: TunnelStats.BytesReceived | null;
+
+    /**
+     * Number of bytes retransmitted, split by direction.
+     */
+    bytesRetransmitted?: TunnelStats.BytesRetransmitted | null;
+
+    /**
+     * Number of bytes sent, split by direction.
+     */
+    bytesSent?: TunnelStats.BytesSent | null;
+
+    /**
+     * Number of packets lost, split by direction.
+     */
+    packetsLost?: TunnelStats.PacketsLost | null;
+
+    /**
+     * Number of packets received, split by direction.
+     */
+    packetsReceived?: TunnelStats.PacketsReceived | null;
+
+    /**
+     * Number of packets retransmitted, split by direction.
+     */
+    packetsRetransmitted?: TunnelStats.PacketsRetransmitted | null;
+
+    /**
+     * Number of packets sent, split by direction.
+     */
+    packetsSent?: TunnelStats.PacketsSent | null;
+
+    /**
+     * The measurement window duration in milliseconds.
+     */
+    statsWindowMs?: number | null;
+  }
+
+  export namespace TunnelStats {
+    /**
+     * Number of bytes lost, split by direction.
+     */
+    export interface BytesLost {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of bytes received, split by direction.
+     */
+    export interface BytesReceived {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of bytes retransmitted, split by direction.
+     */
+    export interface BytesRetransmitted {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of bytes sent, split by direction.
+     */
+    export interface BytesSent {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets lost, split by direction.
+     */
+    export interface PacketsLost {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets received, split by direction.
+     */
+    export interface PacketsReceived {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets retransmitted, split by direction.
+     */
+    export interface PacketsRetransmitted {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets sent, split by direction.
+     */
+    export interface PacketsSent {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
   }
 }
 
 export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Unique identifier for account
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Time range beginning in ISO format
+   * Query param: Start of the time range to query. Timestamp can be provided in ISO
+   * 8601 datetime format or milliseconds since epoch.
    */
   from: string;
 
   /**
-   * Query param: Time range end in ISO format
+   * Query param: End of the time range to query. Timestamp can be provided in ISO
+   * 8601 datetime format or milliseconds since epoch.
    */
   to: string;
 
   /**
-   * Query param: Cloudflare colo
+   * Query param: Cloudflare colo airport code.
    */
   colo?: string;
 
   /**
-   * Query param: Device-specific ID, given as UUID v4
+   * Query param: Device-specific ID, given as UUID.
    */
   device_id?: string;
 
   /**
-   * Query param: The mode under which the WARP client is run
+   * Query param: The mode under which the WARP client is run.
    */
   mode?: string;
 
   /**
-   * Query param: Operating system
+   * Query param: Operating system.
    */
   platform?: string;
 
   /**
-   * Query param: Dimension to sort results by
+   * Query param: Dimension to sort results by.
    */
   sort_by?: 'colo' | 'device_id' | 'mode' | 'platform' | 'status' | 'timestamp' | 'version';
 
@@ -391,12 +617,12 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   source?: 'last_seen' | 'hourly' | 'raw';
 
   /**
-   * Query param: Network status
+   * Query param: Network status.
    */
   status?: string;
 
   /**
-   * Query param: WARP client version
+   * Query param: WARP client version.
    */
   version?: string;
 }

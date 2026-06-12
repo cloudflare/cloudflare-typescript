@@ -30,7 +30,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { dex: { devices: { isp
   test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.devices.isps.list('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      per_page: 1,
+      per_page: 10,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,7 +44,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { dex: { devices: { isp
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.dex.devices.isps.list('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      per_page: 1,
+      per_page: 10,
       cursor: 'cursor',
       from: '2019-12-27T18:11:19.117Z',
       page: 1,

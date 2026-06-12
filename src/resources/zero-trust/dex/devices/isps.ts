@@ -23,7 +23,7 @@ export class BaseISPs extends APIResource {
    *   'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *   {
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
-   *     per_page: 1,
+   *     per_page: 10,
    *   },
    * )) {
    *   // ...
@@ -54,17 +54,17 @@ export interface ISPs {
 export namespace ISPs {
   export interface ISP {
     /**
-     * The test that generated this result
+     * The test that generated this result.
      */
     test_id: string;
 
     /**
-     * The specific test result
+     * The specific test result.
      */
     test_result_id: string;
 
     /**
-     * Timestamp of when the ISP was observed
+     * Timestamp of when the ISP was observed.
      */
     time_start: string;
 
@@ -91,12 +91,12 @@ export namespace ISPs {
       address?: string;
 
       /**
-       * Autonomous System Number
+       * Autonomous System Number.
        */
       asn?: number;
 
       /**
-       * Autonomous System Organization name
+       * Autonomous System Organization name.
        */
       aso?: string;
 
@@ -118,7 +118,7 @@ export namespace ISPs {
       netmask?: string;
 
       /**
-       * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown)
+       * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
        */
       version?: number;
     }
@@ -155,7 +155,7 @@ export namespace ISPs {
 
 export interface ISPListParams extends V4PagePaginationParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -165,22 +165,22 @@ export interface ISPListParams extends V4PagePaginationParams {
   cursor?: string;
 
   /**
-   * Query param: Start time for the query in ISO 8601 format
+   * Query param: Start time for the query in ISO 8601 format.
    */
   from?: string;
 
   /**
-   * Query param: The field to sort results by
+   * Query param: The field to sort results by.
    */
   sort_by?: 'time_start';
 
   /**
-   * Query param: The order to sort results
+   * Query param: The order to sort results.
    */
   sort_order?: 'ASC' | 'DESC';
 
   /**
-   * Query param: End time for the query in ISO 8601 format
+   * Query param: End time for the query in ISO 8601 format.
    */
   to?: string;
 }

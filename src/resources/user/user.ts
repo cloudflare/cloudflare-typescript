@@ -23,6 +23,8 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
+import * as TenantsAPI from './tenants';
+import { BaseTenants, Tenants } from './tenants';
 import * as BillingAPI from './billing/billing';
 import { BaseBilling, Billing } from './billing/billing';
 import * as TokensAPI from './tokens/tokens';
@@ -76,6 +78,7 @@ export class User extends BaseUser {
   invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  tenants: TenantsAPI.Tenants = new TenantsAPI.Tenants(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 }
 
@@ -268,6 +271,8 @@ User.Organizations = Organizations;
 User.BaseOrganizations = BaseOrganizations;
 User.Subscriptions = Subscriptions;
 User.BaseSubscriptions = BaseSubscriptions;
+User.Tenants = Tenants;
+User.BaseTenants = BaseTenants;
 User.Tokens = Tokens;
 User.BaseTokens = BaseTokens;
 
@@ -311,6 +316,8 @@ export declare namespace User {
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
   };
+
+  export { Tenants as Tenants, BaseTenants as BaseTenants };
 
   export {
     Tokens as Tokens,
