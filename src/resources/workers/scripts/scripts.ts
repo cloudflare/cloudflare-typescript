@@ -1831,7 +1831,8 @@ export namespace ScriptUpdateParams {
 
     /**
      * Retain assets which exist for a previously uploaded Worker version; used in lieu
-     * of providing a completion token.
+     * of providing a completion token. An explicit `assets` upload takes precedence
+     * over `keep_assets`.
      */
     keep_assets?: boolean;
 
