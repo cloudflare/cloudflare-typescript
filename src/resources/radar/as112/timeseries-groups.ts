@@ -225,6 +225,8 @@ export namespace TimeseriesGroupDNSSECResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -366,6 +368,8 @@ export namespace TimeseriesGroupEdnsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -507,6 +511,8 @@ export namespace TimeseriesGroupIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -648,6 +654,8 @@ export namespace TimeseriesGroupProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -793,6 +801,8 @@ export namespace TimeseriesGroupQueryTypeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -934,6 +944,8 @@ export namespace TimeseriesGroupResponseCodesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

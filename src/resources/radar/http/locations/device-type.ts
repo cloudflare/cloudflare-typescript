@@ -144,6 +144,8 @@ export namespace DeviceTypeGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

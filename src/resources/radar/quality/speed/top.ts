@@ -158,6 +158,8 @@ export namespace TopAsesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -308,6 +310,8 @@ export namespace TopLocationsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

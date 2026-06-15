@@ -142,6 +142,8 @@ export namespace AseOriginResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -202,6 +202,8 @@ export namespace TimeseriesGroupSummaryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -340,6 +342,8 @@ export namespace TimeseriesGroupTimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -481,6 +485,8 @@ export namespace TimeseriesGroupTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -622,6 +628,8 @@ export namespace TimeseriesGroupUserAgentResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -140,6 +140,8 @@ export namespace SpoofGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

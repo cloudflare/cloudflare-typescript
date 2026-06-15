@@ -139,6 +139,8 @@ export namespace UserAgentDirectiveResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

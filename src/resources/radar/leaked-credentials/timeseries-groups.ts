@@ -161,6 +161,8 @@ export namespace TimeseriesGroupBotClassResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -304,6 +306,8 @@ export namespace TimeseriesGroupCompromisedResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

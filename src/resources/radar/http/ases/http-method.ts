@@ -143,6 +143,8 @@ export namespace HTTPMethodGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

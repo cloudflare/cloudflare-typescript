@@ -169,6 +169,8 @@ export namespace AseGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -135,6 +135,8 @@ export namespace SummaryUserAgentResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
