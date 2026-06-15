@@ -67,6 +67,8 @@ export interface TagCreateResponse {
 
   originCountryISO?: string;
 
+  originCountryISOAlpha3?: string;
+
   priority?: number;
 
   sophisticationLevel?: string;

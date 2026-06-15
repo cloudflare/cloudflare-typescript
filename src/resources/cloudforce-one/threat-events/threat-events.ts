@@ -229,6 +229,8 @@ export interface ThreatEventCreateResponse {
 
   attackerCountry: string;
 
+  attackerCountryAlpha3: string;
+
   category: string;
 
   datasetId: string;
@@ -269,6 +271,8 @@ export interface ThreatEventCreateResponse {
 
   targetCountry: string;
 
+  targetCountryAlpha3: string;
+
   targetIndustry: string;
 
   tlp: string;
@@ -287,6 +291,8 @@ export namespace ThreatEventListResponse {
     attacker: string;
 
     attackerCountry: string;
+
+    attackerCountryAlpha3: string;
 
     category: string;
 
@@ -327,6 +333,8 @@ export namespace ThreatEventListResponse {
     tags: Array<string>;
 
     targetCountry: string;
+
+    targetCountryAlpha3: string;
 
     targetIndustry: string;
 
@@ -417,6 +425,8 @@ export interface ThreatEventEditResponse {
 
   attackerCountry: string;
 
+  attackerCountryAlpha3: string;
+
   category: string;
 
   datasetId: string;
@@ -456,6 +466,8 @@ export interface ThreatEventEditResponse {
   tags: Array<string>;
 
   targetCountry: string;
+
+  targetCountryAlpha3: string;
 
   targetIndustry: string;
 
@@ -473,6 +485,8 @@ export interface ThreatEventGetResponse {
 
   attackerCountry: string;
 
+  attackerCountryAlpha3: string;
+
   category: string;
 
   datasetId: string;
@@ -512,6 +526,8 @@ export interface ThreatEventGetResponse {
   tags: Array<string>;
 
   targetCountry: string;
+
+  targetCountryAlpha3: string;
 
   targetIndustry: string;
 
