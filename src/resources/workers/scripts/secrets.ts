@@ -3,7 +3,6 @@
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
-import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -128,7 +127,6 @@ export class BaseSecrets extends APIResource {
       this._client.patch(path`/accounts/${account_id}/workers/scripts/${scriptName}/secrets-bulk`, {
         body,
         ...options,
-        headers: buildHeaders([{ 'Content-Type': 'application/merge-patch+json' }, options?.headers]),
       }) as APIPromise<{ result: SecretBulkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
