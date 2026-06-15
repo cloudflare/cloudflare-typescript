@@ -1105,6 +1105,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.aiGateway.update()`
 - `client.aiGateway.delete()`
 - `client.aiGateway.get()`
+- `client.aiGateway.customProviders.delete()`
+- `client.aiGateway.customProviders.get()`
 - `client.aiGateway.logs.list()`
 - `client.aiGateway.logs.delete()`
 - `client.aiGateway.logs.edit()`

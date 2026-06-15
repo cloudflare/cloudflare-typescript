@@ -1,6 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as CustomProvidersAPI from './custom-providers';
+import {
+  BaseCustomProviders,
+  CustomProviderCreateParams,
+  CustomProviderCreateResponse,
+  CustomProviderDeleteParams,
+  CustomProviderDeleteResponse,
+  CustomProviderGetParams,
+  CustomProviderGetResponse,
+  CustomProviderListParams,
+  CustomProviderListResponse,
+  CustomProviderListResponsesV4PagePaginationArray,
+  CustomProviders,
+} from './custom-providers';
 import * as DatasetsAPI from './datasets';
 import {
   BaseDatasets,
@@ -243,6 +257,7 @@ export class BaseAIGateway extends APIResource {
 }
 export class AIGateway extends BaseAIGateway {
   evaluationTypes: EvaluationTypesAPI.EvaluationTypes = new EvaluationTypesAPI.EvaluationTypes(this._client);
+  customProviders: CustomProvidersAPI.CustomProviders = new CustomProvidersAPI.CustomProviders(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
@@ -1869,6 +1884,8 @@ export interface AIGatewayGetParams {
 
 AIGateway.EvaluationTypes = EvaluationTypes;
 AIGateway.BaseEvaluationTypes = BaseEvaluationTypes;
+AIGateway.CustomProviders = CustomProviders;
+AIGateway.BaseCustomProviders = BaseCustomProviders;
 AIGateway.Logs = Logs;
 AIGateway.BaseLogs = BaseLogs;
 AIGateway.Datasets = Datasets;
@@ -1905,6 +1922,20 @@ export declare namespace AIGateway {
     type EvaluationTypeListResponse as EvaluationTypeListResponse,
     type EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
     type EvaluationTypeListParams as EvaluationTypeListParams,
+  };
+
+  export {
+    CustomProviders as CustomProviders,
+    BaseCustomProviders as BaseCustomProviders,
+    type CustomProviderCreateResponse as CustomProviderCreateResponse,
+    type CustomProviderListResponse as CustomProviderListResponse,
+    type CustomProviderDeleteResponse as CustomProviderDeleteResponse,
+    type CustomProviderGetResponse as CustomProviderGetResponse,
+    type CustomProviderListResponsesV4PagePaginationArray as CustomProviderListResponsesV4PagePaginationArray,
+    type CustomProviderCreateParams as CustomProviderCreateParams,
+    type CustomProviderListParams as CustomProviderListParams,
+    type CustomProviderDeleteParams as CustomProviderDeleteParams,
+    type CustomProviderGetParams as CustomProviderGetParams,
   };
 
   export {
