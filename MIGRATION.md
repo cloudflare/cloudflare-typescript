@@ -496,6 +496,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.magicTransit.connectors.snapshots.list()`
 - `client.magicTransit.connectors.snapshots.get()`
 - `client.magicTransit.connectors.snapshots.latest.list()`
+- `client.magicTransit.cf1Sites.update()`
+- `client.magicTransit.cf1Sites.delete()`
+- `client.magicTransit.cf1Sites.get()`
+- `client.magicTransit.cf1Sites.ramps.create()`
+- `client.magicTransit.cf1Sites.ramps.list()`
+- `client.magicTransit.cf1Sites.ramps.delete()`
+- `client.magicTransit.cf1Sites.ramps.get()`
 - `client.magicTransit.pcaps.get()`
 - `client.magicTransit.pcaps.stop()`
 - `client.magicTransit.pcaps.ownership.delete()`
@@ -1379,6 +1386,8 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.magicTransit.greTunnels.bulkUpdate()`
 - `client.magicTransit.ipsecTunnels.bulkUpdate()`
 - `client.magicTransit.ipsecTunnels.pskGenerate()`
+- `client.magicTransit.cf1Sites.create()`
+- `client.magicTransit.cf1Sites.ramps.create()`
 - `client.DDoSProtection.advancedTCPProtection.prefixes.bulkCreate()`
 - `client.magicNetworkMonitoring.rules.advertisements.edit()`
 - `client.rules.lists.items.create()`

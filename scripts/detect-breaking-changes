@@ -357,6 +357,8 @@ TEST_PATHS=(
 	tests/api-resources/magic-transit/connectors/events/latest.test.ts
 	tests/api-resources/magic-transit/connectors/snapshots/snapshots.test.ts
 	tests/api-resources/magic-transit/connectors/snapshots/latest.test.ts
+	tests/api-resources/magic-transit/cf1-sites/cf1-sites.test.ts
+	tests/api-resources/magic-transit/cf1-sites/ramps.test.ts
 	tests/api-resources/magic-transit/pcaps/pcaps.test.ts
 	tests/api-resources/magic-transit/pcaps/ownership.test.ts
 	tests/api-resources/magic-transit/pcaps/download.test.ts

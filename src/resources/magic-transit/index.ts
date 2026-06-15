@@ -16,6 +16,18 @@ export {
   type AppListResponsesSinglePage,
 } from './apps';
 export {
+  Cf1Sites,
+  BaseCf1Sites,
+  type Cf1Site,
+  type Cf1SiteLocation,
+  type Cf1SiteCreateParams,
+  type Cf1SiteUpdateParams,
+  type Cf1SiteListParams,
+  type Cf1SiteDeleteParams,
+  type Cf1SiteGetParams,
+  type Cf1SitesSinglePage,
+} from './cf1-sites/index';
+export {
   CfInterconnects,
   BaseCfInterconnects,
   type CfInterconnectUpdateResponse,
@@ -71,6 +83,7 @@ export {
   type IPSECTunnelBulkUpdateResponse,
   type IPSECTunnelGetResponse,
   type IPSECTunnelPSKGenerateResponse,
+  type IPSECTunnelPSKSetResponse,
   type IPSECTunnelCreateParams,
   type IPSECTunnelUpdateParams,
   type IPSECTunnelListParams,
@@ -78,6 +91,7 @@ export {
   type IPSECTunnelBulkUpdateParams,
   type IPSECTunnelGetParams,
   type IPSECTunnelPSKGenerateParams,
+  type IPSECTunnelPSKSetParams,
 } from './ipsec-tunnels';
 export { MagicTransit, BaseMagicTransit } from './magic-transit';
 export {

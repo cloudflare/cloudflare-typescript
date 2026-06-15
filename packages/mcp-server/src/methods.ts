@@ -4967,6 +4967,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}/psk_generate',
   },
   {
+    clientCallName: 'client.magicTransit.ipsecTunnels.pskSet',
+    fullyQualifiedName: 'magicTransit.ipsecTunnels.pskSet',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/ipsec_tunnels/psk',
+  },
+  {
     clientCallName: 'client.magicTransit.routes.create',
     fullyQualifiedName: 'magicTransit.routes.create',
     httpMethod: 'post',
@@ -5223,6 +5229,60 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'magicTransit.connectors.snapshots.latest.list',
     httpMethod: 'get',
     httpPath: '/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/latest',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.create',
+    fullyQualifiedName: 'magicTransit.cf1Sites.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.update',
+    fullyQualifiedName: 'magicTransit.cf1Sites.update',
+    httpMethod: 'patch',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.list',
+    fullyQualifiedName: 'magicTransit.cf1Sites.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.delete',
+    fullyQualifiedName: 'magicTransit.cf1Sites.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.get',
+    fullyQualifiedName: 'magicTransit.cf1Sites.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.ramps.create',
+    fullyQualifiedName: 'magicTransit.cf1Sites.ramps.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.ramps.list',
+    fullyQualifiedName: 'magicTransit.cf1Sites.ramps.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.ramps.delete',
+    fullyQualifiedName: 'magicTransit.cf1Sites.ramps.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps/{ramp_id}',
+  },
+  {
+    clientCallName: 'client.magicTransit.cf1Sites.ramps.get',
+    fullyQualifiedName: 'magicTransit.cf1Sites.ramps.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps/{ramp_id}',
   },
   {
     clientCallName: 'client.magicTransit.pcaps.create',
