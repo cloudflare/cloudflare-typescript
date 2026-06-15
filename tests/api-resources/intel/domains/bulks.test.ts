@@ -44,6 +44,8 @@ const runTests = (client: PartialCloudflare<{ intel: { domains: { bulks: BaseBul
     const response = await client.intel.domains.bulks.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domain: ['string'],
+      include_ranking: true,
+      skip_ranking: true,
     });
   });
 };
