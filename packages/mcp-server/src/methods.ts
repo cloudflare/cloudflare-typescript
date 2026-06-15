@@ -1001,6 +1001,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/ssl/recommendation',
   },
   {
+    clientCallName: 'client.ssl.autoOriginTLSKex.edit',
+    fullyQualifiedName: 'ssl.autoOriginTLSKex.edit',
+    httpMethod: 'patch',
+    httpPath: '/zones/{zone_id}/settings/auto_origin_tls_kex',
+  },
+  {
+    clientCallName: 'client.ssl.autoOriginTLSKex.get',
+    fullyQualifiedName: 'ssl.autoOriginTLSKex.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/settings/auto_origin_tls_kex',
+  },
+  {
     clientCallName: 'client.ssl.universal.settings.edit',
     fullyQualifiedName: 'ssl.universal.settings.edit',
     httpMethod: 'patch',

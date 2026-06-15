@@ -1,7 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Analyze, BaseAnalyze, type AnalyzeCreateResponse, type AnalyzeCreateParams } from './analyze';
-export { AutoOriginTLSKex, BaseAutoOriginTLSKex } from './auto-origin-tls-kex';
+export {
+  AutoOriginTLSKex,
+  BaseAutoOriginTLSKex,
+  type AutoOriginTLSKexEditResponse,
+  type AutoOriginTLSKexGetResponse,
+  type AutoOriginTLSKexEditParams,
+  type AutoOriginTLSKexGetParams,
+} from './auto-origin-tls-kex';
 export {
   CertificatePacks,
   BaseCertificatePacks,

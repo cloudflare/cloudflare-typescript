@@ -273,6 +273,8 @@ const fuse = new Fuse(
     'client.ssl.certificatePacks.list',
     'client.ssl.certificatePacks.quota.get',
     'client.ssl.recommendations.get',
+    'client.ssl.autoOriginTLSKex.edit',
+    'client.ssl.autoOriginTLSKex.get',
     'client.ssl.universal.settings.edit',
     'client.ssl.universal.settings.get',
     'client.ssl.verification.edit',
