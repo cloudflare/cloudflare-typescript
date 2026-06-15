@@ -365,6 +365,8 @@ export namespace TimeseriesGroupCacheHitResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -506,6 +508,8 @@ export namespace TimeseriesGroupDNSSECResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -651,6 +655,8 @@ export namespace TimeseriesGroupDNSSECAwareResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -792,6 +798,8 @@ export namespace TimeseriesGroupDNSSECE2EResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -933,6 +941,8 @@ export namespace TimeseriesGroupIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1074,6 +1084,8 @@ export namespace TimeseriesGroupMatchingAnswerResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1215,6 +1227,8 @@ export namespace TimeseriesGroupProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1360,6 +1374,8 @@ export namespace TimeseriesGroupQueryTypeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1501,6 +1517,8 @@ export namespace TimeseriesGroupResponseCodeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1642,6 +1660,8 @@ export namespace TimeseriesGroupResponseTTLResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -156,6 +156,8 @@ export namespace TopBrowserResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -290,6 +292,8 @@ export namespace TopBrowserFamilyResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

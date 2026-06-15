@@ -305,6 +305,8 @@ export namespace SummaryBotClassResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -445,6 +447,8 @@ export namespace SummaryDeviceTypeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -590,6 +594,8 @@ export namespace SummaryHTTPProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -730,6 +736,8 @@ export namespace SummaryHTTPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -875,6 +883,8 @@ export namespace SummaryIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1015,6 +1025,8 @@ export namespace SummaryOSResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1155,6 +1167,8 @@ export namespace SummaryPostQuantumResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1295,6 +1309,8 @@ export namespace SummaryTLSVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

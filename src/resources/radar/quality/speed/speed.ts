@@ -184,6 +184,8 @@ export namespace SpeedHistogramResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -312,6 +314,8 @@ export namespace SpeedSummaryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

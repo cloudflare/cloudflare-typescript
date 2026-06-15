@@ -206,6 +206,8 @@ export namespace LeakedCredentialSummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -341,6 +343,8 @@ export namespace LeakedCredentialTimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
