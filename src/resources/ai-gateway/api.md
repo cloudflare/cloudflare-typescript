@@ -26,6 +26,22 @@ Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/evaluation-types">client.aiGateway.evaluationTypes.<a href="./src/resources/ai-gateway/evaluation-types.ts">list</a>({ ...params }) -> EvaluationTypeListResponsesV4PagePaginationArray</code>
 
+## CustomProviders
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/custom-providers.ts">CustomProviderCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/custom-providers.ts">CustomProviderListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/custom-providers.ts">CustomProviderDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/custom-providers.ts">CustomProviderGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/custom-providers">client.aiGateway.customProviders.<a href="./src/resources/ai-gateway/custom-providers.ts">create</a>({ ...params }) -> CustomProviderCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/custom-providers">client.aiGateway.customProviders.<a href="./src/resources/ai-gateway/custom-providers.ts">list</a>({ ...params }) -> CustomProviderListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/custom-providers/{id}">client.aiGateway.customProviders.<a href="./src/resources/ai-gateway/custom-providers.ts">delete</a>(id, { ...params }) -> CustomProviderDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/custom-providers/{id}">client.aiGateway.customProviders.<a href="./src/resources/ai-gateway/custom-providers.ts">get</a>(id, { ...params }) -> CustomProviderGetResponse</code>
+
 ## Logs
 
 Types:

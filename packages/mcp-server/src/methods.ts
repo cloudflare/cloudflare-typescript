@@ -12643,6 +12643,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/ai-gateway/evaluation-types',
   },
   {
+    clientCallName: 'client.aiGateway.customProviders.create',
+    fullyQualifiedName: 'aiGateway.customProviders.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/ai-gateway/custom-providers',
+  },
+  {
+    clientCallName: 'client.aiGateway.customProviders.list',
+    fullyQualifiedName: 'aiGateway.customProviders.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/ai-gateway/custom-providers',
+  },
+  {
+    clientCallName: 'client.aiGateway.customProviders.delete',
+    fullyQualifiedName: 'aiGateway.customProviders.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/ai-gateway/custom-providers/{id}',
+  },
+  {
+    clientCallName: 'client.aiGateway.customProviders.get',
+    fullyQualifiedName: 'aiGateway.customProviders.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/ai-gateway/custom-providers/{id}',
+  },
+  {
     clientCallName: 'client.aiGateway.logs.list',
     fullyQualifiedName: 'aiGateway.logs.list',
     httpMethod: 'get',
