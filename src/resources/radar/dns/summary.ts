@@ -281,6 +281,8 @@ export namespace SummaryCacheHitResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -421,6 +423,8 @@ export namespace SummaryDNSSECResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -571,6 +575,8 @@ export namespace SummaryDNSSECAwareResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -711,6 +717,8 @@ export namespace SummaryDNSSECE2EResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -851,6 +859,8 @@ export namespace SummaryIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -991,6 +1001,8 @@ export namespace SummaryMatchingAnswerResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1131,6 +1143,8 @@ export namespace SummaryProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1281,6 +1295,8 @@ export namespace SummaryQueryTypeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1409,6 +1425,8 @@ export namespace SummaryResponseCodeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1537,6 +1555,8 @@ export namespace SummaryResponseTTLResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -143,6 +143,8 @@ export namespace BrowserFamilyGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

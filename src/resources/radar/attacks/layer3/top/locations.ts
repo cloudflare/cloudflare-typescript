@@ -160,6 +160,8 @@ export namespace LocationOriginResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -298,6 +300,8 @@ export namespace LocationTargetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

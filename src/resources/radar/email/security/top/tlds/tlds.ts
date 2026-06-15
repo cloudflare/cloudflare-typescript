@@ -147,6 +147,8 @@ export namespace TLDGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

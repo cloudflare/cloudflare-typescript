@@ -205,6 +205,8 @@ export namespace RoutingSummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -340,6 +342,8 @@ export namespace RoutingTimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

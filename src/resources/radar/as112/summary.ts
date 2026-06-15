@@ -216,6 +216,8 @@ export namespace SummaryDNSSECResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -356,6 +358,8 @@ export namespace SummaryEdnsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -496,6 +500,8 @@ export namespace SummaryIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -636,6 +642,8 @@ export namespace SummaryProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -786,6 +794,8 @@ export namespace SummaryQueryTypeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -914,6 +924,8 @@ export namespace SummaryResponseCodesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

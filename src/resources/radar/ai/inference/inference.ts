@@ -24,7 +24,7 @@ export class BaseInference extends APIResource {
   ] as const);
 
   /**
-   * Retrieves an aggregated summary of unique accounts using Workers AI inference
+   * Retrieves an aggregated summary of the number of inferences run on Workers AI,
    * grouped by the specified dimension.
    *
    * @example
@@ -47,7 +47,7 @@ export class BaseInference extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of unique accounts using Workers AI inference,
+   * Retrieves the distribution of the number of inferences run on Workers AI,
    * grouped by the specified dimension over time.
    *
    * @example
@@ -183,6 +183,8 @@ export namespace InferenceSummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -318,6 +320,8 @@ export namespace InferenceTimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

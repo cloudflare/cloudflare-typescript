@@ -169,6 +169,8 @@ export namespace OriginSummaryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -304,6 +306,8 @@ export namespace OriginTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

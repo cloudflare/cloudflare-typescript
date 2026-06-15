@@ -148,6 +148,8 @@ export namespace TopBotsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -289,6 +291,8 @@ export namespace TopCategoriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

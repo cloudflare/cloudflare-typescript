@@ -147,6 +147,8 @@ export namespace TopDomainCategoriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

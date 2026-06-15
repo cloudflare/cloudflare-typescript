@@ -143,6 +143,8 @@ export namespace TLSVersionGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

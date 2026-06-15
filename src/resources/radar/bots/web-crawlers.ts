@@ -184,6 +184,8 @@ export namespace WebCrawlerSummaryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -319,6 +321,8 @@ export namespace WebCrawlerTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
