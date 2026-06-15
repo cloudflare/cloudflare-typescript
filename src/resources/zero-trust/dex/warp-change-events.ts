@@ -14,7 +14,7 @@ export class WARPChangeEvents extends APIResource {
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
    *     from: '2023-09-20T17:00:00Z',
    *     page: 1,
-   *     per_page: 1,
+   *     per_page: 10,
    *     to: '2023-09-20T17:00:00Z',
    *   });
    * ```
@@ -51,32 +51,32 @@ export namespace WARPChangeEventGetResponse {
     account_tag?: string;
 
     /**
-     * API Resource UUID tag.
+     * The device ID.
      */
     device_id?: string;
 
     /**
-     * API Resource UUID tag.
+     * @deprecated Use `registration_id` instead.
      */
     device_registration?: string;
 
     /**
-     * The hostname of the machine the event is from
+     * The hostname of the machine the event is from.
      */
     hostname?: string;
 
     /**
-     * API Resource UUID tag.
+     * The device registration ID.
      */
     registration_id?: string;
 
     /**
-     * The serial number of the machine the event is from
+     * The serial number of the machine the event is from.
      */
     serial_number?: string;
 
     /**
-     * Timestamp in ISO format
+     * The event time.
      */
     timestamp?: string;
 
@@ -86,53 +86,62 @@ export namespace WARPChangeEventGetResponse {
     toggle?: 'on' | 'off';
 
     /**
-     * Email tied to the device
+     * Email tied to the device.
      */
     user_email?: string;
   }
 
   export interface DigitalExperienceMonitoringWARPConfigChangeEvent {
     /**
-     * API Resource UUID tag.
+     * The device ID.
      */
     device_id?: string;
 
     /**
-     * API Resource UUID tag.
+     * @deprecated Use `registration_id` instead.
      */
     device_registration?: string;
 
+    /**
+     * The details for the WARP configuration that was switched from.
+     */
     from?: DigitalExperienceMonitoringWARPConfigChangeEvent.From;
 
     /**
-     * The hostname of the machine the event is from
+     * The hostname of the machine the event is from.
      */
     hostname?: string;
 
     /**
-     * API Resource UUID tag.
+     * The device registration ID.
      */
     registration_id?: string;
 
     /**
-     * The serial number of the machine the event is from
+     * The serial number of the machine the event is from.
      */
     serial_number?: string;
 
     /**
-     * Timestamp in ISO format
+     * The event time.
      */
     timestamp?: string;
 
+    /**
+     * The details for the WARP configuration that was switched to.
+     */
     to?: DigitalExperienceMonitoringWARPConfigChangeEvent.To;
 
     /**
-     * Email tied to the device
+     * Email tied to the device.
      */
     user_email?: string;
   }
 
   export namespace DigitalExperienceMonitoringWARPConfigChangeEvent {
+    /**
+     * The details for the WARP configuration that was switched from.
+     */
     export interface From {
       /**
        * The account name.
@@ -140,7 +149,7 @@ export namespace WARPChangeEventGetResponse {
       account_name?: string;
 
       /**
-       * API Resource UUID tag.
+       * The public account identifier.
        */
       account_tag?: string;
 
@@ -150,6 +159,9 @@ export namespace WARPChangeEventGetResponse {
       config_name?: string;
     }
 
+    /**
+     * The details for the WARP configuration that was switched to.
+     */
     export interface To {
       /**
        * The account name.
@@ -157,7 +169,7 @@ export namespace WARPChangeEventGetResponse {
       account_name?: string;
 
       /**
-       * API Resource UUID tag.
+       * The public account identifier.
        */
       account_tag?: string;
 
@@ -171,27 +183,27 @@ export namespace WARPChangeEventGetResponse {
 
 export interface WARPChangeEventGetParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   from: string;
 
   /**
-   * Query param: Page number of paginated results
+   * Query param: Page number of paginated results.
    */
   page: number;
 
   /**
-   * Query param: Number of items per page
+   * Query param: Number of results per page.
    */
   per_page: number;
 
   /**
-   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   to: string;
 
@@ -218,7 +230,7 @@ export interface WARPChangeEventGetParams {
   toggle?: 'on' | 'off';
 
   /**
-   * Query param: Filter events by type 'config' or 'toggle'
+   * Query param: Filter events by type 'config' or 'toggle'.
    */
   type?: 'config' | 'toggle';
 }

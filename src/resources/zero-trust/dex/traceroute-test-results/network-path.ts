@@ -34,7 +34,7 @@ export class NetworkPath extends APIResource {
 
 export interface NetworkPathGetResponse {
   /**
-   * an array of the hops taken by the device to reach the end destination
+   * An array of the hops taken by the device to reach the end destination.
    */
   hops: Array<NetworkPathGetResponse.Hop>;
 
@@ -44,9 +44,19 @@ export interface NetworkPathGetResponse {
   resultId: string;
 
   /**
-   * name of the device associated with this network path response
+   * Cloudflare colo airport code.
+   */
+  colo?: string;
+
+  /**
+   * Name of the device associated with this network path response.
    */
   deviceName?: string;
+
+  /**
+   * Whether the test was run inside or outside of the WARP tunnel.
+   */
+  execution_context?: 'EXECUTION_CONTEXT_INVALID' | 'OUT_OF_TUNNEL' | 'IN_TUNNEL';
 
   /**
    * API Resource UUID tag.
@@ -54,9 +64,16 @@ export interface NetworkPathGetResponse {
   testId?: string;
 
   /**
-   * name of the tracroute test
+   * Name of the traceroute test.
    */
   testName?: string;
+
+  /**
+   * Timestamp indicating when the traceroute test execution began.
+   */
+  time_start?: string;
+
+  tunnel_type?: string | null;
 }
 
 export namespace NetworkPathGetResponse {
@@ -93,7 +110,7 @@ export namespace NetworkPathGetResponse {
 
 export interface NetworkPathGetParams {
   /**
-   * unique identifier linked to an account
+   * Unique identifier linked to an account.
    */
   account_id: string;
 }

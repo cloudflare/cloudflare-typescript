@@ -14,10 +14,10 @@ describe('resource devices', () => {
   test.skip('list: only required params', async () => {
     const responsePromise = client.zeroTrust.dex.fleetStatus.devices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      from: '2023-10-11T00:00:00Z',
+      from: '2023-10-11 00:00:00+00',
       page: 1,
       per_page: 10,
-      to: '2023-10-11T00:00:00Z',
+      to: '2023-10-11 00:00:00+00',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,10 +32,10 @@ describe('resource devices', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.zeroTrust.dex.fleetStatus.devices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      from: '2023-10-11T00:00:00Z',
+      from: '2023-10-11 00:00:00+00',
       page: 1,
       per_page: 10,
-      to: '2023-10-11T00:00:00Z',
+      to: '2023-10-11 00:00:00+00',
       colo: 'SJC',
       device_id: 'cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7',
       mode: 'proxy',

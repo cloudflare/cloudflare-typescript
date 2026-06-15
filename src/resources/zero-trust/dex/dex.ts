@@ -79,7 +79,7 @@ export interface DigitalExperienceMonitor {
   id: string;
 
   /**
-   * Whether the policy is the default for the account
+   * Whether the policy is the default for the account.
    */
   default: boolean;
 
@@ -145,6 +145,9 @@ export interface NetworkPathResponse {
    */
   id: string;
 
+  /**
+   * Name of the device that ran the test.
+   */
   deviceName?: string;
 
   /**
@@ -159,29 +162,29 @@ export interface NetworkPathResponse {
   networkPath?: NetworkPath | null;
 
   /**
-   * The host of the Traceroute synthetic application test
+   * The host of the Traceroute synthetic application test.
    */
   url?: string;
 }
 
 export interface Percentiles {
   /**
-   * p50 observed in the time period
+   * p50 observed in the time period.
    */
   p50?: number | null;
 
   /**
-   * p90 observed in the time period
+   * p90 observed in the time period.
    */
   p90?: number | null;
 
   /**
-   * p95 observed in the time period
+   * p95 observed in the time period.
    */
   p95?: number | null;
 
   /**
-   * p99 observed in the time period
+   * p99 observed in the time period.
    */
   p99?: number | null;
 }

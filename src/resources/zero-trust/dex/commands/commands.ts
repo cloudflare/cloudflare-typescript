@@ -21,7 +21,7 @@ export class Commands extends APIResource {
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 
   /**
-   * Initiate commands for up to 10 devices per account
+   * Initiate commands for up to 10 devices per account.
    *
    * @example
    * ```ts
@@ -57,7 +57,7 @@ export class Commands extends APIResource {
    *   {
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
    *     page: 1,
-   *     per_page: 50,
+   *     per_page: 10,
    *   },
    * )) {
    *   // ...
@@ -151,7 +151,7 @@ export namespace CommandListResponse {
 
 export interface CommandCreateParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -229,37 +229,37 @@ export namespace CommandCreateParams {
 
 export interface CommandListParams extends V4PagePaginationParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Optionally filter executed commands by command type
+   * Query param: Optionally filter executed commands by command type.
    */
   command_type?: 'pcap' | 'speed-test' | 'warp-diag';
 
   /**
-   * Query param: Unique identifier for a device
+   * Query param: Unique identifier for a device.
    */
   device_id?: string;
 
   /**
-   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   from?: string;
 
   /**
-   * Query param: Optionally filter executed commands by status
+   * Query param: Optionally filter executed commands by status.
    */
   status?: 'PENDING_EXEC' | 'PENDING_UPLOAD' | 'SUCCESS' | 'FAILED';
 
   /**
-   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   to?: string;
 
   /**
-   * Query param: Email tied to the device
+   * Query param: Email tied to the device.
    */
   user_email?: string;
 }

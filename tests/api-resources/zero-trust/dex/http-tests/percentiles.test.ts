@@ -35,8 +35,8 @@ describe('resource percentiles', () => {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         from: '2023-09-20T17:00:00Z',
         to: '2023-09-20T17:00:00Z',
-        colo: 'colo',
-        deviceId: ['string'],
+        colo: 'SJC',
+        deviceId: ['cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7'],
       },
     );
   });

@@ -36,7 +36,7 @@ export interface UniqueDevices {
 
 export interface UniqueDeviceListParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path.
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -47,7 +47,7 @@ export interface UniqueDeviceListParams {
   deviceId?: Array<string>;
 
   /**
-   * Query param: Optionally filter results by test name
+   * Query param: Optionally filter results by test name.
    */
   testName?: string;
 }
