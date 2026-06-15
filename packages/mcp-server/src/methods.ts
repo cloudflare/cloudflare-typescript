@@ -11755,6 +11755,30 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/cache/origin_post_quantum_encryption',
   },
   {
+    clientCallName: 'client.originTLSComplianceModes.update',
+    fullyQualifiedName: 'originTLSComplianceModes.update',
+    httpMethod: 'put',
+    httpPath: '/zones/{zone_id}/settings/origin_tls_compliance_modes',
+  },
+  {
+    clientCallName: 'client.originTLSComplianceModes.delete',
+    fullyQualifiedName: 'originTLSComplianceModes.delete',
+    httpMethod: 'delete',
+    httpPath: '/zones/{zone_id}/settings/origin_tls_compliance_modes',
+  },
+  {
+    clientCallName: 'client.originTLSComplianceModes.edit',
+    fullyQualifiedName: 'originTLSComplianceModes.edit',
+    httpMethod: 'patch',
+    httpPath: '/zones/{zone_id}/settings/origin_tls_compliance_modes',
+  },
+  {
+    clientCallName: 'client.originTLSComplianceModes.get',
+    fullyQualifiedName: 'originTLSComplianceModes.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/settings/origin_tls_compliance_modes',
+  },
+  {
     clientCallName: 'client.googleTagGateway.config.update',
     fullyQualifiedName: 'googleTagGateway.config.update',
     httpMethod: 'put',
