@@ -127,11 +127,7 @@ export class Secrets extends APIResource {
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets-bulk`,
-        {
-          body,
-          ...options,
-          headers: { 'Content-Type': 'application/merge-patch+json', ...options?.headers },
-        },
+        { body, ...options },
       ) as Core.APIPromise<{ result: SecretBulkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
