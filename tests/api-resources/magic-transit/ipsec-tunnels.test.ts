@@ -223,6 +223,28 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { ipsecTunnels: Base
       body: {},
     });
   });
+
+  test('pskSet: only required params', async () => {
+    const responsePromise = client.magicTransit.ipsecTunnels.pskSet({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      psks: [{ id: '023e105f4ecef8ad9ca31a8372d0c353', psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('pskSet: required and optional params', async () => {
+    const response = await client.magicTransit.ipsecTunnels.pskSet({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      psks: [{ id: '023e105f4ecef8ad9ca31a8372d0c353', psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy' }],
+      validate_only: true,
+    });
+  });
 };
 describe('resource ipsecTunnels', () => runTests(client));
 describe('resource ipsecTunnels (tree shakable, base)', () => runTests(partialClient));

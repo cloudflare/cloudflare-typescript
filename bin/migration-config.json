@@ -2162,6 +2162,80 @@
       ]
     },
     {
+      "base": "magicTransit.cf1Sites.ramps",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "ramp_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "cf1_site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ramp_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "magicTransit.cf1Sites.ramps",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "ramp_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "cf1_site_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ramp_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "pages.projects.deployments",
       "name": "delete",
       "params": [

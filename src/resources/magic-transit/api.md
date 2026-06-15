@@ -72,6 +72,7 @@ Types:
 - <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelBulkUpdateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelGetResponse</a></code>
 - <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelPSKGenerateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/ipsec-tunnels.ts">IPSECTunnelPSKSetResponse</a></code>
 
 Methods:
 
@@ -82,6 +83,7 @@ Methods:
 - <code title="put /accounts/{account_id}/magic/ipsec_tunnels">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">bulkUpdate</a>({ ...params }) -> IPSECTunnelBulkUpdateResponse</code>
 - <code title="get /accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">get</a>(ipsecTunnelID, { ...params }) -> IPSECTunnelGetResponse</code>
 - <code title="post /accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}/psk_generate">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">pskGenerate</a>(ipsecTunnelID, { ...params }) -> IPSECTunnelPSKGenerateResponse</code>
+- <code title="post /accounts/{account_id}/magic/ipsec_tunnels/psk">client.magicTransit.ipsecTunnels.<a href="./src/resources/magic-transit/ipsec-tunnels.ts">pskSet</a>({ ...params }) -> IPSECTunnelPSKSetResponse</code>
 
 ## Routes
 
@@ -239,6 +241,35 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/latest">client.magicTransit.connectors.snapshots.latest.<a href="./src/resources/magic-transit/connectors/snapshots/latest.ts">list</a>(connectorID, { ...params }) -> LatestListResponse</code>
+
+## Cf1Sites
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">Cf1Site</a></code>
+- <code><a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">Cf1SiteLocation</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/cf1_sites">client.magicTransit.cf1Sites.<a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">create</a>([ ...body ]) -> Cf1SitesSinglePage</code>
+- <code title="patch /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}">client.magicTransit.cf1Sites.<a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">update</a>(cf1SiteID, { ...params }) -> Cf1Site</code>
+- <code title="get /accounts/{account_id}/magic/cf1_sites">client.magicTransit.cf1Sites.<a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">list</a>({ ...params }) -> Cf1SitesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}">client.magicTransit.cf1Sites.<a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">delete</a>(cf1SiteID, { ...params }) -> Cf1Site</code>
+- <code title="get /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}">client.magicTransit.cf1Sites.<a href="./src/resources/magic-transit/cf1-sites/cf1-sites.ts">get</a>(cf1SiteID, { ...params }) -> Cf1Site</code>
+
+### Ramps
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/cf1-sites/ramps.ts">Ramp</a></code>
+- <code><a href="./src/resources/magic-transit/cf1-sites/ramps.ts">RampType</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps">client.magicTransit.cf1Sites.ramps.<a href="./src/resources/magic-transit/cf1-sites/ramps.ts">create</a>(cf1SiteID, [ ...body ]) -> RampsSinglePage</code>
+- <code title="get /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps">client.magicTransit.cf1Sites.ramps.<a href="./src/resources/magic-transit/cf1-sites/ramps.ts">list</a>(cf1SiteID, { ...params }) -> RampsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps/{ramp_id}">client.magicTransit.cf1Sites.ramps.<a href="./src/resources/magic-transit/cf1-sites/ramps.ts">delete</a>(rampID, { ...params }) -> Ramp</code>
+- <code title="get /accounts/{account_id}/magic/cf1_sites/{cf1_site_id}/ramps/{ramp_id}">client.magicTransit.cf1Sites.ramps.<a href="./src/resources/magic-transit/cf1-sites/ramps.ts">get</a>(rampID, { ...params }) -> Ramp</code>
 
 ## PCAPs
 
