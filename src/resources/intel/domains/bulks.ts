@@ -5,7 +5,15 @@ import * as Core from '../../../core';
 
 export class Bulks extends APIResource {
   /**
-   * Same as summary.
+   * Returns security details and statistics about multiple domains in a single
+   * request.
+   *
+   * **Behavior change — domain ranking is becoming opt-in.** This endpoint
+   * previously included domain ranking data in every response and accepted a
+   * `skip_ranking=true` query parameter to opt out. That parameter is being
+   * deprecated and ranking will no longer be returned by default. Callers that want
+   * ranking data must pass `include_ranking=true`. The `skip_ranking` parameter will
+   * be silently ignored once the change ships.
    *
    * @example
    * ```ts
@@ -136,6 +144,23 @@ export interface BulkGetParams {
    * `?domain=cloudflare.com&domain=example.com`.
    */
   domain?: Array<string>;
+
+  /**
+   * Query param: Whether to include domain ranking data in the response. Defaults to
+   * `false` — ranking lookups are expensive at bulk scale and most callers do not
+   * need them. Set to `true` to opt in. This parameter replaces the deprecated
+   * `skip_ranking` (see below).
+   */
+  include_ranking?: boolean;
+
+  /**
+   * Query param: **Deprecated.** Previously controlled whether the ranking lookup
+   * was skipped (defaulted to `false`, meaning ranking ran). The endpoint's default
+   * behavior is being flipped — ranking is now opt-in via `include_ranking=true` —
+   * and this parameter will be silently ignored. Remove it from your callers and use
+   * `include_ranking` instead.
+   */
+  skip_ranking?: boolean;
 }
 
 export declare namespace Bulks {
