@@ -543,8 +543,6 @@ export namespace InstanceCreateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -553,18 +551,6 @@ export namespace InstanceCreateResponse {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -938,8 +924,6 @@ export namespace InstanceUpdateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -948,18 +932,6 @@ export namespace InstanceUpdateResponse {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1333,8 +1305,6 @@ export namespace InstanceListResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -1343,18 +1313,6 @@ export namespace InstanceListResponse {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1728,8 +1686,6 @@ export namespace InstanceDeleteResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -1738,18 +1694,6 @@ export namespace InstanceDeleteResponse {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2193,8 +2137,6 @@ export namespace InstanceReadResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -2203,18 +2145,6 @@ export namespace InstanceReadResponse {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2763,8 +2693,6 @@ export namespace InstanceCreateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -2773,18 +2701,6 @@ export namespace InstanceCreateParams {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -3257,8 +3173,6 @@ export namespace InstanceUpdateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
@@ -3267,18 +3181,6 @@ export namespace InstanceUpdateParams {
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -3514,7 +3416,8 @@ export namespace InstanceChatCompletionsParams {
       /**
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
+       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
@@ -3658,7 +3561,8 @@ export namespace InstanceSearchParams {
       /**
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
+       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 

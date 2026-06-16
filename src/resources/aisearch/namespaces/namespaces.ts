@@ -582,7 +582,8 @@ export namespace NamespaceChatCompletionsParams {
       /**
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
+       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
@@ -736,7 +737,8 @@ export namespace NamespaceSearchParams {
       /**
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
+       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
