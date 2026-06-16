@@ -231,6 +231,18 @@ export interface RegistrationListResponse {
   tunnel_type?: string | null;
 
   user?: RegistrationListResponse.User;
+
+  /**
+   * The virtual IPv4 address assigned to the network interface of the tunnel for
+   * this registration.
+   */
+  virtual_ipv4?: string | null;
+
+  /**
+   * The virtual IPv6 address assigned to the network interface of the tunnel for
+   * this registration.
+   */
+  virtual_ipv6?: string | null;
 }
 
 export namespace RegistrationListResponse {
@@ -369,6 +381,18 @@ export interface RegistrationGetResponse {
   tunnel_type?: string | null;
 
   user?: RegistrationGetResponse.User;
+
+  /**
+   * The virtual IPv4 address assigned to the network interface of the tunnel for
+   * this registration.
+   */
+  virtual_ipv4?: string | null;
+
+  /**
+   * The virtual IPv6 address assigned to the network interface of the tunnel for
+   * this registration.
+   */
+  virtual_ipv6?: string | null;
 }
 
 export namespace RegistrationGetResponse {

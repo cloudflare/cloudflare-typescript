@@ -34,7 +34,7 @@ const runTests = (
     const responsePromise = client.zeroTrust.devices.deploymentGroups.create({
       account_id: 'account_id',
       name: 'Engineering Ring 0',
-      version_config: [{ target_environment: 'windows', version: '2026.5.234.0' }],
+      version_config: [{ target_environment: 'windows', version: '2026.6.234.0' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,7 +50,7 @@ const runTests = (
     const response = await client.zeroTrust.devices.deploymentGroups.create({
       account_id: 'account_id',
       name: 'Engineering Ring 0',
-      version_config: [{ target_environment: 'windows', version: '2026.5.234.0' }],
+      version_config: [{ target_environment: 'windows', version: '2026.6.234.0' }],
       policy_ids: ['string'],
     });
   });
@@ -117,7 +117,7 @@ const runTests = (
       account_id: 'account_id',
       name: 'Engineering Ring 0',
       policy_ids: ['string'],
-      version_config: [{ target_environment: 'windows', version: '2026.5.234.0' }],
+      version_config: [{ target_environment: 'windows', version: '2026.6.234.0' }],
     });
   });
 
