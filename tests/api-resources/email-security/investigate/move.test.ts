@@ -27,7 +27,11 @@ describe('resource move', () => {
   test('create: required and optional params', async () => {
     const response = await client.emailSecurity.investigate.move.create(
       '4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', destination: 'Inbox' },
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        destination: 'Inbox',
+        expected_disposition: 'MALICIOUS',
+      },
     );
   });
 
@@ -49,6 +53,7 @@ describe('resource move', () => {
     const response = await client.emailSecurity.investigate.move.bulk({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination: 'Inbox',
+      expected_disposition: 'MALICIOUS',
       ids: ['4Njp3P0STMz2c02Q-2024-01-05T10:00:00-12345678'],
       postfix_ids: ['4Njp3P0STMz2c02Q'],
     });
