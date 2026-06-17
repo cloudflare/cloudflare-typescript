@@ -191,6 +191,21 @@ export interface MoveCreateParams {
     | 'DeletedItems'
     | 'RecoverableItemsDeletions'
     | 'RecoverableItemsPurges';
+
+  /**
+   * Body param
+   */
+  expected_disposition?:
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE';
 }
 
 export interface MoveBulkParams {
@@ -208,6 +223,21 @@ export interface MoveBulkParams {
     | 'DeletedItems'
     | 'RecoverableItemsDeletions'
     | 'RecoverableItemsPurges';
+
+  /**
+   * Body param
+   */
+  expected_disposition?:
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE';
 
   /**
    * Body param: List of message IDs to move
