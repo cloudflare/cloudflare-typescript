@@ -209,7 +209,7 @@ Types:
 
 # [Calls](src/resources/calls/api.md)
 
-# [Moq](src/resources/moq/api.md)
+# [MoQ](src/resources/moq/api.md)
 
 # [CloudforceOne](src/resources/cloudforce-one/api.md)
 

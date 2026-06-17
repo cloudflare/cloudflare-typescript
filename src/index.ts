@@ -86,7 +86,7 @@ import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/mag
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { ManagedTransforms } from './resources/managed-transforms/managed-transforms';
 import { Memberships } from './resources/memberships/memberships';
-import { Moq } from './resources/moq/moq';
+import { MoQ } from './resources/moq/moq';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
 import { Organizations } from './resources/organizations/organizations';
@@ -390,7 +390,7 @@ export class Cloudflare extends Core.APIClient {
   snippets: API.Snippets = new API.Snippets(this);
   realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
   calls: API.Calls = new API.Calls(this);
-  moq: API.Moq = new API.Moq(this);
+  moq: API.MoQ = new API.MoQ(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
   flagship: API.Flagship = new API.Flagship(this);
@@ -649,7 +649,7 @@ Cloudflare.Hostnames = Hostnames;
 Cloudflare.Snippets = Snippets;
 Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
-Cloudflare.Moq = Moq;
+Cloudflare.MoQ = MoQ;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
 Cloudflare.Flagship = Flagship;
@@ -894,7 +894,7 @@ export declare namespace Cloudflare {
 
   export { Calls as Calls };
 
-  export { Moq as Moq };
+  export { MoQ as MoQ };
 
   export { CloudforceOne as CloudforceOne };
 

@@ -68,7 +68,7 @@ export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network
 export { MagicTransit } from './magic-transit/magic-transit';
 export { ManagedTransforms } from './managed-transforms';
 export { Memberships } from './memberships';
-export { Moq } from './moq/moq';
+export { MoQ } from './moq/moq';
 export { NetworkInterconnects } from './network-interconnects/network-interconnects';
 export { Organizations } from './organizations/organizations';
 export { OriginCACertificates } from './origin-ca-certificates';

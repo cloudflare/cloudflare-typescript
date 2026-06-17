@@ -17,14 +17,14 @@ import {
   Relays,
 } from './relays/relays';
 
-export class Moq extends APIResource {
+export class MoQ extends APIResource {
   relays: RelaysAPI.Relays = new RelaysAPI.Relays(this._client);
 }
 
-Moq.Relays = Relays;
-Moq.RelayListResponsesSinglePage = RelayListResponsesSinglePage;
+MoQ.Relays = Relays;
+MoQ.RelayListResponsesSinglePage = RelayListResponsesSinglePage;
 
-export declare namespace Moq {
+export declare namespace MoQ {
   export {
     Relays as Relays,
     type RelayCreateResponse as RelayCreateResponse,
