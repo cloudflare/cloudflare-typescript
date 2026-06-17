@@ -1078,6 +1078,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.calls.turn.update()`
 - `client.calls.turn.delete()`
 - `client.calls.turn.get()`
+- `client.moq.relays.update()`
+- `client.moq.relays.delete()`
+- `client.moq.relays.get()`
+- `client.moq.relays.tokens.rotate()`
 - `client.cloudforceOne.scans.results.get()`
 - `client.cloudforceOne.scans.config.delete()`
 - `client.cloudforceOne.scans.config.edit()`
