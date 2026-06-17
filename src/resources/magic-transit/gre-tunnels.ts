@@ -285,10 +285,20 @@ export namespace GRETunnelCreateResponse {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
@@ -484,10 +494,20 @@ export namespace GRETunnelUpdateResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -682,10 +702,20 @@ export namespace GRETunnelListResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -882,10 +912,20 @@ export namespace GRETunnelDeleteResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1082,10 +1122,20 @@ export namespace GRETunnelBulkUpdateResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1280,10 +1330,20 @@ export namespace GRETunnelGetResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1474,10 +1534,20 @@ export namespace GRETunnelCreateParams {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.

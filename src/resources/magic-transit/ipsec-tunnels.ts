@@ -378,10 +378,20 @@ export namespace IPSECTunnelCreateResponse {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
@@ -599,10 +609,20 @@ export namespace IPSECTunnelUpdateResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -819,10 +839,20 @@ export namespace IPSECTunnelListResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1041,10 +1071,20 @@ export namespace IPSECTunnelDeleteResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1263,10 +1303,20 @@ export namespace IPSECTunnelBulkUpdateResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1483,10 +1533,20 @@ export namespace IPSECTunnelGetResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1752,10 +1812,20 @@ export namespace IPSECTunnelCreateParams {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
@@ -1939,10 +2009,20 @@ export namespace IPSECTunnelUpdateParams {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
