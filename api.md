@@ -209,6 +209,8 @@ Types:
 
 # [Calls](src/resources/calls/api.md)
 
+# [Moq](src/resources/moq/api.md)
+
 # [CloudforceOne](src/resources/cloudforce-one/api.md)
 
 # [AIGateway](src/resources/ai-gateway/api.md)

@@ -813,6 +813,9 @@ TEST_PATHS=(
 	tests/api-resources/calls/calls.test.ts
 	tests/api-resources/calls/sfu.test.ts
 	tests/api-resources/calls/turn.test.ts
+	tests/api-resources/moq/moq.test.ts
+	tests/api-resources/moq/relays/relays.test.ts
+	tests/api-resources/moq/relays/tokens.test.ts
 	tests/api-resources/cloudforce-one/cloudforce-one.test.ts
 	tests/api-resources/cloudforce-one/scans/scans.test.ts
 	tests/api-resources/cloudforce-one/scans/results.test.ts
