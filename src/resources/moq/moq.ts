@@ -18,17 +18,17 @@ import {
   Relays,
 } from './relays/relays';
 
-export class BaseMoq extends APIResource {
+export class BaseMoQ extends APIResource {
   static override readonly _key: readonly ['moq'] = Object.freeze(['moq'] as const);
 }
-export class Moq extends BaseMoq {
+export class MoQ extends BaseMoQ {
   relays: RelaysAPI.Relays = new RelaysAPI.Relays(this._client);
 }
 
-Moq.Relays = Relays;
-Moq.BaseRelays = BaseRelays;
+MoQ.Relays = Relays;
+MoQ.BaseRelays = BaseRelays;
 
-export declare namespace Moq {
+export declare namespace MoQ {
   export {
     Relays as Relays,
     BaseRelays as BaseRelays,

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Moq, BaseMoq } from './moq';
+export { MoQ, BaseMoQ } from './moq';
 export {
   Relays,
   BaseRelays,

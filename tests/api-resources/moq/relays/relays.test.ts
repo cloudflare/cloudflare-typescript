@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Moq } from 'cloudflare/resources/moq/moq';
+import { MoQ } from 'cloudflare/resources/moq/moq';
 import { BaseRelays } from 'cloudflare/resources/moq/relays/relays';
 
 import Cloudflare from 'cloudflare';
@@ -23,7 +23,7 @@ const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [Moq],
+  resources: [MoQ],
 });
 
 const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) => {
