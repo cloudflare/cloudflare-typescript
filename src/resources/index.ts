@@ -80,6 +80,7 @@ export {
 export { MagicTransit, BaseMagicTransit } from './magic-transit/magic-transit';
 export { ManagedTransforms, BaseManagedTransforms } from './managed-transforms';
 export { Memberships, BaseMemberships } from './memberships';
+export { Moq, BaseMoq } from './moq/moq';
 export {
   NetworkInterconnects,
   BaseNetworkInterconnects,

@@ -12379,6 +12379,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/calls/turn_keys/{key_id}',
   },
   {
+    clientCallName: 'client.moq.relays.create',
+    fullyQualifiedName: 'moq.relays.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/moq/relays',
+  },
+  {
+    clientCallName: 'client.moq.relays.update',
+    fullyQualifiedName: 'moq.relays.update',
+    httpMethod: 'put',
+    httpPath: '/accounts/{account_id}/moq/relays/{relay_id}',
+  },
+  {
+    clientCallName: 'client.moq.relays.list',
+    fullyQualifiedName: 'moq.relays.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/moq/relays',
+  },
+  {
+    clientCallName: 'client.moq.relays.delete',
+    fullyQualifiedName: 'moq.relays.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/moq/relays/{relay_id}',
+  },
+  {
+    clientCallName: 'client.moq.relays.get',
+    fullyQualifiedName: 'moq.relays.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/moq/relays/{relay_id}',
+  },
+  {
+    clientCallName: 'client.moq.relays.tokens.rotate',
+    fullyQualifiedName: 'moq.relays.tokens.rotate',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/moq/relays/{relay_id}/tokens/rotate',
+  },
+  {
     clientCallName: 'client.cloudforceOne.scans.results.get',
     fullyQualifiedName: 'cloudforceOne.scans.results.get',
     httpMethod: 'get',
