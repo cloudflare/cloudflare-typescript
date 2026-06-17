@@ -13,11 +13,6 @@ import {
   CatchAlls,
 } from './catch-alls';
 import { APIPromise } from '../../../core/api-promise';
-import {
-  PagePromise,
-  V4PagePaginationArray,
-  type V4PagePaginationArrayParams,
-} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -84,31 +79,6 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Lists existing routing rules.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const emailRoutingRule of client.emailRouting.rules.list(
-   *   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    params: RuleListParams,
-    options?: RequestOptions,
-  ): PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule> {
-    const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      path`/zones/${zone_id}/email/routing/rules`,
-      V4PagePaginationArray<EmailRoutingRule>,
-      { query, ...options },
-    );
-  }
-
-  /**
    * Delete a specific routing rule.
    *
    * @example
@@ -158,8 +128,6 @@ export class BaseRules extends APIResource {
 export class Rules extends BaseRules {
   catchAlls: CatchAllsAPI.CatchAlls = new CatchAllsAPI.CatchAlls(this._client);
 }
-
-export type EmailRoutingRulesV4PagePaginationArray = V4PagePaginationArray<EmailRoutingRule>;
 
 /**
  * Actions pattern.
@@ -326,18 +294,6 @@ export interface RuleUpdateParams {
   priority?: number;
 }
 
-export interface RuleListParams extends V4PagePaginationArrayParams {
-  /**
-   * Path param: Identifier.
-   */
-  zone_id: string;
-
-  /**
-   * Query param: Filter by enabled routing rules.
-   */
-  enabled?: true | false;
-}
-
 export interface RuleDeleteParams {
   /**
    * Identifier.
@@ -360,10 +316,8 @@ export declare namespace Rules {
     type Action as Action,
     type EmailRoutingRule as EmailRoutingRule,
     type Matcher as Matcher,
-    type EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
-    type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
   };
