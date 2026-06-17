@@ -446,7 +446,6 @@ const fuse = new Fuse(
     'client.emailRouting.rules.create',
     'client.emailRouting.rules.delete',
     'client.emailRouting.rules.get',
-    'client.emailRouting.rules.list',
     'client.emailRouting.rules.update',
     'client.emailRouting.rules.catchAlls.get',
     'client.emailRouting.rules.catchAlls.update',

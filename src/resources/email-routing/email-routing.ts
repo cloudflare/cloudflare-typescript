@@ -29,12 +29,10 @@ import {
   Action,
   BaseRules,
   EmailRoutingRule,
-  EmailRoutingRulesV4PagePaginationArray,
   Matcher,
   RuleCreateParams,
   RuleDeleteParams,
   RuleGetParams,
-  RuleListParams,
   RuleUpdateParams,
   Rules,
 } from './rules/rules';
@@ -136,6 +134,12 @@ export interface Settings {
   status?: 'ready' | 'unconfigured' | 'misconfigured' | 'misconfigured/locked' | 'unlocked';
 
   /**
+   * Whether subaddressing (plus-addressing) is honored when matching incoming mail
+   * against routing rules.
+   */
+  support_subaddress?: true | false;
+
+  /**
    * @deprecated Email Routing settings tag. (Deprecated, replaced by Email Routing
    * settings identifier)
    */
@@ -206,10 +210,8 @@ export declare namespace EmailRouting {
     type Action as Action,
     type EmailRoutingRule as EmailRoutingRule,
     type Matcher as Matcher,
-    type EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
-    type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
   };

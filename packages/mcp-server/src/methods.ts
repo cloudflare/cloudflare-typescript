@@ -2041,12 +2041,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/email/routing/rules/{rule_identifier}',
   },
   {
-    clientCallName: 'client.emailRouting.rules.list',
-    fullyQualifiedName: 'emailRouting.rules.list',
-    httpMethod: 'get',
-    httpPath: '/zones/{zone_id}/email/routing/rules',
-  },
-  {
     clientCallName: 'client.emailRouting.rules.delete',
     fullyQualifiedName: 'emailRouting.rules.delete',
     httpMethod: 'delete',
