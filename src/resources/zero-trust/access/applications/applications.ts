@@ -6050,9 +6050,9 @@ export namespace ApplicationCreateResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `ssh_piv_key` is supported.
+         * applications, only `piv_key` is supported.
          */
-        allowed_authenticators?: Array<'ssh_piv_key'>;
+        allowed_authenticators?: Array<'piv_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -11110,9 +11110,9 @@ export namespace ApplicationUpdateResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `ssh_piv_key` is supported.
+         * applications, only `piv_key` is supported.
          */
-        allowed_authenticators?: Array<'ssh_piv_key'>;
+        allowed_authenticators?: Array<'piv_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -16170,9 +16170,9 @@ export namespace ApplicationListResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `ssh_piv_key` is supported.
+         * applications, only `piv_key` is supported.
          */
-        allowed_authenticators?: Array<'ssh_piv_key'>;
+        allowed_authenticators?: Array<'piv_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -21237,9 +21237,9 @@ export namespace ApplicationGetResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `ssh_piv_key` is supported.
+         * applications, only `piv_key` is supported.
          */
-        allowed_authenticators?: Array<'ssh_piv_key'>;
+        allowed_authenticators?: Array<'piv_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -26225,9 +26225,9 @@ export declare namespace ApplicationCreateParams {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `ssh_piv_key` is supported.
+         * applications, only `piv_key` is supported.
          */
-        allowed_authenticators?: Array<'ssh_piv_key'>;
+        allowed_authenticators?: Array<'piv_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -31199,9 +31199,9 @@ export declare namespace ApplicationUpdateParams {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `ssh_piv_key` is supported.
+         * applications, only `piv_key` is supported.
          */
-        allowed_authenticators?: Array<'ssh_piv_key'>;
+        allowed_authenticators?: Array<'piv_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at

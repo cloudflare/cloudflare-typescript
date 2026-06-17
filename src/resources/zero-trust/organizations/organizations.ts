@@ -281,18 +281,18 @@ export interface Organization {
   mfa_config?: Organization.MfaConfig;
 
   /**
+   * Configures PIV key requirements for MFA using hardware security keys.
+   */
+  mfa_piv_key_requirements?: Organization.MfaPivKeyRequirements;
+
+  /**
    * Determines whether global MFA settings apply to applications by default. The
    * organization must have MFA enabled with at least one authentication method and a
    * session duration configured. Note: 'allowed_authenticators' cannot only contain
-   * 'ssh_piv_key' if the organization has any non-infrastructure applications
-   * because PIV keys are only compatible with infrastructure apps.
+   * 'piv_key' if the organization has any non-infrastructure applications because
+   * PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
-
-  /**
-   * Configures SSH PIV key requirements for MFA using hardware security keys.
-   */
-  mfa_ssh_piv_key_requirements?: Organization.MfaSSHPivKeyRequirements;
 
   /**
    * The name of your Zero Trust organization.
@@ -348,7 +348,7 @@ export namespace Organization {
     /**
      * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'ssh_piv_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -371,9 +371,9 @@ export namespace Organization {
   }
 
   /**
-   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   * Configures PIV key requirements for MFA using hardware security keys.
    */
-  export interface MfaSSHPivKeyRequirements {
+  export interface MfaPivKeyRequirements {
     /**
      * Defines when a PIN is required to use the SSH key. Valid values: `never` (no PIN
      * required), `once` (PIN required once per session), `always` (PIN required for
@@ -382,8 +382,8 @@ export namespace Organization {
     pin_policy?: 'never' | 'once' | 'always';
 
     /**
-     * Requires the SSH PIV key to be stored on a FIPS 140-2 Level 1 or higher
-     * validated device.
+     * Requires the PIV key to be stored on a FIPS 140-2 Level 1 or higher validated
+     * device.
      */
     require_fips_device?: boolean;
 
@@ -483,19 +483,19 @@ export interface OrganizationCreateParams {
   mfa_config?: OrganizationCreateParams.MfaConfig;
 
   /**
+   * Body param: Configures PIV key requirements for MFA using hardware security
+   * keys.
+   */
+  mfa_piv_key_requirements?: OrganizationCreateParams.MfaPivKeyRequirements;
+
+  /**
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured. Note: 'allowed_authenticators' cannot
-   * only contain 'ssh_piv_key' if the organization has any non-infrastructure
+   * only contain 'piv_key' if the organization has any non-infrastructure
    * applications because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
-
-  /**
-   * Body param: Configures SSH PIV key requirements for MFA using hardware security
-   * keys.
-   */
-  mfa_ssh_piv_key_requirements?: OrganizationCreateParams.MfaSSHPivKeyRequirements;
 
   /**
    * Body param: The amount of time that tokens issued for applications will be
@@ -534,7 +534,7 @@ export namespace OrganizationCreateParams {
     /**
      * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'ssh_piv_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -557,9 +557,9 @@ export namespace OrganizationCreateParams {
   }
 
   /**
-   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   * Configures PIV key requirements for MFA using hardware security keys.
    */
-  export interface MfaSSHPivKeyRequirements {
+  export interface MfaPivKeyRequirements {
     /**
      * Defines when a PIN is required to use the SSH key. Valid values: `never` (no PIN
      * required), `once` (PIN required once per session), `always` (PIN required for
@@ -568,8 +568,8 @@ export namespace OrganizationCreateParams {
     pin_policy?: 'never' | 'once' | 'always';
 
     /**
-     * Requires the SSH PIV key to be stored on a FIPS 140-2 Level 1 or higher
-     * validated device.
+     * Requires the PIV key to be stored on a FIPS 140-2 Level 1 or higher validated
+     * device.
      */
     require_fips_device?: boolean;
 
@@ -667,19 +667,19 @@ export interface OrganizationUpdateParams {
   mfa_config?: OrganizationUpdateParams.MfaConfig;
 
   /**
+   * Body param: Configures PIV key requirements for MFA using hardware security
+   * keys.
+   */
+  mfa_piv_key_requirements?: OrganizationUpdateParams.MfaPivKeyRequirements;
+
+  /**
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured. Note: 'allowed_authenticators' cannot
-   * only contain 'ssh_piv_key' if the organization has any non-infrastructure
+   * only contain 'piv_key' if the organization has any non-infrastructure
    * applications because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
-
-  /**
-   * Body param: Configures SSH PIV key requirements for MFA using hardware security
-   * keys.
-   */
-  mfa_ssh_piv_key_requirements?: OrganizationUpdateParams.MfaSSHPivKeyRequirements;
 
   /**
    * Body param: The name of your Zero Trust organization.
@@ -736,7 +736,7 @@ export namespace OrganizationUpdateParams {
     /**
      * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'ssh_piv_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -759,9 +759,9 @@ export namespace OrganizationUpdateParams {
   }
 
   /**
-   * Configures SSH PIV key requirements for MFA using hardware security keys.
+   * Configures PIV key requirements for MFA using hardware security keys.
    */
-  export interface MfaSSHPivKeyRequirements {
+  export interface MfaPivKeyRequirements {
     /**
      * Defines when a PIN is required to use the SSH key. Valid values: `never` (no PIN
      * required), `once` (PIN required once per session), `always` (PIN required for
@@ -770,8 +770,8 @@ export namespace OrganizationUpdateParams {
     pin_policy?: 'never' | 'once' | 'always';
 
     /**
-     * Requires the SSH PIV key to be stored on a FIPS 140-2 Level 1 or higher
-     * validated device.
+     * Requires the PIV key to be stored on a FIPS 140-2 Level 1 or higher validated
+     * device.
      */
     require_fips_device?: boolean;
 
