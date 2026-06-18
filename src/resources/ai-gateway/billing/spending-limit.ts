@@ -13,18 +13,12 @@ export class BaseSpendingLimit extends APIResource {
   ] as const);
 
   /**
-   * Configure a spending limit with amount, strategy, and duration.
+   * Deprecated: spending limits can no longer be created, enabled, or modified and
+   * this endpoint always responds 403. Use the new AI Gateway spend limits instead:
+   * https://developers.cloudflare.com/ai-gateway/features/spend-limits/. Existing
+   * limits can be removed via DELETE /spending-limit.
    *
-   * @example
-   * ```ts
-   * const spendingLimit =
-   *   await client.aiGateway.billing.spendingLimit.create({
-   *     account_id: 'account_id',
-   *     amount: 10000,
-   *     duration: 'monthly',
-   *     strategy: 'fixed',
-   *   });
-   * ```
+   * @deprecated
    */
   create(
     params: SpendingLimitCreateParams,
