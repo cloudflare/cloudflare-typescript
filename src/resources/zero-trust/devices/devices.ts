@@ -56,7 +56,7 @@ import {
   IPProfileListParams,
   IPProfileUpdateParams,
   IPProfiles,
-  IPProfilesSinglePage,
+  IPProfilesV4PagePaginationArray,
 } from './ip-profiles';
 import * as NetworksAPI from './networks';
 import {
@@ -572,7 +572,7 @@ export declare namespace Devices {
     BaseIPProfiles as BaseIPProfiles,
     type IPProfile as IPProfile,
     type IPProfileDeleteResponse as IPProfileDeleteResponse,
-    type IPProfilesSinglePage as IPProfilesSinglePage,
+    type IPProfilesV4PagePaginationArray as IPProfilesV4PagePaginationArray,
     type IPProfileCreateParams as IPProfileCreateParams,
     type IPProfileUpdateParams as IPProfileUpdateParams,
     type IPProfileListParams as IPProfileListParams,

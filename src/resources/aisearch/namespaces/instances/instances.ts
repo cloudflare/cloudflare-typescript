@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as SippyAPI from '../../../r2/buckets/sippy';
 import * as ItemsAPI from './items';
 import {
   BaseItems,
@@ -611,9 +610,7 @@ export namespace InstanceCreateResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -659,14 +656,6 @@ export namespace InstanceCreateResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -992,9 +981,7 @@ export namespace InstanceUpdateResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -1040,14 +1027,6 @@ export namespace InstanceUpdateResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -1373,9 +1352,7 @@ export namespace InstanceListResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -1421,14 +1398,6 @@ export namespace InstanceListResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -1754,9 +1723,7 @@ export namespace InstanceDeleteResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -1802,14 +1769,6 @@ export namespace InstanceDeleteResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -2205,9 +2164,7 @@ export namespace InstanceReadResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -2253,14 +2210,6 @@ export namespace InstanceReadResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -2761,9 +2710,7 @@ export namespace InstanceCreateParams {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -2809,14 +2756,6 @@ export namespace InstanceCreateParams {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.ProviderParam;
       }
     }
   }
@@ -3022,6 +2961,11 @@ export interface InstanceUpdateParams {
    * Body param
    */
   score_threshold?: number;
+
+  /**
+   * Body param
+   */
+  source?: string | null;
 
   /**
    * Body param
@@ -3246,9 +3190,7 @@ export namespace InstanceUpdateParams {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
@@ -3294,14 +3236,6 @@ export namespace InstanceUpdateParams {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.ProviderParam;
       }
     }
   }
