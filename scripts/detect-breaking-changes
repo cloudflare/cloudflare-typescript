@@ -144,6 +144,10 @@ TEST_PATHS=(
 	tests/api-resources/email-security/settings/trusted-domains.test.ts
 	tests/api-resources/email-security/settings/url-ignore-patterns.test.ts
 	tests/api-resources/email-security/submissions.test.ts
+	tests/api-resources/email-auth/email-auth.test.ts
+	tests/api-resources/email-auth/dmarc-reports.test.ts
+	tests/api-resources/email-auth/spf/spf.test.ts
+	tests/api-resources/email-auth/spf/inspect.test.ts
 	tests/api-resources/email-routing/email-routing.test.ts
 	tests/api-resources/email-routing/dns.test.ts
 	tests/api-resources/email-routing/rules/rules.test.ts

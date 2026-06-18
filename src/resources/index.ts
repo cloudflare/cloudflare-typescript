@@ -41,6 +41,7 @@ export { DNS } from './dns/dns';
 export { DNSFirewall } from './dns-firewall/dns-firewall';
 export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
+export { EmailAuth } from './email-auth/email-auth';
 export { EmailRouting } from './email-routing/email-routing';
 export { EmailSecurity } from './email-security/email-security';
 export { EmailSending } from './email-sending/email-sending';
