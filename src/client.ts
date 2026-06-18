@@ -72,6 +72,7 @@ import { DLS } from './resources/dls/dls';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
+import { EmailAuth } from './resources/email-auth/email-auth';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
 import { EmailSending } from './resources/email-sending/email-sending';
@@ -1003,6 +1004,7 @@ export class Cloudflare extends BaseCloudflare {
   dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
+  emailAuth: API.EmailAuth = new API.EmailAuth(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
   emailSending: API.EmailSending = new API.EmailSending(this);
   filters: API.Filters = new API.Filters(this);
@@ -1122,6 +1124,7 @@ Cloudflare.TenantCustomNameservers = TenantCustomNameservers;
 Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
+Cloudflare.EmailAuth = EmailAuth;
 Cloudflare.EmailRouting = EmailRouting;
 Cloudflare.EmailSending = EmailSending;
 Cloudflare.Filters = Filters;
@@ -1298,6 +1301,8 @@ export declare namespace Cloudflare {
   export { DNS as DNS };
 
   export { EmailSecurity as EmailSecurity };
+
+  export { EmailAuth as EmailAuth };
 
   export { EmailRouting as EmailRouting };
 

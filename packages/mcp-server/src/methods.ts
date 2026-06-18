@@ -1987,6 +1987,24 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/email-security/submissions',
   },
   {
+    clientCallName: 'client.emailAuth.dmarcReports.edit',
+    fullyQualifiedName: 'emailAuth.dmarcReports.edit',
+    httpMethod: 'patch',
+    httpPath: '/zones/{zone_id}/email/auth/dmarc-reports',
+  },
+  {
+    clientCallName: 'client.emailAuth.dmarcReports.get',
+    fullyQualifiedName: 'emailAuth.dmarcReports.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/email/auth/dmarc-reports',
+  },
+  {
+    clientCallName: 'client.emailAuth.spf.inspect.get',
+    fullyQualifiedName: 'emailAuth.spf.inspect.get',
+    httpMethod: 'get',
+    httpPath: '/zones/{zone_id}/email/auth/spf/inspect',
+  },
+  {
     clientCallName: 'client.emailRouting.disable',
     fullyQualifiedName: 'emailRouting.disable',
     httpMethod: 'post',
