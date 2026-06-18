@@ -73,6 +73,8 @@ Types:
 
 # [EmailSecurity](src/resources/email-security/api.md)
 
+# [EmailAuth](src/resources/email-auth/api.md)
+
 # [EmailRouting](src/resources/email-routing/api.md)
 
 # [EmailSending](src/resources/email-sending/api.md)
