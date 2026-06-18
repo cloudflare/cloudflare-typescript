@@ -54,7 +54,7 @@ export {
   type IPProfileListParams,
   type IPProfileDeleteParams,
   type IPProfileGetParams,
-  type IPProfilesSinglePage,
+  type IPProfilesV4PagePaginationArray,
 } from './ip-profiles';
 export {
   Networks,

@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
-import { PagePromise, SinglePage } from '../../../core/pagination';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -75,12 +79,16 @@ export class BaseIPProfiles extends APIResource {
    * }
    * ```
    */
-  list(params: IPProfileListParams, options?: RequestOptions): PagePromise<IPProfilesSinglePage, IPProfile> {
+  list(
+    params: IPProfileListParams,
+    options?: RequestOptions,
+  ): PagePromise<IPProfilesV4PagePaginationArray, IPProfile> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(path`/accounts/${account_id}/devices/ip-profiles`, SinglePage<IPProfile>, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/devices/ip-profiles`,
+      V4PagePaginationArray<IPProfile>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -133,7 +141,7 @@ export class BaseIPProfiles extends APIResource {
 }
 export class IPProfiles extends BaseIPProfiles {}
 
-export type IPProfilesSinglePage = SinglePage<IPProfile>;
+export type IPProfilesV4PagePaginationArray = V4PagePaginationArray<IPProfile>;
 
 export interface IPProfile {
   /**
@@ -275,16 +283,11 @@ export interface IPProfileUpdateParams {
   subnet_id?: string;
 }
 
-export interface IPProfileListParams {
+export interface IPProfileListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
   account_id: string;
-
-  /**
-   * Query param: The number of IP profiles to return per page.
-   */
-  per_page?: number;
 }
 
 export interface IPProfileDeleteParams {
@@ -299,7 +302,7 @@ export declare namespace IPProfiles {
   export {
     type IPProfile as IPProfile,
     type IPProfileDeleteResponse as IPProfileDeleteResponse,
-    type IPProfilesSinglePage as IPProfilesSinglePage,
+    type IPProfilesV4PagePaginationArray as IPProfilesV4PagePaginationArray,
     type IPProfileCreateParams as IPProfileCreateParams,
     type IPProfileUpdateParams as IPProfileUpdateParams,
     type IPProfileListParams as IPProfileListParams,
