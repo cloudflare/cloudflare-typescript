@@ -147,6 +147,14 @@ export interface SettingsPolicy {
   gateway_unique_id?: string;
 
   /**
+   * Global Acceleration settings for China. When configured, WARP clients connect to
+   * the Global Accelerator addresses instead of the default ones. Please contact
+   * your account representative to enable this feature on your account. See
+   * https://developers.cloudflare.com/china-network/concepts/global-acceleration/.
+   */
+  global_acceleration?: SettingsPolicy.GlobalAcceleration | null;
+
+  /**
    * List of routes included in the WARP client's tunnel.
    */
   include?: Array<SplitTunnelInclude>;
@@ -234,6 +242,36 @@ export namespace SettingsPolicy {
      * A description of the DNS search suffix.
      */
     description?: string;
+  }
+
+  /**
+   * Global Acceleration settings for China. When configured, WARP clients connect to
+   * the Global Accelerator addresses instead of the default ones. Please contact
+   * your account representative to enable this feature on your account. See
+   * https://developers.cloudflare.com/china-network/concepts/global-acceleration/.
+   */
+  export interface GlobalAcceleration {
+    /**
+     * IP:port entries for the API endpoints.
+     */
+    api_endpoints: Array<string>;
+
+    /**
+     * Global acceleration settings are used only when "enabled".
+     */
+    enabled: boolean;
+
+    /**
+     * IP:port entries for the MASQUE tunnel endpoints. Either wireguard_endpoints or
+     * masque_endpoints must be provided.
+     */
+    masque_endpoints: Array<string>;
+
+    /**
+     * IP:port entries for the WireGuard tunnel endpoints. Either wireguard_endpoints
+     * or masque_endpoints must be provided.
+     */
+    wireguard_endpoints: Array<string>;
   }
 
   export interface ServiceModeV2 {

@@ -80,11 +80,6 @@ describe('resource instances', () => {
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
-          store_options: {
-            storage_id: 'storage_id',
-            r2_jurisdiction: 'r2_jurisdiction',
-            storage_type: 'r2',
-          },
         },
       },
       sync_interval: 900,
@@ -143,6 +138,7 @@ describe('resource instances', () => {
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       rewrite_query: true,
       score_threshold: 0,
+      source: 'source',
       source_params: {
         exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
         include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
@@ -160,11 +156,6 @@ describe('resource instances', () => {
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
-          store_options: {
-            storage_id: 'storage_id',
-            r2_jurisdiction: 'r2_jurisdiction',
-            storage_type: 'r2',
-          },
         },
       },
       summarization: true,
