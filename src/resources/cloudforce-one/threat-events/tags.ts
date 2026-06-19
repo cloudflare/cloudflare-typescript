@@ -34,6 +34,12 @@ export interface TagCreateResponse {
 
   actorCategory?: string;
 
+  /**
+   * Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: stripped from
+   * responses to non-CFONE accounts.
+   */
+  aliases?: Array<TagCreateResponse.Alias>;
+
   aliasGroupNames?: Array<string>;
 
   aliasGroupNamesInternal?: Array<string>;
@@ -42,13 +48,23 @@ export interface TagCreateResponse {
 
   attributionConfidence?: string;
 
+  attributionConfidenceScore?: number;
+
   attributionOrganization?: string;
 
   categoryName?: string;
 
   categoryUuid?: string;
 
+  dateOfDiscovery?: string;
+
   externalReferenceLinks?: Array<string>;
+
+  /**
+   * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
+   * returned to non-CFONE accounts.
+   */
+  internalAliases?: Array<TagCreateResponse.InternalAlias>;
 
   internalDescription?: string;
 
@@ -63,6 +79,24 @@ export interface TagCreateResponse {
   priority?: number;
 
   sophisticationLevel?: string;
+}
+
+export namespace TagCreateResponse {
+  export interface Alias {
+    value: string;
+
+    confidence?: number | null;
+
+    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+  }
+
+  export interface InternalAlias {
+    value: string;
+
+    confidence?: number | null;
+
+    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+  }
 }
 
 export interface TagCreateParams {
@@ -82,9 +116,17 @@ export interface TagCreateParams {
   activeDuration?: string;
 
   /**
-   * Body param
+   * Body param: Actor variety. Allowed values: Activist, Competitor, Customer, Crime
+   * Syndicate, Former Employee, Nation State, Organized Crime, Nation State
+   * Affiliated, Terrorist, Unaffiliated.
    */
   actorCategory?: string;
+
+  /**
+   * Body param: Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only:
+   * stripped from responses to non-CFONE accounts.
+   */
+  aliases?: Array<TagCreateParams.Alias>;
 
   /**
    * Body param
@@ -109,6 +151,11 @@ export interface TagCreateParams {
   /**
    * Body param
    */
+  attributionConfidenceScore?: number;
+
+  /**
+   * Body param
+   */
   attributionOrganization?: string;
 
   /**
@@ -117,9 +164,20 @@ export interface TagCreateParams {
   categoryUuid?: string;
 
   /**
+   * Body param: Date the actor was discovered (ISO YYYY-MM-DD).
+   */
+  dateOfDiscovery?: string;
+
+  /**
    * Body param
    */
   externalReferenceLinks?: Array<string>;
+
+  /**
+   * Body param: Internal structured aliases ({ value, confidence 1-10, tlp }).
+   * CFONE-only: never returned to non-CFONE accounts.
+   */
+  internalAliases?: Array<TagCreateParams.InternalAlias>;
 
   /**
    * Body param
@@ -127,7 +185,8 @@ export interface TagCreateParams {
   internalDescription?: string;
 
   /**
-   * Body param
+   * Body param: Actor motive. Allowed values: Convenience, Fear, Fun, Financial,
+   * Grudge, Ideology, Espionage.
    */
   motive?: string;
 
@@ -150,6 +209,24 @@ export interface TagCreateParams {
    * Body param
    */
   sophisticationLevel?: string;
+}
+
+export namespace TagCreateParams {
+  export interface Alias {
+    value: string;
+
+    confidence?: number | null;
+
+    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+  }
+
+  export interface InternalAlias {
+    value: string;
+
+    confidence?: number | null;
+
+    tlp?: 'red' | 'amber' | 'green' | 'white' | null;
+  }
 }
 
 export declare namespace Tags {

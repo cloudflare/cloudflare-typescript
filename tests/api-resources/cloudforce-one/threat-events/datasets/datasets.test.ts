@@ -49,7 +49,10 @@ describe('resource datasets', () => {
 
   // TODO: HTTP 401 from prism
   test.skip('list: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.datasets.list({ account_id: 'account_id' });
+    const response = await client.cloudforceOne.threatEvents.datasets.list({
+      account_id: 'account_id',
+      includeDeleted: true,
+    });
   });
 
   // TODO: HTTP 401 from prism
