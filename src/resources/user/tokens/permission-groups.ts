@@ -47,6 +47,24 @@ export interface PermissionGroupListResponse {
   id?: string;
 
   /**
+   * Product category that this permission group belongs to.
+   */
+  category?:
+    | 'developer_platform'
+    | 'ai_and_machine_learning'
+    | 'dns_and_zones'
+    | 'app_security'
+    | 'rules_and_configuration'
+    | 'cloudflare_one_and_zero_trust'
+    | 'analytics_and_logs'
+    | 'network_services'
+    | 'media'
+    | 'email_and_messaging'
+    | 'cache_and_performance'
+    | 'account_and_billing'
+    | 'other';
+
+  /**
    * Permission Group Name
    */
   name?: string;
