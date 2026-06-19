@@ -37,6 +37,20 @@ import {
 } from './release';
 import * as TraceAPI from './trace';
 import { BaseTrace, Trace, TraceGetParams, TraceGetResponse } from './trace';
+import * as BulkAPI from './bulk/bulk';
+import {
+  BaseBulk,
+  Bulk,
+  BulkCreateParams,
+  BulkCreateResponse,
+  BulkDeleteParams,
+  BulkDeleteResponse,
+  BulkGetParams,
+  BulkGetResponse,
+  BulkListParams,
+  BulkListResponse,
+  BulkListResponsesV4PagePaginationArray,
+} from './bulk/bulk';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
@@ -113,6 +127,7 @@ export class Investigate extends BaseInvestigate {
   move: MoveAPI.Move = new MoveAPI.Move(this._client);
   reclassify: ReclassifyAPI.Reclassify = new ReclassifyAPI.Reclassify(this._client);
   release: ReleaseAPI.Release = new ReleaseAPI.Release(this._client);
+  bulk: BulkAPI.Bulk = new BulkAPI.Bulk(this._client);
 }
 
 export type InvestigateListResponsesV4PagePaginationArray = V4PagePaginationArray<InvestigateListResponse>;
@@ -747,6 +762,8 @@ Investigate.Reclassify = Reclassify;
 Investigate.BaseReclassify = BaseReclassify;
 Investigate.Release = Release;
 Investigate.BaseRelease = BaseRelease;
+Investigate.Bulk = Bulk;
+Investigate.BaseBulk = BaseBulk;
 
 export declare namespace Investigate {
   export {
@@ -811,5 +828,19 @@ export declare namespace Investigate {
     type ReleaseBulkResponse as ReleaseBulkResponse,
     type ReleaseBulkResponsesSinglePage as ReleaseBulkResponsesSinglePage,
     type ReleaseBulkParams as ReleaseBulkParams,
+  };
+
+  export {
+    Bulk as Bulk,
+    BaseBulk as BaseBulk,
+    type BulkCreateResponse as BulkCreateResponse,
+    type BulkListResponse as BulkListResponse,
+    type BulkDeleteResponse as BulkDeleteResponse,
+    type BulkGetResponse as BulkGetResponse,
+    type BulkListResponsesV4PagePaginationArray as BulkListResponsesV4PagePaginationArray,
+    type BulkCreateParams as BulkCreateParams,
+    type BulkListParams as BulkListParams,
+    type BulkDeleteParams as BulkDeleteParams,
+    type BulkGetParams as BulkGetParams,
   };
 }

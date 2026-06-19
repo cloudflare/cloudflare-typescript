@@ -152,6 +152,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailSecurity.investigate.trace.get()`
 - `client.emailSecurity.investigate.move.create()`
 - `client.emailSecurity.investigate.reclassify.create()`
+- `client.emailSecurity.investigate.bulk.delete()`
+- `client.emailSecurity.investigate.bulk.get()`
+- `client.emailSecurity.investigate.bulk.cancel.create()`
+- `client.emailSecurity.investigate.bulk.messages.list()`
 - `client.emailSecurity.settings.allowPolicies.delete()`
 - `client.emailSecurity.settings.allowPolicies.edit()`
 - `client.emailSecurity.settings.allowPolicies.get()`
