@@ -75,7 +75,6 @@ TEST_PATHS=(
 	tests/api-resources/ssl/analyze.test.ts
 	tests/api-resources/ssl/certificate-packs/certificate-packs.test.ts
 	tests/api-resources/ssl/certificate-packs/quota.test.ts
-	tests/api-resources/ssl/recommendations.test.ts
 	tests/api-resources/ssl/auto-origin-tls-kex.test.ts
 	tests/api-resources/ssl/universal/universal.test.ts
 	tests/api-resources/ssl/universal/settings.test.ts

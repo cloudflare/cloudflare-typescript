@@ -28,12 +28,7 @@ export {
   type CertificatePackGetParams,
   type CertificatePackListResponsesV4PagePaginationArray,
 } from './certificate-packs/index';
-export {
-  Recommendations,
-  BaseRecommendations,
-  type RecommendationGetResponse,
-  type RecommendationGetParams,
-} from './recommendations';
+export { Recommendations, BaseRecommendations } from './recommendations';
 export { SSL, BaseSSL } from './ssl';
 export { Universal, BaseUniversal } from './universal/index';
 export {
