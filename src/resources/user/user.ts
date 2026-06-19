@@ -59,7 +59,8 @@ export class BaseUser extends APIResource {
   }
 
   /**
-   * User Details
+   * Retrieves detailed information about the currently authenticated user, including
+   * email, name, and account memberships.
    *
    * @example
    * ```ts
