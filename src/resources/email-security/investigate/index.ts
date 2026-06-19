@@ -1,5 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  Bulk,
+  BaseBulk,
+  type BulkCreateResponse,
+  type BulkListResponse,
+  type BulkDeleteResponse,
+  type BulkGetResponse,
+  type BulkCreateParams,
+  type BulkListParams,
+  type BulkDeleteParams,
+  type BulkGetParams,
+  type BulkListResponsesV4PagePaginationArray,
+} from './bulk/index';
 export { Detections, BaseDetections, type DetectionGetResponse, type DetectionGetParams } from './detections';
 export {
   Investigate,

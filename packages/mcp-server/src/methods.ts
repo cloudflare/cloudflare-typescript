@@ -1765,6 +1765,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts/{account_id}/email-security/investigate/release',
   },
   {
+    clientCallName: 'client.emailSecurity.investigate.bulk.create',
+    fullyQualifiedName: 'emailSecurity.investigate.bulk.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/email-security/investigate/bulk',
+  },
+  {
+    clientCallName: 'client.emailSecurity.investigate.bulk.list',
+    fullyQualifiedName: 'emailSecurity.investigate.bulk.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/email-security/investigate/bulk',
+  },
+  {
+    clientCallName: 'client.emailSecurity.investigate.bulk.delete',
+    fullyQualifiedName: 'emailSecurity.investigate.bulk.delete',
+    httpMethod: 'delete',
+    httpPath: '/accounts/{account_id}/email-security/investigate/bulk/{job_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.investigate.bulk.get',
+    fullyQualifiedName: 'emailSecurity.investigate.bulk.get',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/email-security/investigate/bulk/{job_id}',
+  },
+  {
+    clientCallName: 'client.emailSecurity.investigate.bulk.cancel.create',
+    fullyQualifiedName: 'emailSecurity.investigate.bulk.cancel.create',
+    httpMethod: 'post',
+    httpPath: '/accounts/{account_id}/email-security/investigate/bulk/{job_id}/cancel',
+  },
+  {
+    clientCallName: 'client.emailSecurity.investigate.bulk.messages.list',
+    fullyQualifiedName: 'emailSecurity.investigate.bulk.messages.list',
+    httpMethod: 'get',
+    httpPath: '/accounts/{account_id}/email-security/investigate/bulk/{job_id}/messages',
+  },
+  {
     clientCallName: 'client.emailSecurity.phishguard.reports.list',
     fullyQualifiedName: 'emailSecurity.phishguard.reports.list',
     httpMethod: 'get',
