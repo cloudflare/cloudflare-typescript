@@ -12,7 +12,7 @@ import {
   AutoOriginTLSKexGetResponse,
 } from './auto-origin-tls-kex';
 import * as RecommendationsAPI from './recommendations';
-import { RecommendationGetParams, RecommendationGetResponse, Recommendations } from './recommendations';
+import { Recommendations } from './recommendations';
 import * as VerificationAPI from './verification';
 import {
   Verification,
@@ -91,11 +91,7 @@ export declare namespace SSL {
     type CertificatePackGetParams as CertificatePackGetParams,
   };
 
-  export {
-    Recommendations as Recommendations,
-    type RecommendationGetResponse as RecommendationGetResponse,
-    type RecommendationGetParams as RecommendationGetParams,
-  };
+  export { Recommendations as Recommendations };
 
   export {
     AutoOriginTLSKex as AutoOriginTLSKex,
