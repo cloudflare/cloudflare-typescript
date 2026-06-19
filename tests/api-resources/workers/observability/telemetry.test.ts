@@ -52,7 +52,7 @@ const runTests = (
           filters: [
             {
               filterCombination: 'and',
-              filters: [{}],
+              filters: [],
               kind: 'group',
             },
           ],
@@ -98,7 +98,7 @@ const runTests = (
           filters: [
             {
               filterCombination: 'and',
-              filters: [{}],
+              filters: [],
               kind: 'group',
             },
           ],
@@ -179,7 +179,7 @@ const runTests = (
             filters: [
               {
                 filterCombination: 'and',
-                filters: [{}],
+                filters: [],
                 kind: 'group',
               },
             ],
@@ -238,7 +238,7 @@ const runTests = (
           filters: [
             {
               filterCombination: 'and',
-              filters: [{}],
+              filters: [],
               kind: 'group',
             },
           ],

@@ -52,6 +52,6 @@ fi
 # build all sub-packages
 for dir in packages/*; do
   if [ -d "$dir" ]; then
-      (cd "$dir" && yarn install && yarn build)
+      (cd "$dir" && yarn install --pure-lockfile && yarn build)
   fi
 done
