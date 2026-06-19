@@ -30,6 +30,19 @@ import * as ReleaseAPI from './release';
 import { Release, ReleaseBulkParams, ReleaseBulkResponse, ReleaseBulkResponsesSinglePage } from './release';
 import * as TraceAPI from './trace';
 import { Trace, TraceGetParams, TraceGetResponse } from './trace';
+import * as BulkAPI from './bulk/bulk';
+import {
+  Bulk,
+  BulkCreateParams,
+  BulkCreateResponse,
+  BulkDeleteParams,
+  BulkDeleteResponse,
+  BulkGetParams,
+  BulkGetResponse,
+  BulkListParams,
+  BulkListResponse,
+  BulkListResponsesV4PagePaginationArray,
+} from './bulk/bulk';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Investigate extends APIResource {
@@ -40,6 +53,7 @@ export class Investigate extends APIResource {
   move: MoveAPI.Move = new MoveAPI.Move(this._client);
   reclassify: ReclassifyAPI.Reclassify = new ReclassifyAPI.Reclassify(this._client);
   release: ReleaseAPI.Release = new ReleaseAPI.Release(this._client);
+  bulk: BulkAPI.Bulk = new BulkAPI.Bulk(this._client);
 
   /**
    * Returns information for each email that matches the search parameter(s).
@@ -724,6 +738,8 @@ Investigate.MoveBulkResponsesSinglePage = MoveBulkResponsesSinglePage;
 Investigate.Reclassify = Reclassify;
 Investigate.Release = Release;
 Investigate.ReleaseBulkResponsesSinglePage = ReleaseBulkResponsesSinglePage;
+Investigate.Bulk = Bulk;
+Investigate.BulkListResponsesV4PagePaginationArray = BulkListResponsesV4PagePaginationArray;
 
 export declare namespace Investigate {
   export {
@@ -773,5 +789,18 @@ export declare namespace Investigate {
     type ReleaseBulkResponse as ReleaseBulkResponse,
     ReleaseBulkResponsesSinglePage as ReleaseBulkResponsesSinglePage,
     type ReleaseBulkParams as ReleaseBulkParams,
+  };
+
+  export {
+    Bulk as Bulk,
+    type BulkCreateResponse as BulkCreateResponse,
+    type BulkListResponse as BulkListResponse,
+    type BulkDeleteResponse as BulkDeleteResponse,
+    type BulkGetResponse as BulkGetResponse,
+    BulkListResponsesV4PagePaginationArray as BulkListResponsesV4PagePaginationArray,
+    type BulkCreateParams as BulkCreateParams,
+    type BulkListParams as BulkListParams,
+    type BulkDeleteParams as BulkDeleteParams,
+    type BulkGetParams as BulkGetParams,
   };
 }

@@ -133,6 +133,9 @@ TEST_PATHS=(
 	tests/api-resources/email-security/investigate/move.test.ts
 	tests/api-resources/email-security/investigate/reclassify.test.ts
 	tests/api-resources/email-security/investigate/release.test.ts
+	tests/api-resources/email-security/investigate/bulk/bulk.test.ts
+	tests/api-resources/email-security/investigate/bulk/cancel.test.ts
+	tests/api-resources/email-security/investigate/bulk/messages.test.ts
 	tests/api-resources/email-security/phishguard/phishguard.test.ts
 	tests/api-resources/email-security/phishguard/reports.test.ts
 	tests/api-resources/email-security/settings/settings.test.ts
