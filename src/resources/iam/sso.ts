@@ -10,7 +10,8 @@ export class BaseSSO extends APIResource {
   static override readonly _key: readonly ['iam', 'sso'] = Object.freeze(['iam', 'sso'] as const);
 
   /**
-   * Initialize new SSO connector
+   * Creates a new SSO connector for logging into Cloudflare through an identity
+   * provider.
    *
    * @example
    * ```ts
@@ -30,7 +31,7 @@ export class BaseSSO extends APIResource {
   }
 
   /**
-   * Update SSO connector state
+   * Updates the state or configuration of an SSO connector.
    *
    * @example
    * ```ts
@@ -55,7 +56,7 @@ export class BaseSSO extends APIResource {
   }
 
   /**
-   * Get all SSO connectors
+   * Lists all SSO connectors configured for the account.
    *
    * @example
    * ```ts
@@ -80,7 +81,7 @@ export class BaseSSO extends APIResource {
   }
 
   /**
-   * Delete SSO connector
+   * Deletes an SSO connector from the account.
    *
    * @example
    * ```ts
@@ -105,7 +106,8 @@ export class BaseSSO extends APIResource {
   }
 
   /**
-   * Begin SSO connector verification
+   * Validates the user has added the DNS TXT record required for validating
+   * ownership of the domain they are trying to set up a connector for.
    *
    * @example
    * ```ts
@@ -128,7 +130,7 @@ export class BaseSSO extends APIResource {
   }
 
   /**
-   * Get single SSO connector
+   * Retrieves details for a specific SSO connector.
    *
    * @example
    * ```ts
