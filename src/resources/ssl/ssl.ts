@@ -13,12 +13,7 @@ import {
   BaseAutoOriginTLSKex,
 } from './auto-origin-tls-kex';
 import * as RecommendationsAPI from './recommendations';
-import {
-  BaseRecommendations,
-  RecommendationGetParams,
-  RecommendationGetResponse,
-  Recommendations,
-} from './recommendations';
+import { BaseRecommendations, Recommendations } from './recommendations';
 import * as VerificationAPI from './verification';
 import {
   BaseVerificationResource,
@@ -109,12 +104,7 @@ export declare namespace SSL {
     type CertificatePackGetParams as CertificatePackGetParams,
   };
 
-  export {
-    Recommendations as Recommendations,
-    BaseRecommendations as BaseRecommendations,
-    type RecommendationGetResponse as RecommendationGetResponse,
-    type RecommendationGetParams as RecommendationGetParams,
-  };
+  export { Recommendations as Recommendations, BaseRecommendations as BaseRecommendations };
 
   export {
     AutoOriginTLSKex as AutoOriginTLSKex,

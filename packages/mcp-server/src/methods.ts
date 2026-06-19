@@ -995,12 +995,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/zones/{zone_id}/ssl/certificate_packs/quota',
   },
   {
-    clientCallName: 'client.ssl.recommendations.get',
-    fullyQualifiedName: 'ssl.recommendations.get',
-    httpMethod: 'get',
-    httpPath: '/zones/{zone_id}/ssl/recommendation',
-  },
-  {
     clientCallName: 'client.ssl.autoOriginTLSKex.edit',
     fullyQualifiedName: 'ssl.autoOriginTLSKex.edit',
     httpMethod: 'patch',
