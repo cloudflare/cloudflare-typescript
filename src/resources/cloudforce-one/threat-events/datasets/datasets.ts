@@ -47,8 +47,11 @@ export class BaseDatasets extends APIResource {
    * ```
    */
   list(params: DatasetListParams, options?: RequestOptions): APIPromise<DatasetListResponse> {
-    const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/dataset`, options);
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/cloudforce-one/events/dataset`, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -130,6 +133,8 @@ export interface DatasetCreateResponse {
   name: string;
 
   uuid: string;
+
+  deletedAt?: string;
 }
 
 export type DatasetListResponse = Array<DatasetListResponse.DatasetListResponseItem>;
@@ -141,6 +146,8 @@ export namespace DatasetListResponse {
     name: string;
 
     uuid: string;
+
+    deletedAt?: string;
   }
 }
 
@@ -150,6 +157,8 @@ export interface DatasetEditResponse {
   name: string;
 
   uuid: string;
+
+  deletedAt?: string;
 }
 
 export interface DatasetGetResponse {
@@ -158,6 +167,8 @@ export interface DatasetGetResponse {
   name: string;
 
   uuid: string;
+
+  deletedAt?: string;
 }
 
 export interface DatasetRawResponse {
@@ -194,9 +205,15 @@ export interface DatasetCreateParams {
 
 export interface DatasetListParams {
   /**
-   * Account ID.
+   * Path param: Account ID.
    */
   account_id: string;
+
+  /**
+   * Query param: When true, include soft-deleted datasets in the response. Each item
+   * includes a `deletedAt` field (ISO 8601 or null). Default: false.
+   */
+  includeDeleted?: boolean;
 }
 
 export interface DatasetEditParams {
