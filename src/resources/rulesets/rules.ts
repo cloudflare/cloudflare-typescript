@@ -4936,9 +4936,9 @@ export namespace SetCacheSettingsRule {
     strip_set_cookie?: boolean;
 
     /**
-     * Controls how cached responses vary based on request headers. At least one of
-     * `default` or `headers` must be set, and `default` is required when `headers` is
-     * set.
+     * Controls how cached responses vary based on request headers. `default` is
+     * required by the API and applies to any Vary response header that does not have a
+     * per-header override.
      */
     vary?: ActionParameters.Vary;
   }
@@ -5243,14 +5243,14 @@ export namespace SetCacheSettingsRule {
     }
 
     /**
-     * Controls how cached responses vary based on request headers. At least one of
-     * `default` or `headers` must be set, and `default` is required when `headers` is
-     * set.
+     * Controls how cached responses vary based on request headers. `default` is
+     * required by the API and applies to any Vary response header that does not have a
+     * per-header override.
      */
     export interface Vary {
       /**
-       * Controls how a single request header (or the default for all headers)
-       * contributes to the cache key.
+       * Controls how response Vary headers without a per-header override contribute to
+       * the cache key.
        */
       default?: Vary.Default;
 
@@ -5262,30 +5262,18 @@ export namespace SetCacheSettingsRule {
 
     export namespace Vary {
       /**
-       * Controls how a single request header (or the default for all headers)
-       * contributes to the cache key.
+       * Controls how response Vary headers without a per-header override contribute to
+       * the cache key.
        */
       export interface Default {
         /**
          * How the header value is treated when building the cache key.
          */
         action: 'bypass' | 'passthrough' | 'normalize';
-
-        /**
-         * The set of languages to normalize against. Only valid for the `accept-language`
-         * header.
-         */
-        languages?: Array<string>;
-
-        /**
-         * The set of media types to normalize against. Only valid for the `accept` header.
-         */
-        media_types?: Array<string>;
       }
 
       /**
-       * Controls how a single request header (or the default for all headers)
-       * contributes to the cache key.
+       * Controls how a single request header contributes to the cache key.
        */
       export interface Headers {
         /**
@@ -5519,9 +5507,9 @@ export namespace SetCacheSettingsRuleParam {
     strip_set_cookie?: boolean;
 
     /**
-     * Controls how cached responses vary based on request headers. At least one of
-     * `default` or `headers` must be set, and `default` is required when `headers` is
-     * set.
+     * Controls how cached responses vary based on request headers. `default` is
+     * required by the API and applies to any Vary response header that does not have a
+     * per-header override.
      */
     vary?: ActionParameters.Vary;
   }
@@ -5826,14 +5814,14 @@ export namespace SetCacheSettingsRuleParam {
     }
 
     /**
-     * Controls how cached responses vary based on request headers. At least one of
-     * `default` or `headers` must be set, and `default` is required when `headers` is
-     * set.
+     * Controls how cached responses vary based on request headers. `default` is
+     * required by the API and applies to any Vary response header that does not have a
+     * per-header override.
      */
     export interface Vary {
       /**
-       * Controls how a single request header (or the default for all headers)
-       * contributes to the cache key.
+       * Controls how response Vary headers without a per-header override contribute to
+       * the cache key.
        */
       default?: Vary.Default;
 
@@ -5845,30 +5833,18 @@ export namespace SetCacheSettingsRuleParam {
 
     export namespace Vary {
       /**
-       * Controls how a single request header (or the default for all headers)
-       * contributes to the cache key.
+       * Controls how response Vary headers without a per-header override contribute to
+       * the cache key.
        */
       export interface Default {
         /**
          * How the header value is treated when building the cache key.
          */
         action: 'bypass' | 'passthrough' | 'normalize';
-
-        /**
-         * The set of languages to normalize against. Only valid for the `accept-language`
-         * header.
-         */
-        languages?: Array<string>;
-
-        /**
-         * The set of media types to normalize against. Only valid for the `accept` header.
-         */
-        media_types?: Array<string>;
       }
 
       /**
-       * Controls how a single request header (or the default for all headers)
-       * contributes to the cache key.
+       * Controls how a single request header contributes to the cache key.
        */
       export interface Headers {
         /**
@@ -14426,9 +14402,9 @@ export declare namespace RuleCreateParams {
       strip_set_cookie?: boolean;
 
       /**
-       * Controls how cached responses vary based on request headers. At least one of
-       * `default` or `headers` must be set, and `default` is required when `headers` is
-       * set.
+       * Controls how cached responses vary based on request headers. `default` is
+       * required by the API and applies to any Vary response header that does not have a
+       * per-header override.
        */
       vary?: ActionParameters.Vary;
     }
@@ -14733,14 +14709,14 @@ export declare namespace RuleCreateParams {
       }
 
       /**
-       * Controls how cached responses vary based on request headers. At least one of
-       * `default` or `headers` must be set, and `default` is required when `headers` is
-       * set.
+       * Controls how cached responses vary based on request headers. `default` is
+       * required by the API and applies to any Vary response header that does not have a
+       * per-header override.
        */
       export interface Vary {
         /**
-         * Controls how a single request header (or the default for all headers)
-         * contributes to the cache key.
+         * Controls how response Vary headers without a per-header override contribute to
+         * the cache key.
          */
         default?: Vary.Default;
 
@@ -14752,30 +14728,18 @@ export declare namespace RuleCreateParams {
 
       export namespace Vary {
         /**
-         * Controls how a single request header (or the default for all headers)
-         * contributes to the cache key.
+         * Controls how response Vary headers without a per-header override contribute to
+         * the cache key.
          */
         export interface Default {
           /**
            * How the header value is treated when building the cache key.
            */
           action: 'bypass' | 'passthrough' | 'normalize';
-
-          /**
-           * The set of languages to normalize against. Only valid for the `accept-language`
-           * header.
-           */
-          languages?: Array<string>;
-
-          /**
-           * The set of media types to normalize against. Only valid for the `accept` header.
-           */
-          media_types?: Array<string>;
         }
 
         /**
-         * Controls how a single request header (or the default for all headers)
-         * contributes to the cache key.
+         * Controls how a single request header contributes to the cache key.
          */
         export interface Headers {
           /**
@@ -19776,9 +19740,9 @@ export declare namespace RuleEditParams {
       strip_set_cookie?: boolean;
 
       /**
-       * Controls how cached responses vary based on request headers. At least one of
-       * `default` or `headers` must be set, and `default` is required when `headers` is
-       * set.
+       * Controls how cached responses vary based on request headers. `default` is
+       * required by the API and applies to any Vary response header that does not have a
+       * per-header override.
        */
       vary?: ActionParameters.Vary;
     }
@@ -20083,14 +20047,14 @@ export declare namespace RuleEditParams {
       }
 
       /**
-       * Controls how cached responses vary based on request headers. At least one of
-       * `default` or `headers` must be set, and `default` is required when `headers` is
-       * set.
+       * Controls how cached responses vary based on request headers. `default` is
+       * required by the API and applies to any Vary response header that does not have a
+       * per-header override.
        */
       export interface Vary {
         /**
-         * Controls how a single request header (or the default for all headers)
-         * contributes to the cache key.
+         * Controls how response Vary headers without a per-header override contribute to
+         * the cache key.
          */
         default?: Vary.Default;
 
@@ -20102,30 +20066,18 @@ export declare namespace RuleEditParams {
 
       export namespace Vary {
         /**
-         * Controls how a single request header (or the default for all headers)
-         * contributes to the cache key.
+         * Controls how response Vary headers without a per-header override contribute to
+         * the cache key.
          */
         export interface Default {
           /**
            * How the header value is treated when building the cache key.
            */
           action: 'bypass' | 'passthrough' | 'normalize';
-
-          /**
-           * The set of languages to normalize against. Only valid for the `accept-language`
-           * header.
-           */
-          languages?: Array<string>;
-
-          /**
-           * The set of media types to normalize against. Only valid for the `accept` header.
-           */
-          media_types?: Array<string>;
         }
 
         /**
-         * Controls how a single request header (or the default for all headers)
-         * contributes to the cache key.
+         * Controls how a single request header contributes to the cache key.
          */
         export interface Headers {
           /**
