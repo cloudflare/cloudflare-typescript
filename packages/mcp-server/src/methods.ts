@@ -2611,6 +2611,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logpush/validate/origin',
   },
   {
+    clientCallName: 'client.logs.logExplorer.query.sql',
+    fullyQualifiedName: 'logs.logExplorer.query.sql',
+    httpMethod: 'post',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logs/explorer/query/sql',
+  },
+  {
+    clientCallName: 'client.logs.logExplorer.datasets.create',
+    fullyQualifiedName: 'logs.logExplorer.datasets.create',
+    httpMethod: 'post',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets',
+  },
+  {
+    clientCallName: 'client.logs.logExplorer.datasets.update',
+    fullyQualifiedName: 'logs.logExplorer.datasets.update',
+    httpMethod: 'put',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/{dataset_id}',
+  },
+  {
+    clientCallName: 'client.logs.logExplorer.datasets.list',
+    fullyQualifiedName: 'logs.logExplorer.datasets.list',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets',
+  },
+  {
+    clientCallName: 'client.logs.logExplorer.datasets.get',
+    fullyQualifiedName: 'logs.logExplorer.datasets.get',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/{dataset_id}',
+  },
+  {
+    clientCallName: 'client.logs.logExplorer.datasets.available.list',
+    fullyQualifiedName: 'logs.logExplorer.datasets.available.list',
+    httpMethod: 'get',
+    httpPath: '/{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/available',
+  },
+  {
     clientCallName: 'client.logs.control.retention.create',
     fullyQualifiedName: 'logs.control.retention.create',
     httpMethod: 'post',

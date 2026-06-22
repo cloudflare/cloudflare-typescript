@@ -234,6 +234,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logpush.validate.destination()`
 - `client.logpush.validate.destinationExists()`
 - `client.logpush.validate.origin()`
+- `client.logs.logExplorer.query.sql()`
+- `client.logs.logExplorer.datasets.create()`
+- `client.logs.logExplorer.datasets.update()`
+- `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.get()`
+- `client.logs.logExplorer.datasets.available.list()`
 - `client.logs.RayID.get()`
 - `client.originTLSClientAuth.delete()`
 - `client.originTLSClientAuth.get()`
@@ -1374,6 +1380,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.filters.bulkUpdate()`
 - `client.firewall.rules.bulkEdit()`
 - `client.firewall.rules.bulkUpdate()`
+- `client.logs.logExplorer.query.sql()`
 - `client.waitingRooms.rules.create()`
 - `client.waitingRooms.rules.update()`
 - `client.workers.assets.upload.create()`
@@ -1482,6 +1489,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.logpush.jobs.list()`
 - `client.logpush.jobs.delete()`
 - `client.logpush.jobs.get()`
+- `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.get()`
+- `client.logs.logExplorer.datasets.available.list()`
 - `client.waitingRooms.list()`
 - `client.rulesets.list()`
 - `client.rulesets.delete()`
