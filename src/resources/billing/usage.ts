@@ -316,6 +316,11 @@ export namespace UsagePaygoResponse {
     ServiceFamilyName?: string;
 
     /**
+     * The identifier for the Cloudflare subscription.
+     */
+    SubscriptionId?: string | null;
+
+    /**
      * The identifier for the Cloudflare zone (zone tag).
      */
     ZoneId?: string | null;

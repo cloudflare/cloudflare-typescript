@@ -203,6 +203,8 @@ export interface ConnectorCreateResponse {
 
   notes: string;
 
+  primary: boolean;
+
   timezone: string;
 
   device?: ConnectorCreateResponse.Device;
@@ -212,6 +214,8 @@ export interface ConnectorCreateResponse {
   last_seen_version?: string;
 
   license_key?: string;
+
+  site_id?: string;
 }
 
 export namespace ConnectorCreateResponse {
@@ -249,6 +253,8 @@ export interface ConnectorUpdateResponse {
 
   notes: string;
 
+  primary: boolean;
+
   timezone: string;
 
   device?: ConnectorUpdateResponse.Device;
@@ -258,6 +264,8 @@ export interface ConnectorUpdateResponse {
   last_seen_version?: string;
 
   license_key?: string;
+
+  site_id?: string;
 }
 
 export namespace ConnectorUpdateResponse {
@@ -295,6 +303,8 @@ export interface ConnectorListResponse {
 
   notes: string;
 
+  primary: boolean;
+
   timezone: string;
 
   device?: ConnectorListResponse.Device;
@@ -304,6 +314,8 @@ export interface ConnectorListResponse {
   last_seen_version?: string;
 
   license_key?: string;
+
+  site_id?: string;
 }
 
 export namespace ConnectorListResponse {
@@ -341,6 +353,8 @@ export interface ConnectorDeleteResponse {
 
   notes: string;
 
+  primary: boolean;
+
   timezone: string;
 
   device?: ConnectorDeleteResponse.Device;
@@ -350,6 +364,8 @@ export interface ConnectorDeleteResponse {
   last_seen_version?: string;
 
   license_key?: string;
+
+  site_id?: string;
 }
 
 export namespace ConnectorDeleteResponse {
@@ -387,6 +403,8 @@ export interface ConnectorEditResponse {
 
   notes: string;
 
+  primary: boolean;
+
   timezone: string;
 
   device?: ConnectorEditResponse.Device;
@@ -396,6 +414,8 @@ export interface ConnectorEditResponse {
   last_seen_version?: string;
 
   license_key?: string;
+
+  site_id?: string;
 }
 
 export namespace ConnectorEditResponse {
@@ -433,6 +453,8 @@ export interface ConnectorGetResponse {
 
   notes: string;
 
+  primary: boolean;
+
   timezone: string;
 
   device?: ConnectorGetResponse.Device;
@@ -442,6 +464,8 @@ export interface ConnectorGetResponse {
   last_seen_version?: string;
 
   license_key?: string;
+
+  site_id?: string;
 }
 
 export namespace ConnectorGetResponse {
@@ -497,6 +521,16 @@ export interface ConnectorCreateParams {
    * Body param
    */
   notes?: string;
+
+  /**
+   * Body param
+   */
+  primary?: boolean;
+
+  /**
+   * Body param
+   */
+  site_id?: string;
 
   /**
    * Body param
@@ -559,9 +593,19 @@ export interface ConnectorUpdateParams {
   notes?: string;
 
   /**
+   * Body param
+   */
+  primary?: boolean;
+
+  /**
    * Body param: When true, regenerate license key for the connector.
    */
   provision_license?: boolean;
+
+  /**
+   * Body param
+   */
+  site_id?: string;
 
   /**
    * Body param
@@ -627,9 +671,19 @@ export interface ConnectorEditParams {
   notes?: string;
 
   /**
+   * Body param
+   */
+  primary?: boolean;
+
+  /**
    * Body param: When true, regenerate license key for the connector.
    */
   provision_license?: boolean;
+
+  /**
+   * Body param
+   */
+  site_id?: string;
 
   /**
    * Body param
