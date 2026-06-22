@@ -181,6 +181,10 @@ TEST_PATHS=(
 	tests/api-resources/logpush/ownership.test.ts
 	tests/api-resources/logpush/validate.test.ts
 	tests/api-resources/logs/logs.test.ts
+	tests/api-resources/logs/log-explorer/log-explorer.test.ts
+	tests/api-resources/logs/log-explorer/query.test.ts
+	tests/api-resources/logs/log-explorer/datasets/datasets.test.ts
+	tests/api-resources/logs/log-explorer/datasets/available.test.ts
 	tests/api-resources/logs/control/control.test.ts
 	tests/api-resources/logs/control/retention.test.ts
 	tests/api-resources/logs/control/cmb/cmb.test.ts
