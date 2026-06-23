@@ -7,7 +7,7 @@ import * as PercentilesAPI from './http-tests/percentiles';
 
 export class TracerouteTests extends APIResource {
   /**
-   * Get test details and aggregate performance metrics for an traceroute test for a
+   * Get test details and aggregate performance metrics for a traceroute test for a
    * given time period between 1 hour and 7 days.
    *
    * @example
@@ -39,7 +39,7 @@ export class TracerouteTests extends APIResource {
   }
 
   /**
-   * Get a breakdown of metrics by hop for individual traceroute test runs
+   * Get a breakdown of metrics by hop for individual traceroute test runs.
    *
    * @example
    * ```ts
@@ -104,7 +104,7 @@ export class TracerouteTests extends APIResource {
 
 export interface Traceroute {
   /**
-   * The host of the Traceroute synthetic application test
+   * The host of the Traceroute synthetic application test.
    */
   host: string;
 
@@ -116,7 +116,7 @@ export interface Traceroute {
   kind: 'traceroute';
 
   /**
-   * The name of the Traceroute synthetic application test
+   * The name of the Traceroute synthetic application test.
    */
   name: string;
 
@@ -140,7 +140,7 @@ export namespace Traceroute {
     roundTripTimeMs: PercentilesAPI.TestStatOverTime;
 
     /**
-     * Count of unique devices that have run this test in the given time period
+     * Count of unique devices that have run this test in the given time period.
      */
     uniqueDevicesTotal: number;
   }
@@ -150,17 +150,17 @@ export namespace Traceroute {
       slots: Array<AvailabilityPct.Slot>;
 
       /**
-       * average observed in the time period
+       * average observed in the time period.
        */
       avg?: number | null;
 
       /**
-       * highest observed in the time period
+       * highest observed in the time period.
        */
       max?: number | null;
 
       /**
-       * lowest observed in the time period
+       * lowest observed in the time period.
        */
       min?: number | null;
     }
@@ -177,17 +177,17 @@ export namespace Traceroute {
       slots: Array<PacketLossPct.Slot>;
 
       /**
-       * average observed in the time period
+       * average observed in the time period.
        */
       avg?: number | null;
 
       /**
-       * highest observed in the time period
+       * highest observed in the time period.
        */
       max?: number | null;
 
       /**
-       * lowest observed in the time period
+       * lowest observed in the time period.
        */
       min?: number | null;
     }
@@ -213,7 +213,7 @@ export namespace Traceroute {
     roundTripTimeMs: PercentilesAPI.TestStatOverTime;
 
     /**
-     * Count of unique devices that have run this test in the given time period
+     * Count of unique devices that have run this test in the given time period.
      */
     uniqueDevicesTotal: number;
   }
@@ -223,17 +223,17 @@ export namespace Traceroute {
       slots: Array<AvailabilityPct.Slot>;
 
       /**
-       * average observed in the time period
+       * average observed in the time period.
        */
       avg?: number | null;
 
       /**
-       * highest observed in the time period
+       * highest observed in the time period.
        */
       max?: number | null;
 
       /**
-       * lowest observed in the time period
+       * lowest observed in the time period.
        */
       min?: number | null;
     }
@@ -250,17 +250,17 @@ export namespace Traceroute {
       slots: Array<PacketLossPct.Slot>;
 
       /**
-       * average observed in the time period
+       * average observed in the time period.
        */
       avg?: number | null;
 
       /**
-       * highest observed in the time period
+       * highest observed in the time period.
        */
       max?: number | null;
 
       /**
-       * lowest observed in the time period
+       * lowest observed in the time period.
        */
       min?: number | null;
     }
@@ -285,12 +285,12 @@ export interface TracerouteTestPercentilesResponse {
 
 export interface TracerouteTestGetParams {
   /**
-   * Path param: Unique identifier linked to an account
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Start time for aggregate metrics in ISO ms
+   * Query param: Start time for aggregate metrics in ISO ms.
    */
   from: string;
 
@@ -300,7 +300,7 @@ export interface TracerouteTestGetParams {
   interval: 'minute' | 'hour';
 
   /**
-   * Query param: End time for aggregate metrics in ISO ms
+   * Query param: End time for aggregate metrics in ISO ms.
    */
   to: string;
 
@@ -319,17 +319,17 @@ export interface TracerouteTestGetParams {
 
 export interface TracerouteTestNetworkPathParams {
   /**
-   * Path param: unique identifier linked to an account
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Device to filter tracroute result runs to
+   * Query param: Device to filter traceroute result runs to.
    */
   deviceId: string;
 
   /**
-   * Query param: Start time for aggregate metrics in ISO ms
+   * Query param: Start time for aggregate metrics in ISO ms.
    */
   from: string;
 
@@ -339,24 +339,24 @@ export interface TracerouteTestNetworkPathParams {
   interval: 'minute' | 'hour';
 
   /**
-   * Query param: End time for aggregate metrics in ISO ms
+   * Query param: End time for aggregate metrics in ISO ms.
    */
   to: string;
 }
 
 export interface TracerouteTestPercentilesParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path.
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   from: string;
 
   /**
-   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   to: string;
 

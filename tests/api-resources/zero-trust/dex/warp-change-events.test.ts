@@ -15,7 +15,7 @@ describe('resource warpChangeEvents', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       from: '2023-09-20T17:00:00Z',
       page: 1,
-      per_page: 1,
+      per_page: 10,
       to: '2023-09-20T17:00:00Z',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource warpChangeEvents', () => {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       from: '2023-09-20T17:00:00Z',
       page: 1,
-      per_page: 1,
+      per_page: 10,
       to: '2023-09-20T17:00:00Z',
       account_name: 'Myorg',
       config_name: 'MASQUE',

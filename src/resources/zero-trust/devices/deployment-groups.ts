@@ -18,7 +18,7 @@ export class DeploymentGroups extends APIResource {
    *     version_config: [
    *       {
    *         target_environment: 'windows',
-   *         version: '2026.5.234.0',
+   *         version: '2026.6.234.0',
    *       },
    *     ],
    *   });

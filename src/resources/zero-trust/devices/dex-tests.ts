@@ -69,7 +69,7 @@ export class DEXTests extends APIResource {
   }
 
   /**
-   * Fetch all DEX tests
+   * Fetch all DEX tests.
    *
    * @example
    * ```ts
@@ -292,17 +292,17 @@ export namespace DEXTestCreateResponse {
 
   export interface TargetPolicy {
     /**
-     * API Resource UUID tag.
+     * The id of the DEX rule.
      */
     id: string;
 
     /**
-     * Whether the DEX rule is the account default
+     * Whether the DEX rule is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the DEX rule
+     * The name of the DEX rule.
      */
     name?: string;
   }
@@ -372,17 +372,17 @@ export namespace DEXTestUpdateResponse {
 
   export interface TargetPolicy {
     /**
-     * API Resource UUID tag.
+     * The id of the DEX rule.
      */
     id: string;
 
     /**
-     * Whether the DEX rule is the account default
+     * Whether the DEX rule is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the DEX rule
+     * The name of the DEX rule.
      */
     name?: string;
   }
@@ -452,17 +452,17 @@ export namespace DEXTestListResponse {
 
   export interface TargetPolicy {
     /**
-     * API Resource UUID tag.
+     * The id of the DEX rule.
      */
     id: string;
 
     /**
-     * Whether the DEX rule is the account default
+     * Whether the DEX rule is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the DEX rule
+     * The name of the DEX rule.
      */
     name?: string;
   }
@@ -537,17 +537,17 @@ export namespace DEXTestDeleteResponse {
 
     export interface TargetPolicy {
       /**
-       * API Resource UUID tag.
+       * The id of the DEX rule.
        */
       id: string;
 
       /**
-       * Whether the DEX rule is the account default
+       * Whether the DEX rule is the account default.
        */
       default?: boolean;
 
       /**
-       * The name of the DEX rule
+       * The name of the DEX rule.
        */
       name?: string;
     }
@@ -618,17 +618,17 @@ export namespace DEXTestGetResponse {
 
   export interface TargetPolicy {
     /**
-     * API Resource UUID tag.
+     * The id of the DEX rule.
      */
     id: string;
 
     /**
-     * Whether the DEX rule is the account default
+     * Whether the DEX rule is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the DEX rule
+     * The name of the DEX rule.
      */
     name?: string;
   }
@@ -636,7 +636,7 @@ export namespace DEXTestGetResponse {
 
 export interface DEXTestCreateParams {
   /**
-   * Path param
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -701,17 +701,17 @@ export namespace DEXTestCreateParams {
 
   export interface TargetPolicy {
     /**
-     * API Resource UUID tag.
+     * The id of the DEX rule.
      */
     id: string;
 
     /**
-     * Whether the DEX rule is the account default
+     * Whether the DEX rule is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the DEX rule
+     * The name of the DEX rule.
      */
     name?: string;
   }
@@ -719,7 +719,7 @@ export namespace DEXTestCreateParams {
 
 export interface DEXTestUpdateParams {
   /**
-   * Path param
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
@@ -784,17 +784,17 @@ export namespace DEXTestUpdateParams {
 
   export interface TargetPolicy {
     /**
-     * API Resource UUID tag.
+     * The id of the DEX rule.
      */
     id: string;
 
     /**
-     * Whether the DEX rule is the account default
+     * Whether the DEX rule is the account default.
      */
     default?: boolean;
 
     /**
-     * The name of the DEX rule
+     * The name of the DEX rule.
      */
     name?: string;
   }
@@ -802,26 +802,32 @@ export namespace DEXTestUpdateParams {
 
 export interface DEXTestListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Filter by test type
+   * Query param: Filter by test type.
    */
   kind?: 'http' | 'traceroute';
 
   /**
-   * Query param: Filter by test name
+   * Query param: Filter by test name.
    */
   testName?: string;
 }
 
 export interface DEXTestDeleteParams {
+  /**
+   * Unique identifier linked to an account.
+   */
   account_id: string;
 }
 
 export interface DEXTestGetParams {
+  /**
+   * Unique identifier linked to an account.
+   */
   account_id: string;
 }
 
