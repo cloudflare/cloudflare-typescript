@@ -139,7 +139,7 @@ export class Namespaces extends APIResource {
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
    *       ai_search_options: { instance_ids: ['my-ai-search'] },
-   *       messages: [{ content: 'content', role: 'system' }],
+   *       messages: [{ content: 'string', role: 'system' }],
    *     },
    *   );
    * ```
@@ -271,11 +271,31 @@ export namespace NamespaceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
       [k: string]: unknown;
+    }
+
+    export namespace Message {
+      export interface UnionMember0 {
+        text: string;
+
+        type: 'text';
+      }
+
+      export interface UnionMember1 {
+        image_url: UnionMember1.ImageURL;
+
+        type: 'image_url';
+      }
+
+      export namespace UnionMember1 {
+        export interface ImageURL {
+          url: string;
+        }
+      }
     }
   }
 
@@ -340,9 +360,11 @@ export interface NamespaceReadResponse {
 export interface NamespaceSearchResponse {
   chunks: Array<NamespaceSearchResponse.Chunk>;
 
-  search_query: string;
+  query_kind: 'text' | 'image' | 'multimodal';
 
   errors?: Array<NamespaceSearchResponse.Error>;
+
+  search_query?: string;
 }
 
 export namespace NamespaceSearchResponse {
@@ -618,11 +640,31 @@ export namespace NamespaceChatCompletionsParams {
   }
 
   export interface Message {
-    content: string | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
     [k: string]: unknown;
+  }
+
+  export namespace Message {
+    export interface UnionMember0 {
+      text: string;
+
+      type: 'text';
+    }
+
+    export interface UnionMember1 {
+      image_url: UnionMember1.ImageURL;
+
+      type: 'image_url';
+    }
+
+    export namespace UnionMember1 {
+      export interface ImageURL {
+        url: string;
+      }
+    }
   }
 }
 
@@ -642,7 +684,11 @@ export interface NamespaceSearchParams {
   ai_search_options: NamespaceSearchParams.AISearchOptions;
 
   /**
-   * Body param
+   * Body param: OpenAI-compatible message array. For multimodal queries, set the
+   * last user message's `content` to an array of typed parts:
+   * `[{type:'text', text:'…'}, {type:'image_url', image_url:{url:'…'}}]`. Image
+   * inputs require the RAG's embedding_model to declare 'image' in
+   * supported_modalities.
    */
   messages?: Array<NamespaceSearchParams.Message>;
 
@@ -773,11 +819,31 @@ export namespace NamespaceSearchParams {
   }
 
   export interface Message {
-    content: string | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
     [k: string]: unknown;
+  }
+
+  export namespace Message {
+    export interface UnionMember0 {
+      text: string;
+
+      type: 'text';
+    }
+
+    export interface UnionMember1 {
+      image_url: UnionMember1.ImageURL;
+
+      type: 'image_url';
+    }
+
+    export namespace UnionMember1 {
+      export interface ImageURL {
+        url: string;
+      }
+    }
   }
 }
 

@@ -216,7 +216,7 @@ describe('resource instances', () => {
     const responsePromise = client.aiSearch.namespaces.instances.chatCompletions(
       'my-namespace',
       'my-ai-search',
-      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22', messages: [{ content: 'content', role: 'system' }] },
+      { account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22', messages: [{ content: 'string', role: 'system' }] },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -233,7 +233,7 @@ describe('resource instances', () => {
       'my-ai-search',
       {
         account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-        messages: [{ content: 'content', role: 'system' }],
+        messages: [{ content: 'string', role: 'system' }],
         ai_search_options: {
           cache: { cache_threshold: 'super_strict_match', enabled: true },
           query_rewrite: {
@@ -323,7 +323,7 @@ describe('resource instances', () => {
           return_on_failure: true,
         },
       },
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       query: 'x',
     });
   });

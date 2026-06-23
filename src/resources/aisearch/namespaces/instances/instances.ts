@@ -169,7 +169,7 @@ export class Instances extends APIResource {
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       messages: [{ content: 'content', role: 'system' }],
+   *       messages: [{ content: 'string', role: 'system' }],
    *     },
    *   );
    * ```
@@ -341,6 +341,7 @@ export interface InstanceCreateResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -712,6 +713,7 @@ export interface InstanceUpdateResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -1083,6 +1085,7 @@ export interface InstanceListResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -1454,6 +1457,7 @@ export interface InstanceDeleteResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -1782,11 +1786,31 @@ export namespace InstanceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
       [k: string]: unknown;
+    }
+
+    export namespace Message {
+      export interface UnionMember0 {
+        text: string;
+
+        type: 'text';
+      }
+
+      export interface UnionMember1 {
+        image_url: UnionMember1.ImageURL;
+
+        type: 'image_url';
+      }
+
+      export namespace UnionMember1 {
+        export interface ImageURL {
+          url: string;
+        }
+      }
     }
   }
 
@@ -1895,6 +1919,7 @@ export interface InstanceReadResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -2203,7 +2228,9 @@ export namespace InstanceReadResponse {
 export interface InstanceSearchResponse {
   chunks: Array<InstanceSearchResponse.Chunk>;
 
-  search_query: string;
+  query_kind: 'text' | 'image' | 'multimodal';
+
+  search_query?: string;
 }
 
 export namespace InstanceSearchResponse {
@@ -2411,6 +2438,7 @@ export interface InstanceCreateParams {
    */
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -2835,6 +2863,7 @@ export interface InstanceUpdateParams {
    */
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -3313,11 +3342,31 @@ export interface InstanceChatCompletionsParams {
 
 export namespace InstanceChatCompletionsParams {
   export interface Message {
-    content: string | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
     [k: string]: unknown;
+  }
+
+  export namespace Message {
+    export interface UnionMember0 {
+      text: string;
+
+      type: 'text';
+    }
+
+    export interface UnionMember1 {
+      image_url: UnionMember1.ImageURL;
+
+      type: 'image_url';
+    }
+
+    export namespace UnionMember1 {
+      export interface ImageURL {
+        url: string;
+      }
+    }
   }
 
   export interface AISearchOptions {
@@ -3453,7 +3502,11 @@ export interface InstanceSearchParams {
   ai_search_options?: InstanceSearchParams.AISearchOptions;
 
   /**
-   * Body param
+   * Body param: OpenAI-compatible message array. For multimodal queries, set the
+   * last user message's `content` to an array of typed parts:
+   * `[{type:'text', text:'…'}, {type:'image_url', image_url:{url:'…'}}]`. Image
+   * inputs require the RAG's embedding_model to declare 'image' in
+   * supported_modalities.
    */
   messages?: Array<InstanceSearchParams.Message>;
 
@@ -3582,11 +3635,31 @@ export namespace InstanceSearchParams {
   }
 
   export interface Message {
-    content: string | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
     [k: string]: unknown;
+  }
+
+  export namespace Message {
+    export interface UnionMember0 {
+      text: string;
+
+      type: 'text';
+    }
+
+    export interface UnionMember1 {
+      image_url: UnionMember1.ImageURL;
+
+      type: 'image_url';
+    }
+
+    export namespace UnionMember1 {
+      export interface ImageURL {
+        url: string;
+      }
+    }
   }
 }
 
