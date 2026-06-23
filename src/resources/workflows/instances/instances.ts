@@ -300,7 +300,8 @@ export namespace InstanceGetResponse {
     export namespace Config {
       export interface Retries {
         /**
-         * Specifies the delay duration.
+         * Specifies the delay duration. '[dynamic]' indicates the delay is computed by a
+         * user-supplied function.
          */
         delay: string | number;
 
