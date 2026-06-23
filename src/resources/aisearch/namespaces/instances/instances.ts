@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as SippyAPI from '../../../r2/buckets/sippy';
 import * as ItemsAPI from './items';
 import {
   ItemChunksParams,
@@ -170,7 +169,7 @@ export class Instances extends APIResource {
    *     'my-ai-search',
    *     {
    *       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-   *       messages: [{ content: 'content', role: 'system' }],
+   *       messages: [{ content: 'string', role: 'system' }],
    *     },
    *   );
    * ```
@@ -342,6 +341,7 @@ export interface InstanceCreateResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -594,28 +594,12 @@ export namespace InstanceCreateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -658,14 +642,6 @@ export namespace InstanceCreateResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -737,6 +713,7 @@ export interface InstanceUpdateResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -989,28 +966,12 @@ export namespace InstanceUpdateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1053,14 +1014,6 @@ export namespace InstanceUpdateResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -1132,6 +1085,7 @@ export interface InstanceListResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -1384,28 +1338,12 @@ export namespace InstanceListResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1448,14 +1386,6 @@ export namespace InstanceListResponse {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
       }
     }
   }
@@ -1527,6 +1457,7 @@ export interface InstanceDeleteResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -1779,28 +1710,12 @@ export namespace InstanceDeleteResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1844,14 +1759,6 @@ export namespace InstanceDeleteResponse {
           selector: string;
         }
       }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
-      }
     }
   }
 }
@@ -1879,11 +1786,31 @@ export namespace InstanceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
       [k: string]: unknown;
+    }
+
+    export namespace Message {
+      export interface UnionMember0 {
+        text: string;
+
+        type: 'text';
+      }
+
+      export interface UnionMember1 {
+        image_url: UnionMember1.ImageURL;
+
+        type: 'image_url';
+      }
+
+      export namespace UnionMember1 {
+        export interface ImageURL {
+          url: string;
+        }
+      }
     }
   }
 
@@ -1992,6 +1919,7 @@ export interface InstanceReadResponse {
 
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -2244,28 +2172,12 @@ export namespace InstanceReadResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2309,14 +2221,6 @@ export namespace InstanceReadResponse {
           selector: string;
         }
       }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.Provider;
-      }
     }
   }
 }
@@ -2324,7 +2228,9 @@ export namespace InstanceReadResponse {
 export interface InstanceSearchResponse {
   chunks: Array<InstanceSearchResponse.Chunk>;
 
-  search_query: string;
+  query_kind: 'text' | 'image' | 'multimodal';
+
+  search_query?: string;
 }
 
 export namespace InstanceSearchResponse {
@@ -2532,6 +2438,7 @@ export interface InstanceCreateParams {
    */
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -2814,28 +2721,12 @@ export namespace InstanceCreateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2878,14 +2769,6 @@ export namespace InstanceCreateParams {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.ProviderParam;
       }
     }
   }
@@ -2980,6 +2863,7 @@ export interface InstanceUpdateParams {
    */
   embedding_model?:
     | '@cf/qwen/qwen3-embedding-0.6b'
+    | '@cf/qwen/qwen3-vl-embedding-2b'
     | '@cf/baai/bge-m3'
     | '@cf/baai/bge-large-en-v1.5'
     | '@cf/google/embeddinggemma-300m'
@@ -3086,6 +2970,11 @@ export interface InstanceUpdateParams {
    * Body param
    */
   score_threshold?: number;
+
+  /**
+   * Body param
+   */
+  source?: string | null;
 
   /**
    * Body param
@@ -3308,28 +3197,12 @@ export namespace InstanceUpdateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
-      crawl_options?: WebCrawler.CrawlOptions;
-
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'feed-rss' | 'crawl';
-
-      store_options?: WebCrawler.StoreOptions;
+      parse_type?: 'sitemap' | 'crawl';
     }
 
     export namespace WebCrawler {
-      export interface CrawlOptions {
-        depth?: number;
-
-        include_external_links?: boolean;
-
-        include_subdomains?: boolean;
-
-        max_age?: number;
-
-        source?: 'all' | 'sitemaps' | 'links';
-      }
-
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -3372,14 +3245,6 @@ export namespace InstanceUpdateParams {
            */
           selector: string;
         }
-      }
-
-      export interface StoreOptions {
-        storage_id: string;
-
-        r2_jurisdiction?: string;
-
-        storage_type?: SippyAPI.ProviderParam;
       }
     }
   }
@@ -3477,11 +3342,31 @@ export interface InstanceChatCompletionsParams {
 
 export namespace InstanceChatCompletionsParams {
   export interface Message {
-    content: string | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
     [k: string]: unknown;
+  }
+
+  export namespace Message {
+    export interface UnionMember0 {
+      text: string;
+
+      type: 'text';
+    }
+
+    export interface UnionMember1 {
+      image_url: UnionMember1.ImageURL;
+
+      type: 'image_url';
+    }
+
+    export namespace UnionMember1 {
+      export interface ImageURL {
+        url: string;
+      }
+    }
   }
 
   export interface AISearchOptions {
@@ -3565,7 +3450,8 @@ export namespace InstanceChatCompletionsParams {
       /**
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
+       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
@@ -3616,7 +3502,11 @@ export interface InstanceSearchParams {
   ai_search_options?: InstanceSearchParams.AISearchOptions;
 
   /**
-   * Body param
+   * Body param: OpenAI-compatible message array. For multimodal queries, set the
+   * last user message's `content` to an array of typed parts:
+   * `[{type:'text', text:'…'}, {type:'image_url', image_url:{url:'…'}}]`. Image
+   * inputs require the RAG's embedding_model to declare 'image' in
+   * supported_modalities.
    */
   messages?: Array<InstanceSearchParams.Message>;
 
@@ -3709,7 +3599,8 @@ export namespace InstanceSearchParams {
       /**
        * Controls which documents are candidates for BM25 scoring. 'and' restricts
        * candidates to documents containing all query terms; 'or' includes any document
-       * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+       * containing at least one term, ranked by BM25 relevance. When omitted, falls back
+       * to the instance-level retrieval_options.keyword_match_mode, then to 'and'.
        */
       keyword_match_mode?: 'and' | 'or';
 
@@ -3744,11 +3635,31 @@ export namespace InstanceSearchParams {
   }
 
   export interface Message {
-    content: string | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
     [k: string]: unknown;
+  }
+
+  export namespace Message {
+    export interface UnionMember0 {
+      text: string;
+
+      type: 'text';
+    }
+
+    export interface UnionMember1 {
+      image_url: UnionMember1.ImageURL;
+
+      type: 'image_url';
+    }
+
+    export namespace UnionMember1 {
+      export interface ImageURL {
+        url: string;
+      }
+    }
   }
 }
 
