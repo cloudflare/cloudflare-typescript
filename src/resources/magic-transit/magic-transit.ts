@@ -58,6 +58,8 @@ import {
   IPSECTunnelListResponse,
   IPSECTunnelPSKGenerateParams,
   IPSECTunnelPSKGenerateResponse,
+  IPSECTunnelPSKSetParams,
+  IPSECTunnelPSKSetResponse,
   IPSECTunnelUpdateParams,
   IPSECTunnelUpdateResponse,
   IPSECTunnels,
@@ -82,6 +84,18 @@ import {
   Routes,
   Scope,
 } from './routes';
+import * as Cf1SitesAPI from './cf1-sites/cf1-sites';
+import {
+  Cf1Site,
+  Cf1SiteCreateParams,
+  Cf1SiteDeleteParams,
+  Cf1SiteGetParams,
+  Cf1SiteListParams,
+  Cf1SiteLocation,
+  Cf1SiteUpdateParams,
+  Cf1Sites,
+  Cf1SitesSinglePage,
+} from './cf1-sites/cf1-sites';
 import * as ConnectorsAPI from './connectors/connectors';
 import {
   ConnectorCreateParams,
@@ -135,6 +149,7 @@ export class MagicTransit extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
+  cf1Sites: Cf1SitesAPI.Cf1Sites = new Cf1SitesAPI.Cf1Sites(this._client);
   pcaps: PCAPsAPI.PCAPs = new PCAPsAPI.PCAPs(this._client);
 }
 
@@ -265,6 +280,8 @@ MagicTransit.Sites = Sites;
 MagicTransit.SitesSinglePage = SitesSinglePage;
 MagicTransit.Connectors = Connectors;
 MagicTransit.ConnectorListResponsesSinglePage = ConnectorListResponsesSinglePage;
+MagicTransit.Cf1Sites = Cf1Sites;
+MagicTransit.Cf1SitesSinglePage = Cf1SitesSinglePage;
 MagicTransit.PCAPs = PCAPs;
 MagicTransit.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
 
@@ -328,6 +345,7 @@ export declare namespace MagicTransit {
     type IPSECTunnelBulkUpdateResponse as IPSECTunnelBulkUpdateResponse,
     type IPSECTunnelGetResponse as IPSECTunnelGetResponse,
     type IPSECTunnelPSKGenerateResponse as IPSECTunnelPSKGenerateResponse,
+    type IPSECTunnelPSKSetResponse as IPSECTunnelPSKSetResponse,
     type IPSECTunnelCreateParams as IPSECTunnelCreateParams,
     type IPSECTunnelUpdateParams as IPSECTunnelUpdateParams,
     type IPSECTunnelListParams as IPSECTunnelListParams,
@@ -335,6 +353,7 @@ export declare namespace MagicTransit {
     type IPSECTunnelBulkUpdateParams as IPSECTunnelBulkUpdateParams,
     type IPSECTunnelGetParams as IPSECTunnelGetParams,
     type IPSECTunnelPSKGenerateParams as IPSECTunnelPSKGenerateParams,
+    type IPSECTunnelPSKSetParams as IPSECTunnelPSKSetParams,
   };
 
   export {
@@ -384,6 +403,18 @@ export declare namespace MagicTransit {
     type ConnectorDeleteParams as ConnectorDeleteParams,
     type ConnectorEditParams as ConnectorEditParams,
     type ConnectorGetParams as ConnectorGetParams,
+  };
+
+  export {
+    Cf1Sites as Cf1Sites,
+    type Cf1Site as Cf1Site,
+    type Cf1SiteLocation as Cf1SiteLocation,
+    Cf1SitesSinglePage as Cf1SitesSinglePage,
+    type Cf1SiteCreateParams as Cf1SiteCreateParams,
+    type Cf1SiteUpdateParams as Cf1SiteUpdateParams,
+    type Cf1SiteListParams as Cf1SiteListParams,
+    type Cf1SiteDeleteParams as Cf1SiteDeleteParams,
+    type Cf1SiteGetParams as Cf1SiteGetParams,
   };
 
   export {

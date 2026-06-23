@@ -35,7 +35,9 @@ describe('resource ipsecTunnels', () => {
       automatic_return_routing: true,
       bgp: {
         customer_asn: 0,
+        export_filter_id: 'a1b2c3d4e5f647890a1b2c3d4e5f6789',
         extra_prefixes: ['string'],
+        import_filter_id: 'a1b2c3d4e5f647890a1b2c3d4e5f6789',
         md5_key: 'md5_key',
       },
       custom_remote_identities: { fqdn_id: 'fqdn_id' },
@@ -82,7 +84,9 @@ describe('resource ipsecTunnels', () => {
       automatic_return_routing: true,
       bgp: {
         customer_asn: 0,
+        export_filter_id: 'a1b2c3d4e5f647890a1b2c3d4e5f6789',
         extra_prefixes: ['string'],
+        import_filter_id: 'a1b2c3d4e5f647890a1b2c3d4e5f6789',
         md5_key: 'md5_key',
       },
       custom_remote_identities: { fqdn_id: 'fqdn_id' },
@@ -204,6 +208,28 @@ describe('resource ipsecTunnels', () => {
     const response = await client.magicTransit.ipsecTunnels.pskGenerate('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
+    });
+  });
+
+  test('pskSet: only required params', async () => {
+    const responsePromise = client.magicTransit.ipsecTunnels.pskSet({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      psks: [{ id: '023e105f4ecef8ad9ca31a8372d0c353', psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('pskSet: required and optional params', async () => {
+    const response = await client.magicTransit.ipsecTunnels.pskSet({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      psks: [{ id: '023e105f4ecef8ad9ca31a8372d0c353', psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy' }],
+      validate_only: true,
     });
   });
 });
