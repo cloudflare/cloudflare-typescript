@@ -237,7 +237,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
     const responsePromise = client.aiSearch.namespaces.instances.chatCompletions('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       name: 'my-namespace',
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -252,7 +252,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
     const response = await client.aiSearch.namespaces.instances.chatCompletions('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       name: 'my-namespace',
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       ai_search_options: {
         cache: { cache_threshold: 'super_strict_match', enabled: true },
         query_rewrite: {
@@ -345,7 +345,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
           return_on_failure: true,
         },
       },
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       query: 'x',
     });
   });
