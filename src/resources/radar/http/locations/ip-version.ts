@@ -142,6 +142,8 @@ export namespace IPVersionGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

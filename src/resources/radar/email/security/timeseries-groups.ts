@@ -350,6 +350,8 @@ export namespace TimeseriesGroupARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -485,6 +487,8 @@ export namespace TimeseriesGroupDKIMResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -620,6 +624,8 @@ export namespace TimeseriesGroupDMARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -755,6 +761,8 @@ export namespace TimeseriesGroupMaliciousResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -896,6 +904,8 @@ export namespace TimeseriesGroupSpamResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1037,6 +1047,8 @@ export namespace TimeseriesGroupSPFResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1172,6 +1184,8 @@ export namespace TimeseriesGroupSpoofResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1313,6 +1327,8 @@ export namespace TimeseriesGroupThreatCategoryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1458,6 +1474,8 @@ export namespace TimeseriesGroupTLSVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

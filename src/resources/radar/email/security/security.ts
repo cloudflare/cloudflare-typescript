@@ -288,6 +288,8 @@ export namespace SecuritySummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -423,6 +425,8 @@ export namespace SecurityTimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

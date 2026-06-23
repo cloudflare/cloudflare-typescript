@@ -144,6 +144,8 @@ export namespace BGPTimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

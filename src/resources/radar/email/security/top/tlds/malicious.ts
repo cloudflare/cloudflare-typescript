@@ -147,6 +147,8 @@ export namespace MaliciousGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

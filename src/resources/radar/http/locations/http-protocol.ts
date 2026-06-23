@@ -147,6 +147,8 @@ export namespace HTTPProtocolGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

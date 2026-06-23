@@ -261,6 +261,8 @@ export namespace Layer3SummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -399,6 +401,8 @@ export namespace Layer3TimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -540,6 +544,8 @@ export namespace Layer3TimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

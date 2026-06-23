@@ -146,6 +146,8 @@ export namespace OSGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -317,6 +317,8 @@ export namespace SummaryARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -445,6 +447,8 @@ export namespace SummaryDKIMResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -573,6 +577,8 @@ export namespace SummaryDMARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -701,6 +707,8 @@ export namespace SummaryMaliciousResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -841,6 +849,8 @@ export namespace SummarySpamResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -981,6 +991,8 @@ export namespace SummarySPFResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1109,6 +1121,8 @@ export namespace SummarySpoofResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1249,6 +1263,8 @@ export namespace SummaryThreatCategoryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1399,6 +1415,8 @@ export namespace SummaryTLSVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
