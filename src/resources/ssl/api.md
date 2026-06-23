@@ -44,15 +44,17 @@ Methods:
 
 ## Recommendations
 
+## AutoOriginTLSKex
+
 Types:
 
-- <code><a href="./src/resources/ssl/recommendations.ts">RecommendationGetResponse</a></code>
+- <code><a href="./src/resources/ssl/auto-origin-tls-kex.ts">AutoOriginTLSKexEditResponse</a></code>
+- <code><a href="./src/resources/ssl/auto-origin-tls-kex.ts">AutoOriginTLSKexGetResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/ssl/recommendation">client.ssl.recommendations.<a href="./src/resources/ssl/recommendations.ts">get</a>({ ...params }) -> RecommendationGetResponse</code>
-
-## AutoOriginTLSKex
+- <code title="patch /zones/{zone_id}/settings/auto_origin_tls_kex">client.ssl.autoOriginTLSKex.<a href="./src/resources/ssl/auto-origin-tls-kex.ts">edit</a>({ ...params }) -> AutoOriginTLSKexEditResponse</code>
+- <code title="get /zones/{zone_id}/settings/auto_origin_tls_kex">client.ssl.autoOriginTLSKex.<a href="./src/resources/ssl/auto-origin-tls-kex.ts">get</a>({ ...params }) -> AutoOriginTLSKexGetResponse</code>
 
 ## Universal
 

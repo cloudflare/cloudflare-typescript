@@ -4,9 +4,15 @@ import { APIResource } from '../../resource';
 import * as AnalyzeAPI from './analyze';
 import { Analyze, AnalyzeCreateParams, AnalyzeCreateResponse } from './analyze';
 import * as AutoOriginTLSKexAPI from './auto-origin-tls-kex';
-import { AutoOriginTLSKex } from './auto-origin-tls-kex';
+import {
+  AutoOriginTLSKex,
+  AutoOriginTLSKexEditParams,
+  AutoOriginTLSKexEditResponse,
+  AutoOriginTLSKexGetParams,
+  AutoOriginTLSKexGetResponse,
+} from './auto-origin-tls-kex';
 import * as RecommendationsAPI from './recommendations';
-import { RecommendationGetParams, RecommendationGetResponse, Recommendations } from './recommendations';
+import { Recommendations } from './recommendations';
 import * as VerificationAPI from './verification';
 import {
   Verification,
@@ -85,13 +91,15 @@ export declare namespace SSL {
     type CertificatePackGetParams as CertificatePackGetParams,
   };
 
-  export {
-    Recommendations as Recommendations,
-    type RecommendationGetResponse as RecommendationGetResponse,
-    type RecommendationGetParams as RecommendationGetParams,
-  };
+  export { Recommendations as Recommendations };
 
-  export { AutoOriginTLSKex as AutoOriginTLSKex };
+  export {
+    AutoOriginTLSKex as AutoOriginTLSKex,
+    type AutoOriginTLSKexEditResponse as AutoOriginTLSKexEditResponse,
+    type AutoOriginTLSKexGetResponse as AutoOriginTLSKexGetResponse,
+    type AutoOriginTLSKexEditParams as AutoOriginTLSKexEditParams,
+    type AutoOriginTLSKexGetParams as AutoOriginTLSKexGetParams,
+  };
 
   export { Universal as Universal };
 
