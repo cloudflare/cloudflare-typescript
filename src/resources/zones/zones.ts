@@ -119,6 +119,8 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
+import * as CTAPI from './ct/ct';
+import { CT } from './ct/ct';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Zones extends APIResource {
@@ -132,6 +134,7 @@ export class Zones extends APIResource {
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
   ratePlans: RatePlansAPI.RatePlans = new RatePlansAPI.RatePlans(this._client);
+  ct: CTAPI.CT = new CTAPI.CT(this._client);
 
   /**
    * Create Zone
@@ -694,6 +697,7 @@ Zones.Plans = Plans;
 Zones.AvailableRatePlansSinglePage = AvailableRatePlansSinglePage;
 Zones.RatePlans = RatePlans;
 Zones.RatePlanGetResponsesSinglePage = RatePlanGetResponsesSinglePage;
+Zones.CT = CT;
 
 export declare namespace Zones {
   export {
@@ -830,4 +834,6 @@ export declare namespace Zones {
     RatePlanGetResponsesSinglePage as RatePlanGetResponsesSinglePage,
     type RatePlanGetParams as RatePlanGetParams,
   };
+
+  export { CT as CT };
 }
