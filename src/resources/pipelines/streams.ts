@@ -1258,8 +1258,8 @@ export interface StreamDeleteParams {
   account_id: string;
 
   /**
-   * Query param: Delete stream forcefully, including deleting any dependent
-   * pipelines.
+   * Query param: Deprecated: Delete stream forcefully, including deleting any
+   * dependent pipelines.
    */
   force?: string;
 }
