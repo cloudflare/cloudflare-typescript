@@ -93,7 +93,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">create</a>({ ...params }) -> IPProfile</code>
 - <code title="patch /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">update</a>(profileId, { ...params }) -> IPProfile</code>
-- <code title="get /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">list</a>({ ...params }) -> IPProfilesSinglePage</code>
+- <code title="get /accounts/{account_id}/devices/ip-profiles">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">list</a>({ ...params }) -> IPProfilesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">delete</a>(profileId, { ...params }) -> IPProfileDeleteResponse</code>
 - <code title="get /accounts/{account_id}/devices/ip-profiles/{profile_id}">client.zeroTrust.devices.ipProfiles.<a href="./src/resources/zero-trust/devices/ip-profiles.ts">get</a>(profileId, { ...params }) -> IPProfile</code>
 
@@ -513,7 +513,6 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationPolicy</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationSCIMConfig</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationType</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Decision</a></code>
@@ -559,7 +558,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckGeo</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckListResponse</a></code>
 
 Methods:

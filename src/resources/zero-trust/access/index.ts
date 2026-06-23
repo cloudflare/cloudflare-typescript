@@ -28,7 +28,6 @@ export {
   type AppID,
   type Application,
   type ApplicationPolicy,
-  type ApplicationSCIMConfig,
   type ApplicationType,
   type CORSHeaders,
   type Decision,

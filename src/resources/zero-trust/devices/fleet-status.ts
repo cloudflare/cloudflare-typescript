@@ -35,7 +35,7 @@ export class FleetStatus extends APIResource {
 
 export interface FleetStatusGetResponse {
   /**
-   * Cloudflare colo
+   * Cloudflare colo airport code.
    */
   colo: string;
 
@@ -45,27 +45,24 @@ export interface FleetStatusGetResponse {
   deviceId: string;
 
   /**
-   * The mode under which the WARP client is run
+   * The mode under which the WARP client is run.
    */
   mode: string;
 
   /**
-   * Operating system
+   * Operating system.
    */
   platform: string;
 
   /**
-   * Network status
+   * Network status.
    */
   status: string;
 
-  /**
-   * Timestamp in ISO format
-   */
   timestamp: string;
 
   /**
-   * WARP client version
+   * WARP client version.
    */
   version: string;
 
@@ -81,14 +78,14 @@ export interface FleetStatusGetResponse {
 
   cpuPct?: number | null;
 
-  cpuPctByApp?: Array<Array<FleetStatusGetResponse.CPUPctByApp>> | null;
+  cpuPctByApp?: Array<FleetStatusGetResponse.CPUPctByApp> | null;
 
-  deviceIpv4?: FleetStatusGetResponse.DeviceIPV4;
+  deviceIpv4?: FleetStatusGetResponse.DeviceIPV4 | null;
 
-  deviceIpv6?: FleetStatusGetResponse.DeviceIPV6;
+  deviceIpv6?: FleetStatusGetResponse.DeviceIPV6 | null;
 
   /**
-   * Device identifier (human readable)
+   * Device identifier (human readable).
    */
   deviceName?: string;
 
@@ -109,15 +106,15 @@ export interface FleetStatusGetResponse {
 
   firewallEnabled?: boolean | null;
 
-  gatewayIpv4?: FleetStatusGetResponse.GatewayIPV4;
+  gatewayIpv4?: FleetStatusGetResponse.GatewayIPV4 | null;
 
-  gatewayIpv6?: FleetStatusGetResponse.GatewayIPV6;
+  gatewayIpv6?: FleetStatusGetResponse.GatewayIPV6 | null;
 
   handshakeLatencyMs?: number | null;
 
-  ispIpv4?: FleetStatusGetResponse.ISPIPV4;
+  ispIpv4?: FleetStatusGetResponse.ISPIPV4 | null;
 
-  ispIpv6?: FleetStatusGetResponse.ISPIPV6;
+  ispIpv6?: FleetStatusGetResponse.ISPIPV6 | null;
 
   metal?: string | null;
 
@@ -136,7 +133,7 @@ export interface FleetStatusGetResponse {
 
   ramUsedPct?: number | null;
 
-  ramUsedPctByApp?: Array<Array<FleetStatusGetResponse.RamUsedPctByApp>> | null;
+  ramUsedPctByApp?: Array<FleetStatusGetResponse.RamUsedPctByApp> | null;
 
   /**
    * Device registration identifier (UUID v4). On multi-user devices, this uniquely
@@ -144,16 +141,34 @@ export interface FleetStatusGetResponse {
    */
   registrationId?: string | null;
 
+  /**
+   * Round-trip time statistics for the WARP tunnel.
+   */
+  rtt?: FleetStatusGetResponse.RTT | null;
+
   switchLocked?: boolean | null;
+
+  /**
+   * WARP tunnel packet and byte counters.
+   */
+  tunnelStats?: FleetStatusGetResponse.TunnelStats | null;
+
+  tunnelType?: string | null;
 
   wifiStrengthDbm?: number | null;
 }
 
 export namespace FleetStatusGetResponse {
   export interface CPUPctByApp {
-    cpu_pct?: number;
+    /**
+     * CPU usage percentage, on a scale of 0 to 100.
+     */
+    cpu_pct?: number | null;
 
-    name?: string;
+    /**
+     * Application name.
+     */
+    name?: string | null;
   }
 
   export interface DeviceIPV4 {
@@ -165,9 +180,14 @@ export namespace FleetStatusGetResponse {
 
     location?: DeviceIPV4.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace DeviceIPV4 {
@@ -191,9 +211,14 @@ export namespace FleetStatusGetResponse {
 
     location?: DeviceIPV6.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace DeviceIPV6 {
@@ -217,9 +242,14 @@ export namespace FleetStatusGetResponse {
 
     location?: GatewayIPV4.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace GatewayIPV4 {
@@ -243,9 +273,14 @@ export namespace FleetStatusGetResponse {
 
     location?: GatewayIPV6.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace GatewayIPV6 {
@@ -269,9 +304,14 @@ export namespace FleetStatusGetResponse {
 
     location?: ISPIPV4.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace ISPIPV4 {
@@ -295,9 +335,14 @@ export namespace FleetStatusGetResponse {
 
     location?: ISPIPV6.Location;
 
+    name?: string | null;
+
     netmask?: string | null;
 
-    version?: string | null;
+    /**
+     * IP version (`1` for IPv4, `2` for IPv6, `0` if unknown).
+     */
+    version?: number;
   }
 
   export namespace ISPIPV6 {
@@ -313,30 +358,209 @@ export namespace FleetStatusGetResponse {
   }
 
   export interface RamUsedPctByApp {
-    name?: string;
+    /**
+     * Application name.
+     */
+    name?: string | null;
 
-    ram_used_pct?: number;
+    /**
+     * RAM usage percentage, on a scale of 0 to 100.
+     */
+    ram_used_pct?: number | null;
+  }
+
+  /**
+   * Round-trip time statistics for the WARP tunnel.
+   */
+  export interface RTT {
+    /**
+     * Minimum round-trip time in microseconds.
+     */
+    minRttUs?: RTT.MinRTTUs | null;
+
+    /**
+     * Round-trip time in microseconds.
+     */
+    rttUs?: RTT.RTTUs | null;
+
+    /**
+     * Round-trip time variance in microseconds.
+     */
+    rttVarUs?: RTT.RTTVarUs | null;
+  }
+
+  export namespace RTT {
+    /**
+     * Minimum round-trip time in microseconds.
+     */
+    export interface MinRTTUs {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Round-trip time in microseconds.
+     */
+    export interface RTTUs {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Round-trip time variance in microseconds.
+     */
+    export interface RTTVarUs {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+  }
+
+  /**
+   * WARP tunnel packet and byte counters.
+   */
+  export interface TunnelStats {
+    /**
+     * Number of bytes lost, split by direction.
+     */
+    bytesLost?: TunnelStats.BytesLost | null;
+
+    /**
+     * Number of bytes received, split by direction.
+     */
+    bytesReceived?: TunnelStats.BytesReceived | null;
+
+    /**
+     * Number of bytes retransmitted, split by direction.
+     */
+    bytesRetransmitted?: TunnelStats.BytesRetransmitted | null;
+
+    /**
+     * Number of bytes sent, split by direction.
+     */
+    bytesSent?: TunnelStats.BytesSent | null;
+
+    /**
+     * Number of packets lost, split by direction.
+     */
+    packetsLost?: TunnelStats.PacketsLost | null;
+
+    /**
+     * Number of packets received, split by direction.
+     */
+    packetsReceived?: TunnelStats.PacketsReceived | null;
+
+    /**
+     * Number of packets retransmitted, split by direction.
+     */
+    packetsRetransmitted?: TunnelStats.PacketsRetransmitted | null;
+
+    /**
+     * Number of packets sent, split by direction.
+     */
+    packetsSent?: TunnelStats.PacketsSent | null;
+
+    /**
+     * The measurement window duration in milliseconds.
+     */
+    statsWindowMs?: number | null;
+  }
+
+  export namespace TunnelStats {
+    /**
+     * Number of bytes lost, split by direction.
+     */
+    export interface BytesLost {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of bytes received, split by direction.
+     */
+    export interface BytesReceived {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of bytes retransmitted, split by direction.
+     */
+    export interface BytesRetransmitted {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of bytes sent, split by direction.
+     */
+    export interface BytesSent {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets lost, split by direction.
+     */
+    export interface PacketsLost {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets received, split by direction.
+     */
+    export interface PacketsReceived {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets retransmitted, split by direction.
+     */
+    export interface PacketsRetransmitted {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
+
+    /**
+     * Number of packets sent, split by direction.
+     */
+    export interface PacketsSent {
+      downstream?: number | null;
+
+      upstream?: number | null;
+    }
   }
 }
 
 export interface FleetStatusGetParams {
   /**
-   * Path param: Unique identifier for account
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Number of minutes before current time
+   * Query param: Number of minutes before current time.
    */
   since_minutes: number;
 
   /**
-   * Query param: List of data centers to filter results
+   * Query param: List of data centers to filter results.
    */
   colo?: string;
 
   /**
-   * Query param: Number of minutes before current time
+   * Query param: Current time in ISO format.
    */
   time_now?: string;
 }

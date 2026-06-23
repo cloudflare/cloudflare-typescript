@@ -26,7 +26,7 @@ describe('resource uniqueDevices', () => {
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.dex.tests.uniqueDevices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      deviceId: ['string'],
+      deviceId: ['cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7'],
       testName: 'testName',
     });
   });

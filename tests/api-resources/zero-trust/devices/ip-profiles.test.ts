@@ -84,6 +84,7 @@ describe('resource ipProfiles', () => {
   test.skip('list: required and optional params', async () => {
     const response = await client.zeroTrust.devices.ipProfiles.list({
       account_id: 'account_id',
+      page: 1,
       per_page: 1,
     });
   });

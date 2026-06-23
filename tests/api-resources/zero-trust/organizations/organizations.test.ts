@@ -50,14 +50,14 @@ describe('resource organizations', () => {
         required_aaguids: '2fc0579f-8113-47ea-b116-bb5a8db9202a',
         session_duration: '24h',
       },
-      mfa_required_for_all_apps: false,
-      mfa_ssh_piv_key_requirements: {
+      mfa_piv_key_requirements: {
         pin_policy: 'always',
         require_fips_device: true,
         ssh_key_size: [256, 2048],
         ssh_key_type: ['ecdsa', 'rsa'],
         touch_policy: 'always',
       },
+      mfa_required_for_all_apps: false,
       session_duration: '24h',
       ui_read_only_toggle_reason: 'Temporarily turn off the UI read only lock to make a change via the UI',
       user_seat_expiration_inactive_time: '730h',

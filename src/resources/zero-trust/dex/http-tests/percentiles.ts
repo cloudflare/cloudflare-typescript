@@ -49,17 +49,17 @@ export interface TestStatOverTime {
   slots: Array<TestStatOverTime.Slot>;
 
   /**
-   * average observed in the time period
+   * average observed in the time period.
    */
   avg?: number | null;
 
   /**
-   * highest observed in the time period
+   * highest observed in the time period.
    */
   max?: number | null;
 
   /**
-   * lowest observed in the time period
+   * lowest observed in the time period.
    */
   min?: number | null;
 }
@@ -74,17 +74,17 @@ export namespace TestStatOverTime {
 
 export interface PercentileGetParams {
   /**
-   * Path param: unique identifier linked to an account in the API request path.
+   * Path param: Unique identifier linked to an account.
    */
   account_id: string;
 
   /**
-   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: Start time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   from: string;
 
   /**
-   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format
+   * Query param: End time for the query in ISO (RFC3339 - ISO 8601) format.
    */
   to: string;
 

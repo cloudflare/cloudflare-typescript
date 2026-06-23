@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class IPProfiles extends APIResource {
   /**
@@ -74,12 +74,13 @@ export class IPProfiles extends APIResource {
   list(
     params: IPProfileListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IPProfilesSinglePage, IPProfile> {
+  ): Core.PagePromise<IPProfilesV4PagePaginationArray, IPProfile> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/devices/ip-profiles`, IPProfilesSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/ip-profiles`,
+      IPProfilesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -135,7 +136,7 @@ export class IPProfiles extends APIResource {
   }
 }
 
-export class IPProfilesSinglePage extends SinglePage<IPProfile> {}
+export class IPProfilesV4PagePaginationArray extends V4PagePaginationArray<IPProfile> {}
 
 export interface IPProfile {
   /**
@@ -277,16 +278,11 @@ export interface IPProfileUpdateParams {
   subnet_id?: string;
 }
 
-export interface IPProfileListParams {
+export interface IPProfileListParams extends V4PagePaginationArrayParams {
   /**
    * Path param
    */
   account_id: string;
-
-  /**
-   * Query param: The number of IP profiles to return per page.
-   */
-  per_page?: number;
 }
 
 export interface IPProfileDeleteParams {
@@ -297,13 +293,13 @@ export interface IPProfileGetParams {
   account_id: string;
 }
 
-IPProfiles.IPProfilesSinglePage = IPProfilesSinglePage;
+IPProfiles.IPProfilesV4PagePaginationArray = IPProfilesV4PagePaginationArray;
 
 export declare namespace IPProfiles {
   export {
     type IPProfile as IPProfile,
     type IPProfileDeleteResponse as IPProfileDeleteResponse,
-    IPProfilesSinglePage as IPProfilesSinglePage,
+    IPProfilesV4PagePaginationArray as IPProfilesV4PagePaginationArray,
     type IPProfileCreateParams as IPProfileCreateParams,
     type IPProfileUpdateParams as IPProfileUpdateParams,
     type IPProfileListParams as IPProfileListParams,

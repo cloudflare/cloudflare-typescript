@@ -53,7 +53,7 @@ import {
   IPProfileListParams,
   IPProfileUpdateParams,
   IPProfiles,
-  IPProfilesSinglePage,
+  IPProfilesV4PagePaginationArray,
 } from './ip-profiles';
 import * as NetworksAPI from './networks';
 import {
@@ -471,7 +471,7 @@ Devices.RegistrationListResponsesCursorPagination = RegistrationListResponsesCur
 Devices.DEXTests = DEXTests;
 Devices.DEXTestListResponsesV4PagePaginationArray = DEXTestListResponsesV4PagePaginationArray;
 Devices.IPProfiles = IPProfiles;
-Devices.IPProfilesSinglePage = IPProfilesSinglePage;
+Devices.IPProfilesV4PagePaginationArray = IPProfilesV4PagePaginationArray;
 Devices.DeploymentGroups = DeploymentGroups;
 Devices.DeploymentGroupsV4PagePaginationArray = DeploymentGroupsV4PagePaginationArray;
 Devices.Networks = Networks;
@@ -545,7 +545,7 @@ export declare namespace Devices {
     IPProfiles as IPProfiles,
     type IPProfile as IPProfile,
     type IPProfileDeleteResponse as IPProfileDeleteResponse,
-    IPProfilesSinglePage as IPProfilesSinglePage,
+    IPProfilesV4PagePaginationArray as IPProfilesV4PagePaginationArray,
     type IPProfileCreateParams as IPProfileCreateParams,
     type IPProfileUpdateParams as IPProfileUpdateParams,
     type IPProfileListParams as IPProfileListParams,

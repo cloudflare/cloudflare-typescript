@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 import { SinglePage } from '../../../../pagination';
 
 export class ActiveSessions extends APIResource {
@@ -113,7 +112,7 @@ export interface ActiveSessionGetResponse {
 
   email?: string;
 
-  geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
+  geo?: ActiveSessionGetResponse.Geo;
 
   iat?: number;
 
@@ -169,6 +168,10 @@ export namespace ActiveSessionGetResponse {
 
       path?: string;
     }
+  }
+
+  export interface Geo {
+    country?: string;
   }
 
   export interface IdP {

@@ -10,7 +10,6 @@ export {
   type AppID,
   type Application,
   type ApplicationPolicy,
-  type ApplicationSCIMConfig,
   type ApplicationType,
   type CORSHeaders,
   type Decision,
@@ -95,7 +94,6 @@ export {
 } from './settings';
 export {
   UserPolicyChecks,
-  type UserPolicyCheckGeo,
   type UserPolicyCheckListResponse,
   type UserPolicyCheckListParams,
 } from './user-policy-checks';
