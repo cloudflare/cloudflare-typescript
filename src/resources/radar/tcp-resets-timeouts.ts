@@ -170,6 +170,8 @@ export namespace TCPResetsTimeoutSummaryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -336,6 +338,8 @@ export namespace TCPResetsTimeoutTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

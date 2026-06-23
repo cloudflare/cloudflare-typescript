@@ -254,6 +254,8 @@ export namespace BotSummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -392,6 +394,8 @@ export namespace BotTimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -533,6 +537,8 @@ export namespace BotTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

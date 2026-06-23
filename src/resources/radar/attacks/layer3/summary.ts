@@ -276,6 +276,8 @@ export namespace SummaryBitrateResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -431,6 +433,8 @@ export namespace SummaryDurationResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -591,6 +595,8 @@ export namespace SummaryIndustryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -719,6 +725,8 @@ export namespace SummaryIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -859,6 +867,8 @@ export namespace SummaryProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1009,6 +1019,8 @@ export namespace SummaryVectorResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1137,6 +1149,8 @@ export namespace SummaryVerticalResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

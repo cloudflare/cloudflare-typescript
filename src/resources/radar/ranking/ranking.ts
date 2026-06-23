@@ -190,6 +190,8 @@ export namespace RankingTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -318,6 +320,8 @@ export namespace RankingTopResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

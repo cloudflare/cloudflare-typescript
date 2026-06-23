@@ -249,6 +249,8 @@ export namespace SummaryARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -377,6 +379,8 @@ export namespace SummaryDKIMResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -505,6 +509,8 @@ export namespace SummaryDMARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -633,6 +639,8 @@ export namespace SummaryEncryptedResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -773,6 +781,8 @@ export namespace SummaryIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -913,6 +923,8 @@ export namespace SummarySPFResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

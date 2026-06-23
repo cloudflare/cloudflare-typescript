@@ -345,6 +345,8 @@ export namespace DNSSummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -483,6 +485,8 @@ export namespace DNSTimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -624,6 +628,8 @@ export namespace DNSTimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

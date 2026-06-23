@@ -173,6 +173,8 @@ export namespace ASNListResponse {
 
     countryName: string;
 
+    estimatedUsers: ASN.EstimatedUsers;
+
     name: string;
 
     aka?: string;
@@ -180,6 +182,15 @@ export namespace ASNListResponse {
     orgName?: string;
 
     website?: string;
+  }
+
+  export namespace ASN {
+    export interface EstimatedUsers {
+      /**
+       * Total estimated users.
+       */
+      estimatedUsers?: number;
+    }
   }
 }
 

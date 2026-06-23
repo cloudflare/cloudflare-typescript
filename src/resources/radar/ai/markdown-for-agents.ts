@@ -169,6 +169,8 @@ export namespace MarkdownForAgentSummaryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -314,6 +316,8 @@ export namespace MarkdownForAgentTimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -162,6 +162,8 @@ export namespace SummaryBotClassResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -302,6 +304,8 @@ export namespace SummaryCompromisedResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

@@ -274,6 +274,8 @@ export namespace TimeseriesGroupARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -409,6 +411,8 @@ export namespace TimeseriesGroupDKIMResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -544,6 +548,8 @@ export namespace TimeseriesGroupDMARCResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -679,6 +685,8 @@ export namespace TimeseriesGroupEncryptedResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -820,6 +828,8 @@ export namespace TimeseriesGroupIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -961,6 +971,8 @@ export namespace TimeseriesGroupSPFResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
