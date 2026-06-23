@@ -1564,7 +1564,8 @@ export interface SinkDeleteParams {
   account_id: string;
 
   /**
-   * Query param: Delete sink forcefully, including deleting any dependent pipelines.
+   * Query param: Deprecated: Delete sink forcefully, including deleting any
+   * dependent pipelines.
    */
   force?: string;
 }
