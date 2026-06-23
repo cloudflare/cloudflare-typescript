@@ -36,7 +36,6 @@ Methods:
 
 - <code title="post /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">create</a>({ ...params }) -> EmailRoutingRule</code>
 - <code title="put /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">update</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
-- <code title="get /zones/{zone_id}/email/routing/rules">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">list</a>({ ...params }) -> EmailRoutingRulesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">delete</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
 - <code title="get /zones/{zone_id}/email/routing/rules/{rule_identifier}">client.emailRouting.rules.<a href="./src/resources/email-routing/rules/rules.ts">get</a>(ruleIdentifier, { ...params }) -> EmailRoutingRule</code>
 

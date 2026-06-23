@@ -10,14 +10,12 @@ export {
   type CatchAllGetParams,
 } from './catch-alls';
 export {
-  EmailRoutingRulesV4PagePaginationArray,
   Rules,
   type Action,
   type EmailRoutingRule,
   type Matcher,
   type RuleCreateParams,
   type RuleUpdateParams,
-  type RuleListParams,
   type RuleDeleteParams,
   type RuleGetParams,
 } from './rules';
