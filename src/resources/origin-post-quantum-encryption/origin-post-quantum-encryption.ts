@@ -17,6 +17,8 @@ export class BaseOriginPostQuantumEncryption extends APIResource {
    * connections when the origin supports and prefers PQ), supported means that PQ
    * algorithms are advertised but only used when requested by the origin, and off
    * means that PQ algorithms are not advertised.
+   *
+   * @deprecated
    */
   update(
     params: OriginPostQuantumEncryptionUpdateParams,
@@ -38,6 +40,8 @@ export class BaseOriginPostQuantumEncryption extends APIResource {
    * connections when the origin supports and prefers PQ), supported means that PQ
    * algorithms are advertised but only used when requested by the origin, and off
    * means that PQ algorithms are not advertised.
+   *
+   * @deprecated
    */
   get(
     params: OriginPostQuantumEncryptionGetParams,
