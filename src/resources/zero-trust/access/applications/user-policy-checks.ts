@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as ApplicationsAPI from './applications';
 import { APIPromise } from '../../../../core/api-promise';
 import { CloudflareError } from '../../../../core/error';
@@ -56,10 +55,6 @@ export class BaseUserPolicyChecks extends APIResource {
 }
 export class UserPolicyChecks extends BaseUserPolicyChecks {}
 
-export interface UserPolicyCheckGeo {
-  country?: string;
-}
-
 export interface UserPolicyCheckListResponse {
   app_state?: UserPolicyCheckListResponse.AppState;
 
@@ -93,7 +88,7 @@ export namespace UserPolicyCheckListResponse {
 
     email?: string;
 
-    geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
+    geo?: UserIdentity.Geo;
 
     iat?: number;
 
@@ -109,6 +104,12 @@ export namespace UserPolicyCheckListResponse {
     user_uuid?: string;
 
     version?: number;
+  }
+
+  export namespace UserIdentity {
+    export interface Geo {
+      country?: string;
+    }
   }
 }
 
@@ -126,7 +127,6 @@ export interface UserPolicyCheckListParams {
 
 export declare namespace UserPolicyChecks {
   export {
-    type UserPolicyCheckGeo as UserPolicyCheckGeo,
     type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
     type UserPolicyCheckListParams as UserPolicyCheckListParams,
   };
