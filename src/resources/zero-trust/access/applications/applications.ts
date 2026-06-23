@@ -61,7 +61,6 @@ import {
 } from './settings';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import {
-  UserPolicyCheckGeo,
   UserPolicyCheckListParams,
   UserPolicyCheckListResponse,
   UserPolicyChecks,
@@ -505,6 +504,14 @@ export namespace Application {
     custom_deny_url?: string;
 
     /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -542,7 +549,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -615,6 +622,137 @@ export namespace Application {
        */
       max_age?: number;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface SaaSApplication {
@@ -657,13 +795,13 @@ export namespace Application {
      */
     name?: string;
 
-    saas_app?: SaaSApplication.AccessSchemasSAMLSaaSApp | SaaSApplication.AccessSchemasOIDCSaaSApp;
+    saas_app?: SaaSApplication.AccessSAMLSaaSApp2 | SaaSApplication.AccessOIDCSaaSApp2;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The application type.
@@ -674,7 +812,7 @@ export namespace Application {
   }
 
   export namespace SaaSApplication {
-    export interface AccessSchemasSAMLSaaSApp {
+    export interface AccessSAMLSaaSApp2 {
       /**
        * Optional identifier indicating the authentication protocol used for the saas
        * app. Required for OIDC. Default if unset is "saml"
@@ -689,7 +827,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_attributes?: Array<AccessSchemasSAMLSaaSApp.CustomAttribute>;
+      custom_attributes?: Array<AccessSAMLSaaSApp2.CustomAttribute>;
 
       /**
        * The unique identifier for your SaaS application.
@@ -727,7 +865,7 @@ export namespace Application {
       updated_at?: string;
     }
 
-    export namespace AccessSchemasSAMLSaaSApp {
+    export namespace AccessSAMLSaaSApp2 {
       export interface CustomAttribute {
         /**
          * The SAML FriendlyName of the attribute.
@@ -770,7 +908,7 @@ export namespace Application {
       }
     }
 
-    export interface AccessSchemasOIDCSaaSApp {
+    export interface AccessOIDCSaaSApp2 {
       /**
        * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
        * be greater than or equal to 1m and less than or equal to 24h.
@@ -806,7 +944,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_claims?: Array<AccessSchemasOIDCSaaSApp.CustomClaim>;
+      custom_claims?: Array<AccessOIDCSaaSApp2.CustomClaim>;
 
       /**
        * The OIDC flows supported by this application
@@ -820,7 +958,7 @@ export namespace Application {
        */
       group_filter_regex?: string;
 
-      hybrid_and_implicit_options?: AccessSchemasOIDCSaaSApp.HybridAndImplicitOptions;
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp2.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -833,7 +971,7 @@ export namespace Application {
        */
       redirect_uris?: Array<string>;
 
-      refresh_token_options?: AccessSchemasOIDCSaaSApp.RefreshTokenOptions;
+      refresh_token_options?: AccessOIDCSaaSApp2.RefreshTokenOptions;
 
       /**
        * Define the user information shared with access, "offline_access" scope will be
@@ -844,7 +982,7 @@ export namespace Application {
       updated_at?: string;
     }
 
-    export namespace AccessSchemasOIDCSaaSApp {
+    export namespace AccessOIDCSaaSApp2 {
       export interface CustomClaim {
         /**
          * The name of the claim.
@@ -912,6 +1050,137 @@ export namespace Application {
         lifetime?: string;
       }
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface BrowserSSHApplication {
@@ -974,6 +1243,14 @@ export namespace Application {
     custom_deny_url?: string;
 
     /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -1011,7 +1288,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -1084,6 +1361,137 @@ export namespace Application {
        */
       max_age?: number;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface BrowserVNCApplication {
@@ -1146,6 +1554,14 @@ export namespace Application {
     custom_deny_url?: string;
 
     /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -1183,7 +1599,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -1256,6 +1672,137 @@ export namespace Application {
        */
       max_age?: number;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface AppLauncherApplication {
@@ -1302,7 +1849,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1312,6 +1859,139 @@ export namespace Application {
     session_duration?: string;
 
     updated_at?: string;
+  }
+
+  export namespace AppLauncherApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface DeviceEnrollmentPermissionsApplication {
@@ -1358,7 +2038,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1368,6 +2048,139 @@ export namespace Application {
     session_duration?: string;
 
     updated_at?: string;
+  }
+
+  export namespace DeviceEnrollmentPermissionsApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface BrowserIsolationPermissionsApplication {
@@ -1414,7 +2227,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1424,6 +2237,139 @@ export namespace Application {
     session_duration?: string;
 
     updated_at?: string;
+  }
+
+  export namespace BrowserIsolationPermissionsApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 
   export interface BookmarkApplication {
@@ -1465,9 +2411,142 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     updated_at?: string;
+  }
+
+  export namespace BookmarkApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+        | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+        | Array<
+            | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+            | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken2
+            | ApplicationsAPI.SCIMConfigAuthenticationOauth2
+            | SCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
+          >;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+
+    export namespace SCIMConfig {
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken2 {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring Access Service Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessSCIMConfigAuthenticationAccessServiceToken {
+        /**
+         * Client ID of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_id: string;
+
+        /**
+         * Client secret of the Access service token used to authenticate with the remote
+         * service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'access_service_token';
+      }
+    }
   }
 }
 
@@ -1606,137 +2685,6 @@ export namespace ApplicationPolicy {
      * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
     session_duration?: string;
-  }
-}
-
-/**
- * Configuration for provisioning to this application via SCIM. This is currently
- * in closed beta.
- */
-export interface ApplicationSCIMConfig {
-  /**
-   * The UID of the IdP to use as the source for SCIM resources to provision to this
-   * application.
-   */
-  idp_uid: string;
-
-  /**
-   * The base URI for the application's SCIM-compatible API.
-   */
-  remote_uri: string;
-
-  /**
-   * Attributes for configuring HTTP Basic authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  authentication?:
-    | SCIMConfigAuthenticationHTTPBasic
-    | ApplicationSCIMConfig.AccessSchemasSCIMConfigAuthenticationOAuthBearerToken
-    | SCIMConfigAuthenticationOauth2
-    | ApplicationSCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-    | Array<
-        | SCIMConfigAuthenticationHTTPBasic
-        | ApplicationSCIMConfig.AccessSchemasSCIMConfigAuthenticationOAuthBearerToken
-        | SCIMConfigAuthenticationOauth2
-        | ApplicationSCIMConfig.AccessSCIMConfigAuthenticationAccessServiceToken
-      >;
-
-  /**
-   * If false, we propagate DELETE requests to the target application for SCIM
-   * resources. If true, we only set `active` to false on the SCIM resource. This is
-   * useful because some targets do not support DELETE operations.
-   */
-  deactivate_on_delete?: boolean;
-
-  /**
-   * Whether SCIM provisioning is turned on for this application.
-   */
-  enabled?: boolean;
-
-  /**
-   * A list of mappings to apply to SCIM resources before provisioning them in this
-   * application. These can transform or filter the resources to be provisioned.
-   */
-  mappings?: Array<SCIMConfigMapping>;
-}
-
-export namespace ApplicationSCIMConfig {
-  /**
-   * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  export interface AccessSchemasSCIMConfigAuthenticationOAuthBearerToken {
-    /**
-     * Token used to authenticate with the remote SCIM service.
-     */
-    token: string;
-
-    /**
-     * The authentication scheme to use when making SCIM requests to this application.
-     */
-    scheme: 'oauthbearertoken';
-  }
-
-  /**
-   * Attributes for configuring Access Service Token authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-    /**
-     * Client ID of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_id: string;
-
-    /**
-     * Client secret of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_secret: string;
-
-    /**
-     * The authentication scheme to use when making SCIM requests to this application.
-     */
-    scheme: 'access_service_token';
-  }
-
-  /**
-   * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  export interface AccessSchemasSCIMConfigAuthenticationOAuthBearerToken {
-    /**
-     * Token used to authenticate with the remote SCIM service.
-     */
-    token: string;
-
-    /**
-     * The authentication scheme to use when making SCIM requests to this application.
-     */
-    scheme: 'oauthbearertoken';
-  }
-
-  /**
-   * Attributes for configuring Access Service Token authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  export interface AccessSCIMConfigAuthenticationAccessServiceToken {
-    /**
-     * Client ID of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_id: string;
-
-    /**
-     * Client secret of the Access service token used to authenticate with the remote
-     * service.
-     */
-    client_secret: string;
-
-    /**
-     * The authentication scheme to use when making SCIM requests to this application.
-     */
-    scheme: 'access_service_token';
   }
 }
 
@@ -2770,7 +3718,19 @@ export namespace ApplicationCreateResponse {
       | SelfHostedApplication.PublicDestination
       | SelfHostedApplication.PrivateDestination
       | SelfHostedApplication.ViaMcpServerPortalDestination
+      | SelfHostedApplication.WorkerDestination
+      | SelfHostedApplication.PreviewWorkerDestination
+      | SelfHostedApplication.AllWorkersDestination
+      | SelfHostedApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -2943,6 +3903,60 @@ export namespace ApplicationCreateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -3692,7 +4706,19 @@ export namespace ApplicationCreateResponse {
       | BrowserSSHApplication.PublicDestination
       | BrowserSSHApplication.PrivateDestination
       | BrowserSSHApplication.ViaMcpServerPortalDestination
+      | BrowserSSHApplication.WorkerDestination
+      | BrowserSSHApplication.PreviewWorkerDestination
+      | BrowserSSHApplication.AllWorkersDestination
+      | BrowserSSHApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -3865,6 +4891,60 @@ export namespace ApplicationCreateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -4304,7 +5384,19 @@ export namespace ApplicationCreateResponse {
       | BrowserVNCApplication.PublicDestination
       | BrowserVNCApplication.PrivateDestination
       | BrowserVNCApplication.ViaMcpServerPortalDestination
+      | BrowserVNCApplication.WorkerDestination
+      | BrowserVNCApplication.PreviewWorkerDestination
+      | BrowserVNCApplication.AllWorkersDestination
+      | BrowserVNCApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -4477,6 +5569,60 @@ export namespace ApplicationCreateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -6183,7 +7329,19 @@ export namespace ApplicationCreateResponse {
       | BrowserRDPApplication.PublicDestination
       | BrowserRDPApplication.PrivateDestination
       | BrowserRDPApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.WorkerDestination
+      | BrowserRDPApplication.PreviewWorkerDestination
+      | BrowserRDPApplication.AllWorkersDestination
+      | BrowserRDPApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -6374,6 +7532,60 @@ export namespace ApplicationCreateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -6781,6 +7993,10 @@ export namespace ApplicationCreateResponse {
       | McpServerApplication.PublicDestination
       | McpServerApplication.PrivateDestination
       | McpServerApplication.ViaMcpServerPortalDestination
+      | McpServerApplication.WorkerDestination
+      | McpServerApplication.PreviewWorkerDestination
+      | McpServerApplication.AllWorkersDestination
+      | McpServerApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -6900,6 +8116,60 @@ export namespace ApplicationCreateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -7285,6 +8555,10 @@ export namespace ApplicationCreateResponse {
       | McpServerPortalApplication.PublicDestination
       | McpServerPortalApplication.PrivateDestination
       | McpServerPortalApplication.ViaMcpServerPortalDestination
+      | McpServerPortalApplication.WorkerDestination
+      | McpServerPortalApplication.PreviewWorkerDestination
+      | McpServerPortalApplication.AllWorkersDestination
+      | McpServerPortalApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -7410,6 +8684,60 @@ export namespace ApplicationCreateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -7830,7 +9158,19 @@ export namespace ApplicationUpdateResponse {
       | SelfHostedApplication.PublicDestination
       | SelfHostedApplication.PrivateDestination
       | SelfHostedApplication.ViaMcpServerPortalDestination
+      | SelfHostedApplication.WorkerDestination
+      | SelfHostedApplication.PreviewWorkerDestination
+      | SelfHostedApplication.AllWorkersDestination
+      | SelfHostedApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -8003,6 +9343,60 @@ export namespace ApplicationUpdateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -8752,7 +10146,19 @@ export namespace ApplicationUpdateResponse {
       | BrowserSSHApplication.PublicDestination
       | BrowserSSHApplication.PrivateDestination
       | BrowserSSHApplication.ViaMcpServerPortalDestination
+      | BrowserSSHApplication.WorkerDestination
+      | BrowserSSHApplication.PreviewWorkerDestination
+      | BrowserSSHApplication.AllWorkersDestination
+      | BrowserSSHApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -8925,6 +10331,60 @@ export namespace ApplicationUpdateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -9364,7 +10824,19 @@ export namespace ApplicationUpdateResponse {
       | BrowserVNCApplication.PublicDestination
       | BrowserVNCApplication.PrivateDestination
       | BrowserVNCApplication.ViaMcpServerPortalDestination
+      | BrowserVNCApplication.WorkerDestination
+      | BrowserVNCApplication.PreviewWorkerDestination
+      | BrowserVNCApplication.AllWorkersDestination
+      | BrowserVNCApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -9537,6 +11009,60 @@ export namespace ApplicationUpdateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -11243,7 +12769,19 @@ export namespace ApplicationUpdateResponse {
       | BrowserRDPApplication.PublicDestination
       | BrowserRDPApplication.PrivateDestination
       | BrowserRDPApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.WorkerDestination
+      | BrowserRDPApplication.PreviewWorkerDestination
+      | BrowserRDPApplication.AllWorkersDestination
+      | BrowserRDPApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -11434,6 +12972,60 @@ export namespace ApplicationUpdateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -11841,6 +13433,10 @@ export namespace ApplicationUpdateResponse {
       | McpServerApplication.PublicDestination
       | McpServerApplication.PrivateDestination
       | McpServerApplication.ViaMcpServerPortalDestination
+      | McpServerApplication.WorkerDestination
+      | McpServerApplication.PreviewWorkerDestination
+      | McpServerApplication.AllWorkersDestination
+      | McpServerApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -11960,6 +13556,60 @@ export namespace ApplicationUpdateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -12345,6 +13995,10 @@ export namespace ApplicationUpdateResponse {
       | McpServerPortalApplication.PublicDestination
       | McpServerPortalApplication.PrivateDestination
       | McpServerPortalApplication.ViaMcpServerPortalDestination
+      | McpServerPortalApplication.WorkerDestination
+      | McpServerPortalApplication.PreviewWorkerDestination
+      | McpServerPortalApplication.AllWorkersDestination
+      | McpServerPortalApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -12470,6 +14124,60 @@ export namespace ApplicationUpdateResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -12890,7 +14598,19 @@ export namespace ApplicationListResponse {
       | SelfHostedApplication.PublicDestination
       | SelfHostedApplication.PrivateDestination
       | SelfHostedApplication.ViaMcpServerPortalDestination
+      | SelfHostedApplication.WorkerDestination
+      | SelfHostedApplication.PreviewWorkerDestination
+      | SelfHostedApplication.AllWorkersDestination
+      | SelfHostedApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -13063,6 +14783,60 @@ export namespace ApplicationListResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -13812,7 +15586,19 @@ export namespace ApplicationListResponse {
       | BrowserSSHApplication.PublicDestination
       | BrowserSSHApplication.PrivateDestination
       | BrowserSSHApplication.ViaMcpServerPortalDestination
+      | BrowserSSHApplication.WorkerDestination
+      | BrowserSSHApplication.PreviewWorkerDestination
+      | BrowserSSHApplication.AllWorkersDestination
+      | BrowserSSHApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -13985,6 +15771,60 @@ export namespace ApplicationListResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -14424,7 +16264,19 @@ export namespace ApplicationListResponse {
       | BrowserVNCApplication.PublicDestination
       | BrowserVNCApplication.PrivateDestination
       | BrowserVNCApplication.ViaMcpServerPortalDestination
+      | BrowserVNCApplication.WorkerDestination
+      | BrowserVNCApplication.PreviewWorkerDestination
+      | BrowserVNCApplication.AllWorkersDestination
+      | BrowserVNCApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -14597,6 +16449,60 @@ export namespace ApplicationListResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -16303,7 +18209,19 @@ export namespace ApplicationListResponse {
       | BrowserRDPApplication.PublicDestination
       | BrowserRDPApplication.PrivateDestination
       | BrowserRDPApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.WorkerDestination
+      | BrowserRDPApplication.PreviewWorkerDestination
+      | BrowserRDPApplication.AllWorkersDestination
+      | BrowserRDPApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -16494,6 +18412,60 @@ export namespace ApplicationListResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -16901,6 +18873,10 @@ export namespace ApplicationListResponse {
       | McpServerApplication.PublicDestination
       | McpServerApplication.PrivateDestination
       | McpServerApplication.ViaMcpServerPortalDestination
+      | McpServerApplication.WorkerDestination
+      | McpServerApplication.PreviewWorkerDestination
+      | McpServerApplication.AllWorkersDestination
+      | McpServerApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -17020,6 +18996,60 @@ export namespace ApplicationListResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -17405,6 +19435,10 @@ export namespace ApplicationListResponse {
       | McpServerPortalApplication.PublicDestination
       | McpServerPortalApplication.PrivateDestination
       | McpServerPortalApplication.ViaMcpServerPortalDestination
+      | McpServerPortalApplication.WorkerDestination
+      | McpServerPortalApplication.PreviewWorkerDestination
+      | McpServerPortalApplication.AllWorkersDestination
+      | McpServerPortalApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -17530,6 +19564,60 @@ export namespace ApplicationListResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -17957,7 +20045,19 @@ export namespace ApplicationGetResponse {
       | SelfHostedApplication.PublicDestination
       | SelfHostedApplication.PrivateDestination
       | SelfHostedApplication.ViaMcpServerPortalDestination
+      | SelfHostedApplication.WorkerDestination
+      | SelfHostedApplication.PreviewWorkerDestination
+      | SelfHostedApplication.AllWorkersDestination
+      | SelfHostedApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -18130,6 +20230,60 @@ export namespace ApplicationGetResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -18879,7 +21033,19 @@ export namespace ApplicationGetResponse {
       | BrowserSSHApplication.PublicDestination
       | BrowserSSHApplication.PrivateDestination
       | BrowserSSHApplication.ViaMcpServerPortalDestination
+      | BrowserSSHApplication.WorkerDestination
+      | BrowserSSHApplication.PreviewWorkerDestination
+      | BrowserSSHApplication.AllWorkersDestination
+      | BrowserSSHApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -19052,6 +21218,60 @@ export namespace ApplicationGetResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -19491,7 +21711,19 @@ export namespace ApplicationGetResponse {
       | BrowserVNCApplication.PublicDestination
       | BrowserVNCApplication.PrivateDestination
       | BrowserVNCApplication.ViaMcpServerPortalDestination
+      | BrowserVNCApplication.WorkerDestination
+      | BrowserVNCApplication.PreviewWorkerDestination
+      | BrowserVNCApplication.AllWorkersDestination
+      | BrowserVNCApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -19664,6 +21896,60 @@ export namespace ApplicationGetResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -21370,7 +23656,19 @@ export namespace ApplicationGetResponse {
       | BrowserRDPApplication.PublicDestination
       | BrowserRDPApplication.PrivateDestination
       | BrowserRDPApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.WorkerDestination
+      | BrowserRDPApplication.PreviewWorkerDestination
+      | BrowserRDPApplication.AllWorkersDestination
+      | BrowserRDPApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -21561,6 +23859,60 @@ export namespace ApplicationGetResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -21968,6 +24320,10 @@ export namespace ApplicationGetResponse {
       | McpServerApplication.PublicDestination
       | McpServerApplication.PrivateDestination
       | McpServerApplication.ViaMcpServerPortalDestination
+      | McpServerApplication.WorkerDestination
+      | McpServerApplication.PreviewWorkerDestination
+      | McpServerApplication.AllWorkersDestination
+      | McpServerApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -22087,6 +24443,60 @@ export namespace ApplicationGetResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -22472,6 +24882,10 @@ export namespace ApplicationGetResponse {
       | McpServerPortalApplication.PublicDestination
       | McpServerPortalApplication.PrivateDestination
       | McpServerPortalApplication.ViaMcpServerPortalDestination
+      | McpServerPortalApplication.WorkerDestination
+      | McpServerPortalApplication.PreviewWorkerDestination
+      | McpServerPortalApplication.AllWorkersDestination
+      | McpServerPortalApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -22597,6 +25011,60 @@ export namespace ApplicationGetResponse {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -23026,7 +25494,19 @@ export declare namespace ApplicationCreateParams {
       | SelfHostedApplication.PublicDestination
       | SelfHostedApplication.PrivateDestination
       | SelfHostedApplication.ViaMcpServerPortalDestination
+      | SelfHostedApplication.WorkerDestination
+      | SelfHostedApplication.PreviewWorkerDestination
+      | SelfHostedApplication.AllWorkersDestination
+      | SelfHostedApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -23206,6 +25686,60 @@ export declare namespace ApplicationCreateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -23940,7 +26474,19 @@ export declare namespace ApplicationCreateParams {
       | BrowserSSHApplication.PublicDestination
       | BrowserSSHApplication.PrivateDestination
       | BrowserSSHApplication.ViaMcpServerPortalDestination
+      | BrowserSSHApplication.WorkerDestination
+      | BrowserSSHApplication.PreviewWorkerDestination
+      | BrowserSSHApplication.AllWorkersDestination
+      | BrowserSSHApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -24120,6 +26666,60 @@ export declare namespace ApplicationCreateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -24549,7 +27149,19 @@ export declare namespace ApplicationCreateParams {
       | BrowserVNCApplication.PublicDestination
       | BrowserVNCApplication.PrivateDestination
       | BrowserVNCApplication.ViaMcpServerPortalDestination
+      | BrowserVNCApplication.WorkerDestination
+      | BrowserVNCApplication.PreviewWorkerDestination
+      | BrowserVNCApplication.AllWorkersDestination
+      | BrowserVNCApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -24729,6 +27341,60 @@ export declare namespace ApplicationCreateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -26368,7 +29034,19 @@ export declare namespace ApplicationCreateParams {
       | BrowserRDPApplication.PublicDestination
       | BrowserRDPApplication.PrivateDestination
       | BrowserRDPApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.WorkerDestination
+      | BrowserRDPApplication.PreviewWorkerDestination
+      | BrowserRDPApplication.AllWorkersDestination
+      | BrowserRDPApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -26566,6 +29244,60 @@ export declare namespace ApplicationCreateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -26960,6 +29692,10 @@ export declare namespace ApplicationCreateParams {
       | McpServerApplication.PublicDestination
       | McpServerApplication.PrivateDestination
       | McpServerApplication.ViaMcpServerPortalDestination
+      | McpServerApplication.WorkerDestination
+      | McpServerApplication.PreviewWorkerDestination
+      | McpServerApplication.AllWorkersDestination
+      | McpServerApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -27085,6 +29821,60 @@ export declare namespace ApplicationCreateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -27457,6 +30247,10 @@ export declare namespace ApplicationCreateParams {
       | McpServerPortalApplication.PublicDestination
       | McpServerPortalApplication.PrivateDestination
       | McpServerPortalApplication.ViaMcpServerPortalDestination
+      | McpServerPortalApplication.WorkerDestination
+      | McpServerPortalApplication.PreviewWorkerDestination
+      | McpServerPortalApplication.AllWorkersDestination
+      | McpServerPortalApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -27590,6 +30384,60 @@ export declare namespace ApplicationCreateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -28000,7 +30848,19 @@ export declare namespace ApplicationUpdateParams {
       | SelfHostedApplication.PublicDestination
       | SelfHostedApplication.PrivateDestination
       | SelfHostedApplication.ViaMcpServerPortalDestination
+      | SelfHostedApplication.WorkerDestination
+      | SelfHostedApplication.PreviewWorkerDestination
+      | SelfHostedApplication.AllWorkersDestination
+      | SelfHostedApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -28180,6 +31040,60 @@ export declare namespace ApplicationUpdateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -28914,7 +31828,19 @@ export declare namespace ApplicationUpdateParams {
       | BrowserSSHApplication.PublicDestination
       | BrowserSSHApplication.PrivateDestination
       | BrowserSSHApplication.ViaMcpServerPortalDestination
+      | BrowserSSHApplication.WorkerDestination
+      | BrowserSSHApplication.PreviewWorkerDestination
+      | BrowserSSHApplication.AllWorkersDestination
+      | BrowserSSHApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -29094,6 +32020,60 @@ export declare namespace ApplicationUpdateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -29523,7 +32503,19 @@ export declare namespace ApplicationUpdateParams {
       | BrowserVNCApplication.PublicDestination
       | BrowserVNCApplication.PrivateDestination
       | BrowserVNCApplication.ViaMcpServerPortalDestination
+      | BrowserVNCApplication.WorkerDestination
+      | BrowserVNCApplication.PreviewWorkerDestination
+      | BrowserVNCApplication.AllWorkersDestination
+      | BrowserVNCApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -29703,6 +32695,60 @@ export declare namespace ApplicationUpdateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -31342,7 +34388,19 @@ export declare namespace ApplicationUpdateParams {
       | BrowserRDPApplication.PublicDestination
       | BrowserRDPApplication.PrivateDestination
       | BrowserRDPApplication.ViaMcpServerPortalDestination
+      | BrowserRDPApplication.WorkerDestination
+      | BrowserRDPApplication.PreviewWorkerDestination
+      | BrowserRDPApplication.AllWorkersDestination
+      | BrowserRDPApplication.AllPreviewWorkersDestination
     >;
+
+    /**
+     * Body param: Preemptively sets the Access session cookie on every hostname in a
+     * multi-hostname self-hosted application during the initial redirect chain, rather
+     * than setting it lazily on first visit. Defaults to true. Set to false to disable
+     * the eager redirect cookie behavior.
+     */
+    eager_redirect_cookie_setting?: boolean;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -31540,6 +34598,60 @@ export declare namespace ApplicationUpdateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -31934,6 +35046,10 @@ export declare namespace ApplicationUpdateParams {
       | McpServerApplication.PublicDestination
       | McpServerApplication.PrivateDestination
       | McpServerApplication.ViaMcpServerPortalDestination
+      | McpServerApplication.WorkerDestination
+      | McpServerApplication.PreviewWorkerDestination
+      | McpServerApplication.AllWorkersDestination
+      | McpServerApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -32059,6 +35175,60 @@ export declare namespace ApplicationUpdateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -32431,6 +35601,10 @@ export declare namespace ApplicationUpdateParams {
       | McpServerPortalApplication.PublicDestination
       | McpServerPortalApplication.PrivateDestination
       | McpServerPortalApplication.ViaMcpServerPortalDestination
+      | McpServerPortalApplication.WorkerDestination
+      | McpServerPortalApplication.PreviewWorkerDestination
+      | McpServerPortalApplication.AllWorkersDestination
+      | McpServerPortalApplication.AllPreviewWorkersDestination
     >;
 
     /**
@@ -32564,6 +35738,60 @@ export declare namespace ApplicationUpdateParams {
       mcp_server_id?: string;
 
       type?: 'via_mcp_server_portal';
+    }
+
+    /**
+     * A specific Cloudflare Worker that Access will secure. All requests routed to the
+     * specified Worker, including its preview deployments, will be protected. The
+     * `preview_worker` and `public` destination types takes precedence, so you can
+     * create separate applications to override the policies for the Worker's previews
+     * or specific paths.
+     */
+    export interface WorkerDestination {
+      type: 'worker';
+
+      /**
+       * The ID of the Cloudflare Worker to protect with Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * A specific Cloudflare Worker whose preview deployments Access will secure. Only
+     * requests routed to the preview deployments of the specified Worker will be
+     * protected. The `public` destination type takes precedence, so you can create
+     * separate applications to override the policies for specific paths.
+     */
+    export interface PreviewWorkerDestination {
+      type: 'preview_worker';
+
+      /**
+       * The ID of the Cloudflare Worker whose preview deployments to protect with
+       * Access.
+       */
+      worker_id: string;
+    }
+
+    /**
+     * Protects all Cloudflare Workers on the account with Access, including their
+     * preview deployments. At most one destination of this type can exist per account.
+     * The `worker`, `preview_worker`, `all_preview_workers`, and `public` destination
+     * types take precedence, so you can create separate applications to override the
+     * policies for specific Workers, their previews, or specific paths.
+     */
+    export interface AllWorkersDestination {
+      type: 'all_workers';
+    }
+
+    /**
+     * Protects the preview deployments of all Cloudflare Workers on the account with
+     * Access. At most one destination of this type can exist per account. The
+     * `worker`, `preview_worker`, and `public` destination types take precedence, so
+     * you can create separate applications to override the policies for specific
+     * Workers, their previews, or specific paths.
+     */
+    export interface AllPreviewWorkersDestination {
+      type: 'all_preview_workers';
     }
 
     /**
@@ -32964,7 +36192,6 @@ export declare namespace Applications {
     type AppID as AppID,
     type Application as Application,
     type ApplicationPolicy as ApplicationPolicy,
-    type ApplicationSCIMConfig as ApplicationSCIMConfig,
     type ApplicationType as ApplicationType,
     type CORSHeaders as CORSHeaders,
     type Decision as Decision,
@@ -33004,7 +36231,6 @@ export declare namespace Applications {
 
   export {
     UserPolicyChecks as UserPolicyChecks,
-    type UserPolicyCheckGeo as UserPolicyCheckGeo,
     type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
     type UserPolicyCheckListParams as UserPolicyCheckListParams,
   };

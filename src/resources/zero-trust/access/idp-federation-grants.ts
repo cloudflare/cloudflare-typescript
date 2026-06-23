@@ -9,8 +9,8 @@ export class IdPFederationGrants extends APIResource {
    * available for federation to other accounts in the same Cloudflare organization.
    *
    * The account must belong to a Cloudflare organization. One-time pin and
-   * Cloudflare-managed identity providers cannot be federated. An identity provider
-   * may only have one active grant at a time.
+   * Cloudflare-managed identity providers cannot be federated. An account can
+   * federate at most five identity providers at a time.
    *
    * @example
    * ```ts
@@ -116,11 +116,6 @@ export interface IdPFederationGrant {
    * UID of the IdP federation grant.
    */
   id: string;
-
-  /**
-   * When the grant was created.
-   */
-  created_at: string;
 
   /**
    * UID of the identity provider being federated.

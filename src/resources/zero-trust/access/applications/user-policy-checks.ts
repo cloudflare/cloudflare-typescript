@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as ApplicationsAPI from './applications';
 import { CloudflareError } from '../../../../error';
 
@@ -63,10 +62,6 @@ export class UserPolicyChecks extends APIResource {
   }
 }
 
-export interface UserPolicyCheckGeo {
-  country?: string;
-}
-
 export interface UserPolicyCheckListResponse {
   app_state?: UserPolicyCheckListResponse.AppState;
 
@@ -100,7 +95,7 @@ export namespace UserPolicyCheckListResponse {
 
     email?: string;
 
-    geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
+    geo?: UserIdentity.Geo;
 
     iat?: number;
 
@@ -116,6 +111,12 @@ export namespace UserPolicyCheckListResponse {
     user_uuid?: string;
 
     version?: number;
+  }
+
+  export namespace UserIdentity {
+    export interface Geo {
+      country?: string;
+    }
   }
 }
 
@@ -133,7 +134,6 @@ export interface UserPolicyCheckListParams {
 
 export declare namespace UserPolicyChecks {
   export {
-    type UserPolicyCheckGeo as UserPolicyCheckGeo,
     type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
     type UserPolicyCheckListParams as UserPolicyCheckListParams,
   };

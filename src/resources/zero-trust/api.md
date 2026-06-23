@@ -513,7 +513,6 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationPolicy</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationSCIMConfig</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationType</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Decision</a></code>
@@ -559,7 +558,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckGeo</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckListResponse</a></code>
 
 Methods:
