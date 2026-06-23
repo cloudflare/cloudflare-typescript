@@ -17,6 +17,7 @@ export {
   type SubscriptionDeleteResponse,
   type SubscriptionUpdateParams,
 } from './subscriptions';
+export { Tenants } from './tenants';
 export {
   Tokens,
   type TokenCreateResponse,
