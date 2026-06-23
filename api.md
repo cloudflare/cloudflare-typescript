@@ -31,6 +31,8 @@ Types:
 
 # [Organizations](src/resources/organizations/api.md)
 
+# [Tenants](src/resources/tenants/api.md)
+
 # [OriginCACertificates](src/resources/origin-ca-certificates/api.md)
 
 # [IPs](src/resources/ips/api.md)
@@ -70,6 +72,8 @@ Types:
 # [DNS](src/resources/dns/api.md)
 
 # [EmailSecurity](src/resources/email-security/api.md)
+
+# [EmailAuth](src/resources/email-auth/api.md)
 
 # [EmailRouting](src/resources/email-routing/api.md)
 
@@ -206,6 +210,8 @@ Types:
 # [RealtimeKit](src/resources/realtime-kit/api.md)
 
 # [Calls](src/resources/calls/api.md)
+
+# [MoQ](src/resources/moq/api.md)
 
 # [CloudforceOne](src/resources/cloudforce-one/api.md)
 
