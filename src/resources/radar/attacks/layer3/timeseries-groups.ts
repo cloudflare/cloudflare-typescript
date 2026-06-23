@@ -293,6 +293,8 @@ export namespace TimeseriesGroupBitrateResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -442,6 +444,8 @@ export namespace TimeseriesGroupDurationResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -593,6 +597,8 @@ export namespace TimeseriesGroupIndustryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -734,6 +740,8 @@ export namespace TimeseriesGroupIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -877,6 +885,8 @@ export namespace TimeseriesGroupProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1024,6 +1034,8 @@ export namespace TimeseriesGroupVectorResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1165,6 +1177,8 @@ export namespace TimeseriesGroupVerticalResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

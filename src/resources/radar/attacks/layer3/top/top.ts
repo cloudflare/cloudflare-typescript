@@ -193,6 +193,8 @@ export namespace TopAttacksResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -329,6 +331,8 @@ export namespace TopIndustryResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -463,6 +467,8 @@ export namespace TopVerticalResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

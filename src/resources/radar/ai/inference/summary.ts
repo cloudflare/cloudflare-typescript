@@ -6,7 +6,7 @@ import * as Core from '../../../../core';
 
 export class Summary extends APIResource {
   /**
-   * Retrieves the distribution of unique accounts by model.
+   * Retrieves the distribution of the number of inferences by model.
    *
    * @deprecated Use [Radar AI Inference Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/inference/methods/summary_v2/) instead.
    */
@@ -27,7 +27,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Retrieves the distribution of unique accounts by task.
+   * Retrieves the distribution of the number of inferences by task.
    *
    * @deprecated Use [Radar AI Inference Summary By Dimension](https://developers.cloudflare.com/api/resources/radar/subresources/ai/subresources/inference/methods/summary_v2/) instead.
    */
@@ -153,6 +153,8 @@ export namespace SummaryModelResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -281,6 +283,8 @@ export namespace SummaryTaskResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

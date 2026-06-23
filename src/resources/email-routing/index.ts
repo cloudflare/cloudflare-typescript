@@ -21,14 +21,12 @@ export {
 } from './dns';
 export { EmailRouting } from './email-routing';
 export {
-  EmailRoutingRulesV4PagePaginationArray,
   Rules,
   type Action,
   type EmailRoutingRule,
   type Matcher,
   type RuleCreateParams,
   type RuleUpdateParams,
-  type RuleListParams,
   type RuleDeleteParams,
   type RuleGetParams,
 } from './rules/index';

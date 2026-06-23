@@ -69,13 +69,6 @@ describe('resource instances', () => {
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
-          crawl_options: {
-            depth: 1,
-            include_external_links: true,
-            include_subdomains: true,
-            max_age: 0,
-            source: 'all',
-          },
           parse_options: {
             content_selector: [
               { path: '**/blog/**', selector: 'article div.post-body' },
@@ -87,11 +80,6 @@ describe('resource instances', () => {
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
-          store_options: {
-            storage_id: 'storage_id',
-            r2_jurisdiction: 'r2_jurisdiction',
-            storage_type: 'r2',
-          },
         },
       },
       sync_interval: 900,
@@ -150,19 +138,13 @@ describe('resource instances', () => {
       rewrite_model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       rewrite_query: true,
       score_threshold: 0,
+      source: 'source',
       source_params: {
         exclude_items: ['/admin/**', '/private/**', '**\\temp\\**'],
         include_items: ['/blog/**', '/docs/**/*.html', '**\\blog\\**.html'],
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
-          crawl_options: {
-            depth: 1,
-            include_external_links: true,
-            include_subdomains: true,
-            max_age: 0,
-            source: 'all',
-          },
           parse_options: {
             content_selector: [
               { path: '**/blog/**', selector: 'article div.post-body' },
@@ -174,11 +156,6 @@ describe('resource instances', () => {
             use_browser_rendering: true,
           },
           parse_type: 'sitemap',
-          store_options: {
-            storage_id: 'storage_id',
-            r2_jurisdiction: 'r2_jurisdiction',
-            storage_type: 'r2',
-          },
         },
       },
       summarization: true,
@@ -238,7 +215,7 @@ describe('resource instances', () => {
   test('chatCompletions: only required params', async () => {
     const responsePromise = client.aiSearch.instances.chatCompletions('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -252,7 +229,7 @@ describe('resource instances', () => {
   test('chatCompletions: required and optional params', async () => {
     const response = await client.aiSearch.instances.chatCompletions('my-ai-search', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       ai_search_options: {
         cache: { cache_threshold: 'super_strict_match', enabled: true },
         query_rewrite: {
@@ -341,7 +318,7 @@ describe('resource instances', () => {
           return_on_failure: true,
         },
       },
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       query: 'x',
     });
   });

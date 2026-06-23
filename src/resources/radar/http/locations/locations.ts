@@ -160,6 +160,8 @@ export namespace LocationGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

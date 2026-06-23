@@ -202,9 +202,9 @@ export namespace PortalCreateResponse {
     /**
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. New public server creates default to true; existing
-     * servers default to false from migration until explicitly updated. Effective
-     * behavior is gated by the gateway worker's per-env rollout mode KV key.
+     * customer portal hostname. Defaults to false (off); opt in per server by setting
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -353,9 +353,9 @@ export namespace PortalUpdateResponse {
     /**
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. New public server creates default to true; existing
-     * servers default to false from migration until explicitly updated. Effective
-     * behavior is gated by the gateway worker's per-env rollout mode KV key.
+     * customer portal hostname. Defaults to false (off); opt in per server by setting
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -504,9 +504,9 @@ export namespace PortalListResponse {
     /**
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. New public server creates default to true; existing
-     * servers default to false from migration until explicitly updated. Effective
-     * behavior is gated by the gateway worker's per-env rollout mode KV key.
+     * customer portal hostname. Defaults to false (off); opt in per server by setting
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -686,9 +686,9 @@ export namespace PortalReadResponse {
     /**
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
-     * customer portal hostname. New public server creates default to true; existing
-     * servers default to false from migration until explicitly updated. Effective
-     * behavior is gated by the gateway worker's per-env rollout mode KV key.
+     * customer portal hostname. Defaults to false (off); opt in per server by setting
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 

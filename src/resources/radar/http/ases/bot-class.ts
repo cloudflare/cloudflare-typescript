@@ -147,6 +147,8 @@ export namespace BotClassGetResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

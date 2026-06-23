@@ -60,6 +60,7 @@ import { DLS } from './resources/dls/dls';
 import { DNSFirewall } from './resources/dns-firewall/dns-firewall';
 import { DNS } from './resources/dns/dns';
 import { DurableObjects } from './resources/durable-objects/durable-objects';
+import { EmailAuth } from './resources/email-auth/email-auth';
 import { EmailRouting } from './resources/email-routing/email-routing';
 import { EmailSecurity } from './resources/email-security/email-security';
 import { EmailSending } from './resources/email-sending/email-sending';
@@ -86,6 +87,7 @@ import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/mag
 import { MagicTransit } from './resources/magic-transit/magic-transit';
 import { ManagedTransforms } from './resources/managed-transforms/managed-transforms';
 import { Memberships } from './resources/memberships/memberships';
+import { MoQ } from './resources/moq/moq';
 import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
 import { NetworkInterconnects } from './resources/network-interconnects/network-interconnects';
 import { Organizations } from './resources/organizations/organizations';
@@ -120,6 +122,7 @@ import { Speed } from './resources/speed/speed';
 import { SSL } from './resources/ssl/ssl';
 import { Stream } from './resources/stream/stream';
 import { TenantCustomNameservers } from './resources/tenant-custom-nameservers/tenant-custom-nameservers';
+import { Tenants } from './resources/tenants/tenants';
 import { TokenValidation } from './resources/token-validation/token-validation';
 import { Turnstile } from './resources/turnstile/turnstile';
 import { URLNormalization } from './resources/url-normalization/url-normalization';
@@ -299,6 +302,7 @@ export class Cloudflare extends Core.APIClient {
 
   accounts: API.Accounts = new API.Accounts(this);
   organizations: API.Organizations = new API.Organizations(this);
+  tenants: API.Tenants = new API.Tenants(this);
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
@@ -319,6 +323,7 @@ export class Cloudflare extends Core.APIClient {
   dnsFirewall: API.DNSFirewall = new API.DNSFirewall(this);
   dns: API.DNS = new API.DNS(this);
   emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
+  emailAuth: API.EmailAuth = new API.EmailAuth(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
   emailSending: API.EmailSending = new API.EmailSending(this);
   filters: API.Filters = new API.Filters(this);
@@ -387,6 +392,7 @@ export class Cloudflare extends Core.APIClient {
   snippets: API.Snippets = new API.Snippets(this);
   realtimeKit: API.RealtimeKit = new API.RealtimeKit(this);
   calls: API.Calls = new API.Calls(this);
+  moq: API.MoQ = new API.MoQ(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
   flagship: API.Flagship = new API.Flagship(this);
@@ -556,6 +562,7 @@ export class Cloudflare extends Core.APIClient {
 
 Cloudflare.Accounts = Accounts;
 Cloudflare.Organizations = Organizations;
+Cloudflare.Tenants = Tenants;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
 Cloudflare.Memberships = Memberships;
@@ -576,6 +583,7 @@ Cloudflare.TenantCustomNameservers = TenantCustomNameservers;
 Cloudflare.DNSFirewall = DNSFirewall;
 Cloudflare.DNS = DNS;
 Cloudflare.EmailSecurity = EmailSecurity;
+Cloudflare.EmailAuth = EmailAuth;
 Cloudflare.EmailRouting = EmailRouting;
 Cloudflare.EmailSending = EmailSending;
 Cloudflare.Filters = Filters;
@@ -644,6 +652,7 @@ Cloudflare.Hostnames = Hostnames;
 Cloudflare.Snippets = Snippets;
 Cloudflare.RealtimeKit = RealtimeKit;
 Cloudflare.Calls = Calls;
+Cloudflare.MoQ = MoQ;
 Cloudflare.CloudforceOne = CloudforceOne;
 Cloudflare.AIGateway = AIGateway;
 Cloudflare.Flagship = Flagship;
@@ -710,6 +719,8 @@ export declare namespace Cloudflare {
 
   export { Organizations as Organizations };
 
+  export { Tenants as Tenants };
+
   export { OriginCACertificates as OriginCACertificates };
 
   export { IPs as IPs };
@@ -749,6 +760,8 @@ export declare namespace Cloudflare {
   export { DNS as DNS };
 
   export { EmailSecurity as EmailSecurity };
+
+  export { EmailAuth as EmailAuth };
 
   export { EmailRouting as EmailRouting };
 
@@ -885,6 +898,8 @@ export declare namespace Cloudflare {
   export { RealtimeKit as RealtimeKit };
 
   export { Calls as Calls };
+
+  export { MoQ as MoQ };
 
   export { CloudforceOne as CloudforceOne };
 

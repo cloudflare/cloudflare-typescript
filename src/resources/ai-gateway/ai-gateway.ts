@@ -2,6 +2,19 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as CustomProvidersAPI from './custom-providers';
+import {
+  CustomProviderCreateParams,
+  CustomProviderCreateResponse,
+  CustomProviderDeleteParams,
+  CustomProviderDeleteResponse,
+  CustomProviderGetParams,
+  CustomProviderGetResponse,
+  CustomProviderListParams,
+  CustomProviderListResponse,
+  CustomProviderListResponsesV4PagePaginationArray,
+  CustomProviders,
+} from './custom-providers';
 import * as DatasetsAPI from './datasets';
 import {
   DatasetCreateParams,
@@ -105,6 +118,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class AIGateway extends APIResource {
   evaluationTypes: EvaluationTypesAPI.EvaluationTypes = new EvaluationTypesAPI.EvaluationTypes(this._client);
+  customProviders: CustomProvidersAPI.CustomProviders = new CustomProvidersAPI.CustomProviders(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
   evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
@@ -1865,6 +1879,8 @@ export interface AIGatewayGetParams {
 AIGateway.AIGatewayListResponsesV4PagePaginationArray = AIGatewayListResponsesV4PagePaginationArray;
 AIGateway.EvaluationTypes = EvaluationTypes;
 AIGateway.EvaluationTypeListResponsesV4PagePaginationArray = EvaluationTypeListResponsesV4PagePaginationArray;
+AIGateway.CustomProviders = CustomProviders;
+AIGateway.CustomProviderListResponsesV4PagePaginationArray = CustomProviderListResponsesV4PagePaginationArray;
 AIGateway.Logs = Logs;
 AIGateway.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;
 AIGateway.Datasets = Datasets;
@@ -1897,6 +1913,19 @@ export declare namespace AIGateway {
     type EvaluationTypeListResponse as EvaluationTypeListResponse,
     EvaluationTypeListResponsesV4PagePaginationArray as EvaluationTypeListResponsesV4PagePaginationArray,
     type EvaluationTypeListParams as EvaluationTypeListParams,
+  };
+
+  export {
+    CustomProviders as CustomProviders,
+    type CustomProviderCreateResponse as CustomProviderCreateResponse,
+    type CustomProviderListResponse as CustomProviderListResponse,
+    type CustomProviderDeleteResponse as CustomProviderDeleteResponse,
+    type CustomProviderGetResponse as CustomProviderGetResponse,
+    CustomProviderListResponsesV4PagePaginationArray as CustomProviderListResponsesV4PagePaginationArray,
+    type CustomProviderCreateParams as CustomProviderCreateParams,
+    type CustomProviderListParams as CustomProviderListParams,
+    type CustomProviderDeleteParams as CustomProviderDeleteParams,
+    type CustomProviderGetParams as CustomProviderGetParams,
   };
 
   export {

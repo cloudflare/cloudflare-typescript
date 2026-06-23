@@ -359,6 +359,8 @@ export namespace HTTPSummaryV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -497,6 +499,8 @@ export namespace HTTPTimeseriesResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -638,6 +642,8 @@ export namespace HTTPTimeseriesGroupsV2Response {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

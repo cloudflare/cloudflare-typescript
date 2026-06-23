@@ -83,7 +83,7 @@ export {
 } from './devices';
 export { FleetStatus, type FleetStatusGetResponse, type FleetStatusGetParams } from './fleet-status';
 export {
-  IPProfilesSinglePage,
+  IPProfilesV4PagePaginationArray,
   IPProfiles,
   type IPProfile,
   type IPProfileDeleteResponse,

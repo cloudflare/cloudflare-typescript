@@ -238,6 +238,41 @@ export class IPSECTunnels extends APIResource {
       }) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Sets Pre-Shared Keys for multiple IPsec tunnels associated with an account. Use
+   * `?validate_only=true` as an optional query parameter to only run validation
+   * without persisting changes. After PSKs are applied, they are immediately
+   * persisted to Cloudflare's edge and cannot be retrieved later. Store the PSKs in
+   * a safe place.
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.magicTransit.ipsecTunnels.pskSet({
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     psks: [
+   *       {
+   *         id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *         psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy',
+   *       },
+   *     ],
+   *   });
+   * ```
+   */
+  pskSet(
+    params: IPSECTunnelPSKSetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelPSKSetResponse> {
+    const { account_id, validate_only, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels/psk`, {
+        query: { validate_only },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPSECTunnelPSKSetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 /**
@@ -343,10 +378,20 @@ export namespace IPSECTunnelCreateResponse {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
@@ -564,10 +609,20 @@ export namespace IPSECTunnelUpdateResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -784,10 +839,20 @@ export namespace IPSECTunnelListResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1006,10 +1071,20 @@ export namespace IPSECTunnelDeleteResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1228,10 +1303,20 @@ export namespace IPSECTunnelBulkUpdateResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1448,10 +1533,20 @@ export namespace IPSECTunnelGetResponse {
       customer_asn: number;
 
       /**
+       * ID of the BGP filter profile applied to routes advertised to the customer.
+       */
+      export_filter_id?: string;
+
+      /**
        * Prefixes in this list will be advertised to the customer device, in addition to
        * the routes in the Magic routing table.
        */
       extra_prefixes?: Array<string>;
+
+      /**
+       * ID of the BGP filter profile applied to routes received from the customer.
+       */
+      import_filter_id?: string;
 
       /**
        * MD5 key to use for session authentication.
@@ -1587,6 +1682,45 @@ export interface IPSECTunnelPSKGenerateResponse {
   psk_metadata?: PSKMetadata;
 }
 
+export interface IPSECTunnelPSKSetResponse {
+  /**
+   * Map of tunnel IDs to successfully applied PSK details.
+   */
+  successfully_applied_psks?: { [key: string]: IPSECTunnelPSKSetResponse.SuccessfullyAppliedPSKs };
+
+  /**
+   * Map of tunnel IDs to failure reasons for PSKs that could not be applied.
+   */
+  unapplied_psks?: { [key: string]: string };
+}
+
+export namespace IPSECTunnelPSKSetResponse {
+  /**
+   * A successfully applied PSK for an IPsec tunnel.
+   */
+  export interface SuccessfullyAppliedPSKs {
+    /**
+     * The IKE identifier used for this tunnel on the Cloudflare edge.
+     */
+    ipsec_id: string;
+
+    /**
+     * Identifier
+     */
+    ipsec_tunnel_id: string;
+
+    /**
+     * A randomly generated or provided string for use in the IPsec tunnel.
+     */
+    psk: string;
+
+    /**
+     * The PSK metadata that includes when the PSK was generated.
+     */
+    psk_metadata: IPSECTunnelsAPI.PSKMetadata;
+  }
+}
+
 export interface IPSECTunnelCreateParams {
   /**
    * Path param: Identifier
@@ -1678,10 +1812,20 @@ export namespace IPSECTunnelCreateParams {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
@@ -1865,10 +2009,20 @@ export namespace IPSECTunnelUpdateParams {
     customer_asn: number;
 
     /**
+     * ID of the BGP filter profile applied to routes advertised to the customer.
+     */
+    export_filter_id?: string;
+
+    /**
      * Prefixes in this list will be advertised to the customer device, in addition to
      * the routes in the Magic routing table.
      */
     extra_prefixes?: Array<string>;
+
+    /**
+     * ID of the BGP filter profile applied to routes received from the customer.
+     */
+    import_filter_id?: string;
 
     /**
      * MD5 key to use for session authentication.
@@ -2030,6 +2184,40 @@ export interface IPSECTunnelPSKGenerateParams {
   body: unknown;
 }
 
+export interface IPSECTunnelPSKSetParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: List of tunnel ID and PSK pairs.
+   */
+  psks: Array<IPSECTunnelPSKSetParams.PSK>;
+
+  /**
+   * Query param: If `true`, only run validation without persisting changes.
+   */
+  validate_only?: boolean;
+}
+
+export namespace IPSECTunnelPSKSetParams {
+  /**
+   * A PSK entry for a specific IPsec tunnel.
+   */
+  export interface PSK {
+    /**
+     * The ID of the IPsec tunnel.
+     */
+    id: string;
+
+    /**
+     * A randomly generated or provided string for use in the IPsec tunnel.
+     */
+    psk: string;
+  }
+}
+
 export declare namespace IPSECTunnels {
   export {
     type PSKMetadata as PSKMetadata,
@@ -2040,6 +2228,7 @@ export declare namespace IPSECTunnels {
     type IPSECTunnelBulkUpdateResponse as IPSECTunnelBulkUpdateResponse,
     type IPSECTunnelGetResponse as IPSECTunnelGetResponse,
     type IPSECTunnelPSKGenerateResponse as IPSECTunnelPSKGenerateResponse,
+    type IPSECTunnelPSKSetResponse as IPSECTunnelPSKSetResponse,
     type IPSECTunnelCreateParams as IPSECTunnelCreateParams,
     type IPSECTunnelUpdateParams as IPSECTunnelUpdateParams,
     type IPSECTunnelListParams as IPSECTunnelListParams,
@@ -2047,5 +2236,6 @@ export declare namespace IPSECTunnels {
     type IPSECTunnelBulkUpdateParams as IPSECTunnelBulkUpdateParams,
     type IPSECTunnelGetParams as IPSECTunnelGetParams,
     type IPSECTunnelPSKGenerateParams as IPSECTunnelPSKGenerateParams,
+    type IPSECTunnelPSKSetParams as IPSECTunnelPSKSetParams,
   };
 }

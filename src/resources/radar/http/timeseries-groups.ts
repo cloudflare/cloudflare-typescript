@@ -367,6 +367,8 @@ export namespace TimeseriesGroupBotClassResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -510,6 +512,8 @@ export namespace TimeseriesGroupBrowserResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -651,6 +655,8 @@ export namespace TimeseriesGroupBrowserFamilyResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -792,6 +798,8 @@ export namespace TimeseriesGroupDeviceTypeResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -937,6 +945,8 @@ export namespace TimeseriesGroupHTTPProtocolResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1080,6 +1090,8 @@ export namespace TimeseriesGroupHTTPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1225,6 +1237,8 @@ export namespace TimeseriesGroupIPVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1368,6 +1382,8 @@ export namespace TimeseriesGroupOSResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1509,6 +1525,8 @@ export namespace TimeseriesGroupPostQuantumResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -1652,6 +1670,8 @@ export namespace TimeseriesGroupTLSVersionResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

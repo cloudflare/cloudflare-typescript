@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource recommendations', () => {
-  test('get: only required params', async () => {
-    const responsePromise = client.ssl.recommendations.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+describe('resource tenants', () => {
+  test('get', async () => {
+    const responsePromise = client.tenants.get('tenant_id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,7 +21,10 @@ describe('resource recommendations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
-    const response = await client.ssl.recommendations.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.tenants.get('tenant_id', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 });

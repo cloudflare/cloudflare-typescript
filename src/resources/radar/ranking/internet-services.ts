@@ -214,6 +214,8 @@ export namespace InternetServiceTimeseriesGroupsResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 
@@ -342,6 +344,8 @@ export namespace InternetServiceTopResponse {
         linkedUrl: string;
 
         startDate: string;
+
+        tags?: Array<string>;
       }
     }
 

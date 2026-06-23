@@ -13,6 +13,18 @@ export {
   type BillingUsageHistoryParams,
 } from './billing/index';
 export {
+  CustomProviderListResponsesV4PagePaginationArray,
+  CustomProviders,
+  type CustomProviderCreateResponse,
+  type CustomProviderListResponse,
+  type CustomProviderDeleteResponse,
+  type CustomProviderGetResponse,
+  type CustomProviderCreateParams,
+  type CustomProviderListParams,
+  type CustomProviderDeleteParams,
+  type CustomProviderGetParams,
+} from './custom-providers';
+export {
   DatasetListResponsesV4PagePaginationArray,
   Datasets,
   type DatasetCreateResponse,
