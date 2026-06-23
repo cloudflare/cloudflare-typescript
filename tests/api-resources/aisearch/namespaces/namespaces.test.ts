@@ -114,7 +114,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: BaseNamesp
     const responsePromise = client.aiSearch.namespaces.chatCompletions('my-namespace', {
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       ai_search_options: { instance_ids: ['my-ai-search'] },
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -153,7 +153,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: BaseNamesp
           return_on_failure: true,
         },
       },
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
       stream: true,
     });
@@ -220,7 +220,7 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: BaseNamesp
           return_on_failure: true,
         },
       },
-      messages: [{ content: 'content', role: 'system' }],
+      messages: [{ content: 'string', role: 'system' }],
       query: 'x',
     });
   });
