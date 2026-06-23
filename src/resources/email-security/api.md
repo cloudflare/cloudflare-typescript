@@ -86,6 +86,42 @@ Methods:
 
 - <code title="post /accounts/{account_id}/email-security/investigate/release">client.emailSecurity.investigate.release.<a href="./src/resources/email-security/investigate/release.ts">bulk</a>([ ...body ]) -> ReleaseBulkResponsesSinglePage</code>
 
+### Bulk
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/bulk/bulk.ts">BulkCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/bulk/bulk.ts">BulkListResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/bulk/bulk.ts">BulkDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/bulk/bulk.ts">BulkGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/bulk">client.emailSecurity.investigate.bulk.<a href="./src/resources/email-security/investigate/bulk/bulk.ts">create</a>({ ...params }) -> BulkCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/bulk">client.emailSecurity.investigate.bulk.<a href="./src/resources/email-security/investigate/bulk/bulk.ts">list</a>({ ...params }) -> BulkListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/investigate/bulk/{job_id}">client.emailSecurity.investigate.bulk.<a href="./src/resources/email-security/investigate/bulk/bulk.ts">delete</a>(jobId, { ...params }) -> BulkDeleteResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/bulk/{job_id}">client.emailSecurity.investigate.bulk.<a href="./src/resources/email-security/investigate/bulk/bulk.ts">get</a>(jobId, { ...params }) -> BulkGetResponse</code>
+
+#### Cancel
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/bulk/cancel.ts">CancelCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/bulk/{job_id}/cancel">client.emailSecurity.investigate.bulk.cancel.<a href="./src/resources/email-security/investigate/bulk/cancel.ts">create</a>(jobId, { ...params }) -> CancelCreateResponse</code>
+
+#### Messages
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/bulk/messages.ts">MessageListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/bulk/{job_id}/messages">client.emailSecurity.investigate.bulk.messages.<a href="./src/resources/email-security/investigate/bulk/messages.ts">list</a>(jobId, { ...params }) -> MessageListResponsesV4PagePaginationArray</code>
+
 ## Phishguard
 
 ### Reports
