@@ -9,12 +9,11 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource connectors', () => {
-  // TODO: consider oneOf instead of maxProperties to indicate that this can be either id or serial_number
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.create({
+describe('resource cf1Sites', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.magicTransit.cf1Sites.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      device: {},
+      body: [{ name: 'Pad 34' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,29 +24,25 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: consider oneOf instead of maxProperties to indicate that this can be either id or serial_number
-  test.skip('create: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.create({
+  test('create: required and optional params', async () => {
+    const response = await client.magicTransit.cf1Sites.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      device: {
-        id: 'id',
-        provision_license: true,
-        serial_number: 'serial_number',
-      },
-      activated: true,
-      interrupt_window_days_of_week: ['Sunday'],
-      interrupt_window_duration_hours: 1,
-      interrupt_window_embargo_dates: ['string'],
-      interrupt_window_hour_of_day: 0,
-      notes: 'notes',
-      primary: true,
-      site_id: 'site_id',
-      timezone: 'timezone',
+      body: [
+        {
+          name: 'Pad 34',
+          description: 'Launch Pad 34',
+          location: {
+            lat: 28.521339842093845,
+            long: -80.56092644815843,
+            name: 'Cape Canaveral',
+          },
+        },
+      ],
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.update('connector_id', {
+    const responsePromise = client.magicTransit.cf1Sites.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -60,23 +55,20 @@ describe('resource connectors', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.update('connector_id', {
+    const response = await client.magicTransit.cf1Sites.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      activated: true,
-      interrupt_window_days_of_week: ['Sunday'],
-      interrupt_window_duration_hours: 1,
-      interrupt_window_embargo_dates: ['string'],
-      interrupt_window_hour_of_day: 0,
-      notes: 'notes',
-      primary: true,
-      provision_license: true,
-      site_id: 'site_id',
-      timezone: 'timezone',
+      description: 'Launch Pad 34',
+      location: {
+        lat: 28.521339842093845,
+        long: -80.56092644815843,
+        name: 'Cape Canaveral',
+      },
+      name: 'Pad 34',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.list({
+    const responsePromise = client.magicTransit.cf1Sites.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,14 +81,13 @@ describe('resource connectors', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.list({
+    const response = await client.magicTransit.cf1Sites.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      device_type: 'MANAGED',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.delete('connector_id', {
+    const responsePromise = client.magicTransit.cf1Sites.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -109,42 +100,13 @@ describe('resource connectors', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.delete('connector_id', {
+    const response = await client.magicTransit.cf1Sites.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('edit: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.edit('connector_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('edit: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.edit('connector_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      activated: true,
-      interrupt_window_days_of_week: ['Sunday'],
-      interrupt_window_duration_hours: 1,
-      interrupt_window_embargo_dates: ['string'],
-      interrupt_window_hour_of_day: 0,
-      notes: 'notes',
-      primary: true,
-      provision_license: true,
-      site_id: 'site_id',
-      timezone: 'timezone',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.magicTransit.connectors.get('connector_id', {
+    const responsePromise = client.magicTransit.cf1Sites.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -157,7 +119,7 @@ describe('resource connectors', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.magicTransit.connectors.get('connector_id', {
+    const response = await client.magicTransit.cf1Sites.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
