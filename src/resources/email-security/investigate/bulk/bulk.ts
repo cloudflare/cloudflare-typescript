@@ -66,8 +66,8 @@ export class Bulk extends APIResource {
   }
 
   /**
-   * Soft-deletes the job, hiding it from all list and detail endpoints. Only jobs in
-   * a terminal state (`COMPLETED`, `CANCELLED`, `FAILED`, or `SKIPPED`) can be
+   * Deletes the job, removing it from all list and detail endpoints. Only jobs in a
+   * terminal state (`COMPLETED`, `CANCELLED`, `FAILED`, or `SKIPPED`) can be
    * deleted. To stop an in-progress job without removing it, use the cancel endpoint
    * instead.
    *
