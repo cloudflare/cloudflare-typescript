@@ -859,6 +859,14 @@ Methods:
 - <code title="delete /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">delete</a>(policyID, { ...params }) -> PolicyDeleteResponse</code>
 - <code title="get /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">get</a>(policyID, { ...params }) -> PolicyGetResponse</code>
 
+## Casb
+
+### Applications
+
+#### SetupFlows
+
+### Integrations
+
 ## DEX
 
 Types:

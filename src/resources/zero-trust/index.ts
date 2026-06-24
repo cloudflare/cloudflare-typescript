@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Access, BaseAccess } from './access/index';
+export { Casb, BaseCasb } from './casb/index';
 export {
   ConnectivitySettings,
   BaseConnectivitySettings,
