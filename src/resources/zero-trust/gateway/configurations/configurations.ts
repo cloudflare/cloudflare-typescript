@@ -37,9 +37,9 @@ export class Configurations extends APIResource {
   /**
    * Update (PATCH) a single subcollection of settings such as `antivirus`,
    * `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`,
-   * `body_scanning`, or `certificate` without updating the entire configuration
-   * object. This endpoint returns an error if any settings collection lacks proper
-   * configuration.
+   * `body_scanning`, `certificate`, or `max_ttl_secs` without updating the entire
+   * configuration object. This endpoint returns an error if any settings collection
+   * lacks proper configuration.
    *
    * @example
    * ```ts
@@ -537,6 +537,13 @@ export interface GatewayConfigurationSettings {
   inspection?: GatewayConfigurationSettings.Inspection | null;
 
   /**
+   * Set the account-level DNS TTL cap, in seconds. Gateway rewrites DNS responses so
+   * returned record TTLs do not exceed this value. DNS locations can inherit,
+   * override, or disable this cap.
+   */
+  max_ttl_secs?: number | null;
+
+  /**
    * Specify whether to detect protocols from the initial bytes of client traffic.
    */
   protocol_detection?: ProtocolDetection | null;
@@ -670,6 +677,13 @@ export interface GatewayConfigurationSettingsParam {
    * Define the proxy inspection mode.
    */
   inspection?: GatewayConfigurationSettingsParam.Inspection | null;
+
+  /**
+   * Set the account-level DNS TTL cap, in seconds. Gateway rewrites DNS responses so
+   * returned record TTLs do not exceed this value. DNS locations can inherit,
+   * override, or disable this cap.
+   */
+  max_ttl_secs?: number | null;
 
   /**
    * Specify whether to detect protocols from the initial bytes of client traffic.

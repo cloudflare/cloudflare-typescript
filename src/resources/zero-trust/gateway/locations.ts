@@ -352,6 +352,13 @@ export interface Location {
   ipv4_destination_backup?: string;
 
   /**
+   * Configure DNS response TTL behavior for this Gateway location. Gateway can
+   * rewrite DNS responses to cap returned record TTLs using the account setting or a
+   * location-specific value, or leave TTLs unchanged.
+   */
+  max_ttl?: Location.MaxTTL | null;
+
+  /**
    * Specify the location name.
    */
   name?: string;
@@ -367,6 +374,25 @@ export interface Location {
 }
 
 export namespace Location {
+  /**
+   * Configure DNS response TTL behavior for this Gateway location. Gateway can
+   * rewrite DNS responses to cap returned record TTLs using the account setting or a
+   * location-specific value, or leave TTLs unchanged.
+   */
+  export interface MaxTTL {
+    /**
+     * Specify how this location handles DNS response TTLs by using the account
+     * setting, using a location-specific value, or leaving TTLs unchanged.
+     */
+    mode: 'inherit' | 'override' | 'disabled';
+
+    /**
+     * Set the location-specific DNS TTL cap, in seconds. Required when `mode` is
+     * `override`. Must be omitted when `mode` is `inherit` or `disabled`.
+     */
+    ttl_secs?: number | null;
+  }
+
   export interface Network {
     /**
      * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
@@ -413,6 +439,13 @@ export interface LocationCreateParams {
   endpoints?: EndpointParam | null;
 
   /**
+   * Body param: Configure DNS response TTL behavior for this Gateway location.
+   * Gateway can rewrite DNS responses to cap returned record TTLs using the account
+   * setting or a location-specific value, or leave TTLs unchanged.
+   */
+  max_ttl?: LocationCreateParams.MaxTTL | null;
+
+  /**
    * Body param: Specify the list of network ranges from which requests at this
    * location originate. The list takes effect only if it is non-empty and the IPv4
    * endpoint is enabled for this location.
@@ -421,6 +454,25 @@ export interface LocationCreateParams {
 }
 
 export namespace LocationCreateParams {
+  /**
+   * Configure DNS response TTL behavior for this Gateway location. Gateway can
+   * rewrite DNS responses to cap returned record TTLs using the account setting or a
+   * location-specific value, or leave TTLs unchanged.
+   */
+  export interface MaxTTL {
+    /**
+     * Specify how this location handles DNS response TTLs by using the account
+     * setting, using a location-specific value, or leaving TTLs unchanged.
+     */
+    mode: 'inherit' | 'override' | 'disabled';
+
+    /**
+     * Set the location-specific DNS TTL cap, in seconds. Required when `mode` is
+     * `override`. Must be omitted when `mode` is `inherit` or `disabled`.
+     */
+    ttl_secs?: number | null;
+  }
+
   export interface Network {
     /**
      * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
@@ -465,6 +517,13 @@ export interface LocationUpdateParams {
   endpoints?: EndpointParam | null;
 
   /**
+   * Body param: Configure DNS response TTL behavior for this Gateway location.
+   * Gateway can rewrite DNS responses to cap returned record TTLs using the account
+   * setting or a location-specific value, or leave TTLs unchanged.
+   */
+  max_ttl?: LocationUpdateParams.MaxTTL | null;
+
+  /**
    * Body param: Specify the list of network ranges from which requests at this
    * location originate. The list takes effect only if it is non-empty and the IPv4
    * endpoint is enabled for this location.
@@ -473,6 +532,25 @@ export interface LocationUpdateParams {
 }
 
 export namespace LocationUpdateParams {
+  /**
+   * Configure DNS response TTL behavior for this Gateway location. Gateway can
+   * rewrite DNS responses to cap returned record TTLs using the account setting or a
+   * location-specific value, or leave TTLs unchanged.
+   */
+  export interface MaxTTL {
+    /**
+     * Specify how this location handles DNS response TTLs by using the account
+     * setting, using a location-specific value, or leaving TTLs unchanged.
+     */
+    mode: 'inherit' | 'override' | 'disabled';
+
+    /**
+     * Set the location-specific DNS TTL cap, in seconds. Required when `mode` is
+     * `override`. Must be omitted when `mode` is `inherit` or `disabled`.
+     */
+    ttl_secs?: number | null;
+  }
+
   export interface Network {
     /**
      * Specify the IPv4 address or IPv4 CIDR. Limit IPv4 CIDRs to a maximum of /24.
