@@ -13,6 +13,8 @@ import * as SeatsAPI from './seats';
 import { Seat, SeatEditParams, Seats, SeatsSinglePage } from './seats';
 import * as AccessAPI from './access/access';
 import { Access } from './access/access';
+import * as CasbAPI from './casb/casb';
+import { Casb } from './casb/casb';
 import * as DevicesAPI from './devices/devices';
 import {
   Device,
@@ -91,6 +93,7 @@ export class ZeroTrust extends APIResource {
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   seats: SeatsAPI.Seats = new SeatsAPI.Seats(this._client);
   access: AccessAPI.Access = new AccessAPI.Access(this._client);
+  casb: CasbAPI.Casb = new CasbAPI.Casb(this._client);
   dex: DEXAPI.DEX = new DEXAPI.DEX(this._client);
   tunnels: TunnelsAPI.Tunnels = new TunnelsAPI.Tunnels(this._client);
   connectivitySettings: ConnectivitySettingsAPI.ConnectivitySettings =
@@ -111,6 +114,7 @@ ZeroTrust.Organizations = Organizations;
 ZeroTrust.Seats = Seats;
 ZeroTrust.SeatsSinglePage = SeatsSinglePage;
 ZeroTrust.Access = Access;
+ZeroTrust.Casb = Casb;
 ZeroTrust.DEX = DEX;
 ZeroTrust.Tunnels = Tunnels;
 ZeroTrust.TunnelListResponsesV4PagePaginationArray = TunnelListResponsesV4PagePaginationArray;
@@ -167,6 +171,8 @@ export declare namespace ZeroTrust {
   };
 
   export { Access as Access };
+
+  export { Casb as Casb };
 
   export {
     DEX as DEX,
