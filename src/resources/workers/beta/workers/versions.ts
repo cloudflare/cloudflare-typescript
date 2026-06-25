@@ -255,6 +255,12 @@ export interface Version {
   modules?: Array<Version.Module>;
 
   /**
+   * The list of npm packages that were installed and used when this Worker version
+   * was built.
+   */
+  package_dependencies?: Array<Version.PackageDependency>;
+
+  /**
    * Configuration for
    * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
@@ -1152,6 +1158,23 @@ export namespace Version {
     name: string;
   }
 
+  export interface PackageDependency {
+    /**
+     * The exact version that was resolved and installed by the package manager.
+     */
+    installedVersion: string;
+
+    /**
+     * The npm package name.
+     */
+    name: string;
+
+    /**
+     * The version constraint as written in package.json.
+     */
+    packageJsonVersion: string;
+  }
+
   export interface Mode {
     /**
      * Enables
@@ -1419,6 +1442,12 @@ export interface VersionCreateParams {
    * and `_redirects` with content type `text/plain`.
    */
   modules?: Array<VersionCreateParams.Module>;
+
+  /**
+   * Body param: The list of npm packages that were installed and used when this
+   * Worker version was built.
+   */
+  package_dependencies?: Array<VersionCreateParams.PackageDependency>;
 
   /**
    * Body param: Configuration for
@@ -2333,6 +2362,23 @@ export namespace VersionCreateParams {
      * The name of the module.
      */
     name: string;
+  }
+
+  export interface PackageDependency {
+    /**
+     * The exact version that was resolved and installed by the package manager.
+     */
+    installedVersion: string;
+
+    /**
+     * The npm package name.
+     */
+    name: string;
+
+    /**
+     * The version constraint as written in package.json.
+     */
+    packageJsonVersion: string;
   }
 
   export interface Mode {

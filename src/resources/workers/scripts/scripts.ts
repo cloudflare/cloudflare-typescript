@@ -1847,6 +1847,12 @@ export namespace ScriptUpdateParams {
     observability?: Metadata.Observability;
 
     /**
+     * The list of npm packages that were installed and used when this Worker version
+     * was built.
+     */
+    package_dependencies?: Array<Metadata.PackageDependency>;
+
+    /**
      * Configuration for
      * [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
      * Specify mode='smart' for Smart Placement, or one of region/hostname/host.
@@ -2849,6 +2855,23 @@ export namespace ScriptUpdateParams {
          */
         propagation_policy?: 'authenticated' | 'accept';
       }
+    }
+
+    export interface PackageDependency {
+      /**
+       * The exact version that was resolved and installed by the package manager.
+       */
+      installedVersion: string;
+
+      /**
+       * The npm package name.
+       */
+      name: string;
+
+      /**
+       * The version constraint as written in package.json.
+       */
+      packageJsonVersion: string;
     }
 
     export interface UnionMember0 {

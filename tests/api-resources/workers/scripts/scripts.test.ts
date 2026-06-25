@@ -90,6 +90,13 @@ describe('resource scripts', () => {
             propagation_policy: 'authenticated',
           },
         },
+        package_dependencies: [
+          {
+            installedVersion: '4.17.22',
+            name: 'lodash',
+            packageJsonVersion: '^4.17.21',
+          },
+        ],
         placement: { mode: 'smart' },
         tags: ['string'],
         tail_consumers: [

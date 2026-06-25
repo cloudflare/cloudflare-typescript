@@ -46,6 +46,13 @@ describe('resource versions', () => {
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
         keep_bindings: ['string'],
+        package_dependencies: [
+          {
+            installedVersion: '4.17.22',
+            name: 'lodash',
+            packageJsonVersion: '^4.17.21',
+          },
+        ],
         usage_model: 'standard',
       },
       bindings_inherit: 'strict',
