@@ -26,7 +26,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
@@ -48,7 +48,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
@@ -74,17 +74,6 @@ jobs:
           AUTH: ${{ steps.github-oidc.outputs.github_token }}
           SHA: ${{ github.sha }}
         run: ./scripts/utils/upload-artifact.sh
-
-      - name: Upload MCP Server tarball
-        if: |-
-          github.repository == 'stainless-sdks/cloudflare-typescript' &&
-          !startsWith(github.ref, 'refs/heads/stl/')
-        env:
-          URL: https://pkg.stainless.com/s?subpackage=mcp-server
-          AUTH: ${{ steps.github-oidc.outputs.github_token }}
-          SHA: ${{ github.sha }}
-          BASE_PATH: packages/mcp-server
-        run: ./scripts/utils/upload-artifact.sh
   test:
     timeout-minutes: 10
     name: test
@@ -96,13 +85,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '22'
+          node-version: '20'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
-
-      - name: Build
-        run: ./scripts/build
 
       - name: Run tests
         run: ./scripts/test
