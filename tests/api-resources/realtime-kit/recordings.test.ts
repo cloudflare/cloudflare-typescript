@@ -33,9 +33,11 @@ describe('resource recordings', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getOneRecording: only required params', async () => {
-    const responsePromise = client.realtimeKit.recordings.getOneRecording('app_id', 'recording_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.recordings.getOneRecording(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,9 +49,11 @@ describe('resource recordings', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getOneRecording: required and optional params', async () => {
-    const response = await client.realtimeKit.recordings.getOneRecording('app_id', 'recording_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.realtimeKit.recordings.getOneRecording(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
@@ -87,7 +91,7 @@ describe('resource recordings', () => {
   test.skip('pauseResumeStopRecording: only required params', async () => {
     const responsePromise = client.realtimeKit.recordings.pauseResumeStopRecording(
       '2a95132c15732412d22c1476fa83f27a',
-      'recording_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'stop' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -103,7 +107,7 @@ describe('resource recordings', () => {
   test.skip('pauseResumeStopRecording: required and optional params', async () => {
     const response = await client.realtimeKit.recordings.pauseResumeStopRecording(
       '2a95132c15732412d22c1476fa83f27a',
-      'recording_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'stop' },
     );
   });
@@ -112,6 +116,7 @@ describe('resource recordings', () => {
   test.skip('startRecordings: only required params', async () => {
     const responsePromise = client.realtimeKit.recordings.startRecordings('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -126,6 +131,7 @@ describe('resource recordings', () => {
   test.skip('startRecordings: required and optional params', async () => {
     const response = await client.realtimeKit.recordings.startRecordings('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
       allow_multiple_recordings: false,
       audio_config: {
         channel: 'stereo',
@@ -135,7 +141,6 @@ describe('resource recordings', () => {
       file_name_prefix: 'string',
       interactive_config: { type: 'ID3' },
       max_seconds: 60,
-      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
       realtimekit_bucket_config: { enabled: true },
       rtmp_out_config: { rtmp_url: 'rtmp://a.rtmp.youtube.com/live2' },
       storage_config: {

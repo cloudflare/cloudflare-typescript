@@ -48,7 +48,7 @@ export class Webhooks extends APIResource {
    * const response =
    *   await client.realtimeKit.webhooks.deleteWebhook(
    *     'app_id',
-   *     'webhook_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -74,7 +74,7 @@ export class Webhooks extends APIResource {
    * const response =
    *   await client.realtimeKit.webhooks.editWebhook(
    *     'app_id',
-   *     'webhook_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -100,7 +100,7 @@ export class Webhooks extends APIResource {
    * const response =
    *   await client.realtimeKit.webhooks.getWebhookById(
    *     'app_id',
-   *     'webhook_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
@@ -143,7 +143,7 @@ export class Webhooks extends APIResource {
    * const response =
    *   await client.realtimeKit.webhooks.replaceWebhook(
    *     'app_id',
-   *     'webhook_id',
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       events: [

@@ -60,9 +60,11 @@ describe('resource webhooks', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('deleteWebhook: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.deleteWebhook('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.webhooks.deleteWebhook(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,16 +76,20 @@ describe('resource webhooks', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('deleteWebhook: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.deleteWebhook('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.realtimeKit.webhooks.deleteWebhook(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('editWebhook: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.editWebhook('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.webhooks.editWebhook(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,20 +101,26 @@ describe('resource webhooks', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('editWebhook: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.editWebhook('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      enabled: true,
-      events: ['meeting.started'],
-      name: 'name',
-      url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
-    });
+    const response = await client.realtimeKit.webhooks.editWebhook(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        enabled: true,
+        events: ['meeting.started'],
+        name: 'name',
+        url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
+      },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getWebhookById: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.getWebhookById('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.realtimeKit.webhooks.getWebhookById(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,9 +132,11 @@ describe('resource webhooks', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getWebhookById: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.getWebhookById('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.realtimeKit.webhooks.getWebhookById(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   // TODO: HTTP 401 from prism, support api tokens
@@ -148,22 +162,26 @@ describe('resource webhooks', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('replaceWebhook: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.replaceWebhook('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      events: [
-        'meeting.started',
-        'meeting.ended',
-        'meeting.participantJoined',
-        'meeting.participantLeft',
-        'meeting.chatSynced',
-        'recording.statusUpdate',
-        'livestreaming.statusUpdate',
-        'meeting.transcript',
-        'meeting.summary',
-      ],
-      name: 'All events webhook',
-      url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
-    });
+    const responsePromise = client.realtimeKit.webhooks.replaceWebhook(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        events: [
+          'meeting.started',
+          'meeting.ended',
+          'meeting.participantJoined',
+          'meeting.participantLeft',
+          'meeting.chatSynced',
+          'recording.statusUpdate',
+          'livestreaming.statusUpdate',
+          'meeting.transcript',
+          'meeting.summary',
+        ],
+        name: 'All events webhook',
+        url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
+      },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -175,22 +193,26 @@ describe('resource webhooks', () => {
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('replaceWebhook: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.replaceWebhook('app_id', 'webhook_id', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      events: [
-        'meeting.started',
-        'meeting.ended',
-        'meeting.participantJoined',
-        'meeting.participantLeft',
-        'meeting.chatSynced',
-        'recording.statusUpdate',
-        'livestreaming.statusUpdate',
-        'meeting.transcript',
-        'meeting.summary',
-      ],
-      name: 'All events webhook',
-      url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
-      enabled: true,
-    });
+    const response = await client.realtimeKit.webhooks.replaceWebhook(
+      'app_id',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        events: [
+          'meeting.started',
+          'meeting.ended',
+          'meeting.participantJoined',
+          'meeting.participantLeft',
+          'meeting.chatSynced',
+          'recording.statusUpdate',
+          'livestreaming.statusUpdate',
+          'meeting.transcript',
+          'meeting.summary',
+        ],
+        name: 'All events webhook',
+        url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
+        enabled: true,
+      },
+    );
   });
 });

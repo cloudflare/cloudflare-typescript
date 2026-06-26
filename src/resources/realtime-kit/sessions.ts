@@ -299,7 +299,10 @@ export namespace SessionGetParticipantDataFromPeerIDResponse {
        */
       left_at?: string;
 
-      peer_events?: Array<{ [key: string]: unknown }>;
+      /**
+       * Connection lifecycle events for the participant's peer.
+       */
+      peer_events?: Array<Participant.PeerEvent>;
 
       /**
        * Peer call statistics report.
@@ -326,14 +329,1655 @@ export namespace SessionGetParticipantDataFromPeerIDResponse {
 
     export namespace Participant {
       /**
+       * A connection lifecycle event recorded for a participant's peer.
+       */
+      export interface PeerEvent {
+        /**
+         * ID of the peer event.
+         */
+        id?: string;
+
+        /**
+         * Timestamp when this peer event was created.
+         */
+        created_at?: string;
+
+        /**
+         * Name of the peer event.
+         */
+        event_name?: 'PEER_CREATED' | 'PEER_JOINING' | 'PEER_LEAVING';
+
+        /**
+         * Minutes consumed attributed to this event.
+         */
+        minutes_consumed?: number;
+
+        /**
+         * ID of the participant this event belongs to.
+         */
+        participant_id?: string | null;
+
+        /**
+         * Peer ID this event belongs to.
+         */
+        peer_id?: string;
+
+        /**
+         * View type of the preset associated with the peer.
+         */
+        preset_view_type?: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM' | 'CHAT' | null;
+
+        /**
+         * ID of the session this event belongs to.
+         */
+        session_id?: string | null;
+
+        /**
+         * ID of the socket session associated with this event.
+         */
+        socket_session_id?: string | null;
+
+        /**
+         * Timestamp when this peer event was last updated.
+         */
+        updated_at?: string;
+      }
+
+      /**
        * Peer call statistics report.
        */
       export interface PeerReport {
-        metadata?: { [key: string]: unknown };
+        /**
+         * Connection and device metadata for the participant.
+         */
+        metadata?: PeerReport.Metadata;
 
-        quality?: { [key: string]: unknown };
+        /**
+         * Media quality statistics for the participant.
+         */
+        quality?: PeerReport.Quality;
+      }
 
-        [k: string]: unknown;
+      export namespace PeerReport {
+        /**
+         * Connection and device metadata for the participant.
+         */
+        export interface Metadata {
+          audio_devices_updates?: Array<Metadata.AudioDevicesUpdate>;
+
+          browser_metadata?: Metadata.BrowserMetadata;
+
+          candidate_pairs?: Metadata.CandidatePairs;
+
+          device_info?: Metadata.DeviceInfo;
+
+          events?: Array<Metadata.Event>;
+
+          ip_information?: Metadata.IPInformation;
+
+          native_metadata?: Metadata.NativeMetadata;
+
+          pc_metadata?: Array<Metadata.PcMetadata>;
+
+          room_view_type?: string;
+
+          sdk_name?: string;
+
+          sdk_type?: string;
+
+          sdk_version?: string;
+
+          selected_device_updates?: Array<Metadata.SelectedDeviceUpdate>;
+
+          speaker_devices_updates?: Array<Metadata.SpeakerDevicesUpdate>;
+
+          video_devices_updates?: Array<Metadata.VideoDevicesUpdate>;
+        }
+
+        export namespace Metadata {
+          /**
+           * A change to the set of available devices at a point in time.
+           */
+          export interface AudioDevicesUpdate {
+            /**
+             * Devices that became available.
+             */
+            added?: Array<AudioDevicesUpdate.Added>;
+
+            /**
+             * Devices that became unavailable.
+             */
+            removed?: Array<AudioDevicesUpdate.Removed>;
+
+            /**
+             * Timestamp of the device update.
+             */
+            timestamp?: string;
+          }
+
+          export namespace AudioDevicesUpdate {
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Added {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Removed {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+          }
+
+          export interface BrowserMetadata {
+            browser?: string;
+
+            browser_version?: string;
+
+            engine?: string;
+
+            user_agent?: string;
+
+            webgl_support?: boolean | null;
+          }
+
+          export interface CandidatePairs {
+            consuming_transport?: Array<CandidatePairs.ConsumingTransport>;
+
+            producing_transport?: Array<CandidatePairs.ProducingTransport>;
+          }
+
+          export namespace CandidatePairs {
+            /**
+             * ICE candidate pair statistics for a transport.
+             */
+            export interface ConsumingTransport {
+              available_incoming_bitrate?: number;
+
+              available_outgoing_bitrate?: number;
+
+              bytes_discarded_on_send?: number;
+
+              bytes_received?: number;
+
+              bytes_sent?: number;
+
+              current_round_trip_time?: number;
+
+              /**
+               * Epoch milliseconds when the last packet was received.
+               */
+              last_packet_received_timestamp?: number;
+
+              /**
+               * Epoch milliseconds when the last packet was sent.
+               */
+              last_packet_sent_timestamp?: number;
+
+              local_candidate_address?: string;
+
+              local_candidate_id?: string;
+
+              local_candidate_network_type?: string;
+
+              local_candidate_port?: number;
+
+              local_candidate_protocol?: string;
+
+              local_candidate_related_address?: string;
+
+              local_candidate_related_port?: number;
+
+              local_candidate_type?: string;
+
+              local_candidate_url?: string;
+
+              nominated?: boolean;
+
+              packets_discarded_on_send?: number;
+
+              packets_received?: number;
+
+              packets_sent?: number;
+
+              remote_candidate_address?: string;
+
+              remote_candidate_id?: string;
+
+              remote_candidate_port?: number;
+
+              remote_candidate_protocol?: string;
+
+              remote_candidate_type?: string;
+
+              remote_candidate_url?: string;
+
+              total_round_trip_time?: number;
+            }
+
+            /**
+             * ICE candidate pair statistics for a transport.
+             */
+            export interface ProducingTransport {
+              available_incoming_bitrate?: number;
+
+              available_outgoing_bitrate?: number;
+
+              bytes_discarded_on_send?: number;
+
+              bytes_received?: number;
+
+              bytes_sent?: number;
+
+              current_round_trip_time?: number;
+
+              /**
+               * Epoch milliseconds when the last packet was received.
+               */
+              last_packet_received_timestamp?: number;
+
+              /**
+               * Epoch milliseconds when the last packet was sent.
+               */
+              last_packet_sent_timestamp?: number;
+
+              local_candidate_address?: string;
+
+              local_candidate_id?: string;
+
+              local_candidate_network_type?: string;
+
+              local_candidate_port?: number;
+
+              local_candidate_protocol?: string;
+
+              local_candidate_related_address?: string;
+
+              local_candidate_related_port?: number;
+
+              local_candidate_type?: string;
+
+              local_candidate_url?: string;
+
+              nominated?: boolean;
+
+              packets_discarded_on_send?: number;
+
+              packets_received?: number;
+
+              packets_sent?: number;
+
+              remote_candidate_address?: string;
+
+              remote_candidate_id?: string;
+
+              remote_candidate_port?: number;
+
+              remote_candidate_protocol?: string;
+
+              remote_candidate_type?: string;
+
+              remote_candidate_url?: string;
+
+              total_round_trip_time?: number;
+            }
+          }
+
+          export interface DeviceInfo {
+            cpus?: number;
+
+            is_mobile?: boolean;
+
+            os?: string;
+
+            os_version?: string;
+          }
+
+          /**
+           * A timestamped event recorded during the participant's connection.
+           */
+          export interface Event {
+            /**
+             * Event-specific metadata. Keys vary per event; values are primitive scalars
+             * (string, number, boolean, or null).
+             */
+            metadata?: { [key: string]: unknown };
+
+            /**
+             * Name of the event.
+             */
+            name?: string;
+
+            /**
+             * Timestamp when the event occurred.
+             */
+            timestamp?: string;
+          }
+
+          export interface IPInformation {
+            asn?: IPInformation.ASN;
+
+            city?: string;
+
+            country?: string;
+
+            ipv4?: string;
+
+            org?: string;
+
+            region?: string;
+
+            timezone?: string;
+          }
+
+          export namespace IPInformation {
+            export interface ASN {
+              asn?: string;
+
+              domain?: string;
+
+              name?: string;
+
+              route?: string;
+
+              type?: string;
+            }
+          }
+
+          export interface NativeMetadata {
+            audio_encoder?: string;
+
+            video_encoder?: string;
+          }
+
+          export interface PcMetadata {
+            effective_network_type?: string;
+
+            reflexive_connectivity?: boolean;
+
+            relay_connectivity?: boolean;
+
+            sdp?: Array<string>;
+
+            timestamp?: string;
+
+            turn_connectivity?: boolean;
+          }
+
+          export interface SelectedDeviceUpdate {
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            device?: SelectedDeviceUpdate.Device;
+
+            timestamp?: string;
+          }
+
+          export namespace SelectedDeviceUpdate {
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Device {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+          }
+
+          /**
+           * A change to the set of available devices at a point in time.
+           */
+          export interface SpeakerDevicesUpdate {
+            /**
+             * Devices that became available.
+             */
+            added?: Array<SpeakerDevicesUpdate.Added>;
+
+            /**
+             * Devices that became unavailable.
+             */
+            removed?: Array<SpeakerDevicesUpdate.Removed>;
+
+            /**
+             * Timestamp of the device update.
+             */
+            timestamp?: string;
+          }
+
+          export namespace SpeakerDevicesUpdate {
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Added {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Removed {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+          }
+
+          /**
+           * A change to the set of available devices at a point in time.
+           */
+          export interface VideoDevicesUpdate {
+            /**
+             * Devices that became available.
+             */
+            added?: Array<VideoDevicesUpdate.Added>;
+
+            /**
+             * Devices that became unavailable.
+             */
+            removed?: Array<VideoDevicesUpdate.Removed>;
+
+            /**
+             * Timestamp of the device update.
+             */
+            timestamp?: string;
+          }
+
+          export namespace VideoDevicesUpdate {
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Added {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+
+            /**
+             * A media device (camera, microphone, or speaker).
+             */
+            export interface Removed {
+              /**
+               * ID of the device.
+               */
+              device_id?: string;
+
+              /**
+               * Kind of device, for example audioinput or videoinput.
+               */
+              kind?: string;
+
+              /**
+               * Human-readable label of the device.
+               */
+              label?: string;
+            }
+          }
+        }
+
+        /**
+         * Media quality statistics for the participant.
+         */
+        export interface Quality {
+          audio_consumer?: Array<Quality.AudioConsumer>;
+
+          /**
+           * Aggregated inbound (consumer) audio statistics for the session.
+           */
+          audio_consumer_cumulative?: Quality.AudioConsumerCumulative;
+
+          audio_producer?: Array<Quality.AudioProducer>;
+
+          /**
+           * Aggregated outbound (producer) audio statistics for the session.
+           */
+          audio_producer_cumulative?: Quality.AudioProducerCumulative;
+
+          screenshare_audio_consumer?: Array<Quality.ScreenshareAudioConsumer>;
+
+          /**
+           * Aggregated inbound (consumer) audio statistics for the session.
+           */
+          screenshare_audio_consumer_cumulative?: Quality.ScreenshareAudioConsumerCumulative;
+
+          screenshare_audio_producer?: Array<Quality.ScreenshareAudioProducer>;
+
+          /**
+           * Aggregated outbound (producer) audio statistics for the session.
+           */
+          screenshare_audio_producer_cumulative?: Quality.ScreenshareAudioProducerCumulative;
+
+          screenshare_video_consumer?: Array<Quality.ScreenshareVideoConsumer>;
+
+          /**
+           * Aggregated inbound (consumer) video statistics for the session.
+           */
+          screenshare_video_consumer_cumulative?: Quality.ScreenshareVideoConsumerCumulative;
+
+          screenshare_video_producer?: Array<Quality.ScreenshareVideoProducer>;
+
+          /**
+           * Aggregated outbound (producer) video statistics for the session.
+           */
+          screenshare_video_producer_cumulative?: Quality.ScreenshareVideoProducerCumulative;
+
+          video_consumer?: Array<Quality.VideoConsumer>;
+
+          /**
+           * Aggregated inbound (consumer) video statistics for the session.
+           */
+          video_consumer_cumulative?: Quality.VideoConsumerCumulative;
+
+          video_producer?: Array<Quality.VideoProducer>;
+
+          /**
+           * Aggregated outbound (producer) video statistics for the session.
+           */
+          video_producer_cumulative?: Quality.VideoProducerCumulative;
+        }
+
+        export namespace Quality {
+          /**
+           * Per-sample inbound (consumer) audio statistics.
+           */
+          export interface AudioConsumer {
+            bytes_received?: number;
+
+            concealment_events?: number;
+
+            consumer_id?: string;
+
+            jitter?: number;
+
+            jitter_buffer_delay?: number;
+
+            jitter_buffer_emitted_count?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_received?: number;
+
+            peer_id?: string;
+
+            producer_id?: string;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          /**
+           * Aggregated inbound (consumer) audio statistics for the session.
+           */
+          export interface AudioConsumerCumulative {
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            jitter_buffer_delay?: AudioConsumerCumulative.JitterBufferDelay;
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: AudioConsumerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: AudioConsumerCumulative.QualityMos;
+          }
+
+          export namespace AudioConsumerCumulative {
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface JitterBufferDelay {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+          }
+
+          /**
+           * Per-sample outbound (producer) audio statistics.
+           */
+          export interface AudioProducer {
+            bytes_sent?: number;
+
+            jitter?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_sent?: number;
+
+            producer_id?: string;
+
+            rtt?: number;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          /**
+           * Aggregated outbound (producer) audio statistics for the session.
+           */
+          export interface AudioProducerCumulative {
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: AudioProducerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: AudioProducerCumulative.QualityMos;
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            rtt?: AudioProducerCumulative.RTT;
+          }
+
+          export namespace AudioProducerCumulative {
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface RTT {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+          }
+
+          /**
+           * Per-sample inbound (consumer) audio statistics.
+           */
+          export interface ScreenshareAudioConsumer {
+            bytes_received?: number;
+
+            concealment_events?: number;
+
+            consumer_id?: string;
+
+            jitter?: number;
+
+            jitter_buffer_delay?: number;
+
+            jitter_buffer_emitted_count?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_received?: number;
+
+            peer_id?: string;
+
+            producer_id?: string;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          /**
+           * Aggregated inbound (consumer) audio statistics for the session.
+           */
+          export interface ScreenshareAudioConsumerCumulative {
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            jitter_buffer_delay?: ScreenshareAudioConsumerCumulative.JitterBufferDelay;
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: ScreenshareAudioConsumerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: ScreenshareAudioConsumerCumulative.QualityMos;
+          }
+
+          export namespace ScreenshareAudioConsumerCumulative {
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface JitterBufferDelay {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+          }
+
+          /**
+           * Per-sample outbound (producer) audio statistics.
+           */
+          export interface ScreenshareAudioProducer {
+            bytes_sent?: number;
+
+            jitter?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_sent?: number;
+
+            producer_id?: string;
+
+            rtt?: number;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          /**
+           * Aggregated outbound (producer) audio statistics for the session.
+           */
+          export interface ScreenshareAudioProducerCumulative {
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: ScreenshareAudioProducerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: ScreenshareAudioProducerCumulative.QualityMos;
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            rtt?: ScreenshareAudioProducerCumulative.RTT;
+          }
+
+          export namespace ScreenshareAudioProducerCumulative {
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface RTT {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+          }
+
+          /**
+           * Per-sample inbound (consumer) video statistics.
+           */
+          export interface ScreenshareVideoConsumer {
+            bytes_received?: number;
+
+            consumer_id?: string;
+
+            fir_count?: number;
+
+            frame_height?: number;
+
+            frame_width?: number;
+
+            frames_decoded?: number;
+
+            frames_dropped?: number;
+
+            frames_per_second?: number;
+
+            jitter?: number;
+
+            jitter_buffer_delay?: number;
+
+            jitter_buffer_emitted_count?: number;
+
+            key_frames_decoded?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_received?: number;
+
+            peer_id?: string;
+
+            producer_id?: string;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          /**
+           * Aggregated inbound (consumer) video statistics for the session.
+           */
+          export interface ScreenshareVideoConsumerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_per_second?: ScreenshareVideoConsumerCumulative.FramePerSecond;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_width?: ScreenshareVideoConsumerCumulative.FrameWidth;
+
+            issues?: ScreenshareVideoConsumerCumulative.Issues;
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            jitter_buffer_delay?: ScreenshareVideoConsumerCumulative.JitterBufferDelay;
+
+            key_frames_decoded_fraction?: number;
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: ScreenshareVideoConsumerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: ScreenshareVideoConsumerCumulative.QualityMos;
+          }
+
+          export namespace ScreenshareVideoConsumerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FramePerSecond {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FrameWidth {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            export interface Issues {
+              lag_fraction?: number;
+
+              no_video_fraction?: number;
+
+              poor_resolution_fraction?: number;
+            }
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface JitterBufferDelay {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+          }
+
+          /**
+           * Per-sample outbound (producer) video statistics.
+           */
+          export interface ScreenshareVideoProducer {
+            bytes_sent?: number;
+
+            fir_count?: number;
+
+            frame_height?: number;
+
+            frame_width?: number;
+
+            frames_encoded?: number;
+
+            frames_per_second?: number;
+
+            jitter?: number;
+
+            key_frames_encoded?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_sent?: number;
+
+            pli_count?: number;
+
+            producer_id?: string;
+
+            quality_limitation_durations?: ScreenshareVideoProducer.QualityLimitationDurations;
+
+            quality_limitation_reason?: 'cpu' | 'bandwidth' | 'none' | 'other';
+
+            quality_limitation_resolution_changes?: number;
+
+            rtt?: number;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          export namespace ScreenshareVideoProducer {
+            export interface QualityLimitationDurations {
+              bandwidth?: number;
+
+              cpu?: number;
+
+              none?: number;
+
+              other?: number;
+            }
+          }
+
+          /**
+           * Aggregated outbound (producer) video statistics for the session.
+           */
+          export interface ScreenshareVideoProducerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_per_second?: ScreenshareVideoProducerCumulative.FramePerSecond;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_width?: ScreenshareVideoProducerCumulative.FrameWidth;
+
+            high_negative_feedback_fraction?: number;
+
+            issues?: ScreenshareVideoProducerCumulative.Issues;
+
+            key_frames_encoded_fraction?: number;
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: ScreenshareVideoProducerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: ScreenshareVideoProducerCumulative.QualityMos;
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            rtt?: ScreenshareVideoProducerCumulative.RTT;
+          }
+
+          export namespace ScreenshareVideoProducerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FramePerSecond {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FrameWidth {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            export interface Issues {
+              bandwidth_quality_limitation_fraction?: number;
+
+              cpu_quality_limitation_fraction?: number;
+
+              no_video_fraction?: number;
+
+              poor_resolution_fraction?: number;
+
+              quality_limitation_fraction?: number;
+            }
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface RTT {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+          }
+
+          /**
+           * Per-sample inbound (consumer) video statistics.
+           */
+          export interface VideoConsumer {
+            bytes_received?: number;
+
+            consumer_id?: string;
+
+            fir_count?: number;
+
+            frame_height?: number;
+
+            frame_width?: number;
+
+            frames_decoded?: number;
+
+            frames_dropped?: number;
+
+            frames_per_second?: number;
+
+            jitter?: number;
+
+            jitter_buffer_delay?: number;
+
+            jitter_buffer_emitted_count?: number;
+
+            key_frames_decoded?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_received?: number;
+
+            peer_id?: string;
+
+            producer_id?: string;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          /**
+           * Aggregated inbound (consumer) video statistics for the session.
+           */
+          export interface VideoConsumerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_per_second?: VideoConsumerCumulative.FramePerSecond;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_width?: VideoConsumerCumulative.FrameWidth;
+
+            issues?: VideoConsumerCumulative.Issues;
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            jitter_buffer_delay?: VideoConsumerCumulative.JitterBufferDelay;
+
+            key_frames_decoded_fraction?: number;
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: VideoConsumerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: VideoConsumerCumulative.QualityMos;
+          }
+
+          export namespace VideoConsumerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FramePerSecond {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FrameWidth {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            export interface Issues {
+              lag_fraction?: number;
+
+              no_video_fraction?: number;
+
+              poor_resolution_fraction?: number;
+            }
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface JitterBufferDelay {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+          }
+
+          /**
+           * Per-sample outbound (producer) video statistics.
+           */
+          export interface VideoProducer {
+            bytes_sent?: number;
+
+            fir_count?: number;
+
+            frame_height?: number;
+
+            frame_width?: number;
+
+            frames_encoded?: number;
+
+            frames_per_second?: number;
+
+            jitter?: number;
+
+            key_frames_encoded?: number;
+
+            mid?: string;
+
+            mos_quality?: number;
+
+            packets_lost?: number;
+
+            packets_sent?: number;
+
+            pli_count?: number;
+
+            producer_id?: string;
+
+            quality_limitation_durations?: VideoProducer.QualityLimitationDurations;
+
+            quality_limitation_reason?: 'cpu' | 'bandwidth' | 'none' | 'other';
+
+            quality_limitation_resolution_changes?: number;
+
+            rtt?: number;
+
+            ssrc?: number;
+
+            timestamp?: string;
+          }
+
+          export namespace VideoProducer {
+            export interface QualityLimitationDurations {
+              bandwidth?: number;
+
+              cpu?: number;
+
+              none?: number;
+
+              other?: number;
+            }
+          }
+
+          /**
+           * Aggregated outbound (producer) video statistics for the session.
+           */
+          export interface VideoProducerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_per_second?: VideoProducerCumulative.FramePerSecond;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            frame_width?: VideoProducerCumulative.FrameWidth;
+
+            high_negative_feedback_fraction?: number;
+
+            issues?: VideoProducerCumulative.Issues;
+
+            key_frames_encoded_fraction?: number;
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            packet_loss?: VideoProducerCumulative.PacketLoss;
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            quality_mos?: VideoProducerCumulative.QualityMos;
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            rtt?: VideoProducerCumulative.RTT;
+          }
+
+          export namespace VideoProducerCumulative {
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FramePerSecond {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface FrameWidth {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            export interface Issues {
+              bandwidth_quality_limitation_fraction?: number;
+
+              cpu_quality_limitation_fraction?: number;
+
+              no_video_fraction?: number;
+
+              poor_resolution_fraction?: number;
+
+              quality_limitation_fraction?: number;
+            }
+
+            /**
+             * Cumulative packet loss distribution.
+             */
+            export interface PacketLoss {
+              '10_or_greater_event_fraction'?: number;
+
+              '25_or_greater_event_fraction'?: number;
+
+              '5_or_greater_event_fraction'?: number;
+
+              '50_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+
+            /**
+             * Distribution summary with average and percentiles.
+             */
+            export interface QualityMos {
+              avg?: number;
+
+              p50?: number;
+
+              p75?: number;
+
+              p90?: number;
+            }
+
+            /**
+             * Cumulative latency distribution (milliseconds-based thresholds).
+             */
+            export interface RTT {
+              '100ms_or_greater_event_fraction'?: number;
+
+              '250ms_or_greater_event_fraction'?: number;
+
+              '500ms_or_greater_event_fraction'?: number;
+
+              avg?: number;
+            }
+          }
+        }
       }
     }
   }
@@ -492,6 +2136,12 @@ export namespace SessionGetSessionParticipantDetailsResponse {
       left_at?: string;
 
       /**
+       * Connection lifecycle events for the participant's peer. Only included when
+       * `include_peer_events` is true.
+       */
+      peer_events?: Array<Participant.PeerEvent>;
+
+      /**
        * Name of the preset associated with the participant.
        */
       preset_name?: string;
@@ -505,6 +2155,63 @@ export namespace SessionGetSessionParticipantDetailsResponse {
        * User id for this participant.
        */
       user_id?: string;
+    }
+
+    export namespace Participant {
+      /**
+       * A connection lifecycle event recorded for a participant's peer.
+       */
+      export interface PeerEvent {
+        /**
+         * ID of the peer event.
+         */
+        id?: string;
+
+        /**
+         * Timestamp when this peer event was created.
+         */
+        created_at?: string;
+
+        /**
+         * Name of the peer event.
+         */
+        event_name?: 'PEER_CREATED' | 'PEER_JOINING' | 'PEER_LEAVING';
+
+        /**
+         * Minutes consumed attributed to this event.
+         */
+        minutes_consumed?: number;
+
+        /**
+         * ID of the participant this event belongs to.
+         */
+        participant_id?: string | null;
+
+        /**
+         * Peer ID this event belongs to.
+         */
+        peer_id?: string;
+
+        /**
+         * View type of the preset associated with the peer.
+         */
+        preset_view_type?: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM' | 'CHAT' | null;
+
+        /**
+         * ID of the session this event belongs to.
+         */
+        session_id?: string | null;
+
+        /**
+         * ID of the socket session associated with this event.
+         */
+        socket_session_id?: string | null;
+
+        /**
+         * Timestamp when this peer event was last updated.
+         */
+        updated_at?: string;
+      }
     }
   }
 }
@@ -558,6 +2265,12 @@ export namespace SessionGetSessionParticipantsResponse {
       left_at?: string;
 
       /**
+       * Connection lifecycle events for the participant's peer. Only included when
+       * `include_peer_events` is true.
+       */
+      peer_events?: Array<Participant.PeerEvent>;
+
+      /**
        * Name of the preset associated with the participant.
        */
       preset_name?: string;
@@ -571,6 +2284,63 @@ export namespace SessionGetSessionParticipantsResponse {
        * User id for this participant.
        */
       user_id?: string;
+    }
+
+    export namespace Participant {
+      /**
+       * A connection lifecycle event recorded for a participant's peer.
+       */
+      export interface PeerEvent {
+        /**
+         * ID of the peer event.
+         */
+        id?: string;
+
+        /**
+         * Timestamp when this peer event was created.
+         */
+        created_at?: string;
+
+        /**
+         * Name of the peer event.
+         */
+        event_name?: 'PEER_CREATED' | 'PEER_JOINING' | 'PEER_LEAVING';
+
+        /**
+         * Minutes consumed attributed to this event.
+         */
+        minutes_consumed?: number;
+
+        /**
+         * ID of the participant this event belongs to.
+         */
+        participant_id?: string | null;
+
+        /**
+         * Peer ID this event belongs to.
+         */
+        peer_id?: string;
+
+        /**
+         * View type of the preset associated with the peer.
+         */
+        preset_view_type?: 'GROUP_CALL' | 'WEBINAR' | 'AUDIO_ROOM' | 'LIVESTREAM' | 'CHAT' | null;
+
+        /**
+         * ID of the session this event belongs to.
+         */
+        session_id?: string | null;
+
+        /**
+         * ID of the socket session associated with this event.
+         */
+        socket_session_id?: string | null;
+
+        /**
+         * Timestamp when this peer event was last updated.
+         */
+        updated_at?: string;
+      }
     }
   }
 }
