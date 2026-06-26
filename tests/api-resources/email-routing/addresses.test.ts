@@ -73,6 +73,27 @@ describe('resource addresses', () => {
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = client.emailRouting.addresses.edit('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      status: 'verified',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.emailRouting.addresses.edit('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      status: 'verified',
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.emailRouting.addresses.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

@@ -9,6 +9,7 @@ Methods:
 - <code title="post /zones/{zone_id}/email/routing/disable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">disable</a>({ ...params }) -> Settings</code>
 - <code title="post /zones/{zone_id}/email/routing/enable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">enable</a>({ ...params }) -> Settings</code>
 - <code title="get /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">get</a>({ ...params }) -> Settings</code>
+- <code title="post /zones/{zone_id}/email/routing/unlock">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">unlock</a>({ ...params }) -> Settings</code>
 
 ## DNS
 
@@ -64,4 +65,5 @@ Methods:
 - <code title="post /accounts/{account_id}/email/routing/addresses">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">create</a>({ ...params }) -> Address</code>
 - <code title="get /accounts/{account_id}/email/routing/addresses">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">list</a>({ ...params }) -> AddressesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">delete</a>(destinationAddressIdentifier, { ...params }) -> Address</code>
+- <code title="patch /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">edit</a>(destinationAddressIdentifier, { ...params }) -> Address</code>
 - <code title="get /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}">client.emailRouting.addresses.<a href="./src/resources/email-routing/addresses.ts">get</a>(destinationAddressIdentifier, { ...params }) -> Address</code>

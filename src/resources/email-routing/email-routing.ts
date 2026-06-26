@@ -7,6 +7,7 @@ import {
   Address,
   AddressCreateParams,
   AddressDeleteParams,
+  AddressEditParams,
   AddressGetParams,
   AddressListParams,
   Addresses,
@@ -85,6 +86,21 @@ export class EmailRouting extends APIResource {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/email/routing`, options) as Core.APIPromise<{ result: Settings }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Unlock MX records previously locked by Email Routing. Deprecated - use PATCH
+   * /zones/{zone_id}/email/routing/dns instead.
+   *
+   * @deprecated This endpoint is deprecated. Use PATCH /zones/{zone_id}/email/routing/dns instead.
+   */
+  unlock(params: EmailRoutingUnlockParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(`/zones/${zone_id}/email/routing/unlock`, { body, ...options }) as Core.APIPromise<{
+        result: Settings;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -169,6 +185,18 @@ export interface EmailRoutingGetParams {
   zone_id: string;
 }
 
+export interface EmailRoutingUnlockParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Domain of your zone.
+   */
+  name?: string;
+}
+
 EmailRouting.DNS = DNS;
 EmailRouting.DNSRecordsSinglePage = DNSRecordsSinglePage;
 EmailRouting.Rules = Rules;
@@ -181,6 +209,7 @@ export declare namespace EmailRouting {
     type EmailRoutingDisableParams as EmailRoutingDisableParams,
     type EmailRoutingEnableParams as EmailRoutingEnableParams,
     type EmailRoutingGetParams as EmailRoutingGetParams,
+    type EmailRoutingUnlockParams as EmailRoutingUnlockParams,
   };
 
   export {
@@ -212,6 +241,7 @@ export declare namespace EmailRouting {
     type AddressCreateParams as AddressCreateParams,
     type AddressListParams as AddressListParams,
     type AddressDeleteParams as AddressDeleteParams,
+    type AddressEditParams as AddressEditParams,
     type AddressGetParams as AddressGetParams,
   };
 }

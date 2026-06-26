@@ -7,6 +7,7 @@ export {
   type AddressCreateParams,
   type AddressListParams,
   type AddressDeleteParams,
+  type AddressEditParams,
   type AddressGetParams,
 } from './addresses';
 export {
