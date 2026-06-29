@@ -1011,6 +1011,7 @@ export namespace TelemetryQueryResponse {
           | 'email'
           | 'tail'
           | 'rpc'
+          | 'jsrpc'
           | 'websocket'
           | 'workflow'
           | 'unknown';
@@ -1070,6 +1071,7 @@ export namespace TelemetryQueryResponse {
           | 'email'
           | 'tail'
           | 'rpc'
+          | 'jsrpc'
           | 'websocket'
           | 'workflow'
           | 'unknown';
@@ -1408,6 +1410,7 @@ export namespace TelemetryQueryResponse {
         | 'email'
         | 'tail'
         | 'rpc'
+        | 'jsrpc'
         | 'websocket'
         | 'workflow'
         | 'unknown';
@@ -1467,6 +1470,7 @@ export namespace TelemetryQueryResponse {
         | 'email'
         | 'tail'
         | 'rpc'
+        | 'jsrpc'
         | 'websocket'
         | 'workflow'
         | 'unknown';
