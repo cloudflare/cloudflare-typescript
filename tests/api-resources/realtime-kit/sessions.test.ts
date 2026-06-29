@@ -155,7 +155,6 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { sessions: BaseSessi
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         app_id: 'app_id',
         session_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        filters: 'device_info',
         include_peer_events: true,
       },
     );
