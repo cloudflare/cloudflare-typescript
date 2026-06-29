@@ -137,11 +137,7 @@ describe('resource sessions', () => {
       'app_id',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        filters: 'device_info',
-        include_peer_events: true,
-      },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', include_peer_events: true },
     );
   });
 

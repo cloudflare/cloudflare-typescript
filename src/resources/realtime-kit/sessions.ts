@@ -669,7 +669,7 @@ export namespace SessionGetParticipantDataFromPeerIDResponse {
              * Event-specific metadata. Keys vary per event; values are primitive scalars
              * (string, number, boolean, or null).
              */
-            metadata?: { [key: string]: unknown };
+            metadata?: { [key: string]: string | number | boolean | null };
 
             /**
              * Name of the event.
@@ -2079,11 +2079,6 @@ export namespace SessionGetSessionDetailsResponse {
      * timestamp when session ended
      */
     ended_at?: string;
-
-    /**
-     * Any meta data about session.
-     */
-    meta?: unknown;
   }
 }
 
@@ -2472,11 +2467,6 @@ export namespace SessionGetSessionsResponse {
        * timestamp when session ended
        */
       ended_at?: string;
-
-      /**
-       * Any meta data about session.
-       */
-      meta?: unknown;
     }
   }
 
@@ -2537,12 +2527,6 @@ export interface SessionGetSessionParticipantDetailsParams {
    * Path param: The account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Query param: Comma separated list of filters to apply. Note that there must be
-   * no spaces between the filters.
-   */
-  filters?: 'device_info' | 'ip_information' | 'precall_network_information' | 'events' | 'quality_stats';
 
   /**
    * Query param: if true, response includes all the peer events of participant.
