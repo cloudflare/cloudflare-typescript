@@ -321,6 +321,15 @@ export interface AuditListParams extends CursorPaginationAfterParams {
   limit?: number;
 
   /**
+   * Query param: Filters audit logs by one or more predefined product categories.
+   * Each product category expands into a curated set of resource_product values and
+   * is unioned with any explicit resource_product filter. Matched
+   * case-insensitively; unknown product categories return 400. Repeatable. Use the
+   * audit log product categories endpoint to discover the available values.
+   */
+  product_category?: Array<string>;
+
+  /**
    * Query param
    */
   raw_cf_ray_id?: AuditListParams.RawCfRayID;

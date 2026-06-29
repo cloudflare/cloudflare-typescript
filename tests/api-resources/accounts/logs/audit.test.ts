@@ -47,6 +47,7 @@ describe('resource audit', () => {
       cursor: 'Q1buH-__DQqqig7SVYXT-SsMOTGY2Z3Y80W-fGgva7yaDdmPKveucH5ddOcHsJRhNb-xUK8agZQqkJSMAENGO8NU6g==',
       direction: 'desc',
       limit: 25,
+      product_category: ['zerotrust'],
       raw_cf_ray_id: { not: ['8e8dd2156ef28414'] },
       raw_method: { not: ['GET'] },
       raw_status_code: { not: [200] },
