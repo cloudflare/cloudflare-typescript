@@ -6113,7 +6113,7 @@ export namespace SetConfigRule {
     ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 
     /**
-     * Whether to enable Signed Exchanges (SXG).
+     * @deprecated Signed Exchanges (SXG) is deprecated.
      */
     sxg?: boolean;
   }
@@ -6372,7 +6372,7 @@ export namespace SetConfigRuleParam {
     ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 
     /**
-     * Whether to enable Signed Exchanges (SXG).
+     * @deprecated Signed Exchanges (SXG) is deprecated.
      */
     sxg?: boolean;
   }
@@ -15313,7 +15313,7 @@ export declare namespace RuleCreateParams {
       ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 
       /**
-       * Whether to enable Signed Exchanges (SXG).
+       * @deprecated Signed Exchanges (SXG) is deprecated.
        */
       sxg?: boolean;
     }
@@ -20661,7 +20661,7 @@ export declare namespace RuleEditParams {
       ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 
       /**
-       * Whether to enable Signed Exchanges (SXG).
+       * @deprecated Signed Exchanges (SXG) is deprecated.
        */
       sxg?: boolean;
     }
