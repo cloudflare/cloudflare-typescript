@@ -558,6 +558,10 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/access/custom-pages.test.ts
 	tests/api-resources/zero-trust/access/tags.test.ts
 	tests/api-resources/zero-trust/access/policies.test.ts
+	tests/api-resources/zero-trust/casb/casb.test.ts
+	tests/api-resources/zero-trust/casb/applications/applications.test.ts
+	tests/api-resources/zero-trust/casb/applications/setup-flows.test.ts
+	tests/api-resources/zero-trust/casb/integrations.test.ts
 	tests/api-resources/zero-trust/dex/dex.test.ts
 	tests/api-resources/zero-trust/dex/warp-change-events.test.ts
 	tests/api-resources/zero-trust/dex/commands/commands.test.ts
