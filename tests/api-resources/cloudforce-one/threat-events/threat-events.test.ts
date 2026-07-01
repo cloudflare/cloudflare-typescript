@@ -88,6 +88,7 @@ describe('resource threatEvents', () => {
           value: 'usa',
         },
       ],
+      source: 'do',
     });
   });
 

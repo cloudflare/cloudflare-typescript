@@ -682,6 +682,13 @@ export interface ThreatEventListParams {
    * Query param
    */
   search?: Array<ThreatEventListParams.Search>;
+
+  /**
+   * Query param: Read backend. 'do' (default) reads Durable Object storage.
+   * 'r2catalog' reads R2 Data Catalog (admin-only, experimental; supports a subset
+   * of search fields — no 'tags').
+   */
+  source?: 'do' | 'r2catalog';
 }
 
 export namespace ThreatEventListParams {

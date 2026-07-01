@@ -44,8 +44,6 @@ export namespace QueryGetResponse {
 
     export namespace Parameters {
       export interface StringMatch {
-        max_edit_distance: number;
-
         pattern: string;
       }
     }
