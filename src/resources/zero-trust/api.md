@@ -863,9 +863,46 @@ Methods:
 
 ### Applications
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/applications/applications.ts">ApplicationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/applications/applications.ts">ApplicationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponse</code>
+- <code title="get /accounts/{account_id}/one/applications/{slug}">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">get</a>(slug, { ...params }) -> ApplicationGetResponse</code>
+
 #### SetupFlows
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/applications/setup-flows.ts">SetupFlowListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/one/applications/{slug}/setup-flows">client.zeroTrust.casb.applications.setupFlows.<a href="./src/resources/zero-trust/casb/applications/setup-flows.ts">list</a>(slug, { ...params }) -> SetupFlowListResponse</code>
+
 ### Integrations
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/integrations.ts">IntegrationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/integrations.ts">IntegrationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/integrations.ts">IntegrationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/integrations.ts">IntegrationGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/integrations.ts">IntegrationPauseResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/integrations.ts">IntegrationResumeResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
+- <code title="patch /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">update</a>(id, { ...params }) -> IntegrationUpdateResponse</code>
+- <code title="get /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">list</a>({ ...params }) -> unknown</code>
+- <code title="delete /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">delete</a>(id, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">get</a>(id, { ...params }) -> IntegrationGetResponse</code>
+- <code title="post /accounts/{account_id}/one/integrations/{id}/pause">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">pause</a>(id, { ...params }) -> IntegrationPauseResponse</code>
+- <code title="post /accounts/{account_id}/one/integrations/{id}/resume">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">resume</a>(id, { ...params }) -> IntegrationResumeResponse</code>
 
 ## DEX
 
