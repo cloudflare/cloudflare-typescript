@@ -1,0 +1,37 @@
+stages:
+  - lint
+  - build
+  - test
+
+default:
+  image: node:20
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH !~ /^(integrated\/|stl-preview-head\/|stl-preview-base\/|generated|codegen\/)/
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH =~ /^codegen\/stl\//
+
+lint:
+  stage: lint
+  timeout: 10 minutes
+  rules:
+    - if: $CI_COMMIT_TITLE == "codegen metadata"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_MERGE_REQUEST_SOURCE_PROJECT_PATH != $CI_PROJECT_PATH
+  script:
+    - yarn install
+    - ./scripts/lint
+
+build:
+  stage: build
+  timeout: 10 minutes
+  rules:
+    - if: $CI_COMMIT_TITLE == "codegen metadata"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_MERGE_REQUEST_SOURCE_PROJECT_PATH != $CI_PROJECT_PATH
+  script:
+    - yarn install
+    - ./scripts/build

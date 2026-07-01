@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as DEXTestsAPI from '../devices/dex-tests';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, V4PagePagination, type V4PagePaginationParams } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -157,36 +158,13 @@ export namespace RuleCreateResponse {
      * The configuration object which contains the details for the WARP client to
      * conduct the test.
      */
-    data: TargetedTest.Data;
+    data: DEXTestsAPI.SchemaData;
 
     enabled: boolean;
 
     name: string;
 
     test_id: string;
-  }
-
-  export namespace TargetedTest {
-    /**
-     * The configuration object which contains the details for the WARP client to
-     * conduct the test.
-     */
-    export interface Data {
-      /**
-       * The desired endpoint to test.
-       */
-      host: string;
-
-      /**
-       * The type of test.
-       */
-      kind: 'http' | 'traceroute';
-
-      /**
-       * The HTTP request method type.
-       */
-      method?: 'GET';
-    }
   }
 }
 
@@ -215,36 +193,13 @@ export namespace RuleUpdateResponse {
      * The configuration object which contains the details for the WARP client to
      * conduct the test.
      */
-    data: TargetedTest.Data;
+    data: DEXTestsAPI.SchemaData;
 
     enabled: boolean;
 
     name: string;
 
     test_id: string;
-  }
-
-  export namespace TargetedTest {
-    /**
-     * The configuration object which contains the details for the WARP client to
-     * conduct the test.
-     */
-    export interface Data {
-      /**
-       * The desired endpoint to test.
-       */
-      host: string;
-
-      /**
-       * The type of test.
-       */
-      kind: 'http' | 'traceroute';
-
-      /**
-       * The HTTP request method type.
-       */
-      method?: 'GET';
-    }
   }
 }
 
@@ -278,36 +233,13 @@ export namespace RuleListResponse {
        * The configuration object which contains the details for the WARP client to
        * conduct the test.
        */
-      data: TargetedTest.Data;
+      data: DEXTestsAPI.SchemaData;
 
       enabled: boolean;
 
       name: string;
 
       test_id: string;
-    }
-
-    export namespace TargetedTest {
-      /**
-       * The configuration object which contains the details for the WARP client to
-       * conduct the test.
-       */
-      export interface Data {
-        /**
-         * The desired endpoint to test.
-         */
-        host: string;
-
-        /**
-         * The type of test.
-         */
-        kind: 'http' | 'traceroute';
-
-        /**
-         * The HTTP request method type.
-         */
-        method?: 'GET';
-      }
     }
   }
 }
@@ -339,36 +271,13 @@ export namespace RuleGetResponse {
      * The configuration object which contains the details for the WARP client to
      * conduct the test.
      */
-    data: TargetedTest.Data;
+    data: DEXTestsAPI.SchemaData;
 
     enabled: boolean;
 
     name: string;
 
     test_id: string;
-  }
-
-  export namespace TargetedTest {
-    /**
-     * The configuration object which contains the details for the WARP client to
-     * conduct the test.
-     */
-    export interface Data {
-      /**
-       * The desired endpoint to test.
-       */
-      host: string;
-
-      /**
-       * The type of test.
-       */
-      kind: 'http' | 'traceroute';
-
-      /**
-       * The HTTP request method type.
-       */
-      method?: 'GET';
-    }
   }
 }
 

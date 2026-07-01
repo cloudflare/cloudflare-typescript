@@ -926,6 +926,7 @@ export namespace SharedQueryGetResponse {
           | 'email'
           | 'tail'
           | 'rpc'
+          | 'jsrpc'
           | 'websocket'
           | 'workflow'
           | 'unknown';
@@ -985,6 +986,7 @@ export namespace SharedQueryGetResponse {
           | 'email'
           | 'tail'
           | 'rpc'
+          | 'jsrpc'
           | 'websocket'
           | 'workflow'
           | 'unknown';
@@ -1323,6 +1325,7 @@ export namespace SharedQueryGetResponse {
         | 'email'
         | 'tail'
         | 'rpc'
+        | 'jsrpc'
         | 'websocket'
         | 'workflow'
         | 'unknown';
@@ -1382,6 +1385,7 @@ export namespace SharedQueryGetResponse {
         | 'email'
         | 'tail'
         | 'rpc'
+        | 'jsrpc'
         | 'websocket'
         | 'workflow'
         | 'unknown';

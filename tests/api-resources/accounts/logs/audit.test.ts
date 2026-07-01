@@ -64,6 +64,7 @@ const runTests = (client: PartialCloudflare<{ accounts: { logs: { audit: BaseAud
       cursor: 'Q1buH-__DQqqig7SVYXT-SsMOTGY2Z3Y80W-fGgva7yaDdmPKveucH5ddOcHsJRhNb-xUK8agZQqkJSMAENGO8NU6g==',
       direction: 'desc',
       limit: 25,
+      product_category: ['zerotrust'],
       raw_cf_ray_id: { not: ['8e8dd2156ef28414'] },
       raw_method: { not: ['GET'] },
       raw_status_code: { not: [200] },
@@ -74,6 +75,53 @@ const runTests = (client: PartialCloudflare<{ accounts: { logs: { audit: BaseAud
       resource_type: { not: ['Video'] },
       zone_id: { not: ['string'] },
       zone_name: { not: ['example.com'] },
+    });
+  });
+
+  test('history: only required params', async () => {
+    const responsePromise = client.accounts.logs.audit.history('f174be97-19b1-40d6-954d-70cd5fbd52db', {
+      account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+      action_time: '2024-10-30T15:00:00Z',
+      before: '2024-10-31',
+      since: '2024-10-30',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('history: required and optional params', async () => {
+    const response = await client.accounts.logs.audit.history('f174be97-19b1-40d6-954d-70cd5fbd52db', {
+      account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+      action_time: '2024-10-30T15:00:00Z',
+      before: '2024-10-31',
+      since: '2024-10-30',
+      cursor: 'Q1buH-__DQqqig7SVYXT-SsMOTGY2Z3Y80W-fGgva7yaDdmPKveucH5ddOcHsJRhNb-xUK8agZQqkJSMAENGO8NU6g==',
+      direction: 'desc',
+      limit: 25,
+    });
+  });
+
+  test('productCategories: only required params', async () => {
+    const responsePromise = client.accounts.logs.audit.productCategories({
+      account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('productCategories: required and optional params', async () => {
+    const response = await client.accounts.logs.audit.productCategories({
+      account_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
     });
   });
 };

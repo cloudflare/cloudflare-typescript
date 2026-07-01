@@ -70,6 +70,34 @@ const runTests = (client: PartialCloudflare<{ organizations: { logs: { audit: Ba
       resource_type: { not: ['Video'] },
     });
   });
+
+  test('history: only required params', async () => {
+    const responsePromise = client.organizations.logs.audit.history('f174be97-19b1-40d6-954d-70cd5fbd52db', {
+      organization_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+      action_time: '2024-10-30T15:00:00Z',
+      before: '2024-10-31',
+      since: '2024-10-30',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('history: required and optional params', async () => {
+    const response = await client.organizations.logs.audit.history('f174be97-19b1-40d6-954d-70cd5fbd52db', {
+      organization_id: 'a67e14daa5f8dceeb91fe5449ba496ef',
+      action_time: '2024-10-30T15:00:00Z',
+      before: '2024-10-31',
+      since: '2024-10-30',
+      cursor: 'Q1buH-__DQqqig7SVYXT-SsMOTGY2Z3Y80W-fGgva7yaDdmPKveucH5ddOcHsJRhNb-xUK8agZQqkJSMAENGO8NU6g==',
+      direction: 'desc',
+      limit: 25,
+    });
+  });
 };
 describe('resource audit', () => runTests(client));
 describe('resource audit (tree shakable, base)', () => runTests(partialClient));
