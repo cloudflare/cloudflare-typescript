@@ -6,7 +6,7 @@ import { SinglePage } from '../../pagination';
 
 export class CustomNameservers extends APIResource {
   /**
-   * Add Account Custom Nameserver
+   * Adds a custom nameserver to the account for use as a vanity nameserver on zones.
    *
    * @example
    * ```ts
@@ -30,7 +30,7 @@ export class CustomNameservers extends APIResource {
   }
 
   /**
-   * Delete Account Custom Nameserver
+   * Removes a custom nameserver from the account.
    *
    * @example
    * ```ts
