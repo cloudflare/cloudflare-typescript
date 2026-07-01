@@ -49,6 +49,7 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
       value: 'APT28',
       activeDuration: 'activeDuration',
       actorCategory: 'Nation State',
+      actorCategoryConfidence: 7,
       aliases: [
         {
           value: 'Fancy Bear',
@@ -65,6 +66,7 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
       categoryUuid: '12345678-1234-1234-1234-1234567890ab',
       dateOfDiscovery: '2024-01-15',
       externalReferenceLinks: ['string'],
+      externalReferences: [{ url: 'https://example.com/report', description: 'Vendor threat report' }],
       internalAliases: [
         {
           value: 'Fancy Bear',
@@ -74,8 +76,11 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
       ],
       internalDescription: 'internalDescription',
       motive: 'Espionage',
+      motiveConfidence: 7,
       opsecLevel: 'opsecLevel',
+      originCountryConfidence: 7,
       originCountryISO: 'originCountryISO',
+      originCountryTlp: 'amber',
       priority: 0,
       sophisticationLevel: 'sophisticationLevel',
     });
