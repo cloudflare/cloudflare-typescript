@@ -1283,6 +1283,21 @@ export namespace LatestListResponse {
       tunnel_id: string;
 
       /**
+       * Public socket address returned by the NAT detector
+       */
+      natd_result?: string;
+
+      /**
+       * Numeric NAT detector state (0 = detected, 1 = missing result, 2 = stale result)
+       */
+      natd_state?: number;
+
+      /**
+       * Target socket address probed by the NAT detector, using the detector source port
+       */
+      natd_target?: string;
+
+      /**
        * MTU as measured between the two ends of the tunnel
        */
       probed_mtu?: number;
