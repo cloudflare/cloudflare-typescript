@@ -181,6 +181,13 @@ export interface EmailRoutingRule {
   priority?: number;
 
   /**
+   * Who manages the rule. `api` covers dashboard, generic API, and Terraform;
+   * `wrangler` means the rule is managed by a Worker's wrangler.jsonc. Defaults to
+   * `api` when omitted on write.
+   */
+  source?: 'api' | 'wrangler';
+
+  /**
    * @deprecated Routing rule tag. (Deprecated, replaced by routing rule identifier)
    */
   tag?: string;
@@ -253,9 +260,22 @@ export interface RuleCreateParams {
   name?: string;
 
   /**
+   * Body param: Public tag (script_tag) of the Worker that owns this rule. Required
+   * when `source` is `wrangler`.
+   */
+  owner_worker_tag?: string;
+
+  /**
    * Body param: Priority of the routing rule.
    */
   priority?: number;
+
+  /**
+   * Body param: Who manages the rule. `api` covers dashboard, generic API, and
+   * Terraform; `wrangler` means the rule is managed by a Worker's wrangler.jsonc.
+   * Defaults to `api` when omitted on write.
+   */
+  source?: 'api' | 'wrangler';
 }
 
 export interface RuleUpdateParams {
@@ -285,9 +305,22 @@ export interface RuleUpdateParams {
   name?: string;
 
   /**
+   * Body param: Public tag (script_tag) of the Worker that owns this rule. Required
+   * when `source` is `wrangler`.
+   */
+  owner_worker_tag?: string;
+
+  /**
    * Body param: Priority of the routing rule.
    */
   priority?: number;
+
+  /**
+   * Body param: Who manages the rule. `api` covers dashboard, generic API, and
+   * Terraform; `wrangler` means the rule is managed by a Worker's wrangler.jsonc.
+   * Defaults to `api` when omitted on write.
+   */
+  source?: 'api' | 'wrangler';
 }
 
 export interface RuleDeleteParams {

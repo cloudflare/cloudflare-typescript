@@ -165,6 +165,7 @@ export interface PhaseUpdateResponse {
     | PhaseUpdateResponse.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
+    | PhaseUpdateResponse.RulesetsTransformResponseHTMLRule
   >;
 
   /**
@@ -1314,6 +1315,151 @@ export namespace PhaseUpdateResponse {
       score_response_header_name?: string;
     }
   }
+
+  export interface RulesetsTransformResponseHTMLRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'transform_response_html';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsTransformResponseHTMLRule.ActionParameters;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsTransformResponseHTMLRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsTransformResponseHTMLRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsTransformResponseHTMLRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * Enables the link maze transformation on the response.
+       */
+      link_maze: unknown;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
 }
 
 /**
@@ -1369,6 +1515,7 @@ export interface PhaseGetResponse {
     | PhaseGetResponse.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRule
     | RulesAPI.SkipRule
+    | PhaseGetResponse.RulesetsTransformResponseHTMLRule
   >;
 
   /**
@@ -2518,6 +2665,151 @@ export namespace PhaseGetResponse {
       score_response_header_name?: string;
     }
   }
+
+  export interface RulesetsTransformResponseHTMLRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'transform_response_html';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsTransformResponseHTMLRule.ActionParameters;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsTransformResponseHTMLRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsTransformResponseHTMLRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsTransformResponseHTMLRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * Enables the link maze transformation on the response.
+       */
+      link_maze: unknown;
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
 }
 
 export interface PhaseUpdateParams {
@@ -2567,6 +2859,7 @@ export interface PhaseUpdateParams {
     | PhaseUpdateParams.RulesetsSetCacheTagsRule
     | RulesAPI.SetConfigRuleParam
     | RulesAPI.SkipRuleParam
+    | PhaseUpdateParams.RulesetsTransformResponseHTMLRule
   >;
 }
 
@@ -3578,6 +3871,136 @@ export namespace PhaseUpdateParams {
        * The operation to perform on the cache tags.
        */
       operation: 'add' | 'remove' | 'set';
+    }
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    export interface ExposedCredentialCheck {
+      /**
+       * An expression that selects the password used in the credentials check.
+       */
+      password_expression: string;
+
+      /**
+       * An expression that selects the user ID used in the credentials check.
+       */
+      username_expression: string;
+    }
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    export interface Ratelimit {
+      /**
+       * Characteristics of the request on which the rate limit counter will be
+       * incremented.
+       */
+      characteristics: Array<string>;
+
+      /**
+       * Period in seconds over which the counter is being incremented.
+       */
+      period: number;
+
+      /**
+       * An expression that defines when the rate limit counter should be incremented. It
+       * defaults to the same as the rule's expression.
+       */
+      counting_expression?: string;
+
+      /**
+       * Period of time in seconds after which the action will be disabled following its
+       * first execution.
+       */
+      mitigation_timeout?: number;
+
+      /**
+       * The threshold of requests per period after which the action will be executed for
+       * the first time.
+       */
+      requests_per_period?: number;
+
+      /**
+       * Whether counting is only performed when an origin is reached.
+       */
+      requests_to_origin?: boolean;
+
+      /**
+       * The score threshold per period for which the action will be executed the first
+       * time.
+       */
+      score_per_period?: number;
+
+      /**
+       * A response header name provided by the origin, which contains the score to
+       * increment rate limit counter with.
+       */
+      score_response_header_name?: string;
+    }
+  }
+
+  export interface RulesetsTransformResponseHTMLRule {
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'transform_response_html';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: RulesetsTransformResponseHTMLRule.ActionParameters;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Configuration for exposed credential checking.
+     */
+    exposed_credential_check?: RulesetsTransformResponseHTMLRule.ExposedCredentialCheck;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.LoggingParam;
+
+    /**
+     * An object configuring the rule's rate limit behavior.
+     */
+    ratelimit?: RulesetsTransformResponseHTMLRule.Ratelimit;
+
+    /**
+     * The reference of the rule (the rule's ID by default).
+     */
+    ref?: string;
+  }
+
+  export namespace RulesetsTransformResponseHTMLRule {
+    /**
+     * The parameters configuring the rule's action.
+     */
+    export interface ActionParameters {
+      /**
+       * Enables the link maze transformation on the response.
+       */
+      link_maze: unknown;
     }
 
     /**

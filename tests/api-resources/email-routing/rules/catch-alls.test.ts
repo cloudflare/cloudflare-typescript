@@ -32,6 +32,8 @@ describe('resource catchAlls', () => {
       matchers: [{ type: 'all' }],
       enabled: true,
       name: 'Send to user@example.net rule.',
+      owner_worker_tag: 'a7e6fb77503c41d8a7f3113c6918f10c',
+      source: 'api',
     });
   });
 

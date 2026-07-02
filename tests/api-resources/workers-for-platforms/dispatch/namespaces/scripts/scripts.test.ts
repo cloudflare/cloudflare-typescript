@@ -56,8 +56,19 @@ describe('resource scripts', () => {
             },
           ],
           body_part: 'worker.js',
+          cache_options: { enabled: true, cross_version_cache: true },
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
+          exports: {
+            Admin: {
+              type: 'worker',
+              cache: { enabled: true },
+            },
+            default: {
+              type: 'worker',
+              cache: { enabled: false },
+            },
+          },
           keep_assets: false,
           keep_bindings: ['string'],
           limits: { cpu_ms: 50, subrequests: 1000 },

@@ -143,6 +143,11 @@ export interface SubdomainCreateResponse {
   modified?: string;
 
   /**
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
+
+  /**
    * The return-path domain used for bounce handling.
    */
   return_path_domain?: string;
@@ -178,6 +183,11 @@ export interface SubdomainListResponse {
    * The date and time the destination address was last modified.
    */
   modified?: string;
+
+  /**
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
 
   /**
    * The return-path domain used for bounce handling.
@@ -260,6 +270,11 @@ export interface SubdomainGetResponse {
    * The date and time the destination address was last modified.
    */
   modified?: string;
+
+  /**
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
 
   /**
    * The return-path domain used for bounce handling.

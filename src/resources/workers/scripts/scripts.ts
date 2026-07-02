@@ -233,6 +233,13 @@ export interface Script {
   id?: string;
 
   /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  cache_options?: Script.CacheOptions;
+
+  /**
    * Date indicating targeted support in the Workers runtime. Backwards incompatible
    * fixes to the runtime following this date will not affect this Worker.
    */
@@ -352,6 +359,25 @@ export interface Script {
 }
 
 export namespace Script {
+  /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  export interface CacheOptions {
+    /**
+     * Whether caching is enabled for this Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether cached responses are shared across Worker version uploads. This is
+     * independent of `enabled`. It can stay true while caching is off, so the
+     * preference survives turning caching off and back on.
+     */
+    cross_version_cache?: boolean;
+  }
+
   export interface NamedHandler {
     /**
      * The names of handlers exported as part of the named export.
@@ -782,6 +808,13 @@ export interface ScriptUpdateResponse {
   id?: string;
 
   /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  cache_options?: ScriptUpdateResponse.CacheOptions;
+
+  /**
    * Date indicating targeted support in the Workers runtime. Backwards incompatible
    * fixes to the runtime following this date will not affect this Worker.
    */
@@ -903,6 +936,25 @@ export interface ScriptUpdateResponse {
 }
 
 export namespace ScriptUpdateResponse {
+  /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  export interface CacheOptions {
+    /**
+     * Whether caching is enabled for this Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether cached responses are shared across Worker version uploads. This is
+     * independent of `enabled`. It can stay true while caching is off, so the
+     * preference survives turning caching off and back on.
+     */
+    cross_version_cache?: boolean;
+  }
+
   export interface NamedHandler {
     /**
      * The names of handlers exported as part of the named export.
@@ -1213,6 +1265,13 @@ export interface ScriptListResponse {
   id?: string;
 
   /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  cache_options?: ScriptListResponse.CacheOptions;
+
+  /**
    * Date indicating targeted support in the Workers runtime. Backwards incompatible
    * fixes to the runtime following this date will not affect this Worker.
    */
@@ -1334,6 +1393,25 @@ export interface ScriptListResponse {
 }
 
 export namespace ScriptListResponse {
+  /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  export interface CacheOptions {
+    /**
+     * Whether caching is enabled for this Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether cached responses are shared across Worker version uploads. This is
+     * independent of `enabled`. It can stay true while caching is off, so the
+     * preference survives turning caching off and back on.
+     */
+    cross_version_cache?: boolean;
+  }
+
   export interface NamedHandler {
     /**
      * The names of handlers exported as part of the named export.
@@ -1796,6 +1874,13 @@ export namespace ScriptUpdateParams {
     body_part?: string;
 
     /**
+     * Global CacheW configuration for the Worker. When caching is on, the platform
+     * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+     * `exports` map can override this value for a single entrypoint.
+     */
+    cache_options?: Metadata.CacheOptions;
+
+    /**
      * Date indicating targeted support in the Workers runtime. Backwards incompatible
      * fixes to the runtime following this date will not affect this Worker.
      */
@@ -1807,6 +1892,12 @@ export namespace ScriptUpdateParams {
      * `compatibility_date`.
      */
     compatibility_flags?: Array<string>;
+
+    /**
+     * Declarative exports for the Worker. Worker entrypoint entries (`type: worker`)
+     * carry cache configuration for that entrypoint.
+     */
+    exports?: { [key: string]: Metadata.Exports };
 
     /**
      * Retain assets which exist for a previously uploaded Worker version; used in lieu
@@ -2728,6 +2819,58 @@ export namespace ScriptUpdateParams {
        * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
        */
       tunnel_id?: string;
+    }
+
+    /**
+     * Global CacheW configuration for the Worker. When caching is on, the platform
+     * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+     * `exports` map can override this value for a single entrypoint.
+     */
+    export interface CacheOptions {
+      /**
+       * Whether caching is enabled for this Worker.
+       */
+      enabled: boolean;
+
+      /**
+       * Whether cached responses are shared across Worker version uploads. This is
+       * independent of `enabled`. It can stay true while caching is off, so the
+       * preference survives turning caching off and back on.
+       */
+      cross_version_cache?: boolean;
+    }
+
+    /**
+     * A single entry in the `exports` map, keyed by export name (a `WorkerEntrypoint`
+     * class name, a Durable Object class name, or `default` for the Worker's default
+     * export). Worker entrypoint entries set `type: worker` and may carry `cache`
+     * configuration for that entrypoint. Durable Object entries set
+     * `type: durable-object` and carry additional provisioning fields.
+     */
+    export interface Exports {
+      /**
+       * The kind of export.
+       */
+      type: 'worker' | 'durable-object';
+
+      /**
+       * Cache override for this entrypoint. It applies only to `type: worker` entries
+       * and overrides the Worker's global `cache_options.enabled` for that entrypoint.
+       */
+      cache?: Exports.Cache;
+    }
+
+    export namespace Exports {
+      /**
+       * Cache override for this entrypoint. It applies only to `type: worker` entries
+       * and overrides the Worker's global `cache_options.enabled` for that entrypoint.
+       */
+      export interface Cache {
+        /**
+         * Whether caching is enabled for this entrypoint.
+         */
+        enabled: boolean;
+      }
     }
 
     /**

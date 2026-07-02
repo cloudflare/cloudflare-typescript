@@ -199,6 +199,13 @@ export interface Version {
   >;
 
   /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  cache_options?: Version.CacheOptions;
+
+  /**
    * Date indicating targeted support in the Workers runtime. Backwards incompatible
    * fixes to the runtime following this date will not affect this Worker.
    */
@@ -1115,6 +1122,25 @@ export namespace Version {
   }
 
   /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  export interface CacheOptions {
+    /**
+     * Whether caching is enabled for this Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether cached responses are shared across Worker version uploads. This is
+     * independent of `enabled`. It can stay true while caching is off, so the
+     * preference survives turning caching off and back on.
+     */
+    cross_version_cache?: boolean;
+  }
+
+  /**
    * Container configuration for a Worker.
    */
   export interface Container {
@@ -1391,6 +1417,13 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindVPCService
     | VersionCreateParams.WorkersBindingKindVPCNetwork
   >;
+
+  /**
+   * Body param: Global CacheW configuration for the Worker. When caching is on, the
+   * platform provisions a `cloudflare.app` zone for the Worker. A `type: worker`
+   * entry in the `exports` map can override this value for a single entrypoint.
+   */
+  cache_options?: VersionCreateParams.CacheOptions;
 
   /**
    * Body param: Date indicating targeted support in the Workers runtime. Backwards
@@ -2302,6 +2335,25 @@ export namespace VersionCreateParams {
      * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
      */
     tunnel_id?: string;
+  }
+
+  /**
+   * Global CacheW configuration for the Worker. When caching is on, the platform
+   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
+   * `exports` map can override this value for a single entrypoint.
+   */
+  export interface CacheOptions {
+    /**
+     * Whether caching is enabled for this Worker.
+     */
+    enabled: boolean;
+
+    /**
+     * Whether cached responses are shared across Worker version uploads. This is
+     * independent of `enabled`. It can stay true while caching is off, so the
+     * preference survives turning caching off and back on.
+     */
+    cross_version_cache?: boolean;
   }
 
   /**

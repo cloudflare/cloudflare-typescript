@@ -43,6 +43,7 @@ describe('resource versions', () => {
           type: 'plain_text',
         },
       ],
+      cache_options: { enabled: true, cross_version_cache: true },
       compatibility_date: '2021-01-01',
       compatibility_flags: ['nodejs_compat'],
       containers: [{ class_name: 'MyDurableObject' }],
