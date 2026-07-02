@@ -491,6 +491,14 @@ export namespace InstanceCreateResponse {
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
 
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -862,6 +870,14 @@ export namespace InstanceUpdateResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -1235,6 +1251,14 @@ export namespace InstanceListResponse {
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
 
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -1606,6 +1630,14 @@ export namespace InstanceDeleteResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -2068,6 +2100,14 @@ export namespace InstanceReadResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -2618,6 +2658,14 @@ export namespace InstanceCreateParams {
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
 
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -3093,6 +3141,14 @@ export namespace InstanceUpdateParams {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
+
+    /**
+     * Custom domain hostnames that alias this public endpoint. GET and create
+     * responses return the current set; on update (PUT) this field is only echoed back
+     * when supplied in the request body, otherwise it is null (omit it to leave
+     * domains unchanged).
+     */
+    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
