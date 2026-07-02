@@ -118,8 +118,7 @@ export interface InvestigateListResponse {
   id: string;
 
   /**
-   * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-   * instead. End of life: November 1, 2026.
+   * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
    */
   action_log: Array<InvestigateListResponse.ActionLog>;
 
@@ -142,7 +141,7 @@ export interface InvestigateListResponse {
   properties: InvestigateListResponse.Properties;
 
   /**
-   * @deprecated Deprecated, use `scanned_at` instead. End of life: November 1, 2026.
+   * @deprecated Use `scanned_at` instead.
    */
   ts: string;
 
@@ -184,9 +183,8 @@ export interface InvestigateListResponse {
     | 'NONE';
 
   /**
-   * @deprecated Deprecated, use the `findings` field from
-   * `GET /investigate/{investigate_id}/detections` instead. End of life: November
-   * 1, 2026. Detection findings for this message.
+   * @deprecated Use the `findings` field from GET
+   * /investigate/{investigate_id}/detections instead.
    */
   findings?: Array<InvestigateListResponse.Finding> | null;
 
@@ -249,8 +247,7 @@ export namespace InvestigateListResponse {
     operation: 'MOVE' | 'RELEASE' | 'RECLASSIFY' | 'SUBMISSION' | 'QUARANTINE_RELEASE' | 'PREVIEW';
 
     /**
-     * @deprecated Deprecated, use `completed_at` instead. End of life: November
-     * 1, 2026.
+     * @deprecated Use `completed_at` instead.
      */
     completed_timestamp?: string;
 
@@ -378,8 +375,7 @@ export interface InvestigateGetResponse {
   id: string;
 
   /**
-   * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-   * instead. End of life: November 1, 2026.
+   * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
    */
   action_log: Array<InvestigateGetResponse.ActionLog>;
 
@@ -402,7 +398,7 @@ export interface InvestigateGetResponse {
   properties: InvestigateGetResponse.Properties;
 
   /**
-   * @deprecated Deprecated, use `scanned_at` instead. End of life: November 1, 2026.
+   * @deprecated Use `scanned_at` instead.
    */
   ts: string;
 
@@ -444,9 +440,8 @@ export interface InvestigateGetResponse {
     | 'NONE';
 
   /**
-   * @deprecated Deprecated, use the `findings` field from
-   * `GET /investigate/{investigate_id}/detections` instead. End of life: November
-   * 1, 2026. Detection findings for this message.
+   * @deprecated Use the `findings` field from GET
+   * /investigate/{investigate_id}/detections instead.
    */
   findings?: Array<InvestigateGetResponse.Finding> | null;
 
@@ -509,8 +504,7 @@ export namespace InvestigateGetResponse {
     operation: 'MOVE' | 'RELEASE' | 'RECLASSIFY' | 'SUBMISSION' | 'QUARANTINE_RELEASE' | 'PREVIEW';
 
     /**
-     * @deprecated Deprecated, use `completed_at` instead. End of life: November
-     * 1, 2026.
+     * @deprecated Use `completed_at` instead.
      */
     completed_timestamp?: string;
 

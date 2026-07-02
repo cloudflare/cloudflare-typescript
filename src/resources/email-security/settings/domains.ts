@@ -158,8 +158,7 @@ export interface DomainListResponse {
   ip_restrictions?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -247,8 +246,7 @@ export interface DomainEditResponse {
   ip_restrictions?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -329,8 +327,7 @@ export interface DomainGetResponse {
   ip_restrictions?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 

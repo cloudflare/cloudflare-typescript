@@ -92,8 +92,7 @@ export namespace CancelCreateResponse {
 
   export interface SearchParams {
     /**
-     * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-     * instead. End of life: November 1, 2026.
+     * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
      */
     action_log?: boolean;
 

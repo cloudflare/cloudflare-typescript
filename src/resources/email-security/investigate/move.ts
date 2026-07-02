@@ -84,8 +84,7 @@ export interface MoveCreateResponse {
   completed_at?: string | null;
 
   /**
-   * @deprecated Deprecated, use `completed_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `completed_at` instead.
    */
   completed_timestamp?: string;
 
@@ -95,7 +94,7 @@ export interface MoveCreateResponse {
   destination?: string | null;
 
   /**
-   * @deprecated Number of items moved. End of life: November 1, 2026.
+   * @deprecated This field is deprecated.
    */
   item_count?: number;
 
@@ -132,8 +131,7 @@ export interface MoveBulkResponse {
   completed_at?: string | null;
 
   /**
-   * @deprecated Deprecated, use `completed_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `completed_at` instead.
    */
   completed_timestamp?: string;
 
@@ -143,7 +141,7 @@ export interface MoveBulkResponse {
   destination?: string | null;
 
   /**
-   * @deprecated Number of items moved. End of life: November 1, 2026.
+   * @deprecated This field is deprecated.
    */
   item_count?: number;
 
@@ -237,8 +235,7 @@ export interface MoveBulkParams {
   ids?: Array<string>;
 
   /**
-   * @deprecated Body param: Deprecated, use `ids` instead. End of life: November
-   * 1, 2026. List of message IDs to move.
+   * @deprecated Use `ids` instead.
    */
   postfix_ids?: Array<string>;
 }

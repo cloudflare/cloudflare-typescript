@@ -176,8 +176,7 @@ export interface TrustedDomainCreateResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -214,8 +213,7 @@ export interface TrustedDomainListResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -259,8 +257,7 @@ export interface TrustedDomainEditResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -297,8 +294,7 @@ export interface TrustedDomainGetResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 

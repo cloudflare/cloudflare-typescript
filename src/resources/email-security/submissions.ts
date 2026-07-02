@@ -71,7 +71,7 @@ export interface SubmissionListResponse {
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
   /**
-   * @deprecated Deprecated, use `requested_at` instead
+   * @deprecated Use `requested_at` instead.
    */
   requested_ts?: string;
 
