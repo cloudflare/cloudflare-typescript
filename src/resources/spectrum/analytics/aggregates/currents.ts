@@ -29,22 +29,22 @@ export namespace CurrentGetResponse {
     appID: string;
 
     /**
-     * Number of bytes sent
+     * Number of bytes sent.
      */
     bytesEgress: number;
 
     /**
-     * Number of bytes received
+     * Number of bytes received.
      */
     bytesIngress: number;
 
     /**
-     * Number of connections
+     * Number of connections.
      */
     connections: number;
 
     /**
-     * Average duration of connections
+     * Average duration of connections.
      */
     durationAvg: number;
   }

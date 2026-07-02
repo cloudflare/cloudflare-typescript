@@ -54,7 +54,7 @@ export interface BytimeGetResponse {
   totals: { [key: string]: number };
 
   /**
-   * List of time interval buckets: [start, end]
+   * List of time interval buckets: [start, end].
    */
   time_intervals?: Array<Array<string>>;
 }
@@ -95,6 +95,8 @@ export namespace BytimeGetResponse {
      * | \<       | Less Than                | %3C         |
      * | \>=      | Greater than or equal to | %3E%3D      |
      * | \<=      | Less than or equal to    | %3C%3D      |
+     *
+     * Use the above to construct filters.
      */
     filters?: string;
 
@@ -187,6 +189,8 @@ export interface BytimeGetParams {
    * | \<       | Less Than                | %3C         |
    * | \>=      | Greater than or equal to | %3E%3D      |
    * | \<=      | Less than or equal to    | %3C%3D      |
+   *
+   * Use the above to construct filters.
    */
   filters?: string;
 
