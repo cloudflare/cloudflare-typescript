@@ -26,6 +26,7 @@ describe('resource browser', () => {
       account_id: 'account_id',
       keep_alive: 10000,
       lab: true,
+      liveViewUrlExpiresInMs: 60000,
       recording: true,
       targets: true,
     });
