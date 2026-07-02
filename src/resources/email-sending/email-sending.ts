@@ -142,15 +142,22 @@ export interface EmailSendingSendParams {
   >;
 
   /**
-   * Body param: BCC recipient(s). A single email string or an array of email
-   * strings.
+   * Body param: BCC recipient(s). A single email string, a named address object, or
+   * an array of either.
    */
-  bcc?: string | Array<string>;
+  bcc?:
+    | string
+    | EmailSendingSendParams.EmailSendingEmailAddressObject
+    | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
 
   /**
-   * Body param: CC recipient(s). A single email string or an array of email strings.
+   * Body param: CC recipient(s). A single email string, a named address object, or
+   * an array of either.
    */
-  cc?: string | Array<string>;
+  cc?:
+    | string
+    | EmailSendingSendParams.EmailSendingEmailAddressObject
+    | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
 
   /**
    * Body param: Custom email headers as key-value pairs.
@@ -177,9 +184,12 @@ export interface EmailSendingSendParams {
 
   /**
    * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
-   * string or an array of email strings.
+   * string, a named address object, or an array of either.
    */
-  to?: string | Array<string>;
+  to?:
+    | string
+    | EmailSendingSendParams.EmailSendingEmailAddressObject
+    | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
 }
 
 export namespace EmailSendingSendParams {
@@ -190,9 +200,10 @@ export namespace EmailSendingSendParams {
     address: string;
 
     /**
-     * Display name for the email address (e.g., 'John Doe').
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
      */
-    name: string;
+    name?: string | null;
   }
 
   export interface EmailSendingEmailInlineAttachment {
@@ -252,9 +263,88 @@ export namespace EmailSendingSendParams {
     address: string;
 
     /**
-     * Display name for the email address (e.g., 'John Doe').
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
      */
-    name: string;
+    name?: string | null;
+  }
+
+  export interface EmailSendingEmailAddressObject {
+    /**
+     * Email address (e.g., 'user@example.com').
+     */
+    address: string;
+
+    /**
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
+     */
+    name?: string | null;
+  }
+
+  export interface EmailSendingEmailAddressObject {
+    /**
+     * Email address (e.g., 'user@example.com').
+     */
+    address: string;
+
+    /**
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
+     */
+    name?: string | null;
+  }
+
+  export interface EmailSendingEmailAddressObject {
+    /**
+     * Email address (e.g., 'user@example.com').
+     */
+    address: string;
+
+    /**
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
+     */
+    name?: string | null;
+  }
+
+  export interface EmailSendingEmailAddressObject {
+    /**
+     * Email address (e.g., 'user@example.com').
+     */
+    address: string;
+
+    /**
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
+     */
+    name?: string | null;
+  }
+
+  export interface EmailSendingEmailAddressObject {
+    /**
+     * Email address (e.g., 'user@example.com').
+     */
+    address: string;
+
+    /**
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
+     */
+    name?: string | null;
+  }
+
+  export interface EmailSendingEmailAddressObject {
+    /**
+     * Email address (e.g., 'user@example.com').
+     */
+    address: string;
+
+    /**
+     * Display name for the email address (e.g., 'John Doe'). Optional — omit or set to
+     * null for no display name.
+     */
+    name?: string | null;
   }
 }
 
