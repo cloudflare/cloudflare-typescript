@@ -26,10 +26,10 @@ export class BaseTargets extends APIResource {
     params: TargetCreateParams,
     options?: RequestOptions,
   ): APIPromise<TargetCreateResponse> {
-    const { account_id, url } = params;
+    const { account_id, liveViewUrlExpiresInMs, url } = params;
     return this._client.put(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/new`,
-      { query: { url }, ...options },
+      { query: { liveViewUrlExpiresInMs, url }, ...options },
     );
   }
 
@@ -51,10 +51,10 @@ export class BaseTargets extends APIResource {
     params: TargetListParams,
     options?: RequestOptions,
   ): APIPromise<TargetListResponse> {
-    const { account_id } = params;
+    const { account_id, ...query } = params;
     return this._client.get(
       path`/accounts/${account_id}/browser-rendering/devtools/browser/${sessionID}/json/list`,
-      options,
+      { query, ...options },
     );
   }
 
@@ -274,6 +274,12 @@ export interface TargetCreateParams {
   account_id: string;
 
   /**
+   * Query param: How long the live view URL remains valid, in milliseconds (max 60
+   * minutes)
+   */
+  liveViewUrlExpiresInMs?: number;
+
+  /**
    * Query param
    */
   url?: string;
@@ -281,9 +287,15 @@ export interface TargetCreateParams {
 
 export interface TargetListParams {
   /**
-   * Account ID.
+   * Path param: Account ID.
    */
   account_id: string;
+
+  /**
+   * Query param: How long the live view URLs remain valid, in milliseconds (max 60
+   * minutes)
+   */
+  liveViewUrlExpiresInMs?: number;
 }
 
 export interface TargetActivateParams {
