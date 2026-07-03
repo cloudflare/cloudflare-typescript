@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class Devices extends APIResource {
   /**
-   * List details for devices using WARP.
+   * List details of devices using WARP.
    *
    * @example
    * ```ts
