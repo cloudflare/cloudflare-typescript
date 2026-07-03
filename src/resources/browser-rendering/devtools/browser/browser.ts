@@ -24,7 +24,7 @@ export class Browser extends APIResource {
   targets: TargetsAPI.Targets = new TargetsAPI.Targets(this._client);
 
   /**
-   * Get a browser session ID.
+   * Acquires a browser and returns its session ID and websocket URL.
    *
    * @example
    * ```ts
