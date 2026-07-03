@@ -31,7 +31,7 @@ export class BaseBrowser extends APIResource {
   ] as const);
 
   /**
-   * Get a browser session ID.
+   * Acquires a browser and returns its session ID and websocket URL.
    *
    * @example
    * ```ts
