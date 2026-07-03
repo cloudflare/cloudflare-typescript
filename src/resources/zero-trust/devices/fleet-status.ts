@@ -13,8 +13,7 @@ export class BaseFleetStatus extends APIResource {
   ] as const);
 
   /**
-   * Get the live status of a latest device given device_id from the device_state
-   * table
+   * Get the latest status of a device given device_id from the device_state table.
    *
    * @example
    * ```ts
