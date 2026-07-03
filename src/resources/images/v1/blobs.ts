@@ -6,8 +6,9 @@ import { type Response } from '../../../_shims/index';
 
 export class Blobs extends APIResource {
   /**
-   * Fetch base image. For most images this will be the originally uploaded file. For
-   * larger images it can be a near-lossless version of the original.
+   * Download an image from CF Images. For most images this will be the originally
+   * uploaded file. For larger images it can be a near-lossless version of the
+   * original.
    *
    * @example
    * ```ts

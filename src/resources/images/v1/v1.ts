@@ -40,9 +40,9 @@ export class V1 extends APIResource {
   blobs: BlobsAPI.Blobs = new BlobsAPI.Blobs(this._client);
 
   /**
-   * Upload an image with up to 10 Megabytes using a single HTTP POST
-   * (multipart/form-data) request. An image can be uploaded by sending an image file
-   * or passing an accessible to an API url.
+   * Upload an image to CF Images. Images up to 10 Megabytes can be uploaded using a
+   * single HTTP POST (multipart/form-data) request by sending an image file or
+   * passing a URL accessible to the API.
    *
    * @example
    * ```ts
@@ -103,8 +103,8 @@ export class V1 extends APIResource {
   }
 
   /**
-   * Update image access control. On access control change, all copies of the image
-   * are purged from cache.
+   * Update a CF Images image's metadata, creator, or access control. On access
+   * control change, all copies of the image are purged from cache.
    *
    * @example
    * ```ts
@@ -124,7 +124,7 @@ export class V1 extends APIResource {
   }
 
   /**
-   * Fetch details for a single image.
+   * Fetch details for a CF Images image.
    *
    * @example
    * ```ts

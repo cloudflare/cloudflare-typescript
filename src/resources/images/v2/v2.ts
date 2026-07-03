@@ -10,9 +10,9 @@ export class V2 extends APIResource {
   directUploads: DirectUploadsAPI.DirectUploads = new DirectUploadsAPI.DirectUploads(this._client);
 
   /**
-   * List up to 10000 images with up to 1000 results per page. Use the optional
-   * parameters below to get a specific range of images. Pagination is supported via
-   * continuation_token.
+   * List up to 10000 images from CF Images, with up to 1000 results per page. Use
+   * the optional parameters below to get a specific range of images. Pagination is
+   * supported via continuation_token.
    *
    * **Metadata Filtering (Optional):**
    *
