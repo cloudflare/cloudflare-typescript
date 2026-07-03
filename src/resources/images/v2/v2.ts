@@ -17,9 +17,9 @@ export class BaseV2 extends APIResource {
   static override readonly _key: readonly ['images', 'v2'] = Object.freeze(['images', 'v2'] as const);
 
   /**
-   * List up to 10000 images with up to 1000 results per page. Use the optional
-   * parameters below to get a specific range of images. Pagination is supported via
-   * continuation_token.
+   * List up to 10000 images from CF Images, with up to 1000 results per page. Use
+   * the optional parameters below to get a specific range of images. Pagination is
+   * supported via continuation_token.
    *
    * **Metadata Filtering (Optional):**
    *
