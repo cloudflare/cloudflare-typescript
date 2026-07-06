@@ -51,6 +51,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
       name: 'example.com',
       ttl: 3600,
       type: 'A',
+      include_shadow_metadata: true,
       comment: 'Domain verification record',
       content: '198.51.100.4',
       private_routing: true,
@@ -84,6 +85,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
       name: 'example.com',
       ttl: 3600,
       type: 'A',
+      include_shadow_metadata: true,
       comment: 'Domain verification record',
       content: '198.51.100.4',
       private_routing: true,
@@ -124,6 +126,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
         startswith: '127.0.',
       },
       direction: 'asc',
+      include_shadow_metadata: true,
       match: 'any',
       name: {
         contains: 'w.example.',
@@ -136,6 +139,8 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
       per_page: 5,
       proxied: true,
       search: 'www.cloudflare.com',
+      shadowed_by_name: 'sub.example.com',
+      shadowing_name: 'www.sub.example.com',
       tag: {
         absent: 'important',
         contains: 'greeting:ello, worl',
@@ -184,6 +189,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
   test.skip('batch: required and optional params', async () => {
     const response = await client.dns.records.batch({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      include_shadow_metadata: true,
       deletes: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
       patches: [
         {
@@ -253,6 +259,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
       name: 'example.com',
       ttl: 3600,
       type: 'A',
+      include_shadow_metadata: true,
       comment: 'Domain verification record',
       content: '198.51.100.4',
       private_routing: true,
@@ -295,6 +302,7 @@ const runTests = (client: PartialCloudflare<{ dns: { records: BaseRecords } }>) 
   test.skip('get: required and optional params', async () => {
     const response = await client.dns.records.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      include_shadow_metadata: true,
     });
   });
 
