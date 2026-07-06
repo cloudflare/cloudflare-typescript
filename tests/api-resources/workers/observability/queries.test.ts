@@ -64,7 +64,7 @@ const runTests = (client: PartialCloudflare<{ workers: { observability: { querie
         filters: [
           {
             filterCombination: 'and',
-            filters: [],
+            filters: [{}],
             kind: 'group',
           },
         ],
