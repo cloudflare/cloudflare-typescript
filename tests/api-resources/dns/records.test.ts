@@ -34,6 +34,7 @@ describe('resource records', () => {
       name: 'example.com',
       ttl: 3600,
       type: 'A',
+      include_shadow_metadata: true,
       comment: 'Domain verification record',
       content: '198.51.100.4',
       private_routing: true,
@@ -67,6 +68,7 @@ describe('resource records', () => {
       name: 'example.com',
       ttl: 3600,
       type: 'A',
+      include_shadow_metadata: true,
       comment: 'Domain verification record',
       content: '198.51.100.4',
       private_routing: true,
@@ -107,6 +109,7 @@ describe('resource records', () => {
         startswith: '127.0.',
       },
       direction: 'asc',
+      include_shadow_metadata: true,
       match: 'any',
       name: {
         contains: 'w.example.',
@@ -119,6 +122,8 @@ describe('resource records', () => {
       per_page: 5,
       proxied: true,
       search: 'www.cloudflare.com',
+      shadowed_by_name: 'sub.example.com',
+      shadowing_name: 'www.sub.example.com',
       tag: {
         absent: 'important',
         contains: 'greeting:ello, worl',
@@ -167,6 +172,7 @@ describe('resource records', () => {
   test.skip('batch: required and optional params', async () => {
     const response = await client.dns.records.batch({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      include_shadow_metadata: true,
       deletes: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
       patches: [
         {
@@ -236,6 +242,7 @@ describe('resource records', () => {
       name: 'example.com',
       ttl: 3600,
       type: 'A',
+      include_shadow_metadata: true,
       comment: 'Domain verification record',
       content: '198.51.100.4',
       private_routing: true,
@@ -278,6 +285,7 @@ describe('resource records', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.dns.records.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      include_shadow_metadata: true,
     });
   });
 

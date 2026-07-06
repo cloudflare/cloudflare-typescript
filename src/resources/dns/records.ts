@@ -28,11 +28,13 @@ export class Records extends APIResource {
    * ```
    */
   create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<RecordResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, include_shadow_metadata, ...body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
-        result: RecordResponse;
-      }>
+      this._client.post(`/zones/${zone_id}/dns_records`, {
+        query: { include_shadow_metadata },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RecordResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -64,9 +66,10 @@ export class Records extends APIResource {
     params: RecordUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, include_shadow_metadata, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
+        query: { include_shadow_metadata },
         body,
         ...options,
       }) as Core.APIPromise<{ result: RecordResponse }>
@@ -148,11 +151,13 @@ export class Records extends APIResource {
    * ```
    */
   batch(params: RecordBatchParams, options?: Core.RequestOptions): Core.APIPromise<RecordBatchResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, include_shadow_metadata, ...body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/dns_records/batch`, { body, ...options }) as Core.APIPromise<{
-        result: RecordBatchResponse;
-      }>
+      this._client.post(`/zones/${zone_id}/dns_records/batch`, {
+        query: { include_shadow_metadata },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RecordBatchResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -184,9 +189,10 @@ export class Records extends APIResource {
     params: RecordEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, include_shadow_metadata, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
+        query: { include_shadow_metadata },
         body,
         ...options,
       }) as Core.APIPromise<{ result: RecordResponse }>
@@ -233,11 +239,12 @@ export class Records extends APIResource {
     params: RecordGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RecordResponse> {
-    const { zone_id } = params;
+    const { zone_id, ...query } = params;
     return (
-      this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
-        result: RecordResponse;
-      }>
+      this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: RecordResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -3723,30 +3730,30 @@ export namespace Record {
 }
 
 export type RecordResponse =
-  | RecordResponse.A
-  | RecordResponse.AAAA
-  | RecordResponse.CNAME
-  | RecordResponse.MX
-  | RecordResponse.NS
-  | RecordResponse.Openpgpkey
-  | RecordResponse.PTR
-  | RecordResponse.TXT
-  | RecordResponse.CAA
-  | RecordResponse.CERT
-  | RecordResponse.DNSKEY
-  | RecordResponse.DS
-  | RecordResponse.HTTPS
-  | RecordResponse.LOC
-  | RecordResponse.NAPTR
-  | RecordResponse.SMIMEA
-  | RecordResponse.SRV
-  | RecordResponse.SSHFP
-  | RecordResponse.SVCB
-  | RecordResponse.TLSA
-  | RecordResponse.URI;
+  | RecordResponse.ARecord
+  | RecordResponse.AAAARecord
+  | RecordResponse.CNAMERecord
+  | RecordResponse.MXRecord
+  | RecordResponse.NSRecord
+  | RecordResponse.OpenpgpkeyRecord
+  | RecordResponse.PTRRecord
+  | RecordResponse.TXTRecord
+  | RecordResponse.CAARecord
+  | RecordResponse.CERTRecord
+  | RecordResponse.DNSKEYRecord
+  | RecordResponse.DSRecord
+  | RecordResponse.HTTPSRecord
+  | RecordResponse.LOCRecord
+  | RecordResponse.NAPTRRecord
+  | RecordResponse.SMIMEARecord
+  | RecordResponse.SRVRecord
+  | RecordResponse.SSHFPRecord
+  | RecordResponse.SVCBRecord
+  | RecordResponse.TLSARecord
+  | RecordResponse.URIRecord;
 
 export namespace RecordResponse {
-  export interface A extends RecordsAPI.ARecord {
+  export interface ARecord extends RecordsAPI.ARecord {
     /**
      * Identifier.
      */
@@ -3758,9 +3765,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: ARecord.Meta;
 
     /**
      * When the record was last modified.
@@ -3783,7 +3790,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface AAAA extends RecordsAPI.AAAARecord {
+  export namespace ARecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface AAAARecord extends RecordsAPI.AAAARecord {
     /**
      * Identifier.
      */
@@ -3795,9 +3835,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: AAAARecord.Meta;
 
     /**
      * When the record was last modified.
@@ -3820,7 +3860,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CNAME extends RecordsAPI.CNAMERecord {
+  export namespace AAAARecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface CNAMERecord extends RecordsAPI.CNAMERecord {
     /**
      * Identifier.
      */
@@ -3832,9 +3905,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: CNAMERecord.Meta;
 
     /**
      * When the record was last modified.
@@ -3857,7 +3930,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface MX extends RecordsAPI.MXRecord {
+  export namespace CNAMERecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface MXRecord extends RecordsAPI.MXRecord {
     /**
      * Identifier.
      */
@@ -3869,9 +3975,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: MXRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -3894,7 +4000,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface NS extends RecordsAPI.NSRecord {
+  export namespace MXRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface NSRecord extends RecordsAPI.NSRecord {
     /**
      * Identifier.
      */
@@ -3906,9 +4045,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: NSRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -3931,7 +4070,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface Openpgpkey {
+  export namespace NSRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface OpenpgpkeyRecord {
     /**
      * Identifier.
      */
@@ -3954,9 +4126,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: OpenpgpkeyRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -3982,7 +4154,7 @@ export namespace RecordResponse {
     /**
      * Settings for the DNS record.
      */
-    settings: Openpgpkey.Settings;
+    settings: OpenpgpkeyRecord.Settings;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -4012,7 +4184,38 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export namespace Openpgpkey {
+  export namespace OpenpgpkeyRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+
     /**
      * Settings for the DNS record.
      */
@@ -4035,7 +4238,7 @@ export namespace RecordResponse {
     }
   }
 
-  export interface PTR extends RecordsAPI.PTRRecord {
+  export interface PTRRecord extends RecordsAPI.PTRRecord {
     /**
      * Identifier.
      */
@@ -4047,9 +4250,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: PTRRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4072,7 +4275,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface TXT extends RecordsAPI.TXTRecord {
+  export namespace PTRRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface TXTRecord extends RecordsAPI.TXTRecord {
     /**
      * Identifier.
      */
@@ -4084,9 +4320,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: TXTRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4109,7 +4345,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CAA extends RecordsAPI.CAARecord {
+  export namespace TXTRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface CAARecord extends RecordsAPI.CAARecord {
     /**
      * Identifier.
      */
@@ -4121,9 +4390,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: CAARecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4146,7 +4415,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface CERT extends RecordsAPI.CERTRecord {
+  export namespace CAARecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface CERTRecord extends RecordsAPI.CERTRecord {
     /**
      * Identifier.
      */
@@ -4158,9 +4460,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: CERTRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4183,7 +4485,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface DNSKEY extends RecordsAPI.DNSKEYRecord {
+  export namespace CERTRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface DNSKEYRecord extends RecordsAPI.DNSKEYRecord {
     /**
      * Identifier.
      */
@@ -4195,9 +4530,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: DNSKEYRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4220,7 +4555,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface DS extends RecordsAPI.DSRecord {
+  export namespace DNSKEYRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface DSRecord extends RecordsAPI.DSRecord {
     /**
      * Identifier.
      */
@@ -4232,9 +4600,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: DSRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4257,7 +4625,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface HTTPS extends RecordsAPI.HTTPSRecord {
+  export namespace DSRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface HTTPSRecord extends RecordsAPI.HTTPSRecord {
     /**
      * Identifier.
      */
@@ -4269,9 +4670,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: HTTPSRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4294,7 +4695,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface LOC extends RecordsAPI.LOCRecord {
+  export namespace HTTPSRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface LOCRecord extends RecordsAPI.LOCRecord {
     /**
      * Identifier.
      */
@@ -4306,9 +4740,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: LOCRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4331,7 +4765,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface NAPTR extends RecordsAPI.NAPTRRecord {
+  export namespace LOCRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface NAPTRRecord extends RecordsAPI.NAPTRRecord {
     /**
      * Identifier.
      */
@@ -4343,9 +4810,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: NAPTRRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4368,7 +4835,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SMIMEA extends RecordsAPI.SMIMEARecord {
+  export namespace NAPTRRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface SMIMEARecord extends RecordsAPI.SMIMEARecord {
     /**
      * Identifier.
      */
@@ -4380,9 +4880,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: SMIMEARecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4405,7 +4905,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SRV extends RecordsAPI.SRVRecord {
+  export namespace SMIMEARecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface SRVRecord extends RecordsAPI.SRVRecord {
     /**
      * Identifier.
      */
@@ -4417,9 +4950,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: SRVRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4442,7 +4975,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SSHFP extends RecordsAPI.SSHFPRecord {
+  export namespace SRVRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface SSHFPRecord extends RecordsAPI.SSHFPRecord {
     /**
      * Identifier.
      */
@@ -4454,9 +5020,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: SSHFPRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4479,7 +5045,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface SVCB extends RecordsAPI.SVCBRecord {
+  export namespace SSHFPRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface SVCBRecord extends RecordsAPI.SVCBRecord {
     /**
      * Identifier.
      */
@@ -4491,9 +5090,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: SVCBRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4516,7 +5115,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface TLSA extends RecordsAPI.TLSARecord {
+  export namespace SVCBRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface TLSARecord extends RecordsAPI.TLSARecord {
     /**
      * Identifier.
      */
@@ -4528,9 +5160,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: TLSARecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4553,7 +5185,40 @@ export namespace RecordResponse {
     tags_modified_on?: string;
   }
 
-  export interface URI extends RecordsAPI.URIRecord {
+  export namespace TLSARecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
+  }
+
+  export interface URIRecord extends RecordsAPI.URIRecord {
     /**
      * Identifier.
      */
@@ -4565,9 +5230,9 @@ export namespace RecordResponse {
     created_on: string;
 
     /**
-     * Extra Cloudflare-specific information about the record.
+     * Extra Cloudflare-specific metadata about the record.
      */
-    meta: unknown;
+    meta: URIRecord.Meta;
 
     /**
      * When the record was last modified.
@@ -4588,6 +5253,39 @@ export namespace RecordResponse {
      * When the record tags were last modified. Omitted if there are no tags.
      */
     tags_modified_on?: string;
+  }
+
+  export namespace URIRecord {
+    /**
+     * Extra Cloudflare-specific metadata about the record.
+     */
+    export interface Meta {
+      /**
+       * Whether this glue record is not served because a shallower NS delegation takes
+       * precedence over the deeper delegation that needs it. Present only when true;
+       * reachable glue carries only `is_glue`. See
+       * [Unreachable glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#unreachable-glue-records).
+       */
+      dead_glue?: boolean;
+
+      /**
+       * Whether this A or AAAA record is glue for a subdomain NS delegation. See
+       * [Glue records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records#glue-records).
+       */
+      is_glue?: boolean;
+
+      /**
+       * IDs of the NS records that shadow this record. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_by?: Array<string>;
+
+      /**
+       * Number of records shadowed by this NS delegation. See
+       * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+       */
+      shadowed_records_count?: number;
+    }
   }
 }
 
@@ -6047,6 +6745,13 @@ export declare namespace RecordCreateParams {
     type: 'A';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6127,6 +6832,13 @@ export declare namespace RecordCreateParams {
     type: 'AAAA';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6205,6 +6917,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CNAME';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6290,6 +7009,13 @@ export declare namespace RecordCreateParams {
     type: 'MX';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6373,6 +7099,13 @@ export declare namespace RecordCreateParams {
     type: 'NS';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6446,6 +7179,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6524,6 +7264,13 @@ export declare namespace RecordCreateParams {
     type: 'PTR';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6597,6 +7344,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'TXT';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6677,6 +7431,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CAA';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6772,6 +7533,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CERT';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6874,6 +7642,13 @@ export declare namespace RecordCreateParams {
     type: 'DNSKEY';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6972,6 +7747,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'DS';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -7074,6 +7856,13 @@ export declare namespace RecordCreateParams {
     type: 'HTTPS';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7167,6 +7956,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'LOC';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -7309,6 +8105,13 @@ export declare namespace RecordCreateParams {
     type: 'NAPTR';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7419,6 +8222,13 @@ export declare namespace RecordCreateParams {
     type: 'SMIMEA';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7517,6 +8327,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SRV';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -7621,6 +8438,13 @@ export declare namespace RecordCreateParams {
     type: 'SSHFP';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7716,6 +8540,13 @@ export declare namespace RecordCreateParams {
     type: 'SVCB';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -7809,6 +8640,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -7909,6 +8747,13 @@ export declare namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'URI';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -8034,6 +8879,13 @@ export declare namespace RecordUpdateParams {
     type: 'A';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8114,6 +8966,13 @@ export declare namespace RecordUpdateParams {
     type: 'AAAA';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8192,6 +9051,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CNAME';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -8277,6 +9143,13 @@ export declare namespace RecordUpdateParams {
     type: 'MX';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8360,6 +9233,13 @@ export declare namespace RecordUpdateParams {
     type: 'NS';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8433,6 +9313,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -8511,6 +9398,13 @@ export declare namespace RecordUpdateParams {
     type: 'PTR';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8584,6 +9478,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'TXT';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -8664,6 +9565,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CAA';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -8759,6 +9667,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CERT';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -8861,6 +9776,13 @@ export declare namespace RecordUpdateParams {
     type: 'DNSKEY';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -8959,6 +9881,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'DS';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -9061,6 +9990,13 @@ export declare namespace RecordUpdateParams {
     type: 'HTTPS';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9154,6 +10090,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'LOC';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -9296,6 +10239,13 @@ export declare namespace RecordUpdateParams {
     type: 'NAPTR';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9406,6 +10356,13 @@ export declare namespace RecordUpdateParams {
     type: 'SMIMEA';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9504,6 +10461,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SRV';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -9608,6 +10572,13 @@ export declare namespace RecordUpdateParams {
     type: 'SSHFP';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9703,6 +10674,13 @@ export declare namespace RecordUpdateParams {
     type: 'SVCB';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9796,6 +10774,13 @@ export declare namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -9898,6 +10883,13 @@ export declare namespace RecordUpdateParams {
     type: 'URI';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -9995,6 +10987,13 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   direction?: Shared.SortDirectionParam;
 
   /**
+   * Query param: Whether to include shadow metadata in the `meta` field of each
+   * record in the response. See
+   * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+   */
+  include_shadow_metadata?: boolean;
+
+  /**
    * Query param: Whether to match all search requirements or at least one (any). If
    * set to `all`, acts like a logical AND between filters. If set to `any`, acts
    * like a logical OR instead. Note that the interaction between tag filters is
@@ -10026,6 +11025,24 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
    * searches, please use the other available parameters.
    */
   search?: string;
+
+  /**
+   * Query param: Filters to records at or below the given NS delegation name,
+   * excluding the NS records that form the delegation itself. The value must be a
+   * subdomain of the zone; the zone apex is not accepted. Requires
+   * `include_shadow_metadata=true`. See
+   * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+   */
+  shadowed_by_name?: string;
+
+  /**
+   * Query param: Returns NS records that shadow the given name, searching at the
+   * name itself and each of its ancestor names within the zone, excluding the zone
+   * apex. The value must be a subdomain of the zone; the zone apex is not accepted.
+   * See
+   * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+   */
+  shadowing_name?: string;
 
   /**
    * Query param
@@ -10202,6 +11219,13 @@ export interface RecordBatchParams {
   zone_id: string;
 
   /**
+   * Query param: Whether to include shadow metadata in the `meta` field of each
+   * record in the response. See
+   * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+   */
+  include_shadow_metadata?: boolean;
+
+  /**
    * Body param
    */
   deletes?: Array<RecordBatchParams.Delete>;
@@ -10370,6 +11394,13 @@ export declare namespace RecordEditParams {
     type: 'A';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10450,6 +11481,13 @@ export declare namespace RecordEditParams {
     type: 'AAAA';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10528,6 +11566,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CNAME';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -10613,6 +11658,13 @@ export declare namespace RecordEditParams {
     type: 'MX';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10696,6 +11748,13 @@ export declare namespace RecordEditParams {
     type: 'NS';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10769,6 +11828,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -10847,6 +11913,13 @@ export declare namespace RecordEditParams {
     type: 'PTR';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -10920,6 +11993,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'TXT';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -11000,6 +12080,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CAA';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -11095,6 +12182,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CERT';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -11197,6 +12291,13 @@ export declare namespace RecordEditParams {
     type: 'DNSKEY';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11295,6 +12396,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'DS';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -11397,6 +12505,13 @@ export declare namespace RecordEditParams {
     type: 'HTTPS';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11490,6 +12605,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'LOC';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -11632,6 +12754,13 @@ export declare namespace RecordEditParams {
     type: 'NAPTR';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11742,6 +12871,13 @@ export declare namespace RecordEditParams {
     type: 'SMIMEA';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -11840,6 +12976,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SRV';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -11944,6 +13087,13 @@ export declare namespace RecordEditParams {
     type: 'SSHFP';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -12039,6 +13189,13 @@ export declare namespace RecordEditParams {
     type: 'SVCB';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -12132,6 +13289,13 @@ export declare namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'TLSA';
+
+    /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -12234,6 +13398,13 @@ export declare namespace RecordEditParams {
     type: 'URI';
 
     /**
+     * Query param: Whether to include shadow metadata in the `meta` field of each
+     * record in the response. See
+     * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+     */
+    include_shadow_metadata?: boolean;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -12318,9 +13489,16 @@ export interface RecordExportParams {
 
 export interface RecordGetParams {
   /**
-   * Identifier.
+   * Path param: Identifier.
    */
   zone_id: string;
+
+  /**
+   * Query param: Whether to include shadow metadata in the `meta` field of each
+   * record in the response. See
+   * [Shadowed records](https://developers.cloudflare.com/dns/manage-dns-records/reference/shadowed-records).
+   */
+  include_shadow_metadata?: boolean;
 }
 
 export interface RecordImportParams {
