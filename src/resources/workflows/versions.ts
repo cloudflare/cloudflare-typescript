@@ -175,7 +175,7 @@ export namespace VersionGraphResponse {
       /**
        * Shape descriptor for JSON payloads.
        */
-      payload?: Workflow.Type | Workflow.UnionMember1;
+      payload?: Workflow.Payload.Type | Workflow.Payload.UnionMember1;
     }
 
     export namespace Workflow {
@@ -501,17 +501,19 @@ export namespace VersionGraphResponse {
         type: 'break';
       }
 
-      export interface Type {
-        type: 'unknown';
-      }
+      export namespace Payload {
+        export interface Type {
+          type: 'unknown';
+        }
 
-      export interface UnionMember1 {
-        /**
-         * Nested JsonShape fields (recursive structure).
-         */
-        fields: { [key: string]: unknown };
+        export interface UnionMember1 {
+          /**
+           * Nested JsonShape fields (recursive structure).
+           */
+          fields: { [key: string]: unknown };
 
-        type: 'object';
+          type: 'object';
+        }
       }
     }
   }
