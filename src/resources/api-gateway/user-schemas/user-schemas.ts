@@ -21,7 +21,8 @@ export class UserSchemas extends APIResource {
   hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
 
   /**
-   * Upload a schema to a zone
+   * Uploads a new OpenAPI schema for API Shield schema validation. The schema
+   * defines expected request/response formats for API endpoints.
    *
    * @deprecated Use [Schema Validation API](https://developers.cloudflare.com/api/resources/schema_validation/) instead.
    */

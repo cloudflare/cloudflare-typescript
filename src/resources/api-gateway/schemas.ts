@@ -5,7 +5,7 @@ import * as Core from '../../core';
 
 export class Schemas extends APIResource {
   /**
-   * Retrieve operations and features as OpenAPI schemas
+   * Retrieves API operations and their features exported as OpenAPI schemas.
    *
    * @example
    * ```ts
