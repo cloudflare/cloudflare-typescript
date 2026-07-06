@@ -352,9 +352,9 @@ export interface Location {
   ipv4_destination_backup?: string;
 
   /**
-   * Configure DNS response TTL behavior for this Gateway location. Gateway can
-   * rewrite DNS responses to cap returned record TTLs using the account setting or a
-   * location-specific value, or leave TTLs unchanged.
+   * Controls how DNS response TTLs are capped for this location relative to the
+   * account `max_ttl_secs` setting. Omitting `max_ttl` on update resets it to
+   * `inherit`.
    */
   max_ttl?: Location.MaxTTL | null;
 
@@ -375,19 +375,19 @@ export interface Location {
 
 export namespace Location {
   /**
-   * Configure DNS response TTL behavior for this Gateway location. Gateway can
-   * rewrite DNS responses to cap returned record TTLs using the account setting or a
-   * location-specific value, or leave TTLs unchanged.
+   * Controls how DNS response TTLs are capped for this location relative to the
+   * account `max_ttl_secs` setting. Omitting `max_ttl` on update resets it to
+   * `inherit`.
    */
   export interface MaxTTL {
     /**
-     * Specify how this location handles DNS response TTLs by using the account
-     * setting, using a location-specific value, or leaving TTLs unchanged.
+     * `inherit` uses the account `max_ttl_secs`. `override` uses this location's
+     * `ttl_secs`. `disabled` leaves returned TTLs unchanged.
      */
     mode: 'inherit' | 'override' | 'disabled';
 
     /**
-     * Set the location-specific DNS TTL cap, in seconds. Required when `mode` is
+     * Location-specific cap on DNS response TTLs, in seconds. Required when `mode` is
      * `override`. Must be omitted when `mode` is `inherit` or `disabled`.
      */
     ttl_secs?: number | null;
@@ -439,9 +439,9 @@ export interface LocationCreateParams {
   endpoints?: EndpointParam | null;
 
   /**
-   * Body param: Configure DNS response TTL behavior for this Gateway location.
-   * Gateway can rewrite DNS responses to cap returned record TTLs using the account
-   * setting or a location-specific value, or leave TTLs unchanged.
+   * Body param: Controls how DNS response TTLs are capped for this location relative
+   * to the account `max_ttl_secs` setting. Omitting `max_ttl` on update resets it to
+   * `inherit`.
    */
   max_ttl?: LocationCreateParams.MaxTTL | null;
 
@@ -455,19 +455,19 @@ export interface LocationCreateParams {
 
 export namespace LocationCreateParams {
   /**
-   * Configure DNS response TTL behavior for this Gateway location. Gateway can
-   * rewrite DNS responses to cap returned record TTLs using the account setting or a
-   * location-specific value, or leave TTLs unchanged.
+   * Controls how DNS response TTLs are capped for this location relative to the
+   * account `max_ttl_secs` setting. Omitting `max_ttl` on update resets it to
+   * `inherit`.
    */
   export interface MaxTTL {
     /**
-     * Specify how this location handles DNS response TTLs by using the account
-     * setting, using a location-specific value, or leaving TTLs unchanged.
+     * `inherit` uses the account `max_ttl_secs`. `override` uses this location's
+     * `ttl_secs`. `disabled` leaves returned TTLs unchanged.
      */
     mode: 'inherit' | 'override' | 'disabled';
 
     /**
-     * Set the location-specific DNS TTL cap, in seconds. Required when `mode` is
+     * Location-specific cap on DNS response TTLs, in seconds. Required when `mode` is
      * `override`. Must be omitted when `mode` is `inherit` or `disabled`.
      */
     ttl_secs?: number | null;
@@ -517,9 +517,9 @@ export interface LocationUpdateParams {
   endpoints?: EndpointParam | null;
 
   /**
-   * Body param: Configure DNS response TTL behavior for this Gateway location.
-   * Gateway can rewrite DNS responses to cap returned record TTLs using the account
-   * setting or a location-specific value, or leave TTLs unchanged.
+   * Body param: Controls how DNS response TTLs are capped for this location relative
+   * to the account `max_ttl_secs` setting. Omitting `max_ttl` on update resets it to
+   * `inherit`.
    */
   max_ttl?: LocationUpdateParams.MaxTTL | null;
 
@@ -533,19 +533,19 @@ export interface LocationUpdateParams {
 
 export namespace LocationUpdateParams {
   /**
-   * Configure DNS response TTL behavior for this Gateway location. Gateway can
-   * rewrite DNS responses to cap returned record TTLs using the account setting or a
-   * location-specific value, or leave TTLs unchanged.
+   * Controls how DNS response TTLs are capped for this location relative to the
+   * account `max_ttl_secs` setting. Omitting `max_ttl` on update resets it to
+   * `inherit`.
    */
   export interface MaxTTL {
     /**
-     * Specify how this location handles DNS response TTLs by using the account
-     * setting, using a location-specific value, or leaving TTLs unchanged.
+     * `inherit` uses the account `max_ttl_secs`. `override` uses this location's
+     * `ttl_secs`. `disabled` leaves returned TTLs unchanged.
      */
     mode: 'inherit' | 'override' | 'disabled';
 
     /**
-     * Set the location-specific DNS TTL cap, in seconds. Required when `mode` is
+     * Location-specific cap on DNS response TTLs, in seconds. Required when `mode` is
      * `override`. Must be omitted when `mode` is `inherit` or `disabled`.
      */
     ttl_secs?: number | null;

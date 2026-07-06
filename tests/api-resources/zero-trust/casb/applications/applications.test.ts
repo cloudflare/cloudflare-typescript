@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseCatchAlls } from 'cloudflare/resources/email-routing/rules/catch-alls';
-import { Rules } from 'cloudflare/resources/email-routing/rules/rules';
+import { Casb } from 'cloudflare/resources/zero-trust/casb/casb';
+import { BaseApplications } from 'cloudflare/resources/zero-trust/casb/applications/applications';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,22 +16,20 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseCatchAlls],
+  resources: [BaseApplications],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [Rules],
+  resources: [Casb],
 });
 
-const runTests = (client: PartialCloudflare<{ emailRouting: { rules: { catchAlls: BaseCatchAlls } } }>) => {
-  test('update: only required params', async () => {
-    const responsePromise = client.emailRouting.rules.catchAlls.update({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'forward' }],
-      matchers: [{ type: 'all' }],
+const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { applications: BaseApplications } } }>) => {
+  test('list: only required params', async () => {
+    const responsePromise = client.zeroTrust.casb.applications.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,21 +40,16 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: { catchAlls
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
-    const response = await client.emailRouting.rules.catchAlls.update({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'forward', value: ['destinationaddress@example.net'] }],
-      matchers: [{ type: 'all' }],
-      enabled: true,
-      name: 'Send to user@example.net rule.',
-      owner_worker_tag: 'a7e6fb77503c41d8a7f3113c6918f10c',
-      source: 'api',
+  test('list: required and optional params', async () => {
+    const response = await client.zeroTrust.casb.applications.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      environment: 'environment',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailRouting.rules.catchAlls.get({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.zeroTrust.casb.applications.get('GITHUB', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -68,11 +61,11 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: { catchAlls
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailRouting.rules.catchAlls.get({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.zeroTrust.casb.applications.get('GITHUB', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 };
-describe('resource catchAlls', () => runTests(client));
-describe('resource catchAlls (tree shakable, base)', () => runTests(partialClient));
-describe('resource catchAlls (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource applications', () => runTests(client));
+describe('resource applications (tree shakable, base)', () => runTests(partialClient));
+describe('resource applications (tree shakable, subresource)', () => runTests(parentPartialClient));

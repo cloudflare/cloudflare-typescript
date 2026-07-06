@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { MoQ } from 'cloudflare/resources/moq/moq';
-import { BaseRelays } from 'cloudflare/resources/moq/relays/relays';
+import { Casb } from 'cloudflare/resources/zero-trust/casb/casb';
+import { BaseIntegrations } from 'cloudflare/resources/zero-trust/casb/integrations';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,21 +16,23 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseRelays],
+  resources: [BaseIntegrations],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [MoQ],
+  resources: [Casb],
 });
 
-const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) => {
+const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { integrations: BaseIntegrations } } }>) => {
   test('create: only required params', async () => {
-    const responsePromise = client.moq.relays.create({
+    const responsePromise = client.zeroTrust.casb.integrations.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'Production Live Stream',
+      application: 'GOOGLE_WORKSPACE',
+      credentials: { admin_email: 'bar' },
+      name: 'My Google Workspace',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,14 +44,20 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.moq.relays.create({
+    const response = await client.zeroTrust.casb.integrations.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'Production Live Stream',
+      application: 'GOOGLE_WORKSPACE',
+      credentials: { admin_email: 'bar' },
+      name: 'My Google Workspace',
+      auth_method: 'service_account',
+      dlp_profiles: ['e91a2360-da51-4fdf-9711-bcdecd462614'],
+      permissions: ['https://www.googleapis.com/auth/drive.readonly'],
+      use_cases: ['casb', 'ces'],
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.moq.relays.update('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const responsePromise = client.zeroTrust.casb.integrations.update('id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,18 +70,20 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.moq.relays.update('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const response = await client.zeroTrust.casb.integrations.update('id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      config: {
-        lingering_subscribe: { enabled: true, max_timeout_ms: 0 },
-        upstreams: { enabled: true, upstreams: [{ url: 'url' }] },
-      },
-      name: 'name',
+      credentials: { access_token: 'bar', refresh_token: 'bar' },
+      dlp_profiles: ['182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+      name: 'x',
+      permissions: ['x'],
+      use_cases: ['casb'],
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.moq.relays.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.zeroTrust.casb.integrations.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,17 +94,22 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.moq.relays.list({
+    const response = await client.zeroTrust.casb.integrations.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      asc: true,
-      created_after: '2026-03-27T15:00:00Z',
-      created_before: '2026-03-27T15:00:00Z',
-      per_page: 50,
+      application: 'application',
+      direction: 'asc',
+      dlp_enabled: true,
+      order: 'application',
+      page: 0,
+      page_size: 0,
+      search: 'search',
+      status: 'Healthy',
+      use_cases: 'use_cases',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.moq.relays.delete('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const responsePromise = client.zeroTrust.casb.integrations.delete('id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -107,13 +122,13 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.moq.relays.delete('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const response = await client.zeroTrust.casb.integrations.delete('id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.moq.relays.get('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const responsePromise = client.zeroTrust.casb.integrations.get('id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -126,11 +141,49 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.moq.relays.get('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const response = await client.zeroTrust.casb.integrations.get('id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('pause: only required params', async () => {
+    const responsePromise = client.zeroTrust.casb.integrations.pause('id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('pause: required and optional params', async () => {
+    const response = await client.zeroTrust.casb.integrations.pause('id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('resume: only required params', async () => {
+    const responsePromise = client.zeroTrust.casb.integrations.resume('id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('resume: required and optional params', async () => {
+    const response = await client.zeroTrust.casb.integrations.resume('id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 };
-describe('resource relays', () => runTests(client));
-describe('resource relays (tree shakable, base)', () => runTests(partialClient));
-describe('resource relays (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource integrations', () => runTests(client));
+describe('resource integrations (tree shakable, base)', () => runTests(partialClient));
+describe('resource integrations (tree shakable, subresource)', () => runTests(parentPartialClient));

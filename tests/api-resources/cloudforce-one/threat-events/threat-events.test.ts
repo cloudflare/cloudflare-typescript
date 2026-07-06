@@ -105,6 +105,7 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
           value: 'usa',
         },
       ],
+      source: 'do',
     });
   });
 

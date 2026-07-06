@@ -46,7 +46,11 @@ const runTests = (
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.devtools.browser.targets.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id', url: 'https://example.com' },
+      {
+        account_id: 'account_id',
+        liveViewUrlExpiresInMs: 60000,
+        url: 'https://example.com',
+      },
     );
   });
 
@@ -67,7 +71,7 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.browserRendering.devtools.browser.targets.list(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
+      { account_id: 'account_id', liveViewUrlExpiresInMs: 60000 },
     );
   });
 

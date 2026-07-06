@@ -171,8 +171,7 @@ export interface BlockSenderCreateResponse {
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -203,8 +202,7 @@ export interface BlockSenderListResponse {
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -242,8 +240,7 @@ export interface BlockSenderEditResponse {
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -274,8 +271,7 @@ export interface BlockSenderGetResponse {
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 

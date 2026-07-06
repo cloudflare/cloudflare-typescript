@@ -63,7 +63,7 @@ export namespace TraceGetResponse {
       message?: string;
 
       /**
-       * @deprecated Deprecated, use `logged_at` instead. End of life: November 1, 2026.
+       * @deprecated Use `logged_at` instead.
        */
       ts?: string;
     }
@@ -87,7 +87,7 @@ export namespace TraceGetResponse {
       message?: string;
 
       /**
-       * @deprecated Deprecated, use `logged_at` instead. End of life: November 1, 2026.
+       * @deprecated Use `logged_at` instead.
        */
       ts?: string;
     }

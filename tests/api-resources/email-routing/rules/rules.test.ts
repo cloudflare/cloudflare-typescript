@@ -55,7 +55,9 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: BaseRules }
       ],
       enabled: true,
       name: 'Send to user@example.net rule.',
+      owner_worker_tag: 'a7e6fb77503c41d8a7f3113c6918f10c',
       priority: 0,
+      source: 'api',
     });
   });
 
@@ -87,7 +89,9 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: BaseRules }
       ],
       enabled: true,
       name: 'Send to user@example.net rule.',
+      owner_worker_tag: 'a7e6fb77503c41d8a7f3113c6918f10c',
       priority: 0,
+      source: 'api',
     });
   });
 

@@ -60,8 +60,19 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { versions: Ba
             type: 'plain_text',
           },
         ],
+        cache_options: { enabled: true, cross_version_cache: true },
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
+        exports: {
+          Admin: {
+            type: 'worker',
+            cache: { enabled: true },
+          },
+          default: {
+            type: 'worker',
+            cache: { enabled: false },
+          },
+        },
         keep_bindings: ['string'],
         package_dependencies: [
           {

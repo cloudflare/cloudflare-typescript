@@ -171,8 +171,7 @@ export interface AllowPolicyCreateResponse {
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
@@ -191,22 +190,19 @@ export interface AllowPolicyCreateResponse {
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
@@ -244,8 +240,7 @@ export interface AllowPolicyListResponse {
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
@@ -264,22 +259,19 @@ export interface AllowPolicyListResponse {
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
@@ -324,8 +316,7 @@ export interface AllowPolicyEditResponse {
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
@@ -344,22 +335,19 @@ export interface AllowPolicyEditResponse {
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
@@ -397,8 +385,7 @@ export interface AllowPolicyGetResponse {
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
@@ -417,22 +404,19 @@ export interface AllowPolicyGetResponse {
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
@@ -511,20 +495,17 @@ export interface AllowPolicyCreateParams {
   comments?: string | null;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_exempt_recipient`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_trusted_sender`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use
-   * `is_acceptable_sender` instead. End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 }
@@ -618,8 +599,7 @@ export interface AllowPolicyEditParams {
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_exempt_recipient`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
@@ -629,14 +609,12 @@ export interface AllowPolicyEditParams {
   is_regex?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_trusted_sender`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use
-   * `is_acceptable_sender` instead. End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
