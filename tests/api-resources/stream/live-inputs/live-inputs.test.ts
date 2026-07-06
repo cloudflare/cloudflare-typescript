@@ -47,7 +47,6 @@ const runTests = (client: PartialCloudflare<{ stream: { liveInputs: BaseLiveInpu
       deleteRecordingAfterDays: 45,
       enabled: true,
       meta: { name: 'test stream 1' },
-      preferLowLatency: true,
       recording: {
         allowedOrigins: ['example.com'],
         hideLiveViewerCount: false,
@@ -78,7 +77,6 @@ const runTests = (client: PartialCloudflare<{ stream: { liveInputs: BaseLiveInpu
       deleteRecordingAfterDays: 45,
       enabled: true,
       meta: { name: 'test stream 1' },
-      preferLowLatency: true,
       recording: {
         allowedOrigins: ['example.com'],
         hideLiveViewerCount: false,

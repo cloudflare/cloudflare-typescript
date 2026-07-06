@@ -12,8 +12,7 @@ export class BaseRules extends APIResource {
   ] as const);
 
   /**
-   * Updates Cloud Connector rules for a zone, replacing the existing rule
-   * configuration.
+   * Put Rules
    */
   update(
     params: RuleUpdateParams,
@@ -28,8 +27,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Retrieves the Cloud Connector rules configured for a zone. Rules define how
-   * traffic is routed to cloud services.
+   * Rules
    */
   list(
     params: RuleListParams,

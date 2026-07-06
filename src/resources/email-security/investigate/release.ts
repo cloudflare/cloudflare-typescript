@@ -57,7 +57,7 @@ export interface ReleaseBulkResponse {
   failed?: Array<string> | null;
 
   /**
-   * @deprecated Use `id` instead.
+   * @deprecated Deprecated, use `id` instead. End of life: November 1, 2026.
    */
   postfix_id?: string;
 

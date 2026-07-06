@@ -179,7 +179,8 @@ export interface URLIgnorePatternCreateResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -209,7 +210,8 @@ export interface URLIgnorePatternListResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -246,7 +248,8 @@ export interface URLIgnorePatternEditResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -276,7 +279,8 @@ export interface URLIgnorePatternGetResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 

@@ -13,8 +13,7 @@ export class BaseVariants extends APIResource {
   ] as const);
 
   /**
-   * Create a CF Images variant that allows you to resize images for different use
-   * cases.
+   * Specify variants that allow you to resize images for different use cases.
    *
    * @example
    * ```ts
@@ -41,7 +40,7 @@ export class BaseVariants extends APIResource {
   }
 
   /**
-   * List existing CF Images variants.
+   * Lists existing variants.
    *
    * @example
    * ```ts
@@ -60,8 +59,7 @@ export class BaseVariants extends APIResource {
   }
 
   /**
-   * Delete a CF Images variant. This will purge the cache for all images associated
-   * with the variant.
+   * Deleting a variant purges the cache for all images associated with the variant.
    *
    * @example
    * ```ts
@@ -86,8 +84,7 @@ export class BaseVariants extends APIResource {
   }
 
   /**
-   * Update a CF Images variant. This will purge the cache for all images associated
-   * with the variant.
+   * Updating a variant purges the cache for all images associated with the variant.
    *
    * @example
    * ```ts
@@ -120,7 +117,7 @@ export class BaseVariants extends APIResource {
   }
 
   /**
-   * Fetch details for a CF Images variant.
+   * Fetch details for a single variant.
    *
    * @example
    * ```ts

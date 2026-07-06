@@ -66,7 +66,7 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       config: {
         lingering_subscribe: { enabled: true, max_timeout_ms: 0 },
-        upstreams: { enabled: true, upstreams: [{ url: 'url' }] },
+        origin_fallback: { enabled: true, origins: [{ url: 'url' }] },
       },
       name: 'name',
     });

@@ -14,8 +14,8 @@ export class BaseRelays extends APIResource {
   /**
    * Provisions a new MoQ relay instance. Auto-creates a publish+subscribe token and
    * a subscribe-only token. Token values are included in the response (shown once).
-   * Config is set to defaults (lingering subscribe enabled, 30s ceiling, upstreams
-   * off). Use PUT to modify.
+   * Config is set to defaults (lingering subscribe enabled, 30s ceiling, origin
+   * fallback off). Use PUT to modify.
    *
    * @example
    * ```ts
@@ -36,8 +36,8 @@ export class BaseRelays extends APIResource {
 
   /**
    * Updates a relay's name and/or configuration. Partial updates: omitted fields are
-   * preserved. Config sub-objects replace as whole objects when present. upstreams
-   * and lingering_subscribe are mutually exclusive.
+   * preserved. Config sub-objects replace as whole objects when present.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    *
    * @example
    * ```ts
@@ -147,7 +147,7 @@ export type RelayListResponsesSinglePage = SinglePage<RelayListResponse>;
  */
 export interface RelayCreateResponse {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   config: RelayCreateResponse.Config;
 
@@ -175,16 +175,12 @@ export interface RelayCreateResponse {
 
 export namespace RelayCreateResponse {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   export interface Config {
     lingering_subscribe?: Config.LingeringSubscribe;
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    upstreams?: Config.Upstreams;
+    origin_fallback?: Config.OriginFallback;
   }
 
   export namespace Config {
@@ -197,28 +193,24 @@ export namespace RelayCreateResponse {
       max_timeout_ms?: number;
     }
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    export interface Upstreams {
+    export interface OriginFallback {
       enabled?: boolean;
 
       /**
-       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
-       * bare string) so per-upstream configuration can be added in the future without
-       * another breaking change.
+       * Ordered list of upstream origin relays. Each entry is an object (not a bare
+       * string) so per-origin configuration can be added in the future without another
+       * breaking change.
        */
-      upstreams?: Array<Upstreams.Upstream>;
+      origins?: Array<OriginFallback.Origin>;
     }
 
-    export namespace Upstreams {
+    export namespace OriginFallback {
       /**
-       * A single upstream MOQT server publisher.
+       * A single upstream origin relay.
        */
-      export interface Upstream {
+      export interface Origin {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream origin relay URL.
          */
         url?: string;
       }
@@ -231,7 +223,7 @@ export namespace RelayCreateResponse {
  */
 export interface RelayUpdateResponse {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   config: RelayUpdateResponse.Config;
 
@@ -251,16 +243,12 @@ export interface RelayUpdateResponse {
 
 export namespace RelayUpdateResponse {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   export interface Config {
     lingering_subscribe?: Config.LingeringSubscribe;
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    upstreams?: Config.Upstreams;
+    origin_fallback?: Config.OriginFallback;
   }
 
   export namespace Config {
@@ -273,28 +261,24 @@ export namespace RelayUpdateResponse {
       max_timeout_ms?: number;
     }
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    export interface Upstreams {
+    export interface OriginFallback {
       enabled?: boolean;
 
       /**
-       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
-       * bare string) so per-upstream configuration can be added in the future without
-       * another breaking change.
+       * Ordered list of upstream origin relays. Each entry is an object (not a bare
+       * string) so per-origin configuration can be added in the future without another
+       * breaking change.
        */
-      upstreams?: Array<Upstreams.Upstream>;
+      origins?: Array<OriginFallback.Origin>;
     }
 
-    export namespace Upstreams {
+    export namespace OriginFallback {
       /**
-       * A single upstream MOQT server publisher.
+       * A single upstream origin relay.
        */
-      export interface Upstream {
+      export interface Origin {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream origin relay URL.
          */
         url?: string;
       }
@@ -322,7 +306,7 @@ export type RelayDeleteResponse = unknown;
  */
 export interface RelayGetResponse {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   config: RelayGetResponse.Config;
 
@@ -342,16 +326,12 @@ export interface RelayGetResponse {
 
 export namespace RelayGetResponse {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   export interface Config {
     lingering_subscribe?: Config.LingeringSubscribe;
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    upstreams?: Config.Upstreams;
+    origin_fallback?: Config.OriginFallback;
   }
 
   export namespace Config {
@@ -364,28 +344,24 @@ export namespace RelayGetResponse {
       max_timeout_ms?: number;
     }
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    export interface Upstreams {
+    export interface OriginFallback {
       enabled?: boolean;
 
       /**
-       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
-       * bare string) so per-upstream configuration can be added in the future without
-       * another breaking change.
+       * Ordered list of upstream origin relays. Each entry is an object (not a bare
+       * string) so per-origin configuration can be added in the future without another
+       * breaking change.
        */
-      upstreams?: Array<Upstreams.Upstream>;
+      origins?: Array<OriginFallback.Origin>;
     }
 
-    export namespace Upstreams {
+    export namespace OriginFallback {
       /**
-       * A single upstream MOQT server publisher.
+       * A single upstream origin relay.
        */
-      export interface Upstream {
+      export interface Origin {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream origin relay URL.
          */
         url?: string;
       }
@@ -412,7 +388,7 @@ export interface RelayUpdateParams {
   account_id: string;
 
   /**
-   * Body param: upstreams and lingering_subscribe are mutually exclusive.
+   * Body param: origin_fallback and lingering_subscribe are mutually exclusive.
    */
   config?: RelayUpdateParams.Config;
 
@@ -424,16 +400,12 @@ export interface RelayUpdateParams {
 
 export namespace RelayUpdateParams {
   /**
-   * upstreams and lingering_subscribe are mutually exclusive.
+   * origin_fallback and lingering_subscribe are mutually exclusive.
    */
   export interface Config {
     lingering_subscribe?: Config.LingeringSubscribe;
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    upstreams?: Config.Upstreams;
+    origin_fallback?: Config.OriginFallback;
   }
 
   export namespace Config {
@@ -446,28 +418,24 @@ export namespace RelayUpdateParams {
       max_timeout_ms?: number;
     }
 
-    /**
-     * Upstreams are external MOQT server publishers that a relay falls back to when it
-     * has no local publisher for a requested namespace/track.
-     */
-    export interface Upstreams {
+    export interface OriginFallback {
       enabled?: boolean;
 
       /**
-       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
-       * bare string) so per-upstream configuration can be added in the future without
-       * another breaking change.
+       * Ordered list of upstream origin relays. Each entry is an object (not a bare
+       * string) so per-origin configuration can be added in the future without another
+       * breaking change.
        */
-      upstreams?: Array<Upstreams.Upstream>;
+      origins?: Array<OriginFallback.Origin>;
     }
 
-    export namespace Upstreams {
+    export namespace OriginFallback {
       /**
-       * A single upstream MOQT server publisher.
+       * A single upstream origin relay.
        */
-      export interface Upstream {
+      export interface Origin {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream origin relay URL.
          */
         url?: string;
       }

@@ -362,7 +362,6 @@ export interface InstanceCreateResponse {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -506,14 +505,6 @@ export namespace InstanceCreateResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -743,7 +734,6 @@ export interface InstanceUpdateResponse {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -887,14 +877,6 @@ export namespace InstanceUpdateResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -1124,7 +1106,6 @@ export interface InstanceListResponse {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -1268,14 +1249,6 @@ export namespace InstanceListResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -1505,7 +1478,6 @@ export interface InstanceDeleteResponse {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -1649,14 +1621,6 @@ export namespace InstanceDeleteResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -1976,7 +1940,6 @@ export interface InstanceReadResponse {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -2120,14 +2083,6 @@ export namespace InstanceReadResponse {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -2504,7 +2459,6 @@ export interface InstanceCreateParams {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -2678,14 +2632,6 @@ export namespace InstanceCreateParams {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 
@@ -2943,7 +2889,6 @@ export interface InstanceUpdateParams {
     | '@cf/google/embeddinggemma-300m'
     | 'google-ai-studio/gemini-embedding-001'
     | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
     | 'openai/text-embedding-3-small'
     | 'openai/text-embedding-3-large'
     | ''
@@ -3168,14 +3113,6 @@ export namespace InstanceUpdateParams {
     authorized_hosts?: Array<string>;
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
 
     enabled?: boolean;
 

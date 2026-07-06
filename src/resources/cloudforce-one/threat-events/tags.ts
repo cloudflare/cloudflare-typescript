@@ -44,12 +44,6 @@ export interface TagCreateResponse {
   actorCategory?: string;
 
   /**
-   * Confidence (1-10) in the actor variety (actorCategory). CFONE-only: stripped
-   * from responses to non-CFONE accounts.
-   */
-  actorCategoryConfidence?: number;
-
-  /**
    * Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: stripped from
    * responses to non-CFONE accounts.
    */
@@ -76,12 +70,6 @@ export interface TagCreateResponse {
   externalReferenceLinks?: Array<string>;
 
   /**
-   * Structured external references ({ url, description }). Public: returned to all
-   * accounts.
-   */
-  externalReferences?: Array<TagCreateResponse.ExternalReference>;
-
-  /**
    * Internal structured aliases ({ value, confidence 1-10, tlp }). CFONE-only: never
    * returned to non-CFONE accounts.
    */
@@ -91,29 +79,11 @@ export interface TagCreateResponse {
 
   motive?: string;
 
-  /**
-   * Confidence (1-10) in the actor motive. CFONE-only: stripped from responses to
-   * non-CFONE accounts.
-   */
-  motiveConfidence?: number;
-
   opsecLevel?: string;
-
-  /**
-   * Confidence (1-10) in the origin-country attribution. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  originCountryConfidence?: number;
 
   originCountryISO?: string;
 
   originCountryISOAlpha3?: string;
-
-  /**
-   * TLP marking for the origin-country attribution. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
 
   priority?: number;
 
@@ -127,12 +97,6 @@ export namespace TagCreateResponse {
     confidence?: number | null;
 
     tlp?: 'red' | 'amber' | 'green' | 'white' | null;
-  }
-
-  export interface ExternalReference {
-    url: string;
-
-    description?: string | null;
   }
 
   export interface InternalAlias {
@@ -166,12 +130,6 @@ export interface TagCreateParams {
    * Affiliated, Terrorist, Unaffiliated.
    */
   actorCategory?: string;
-
-  /**
-   * Body param: Confidence (1-10) in the actor variety (actorCategory). CFONE-only:
-   * stripped from responses to non-CFONE accounts.
-   */
-  actorCategoryConfidence?: number;
 
   /**
    * Body param: Structured aliases ({ value, confidence 1-10, tlp }). CFONE-only:
@@ -225,12 +183,6 @@ export interface TagCreateParams {
   externalReferenceLinks?: Array<string>;
 
   /**
-   * Body param: Structured external references ({ url, description }). Public:
-   * returned to all accounts.
-   */
-  externalReferences?: Array<TagCreateParams.ExternalReference>;
-
-  /**
    * Body param: Internal structured aliases ({ value, confidence 1-10, tlp }).
    * CFONE-only: never returned to non-CFONE accounts.
    */
@@ -248,32 +200,14 @@ export interface TagCreateParams {
   motive?: string;
 
   /**
-   * Body param: Confidence (1-10) in the actor motive. CFONE-only: stripped from
-   * responses to non-CFONE accounts.
-   */
-  motiveConfidence?: number;
-
-  /**
    * Body param
    */
   opsecLevel?: string;
 
   /**
-   * Body param: Confidence (1-10) in the origin-country attribution. CFONE-only:
-   * stripped from responses to non-CFONE accounts.
-   */
-  originCountryConfidence?: number;
-
-  /**
    * Body param
    */
   originCountryISO?: string;
-
-  /**
-   * Body param: TLP marking for the origin-country attribution. CFONE-only: stripped
-   * from responses to non-CFONE accounts.
-   */
-  originCountryTlp?: 'red' | 'amber' | 'green' | 'white';
 
   /**
    * Body param
@@ -293,12 +227,6 @@ export namespace TagCreateParams {
     confidence?: number | null;
 
     tlp?: 'red' | 'amber' | 'green' | 'white' | null;
-  }
-
-  export interface ExternalReference {
-    url: string;
-
-    description?: string | null;
   }
 
   export interface InternalAlias {

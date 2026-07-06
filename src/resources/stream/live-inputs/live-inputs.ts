@@ -167,12 +167,6 @@ export interface LiveInput {
   enabled?: boolean;
 
   /**
-   * The date and time the live input keys were last rotated. Omitted for live inputs
-   * that have never had their keys rotated.
-   */
-  keysRotatedAt?: string | null;
-
-  /**
    * A user modifiable key-value store used to reference other systems of record for
    * managing live inputs.
    */
@@ -182,13 +176,6 @@ export interface LiveInput {
    * The date and time the live input was last modified.
    */
   modified?: string;
-
-  /**
-   * When enabled, the live stream is delivered using Low-Latency HLS (LL-HLS),
-   * reducing glass-to-glass latency for viewers at the cost of reduced player
-   * compatibility.
-   */
-  preferLowLatency?: boolean;
 
   /**
    * Records the input to a Cloudflare Stream video. Behavior depends on the mode. In
@@ -465,13 +452,6 @@ export interface LiveInputCreateParams {
   meta?: unknown;
 
   /**
-   * Body param: When enabled, the live stream is delivered using Low-Latency HLS
-   * (LL-HLS), reducing glass-to-glass latency for viewers at the cost of reduced
-   * player compatibility.
-   */
-  preferLowLatency?: boolean;
-
-  /**
    * Body param: Records the input to a Cloudflare Stream video. Behavior depends on
    * the mode. In most cases, the video will initially be viewable as a live video
    * and transition to on-demand after a condition is satisfied.
@@ -552,13 +532,6 @@ export interface LiveInputUpdateParams {
    * record for managing live inputs.
    */
   meta?: unknown;
-
-  /**
-   * Body param: When enabled, the live stream is delivered using Low-Latency HLS
-   * (LL-HLS), reducing glass-to-glass latency for viewers at the cost of reduced
-   * player compatibility.
-   */
-  preferLowLatency?: boolean;
 
   /**
    * Body param: Records the input to a Cloudflare Stream video. Behavior depends on

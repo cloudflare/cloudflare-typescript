@@ -71,7 +71,7 @@ export interface ReportListResponse {
   tags?: Array<ReportListResponse.Tag> | null;
 
   /**
-   * @deprecated Use `created_at` instead.
+   * @deprecated Deprecated, use `created_at` instead
    */
   ts?: string;
 
@@ -89,7 +89,7 @@ export namespace ReportListResponse {
     postfix_id?: string | null;
 
     /**
-     * @deprecated Use `occurred_at` instead.
+     * @deprecated Deprecated, use `occurred_at` instead
      */
     ts?: string;
   }

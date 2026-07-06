@@ -31,7 +31,7 @@ export class BaseBrowser extends APIResource {
   ] as const);
 
   /**
-   * Acquires a browser and returns its session ID and websocket URL.
+   * Get a browser session ID.
    *
    * @example
    * ```ts
@@ -42,9 +42,9 @@ export class BaseBrowser extends APIResource {
    * ```
    */
   create(params: BrowserCreateParams, options?: RequestOptions): APIPromise<BrowserCreateResponse> {
-    const { account_id, keep_alive, lab, liveViewUrlExpiresInMs, recording, targets } = params;
+    const { account_id, keep_alive, lab, recording, targets } = params;
     return this._client.post(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
-      query: { keep_alive, lab, liveViewUrlExpiresInMs, recording, targets },
+      query: { keep_alive, lab, recording, targets },
       ...options,
     });
   }
@@ -290,12 +290,6 @@ export interface BrowserCreateParams {
    * Query param: Use experimental browser.
    */
   lab?: boolean;
-
-  /**
-   * Query param: How long the live view URL remains valid, in milliseconds (max 60
-   * minutes). Only used when targets is true.
-   */
-  liveViewUrlExpiresInMs?: number;
 
   /**
    * Query param

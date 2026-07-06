@@ -187,8 +187,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Performs a semantic search query against multiple AI Search instances in
-   * parallel, merging the retrieved results into a single ranked response.
+   * Multi-Instance Search
    *
    * @example
    * ```ts

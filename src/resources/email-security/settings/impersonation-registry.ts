@@ -180,14 +180,15 @@ export interface ImpersonationRegistryCreateResponse {
   email?: string;
 
   /**
-   * @deprecated This field is deprecated.
+   * @deprecated
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -218,14 +219,15 @@ export interface ImpersonationRegistryListResponse {
   email?: string;
 
   /**
-   * @deprecated This field is deprecated.
+   * @deprecated
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -263,14 +265,15 @@ export interface ImpersonationRegistryEditResponse {
   email?: string;
 
   /**
-   * @deprecated This field is deprecated.
+   * @deprecated
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -301,14 +304,15 @@ export interface ImpersonationRegistryGetResponse {
   email?: string;
 
   /**
-   * @deprecated This field is deprecated.
+   * @deprecated
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -356,7 +360,7 @@ export interface ImpersonationRegistryCreateParams {
   directory_node_id?: number | null;
 
   /**
-   * @deprecated This field is deprecated.
+   * @deprecated Body param
    */
   external_directory_node_id?: string | null;
 
@@ -427,7 +431,7 @@ export interface ImpersonationRegistryEditParams {
   email?: string;
 
   /**
-   * @deprecated This field is deprecated.
+   * @deprecated Body param
    */
   external_directory_node_id?: string | null;
 

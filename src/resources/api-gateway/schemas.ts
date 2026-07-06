@@ -12,7 +12,7 @@ export class BaseSchemas extends APIResource {
   ] as const);
 
   /**
-   * Retrieves API operations and their features exported as OpenAPI schemas.
+   * Retrieve operations and features as OpenAPI schemas
    *
    * @example
    * ```ts
