@@ -1,6 +1,6 @@
 # Changelog
 
-## 7.0.0 (2026-07-01)
+## 7.0.0 (2026-07-08)
 
 Full Changelog: [v6.5.0...v7.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.5.0...v7.0.0)
 
@@ -159,6 +159,44 @@ Several methods were renamed to use consistent `ID` casing:
 | `realtimeKit.livestreams` | `getLivestreamSessionDetailsForSessionId()` | `getLivestreamSessionDetailsForSessionID()` |
 | `realtimeKit.livestreams` | `getLivestreamSessionForLivestreamId()` | `getLivestreamSessionForLivestreamID()` |
 
+#### Removed `fileFromPath` helper
+
+The `Cloudflare.fileFromPath` static method and the named `fileFromPath` export have been removed.
+Use native Node.js streams or the `toFile()` helper instead:
+
+```ts
+// Before (v6.x)
+import Cloudflare, { fileFromPath } from 'cloudflare';
+const file = await fileFromPath('path/to/file');
+
+// After (v7.0.0)
+import fs from 'node:fs';
+const file = fs.createReadStream('path/to/file');
+```
+
+#### `APIClient` replaced by `BaseCloudflare`
+
+The `APIClient` base class has been replaced:
+
+```ts
+// Before (v6.x)
+import { APIClient } from 'cloudflare/core';
+
+// After (v7.0.0)
+import { BaseCloudflare } from 'cloudflare/client';
+```
+
+#### Page classes converted to type aliases
+
+Per-method pagination classes (e.g. `AccountsV4PagePaginationArray`) are now type aliases instead
+of classes. Runtime `instanceof` checks against them will break. Import the base pagination class
+instead, or use them only at the type level.
+
+#### `cloudflare/src` directory removed
+
+The `cloudflare/src/*` import paths are no longer available. If your IDE auto-completed imports
+from `cloudflare/src/...`, replace them with `cloudflare/...`.
+
 ---
 
 ### Features
@@ -179,6 +217,28 @@ Several methods were renamed to use consistent `ID` casing:
 
 - `AuditHistoryResponse` (on `accounts.logs.audit` and `organizations.logs.audit`)
 - `AuditProductCategoriesResponse` (on `accounts.logs.audit`)
+
+#### Tree-shaking support
+
+New `createClient` function and `PartialCloudflare` type exported from `cloudflare/tree-shakable`.
+Every resource class now exports a `Base*` variant (e.g. `BaseAccounts`, `BaseZones`) for selective
+imports, allowing bundlers to tree-shake unused resources and reduce bundle size.
+
+```ts
+import { createClient } from 'cloudflare/tree-shakable';
+import { Zones } from 'cloudflare/resources/zones/zones';
+
+const client = createClient({ resources: [Zones] });
+```
+
+#### Migration CLI
+
+Automated codemod for v6 -> v7 migration. Handles path parameter reordering, casing changes,
+and import path updates:
+
+```sh
+npx cloudflare migrate ./your/src/folders
+```
 
 ---
 
