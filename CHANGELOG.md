@@ -166,10 +166,6 @@ Several methods were renamed to use consistent `ID` casing:
 #### New Resources
 
 - **`registrar.registrations`** -- `create()`, `list()`, `edit()`, `get()` for domain registrations
-- **`zeroTrust.casb.applications`** -- `list()`, `get()` for CASB application discovery
-- **`zeroTrust.casb.applications.setupFlows`** -- `list()` for CASB setup flows
-- **`zeroTrust.casb.integrations`** -- `create()`, `update()`, `list()`, `delete()`, `get()`,
-  `pause()`, `resume()` for CASB SaaS integrations
 
 #### New Methods
 
