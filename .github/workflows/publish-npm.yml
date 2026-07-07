@@ -32,4 +32,4 @@ jobs:
 
       - name: Publish to NPM
         run: |
-          bash ./bin/publish-npm        
+          bash ./bin/publish-npm
