@@ -16,6 +16,11 @@ upgrading. You can also run the automated migration tool:
 npx cloudflare migrate ./your/src/folders
 ```
 
+The migration tool has two known limitations. First, it is not idempotent -- running it a second
+time on already-migrated code will produce incorrect output. Run it once only. Second, if you have
+manually updated some call sites to v7 style before running the tool, those call sites may be
+incorrectly transformed. Review the output diff carefully before committing.
+
 ---
 
 ### General Changes
