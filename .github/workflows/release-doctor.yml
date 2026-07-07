@@ -5,15 +5,24 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   release_doctor:
     name: release doctor
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 2
     if: github.repository == 'cloudflare/cloudflare-typescript' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || startsWith(github.head_ref, 'release-please') || github.head_ref == 'next')
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Check release environment
         run: |
           bash ./bin/check-release-environment
+        env:
+          NPM_TOKEN: ${{ secrets.CLOUDFLARE_NPM_TOKEN || secrets.NPM_TOKEN }}
