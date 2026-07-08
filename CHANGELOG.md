@@ -43,7 +43,6 @@ in `package.json` is now empty.
 
 #### Removed client options
 
-- **`apiVersion`** -- removed. API versioning is no longer configured at the client level.
 - **`httpAgent`** -- removed. Use `fetchOptions` to pass agent-like configuration instead.
 
 #### Type changes
