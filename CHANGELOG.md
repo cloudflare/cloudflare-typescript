@@ -1,6 +1,6 @@
 # Changelog
 
-## 7.0.0 (2026-07-08)
+## 7.0.0 (2026-07-09)
 
 Full Changelog: [v6.5.0...v7.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.5.0...v7.0.0)
 
