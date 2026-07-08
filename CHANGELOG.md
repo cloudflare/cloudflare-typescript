@@ -1,6 +1,6 @@
 # Changelog
 
-## 7.0.0 (2026-07-08)
+## 7.0.0 (2026-07-09)
 
 Full Changelog: [v6.5.0...v7.0.0](https://github.com/cloudflare/cloudflare-typescript/compare/v6.5.0...v7.0.0)
 
@@ -219,6 +219,7 @@ from `cloudflare/src/...`, replace them with `cloudflare/...`.
 - **`organizations.logs.audit.history()`** -- `GET /organizations/{organization_id}/logs/audit/{id}/history`
 - **`emailRouting.unlock()`** -- `POST /zones/{zone_id}/email/routing/unlock`
 - **`emailRouting.addresses.edit()`** -- `PATCH /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}`
+- **`browserRendering.accessibilityTree.create()`** -- `POST /accounts/{account_id}/browser-rendering/accessibilityTree`
 
 #### New Types
 
