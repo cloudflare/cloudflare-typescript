@@ -219,6 +219,7 @@ from `cloudflare/src/...`, replace them with `cloudflare/...`.
 - **`organizations.logs.audit.history()`** -- `GET /organizations/{organization_id}/logs/audit/{id}/history`
 - **`emailRouting.unlock()`** -- `POST /zones/{zone_id}/email/routing/unlock`
 - **`emailRouting.addresses.edit()`** -- `PATCH /accounts/{account_id}/email/routing/addresses/{destination_address_identifier}`
+- **`browserRendering.accessibilityTree.create()`** -- `POST /accounts/{account_id}/browser-rendering/accessibilityTree`
 
 #### New Types
 
