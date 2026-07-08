@@ -1,5 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  AccessibilityTree,
+  BaseAccessibilityTree,
+  type AccessibilityTreeCreateResponse,
+  type AccessibilityTreeCreateParams,
+} from './accessibility-tree';
 export { BrowserRendering, BaseBrowserRendering } from './browser-rendering';
 export { Content, BaseContent, type ContentCreateResponse, type ContentCreateParams } from './content';
 export {
