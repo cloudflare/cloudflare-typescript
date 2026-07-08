@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AccessibilityTreeAPI from './accessibility-tree';
+import {
+  AccessibilityTree,
+  AccessibilityTreeCreateParams,
+  AccessibilityTreeCreateResponse,
+  BaseAccessibilityTree,
+} from './accessibility-tree';
 import * as ContentAPI from './content';
 import { BaseContent, Content, ContentCreateParams, ContentCreateResponse } from './content';
 import * as CrawlAPI from './crawl';
@@ -43,6 +50,9 @@ export class BrowserRendering extends BaseBrowserRendering {
   json: JsonAPI.Json = new JsonAPI.Json(this._client);
   links: LinksAPI.Links = new LinksAPI.Links(this._client);
   markdown: MarkdownAPI.Markdown = new MarkdownAPI.Markdown(this._client);
+  accessibilityTree: AccessibilityTreeAPI.AccessibilityTree = new AccessibilityTreeAPI.AccessibilityTree(
+    this._client,
+  );
   crawl: CrawlAPI.Crawl = new CrawlAPI.Crawl(this._client);
   devtools: DevtoolsAPI.Devtools = new DevtoolsAPI.Devtools(this._client);
 }
@@ -63,6 +73,8 @@ BrowserRendering.Links = Links;
 BrowserRendering.BaseLinks = BaseLinks;
 BrowserRendering.Markdown = Markdown;
 BrowserRendering.BaseMarkdown = BaseMarkdown;
+BrowserRendering.AccessibilityTree = AccessibilityTree;
+BrowserRendering.BaseAccessibilityTree = BaseAccessibilityTree;
 BrowserRendering.Crawl = Crawl;
 BrowserRendering.BaseCrawl = BaseCrawl;
 BrowserRendering.Devtools = Devtools;
@@ -118,6 +130,13 @@ export declare namespace BrowserRendering {
     BaseMarkdown as BaseMarkdown,
     type MarkdownCreateResponse as MarkdownCreateResponse,
     type MarkdownCreateParams as MarkdownCreateParams,
+  };
+
+  export {
+    AccessibilityTree as AccessibilityTree,
+    BaseAccessibilityTree as BaseAccessibilityTree,
+    type AccessibilityTreeCreateResponse as AccessibilityTreeCreateResponse,
+    type AccessibilityTreeCreateParams as AccessibilityTreeCreateParams,
   };
 
   export {
