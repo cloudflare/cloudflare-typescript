@@ -251,6 +251,13 @@ export interface ClientOptions {
    * Defaults to globalThis.console.
    */
   logger?: Logger | undefined;
+
+  /**
+   * Define the API version to target for the requests, e.g., "2025-01-01".
+   *
+   * Defaults to today's date.
+   */
+  apiVersion?: string | null | undefined;
 }
 
 /**
@@ -268,6 +275,7 @@ export class BaseCloudflare {
   logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
+  apiVersion: string;
 
   private fetch: Fetch;
   #encoder: Opts.RequestEncoder;
@@ -288,9 +296,11 @@ export class BaseCloudflare {
    * @param {number} [opts.maxRetries=2] - The maximum number of times the client will retry a request.
    * @param {HeadersLike} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
+   * @param {string | null} [opts.apiVersion] - Define the version to target for the API.
    */
   constructor({
     baseURL = readEnv('CLOUDFLARE_BASE_URL'),
+    apiVersion = null,
     apiToken = readEnv('CLOUDFLARE_API_TOKEN') ?? null,
     apiKey = readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = readEnv('CLOUDFLARE_EMAIL') ?? null,
@@ -304,6 +314,7 @@ export class BaseCloudflare {
       userServiceKey,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
+      apiVersion: apiVersion || new Date().toISOString().slice(0, 10),
     };
 
     this.baseURL = options.baseURL!;
@@ -339,6 +350,7 @@ export class BaseCloudflare {
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
     this.userServiceKey = userServiceKey;
+    this.apiVersion = options.apiVersion!;
   }
 
   /**
@@ -358,6 +370,7 @@ export class BaseCloudflare {
       apiKey: this.apiKey,
       apiEmail: this.apiEmail,
       userServiceKey: this.userServiceKey,
+      apiVersion: this.apiVersion,
       ...options,
     });
     return client;
@@ -888,6 +901,7 @@ export class BaseCloudflare {
       {
         Accept: 'application/json',
         'User-Agent': this.getUserAgent(),
+        'api-version': this.apiVersion,
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
