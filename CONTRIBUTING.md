@@ -42,14 +42,14 @@ If you’d like to use the repository from source, you can either install from g
 To install via git:
 
 ```sh
-$ npm install git+ssh://git@github.com:stainless-sdks/cloudflare-typescript.git
+$ npm install git+ssh://git@github.com:cloudflare/cloudflare-typescript.git
 ```
 
 Alternatively, to link a local copy of the repo:
 
 ```sh
 # Clone
-$ git clone https://www.github.com/stainless-sdks/cloudflare-typescript
+$ git clone https://www.github.com/cloudflare/cloudflare-typescript
 $ cd cloudflare-typescript
 
 # With yarn

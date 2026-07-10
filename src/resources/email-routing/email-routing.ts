@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as AccountRulesAPI from './account-rules';
+import {
+  AccountRule,
+  AccountRuleListParams,
+  AccountRules,
+  AccountRulesV4PagePaginationArray,
+  BaseAccountRules,
+} from './account-rules';
 import * as AddressesAPI from './addresses';
 import {
   Address,
@@ -34,6 +42,7 @@ import {
   RuleCreateParams,
   RuleDeleteParams,
   RuleGetParams,
+  RuleListParams,
   RuleUpdateParams,
   Rules,
 } from './rules/rules';
@@ -110,6 +119,7 @@ export class BaseEmailRouting extends APIResource {
 export class EmailRouting extends BaseEmailRouting {
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+  accountRules: AccountRulesAPI.AccountRules = new AccountRulesAPI.AccountRules(this._client);
   addresses: AddressesAPI.Addresses = new AddressesAPI.Addresses(this._client);
 }
 
@@ -209,6 +219,8 @@ EmailRouting.DNS = DNS;
 EmailRouting.BaseDNS = BaseDNS;
 EmailRouting.Rules = Rules;
 EmailRouting.BaseRules = BaseRules;
+EmailRouting.AccountRules = AccountRules;
+EmailRouting.BaseAccountRules = BaseAccountRules;
 EmailRouting.Addresses = Addresses;
 EmailRouting.BaseAddresses = BaseAddresses;
 
@@ -241,8 +253,17 @@ export declare namespace EmailRouting {
     type Matcher as Matcher,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    AccountRules as AccountRules,
+    BaseAccountRules as BaseAccountRules,
+    type AccountRule as AccountRule,
+    type AccountRulesV4PagePaginationArray as AccountRulesV4PagePaginationArray,
+    type AccountRuleListParams as AccountRuleListParams,
   };
 
   export {

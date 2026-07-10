@@ -95,6 +95,17 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: BaseRules }
     });
   });
 
+  test('list', async () => {
+    const responsePromise = client.emailRouting.rules.list({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   test('delete: only required params', async () => {
     const responsePromise = client.emailRouting.rules.delete('a7e6fb77503c41d8a7f3113c6918f10c', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',

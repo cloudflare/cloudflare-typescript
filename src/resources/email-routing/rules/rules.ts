@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AccountRulesAPI from '../account-rules';
+import { AccountRulesV4PagePaginationArray } from '../account-rules';
 import * as CatchAllsAPI from './catch-alls';
 import {
   BaseCatchAlls,
@@ -13,6 +15,12 @@ import {
   CatchAlls,
 } from './catch-alls';
 import { APIPromise } from '../../../core/api-promise';
+import { CloudflareError } from '../../../core/error';
+import {
+  PagePromise,
+  V4PagePaginationArray,
+  type V4PagePaginationArrayParams,
+} from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
@@ -76,6 +84,47 @@ export class BaseRules extends APIResource {
         ...options,
       }) as APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists existing routing rules across all zones in the account or zone.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const accountRule of client.emailRouting.rules.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    params: RuleListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AccountRulesV4PagePaginationArray, AccountRulesAPI.AccountRule> {
+    const { account_id, zone_id, ...query } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      path`/${accountOrZone}/${accountOrZoneId}/email/routing/rules`,
+      V4PagePaginationArray<AccountRulesAPI.AccountRule>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -327,6 +376,25 @@ export interface RuleUpdateParams {
   source?: 'api' | 'wrangler';
 }
 
+export interface RuleListParams extends V4PagePaginationArrayParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+
+  /**
+   * Query param: Filter by enabled routing rules.
+   */
+  enabled?: true | false;
+}
+
 export interface RuleDeleteParams {
   /**
    * Identifier.
@@ -351,6 +419,7 @@ export declare namespace Rules {
     type Matcher as Matcher,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
     type RuleGetParams as RuleGetParams,
   };
@@ -366,3 +435,5 @@ export declare namespace Rules {
     type CatchAllGetParams as CatchAllGetParams,
   };
 }
+
+export { type AccountRulesV4PagePaginationArray };

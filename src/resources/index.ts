@@ -109,6 +109,7 @@ export { Radar, BaseRadar } from './radar/radar';
 export { RateLimits, BaseRateLimits } from './rate-limits';
 export { RealtimeKit, BaseRealtimeKit } from './realtime-kit/realtime-kit';
 export { Registrar, BaseRegistrar } from './registrar/registrar';
+export { RegistrarSandbox, BaseRegistrarSandbox } from './registrar-sandbox/registrar-sandbox';
 export { RequestTracers, BaseRequestTracers } from './request-tracers/request-tracers';
 export { ResourceSharing, BaseResourceSharing } from './resource-sharing/resource-sharing';
 export { ResourceTagging, BaseResourceTagging } from './resource-tagging/resource-tagging';

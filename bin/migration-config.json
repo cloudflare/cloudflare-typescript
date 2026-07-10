@@ -1,9 +1,46 @@
 {
   "pkg": "cloudflare",
-  "githubRepo": "https://github.com/stainless-sdks/cloudflare-typescript",
+  "githubRepo": "https://github.com/cloudflare/cloudflare-typescript",
   "clientClass": "Cloudflare",
   "baseClientClass": "BaseCloudflare",
   "methods": [
+    {
+      "base": "organizations.logs.audit",
+      "name": "history",
+      "params": [
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "organization_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
     {
       "base": "customHostnames.certificatePack.certificates",
       "name": "update",

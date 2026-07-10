@@ -4,9 +4,14 @@ import { APIResource } from '../../../core/resource';
 import * as AuditAPI from './audit';
 import {
   Audit,
+  AuditHistoryParams,
+  AuditHistoryResponse,
   AuditListParams,
   AuditListResponse,
   AuditListResponsesCursorPaginationAfter,
+  AuditProductCategoriesParams,
+  AuditProductCategoriesResponse,
+  AuditProductCategoriesResponsesSinglePage,
   BaseAudit,
 } from './audit';
 
@@ -25,7 +30,12 @@ export declare namespace Logs {
     Audit as Audit,
     BaseAudit as BaseAudit,
     type AuditListResponse as AuditListResponse,
+    type AuditHistoryResponse as AuditHistoryResponse,
+    type AuditProductCategoriesResponse as AuditProductCategoriesResponse,
     type AuditListResponsesCursorPaginationAfter as AuditListResponsesCursorPaginationAfter,
+    type AuditProductCategoriesResponsesSinglePage as AuditProductCategoriesResponsesSinglePage,
     type AuditListParams as AuditListParams,
+    type AuditHistoryParams as AuditHistoryParams,
+    type AuditProductCategoriesParams as AuditProductCategoriesParams,
   };
 }

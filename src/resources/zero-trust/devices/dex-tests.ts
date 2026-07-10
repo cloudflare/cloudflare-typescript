@@ -22,7 +22,7 @@ export class BaseDEXTests extends APIResource {
    *
    * @example
    * ```ts
-   * const dexTest =
+   * const schemaHTTP =
    *   await client.zeroTrust.devices.dexTests.create({
    *     account_id: '01a7362d577a6c3019a474fd6f485823',
    *     data: {
@@ -35,13 +35,13 @@ export class BaseDEXTests extends APIResource {
    *   });
    * ```
    */
-  create(params: DEXTestCreateParams, options?: RequestOptions): APIPromise<DEXTestCreateResponse> {
+  create(params: DEXTestCreateParams, options?: RequestOptions): APIPromise<SchemaHTTP> {
     const { account_id, ...body } = params;
     return (
       this._client.post(path`/accounts/${account_id}/dex/devices/dex_tests`, {
         body,
         ...options,
-      }) as APIPromise<{ result: DEXTestCreateResponse }>
+      }) as APIPromise<{ result: SchemaHTTP }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -50,7 +50,7 @@ export class BaseDEXTests extends APIResource {
    *
    * @example
    * ```ts
-   * const dexTest =
+   * const schemaHTTP =
    *   await client.zeroTrust.devices.dexTests.update(
    *     'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *     {
@@ -66,17 +66,13 @@ export class BaseDEXTests extends APIResource {
    *   );
    * ```
    */
-  update(
-    dexTestID: string,
-    params: DEXTestUpdateParams,
-    options?: RequestOptions,
-  ): APIPromise<DEXTestUpdateResponse> {
+  update(dexTestID: string, params: DEXTestUpdateParams, options?: RequestOptions): APIPromise<SchemaHTTP> {
     const { account_id, ...body } = params;
     return (
       this._client.put(path`/accounts/${account_id}/dex/devices/dex_tests/${dexTestID}`, {
         body,
         ...options,
-      }) as APIPromise<{ result: DEXTestUpdateResponse }>
+      }) as APIPromise<{ result: SchemaHTTP }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -86,7 +82,7 @@ export class BaseDEXTests extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const dexTestListResponse of client.zeroTrust.devices.dexTests.list(
+   * for await (const schemaHTTP of client.zeroTrust.devices.dexTests.list(
    *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
    * )) {
    *   // ...
@@ -96,11 +92,11 @@ export class BaseDEXTests extends APIResource {
   list(
     params: DEXTestListParams,
     options?: RequestOptions,
-  ): PagePromise<DEXTestListResponsesV4PagePaginationArray, DEXTestListResponse> {
+  ): PagePromise<SchemaHTTPSV4PagePaginationArray, SchemaHTTP> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/dex/devices/dex_tests`,
-      V4PagePaginationArray<DEXTestListResponse>,
+      V4PagePaginationArray<SchemaHTTP>,
       { query, ...options },
     );
   }
@@ -137,25 +133,26 @@ export class BaseDEXTests extends APIResource {
    *
    * @example
    * ```ts
-   * const dexTest = await client.zeroTrust.devices.dexTests.get(
-   *   '372e67954025e0ba6aaa6d586b9e0b59',
-   *   { account_id: '01a7362d577a6c3019a474fd6f485823' },
-   * );
+   * const schemaHTTP =
+   *   await client.zeroTrust.devices.dexTests.get(
+   *     '372e67954025e0ba6aaa6d586b9e0b59',
+   *     { account_id: '01a7362d577a6c3019a474fd6f485823' },
+   *   );
    * ```
    */
-  get(dexTestID: string, params: DEXTestGetParams, options?: RequestOptions): APIPromise<DEXTestGetResponse> {
+  get(dexTestID: string, params: DEXTestGetParams, options?: RequestOptions): APIPromise<SchemaHTTP> {
     const { account_id } = params;
     return (
       this._client.get(
         path`/accounts/${account_id}/dex/devices/dex_tests/${dexTestID}`,
         options,
-      ) as APIPromise<{ result: DEXTestGetResponse }>
+      ) as APIPromise<{ result: SchemaHTTP }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 export class DEXTests extends BaseDEXTests {}
 
-export type DEXTestListResponsesV4PagePaginationArray = V4PagePaginationArray<DEXTestListResponse>;
+export type SchemaHTTPSV4PagePaginationArray = V4PagePaginationArray<SchemaHTTP>;
 
 /**
  * The configuration object which contains the details for the WARP client to
@@ -165,17 +162,38 @@ export interface SchemaData {
   /**
    * The desired endpoint to test.
    */
-  host?: string;
+  host: string;
 
   /**
    * The type of test.
    */
-  kind?: string;
+  kind: 'http' | 'traceroute';
 
   /**
    * The HTTP request method type.
    */
-  method?: string;
+  method?: 'GET';
+}
+
+/**
+ * The configuration object which contains the details for the WARP client to
+ * conduct the test.
+ */
+export interface SchemaDataParam {
+  /**
+   * The desired endpoint to test.
+   */
+  host: string;
+
+  /**
+   * The type of test.
+   */
+  kind: 'http' | 'traceroute';
+
+  /**
+   * The HTTP request method type.
+   */
+  method?: 'GET';
 }
 
 export interface SchemaHTTP {
@@ -206,7 +224,7 @@ export interface SchemaHTTP {
   description?: string;
 
   /**
-   * Device settings profiles targeted by this test.
+   * DEX rules targeted by this test
    */
   target_policies?: Array<SchemaHTTP.TargetPolicy>;
 
@@ -219,246 +237,6 @@ export interface SchemaHTTP {
 }
 
 export namespace SchemaHTTP {
-  export interface TargetPolicy {
-    /**
-     * The id of the device settings profile.
-     */
-    id?: string;
-
-    /**
-     * Whether the profile is the account default.
-     */
-    default?: boolean;
-
-    /**
-     * The name of the device settings profile.
-     */
-    name?: string;
-  }
-}
-
-export interface DEXTestCreateResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  data: DEXTestCreateResponse.Data;
-
-  /**
-   * Determines whether or not the test is active.
-   */
-  enabled: boolean;
-
-  /**
-   * How often the test will run.
-   */
-  interval: string;
-
-  /**
-   * The name of the DEX test. Must be unique.
-   */
-  name: string;
-
-  /**
-   * Additional details about the test.
-   */
-  description?: string;
-
-  /**
-   * DEX rules targeted by this test
-   */
-  target_policies?: Array<DEXTestCreateResponse.TargetPolicy>;
-
-  targeted?: boolean;
-
-  /**
-   * The unique identifier for the test.
-   */
-  test_id?: string;
-}
-
-export namespace DEXTestCreateResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host: string;
-
-    /**
-     * The type of test.
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: 'GET';
-  }
-
-  export interface TargetPolicy {
-    /**
-     * The id of the DEX rule.
-     */
-    id: string;
-
-    /**
-     * Whether the DEX rule is the account default.
-     */
-    default?: boolean;
-
-    /**
-     * The name of the DEX rule.
-     */
-    name?: string;
-  }
-}
-
-export interface DEXTestUpdateResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  data: DEXTestUpdateResponse.Data;
-
-  /**
-   * Determines whether or not the test is active.
-   */
-  enabled: boolean;
-
-  /**
-   * How often the test will run.
-   */
-  interval: string;
-
-  /**
-   * The name of the DEX test. Must be unique.
-   */
-  name: string;
-
-  /**
-   * Additional details about the test.
-   */
-  description?: string;
-
-  /**
-   * DEX rules targeted by this test
-   */
-  target_policies?: Array<DEXTestUpdateResponse.TargetPolicy>;
-
-  targeted?: boolean;
-
-  /**
-   * The unique identifier for the test.
-   */
-  test_id?: string;
-}
-
-export namespace DEXTestUpdateResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host: string;
-
-    /**
-     * The type of test.
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: 'GET';
-  }
-
-  export interface TargetPolicy {
-    /**
-     * The id of the DEX rule.
-     */
-    id: string;
-
-    /**
-     * Whether the DEX rule is the account default.
-     */
-    default?: boolean;
-
-    /**
-     * The name of the DEX rule.
-     */
-    name?: string;
-  }
-}
-
-export interface DEXTestListResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  data: DEXTestListResponse.Data;
-
-  /**
-   * Determines whether or not the test is active.
-   */
-  enabled: boolean;
-
-  /**
-   * How often the test will run.
-   */
-  interval: string;
-
-  /**
-   * The name of the DEX test. Must be unique.
-   */
-  name: string;
-
-  /**
-   * Additional details about the test.
-   */
-  description?: string;
-
-  /**
-   * DEX rules targeted by this test
-   */
-  target_policies?: Array<DEXTestListResponse.TargetPolicy>;
-
-  targeted?: boolean;
-
-  /**
-   * The unique identifier for the test.
-   */
-  test_id?: string;
-}
-
-export namespace DEXTestListResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host: string;
-
-    /**
-     * The type of test.
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: 'GET';
-  }
-
   export interface TargetPolicy {
     /**
      * The id of the DEX rule.
@@ -478,169 +256,7 @@ export namespace DEXTestListResponse {
 }
 
 export interface DEXTestDeleteResponse {
-  dex_tests?: Array<DEXTestDeleteResponse.DEXTest>;
-}
-
-export namespace DEXTestDeleteResponse {
-  export interface DEXTest {
-    /**
-     * The configuration object which contains the details for the WARP client to
-     * conduct the test.
-     */
-    data: DEXTest.Data;
-
-    /**
-     * Determines whether or not the test is active.
-     */
-    enabled: boolean;
-
-    /**
-     * How often the test will run.
-     */
-    interval: string;
-
-    /**
-     * The name of the DEX test. Must be unique.
-     */
-    name: string;
-
-    /**
-     * Additional details about the test.
-     */
-    description?: string;
-
-    /**
-     * DEX rules targeted by this test
-     */
-    target_policies?: Array<DEXTest.TargetPolicy>;
-
-    targeted?: boolean;
-
-    /**
-     * The unique identifier for the test.
-     */
-    test_id?: string;
-  }
-
-  export namespace DEXTest {
-    /**
-     * The configuration object which contains the details for the WARP client to
-     * conduct the test.
-     */
-    export interface Data {
-      /**
-       * The desired endpoint to test.
-       */
-      host: string;
-
-      /**
-       * The type of test.
-       */
-      kind: 'http' | 'traceroute';
-
-      /**
-       * The HTTP request method type.
-       */
-      method?: 'GET';
-    }
-
-    export interface TargetPolicy {
-      /**
-       * The id of the DEX rule.
-       */
-      id: string;
-
-      /**
-       * Whether the DEX rule is the account default.
-       */
-      default?: boolean;
-
-      /**
-       * The name of the DEX rule.
-       */
-      name?: string;
-    }
-  }
-}
-
-export interface DEXTestGetResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  data: DEXTestGetResponse.Data;
-
-  /**
-   * Determines whether or not the test is active.
-   */
-  enabled: boolean;
-
-  /**
-   * How often the test will run.
-   */
-  interval: string;
-
-  /**
-   * The name of the DEX test. Must be unique.
-   */
-  name: string;
-
-  /**
-   * Additional details about the test.
-   */
-  description?: string;
-
-  /**
-   * DEX rules targeted by this test
-   */
-  target_policies?: Array<DEXTestGetResponse.TargetPolicy>;
-
-  targeted?: boolean;
-
-  /**
-   * The unique identifier for the test.
-   */
-  test_id?: string;
-}
-
-export namespace DEXTestGetResponse {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host: string;
-
-    /**
-     * The type of test.
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: 'GET';
-  }
-
-  export interface TargetPolicy {
-    /**
-     * The id of the DEX rule.
-     */
-    id: string;
-
-    /**
-     * Whether the DEX rule is the account default.
-     */
-    default?: boolean;
-
-    /**
-     * The name of the DEX rule.
-     */
-    name?: string;
-  }
+  dex_tests?: Array<SchemaHTTP>;
 }
 
 export interface DEXTestCreateParams {
@@ -653,7 +269,7 @@ export interface DEXTestCreateParams {
    * Body param: The configuration object which contains the details for the WARP
    * client to conduct the test.
    */
-  data: DEXTestCreateParams.Data;
+  data: SchemaDataParam;
 
   /**
    * Body param: Determines whether or not the test is active.
@@ -687,27 +303,6 @@ export interface DEXTestCreateParams {
 }
 
 export namespace DEXTestCreateParams {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host: string;
-
-    /**
-     * The type of test.
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: 'GET';
-  }
-
   export interface TargetPolicy {
     /**
      * The id of the DEX rule.
@@ -736,7 +331,7 @@ export interface DEXTestUpdateParams {
    * Body param: The configuration object which contains the details for the WARP
    * client to conduct the test.
    */
-  data: DEXTestUpdateParams.Data;
+  data: SchemaDataParam;
 
   /**
    * Body param: Determines whether or not the test is active.
@@ -770,27 +365,6 @@ export interface DEXTestUpdateParams {
 }
 
 export namespace DEXTestUpdateParams {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  export interface Data {
-    /**
-     * The desired endpoint to test.
-     */
-    host: string;
-
-    /**
-     * The type of test.
-     */
-    kind: 'http' | 'traceroute';
-
-    /**
-     * The HTTP request method type.
-     */
-    method?: 'GET';
-  }
-
   export interface TargetPolicy {
     /**
      * The id of the DEX rule.
@@ -844,12 +418,8 @@ export declare namespace DEXTests {
   export {
     type SchemaData as SchemaData,
     type SchemaHTTP as SchemaHTTP,
-    type DEXTestCreateResponse as DEXTestCreateResponse,
-    type DEXTestUpdateResponse as DEXTestUpdateResponse,
-    type DEXTestListResponse as DEXTestListResponse,
     type DEXTestDeleteResponse as DEXTestDeleteResponse,
-    type DEXTestGetResponse as DEXTestGetResponse,
-    type DEXTestListResponsesV4PagePaginationArray as DEXTestListResponsesV4PagePaginationArray,
+    type SchemaHTTPSV4PagePaginationArray as SchemaHTTPSV4PagePaginationArray,
     type DEXTestCreateParams as DEXTestCreateParams,
     type DEXTestUpdateParams as DEXTestUpdateParams,
     type DEXTestListParams as DEXTestListParams,

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseAvailable } from 'cloudflare/resources/logs/log-explorer/datasets/available';
-import { Datasets } from 'cloudflare/resources/logs/log-explorer/datasets/datasets';
+import { BaseAccountRules } from 'cloudflare/resources/email-routing/account-rules';
+import { EmailRouting } from 'cloudflare/resources/email-routing/email-routing';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,22 +16,19 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseAvailable],
+  resources: [BaseAccountRules],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [Datasets],
+  resources: [EmailRouting],
 });
 
-const runTests = (
-  client: PartialCloudflare<{ logs: { logExplorer: { datasets: { available: BaseAvailable } } } }>,
-) => {
-  // HTTP 400 error from prism
-  test.skip('list', async () => {
-    const responsePromise = client.logs.logExplorer.datasets.available.list({ account_id: 'account_id' });
+const runTests = (client: PartialCloudflare<{ emailRouting: { accountRules: BaseAccountRules } }>) => {
+  test('list', async () => {
+    const responsePromise = client.emailRouting.accountRules.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,6 +38,6 @@ const runTests = (
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 };
-describe('resource available', () => runTests(client));
-describe('resource available (tree shakable, base)', () => runTests(partialClient));
-describe('resource available (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource accountRules', () => runTests(client));
+describe('resource accountRules (tree shakable, base)', () => runTests(partialClient));
+describe('resource accountRules (tree shakable, subresource)', () => runTests(parentPartialClient));

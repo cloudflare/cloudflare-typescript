@@ -117,6 +117,7 @@ import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
 import { RateLimits } from './resources/rate-limits/rate-limits';
 import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
+import { RegistrarSandbox } from './resources/registrar-sandbox/registrar-sandbox';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
 import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
@@ -1051,7 +1052,208 @@ export class Cloudflare extends BaseCloudflare {
   networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
+  /**
+   * Registrar API for searching, checking, registering, and managing domains through Cloudflare Registrar.
+   *
+   * ## Prerequisites
+   *
+   * Before using this API, ensure:
+   *
+   * 1. **Cloudflare account** — the caller must have a valid Cloudflare account.
+   * 2. **Billing profile** — the account must have a billing profile with a valid,
+   *   current default payment method (credit card or other accepted method).
+   *   This cannot be set up via API — the account owner must configure billing
+   *   at `https://dash.cloudflare.com/{account_id}/billing/payment-info` before
+   *   calling `POST /registrations`.
+   * 3. **API authentication** — use an API token or API key with the appropriate
+   *   Registrar permissions for the operations you are calling.
+   *
+   * ## Terminology: domain extension
+   *
+   * Throughout this API, "extension" refers to the domain extension part of a fully
+   * qualified domain name — the portion after the registrable label. For example,
+   * in `example.co.uk`, the extension is `co.uk` (not just `uk`). This covers both
+   * top-level domains like `com` and multi-level extensions like `co.uk`. This is
+   * distinct from other uses of the word "extension" (e.g., EPP extensions).
+   *
+   * ## Supported extensions
+   *
+   * This API currently supports programmatic registration for the following
+   * extensions:
+   *
+   * `com`, `org`, `net`, `app`, `dev`, `cc`, `xyz`, `info`, `cloud`, `studio`,
+   * `live`, `link`, `pro`, `tech`, `fyi`, `shop`, `online`, `tools`, `run`,
+   * `games`, `build`, `systems`, `world`, `news`, `site`, `network`, `chat`,
+   * `space`, `family`, `page`, `life`, `group`, `email`, `solutions`, `day`,
+   * `blog`, `ing`, `icu`, `academy`, `today`
+   *
+   * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
+   * not listed above can be registered at `https://dash.cloudflare.com/{account_id}/domains/registrations`.
+   *
+   * ## Typical workflow
+   *
+   * 1. **Search** — call `GET /domain-search?q={keyword}` to discover available domains.
+   * 2. **Check** — call `POST /domain-check` with candidate domains to verify real-time
+   *   availability and pricing.
+   * 3. **Review the response** — if `registrable: false`, inspect `reason` to
+   *   understand whether the domain is unavailable, the extension is not supported
+   *   by this API, the extension is not supported by Cloudflare Registrar at all,
+   *   or the extension's registry has frozen new registrations.
+   * 4. **Handle premium domains** — if `tier: premium`, premium registration is
+   *   not currently supported by this API. Surface the premium pricing to the user,
+   *   but do not proceed to `POST /registrations` for that domain.
+   * 5. **Register** — call `POST /registrations` with the chosen domain name for
+   *   supported non-premium registrations.
+   * 6. **Confirm completion** — if the response is `201 Created`, registration
+   *   completed within the default timeout and no polling is needed.
+   * 7. **Poll when needed** — if the response is `202 Accepted`, poll
+   *   `links.self` from the workflow response.
+   * 8. **Stop for user action** — if `state: action_required`, stop polling and
+   *   surface `context.action` to the user.
+   *   The workflow will not resolve on its own.
+   * 9. **Continue when blocked** — if `state: blocked`, continue polling and
+   *   inform the user that a third party, such as the extension registry or losing
+   *   registrar, is delaying progress.
+   * 10. **Review failures before retrying** — if `state: failed`, review
+   *   `error.code` and `error.message`, then decide whether user action or a new
+   *   Check call is needed.
+   *
+   * **All successful domain registrations are non-refundable.** Once the registration
+   * workflow completes with `state: succeeded`, the charge cannot be reversed.
+   * Confirm pricing and domain choice with the user before calling `POST /registrations`.
+   *
+   * ## Default behavior for mutating operations
+   *
+   * By default, mutating operations such as create and update hold the connection
+   * for a bounded, server-defined amount of time while the operation completes.
+   * In most cases, the response contains a completed workflow status and no
+   * polling is required.
+   *
+   * - **Completed within the synchronous wait window:** Returns `201` (create)
+   * or `200` (update) with a `workflow_status` where `state: succeeded` and
+   * `completed: true`.
+   * - **Still processing after the synchronous wait window:** Returns
+   * `202 Accepted` with a `workflow_status` where `completed: false`. Use
+   * the `links.self` URL to poll for completion.
+   *
+   * ## Non-blocking mode
+   *
+   * To receive an immediate `202 Accepted` response without waiting, send the
+   * `Prefer: respond-async` request header (RFC 7240). The server will acknowledge
+   * it with a `Preference-Applied: respond-async` response header.
+   *
+   * ## Polling
+   *
+   * When the response is `202`, poll the workflow status endpoint indicated by
+   * `links.self` in the response body until the workflow reaches a terminal
+   * state or requires user action.
+   */
   registrar: API.Registrar = new API.Registrar(this);
+  /**
+   * Use the Registrar Sandbox API to test domain search, availability checks,
+   * registration, and domain management flows without buying real domains.
+   *
+   * **This API is a test environment for the production Registrar API.**
+   *
+   * ## Prerequisites
+   *
+   * Before using this API, make sure you have:
+   *
+   * 1. **Cloudflare account** — the caller must have a valid Cloudflare account.
+   * 2. **API authentication** — create an API token with Registrar Sandbox permissions.
+   *
+   * ## How the Sandbox API differs from the production Registrar API
+   *
+   * Because the Sandbox API is intended for testing, it behaves differently from
+   * the production Registrar API in a few important ways:
+   *
+   * 1. **No billing** — you will not be charged real money for purchasing a domain.
+   * 2. **No real domains** — purchased domains are test records and will not be
+   *   reachable on the Internet.
+   * 3. **No DNS zones** — purchasing a domain does not create a zone resource.
+   * 4. **No Registration Express Mode** — you must provide full contact data.
+   *
+   * Sandbox purchases are still persisted. If you purchase a domain in the sandbox,
+   * that domain will not be available for others to purchase in the sandbox.
+   *
+   * ## Terminology: domain extension
+   *
+   * Throughout this API, "extension" refers to the domain extension part of a fully
+   * qualified domain name — the portion after the registrable label. For example,
+   * in `example.co.uk`, the extension is `co.uk` (not just `uk`). This covers both
+   * top-level domains like `com` and multi-level extensions like `co.uk`. This is
+   * distinct from other uses of the word "extension" (e.g., EPP extensions).
+   *
+   * ## Supported extensions
+   *
+   * The Sandbox API currently supports programmatic registration for these
+   * extensions:
+   *
+   * `com`, `net`
+   *
+   * The production Registrar API supports 40+ extensions.
+   *
+   * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
+   * not listed above can be registered at `https://dash.cloudflare.com/{account_id}/domains/registrations`.
+   *
+   * ## Typical workflow
+   *
+   * 1. **Search** — call `GET /domain-search?q={keyword}` to discover available domains.
+   * 2. **Check** — call `POST /domain-check` with candidate domains to verify real-time
+   *   availability and pricing.
+   * 3. **Review the response** — if `registrable: false`, inspect `reason` to
+   *   understand whether the domain is unavailable, the extension is not supported
+   *   by this API, the extension is not supported by Cloudflare Registrar at all,
+   *   or the extension's registry has frozen new registrations.
+   * 4. **Handle premium domains** — if `tier: premium`, premium registration is
+   *   not currently supported by this API. The Sandbox API currently supports
+   *   only `com` and `net`, which do not have premium registrations, but clients
+   *   should still handle this response for consistency with the production
+   *   Registrar API. Surface the premium pricing to the user, but do not proceed
+   *   to `POST /registrations` for that domain.
+   * 5. **Register** — call `POST /registrations` with the chosen domain name for
+   *   supported non-premium registrations.
+   * 6. **Confirm completion** — if the response is `201 Created`, registration
+   *   completed within the default timeout and no polling is needed.
+   * 7. **Poll when needed** — if the response is `202 Accepted`, poll
+   *   `links.self` from the workflow response.
+   * 8. **Stop for user action** — if `state: action_required`, stop polling and
+   *   surface `context.action` to the user.
+   *   The workflow will not resolve on its own.
+   * 9. **Continue when blocked** — if `state: blocked`, continue polling and
+   *   inform the user that a third party, such as the extension registry or losing
+   *   registrar, is delaying progress.
+   * 10. **Review failures before retrying** — if `state: failed`, review
+   *   `error.code` and `error.message`, then decide whether user action or a new
+   *   Check call is needed.
+   *
+   * ## Default behavior for mutating operations
+   *
+   * By default, mutating operations such as create and update hold the connection
+   * for a bounded, server-defined amount of time while the operation completes.
+   * In most cases, the response contains a completed workflow status and no
+   * polling is required.
+   *
+   * - **Completed within the synchronous wait window:** Returns `201` (create)
+   * or `200` (update) with a `workflow_status` where `state: succeeded` and
+   * `completed: true`.
+   * - **Still processing after the synchronous wait window:** Returns
+   * `202 Accepted` with a `workflow_status` where `completed: false`. Use
+   * the `links.self` URL to poll for completion.
+   *
+   * ## Non-blocking mode
+   *
+   * To receive an immediate `202 Accepted` response without waiting, send the
+   * `Prefer: respond-async` request header (RFC 7240). The server will acknowledge
+   * it with a `Preference-Applied: respond-async` response header.
+   *
+   * ## Polling
+   *
+   * When the response is `202`, poll the workflow status endpoint indicated by
+   * `links.self` in the response body until the workflow reaches a terminal
+   * state or requires user action.
+   */
+  registrarSandbox: API.RegistrarSandbox = new API.RegistrarSandbox(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
   rules: API.Rules = new API.Rules(this);
   stream: API.Stream = new API.Stream(this);
@@ -1172,6 +1374,7 @@ Cloudflare.NetworkInterconnects = NetworkInterconnects;
 Cloudflare.MTLSCertificates = MTLSCertificates;
 Cloudflare.Pages = Pages;
 Cloudflare.Registrar = Registrar;
+Cloudflare.RegistrarSandbox = RegistrarSandbox;
 Cloudflare.RequestTracers = RequestTracers;
 Cloudflare.Rules = Rules;
 Cloudflare.Stream = Stream;
@@ -1389,6 +1592,8 @@ export declare namespace Cloudflare {
   export { Pages as Pages };
 
   export { Registrar as Registrar };
+
+  export { RegistrarSandbox as RegistrarSandbox };
 
   export { RequestTracers as RequestTracers };
 
