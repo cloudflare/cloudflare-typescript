@@ -110,7 +110,7 @@ export class BaseRecords extends APIResource {
   }
 
   /**
-   * Permanently removes a DNS record from the zone.
+   * Delete DNS Record
    *
    * @example
    * ```ts
@@ -226,7 +226,7 @@ export class BaseRecords extends APIResource {
   }
 
   /**
-   * Retrieves details for a specific DNS record in the zone.
+   * DNS Record Details
    *
    * @example
    * ```ts

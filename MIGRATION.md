@@ -66,8 +66,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.accounts.tokens.delete()`
 - `client.accounts.tokens.get()`
 - `client.accounts.tokens.value.update()`
-- `client.accounts.logs.audit.history()`
-- `client.organizations.logs.audit.history()`
 - `client.zones.settings.edit()`
 - `client.zones.settings.get()`
 - `client.zones.environments.delete()`
@@ -183,7 +181,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailRouting.rules.delete()`
 - `client.emailRouting.rules.get()`
 - `client.emailRouting.addresses.delete()`
-- `client.emailRouting.addresses.edit()`
 - `client.emailRouting.addresses.get()`
 - `client.emailSending.subdomains.delete()`
 - `client.emailSending.subdomains.get()`
@@ -1803,10 +1800,10 @@ client.example.list(undefined, { headers: { ... } });
 
 ### Removed `httpAgent` in favor of `fetchOptions`
 
-The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript#fetch-options).
+The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://github.com/cloudflare/cloudflare-typescript#fetch-options).
 This change was made as `httpAgent` relied on `node:http` agents which are not supported by any runtime's builtin fetch implementation.
 
-If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript#configuring-proxies).
+If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://github.com/cloudflare/cloudflare-typescript#configuring-proxies).
 
 Before:
 

@@ -2,6 +2,7 @@ CHANGELOG.md
 /ecosystem-tests/*/**
 /node_modules
 /deno
+/packages/mcp-server/manifest.json
 
 # don't format tsc output, will break source maps
-/dist
+dist

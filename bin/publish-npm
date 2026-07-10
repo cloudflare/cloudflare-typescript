@@ -2,6 +2,8 @@
 
 set -eux
 
+npm config set '//registry.npmjs.org/:_authToken' "$NPM_TOKEN"
+
 yarn build
 cd dist
 
@@ -56,4 +58,4 @@ else
 fi
 
 # Publish with the appropriate tag
-npm publish --provenance --tag "$TAG"
+yarn publish --tag "$TAG"

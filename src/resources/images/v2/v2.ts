@@ -29,10 +29,6 @@ export class BaseV2 extends APIResource {
    * **Supported Operators:**
    *
    * - `eq` / `eq:string` / `eq:number` / `eq:boolean` - Exact match
-   * - `gt` / `gt:number` - Greater than (number only)
-   * - `gte` / `gte:number` - Greater than or equal (number only)
-   * - `lt` / `lt:number` - Less than (number only)
-   * - `lte` / `lte:number` - Less than or equal (number only)
    * - `in` / `in:string` / `in:number` - Match any value in list (pipe-separated)
    *
    * **Metadata Filter Constraints:**
@@ -41,13 +37,6 @@ export class BaseV2 extends APIResource {
    * - Maximum 5 levels of nesting (e.g., `meta.first.second.third.fourth.fifth`)
    * - Maximum 10 elements for list operators (`in`)
    * - Supports string, number, and boolean value types
-   * - Range operators (`gt`, `gte`, `lt`, `lte`) only accept numeric values
-   *
-   * **Filter Consistency:** Filters are combined with AND logic. The system does not
-   * validate whether filter combinations are logically consistent. For example,
-   * `meta.priority[eq:number]=5&meta.priority[lte:number]=3` will return zero
-   * results because no value can satisfy both conditions simultaneously. It is the
-   * caller's responsibility to ensure filter combinations make sense.
    *
    * **Examples:**
    *
@@ -63,12 +52,6 @@ export class BaseV2 extends APIResource {
    *
    * # Filter by metadata [in:number]
    * /images/v2?meta.ratings[in:number]=4|5
-   *
-   * # Filter by metadata range [gte:number]
-   * /images/v2?meta.priority[gte:number]=1
-   *
-   * # Filter by bounded range
-   * /images/v2?meta.priority[gte:number]=1&meta.priority[lte:number]=5
    *
    * # Filter by nested metadata
    * /images/v2?meta.region.name[eq]=eu-west
@@ -152,10 +135,6 @@ export namespace V2ListParams {
      * **Operators:**
      *
      * - `eq`, `eq:string`, `eq:number`, `eq:boolean` - Exact match
-     * - `gt`, `gt:number` - Greater than (number only)
-     * - `gte`, `gte:number` - Greater than or equal (number only)
-     * - `lt`, `lt:number` - Less than (number only)
-     * - `lte`, `lte:number` - Less than or equal (number only)
      * - `in`, `in:string`, `in:number` - Match any value in pipe-separated list
      *
      * **Examples:**
@@ -163,13 +142,7 @@ export namespace V2ListParams {
      * - `meta.status[eq]=active`
      * - `meta.priority[eq:number]=5`
      * - `meta.enabled[eq:boolean]=true`
-     * - `meta.priority[gte:number]=1`
-     * - `meta.score[lt:number]=100`
      * - `meta.region[in]=us-east|us-west|eu-west`
-     *
-     * **Note:** Filter consistency is not validated. Contradictory filters (e.g.,
-     * `meta.priority[eq:number]=5&meta.priority[lte:number]=3`) will return zero
-     * results.
      */
     '<field>[<operator>]'?: string;
   }

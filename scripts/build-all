@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# build-all is deprecated, use build instead
+
+bash ./scripts/build

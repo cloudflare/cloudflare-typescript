@@ -183,11 +183,6 @@ export namespace PortalCreateResponse {
 
     prompts: Array<{ [key: string]: unknown }>;
 
-    /**
-     * server id
-     */
-    server_id: string;
-
     tools: Array<{ [key: string]: unknown }>;
 
     created_at?: string;
@@ -339,11 +334,6 @@ export namespace PortalUpdateResponse {
 
     prompts: Array<{ [key: string]: unknown }>;
 
-    /**
-     * server id
-     */
-    server_id: string;
-
     tools: Array<{ [key: string]: unknown }>;
 
     created_at?: string;
@@ -494,11 +484,6 @@ export namespace PortalListResponse {
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
-
-    /**
-     * server id
-     */
-    server_id: string;
 
     tools: Array<{ [key: string]: unknown }>;
 
@@ -681,11 +666,6 @@ export namespace PortalReadResponse {
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
-
-    /**
-     * server id
-     */
-    server_id: string;
 
     tools: Array<{ [key: string]: unknown }>;
 

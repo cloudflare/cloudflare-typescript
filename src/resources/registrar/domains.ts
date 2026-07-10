@@ -15,7 +15,7 @@ export class BaseDomains extends APIResource {
   /**
    * Update individual domain.
    *
-   * @deprecated This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.
+   * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
   update(
     domainName: string,
@@ -34,7 +34,7 @@ export class BaseDomains extends APIResource {
   /**
    * List domains handled by Registrar.
    *
-   * @deprecated This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.
+   * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
   list(params: DomainListParams, options?: RequestOptions): PagePromise<DomainsSinglePage, Domain> {
     const { account_id } = params;
@@ -48,7 +48,7 @@ export class BaseDomains extends APIResource {
   /**
    * Show individual domain.
    *
-   * @deprecated This operation is deprecated and will reach end of life on September 27, 2026. Use the new Registrar API endpoints (domain-search, domain-check, registrations) instead. Refer to https://developers.cloudflare.com/fundamentals/api/reference/deprecations/ for details.
+   * @deprecated This operation is deprecated and will be removed in a future release. A replacement Registrar API will be announced separately.
    */
   get(
     domainName: string,

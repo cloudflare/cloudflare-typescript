@@ -136,7 +136,7 @@ export namespace BotListResponse {
     description: string;
 
     /**
-     * @deprecated The kind of the bot.
+     * The kind of the bot.
      */
     kind: string;
 
@@ -176,7 +176,7 @@ export namespace BotGetResponse {
     description: string;
 
     /**
-     * @deprecated The kind of the bot.
+     * The kind of the bot.
      */
     kind: string;
 
@@ -669,8 +669,7 @@ export interface BotListParams {
   format?: 'JSON' | 'CSV';
 
   /**
-   * Filters results by bot kind. Deprecated: the Verified Bot / Signed Agent
-   * distinction is being removed.
+   * Filters results by bot kind.
    */
   kind?: 'AGENT' | 'BOT';
 
@@ -729,8 +728,7 @@ export interface BotSummaryParams {
   >;
 
   /**
-   * Filters results by bot kind. Deprecated: the Verified Bot / Signed Agent
-   * distinction is being removed.
+   * Filters results by bot kind.
    */
   botKind?: Array<'AGENT' | 'BOT'>;
 
@@ -837,8 +835,7 @@ export interface BotTimeseriesParams {
   >;
 
   /**
-   * Filters results by bot kind. Deprecated: the Verified Bot / Signed Agent
-   * distinction is being removed.
+   * Filters results by bot kind.
    */
   botKind?: Array<'AGENT' | 'BOT'>;
 
@@ -938,8 +935,7 @@ export interface BotTimeseriesGroupsParams {
   >;
 
   /**
-   * Filters results by bot kind. Deprecated: the Verified Bot / Signed Agent
-   * distinction is being removed.
+   * Filters results by bot kind.
    */
   botKind?: Array<'AGENT' | 'BOT'>;
 

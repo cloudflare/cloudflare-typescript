@@ -90,13 +90,6 @@ const runTests = (
           name: 'index.js',
         },
       ],
-      package_dependencies: [
-        {
-          installedVersion: '4.17.22',
-          name: 'lodash',
-          packageJsonVersion: '^4.17.21',
-        },
-      ],
       placement: { mode: 'smart' },
       usage_model: 'standard',
     });

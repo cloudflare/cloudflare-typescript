@@ -14,25 +14,19 @@ on:
       - 'stl-preview-head/**'
       - 'stl-preview-base/**'
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   lint:
     timeout-minutes: 10
     name: lint
-    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
@@ -43,7 +37,7 @@ jobs:
   build:
     timeout-minutes: 5
     name: build
-    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
     permissions:
       contents: read
@@ -54,7 +48,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
@@ -64,7 +58,7 @@ jobs:
 
       - name: Get GitHub OIDC Token
         if: |-
-          github.repository == 'stainless-sdks/cloudflare-node' &&
+          github.repository == 'stainless-sdks/cloudflare-typescript' &&
           !startsWith(github.ref, 'refs/heads/stl/')
         id: github-oidc
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
@@ -73,57 +67,42 @@ jobs:
 
       - name: Upload tarball
         if: |-
-          github.repository == 'stainless-sdks/cloudflare-node' &&
+          github.repository == 'stainless-sdks/cloudflare-typescript' &&
           !startsWith(github.ref, 'refs/heads/stl/')
         env:
           URL: https://pkg.stainless.com/s
           AUTH: ${{ steps.github-oidc.outputs.github_token }}
           SHA: ${{ github.sha }}
         run: ./scripts/utils/upload-artifact.sh
+
+      - name: Upload MCP Server tarball
+        if: |-
+          github.repository == 'stainless-sdks/cloudflare-typescript' &&
+          !startsWith(github.ref, 'refs/heads/stl/')
+        env:
+          URL: https://pkg.stainless.com/s?subpackage=mcp-server
+          AUTH: ${{ steps.github-oidc.outputs.github_token }}
+          SHA: ${{ github.sha }}
+          BASE_PATH: packages/mcp-server
+        run: ./scripts/utils/upload-artifact.sh
   test:
     timeout-minutes: 10
     name: test
-    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
+    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-typescript' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
 
+      - name: Build
+        run: ./scripts/build
+
       - name: Run tests
-        continue-on-error: true
         run: ./scripts/test
-  examples:
-    timeout-minutes: 10
-    name: examples
-    runs-on: ${{ github.repository == 'stainless-sdks/cloudflare-node' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
-    if: github.repository == 'cloudflare/cloudflare-typescript' && (github.event_name == 'push' || github.event.pull_request.head.repo.fork) && (github.event_name != 'push' || github.event.head_commit.message != 'codegen metadata')
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Set up Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: '20'
-      - name: Install dependencies
-        run: |
-          yarn install
-
-      - continue-on-error: true
-        env:
-          CLOUDFLARE_ACCOUNT_ID: f037e56e89293a057740de681ac9abbe
-          CLOUDFLARE_EMAIL: terraform-acceptance-test@cfapi.net
-          CLOUDFLARE_ZONE_ID: 0da42c8d2132a9ddaf714f9e7c92011
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-        run: |
-          yarn tsn ./examples/ai/demo.ts

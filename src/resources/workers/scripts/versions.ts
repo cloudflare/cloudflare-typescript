@@ -2173,12 +2173,6 @@ export namespace VersionCreateParams {
     keep_bindings?: Array<string>;
 
     /**
-     * The list of npm packages that were installed and used when this Worker version
-     * was built.
-     */
-    package_dependencies?: Array<Metadata.PackageDependency>;
-
-    /**
      * Usage model for the Worker invocations.
      */
     usage_model?: 'standard' | 'bundled' | 'unbound';
@@ -2971,23 +2965,6 @@ export namespace VersionCreateParams {
        * UUID of the Cloudflare Tunnel to bind to. Mutually exclusive with network_id.
        */
       tunnel_id?: string;
-    }
-
-    export interface PackageDependency {
-      /**
-       * The exact version that was resolved and installed by the package manager.
-       */
-      installedVersion: string;
-
-      /**
-       * The npm package name.
-       */
-      name: string;
-
-      /**
-       * The version constraint as written in package.json.
-       */
-      packageJsonVersion: string;
     }
   }
 }

@@ -12,7 +12,7 @@ export class BaseCustomNameservers extends APIResource {
   ] as const);
 
   /**
-   * Adds a custom nameserver to the account for use as a vanity nameserver on zones.
+   * Add Account Custom Nameserver
    *
    * @example
    * ```ts
@@ -33,7 +33,7 @@ export class BaseCustomNameservers extends APIResource {
   }
 
   /**
-   * Removes a custom nameserver from the account.
+   * Delete Account Custom Nameserver
    *
    * @example
    * ```ts

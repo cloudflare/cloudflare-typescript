@@ -31,7 +31,7 @@ export class BaseBrowser extends APIResource {
   ] as const);
 
   /**
-   * Get a browser session ID.
+   * Acquire a new browser DevTools session
    *
    * @example
    * ```ts

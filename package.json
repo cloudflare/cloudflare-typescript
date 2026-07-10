@@ -1,15 +1,12 @@
 {
   "name": "cloudflare",
-  "version": "7.0.0",
+  "version": "0.0.1-alpha.0",
   "description": "The official TypeScript library for the Cloudflare API",
   "author": "Cloudflare <api@cloudflare.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cloudflare/cloudflare-typescript.git"
-  },
+  "repository": "github:cloudflare/cloudflare-typescript",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
