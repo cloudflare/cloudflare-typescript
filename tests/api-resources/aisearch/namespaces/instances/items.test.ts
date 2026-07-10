@@ -48,6 +48,7 @@ const runTests = (
       account_id: 'c3dc5f0b34a14ff8e1b3ec04895e1b22',
       name: 'my-namespace',
       item_id: 'item_id',
+      key: 'key',
       metadata_filter: 'metadata_filter',
       page: 1,
       per_page: 0,

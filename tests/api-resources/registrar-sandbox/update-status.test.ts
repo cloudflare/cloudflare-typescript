@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Billing } from 'cloudflare/resources/organizations/billing/billing';
-import { BaseUsage } from 'cloudflare/resources/organizations/billing/usage';
+import { RegistrarSandbox } from 'cloudflare/resources/registrar-sandbox/registrar-sandbox';
+import { BaseUpdateStatus } from 'cloudflare/resources/registrar-sandbox/update-status';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,19 +16,21 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseUsage],
+  resources: [BaseUpdateStatus],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [Billing],
+  resources: [RegistrarSandbox],
 });
 
-const runTests = (client: PartialCloudflare<{ organizations: { billing: { usage: BaseUsage } } }>) => {
-  test('get', async () => {
-    const responsePromise = client.organizations.billing.usage.get('023e105f4ecef8ad9ca31a8372d0c353');
+const runTests = (client: PartialCloudflare<{ registrarSandbox: { updateStatus: BaseUpdateStatus } }>) => {
+  test('get: only required params', async () => {
+    const responsePromise = client.registrarSandbox.updateStatus.get('example.com', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -38,17 +40,12 @@ const runTests = (client: PartialCloudflare<{ organizations: { billing: { usage:
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.organizations.billing.usage.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { from: '2025-05-01', to: '2025-05-31' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.registrarSandbox.updateStatus.get('example.com', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 };
-describe('resource usage', () => runTests(client));
-describe('resource usage (tree shakable, base)', () => runTests(partialClient));
-describe('resource usage (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource updateStatus', () => runTests(client));
+describe('resource updateStatus (tree shakable, base)', () => runTests(partialClient));
+describe('resource updateStatus (tree shakable, subresource)', () => runTests(parentPartialClient));

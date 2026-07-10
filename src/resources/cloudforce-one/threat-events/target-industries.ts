@@ -10,7 +10,7 @@ export class BaseTargetIndustries extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'targetIndustries'] as const);
 
   /**
-   * Lists target industries across multiple datasets
+   * List target industries referenced in events across one or more datasets.
    *
    * @example
    * ```ts

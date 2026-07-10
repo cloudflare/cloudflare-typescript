@@ -21,7 +21,7 @@ export class BaseLevels extends APIResource {
   );
 
   /**
-   * Creates a new sensitivity level.
+   * Creates a sensitivity level in a group.
    *
    * @example
    * ```ts
@@ -47,7 +47,7 @@ export class BaseLevels extends APIResource {
   }
 
   /**
-   * Update the attributes of a single sensitivity level.
+   * Updates a sensitivity level in a group.
    *
    * @example
    * ```ts
@@ -77,7 +77,7 @@ export class BaseLevels extends APIResource {
   }
 
   /**
-   * Retrieve all sensitivity levels in a sensitivity group
+   * Lists sensitivity levels in a sensitivity group.
    *
    * @example
    * ```ts
@@ -104,7 +104,7 @@ export class BaseLevels extends APIResource {
   }
 
   /**
-   * Delete a single sensitivity level.
+   * Deletes a sensitivity level from a group.
    *
    * @example
    * ```ts
@@ -134,7 +134,7 @@ export class BaseLevels extends APIResource {
   }
 
   /**
-   * Retrieve a specific sensitivity level.
+   * Gets a sensitivity level from a group.
    *
    * @example
    * ```ts

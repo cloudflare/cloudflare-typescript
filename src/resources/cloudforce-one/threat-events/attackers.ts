@@ -13,7 +13,7 @@ export class BaseAttackers extends APIResource {
   ] as const);
 
   /**
-   * Lists attackers across multiple datasets
+   * List attacker names referenced in events across one or more datasets.
    *
    * @example
    * ```ts

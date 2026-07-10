@@ -14,7 +14,10 @@ export class BaseIntegrations extends APIResource {
   ] as const);
 
   /**
-   * Creates a new integration for the specified application.
+   * Creates a new integration for the specified application. Integration creation
+   * with OAuth is not supported by API at the moment. For other auth methods, use
+   * `GET /v2/applications/{slug}/credential-guide` to see the required credential
+   * structure and example payloads for each vendor.
    *
    * @example
    * ```ts
@@ -610,13 +613,22 @@ export interface IntegrationCreateParams {
   /**
    * Body param: Vendor/application slug (e.g., GOOGLE_WORKSPACE).
    *
+   * - `BOX` - BOX
+   * - `DROPBOX` - DROPBOX
    * - `GITHUB` - GITHUB
    * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
    * - `MICROSOFT_INTERNAL` - MICROSOFT_INTERNAL
    * - `SALESFORCE` - SALESFORCE
    * - `SLACK` - SLACK
    */
-  application: 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK';
+  application:
+    | 'BOX'
+    | 'DROPBOX'
+    | 'GITHUB'
+    | 'GOOGLE_WORKSPACE'
+    | 'MICROSOFT_INTERNAL'
+    | 'SALESFORCE'
+    | 'SLACK';
 
   /**
    * Body param: Credentials for the integration.

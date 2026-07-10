@@ -45,7 +45,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Update email scanner rule
+   * Updates a DLP email scanning rule.
    *
    * @example
    * ```ts

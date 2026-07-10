@@ -110,7 +110,7 @@ export class BasePortals extends APIResource {
   }
 
   /**
-   * Read details of an MCP Portal
+   * Read the details of a single MCP Portal, including its configured servers.
    *
    * @example
    * ```ts
@@ -226,7 +226,10 @@ export namespace PortalCreateResponse {
      */
     secure_web_gateway?: boolean;
 
-    status?: string;
+    /**
+     * Current sync state of the server
+     */
+    status?: 'waiting' | 'ready' | 'stale' | 'error';
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -382,7 +385,10 @@ export namespace PortalUpdateResponse {
      */
     secure_web_gateway?: boolean;
 
-    status?: string;
+    /**
+     * Current sync state of the server
+     */
+    status?: 'waiting' | 'ready' | 'stale' | 'error';
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -538,7 +544,10 @@ export namespace PortalListResponse {
      */
     secure_web_gateway?: boolean;
 
-    status?: string;
+    /**
+     * Current sync state of the server
+     */
+    status?: 'waiting' | 'ready' | 'stale' | 'error';
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -725,7 +734,10 @@ export namespace PortalReadResponse {
      */
     secure_web_gateway?: boolean;
 
-    status?: string;
+    /**
+     * Current sync state of the server
+     */
+    status?: 'waiting' | 'ready' | 'stale' | 'error';
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 

@@ -13,7 +13,7 @@ export class BaseEnvironments extends APIResource {
   ] as const);
 
   /**
-   * Create zone environments
+   * Creates environments for a zone.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseEnvironments extends APIResource {
   }
 
   /**
-   * Upsert zone environments
+   * Replaces the full environment configuration for a zone.
    *
    * @example
    * ```ts
@@ -71,7 +71,7 @@ export class BaseEnvironments extends APIResource {
   }
 
   /**
-   * List zone environments
+   * Lists configured environments for a zone.
    *
    * @example
    * ```ts
@@ -90,7 +90,7 @@ export class BaseEnvironments extends APIResource {
   }
 
   /**
-   * Delete zone environment
+   * Deletes a zone environment by reference identifier.
    *
    * @example
    * ```ts
@@ -114,7 +114,7 @@ export class BaseEnvironments extends APIResource {
   }
 
   /**
-   * Partially update zone environments
+   * Applies partial updates to zone environments.
    *
    * @example
    * ```ts
@@ -143,7 +143,7 @@ export class BaseEnvironments extends APIResource {
   }
 
   /**
-   * Roll back zone environment
+   * Rolls a zone environment back to its previous version.
    *
    * @example
    * ```ts

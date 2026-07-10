@@ -19,11 +19,3 @@ Methods:
 - <code title="get /accounts/{account_id}/moq/relays/{relay_id}">client.moq.relays.<a href="./src/resources/moq/relays/relays.ts">get</a>(relayID, { ...params }) -> RelayGetResponse</code>
 
 ### Tokens
-
-Types:
-
-- <code><a href="./src/resources/moq/relays/tokens.ts">TokenRotateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/moq/relays/{relay_id}/tokens/rotate">client.moq.relays.tokens.<a href="./src/resources/moq/relays/tokens.ts">rotate</a>(relayID, { ...params }) -> TokenRotateResponse</code>

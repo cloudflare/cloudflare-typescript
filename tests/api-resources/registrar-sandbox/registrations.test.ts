@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { MoQ } from 'cloudflare/resources/moq/moq';
-import { BaseRelays } from 'cloudflare/resources/moq/relays/relays';
+import { RegistrarSandbox } from 'cloudflare/resources/registrar-sandbox/registrar-sandbox';
+import { BaseRegistrations } from 'cloudflare/resources/registrar-sandbox/registrations';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,21 +16,21 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseRelays],
+  resources: [BaseRegistrations],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [MoQ],
+  resources: [RegistrarSandbox],
 });
 
-const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) => {
+const runTests = (client: PartialCloudflare<{ registrarSandbox: { registrations: BaseRegistrations } }>) => {
   test('create: only required params', async () => {
-    const responsePromise = client.moq.relays.create({
+    const responsePromise = client.registrarSandbox.registrations.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'Production Live Stream',
+      domain_name: 'my-new-startup.com',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,35 +42,38 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.moq.relays.create({
+    const response = await client.registrarSandbox.registrations.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'Production Live Stream',
-    });
-  });
-
-  test('update: only required params', async () => {
-    const responsePromise = client.moq.relays.update('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: required and optional params', async () => {
-    const response = await client.moq.relays.update('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      config: { upstreams: { enabled: true, upstreams: [{ url: 'url' }] } },
-      name: 'name',
+      domain_name: 'my-new-startup.com',
+      auto_renew: false,
+      contacts: {
+        registrant: {
+          email: 'ada@example.com',
+          phone: '+1.5555555555',
+          postal_info: {
+            address: {
+              city: 'Austin',
+              country_code: 'US',
+              postal_code: '78701',
+              state: 'TX',
+              street: '123 Main St',
+            },
+            name: 'Ada Lovelace',
+            organization: 'Example Inc',
+          },
+          fax: '+1.5555555555',
+        },
+      },
+      privacy_mode: 'redaction',
+      years: 1,
+      Prefer: 'Prefer',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.moq.relays.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.registrarSandbox.registrations.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,17 +84,17 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.moq.relays.list({
+    const response = await client.registrarSandbox.registrations.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      asc: true,
-      created_after: '2026-03-27T15:00:00Z',
-      created_before: '2026-03-27T15:00:00Z',
-      per_page: 50,
+      cursor: 'cursor',
+      direction: 'asc',
+      per_page: 1,
+      sort_by: 'registry_created_at',
     });
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.moq.relays.delete('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+  test('edit: only required params', async () => {
+    const responsePromise = client.registrarSandbox.registrations.edit('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -103,14 +106,16 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.moq.relays.delete('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+  test('edit: required and optional params', async () => {
+    const response = await client.registrarSandbox.registrations.edit('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      auto_renew: false,
+      Prefer: 'respond-async',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.moq.relays.get('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const responsePromise = client.registrarSandbox.registrations.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -123,11 +128,11 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.moq.relays.get('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
+    const response = await client.registrarSandbox.registrations.get('example.com', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 };
-describe('resource relays', () => runTests(client));
-describe('resource relays (tree shakable, base)', () => runTests(partialClient));
-describe('resource relays (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource registrations', () => runTests(client));
+describe('resource registrations (tree shakable, base)', () => runTests(partialClient));
+describe('resource registrations (tree shakable, subresource)', () => runTests(parentPartialClient));

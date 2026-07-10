@@ -13,7 +13,7 @@ export class BaseCountries extends APIResource {
   ] as const);
 
   /**
-   * Retrieves countries information for all countries
+   * Retrieve country code information for all supported countries.
    *
    * @example
    * ```ts

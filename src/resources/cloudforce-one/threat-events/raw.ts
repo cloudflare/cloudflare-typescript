@@ -13,7 +13,7 @@ export class BaseRaw extends APIResource {
   ] as const);
 
   /**
-   * Updates a raw event
+   * Update raw data for a specific event.
    *
    * @example
    * ```ts
@@ -33,7 +33,7 @@ export class BaseRaw extends APIResource {
   }
 
   /**
-   * Reads data for a raw event
+   * Retrieve raw data for a specific event.
    *
    * @example
    * ```ts

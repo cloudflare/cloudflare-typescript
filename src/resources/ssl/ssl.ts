@@ -39,10 +39,7 @@ import {
   CertificatePackListResponse,
   CertificatePackListResponsesV4PagePaginationArray,
   CertificatePacks,
-  Host,
   RequestValidity,
-  Status,
-  ValidationMethod,
 } from './certificate-packs/certificate-packs';
 import * as UniversalAPI from './universal/universal';
 import { BaseUniversal, Universal } from './universal/universal';
@@ -87,10 +84,7 @@ export declare namespace SSL {
   export {
     CertificatePacks as CertificatePacks,
     BaseCertificatePacks as BaseCertificatePacks,
-    type Host as Host,
     type RequestValidity as RequestValidity,
-    type Status as Status,
-    type ValidationMethod as ValidationMethod,
     type CertificatePackCreateResponse as CertificatePackCreateResponse,
     type CertificatePackListResponse as CertificatePackListResponse,
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,

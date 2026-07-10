@@ -4,7 +4,6 @@
 
 Types:
 
-- <code><a href="./src/resources/acm/total-tls.ts">CertificateAuthority</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSUpdateResponse</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSEditResponse</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSGetResponse</a></code>

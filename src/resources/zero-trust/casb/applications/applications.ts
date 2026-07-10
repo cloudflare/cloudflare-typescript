@@ -37,13 +37,13 @@ export class BaseApplications extends APIResource {
    * @example
    * ```ts
    * const application =
-   *   await client.zeroTrust.casb.applications.get('GITHUB', {
+   *   await client.zeroTrust.casb.applications.get('BOX', {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   });
    * ```
    */
   get(
-    slug: 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK',
+    slug: 'BOX' | 'DROPBOX' | 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK',
     params: ApplicationGetParams,
     options?: RequestOptions,
   ): APIPromise<ApplicationGetResponse> {
@@ -100,13 +100,15 @@ export namespace ApplicationListResponse {
     /**
      * Vendor identifier (e.g. microsoft_internal, google_workspace).
      *
+     * - `BOX` - BOX
+     * - `DROPBOX` - DROPBOX
      * - `GITHUB` - GITHUB
      * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
      * - `MICROSOFT_INTERNAL` - MICROSOFT_INTERNAL
      * - `SALESFORCE` - SALESFORCE
      * - `SLACK` - SLACK
      */
-    slug: 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK';
+    slug: 'BOX' | 'DROPBOX' | 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK';
 
     /**
      * Environments this vendor supports (standard, fedramp).
@@ -219,13 +221,15 @@ export interface ApplicationGetResponse {
   /**
    * Vendor identifier.
    *
+   * - `BOX` - BOX
+   * - `DROPBOX` - DROPBOX
    * - `GITHUB` - GITHUB
    * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
    * - `MICROSOFT_INTERNAL` - MICROSOFT_INTERNAL
    * - `SALESFORCE` - SALESFORCE
    * - `SLACK` - SLACK
    */
-  slug: 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK';
+  slug: 'BOX' | 'DROPBOX' | 'GITHUB' | 'GOOGLE_WORKSPACE' | 'MICROSOFT_INTERNAL' | 'SALESFORCE' | 'SLACK';
 
   /**
    * Use cases with full scope details.

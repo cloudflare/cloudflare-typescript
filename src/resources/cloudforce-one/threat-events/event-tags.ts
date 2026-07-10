@@ -13,7 +13,7 @@ export class BaseEventTags extends APIResource {
   ] as const);
 
   /**
-   * Adds a tag to an event
+   * Add one or more tags to an event.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseEventTags extends APIResource {
   }
 
   /**
-   * Removes a tag from an event
+   * Remove one or more tags from an event.
    *
    * @example
    * ```ts

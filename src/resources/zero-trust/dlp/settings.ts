@@ -33,7 +33,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Delete (reset) DLP account-level settings to initial values.
+   * Deletes account-level DLP settings and returns the initial values.
    *
    * @example
    * ```ts
@@ -73,7 +73,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Get DLP account-level settings.
+   * Gets the account-level DLP settings.
    *
    * @example
    * ```ts

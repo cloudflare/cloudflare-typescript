@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../core/resource';
 import * as HyperdriveAPI from './hyperdrive';
-import { HyperdrivesSinglePage } from './hyperdrive';
+import { HyperdrivesV4PagePaginationArray } from './hyperdrive';
 import { APIPromise } from '../../core/api-promise';
-import { PagePromise, SinglePage } from '../../core/pagination';
+import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -95,12 +95,12 @@ export class BaseConfigs extends APIResource {
   list(
     params: ConfigListParams,
     options?: RequestOptions,
-  ): PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
-    const { account_id } = params;
+  ): PagePromise<HyperdrivesV4PagePaginationArray, HyperdriveAPI.Hyperdrive> {
+    const { account_id, ...query } = params;
     return this._client.getAPIList(
       path`/accounts/${account_id}/hyperdrive/configs`,
-      SinglePage<HyperdriveAPI.Hyperdrive>,
-      options,
+      V4PagePaginationArray<HyperdriveAPI.Hyperdrive>,
+      { query, ...options },
     );
   }
 
@@ -576,9 +576,9 @@ export namespace ConfigUpdateParams {
   }
 }
 
-export interface ConfigListParams {
+export interface ConfigListParams extends V4PagePaginationArrayParams {
   /**
-   * Define configurations using a unique string identifier.
+   * Path param: Define configurations using a unique string identifier.
    */
   account_id: string;
 }
@@ -773,4 +773,4 @@ export declare namespace Configs {
   };
 }
 
-export { type HyperdrivesSinglePage };
+export { type HyperdrivesV4PagePaginationArray };

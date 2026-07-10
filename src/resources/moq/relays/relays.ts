@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TokensAPI from './tokens';
-import { BaseTokens, TokenRotateParams, TokenRotateResponse, Tokens } from './tokens';
+import { BaseTokens, Tokens } from './tokens';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -14,8 +14,7 @@ export class BaseRelays extends APIResource {
   /**
    * Provisions a new MoQ relay instance. Auto-creates a publish+subscribe token and
    * a subscribe-only token. Token values are included in the response (shown once).
-   * Config is set to defaults (lingering subscribe enabled, 30s ceiling, upstreams
-   * off). Use PUT to modify.
+   * Config is set to defaults (upstreams off). Use PUT to modify.
    *
    * @example
    * ```ts
@@ -36,8 +35,7 @@ export class BaseRelays extends APIResource {
 
   /**
    * Updates a relay's name and/or configuration. Partial updates: omitted fields are
-   * preserved. Config sub-objects replace as whole objects when present. upstreams
-   * and lingering_subscribe are mutually exclusive.
+   * preserved. Config sub-objects replace as whole objects when present.
    *
    * @example
    * ```ts
@@ -143,29 +141,24 @@ export class Relays extends BaseRelays {
 export type RelayListResponsesSinglePage = SinglePage<RelayListResponse>;
 
 /**
- * Relay with auto-generated tokens (shown once).
+ * Relay with its auto-created default token pair (one full-access [publish,
+ * subscribe] and one [subscribe]-only), each with its one-time secret, wrapped in
+ * the issuers envelope.
  */
 export interface RelayCreateResponse {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   config: RelayCreateResponse.Config;
 
   created: string;
 
+  /**
+   * Token collection (discriminated union on `type`). On create this holds the
+   * auto-created default pair, each including its one-time secret.
+   */
+  issuers: Array<RelayCreateResponse.Issuer>;
+
   modified: string;
 
   name: string;
-
-  /**
-   * Full access token (publish + subscribe). Treat as sensitive.
-   */
-  token_publish_subscribe: string;
-
-  /**
-   * Subscribe-only token. Treat as sensitive.
-   */
-  token_subscribe: string;
 
   /**
    * Server-generated unique identifier (32 hex chars).
@@ -174,12 +167,7 @@ export interface RelayCreateResponse {
 }
 
 export namespace RelayCreateResponse {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -188,15 +176,6 @@ export namespace RelayCreateResponse {
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
-      enabled?: boolean;
-
-      /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
-       */
-      max_timeout_ms?: number;
-    }
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -224,15 +203,59 @@ export namespace RelayCreateResponse {
       }
     }
   }
+
+  /**
+   * One arm of the discriminated-union token collection.
+   */
+  export interface Issuer {
+    /**
+     * Always present ([] when empty).
+     */
+    cloudflare_tokens: Array<Issuer.CloudflareToken>;
+
+    issuer: 'cloudflare';
+
+    type: 'cloudflare_jwt';
+  }
+
+  export namespace Issuer {
+    export interface CloudflareToken {
+      created: string;
+
+      /**
+       * Mandatory; no more than 1 year after `created`.
+       */
+      expires: string;
+
+      /**
+       * Token identity and registry key (32 hex chars).
+       */
+      jti: string;
+
+      /**
+       * Signed allowlist of what the token may do. V1 coarse roles; the array form
+       * extends to fine-grained MoQT message names later without a breaking change.
+       */
+      operations: Array<'publish' | 'subscribe'>;
+
+      /**
+       * Optional, customer-set.
+       */
+      label?: string;
+
+      /**
+       * The signed JWT. Present ONLY in create / auto-create responses (shown once);
+       * never returned by list, never stored.
+       */
+      secret?: string;
+    }
+  }
 }
 
 /**
  * Full relay details (no tokens).
  */
 export interface RelayUpdateResponse {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   config: RelayUpdateResponse.Config;
 
   created: string;
@@ -250,12 +273,7 @@ export interface RelayUpdateResponse {
 }
 
 export namespace RelayUpdateResponse {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -264,15 +282,6 @@ export namespace RelayUpdateResponse {
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
-      enabled?: boolean;
-
-      /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
-       */
-      max_timeout_ms?: number;
-    }
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -321,9 +330,6 @@ export type RelayDeleteResponse = unknown;
  * Full relay details (no tokens).
  */
 export interface RelayGetResponse {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   config: RelayGetResponse.Config;
 
   created: string;
@@ -341,12 +347,7 @@ export interface RelayGetResponse {
 }
 
 export namespace RelayGetResponse {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -355,15 +356,6 @@ export namespace RelayGetResponse {
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
-      enabled?: boolean;
-
-      /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
-       */
-      max_timeout_ms?: number;
-    }
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -412,7 +404,7 @@ export interface RelayUpdateParams {
   account_id: string;
 
   /**
-   * Body param: upstreams and lingering_subscribe are mutually exclusive.
+   * Body param
    */
   config?: RelayUpdateParams.Config;
 
@@ -423,12 +415,7 @@ export interface RelayUpdateParams {
 }
 
 export namespace RelayUpdateParams {
-  /**
-   * upstreams and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -437,15 +424,6 @@ export namespace RelayUpdateParams {
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
-      enabled?: boolean;
-
-      /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
-       */
-      max_timeout_ms?: number;
-    }
-
     /**
      * Upstreams are external MOQT server publishers that a relay falls back to when it
      * has no local publisher for a requested namespace/track.
@@ -539,10 +517,5 @@ export declare namespace Relays {
     type RelayGetParams as RelayGetParams,
   };
 
-  export {
-    Tokens as Tokens,
-    BaseTokens as BaseTokens,
-    type TokenRotateResponse as TokenRotateResponse,
-    type TokenRotateParams as TokenRotateParams,
-  };
+  export { Tokens as Tokens, BaseTokens as BaseTokens };
 }

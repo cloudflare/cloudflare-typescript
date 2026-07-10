@@ -15,7 +15,7 @@ export class BaseSnapshots extends APIResource {
   ] as const);
 
   /**
-   * List Snapshots
+   * Lists Magic WAN Connector Telemetry Snapshots
    *
    * @example
    * ```ts
@@ -45,7 +45,7 @@ export class BaseSnapshots extends APIResource {
   }
 
   /**
-   * Get Snapshot
+   * Fetches Magic WAN Connector Telemetry Snapshot
    *
    * @example
    * ```ts

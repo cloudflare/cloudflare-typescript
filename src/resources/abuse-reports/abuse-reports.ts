@@ -21,7 +21,12 @@ export class BaseAbuseReports extends APIResource {
   static override readonly _key: readonly ['abuseReports'] = Object.freeze(['abuseReports'] as const);
 
   /**
-   * Submit the Abuse Report of a particular type
+   * Submit an abuse report of a particular type.
+   *
+   * Requires the abuse-reports entitlement on the account (Enterprise accounts have
+   * it by default; other accounts must request access) and an API token with the
+   * `Account > Abuse Reports > Edit` permission. If the account is not entitled, the
+   * request is rejected with an HTTP `401` response (see below).
    */
   create(
     reportParam: string,

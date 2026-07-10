@@ -276,6 +276,18 @@ export interface Deployment {
   url: string;
 
   /**
+   * Why the deployment was skipped.
+   */
+  skip_reason?:
+    | 'commit_message'
+    | 'preview_deployments_disabled'
+    | 'production_deployments_disabled'
+    | 'path_config'
+    | 'branch_config'
+    | 'pages_to_workers_conversion'
+    | null;
+
+  /**
    * Whether the deployment uses functions.
    */
   uses_functions?: boolean | null;

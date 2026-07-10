@@ -123,7 +123,7 @@ export class BaseIntegrations extends APIResource {
   }
 
   /**
-   * Get risk score integration by id.
+   * Gets a Zero Trust risk score integration by ID.
    *
    * @example
    * ```ts

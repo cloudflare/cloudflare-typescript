@@ -133,7 +133,11 @@ const runTests = (client: PartialCloudflare<{ hyperdrive: { configs: BaseConfigs
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.hyperdrive.configs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.hyperdrive.configs.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      page: 1,
+      per_page: 1,
+    });
   });
 
   test('delete: only required params', async () => {

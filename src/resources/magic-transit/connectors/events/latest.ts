@@ -14,7 +14,7 @@ export class BaseLatest extends APIResource {
   ] as const);
 
   /**
-   * Get latest Events
+   * Fetches latest Magic WAN Connector Telemetry Events
    *
    * @example
    * ```ts
@@ -52,28 +52,35 @@ export namespace LatestListResponse {
    * Recorded Event
    */
   export interface Item {
-    e:
-      | Item.Init
-      | Item.Leave
-      | Item.StartAttestation
-      | Item.FinishAttestationSuccess
-      | Item.FinishAttestationFailure
-      | Item.StartRotateCryptKey
-      | Item.FinishRotateCryptKeySuccess
-      | Item.FinishRotateCryptKeyFailure
-      | Item.StartRotatePki
-      | Item.FinishRotatePkiSuccess
-      | Item.FinishRotatePkiFailure
-      | Item.StartUpgrade
-      | Item.FinishUpgradeSuccess
-      | Item.FinishUpgradeFailure
-      | Item.Reconcile
-      | Item.ConfigureCloudflaredTunnel
-      | Item.RekeyInstallBoth
-      | Item.RekeyStart
-      | Item.RekeyAdvance
-      | Item.RekeyComplete
-      | Item.RekeyReset;
+    /**
+     * Event kind plus event-specific payload fields.
+     *
+     * Event kinds:
+     *
+     * - `Init`: Initialized process
+     * - `Leave`: Stopped process
+     * - `StartAttestation`: Started attestation
+     * - `FinishAttestationSuccess`: Finished attestation
+     * - `FinishAttestationFailure`: Failed attestation
+     * - `StartRotateCryptKey`: Started crypt key rotation
+     * - `FinishRotateCryptKeySuccess`: Finished crypt key rotation
+     * - `FinishRotateCryptKeyFailure`: Failed crypt key rotation
+     * - `StartRotatePki`: Started PKI rotation
+     * - `FinishRotatePkiSuccess`: Finished PKI rotation
+     * - `FinishRotatePkiFailure`: Failed PKI rotation
+     * - `StartUpgrade`: Started upgrade
+     * - `FinishUpgradeSuccess`: Finished upgrade
+     * - `FinishUpgradeFailure`: Failed upgrade
+     * - `Reconcile`: Reconciled
+     * - `ConfigureCloudflaredTunnel`: Configured Cloudflared tunnel
+     * - `RekeyInstallBoth`: Installed initial inbound and outbound keys
+     * - `RekeyStart`: Installed new inbound key, kept old outbound
+     * - `RekeyRestart`: Restarted in-progress rekey with newer key material
+     * - `RekeyAdvance`: Confirmed traffic on new inbound key, swapped outbound to new
+     * - `RekeyComplete`: Deleted old keys
+     * - `RekeyReset`: Deleted all keys after receiving an unexpected key
+     */
+    e: Item.E;
 
     /**
      * Sequence number, used to order events with the same timestamp
@@ -92,181 +99,63 @@ export namespace LatestListResponse {
   }
 
   export namespace Item {
-    export interface Init {
+    /**
+     * Event kind plus event-specific payload fields.
+     *
+     * Event kinds:
+     *
+     * - `Init`: Initialized process
+     * - `Leave`: Stopped process
+     * - `StartAttestation`: Started attestation
+     * - `FinishAttestationSuccess`: Finished attestation
+     * - `FinishAttestationFailure`: Failed attestation
+     * - `StartRotateCryptKey`: Started crypt key rotation
+     * - `FinishRotateCryptKeySuccess`: Finished crypt key rotation
+     * - `FinishRotateCryptKeyFailure`: Failed crypt key rotation
+     * - `StartRotatePki`: Started PKI rotation
+     * - `FinishRotatePkiSuccess`: Finished PKI rotation
+     * - `FinishRotatePkiFailure`: Failed PKI rotation
+     * - `StartUpgrade`: Started upgrade
+     * - `FinishUpgradeSuccess`: Finished upgrade
+     * - `FinishUpgradeFailure`: Failed upgrade
+     * - `Reconcile`: Reconciled
+     * - `ConfigureCloudflaredTunnel`: Configured Cloudflared tunnel
+     * - `RekeyInstallBoth`: Installed initial inbound and outbound keys
+     * - `RekeyStart`: Installed new inbound key, kept old outbound
+     * - `RekeyRestart`: Restarted in-progress rekey with newer key material
+     * - `RekeyAdvance`: Confirmed traffic on new inbound key, swapped outbound to new
+     * - `RekeyComplete`: Deleted old keys
+     * - `RekeyReset`: Deleted all keys after receiving an unexpected key
+     */
+    export interface E {
       /**
-       * Initialized process
+       * Event kind
        */
-      k: 'Init';
-    }
+      k:
+        | 'Init'
+        | 'Leave'
+        | 'StartAttestation'
+        | 'FinishAttestationSuccess'
+        | 'FinishAttestationFailure'
+        | 'StartRotateCryptKey'
+        | 'FinishRotateCryptKeySuccess'
+        | 'FinishRotateCryptKeyFailure'
+        | 'StartRotatePki'
+        | 'FinishRotatePkiSuccess'
+        | 'FinishRotatePkiFailure'
+        | 'StartUpgrade'
+        | 'FinishUpgradeSuccess'
+        | 'FinishUpgradeFailure'
+        | 'Reconcile'
+        | 'ConfigureCloudflaredTunnel'
+        | 'RekeyInstallBoth'
+        | 'RekeyStart'
+        | 'RekeyRestart'
+        | 'RekeyAdvance'
+        | 'RekeyComplete'
+        | 'RekeyReset';
 
-    export interface Leave {
-      /**
-       * Stopped process
-       */
-      k: 'Leave';
-    }
-
-    export interface StartAttestation {
-      /**
-       * Started attestation
-       */
-      k: 'StartAttestation';
-    }
-
-    export interface FinishAttestationSuccess {
-      /**
-       * Finished attestation
-       */
-      k: 'FinishAttestationSuccess';
-    }
-
-    export interface FinishAttestationFailure {
-      /**
-       * Failed attestation
-       */
-      k: 'FinishAttestationFailure';
-    }
-
-    export interface StartRotateCryptKey {
-      /**
-       * Started crypt key rotation
-       */
-      k: 'StartRotateCryptKey';
-    }
-
-    export interface FinishRotateCryptKeySuccess {
-      /**
-       * Finished crypt key rotation
-       */
-      k: 'FinishRotateCryptKeySuccess';
-    }
-
-    export interface FinishRotateCryptKeyFailure {
-      /**
-       * Failed crypt key rotation
-       */
-      k: 'FinishRotateCryptKeyFailure';
-    }
-
-    export interface StartRotatePki {
-      /**
-       * Started PKI rotation
-       */
-      k: 'StartRotatePki';
-    }
-
-    export interface FinishRotatePkiSuccess {
-      /**
-       * Finished PKI rotation
-       */
-      k: 'FinishRotatePkiSuccess';
-    }
-
-    export interface FinishRotatePkiFailure {
-      /**
-       * Failed PKI rotation
-       */
-      k: 'FinishRotatePkiFailure';
-    }
-
-    export interface StartUpgrade {
-      /**
-       * Started upgrade
-       */
-      k: 'StartUpgrade';
-
-      /**
-       * Location of upgrade bundle
-       */
-      url: string;
-    }
-
-    export interface FinishUpgradeSuccess {
-      /**
-       * Finished upgrade
-       */
-      k: 'FinishUpgradeSuccess';
-    }
-
-    export interface FinishUpgradeFailure {
-      /**
-       * Failed upgrade
-       */
-      k: 'FinishUpgradeFailure';
-    }
-
-    export interface Reconcile {
-      /**
-       * Reconciled
-       */
-      k: 'Reconcile';
-    }
-
-    export interface ConfigureCloudflaredTunnel {
-      /**
-       * Configured Cloudflared tunnel
-       */
-      k: 'ConfigureCloudflaredTunnel';
-    }
-
-    export interface RekeyInstallBoth {
-      /**
-       * Installed initial inbound and outbound keys
-       */
-      k: 'RekeyInstallBoth';
-
-      /**
-       * Tunnel identifier
-       */
-      tunnel_id: string;
-    }
-
-    export interface RekeyStart {
-      /**
-       * Installed new inbound key, kept old outbound
-       */
-      k: 'RekeyStart';
-
-      /**
-       * Tunnel identifier
-       */
-      tunnel_id: string;
-    }
-
-    export interface RekeyAdvance {
-      /**
-       * Confirmed traffic on new inbound key, swapped outbound to new
-       */
-      k: 'RekeyAdvance';
-
-      /**
-       * Tunnel identifier
-       */
-      tunnel_id: string;
-    }
-
-    export interface RekeyComplete {
-      /**
-       * Deleted old keys
-       */
-      k: 'RekeyComplete';
-
-      /**
-       * Tunnel identifier
-       */
-      tunnel_id: string;
-    }
-
-    export interface RekeyReset {
-      /**
-       * Deleted all keys after receiving an unexpected key
-       */
-      k: 'RekeyReset';
-
-      /**
-       * Tunnel identifier
-       */
-      tunnel_id: string;
+      [k: string]: unknown;
     }
   }
 }

@@ -28,7 +28,8 @@ export class BaseBulk extends APIResource {
   ] as const);
 
   /**
-   * Create a bulk action job
+   * Creates a new bulk action job to move or release messages that match the
+   * provided search parameters.
    *
    * @example
    * ```ts
@@ -51,7 +52,7 @@ export class BaseBulk extends APIResource {
   }
 
   /**
-   * List bulk action jobs
+   * Returns a paginated list of bulk action jobs for the account.
    *
    * @example
    * ```ts
@@ -101,7 +102,7 @@ export class BaseBulk extends APIResource {
   }
 
   /**
-   * Get bulk action job details
+   * Returns the status and details of a specific bulk action job.
    *
    * @example
    * ```ts

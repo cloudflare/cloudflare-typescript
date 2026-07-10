@@ -15,7 +15,6 @@ import {
 import * as TotalTLSAPI from './total-tls';
 import {
   BaseTotalTLS,
-  CertificateAuthority,
   TotalTLS,
   TotalTLSEditParams,
   TotalTLSEditResponse,
@@ -43,7 +42,6 @@ export declare namespace ACM {
   export {
     TotalTLS as TotalTLS,
     BaseTotalTLS as BaseTotalTLS,
-    type CertificateAuthority as CertificateAuthority,
     type TotalTLSUpdateResponse as TotalTLSUpdateResponse,
     type TotalTLSEditResponse as TotalTLSEditResponse,
     type TotalTLSGetResponse as TotalTLSGetResponse,

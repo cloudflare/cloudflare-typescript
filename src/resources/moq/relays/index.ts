@@ -15,4 +15,4 @@ export {
   type RelayGetParams,
   type RelayListResponsesSinglePage,
 } from './relays';
-export { Tokens, BaseTokens, type TokenRotateResponse, type TokenRotateParams } from './tokens';
+export { Tokens, BaseTokens } from './tokens';
