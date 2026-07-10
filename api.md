@@ -153,6 +153,8 @@ Types:
 
 # [Registrar](src/resources/registrar/api.md)
 
+# [RegistrarSandbox](src/resources/registrar-sandbox/api.md)
+
 # [RequestTracers](src/resources/request-tracers/api.md)
 
 # [Rules](src/resources/rules/api.md)

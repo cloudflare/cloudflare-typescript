@@ -180,8 +180,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailSecurity.settings.urlIgnorePatterns.edit()`
 - `client.emailSecurity.settings.urlIgnorePatterns.get()`
 - `client.emailRouting.rules.update()`
+- `client.emailRouting.rules.list()`
 - `client.emailRouting.rules.delete()`
 - `client.emailRouting.rules.get()`
+- `client.emailRouting.accountRules.list()`
 - `client.emailRouting.addresses.delete()`
 - `client.emailRouting.addresses.edit()`
 - `client.emailRouting.addresses.get()`
@@ -1484,6 +1486,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.customCsrs.list()`
 - `client.customCsrs.delete()`
 - `client.customCsrs.get()`
+- `client.emailRouting.rules.list()`
+- `client.emailRouting.accountRules.list()`
 - `client.firewall.accessRules.list()`
 - `client.firewall.accessRules.delete()`
 - `client.firewall.accessRules.get()`
