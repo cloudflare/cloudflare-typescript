@@ -31,7 +31,7 @@ export class BaseInstances extends APIResource {
   ] as const);
 
   /**
-   * Create a new instance.
+   * Create a new AI Search instance with the given configuration.
    *
    * @example
    * ```ts
@@ -52,7 +52,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Update instance.
+   * Update the configuration of an AI Search instance.
    *
    * @example
    * ```ts
@@ -77,7 +77,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * List instances.
+   * List all AI Search instances in the account.
    *
    * @example
    * ```ts
@@ -102,7 +102,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Delete instance.
+   * Permanently delete an AI Search instance and all its indexed data.
    *
    * @example
    * ```ts
@@ -154,7 +154,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Read instance.
+   * Retrieve the configuration and status of an AI Search instance.
    *
    * @example
    * ```ts
@@ -200,7 +200,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Retrieves usage statistics for AI Search instances.
+   * Retrieve usage and indexing statistics for an AI Search instance.
    *
    * @example
    * ```ts

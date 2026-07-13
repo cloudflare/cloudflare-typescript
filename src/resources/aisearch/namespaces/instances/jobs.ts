@@ -44,7 +44,7 @@ export class BaseJobs extends APIResource {
   }
 
   /**
-   * Updates the status of an AI Search indexing job.
+   * Cancel an in-progress indexing job for an AI Search instance.
    *
    * @example
    * ```ts
