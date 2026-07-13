@@ -42,6 +42,16 @@ import { AISecurity } from './resources/ai-security/ai-security';
 import { AI } from './resources/ai/ai';
 import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
+import {
+  AnalyticsQuery,
+  AnalyticsQuerySummaryParams,
+  AnalyticsQuerySummaryResponse,
+  AnalyticsQueryTimeseriesParams,
+  AnalyticsQueryTimeseriesResponse,
+  AnalyticsQueryTopNParams,
+  AnalyticsQueryTopNResponse,
+  AnalyticsQueryTopNResponsesSinglePage,
+} from './resources/analytics-query/analytics-query';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
 import { AuditLogs } from './resources/audit-logs/audit-logs';
@@ -1002,6 +1012,7 @@ export class Cloudflare extends BaseCloudflare {
   cache: API.Cache = new API.Cache(this);
   ssl: API.SSL = new API.SSL(this);
   acm: API.ACM = new API.ACM(this);
+  analyticsQuery: API.AnalyticsQuery = new API.AnalyticsQuery(this);
   argo: API.Argo = new API.Argo(this);
   certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
   clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
@@ -1323,6 +1334,7 @@ Cloudflare.LoadBalancers = LoadBalancers;
 Cloudflare.Cache = Cache;
 Cloudflare.SSL = SSL;
 Cloudflare.ACM = ACM;
+Cloudflare.AnalyticsQuery = AnalyticsQuery;
 Cloudflare.Argo = Argo;
 Cloudflare.CertificateAuthorities = CertificateAuthorities;
 Cloudflare.ClientCertificates = ClientCertificates;
@@ -1490,6 +1502,17 @@ export declare namespace Cloudflare {
   export { SSL as SSL };
 
   export { ACM as ACM };
+
+  export {
+    AnalyticsQuery as AnalyticsQuery,
+    type AnalyticsQuerySummaryResponse as AnalyticsQuerySummaryResponse,
+    type AnalyticsQueryTimeseriesResponse as AnalyticsQueryTimeseriesResponse,
+    type AnalyticsQueryTopNResponse as AnalyticsQueryTopNResponse,
+    type AnalyticsQueryTopNResponsesSinglePage as AnalyticsQueryTopNResponsesSinglePage,
+    type AnalyticsQuerySummaryParams as AnalyticsQuerySummaryParams,
+    type AnalyticsQueryTimeseriesParams as AnalyticsQueryTimeseriesParams,
+    type AnalyticsQueryTopNParams as AnalyticsQueryTopNParams,
+  };
 
   export { Argo as Argo };
 

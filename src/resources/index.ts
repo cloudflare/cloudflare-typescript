@@ -12,6 +12,17 @@ export { AbuseReports, BaseAbuseReports } from './abuse-reports/abuse-reports';
 export { Accounts, BaseAccounts } from './accounts/accounts';
 export { Addressing, BaseAddressing } from './addressing/addressing';
 export { Alerting, BaseAlerting } from './alerting/alerting';
+export {
+  AnalyticsQuery,
+  BaseAnalyticsQuery,
+  type AnalyticsQuerySummaryResponse,
+  type AnalyticsQueryTimeseriesResponse,
+  type AnalyticsQueryTopNResponse,
+  type AnalyticsQuerySummaryParams,
+  type AnalyticsQueryTimeseriesParams,
+  type AnalyticsQueryTopNParams,
+  type AnalyticsQueryTopNResponsesSinglePage,
+} from './analytics-query/analytics-query';
 export { Argo, BaseArgo } from './argo/argo';
 export { AuditLogs, BaseAuditLogs } from './audit-logs';
 export { Billing, BaseBilling } from './billing/billing';

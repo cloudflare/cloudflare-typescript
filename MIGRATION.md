@@ -103,6 +103,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.ssl.verification.edit()`
 - `client.acm.customTrustStore.delete()`
 - `client.acm.customTrustStore.get()`
+- `client.analyticsQuery.summary()`
+- `client.analyticsQuery.timeseries()`
+- `client.analyticsQuery.topN()`
 - `client.clientCertificates.delete()`
 - `client.clientCertificates.edit()`
 - `client.clientCertificates.get()`
