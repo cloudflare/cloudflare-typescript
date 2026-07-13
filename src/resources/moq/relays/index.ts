@@ -15,4 +15,13 @@ export {
   type RelayGetParams,
   type RelayListResponsesSinglePage,
 } from './relays';
-export { Tokens, BaseTokens } from './tokens';
+export {
+  Tokens,
+  BaseTokens,
+  type TokenCreateResponse,
+  type TokenListResponse,
+  type TokenDeleteResponse,
+  type TokenCreateParams,
+  type TokenListParams,
+  type TokenDeleteParams,
+} from './tokens';

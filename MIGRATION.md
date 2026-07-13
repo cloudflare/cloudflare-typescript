@@ -1103,6 +1103,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.moq.relays.update()`
 - `client.moq.relays.delete()`
 - `client.moq.relays.get()`
+- `client.moq.relays.tokens.create()`
+- `client.moq.relays.tokens.list()`
+- `client.moq.relays.tokens.delete()`
 - `client.cloudforceOne.scans.results.get()`
 - `client.cloudforceOne.scans.config.delete()`
 - `client.cloudforceOne.scans.config.edit()`

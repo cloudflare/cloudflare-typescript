@@ -2,7 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TokensAPI from './tokens';
-import { BaseTokens, Tokens } from './tokens';
+import {
+  BaseTokens,
+  TokenCreateParams,
+  TokenCreateResponse,
+  TokenDeleteParams,
+  TokenDeleteResponse,
+  TokenListParams,
+  TokenListResponse,
+  Tokens,
+} from './tokens';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -517,5 +526,14 @@ export declare namespace Relays {
     type RelayGetParams as RelayGetParams,
   };
 
-  export { Tokens as Tokens, BaseTokens as BaseTokens };
+  export {
+    Tokens as Tokens,
+    BaseTokens as BaseTokens,
+    type TokenCreateResponse as TokenCreateResponse,
+    type TokenListResponse as TokenListResponse,
+    type TokenDeleteResponse as TokenDeleteResponse,
+    type TokenCreateParams as TokenCreateParams,
+    type TokenListParams as TokenListParams,
+    type TokenDeleteParams as TokenDeleteParams,
+  };
 }

@@ -6391,6 +6391,43 @@
       ]
     },
     {
+      "base": "moq.relays.tokens",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "jti",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "relay_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "jti",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "cloudforceOne.requests.message",
       "name": "update",
       "params": [
