@@ -19,6 +19,26 @@ const partialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ emailRouting: BaseEmailRouting }>) => {
+  test('update: only required params', async () => {
+    const responsePromise = client.emailRouting.update({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.emailRouting.update({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
+      skip_wizard: true,
+      support_subaddress: true,
+    });
+  });
+
   test('disable: only required params', async () => {
     const responsePromise = client.emailRouting.disable({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -37,6 +57,26 @@ const runTests = (client: PartialCloudflare<{ emailRouting: BaseEmailRouting }>)
     const response = await client.emailRouting.disable({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
+    });
+  });
+
+  test('edit: only required params', async () => {
+    const responsePromise = client.emailRouting.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.emailRouting.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      enabled: true,
+      skip_wizard: true,
+      support_subaddress: true,
     });
   });
 

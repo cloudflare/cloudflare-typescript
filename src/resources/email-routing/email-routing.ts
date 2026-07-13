@@ -54,6 +54,25 @@ export class BaseEmailRouting extends APIResource {
   static override readonly _key: readonly ['emailRouting'] = Object.freeze(['emailRouting'] as const);
 
   /**
+   * Update the settings for your Email Routing zone.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.update({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  update(params: EmailRoutingUpdateParams, options?: RequestOptions): APIPromise<Settings> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.put(path`/zones/${zone_id}/email/routing`, { body, ...options }) as APIPromise<{
+        result: Settings;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
    *
@@ -66,6 +85,25 @@ export class BaseEmailRouting extends APIResource {
         body: body,
         ...options,
       }) as APIPromise<{ result: Settings }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update the settings for your Email Routing zone.
+   *
+   * @example
+   * ```ts
+   * const settings = await client.emailRouting.edit({
+   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * });
+   * ```
+   */
+  edit(params: EmailRoutingEditParams, options?: RequestOptions): APIPromise<Settings> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.patch(path`/zones/${zone_id}/email/routing`, { body, ...options }) as APIPromise<{
+        result: Settings;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -172,6 +210,30 @@ export interface Settings {
   tag?: string;
 }
 
+export interface EmailRoutingUpdateParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: State of your zone Email Routing settings. No-op on this endpoint -
+   * use `POST`/`DELETE /zones/{zone_id}/email/routing/dns`.
+   */
+  enabled?: true | false;
+
+  /**
+   * Body param: Flag to check if the user skipped the configuration wizard.
+   */
+  skip_wizard?: true | false;
+
+  /**
+   * Body param: Whether subaddressing (plus-addressing) is honored when matching
+   * incoming mail against routing rules.
+   */
+  support_subaddress?: true | false;
+}
+
 export interface EmailRoutingDisableParams {
   /**
    * Path param: Identifier.
@@ -182,6 +244,30 @@ export interface EmailRoutingDisableParams {
    * Body param
    */
   body: unknown;
+}
+
+export interface EmailRoutingEditParams {
+  /**
+   * Path param: Identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Body param: State of your zone Email Routing settings. No-op on this endpoint -
+   * use `POST`/`DELETE /zones/{zone_id}/email/routing/dns`.
+   */
+  enabled?: true | false;
+
+  /**
+   * Body param: Flag to check if the user skipped the configuration wizard.
+   */
+  skip_wizard?: true | false;
+
+  /**
+   * Body param: Whether subaddressing (plus-addressing) is honored when matching
+   * incoming mail against routing rules.
+   */
+  support_subaddress?: true | false;
 }
 
 export interface EmailRoutingEnableParams {
@@ -227,7 +313,9 @@ EmailRouting.BaseAddresses = BaseAddresses;
 export declare namespace EmailRouting {
   export {
     type Settings as Settings,
+    type EmailRoutingUpdateParams as EmailRoutingUpdateParams,
     type EmailRoutingDisableParams as EmailRoutingDisableParams,
+    type EmailRoutingEditParams as EmailRoutingEditParams,
     type EmailRoutingEnableParams as EmailRoutingEnableParams,
     type EmailRoutingGetParams as EmailRoutingGetParams,
     type EmailRoutingUnlockParams as EmailRoutingUnlockParams,
