@@ -469,8 +469,12 @@ export namespace GatewayRule {
 export interface RuleSetting {
   /**
    * Add custom headers to allowed requests as key-value pairs. Use header names as
-   * keys that map to arrays of header values. Settable only for `http` rules with
-   * the action set to `allow`.
+   * keys that map to arrays of header values. Header values may contain
+   * `@{selector.name}` variable references that are interpolated at the edge. Use
+   * `@@{` to escape a literal `@{`. A maximum of 20 header operations (add + set +
+   * delete) is allowed per policy. Each header name may not exceed 256 bytes and
+   * each header value may not exceed 4 KB. Settable only for `http` rules with the
+   * action set to `allow`.
    */
   add_headers?: { [key: string]: Array<string> } | null;
 
@@ -521,6 +525,13 @@ export interface RuleSetting {
    * the action set to `allow`.
    */
   check_session?: RuleSetting.CheckSession | null;
+
+  /**
+   * Remove headers from allowed requests by name. A maximum of 20 header operations
+   * (add + set + delete) is allowed per policy. Each header name may not exceed 256
+   * bytes. Settable only for `http` rules with the action set to `allow`.
+   */
+  delete_headers?: Array<string> | null;
 
   /**
    * Configure custom resolvers to route queries that match the resolver policy.
@@ -627,6 +638,17 @@ export interface RuleSetting {
    * `dns_resolver` rules.
    */
   resolve_dns_through_cloudflare?: boolean | null;
+
+  /**
+   * Replace existing headers on allowed requests with the specified key-value pairs.
+   * If a header does not exist, it is added. Header values may contain
+   * `@{selector.name}` variable references that are interpolated at the edge. Use
+   * `@@{` to escape a literal `@{`. A maximum of 20 header operations (add + set +
+   * delete) is allowed per policy. Each header name may not exceed 256 bytes and
+   * each header value may not exceed 4 KB. Settable only for `http` rules with the
+   * action set to `allow`.
+   */
+  set_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Configure behavior when an upstream certificate is invalid or an SSL error
@@ -950,8 +972,12 @@ export namespace RuleSetting {
 export interface RuleSettingParam {
   /**
    * Add custom headers to allowed requests as key-value pairs. Use header names as
-   * keys that map to arrays of header values. Settable only for `http` rules with
-   * the action set to `allow`.
+   * keys that map to arrays of header values. Header values may contain
+   * `@{selector.name}` variable references that are interpolated at the edge. Use
+   * `@@{` to escape a literal `@{`. A maximum of 20 header operations (add + set +
+   * delete) is allowed per policy. Each header name may not exceed 256 bytes and
+   * each header value may not exceed 4 KB. Settable only for `http` rules with the
+   * action set to `allow`.
    */
   add_headers?: { [key: string]: Array<string> } | null;
 
@@ -1002,6 +1028,13 @@ export interface RuleSettingParam {
    * the action set to `allow`.
    */
   check_session?: RuleSettingParam.CheckSession | null;
+
+  /**
+   * Remove headers from allowed requests by name. A maximum of 20 header operations
+   * (add + set + delete) is allowed per policy. Each header name may not exceed 256
+   * bytes. Settable only for `http` rules with the action set to `allow`.
+   */
+  delete_headers?: Array<string> | null;
 
   /**
    * Configure custom resolvers to route queries that match the resolver policy.
@@ -1108,6 +1141,17 @@ export interface RuleSettingParam {
    * `dns_resolver` rules.
    */
   resolve_dns_through_cloudflare?: boolean | null;
+
+  /**
+   * Replace existing headers on allowed requests with the specified key-value pairs.
+   * If a header does not exist, it is added. Header values may contain
+   * `@{selector.name}` variable references that are interpolated at the edge. Use
+   * `@@{` to escape a literal `@{`. A maximum of 20 header operations (add + set +
+   * delete) is allowed per policy. Each header name may not exceed 256 bytes and
+   * each header value may not exceed 4 KB. Settable only for `http` rules with the
+   * action set to `allow`.
+   */
+  set_headers?: { [key: string]: Array<string> } | null;
 
   /**
    * Configure behavior when an upstream certificate is invalid or an SSL error

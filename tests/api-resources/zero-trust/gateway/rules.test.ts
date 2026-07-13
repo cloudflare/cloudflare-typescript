@@ -78,6 +78,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
         block_reason: 'This website is a security risk',
         bypass_parent_rule: false,
         check_session: { duration: '300s', enforce: true },
+        delete_headers: ['X-Old-Header', 'X-Remove-Me'],
         dns_resolvers: {
           ipv4: [
             {
@@ -124,6 +125,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
         },
         resolve_dns_internally: { fallback: 'none', view_id: 'view_id' },
         resolve_dns_through_cloudflare: true,
+        set_headers: { 'X-User-Identity': ['user=@{identity.name}'] },
         untrusted_cert: { action: 'error' },
       },
       schedule: {
@@ -192,6 +194,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
         block_reason: 'This website is a security risk',
         bypass_parent_rule: false,
         check_session: { duration: '300s', enforce: true },
+        delete_headers: ['X-Old-Header', 'X-Remove-Me'],
         dns_resolvers: {
           ipv4: [
             {
@@ -238,6 +241,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { gateway: { rules: Bas
         },
         resolve_dns_internally: { fallback: 'none', view_id: 'view_id' },
         resolve_dns_through_cloudflare: true,
+        set_headers: { 'X-User-Identity': ['user=@{identity.name}'] },
         untrusted_cert: { action: 'error' },
       },
       schedule: {
