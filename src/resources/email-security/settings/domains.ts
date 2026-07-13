@@ -4,6 +4,7 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
+  SinglePage,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../core/pagination';
@@ -73,6 +74,23 @@ export class BaseDomains extends APIResource {
   }
 
   /**
+   * Deprecated. Use the batch endpoint instead.
+   *
+   * @deprecated
+   */
+  bulkDelete(
+    params: DomainBulkDeleteParams,
+    options?: RequestOptions,
+  ): PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/email-security/settings/domains`,
+      SinglePage<DomainBulkDeleteResponse>,
+      { method: 'delete', ...options },
+    );
+  }
+
+  /**
    * Updates configuration for a protected email domain. Only provided fields will be
    * modified. Changes affect delivery mode, security settings, and regional
    * processing.
@@ -123,6 +141,8 @@ export class Domains extends BaseDomains {}
 
 export type DomainListResponsesV4PagePaginationArray = V4PagePaginationArray<DomainListResponse>;
 
+export type DomainBulkDeleteResponsesSinglePage = SinglePage<DomainBulkDeleteResponse>;
+
 export interface DomainListResponse {
   /**
    * Domain identifier
@@ -135,7 +155,7 @@ export interface DomainListResponse {
 
   created_at?: string;
 
-  dmarc_status?: 'none' | 'good' | 'invalid';
+  dmarc_status?: 'none' | 'good' | 'invalid' | null;
 
   domain?: string;
 
@@ -154,7 +174,7 @@ export interface DomainListResponse {
 
   emails_processed?: DomainListResponse.EmailsProcessed;
 
-  folder?: 'AllItems' | 'Inbox';
+  folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
 
@@ -180,9 +200,9 @@ export interface DomainListResponse {
 
   require_tls_outbound?: boolean | null;
 
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid';
+  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
 
-  status?: 'pending' | 'active' | 'failed' | 'timeout';
+  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
 
   transport?: string;
 }
@@ -212,6 +232,13 @@ export interface DomainDeleteResponse {
   id: string;
 }
 
+export interface DomainBulkDeleteResponse {
+  /**
+   * Domain identifier
+   */
+  id: string;
+}
+
 export interface DomainEditResponse {
   /**
    * Domain identifier
@@ -224,7 +251,7 @@ export interface DomainEditResponse {
 
   created_at?: string;
 
-  dmarc_status?: 'none' | 'good' | 'invalid';
+  dmarc_status?: 'none' | 'good' | 'invalid' | null;
 
   domain?: string;
 
@@ -243,7 +270,7 @@ export interface DomainEditResponse {
 
   emails_processed?: DomainEditResponse.EmailsProcessed;
 
-  folder?: 'AllItems' | 'Inbox';
+  folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
 
@@ -269,9 +296,9 @@ export interface DomainEditResponse {
 
   require_tls_outbound?: boolean | null;
 
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid';
+  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
 
-  status?: 'pending' | 'active' | 'failed' | 'timeout';
+  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
 
   transport?: string;
 }
@@ -306,7 +333,7 @@ export interface DomainGetResponse {
 
   created_at?: string;
 
-  dmarc_status?: 'none' | 'good' | 'invalid';
+  dmarc_status?: 'none' | 'good' | 'invalid' | null;
 
   domain?: string;
 
@@ -325,7 +352,7 @@ export interface DomainGetResponse {
 
   emails_processed?: DomainGetResponse.EmailsProcessed;
 
-  folder?: 'AllItems' | 'Inbox';
+  folder?: 'AllItems' | 'Inbox' | null;
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
 
@@ -351,9 +378,9 @@ export interface DomainGetResponse {
 
   require_tls_outbound?: boolean | null;
 
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid';
+  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
 
-  status?: 'pending' | 'active' | 'failed' | 'timeout';
+  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
 
   transport?: string;
 }
@@ -420,10 +447,17 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Filters response to domains with the provided status.
    */
-  status?: 'pending' | 'active' | 'failed' | 'timeout';
+  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
 }
 
 export interface DomainDeleteParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
+export interface DomainBulkDeleteParams {
   /**
    * Identifier.
    */
@@ -465,7 +499,7 @@ export interface DomainEditParams {
   /**
    * Body param
    */
-  folder?: 'AllItems' | 'Inbox';
+  folder?: 'AllItems' | 'Inbox' | null;
 
   /**
    * Body param
@@ -514,11 +548,14 @@ export declare namespace Domains {
   export {
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     type DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
+    type DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
+    type DomainBulkDeleteParams as DomainBulkDeleteParams,
     type DomainEditParams as DomainEditParams,
     type DomainGetParams as DomainGetParams,
   };

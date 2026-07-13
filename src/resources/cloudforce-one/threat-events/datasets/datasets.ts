@@ -15,7 +15,7 @@ export class BaseDatasets extends APIResource {
   ] as const);
 
   /**
-   * Creates a dataset
+   * Create a new dataset in the account.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Lists all datasets in an account
+   * List all datasets accessible to the account.
    *
    * @example
    * ```ts
@@ -55,7 +55,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Updates an existing dataset
+   * Update an existing dataset by its identifier.
    *
    * @example
    * ```ts
@@ -83,7 +83,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Reads a dataset
+   * Retrieve metadata for a specific dataset.
    *
    * @example
    * ```ts

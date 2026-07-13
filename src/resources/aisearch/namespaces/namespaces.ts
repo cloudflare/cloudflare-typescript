@@ -110,7 +110,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Delete namespace.
+   * Permanently delete a namespace. The namespace must be empty (no instances).
    *
    * @example
    * ```ts

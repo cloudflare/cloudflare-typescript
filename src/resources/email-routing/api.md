@@ -6,7 +6,9 @@ Types:
 
 Methods:
 
+- <code title="put /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">update</a>({ ...params }) -> Settings</code>
 - <code title="post /zones/{zone_id}/email/routing/disable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">disable</a>({ ...params }) -> Settings</code>
+- <code title="patch /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">edit</a>({ ...params }) -> Settings</code>
 - <code title="post /zones/{zone_id}/email/routing/enable">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">enable</a>({ ...params }) -> Settings</code>
 - <code title="get /zones/{zone_id}/email/routing">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">get</a>({ ...params }) -> Settings</code>
 - <code title="post /zones/{zone_id}/email/routing/unlock">client.emailRouting.<a href="./src/resources/email-routing/email-routing.ts">unlock</a>({ ...params }) -> Settings</code>

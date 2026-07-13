@@ -178,6 +178,7 @@ Types:
 
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainBulkDeleteResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainEditResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainGetResponse</a></code>
 
@@ -185,6 +186,7 @@ Methods:
 
 - <code title="get /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">list</a>({ ...params }) -> DomainListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">delete</a>(domainID, { ...params }) -> DomainDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">bulkDelete</a>({ ...params }) -> DomainBulkDeleteResponsesSinglePage</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">edit</a>(domainID, { ...params }) -> DomainEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">get</a>(domainID, { ...params }) -> DomainGetResponse</code>
 

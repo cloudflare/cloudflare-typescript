@@ -207,7 +207,10 @@ export interface ServerCreateResponse {
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
   updated_prompts?: Array<ServerCreateResponse.UpdatedPrompt>;
 
@@ -311,7 +314,10 @@ export interface ServerUpdateResponse {
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
   updated_prompts?: Array<ServerUpdateResponse.UpdatedPrompt>;
 
@@ -415,7 +421,10 @@ export interface ServerListResponse {
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
   updated_prompts?: Array<ServerListResponse.UpdatedPrompt>;
 
@@ -519,7 +528,10 @@ export interface ServerDeleteResponse {
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
   updated_prompts?: Array<ServerDeleteResponse.UpdatedPrompt>;
 
@@ -623,7 +635,10 @@ export interface ServerReadResponse {
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
   updated_prompts?: Array<ServerReadResponse.UpdatedPrompt>;
 
@@ -684,7 +699,7 @@ export interface ServerSyncResponse {
 
   error_details?: ServerSyncResponse.ErrorDetails;
 
-  status?: string;
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 }
 
 export namespace ServerSyncResponse {

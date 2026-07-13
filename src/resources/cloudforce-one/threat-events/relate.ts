@@ -13,7 +13,7 @@ export class BaseRelate extends APIResource {
   ] as const);
 
   /**
-   * Removes an event reference
+   * Remove one or more references from an event.
    *
    * @example
    * ```ts

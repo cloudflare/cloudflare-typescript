@@ -114,7 +114,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Fetch a specific dataset
+   * Gets a dataset and its latest upload status.
    *
    * @example
    * ```ts

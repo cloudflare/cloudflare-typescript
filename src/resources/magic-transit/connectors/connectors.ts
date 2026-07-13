@@ -31,7 +31,7 @@ export class BaseConnectors extends APIResource {
   ] as const);
 
   /**
-   * Add a connector to your account
+   * Creates a Magic WAN Connector.
    *
    * @example
    * ```ts
@@ -52,7 +52,8 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Replace Connector or Re-provision License Key
+   * Replaces properties of a Magic WAN Connector. May be used to re-provision a
+   * license key.
    *
    * @example
    * ```ts
@@ -78,7 +79,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * List Connectors
+   * Lists Magic WAN Connectors.
    *
    * @example
    * ```ts
@@ -103,7 +104,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Remove a connector from your account
+   * Deletes a Magic WAN Connector.
    *
    * @example
    * ```ts
@@ -129,7 +130,8 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Edit Connector to update specific properties or Re-provision License Key
+   * Updates properties of a Magic WAN Connector. May be used to re-provision a
+   * license key.
    *
    * @example
    * ```ts
@@ -154,7 +156,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Fetch Connector
+   * Fetches a Magic WAN Connector.
    *
    * @example
    * ```ts

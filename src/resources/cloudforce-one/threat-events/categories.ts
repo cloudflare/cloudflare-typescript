@@ -13,7 +13,7 @@ export class BaseCategories extends APIResource {
   ] as const);
 
   /**
-   * Creates a new category
+   * Create a new event category for the account.
    *
    * @example
    * ```ts
@@ -36,7 +36,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Lists categories across multiple datasets
+   * List categories across one or more datasets for the account.
    *
    * @example
    * ```ts
@@ -55,7 +55,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Deletes a category
+   * Delete a category by its identifier.
    *
    * @example
    * ```ts
@@ -79,7 +79,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Updates a category
+   * Update an existing category by its identifier.
    *
    * @example
    * ```ts
@@ -103,7 +103,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Reads a category
+   * Retrieve a single category by its identifier.
    *
    * @example
    * ```ts

@@ -14,10 +14,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestValidity</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Status</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">ValidationMethod</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackCreateResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>

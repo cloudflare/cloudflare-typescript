@@ -31,7 +31,7 @@ export class BaseInstances extends APIResource {
   ] as const);
 
   /**
-   * Create a new instance.
+   * Create a new AI Search instance with the given configuration.
    *
    * @example
    * ```ts
@@ -52,7 +52,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Update instance.
+   * Update the configuration of an AI Search instance.
    *
    * @example
    * ```ts
@@ -77,7 +77,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * List instances.
+   * List all AI Search instances in the account.
    *
    * @example
    * ```ts
@@ -102,7 +102,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Delete instance.
+   * Permanently delete an AI Search instance and all its indexed data.
    *
    * @example
    * ```ts
@@ -154,7 +154,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Read instance.
+   * Retrieve the configuration and status of an AI Search instance.
    *
    * @example
    * ```ts
@@ -200,7 +200,7 @@ export class BaseInstances extends APIResource {
   }
 
   /**
-   * Retrieves usage statistics for AI Search instances.
+   * Retrieve usage and indexing statistics for an AI Search instance.
    *
    * @example
    * ```ts
@@ -499,7 +499,9 @@ export namespace InstanceCreateResponse {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -871,7 +873,9 @@ export namespace InstanceUpdateResponse {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -1243,7 +1247,9 @@ export namespace InstanceListResponse {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -1615,7 +1621,9 @@ export namespace InstanceDeleteResponse {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -2077,7 +2085,9 @@ export namespace InstanceReadResponse {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -2626,7 +2636,9 @@ export namespace InstanceCreateParams {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }
@@ -3102,7 +3114,9 @@ export namespace InstanceUpdateParams {
     /**
      * Controls which documents are candidates for BM25 scoring. 'and' restricts
      * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. Defaults to 'and'.
+     * containing at least one term, ranked by BM25 relevance. When omitted on an
+     * update, the existing stored value is preserved; when never set, search falls
+     * back to 'and'.
      */
     keyword_match_mode?: 'and' | 'or';
   }

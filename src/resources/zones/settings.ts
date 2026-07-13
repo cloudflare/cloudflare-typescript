@@ -1558,12 +1558,12 @@ export type SettingEditResponse =
   | AdvancedDDoS
   | SettingEditResponse.ZonesCacheRulesAegis
   | AlwaysOnline
-  | SettingEditResponse.ZonesSchemasAlwaysUseHTTPS
-  | SettingEditResponse.ZonesSchemasAutomaticHTTPSRewrites
+  | SettingEditResponse.ZonesAlwaysUseHTTPS2
+  | SettingEditResponse.ZonesAutomaticHTTPSRewrites2
   | Brotli
-  | SettingEditResponse.ZonesSchemasBrowserCacheTTL
-  | SettingEditResponse.ZonesSchemasBrowserCheck
-  | SettingEditResponse.ZonesSchemasCacheLevel
+  | SettingEditResponse.ZonesBrowserCacheTTL2
+  | SettingEditResponse.ZonesBrowserCheck2
+  | SettingEditResponse.ZonesCacheLevel2
   | ChallengeTTL
   | SettingEditResponse.ZonesChinaNetworkEnabled
   | SettingEditResponse.ZonesContentConverter
@@ -1571,50 +1571,50 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesCNAMEFlattening
   | DevelopmentMode
   | EarlyHints
-  | SettingEditResponse.ZonesSchemasEdgeCacheTTL
-  | SettingEditResponse.ZonesSchemasEmailObfuscation
+  | SettingEditResponse.ZonesEdgeCacheTTL2
+  | SettingEditResponse.ZonesEmailObfuscation2
   | H2Prioritization
   | HotlinkProtection
   | HTTP2
   | HTTP3
   | ImageResizing
-  | SettingEditResponse.ZonesSchemasIPGeolocation
+  | SettingEditResponse.ZonesIPGeolocation2
   | IPV6
   | SettingEditResponse.ZonesMaxUpload
   | MinTLSVersion
-  | SettingEditResponse.ZonesSchemasMirage
+  | SettingEditResponse.ZonesMirage2
   | NEL
-  | SettingEditResponse.ZonesSchemasOpportunisticEncryption
+  | SettingEditResponse.ZonesOpportunisticEncryption2
   | OpportunisticOnion
   | OrangeToOrange
-  | SettingEditResponse.ZonesSchemasOriginErrorPagePassThru
+  | SettingEditResponse.ZonesOriginErrorPagePassThru2
   | SettingEditResponse.ZonesCacheRulesOriginH2MaxStreams
   | SettingEditResponse.ZonesCacheRulesOriginMaxHTTPVersion
-  | SettingEditResponse.ZonesSchemasPolish
+  | SettingEditResponse.ZonesPolish2
   | PrefetchPreload
   | SettingEditResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
   | SettingEditResponse.ZonesRedirectsForAITraining
   | SettingEditResponse.ZonesReplaceInsecureJS
-  | SettingEditResponse.ZonesSchemasResponseBuffering
-  | SettingEditResponse.ZonesSchemasRocketLoader
+  | SettingEditResponse.ZonesResponseBuffering2
+  | SettingEditResponse.ZonesRocketLoader2
   | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization
   | SettingEditResponse.ZonesSearchForAgents
   | SecurityHeaders
-  | SettingEditResponse.ZonesSchemasSecurityLevel
+  | SettingEditResponse.ZonesSecurityLevel2
   | ServerSideExcludes
   | SettingEditResponse.ZonesSha1Support
-  | SettingEditResponse.ZonesSchemasSortQueryStringForCache
-  | SettingEditResponse.ZonesSchemasSSL
+  | SettingEditResponse.ZonesSortQueryStringForCache2
+  | SettingEditResponse.ZonesSSL2
   | SSLRecommender
   | SettingEditResponse.ZonesTLS1_2Only
   | TLS1_3
   | TLSClientAuth
   | SettingEditResponse.ZonesTransformations
   | SettingEditResponse.ZonesTransformationsAllowedOrigins
-  | SettingEditResponse.ZonesSchemasTrueClientIPHeader
-  | SettingEditResponse.ZonesSchemasWAF
+  | SettingEditResponse.ZonesTrueClientIPHeader2
+  | SettingEditResponse.ZonesWAF2
   | WebP
   | Websocket;
 
@@ -1665,7 +1665,7 @@ export namespace SettingEditResponse {
    * equivalent "https" URL. If you only want to redirect for a subset of requests,
    * consider creating an "Always use HTTPS" page rule.
    */
-  export interface ZonesSchemasAlwaysUseHTTPS {
+  export interface ZonesAlwaysUseHTTPS2 {
     /**
      * ID of the zone setting.
      */
@@ -1691,7 +1691,7 @@ export namespace SettingEditResponse {
   /**
    * Enable the Automatic HTTPS Rewrites feature for this zone.
    */
-  export interface ZonesSchemasAutomaticHTTPSRewrites {
+  export interface ZonesAutomaticHTTPSRewrites2 {
     /**
      * ID of the zone setting.
      */
@@ -1720,7 +1720,7 @@ export namespace SettingEditResponse {
    * specified by your server.
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
-  export interface ZonesSchemasBrowserCacheTTL {
+  export interface ZonesBrowserCacheTTL2 {
     /**
      * ID of the zone setting.
      */
@@ -1750,7 +1750,7 @@ export namespace SettingEditResponse {
    * agent (also commonly used by abuse bots, crawlers or visitors).
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
-  export interface ZonesSchemasBrowserCheck {
+  export interface ZonesBrowserCheck2 {
     /**
      * ID of the zone setting.
      */
@@ -1780,7 +1780,7 @@ export namespace SettingEditResponse {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  export interface ZonesSchemasCacheLevel {
+  export interface ZonesCacheLevel2 {
     /**
      * ID of the zone setting.
      */
@@ -1893,7 +1893,7 @@ export namespace SettingEditResponse {
    * Time (in seconds) that a resource will be ensured to remain on Cloudflare's
    * cache servers.
    */
-  export interface ZonesSchemasEdgeCacheTTL {
+  export interface ZonesEdgeCacheTTL2 {
     /**
      * ID of the zone setting.
      */
@@ -1941,7 +1941,7 @@ export namespace SettingEditResponse {
    * Encrypt email adresses on your web page from bots, while keeping them visible to
    * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
    */
-  export interface ZonesSchemasEmailObfuscation {
+  export interface ZonesEmailObfuscation2 {
     /**
      * ID of the zone setting.
      */
@@ -1969,7 +1969,7 @@ export namespace SettingEditResponse {
    * pass the country code to you.
    * (https://support.cloudflare.com/hc/en-us/articles/200168236).
    */
-  export interface ZonesSchemasIPGeolocation {
+  export interface ZonesIPGeolocation2 {
     /**
      * ID of the zone setting.
      */
@@ -2040,7 +2040,7 @@ export namespace SettingEditResponse {
    * @deprecated Mirage is being deprecated. More information at
    * https://developers.cloudflare.com/speed/optimization/images/mirage/
    */
-  export interface ZonesSchemasMirage {
+  export interface ZonesMirage2 {
     /**
      * ID of the zone setting.
      */
@@ -2067,7 +2067,7 @@ export namespace SettingEditResponse {
   /**
    * Enables the Opportunistic Encryption feature for a zone.
    */
-  export interface ZonesSchemasOpportunisticEncryption {
+  export interface ZonesOpportunisticEncryption2 {
     /**
      * ID of the zone setting.
      */
@@ -2095,7 +2095,7 @@ export namespace SettingEditResponse {
    * server instead of showing a default Cloudflare error page. This does not apply
    * to 522 errors and is limited to Enterprise Zones.
    */
-  export interface ZonesSchemasOriginErrorPagePassThru {
+  export interface ZonesOriginErrorPagePassThru2 {
     /**
      * ID of the zone setting.
      */
@@ -2176,7 +2176,7 @@ export namespace SettingEditResponse {
    * lower-resolution image first and ending in a higher-resolution version. Not
    * recommended for hi-res photography sites.
    */
-  export interface ZonesSchemasPolish {
+  export interface ZonesPolish2 {
     /**
      * ID of the zone setting.
      */
@@ -2291,7 +2291,7 @@ export namespace SettingEditResponse {
    * @deprecated This zone setting is deprecated. This functionality is no longer
    * supported.
    */
-  export interface ZonesSchemasResponseBuffering {
+  export interface ZonesResponseBuffering2 {
     /**
      * ID of the zone setting.
      */
@@ -2326,7 +2326,7 @@ export namespace SettingEditResponse {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  export interface ZonesSchemasRocketLoader {
+  export interface ZonesRocketLoader2 {
     /**
      * ID of the zone setting.
      */
@@ -2412,7 +2412,7 @@ export namespace SettingEditResponse {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  export interface ZonesSchemasSecurityLevel {
+  export interface ZonesSecurityLevel2 {
     /**
      * ID of the zone setting.
      */
@@ -2466,7 +2466,7 @@ export namespace SettingEditResponse {
    * cache, regardless of the order of the query strings. This is limited to
    * Enterprise Zones.
    */
-  export interface ZonesSchemasSortQueryStringForCache {
+  export interface ZonesSortQueryStringForCache2 {
     /**
      * ID of the zone setting.
      */
@@ -2507,7 +2507,7 @@ export namespace SettingEditResponse {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  export interface ZonesSchemasSSL {
+  export interface ZonesSSL2 {
     /**
      * ID of the zone setting.
      */
@@ -2622,7 +2622,7 @@ export namespace SettingEditResponse {
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
-  export interface ZonesSchemasTrueClientIPHeader {
+  export interface ZonesTrueClientIPHeader2 {
     /**
      * ID of the zone setting.
      */
@@ -2657,7 +2657,7 @@ export namespace SettingEditResponse {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  export interface ZonesSchemasWAF {
+  export interface ZonesWAF2 {
     /**
      * ID of the zone setting.
      */
@@ -2689,12 +2689,12 @@ export type SettingGetResponse =
   | AdvancedDDoS
   | SettingGetResponse.ZonesCacheRulesAegis
   | AlwaysOnline
-  | SettingGetResponse.ZonesSchemasAlwaysUseHTTPS
-  | SettingGetResponse.ZonesSchemasAutomaticHTTPSRewrites
+  | SettingGetResponse.ZonesAlwaysUseHTTPS2
+  | SettingGetResponse.ZonesAutomaticHTTPSRewrites2
   | Brotli
-  | SettingGetResponse.ZonesSchemasBrowserCacheTTL
-  | SettingGetResponse.ZonesSchemasBrowserCheck
-  | SettingGetResponse.ZonesSchemasCacheLevel
+  | SettingGetResponse.ZonesBrowserCacheTTL2
+  | SettingGetResponse.ZonesBrowserCheck2
+  | SettingGetResponse.ZonesCacheLevel2
   | ChallengeTTL
   | SettingGetResponse.ZonesChinaNetworkEnabled
   | SettingGetResponse.ZonesContentConverter
@@ -2702,50 +2702,50 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesCNAMEFlattening
   | DevelopmentMode
   | EarlyHints
-  | SettingGetResponse.ZonesSchemasEdgeCacheTTL
-  | SettingGetResponse.ZonesSchemasEmailObfuscation
+  | SettingGetResponse.ZonesEdgeCacheTTL2
+  | SettingGetResponse.ZonesEmailObfuscation2
   | H2Prioritization
   | HotlinkProtection
   | HTTP2
   | HTTP3
   | ImageResizing
-  | SettingGetResponse.ZonesSchemasIPGeolocation
+  | SettingGetResponse.ZonesIPGeolocation2
   | IPV6
   | SettingGetResponse.ZonesMaxUpload
   | MinTLSVersion
-  | SettingGetResponse.ZonesSchemasMirage
+  | SettingGetResponse.ZonesMirage2
   | NEL
-  | SettingGetResponse.ZonesSchemasOpportunisticEncryption
+  | SettingGetResponse.ZonesOpportunisticEncryption2
   | OpportunisticOnion
   | OrangeToOrange
-  | SettingGetResponse.ZonesSchemasOriginErrorPagePassThru
+  | SettingGetResponse.ZonesOriginErrorPagePassThru2
   | SettingGetResponse.ZonesCacheRulesOriginH2MaxStreams
   | SettingGetResponse.ZonesCacheRulesOriginMaxHTTPVersion
-  | SettingGetResponse.ZonesSchemasPolish
+  | SettingGetResponse.ZonesPolish2
   | PrefetchPreload
   | SettingGetResponse.ZonesPrivacyPass
   | ProxyReadTimeout
   | PseudoIPV4
   | SettingGetResponse.ZonesRedirectsForAITraining
   | SettingGetResponse.ZonesReplaceInsecureJS
-  | SettingGetResponse.ZonesSchemasResponseBuffering
-  | SettingGetResponse.ZonesSchemasRocketLoader
+  | SettingGetResponse.ZonesResponseBuffering2
+  | SettingGetResponse.ZonesRocketLoader2
   | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization
   | SettingGetResponse.ZonesSearchForAgents
   | SecurityHeaders
-  | SettingGetResponse.ZonesSchemasSecurityLevel
+  | SettingGetResponse.ZonesSecurityLevel2
   | ServerSideExcludes
   | SettingGetResponse.ZonesSha1Support
-  | SettingGetResponse.ZonesSchemasSortQueryStringForCache
-  | SettingGetResponse.ZonesSchemasSSL
+  | SettingGetResponse.ZonesSortQueryStringForCache2
+  | SettingGetResponse.ZonesSSL2
   | SSLRecommender
   | SettingGetResponse.ZonesTLS1_2Only
   | TLS1_3
   | TLSClientAuth
   | SettingGetResponse.ZonesTransformations
   | SettingGetResponse.ZonesTransformationsAllowedOrigins
-  | SettingGetResponse.ZonesSchemasTrueClientIPHeader
-  | SettingGetResponse.ZonesSchemasWAF
+  | SettingGetResponse.ZonesTrueClientIPHeader2
+  | SettingGetResponse.ZonesWAF2
   | WebP
   | Websocket;
 
@@ -2796,7 +2796,7 @@ export namespace SettingGetResponse {
    * equivalent "https" URL. If you only want to redirect for a subset of requests,
    * consider creating an "Always use HTTPS" page rule.
    */
-  export interface ZonesSchemasAlwaysUseHTTPS {
+  export interface ZonesAlwaysUseHTTPS2 {
     /**
      * ID of the zone setting.
      */
@@ -2822,7 +2822,7 @@ export namespace SettingGetResponse {
   /**
    * Enable the Automatic HTTPS Rewrites feature for this zone.
    */
-  export interface ZonesSchemasAutomaticHTTPSRewrites {
+  export interface ZonesAutomaticHTTPSRewrites2 {
     /**
      * ID of the zone setting.
      */
@@ -2851,7 +2851,7 @@ export namespace SettingGetResponse {
    * specified by your server.
    * (https://support.cloudflare.com/hc/en-us/articles/200168276).
    */
-  export interface ZonesSchemasBrowserCacheTTL {
+  export interface ZonesBrowserCacheTTL2 {
     /**
      * ID of the zone setting.
      */
@@ -2881,7 +2881,7 @@ export namespace SettingGetResponse {
    * agent (also commonly used by abuse bots, crawlers or visitors).
    * (https://support.cloudflare.com/hc/en-us/articles/200170086).
    */
-  export interface ZonesSchemasBrowserCheck {
+  export interface ZonesBrowserCheck2 {
     /**
      * ID of the zone setting.
      */
@@ -2911,7 +2911,7 @@ export namespace SettingGetResponse {
    * aggressive setting will cache all static resources, including ones with a query
    * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
    */
-  export interface ZonesSchemasCacheLevel {
+  export interface ZonesCacheLevel2 {
     /**
      * ID of the zone setting.
      */
@@ -3024,7 +3024,7 @@ export namespace SettingGetResponse {
    * Time (in seconds) that a resource will be ensured to remain on Cloudflare's
    * cache servers.
    */
-  export interface ZonesSchemasEdgeCacheTTL {
+  export interface ZonesEdgeCacheTTL2 {
     /**
      * ID of the zone setting.
      */
@@ -3072,7 +3072,7 @@ export namespace SettingGetResponse {
    * Encrypt email adresses on your web page from bots, while keeping them visible to
    * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
    */
-  export interface ZonesSchemasEmailObfuscation {
+  export interface ZonesEmailObfuscation2 {
     /**
      * ID of the zone setting.
      */
@@ -3100,7 +3100,7 @@ export namespace SettingGetResponse {
    * pass the country code to you.
    * (https://support.cloudflare.com/hc/en-us/articles/200168236).
    */
-  export interface ZonesSchemasIPGeolocation {
+  export interface ZonesIPGeolocation2 {
     /**
      * ID of the zone setting.
      */
@@ -3171,7 +3171,7 @@ export namespace SettingGetResponse {
    * @deprecated Mirage is being deprecated. More information at
    * https://developers.cloudflare.com/speed/optimization/images/mirage/
    */
-  export interface ZonesSchemasMirage {
+  export interface ZonesMirage2 {
     /**
      * ID of the zone setting.
      */
@@ -3198,7 +3198,7 @@ export namespace SettingGetResponse {
   /**
    * Enables the Opportunistic Encryption feature for a zone.
    */
-  export interface ZonesSchemasOpportunisticEncryption {
+  export interface ZonesOpportunisticEncryption2 {
     /**
      * ID of the zone setting.
      */
@@ -3226,7 +3226,7 @@ export namespace SettingGetResponse {
    * server instead of showing a default Cloudflare error page. This does not apply
    * to 522 errors and is limited to Enterprise Zones.
    */
-  export interface ZonesSchemasOriginErrorPagePassThru {
+  export interface ZonesOriginErrorPagePassThru2 {
     /**
      * ID of the zone setting.
      */
@@ -3307,7 +3307,7 @@ export namespace SettingGetResponse {
    * lower-resolution image first and ending in a higher-resolution version. Not
    * recommended for hi-res photography sites.
    */
-  export interface ZonesSchemasPolish {
+  export interface ZonesPolish2 {
     /**
      * ID of the zone setting.
      */
@@ -3422,7 +3422,7 @@ export namespace SettingGetResponse {
    * @deprecated This zone setting is deprecated. This functionality is no longer
    * supported.
    */
-  export interface ZonesSchemasResponseBuffering {
+  export interface ZonesResponseBuffering2 {
     /**
      * ID of the zone setting.
      */
@@ -3457,7 +3457,7 @@ export namespace SettingGetResponse {
    * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
    * for more information.
    */
-  export interface ZonesSchemasRocketLoader {
+  export interface ZonesRocketLoader2 {
     /**
      * ID of the zone setting.
      */
@@ -3543,7 +3543,7 @@ export namespace SettingGetResponse {
    * an individual security setting, the profile will become Custom.
    * (https://support.cloudflare.com/hc/en-us/articles/200170056).
    */
-  export interface ZonesSchemasSecurityLevel {
+  export interface ZonesSecurityLevel2 {
     /**
      * ID of the zone setting.
      */
@@ -3597,7 +3597,7 @@ export namespace SettingGetResponse {
    * cache, regardless of the order of the query strings. This is limited to
    * Enterprise Zones.
    */
-  export interface ZonesSchemasSortQueryStringForCache {
+  export interface ZonesSortQueryStringForCache2 {
     /**
      * ID of the zone setting.
      */
@@ -3638,7 +3638,7 @@ export namespace SettingGetResponse {
    * expiration date in the future, and respond for the request domain name
    * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
    */
-  export interface ZonesSchemasSSL {
+  export interface ZonesSSL2 {
     /**
      * ID of the zone setting.
      */
@@ -3753,7 +3753,7 @@ export namespace SettingGetResponse {
    * Allows customer to continue to use True Client IP (Akamai feature) in the
    * headers we send to the origin. This is limited to Enterprise Zones.
    */
-  export interface ZonesSchemasTrueClientIPHeader {
+  export interface ZonesTrueClientIPHeader2 {
     /**
      * ID of the zone setting.
      */
@@ -3788,7 +3788,7 @@ export namespace SettingGetResponse {
    * reaches your origin web server.
    * (https://support.cloudflare.com/hc/en-us/articles/200172016).
    */
-  export interface ZonesSchemasWAF {
+  export interface ZonesWAF2 {
     /**
      * ID of the zone setting.
      */

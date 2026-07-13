@@ -1,6 +1,6 @@
 {
   "pkg": "cloudflare",
-  "githubRepo": "https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript",
+  "githubRepo": "https://github.com/cloudflare/cloudflare-typescript",
   "clientClass": "Cloudflare",
   "baseClientClass": "BaseCloudflare",
   "methods": [
@@ -6379,6 +6379,43 @@
         {
           "type": "param",
           "key": "meeting_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "moq.relays.tokens",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "jti",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "relay_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "jti",
           "location": "path"
         },
         {

@@ -73,10 +73,6 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zones.environments.delete()`
 - `client.zones.environments.rollback()`
 - `client.zones.plans.get()`
-- `client.loadBalancers.update()`
-- `client.loadBalancers.delete()`
-- `client.loadBalancers.edit()`
-- `client.loadBalancers.get()`
 - `client.loadBalancers.monitors.update()`
 - `client.loadBalancers.monitors.delete()`
 - `client.loadBalancers.monitors.edit()`
@@ -107,6 +103,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.ssl.verification.edit()`
 - `client.acm.customTrustStore.delete()`
 - `client.acm.customTrustStore.get()`
+- `client.analyticsQuery.summary()`
+- `client.analyticsQuery.timeseries()`
+- `client.analyticsQuery.topN()`
 - `client.clientCertificates.delete()`
 - `client.clientCertificates.edit()`
 - `client.clientCertificates.get()`
@@ -596,6 +595,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.registrar.registrations.get()`
 - `client.registrar.registrationStatus.get()`
 - `client.registrar.updateStatus.get()`
+- `client.registrarSandbox.registrations.edit()`
+- `client.registrarSandbox.registrations.get()`
+- `client.registrarSandbox.registrationStatus.get()`
+- `client.registrarSandbox.updateStatus.get()`
 - `client.rules.lists.update()`
 - `client.rules.lists.delete()`
 - `client.rules.lists.get()`
@@ -1096,7 +1099,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.moq.relays.update()`
 - `client.moq.relays.delete()`
 - `client.moq.relays.get()`
-- `client.moq.relays.tokens.rotate()`
+- `client.moq.relays.tokens.create()`
+- `client.moq.relays.tokens.list()`
+- `client.moq.relays.tokens.delete()`
 - `client.cloudforceOne.scans.results.get()`
 - `client.cloudforceOne.scans.config.delete()`
 - `client.cloudforceOne.scans.config.edit()`
@@ -1807,10 +1812,10 @@ client.example.list(undefined, { headers: { ... } });
 
 ### Removed `httpAgent` in favor of `fetchOptions`
 
-The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript#fetch-options).
+The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://github.com/cloudflare/cloudflare-typescript#fetch-options).
 This change was made as `httpAgent` relied on `node:http` agents which are not supported by any runtime's builtin fetch implementation.
 
-If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript#configuring-proxies).
+If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://github.com/cloudflare/cloudflare-typescript#configuring-proxies).
 
 Before:
 

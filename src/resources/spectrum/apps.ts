@@ -149,7 +149,7 @@ export namespace AppCreateResponse {
 
     /**
      * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-     * applications with traffic_type set to "direct".
+     * or UDP applications with traffic_type set to "direct".
      */
     argo_smart_routing?: boolean;
 
@@ -282,7 +282,7 @@ export namespace AppUpdateResponse {
 
     /**
      * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-     * applications with traffic_type set to "direct".
+     * or UDP applications with traffic_type set to "direct".
      */
     argo_smart_routing?: boolean;
 
@@ -415,7 +415,7 @@ export namespace AppListResponse {
 
     /**
      * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-     * applications with traffic_type set to "direct".
+     * or UDP applications with traffic_type set to "direct".
      */
     argo_smart_routing?: boolean;
 
@@ -555,7 +555,7 @@ export namespace AppGetResponse {
 
     /**
      * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-     * applications with traffic_type set to "direct".
+     * or UDP applications with traffic_type set to "direct".
      */
     argo_smart_routing?: boolean;
 
@@ -679,7 +679,7 @@ export declare namespace AppCreateParams {
 
     /**
      * Body param: Enables Argo Smart Routing for this application. Notes: Only
-     * available for TCP applications with traffic_type set to "direct".
+     * available for TCP or UDP applications with traffic_type set to "direct".
      */
     argo_smart_routing?: boolean;
 
@@ -795,7 +795,7 @@ export declare namespace AppUpdateParams {
 
     /**
      * Body param: Enables Argo Smart Routing for this application. Notes: Only
-     * available for TCP applications with traffic_type set to "direct".
+     * available for TCP or UDP applications with traffic_type set to "direct".
      */
     argo_smart_routing?: boolean;
 

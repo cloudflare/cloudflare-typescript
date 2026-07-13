@@ -393,12 +393,12 @@ export namespace PolicyCreateResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -538,12 +538,12 @@ export namespace PolicyUpdateResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -683,12 +683,12 @@ export namespace PolicyListResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -835,12 +835,12 @@ export namespace PolicyGetResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -971,12 +971,12 @@ export namespace PolicyCreateParams {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -1107,12 +1107,12 @@ export namespace PolicyUpdateParams {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 

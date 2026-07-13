@@ -352,10 +352,10 @@ export interface UsageGetParams {
   from?: string;
 
   /**
-   * Query param: Filter results by billable metric id (e.g.,
-   * workers_standard_requests).
+   * Query param: Filter results by one or more billable metric ids. Repeat the
+   * parameter to filter by multiple metrics. Maximum 10 values.
    */
-  metric?: string;
+  metric_id?: Array<string>;
 
   /**
    * Query param: End date for the usage query (ISO 8601). Required if `from` is set.

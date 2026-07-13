@@ -4,7 +4,6 @@ import { APIResource } from '../../core/resource';
 import * as HostnameAssociationsAPI from './hostname-associations';
 import {
   BaseHostnameAssociations,
-  HostnameAssociation,
   HostnameAssociationGetParams,
   HostnameAssociationGetResponse,
   HostnameAssociationUpdateParams,
@@ -30,7 +29,6 @@ export declare namespace CertificateAuthorities {
   export {
     HostnameAssociations as HostnameAssociations,
     BaseHostnameAssociations as BaseHostnameAssociations,
-    type HostnameAssociation as HostnameAssociation,
     type TLSHostnameAssociation as TLSHostnameAssociation,
     type HostnameAssociationUpdateResponse as HostnameAssociationUpdateResponse,
     type HostnameAssociationGetResponse as HostnameAssociationGetResponse,

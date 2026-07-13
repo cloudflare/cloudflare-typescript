@@ -2064,6 +2064,21 @@ export interface CustomHostnameCreateParams {
   custom_metadata?: { [key: string]: string };
 
   /**
+   * Body param: a valid hostname that’s been added to your DNS zone as an A, AAAA,
+   * or CNAME record.
+   */
+  custom_origin_server?: string;
+
+  /**
+   * Body param: A hostname that will be sent to your custom origin server as SNI for
+   * TLS handshake. This can be a valid subdomain of the zone or custom origin server
+   * name or the string ':request_host_header:' which will cause the host header in
+   * the request to be used as SNI. Not configurable with default/fallback origin
+   * server.
+   */
+  custom_origin_sni?: string;
+
+  /**
    * Body param: SSL properties used when creating the custom hostname.
    */
   ssl?: CustomHostnameCreateParams.SSL;
