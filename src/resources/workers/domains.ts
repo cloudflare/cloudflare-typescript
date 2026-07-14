@@ -115,11 +115,6 @@ export interface DomainUpdateResponse {
   cert_id: string;
 
   /**
-   * @deprecated Worker environment associated with the domain.
-   */
-  environment: string;
-
-  /**
    * Hostname of the domain. Can be either the zone apex or a subdomain of the zone.
    * Requests to this hostname will be routed to the configured Worker.
    */
@@ -140,6 +135,11 @@ export interface DomainUpdateResponse {
    * Name of the zone containing the domain hostname.
    */
   zone_name: string;
+
+  /**
+   * @deprecated Worker environment associated with the domain.
+   */
+  environment?: string;
 }
 
 export interface DomainListResponse {
@@ -154,11 +154,6 @@ export interface DomainListResponse {
   cert_id: string;
 
   /**
-   * @deprecated Worker environment associated with the domain.
-   */
-  environment: string;
-
-  /**
    * Hostname of the domain. Can be either the zone apex or a subdomain of the zone.
    * Requests to this hostname will be routed to the configured Worker.
    */
@@ -179,6 +174,11 @@ export interface DomainListResponse {
    * Name of the zone containing the domain hostname.
    */
   zone_name: string;
+
+  /**
+   * @deprecated Worker environment associated with the domain.
+   */
+  environment?: string;
 }
 
 export interface DomainDeleteResponse {
@@ -238,11 +238,6 @@ export interface DomainGetResponse {
   cert_id: string;
 
   /**
-   * @deprecated Worker environment associated with the domain.
-   */
-  environment: string;
-
-  /**
    * Hostname of the domain. Can be either the zone apex or a subdomain of the zone.
    * Requests to this hostname will be routed to the configured Worker.
    */
@@ -263,6 +258,11 @@ export interface DomainGetResponse {
    * Name of the zone containing the domain hostname.
    */
   zone_name: string;
+
+  /**
+   * @deprecated Worker environment associated with the domain.
+   */
+  environment?: string;
 }
 
 export interface DomainUpdateParams {
@@ -282,11 +282,6 @@ export interface DomainUpdateParams {
    * configured hostname will be routed to this Worker.
    */
   service: string;
-
-  /**
-   * @deprecated Body param: Worker environment associated with the domain.
-   */
-  environment?: string;
 
   /**
    * Body param: ID of the zone containing the domain hostname.
