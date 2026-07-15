@@ -73,6 +73,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zones.environments.delete()`
 - `client.zones.environments.rollback()`
 - `client.zones.plans.get()`
+- `client.loadBalancers.create()`
+- `client.loadBalancers.update()`
+- `client.loadBalancers.list()`
+- `client.loadBalancers.delete()`
+- `client.loadBalancers.edit()`
+- `client.loadBalancers.get()`
 - `client.loadBalancers.monitors.update()`
 - `client.loadBalancers.monitors.delete()`
 - `client.loadBalancers.monitors.edit()`
@@ -1493,6 +1499,9 @@ client.example.list(undefined, { headers: { ... } });
 - `client.user.tokens.list()`
 - `client.user.tokens.permissionGroups.list()`
 - `client.zones.list()`
+- `client.loadBalancers.list()`
+- `client.loadBalancers.delete()`
+- `client.loadBalancers.get()`
 - `client.customCsrs.list()`
 - `client.customCsrs.delete()`
 - `client.customCsrs.get()`
