@@ -862,22 +862,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/casb/applications/applications.ts">ApplicationListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/casb/applications/applications.ts">ApplicationGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponse</code>
-- <code title="get /accounts/{account_id}/one/applications/{slug}">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">get</a>(slug, { ...params }) -> ApplicationGetResponse</code>
 
 #### SetupFlows
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/casb/applications/setup-flows.ts">SetupFlowListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/one/applications/{slug}/setup-flows">client.zeroTrust.casb.applications.setupFlows.<a href="./src/resources/zero-trust/casb/applications/setup-flows.ts">list</a>(slug, { ...params }) -> SetupFlowListResponse</code>
 
 ### Integrations
 
