@@ -44,6 +44,19 @@ export class BaseUsage extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Returns high-level usage information for the account, including coverage, and
+   * subscription metadata.
+   */
+  paygoInfo(params: UsagePaygoInfoParams, options?: RequestOptions): APIPromise<UsagePaygoInfoResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/paygo-usage-info`, options) as APIPromise<{
+        result: UsagePaygoInfoResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 export class Usage extends BaseUsage {}
 
@@ -335,6 +348,46 @@ export namespace UsagePaygoResponse {
   }
 }
 
+/**
+ * Contains the paygo usage info.
+ */
+export interface UsagePaygoInfoResponse {
+  /**
+   * Indicates whether the account is covered.
+   */
+  covered: boolean;
+
+  /**
+   * List of subscriptions for the account.
+   */
+  subscriptions: Array<UsagePaygoInfoResponse.Subscription>;
+}
+
+export namespace UsagePaygoInfoResponse {
+  export interface Subscription {
+    /**
+     * The identifier for the Cloudflare subscription.
+     */
+    id: string;
+
+    /**
+     * The subscription billing cycle anchor timestamp.
+     */
+    billing_cycle_anchor_timestamp: string;
+
+    /**
+     * The subscription start timestamp.
+     */
+    start_timestamp: string;
+
+    /**
+     * The subscription end timestamp. Omitted for active subscriptions; present only
+     * when the subscription has been cancelled.
+     */
+    end_timestamp?: string;
+  }
+}
+
 export interface UsageGetParams {
   /**
    * Path param: Represents a Cloudflare resource identifier tag.
@@ -381,11 +434,20 @@ export interface UsagePaygoParams {
   to?: string;
 }
 
+export interface UsagePaygoInfoParams {
+  /**
+   * Represents a Cloudflare resource identifier tag.
+   */
+  account_id: string;
+}
+
 export declare namespace Usage {
   export {
     type UsageGetResponse as UsageGetResponse,
     type UsagePaygoResponse as UsagePaygoResponse,
+    type UsagePaygoInfoResponse as UsagePaygoInfoResponse,
     type UsageGetParams as UsageGetParams,
     type UsagePaygoParams as UsagePaygoParams,
+    type UsagePaygoInfoParams as UsagePaygoInfoParams,
   };
 }
