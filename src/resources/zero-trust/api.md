@@ -900,6 +900,142 @@ Methods:
 - <code title="post /accounts/{account_id}/one/integrations/{id}/pause">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">pause</a>(id, { ...params }) -> IntegrationPauseResponse</code>
 - <code title="post /accounts/{account_id}/one/integrations/{id}/resume">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">resume</a>(id, { ...params }) -> IntegrationResumeResponse</code>
 
+### Posture
+
+#### Findings
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingExportResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingIgnoreResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingResetSeverityResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingTuneSeverityResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">FindingUnignoreResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/data-security/posture/findings">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">list</a>({ ...params }) -> FindingListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/export">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">export</a>({ ...params }) -> FindingExportResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/findings/{finding_id}">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">get</a>(findingID, { ...params }) -> FindingGetResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/ignore">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">ignore</a>({ ...params }) -> FindingIgnoreResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/{finding_id}/reset_finding_severity">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">resetSeverity</a>(findingID, { ...params }) -> FindingResetSeverityResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/{finding_id}/tune_finding_severity">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">tuneSeverity</a>(findingID, { ...params }) -> FindingTuneSeverityResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/unignore">client.zeroTrust.casb.posture.findings.<a href="./src/resources/zero-trust/casb/posture/findings/findings.ts">unignore</a>({ ...params }) -> FindingUnignoreResponse</code>
+
+##### Instances
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">InstanceArchiveResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">InstanceExportResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">InstanceGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">InstanceUnarchiveResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/data-security/posture/findings/{finding_id}/instances">client.zeroTrust.casb.posture.findings.instances.<a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">list</a>(findingID, { ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/{finding_id}/instances/archive">client.zeroTrust.casb.posture.findings.instances.<a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">archive</a>(findingID, { ...params }) -> InstanceArchiveResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/{storage_namespace_id}/instances/export">client.zeroTrust.casb.posture.findings.instances.<a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">export</a>(storageNamespaceID, { ...params }) -> InstanceExportResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/findings/{finding_id}/instances/{instance_id}">client.zeroTrust.casb.posture.findings.instances.<a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">get</a>(instanceID, { ...params }) -> InstanceGetResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/findings/{finding_id}/instances/unarchive">client.zeroTrust.casb.posture.findings.instances.<a href="./src/resources/zero-trust/casb/posture/findings/instances.ts">unarchive</a>(findingID, { ...params }) -> InstanceUnarchiveResponse</code>
+
+#### Exports
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/exports.ts">ExportListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/exports.ts">ExportGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/data-security/posture/exports">client.zeroTrust.casb.posture.exports.<a href="./src/resources/zero-trust/casb/posture/exports.ts">list</a>({ ...params }) -> ExportListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/data-security/posture/exports/{id}">client.zeroTrust.casb.posture.exports.<a href="./src/resources/zero-trust/casb/posture/exports.ts">get</a>(id, { ...params }) -> ExportGetResponse</code>
+
+#### FindingTypes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/finding-types/finding-types.ts">FindingTypeListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/finding-types/finding-types.ts">FindingTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/data-security/posture/finding_types">client.zeroTrust.casb.posture.findingTypes.<a href="./src/resources/zero-trust/casb/posture/finding-types/finding-types.ts">list</a>({ ...params }) -> FindingTypeListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/data-security/posture/finding_types/{finding_type_id}">client.zeroTrust.casb.posture.findingTypes.<a href="./src/resources/zero-trust/casb/posture/finding-types/finding-types.ts">get</a>(findingTypeID, { ...params }) -> FindingTypeGetResponse</code>
+
+##### RemediationTypes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/finding-types/remediation-types.ts">RemediationTypeListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/data-security/posture/finding_types/{finding_type_id}/remediation_types">client.zeroTrust.casb.posture.findingTypes.remediationTypes.<a href="./src/resources/zero-trust/casb/posture/finding-types/remediation-types.ts">list</a>(findingTypeID, { ...params }) -> RemediationTypeListResponsesV4PagePaginationArray</code>
+
+#### Content
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/content.ts">ContentListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/content.ts">ContentExportResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/data-security/posture/content">client.zeroTrust.casb.posture.content.<a href="./src/resources/zero-trust/casb/posture/content.ts">list</a>({ ...params }) -> ContentListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/data-security/posture/content/export">client.zeroTrust.casb.posture.content.<a href="./src/resources/zero-trust/casb/posture/content.ts">export</a>({ ...params }) -> ContentExportResponse</code>
+
+#### Remediations
+
+##### Jobs
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">JobListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">JobExportResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/data-security/posture/remediations/jobs">client.zeroTrust.casb.posture.remediations.jobs.<a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">create</a>({ ...params }) -> JobCreateResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/remediations/jobs">client.zeroTrust.casb.posture.remediations.jobs.<a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">list</a>({ ...params }) -> JobListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/data-security/posture/remediations/jobs/export">client.zeroTrust.casb.posture.remediations.jobs.<a href="./src/resources/zero-trust/casb/posture/remediations/jobs.ts">export</a>({ ...params }) -> JobExportResponse</code>
+
+#### Webhooks
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookEvaluateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookEvaluateExistingResponse</a></code>
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">WebhookGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/data-security/posture/webhooks">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">create</a>({ ...params }) -> WebhookCreateResponse</code>
+- <code title="put /accounts/{account_id}/data-security/posture/webhooks/{webhook_id}">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">update</a>(webhookID, { ...params }) -> WebhookUpdateResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/webhooks">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">list</a>({ ...params }) -> WebhookListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/data-security/posture/webhooks/{webhook_id}">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">delete</a>(webhookID, { ...params }) -> WebhookDeleteResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/webhooks/evaluate">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">evaluate</a>({ ...params }) -> WebhookEvaluateResponse</code>
+- <code title="post /accounts/{account_id}/data-security/posture/webhooks/{webhook_id}/evaluate">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">evaluateExisting</a>(webhookID, { ...params }) -> WebhookEvaluateExistingResponse</code>
+- <code title="get /accounts/{account_id}/data-security/posture/webhooks/{webhook_id}">client.zeroTrust.casb.posture.webhooks.<a href="./src/resources/zero-trust/casb/posture/webhooks/webhooks.ts">get</a>(webhookID, { ...params }) -> WebhookGetResponse</code>
+
+##### Jobs
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/casb/posture/webhooks/jobs.ts">JobCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/data-security/posture/webhooks/jobs">client.zeroTrust.casb.posture.webhooks.jobs.<a href="./src/resources/zero-trust/casb/posture/webhooks/jobs.ts">create</a>({ ...params }) -> JobCreateResponse</code>
+
 ## DEX
 
 Types:

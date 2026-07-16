@@ -26,3 +26,4 @@ export {
   type IntegrationPauseParams,
   type IntegrationResumeParams,
 } from './integrations';
+export { Posture, BasePosture } from './posture/index';

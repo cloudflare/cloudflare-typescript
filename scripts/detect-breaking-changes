@@ -572,6 +572,17 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/casb/applications/applications.test.ts
 	tests/api-resources/zero-trust/casb/applications/auth-methods.test.ts
 	tests/api-resources/zero-trust/casb/integrations.test.ts
+	tests/api-resources/zero-trust/casb/posture/posture.test.ts
+	tests/api-resources/zero-trust/casb/posture/findings/findings.test.ts
+	tests/api-resources/zero-trust/casb/posture/findings/instances.test.ts
+	tests/api-resources/zero-trust/casb/posture/exports.test.ts
+	tests/api-resources/zero-trust/casb/posture/finding-types/finding-types.test.ts
+	tests/api-resources/zero-trust/casb/posture/finding-types/remediation-types.test.ts
+	tests/api-resources/zero-trust/casb/posture/content.test.ts
+	tests/api-resources/zero-trust/casb/posture/remediations/remediations.test.ts
+	tests/api-resources/zero-trust/casb/posture/remediations/jobs.test.ts
+	tests/api-resources/zero-trust/casb/posture/webhooks/webhooks.test.ts
+	tests/api-resources/zero-trust/casb/posture/webhooks/jobs.test.ts
 	tests/api-resources/zero-trust/dex/dex.test.ts
 	tests/api-resources/zero-trust/dex/warp-change-events.test.ts
 	tests/api-resources/zero-trust/dex/commands/commands.test.ts
