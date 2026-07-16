@@ -96,6 +96,9 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: BaseLoadBalancers }
             ],
             fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'resolver_ip', prefer_ecs: 'always' },
+            pool_default_weight: 0.2,
+            pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
+            pools: ['17b5962d775c646f3f9725cbc7a53df4'],
             pop_pools: {
               LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
@@ -221,6 +224,9 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: BaseLoadBalancers }
             ],
             fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'resolver_ip', prefer_ecs: 'always' },
+            pool_default_weight: 0.2,
+            pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
+            pools: ['17b5962d775c646f3f9725cbc7a53df4'],
             pop_pools: {
               LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
