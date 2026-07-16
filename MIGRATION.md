@@ -847,6 +847,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.access.policies.update()`
 - `client.zeroTrust.access.policies.delete()`
 - `client.zeroTrust.access.policies.get()`
+- `client.zeroTrust.casb.applications.get()`
+- `client.zeroTrust.casb.applications.authMethods.list()`
 - `client.zeroTrust.casb.integrations.update()`
 - `client.zeroTrust.casb.integrations.delete()`
 - `client.zeroTrust.casb.integrations.get()`

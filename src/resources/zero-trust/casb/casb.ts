@@ -21,6 +21,8 @@ import {
 } from './integrations';
 import * as ApplicationsAPI from './applications/applications';
 import {
+  ApplicationGetParams,
+  ApplicationGetResponse,
   ApplicationListParams,
   ApplicationListResponse,
   Applications,
@@ -48,7 +50,9 @@ export declare namespace Casb {
     Applications as Applications,
     BaseApplications as BaseApplications,
     type ApplicationListResponse as ApplicationListResponse,
+    type ApplicationGetResponse as ApplicationGetResponse,
     type ApplicationListParams as ApplicationListParams,
+    type ApplicationGetParams as ApplicationGetParams,
   };
 
   export {

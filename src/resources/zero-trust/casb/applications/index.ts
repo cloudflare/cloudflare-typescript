@@ -4,6 +4,13 @@ export {
   Applications,
   BaseApplications,
   type ApplicationListResponse,
+  type ApplicationGetResponse,
   type ApplicationListParams,
+  type ApplicationGetParams,
 } from './applications';
-export { SetupFlows, BaseSetupFlows } from './setup-flows';
+export {
+  AuthMethods,
+  BaseAuthMethods,
+  type AuthMethodListResponse,
+  type AuthMethodListParams,
+} from './auth-methods';
