@@ -66,6 +66,26 @@ const runTests = (
       compatibility_date: '2021-01-01',
       compatibility_flags: ['nodejs_compat'],
       containers: [{ class_name: 'MyDurableObject' }],
+      exports: {
+        Admin: {
+          type: 'worker',
+          cache: { enabled: true },
+          renamed_to: 'renamed_to',
+          state: 'created',
+          storage: 'sqlite',
+          transfer_from: 'transfer_from',
+          transferred_to: 'transferred_to',
+        },
+        default: {
+          type: 'worker',
+          cache: { enabled: false },
+          renamed_to: 'renamed_to',
+          state: 'created',
+          storage: 'sqlite',
+          transfer_from: 'transfer_from',
+          transferred_to: 'transferred_to',
+        },
+      },
       limits: { cpu_ms: 50, subrequests: 1000 },
       main_module: 'index.js',
       migrations: {
