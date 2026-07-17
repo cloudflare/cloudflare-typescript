@@ -10,7 +10,7 @@ export class BaseLatest extends APIResource {
     Object.freeze(['magicTransit', 'connectors', 'snapshots', 'latest'] as const);
 
   /**
-   * Fetches latest Magic WAN Connector Telemetry Snapshots
+   * Gets latest Magic WAN Connector Telemetry Snapshots
    *
    * @example
    * ```ts

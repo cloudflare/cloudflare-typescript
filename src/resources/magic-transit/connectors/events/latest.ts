@@ -14,7 +14,7 @@ export class BaseLatest extends APIResource {
   ] as const);
 
   /**
-   * Fetches latest Magic WAN Connector Telemetry Events
+   * Gets latest Magic WAN Connector Telemetry Events
    *
    * @example
    * ```ts
