@@ -52,7 +52,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Replaces properties of a Magic WAN Connector. May be used to re-provision a
+   * Updates properties of a Magic WAN Connector. May be used to re-provision a
    * license key.
    *
    * @example
@@ -130,8 +130,8 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Updates properties of a Magic WAN Connector. May be used to re-provision a
-   * license key.
+   * Edits properties of a Magic WAN Connector. May be used to re-provision a license
+   * key.
    *
    * @example
    * ```ts
@@ -156,7 +156,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Fetches a Magic WAN Connector.
+   * Gets a Magic WAN Connector.
    *
    * @example
    * ```ts
