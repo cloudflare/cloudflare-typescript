@@ -17,15 +17,7 @@ export class BaseRoles extends APIResource {
   /**
    * Get all available roles for an account.
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const role of client.accounts.roles.list({
-   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated Use /accounts/{account_id}/iam/permission_groups instead.
    */
   list(
     params: RoleListParams,
@@ -41,13 +33,7 @@ export class BaseRoles extends APIResource {
   /**
    * Get information about a specific role for an account.
    *
-   * @example
-   * ```ts
-   * const role = await client.accounts.roles.get(
-   *   '3536bcfad5faccb999b47003c79917fb',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
+   * @deprecated Use /accounts/{account_id}/iam/permission_groups/{permission_group_id} instead.
    */
   get(roleID: string, params: RoleGetParams, options?: RequestOptions): APIPromise<Shared.Role> {
     const { account_id } = params;
