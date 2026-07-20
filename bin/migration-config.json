@@ -6650,8 +6650,82 @@
       ]
     },
     {
+      "base": "cloudforceOne.threatEvents.indicators.byDataset",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "indicator_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "indicator_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "cloudforceOne.threatEvents.datasets",
       "name": "raw",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.datasets.events",
+      "name": "get",
       "params": [
         {
           "type": "param",
@@ -6749,6 +6823,43 @@
         {
           "type": "param",
           "key": "raw_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.tags.indicators.byDataset",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag_uuid",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag_uuid",
           "location": "path"
         },
         {

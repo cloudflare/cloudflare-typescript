@@ -1,23 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as AggregateAPI from './aggregate';
+import { Aggregate, AggregateListParams, AggregateListResponse, BaseAggregate } from './aggregate';
 import * as AttackersAPI from './attackers';
 import { AttackerListParams, AttackerListResponse, Attackers, BaseAttackers } from './attackers';
-import * as CategoriesAPI from './categories';
-import {
-  BaseCategories,
-  Categories,
-  CategoryCreateParams,
-  CategoryCreateResponse,
-  CategoryDeleteParams,
-  CategoryDeleteResponse,
-  CategoryEditParams,
-  CategoryEditResponse,
-  CategoryGetParams,
-  CategoryGetResponse,
-  CategoryListParams,
-  CategoryListResponse,
-} from './categories';
 import * as CountriesAPI from './countries';
 import { BaseCountries, Countries, CountryListParams, CountryListResponse } from './countries';
 import * as CronsAPI from './crons';
@@ -31,6 +18,10 @@ import {
   EventTagDeleteResponse,
   EventTags,
 } from './event-tags';
+import * as GraphAPI from './graph';
+import { BaseGraph, Graph, GraphListParams, GraphListResponse } from './graph';
+import * as GraphqlAPI from './graphql';
+import { BaseGraphql, Graphql, GraphqlCreateParams, GraphqlCreateResponse } from './graphql';
 import * as IndicatorTypesAPI from './indicator-types';
 import {
   BaseIndicatorTypes,
@@ -40,6 +31,20 @@ import {
 } from './indicator-types';
 import * as InsightsAPI from './insights';
 import { BaseInsights, Insights } from './insights';
+import * as QueriesAPI from './queries';
+import {
+  BaseQueries,
+  Queries,
+  QueryCreateParams,
+  QueryCreateResponse,
+  QueryDeleteParams,
+  QueryEditParams,
+  QueryEditResponse,
+  QueryGetParams,
+  QueryGetResponse,
+  QueryListParams,
+  QueryListResponse,
+} from './queries';
 import * as RawAPI from './raw';
 import {
   BaseRaw,
@@ -51,20 +56,35 @@ import {
 } from './raw';
 import * as RelateAPI from './relate';
 import { BaseRelate, Relate, RelateDeleteParams, RelateDeleteResponse } from './relate';
-import * as TagsAPI from './tags';
-import { BaseTags, TagCreateParams, TagCreateResponse, Tags } from './tags';
-import * as TargetIndustriesAPI from './target-industries';
+import * as RelationshipsAPI from './relationships';
 import {
-  BaseTargetIndustries,
-  TargetIndustries,
-  TargetIndustryListParams,
-  TargetIndustryListResponse,
-} from './target-industries';
+  BaseRelationships,
+  RelationshipListParams,
+  RelationshipListResponse,
+  Relationships,
+} from './relationships';
+import * as CategoriesAPI from './categories/categories';
+import {
+  BaseCategories,
+  Categories,
+  CategoryCreateParams,
+  CategoryCreateResponse,
+  CategoryDeleteParams,
+  CategoryDeleteResponse,
+  CategoryEditParams,
+  CategoryEditResponse,
+  CategoryGetParams,
+  CategoryGetResponse,
+  CategoryListParams,
+  CategoryListResponse,
+} from './categories/categories';
 import * as DatasetsAPI from './datasets/datasets';
 import {
   BaseDatasets,
   DatasetCreateParams,
   DatasetCreateResponse,
+  DatasetDeleteParams,
+  DatasetDeleteResponse,
   DatasetEditParams,
   DatasetEditResponse,
   DatasetGetParams,
@@ -75,6 +95,33 @@ import {
   DatasetRawResponse,
   Datasets,
 } from './datasets/datasets';
+import * as IndicatorsAPI from './indicators/indicators';
+import {
+  BaseIndicators,
+  IndicatorListParams,
+  IndicatorListResponse,
+  Indicators,
+} from './indicators/indicators';
+import * as TagsAPI from './tags/tags';
+import {
+  BaseTags,
+  TagCreateParams,
+  TagCreateResponse,
+  TagDeleteParams,
+  TagDeleteResponse,
+  TagEditParams,
+  TagEditResponse,
+  TagListParams,
+  TagListResponse,
+  Tags,
+} from './tags/tags';
+import * as TargetIndustriesAPI from './target-industries/target-industries';
+import {
+  BaseTargetIndustries,
+  TargetIndustries,
+  TargetIndustryListParams,
+  TargetIndustryListResponse,
+} from './target-industries/target-industries';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -169,6 +216,22 @@ export class BaseThreatEvents extends APIResource {
   }
 
   /**
+   * This method is deprecated. Please use `event_create_bulk` instead
+   *
+   * @deprecated This endpoint is deprecated and will be removed in a future version.
+   */
+  bulkCreateRelationships(
+    params: ThreatEventBulkCreateRelationshipsParams,
+    options?: RequestOptions,
+  ): APIPromise<ThreatEventBulkCreateRelationshipsResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post(path`/accounts/${account_id}/cloudforce-one/events/create/bulk/relationships`, {
+      body,
+      ...options,
+    });
+  }
+
+  /**
    * Update an existing event by its identifier.
    *
    * @example
@@ -196,7 +259,7 @@ export class BaseThreatEvents extends APIResource {
    * This Method is deprecated. Please use
    * /events/dataset/:dataset_id/events/:event_id instead.
    *
-   * @deprecated
+   * @deprecated Use datasets.events.get instead (GET /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/events/{event_id}).
    */
   get(
     eventID: string,
@@ -208,6 +271,12 @@ export class BaseThreatEvents extends APIResource {
   }
 }
 export class ThreatEvents extends BaseThreatEvents {
+  aggregate: AggregateAPI.Aggregate = new AggregateAPI.Aggregate(this._client);
+  graphql: GraphqlAPI.Graphql = new GraphqlAPI.Graphql(this._client);
+  graph: GraphAPI.Graph = new GraphAPI.Graph(this._client);
+  queries: QueriesAPI.Queries = new QueriesAPI.Queries(this._client);
+  relationships: RelationshipsAPI.Relationships = new RelationshipsAPI.Relationships(this._client);
+  indicators: IndicatorsAPI.Indicators = new IndicatorsAPI.Indicators(this._client);
   attackers: AttackersAPI.Attackers = new AttackersAPI.Attackers(this._client);
   categories: CategoriesAPI.Categories = new CategoriesAPI.Categories(this._client);
   countries: CountriesAPI.Countries = new CountriesAPI.Countries(this._client);
@@ -407,6 +476,50 @@ export namespace ThreatEventBulkCreateResponse {
     uuid: string;
   }
 
+  export interface Error {
+    /**
+     * Error message
+     */
+    error: string;
+
+    /**
+     * Index of the event that caused the error
+     */
+    eventIndex: number;
+  }
+}
+
+/**
+ * Result of bulk relationship creation operation
+ */
+export interface ThreatEventBulkCreateRelationshipsResponse {
+  /**
+   * Number of events created
+   */
+  createdEventsCount: number;
+
+  /**
+   * Number of indicators created
+   */
+  createdIndicatorsCount: number;
+
+  /**
+   * Number of relationships created
+   */
+  createdRelationshipsCount: number;
+
+  /**
+   * Number of errors encountered
+   */
+  errorCount: number;
+
+  /**
+   * Array of error details
+   */
+  errors?: Array<ThreatEventBulkCreateRelationshipsResponse.Error>;
+}
+
+export namespace ThreatEventBulkCreateRelationshipsResponse {
   export interface Error {
     /**
      * Error message
@@ -836,6 +949,85 @@ export namespace ThreatEventBulkCreateParams {
   }
 }
 
+export interface ThreatEventBulkCreateRelationshipsParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  data: Array<ThreatEventBulkCreateRelationshipsParams.Data>;
+
+  /**
+   * Body param
+   */
+  datasetId: string;
+}
+
+export namespace ThreatEventBulkCreateRelationshipsParams {
+  export interface Data {
+    category: string;
+
+    date: string;
+
+    event: string;
+
+    raw: Data.Raw;
+
+    tlp: string;
+
+    accountId?: number;
+
+    attacker?: string | null;
+
+    attackerCountry?: string;
+
+    datasetId?: string;
+
+    indicator?: string;
+
+    /**
+     * Array of indicators for this event. Supports multiple indicators per event for
+     * complex scenarios.
+     */
+    indicators?: Array<Data.Indicator>;
+
+    indicatorType?: string;
+
+    insight?: string;
+
+    tags?: Array<string>;
+
+    targetCountry?: string;
+
+    targetIndustry?: string;
+  }
+
+  export namespace Data {
+    export interface Raw {
+      data: { [key: string]: unknown } | null;
+
+      source?: string;
+
+      tlp?: string;
+    }
+
+    export interface Indicator {
+      /**
+       * The type of indicator (e.g., DOMAIN, IP, JA3, HASH)
+       */
+      indicatorType: string;
+
+      /**
+       * The indicator value (e.g., domain name, IP address, hash)
+       */
+      value: string;
+    }
+  }
+}
+
 export interface ThreatEventEditParams {
   /**
    * Path param: Account ID.
@@ -930,6 +1122,18 @@ export interface ThreatEventGetParams {
   account_id: string;
 }
 
+ThreatEvents.Aggregate = Aggregate;
+ThreatEvents.BaseAggregate = BaseAggregate;
+ThreatEvents.Graphql = Graphql;
+ThreatEvents.BaseGraphql = BaseGraphql;
+ThreatEvents.Graph = Graph;
+ThreatEvents.BaseGraph = BaseGraph;
+ThreatEvents.Queries = Queries;
+ThreatEvents.BaseQueries = BaseQueries;
+ThreatEvents.Relationships = Relationships;
+ThreatEvents.BaseRelationships = BaseRelationships;
+ThreatEvents.Indicators = Indicators;
+ThreatEvents.BaseIndicators = BaseIndicators;
 ThreatEvents.Attackers = Attackers;
 ThreatEvents.BaseAttackers = BaseAttackers;
 ThreatEvents.Categories = Categories;
@@ -960,13 +1164,64 @@ export declare namespace ThreatEvents {
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
     type ThreatEventListResponse as ThreatEventListResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
+    type ThreatEventBulkCreateRelationshipsResponse as ThreatEventBulkCreateRelationshipsResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
+    type ThreatEventBulkCreateRelationshipsParams as ThreatEventBulkCreateRelationshipsParams,
     type ThreatEventEditParams as ThreatEventEditParams,
     type ThreatEventGetParams as ThreatEventGetParams,
+  };
+
+  export {
+    Aggregate as Aggregate,
+    BaseAggregate as BaseAggregate,
+    type AggregateListResponse as AggregateListResponse,
+    type AggregateListParams as AggregateListParams,
+  };
+
+  export {
+    Graphql as Graphql,
+    BaseGraphql as BaseGraphql,
+    type GraphqlCreateResponse as GraphqlCreateResponse,
+    type GraphqlCreateParams as GraphqlCreateParams,
+  };
+
+  export {
+    Graph as Graph,
+    BaseGraph as BaseGraph,
+    type GraphListResponse as GraphListResponse,
+    type GraphListParams as GraphListParams,
+  };
+
+  export {
+    Queries as Queries,
+    BaseQueries as BaseQueries,
+    type QueryCreateResponse as QueryCreateResponse,
+    type QueryListResponse as QueryListResponse,
+    type QueryEditResponse as QueryEditResponse,
+    type QueryGetResponse as QueryGetResponse,
+    type QueryCreateParams as QueryCreateParams,
+    type QueryListParams as QueryListParams,
+    type QueryDeleteParams as QueryDeleteParams,
+    type QueryEditParams as QueryEditParams,
+    type QueryGetParams as QueryGetParams,
+  };
+
+  export {
+    Relationships as Relationships,
+    BaseRelationships as BaseRelationships,
+    type RelationshipListResponse as RelationshipListResponse,
+    type RelationshipListParams as RelationshipListParams,
+  };
+
+  export {
+    Indicators as Indicators,
+    BaseIndicators as BaseIndicators,
+    type IndicatorListResponse as IndicatorListResponse,
+    type IndicatorListParams as IndicatorListParams,
   };
 
   export {
@@ -1005,11 +1260,13 @@ export declare namespace ThreatEvents {
     BaseDatasets as BaseDatasets,
     type DatasetCreateResponse as DatasetCreateResponse,
     type DatasetListResponse as DatasetListResponse,
+    type DatasetDeleteResponse as DatasetDeleteResponse,
     type DatasetEditResponse as DatasetEditResponse,
     type DatasetGetResponse as DatasetGetResponse,
     type DatasetRawResponse as DatasetRawResponse,
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
     type DatasetEditParams as DatasetEditParams,
     type DatasetGetParams as DatasetGetParams,
     type DatasetRawParams as DatasetRawParams,
@@ -1042,7 +1299,13 @@ export declare namespace ThreatEvents {
     Tags as Tags,
     BaseTags as BaseTags,
     type TagCreateResponse as TagCreateResponse,
+    type TagListResponse as TagListResponse,
+    type TagDeleteResponse as TagDeleteResponse,
+    type TagEditResponse as TagEditResponse,
     type TagCreateParams as TagCreateParams,
+    type TagListParams as TagListParams,
+    type TagDeleteParams as TagDeleteParams,
+    type TagEditParams as TagEditParams,
   };
 
   export {

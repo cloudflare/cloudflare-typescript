@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseCategories } from 'cloudflare/resources/cloudforce-one/threat-events/categories';
 import { ThreatEvents } from 'cloudflare/resources/cloudforce-one/threat-events/threat-events';
+import { BaseCategories } from 'cloudflare/resources/cloudforce-one/threat-events/categories/categories';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';

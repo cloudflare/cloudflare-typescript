@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as EventsAPI from './events';
+import { BaseEvents, EventGetParams, EventGetResponse, Events } from './events';
 import * as HealthAPI from './health';
 import { BaseHealth, Health } from './health';
 import { APIPromise } from '../../../../core/api-promise';
@@ -52,6 +54,30 @@ export class BaseDatasets extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Soft-deletes a dataset given a datasetId.
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.cloudforceOne.threatEvents.datasets.delete(
+   *     'dataset_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  delete(
+    datasetID: string,
+    params: DatasetDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<DatasetDeleteResponse> {
+    const { account_id } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetID}`,
+      options,
+    );
   }
 
   /**
@@ -125,6 +151,7 @@ export class BaseDatasets extends APIResource {
 }
 export class Datasets extends BaseDatasets {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 }
 
 export interface DatasetCreateResponse {
@@ -149,6 +176,12 @@ export namespace DatasetListResponse {
 
     deletedAt?: string;
   }
+}
+
+export interface DatasetDeleteResponse {
+  name: string;
+
+  uuid: string;
 }
 
 export interface DatasetEditResponse {
@@ -216,6 +249,13 @@ export interface DatasetListParams {
   includeDeleted?: boolean;
 }
 
+export interface DatasetDeleteParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 export interface DatasetEditParams {
   /**
    * Path param: Account ID.
@@ -255,20 +295,31 @@ export interface DatasetRawParams {
 
 Datasets.Health = Health;
 Datasets.BaseHealth = BaseHealth;
+Datasets.Events = Events;
+Datasets.BaseEvents = BaseEvents;
 
 export declare namespace Datasets {
   export {
     type DatasetCreateResponse as DatasetCreateResponse,
     type DatasetListResponse as DatasetListResponse,
+    type DatasetDeleteResponse as DatasetDeleteResponse,
     type DatasetEditResponse as DatasetEditResponse,
     type DatasetGetResponse as DatasetGetResponse,
     type DatasetRawResponse as DatasetRawResponse,
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
     type DatasetEditParams as DatasetEditParams,
     type DatasetGetParams as DatasetGetParams,
     type DatasetRawParams as DatasetRawParams,
   };
 
   export { Health as Health, BaseHealth as BaseHealth };
+
+  export {
+    Events as Events,
+    BaseEvents as BaseEvents,
+    type EventGetResponse as EventGetResponse,
+    type EventGetParams as EventGetParams,
+  };
 }

@@ -862,16 +862,33 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/requests/priority.test.ts
 	tests/api-resources/cloudforce-one/requests/assets.test.ts
 	tests/api-resources/cloudforce-one/threat-events/threat-events.test.ts
+	tests/api-resources/cloudforce-one/threat-events/aggregate.test.ts
+	tests/api-resources/cloudforce-one/threat-events/graphql.test.ts
+	tests/api-resources/cloudforce-one/threat-events/graph.test.ts
+	tests/api-resources/cloudforce-one/threat-events/queries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/relationships.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/indicators.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/aggregate.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/types.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/by-dataset/by-dataset.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/by-dataset/tags.test.ts
 	tests/api-resources/cloudforce-one/threat-events/attackers.test.ts
-	tests/api-resources/cloudforce-one/threat-events/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-events/categories/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-events/categories/catalog.test.ts
 	tests/api-resources/cloudforce-one/threat-events/countries.test.ts
 	tests/api-resources/cloudforce-one/threat-events/datasets/datasets.test.ts
+	tests/api-resources/cloudforce-one/threat-events/datasets/events.test.ts
 	tests/api-resources/cloudforce-one/threat-events/indicator-types.test.ts
 	tests/api-resources/cloudforce-one/threat-events/raw.test.ts
 	tests/api-resources/cloudforce-one/threat-events/relate.test.ts
-	tests/api-resources/cloudforce-one/threat-events/tags.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/tags.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/indicators/indicators.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/indicators/by-dataset.test.ts
 	tests/api-resources/cloudforce-one/threat-events/event-tags.test.ts
-	tests/api-resources/cloudforce-one/threat-events/target-industries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/target-industries/target-industries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/target-industries/by-dataset.test.ts
+	tests/api-resources/cloudforce-one/threat-events/target-industries/catalog.test.ts
 	tests/api-resources/ai-gateway/ai-gateway.test.ts
 	tests/api-resources/ai-gateway/evaluation-types.test.ts
 	tests/api-resources/ai-gateway/custom-providers.test.ts

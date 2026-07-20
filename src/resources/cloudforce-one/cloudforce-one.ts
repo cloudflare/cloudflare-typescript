@@ -37,6 +37,8 @@ import * as ThreatEventsAPI from './threat-events/threat-events';
 import {
   BaseThreatEvents,
   ThreatEventBulkCreateParams,
+  ThreatEventBulkCreateRelationshipsParams,
+  ThreatEventBulkCreateRelationshipsResponse,
   ThreatEventBulkCreateResponse,
   ThreatEventCreateParams,
   ThreatEventCreateResponse,
@@ -107,11 +109,13 @@ export declare namespace CloudforceOne {
     type ThreatEventCreateResponse as ThreatEventCreateResponse,
     type ThreatEventListResponse as ThreatEventListResponse,
     type ThreatEventBulkCreateResponse as ThreatEventBulkCreateResponse,
+    type ThreatEventBulkCreateRelationshipsResponse as ThreatEventBulkCreateRelationshipsResponse,
     type ThreatEventEditResponse as ThreatEventEditResponse,
     type ThreatEventGetResponse as ThreatEventGetResponse,
     type ThreatEventCreateParams as ThreatEventCreateParams,
     type ThreatEventListParams as ThreatEventListParams,
     type ThreatEventBulkCreateParams as ThreatEventBulkCreateParams,
+    type ThreatEventBulkCreateRelationshipsParams as ThreatEventBulkCreateRelationshipsParams,
     type ThreatEventEditParams as ThreatEventEditParams,
     type ThreatEventGetParams as ThreatEventGetParams,
   };
