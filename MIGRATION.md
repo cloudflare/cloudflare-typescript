@@ -510,6 +510,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.magicTransit.connectors.delete()`
 - `client.magicTransit.connectors.edit()`
 - `client.magicTransit.connectors.get()`
+- `client.magicTransit.connectors.interrupts.create()`
+- `client.magicTransit.connectors.interrupts.list()`
 - `client.magicTransit.connectors.events.list()`
 - `client.magicTransit.connectors.events.get()`
 - `client.magicTransit.connectors.events.latest.list()`

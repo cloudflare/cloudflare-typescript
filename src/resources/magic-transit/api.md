@@ -198,6 +198,18 @@ Methods:
 - <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">edit</a>(connectorID, { ...params }) -> ConnectorEditResponse</code>
 - <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors/connectors.ts">get</a>(connectorID, { ...params }) -> ConnectorGetResponse</code>
 
+### Interrupts
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors/interrupts.ts">InterruptCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors/interrupts.ts">InterruptListResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/connectors/{connector_id}/interrupts">client.magicTransit.connectors.interrupts.<a href="./src/resources/magic-transit/connectors/interrupts.ts">create</a>(connectorID, { ...params }) -> InterruptCreateResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}/interrupts">client.magicTransit.connectors.interrupts.<a href="./src/resources/magic-transit/connectors/interrupts.ts">list</a>(connectorID, { ...params }) -> InterruptListResponsesSinglePage</code>
+
 ### Events
 
 Types:

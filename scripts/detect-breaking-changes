@@ -369,6 +369,7 @@ TEST_PATHS=(
 	tests/api-resources/magic-transit/sites/lans.test.ts
 	tests/api-resources/magic-transit/sites/wans.test.ts
 	tests/api-resources/magic-transit/connectors/connectors.test.ts
+	tests/api-resources/magic-transit/connectors/interrupts.test.ts
 	tests/api-resources/magic-transit/connectors/events/events.test.ts
 	tests/api-resources/magic-transit/connectors/events/latest.test.ts
 	tests/api-resources/magic-transit/connectors/snapshots/snapshots.test.ts
