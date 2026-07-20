@@ -8,6 +8,9 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * @deprecated Please use the [Account Permission Groups](https://developers.cloudflare.com/api/resources/iam/subresources/permission_groups/) API instead
+ */
 export class BaseRoles extends APIResource {
   static override readonly _key: readonly ['accounts', 'roles'] = Object.freeze([
     'accounts',
@@ -44,6 +47,9 @@ export class BaseRoles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+/**
+ * @deprecated Please use the [Account Permission Groups](https://developers.cloudflare.com/api/resources/iam/subresources/permission_groups/) API instead
+ */
 export class Roles extends BaseRoles {}
 
 export interface RoleListParams extends V4PagePaginationArrayParams {
