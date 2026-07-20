@@ -936,6 +936,8 @@ TEST_PATHS=(
 	tests/api-resources/ai/models/models.test.ts
 	tests/api-resources/ai/models/schema.test.ts
 	tests/api-resources/ai/to-markdown.test.ts
+	tests/api-resources/ai-audit/ai-audit.test.ts
+	tests/api-resources/ai-audit/robots.test.ts
 	tests/api-resources/aisearch/aisearch.test.ts
 	tests/api-resources/aisearch/namespaces/namespaces.test.ts
 	tests/api-resources/aisearch/namespaces/instances/instances.test.ts

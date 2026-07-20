@@ -1480,6 +1480,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.workflows.instances.events.create()`
 - `client.contentScanning.payloads.create()`
 - `client.ai.toMarkdown.transform()`
+- `client.aiAudit.robots.bulkGet()`
 - `client.aiSearch.namespaces.instances.items.upload()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.schemaValidation.settings.operations.bulkEdit()`
