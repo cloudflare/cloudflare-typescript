@@ -515,6 +515,15 @@ export namespace InstanceCreateResponse {
      */
     custom_domains?: Array<string> | null;
 
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -897,6 +906,15 @@ export namespace InstanceUpdateResponse {
      * domains unchanged).
      */
     custom_domains?: Array<string> | null;
+
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
 
     enabled?: boolean;
 
@@ -1281,6 +1299,15 @@ export namespace InstanceListResponse {
      */
     custom_domains?: Array<string> | null;
 
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -1664,6 +1691,15 @@ export namespace InstanceDeleteResponse {
      */
     custom_domains?: Array<string> | null;
 
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -1845,7 +1881,7 @@ export namespace InstanceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -1868,6 +1904,22 @@ export namespace InstanceChatCompletionsResponse {
       export namespace UnionMember1 {
         export interface ImageURL {
           url: string;
+        }
+      }
+
+      export interface UnionMember2 {
+        file: UnionMember2.File;
+
+        type: 'file';
+      }
+
+      export namespace UnionMember2 {
+        export interface File {
+          filename: string;
+
+          file_data?: string;
+
+          file_id?: string;
         }
       }
     }
@@ -2136,6 +2188,15 @@ export namespace InstanceReadResponse {
      * domains unchanged).
      */
     custom_domains?: Array<string> | null;
+
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
 
     enabled?: boolean;
 
@@ -2697,6 +2758,15 @@ export namespace InstanceCreateParams {
      */
     custom_domains?: Array<string> | null;
 
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -3189,6 +3259,15 @@ export namespace InstanceUpdateParams {
      */
     custom_domains?: Array<string> | null;
 
+    /**
+     * When false, the instance is reachable only via a registered custom domain and
+     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
+     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
+     * replaced wholesale on update, so resend default_domain_enabled on every update
+     * to keep the default host off — omitting it resets to true.
+     */
+    default_domain_enabled?: boolean;
+
     enabled?: boolean;
 
     mcp?: PublicEndpointParams.Mcp;
@@ -3449,7 +3528,7 @@ export interface InstanceChatCompletionsParams {
 
 export namespace InstanceChatCompletionsParams {
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -3472,6 +3551,22 @@ export namespace InstanceChatCompletionsParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      file: UnionMember2.File;
+
+      type: 'file';
+    }
+
+    export namespace UnionMember2 {
+      export interface File {
+        filename: string;
+
+        file_data?: string;
+
+        file_id?: string;
       }
     }
   }
@@ -3752,7 +3847,7 @@ export namespace InstanceSearchParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -3775,6 +3870,22 @@ export namespace InstanceSearchParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      file: UnionMember2.File;
+
+      type: 'file';
+    }
+
+    export namespace UnionMember2 {
+      export interface File {
+        filename: string;
+
+        file_data?: string;
+
+        file_id?: string;
       }
     }
   }

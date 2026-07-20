@@ -281,7 +281,7 @@ export namespace NamespaceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -304,6 +304,22 @@ export namespace NamespaceChatCompletionsResponse {
       export namespace UnionMember1 {
         export interface ImageURL {
           url: string;
+        }
+      }
+
+      export interface UnionMember2 {
+        file: UnionMember2.File;
+
+        type: 'file';
+      }
+
+      export namespace UnionMember2 {
+        export interface File {
+          filename: string;
+
+          file_data?: string;
+
+          file_id?: string;
         }
       }
     }
@@ -650,7 +666,7 @@ export namespace NamespaceChatCompletionsParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -673,6 +689,22 @@ export namespace NamespaceChatCompletionsParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      file: UnionMember2.File;
+
+      type: 'file';
+    }
+
+    export namespace UnionMember2 {
+      export interface File {
+        filename: string;
+
+        file_data?: string;
+
+        file_id?: string;
       }
     }
   }
@@ -829,7 +861,7 @@ export namespace NamespaceSearchParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -852,6 +884,22 @@ export namespace NamespaceSearchParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      file: UnionMember2.File;
+
+      type: 'file';
+    }
+
+    export namespace UnionMember2 {
+      export interface File {
+        filename: string;
+
+        file_data?: string;
+
+        file_id?: string;
       }
     }
   }
