@@ -175,6 +175,13 @@ export interface ServerCreateResponse {
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerCreateResponse.AuthConfigSummary;
+
   created_at?: string;
 
   created_by?: string;
@@ -218,6 +225,47 @@ export interface ServerCreateResponse {
 }
 
 export namespace ServerCreateResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -282,6 +330,13 @@ export interface ServerUpdateResponse {
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerUpdateResponse.AuthConfigSummary;
+
   created_at?: string;
 
   created_by?: string;
@@ -325,6 +380,47 @@ export interface ServerUpdateResponse {
 }
 
 export namespace ServerUpdateResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -389,6 +485,13 @@ export interface ServerListResponse {
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerListResponse.AuthConfigSummary;
+
   created_at?: string;
 
   created_by?: string;
@@ -432,6 +535,47 @@ export interface ServerListResponse {
 }
 
 export namespace ServerListResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -496,6 +640,13 @@ export interface ServerDeleteResponse {
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerDeleteResponse.AuthConfigSummary;
+
   created_at?: string;
 
   created_by?: string;
@@ -539,6 +690,47 @@ export interface ServerDeleteResponse {
 }
 
 export namespace ServerDeleteResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -603,6 +795,13 @@ export interface ServerReadResponse {
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerReadResponse.AuthConfigSummary;
+
   created_at?: string;
 
   created_by?: string;
@@ -646,6 +845,47 @@ export interface ServerReadResponse {
 }
 
 export namespace ServerReadResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -763,6 +1003,13 @@ export interface ServerCreateParams {
   auth_credentials?: string;
 
   /**
+   * Body param: Pre-registered OAuth client_secret. Write-only - accepted on
+   * create/update when auth_credentials.auth_mode is 'manual'. Stored
+   * AES-GCM-encrypted in server_oauth_secrets; never returned by read endpoints.
+   */
+  client_secret?: string;
+
+  /**
    * Body param
    */
   description?: string | null;
@@ -825,6 +1072,13 @@ export interface ServerUpdateParams {
    * Body param
    */
   auth_credentials?: string;
+
+  /**
+   * Body param: Pre-registered OAuth client_secret. Write-only - accepted on
+   * create/update when auth_credentials.auth_mode is 'manual'. Stored
+   * AES-GCM-encrypted in server_oauth_secrets; never returned by read endpoints.
+   */
+  client_secret?: string;
 
   /**
    * Body param

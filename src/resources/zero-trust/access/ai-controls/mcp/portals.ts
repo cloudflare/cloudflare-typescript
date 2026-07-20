@@ -190,6 +190,13 @@ export namespace PortalCreateResponse {
 
     tools: Array<{ [key: string]: unknown }>;
 
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    auth_config_summary?: Server.AuthConfigSummary;
+
     created_at?: string;
 
     created_by?: string;
@@ -237,6 +244,47 @@ export namespace PortalCreateResponse {
   }
 
   export namespace Server {
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    export interface AuthConfigSummary {
+      auth_mode?: 'dcr' | 'manual';
+
+      client_secret_version?: number;
+
+      config?: AuthConfigSummary.Config;
+
+      has_client_secret?: boolean;
+
+      registration_info?: AuthConfigSummary.RegistrationInfo;
+    }
+
+    export namespace AuthConfigSummary {
+      export interface Config {
+        authorization_endpoint?: string;
+
+        issuer?: string;
+
+        resource?: string;
+
+        revocation_endpoint?: string;
+
+        token_endpoint?: string;
+      }
+
+      export interface RegistrationInfo {
+        client_id?: string;
+
+        redirect_uris?: Array<string>;
+
+        scope?: string;
+
+        token_endpoint_auth_method?: string;
+      }
+    }
+
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -349,6 +397,13 @@ export namespace PortalUpdateResponse {
 
     tools: Array<{ [key: string]: unknown }>;
 
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    auth_config_summary?: Server.AuthConfigSummary;
+
     created_at?: string;
 
     created_by?: string;
@@ -396,6 +451,47 @@ export namespace PortalUpdateResponse {
   }
 
   export namespace Server {
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    export interface AuthConfigSummary {
+      auth_mode?: 'dcr' | 'manual';
+
+      client_secret_version?: number;
+
+      config?: AuthConfigSummary.Config;
+
+      has_client_secret?: boolean;
+
+      registration_info?: AuthConfigSummary.RegistrationInfo;
+    }
+
+    export namespace AuthConfigSummary {
+      export interface Config {
+        authorization_endpoint?: string;
+
+        issuer?: string;
+
+        resource?: string;
+
+        revocation_endpoint?: string;
+
+        token_endpoint?: string;
+      }
+
+      export interface RegistrationInfo {
+        client_id?: string;
+
+        redirect_uris?: Array<string>;
+
+        scope?: string;
+
+        token_endpoint_auth_method?: string;
+      }
+    }
+
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -508,6 +604,13 @@ export namespace PortalListResponse {
 
     tools: Array<{ [key: string]: unknown }>;
 
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    auth_config_summary?: Server.AuthConfigSummary;
+
     created_at?: string;
 
     created_by?: string;
@@ -555,6 +658,47 @@ export namespace PortalListResponse {
   }
 
   export namespace Server {
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    export interface AuthConfigSummary {
+      auth_mode?: 'dcr' | 'manual';
+
+      client_secret_version?: number;
+
+      config?: AuthConfigSummary.Config;
+
+      has_client_secret?: boolean;
+
+      registration_info?: AuthConfigSummary.RegistrationInfo;
+    }
+
+    export namespace AuthConfigSummary {
+      export interface Config {
+        authorization_endpoint?: string;
+
+        issuer?: string;
+
+        resource?: string;
+
+        revocation_endpoint?: string;
+
+        token_endpoint?: string;
+      }
+
+      export interface RegistrationInfo {
+        client_id?: string;
+
+        redirect_uris?: Array<string>;
+
+        scope?: string;
+
+        token_endpoint_auth_method?: string;
+      }
+    }
+
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -698,6 +842,13 @@ export namespace PortalReadResponse {
 
     tools: Array<{ [key: string]: unknown }>;
 
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    auth_config_summary?: Server.AuthConfigSummary;
+
     created_at?: string;
 
     created_by?: string;
@@ -745,6 +896,47 @@ export namespace PortalReadResponse {
   }
 
   export namespace Server {
+    /**
+     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+     * endpoints + client_id for manual servers. Never includes the secret value.
+     */
+    export interface AuthConfigSummary {
+      auth_mode?: 'dcr' | 'manual';
+
+      client_secret_version?: number;
+
+      config?: AuthConfigSummary.Config;
+
+      has_client_secret?: boolean;
+
+      registration_info?: AuthConfigSummary.RegistrationInfo;
+    }
+
+    export namespace AuthConfigSummary {
+      export interface Config {
+        authorization_endpoint?: string;
+
+        issuer?: string;
+
+        resource?: string;
+
+        revocation_endpoint?: string;
+
+        token_endpoint?: string;
+      }
+
+      export interface RegistrationInfo {
+        client_id?: string;
+
+        redirect_uris?: Array<string>;
+
+        scope?: string;
+
+        token_endpoint_auth_method?: string;
+      }
+    }
+
     export interface ErrorDetails {
       /**
        * Underlying error message
