@@ -34,7 +34,7 @@ const runTests = (
       account_id: 'account_id',
       enabled: true,
       name: 'name',
-      topic: 'topic',
+      topic: 'xx',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,7 +50,7 @@ const runTests = (
       account_id: 'account_id',
       enabled: true,
       name: 'name',
-      topic: 'topic',
+      topic: 'xx',
       description: 'description',
       profile_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
@@ -63,7 +63,7 @@ const runTests = (
         account_id: 'account_id',
         enabled: true,
         name: 'name',
-        topic: 'topic',
+        topic: 'xx',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -82,7 +82,7 @@ const runTests = (
         account_id: 'account_id',
         enabled: true,
         name: 'name',
-        topic: 'topic',
+        topic: 'xx',
         description: 'description',
       },
     );
