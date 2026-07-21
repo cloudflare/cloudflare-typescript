@@ -424,7 +424,10 @@ export interface UsagePaygoParams {
   account_id: string;
 
   /**
-   * Query param: Start date for the usage query (ISO 8601).
+   * Query param: Start date for the usage query (ISO 8601). The provided time range
+   * must include the subscription billing cycle anchor day, otherwise no usage data
+   * is returned. Subscription anchor days are provided on the response of the
+   * /accounts/{account_id}/paygo-usage-info endpoint.
    */
   from?: string;
 
