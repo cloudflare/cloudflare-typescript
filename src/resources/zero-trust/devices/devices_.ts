@@ -484,6 +484,11 @@ export interface DeviceListParams extends CursorPaginationParams {
   /**
    * Query param
    */
+  last_seen_registration?: DeviceListParams.LastSeenRegistration;
+
+  /**
+   * Query param
+   */
   last_seen_user?: DeviceListParams.LastSeenUser;
 
   /**
@@ -522,6 +527,14 @@ export interface DeviceListParams extends CursorPaginationParams {
 }
 
 export namespace DeviceListParams {
+  export interface LastSeenRegistration {
+    /**
+     * Filter by the ID of the device settings profile assigned to the device
+     * registration.
+     */
+    policy?: string;
+  }
+
   export interface LastSeenUser {
     /**
      * Filter by the last seen user's email.

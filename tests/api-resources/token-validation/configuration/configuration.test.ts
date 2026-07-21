@@ -33,12 +33,11 @@ const runTests = (client: PartialCloudflare<{ tokenValidation: { configuration: 
       credentials: {
         keys: [
           {
-            alg: 'ES256',
-            crv: 'P-256',
-            kid: '38013f13-c266-4eec-a72a-92ec92779f21',
-            kty: 'EC',
-            x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
-            y: 'lnkkzIxaveggz-HFhcMWW15nxvOj0Z_uQsXbpK0GFcY',
+            alg: 'RS256',
+            e: 'e',
+            kid: 'kid',
+            kty: 'RSA',
+            n: 'n',
           },
         ],
       },
@@ -62,12 +61,11 @@ const runTests = (client: PartialCloudflare<{ tokenValidation: { configuration: 
       credentials: {
         keys: [
           {
-            alg: 'ES256',
-            crv: 'P-256',
-            kid: '38013f13-c266-4eec-a72a-92ec92779f21',
-            kty: 'EC',
-            x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
-            y: 'lnkkzIxaveggz-HFhcMWW15nxvOj0Z_uQsXbpK0GFcY',
+            alg: 'RS256',
+            e: 'e',
+            kid: 'kid',
+            kty: 'RSA',
+            n: 'n',
           },
         ],
       },

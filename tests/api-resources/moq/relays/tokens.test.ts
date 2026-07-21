@@ -45,7 +45,7 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: { tokens: BaseToken
     const response = await client.moq.relays.tokens.create('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       operations: ['publish', 'subscribe'],
-      expires_at: '2027-03-27T15:00:00Z',
+      expires: '2027-03-27T15:00:00Z',
       label: 'primary-encoder',
     });
   });

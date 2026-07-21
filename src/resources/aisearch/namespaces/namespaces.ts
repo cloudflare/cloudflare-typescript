@@ -39,7 +39,7 @@ export class BaseNamespaces extends APIResource {
   ] as const);
 
   /**
-   * Create a new namespace.
+   * Create a namespace for organizing AI Search instances.
    *
    * @example
    * ```ts
@@ -60,7 +60,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Update namespace.
+   * Update the description of an existing namespace. The default namespace cannot be
+   * modified.
    *
    * @example
    * ```ts
@@ -85,7 +86,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * List namespaces.
+   * List namespaces in the account, including their descriptions and creation times.
    *
    * @example
    * ```ts
@@ -110,7 +111,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Permanently delete a namespace. The namespace must be empty (no instances).
+   * Permanently delete a namespace. The namespace must be empty (no instances), and
+   * the default namespace cannot be deleted.
    *
    * @example
    * ```ts
@@ -163,7 +165,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Read namespace.
+   * Retrieve a namespace and its description.
    *
    * @example
    * ```ts
@@ -280,7 +282,7 @@ export namespace NamespaceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -303,6 +305,22 @@ export namespace NamespaceChatCompletionsResponse {
       export namespace UnionMember1 {
         export interface ImageURL {
           url: string;
+        }
+      }
+
+      export interface UnionMember2 {
+        file: UnionMember2.File;
+
+        type: 'file';
+      }
+
+      export namespace UnionMember2 {
+        export interface File {
+          filename: string;
+
+          file_data?: string;
+
+          file_id?: string;
         }
       }
     }
@@ -649,7 +667,7 @@ export namespace NamespaceChatCompletionsParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -672,6 +690,22 @@ export namespace NamespaceChatCompletionsParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      file: UnionMember2.File;
+
+      type: 'file';
+    }
+
+    export namespace UnionMember2 {
+      export interface File {
+        filename: string;
+
+        file_data?: string;
+
+        file_id?: string;
       }
     }
   }
@@ -828,7 +862,7 @@ export namespace NamespaceSearchParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -851,6 +885,22 @@ export namespace NamespaceSearchParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
+      }
+    }
+
+    export interface UnionMember2 {
+      file: UnionMember2.File;
+
+      type: 'file';
+    }
+
+    export namespace UnionMember2 {
+      export interface File {
+        filename: string;
+
+        file_data?: string;
+
+        file_id?: string;
       }
     }
   }

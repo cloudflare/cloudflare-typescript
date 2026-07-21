@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseTargetIndustries } from 'cloudflare/resources/cloudforce-one/threat-events/target-industries';
+import { BaseAggregate } from 'cloudflare/resources/cloudforce-one/threat-events/aggregate';
 import { ThreatEvents } from 'cloudflare/resources/cloudforce-one/threat-events/threat-events';
 
 import Cloudflare from 'cloudflare';
@@ -16,7 +16,7 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseTargetIndustries],
+  resources: [BaseAggregate],
 });
 
 const parentPartialClient = createClient({
@@ -27,12 +27,12 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (
-  client: PartialCloudflare<{ cloudforceOne: { threatEvents: { targetIndustries: BaseTargetIndustries } } }>,
+  client: PartialCloudflare<{ cloudforceOne: { threatEvents: { aggregate: BaseAggregate } } }>,
 ) => {
-  // TODO: HTTP 401 from prism
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.targetIndustries.list({
+  test('list: only required params', async () => {
+    const responsePromise = client.cloudforceOne.threatEvents.aggregate.list({
       account_id: 'account_id',
+      aggregateBy: 'aggregateBy',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,14 +43,18 @@ const runTests = (
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: HTTP 401 from prism
-  test.skip('list: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.targetIndustries.list({
+  test('list: required and optional params', async () => {
+    const response = await client.cloudforceOne.threatEvents.aggregate.list({
       account_id: 'account_id',
-      datasetIds: ['string'],
+      aggregateBy: 'aggregateBy',
+      datasetId: ['string'],
+      endDate: 'endDate',
+      groupByDate: true,
+      limit: 0,
+      startDate: 'startDate',
     });
   });
 };
-describe('resource targetIndustries', () => runTests(client));
-describe('resource targetIndustries (tree shakable, base)', () => runTests(partialClient));
-describe('resource targetIndustries (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource aggregate', () => runTests(client));
+describe('resource aggregate (tree shakable, base)', () => runTests(partialClient));
+describe('resource aggregate (tree shakable, subresource)', () => runTests(parentPartialClient));

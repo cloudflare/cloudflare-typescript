@@ -2,7 +2,14 @@
 
 import { APIResource } from '../../core/resource';
 import * as RobotsAPI from './robots';
-import { BaseRobots, Robots } from './robots';
+import {
+  BaseRobots,
+  RobotBulkGetParams,
+  RobotBulkGetResponse,
+  RobotGetParams,
+  RobotGetResponse,
+  Robots,
+} from './robots';
 
 export class BaseAIAudit extends APIResource {
   static override readonly _key: readonly ['aiAudit'] = Object.freeze(['aiAudit'] as const);
@@ -15,5 +22,12 @@ AIAudit.Robots = Robots;
 AIAudit.BaseRobots = BaseRobots;
 
 export declare namespace AIAudit {
-  export { Robots as Robots, BaseRobots as BaseRobots };
+  export {
+    Robots as Robots,
+    BaseRobots as BaseRobots,
+    type RobotBulkGetResponse as RobotBulkGetResponse,
+    type RobotGetResponse as RobotGetResponse,
+    type RobotBulkGetParams as RobotBulkGetParams,
+    type RobotGetParams as RobotGetParams,
+  };
 }

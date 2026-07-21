@@ -117,7 +117,7 @@ const runTests = (
         dynamic_client_registration: {
           allow_any_on_localhost: true,
           allow_any_on_loopback: true,
-          allowed_uris: ['https://example.com/callback'],
+          allowed_uris: ['https://example.com/callback', 'com.example.app:/oauth/callback'],
           enabled: true,
         },
         enabled: true,
@@ -251,7 +251,7 @@ const runTests = (
         dynamic_client_registration: {
           allow_any_on_localhost: true,
           allow_any_on_loopback: true,
-          allowed_uris: ['https://example.com/callback'],
+          allowed_uris: ['https://example.com/callback', 'com.example.app:/oauth/callback'],
           enabled: true,
         },
         enabled: true,

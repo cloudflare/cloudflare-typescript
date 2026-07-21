@@ -369,6 +369,7 @@ TEST_PATHS=(
 	tests/api-resources/magic-transit/sites/lans.test.ts
 	tests/api-resources/magic-transit/sites/wans.test.ts
 	tests/api-resources/magic-transit/connectors/connectors.test.ts
+	tests/api-resources/magic-transit/connectors/interrupts.test.ts
 	tests/api-resources/magic-transit/connectors/events/events.test.ts
 	tests/api-resources/magic-transit/connectors/events/latest.test.ts
 	tests/api-resources/magic-transit/connectors/snapshots/snapshots.test.ts
@@ -568,6 +569,21 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/access/custom-pages.test.ts
 	tests/api-resources/zero-trust/access/tags.test.ts
 	tests/api-resources/zero-trust/access/policies.test.ts
+	tests/api-resources/zero-trust/casb/casb.test.ts
+	tests/api-resources/zero-trust/casb/applications/applications.test.ts
+	tests/api-resources/zero-trust/casb/applications/auth-methods.test.ts
+	tests/api-resources/zero-trust/casb/integrations.test.ts
+	tests/api-resources/zero-trust/casb/posture/posture.test.ts
+	tests/api-resources/zero-trust/casb/posture/findings/findings.test.ts
+	tests/api-resources/zero-trust/casb/posture/findings/instances.test.ts
+	tests/api-resources/zero-trust/casb/posture/exports.test.ts
+	tests/api-resources/zero-trust/casb/posture/finding-types/finding-types.test.ts
+	tests/api-resources/zero-trust/casb/posture/finding-types/remediation-types.test.ts
+	tests/api-resources/zero-trust/casb/posture/content.test.ts
+	tests/api-resources/zero-trust/casb/posture/remediations/remediations.test.ts
+	tests/api-resources/zero-trust/casb/posture/remediations/jobs.test.ts
+	tests/api-resources/zero-trust/casb/posture/webhooks/webhooks.test.ts
+	tests/api-resources/zero-trust/casb/posture/webhooks/jobs.test.ts
 	tests/api-resources/zero-trust/dex/dex.test.ts
 	tests/api-resources/zero-trust/dex/warp-change-events.test.ts
 	tests/api-resources/zero-trust/dex/commands/commands.test.ts
@@ -846,16 +862,32 @@ TEST_PATHS=(
 	tests/api-resources/cloudforce-one/requests/priority.test.ts
 	tests/api-resources/cloudforce-one/requests/assets.test.ts
 	tests/api-resources/cloudforce-one/threat-events/threat-events.test.ts
+	tests/api-resources/cloudforce-one/threat-events/aggregate.test.ts
+	tests/api-resources/cloudforce-one/threat-events/graphql.test.ts
+	tests/api-resources/cloudforce-one/threat-events/graph.test.ts
+	tests/api-resources/cloudforce-one/threat-events/queries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/relationships.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/indicators.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/aggregate.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/types.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/by-dataset/by-dataset.test.ts
+	tests/api-resources/cloudforce-one/threat-events/indicators/by-dataset/tags.test.ts
 	tests/api-resources/cloudforce-one/threat-events/attackers.test.ts
-	tests/api-resources/cloudforce-one/threat-events/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-events/categories/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-events/categories/catalog.test.ts
 	tests/api-resources/cloudforce-one/threat-events/countries.test.ts
 	tests/api-resources/cloudforce-one/threat-events/datasets/datasets.test.ts
-	tests/api-resources/cloudforce-one/threat-events/indicator-types.test.ts
+	tests/api-resources/cloudforce-one/threat-events/datasets/events.test.ts
 	tests/api-resources/cloudforce-one/threat-events/raw.test.ts
 	tests/api-resources/cloudforce-one/threat-events/relate.test.ts
-	tests/api-resources/cloudforce-one/threat-events/tags.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/tags.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/categories.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/indicators/indicators.test.ts
+	tests/api-resources/cloudforce-one/threat-events/tags/indicators/by-dataset.test.ts
 	tests/api-resources/cloudforce-one/threat-events/event-tags.test.ts
-	tests/api-resources/cloudforce-one/threat-events/target-industries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/target-industries/target-industries.test.ts
+	tests/api-resources/cloudforce-one/threat-events/target-industries/by-dataset.test.ts
+	tests/api-resources/cloudforce-one/threat-events/target-industries/catalog.test.ts
 	tests/api-resources/ai-gateway/ai-gateway.test.ts
 	tests/api-resources/ai-gateway/evaluation-types.test.ts
 	tests/api-resources/ai-gateway/custom-providers.test.ts
@@ -921,6 +953,8 @@ TEST_PATHS=(
 	tests/api-resources/ai/models/models.test.ts
 	tests/api-resources/ai/models/schema.test.ts
 	tests/api-resources/ai/to-markdown.test.ts
+	tests/api-resources/ai-audit/ai-audit.test.ts
+	tests/api-resources/ai-audit/robots.test.ts
 	tests/api-resources/aisearch/aisearch.test.ts
 	tests/api-resources/aisearch/namespaces/namespaces.test.ts
 	tests/api-resources/aisearch/namespaces/instances/instances.test.ts

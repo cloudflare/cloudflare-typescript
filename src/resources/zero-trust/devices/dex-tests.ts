@@ -219,6 +219,11 @@ export interface SchemaHTTP {
   name: string;
 
   /**
+   * Date the test was created, in RFC 3339 format.
+   */
+  created?: string;
+
+  /**
    * Additional details about the test.
    */
   description?: string;
@@ -234,6 +239,11 @@ export interface SchemaHTTP {
    * The unique identifier for the test.
    */
   test_id?: string;
+
+  /**
+   * Date the test was last updated, in RFC 3339 format.
+   */
+  updated?: string;
 }
 
 export namespace SchemaHTTP {

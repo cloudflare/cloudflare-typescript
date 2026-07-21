@@ -9,6 +9,8 @@ import {
   Usage,
   UsageGetParams,
   UsageGetResponse,
+  UsagePaygoInfoParams,
+  UsagePaygoInfoResponse,
   UsagePaygoParams,
   UsagePaygoResponse,
 } from './usage';
@@ -39,7 +41,9 @@ export declare namespace Billing {
     BaseUsage as BaseUsage,
     type UsageGetResponse as UsageGetResponse,
     type UsagePaygoResponse as UsagePaygoResponse,
+    type UsagePaygoInfoResponse as UsagePaygoInfoResponse,
     type UsageGetParams as UsageGetParams,
     type UsagePaygoParams as UsagePaygoParams,
+    type UsagePaygoInfoParams as UsagePaygoInfoParams,
   };
 }

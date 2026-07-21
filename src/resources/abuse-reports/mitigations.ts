@@ -18,6 +18,17 @@ export class BaseMitigations extends APIResource {
 
   /**
    * List mitigations done to remediate the abuse report.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const mitigationListResponse of client.abuseReports.mitigations.list(
+   *   'report_id',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     reportID: string,
@@ -34,6 +45,17 @@ export class BaseMitigations extends APIResource {
 
   /**
    * Request a review for mitigations on an account.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const mitigationReviewResponse of client.abuseReports.mitigations.review(
+   *   'report_id',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   review(
     reportID: string,
@@ -236,7 +258,17 @@ export interface MitigationReviewParams {
   /**
    * Body param: List of mitigations to appeal.
    */
-  appeals: Array<MitigationReviewParams.Appeal>;
+  appeals?: Array<MitigationReviewParams.Appeal>;
+
+  /**
+   * Body param: Counter-notice details supporting an appeal.
+   */
+  data?: MitigationReviewParams.Data;
+
+  /**
+   * Body param: The type of appeal being submitted.
+   */
+  type?: 'counter_notice' | 'content_removed';
 }
 
 export namespace MitigationReviewParams {
@@ -250,6 +282,39 @@ export namespace MitigationReviewParams {
      * Reason why the customer is appealing.
      */
     reason: 'removed' | 'misclassified';
+  }
+
+  /**
+   * Counter-notice details supporting an appeal.
+   */
+  export interface Data {
+    city: string;
+
+    country: string;
+
+    email: string;
+
+    full_name: string;
+
+    jurisdiction_consent: boolean;
+
+    perjury_attestation: boolean;
+
+    phone_number: string;
+
+    signature: string;
+
+    state: string;
+
+    street_address: string;
+
+    urls: Array<string>;
+
+    zip_code: string;
+
+    company?: string;
+
+    counter_notice_response?: string;
   }
 }
 

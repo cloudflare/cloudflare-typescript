@@ -143,7 +143,11 @@ export class BaseZones extends APIResource {
   static override readonly _key: readonly ['zones'] = Object.freeze(['zones'] as const);
 
   /**
-   * Create Zone
+   * Creates a new zone (domain) in your Cloudflare account.
+   *
+   * The zone is created in a pending state and must be activated by updating your
+   * domain's nameservers to point to Cloudflare, or by completing the verification
+   * process for partial (CNAME) setups.
    *
    * @example
    * ```ts
@@ -215,7 +219,9 @@ export class BaseZones extends APIResource {
   }
 
   /**
-   * Zone Details
+   * Retrieves detailed information about a specific zone identified by its zone ID.
+   *
+   * Returns zone configuration, status, nameservers, and associated metadata.
    *
    * @example
    * ```ts

@@ -374,7 +374,11 @@ export interface TopAsesParams {
   continent?: Array<string>;
 
   /**
-   * End of the date range (inclusive).
+   * End of the date range (inclusive). Alternative to `dateRange`; provide together
+   * with `dateStart`. When requesting comparison series, every series must resolve
+   * to the same duration as the main series. Each `dateStart`/`dateEnd` is floored
+   * to the nearest 15 minutes before evaluation, so windows whose durations match
+   * only before alignment may be rejected.
    */
   dateEnd?: Array<string>;
 
@@ -434,7 +438,11 @@ export interface TopLocationsParams {
   continent?: Array<string>;
 
   /**
-   * End of the date range (inclusive).
+   * End of the date range (inclusive). Alternative to `dateRange`; provide together
+   * with `dateStart`. When requesting comparison series, every series must resolve
+   * to the same duration as the main series. Each `dateStart`/`dateEnd` is floored
+   * to the nearest 15 minutes before evaluation, so windows whose durations match
+   * only before alignment may be rejected.
    */
   dateEnd?: Array<string>;
 

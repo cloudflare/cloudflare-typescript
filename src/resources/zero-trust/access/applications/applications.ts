@@ -3998,7 +3998,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -4986,7 +4987,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -5664,7 +5666,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -7627,7 +7630,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -8189,7 +8193,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -8757,7 +8762,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -9438,7 +9444,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -10426,7 +10433,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -11104,7 +11112,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -13067,7 +13076,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -13629,7 +13639,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -14197,7 +14208,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -14878,7 +14890,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -15866,7 +15879,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -16544,7 +16558,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -18507,7 +18522,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -19069,7 +19085,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -19637,7 +19654,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -20325,7 +20343,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -21313,7 +21332,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -21991,7 +22011,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -23954,7 +23975,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -24516,7 +24538,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -25084,7 +25107,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -25781,7 +25805,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -26761,7 +26786,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -27436,7 +27462,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -29339,7 +29366,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -29894,7 +29922,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -30457,7 +30486,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -31135,7 +31165,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -32115,7 +32146,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -32790,7 +32822,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -34693,7 +34726,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -35248,7 +35282,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -35811,7 +35846,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 

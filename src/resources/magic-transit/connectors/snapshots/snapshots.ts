@@ -45,7 +45,7 @@ export class BaseSnapshots extends APIResource {
   }
 
   /**
-   * Fetches Magic WAN Connector Telemetry Snapshot
+   * Gets Magic WAN Connector Telemetry Snapshot
    *
    * @example
    * ```ts

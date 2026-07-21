@@ -23,7 +23,7 @@ export class BaseCustomPromptTopics extends APIResource {
    *     account_id: 'account_id',
    *     enabled: true,
    *     name: 'name',
-   *     topic: 'topic',
+   *     topic: 'xx',
    *   });
    * ```
    */
@@ -49,7 +49,7 @@ export class BaseCustomPromptTopics extends APIResource {
    *       account_id: 'account_id',
    *       enabled: true,
    *       name: 'name',
-   *       topic: 'topic',
+   *       topic: 'xx',
    *     },
    *   );
    * ```

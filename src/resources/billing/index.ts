@@ -7,6 +7,8 @@ export {
   BaseUsage,
   type UsageGetResponse,
   type UsagePaygoResponse,
+  type UsagePaygoInfoResponse,
   type UsageGetParams,
   type UsagePaygoParams,
+  type UsagePaygoInfoParams,
 } from './usage';

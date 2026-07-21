@@ -64,6 +64,8 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { instances: BaseInstanc
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
+        custom_domains: ['search.example.com'],
+        default_domain_enabled: true,
         enabled: true,
         mcp: { description: 'description', disabled: true },
         rate_limit: {
@@ -140,6 +142,8 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { instances: BaseInstanc
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
+        custom_domains: ['search.example.com'],
+        default_domain_enabled: true,
         enabled: true,
         mcp: { description: 'description', disabled: true },
         rate_limit: {

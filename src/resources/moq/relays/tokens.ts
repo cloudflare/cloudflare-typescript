@@ -242,7 +242,7 @@ export interface TokenCreateParams {
    * Body param: Optional expiry (RFC 3339). Defaults to 1 year from creation;
    * rejected if more than 1 year in the future.
    */
-  expires_at?: string;
+  expires?: string;
 
   /**
    * Body param: Optional, customer-set label.

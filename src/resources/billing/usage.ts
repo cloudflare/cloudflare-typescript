@@ -34,15 +34,26 @@ export class BaseUsage extends APIResource {
 
   /**
    * Returns billable usage data for PayGo (self-serve) accounts. When no query
-   * parameters are provided, returns usage for the current billing period. This
-   * endpoint is currently in alpha and access is restricted to select accounts.
-   * While in alpha, the endpoint may get breaking changes.
+   * parameters are provided, returns usage for the current billing period.
    */
   paygo(params: UsagePaygoParams, options?: RequestOptions): APIPromise<UsagePaygoResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(path`/accounts/${account_id}/paygo-usage`, { query, ...options }) as APIPromise<{
         result: UsagePaygoResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns high-level usage information for the account, including coverage, and
+   * subscription metadata.
+   */
+  paygoInfo(params: UsagePaygoInfoParams, options?: RequestOptions): APIPromise<UsagePaygoInfoResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(path`/accounts/${account_id}/paygo-usage-info`, options) as APIPromise<{
+        result: UsagePaygoInfoResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -337,6 +348,46 @@ export namespace UsagePaygoResponse {
   }
 }
 
+/**
+ * Contains the paygo usage info.
+ */
+export interface UsagePaygoInfoResponse {
+  /**
+   * Indicates whether the account is covered.
+   */
+  covered: boolean;
+
+  /**
+   * List of subscriptions for the account.
+   */
+  subscriptions: Array<UsagePaygoInfoResponse.Subscription>;
+}
+
+export namespace UsagePaygoInfoResponse {
+  export interface Subscription {
+    /**
+     * The identifier for the Cloudflare subscription.
+     */
+    id: string;
+
+    /**
+     * The subscription billing cycle anchor timestamp.
+     */
+    billing_cycle_anchor_timestamp: string;
+
+    /**
+     * The subscription start timestamp.
+     */
+    start_timestamp: string;
+
+    /**
+     * The subscription end timestamp. Omitted for active subscriptions; present only
+     * when the subscription has been cancelled.
+     */
+    end_timestamp?: string;
+  }
+}
+
 export interface UsageGetParams {
   /**
    * Path param: Represents a Cloudflare resource identifier tag.
@@ -373,7 +424,10 @@ export interface UsagePaygoParams {
   account_id: string;
 
   /**
-   * Query param: Start date for the usage query (ISO 8601).
+   * Query param: Start date for the usage query (ISO 8601). The provided time range
+   * must include the subscription billing cycle anchor day, otherwise no usage data
+   * is returned. Subscription anchor days are provided on the response of the
+   * /accounts/{account_id}/paygo-usage-info endpoint.
    */
   from?: string;
 
@@ -383,11 +437,20 @@ export interface UsagePaygoParams {
   to?: string;
 }
 
+export interface UsagePaygoInfoParams {
+  /**
+   * Represents a Cloudflare resource identifier tag.
+   */
+  account_id: string;
+}
+
 export declare namespace Usage {
   export {
     type UsageGetResponse as UsageGetResponse,
     type UsagePaygoResponse as UsagePaygoResponse,
+    type UsagePaygoInfoResponse as UsagePaygoInfoResponse,
     type UsageGetParams as UsageGetParams,
     type UsagePaygoParams as UsagePaygoParams,
+    type UsagePaygoInfoParams as UsagePaygoInfoParams,
   };
 }

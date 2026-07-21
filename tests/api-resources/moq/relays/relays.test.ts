@@ -64,7 +64,7 @@ const runTests = (client: PartialCloudflare<{ moq: { relays: BaseRelays } }>) =>
   test('update: required and optional params', async () => {
     const response = await client.moq.relays.update('a1b2c3d4e5f67890a1b2c3d4e5f67890', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      config: { upstreams: { enabled: true, upstreams: [{ url: 'url' }] } },
+      config: { upstreams: { enabled: true, upstreams: [{ url: 'https://example.com' }] } },
       name: 'name',
     });
   });

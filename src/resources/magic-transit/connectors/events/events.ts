@@ -45,7 +45,7 @@ export class BaseEvents extends APIResource {
   }
 
   /**
-   * Fetches Magic WAN Connector Telemetry Event
+   * Gets Magic WAN Connector Telemetry Event
    *
    * @example
    * ```ts
