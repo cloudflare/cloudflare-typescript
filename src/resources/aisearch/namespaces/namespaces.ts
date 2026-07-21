@@ -39,7 +39,7 @@ export class BaseNamespaces extends APIResource {
   ] as const);
 
   /**
-   * Create a new namespace.
+   * Create a namespace for organizing AI Search instances.
    *
    * @example
    * ```ts
@@ -60,7 +60,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Update namespace.
+   * Update the description of an existing namespace. The default namespace cannot be
+   * modified.
    *
    * @example
    * ```ts
@@ -85,7 +86,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * List namespaces.
+   * List namespaces in the account, including their descriptions and creation times.
    *
    * @example
    * ```ts
@@ -110,7 +111,8 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Permanently delete a namespace. The namespace must be empty (no instances).
+   * Permanently delete a namespace. The namespace must be empty (no instances), and
+   * the default namespace cannot be deleted.
    *
    * @example
    * ```ts
@@ -163,7 +165,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Read namespace.
+   * Retrieve a namespace and its description.
    *
    * @example
    * ```ts
