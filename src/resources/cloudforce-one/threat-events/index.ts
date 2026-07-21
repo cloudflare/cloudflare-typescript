@@ -45,12 +45,6 @@ export {
 export { Graph, BaseGraph, type GraphListResponse, type GraphListParams } from './graph';
 export { Graphql, BaseGraphql, type GraphqlCreateResponse, type GraphqlCreateParams } from './graphql';
 export {
-  IndicatorTypes,
-  BaseIndicatorTypes,
-  type IndicatorTypeListResponse,
-  type IndicatorTypeListParams,
-} from './indicator-types';
-export {
   Indicators,
   BaseIndicators,
   type IndicatorListResponse,

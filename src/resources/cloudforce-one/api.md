@@ -321,16 +321,6 @@ Methods:
 
 - <code title="get /accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/events/{event_id}">client.cloudforceOne.threatEvents.datasets.events.<a href="./src/resources/cloudforce-one/threat-events/datasets/events.ts">get</a>(eventID, { ...params }) -> EventGetResponse</code>
 
-### IndicatorTypes
-
-Types:
-
-- <code><a href="./src/resources/cloudforce-one/threat-events/indicator-types.ts">IndicatorTypeListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/cloudforce-one/events/indicatorTypes">client.cloudforceOne.threatEvents.indicatorTypes.<a href="./src/resources/cloudforce-one/threat-events/indicator-types.ts">list</a>({ ...params }) -> IndicatorTypeListResponse</code>
-
 ### Raw
 
 Types:

@@ -22,13 +22,6 @@ import * as GraphAPI from './graph';
 import { BaseGraph, Graph, GraphListParams, GraphListResponse } from './graph';
 import * as GraphqlAPI from './graphql';
 import { BaseGraphql, Graphql, GraphqlCreateParams, GraphqlCreateResponse } from './graphql';
-import * as IndicatorTypesAPI from './indicator-types';
-import {
-  BaseIndicatorTypes,
-  IndicatorTypeListParams,
-  IndicatorTypeListResponse,
-  IndicatorTypes,
-} from './indicator-types';
 import * as InsightsAPI from './insights';
 import { BaseInsights, Insights } from './insights';
 import * as QueriesAPI from './queries';
@@ -282,7 +275,6 @@ export class ThreatEvents extends BaseThreatEvents {
   countries: CountriesAPI.Countries = new CountriesAPI.Countries(this._client);
   crons: CronsAPI.Crons = new CronsAPI.Crons(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
-  indicatorTypes: IndicatorTypesAPI.IndicatorTypes = new IndicatorTypesAPI.IndicatorTypes(this._client);
   raw: RawAPI.Raw = new RawAPI.Raw(this._client);
   relate: RelateAPI.Relate = new RelateAPI.Relate(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
@@ -1144,8 +1136,6 @@ ThreatEvents.Crons = Crons;
 ThreatEvents.BaseCrons = BaseCrons;
 ThreatEvents.Datasets = Datasets;
 ThreatEvents.BaseDatasets = BaseDatasets;
-ThreatEvents.IndicatorTypes = IndicatorTypes;
-ThreatEvents.BaseIndicatorTypes = BaseIndicatorTypes;
 ThreatEvents.Raw = RawAPIRaw;
 ThreatEvents.BaseRaw = BaseRaw;
 ThreatEvents.Relate = Relate;
@@ -1270,13 +1260,6 @@ export declare namespace ThreatEvents {
     type DatasetEditParams as DatasetEditParams,
     type DatasetGetParams as DatasetGetParams,
     type DatasetRawParams as DatasetRawParams,
-  };
-
-  export {
-    IndicatorTypes as IndicatorTypes,
-    BaseIndicatorTypes as BaseIndicatorTypes,
-    type IndicatorTypeListResponse as IndicatorTypeListResponse,
-    type IndicatorTypeListParams as IndicatorTypeListParams,
   };
 
   export {
