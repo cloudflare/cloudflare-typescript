@@ -245,7 +245,15 @@ export interface ScriptUpdateResponse {
    * Tombstoned lifecycle entries are omitted, so only live exports (`created` and
    * `expecting-transfer`) are returned.
    */
-  exports?: { [key: string]: ScriptUpdateResponse.Exports };
+  exports?: {
+    [key: string]:
+      | ScriptUpdateResponse.WorkersWorkerExport
+      | ScriptUpdateResponse.WorkersDurableObjectExport
+      | ScriptUpdateResponse.WorkersDurableObjectDeletedExport
+      | ScriptUpdateResponse.WorkersDurableObjectRenamedExport
+      | ScriptUpdateResponse.WorkersDurableObjectTransferredExport
+      | ScriptUpdateResponse.WorkersDurableObjectExpectingTransferExport;
+  };
 
   /**
    * The names of handlers exported as part of the default export.
@@ -361,58 +369,33 @@ export namespace ScriptUpdateResponse {
   }
 
   /**
-   * A single entry in the `exports` map, keyed by export name (a `WorkerEntrypoint`
-   * class name, a Durable Object class name, or `default` for the Worker's default
-   * export). Worker entrypoint entries set `type: worker` and may carry `cache`
-   * configuration for that entrypoint. Durable Object entries set
-   * `type: durable-object` and carry additional provisioning fields.
+   * A named Worker entrypoint export (`type: worker`). Worker entrypoints are always
+   * live (`state: created`) and carry no storage or lifecycle fields. The optional
+   * `cache` block overrides the Worker's global `cache_options.enabled` for this
+   * entrypoint.
    */
-  export interface Exports {
+  export interface WorkersWorkerExport {
     /**
-     * The kind of export.
+     * Marks this entry as a Worker entrypoint export.
      */
-    type: 'worker' | 'durable-object';
+    type: 'worker';
 
     /**
-     * Cache override for this entrypoint. It applies only to `type: worker` entries
-     * and overrides the Worker's global `cache_options.enabled` for that entrypoint.
+     * Cache override for this entrypoint. Overrides the Worker's global
+     * `cache_options.enabled` for this entrypoint only.
      */
-    cache?: Exports.Cache;
+    cache?: WorkersWorkerExport.Cache;
 
     /**
-     * Lifecycle state of the export entry. Defaults to `created` (a normal, live
-     * export) when omitted.
-     *
-     * `deleted`, `renamed`, and `transferred` are tombstones: write-only lifecycle
-     * operations that retire, rename, or hand off a provisioned Durable Object
-     * namespace. They are applied at upload and are filtered out of GET responses, so
-     * a read only ever returns `created` or `expecting-transfer`.
-     *
-     * `expecting-transfer` is a live export whose data is being received from another
-     * script via the two-phase transfer flow; it carries `storage` and
-     * `transfer_from`.
+     * Live export. May be omitted; defaults to `created`.
      */
-    state?: 'created' | 'deleted' | 'renamed' | 'transferred' | 'expecting-transfer';
-
-    /**
-     * Storage backend for a `type: durable-object` export. Required for live Durable
-     * Object entries (`created` and `expecting-transfer`). `sqlite` selects
-     * SQLite-backed storage; `legacy-kv` selects the legacy key-value storage.
-     */
-    storage?: 'sqlite' | 'legacy-kv';
-
-    /**
-     * Source script for a `state: expecting-transfer` entry. The namespace on this
-     * script is materialised from the source script's data via the pending-transfer
-     * flow. Present on reads for `expecting-transfer` entries.
-     */
-    transfer_from?: string;
+    state?: 'created';
   }
 
-  export namespace Exports {
+  export namespace WorkersWorkerExport {
     /**
-     * Cache override for this entrypoint. It applies only to `type: worker` entries
-     * and overrides the Worker's global `cache_options.enabled` for that entrypoint.
+     * Cache override for this entrypoint. Overrides the Worker's global
+     * `cache_options.enabled` for this entrypoint only.
      */
     export interface Cache {
       /**
@@ -420,6 +403,137 @@ export namespace ScriptUpdateResponse {
        */
       enabled: boolean;
     }
+  }
+
+  /**
+   * A live Durable Object export (`state: created`, the default). The platform
+   * auto-provisions the namespace on first deploy, matches it on subsequent deploys,
+   * and never mutates or deletes it as a side effect of a code-only change.
+   * `storage` is required; `renamed_to`, `transferred_to` and `transfer_from` are
+   * not allowed on a live entry.
+   */
+  export interface WorkersDurableObjectExport {
+    /**
+     * Durable Object storage backend. `sqlite` is the recommended (and only) backend
+     * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
+     * already exists as KV-backed; the `exports` flow never provisions a new
+     * `legacy-kv` namespace.
+     */
+    storage: 'sqlite' | 'legacy-kv';
+
+    /**
+     * Marks this entry as a Durable Object export.
+     */
+    type: 'durable-object';
+
+    /**
+     * Name of the container (declared in the upload's `metadata.containers`) that
+     * backs this Durable Object. When set, the namespace is container-enabled. Valid
+     * only on live entries.
+     */
+    container?: string;
+
+    /**
+     * Live export. May be omitted; defaults to `created`.
+     */
+    state?: 'created';
+  }
+
+  /**
+   * A `deleted` tombstone: retires the provisioned namespace for this class and all
+   * of its data. The class must be absent from the uploaded code and no other Worker
+   * in the account may bind to the namespace, otherwise the deploy is rejected. No
+   * other fields are allowed. Deletion is irreversible.
+   */
+  export interface WorkersDurableObjectDeletedExport {
+    /**
+     * Tombstone that deletes the namespace.
+     */
+    state: 'deleted';
+
+    /**
+     * Marks this entry as a Durable Object export.
+     */
+    type: 'durable-object';
+  }
+
+  /**
+   * A `renamed` tombstone: rewrites the provisioned namespace's class name from this
+   * map key to `renamed_to`. The source class may stay in code during the rollout
+   * window (an info notice is emitted). `storage`, `transferred_to` and
+   * `transfer_from` are not allowed.
+   */
+  export interface WorkersDurableObjectRenamedExport {
+    /**
+     * Tombstone that renames the namespace's class.
+     */
+    state: 'renamed';
+
+    /**
+     * Marks this entry as a Durable Object export.
+     */
+    type: 'durable-object';
+  }
+
+  /**
+   * A `transferred` tombstone (source side of a two-phase transfer): hands ownership
+   * of the provisioned namespace to another script in the same account, named by
+   * `transferred_to`. The target must have already deployed a matching
+   * `expecting-transfer` entry. The source class may stay in code during the rollout
+   * window (an info notice is emitted). `storage`, `renamed_to` and `transfer_from`
+   * are not allowed.
+   */
+  export interface WorkersDurableObjectTransferredExport {
+    /**
+     * Tombstone that transfers the namespace to another script.
+     */
+    state: 'transferred';
+
+    /**
+     * Marks this entry as a Durable Object export.
+     */
+    type: 'durable-object';
+  }
+
+  /**
+   * The target side of a two-phase transfer (`state: expecting-transfer`). Declares
+   * that this script expects to receive a namespace for this class from the
+   * `transfer_from` script. This is a live entry, not a tombstone: bindings resolve
+   * through the source's namespace until the source commits with a `transferred`
+   * tombstone. `storage` and `transfer_from` are required; `renamed_to` and
+   * `transferred_to` are not allowed.
+   */
+  export interface WorkersDurableObjectExpectingTransferExport {
+    /**
+     * Target side of a two-phase transfer.
+     */
+    state: 'expecting-transfer';
+
+    /**
+     * Durable Object storage backend. `sqlite` is the recommended (and only) backend
+     * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
+     * already exists as KV-backed; the `exports` flow never provisions a new
+     * `legacy-kv` namespace.
+     */
+    storage: 'sqlite' | 'legacy-kv';
+
+    /**
+     * The source script name to receive the namespace from. Must be in the same
+     * account and dispatch-namespace context. Present on reads for
+     * `expecting-transfer` entries.
+     */
+    transfer_from: string;
+
+    /**
+     * Marks this entry as a Durable Object export.
+     */
+    type: 'durable-object';
+
+    /**
+     * Name of the container (declared in the upload's `metadata.containers`) that
+     * backs this Durable Object once the transfer settles. Valid only on live entries.
+     */
+    container?: string;
   }
 
   export interface NamedHandler {
@@ -846,7 +960,15 @@ export namespace ScriptUpdateParams {
      * Declarative exports for the Worker. Worker entrypoint entries (`type: worker`)
      * carry cache configuration for that entrypoint.
      */
-    exports?: { [key: string]: Metadata.Exports };
+    exports?: {
+      [key: string]:
+        | Metadata.WorkersWorkerExport
+        | Metadata.WorkersDurableObjectExport
+        | Metadata.WorkersDurableObjectDeletedExport
+        | Metadata.WorkersDurableObjectRenamedExport
+        | Metadata.WorkersDurableObjectTransferredExport
+        | Metadata.WorkersDurableObjectExpectingTransferExport;
+    };
 
     /**
      * Retain assets which exist for a previously uploaded Worker version; used in lieu
@@ -1775,72 +1897,33 @@ export namespace ScriptUpdateParams {
     }
 
     /**
-     * A single entry in the `exports` map, keyed by export name (a `WorkerEntrypoint`
-     * class name, a Durable Object class name, or `default` for the Worker's default
-     * export). Worker entrypoint entries set `type: worker` and may carry `cache`
-     * configuration for that entrypoint. Durable Object entries set
-     * `type: durable-object` and carry additional provisioning fields.
+     * A named Worker entrypoint export (`type: worker`). Worker entrypoints are always
+     * live (`state: created`) and carry no storage or lifecycle fields. The optional
+     * `cache` block overrides the Worker's global `cache_options.enabled` for this
+     * entrypoint.
      */
-    export interface Exports {
+    export interface WorkersWorkerExport {
       /**
-       * The kind of export.
+       * Marks this entry as a Worker entrypoint export.
        */
-      type: 'worker' | 'durable-object';
+      type: 'worker';
 
       /**
-       * Cache override for this entrypoint. It applies only to `type: worker` entries
-       * and overrides the Worker's global `cache_options.enabled` for that entrypoint.
+       * Cache override for this entrypoint. Overrides the Worker's global
+       * `cache_options.enabled` for this entrypoint only.
        */
-      cache?: Exports.Cache;
+      cache?: WorkersWorkerExport.Cache;
 
       /**
-       * Destination class name for a `state: renamed` tombstone. The target must appear
-       * as a live (`created`) entry in the same `exports` map. Write-only: never present
-       * in GET responses.
+       * Live export. May be omitted; defaults to `created`.
        */
-      renamed_to?: string;
-
-      /**
-       * Lifecycle state of the export entry. Defaults to `created` (a normal, live
-       * export) when omitted.
-       *
-       * `deleted`, `renamed`, and `transferred` are tombstones: write-only lifecycle
-       * operations that retire, rename, or hand off a provisioned Durable Object
-       * namespace. They are applied at upload and are filtered out of GET responses, so
-       * a read only ever returns `created` or `expecting-transfer`.
-       *
-       * `expecting-transfer` is a live export whose data is being received from another
-       * script via the two-phase transfer flow; it carries `storage` and
-       * `transfer_from`.
-       */
-      state?: 'created' | 'deleted' | 'renamed' | 'transferred' | 'expecting-transfer';
-
-      /**
-       * Storage backend for a `type: durable-object` export. Required for live Durable
-       * Object entries (`created` and `expecting-transfer`). `sqlite` selects
-       * SQLite-backed storage; `legacy-kv` selects the legacy key-value storage.
-       */
-      storage?: 'sqlite' | 'legacy-kv';
-
-      /**
-       * Source script for a `state: expecting-transfer` entry. The namespace on this
-       * script is materialised from the source script's data via the pending-transfer
-       * flow. Present on reads for `expecting-transfer` entries.
-       */
-      transfer_from?: string;
-
-      /**
-       * Destination script for a `state: transferred` tombstone. Must reference a script
-       * in the same account; cross-dispatch-namespace transfers are rejected.
-       * Write-only: never present in GET responses.
-       */
-      transferred_to?: string;
+      state?: 'created';
     }
 
-    export namespace Exports {
+    export namespace WorkersWorkerExport {
       /**
-       * Cache override for this entrypoint. It applies only to `type: worker` entries
-       * and overrides the Worker's global `cache_options.enabled` for that entrypoint.
+       * Cache override for this entrypoint. Overrides the Worker's global
+       * `cache_options.enabled` for this entrypoint only.
        */
       export interface Cache {
         /**
@@ -1848,6 +1931,151 @@ export namespace ScriptUpdateParams {
          */
         enabled: boolean;
       }
+    }
+
+    /**
+     * A live Durable Object export (`state: created`, the default). The platform
+     * auto-provisions the namespace on first deploy, matches it on subsequent deploys,
+     * and never mutates or deletes it as a side effect of a code-only change.
+     * `storage` is required; `renamed_to`, `transferred_to` and `transfer_from` are
+     * not allowed on a live entry.
+     */
+    export interface WorkersDurableObjectExport {
+      /**
+       * Durable Object storage backend. `sqlite` is the recommended (and only) backend
+       * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
+       * already exists as KV-backed; the `exports` flow never provisions a new
+       * `legacy-kv` namespace.
+       */
+      storage: 'sqlite' | 'legacy-kv';
+
+      /**
+       * Marks this entry as a Durable Object export.
+       */
+      type: 'durable-object';
+
+      /**
+       * Name of the container (declared in the upload's `metadata.containers`) that
+       * backs this Durable Object. When set, the namespace is container-enabled. Valid
+       * only on live entries.
+       */
+      container?: string;
+
+      /**
+       * Live export. May be omitted; defaults to `created`.
+       */
+      state?: 'created';
+    }
+
+    /**
+     * A `deleted` tombstone: retires the provisioned namespace for this class and all
+     * of its data. The class must be absent from the uploaded code and no other Worker
+     * in the account may bind to the namespace, otherwise the deploy is rejected. No
+     * other fields are allowed. Deletion is irreversible.
+     */
+    export interface WorkersDurableObjectDeletedExport {
+      /**
+       * Tombstone that deletes the namespace.
+       */
+      state: 'deleted';
+
+      /**
+       * Marks this entry as a Durable Object export.
+       */
+      type: 'durable-object';
+    }
+
+    /**
+     * A `renamed` tombstone: rewrites the provisioned namespace's class name from this
+     * map key to `renamed_to`. The source class may stay in code during the rollout
+     * window (an info notice is emitted). `storage`, `transferred_to` and
+     * `transfer_from` are not allowed.
+     */
+    export interface WorkersDurableObjectRenamedExport {
+      /**
+       * The destination class name. Must differ from the source class (the map key) and
+       * must be declared as a live (`created`) entry in the same `exports` map.
+       * Write-only: never present in GET responses.
+       */
+      renamed_to: string;
+
+      /**
+       * Tombstone that renames the namespace's class.
+       */
+      state: 'renamed';
+
+      /**
+       * Marks this entry as a Durable Object export.
+       */
+      type: 'durable-object';
+    }
+
+    /**
+     * A `transferred` tombstone (source side of a two-phase transfer): hands ownership
+     * of the provisioned namespace to another script in the same account, named by
+     * `transferred_to`. The target must have already deployed a matching
+     * `expecting-transfer` entry. The source class may stay in code during the rollout
+     * window (an info notice is emitted). `storage`, `renamed_to` and `transfer_from`
+     * are not allowed.
+     */
+    export interface WorkersDurableObjectTransferredExport {
+      /**
+       * Tombstone that transfers the namespace to another script.
+       */
+      state: 'transferred';
+
+      /**
+       * The destination script name. Must be in the same account and the same
+       * dispatch-namespace context (or both non-dispatch). Cross-dispatch-namespace
+       * transfers are rejected. Write-only: never present in GET responses.
+       */
+      transferred_to: string;
+
+      /**
+       * Marks this entry as a Durable Object export.
+       */
+      type: 'durable-object';
+    }
+
+    /**
+     * The target side of a two-phase transfer (`state: expecting-transfer`). Declares
+     * that this script expects to receive a namespace for this class from the
+     * `transfer_from` script. This is a live entry, not a tombstone: bindings resolve
+     * through the source's namespace until the source commits with a `transferred`
+     * tombstone. `storage` and `transfer_from` are required; `renamed_to` and
+     * `transferred_to` are not allowed.
+     */
+    export interface WorkersDurableObjectExpectingTransferExport {
+      /**
+       * Target side of a two-phase transfer.
+       */
+      state: 'expecting-transfer';
+
+      /**
+       * Durable Object storage backend. `sqlite` is the recommended (and only) backend
+       * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
+       * already exists as KV-backed; the `exports` flow never provisions a new
+       * `legacy-kv` namespace.
+       */
+      storage: 'sqlite' | 'legacy-kv';
+
+      /**
+       * The source script name to receive the namespace from. Must be in the same
+       * account and dispatch-namespace context. Present on reads for
+       * `expecting-transfer` entries.
+       */
+      transfer_from: string;
+
+      /**
+       * Marks this entry as a Durable Object export.
+       */
+      type: 'durable-object';
+
+      /**
+       * Name of the container (declared in the upload's `metadata.containers`) that
+       * backs this Durable Object once the transfer settles. Valid only on live entries.
+       */
+      container?: string;
     }
 
     /**
