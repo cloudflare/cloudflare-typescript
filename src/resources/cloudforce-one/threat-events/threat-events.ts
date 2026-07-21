@@ -762,6 +762,13 @@ export interface ThreatEventListParams {
   account_id: string;
 
   /**
+   * Query param: Cache strategy. 'from-graph' serves results from the graph-node KV
+   * cache when all requested UUIDs are cached; falls back to normal path on
+   * partial/zero hit.
+   */
+  cache?: 'from-graph';
+
+  /**
    * Query param: Cursor for pagination. When provided, filters are embedded in the
    * cursor so you only need to pass cursor and pageSize. Returned in the previous
    * response's result_info.cursor field. Use cursor-based pagination for deep

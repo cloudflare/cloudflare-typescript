@@ -89,6 +89,7 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.list({
       account_id: 'account_id',
+      cache: 'from-graph',
       cursor:
         'eyJ2ZXJzaW9uIjoxLCJwb3NpdGlvbiI6eyJkYXRlIjoiMjAyNC0wMS0xMlQxMDowMDowMFoiLCJ1dWlkIjoiYWJjMTIzIn19',
       datasetId: ['string'],

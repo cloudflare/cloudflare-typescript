@@ -639,6 +639,13 @@ export interface TagListParams {
   account_id: string;
 
   /**
+   * Query param: Cache strategy. 'from-graph' serves results from the graph-node KV
+   * cache when all requested UUIDs are cached; falls back to normal path on
+   * partial/zero hit.
+   */
+  cache?: 'from-graph';
+
+  /**
    * Query param
    */
   categoryUuid?: string;

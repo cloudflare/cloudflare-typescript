@@ -43,6 +43,7 @@ const runTests = (
   test('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.indicators.list({
       account_id: 'account_id',
+      cache: 'from-graph',
       createdAfter: '2019-12-27T18:11:19.117Z',
       createdBefore: '2019-12-27T18:11:19.117Z',
       datasetIds: ['string'],

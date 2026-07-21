@@ -100,6 +100,7 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: { t
   test('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.tags.list({
       account_id: 'account_id',
+      cache: 'from-graph',
       categoryUuid: 'categoryUuid',
       filters: [
         {

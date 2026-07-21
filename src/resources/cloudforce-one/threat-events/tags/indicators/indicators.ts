@@ -141,9 +141,9 @@ export interface IndicatorListParams {
 export namespace IndicatorListParams {
   export interface Search {
     /**
-     * The indicator field to search on. Allowed: value, indicatorType.
+     * The indicator field to search on. Allowed: value, indicatorType, uuid.
      */
-    field: 'value' | 'indicatorType';
+    field: 'value' | 'indicatorType' | 'uuid';
 
     /**
      * Search operator. Use 'in' for bulk lookup of up to 100 values at once, e.g.
