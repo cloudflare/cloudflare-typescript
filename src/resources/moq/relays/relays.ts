@@ -23,7 +23,9 @@ export class BaseRelays extends APIResource {
   /**
    * Provisions a new MoQ relay instance. Auto-creates a publish+subscribe token and
    * a subscribe-only token. Token values are included in the response (shown once).
-   * Config is set to defaults (upstreams off). Use PUT to modify.
+   * Config is always set to defaults (upstreams off) and cannot be supplied here —
+   * sending a non-empty `config` is rejected (21014); `null` or `{}` is accepted as
+   * absent. Use PUT to configure the relay after it exists.
    *
    * @example
    * ```ts
@@ -43,8 +45,11 @@ export class BaseRelays extends APIResource {
   }
 
   /**
-   * Updates a relay's name and/or configuration. Partial updates: omitted fields are
-   * preserved. Config sub-objects replace as whole objects when present.
+   * Updates a relay's name and/or configuration. The relay ID goes in the URL path —
+   * `PUT /accounts/{account_id}/moq/relays/{relay_id}` — not the request body; there
+   * is no collection-level update endpoint. This is also the only way to set a
+   * relay's config (config cannot be set at create time). Partial updates: omitted
+   * fields are preserved; config sub-objects replace as whole objects when present.
    *
    * @example
    * ```ts
@@ -99,7 +104,9 @@ export class BaseRelays extends APIResource {
   }
 
   /**
-   * Soft-deletes a MoQ relay.
+   * Soft-deletes a MoQ relay. The relay ID goes in the URL path —
+   * `DELETE /accounts/{account_id}/moq/relays/{relay_id}` — not the request body;
+   * there is no collection-level delete endpoint.
    *
    * @example
    * ```ts
@@ -206,9 +213,11 @@ export namespace RelayCreateResponse {
        */
       export interface Upstream {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
+         * on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
@@ -312,9 +321,11 @@ export namespace RelayUpdateResponse {
        */
       export interface Upstream {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
+         * on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
@@ -386,9 +397,11 @@ export namespace RelayGetResponse {
        */
       export interface Upstream {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
+         * on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
@@ -454,9 +467,11 @@ export namespace RelayUpdateParams {
        */
       export interface Upstream {
         /**
-         * Upstream MOQT server publisher URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
+         * on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
