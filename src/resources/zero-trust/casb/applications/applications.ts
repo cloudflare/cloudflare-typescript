@@ -38,21 +38,24 @@ export class BaseApplications extends APIResource {
    * ```ts
    * const application =
    *   await client.zeroTrust.casb.applications.get(
-   *     'BITBUCKET',
+   *     'ANTHROPIC',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
     applicationID:
+      | 'ANTHROPIC'
       | 'BITBUCKET'
       | 'BOX'
       | 'CONFLUENCE'
       | 'DROPBOX'
       | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
       | 'GOOGLE_WORKSPACE'
       | 'JIRA'
       | 'MICROSOFT_INTERNAL'
+      | 'OPENAI'
       | 'SALESFORCE'
       | 'SLACK',
     params: ApplicationGetParams,
@@ -76,26 +79,32 @@ export namespace ApplicationListResponse {
     /**
      * Vendor identifier (e.g. microsoft_internal, google_workspace).
      *
+     * - `ANTHROPIC` - ANTHROPIC
      * - `BITBUCKET` - BITBUCKET
      * - `BOX` - BOX
      * - `CONFLUENCE` - CONFLUENCE
      * - `DROPBOX` - DROPBOX
      * - `GITHUB` - GITHUB
+     * - `GOOGLE_CLOUD_PLATFORM` - GOOGLE_CLOUD_PLATFORM
      * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
      * - `JIRA` - JIRA
      * - `MICROSOFT_INTERNAL` - MICROSOFT_INTERNAL
+     * - `OPENAI` - OPENAI
      * - `SALESFORCE` - SALESFORCE
      * - `SLACK` - SLACK
      */
     id:
+      | 'ANTHROPIC'
       | 'BITBUCKET'
       | 'BOX'
       | 'CONFLUENCE'
       | 'DROPBOX'
       | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
       | 'GOOGLE_WORKSPACE'
       | 'JIRA'
       | 'MICROSOFT_INTERNAL'
+      | 'OPENAI'
       | 'SALESFORCE'
       | 'SLACK';
 
@@ -210,26 +219,32 @@ export interface ApplicationGetResponse {
   /**
    * Vendor identifier.
    *
+   * - `ANTHROPIC` - ANTHROPIC
    * - `BITBUCKET` - BITBUCKET
    * - `BOX` - BOX
    * - `CONFLUENCE` - CONFLUENCE
    * - `DROPBOX` - DROPBOX
    * - `GITHUB` - GITHUB
+   * - `GOOGLE_CLOUD_PLATFORM` - GOOGLE_CLOUD_PLATFORM
    * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
    * - `JIRA` - JIRA
    * - `MICROSOFT_INTERNAL` - MICROSOFT_INTERNAL
+   * - `OPENAI` - OPENAI
    * - `SALESFORCE` - SALESFORCE
    * - `SLACK` - SLACK
    */
   id:
+    | 'ANTHROPIC'
     | 'BITBUCKET'
     | 'BOX'
     | 'CONFLUENCE'
     | 'DROPBOX'
     | 'GITHUB'
+    | 'GOOGLE_CLOUD_PLATFORM'
     | 'GOOGLE_WORKSPACE'
     | 'JIRA'
     | 'MICROSOFT_INTERNAL'
+    | 'OPENAI'
     | 'SALESFORCE'
     | 'SLACK';
 

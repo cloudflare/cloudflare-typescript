@@ -48,7 +48,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { applications:
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.casb.applications.get('BITBUCKET', {
+    const responsePromise = client.zeroTrust.casb.applications.get('ANTHROPIC', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { applications:
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.casb.applications.get('BITBUCKET', {
+    const response = await client.zeroTrust.casb.applications.get('ANTHROPIC', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

@@ -18,21 +18,24 @@ export class BaseAuthMethods extends APIResource {
    * ```ts
    * const authMethods =
    *   await client.zeroTrust.casb.applications.authMethods.list(
-   *     'BITBUCKET',
+   *     'ANTHROPIC',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   list(
     applicationID:
+      | 'ANTHROPIC'
       | 'BITBUCKET'
       | 'BOX'
       | 'CONFLUENCE'
       | 'DROPBOX'
       | 'GITHUB'
+      | 'GOOGLE_CLOUD_PLATFORM'
       | 'GOOGLE_WORKSPACE'
       | 'JIRA'
       | 'MICROSOFT_INTERNAL'
+      | 'OPENAI'
       | 'SALESFORCE'
       | 'SLACK',
     params: AuthMethodListParams,
