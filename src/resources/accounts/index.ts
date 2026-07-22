@@ -19,10 +19,8 @@ export {
   Subscriptions,
   BaseSubscriptions,
   type SubscriptionDeleteResponse,
-  type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
   type SubscriptionDeleteParams,
-  type SubscriptionGetParams,
 } from './subscriptions';
 export {
   Tokens,

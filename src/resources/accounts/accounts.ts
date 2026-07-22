@@ -18,10 +18,8 @@ import { BaseRoles, RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   BaseSubscriptions,
-  SubscriptionCreateParams,
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
-  SubscriptionGetParams,
   SubscriptionUpdateParams,
   Subscriptions,
 } from './subscriptions';
@@ -382,10 +380,8 @@ export declare namespace Accounts {
     Subscriptions as Subscriptions,
     BaseSubscriptions as BaseSubscriptions,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
-    type SubscriptionGetParams as SubscriptionGetParams,
   };
 
   export {

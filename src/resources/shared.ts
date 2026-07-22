@@ -766,6 +766,18 @@ export interface SubscriptionComponent {
   default?: number;
 
   /**
+   * A human-readable version of the component name.
+   */
+  display_name?: string;
+
+  /**
+   * The type of component value. "enum" for discrete values (including boolean
+   * on/off toggles where 0=off and 1=on), "sum" for countable quantities, "usage"
+   * for metered billing components.
+   */
+  kind?: 'enum' | 'sum' | 'usage';
+
+  /**
    * The name of the component value.
    */
   name?: string;
@@ -993,10 +1005,10 @@ export type MembersV4PagePaginationArray = V4PagePaginationArray<Member>;
 
 export type RolesV4PagePaginationArray = V4PagePaginationArray<Role>;
 
-export type SubscriptionsSinglePage = SinglePage<Subscription>;
-
 export type TokensV4PagePaginationArray = V4PagePaginationArray<Token>;
 
 export type AuditLogsV4PagePaginationArray = V4PagePaginationArray<AuditLog>;
+
+export type SubscriptionsSinglePage = SinglePage<Subscription>;
 
 export type CloudflareTunnelsV4PagePaginationArray = V4PagePaginationArray<CloudflareTunnel>;
