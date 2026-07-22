@@ -1,0 +1,27 @@
+.gitlab-ci.yml
+  s_9ac76fe9a777ec::t_6d5d7662d6fbbf 5-10,13,23,44-68
+bin/publish-npm
+  s_9ac76fe9a777ec::t_b13cc966edc3a7 59
+package-lock.json
+  s_9ac76fe9a777ec::t_e86b4424ba8547 1-6235
+src/client.ts
+  s_9ac76fe9a777ec::t_13de32e0e24a3b 265-271,289,310,314,328,364,384,915
+src/resources/workflows/versions.ts
+  s_9ac76fe9a777ec::t_aa5d5320c1d054 178,504-507,509-513,515-516
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1742460787e543d0c17cb07151bbc4d1fb906196",
+  "prompts": {},
+  "sessions": {
+    "s_9ac76fe9a777ec": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0748e9747ffeqUK4ZhSMq4HYSm",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}
