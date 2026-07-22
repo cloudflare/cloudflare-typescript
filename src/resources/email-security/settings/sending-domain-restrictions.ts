@@ -188,8 +188,7 @@ export interface SendingDomainRestrictionCreateResponse {
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -222,8 +221,7 @@ export interface SendingDomainRestrictionListResponse {
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -263,8 +261,7 @@ export interface SendingDomainRestrictionEditResponse {
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -297,8 +294,7 @@ export interface SendingDomainRestrictionGetResponse {
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 

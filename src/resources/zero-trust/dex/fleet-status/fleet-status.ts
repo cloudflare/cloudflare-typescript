@@ -22,7 +22,7 @@ export class BaseFleetStatus extends APIResource {
   ] as const);
 
   /**
-   * List details for live (up to 60 minutes) devices using WARP.
+   * Get details for live (up to 60 minutes) devices using WARP.
    *
    * @example
    * ```ts
@@ -44,7 +44,7 @@ export class BaseFleetStatus extends APIResource {
   }
 
   /**
-   * List details for devices using WARP, up to 7 days.
+   * Get aggregate details for devices using WARP, up to 7 days.
    *
    * @example
    * ```ts

@@ -65,7 +65,7 @@ export interface DMARCReportEditResponse {
   approved_sources?: Array<DMARCReportEditResponse.ApprovedSource>;
 
   /**
-   * @deprecated Deprecated, use created_at
+   * @deprecated Use `created_at` instead.
    */
   created?: string;
 
@@ -80,7 +80,7 @@ export interface DMARCReportEditResponse {
   enabled?: boolean;
 
   /**
-   * @deprecated Deprecated, use modified_at
+   * @deprecated Use `modified_at` instead.
    */
   modified?: string;
 
@@ -110,7 +110,7 @@ export interface DMARCReportEditResponse {
   status?: 'missing-dmarc-report' | 'multiple-dmarc-reports' | 'missing-dmarc-rua' | 'cname-on-dmarc-record';
 
   /**
-   * @deprecated Use `zone_id` instead
+   * @deprecated Use `zone_id` instead.
    */
   tag?: string;
 
@@ -126,7 +126,7 @@ export namespace DMARCReportEditResponse {
    */
   export interface ApprovedSource {
     /**
-     * @deprecated Deprecated, use created_at
+     * @deprecated Use `created_at` instead.
      */
     created?: string;
 
@@ -146,7 +146,7 @@ export namespace DMARCReportEditResponse {
     ips?: Array<string>;
 
     /**
-     * @deprecated Deprecated, use modified_at
+     * @deprecated Use `modified_at` instead.
      */
     modified?: string;
 
@@ -434,7 +434,7 @@ export interface DMARCReportGetResponse {
   approved_sources?: Array<DMARCReportGetResponse.ApprovedSource>;
 
   /**
-   * @deprecated Deprecated, use created_at
+   * @deprecated Use `created_at` instead.
    */
   created?: string;
 
@@ -449,7 +449,7 @@ export interface DMARCReportGetResponse {
   enabled?: boolean;
 
   /**
-   * @deprecated Deprecated, use modified_at
+   * @deprecated Use `modified_at` instead.
    */
   modified?: string;
 
@@ -479,7 +479,7 @@ export interface DMARCReportGetResponse {
   status?: 'missing-dmarc-report' | 'multiple-dmarc-reports' | 'missing-dmarc-rua' | 'cname-on-dmarc-record';
 
   /**
-   * @deprecated Use `zone_id` instead
+   * @deprecated Use `zone_id` instead.
    */
   tag?: string;
 
@@ -495,7 +495,7 @@ export namespace DMARCReportGetResponse {
    */
   export interface ApprovedSource {
     /**
-     * @deprecated Deprecated, use created_at
+     * @deprecated Use `created_at` instead.
      */
     created?: string;
 
@@ -515,7 +515,7 @@ export namespace DMARCReportGetResponse {
     ips?: Array<string>;
 
     /**
-     * @deprecated Deprecated, use modified_at
+     * @deprecated Use `modified_at` instead.
      */
     modified?: string;
 
