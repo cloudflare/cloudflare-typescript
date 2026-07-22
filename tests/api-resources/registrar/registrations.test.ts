@@ -30,7 +30,7 @@ const runTests = (client: PartialCloudflare<{ registrar: { registrations: BaseRe
   test('create: only required params', async () => {
     const responsePromise = client.registrar.registrations.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domain_name: 'my-new-startup.com',
+      domain_name: 'my-brand-example.io',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,11 +44,45 @@ const runTests = (client: PartialCloudflare<{ registrar: { registrations: BaseRe
   test('create: required and optional params', async () => {
     const response = await client.registrar.registrations.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domain_name: 'my-new-startup.com',
+      domain_name: 'my-brand-example.io',
+      acknowledgements: { fees: 'bar' },
       auto_renew: false,
+      contact_extensions: { application_purpose: 'bar', nexus_category: 'bar' },
       contacts: {
+        administrator: {
+          email: 'katherine@example.io',
+          phone: '+1.5555550102',
+          postal_info: {
+            address: {
+              city: 'San Francisco',
+              country_code: 'US',
+              postal_code: '94103',
+              state: 'CA',
+              street: '789 Mission St',
+            },
+            name: 'Katherine Johnson',
+            organization: 'Example Admin Inc',
+          },
+          fax: '+1.5555555555',
+        },
+        billing: {
+          email: 'dorothy@example.io',
+          phone: '+1.5555550103',
+          postal_info: {
+            address: {
+              city: 'San Francisco',
+              country_code: 'US',
+              postal_code: '94105',
+              state: 'CA',
+              street: '101 Howard St',
+            },
+            name: 'Dorothy Vaughan',
+            organization: 'Example Billing Inc',
+          },
+          fax: '+1.5555555555',
+        },
         registrant: {
-          email: 'ada@example.com',
+          email: 'ada@example.io',
           phone: '+1.5555555555',
           postal_info: {
             address: {
@@ -60,6 +94,22 @@ const runTests = (client: PartialCloudflare<{ registrar: { registrations: BaseRe
             },
             name: 'Ada Lovelace',
             organization: 'Example Inc',
+          },
+          fax: '+1.5555555555',
+        },
+        technical: {
+          email: 'grace@example.io',
+          phone: '+1.5555550101',
+          postal_info: {
+            address: {
+              city: 'San Francisco',
+              country_code: 'US',
+              postal_code: '94105',
+              state: 'CA',
+              street: '456 Market St',
+            },
+            name: 'Grace Hopper',
+            organization: 'Example Technical Inc',
           },
           fax: '+1.5555555555',
         },

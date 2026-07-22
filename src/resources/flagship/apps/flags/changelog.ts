@@ -56,8 +56,8 @@ export namespace ChangelogListResponse {
   export namespace UnionMember0 {
     export interface After {
       /**
-       * Variation served when no rule matches or the flag is disabled. Must be a key in
-       * `variations`.
+       * Variation the API serves when the flag is off, or when it's on but no rule
+       * matches the context. Must be a key in `variations`.
        */
       default_variation: string;
 
@@ -79,9 +79,8 @@ export namespace ChangelogListResponse {
       rules: Array<After.Rule>;
 
       /**
-       * Map of variation name to value. All values must be the same type (boolean,
-       * string, number, or JSON object/array). Each serialized value must be 10KB or
-       * smaller.
+       * Map of variation name to value. All values share the same type (boolean, string,
+       * number, or JSON object/array), and each serialized value stays within 10KB.
        */
       variations: {
         [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -90,8 +89,8 @@ export namespace ChangelogListResponse {
       description?: string | null;
 
       /**
-       * Value type of the flag's variations. Inferred from the variation values on
-       * write, so it may be omitted in requests.
+       * Value type of the flag's variations. The API infers this from the variation
+       * values on write, so you can omit it in requests.
        */
       type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -109,13 +108,13 @@ export namespace ChangelogListResponse {
         conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
         /**
-         * Evaluation order; lower numbers are evaluated first. Must be unique across the
-         * flag's rules.
+         * Evaluation order: the API evaluates rules with lower numbers first. Must be
+         * unique across the flag's rules.
          */
         priority: number;
 
         /**
-         * Variation served when this rule matches. Must be a key in `variations`.
+         * Variation the API serves when this rule matches. Must be a key in `variations`.
          */
         serve_variation: string;
 
@@ -139,12 +138,7 @@ export namespace ChangelogListResponse {
             | 'in'
             | 'not_in';
 
-          /**
-           * Value to compare against the context attribute. Must be an array for `in` and
-           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-           * operators.
-           */
-          value: unknown;
+          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
 
         export interface UnionMember1 {
@@ -170,12 +164,7 @@ export namespace ChangelogListResponse {
               | 'in'
               | 'not_in';
 
-            /**
-             * Value to compare against the context attribute. Must be an array for `in` and
-             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-             * operators.
-             */
-            value: unknown;
+            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
 
           export interface UnionMember1 {
@@ -201,12 +190,7 @@ export namespace ChangelogListResponse {
                 | 'in'
                 | 'not_in';
 
-              /**
-               * Value to compare against the context attribute. Must be an array for `in` and
-               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-               * operators.
-               */
-              value: unknown;
+              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
 
             export interface UnionMember1 {
@@ -232,12 +216,7 @@ export namespace ChangelogListResponse {
                   | 'in'
                   | 'not_in';
 
-                /**
-                 * Value to compare against the context attribute. Must be an array for `in` and
-                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                 * operators.
-                 */
-                value: unknown;
+                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
 
               export interface UnionMember1 {
@@ -263,12 +242,7 @@ export namespace ChangelogListResponse {
                     | 'in'
                     | 'not_in';
 
-                  /**
-                   * Value to compare against the context attribute. Must be an array for `in` and
-                   * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                   * operators.
-                   */
-                  value: unknown;
+                  value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
 
                 export interface UnionMember1 {
@@ -294,12 +268,7 @@ export namespace ChangelogListResponse {
                       | 'in'
                       | 'not_in';
 
-                    /**
-                     * Value to compare against the context attribute. Must be an array for `in` and
-                     * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                     * operators.
-                     */
-                    value: unknown;
+                    value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                   }
 
                   export interface UnionMember1 {
@@ -343,8 +312,8 @@ export namespace ChangelogListResponse {
   export namespace UnionMember1 {
     export interface After {
       /**
-       * Variation served when no rule matches or the flag is disabled. Must be a key in
-       * `variations`.
+       * Variation the API serves when the flag is off, or when it's on but no rule
+       * matches the context. Must be a key in `variations`.
        */
       default_variation: string;
 
@@ -366,9 +335,8 @@ export namespace ChangelogListResponse {
       rules: Array<After.Rule>;
 
       /**
-       * Map of variation name to value. All values must be the same type (boolean,
-       * string, number, or JSON object/array). Each serialized value must be 10KB or
-       * smaller.
+       * Map of variation name to value. All values share the same type (boolean, string,
+       * number, or JSON object/array), and each serialized value stays within 10KB.
        */
       variations: {
         [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -377,8 +345,8 @@ export namespace ChangelogListResponse {
       description?: string | null;
 
       /**
-       * Value type of the flag's variations. Inferred from the variation values on
-       * write, so it may be omitted in requests.
+       * Value type of the flag's variations. The API infers this from the variation
+       * values on write, so you can omit it in requests.
        */
       type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -396,13 +364,13 @@ export namespace ChangelogListResponse {
         conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
         /**
-         * Evaluation order; lower numbers are evaluated first. Must be unique across the
-         * flag's rules.
+         * Evaluation order: the API evaluates rules with lower numbers first. Must be
+         * unique across the flag's rules.
          */
         priority: number;
 
         /**
-         * Variation served when this rule matches. Must be a key in `variations`.
+         * Variation the API serves when this rule matches. Must be a key in `variations`.
          */
         serve_variation: string;
 
@@ -426,12 +394,7 @@ export namespace ChangelogListResponse {
             | 'in'
             | 'not_in';
 
-          /**
-           * Value to compare against the context attribute. Must be an array for `in` and
-           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-           * operators.
-           */
-          value: unknown;
+          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
 
         export interface UnionMember1 {
@@ -457,12 +420,7 @@ export namespace ChangelogListResponse {
               | 'in'
               | 'not_in';
 
-            /**
-             * Value to compare against the context attribute. Must be an array for `in` and
-             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-             * operators.
-             */
-            value: unknown;
+            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
 
           export interface UnionMember1 {
@@ -488,12 +446,7 @@ export namespace ChangelogListResponse {
                 | 'in'
                 | 'not_in';
 
-              /**
-               * Value to compare against the context attribute. Must be an array for `in` and
-               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-               * operators.
-               */
-              value: unknown;
+              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
 
             export interface UnionMember1 {
@@ -519,12 +472,7 @@ export namespace ChangelogListResponse {
                   | 'in'
                   | 'not_in';
 
-                /**
-                 * Value to compare against the context attribute. Must be an array for `in` and
-                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                 * operators.
-                 */
-                value: unknown;
+                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
 
               export interface UnionMember1 {
@@ -550,12 +498,7 @@ export namespace ChangelogListResponse {
                     | 'in'
                     | 'not_in';
 
-                  /**
-                   * Value to compare against the context attribute. Must be an array for `in` and
-                   * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                   * operators.
-                   */
-                  value: unknown;
+                  value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
 
                 export interface UnionMember1 {
@@ -581,12 +524,7 @@ export namespace ChangelogListResponse {
                       | 'in'
                       | 'not_in';
 
-                    /**
-                     * Value to compare against the context attribute. Must be an array for `in` and
-                     * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                     * operators.
-                     */
-                    value: unknown;
+                    value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                   }
 
                   export interface UnionMember1 {
@@ -632,8 +570,8 @@ export namespace ChangelogListResponse {
   export namespace UnionMember2 {
     export interface After {
       /**
-       * Variation served when no rule matches or the flag is disabled. Must be a key in
-       * `variations`.
+       * Variation the API serves when the flag is off, or when it's on but no rule
+       * matches the context. Must be a key in `variations`.
        */
       default_variation: string;
 
@@ -655,9 +593,8 @@ export namespace ChangelogListResponse {
       rules: Array<After.Rule>;
 
       /**
-       * Map of variation name to value. All values must be the same type (boolean,
-       * string, number, or JSON object/array). Each serialized value must be 10KB or
-       * smaller.
+       * Map of variation name to value. All values share the same type (boolean, string,
+       * number, or JSON object/array), and each serialized value stays within 10KB.
        */
       variations: {
         [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -666,8 +603,8 @@ export namespace ChangelogListResponse {
       description?: string | null;
 
       /**
-       * Value type of the flag's variations. Inferred from the variation values on
-       * write, so it may be omitted in requests.
+       * Value type of the flag's variations. The API infers this from the variation
+       * values on write, so you can omit it in requests.
        */
       type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -685,13 +622,13 @@ export namespace ChangelogListResponse {
         conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
         /**
-         * Evaluation order; lower numbers are evaluated first. Must be unique across the
-         * flag's rules.
+         * Evaluation order: the API evaluates rules with lower numbers first. Must be
+         * unique across the flag's rules.
          */
         priority: number;
 
         /**
-         * Variation served when this rule matches. Must be a key in `variations`.
+         * Variation the API serves when this rule matches. Must be a key in `variations`.
          */
         serve_variation: string;
 
@@ -715,12 +652,7 @@ export namespace ChangelogListResponse {
             | 'in'
             | 'not_in';
 
-          /**
-           * Value to compare against the context attribute. Must be an array for `in` and
-           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-           * operators.
-           */
-          value: unknown;
+          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
         }
 
         export interface UnionMember1 {
@@ -746,12 +678,7 @@ export namespace ChangelogListResponse {
               | 'in'
               | 'not_in';
 
-            /**
-             * Value to compare against the context attribute. Must be an array for `in` and
-             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-             * operators.
-             */
-            value: unknown;
+            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
           }
 
           export interface UnionMember1 {
@@ -777,12 +704,7 @@ export namespace ChangelogListResponse {
                 | 'in'
                 | 'not_in';
 
-              /**
-               * Value to compare against the context attribute. Must be an array for `in` and
-               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-               * operators.
-               */
-              value: unknown;
+              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
             }
 
             export interface UnionMember1 {
@@ -808,12 +730,7 @@ export namespace ChangelogListResponse {
                   | 'in'
                   | 'not_in';
 
-                /**
-                 * Value to compare against the context attribute. Must be an array for `in` and
-                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                 * operators.
-                 */
-                value: unknown;
+                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
               }
 
               export interface UnionMember1 {
@@ -839,12 +756,7 @@ export namespace ChangelogListResponse {
                     | 'in'
                     | 'not_in';
 
-                  /**
-                   * Value to compare against the context attribute. Must be an array for `in` and
-                   * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                   * operators.
-                   */
-                  value: unknown;
+                  value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                 }
 
                 export interface UnionMember1 {
@@ -870,12 +782,7 @@ export namespace ChangelogListResponse {
                       | 'in'
                       | 'not_in';
 
-                    /**
-                     * Value to compare against the context attribute. Must be an array for `in` and
-                     * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
-                     * operators.
-                     */
-                    value: unknown;
+                    value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
                   }
 
                   export interface UnionMember1 {

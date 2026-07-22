@@ -132,6 +132,13 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
+import * as TransformationsAllowedOriginsAPI from './transformations-allowed-origins';
+import {
+  BaseTransformationsAllowedOrigins,
+  TransformationsAllowedOrigins,
+} from './transformations-allowed-origins';
+import * as TransformationsC2paAPI from './transformations-c2pa';
+import { BaseTransformationsC2pa, TransformationsC2pa } from './transformations-c2pa';
 import * as CTAPI from './ct/ct';
 import { BaseCT, CT } from './ct/ct';
 import { APIPromise } from '../../core/api-promise';
@@ -240,6 +247,10 @@ export class BaseZones extends APIResource {
 export class Zones extends BaseZones {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  transformationsAllowedOrigins: TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins =
+    new TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins(this._client);
+  transformationsC2pa: TransformationsC2paAPI.TransformationsC2pa =
+    new TransformationsC2paAPI.TransformationsC2pa(this._client);
   environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
@@ -703,6 +714,10 @@ Zones.ActivationCheck = ActivationCheck;
 Zones.BaseActivationCheck = BaseActivationCheck;
 Zones.Settings = Settings;
 Zones.BaseSettings = BaseSettings;
+Zones.TransformationsAllowedOrigins = TransformationsAllowedOrigins;
+Zones.BaseTransformationsAllowedOrigins = BaseTransformationsAllowedOrigins;
+Zones.TransformationsC2pa = TransformationsC2pa;
+Zones.BaseTransformationsC2pa = BaseTransformationsC2pa;
 Zones.Environments = Environments;
 Zones.BaseEnvironments = BaseEnvironments;
 Zones.CustomNameservers = CustomNameservers;
@@ -796,6 +811,13 @@ export declare namespace Zones {
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
   };
+
+  export {
+    TransformationsAllowedOrigins as TransformationsAllowedOrigins,
+    BaseTransformationsAllowedOrigins as BaseTransformationsAllowedOrigins,
+  };
+
+  export { TransformationsC2pa as TransformationsC2pa, BaseTransformationsC2pa as BaseTransformationsC2pa };
 
   export {
     Environments as Environments,

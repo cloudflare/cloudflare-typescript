@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Accounts } from 'cloudflare/resources/accounts/accounts';
-import { BaseSubscriptions } from 'cloudflare/resources/accounts/subscriptions';
+import { Casb } from 'cloudflare/resources/zero-trust/casb/casb';
+import { BaseApplications } from 'cloudflare/resources/zero-trust/casb/applications/applications';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,19 +16,19 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseSubscriptions],
+  resources: [BaseApplications],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [Accounts],
+  resources: [Casb],
 });
 
-const runTests = (client: PartialCloudflare<{ accounts: { subscriptions: BaseSubscriptions } }>) => {
-  test('update: only required params', async () => {
-    const responsePromise = client.accounts.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {
+const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { applications: BaseApplications } } }>) => {
+  test('list: only required params', async () => {
+    const responsePromise = client.zeroTrust.casb.applications.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -40,24 +40,15 @@ const runTests = (client: PartialCloudflare<{ accounts: { subscriptions: BaseSub
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
-    const response = await client.accounts.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {
+  test('list: required and optional params', async () => {
+    const response = await client.zeroTrust.casb.applications.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      frequency: 'monthly',
-      rate_plan: {
-        id: 'free',
-        currency: 'USD',
-        externally_managed: false,
-        is_contract: false,
-        public_name: 'Business Plan',
-        scope: 'zone',
-        sets: ['string'],
-      },
+      environment: 'environment',
     });
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.accounts.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2', {
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.casb.applications.get('ANTHROPIC', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -69,12 +60,12 @@ const runTests = (client: PartialCloudflare<{ accounts: { subscriptions: BaseSub
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.accounts.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2', {
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.casb.applications.get('ANTHROPIC', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 };
-describe('resource subscriptions', () => runTests(client));
-describe('resource subscriptions (tree shakable, base)', () => runTests(partialClient));
-describe('resource subscriptions (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource applications', () => runTests(client));
+describe('resource applications (tree shakable, base)', () => runTests(partialClient));
+describe('resource applications (tree shakable, subresource)', () => runTests(parentPartialClient));

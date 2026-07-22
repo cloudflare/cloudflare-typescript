@@ -28,10 +28,7 @@ const parentPartialClient = createClient({
 
 const runTests = (client: PartialCloudflare<{ browserRendering: { screenshot: BaseScreenshot } }>) => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.screenshot.create({
-      account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
-    });
+    const responsePromise = client.browserRendering.screenshot.create({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,7 +41,6 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { screenshot: Ba
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.screenshot.create({
       account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
@@ -85,6 +81,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { screenshot: Ba
         timeout: 60000,
         waitUntil: 'load',
       },
+      html: '<h1>Hello World!</h1>',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       screenshotOptions: {
@@ -108,6 +105,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { screenshot: Ba
       selector: 'selector',
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
+      url: 'https://www.example.com/',
       userAgent: 'userAgent',
       viewport: {
         height: 0,

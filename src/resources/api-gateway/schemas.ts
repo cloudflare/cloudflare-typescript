@@ -55,6 +55,11 @@ export interface SchemaListParams {
    * Query param: Receive schema only for the given host(s).
    */
   host?: Array<string>;
+
+  /**
+   * Query param: Schema kinds to include in exported OpenAPI schemas.
+   */
+  include_schema_kind?: Array<'learned'>;
 }
 
 export declare namespace Schemas {

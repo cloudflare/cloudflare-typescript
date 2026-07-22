@@ -43,10 +43,8 @@ Types:
 
 Methods:
 
-- <code title="post /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
 - <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
 - <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
-- <code title="get /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionsSinglePage</code>
 
 ## Tokens
 
@@ -98,3 +96,7 @@ Methods:
 - <code title="get /accounts/{account_id}/logs/audit">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">list</a>({ ...params }) -> AuditListResponsesCursorPaginationAfter</code>
 - <code title="get /accounts/{account_id}/logs/audit/{id}/history">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">history</a>(id, { ...params }) -> AuditHistoryResponse</code>
 - <code title="get /accounts/{account_id}/logs/audit/product_categories">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">productCategories</a>({ ...params }) -> AuditProductCategoriesResponsesSinglePage</code>
+
+## SpeedSettings
+
+### Transformations

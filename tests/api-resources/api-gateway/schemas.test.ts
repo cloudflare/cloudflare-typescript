@@ -43,6 +43,7 @@ const runTests = (client: PartialCloudflare<{ apiGateway: { schemas: BaseSchemas
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       feature: ['thresholds'],
       host: ['www.example.com'],
+      include_schema_kind: ['learned'],
     });
   });
 };

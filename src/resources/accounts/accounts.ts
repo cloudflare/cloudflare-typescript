@@ -18,15 +18,15 @@ import { BaseRoles, RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   BaseSubscriptions,
-  SubscriptionCreateParams,
   SubscriptionDeleteParams,
   SubscriptionDeleteResponse,
-  SubscriptionGetParams,
   SubscriptionUpdateParams,
   Subscriptions,
 } from './subscriptions';
 import * as LogsAPI from './logs/logs';
 import { BaseLogs, Logs } from './logs/logs';
+import * as SpeedSettingsAPI from './speed-settings/speed-settings';
+import { BaseSpeedSettings, SpeedSettings } from './speed-settings/speed-settings';
 import * as TokensAPI from './tokens/tokens';
 import {
   BaseTokens,
@@ -147,6 +147,7 @@ export class Accounts extends BaseAccounts {
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
   tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  speedSettings: SpeedSettingsAPI.SpeedSettings = new SpeedSettingsAPI.SpeedSettings(this._client);
 }
 
 export type AccountsV4PagePaginationArray = V4PagePaginationArray<Account>;
@@ -341,6 +342,8 @@ Accounts.Tokens = Tokens;
 Accounts.BaseTokens = BaseTokens;
 Accounts.Logs = Logs;
 Accounts.BaseLogs = BaseLogs;
+Accounts.SpeedSettings = SpeedSettings;
+Accounts.BaseSpeedSettings = BaseSpeedSettings;
 
 export declare namespace Accounts {
   export {
@@ -377,10 +380,8 @@ export declare namespace Accounts {
     Subscriptions as Subscriptions,
     BaseSubscriptions as BaseSubscriptions,
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
-    type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
-    type SubscriptionGetParams as SubscriptionGetParams,
   };
 
   export {
@@ -398,4 +399,6 @@ export declare namespace Accounts {
   };
 
   export { Logs as Logs, BaseLogs as BaseLogs };
+
+  export { SpeedSettings as SpeedSettings, BaseSpeedSettings as BaseSpeedSettings };
 }

@@ -31,7 +31,6 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { pdf: BasePDF }
   test.skip('create: required and optional params', async () => {
     const response = await client.browserRendering.pdf.create({
       account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
@@ -72,6 +71,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { pdf: BasePDF }
         timeout: 60000,
         waitUntil: 'load',
       },
+      html: '<h1>Hello World!</h1>',
       pdfOptions: {
         displayHeaderFooter: true,
         footerTemplate: 'footerTemplate',
@@ -99,6 +99,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { pdf: BasePDF }
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
+      url: 'https://www.example.com/',
       userAgent: 'userAgent',
       viewport: {
         height: 0,

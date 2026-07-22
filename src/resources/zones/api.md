@@ -86,6 +86,10 @@ Methods:
 - <code title="patch /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">edit</a>(settingID, { ...params }) -> SettingEditResponse</code>
 - <code title="get /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">get</a>(settingID, { ...params }) -> SettingGetResponse</code>
 
+## TransformationsAllowedOrigins
+
+## TransformationsC2pa
+
 ## Environments
 
 Types:

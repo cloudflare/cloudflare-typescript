@@ -14,14 +14,13 @@ export {
   type MemberGetParams,
 } from './members';
 export { Roles, BaseRoles, type RoleListParams, type RoleGetParams } from './roles';
+export { SpeedSettings, BaseSpeedSettings } from './speed-settings/index';
 export {
   Subscriptions,
   BaseSubscriptions,
   type SubscriptionDeleteResponse,
-  type SubscriptionCreateParams,
   type SubscriptionUpdateParams,
   type SubscriptionDeleteParams,
-  type SubscriptionGetParams,
 } from './subscriptions';
 export {
   Tokens,
