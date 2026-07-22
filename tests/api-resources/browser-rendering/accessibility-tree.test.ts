@@ -30,10 +30,7 @@ const runTests = (
   client: PartialCloudflare<{ browserRendering: { accessibilityTree: BaseAccessibilityTree } }>,
 ) => {
   test('create: only required params', async () => {
-    const responsePromise = client.browserRendering.accessibilityTree.create({
-      account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
-    });
+    const responsePromise = client.browserRendering.accessibilityTree.create({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,7 +43,6 @@ const runTests = (
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.accessibilityTree.create({
       account_id: 'account_id',
-      html: '<h1>Hello World!</h1>',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
@@ -87,12 +83,14 @@ const runTests = (
         timeout: 60000,
         waitUntil: 'load',
       },
+      html: '<h1>Hello World!</h1>',
       interestingOnly: true,
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       root: 'root',
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
+      url: 'https://www.example.com/',
       userAgent: 'userAgent',
       viewport: {
         height: 0,
