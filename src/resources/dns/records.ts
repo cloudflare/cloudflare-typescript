@@ -3025,11 +3025,6 @@ export interface MXRecord {
   content?: string;
 
   /**
-   * Components of a MX record.
-   */
-  data?: MXRecord.Data;
-
-  /**
    * Required for MX and URI records; ignored for other record types (but may still
    * be returned by the API). Records with lower priorities are preferred. This field
    * is to be deprecated in favor of the priority field within the data map.
@@ -3054,23 +3049,6 @@ export interface MXRecord {
 }
 
 export namespace MXRecord {
-  /**
-   * Components of a MX record.
-   */
-  export interface Data {
-    /**
-     * Required for MX and URI records; ignored for other record types (but may still
-     * be returned by the API). Records with lower priorities are preferred. This field
-     * is to be deprecated in favor of the priority field within the data map.
-     */
-    priority?: number;
-
-    /**
-     * A valid mail server hostname, or "." for a NULL MX record.
-     */
-    target?: string;
-  }
-
   /**
    * Settings for the DNS record.
    */
@@ -3123,11 +3101,6 @@ export interface MXRecordParam {
   content?: string;
 
   /**
-   * Components of a MX record.
-   */
-  data?: MXRecordParam.Data;
-
-  /**
    * Required for MX and URI records; ignored for other record types (but may still
    * be returned by the API). Records with lower priorities are preferred. This field
    * is to be deprecated in favor of the priority field within the data map.
@@ -3152,23 +3125,6 @@ export interface MXRecordParam {
 }
 
 export namespace MXRecordParam {
-  /**
-   * Components of a MX record.
-   */
-  export interface Data {
-    /**
-     * Required for MX and URI records; ignored for other record types (but may still
-     * be returned by the API). Records with lower priorities are preferred. This field
-     * is to be deprecated in favor of the priority field within the data map.
-     */
-    priority?: number;
-
-    /**
-     * A valid mail server hostname, or "." for a NULL MX record.
-     */
-    target?: string;
-  }
-
   /**
    * Settings for the DNS record.
    */
@@ -6522,13 +6478,6 @@ export namespace URIRecord {
    */
   export interface Data {
     /**
-     * Required for MX and URI records; ignored for other record types (but may still
-     * be returned by the API). Records with lower priorities are preferred. This field
-     * is to be deprecated in favor of the priority field within the data map.
-     */
-    priority?: number;
-
-    /**
      * The record content.
      */
     target?: string;
@@ -6619,13 +6568,6 @@ export namespace URIRecordParam {
    * Components of a URI record.
    */
   export interface Data {
-    /**
-     * Required for MX and URI records; ignored for other record types (but may still
-     * be returned by the API). Records with lower priorities are preferred. This field
-     * is to be deprecated in favor of the priority field within the data map.
-     */
-    priority?: number;
-
     /**
      * The record content.
      */
@@ -7086,11 +7028,6 @@ export declare namespace RecordCreateParams {
     content?: string;
 
     /**
-     * Body param: Components of a MX record.
-     */
-    data?: MXRecord.Data;
-
-    /**
      * Body param: Required for MX and URI records; ignored for other record types (but
      * may still be returned by the API). Records with lower priorities are preferred.
      * This field is to be deprecated in favor of the priority field within the data
@@ -7117,23 +7054,6 @@ export declare namespace RecordCreateParams {
   }
 
   export namespace MXRecord {
-    /**
-     * Components of a MX record.
-     */
-    export interface Data {
-      /**
-       * Required for MX and URI records; ignored for other record types (but may still
-       * be returned by the API). Records with lower priorities are preferred. This field
-       * is to be deprecated in favor of the priority field within the data map.
-       */
-      priority?: number;
-
-      /**
-       * A valid mail server hostname, or "." for a NULL MX record.
-       */
-      target?: string;
-    }
-
     /**
      * Settings for the DNS record.
      */
@@ -8878,13 +8798,6 @@ export declare namespace RecordCreateParams {
      * Components of a URI record.
      */
     export interface Data {
-      /**
-       * Required for MX and URI records; ignored for other record types (but may still
-       * be returned by the API). Records with lower priorities are preferred. This field
-       * is to be deprecated in favor of the priority field within the data map.
-       */
-      priority?: number;
-
       /**
        * The record content.
        */
@@ -9249,11 +9162,6 @@ export declare namespace RecordUpdateParams {
     content?: string;
 
     /**
-     * Body param: Components of a MX record.
-     */
-    data?: MXRecord.Data;
-
-    /**
      * Body param: Required for MX and URI records; ignored for other record types (but
      * may still be returned by the API). Records with lower priorities are preferred.
      * This field is to be deprecated in favor of the priority field within the data
@@ -9280,23 +9188,6 @@ export declare namespace RecordUpdateParams {
   }
 
   export namespace MXRecord {
-    /**
-     * Components of a MX record.
-     */
-    export interface Data {
-      /**
-       * Required for MX and URI records; ignored for other record types (but may still
-       * be returned by the API). Records with lower priorities are preferred. This field
-       * is to be deprecated in favor of the priority field within the data map.
-       */
-      priority?: number;
-
-      /**
-       * A valid mail server hostname, or "." for a NULL MX record.
-       */
-      target?: string;
-    }
-
     /**
      * Settings for the DNS record.
      */
@@ -11041,13 +10932,6 @@ export declare namespace RecordUpdateParams {
      * Components of a URI record.
      */
     export interface Data {
-      /**
-       * Required for MX and URI records; ignored for other record types (but may still
-       * be returned by the API). Records with lower priorities are preferred. This field
-       * is to be deprecated in favor of the priority field within the data map.
-       */
-      priority?: number;
-
       /**
        * The record content.
        */
@@ -11793,11 +11677,6 @@ export declare namespace RecordEditParams {
     content?: string;
 
     /**
-     * Body param: Components of a MX record.
-     */
-    data?: MXRecord.Data;
-
-    /**
      * Body param: Required for MX and URI records; ignored for other record types (but
      * may still be returned by the API). Records with lower priorities are preferred.
      * This field is to be deprecated in favor of the priority field within the data
@@ -11824,23 +11703,6 @@ export declare namespace RecordEditParams {
   }
 
   export namespace MXRecord {
-    /**
-     * Components of a MX record.
-     */
-    export interface Data {
-      /**
-       * Required for MX and URI records; ignored for other record types (but may still
-       * be returned by the API). Records with lower priorities are preferred. This field
-       * is to be deprecated in favor of the priority field within the data map.
-       */
-      priority?: number;
-
-      /**
-       * A valid mail server hostname, or "." for a NULL MX record.
-       */
-      target?: string;
-    }
-
     /**
      * Settings for the DNS record.
      */
@@ -13585,13 +13447,6 @@ export declare namespace RecordEditParams {
      * Components of a URI record.
      */
     export interface Data {
-      /**
-       * Required for MX and URI records; ignored for other record types (but may still
-       * be returned by the API). Records with lower priorities are preferred. This field
-       * is to be deprecated in favor of the priority field within the data map.
-       */
-      priority?: number;
-
       /**
        * The record content.
        */
