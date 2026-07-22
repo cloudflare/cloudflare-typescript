@@ -291,6 +291,11 @@ export interface ItemListResponse {
 
   last_seen_at: string;
 
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
+
   namespace: string;
 
   next_action: 'INDEX' | 'DELETE' | null;
@@ -351,6 +356,11 @@ export interface ItemCreateOrUpdateResponse {
 
   last_seen_at: string;
 
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
+
   namespace: string;
 
   next_action: 'INDEX' | 'DELETE' | null;
@@ -380,6 +390,11 @@ export interface ItemGetResponse {
   key: string;
 
   last_seen_at: string;
+
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
 
   namespace: string;
 
@@ -431,6 +446,11 @@ export interface ItemSyncResponse {
 
   last_seen_at: string;
 
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
+
   namespace: string;
 
   next_action: 'INDEX' | 'DELETE' | null;
@@ -460,6 +480,11 @@ export interface ItemUploadResponse {
   key: string;
 
   last_seen_at: string;
+
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
 
   namespace: string;
 

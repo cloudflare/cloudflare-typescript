@@ -1014,176 +1014,95 @@ export namespace InstanceUpdateResponse {
 }
 
 export interface InstanceListResponse {
-  /**
-   * AI Search instance ID. Lowercase alphanumeric, hyphens, and underscores.
-   */
   id: string;
+
+  ai_gateway_id: string | null;
+
+  ai_search_model: string | null;
+
+  cache: boolean;
+
+  cache_threshold: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes' | null;
+
+  cache_ttl: 600 | 1800 | 3600 | 7200 | 21600 | 43200 | 86400 | 172800 | 259200 | 518400;
+
+  chunk: boolean;
+
+  chunk_overlap: number | null;
+
+  chunk_size: number | null;
 
   created_at: string;
 
+  created_by: string | null;
+
+  custom_metadata: Array<InstanceListResponse.CustomMetadata> | null;
+
+  embedding_model: string | null;
+
+  enable: boolean;
+
+  engine_version: number;
+
+  fusion_method: 'max' | 'rrf';
+
+  hybrid_search_enabled: boolean;
+
+  index_method: InstanceListResponse.IndexMethod;
+
+  indexing_options: InstanceListResponse.IndexingOptions | null;
+
+  last_activity: string | null;
+
+  max_num_results: number | null;
+
+  metadata: InstanceListResponse.Metadata | null;
+
   modified_at: string;
 
-  ai_gateway_id?: string | null;
+  modified_by: string | null;
 
-  ai_search_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
+  namespace: string;
 
-  cache?: boolean;
+  paused: boolean;
 
-  cache_threshold?: 'super_strict_match' | 'close_enough' | 'flexible_friend' | 'anything_goes';
+  public_endpoint_id: string | null;
 
-  /**
-   * Cache entry TTL in seconds. Allowed values: 600 (10min), 1800 (30min), 3600
-   * (1h), 7200 (2h), 21600 (6h), 43200 (12h), 86400 (24h), 172800 (48h), 259200
-   * (72h), 518400 (6d).
-   */
-  cache_ttl?: 600 | 1800 | 3600 | 7200 | 21600 | 43200 | 86400 | 172800 | 259200 | 518400;
+  public_endpoint_params: InstanceListResponse.PublicEndpointParams | null;
 
-  chunk_overlap?: number;
+  reranking: boolean;
 
-  chunk_size?: number;
+  reranking_model: string | null;
 
-  created_by?: string | null;
+  retrieval_options: InstanceListResponse.RetrievalOptions | null;
 
-  custom_metadata?: Array<InstanceListResponse.CustomMetadata>;
+  rewrite_model: string | null;
 
-  embedding_model?:
-    | '@cf/qwen/qwen3-embedding-0.6b'
-    | '@cf/qwen/qwen3-vl-embedding-2b'
-    | '@cf/baai/bge-m3'
-    | '@cf/baai/bge-large-en-v1.5'
-    | '@cf/google/embeddinggemma-300m'
-    | 'google-ai-studio/gemini-embedding-001'
-    | 'google-ai-studio/gemini-embedding-2-preview'
-    | 'google-ai-studio/gemini-embedding-2'
-    | 'openai/text-embedding-3-small'
-    | 'openai/text-embedding-3-large'
-    | ''
-    | null;
+  rewrite_query: boolean;
 
-  enable?: boolean;
+  score_threshold: number | null;
 
-  engine_version?: number;
+  source: string | null;
 
-  fusion_method?: 'max' | 'rrf';
+  source_params: InstanceListResponse.SourceParams | null;
 
-  /**
-   * @deprecated Deprecated — use index_method instead.
-   */
-  hybrid_search_enabled?: boolean;
+  status: string;
 
-  /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
-   */
-  index_method?: InstanceListResponse.IndexMethod;
+  summarization: boolean;
 
-  indexing_options?: InstanceListResponse.IndexingOptions | null;
+  summarization_model: string | null;
 
-  last_activity?: string | null;
+  sync_interval: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
 
-  max_num_results?: number;
+  system_prompt_ai_search: string | null;
 
-  metadata?: InstanceListResponse.Metadata;
+  system_prompt_index_summarization: string | null;
 
-  modified_by?: string | null;
+  system_prompt_rewrite_query: string | null;
 
-  namespace?: string | null;
+  token_id: string | null;
 
-  paused?: boolean;
-
-  public_endpoint_id?: string | null;
-
-  public_endpoint_params?: InstanceListResponse.PublicEndpointParams;
-
-  reranking?: boolean;
-
-  reranking_model?: '@cf/baai/bge-reranker-base' | '' | null;
-
-  retrieval_options?: InstanceListResponse.RetrievalOptions | null;
-
-  rewrite_model?:
-    | '@cf/meta/llama-3.3-70b-instruct-fp8-fast'
-    | '@cf/zai-org/glm-4.7-flash'
-    | '@cf/meta/llama-3.1-8b-instruct-fast'
-    | '@cf/meta/llama-3.1-8b-instruct-fp8'
-    | '@cf/meta/llama-4-scout-17b-16e-instruct'
-    | '@cf/qwen/qwen3-30b-a3b-fp8'
-    | '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'
-    | '@cf/moonshotai/kimi-k2-instruct'
-    | '@cf/google/gemma-3-12b-it'
-    | '@cf/google/gemma-4-26b-a4b-it'
-    | '@cf/moonshotai/kimi-k2.5'
-    | 'anthropic/claude-3-7-sonnet'
-    | 'anthropic/claude-sonnet-4'
-    | 'anthropic/claude-opus-4'
-    | 'anthropic/claude-3-5-haiku'
-    | 'cerebras/qwen-3-235b-a22b-instruct'
-    | 'cerebras/qwen-3-235b-a22b-thinking'
-    | 'cerebras/llama-3.3-70b'
-    | 'cerebras/llama-4-maverick-17b-128e-instruct'
-    | 'cerebras/llama-4-scout-17b-16e-instruct'
-    | 'cerebras/gpt-oss-120b'
-    | 'google-ai-studio/gemini-2.5-flash'
-    | 'google-ai-studio/gemini-2.5-pro'
-    | 'grok/grok-4'
-    | 'groq/llama-3.3-70b-versatile'
-    | 'groq/llama-3.1-8b-instant'
-    | 'openai/gpt-5'
-    | 'openai/gpt-5-mini'
-    | 'openai/gpt-5-nano'
-    | ''
-    | null;
-
-  rewrite_query?: boolean;
-
-  score_threshold?: number;
-
-  source?: string | null;
-
-  source_params?: InstanceListResponse.SourceParams | null;
-
-  status?: string;
-
-  /**
-   * Interval between automatic syncs, in seconds. Allowed values: 900 (15min), 1800
-   * (30min), 3600 (1h), 7200 (2h), 14400 (4h), 21600 (6h), 43200 (12h), 86400 (24h).
-   */
-  sync_interval?: 900 | 1800 | 3600 | 7200 | 14400 | 21600 | 43200 | 86400;
-
-  token_id?: string;
-
-  type?: 'r2' | 'web-crawler' | null;
+  type: 'r2' | 'web-crawler' | null;
 }
 
 export namespace InstanceListResponse {
@@ -1193,36 +1112,26 @@ export namespace InstanceListResponse {
     field_name: string;
   }
 
-  /**
-   * Controls which storage backends are used during indexing. Defaults to
-   * vector-only.
-   */
   export interface IndexMethod {
-    /**
-     * Enable keyword (BM25) storage backend.
-     */
     keyword: boolean;
 
-    /**
-     * Enable vector (embedding) storage backend.
-     */
     vector: boolean;
+
+    [k: string]: unknown;
   }
 
   export interface IndexingOptions {
-    /**
-     * Tokenizer used for keyword search indexing. porter provides word-level
-     * tokenization with Porter stemming (good for natural language queries). trigram
-     * enables character-level substring matching (good for partial matches, code,
-     * identifiers). Changing this triggers a full re-index. Defaults to porter.
-     */
     keyword_tokenizer?: 'porter' | 'trigram';
+
+    [k: string]: unknown;
   }
 
   export interface Metadata {
     created_from_aisearch_wizard?: boolean;
 
     worker_domain?: string;
+
+    [k: string]: unknown;
   }
 
   export interface PublicEndpointParams {
@@ -1230,21 +1139,8 @@ export namespace InstanceListResponse {
 
     chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
 
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
     custom_domains?: Array<string> | null;
 
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
     default_domain_enabled?: boolean;
 
     enabled?: boolean;
@@ -1254,23 +1150,23 @@ export namespace InstanceListResponse {
     rate_limit?: PublicEndpointParams.RateLimit;
 
     search_endpoint?: PublicEndpointParams.SearchEndpoint;
+
+    [k: string]: unknown;
   }
 
   export namespace PublicEndpointParams {
     export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
       disabled?: boolean;
+
+      [k: string]: unknown;
     }
 
     export interface Mcp {
       description?: string;
 
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
       disabled?: boolean;
+
+      [k: string]: unknown;
     }
 
     export interface RateLimit {
@@ -1279,68 +1175,40 @@ export namespace InstanceListResponse {
       requests?: number;
 
       technique?: 'fixed' | 'sliding';
+
+      [k: string]: unknown;
     }
 
     export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
       disabled?: boolean;
+
+      [k: string]: unknown;
     }
   }
 
   export interface RetrievalOptions {
-    /**
-     * Metadata fields to boost search results by. Each entry specifies a metadata
-     * field and an optional direction. Direction defaults to 'asc' for
-     * numeric/datetime fields and 'exists' for text/boolean fields. Fields must match
-     * 'timestamp' or a defined custom_metadata field.
-     */
     boost_by?: Array<RetrievalOptions.BoostBy>;
 
-    /**
-     * Controls which documents are candidates for BM25 scoring. 'and' restricts
-     * candidates to documents containing all query terms; 'or' includes any document
-     * containing at least one term, ranked by BM25 relevance. When omitted on an
-     * update, the existing stored value is preserved; when never set, search falls
-     * back to 'and'.
-     */
     keyword_match_mode?: 'and' | 'or';
+
+    [k: string]: unknown;
   }
 
   export namespace RetrievalOptions {
     export interface BoostBy {
-      /**
-       * Metadata field name to boost by. Use 'timestamp' for document freshness, or any
-       * custom_metadata field. Numeric and datetime fields support all four directions
-       * (asc, desc, exists, not_exists); text/boolean fields only support
-       * exists/not_exists.
-       */
       field: string;
 
-      /**
-       * Boost direction. 'desc' = higher values rank higher (e.g. newer timestamps).
-       * 'asc' = lower values rank higher. 'exists' = boost chunks that have the field.
-       * 'not_exists' = boost chunks that lack the field. Optional — defaults to 'asc'
-       * for numeric/datetime fields, 'exists' for text/boolean fields.
-       */
+      dataType?: 'number' | 'datetime' | 'text' | 'boolean';
+
       direction?: 'asc' | 'desc' | 'exists' | 'not_exists';
+
+      [k: string]: unknown;
     }
   }
 
   export interface SourceParams {
-    /**
-     * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
-     * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
-     */
     exclude_items?: Array<string>;
 
-    /**
-     * List of path patterns to include. Uses micromatch glob syntax: \* matches within
-     * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
-     */
     include_items?: Array<string>;
 
     prefix?: string;
@@ -1348,6 +1216,8 @@ export namespace InstanceListResponse {
     r2_jurisdiction?: string;
 
     web_crawler?: SourceParams.WebCrawler;
+
+    [k: string]: unknown;
   }
 
   export namespace SourceParams {
@@ -1355,50 +1225,32 @@ export namespace InstanceListResponse {
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'crawl';
+
+      [k: string]: unknown;
     }
 
     export namespace WebCrawler {
       export interface ParseOptions {
-        /**
-         * List of path-to-selector mappings for extracting specific content from crawled
-         * pages. Each entry pairs a URL glob pattern with a CSS selector. The first
-         * matching path wins. Only the matched HTML fragment is stored and indexed. Omit
-         * the field to disable content selection — empty arrays are rejected.
-         */
         content_selector?: Array<ParseOptions.ContentSelector>;
 
-        /**
-         * Up to 5 custom HTTP headers sent with each crawl request. Names must be RFC-7230
-         * token characters (no spaces, colons, or control characters); values must be
-         * HTAB + printable ASCII (no CR/LF).
-         */
         include_headers?: { [key: string]: string };
 
         include_images?: boolean;
 
-        /**
-         * List of specific sitemap URLs to use for crawling. Only valid when parse_type is
-         * 'sitemap'.
-         */
         specific_sitemaps?: Array<string>;
 
         use_browser_rendering?: boolean;
+
+        [k: string]: unknown;
       }
 
       export namespace ParseOptions {
         export interface ContentSelector {
-          /**
-           * Glob pattern to match against the page URL path. Uses standard glob syntax: \*
-           * matches within a segment, \*\* crosses directories.
-           */
           path: string;
 
-          /**
-           * CSS selector to extract content from pages matching the path pattern. Must not
-           * contain disallowed characters (;, `, $, {, }, \). Must target a single element;
-           * if multiple elements match, the selector is ignored and the full page is used.
-           */
           selector: string;
+
+          [k: string]: unknown;
         }
       }
     }
