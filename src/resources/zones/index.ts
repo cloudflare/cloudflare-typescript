@@ -124,4 +124,9 @@ export {
   type SubscriptionUpdateParams,
   type SubscriptionGetParams,
 } from './subscriptions';
+export {
+  TransformationsAllowedOrigins,
+  BaseTransformationsAllowedOrigins,
+} from './transformations-allowed-origins';
+export { TransformationsC2pa, BaseTransformationsC2pa } from './transformations-c2pa';
 export { Zones, BaseZones } from './zones';

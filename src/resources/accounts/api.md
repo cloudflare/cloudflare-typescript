@@ -98,3 +98,7 @@ Methods:
 - <code title="get /accounts/{account_id}/logs/audit">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">list</a>({ ...params }) -> AuditListResponsesCursorPaginationAfter</code>
 - <code title="get /accounts/{account_id}/logs/audit/{id}/history">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">history</a>(id, { ...params }) -> AuditHistoryResponse</code>
 - <code title="get /accounts/{account_id}/logs/audit/product_categories">client.accounts.logs.audit.<a href="./src/resources/accounts/logs/audit.ts">productCategories</a>({ ...params }) -> AuditProductCategoriesResponsesSinglePage</code>
+
+## SpeedSettings
+
+### Transformations
