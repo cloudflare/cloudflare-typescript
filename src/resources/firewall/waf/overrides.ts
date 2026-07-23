@@ -18,10 +18,10 @@ export class BaseOverrides extends APIResource {
   ] as const);
 
   /**
-   * Creates a URI-based WAF override for a zone.
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
    *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   * Previously created a URI-based WAF override for a zone.
    *
    * @deprecated
    */
@@ -35,10 +35,10 @@ export class BaseOverrides extends APIResource {
   }
 
   /**
-   * Updates an existing URI-based WAF override.
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
    *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   * Previously updated an existing URI-based WAF override.
    *
    * @deprecated
    */
@@ -53,10 +53,10 @@ export class BaseOverrides extends APIResource {
   }
 
   /**
-   * Fetches the URI-based WAF overrides in a zone.
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
    *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   * Previously fetched the URI-based WAF overrides in a zone.
    *
    * @deprecated
    */
@@ -73,10 +73,10 @@ export class BaseOverrides extends APIResource {
   }
 
   /**
-   * Deletes an existing URI-based WAF override.
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
    *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   * Previously deleted an existing URI-based WAF override.
    *
    * @deprecated
    */
@@ -95,10 +95,10 @@ export class BaseOverrides extends APIResource {
   }
 
   /**
-   * Fetches the details of a URI-based WAF override.
+   * **This endpoint has been deprecated and returns 410 Gone. Please use the
+   * [Rulesets API](https://developers.cloudflare.com/ruleset-engine/) instead.**
    *
-   * **Note:** Applies only to the
-   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   * Previously fetched the details of a URI-based WAF override.
    *
    * @deprecated
    */
