@@ -46,3 +46,15 @@ Methods:
 Methods:
 
 - <code title="get /accounts/{account_id}/registrar/registrations/{domain_name}/update-status">client.registrar.updateStatus.<a href="./src/resources/registrar/update-status.ts">get</a>(domainName, { ...params }) -> WorkflowStatus</code>
+
+## Extensions
+
+Types:
+
+- <code><a href="./src/resources/registrar/extensions.ts">ExtensionListResponse</a></code>
+- <code><a href="./src/resources/registrar/extensions.ts">ExtensionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/registrar/extensions">client.registrar.extensions.<a href="./src/resources/registrar/extensions.ts">list</a>({ ...params }) -> ExtensionListResponsesCursorPagination</code>
+- <code title="get /accounts/{account_id}/registrar/extensions/{extension}">client.registrar.extensions.<a href="./src/resources/registrar/extensions.ts">get</a>(extension, { ...params }) -> ExtensionGetResponse</code>

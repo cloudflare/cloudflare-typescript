@@ -603,10 +603,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.registrar.registrations.get()`
 - `client.registrar.registrationStatus.get()`
 - `client.registrar.updateStatus.get()`
+- `client.registrar.extensions.get()`
 - `client.registrarSandbox.registrations.edit()`
 - `client.registrarSandbox.registrations.get()`
 - `client.registrarSandbox.registrationStatus.get()`
 - `client.registrarSandbox.updateStatus.get()`
+- `client.registrarSandbox.extensions.get()`
 - `client.rules.lists.update()`
 - `client.rules.lists.delete()`
 - `client.rules.lists.get()`

@@ -1,5 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  Extensions,
+  BaseExtensions,
+  type ExtensionListResponse,
+  type ExtensionGetResponse,
+  type ExtensionListParams,
+  type ExtensionGetParams,
+  type ExtensionListResponsesCursorPagination,
+} from './extensions';
 export { RegistrarSandbox, BaseRegistrarSandbox } from './registrar-sandbox';
 export {
   RegistrationStatus,

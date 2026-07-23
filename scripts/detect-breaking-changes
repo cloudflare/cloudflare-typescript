@@ -428,10 +428,12 @@ TEST_PATHS=(
 	tests/api-resources/registrar/registrations.test.ts
 	tests/api-resources/registrar/registration-status.test.ts
 	tests/api-resources/registrar/update-status.test.ts
+	tests/api-resources/registrar/extensions.test.ts
 	tests/api-resources/registrar-sandbox/registrar-sandbox.test.ts
 	tests/api-resources/registrar-sandbox/registrations.test.ts
 	tests/api-resources/registrar-sandbox/registration-status.test.ts
 	tests/api-resources/registrar-sandbox/update-status.test.ts
+	tests/api-resources/registrar-sandbox/extensions.test.ts
 	tests/api-resources/request-tracers/request-tracers.test.ts
 	tests/api-resources/request-tracers/traces.test.ts
 	tests/api-resources/rules/rules.test.ts
