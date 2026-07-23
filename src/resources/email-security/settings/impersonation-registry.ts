@@ -161,11 +161,11 @@ export type ImpersonationRegistryListResponsesV4PagePaginationArray =
   V4PagePaginationArray<ImpersonationRegistryListResponse>;
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryCreateResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -199,11 +199,11 @@ export interface ImpersonationRegistryCreateResponse {
 }
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryListResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -238,17 +238,17 @@ export interface ImpersonationRegistryListResponse {
 
 export interface ImpersonationRegistryDeleteResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id: string;
 }
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryEditResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -282,11 +282,11 @@ export interface ImpersonationRegistryEditResponse {
 }
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryGetResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 

@@ -134,7 +134,7 @@ export type InvestigateListResponsesV4PagePaginationArray = V4PagePaginationArra
 
 export interface InvestigateListResponse {
   /**
-   * Unique identifier for a message retrieved from investigation
+   * Unique identifier for a message retrieved from investigation.
    */
   id: string;
 
@@ -152,12 +152,12 @@ export interface InvestigateListResponse {
   is_quarantined: boolean;
 
   /**
-   * The identifier of the message
+   * The identifier of the message.
    */
   postfix_id: string;
 
   /**
-   * Message processing properties
+   * Message processing properties.
    */
   properties: InvestigateListResponse.Properties;
 
@@ -218,7 +218,7 @@ export interface InvestigateListResponse {
   message_id?: string | null;
 
   /**
-   * Post-delivery operations performed on this message
+   * Post-delivery operations performed on this message.
    */
   post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'> | null;
 
@@ -227,12 +227,12 @@ export interface InvestigateListResponse {
   replyto?: string | null;
 
   /**
-   * When the message was scanned (UTC)
+   * When the message was scanned (UTC).
    */
   scanned_at?: string | null;
 
   /**
-   * When the message was sent (UTC)
+   * When the message was sent (UTC).
    */
   sent_at?: string | null;
 
@@ -258,12 +258,12 @@ export interface InvestigateListResponse {
 export namespace InvestigateListResponse {
   export interface ActionLog {
     /**
-     * Timestamp when action completed
+     * Timestamp when action completed.
      */
     completed_at: string;
 
     /**
-     * Type of action performed
+     * Type of action performed.
      */
     operation: 'MOVE' | 'RELEASE' | 'RECLASSIFY' | 'SUBMISSION' | 'QUARANTINE_RELEASE' | 'PREVIEW';
 
@@ -273,44 +273,44 @@ export namespace InvestigateListResponse {
     completed_timestamp?: string;
 
     /**
-     * Additional properties for the action
+     * Additional properties for the action.
      */
     properties?: ActionLog.Properties;
 
     /**
-     * Status of the action
+     * Status of the action.
      */
     status?: string | null;
   }
 
   export namespace ActionLog {
     /**
-     * Additional properties for the action
+     * Additional properties for the action.
      */
     export interface Properties {
       /**
-       * Target folder for move operations
+       * Target folder for move operations.
        */
       folder?: string;
 
       /**
-       * User who requested the action
+       * User who requested the action.
        */
       requested_by?: string;
     }
   }
 
   /**
-   * Message processing properties
+   * Message processing properties.
    */
   export interface Properties {
     /**
-     * Pattern that allowlisted this message
+     * Pattern that allowlisted this message.
      */
     allowlisted_pattern?: string | null;
 
     /**
-     * Type of allowlist pattern
+     * Type of allowlist pattern.
      */
     allowlisted_pattern_type?:
       | 'quarantine_release'
@@ -324,17 +324,17 @@ export namespace InvestigateListResponse {
       | null;
 
     /**
-     * Whether message was blocklisted
+     * Whether message was blocklisted.
      */
     blocklisted_message?: boolean | null;
 
     /**
-     * Pattern that blocklisted this message
+     * Pattern that blocklisted this message.
      */
     blocklisted_pattern?: string | null;
 
     /**
-     * Legacy field for allowlist pattern type
+     * Legacy field for allowlist pattern type.
      */
     whitelisted_pattern_type?:
       | 'quarantine_release'
@@ -391,7 +391,7 @@ export namespace InvestigateListResponse {
 
 export interface InvestigateGetResponse {
   /**
-   * Unique identifier for a message retrieved from investigation
+   * Unique identifier for a message retrieved from investigation.
    */
   id: string;
 
@@ -409,12 +409,12 @@ export interface InvestigateGetResponse {
   is_quarantined: boolean;
 
   /**
-   * The identifier of the message
+   * The identifier of the message.
    */
   postfix_id: string;
 
   /**
-   * Message processing properties
+   * Message processing properties.
    */
   properties: InvestigateGetResponse.Properties;
 
@@ -475,7 +475,7 @@ export interface InvestigateGetResponse {
   message_id?: string | null;
 
   /**
-   * Post-delivery operations performed on this message
+   * Post-delivery operations performed on this message.
    */
   post_delivery_operations?: Array<'PREVIEW' | 'QUARANTINE_RELEASE' | 'SUBMISSION' | 'MOVE'> | null;
 
@@ -484,12 +484,12 @@ export interface InvestigateGetResponse {
   replyto?: string | null;
 
   /**
-   * When the message was scanned (UTC)
+   * When the message was scanned (UTC).
    */
   scanned_at?: string | null;
 
   /**
-   * When the message was sent (UTC)
+   * When the message was sent (UTC).
    */
   sent_at?: string | null;
 
@@ -515,12 +515,12 @@ export interface InvestigateGetResponse {
 export namespace InvestigateGetResponse {
   export interface ActionLog {
     /**
-     * Timestamp when action completed
+     * Timestamp when action completed.
      */
     completed_at: string;
 
     /**
-     * Type of action performed
+     * Type of action performed.
      */
     operation: 'MOVE' | 'RELEASE' | 'RECLASSIFY' | 'SUBMISSION' | 'QUARANTINE_RELEASE' | 'PREVIEW';
 
@@ -530,44 +530,44 @@ export namespace InvestigateGetResponse {
     completed_timestamp?: string;
 
     /**
-     * Additional properties for the action
+     * Additional properties for the action.
      */
     properties?: ActionLog.Properties;
 
     /**
-     * Status of the action
+     * Status of the action.
      */
     status?: string | null;
   }
 
   export namespace ActionLog {
     /**
-     * Additional properties for the action
+     * Additional properties for the action.
      */
     export interface Properties {
       /**
-       * Target folder for move operations
+       * Target folder for move operations.
        */
       folder?: string;
 
       /**
-       * User who requested the action
+       * User who requested the action.
        */
       requested_by?: string;
     }
   }
 
   /**
-   * Message processing properties
+   * Message processing properties.
    */
   export interface Properties {
     /**
-     * Pattern that allowlisted this message
+     * Pattern that allowlisted this message.
      */
     allowlisted_pattern?: string | null;
 
     /**
-     * Type of allowlist pattern
+     * Type of allowlist pattern.
      */
     allowlisted_pattern_type?:
       | 'quarantine_release'
@@ -581,17 +581,17 @@ export namespace InvestigateGetResponse {
       | null;
 
     /**
-     * Whether message was blocklisted
+     * Whether message was blocklisted.
      */
     blocklisted_message?: boolean | null;
 
     /**
-     * Pattern that blocklisted this message
+     * Pattern that blocklisted this message.
      */
     blocklisted_pattern?: string | null;
 
     /**
-     * Legacy field for allowlist pattern type
+     * Legacy field for allowlist pattern type.
      */
     whitelisted_pattern_type?:
       | 'quarantine_release'
