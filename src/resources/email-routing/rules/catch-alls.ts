@@ -13,9 +13,9 @@ export class BaseCatchAlls extends APIResource {
   ] as const);
 
   /**
-   * Enable or disable catch-all routing rule, or change action to forward to
-   * specific destination address. Forward actions require all destination addresses
-   * to be verified.
+   * Enable or disable catch-all routing rule, or change action to forward to a
+   * specific destination address. Forward actions require exactly one verified
+   * destination address.
    *
    * @example
    * ```ts
