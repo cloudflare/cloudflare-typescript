@@ -251,6 +251,12 @@ export interface WorkflowUpdateParams {
   script_name: string;
 
   /**
+   * Body param: Default retention applied to instances of this version when they do
+   * not set their own retention.
+   */
+  default_retention?: WorkflowUpdateParams.DefaultRetention;
+
+  /**
    * Body param
    */
   limits?: WorkflowUpdateParams.Limits;
@@ -262,6 +268,22 @@ export interface WorkflowUpdateParams {
 }
 
 export namespace WorkflowUpdateParams {
+  /**
+   * Default retention applied to instances of this version when they do not set
+   * their own retention.
+   */
+  export interface DefaultRetention {
+    /**
+     * Specifies the duration in milliseconds or as a string like '5 minutes'.
+     */
+    error_retention?: number | string;
+
+    /**
+     * Specifies the duration in milliseconds or as a string like '5 minutes'.
+     */
+    success_retention?: number | string;
+  }
+
   export interface Limits {
     steps?: number;
   }

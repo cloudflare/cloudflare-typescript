@@ -446,9 +446,9 @@ export interface InstanceCreateParams {
   instance_retention?: InstanceCreateParams.InstanceRetention;
 
   /**
-   * Body param
+   * Body param: JSON-encoded event payload passed into the new instance.
    */
-  params?: unknown;
+  params?: string;
 }
 
 export namespace InstanceCreateParams {
@@ -525,7 +525,10 @@ export namespace InstanceBulkParams {
 
     instance_retention?: Body.InstanceRetention;
 
-    params?: unknown;
+    /**
+     * JSON-encoded event payload passed into the new instance.
+     */
+    params?: string;
   }
 
   export namespace Body {

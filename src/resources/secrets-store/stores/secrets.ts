@@ -19,7 +19,7 @@ export class BaseSecrets extends APIResource {
   ] as const);
 
   /**
-   * Creates a secret in the account
+   * Creates a secret in the account.
    *
    * @example
    * ```ts
@@ -31,7 +31,13 @@ export class BaseSecrets extends APIResource {
    *     body: [
    *       {
    *         name: 'MY_API_KEY',
-   *         scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+   *         scopes: [
+   *           'workers',
+   *           'ai_gateway',
+   *           'dex',
+   *           'access',
+   *           'websearch',
+   *         ],
    *         value: 'api-token-secret-123',
    *       },
    *     ],
@@ -55,7 +61,7 @@ export class BaseSecrets extends APIResource {
   }
 
   /**
-   * Lists all store secrets
+   * Lists all store secrets.
    *
    * @example
    * ```ts
@@ -82,7 +88,7 @@ export class BaseSecrets extends APIResource {
   }
 
   /**
-   * Deletes a single secret
+   * Deletes a single secret.
    *
    * @example
    * ```ts
@@ -111,7 +117,7 @@ export class BaseSecrets extends APIResource {
   }
 
   /**
-   * Deletes one or more secrets
+   * Deletes one or more secrets.
    *
    * @example
    * ```ts
@@ -137,7 +143,7 @@ export class BaseSecrets extends APIResource {
   }
 
   /**
-   * Duplicates the secret, keeping the value
+   * Creates a duplicate of the secret, keeping the value.
    *
    * @example
    * ```ts
@@ -148,7 +154,13 @@ export class BaseSecrets extends APIResource {
    *       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
    *       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       name: 'MY_API_KEY',
-   *       scopes: ['workers', 'ai_gateway', 'dex', 'access'],
+   *       scopes: [
+   *         'workers',
+   *         'ai_gateway',
+   *         'dex',
+   *         'access',
+   *         'websearch',
+   *       ],
    *     },
    *   );
    * ```
@@ -168,7 +180,7 @@ export class BaseSecrets extends APIResource {
   }
 
   /**
-   * Updates a single secret
+   * Updates a single secret.
    *
    * @example
    * ```ts
@@ -193,7 +205,7 @@ export class BaseSecrets extends APIResource {
   }
 
   /**
-   * Returns details of a single secret
+   * Returns details of a single secret.
    *
    * @example
    * ```ts
@@ -229,7 +241,7 @@ export interface SecretCreateResponse {
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -239,26 +251,26 @@ export interface SecretCreateResponse {
   modified: string;
 
   /**
-   * The name of the secret
+   * The name of the secret.
    */
   name: string;
 
   status: 'pending' | 'active' | 'deleted';
 
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   store_id: string;
 
   /**
-   * Freeform text describing the secret
+   * Freeform text describing the secret.
    */
   comment?: string;
 
   /**
    * The list of services that can use this secret.
    */
-  scopes?: Array<string>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 }
 
 export interface SecretListResponse {
@@ -268,7 +280,7 @@ export interface SecretListResponse {
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -278,26 +290,26 @@ export interface SecretListResponse {
   modified: string;
 
   /**
-   * The name of the secret
+   * The name of the secret.
    */
   name: string;
 
   status: 'pending' | 'active' | 'deleted';
 
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   store_id: string;
 
   /**
-   * Freeform text describing the secret
+   * Freeform text describing the secret.
    */
   comment?: string;
 
   /**
    * The list of services that can use this secret.
    */
-  scopes?: Array<string>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 }
 
 /**
@@ -317,7 +329,7 @@ export interface SecretDuplicateResponse {
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -327,26 +339,26 @@ export interface SecretDuplicateResponse {
   modified: string;
 
   /**
-   * The name of the secret
+   * The name of the secret.
    */
   name: string;
 
   status: 'pending' | 'active' | 'deleted';
 
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   store_id: string;
 
   /**
-   * Freeform text describing the secret
+   * Freeform text describing the secret.
    */
   comment?: string;
 
   /**
    * The list of services that can use this secret.
    */
-  scopes?: Array<string>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 }
 
 export interface SecretEditResponse {
@@ -356,7 +368,7 @@ export interface SecretEditResponse {
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -366,26 +378,26 @@ export interface SecretEditResponse {
   modified: string;
 
   /**
-   * The name of the secret
+   * The name of the secret.
    */
   name: string;
 
   status: 'pending' | 'active' | 'deleted';
 
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   store_id: string;
 
   /**
-   * Freeform text describing the secret
+   * Freeform text describing the secret.
    */
   comment?: string;
 
   /**
    * The list of services that can use this secret.
    */
-  scopes?: Array<string>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 }
 
 export interface SecretGetResponse {
@@ -395,7 +407,7 @@ export interface SecretGetResponse {
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -405,31 +417,31 @@ export interface SecretGetResponse {
   modified: string;
 
   /**
-   * The name of the secret
+   * The name of the secret.
    */
   name: string;
 
   status: 'pending' | 'active' | 'deleted';
 
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   store_id: string;
 
   /**
-   * Freeform text describing the secret
+   * Freeform text describing the secret.
    */
   comment?: string;
 
   /**
    * The list of services that can use this secret.
    */
-  scopes?: Array<string>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 }
 
 export interface SecretCreateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
@@ -442,24 +454,24 @@ export interface SecretCreateParams {
 export namespace SecretCreateParams {
   export interface Body {
     /**
-     * The name of the secret
+     * The name of the secret.
      */
     name: string;
 
     /**
      * The list of services that can use this secret.
      */
-    scopes: Array<string>;
+    scopes: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 
     /**
      * The value of the secret. Maximum 64 KiB (65,536 bytes). Note that this is 'write
-     * only' - no API response will provide this value, it is only used to
-     * create/modify secrets.
+     * only' - the API never returns this value; it exists only to create or modify
+     * secrets.
      */
     value: string;
 
     /**
-     * Freeform text describing the secret
+     * Freeform text describing the secret.
      */
     comment?: string;
   }
@@ -467,115 +479,115 @@ export namespace SecretCreateParams {
 
 export interface SecretListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
   /**
-   * Query param: Direction to sort objects
+   * Query param: Direction to sort objects.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Order secrets by values in the given field
+   * Query param: Order secrets by values in the given field.
    */
   order?: 'name' | 'comment' | 'created' | 'modified' | 'status';
 
   /**
-   * Query param: Only secrets with the given scopes will be returned
+   * Query param: Only secrets with the given scopes will be returned.
    */
-  scopes?: Array<Array<string>>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 
   /**
    * Query param: Search secrets using a filter string, filtering across name and
-   * comment
+   * comment.
    */
   search?: string;
 }
 
 export interface SecretDeleteParams {
   /**
-   * Account Identifier
+   * Account identifier.
    */
   account_id: string;
 
   /**
-   * Store Identifier
+   * Store identifier.
    */
   store_id: string;
 }
 
 export interface SecretBulkDeleteParams {
   /**
-   * Account Identifier
+   * Account identifier.
    */
   account_id: string;
 }
 
 export interface SecretDuplicateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
   /**
-   * Path param: Store Identifier
+   * Path param: Store identifier.
    */
   store_id: string;
 
   /**
-   * Body param: The name of the secret
+   * Body param: The name of the secret.
    */
   name: string;
 
   /**
    * Body param: The list of services that can use this secret.
    */
-  scopes: Array<string>;
+  scopes: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 
   /**
-   * Body param: Freeform text describing the secret
+   * Body param: Freeform text describing the secret.
    */
   comment?: string;
 }
 
 export interface SecretEditParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
   /**
-   * Path param: Store Identifier
+   * Path param: Store identifier.
    */
   store_id: string;
 
   /**
-   * Body param: Freeform text describing the secret
+   * Body param: Freeform text describing the secret.
    */
   comment?: string;
 
   /**
    * Body param: The list of services that can use this secret.
    */
-  scopes?: Array<string>;
+  scopes?: Array<'workers' | 'ai_gateway' | 'dex' | 'access' | 'containers' | 'websearch'>;
 
   /**
    * Body param: The value of the secret. Maximum 64 KiB (65,536 bytes). Note that
-   * this is 'write only' - no API response will provide this value, it is only used
-   * to create/modify secrets.
+   * this is 'write only' - the API never returns this value; it exists only to
+   * create or modify secrets.
    */
   value?: string;
 }
 
 export interface SecretGetParams {
   /**
-   * Account Identifier
+   * Account identifier.
    */
   account_id: string;
 
   /**
-   * Store Identifier
+   * Store identifier.
    */
   store_id: string;
 }

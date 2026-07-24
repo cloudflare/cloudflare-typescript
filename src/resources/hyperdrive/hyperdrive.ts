@@ -164,6 +164,13 @@ export interface Hyperdrive {
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
+
+  /**
+   * Defines the last time the Hyperdrive connection pool was explicitly restarted
+   * via the restart endpoint. Omitted if the pool has never been explicitly
+   * restarted.
+   */
+  restarted_on?: string | null;
 }
 
 export namespace Hyperdrive {

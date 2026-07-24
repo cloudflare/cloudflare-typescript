@@ -54,7 +54,7 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { cfInterconnects: B
         target: { saved: '203.0.113.1' },
         type: 'request',
       },
-      interface_address: '192.0.2.0/31',
+      interface_address: '192.0.2.3/29',
       interface_address6: '2606:54c1:7:0:a9fe:12d2:1:200/127',
       mtu: 0,
       name: 'pni_ord',

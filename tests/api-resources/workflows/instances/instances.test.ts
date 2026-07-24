@@ -43,7 +43,7 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: BaseInstan
       account_id: 'account_id',
       instance_id: 'instance_id',
       instance_retention: { error_retention: '5 minutes', success_retention: '5 minutes' },
-      params: {},
+      params: 'params',
     });
   });
 
@@ -89,7 +89,7 @@ const runTests = (client: PartialCloudflare<{ workflows: { instances: BaseInstan
         {
           instance_id: 'instance_id',
           instance_retention: { error_retention: '5 minutes', success_retention: '5 minutes' },
-          params: {},
+          params: 'params',
         },
       ],
     });

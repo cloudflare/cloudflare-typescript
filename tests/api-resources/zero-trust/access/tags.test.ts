@@ -85,7 +85,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { tags: BaseT
     const response = await client.zeroTrust.access.tags.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 0,
-      per_page: 0,
+      per_page: 1000,
     });
   });
 

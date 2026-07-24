@@ -80,10 +80,24 @@ export interface VersionListResponse {
 
   workflow_id: string;
 
+  default_retention?: VersionListResponse.DefaultRetention;
+
   limits?: VersionListResponse.Limits;
 }
 
 export namespace VersionListResponse {
+  export interface DefaultRetention {
+    /**
+     * Default error retention in milliseconds.
+     */
+    error_retention?: number;
+
+    /**
+     * Default success retention in milliseconds.
+     */
+    success_retention?: number;
+  }
+
   export interface Limits {
     steps?: number;
   }
@@ -107,10 +121,24 @@ export interface VersionGetResponse {
 
   workflow_id: string;
 
+  default_retention?: VersionGetResponse.DefaultRetention;
+
   limits?: VersionGetResponse.Limits;
 }
 
 export namespace VersionGetResponse {
+  export interface DefaultRetention {
+    /**
+     * Default error retention in milliseconds.
+     */
+    error_retention?: number;
+
+    /**
+     * Default success retention in milliseconds.
+     */
+    success_retention?: number;
+  }
+
   export interface Limits {
     steps?: number;
   }

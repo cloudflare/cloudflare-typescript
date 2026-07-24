@@ -161,9 +161,9 @@ export interface ResourceGroupCreateResponse {
   id: string;
 
   /**
-   * The scope associated to the resource group
+   * A scope is a combination of scope objects which provides additional context.
    */
-  scope: Array<ResourceGroupCreateResponse.Scope>;
+  scope: ResourceGroupCreateResponse.Scope;
 
   /**
    * Attributes associated to the resource group.
@@ -227,9 +227,9 @@ export interface ResourceGroupUpdateResponse {
   id: string;
 
   /**
-   * The scope associated to the resource group
+   * A scope is a combination of scope objects which provides additional context.
    */
-  scope: Array<ResourceGroupUpdateResponse.Scope>;
+  scope: ResourceGroupUpdateResponse.Scope;
 
   /**
    * Attributes associated to the resource group.
@@ -293,9 +293,9 @@ export interface ResourceGroupListResponse {
   id: string;
 
   /**
-   * The scope associated to the resource group
+   * A scope is a combination of scope objects which provides additional context.
    */
-  scope: Array<ResourceGroupListResponse.Scope>;
+  scope: ResourceGroupListResponse.Scope;
 
   /**
    * Attributes associated to the resource group.
@@ -366,9 +366,9 @@ export interface ResourceGroupGetResponse {
   id: string;
 
   /**
-   * The scope associated to the resource group
+   * A scope is a combination of scope objects which provides additional context.
    */
-  scope: Array<ResourceGroupGetResponse.Scope>;
+  scope: ResourceGroupGetResponse.Scope;
 
   /**
    * Attributes associated to the resource group.

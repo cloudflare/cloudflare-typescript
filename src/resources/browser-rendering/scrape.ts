@@ -108,11 +108,6 @@ export interface ScrapeCreateParams {
   account_id: string;
 
   /**
-   * Body param
-   */
-  elements: Array<ScrapeCreateParams.Element>;
-
-  /**
    * Query param: Cache TTL default is 5s. Set to 0 to disable.
    */
   cacheTTL?: number;
@@ -181,6 +176,11 @@ export interface ScrapeCreateParams {
    * Body param: Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
    */
   cookies?: Array<ScrapeCreateParams.Cookie>;
+
+  /**
+   * Body param
+   */
+  elements?: Array<ScrapeCreateParams.Element>;
 
   /**
    * Body param
@@ -267,10 +267,6 @@ export interface ScrapeCreateParams {
 }
 
 export namespace ScrapeCreateParams {
-  export interface Element {
-    selector: string;
-  }
-
   export interface AddScriptTag {
     id?: string;
 
@@ -327,6 +323,10 @@ export namespace ScrapeCreateParams {
     sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
 
     url?: string;
+  }
+
+  export interface Element {
+    selector: string;
   }
 
   /**

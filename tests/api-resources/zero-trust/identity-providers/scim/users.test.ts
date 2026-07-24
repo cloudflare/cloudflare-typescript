@@ -53,7 +53,7 @@ const runTests = (
         idp_resource_id: ['john_smith_01'],
         name: 'John Smith',
         page: 0,
-        per_page: 0,
+        per_page: 100,
         username: 'John Smith',
       },
     );

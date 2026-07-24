@@ -90,8 +90,8 @@ export interface SharedQueryGetResponse {
   statistics: SharedQueryGetResponse.Statistics;
 
   /**
-   * Durable Object agent summaries. Present when the query view is 'agents'. Each
-   * entry represents an agent with its event counts and status.
+   * Agent run summaries. Present when the query view is 'agents'. Each entry
+   * represents one trace containing at least one agent invocation.
    */
   agents?: Array<SharedQueryGetResponse.Agent>;
 
@@ -107,6 +107,12 @@ export interface SharedQueryGetResponse {
    * compare option is enabled. Same structure as calculations.
    */
   compare?: Array<SharedQueryGetResponse.Compare>;
+
+  /**
+   * Bucketed 2D histogram of a numeric field over time. Present when chartType is
+   * 'distribution'.
+   */
+  distribution?: SharedQueryGetResponse.Distribution;
 
   /**
    * Individual event results. Present when the query view is 'events'. Contains the
@@ -519,45 +525,86 @@ export namespace SharedQueryGetResponse {
 
   export interface Agent {
     /**
-     * Class name of the Durable Object agent.
+     * Pagination cursor derived from the first agent invocation in the run.
      */
-    agentClass: string;
+    id: string;
 
     /**
-     * Breakdown of event counts by event type.
+     * Distinct errors reported by spans in the run.
      */
-    eventTypeCounts: { [key: string]: number };
+    errors: Array<string>;
 
     /**
-     * Timestamp of the earliest event from this agent in the queried window (Unix
-     * epoch ms).
+     * Distinct models reported by chat spans across the run's trace.
      */
-    firstEventMs: number;
+    models: Array<string>;
 
     /**
-     * Whether the agent emitted any error events in the queried window.
+     * Distinct GenAI providers reported by chat spans in the run.
      */
-    hasErrors: boolean;
+    providers: Array<string>;
 
     /**
-     * Timestamp of the most recent event from this agent (Unix epoch ms).
+     * Worker services represented in the run's trace.
      */
-    lastEventMs: number;
+    services: Array<string>;
 
     /**
-     * Durable Object namespace the agent belongs to.
+     * Number of spans in the run's trace.
      */
-    namespace: string;
+    spans: number;
 
     /**
-     * Worker service name that hosts this agent.
+     * Observed run status.
      */
-    service: string;
+    status: 'completed' | 'error';
 
     /**
-     * Total number of events emitted by this agent in the queried window.
+     * Total trace duration in milliseconds.
      */
-    totalEvents: number;
+    traceDurationMs: number;
+
+    /**
+     * End of the run's trace as a Unix epoch in milliseconds.
+     */
+    traceEndMs: number;
+
+    /**
+     * Trace identifier for this agent run.
+     */
+    traceId: string;
+
+    /**
+     * Start of the run's trace as a Unix epoch in milliseconds.
+     */
+    traceStartMs: number;
+
+    /**
+     * ID from the earliest agent invocation that provides one.
+     */
+    agentId?: string;
+
+    /**
+     * Name from the earliest agent invocation that provides one.
+     */
+    agentName?: string;
+
+    /**
+     * Conversation ID from the earliest invocation that provides one.
+     */
+    conversationId?: string;
+
+    /**
+     * Input tokens summed across chat spans in the run's trace; informational, not
+     * billing data.
+     */
+    inputTokens?: number;
+
+    /**
+     * Output tokens summed across chat spans in the run's trace; informational, not
+     * billing data.
+     */
+    outputTokens?: number;
   }
 
   export interface Calculation {
@@ -686,6 +733,40 @@ export namespace SharedQueryGetResponse {
         }
       }
     }
+  }
+
+  /**
+   * Bucketed 2D histogram of a numeric field over time. Present when chartType is
+   * 'distribution'.
+   */
+  export interface Distribution {
+    /**
+     * Time-bucket labels (ISO-8601 strings), one per matrix column.
+     */
+    bins: Array<string>;
+
+    /**
+     * Raw bucket edges in the value's native unit, length buckets.length + 1. Used for
+     * the colour scale and percentile mapping.
+     */
+    bucketBoundaries: Array<number>;
+
+    /**
+     * Bucketing scheme used to derive the boundaries. 'log' produces geometric edges;
+     * 'linear' produces fixed-width edges.
+     */
+    bucketMode: 'log' | 'linear';
+
+    /**
+     * Value-range labels, one per matrix row (e.g. '50–100ms').
+     */
+    buckets: Array<string>;
+
+    /**
+     * Sampling-corrected counts. matrix[bucketIdx][binIdx] is the estimated number of
+     * events in value-bucket 'bucketIdx' during time-bin 'binIdx'.
+     */
+    matrix: Array<Array<number>>;
   }
 
   /**
@@ -844,6 +925,12 @@ export namespace SharedQueryGetResponse {
          * Infrastructure provider identifier.
          */
         provider?: string;
+
+        /**
+         * Cloudflare Ray ID from the `cf-ray` header of the request that triggered the
+         * invocation.
+         */
+        rayId?: string;
 
         /**
          * Cloudflare data center / region that handled the request.
@@ -1245,6 +1332,12 @@ export namespace SharedQueryGetResponse {
       provider?: string;
 
       /**
+       * Cloudflare Ray ID from the `cf-ray` header of the request that triggered the
+       * invocation.
+       */
+      rayId?: string;
+
+      /**
        * Cloudflare data center / region that handled the request.
        */
       region?: string;
@@ -1521,6 +1614,16 @@ export interface SharedQueryCreateParams {
   chart?: boolean;
 
   /**
+   * Body param: Controls the SQL shape and response payload for the 'calculations'
+   * view. Omitted or 'timeseries_and_aggregate': current behaviour — both the
+   * time-series and aggregate queries. 'timeseries': time-series only. 'aggregate':
+   * aggregate only. 'distribution': a bucketed 2D histogram (time × value buckets)
+   * returned in 'distribution' instead of 'calculations'. 'distribution' is not
+   * compatible with 'compare' — combining them returns a 400.
+   */
+  chartType?: 'timeseries_and_aggregate' | 'timeseries' | 'aggregate' | 'distribution';
+
+  /**
    * Body param: When true, includes a comparison dataset from the previous time
    * period of equal length.
    */
@@ -1551,8 +1654,9 @@ export interface SharedQueryCreateParams {
   limit?: number;
 
   /**
-   * Body param: Cursor for pagination in event, trace, and invocation views. Pass
-   * the $metadata.id of the last returned item to fetch the next page.
+   * Body param: Cursor for pagination in event, trace, invocation, and agent views.
+   * Pass the $metadata.id of the last event, the trace cursor, or AgentRun.id to
+   * fetch the next page.
    */
   offset?: string;
 
@@ -1580,8 +1684,8 @@ export interface SharedQueryCreateParams {
    * Body param: Controls the shape of the response. 'events': individual log lines
    * matching the query. 'calculations': aggregated metrics (count, avg, p99, etc.)
    * with optional group-by breakdowns and time-series. 'invocations': events grouped
-   * by request ID. 'traces': distributed trace summaries. 'agents': Durable Object
-   * agent summaries.
+   * by request ID. 'traces': distributed trace summaries. 'agents': agent-specific
+   * trace summaries.
    */
   view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'agents';
 }
