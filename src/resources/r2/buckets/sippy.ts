@@ -160,7 +160,12 @@ export namespace Sippy {
      */
     bucketUrl?: string | null;
 
-    provider?: 'aws' | 'gcs' | 's3';
+    /**
+     * Name of the Azure Blob Storage container (Azure only).
+     */
+    container?: string | null;
+
+    provider?: 'aws' | 'gcs' | 's3' | 'azure';
 
     /**
      * Region where the bucket resides (AWS only).
@@ -176,7 +181,8 @@ export interface SippyDeleteResponse {
 export type SippyUpdateParams =
   | SippyUpdateParams.R2EnableSippyAws
   | SippyUpdateParams.R2EnableSippyGcs
-  | SippyUpdateParams.R2EnableSippyS3;
+  | SippyUpdateParams.R2EnableSippyS3
+  | SippyUpdateParams.R2EnableSippyAzure;
 
 export declare namespace SippyUpdateParams {
   export interface R2EnableSippyAws {
@@ -403,6 +409,86 @@ export declare namespace SippyUpdateParams {
        * Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket).
        */
       secretAccessKey?: string;
+    }
+  }
+
+  export interface R2EnableSippyAzure {
+    /**
+     * Path param: Account ID.
+     */
+    account_id: string;
+
+    /**
+     * Body param: R2 bucket to copy objects to.
+     */
+    destination?: R2EnableSippyAzure.Destination;
+
+    /**
+     * Body param: Azure Blob Storage container to copy objects from.
+     */
+    source?: R2EnableSippyAzure.Source;
+
+    /**
+     * Header param: Jurisdiction where objects in this bucket are guaranteed to be
+     * stored.
+     */
+    jurisdiction?: 'default' | 'eu' | 'fedramp';
+  }
+
+  export namespace R2EnableSippyAzure {
+    /**
+     * R2 bucket to copy objects to.
+     */
+    export interface Destination {
+      /**
+       * ID of a Cloudflare API token. This is the value labelled "Access Key ID" when
+       * creating an API. token from the
+       * [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
+       *
+       * Sippy will use this token when writing objects to R2, so it is best to scope
+       * this token to the bucket you're enabling Sippy for.
+       */
+      accessKeyId?: string;
+
+      provider?: SippyAPI.ProviderParam;
+
+      /**
+       * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"
+       * when creating an API. token from the
+       * [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
+       *
+       * Sippy will use this token when writing objects to R2, so it is best to scope
+       * this token to the bucket you're enabling Sippy for.
+       */
+      secretAccessKey?: string;
+    }
+
+    /**
+     * Azure Blob Storage container to copy objects from.
+     */
+    export interface Source {
+      /**
+       * Access key for the Azure Storage account. Mutually exclusive with sasToken.
+       */
+      accountKey?: string;
+
+      /**
+       * Name of the Azure Storage account.
+       */
+      accountName?: string;
+
+      /**
+       * Name of the Azure Blob Storage container.
+       */
+      container?: string;
+
+      provider?: 'azure';
+
+      /**
+       * Shared Access Signature token for the Azure Storage account. Mutually exclusive
+       * with accountKey.
+       */
+      sasToken?: string;
     }
   }
 }
