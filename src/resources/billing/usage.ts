@@ -242,6 +242,12 @@ export namespace UsageGetResponse {
     x_BillableMetricId?: string;
 
     /**
+     * The product category the charge belongs to (e.g., "Developer", "Cloudflare
+     * One"). Cloudflare extension; replaces FOCUS ServiceCategory.
+     */
+    x_ProductCategoryName?: string;
+
+    /**
      * The product family the charge belongs to (e.g., "R2", "Workers"). Cloudflare
      * extension; replaces FOCUS ServiceName.
      */
