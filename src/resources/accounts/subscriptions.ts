@@ -2,7 +2,10 @@
 
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
+import { SubscriptionsSinglePage } from '../shared';
 import { APIPromise } from '../../core/api-promise';
+import { CloudflareError } from '../../core/error';
+import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -11,6 +14,43 @@ export class BaseSubscriptions extends APIResource {
     'accounts',
     'subscriptions',
   ] as const);
+
+  /**
+   * Creates an account or zone subscription.
+   *
+   * @example
+   * ```ts
+   * const subscription =
+   *   await client.accounts.subscriptions.create({
+   *     account_id: 'account_id',
+   *   });
+   * ```
+   */
+  create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<Shared.Subscription> {
+    const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(path`/${accountOrZone}/${accountOrZoneId}/subscriptions`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: Shared.Subscription }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * Updates an account subscription.
@@ -63,6 +103,47 @@ export class BaseSubscriptions extends APIResource {
       ) as APIPromise<{ result: SubscriptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Lists all of an account or zone's subscriptions.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const subscription of client.accounts.subscriptions.get(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  get(
+    params: SubscriptionGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<SubscriptionsSinglePage, Shared.Subscription> {
+    const { account_id, zone_id } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      path`/${accountOrZone}/${accountOrZoneId}/subscriptions`,
+      SinglePage<Shared.Subscription>,
+      options,
+    );
+  }
 }
 export class Subscriptions extends BaseSubscriptions {}
 
@@ -71,6 +152,30 @@ export interface SubscriptionDeleteResponse {
    * Subscription identifier tag.
    */
   subscription_id?: string;
+}
+
+export interface SubscriptionCreateParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+
+  /**
+   * Body param: How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * Body param: The rate plan applied to the subscription.
+   */
+  rate_plan?: Shared.RatePlanParam;
 }
 
 export interface SubscriptionUpdateParams {
@@ -97,10 +202,26 @@ export interface SubscriptionDeleteParams {
   account_id: string;
 }
 
+export interface SubscriptionGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
 export declare namespace Subscriptions {
   export {
     type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
   };
 }
+
+export { type SubscriptionsSinglePage };

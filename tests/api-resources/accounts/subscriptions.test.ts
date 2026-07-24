@@ -27,6 +27,17 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ accounts: { subscriptions: BaseSubscriptions } }>) => {
+  test('create', async () => {
+    const responsePromise = client.accounts.subscriptions.create({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   test('update: only required params', async () => {
     const responsePromise = client.accounts.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -73,6 +84,17 @@ const runTests = (client: PartialCloudflare<{ accounts: { subscriptions: BaseSub
     const response = await client.accounts.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
+  });
+
+  test('get', async () => {
+    const responsePromise = client.accounts.subscriptions.get({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 };
 describe('resource subscriptions', () => runTests(client));

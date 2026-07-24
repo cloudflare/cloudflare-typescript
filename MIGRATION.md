@@ -60,8 +60,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.accounts.members.delete()`
 - `client.accounts.members.get()`
 - `client.accounts.roles.get()`
+- `client.accounts.subscriptions.create()`
 - `client.accounts.subscriptions.update()`
 - `client.accounts.subscriptions.delete()`
+- `client.accounts.subscriptions.get()`
 - `client.accounts.tokens.update()`
 - `client.accounts.tokens.delete()`
 - `client.accounts.tokens.get()`
@@ -1527,6 +1529,7 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
+- `client.accounts.subscriptions.get()`
 - `client.organizations.list()`
 - `client.organizations.billing.usage.get()`
 - `client.ips.list()`
