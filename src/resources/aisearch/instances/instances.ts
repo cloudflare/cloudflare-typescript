@@ -570,7 +570,7 @@ export namespace InstanceCreateResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
@@ -962,7 +962,7 @@ export namespace InstanceUpdateResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
@@ -1224,7 +1224,7 @@ export namespace InstanceListResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
 
       [k: string]: unknown;
     }
@@ -1598,7 +1598,7 @@ export namespace InstanceDeleteResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
@@ -2096,7 +2096,7 @@ export namespace InstanceReadResponse {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
@@ -2665,7 +2665,7 @@ export namespace InstanceCreateParams {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
@@ -3161,7 +3161,7 @@ export namespace InstanceUpdateParams {
     export interface WebCrawler {
       parse_options?: WebCrawler.ParseOptions;
 
-      parse_type?: 'sitemap' | 'crawl';
+      parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
