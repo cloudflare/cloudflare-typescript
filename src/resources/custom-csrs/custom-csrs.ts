@@ -551,6 +551,16 @@ export interface CustomCsrListParams extends V4PagePaginationArrayParams {
    * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Query param: The direction to sort by.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: The field to sort the returned custom CSRs by.
+   */
+  order?: 'name' | 'account_tag' | 'created_at';
 }
 
 export interface CustomCsrDeleteParams {
