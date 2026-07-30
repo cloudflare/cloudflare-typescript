@@ -1,0 +1,24 @@
+src/version.ts
+  s_f94aacad13a913::t_d73191c4dab636 2-4
+tests/index.test.ts
+  s_f94aacad13a913::t_976346c9c7d197 246-281
+src/client.ts
+  s_f94aacad13a913::t_d73191c4dab636 15,314,328,915
+  s_f94aacad13a913::t_df8ca30c6bfbac 267,269
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "162c7db4c4ad51eacb9d6c5cae2dde59d365e173",
+  "prompts": {},
+  "sessions": {
+    "s_f94aacad13a913": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_06ebb99a7ffevAE92M56IYSF4c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": null
+    }
+  }
+}
