@@ -212,6 +212,14 @@ export interface CreateRequest {
    * absent.
    */
   fields?: Array<CreateRequest.Field>;
+
+  /**
+   * Optional Logpush filter predicate to restrict which events are ingested. If
+   * provided, replaces the dataset's default filter entirely. See
+   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
+   * syntax and examples.
+   */
+  filter?: string;
 }
 
 export namespace CreateRequest {
@@ -247,6 +255,11 @@ export interface Dataset {
    * Unique dataset ID.
    */
   dataset_id: string;
+
+  /**
+   * Whether deletion is blocked. Set to `false` before deleting the dataset.
+   */
+  deletion_protection: boolean;
 
   /**
    * Whether log ingest is currently active for this dataset.
@@ -309,6 +322,11 @@ export interface DatasetSummary {
   dataset_id: string;
 
   /**
+   * Whether deletion is blocked. Set to `false` before deleting the dataset.
+   */
+  deletion_protection: boolean;
+
+  /**
    * Whether log ingest is currently active for this dataset.
    */
   enabled: boolean;
@@ -334,6 +352,11 @@ export interface UpdateRequest {
    * Whether to enable or disable log ingest for this dataset.
    */
   enabled: boolean;
+
+  /**
+   * Set to `false` to allow deletion of this dataset.
+   */
+  deletion_protection?: boolean;
 
   /**
    * Controls which fields the API ingests after the update. Defaults to all
@@ -379,6 +402,14 @@ export interface DatasetCreateParams {
    * fields when absent.
    */
   fields?: Array<DatasetCreateParams.Field>;
+
+  /**
+   * Body param: Optional Logpush filter predicate to restrict which events are
+   * ingested. If provided, replaces the dataset's default filter entirely. See
+   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
+   * syntax and examples.
+   */
+  filter?: string;
 }
 
 export namespace DatasetCreateParams {
@@ -412,6 +443,11 @@ export interface DatasetUpdateParams {
    * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Body param: Set to `false` to allow deletion of this dataset.
+   */
+  deletion_protection?: boolean;
 
   /**
    * Body param: Controls which fields the API ingests after the update. Defaults to

@@ -134,6 +134,10 @@ export interface EventGetResponse {
    * - `RekeyAdvance`: Confirmed traffic on new inbound key, swapped outbound to new
    * - `RekeyComplete`: Deleted old keys
    * - `RekeyReset`: Deleted all keys after receiving an unexpected key
+   * - `HaTransition`: Completed HA state transition
+   * - `HaError`: Received unexpected HA error
+   * - `HaInit`: Initialized HA subsystem
+   * - `HaLeave`: Stopped HA subsystem
    */
   e: EventGetResponse.E;
 
@@ -181,6 +185,10 @@ export namespace EventGetResponse {
    * - `RekeyAdvance`: Confirmed traffic on new inbound key, swapped outbound to new
    * - `RekeyComplete`: Deleted old keys
    * - `RekeyReset`: Deleted all keys after receiving an unexpected key
+   * - `HaTransition`: Completed HA state transition
+   * - `HaError`: Received unexpected HA error
+   * - `HaInit`: Initialized HA subsystem
+   * - `HaLeave`: Stopped HA subsystem
    */
   export interface E {
     /**
@@ -208,7 +216,11 @@ export namespace EventGetResponse {
       | 'RekeyRestart'
       | 'RekeyAdvance'
       | 'RekeyComplete'
-      | 'RekeyReset';
+      | 'RekeyReset'
+      | 'HaTransition'
+      | 'HaError'
+      | 'HaInit'
+      | 'HaLeave';
 
     [k: string]: unknown;
   }

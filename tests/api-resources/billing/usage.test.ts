@@ -46,42 +46,6 @@ const runTests = (client: PartialCloudflare<{ billing: { usage: BaseUsage } }>) 
       to: '2025-05-31',
     });
   });
-
-  test('paygo: only required params', async () => {
-    const responsePromise = client.billing.usage.paygo({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('paygo: required and optional params', async () => {
-    const response = await client.billing.usage.paygo({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      from: '2025-05-01',
-      to: '2025-05-31',
-    });
-  });
-
-  test('paygoInfo: only required params', async () => {
-    const responsePromise = client.billing.usage.paygoInfo({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('paygoInfo: required and optional params', async () => {
-    const response = await client.billing.usage.paygoInfo({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
-  });
 };
 describe('resource usage', () => runTests(client));
 describe('resource usage (tree shakable, base)', () => runTests(partialClient));

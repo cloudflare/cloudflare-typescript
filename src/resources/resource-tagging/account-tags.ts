@@ -135,7 +135,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -171,7 +172,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -207,7 +209,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -238,7 +241,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -269,7 +273,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -300,7 +305,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -331,7 +337,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -362,7 +369,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -393,7 +401,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -429,7 +438,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -460,7 +470,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -496,7 +507,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -532,7 +544,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -563,7 +576,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -599,7 +613,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -630,7 +645,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -661,7 +677,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -692,7 +709,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -728,7 +746,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -759,7 +778,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -790,7 +810,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -821,7 +842,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -857,7 +879,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -888,7 +911,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -919,7 +943,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -955,7 +980,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -986,7 +1012,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1017,7 +1044,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1048,7 +1076,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1079,7 +1108,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1110,7 +1140,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1141,7 +1172,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1172,7 +1204,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1203,7 +1236,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1239,7 +1273,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1275,7 +1310,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1311,7 +1347,8 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1391,7 +1428,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1427,7 +1465,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1463,7 +1502,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1494,7 +1534,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1525,7 +1566,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1556,7 +1598,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1587,7 +1630,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1618,7 +1662,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1649,7 +1694,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1685,7 +1731,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1716,7 +1763,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1752,7 +1800,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1788,7 +1837,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1819,7 +1869,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1855,7 +1906,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1886,7 +1938,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1917,7 +1970,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1948,7 +2002,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1984,7 +2039,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2015,7 +2071,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2046,7 +2103,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2077,7 +2135,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2113,7 +2172,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2144,7 +2204,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2175,7 +2236,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2211,7 +2273,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2242,7 +2305,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2273,7 +2337,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2304,7 +2369,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2335,7 +2401,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2366,7 +2433,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2397,7 +2465,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2428,7 +2497,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2459,7 +2529,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2495,7 +2566,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2531,7 +2603,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2567,7 +2640,8 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -2634,7 +2708,8 @@ export declare namespace AccountTagUpdateParams {
     worker_id: string;
 
     /**
-     * Body param: Contains key-value pairs of tags. Values may be empty strings for
+     * Body param: Contains key-value pairs of tags. Keys may contain at most 256
+     * characters. Values may contain at most 1024 characters and may be empty for
      * key-only tags.
      */
     tags?: { [key: string]: string };
@@ -2691,7 +2766,8 @@ export declare namespace AccountTagUpdateParams {
       | 'worker';
 
     /**
-     * Body param: Contains key-value pairs of tags. Values may be empty strings for
+     * Body param: Contains key-value pairs of tags. Keys may contain at most 256
+     * characters. Values may contain at most 1024 characters and may be empty for
      * key-only tags.
      */
     tags?: { [key: string]: string };

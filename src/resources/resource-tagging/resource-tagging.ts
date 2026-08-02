@@ -139,7 +139,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -175,7 +176,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -211,7 +213,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -242,7 +245,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -273,7 +277,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -304,7 +309,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -335,7 +341,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -366,7 +373,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -397,7 +405,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -433,7 +442,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -464,7 +474,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -500,7 +511,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -536,7 +548,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -567,7 +580,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -603,7 +617,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -634,7 +649,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -665,7 +681,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -696,7 +713,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -732,7 +750,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -763,7 +782,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -794,7 +814,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -825,7 +846,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -861,7 +883,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -892,7 +915,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -923,7 +947,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -959,7 +984,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -990,7 +1016,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1021,7 +1048,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1052,7 +1080,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1083,7 +1112,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1114,7 +1144,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1145,7 +1176,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1176,7 +1208,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1207,7 +1240,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1243,7 +1277,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1279,7 +1314,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1315,7 +1351,8 @@ export namespace ResourceTaggingListResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Values may be empty strings for key-only tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 

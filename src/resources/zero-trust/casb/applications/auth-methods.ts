@@ -26,92 +26,51 @@ export class BaseAuthMethods extends APIResource {
   list(
     applicationID:
       | 'ANTHROPIC'
+      | 'AWS'
       | 'BITBUCKET'
       | 'BOX'
       | 'CONFLUENCE'
       | 'DROPBOX'
       | 'GITHUB'
+      | 'GITLAB'
       | 'GOOGLE_CLOUD_PLATFORM'
       | 'GOOGLE_WORKSPACE'
       | 'JIRA'
       | 'MICROSOFT_INTERNAL'
       | 'OPENAI'
       | 'SALESFORCE'
-      | 'SLACK',
+      | 'SERVICENOW'
+      | 'SLACK'
+      | 'ZOOM',
     params: AuthMethodListParams,
     options?: RequestOptions,
-  ): APIPromise<AuthMethodListResponse> {
-    const { account_id } = params;
-    return this._client.get(
-      path`/accounts/${account_id}/one/applications/${applicationID}/auth-methods`,
-      options,
-    );
+  ): APIPromise<unknown> {
+    const { account_id, ...query } = params;
+    return this._client.get(path`/accounts/${account_id}/one/applications/${applicationID}/auth-methods`, {
+      query,
+      ...options,
+    });
   }
 }
 export class AuthMethods extends BaseAuthMethods {}
 
-export type AuthMethodListResponse = Array<AuthMethodListResponse.AuthMethodListResponseItem>;
-
-export namespace AuthMethodListResponse {
-  /**
-   * Detailed auth method info including credentials schema and instructions.
-   */
-  export interface AuthMethodListResponseItem {
-    /**
-     * Auth method identifier.
-     */
-    id: string;
-
-    /**
-     * Human-readable auth method name.
-     */
-    display_name: string;
-
-    /**
-     * Whether setup requires human interaction or integration can be created purely
-     * using API (e.g., For OAuth can not be created without user interaction).
-     */
-    human_interaction_required: boolean;
-
-    /**
-     * Step-by-step instructions for obtaining credentials.
-     */
-    instructions: AuthMethodListResponseItem.Instructions;
-
-    /**
-     * Example credentials payload with placeholder values.
-     */
-    payload_example: { [key: string]: unknown } | null;
-
-    /**
-     * JSON Schema for the credentials object in POST /v2/integrations request.
-     */
-    payload_schema: { [key: string]: unknown } | null;
-
-    /**
-     * OAuth redirect URL for vendors requiring human interaction.
-     */
-    redirect_url: string | null;
-  }
-
-  export namespace AuthMethodListResponseItem {
-    /**
-     * Step-by-step instructions for obtaining credentials.
-     */
-    export interface Instructions {
-      /**
-       * Detailed instructions in markdown format.
-       */
-      markdown: string;
-    }
-  }
-}
+export type AuthMethodListResponse = unknown;
 
 export interface AuthMethodListParams {
   /**
-   * Cloudflare account identifier.
+   * Path param: Cloudflare account identifier.
    */
   account_id: string;
+
+  /**
+   * Query param: A page number within the paginated result set.
+   */
+  page?: number;
+
+  /**
+   * Query param: Number of results to return per page.
+   */
+  page_size?: number;
 }
 
 export declare namespace AuthMethods {

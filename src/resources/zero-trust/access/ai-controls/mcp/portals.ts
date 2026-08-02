@@ -148,9 +148,19 @@ export interface PortalCreateResponse {
   servers: Array<PortalCreateResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` instead. Legacy on/off toggle for
+   * Dynamic Workers (codemode). `true` maps to any non-off `code_mode`; `false` maps
+   * to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Controls Dynamic Workers (codemode) availability for this portal. `off` disables
+   * codemode. `opt_in` makes it available but clients must opt in per session.
+   * `default_on` enables it by default with a client override. `enforced` requires
+   * codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -213,8 +223,7 @@ export namespace PortalCreateResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -355,9 +364,19 @@ export interface PortalUpdateResponse {
   servers: Array<PortalUpdateResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` instead. Legacy on/off toggle for
+   * Dynamic Workers (codemode). `true` maps to any non-off `code_mode`; `false` maps
+   * to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Controls Dynamic Workers (codemode) availability for this portal. `off` disables
+   * codemode. `opt_in` makes it available but clients must opt in per session.
+   * `default_on` enables it by default with a client override. `enforced` requires
+   * codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -420,8 +439,7 @@ export namespace PortalUpdateResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -562,9 +580,19 @@ export interface PortalListResponse {
   servers: Array<PortalListResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` instead. Legacy on/off toggle for
+   * Dynamic Workers (codemode). `true` maps to any non-off `code_mode`; `false` maps
+   * to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Controls Dynamic Workers (codemode) availability for this portal. `off` disables
+   * codemode. `opt_in` makes it available but clients must opt in per session.
+   * `default_on` enables it by default with a client override. `enforced` requires
+   * codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -627,8 +655,7 @@ export namespace PortalListResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -767,9 +794,19 @@ export interface PortalDeleteResponse {
   name: string;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` instead. Legacy on/off toggle for
+   * Dynamic Workers (codemode). `true` maps to any non-off `code_mode`; `false` maps
+   * to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Controls Dynamic Workers (codemode) availability for this portal. `off` disables
+   * codemode. `opt_in` makes it available but clients must opt in per session.
+   * `default_on` enables it by default with a client override. `enforced` requires
+   * codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -800,9 +837,19 @@ export interface PortalReadResponse {
   servers: Array<PortalReadResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` instead. Legacy on/off toggle for
+   * Dynamic Workers (codemode). `true` maps to any non-off `code_mode`; `false` maps
+   * to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Controls Dynamic Workers (codemode) availability for this portal. `off` disables
+   * codemode. `opt_in` makes it available but clients must opt in per session.
+   * `default_on` enables it by default with a client override. `enforced` requires
+   * codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -865,8 +912,7 @@ export namespace PortalReadResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -1016,9 +1062,19 @@ export interface PortalCreateParams {
   name: string;
 
   /**
-   * Body param: Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Body param: Deprecated: use `code_mode` instead. Legacy on/off
+   * toggle for Dynamic Workers (codemode). `true` maps to any non-off `code_mode`;
+   * `false` maps to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Body param: Controls Dynamic Workers (codemode) availability for this portal.
+   * `off` disables codemode. `opt_in` makes it available but clients must opt in per
+   * session. `default_on` enables it by default with a client override. `enforced`
+   * requires codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   /**
    * Body param
@@ -1082,9 +1138,19 @@ export interface PortalUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Body param: Deprecated: use `code_mode` instead. Legacy on/off
+   * toggle for Dynamic Workers (codemode). `true` maps to any non-off `code_mode`;
+   * `false` maps to `code_mode: off`.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Body param: Controls Dynamic Workers (codemode) availability for this portal.
+   * `off` disables codemode. `opt_in` makes it available but clients must opt in per
+   * session. `default_on` enables it by default with a client override. `enforced`
+   * requires codemode for every session with no override.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   /**
    * Body param

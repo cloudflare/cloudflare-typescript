@@ -1615,6 +1615,8 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesTransformationsAllowedOrigins
   | SettingEditResponse.ZonesTrueClientIPHeader2
   | SettingEditResponse.ZonesWAF2
+  | SettingEditResponse.ZonesWebmcpEnabled
+  | SettingEditResponse.ZonesWebmcpPacks
   | WebP
   | Websocket;
 
@@ -2679,6 +2681,64 @@ export namespace SettingEditResponse {
      */
     modified_on?: string | null;
   }
+
+  /**
+   * When enabled, Cloudflare injects the WebMCP bridge (bridge.js) into HTML
+   * responses for this zone, exposing DOM and Content Credentials tools to an
+   * in-browser AI agent via navigator.modelContext. No origin-side code changes are
+   * required. This setting is currently in beta and its behavior may change.
+   */
+  export interface ZonesWebmcpEnabled {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'webmcp_enabled';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * Optional per-zone override of which bundled WebMCP tool packs the injected
+   * bridge.js activates. Only takes effect when webmcp_enabled is on. Leave empty to
+   * use the bridge's default pack set. Unknown pack names are ignored by the bridge.
+   * This setting is currently in beta and its behavior may change.
+   */
+  export interface ZonesWebmcpPacks {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'webmcp_packs';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: string;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
 }
 
 /**
@@ -2746,6 +2806,8 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesTransformationsAllowedOrigins
   | SettingGetResponse.ZonesTrueClientIPHeader2
   | SettingGetResponse.ZonesWAF2
+  | SettingGetResponse.ZonesWebmcpEnabled
+  | SettingGetResponse.ZonesWebmcpPacks
   | WebP
   | Websocket;
 
@@ -3810,6 +3872,64 @@ export namespace SettingGetResponse {
      */
     modified_on?: string | null;
   }
+
+  /**
+   * When enabled, Cloudflare injects the WebMCP bridge (bridge.js) into HTML
+   * responses for this zone, exposing DOM and Content Credentials tools to an
+   * in-browser AI agent via navigator.modelContext. No origin-side code changes are
+   * required. This setting is currently in beta and its behavior may change.
+   */
+  export interface ZonesWebmcpEnabled {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'webmcp_enabled';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
+
+  /**
+   * Optional per-zone override of which bundled WebMCP tool packs the injected
+   * bridge.js activates. Only takes effect when webmcp_enabled is on. Leave empty to
+   * use the bridge's default pack set. Unknown pack names are ignored by the bridge.
+   * This setting is currently in beta and its behavior may change.
+   */
+  export interface ZonesWebmcpPacks {
+    /**
+     * ID of the zone setting.
+     */
+    id: 'webmcp_packs';
+
+    /**
+     * Current value of the zone setting.
+     */
+    value: string;
+
+    /**
+     * Whether or not this setting can be modified for this zone (based on your
+     * Cloudflare plan level).
+     */
+    editable?: true | false;
+
+    /**
+     * last time this setting was modified.
+     */
+    modified_on?: string | null;
+  }
 }
 
 export type SettingEditParams = SettingEditParams.Variant0 | SettingEditParams.Variant1;
@@ -3843,7 +3963,8 @@ export declare namespace SettingEditParams {
       | Variant1.ZonesNELValue
       | number
       | AutomaticPlatformOptimizationParam
-      | Variant1.ZonesSecurityHeaderValue;
+      | Variant1.ZonesSecurityHeaderValue
+      | string;
   }
 
   export namespace Variant1 {

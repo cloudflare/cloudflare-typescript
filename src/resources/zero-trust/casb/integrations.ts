@@ -38,7 +38,11 @@ export class BaseIntegrations extends APIResource {
    */
   create(params: IntegrationCreateParams, options?: RequestOptions): APIPromise<IntegrationCreateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(path`/accounts/${account_id}/one/integrations`, { body, ...options });
+    return (
+      this._client.post(path`/accounts/${account_id}/one/integrations`, { body, ...options }) as APIPromise<{
+        result: IntegrationCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -63,7 +67,12 @@ export class BaseIntegrations extends APIResource {
     options?: RequestOptions,
   ): APIPromise<IntegrationUpdateResponse> {
     const { account_id, ...body } = params;
-    return this._client.patch(path`/accounts/${account_id}/one/integrations/${id}`, { body, ...options });
+    return (
+      this._client.patch(path`/accounts/${account_id}/one/integrations/${id}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: IntegrationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -117,7 +126,11 @@ export class BaseIntegrations extends APIResource {
     options?: RequestOptions,
   ): APIPromise<IntegrationGetResponse> {
     const { account_id } = params;
-    return this._client.get(path`/accounts/${account_id}/one/integrations/${id}`, options);
+    return (
+      this._client.get(path`/accounts/${account_id}/one/integrations/${id}`, options) as APIPromise<{
+        result: IntegrationGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -137,7 +150,11 @@ export class BaseIntegrations extends APIResource {
     options?: RequestOptions,
   ): APIPromise<IntegrationPauseResponse> {
     const { account_id } = params;
-    return this._client.post(path`/accounts/${account_id}/one/integrations/${id}/pause`, options);
+    return (
+      this._client.post(path`/accounts/${account_id}/one/integrations/${id}/pause`, options) as APIPromise<{
+        result: IntegrationPauseResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -157,13 +174,17 @@ export class BaseIntegrations extends APIResource {
     options?: RequestOptions,
   ): APIPromise<IntegrationResumeResponse> {
     const { account_id } = params;
-    return this._client.post(path`/accounts/${account_id}/one/integrations/${id}/resume`, options);
+    return (
+      this._client.post(path`/accounts/${account_id}/one/integrations/${id}/resume`, options) as APIPromise<{
+        result: IntegrationResumeResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 export class Integrations extends BaseIntegrations {}
 
 /**
- * Serializer for v2 integration detail response with use cases.
+ * The requested item.
  */
 export interface IntegrationCreateResponse {
   /**
@@ -251,7 +272,7 @@ export namespace IntegrationCreateResponse {
 }
 
 /**
- * Serializer for v2 integration detail response with use cases.
+ * The requested item.
  */
 export interface IntegrationUpdateResponse {
   /**
@@ -341,7 +362,7 @@ export namespace IntegrationUpdateResponse {
 export type IntegrationListResponse = unknown;
 
 /**
- * Serializer for v2 integration detail response with use cases.
+ * The requested item.
  */
 export interface IntegrationGetResponse {
   /**
@@ -429,7 +450,7 @@ export namespace IntegrationGetResponse {
 }
 
 /**
- * Serializer for v2 integration detail response with use cases.
+ * The requested item.
  */
 export interface IntegrationPauseResponse {
   /**
@@ -517,7 +538,7 @@ export namespace IntegrationPauseResponse {
 }
 
 /**
- * Serializer for v2 integration detail response with use cases.
+ * The requested item.
  */
 export interface IntegrationResumeResponse {
   /**
@@ -614,33 +635,41 @@ export interface IntegrationCreateParams {
    * Body param: Vendor/application slug (e.g., GOOGLE_WORKSPACE).
    *
    * - `ANTHROPIC` - ANTHROPIC
+   * - `AWS` - AWS
    * - `BITBUCKET` - BITBUCKET
    * - `BOX` - BOX
    * - `CONFLUENCE` - CONFLUENCE
    * - `DROPBOX` - DROPBOX
    * - `GITHUB` - GITHUB
+   * - `GITLAB` - GITLAB
    * - `GOOGLE_CLOUD_PLATFORM` - GOOGLE_CLOUD_PLATFORM
    * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
    * - `JIRA` - JIRA
    * - `MICROSOFT_INTERNAL` - MICROSOFT_INTERNAL
    * - `OPENAI` - OPENAI
    * - `SALESFORCE` - SALESFORCE
+   * - `SERVICENOW` - SERVICENOW
    * - `SLACK` - SLACK
+   * - `ZOOM` - ZOOM
    */
   application:
     | 'ANTHROPIC'
+    | 'AWS'
     | 'BITBUCKET'
     | 'BOX'
     | 'CONFLUENCE'
     | 'DROPBOX'
     | 'GITHUB'
+    | 'GITLAB'
     | 'GOOGLE_CLOUD_PLATFORM'
     | 'GOOGLE_WORKSPACE'
     | 'JIRA'
     | 'MICROSOFT_INTERNAL'
     | 'OPENAI'
     | 'SALESFORCE'
-    | 'SLACK';
+    | 'SERVICENOW'
+    | 'SLACK'
+    | 'ZOOM';
 
   /**
    * Body param: Credentials for the integration.

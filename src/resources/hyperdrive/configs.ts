@@ -44,7 +44,11 @@ export class BaseConfigs extends APIResource {
   }
 
   /**
-   * Updates and returns the specified Hyperdrive configuration.
+   * Replaces and returns the specified Hyperdrive configuration. The request must
+   * include the name and complete origin connection details. Omitted caching
+   * settings are reset to their defaults, while omitted mTLS settings and origin
+   * connection limits are preserved. Use the update operation to modify only
+   * selected fields.
    *
    * @example
    * ```ts
@@ -130,8 +134,8 @@ export class BaseConfigs extends APIResource {
   }
 
   /**
-   * Patches and returns the specified Hyperdrive configuration. Custom caching
-   * settings are not kept if caching is disabled.
+   * Updates and returns the specified fields of the Hyperdrive configuration. Custom
+   * caching settings are not kept if caching is disabled.
    *
    * @example
    * ```ts

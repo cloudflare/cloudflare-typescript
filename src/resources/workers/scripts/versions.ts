@@ -142,6 +142,7 @@ export namespace VersionCreateResponse {
       | Resources.WorkersBindingKindAI
       | Resources.WorkersBindingKindAISearch
       | Resources.WorkersBindingKindAISearchNamespace
+      | Resources.WorkersBindingKindMessaging
       | Resources.WorkersBindingKindAnalyticsEngine
       | Resources.WorkersBindingKindAssets
       | Resources.WorkersBindingKindBrowser
@@ -239,6 +240,23 @@ export namespace VersionCreateResponse {
        * The kind of resource that the binding provides.
        */
       type: 'ai_search_namespace';
+    }
+
+    export interface WorkersBindingKindMessaging {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Messaging namespace to bind to.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'messaging';
     }
 
     export interface WorkersBindingKindAnalyticsEngine {
@@ -1575,6 +1593,7 @@ export namespace VersionGetResponse {
       | Resources.WorkersBindingKindAI
       | Resources.WorkersBindingKindAISearch
       | Resources.WorkersBindingKindAISearchNamespace
+      | Resources.WorkersBindingKindMessaging
       | Resources.WorkersBindingKindAnalyticsEngine
       | Resources.WorkersBindingKindAssets
       | Resources.WorkersBindingKindBrowser
@@ -1672,6 +1691,23 @@ export namespace VersionGetResponse {
        * The kind of resource that the binding provides.
        */
       type: 'ai_search_namespace';
+    }
+
+    export interface WorkersBindingKindMessaging {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Messaging namespace to bind to.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'messaging';
     }
 
     export interface WorkersBindingKindAnalyticsEngine {
@@ -2736,6 +2772,7 @@ export namespace VersionCreateParams {
       | Metadata.WorkersBindingKindAI
       | Metadata.WorkersBindingKindAISearch
       | Metadata.WorkersBindingKindAISearchNamespace
+      | Metadata.WorkersBindingKindMessaging
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
@@ -2893,6 +2930,23 @@ export namespace VersionCreateParams {
        * The kind of resource that the binding provides.
        */
       type: 'ai_search_namespace';
+    }
+
+    export interface WorkersBindingKindMessaging {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Messaging namespace to bind to.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'messaging';
     }
 
     export interface WorkersBindingKindAnalyticsEngine {

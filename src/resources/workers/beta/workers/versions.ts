@@ -172,6 +172,7 @@ export interface Version {
     | Version.WorkersBindingKindAI
     | Version.WorkersBindingKindAISearch
     | Version.WorkersBindingKindAISearchNamespace
+    | Version.WorkersBindingKindMessaging
     | Version.WorkersBindingKindAnalyticsEngine
     | Version.WorkersBindingKindAssets
     | Version.WorkersBindingKindBrowser
@@ -454,6 +455,23 @@ export namespace Version {
      * The kind of resource that the binding provides.
      */
     type: 'ai_search_namespace';
+  }
+
+  export interface WorkersBindingKindMessaging {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The Messaging namespace to bind to.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'messaging';
   }
 
   export interface WorkersBindingKindAnalyticsEngine {
@@ -1825,6 +1843,7 @@ export interface VersionCreateParams {
     | VersionCreateParams.WorkersBindingKindAI
     | VersionCreateParams.WorkersBindingKindAISearch
     | VersionCreateParams.WorkersBindingKindAISearchNamespace
+    | VersionCreateParams.WorkersBindingKindMessaging
     | VersionCreateParams.WorkersBindingKindAnalyticsEngine
     | VersionCreateParams.WorkersBindingKindAssets
     | VersionCreateParams.WorkersBindingKindBrowser
@@ -2078,6 +2097,23 @@ export namespace VersionCreateParams {
      * The kind of resource that the binding provides.
      */
     type: 'ai_search_namespace';
+  }
+
+  export interface WorkersBindingKindMessaging {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The Messaging namespace to bind to.
+     */
+    namespace: string;
+
+    /**
+     * The kind of resource that the binding provides.
+     */
+    type: 'messaging';
   }
 
   export interface WorkersBindingKindAnalyticsEngine {

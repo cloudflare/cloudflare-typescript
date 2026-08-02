@@ -2,13 +2,4 @@
 
 export { Billing, BaseBilling } from './billing';
 export { Profiles, BaseProfiles, type ProfileGetResponse, type ProfileGetParams } from './profiles';
-export {
-  Usage,
-  BaseUsage,
-  type UsageGetResponse,
-  type UsagePaygoResponse,
-  type UsagePaygoInfoResponse,
-  type UsageGetParams,
-  type UsagePaygoParams,
-  type UsagePaygoInfoParams,
-} from './usage';
+export { Usage, BaseUsage, type UsageGetResponse, type UsageGetParams } from './usage';

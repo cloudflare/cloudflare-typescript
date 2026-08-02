@@ -44,6 +44,8 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { casb: { applications:
     const response = await client.zeroTrust.casb.applications.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       environment: 'environment',
+      page: 0,
+      page_size: 0,
     });
   });
 

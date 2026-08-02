@@ -231,6 +231,12 @@ export namespace UsageGetResponse {
     x_ProductCategoryName?: string;
 
     /**
+     * The unique identifier for the product family in the Cloudflare catalog.
+     * Cloudflare extension; replaces FOCUS ServiceId.
+     */
+    x_ProductFamilyId?: string;
+
+    /**
      * The product family the charge belongs to (e.g., "R2", "Workers"). Cloudflare
      * extension; replaces FOCUS ServiceName.
      */

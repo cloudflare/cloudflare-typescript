@@ -31,32 +31,6 @@ export class BaseUsage extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Returns billable usage data for PayGo (self-serve) accounts. When no query
-   * parameters are provided, returns usage for the current billing period.
-   */
-  paygo(params: UsagePaygoParams, options?: RequestOptions): APIPromise<UsagePaygoResponse> {
-    const { account_id, ...query } = params;
-    return (
-      this._client.get(path`/accounts/${account_id}/paygo-usage`, { query, ...options }) as APIPromise<{
-        result: UsagePaygoResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns high-level usage information for the account, including coverage, and
-   * subscription metadata.
-   */
-  paygoInfo(params: UsagePaygoInfoParams, options?: RequestOptions): APIPromise<UsagePaygoInfoResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(path`/accounts/${account_id}/paygo-usage-info`, options) as APIPromise<{
-        result: UsagePaygoInfoResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Usage extends BaseUsage {}
 
@@ -248,6 +222,12 @@ export namespace UsageGetResponse {
     x_ProductCategoryName?: string;
 
     /**
+     * The unique identifier for the product family in the Cloudflare catalog.
+     * Cloudflare extension; replaces FOCUS ServiceId.
+     */
+    x_ProductFamilyId?: string;
+
+    /**
      * The product family the charge belongs to (e.g., "R2", "Workers"). Cloudflare
      * extension; replaces FOCUS ServiceName.
      */
@@ -262,135 +242,6 @@ export namespace UsageGetResponse {
      * The display name of the Cloudflare zone. Cloudflare extension.
      */
     x_ZoneName?: string | null;
-  }
-}
-
-/**
- * Contains the array of billable usage records.
- */
-export type UsagePaygoResponse = Array<UsagePaygoResponse.UsagePaygoResponseItem>;
-
-export namespace UsagePaygoResponse {
-  /**
-   * Represents a single billable usage record.
-   */
-  export interface UsagePaygoResponseItem {
-    /**
-     * Specifies the billing currency code (ISO 4217).
-     */
-    BillingCurrency: string;
-
-    /**
-     * Indicates the start of the billing period.
-     */
-    BillingPeriodStart: string;
-
-    /**
-     * Indicates the end of the charge period.
-     */
-    ChargePeriodEnd: string;
-
-    /**
-     * Indicates the start of the charge period.
-     */
-    ChargePeriodStart: string;
-
-    /**
-     * Specifies the quantity consumed during this charge period.
-     */
-    ConsumedQuantity: number;
-
-    /**
-     * A display name for the unit of measurement used for the product (for example,
-     * "GB-months", "GB-seconds"). May be empty when the unit is implicit in the
-     * service name.
-     */
-    ConsumedUnit: string;
-
-    /**
-     * Specifies the cost for this charge period in the billing currency.
-     */
-    ContractedCost: number;
-
-    /**
-     * Specifies the cumulated cost for the billing period in the billing currency.
-     */
-    CumulatedContractedCost: number;
-
-    /**
-     * Specifies the cumulated pricing quantity for the billing period.
-     */
-    CumulatedPricingQuantity: number;
-
-    /**
-     * Specifies the pricing quantity for this charge period.
-     */
-    PricingQuantity: number;
-
-    /**
-     * Identifies the Cloudflare service.
-     */
-    ServiceName: string;
-
-    /**
-     * Identifies the product family for the Cloudflare service.
-     */
-    ServiceFamilyName?: string;
-
-    /**
-     * The identifier for the Cloudflare subscription.
-     */
-    SubscriptionId?: string | null;
-
-    /**
-     * The identifier for the Cloudflare zone (zone tag).
-     */
-    ZoneId?: string | null;
-
-    /**
-     * The display name of the Cloudflare zone.
-     */
-    ZoneName?: string | null;
-  }
-}
-
-/**
- * Contains the paygo usage info.
- */
-export interface UsagePaygoInfoResponse {
-  /**
-   * Indicates whether the account is covered.
-   */
-  covered: boolean;
-
-  /**
-   * List of subscriptions for the account.
-   */
-  subscriptions: Array<UsagePaygoInfoResponse.Subscription>;
-}
-
-export namespace UsagePaygoInfoResponse {
-  export interface Subscription {
-    /**
-     * The identifier for the Cloudflare subscription.
-     */
-    id: string;
-
-    /**
-     * The subscription billing cycle anchor timestamp.
-     */
-    billing_cycle_anchor_timestamp: string;
-
-    /**
-     * The subscription start timestamp.
-     */
-    start_timestamp: string;
-
-    /**
-     * The subscription end timestamp. Omitted for active subscriptions; present only
-     * when the subscription has been cancelled.
-     */
-    end_timestamp?: string;
   }
 }
 
@@ -423,40 +274,6 @@ export interface UsageGetParams {
   to?: string;
 }
 
-export interface UsagePaygoParams {
-  /**
-   * Path param: Represents a Cloudflare resource identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Query param: Start date for the usage query (ISO 8601). The provided time range
-   * must include the subscription billing cycle anchor day, otherwise no usage data
-   * is returned. Subscription anchor days are provided on the response of the
-   * /accounts/{account_id}/paygo-usage-info endpoint.
-   */
-  from?: string;
-
-  /**
-   * Query param: End date for the usage query (ISO 8601).
-   */
-  to?: string;
-}
-
-export interface UsagePaygoInfoParams {
-  /**
-   * Represents a Cloudflare resource identifier tag.
-   */
-  account_id: string;
-}
-
 export declare namespace Usage {
-  export {
-    type UsageGetResponse as UsageGetResponse,
-    type UsagePaygoResponse as UsagePaygoResponse,
-    type UsagePaygoInfoResponse as UsagePaygoInfoResponse,
-    type UsageGetParams as UsageGetParams,
-    type UsagePaygoParams as UsagePaygoParams,
-    type UsagePaygoInfoParams as UsagePaygoInfoParams,
-  };
+  export { type UsageGetResponse as UsageGetResponse, type UsageGetParams as UsageGetParams };
 }

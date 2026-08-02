@@ -321,6 +321,12 @@ export interface Organization {
   user_seat_expiration_inactive_time?: string;
 
   /**
+   * When enabled, unsuccessful WARP authentication requests with a non-HTML Accept
+   * header return a 401 response instead of redirecting to the login page.
+   */
+  warp_auth_non_browser_401?: boolean;
+
+  /**
    * The amount of time that tokens issued for applications will be valid. Must be in
    * the format `30m` or `2h45m`. Valid time units are: m, h.
    */
@@ -520,6 +526,13 @@ export interface OrganizationCreateParams {
   user_seat_expiration_inactive_time?: string;
 
   /**
+   * Body param: When enabled, unsuccessful WARP authentication requests with a
+   * non-HTML Accept header return a 401 response instead of redirecting to the login
+   * page.
+   */
+  warp_auth_non_browser_401?: boolean;
+
+  /**
    * Body param: The amount of time that tokens issued for applications will be
    * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
@@ -707,6 +720,13 @@ export interface OrganizationUpdateParams {
    * Valid time units are: `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
    */
   user_seat_expiration_inactive_time?: string;
+
+  /**
+   * Body param: When enabled, unsuccessful WARP authentication requests with a
+   * non-HTML Accept header return a 401 response instead of redirecting to the login
+   * page.
+   */
+  warp_auth_non_browser_401?: boolean;
 
   /**
    * Body param: The amount of time that tokens issued for applications will be

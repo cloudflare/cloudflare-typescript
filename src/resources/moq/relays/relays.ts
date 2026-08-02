@@ -214,8 +214,8 @@ export namespace RelayCreateResponse {
       export interface Upstream {
         /**
          * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
-         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
-         * on update (PUT); rejected with 21013.
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
         url: string;
       }
@@ -322,8 +322,8 @@ export namespace RelayUpdateResponse {
       export interface Upstream {
         /**
          * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
-         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
-         * on update (PUT); rejected with 21013.
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
         url: string;
       }
@@ -398,8 +398,8 @@ export namespace RelayGetResponse {
       export interface Upstream {
         /**
          * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
-         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
-         * on update (PUT); rejected with 21013.
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
         url: string;
       }
@@ -468,8 +468,8 @@ export namespace RelayUpdateParams {
       export interface Upstream {
         /**
          * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
-         * scheme crique can dial: moqt:// (raw QUIC) or https:// (WebTransport). Validated
-         * on update (PUT); rejected with 21013.
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
         url: string;
       }
@@ -504,7 +504,8 @@ export interface RelayListParams {
   created_before?: string;
 
   /**
-   * Query param: Maximum number of relays to return per page.
+   * Query param: Maximum number of relays to return per page. Values above the
+   * maximum are clamped to it rather than rejected.
    */
   per_page?: number;
 }

@@ -368,7 +368,7 @@ export interface PolicyCreateResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -513,7 +513,7 @@ export interface PolicyUpdateResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -658,7 +658,7 @@ export interface PolicyListResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -810,7 +810,7 @@ export interface PolicyGetResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -948,7 +948,7 @@ export interface PolicyCreateParams {
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 }
 
 export namespace PolicyCreateParams {
@@ -1084,7 +1084,7 @@ export interface PolicyUpdateParams {
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 }
 
 export namespace PolicyUpdateParams {

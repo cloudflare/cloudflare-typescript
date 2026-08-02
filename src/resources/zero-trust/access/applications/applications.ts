@@ -2605,7 +2605,7 @@ export interface ApplicationPolicy {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -4114,7 +4114,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -4424,7 +4424,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -5103,7 +5103,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -5782,7 +5782,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6179,7 +6179,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6391,7 +6391,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6603,7 +6603,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6815,7 +6815,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -7006,7 +7006,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -7746,7 +7746,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -8309,7 +8309,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -8878,7 +8878,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -9560,7 +9560,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -9870,7 +9870,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -10549,7 +10549,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11228,7 +11228,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11625,7 +11625,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11837,7 +11837,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12049,7 +12049,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12261,7 +12261,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12452,7 +12452,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -13192,7 +13192,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -13755,7 +13755,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -14324,7 +14324,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15006,7 +15006,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15316,7 +15316,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15995,7 +15995,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -16674,7 +16674,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17071,7 +17071,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17283,7 +17283,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17495,7 +17495,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17707,7 +17707,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17898,7 +17898,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -18638,7 +18638,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -19201,7 +19201,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -19770,7 +19770,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -20459,7 +20459,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -20769,7 +20769,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -21448,7 +21448,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22127,7 +22127,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22524,7 +22524,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22736,7 +22736,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22948,7 +22948,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -23160,7 +23160,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -23351,7 +23351,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -24091,7 +24091,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -24654,7 +24654,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -25223,7 +25223,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -25906,7 +25906,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -26211,7 +26211,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -26887,7 +26887,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -27563,7 +27563,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -27944,7 +27944,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28141,7 +28141,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28338,7 +28338,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28546,7 +28546,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28728,7 +28728,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -29467,7 +29467,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -30023,7 +30023,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -30587,7 +30587,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -31266,7 +31266,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -31571,7 +31571,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -32247,7 +32247,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -32923,7 +32923,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33304,7 +33304,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33501,7 +33501,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33698,7 +33698,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33906,7 +33906,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -34088,7 +34088,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -34827,7 +34827,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -35383,7 +35383,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -35947,7 +35947,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {

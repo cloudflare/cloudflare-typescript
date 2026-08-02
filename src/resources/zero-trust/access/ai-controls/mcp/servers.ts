@@ -196,8 +196,7 @@ export interface ServerCreateResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -351,8 +350,7 @@ export interface ServerUpdateResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -506,8 +504,7 @@ export interface ServerListResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -661,8 +658,7 @@ export interface ServerDeleteResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -816,8 +812,7 @@ export interface ServerReadResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -1018,8 +1013,7 @@ export interface ServerCreateParams {
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
    * the customer portal hostname. Defaults to false (off); opt in per server by
-   * setting true. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * setting true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -1089,8 +1083,7 @@ export interface ServerUpdateParams {
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
    * the customer portal hostname. Defaults to false (off); opt in per server by
-   * setting true. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * setting true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 

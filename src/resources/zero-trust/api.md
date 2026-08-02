@@ -866,7 +866,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponse</code>
+- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> unknown</code>
 - <code title="get /accounts/{account_id}/one/applications/{application_id}">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">get</a>(applicationID, { ...params }) -> ApplicationGetResponse</code>
 
 #### AuthMethods
@@ -877,7 +877,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/one/applications/{application_id}/auth-methods">client.zeroTrust.casb.applications.authMethods.<a href="./src/resources/zero-trust/casb/applications/auth-methods.ts">list</a>(applicationID, { ...params }) -> AuthMethodListResponse</code>
+- <code title="get /accounts/{account_id}/one/applications/{application_id}/auth-methods">client.zeroTrust.casb.applications.authMethods.<a href="./src/resources/zero-trust/casb/applications/auth-methods.ts">list</a>(applicationID, { ...params }) -> unknown</code>
 
 ### Integrations
 
