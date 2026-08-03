@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import { APIPromise } from '../../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
@@ -16,11 +16,13 @@ export class BaseAuthMethods extends APIResource {
    *
    * @example
    * ```ts
-   * const authMethods =
-   *   await client.zeroTrust.casb.applications.authMethods.list(
-   *     'ANTHROPIC',
-   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   *   );
+   * // Automatically fetches more pages as needed.
+   * for await (const authMethodListResponse of client.zeroTrust.casb.applications.authMethods.list(
+   *   'ANTHROPIC',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
   list(
@@ -32,7 +34,6 @@ export class BaseAuthMethods extends APIResource {
       | 'CONFLUENCE'
       | 'DROPBOX'
       | 'GITHUB'
-      | 'GITLAB'
       | 'GOOGLE_CLOUD_PLATFORM'
       | 'GOOGLE_WORKSPACE'
       | 'JIRA'
@@ -40,21 +41,74 @@ export class BaseAuthMethods extends APIResource {
       | 'OPENAI'
       | 'SALESFORCE'
       | 'SERVICENOW'
-      | 'SLACK'
-      | 'ZOOM',
+      | 'SLACK',
     params: AuthMethodListParams,
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): PagePromise<AuthMethodListResponsesSinglePage, AuthMethodListResponse> {
     const { account_id, ...query } = params;
-    return this._client.get(path`/accounts/${account_id}/one/applications/${applicationID}/auth-methods`, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/one/applications/${applicationID}/auth-methods`,
+      SinglePage<AuthMethodListResponse>,
+      { query, ...options },
+    );
   }
 }
 export class AuthMethods extends BaseAuthMethods {}
 
-export type AuthMethodListResponse = unknown;
+export type AuthMethodListResponsesSinglePage = SinglePage<AuthMethodListResponse>;
+
+/**
+ * Detailed auth method info including credentials schema and instructions.
+ */
+export interface AuthMethodListResponse {
+  /**
+   * Auth method identifier.
+   */
+  id: string;
+
+  /**
+   * Human-readable auth method name.
+   */
+  display_name: string;
+
+  /**
+   * Whether setup requires human interaction or integration can be created purely
+   * using API (e.g., For OAuth can not be created without user interaction).
+   */
+  human_interaction_required: boolean;
+
+  /**
+   * Step-by-step instructions for obtaining credentials.
+   */
+  instructions: AuthMethodListResponse.Instructions;
+
+  /**
+   * Example credentials payload with placeholder values.
+   */
+  payload_example: { [key: string]: unknown } | null;
+
+  /**
+   * JSON Schema for the credentials object in POST /v2/integrations request.
+   */
+  payload_schema: { [key: string]: unknown } | null;
+
+  /**
+   * OAuth redirect URL for vendors requiring human interaction.
+   */
+  redirect_url: string | null;
+}
+
+export namespace AuthMethodListResponse {
+  /**
+   * Step-by-step instructions for obtaining credentials.
+   */
+  export interface Instructions {
+    /**
+     * Detailed instructions in markdown format.
+     */
+    markdown: string;
+  }
+}
 
 export interface AuthMethodListParams {
   /**
@@ -76,6 +130,7 @@ export interface AuthMethodListParams {
 export declare namespace AuthMethods {
   export {
     type AuthMethodListResponse as AuthMethodListResponse,
+    type AuthMethodListResponsesSinglePage as AuthMethodListResponsesSinglePage,
     type AuthMethodListParams as AuthMethodListParams,
   };
 }

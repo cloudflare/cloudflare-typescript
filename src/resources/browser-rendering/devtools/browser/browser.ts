@@ -31,7 +31,8 @@ export class BaseBrowser extends APIResource {
   ] as const);
 
   /**
-   * Acquires a browser and returns its session ID and websocket URL.
+   * Acquires a browser and returns its session ID and websocket URL. Optionally
+   * accepts a JSON body with session guardrails to restrict outbound HTTP/S traffic.
    *
    * @example
    * ```ts
@@ -42,9 +43,10 @@ export class BaseBrowser extends APIResource {
    * ```
    */
   create(params: BrowserCreateParams, options?: RequestOptions): APIPromise<BrowserCreateResponse> {
-    const { account_id, keep_alive, lab, liveViewUrlExpiresInMs, recording, targets } = params;
+    const { account_id, keep_alive, lab, liveViewUrlExpiresInMs, recording, targets, ...body } = params;
     return this._client.post(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query: { keep_alive, lab, liveViewUrlExpiresInMs, recording, targets },
+      body,
       ...options,
     });
   }
@@ -306,6 +308,28 @@ export interface BrowserCreateParams {
    * Query param: Include browser targets in response.
    */
   targets?: boolean;
+
+  /**
+   * Body param
+   */
+  guardrails?: BrowserCreateParams.Guardrails;
+}
+
+export namespace BrowserCreateParams {
+  export interface Guardrails {
+    /**
+     * Hostname patterns, max 50. Supports exact hosts (example.com) or a single _
+     * wildcard anywhere. Prefer _.example.com (subdomain wildcard) over \*example.com
+     * (prefix wildcard) to avoid matching overbroad lookalikes like evilexample.com.
+     */
+    allowedDomains?: Array<string>;
+
+    /**
+     * Max 4 entries: curated preset names (common-cdns) and/or https URLs of
+     * newline-separated hostname lists.
+     */
+    allowedDomainSets?: Array<string>;
+  }
 }
 
 export interface BrowserDeleteParams {

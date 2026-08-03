@@ -7,6 +7,7 @@ export {
   type ApplicationGetResponse,
   type ApplicationListParams,
   type ApplicationGetParams,
+  type ApplicationListResponsesSinglePage,
 } from './applications/index';
 export { Casb, BaseCasb } from './casb';
 export {
@@ -25,5 +26,6 @@ export {
   type IntegrationGetParams,
   type IntegrationPauseParams,
   type IntegrationResumeParams,
+  type IntegrationListResponsesSinglePage,
 } from './integrations';
 export { Posture, BasePosture } from './posture/index';

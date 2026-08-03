@@ -48,6 +48,7 @@ const runTests = (
       liveViewUrlExpiresInMs: 60000,
       recording: true,
       targets: true,
+      guardrails: { allowedDomains: ['string'], allowedDomainSets: ['string'] },
     });
   });
 

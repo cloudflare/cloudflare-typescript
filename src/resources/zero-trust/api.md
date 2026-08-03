@@ -866,7 +866,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/one/applications/{application_id}">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">get</a>(applicationID, { ...params }) -> ApplicationGetResponse</code>
 
 #### AuthMethods
@@ -877,7 +877,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/one/applications/{application_id}/auth-methods">client.zeroTrust.casb.applications.authMethods.<a href="./src/resources/zero-trust/casb/applications/auth-methods.ts">list</a>(applicationID, { ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/one/applications/{application_id}/auth-methods">client.zeroTrust.casb.applications.authMethods.<a href="./src/resources/zero-trust/casb/applications/auth-methods.ts">list</a>(applicationID, { ...params }) -> AuthMethodListResponsesSinglePage</code>
 
 ### Integrations
 
@@ -894,7 +894,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
 - <code title="patch /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">update</a>(id, { ...params }) -> IntegrationUpdateResponse</code>
-- <code title="get /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">list</a>({ ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">list</a>({ ...params }) -> IntegrationListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">delete</a>(id, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">get</a>(id, { ...params }) -> IntegrationGetResponse</code>
 - <code title="post /accounts/{account_id}/one/integrations/{id}/pause">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">pause</a>(id, { ...params }) -> IntegrationPauseResponse</code>

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { PagePromise, SinglePage } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -80,15 +81,24 @@ export class BaseIntegrations extends APIResource {
    *
    * @example
    * ```ts
-   * const integrations =
-   *   await client.zeroTrust.casb.integrations.list({
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   });
+   * // Automatically fetches more pages as needed.
+   * for await (const integrationListResponse of client.zeroTrust.casb.integrations.list(
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * )) {
+   *   // ...
+   * }
    * ```
    */
-  list(params: IntegrationListParams, options?: RequestOptions): APIPromise<unknown> {
+  list(
+    params: IntegrationListParams,
+    options?: RequestOptions,
+  ): PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
     const { account_id, ...query } = params;
-    return this._client.get(path`/accounts/${account_id}/one/integrations`, { query, ...options });
+    return this._client.getAPIList(
+      path`/accounts/${account_id}/one/integrations`,
+      SinglePage<IntegrationListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -182,6 +192,8 @@ export class BaseIntegrations extends APIResource {
   }
 }
 export class Integrations extends BaseIntegrations {}
+
+export type IntegrationListResponsesSinglePage = SinglePage<IntegrationListResponse>;
 
 /**
  * The requested item.
@@ -359,7 +371,42 @@ export namespace IntegrationUpdateResponse {
   }
 }
 
-export type IntegrationListResponse = unknown;
+/**
+ * Serializer for v2 integration list responses.
+ */
+export interface IntegrationListResponse {
+  /**
+   * Integration ID.
+   */
+  id: string;
+
+  application: { [key: string]: string | null };
+
+  /**
+   * When the integration was created.
+   */
+  created: string;
+
+  /**
+   * Whether the user paused the integration.
+   */
+  is_paused: boolean;
+
+  /**
+   * Name of the integration.
+   */
+  name: string;
+
+  /**
+   * Integration status.
+   */
+  status: string;
+
+  /**
+   * When the integration was last updated.
+   */
+  updated: string;
+}
 
 /**
  * The requested item.
@@ -641,7 +688,6 @@ export interface IntegrationCreateParams {
    * - `CONFLUENCE` - CONFLUENCE
    * - `DROPBOX` - DROPBOX
    * - `GITHUB` - GITHUB
-   * - `GITLAB` - GITLAB
    * - `GOOGLE_CLOUD_PLATFORM` - GOOGLE_CLOUD_PLATFORM
    * - `GOOGLE_WORKSPACE` - GOOGLE_WORKSPACE
    * - `JIRA` - JIRA
@@ -650,7 +696,6 @@ export interface IntegrationCreateParams {
    * - `SALESFORCE` - SALESFORCE
    * - `SERVICENOW` - SERVICENOW
    * - `SLACK` - SLACK
-   * - `ZOOM` - ZOOM
    */
   application:
     | 'ANTHROPIC'
@@ -660,7 +705,6 @@ export interface IntegrationCreateParams {
     | 'CONFLUENCE'
     | 'DROPBOX'
     | 'GITHUB'
-    | 'GITLAB'
     | 'GOOGLE_CLOUD_PLATFORM'
     | 'GOOGLE_WORKSPACE'
     | 'JIRA'
@@ -668,8 +712,7 @@ export interface IntegrationCreateParams {
     | 'OPENAI'
     | 'SALESFORCE'
     | 'SERVICENOW'
-    | 'SLACK'
-    | 'ZOOM';
+    | 'SLACK';
 
   /**
    * Body param: Credentials for the integration.
@@ -826,6 +869,7 @@ export declare namespace Integrations {
     type IntegrationGetResponse as IntegrationGetResponse,
     type IntegrationPauseResponse as IntegrationPauseResponse,
     type IntegrationResumeResponse as IntegrationResumeResponse,
+    type IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
     type IntegrationCreateParams as IntegrationCreateParams,
     type IntegrationUpdateParams as IntegrationUpdateParams,
     type IntegrationListParams as IntegrationListParams,

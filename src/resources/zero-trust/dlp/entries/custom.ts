@@ -266,6 +266,12 @@ export namespace CustomListResponse {
     type: 'predefined';
 
     /**
+     * Whether this entry is deprecated for new use. This is computed from the static
+     * catalog and emitted only when true.
+     */
+    deprecated?: boolean;
+
+    /**
      * @deprecated
      */
     profile_id?: string | null;
@@ -509,6 +515,12 @@ export namespace CustomGetResponse {
     name: string;
 
     type: 'predefined';
+
+    /**
+     * Whether this entry is deprecated for new use. This is computed from the static
+     * catalog and emitted only when true.
+     */
+    deprecated?: boolean;
 
     /**
      * @deprecated
