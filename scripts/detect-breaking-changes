@@ -815,6 +815,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/leaked-credentials/timeseries-groups.test.ts
 	tests/api-resources/bot-management.test.ts
 	tests/api-resources/fraud.test.ts
+	tests/api-resources/precursor.test.ts
 	tests/api-resources/origin-post-quantum-encryption.test.ts
 	tests/api-resources/origin-tls-compliance-modes.test.ts
 	tests/api-resources/google-tag-gateway/google-tag-gateway.test.ts

@@ -112,6 +112,7 @@ export { PageRules, BasePageRules } from './page-rules';
 export { PageShield, BasePageShield } from './page-shield/page-shield';
 export { Pages, BasePages } from './pages/pages';
 export { Pipelines, BasePipelines } from './pipelines/pipelines';
+export { Precursor, BasePrecursor } from './precursor';
 export { Queues, BaseQueues } from './queues/queues';
 export { R2, BaseR2 } from './r2/r2';
 export { R2DataCatalog, BaseR2DataCatalog } from './r2-data-catalog/r2-data-catalog';

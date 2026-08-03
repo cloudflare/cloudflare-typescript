@@ -121,6 +121,7 @@ import { PageRules } from './resources/page-rules/page-rules';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
 import { Pipelines } from './resources/pipelines/pipelines';
+import { Precursor } from './resources/precursor/precursor';
 import { Queues } from './resources/queues/queues';
 import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
 import { R2 } from './resources/r2/r2';
@@ -1284,6 +1285,7 @@ export class Cloudflare extends BaseCloudflare {
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   fraud: API.Fraud = new API.Fraud(this);
+  precursor: API.Precursor = new API.Precursor(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
   originTLSComplianceModes: API.OriginTLSComplianceModes = new API.OriginTLSComplianceModes(this);
   googleTagGateway: API.GoogleTagGateway = new API.GoogleTagGateway(this);
@@ -1406,6 +1408,7 @@ Cloudflare.VulnerabilityScanner = VulnerabilityScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.Fraud = Fraud;
+Cloudflare.Precursor = Precursor;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
 Cloudflare.OriginTLSComplianceModes = OriginTLSComplianceModes;
 Cloudflare.GoogleTagGateway = GoogleTagGateway;
@@ -1655,6 +1658,8 @@ export declare namespace Cloudflare {
   export { BotManagement as BotManagement };
 
   export { Fraud as Fraud };
+
+  export { Precursor as Precursor };
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
 
