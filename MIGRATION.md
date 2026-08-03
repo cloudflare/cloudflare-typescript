@@ -433,6 +433,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.prefixes.delete()`
 - `client.addressing.prefixes.edit()`
 - `client.addressing.prefixes.get()`
+- `client.addressing.prefixes.validate()`
 - `client.addressing.prefixes.serviceBindings.create()`
 - `client.addressing.prefixes.serviceBindings.list()`
 - `client.addressing.prefixes.serviceBindings.delete()`

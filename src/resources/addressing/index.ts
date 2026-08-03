@@ -33,6 +33,7 @@ export {
   type PrefixDeleteParams,
   type PrefixEditParams,
   type PrefixGetParams,
+  type PrefixValidateParams,
   type PrefixesSinglePage,
 } from './prefixes/index';
 export {
