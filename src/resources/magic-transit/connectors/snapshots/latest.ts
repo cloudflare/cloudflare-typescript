@@ -1289,6 +1289,16 @@ export namespace LatestListResponse {
       tunnel_id: string;
 
       /**
+       * Tunnel round-trip latency variation in milliseconds
+       */
+      jitter_ms?: number;
+
+      /**
+       * 50th percentile tunnel round-trip latency in milliseconds
+       */
+      latency_ms?: number;
+
+      /**
        * Public socket address returned by the NAT detector
        */
       natd_result?: string;
