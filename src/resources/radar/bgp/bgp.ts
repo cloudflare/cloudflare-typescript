@@ -1,7 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as RoutesAPI from './routes';
+import * as HijacksAPI from './hijacks/hijacks';
+import { BaseHijacks, Hijacks } from './hijacks/hijacks';
+import * as IPsAPI from './ips/ips';
+import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips/ips';
+import * as LeaksAPI from './leaks/leaks';
+import { BaseLeaks, Leaks } from './leaks/leaks';
+import * as RoutesAPI from './routes/routes';
 import {
   BaseRoutes,
   RouteAsesParams,
@@ -15,13 +21,7 @@ import {
   RouteStatsParams,
   RouteStatsResponse,
   Routes,
-} from './routes';
-import * as HijacksAPI from './hijacks/hijacks';
-import { BaseHijacks, Hijacks } from './hijacks/hijacks';
-import * as IPsAPI from './ips/ips';
-import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips/ips';
-import * as LeaksAPI from './leaks/leaks';
-import { BaseLeaks, Leaks } from './leaks/leaks';
+} from './routes/routes';
 import * as RPKIAPI from './rpki/rpki';
 import { BaseRPKI, RPKI } from './rpki/rpki';
 import * as TopAPI from './top/top';

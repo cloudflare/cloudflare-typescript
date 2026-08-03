@@ -18,5 +18,5 @@ export {
   type RoutePfx2asParams,
   type RouteRealtimeParams,
   type RouteStatsParams,
-} from './routes';
+} from './routes/index';
 export { Top, BaseTop, type TopPrefixesResponse, type TopPrefixesParams } from './top/index';

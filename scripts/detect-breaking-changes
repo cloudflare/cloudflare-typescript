@@ -722,7 +722,9 @@ TEST_PATHS=(
 	tests/api-resources/radar/bgp/top/ases.test.ts
 	tests/api-resources/radar/bgp/hijacks/hijacks.test.ts
 	tests/api-resources/radar/bgp/hijacks/events.test.ts
-	tests/api-resources/radar/bgp/routes.test.ts
+	tests/api-resources/radar/bgp/routes/routes.test.ts
+	tests/api-resources/radar/bgp/routes/upstreams.test.ts
+	tests/api-resources/radar/bgp/routes/paths.test.ts
 	tests/api-resources/radar/bgp/ips/ips.test.ts
 	tests/api-resources/radar/bgp/ips/top.test.ts
 	tests/api-resources/radar/bgp/rpki/rpki.test.ts

@@ -1629,6 +1629,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bgp.routes.pfx2as()`
 - `client.radar.bgp.routes.realtime()`
 - `client.radar.bgp.routes.stats()`
+- `client.radar.bgp.routes.upstreams.timeseries()`
+- `client.radar.bgp.routes.paths.list()`
 - `client.radar.bgp.ips.timeseries()`
 - `client.radar.bgp.ips.top.ases()`
 - `client.radar.bgp.rpki.aspa.changes()`
