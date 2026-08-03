@@ -169,7 +169,6 @@ Types:
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">SeverityQueryParam</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueListResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClassResponse</a></code>
-- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueDismissResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueSeverityResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueTypeResponse</a></code>
 
@@ -177,6 +176,5 @@ Methods:
 
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">list</a>({ ...params }) -> IssueListResponsesV4PagePagination</code>
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/class">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">class</a>({ ...params }) -> IssueClassResponse</code>
-- <code title="put /accounts/{account_id}/intel/attack-surface-report/{issue_id}/dismiss">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">dismiss</a>(issueID, { ...params }) -> IssueDismissResponse</code>
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/severity">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">severity</a>({ ...params }) -> IssueSeverityResponse</code>
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/type">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">type</a>({ ...params }) -> IssueTypeResponse</code>
