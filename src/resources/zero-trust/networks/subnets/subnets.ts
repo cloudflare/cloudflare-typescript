@@ -3,6 +3,13 @@
 import { APIResource } from '../../../../core/resource';
 import * as CloudflareSourceAPI from './cloudflare-source';
 import { BaseCloudflareSource, CloudflareSource, CloudflareSourceUpdateParams } from './cloudflare-source';
+import * as InitialResolvedIPAPI from './initial-resolved-ip';
+import {
+  BaseInitialResolvedIP,
+  InitialResolvedIP,
+  InitialResolvedIPGetParams,
+  InitialResolvedIPUpdateParams,
+} from './initial-resolved-ip';
 import * as WARPAPI from './warp';
 import {
   BaseWARP,
@@ -58,6 +65,9 @@ export class BaseSubnets extends APIResource {
 export class Subnets extends BaseSubnets {
   warp: WARPAPI.WARP = new WARPAPI.WARP(this._client);
   cloudflareSource: CloudflareSourceAPI.CloudflareSource = new CloudflareSourceAPI.CloudflareSource(
+    this._client,
+  );
+  initialResolvedIP: InitialResolvedIPAPI.InitialResolvedIP = new InitialResolvedIPAPI.InitialResolvedIP(
     this._client,
   );
 }
@@ -124,6 +134,8 @@ Subnets.WARP = WARP;
 Subnets.BaseWARP = BaseWARP;
 Subnets.CloudflareSource = CloudflareSource;
 Subnets.BaseCloudflareSource = BaseCloudflareSource;
+Subnets.InitialResolvedIP = InitialResolvedIP;
+Subnets.BaseInitialResolvedIP = BaseInitialResolvedIP;
 
 export declare namespace Subnets {
   export { type SubnetListParams as SubnetListParams };
@@ -143,6 +155,13 @@ export declare namespace Subnets {
     CloudflareSource as CloudflareSource,
     BaseCloudflareSource as BaseCloudflareSource,
     type CloudflareSourceUpdateParams as CloudflareSourceUpdateParams,
+  };
+
+  export {
+    InitialResolvedIP as InitialResolvedIP,
+    BaseInitialResolvedIP as BaseInitialResolvedIP,
+    type InitialResolvedIPUpdateParams as InitialResolvedIPUpdateParams,
+    type InitialResolvedIPGetParams as InitialResolvedIPGetParams,
   };
 }
 

@@ -993,6 +993,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.networks.subnets.warp.edit()`
 - `client.zeroTrust.networks.subnets.warp.get()`
 - `client.zeroTrust.networks.subnets.cloudflareSource.update()`
+- `client.zeroTrust.networks.subnets.initialResolvedIP.update()`
+- `client.zeroTrust.networks.subnets.initialResolvedIP.get()`
 - `client.zeroTrust.networks.hostnameRoutes.delete()`
 - `client.zeroTrust.networks.hostnameRoutes.edit()`
 - `client.zeroTrust.networks.hostnameRoutes.get()`

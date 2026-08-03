@@ -2015,6 +2015,13 @@ Methods:
 
 - <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> Subnet</code>
 
+#### InitialResolvedIP
+
+Methods:
+
+- <code title="put /accounts/{account_id}/zerotrust/subnets/initial_resolved_ip/{address_family}">client.zeroTrust.networks.subnets.initialResolvedIP.<a href="./src/resources/zero-trust/networks/subnets/initial-resolved-ip.ts">update</a>(addressFamily, { ...params }) -> Subnet</code>
+- <code title="get /accounts/{account_id}/zerotrust/subnets/initial_resolved_ip/{address_family}">client.zeroTrust.networks.subnets.initialResolvedIP.<a href="./src/resources/zero-trust/networks/subnets/initial-resolved-ip.ts">get</a>(addressFamily, { ...params }) -> Subnet</code>
+
 ### HostnameRoutes
 
 Types:
