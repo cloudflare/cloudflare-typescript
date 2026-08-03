@@ -107,7 +107,8 @@ TEST_PATHS=(
 	tests/api-resources/dns-firewall/analytics/reports/bytimes.test.ts
 	tests/api-resources/dns-firewall/reverse-dns.test.ts
 	tests/api-resources/dns/dns.test.ts
-	tests/api-resources/dns/dnssec.test.ts
+	tests/api-resources/dns/dnssec/dnssec.test.ts
+	tests/api-resources/dns/dnssec/zsk.test.ts
 	tests/api-resources/dns/records.test.ts
 	tests/api-resources/dns/usage/usage.test.ts
 	tests/api-resources/dns/usage/zone.test.ts
