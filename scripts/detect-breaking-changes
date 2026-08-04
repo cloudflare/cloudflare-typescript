@@ -99,6 +99,7 @@ TEST_PATHS=(
 	tests/api-resources/custom-hostnames/fallback-origin.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificate-pack.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificates.test.ts
+	tests/api-resources/custom-hostnames/quota.test.ts
 	tests/api-resources/custom-nameservers.test.ts
 	tests/api-resources/tenant-custom-nameservers.test.ts
 	tests/api-resources/dns-firewall/dns-firewall.test.ts

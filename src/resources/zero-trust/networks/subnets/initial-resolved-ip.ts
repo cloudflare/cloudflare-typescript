@@ -11,9 +11,9 @@ export class BaseInitialResolvedIP extends APIResource {
     Object.freeze(['zeroTrust', 'networks', 'subnets', 'initialResolvedIP'] as const);
 
   /**
-   * Updates the CIDR for the account's default gateway ephemeral subnet of the given
-   * address family. The new CIDR must not conflict with existing private routes in
-   * the account.
+   * Updates the CIDR for the account's default Initial Resolved IP Subnet of the
+   * given address family. The new CIDR must not conflict with existing private
+   * routes in the account.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseInitialResolvedIP extends APIResource {
   }
 
   /**
-   * Returns the account's default gateway ephemeral subnet for the given address
+   * Returns the account's default Initial Resolved IP Subnet for the given address
    * family.
    *
    * @example

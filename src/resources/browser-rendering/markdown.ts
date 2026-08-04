@@ -38,7 +38,8 @@ export class BaseMarkdown extends APIResource {
 export class Markdown extends BaseMarkdown {}
 
 /**
- * Markdown content.
+ * Markdown content. Prefixed with YAML frontmatter (e.g. `title`) when the page
+ * provides that metadata.
  */
 export type MarkdownCreateResponse = string;
 

@@ -51,7 +51,8 @@ export interface SnapshotCreateResponse {
   content?: string;
 
   /**
-   * Markdown content.
+   * Markdown content. Prefixed with YAML frontmatter (e.g. `title`) when the page
+   * provides that metadata.
    */
   markdown?: string;
 
