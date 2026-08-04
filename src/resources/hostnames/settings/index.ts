@@ -6,10 +6,11 @@ export {
   BaseTLS,
   type Setting,
   type SettingValue,
+  type TLSListResponse,
   type TLSDeleteResponse,
-  type TLSGetResponse,
   type TLSUpdateParams,
+  type TLSListParams,
   type TLSDeleteParams,
   type TLSGetParams,
-  type TLSGetResponsesSinglePage,
+  type TLSListResponsesSinglePage,
 } from './tls';

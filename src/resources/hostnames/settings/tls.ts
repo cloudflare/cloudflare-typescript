@@ -27,6 +27,22 @@ export class BaseTLS extends APIResource {
   }
 
   /**
+   * List the requested TLS setting for the hostnames under this zone.
+   */
+  list(
+    settingID: 'ciphers' | 'min_tls_version' | 'http2',
+    params: TLSListParams,
+    options?: RequestOptions,
+  ): PagePromise<TLSListResponsesSinglePage, TLSListResponse> {
+    const { zone_id } = params;
+    return this._client.getAPIList(
+      path`/zones/${zone_id}/hostnames/settings/${settingID}`,
+      SinglePage<TLSListResponse>,
+      options,
+    );
+  }
+
+  /**
    * Delete the tls setting value for the hostname.
    */
   delete(hostname: string, params: TLSDeleteParams, options?: RequestOptions): APIPromise<TLSDeleteResponse> {
@@ -40,24 +56,21 @@ export class BaseTLS extends APIResource {
   }
 
   /**
-   * List the requested TLS setting for the hostnames under this zone.
+   * Get the requested TLS setting for the hostname.
    */
-  get(
-    settingID: 'ciphers' | 'min_tls_version' | 'http2',
-    params: TLSGetParams,
-    options?: RequestOptions,
-  ): PagePromise<TLSGetResponsesSinglePage, TLSGetResponse> {
-    const { zone_id } = params;
-    return this._client.getAPIList(
-      path`/zones/${zone_id}/hostnames/settings/${settingID}`,
-      SinglePage<TLSGetResponse>,
-      options,
-    );
+  get(hostname: string, params: TLSGetParams, options?: RequestOptions): APIPromise<Setting> {
+    const { zone_id, setting_id } = params;
+    return (
+      this._client.get(
+        path`/zones/${zone_id}/hostnames/settings/${setting_id}/${hostname}`,
+        options,
+      ) as APIPromise<{ result: Setting }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 export class TLS extends BaseTLS {}
 
-export type TLSGetResponsesSinglePage = SinglePage<TLSGetResponse>;
+export type TLSListResponsesSinglePage = SinglePage<TLSListResponse>;
 
 export interface Setting {
   /**
@@ -120,7 +133,7 @@ export type SettingValue = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<
  */
 export type SettingValueParam = '1.0' | '1.1' | '1.2' | '1.3' | 'on' | 'off' | Array<string>;
 
-export interface TLSDeleteResponse {
+export interface TLSListResponse {
   /**
    * This is the time the tls setting was originally created for this hostname.
    */
@@ -155,7 +168,7 @@ export interface TLSDeleteResponse {
   value?: SettingValue;
 }
 
-export interface TLSGetResponse {
+export interface TLSDeleteResponse {
   /**
    * This is the time the tls setting was originally created for this hostname.
    */
@@ -221,6 +234,13 @@ export interface TLSUpdateParams {
   value: SettingValueParam;
 }
 
+export interface TLSListParams {
+  /**
+   * Identifier.
+   */
+  zone_id: string;
+}
+
 export interface TLSDeleteParams {
   /**
    * Identifier.
@@ -244,16 +264,28 @@ export interface TLSGetParams {
    * Identifier.
    */
   zone_id: string;
+
+  /**
+   * The TLS Setting name. The value type depends on the setting:
+   *
+   * - `ciphers`: value is an array of cipher suite strings (e.g.,
+   *   `["ECDHE-RSA-AES128-GCM-SHA256", "AES128-GCM-SHA256"]`).
+   * - `min_tls_version`: value is a TLS version string (`"1.0"`, `"1.1"`, `"1.2"`,
+   *   or `"1.3"`).
+   * - `http2`: value is `"on"` or `"off"`.
+   */
+  setting_id: 'ciphers' | 'min_tls_version' | 'http2';
 }
 
 export declare namespace TLS {
   export {
     type Setting as Setting,
     type SettingValue as SettingValue,
+    type TLSListResponse as TLSListResponse,
     type TLSDeleteResponse as TLSDeleteResponse,
-    type TLSGetResponse as TLSGetResponse,
-    type TLSGetResponsesSinglePage as TLSGetResponsesSinglePage,
+    type TLSListResponsesSinglePage as TLSListResponsesSinglePage,
     type TLSUpdateParams as TLSUpdateParams,
+    type TLSListParams as TLSListParams,
     type TLSDeleteParams as TLSDeleteParams,
     type TLSGetParams as TLSGetParams,
   };

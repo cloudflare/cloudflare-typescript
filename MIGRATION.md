@@ -1067,6 +1067,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.speed.pages.tests.delete()`
 - `client.speed.pages.tests.get()`
 - `client.hostnames.settings.tls.update()`
+- `client.hostnames.settings.tls.list()`
 - `client.hostnames.settings.tls.delete()`
 - `client.hostnames.settings.tls.get()`
 - `client.snippets.update()`

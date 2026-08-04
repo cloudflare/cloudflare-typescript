@@ -5034,6 +5034,43 @@
       ]
     },
     {
+      "base": "hostnames.settings.tls",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "setting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "realtimeKit.meetings",
       "name": "addParticipant",
       "params": [
