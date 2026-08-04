@@ -226,7 +226,8 @@ export interface ConfigCreateParams {
    * to make to the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
+   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
@@ -422,7 +423,8 @@ export interface ConfigUpdateParams {
    * to make to the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
+   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
@@ -635,7 +637,8 @@ export interface ConfigEditParams {
    * to make to the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
+   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
