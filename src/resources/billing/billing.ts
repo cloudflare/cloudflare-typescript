@@ -4,7 +4,22 @@ import { APIResource } from '../../core/resource';
 import * as ProfilesAPI from './profiles';
 import { BaseProfiles, ProfileGetParams, ProfileGetResponse, Profiles } from './profiles';
 import * as UsageAPI from './usage';
-import { BaseUsage, Usage, UsageGetParams, UsageGetResponse } from './usage';
+import {
+  BaseUsage,
+  Usage,
+  UsageGetAccountUsageInfoV1Params,
+  UsageGetAccountUsageInfoV1Response,
+  UsageGetAccountUsageV1Params,
+  UsageGetAccountUsageV1Response,
+  UsageGetAccountUsageV2Params,
+  UsageGetAccountUsageV2Response,
+  UsageGetParams,
+  UsageGetResponse,
+  UsagePaygoInfoParams,
+  UsagePaygoInfoResponse,
+  UsagePaygoParams,
+  UsagePaygoResponse,
+} from './usage';
 
 export class BaseBilling extends APIResource {
   static override readonly _key: readonly ['billing'] = Object.freeze(['billing'] as const);
@@ -31,6 +46,16 @@ export declare namespace Billing {
     Usage as Usage,
     BaseUsage as BaseUsage,
     type UsageGetResponse as UsageGetResponse,
+    type UsageGetAccountUsageInfoV1Response as UsageGetAccountUsageInfoV1Response,
+    type UsageGetAccountUsageV1Response as UsageGetAccountUsageV1Response,
+    type UsageGetAccountUsageV2Response as UsageGetAccountUsageV2Response,
+    type UsagePaygoResponse as UsagePaygoResponse,
+    type UsagePaygoInfoResponse as UsagePaygoInfoResponse,
     type UsageGetParams as UsageGetParams,
+    type UsageGetAccountUsageInfoV1Params as UsageGetAccountUsageInfoV1Params,
+    type UsageGetAccountUsageV1Params as UsageGetAccountUsageV1Params,
+    type UsageGetAccountUsageV2Params as UsageGetAccountUsageV2Params,
+    type UsagePaygoParams as UsagePaygoParams,
+    type UsagePaygoInfoParams as UsagePaygoInfoParams,
   };
 }
