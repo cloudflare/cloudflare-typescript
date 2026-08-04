@@ -2458,6 +2458,85 @@
       ]
     },
     {
+      "base": "pages.projects.deployments.tails",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.tails",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "tail_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tail_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "pages.projects.domains",
       "name": "delete",
       "params": [

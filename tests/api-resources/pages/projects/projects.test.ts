@@ -304,6 +304,25 @@ const runTests = (client: PartialCloudflare<{ pages: { projects: BaseProjects } 
     });
   });
 
+  test('getUploadToken: only required params', async () => {
+    const responsePromise = client.pages.projects.getUploadToken('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getUploadToken: required and optional params', async () => {
+    const response = await client.pages.projects.getUploadToken('this-is-my-project-01', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
   test('purgeBuildCache: only required params', async () => {
     const responsePromise = client.pages.projects.purgeBuildCache('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

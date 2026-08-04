@@ -424,7 +424,9 @@ TEST_PATHS=(
 	tests/api-resources/pages/projects/deployments/deployments.test.ts
 	tests/api-resources/pages/projects/deployments/history/history.test.ts
 	tests/api-resources/pages/projects/deployments/history/logs.test.ts
+	tests/api-resources/pages/projects/deployments/tails.test.ts
 	tests/api-resources/pages/projects/domains.test.ts
+	tests/api-resources/pages/assets.test.ts
 	tests/api-resources/registrar/registrar.test.ts
 	tests/api-resources/registrar/domains.test.ts
 	tests/api-resources/registrar/registrations.test.ts

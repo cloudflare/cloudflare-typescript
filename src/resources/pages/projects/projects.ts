@@ -158,6 +158,31 @@ export class BaseProjects extends APIResource {
   }
 
   /**
+   * Get a short-lived JWT for Pages Direct Upload asset operations.
+   *
+   * @example
+   * ```ts
+   * const response = await client.pages.projects.getUploadToken(
+   *   'this-is-my-project-01',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  getUploadToken(
+    projectName: string,
+    params: ProjectGetUploadTokenParams,
+    options?: RequestOptions,
+  ): APIPromise<ProjectGetUploadTokenResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        path`/accounts/${account_id}/pages/projects/${projectName}/upload-token`,
+        options,
+      ) as APIPromise<{ result: ProjectGetUploadTokenResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Purge all cached build artifacts for a Pages project
    *
    * @example
@@ -1296,6 +1321,13 @@ export interface Stage {
 }
 
 export type ProjectDeleteResponse = unknown;
+
+export interface ProjectGetUploadTokenResponse {
+  /**
+   * Short-lived JWT used to authenticate Pages Direct Upload asset operations.
+   */
+  jwt: string;
+}
 
 export type ProjectPurgeBuildCacheResponse = unknown;
 
@@ -2794,6 +2826,13 @@ export interface ProjectGetParams {
   account_id: string;
 }
 
+export interface ProjectGetUploadTokenParams {
+  /**
+   * Identifier.
+   */
+  account_id: string;
+}
+
 export interface ProjectPurgeBuildCacheParams {
   /**
    * Identifier.
@@ -2812,6 +2851,7 @@ export declare namespace Projects {
     type Project as Project,
     type Stage as Stage,
     type ProjectDeleteResponse as ProjectDeleteResponse,
+    type ProjectGetUploadTokenResponse as ProjectGetUploadTokenResponse,
     type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
     type ProjectsV4PagePaginationArray as ProjectsV4PagePaginationArray,
     type ProjectCreateParams as ProjectCreateParams,
@@ -2819,6 +2859,7 @@ export declare namespace Projects {
     type ProjectDeleteParams as ProjectDeleteParams,
     type ProjectEditParams as ProjectEditParams,
     type ProjectGetParams as ProjectGetParams,
+    type ProjectGetUploadTokenParams as ProjectGetUploadTokenParams,
     type ProjectPurgeBuildCacheParams as ProjectPurgeBuildCacheParams,
   };
 

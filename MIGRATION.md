@@ -586,6 +586,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.delete()`
 - `client.pages.projects.edit()`
 - `client.pages.projects.get()`
+- `client.pages.projects.getUploadToken()`
 - `client.pages.projects.purgeBuildCache()`
 - `client.pages.projects.deployments.create()`
 - `client.pages.projects.deployments.list()`
@@ -594,6 +595,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.deployments.retry()`
 - `client.pages.projects.deployments.rollback()`
 - `client.pages.projects.deployments.history.logs.get()`
+- `client.pages.projects.deployments.tails.create()`
+- `client.pages.projects.deployments.tails.delete()`
 - `client.pages.projects.domains.create()`
 - `client.pages.projects.domains.list()`
 - `client.pages.projects.domains.delete()`
@@ -1468,6 +1471,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.magicTransit.cf1Sites.ramps.create()`
 - `client.DDoSProtection.advancedTCPProtection.prefixes.bulkCreate()`
 - `client.magicNetworkMonitoring.rules.advertisements.edit()`
+- `client.pages.assets.upload()`
 - `client.rules.lists.items.create()`
 - `client.rules.lists.items.update()`
 - `client.stream.keys.create()`
