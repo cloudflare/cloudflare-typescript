@@ -76,7 +76,7 @@ export interface Sinkhole {
 
 export interface SinkholeListParams {
   /**
-   * An identifier for the resource.
+   * Identifier.
    */
   account_id: string;
 }
