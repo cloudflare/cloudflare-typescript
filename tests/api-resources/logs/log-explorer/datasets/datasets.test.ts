@@ -74,6 +74,7 @@ const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: B
       account_id: 'account_id',
       deletion_protection: true,
       fields: [{ enabled: true, name: 'name' }],
+      filter: 'filter',
     });
   });
 

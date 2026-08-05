@@ -370,6 +370,8 @@ export namespace InstanceGetResponse {
 
     type: 'waitForEvent';
 
+    event_type?: string;
+
     output?: string;
   }
 
@@ -408,6 +410,12 @@ export interface InstanceStepResponse {
     | 'waitingForPause'
     | 'waiting'
     | 'rollingBack';
+
+  /**
+   * The event type the step is waiting on, as supplied to step.waitForEvent. Only
+   * present when type='waitForEvent'.
+   */
+  event_type?: string;
 
   /**
    * Full step output or waitForEvent payload without truncation. Sensitive outputs

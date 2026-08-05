@@ -285,6 +285,12 @@ export interface Dataset {
    * The field configuration for this dataset.
    */
   fields?: Array<Dataset.Field>;
+
+  /**
+   * The Logpush filter predicate applied to this dataset. Omitted when no filter is
+   * set.
+   */
+  filter?: string;
 }
 
 export namespace Dataset {
@@ -363,6 +369,15 @@ export interface UpdateRequest {
    * available fields when absent.
    */
   fields?: Array<UpdateRequest.Field>;
+
+  /**
+   * Optional Logpush filter predicate to restrict which events are ingested. If
+   * omitted, the existing filter is left unchanged. Set to an empty string (`""`) to
+   * clear the filter. Otherwise, replaces the dataset's filter entirely. See
+   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
+   * syntax and examples.
+   */
+  filter?: string | null;
 }
 
 export namespace UpdateRequest {
@@ -454,6 +469,16 @@ export interface DatasetUpdateParams {
    * all available fields when absent.
    */
   fields?: Array<DatasetUpdateParams.Field>;
+
+  /**
+   * Body param: Optional Logpush filter predicate to restrict which events are
+   * ingested. If omitted, the existing filter is left unchanged. Set to an empty
+   * string (`""`) to clear the filter. Otherwise, replaces the dataset's filter
+   * entirely. See
+   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
+   * syntax and examples.
+   */
+  filter?: string | null;
 }
 
 export namespace DatasetUpdateParams {
