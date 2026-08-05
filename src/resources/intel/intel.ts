@@ -22,8 +22,6 @@ import {
   MiscategorizationCreateResponse,
   Miscategorizations,
 } from './miscategorizations';
-import * as SinkholesAPI from './sinkholes';
-import { BaseSinkholes, Sinkhole, SinkholeListParams, Sinkholes, SinkholesSinglePage } from './sinkholes';
 import * as WhoisAPI from './whois';
 import { BaseWhois, Whois, WhoisGetParams, WhoisGetResponse } from './whois';
 import * as ASNAPI from './asn/asn';
@@ -48,6 +46,20 @@ import {
   IndicatorFeedUpdateResponse,
   IndicatorFeeds,
 } from './indicator-feeds/indicator-feeds';
+import * as SinkholesAPI from './sinkholes/sinkholes';
+import {
+  BaseSinkholes,
+  Sinkhole,
+  SinkholeCreateParams,
+  SinkholeDeleteParams,
+  SinkholeDeleteResponse,
+  SinkholeGetParams,
+  SinkholeListParams,
+  SinkholeUpdateParams,
+  SinkholeUpdateResponse,
+  Sinkholes,
+  SinkholesSinglePage,
+} from './sinkholes/sinkholes';
 
 export class BaseIntel extends APIResource {
   static override readonly _key: readonly ['intel'] = Object.freeze(['intel'] as const);
@@ -161,8 +173,14 @@ export declare namespace Intel {
     Sinkholes as Sinkholes,
     BaseSinkholes as BaseSinkholes,
     type Sinkhole as Sinkhole,
+    type SinkholeUpdateResponse as SinkholeUpdateResponse,
+    type SinkholeDeleteResponse as SinkholeDeleteResponse,
     type SinkholesSinglePage as SinkholesSinglePage,
+    type SinkholeCreateParams as SinkholeCreateParams,
+    type SinkholeUpdateParams as SinkholeUpdateParams,
     type SinkholeListParams as SinkholeListParams,
+    type SinkholeDeleteParams as SinkholeDeleteParams,
+    type SinkholeGetParams as SinkholeGetParams,
   };
 
   export { AttackSurfaceReport as AttackSurfaceReport, BaseAttackSurfaceReport as BaseAttackSurfaceReport };

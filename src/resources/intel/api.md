@@ -143,11 +143,33 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/intel/sinkholes.ts">Sinkhole</a></code>
+- <code><a href="./src/resources/intel/sinkholes/sinkholes.ts">Sinkhole</a></code>
+- <code><a href="./src/resources/intel/sinkholes/sinkholes.ts">SinkholeUpdateResponse</a></code>
+- <code><a href="./src/resources/intel/sinkholes/sinkholes.ts">SinkholeDeleteResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>({ ...params }) -> SinkholesSinglePage</code>
+- <code title="post /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">create</a>({ ...params }) -> Sinkhole</code>
+- <code title="put /accounts/{account_id}/intel/sinkholes/{sinkhole_id}">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">update</a>(sinkholeID, { ...params }) -> SinkholeUpdateResponse</code>
+- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">list</a>({ ...params }) -> SinkholesSinglePage</code>
+- <code title="delete /accounts/{account_id}/intel/sinkholes/{sinkhole_id}">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">delete</a>(sinkholeID, { ...params }) -> SinkholeDeleteResponse</code>
+- <code title="get /accounts/{account_id}/intel/sinkholes/{sinkhole_id}">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">get</a>(sinkholeID, { ...params }) -> Sinkhole</code>
+
+### Ingresses
+
+Types:
+
+- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressCreateResponse</a></code>
+- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressUpdateResponse</a></code>
+- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressDeleteResponse</a></code>
+- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">create</a>(sinkholeID, { ...params }) -> IngressCreateResponse</code>
+- <code title="put /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses/{ingress_id}">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">update</a>(ingressID, { ...params }) -> IngressUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses/{ingress_id}">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">delete</a>(ingressID, { ...params }) -> IngressDeleteResponse</code>
+- <code title="get /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses/{ingress_id}">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">get</a>(ingressID, { ...params }) -> IngressGetResponse</code>
 
 ## AttackSurfaceReport
 

@@ -471,6 +471,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.intel.indicatorFeeds.data()`
 - `client.intel.indicatorFeeds.get()`
 - `client.intel.indicatorFeeds.snapshots.update()`
+- `client.intel.sinkholes.update()`
+- `client.intel.sinkholes.delete()`
+- `client.intel.sinkholes.get()`
+- `client.intel.sinkholes.ingresses.create()`
+- `client.intel.sinkholes.ingresses.update()`
+- `client.intel.sinkholes.ingresses.delete()`
+- `client.intel.sinkholes.ingresses.get()`
 - `client.magicTransit.apps.update()`
 - `client.magicTransit.apps.delete()`
 - `client.magicTransit.apps.edit()`
