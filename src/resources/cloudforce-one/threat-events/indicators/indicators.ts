@@ -26,9 +26,10 @@ export class BaseIndicators extends APIResource {
   ] as const);
 
   /**
-   * Retrieves a paginated list of indicators across specified datasets. Use
-   * datasetIds=all or datasetIds=\* to query all datasets for the account. If no
-   * datasetIds provided, uses the default dataset.
+   * Retrieves indicators across specified datasets, ordered by createdAt descending
+   * then UUID, dataset ID, and shard ID ascending. Use datasetIds=all or
+   * datasetIds=\* to query all datasets for the account. If no datasetIds provided,
+   * uses the default dataset.
    *
    * @example
    * ```ts
@@ -60,12 +61,94 @@ export interface IndicatorListResponse {
 
 export namespace IndicatorListResponse {
   export interface Properties {
+    completeness: Properties.Completeness;
+
     indicators: Properties.Indicators;
 
     pagination: Properties.Pagination;
   }
 
   export namespace Properties {
+    export interface Completeness {
+      properties: Completeness.Properties;
+
+      type: string;
+    }
+
+    export namespace Completeness {
+      export interface Properties {
+        complete: Properties.Complete;
+
+        failedDatasets: Properties.FailedDatasets;
+
+        failedShards: Properties.FailedShards;
+
+        warnings: Properties.Warnings;
+      }
+
+      export namespace Properties {
+        export interface Complete {
+          type: string;
+        }
+
+        export interface FailedDatasets {
+          items: FailedDatasets.Items;
+
+          type: string;
+        }
+
+        export namespace FailedDatasets {
+          export interface Items {
+            type: string;
+          }
+        }
+
+        export interface FailedShards {
+          items: FailedShards.Items;
+
+          type: string;
+        }
+
+        export namespace FailedShards {
+          export interface Items {
+            properties: Items.Properties;
+
+            type: string;
+          }
+
+          export namespace Items {
+            export interface Properties {
+              datasetId: Properties.DatasetID;
+
+              shardId: Properties.ShardID;
+            }
+
+            export namespace Properties {
+              export interface DatasetID {
+                type: string;
+              }
+
+              export interface ShardID {
+                type: string;
+              }
+            }
+          }
+        }
+
+        export interface Warnings {
+          items: Warnings.Items;
+
+          type: string;
+        }
+
+        export namespace Warnings {
+          export interface Items {
+            type: string;
+          }
+        }
+      }
+    }
+
     export interface Indicators {
       items: Indicators.Items;
 
@@ -126,6 +209,8 @@ export namespace IndicatorListResponse {
         per_page: Properties.PerPage;
 
         total_count: Properties.TotalCount;
+
+        total_count_is_exact: Properties.TotalCountIsExact;
       }
 
       export namespace Properties {
@@ -142,6 +227,16 @@ export namespace IndicatorListResponse {
         }
 
         export interface TotalCount {
+          description: string;
+
+          nullable: boolean;
+
+          type: string;
+        }
+
+        export interface TotalCountIsExact {
+          description: string;
+
           type: string;
         }
       }
@@ -195,8 +290,9 @@ export interface IndicatorListParams {
   includeTags?: boolean;
 
   /**
-   * Query param: Whether to compute accurate total count via COUNT(\*). Defaults to
-   * false for performance. When false, total_count is an approximation.
+   * Query param: Whether to compute total count via COUNT(\*). Defaults to false for
+   * performance. total_count is null unless this is true and the complete fan-out
+   * succeeds.
    */
   includeTotalCount?: boolean;
 
