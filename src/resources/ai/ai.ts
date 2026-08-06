@@ -42,7 +42,6 @@ import {
 import { APIPromise } from '../../core/api-promise';
 import { type Uploadable } from '../../core/uploads';
 import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
 
 export class BaseAI extends APIResource {
   static override readonly _key: readonly ['ai'] = Object.freeze(['ai'] as const);
@@ -61,7 +60,7 @@ export class BaseAI extends APIResource {
   run(modelName: string, params: AIRunParams, options?: RequestOptions): APIPromise<AIRunResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/ai/run/${modelName}`, {
+      this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
         body,
         ...options,
       }) as APIPromise<{ result: AIRunResponse }>
