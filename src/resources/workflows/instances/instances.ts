@@ -454,6 +454,11 @@ export interface InstanceCreateParams {
   instance_retention?: InstanceCreateParams.InstanceRetention;
 
   /**
+   * Body param
+   */
+  location_hint?: 'wnam' | 'weur' | 'enam' | 'eeur' | 'apac' | 'oc' | 'sam' | 'afr' | 'me';
+
+  /**
    * Body param: JSON-encoded event payload passed into the new instance.
    */
   params?: string;
@@ -532,6 +537,8 @@ export namespace InstanceBulkParams {
     instance_id?: string;
 
     instance_retention?: Body.InstanceRetention;
+
+    location_hint?: 'wnam' | 'weur' | 'enam' | 'eeur' | 'apac' | 'oc' | 'sam' | 'afr' | 'me';
 
     /**
      * JSON-encoded event payload passed into the new instance.
