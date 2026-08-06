@@ -353,6 +353,7 @@ TEST_PATHS=(
 	tests/api-resources/intel/ips.test.ts
 	tests/api-resources/intel/miscategorizations.test.ts
 	tests/api-resources/intel/whois.test.ts
+	tests/api-resources/intel/urls.test.ts
 	tests/api-resources/intel/indicator-feeds/indicator-feeds.test.ts
 	tests/api-resources/intel/indicator-feeds/snapshots.test.ts
 	tests/api-resources/intel/indicator-feeds/permissions.test.ts

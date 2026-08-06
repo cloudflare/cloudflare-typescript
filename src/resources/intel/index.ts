@@ -48,4 +48,5 @@ export {
   type SinkholeGetParams,
   type SinkholesSinglePage,
 } from './sinkholes/index';
+export { URLs, BaseURLs, type URL, type URLGetParams } from './urls';
 export { Whois, BaseWhois, type WhoisGetResponse, type WhoisGetParams } from './whois';
