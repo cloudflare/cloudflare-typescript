@@ -13,8 +13,12 @@ export class BaseRecipients extends APIResource {
   ] as const);
 
   /**
-   * Adds a recipient to a resource share, granting them access to the shared
-   * resources.
+   * Adds a single recipient to an account-targeted resource share, granting them
+   * access to the shared resources. The recipient account must belong to the same
+   * organization as the share owner.
+   *
+   * To replace the entire recipient list in one call, use
+   * `PUT /accounts/{account_id}/shares/{share_id}/recipients` instead.
    *
    * @example
    * ```ts
@@ -40,7 +44,10 @@ export class BaseRecipients extends APIResource {
   }
 
   /**
-   * List share recipients by share ID.
+   * List share recipients by share ID. Returns **all** recipients regardless of
+   * their `association_status` (associating, associated, disassociating,
+   * disassociated). Callers that want only "active" recipients must filter
+   * client-side on the `association_status` field.
    *
    * @example
    * ```ts
@@ -67,8 +74,16 @@ export class BaseRecipients extends APIResource {
   }
 
   /**
-   * Deletion is not immediate, an updated share recipient object with a new status
-   * will be returned.
+   * Performs a **soft delete**: sets the recipient's `desired_association_status` to
+   * `disassociated`, which signals the background reconciliation workflow (Temporal)
+   * to remove the shared resources from the recipient account. The recipient record
+   * remains in the database for audit purposes and is still returned by
+   * `GET /accounts/{account_id}/shares/{share_id}/recipients` with its updated
+   * status.
+   *
+   * Resource access is not fully removed until the workflow completes and
+   * `current_association_status` transitions to `disassociated`. The recipient
+   * record itself is never physically deleted.
    *
    * @example
    * ```ts
@@ -129,6 +144,12 @@ export class Recipients extends BaseRecipients {}
 
 export type RecipientListResponsesV4PagePaginationArray = V4PagePaginationArray<RecipientListResponse>;
 
+/**
+ * A recipient of a share. The `association_status` field tracks the lifecycle of
+ * the shared resources in the recipient account. All recipients are returned by
+ * the list endpoint regardless of status; filter client-side if only active
+ * recipients are needed.
+ */
 export interface RecipientCreateResponse {
   /**
    * Share Recipient identifier tag.
@@ -141,7 +162,19 @@ export interface RecipientCreateResponse {
   account_id: string;
 
   /**
-   * Share Recipient association status.
+   * The current state of the recipient relative to the share. The
+   * `desired_association_status` (not exposed in the response) tracks the target
+   * state set by the API; the background reconciliation workflow drives
+   * `current_association_status` toward it.
+   *
+   * - `associating` — The recipient was recently added; the workflow is pushing
+   *   shared resources into the recipient account.
+   * - `associated` — Shared resources have been successfully applied to the
+   *   recipient account.
+   * - `disassociating` — The recipient was removed (via DELETE or PUT replacement);
+   *   the workflow is removing shared resources from the recipient account.
+   * - `disassociated` — Shared resources have been removed from the recipient
+   *   account. The recipient record remains in the database.
    */
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
@@ -182,6 +215,12 @@ export namespace RecipientCreateResponse {
   }
 }
 
+/**
+ * A recipient of a share. The `association_status` field tracks the lifecycle of
+ * the shared resources in the recipient account. All recipients are returned by
+ * the list endpoint regardless of status; filter client-side if only active
+ * recipients are needed.
+ */
 export interface RecipientListResponse {
   /**
    * Share Recipient identifier tag.
@@ -194,7 +233,19 @@ export interface RecipientListResponse {
   account_id: string;
 
   /**
-   * Share Recipient association status.
+   * The current state of the recipient relative to the share. The
+   * `desired_association_status` (not exposed in the response) tracks the target
+   * state set by the API; the background reconciliation workflow drives
+   * `current_association_status` toward it.
+   *
+   * - `associating` — The recipient was recently added; the workflow is pushing
+   *   shared resources into the recipient account.
+   * - `associated` — Shared resources have been successfully applied to the
+   *   recipient account.
+   * - `disassociating` — The recipient was removed (via DELETE or PUT replacement);
+   *   the workflow is removing shared resources from the recipient account.
+   * - `disassociated` — Shared resources have been removed from the recipient
+   *   account. The recipient record remains in the database.
    */
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
@@ -235,6 +286,12 @@ export namespace RecipientListResponse {
   }
 }
 
+/**
+ * A recipient of a share. The `association_status` field tracks the lifecycle of
+ * the shared resources in the recipient account. All recipients are returned by
+ * the list endpoint regardless of status; filter client-side if only active
+ * recipients are needed.
+ */
 export interface RecipientDeleteResponse {
   /**
    * Share Recipient identifier tag.
@@ -247,7 +304,19 @@ export interface RecipientDeleteResponse {
   account_id: string;
 
   /**
-   * Share Recipient association status.
+   * The current state of the recipient relative to the share. The
+   * `desired_association_status` (not exposed in the response) tracks the target
+   * state set by the API; the background reconciliation workflow drives
+   * `current_association_status` toward it.
+   *
+   * - `associating` — The recipient was recently added; the workflow is pushing
+   *   shared resources into the recipient account.
+   * - `associated` — Shared resources have been successfully applied to the
+   *   recipient account.
+   * - `disassociating` — The recipient was removed (via DELETE or PUT replacement);
+   *   the workflow is removing shared resources from the recipient account.
+   * - `disassociated` — Shared resources have been removed from the recipient
+   *   account. The recipient record remains in the database.
    */
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 
@@ -288,6 +357,12 @@ export namespace RecipientDeleteResponse {
   }
 }
 
+/**
+ * A recipient of a share. The `association_status` field tracks the lifecycle of
+ * the shared resources in the recipient account. All recipients are returned by
+ * the list endpoint regardless of status; filter client-side if only active
+ * recipients are needed.
+ */
 export interface RecipientGetResponse {
   /**
    * Share Recipient identifier tag.
@@ -300,7 +375,19 @@ export interface RecipientGetResponse {
   account_id: string;
 
   /**
-   * Share Recipient association status.
+   * The current state of the recipient relative to the share. The
+   * `desired_association_status` (not exposed in the response) tracks the target
+   * state set by the API; the background reconciliation workflow drives
+   * `current_association_status` toward it.
+   *
+   * - `associating` — The recipient was recently added; the workflow is pushing
+   *   shared resources into the recipient account.
+   * - `associated` — Shared resources have been successfully applied to the
+   *   recipient account.
+   * - `disassociating` — The recipient was removed (via DELETE or PUT replacement);
+   *   the workflow is removing shared resources from the recipient account.
+   * - `disassociated` — Shared resources have been removed from the recipient
+   *   account. The recipient record remains in the database.
    */
   association_status: 'associating' | 'associated' | 'disassociating' | 'disassociated';
 

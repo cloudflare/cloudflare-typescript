@@ -553,6 +553,11 @@ export namespace LatestListResponse {
     platform?: string;
 
     /**
+     * Site identifier
+     */
+    site_id?: string;
+
+    /**
      * Number of ICMP Address Mask Reply messages received
      */
     snmp_icmp_in_addr_mask_reps?: number;
