@@ -58,6 +58,32 @@ export class BaseMessages extends APIResource {
   }
 
   /**
+   * Peek messages from a Queue without leasing them. Messages remain available for
+   * subsequent peek or pull operations.
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.peek(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
+   */
+  peek(
+    queueID: string,
+    params: MessagePeekParams,
+    options?: RequestOptions,
+  ): APIPromise<MessagePeekResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/peek`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: MessagePeekResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Pull a batch of messages from a Queue
    *
    * @example
@@ -79,6 +105,40 @@ export class BaseMessages extends APIResource {
         body,
         ...options,
       }) as APIPromise<{ result: MessagePullResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Delete peeked messages from a Queue by their ref. Purged messages aren't
+   * considered delivered, they are instantly deleted from this queue and do not
+   * affect metrics.
+   *
+   * @example
+   * ```ts
+   * const response = await client.queues.messages.purge(
+   *   '023e105f4ecef8ad9ca31a8372d0c353',
+   *   {
+   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     refs: [
+   *       {
+   *         ref: 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIn0..Q8p21d7dceR6vUfwftONdQ.JVqZgAS-Zk7MqmqccYtTHeeMElNHaOMigeWdb8LyMOg.T2_HV99CYzGaQuhTyW8RsgbnpTRZHRM6N7UoSaAKeK0',
+   *       },
+   *     ],
+   *   },
+   * );
+   * ```
+   */
+  purge(
+    queueID: string,
+    params: MessagePurgeParams,
+    options?: RequestOptions,
+  ): APIPromise<MessagePurgeResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/queues/${queueID}/messages/purge`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: MessagePurgeResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -164,6 +224,30 @@ export namespace MessageBulkPushResponse {
   }
 }
 
+export interface MessagePeekResponse {
+  messages?: Array<MessagePeekResponse.Message>;
+}
+
+export namespace MessagePeekResponse {
+  export interface Message {
+    id?: string;
+
+    attempts?: number;
+
+    body?: string;
+
+    metadata?: unknown;
+
+    /**
+     * An opaque reference to a peeked message. You must hold on to this value and use
+     * it to purge the message.
+     */
+    ref?: string;
+
+    timestamp_ms?: number;
+  }
+}
+
 export interface MessagePullResponse {
   /**
    * The number of unacknowledged messages in the queue.
@@ -224,6 +308,24 @@ export namespace MessagePullResponse {
        */
       oldest_message_timestamp_ms: number;
     }
+  }
+}
+
+export interface MessagePurgeResponse {
+  /**
+   * Errors encountered while purging messages.
+   */
+  errors?: Array<MessagePurgeResponse.Error>;
+
+  /**
+   * Map of refs to warning messages encountered during purge.
+   */
+  warnings?: { [key: string]: string };
+}
+
+export namespace MessagePurgeResponse {
+  export interface Error {
+    message?: string;
   }
 }
 
@@ -350,6 +452,18 @@ export namespace MessageBulkPushParams {
   }
 }
 
+export interface MessagePeekParams {
+  /**
+   * Path param: A Resource identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The maximum number of messages to include in a batch.
+   */
+  batch_size?: number;
+}
+
 export interface MessagePullParams {
   /**
    * Path param: A Resource identifier.
@@ -366,6 +480,28 @@ export interface MessagePullParams {
    * After the timeout, the message becomes available for another attempt.
    */
   visibility_timeout_ms?: number;
+}
+
+export interface MessagePurgeParams {
+  /**
+   * Path param: A Resource identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param
+   */
+  refs: Array<MessagePurgeParams.Ref>;
+}
+
+export namespace MessagePurgeParams {
+  export interface Ref {
+    /**
+     * An opaque reference to a peeked message. You must hold on to this value and use
+     * it to purge the message.
+     */
+    ref: string;
+  }
 }
 
 export type MessagePushParams = MessagePushParams.MqQueueMessageText | MessagePushParams.MqQueueMessageJson;
@@ -422,11 +558,15 @@ export declare namespace Messages {
   export {
     type MessageAckResponse as MessageAckResponse,
     type MessageBulkPushResponse as MessageBulkPushResponse,
+    type MessagePeekResponse as MessagePeekResponse,
     type MessagePullResponse as MessagePullResponse,
+    type MessagePurgeResponse as MessagePurgeResponse,
     type MessagePushResponse as MessagePushResponse,
     type MessageAckParams as MessageAckParams,
     type MessageBulkPushParams as MessageBulkPushParams,
+    type MessagePeekParams as MessagePeekParams,
     type MessagePullParams as MessagePullParams,
+    type MessagePurgeParams as MessagePurgeParams,
     type MessagePushParams as MessagePushParams,
   };
 }
