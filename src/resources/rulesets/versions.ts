@@ -71,7 +71,7 @@ export class BaseVersions extends APIResource {
    * ```
    */
   delete(rulesetVersion: string, params: VersionDeleteParams, options?: RequestOptions): APIPromise<void> {
-    const { ruleset_id, account_id, zone_id } = params;
+    const { ruleset_id, account_id, zone_id, dry_run } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -90,7 +90,7 @@ export class BaseVersions extends APIResource {
         };
     return this._client.delete(
       path`/${accountOrZone}/${accountOrZoneId}/rulesets/${ruleset_id}/versions/${rulesetVersion}`,
-      { ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
+      { query: { dry_run }, ...options, headers: buildHeaders([{ Accept: '*/*' }, options?.headers]) },
     );
   }
 
@@ -1543,19 +1543,28 @@ export interface VersionListParams {
 
 export interface VersionDeleteParams {
   /**
-   * The unique ID of the ruleset.
+   * Path param: The unique ID of the ruleset.
    */
   ruleset_id: string;
 
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Query param: Validates the request without persisting changes when set to
+   * `true`. Responses that normally return 200 return `result: null`; endpoints that
+   * normally return 204 continue to return 204.
+   */
+  dry_run?: boolean;
 }
 
 export interface VersionGetParams {

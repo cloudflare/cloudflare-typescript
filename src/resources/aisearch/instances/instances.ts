@@ -548,14 +548,16 @@ export namespace InstanceCreateResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
+     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
 
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
+     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * support to raise it.
      */
     include_items?: Array<string>;
 
@@ -568,12 +570,60 @@ export namespace InstanceCreateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
+      /**
+       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
+       * recursively and requires the source to be a Verified zone on this account.
+       */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      export interface DiscoverOptions {
+        /**
+         * Maximum link-follow depth from the seed URL.
+         */
+        depth?: number;
+
+        /**
+         * Follow links that point outside the source domain. Must stay `false` — discover
+         * crawls are restricted to the zone you own.
+         */
+        include_external_links?: boolean;
+
+        /**
+         * Follow links to subdomains of the source host.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl (1-100000).
+         */
+        limit?: number;
+
+        /**
+         * Maximum content age in seconds to accept (0–604800).
+         */
+        max_age?: number;
+
+        /**
+         * Where the crawler looks for URLs: 'sitemaps' reads sitemap XML only, 'links'
+         * follows page links only, 'all' does both.
+         */
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -940,14 +990,16 @@ export namespace InstanceUpdateResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
+     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
 
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
+     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * support to raise it.
      */
     include_items?: Array<string>;
 
@@ -960,12 +1012,60 @@ export namespace InstanceUpdateResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
+      /**
+       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
+       * recursively and requires the source to be a Verified zone on this account.
+       */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      export interface DiscoverOptions {
+        /**
+         * Maximum link-follow depth from the seed URL.
+         */
+        depth?: number;
+
+        /**
+         * Follow links that point outside the source domain. Must stay `false` — discover
+         * crawls are restricted to the zone you own.
+         */
+        include_external_links?: boolean;
+
+        /**
+         * Follow links to subdomains of the source host.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl (1-100000).
+         */
+        limit?: number;
+
+        /**
+         * Maximum content age in seconds to accept (0–604800).
+         */
+        max_age?: number;
+
+        /**
+         * Where the crawler looks for URLs: 'sitemaps' reads sitemap XML only, 'links'
+         * follows page links only, 'all' does both.
+         */
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -1222,6 +1322,8 @@ export namespace InstanceListResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
       parse_type?: 'sitemap' | 'discover';
@@ -1230,6 +1332,27 @@ export namespace InstanceListResponse {
     }
 
     export namespace WebCrawler {
+      export interface DiscoverOptions {
+        depth?: number;
+
+        include_external_links?: boolean;
+
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl. New values are capped at 100000; instances
+         * configured before that cap may report a higher stored value, which the crawler
+         * clamps at run time.
+         */
+        limit?: number;
+
+        max_age?: number;
+
+        source?: 'all' | 'sitemaps' | 'links';
+
+        [k: string]: unknown;
+      }
+
       export interface ParseOptions {
         content_selector?: Array<ParseOptions.ContentSelector>;
 
@@ -1576,14 +1699,16 @@ export namespace InstanceDeleteResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
+     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
 
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
+     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * support to raise it.
      */
     include_items?: Array<string>;
 
@@ -1596,12 +1721,60 @@ export namespace InstanceDeleteResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
+      /**
+       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
+       * recursively and requires the source to be a Verified zone on this account.
+       */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      export interface DiscoverOptions {
+        /**
+         * Maximum link-follow depth from the seed URL.
+         */
+        depth?: number;
+
+        /**
+         * Follow links that point outside the source domain. Must stay `false` — discover
+         * crawls are restricted to the zone you own.
+         */
+        include_external_links?: boolean;
+
+        /**
+         * Follow links to subdomains of the source host.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl (1-100000).
+         */
+        limit?: number;
+
+        /**
+         * Maximum content age in seconds to accept (0–604800).
+         */
+        max_age?: number;
+
+        /**
+         * Where the crawler looks for URLs: 'sitemaps' reads sitemap XML only, 'links'
+         * follows page links only, 'all' does both.
+         */
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2074,14 +2247,16 @@ export namespace InstanceReadResponse {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
+     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
 
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
+     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * support to raise it.
      */
     include_items?: Array<string>;
 
@@ -2094,12 +2269,60 @@ export namespace InstanceReadResponse {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
+      /**
+       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
+       * recursively and requires the source to be a Verified zone on this account.
+       */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      export interface DiscoverOptions {
+        /**
+         * Maximum link-follow depth from the seed URL.
+         */
+        depth?: number;
+
+        /**
+         * Follow links that point outside the source domain. Must stay `false` — discover
+         * crawls are restricted to the zone you own.
+         */
+        include_external_links?: boolean;
+
+        /**
+         * Follow links to subdomains of the source host.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl (1-100000).
+         */
+        limit?: number;
+
+        /**
+         * Maximum content age in seconds to accept (0–604800).
+         */
+        max_age?: number;
+
+        /**
+         * Where the crawler looks for URLs: 'sitemaps' reads sitemap XML only, 'links'
+         * follows page links only, 'all' does both.
+         */
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -2643,14 +2866,16 @@ export namespace InstanceCreateParams {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
+     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
 
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
+     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * support to raise it.
      */
     include_items?: Array<string>;
 
@@ -2663,12 +2888,60 @@ export namespace InstanceCreateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
+      /**
+       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
+       * recursively and requires the source to be a Verified zone on this account.
+       */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      export interface DiscoverOptions {
+        /**
+         * Maximum link-follow depth from the seed URL.
+         */
+        depth?: number;
+
+        /**
+         * Follow links that point outside the source domain. Must stay `false` — discover
+         * crawls are restricted to the zone you own.
+         */
+        include_external_links?: boolean;
+
+        /**
+         * Follow links to subdomains of the source host.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl (1-100000).
+         */
+        limit?: number;
+
+        /**
+         * Maximum content age in seconds to accept (0–604800).
+         */
+        max_age?: number;
+
+        /**
+         * Where the crawler looks for URLs: 'sitemaps' reads sitemap XML only, 'links'
+         * follows page links only, 'all' does both.
+         */
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
@@ -3139,14 +3412,16 @@ export namespace InstanceUpdateParams {
     /**
      * List of path patterns to exclude. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /admin/** matches
-     * /admin/users and /admin/settings/advanced)
+     * /admin/users and /admin/settings/advanced). Most accounts are limited to 10
+     * rules; contact support to raise it.
      */
     exclude_items?: Array<string>;
 
     /**
      * List of path patterns to include. Uses micromatch glob syntax: \* matches within
      * a path segment, ** matches across path segments (e.g., /blog/** matches
-     * /blog/post and /blog/2024/post)
+     * /blog/post and /blog/2024/post). Most accounts are limited to 10 rules; contact
+     * support to raise it.
      */
     include_items?: Array<string>;
 
@@ -3159,12 +3434,60 @@ export namespace InstanceUpdateParams {
 
   export namespace SourceParams {
     export interface WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      discover_options?: WebCrawler.DiscoverOptions;
+
       parse_options?: WebCrawler.ParseOptions;
 
+      /**
+       * How URLs are discovered. 'sitemap' reads XML sitemaps; 'discover' follows links
+       * recursively and requires the source to be a Verified zone on this account.
+       */
       parse_type?: 'sitemap' | 'discover';
     }
 
     export namespace WebCrawler {
+      /**
+       * Options for parse_type 'discover', where Browser Run discovers URLs by link
+       * following and sitemaps. Ignored for 'sitemap'.
+       */
+      export interface DiscoverOptions {
+        /**
+         * Maximum link-follow depth from the seed URL.
+         */
+        depth?: number;
+
+        /**
+         * Follow links that point outside the source domain. Must stay `false` — discover
+         * crawls are restricted to the zone you own.
+         */
+        include_external_links?: boolean;
+
+        /**
+         * Follow links to subdomains of the source host.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Maximum number of pages to crawl (1-100000).
+         */
+        limit?: number;
+
+        /**
+         * Maximum content age in seconds to accept (0–604800).
+         */
+        max_age?: number;
+
+        /**
+         * Where the crawler looks for URLs: 'sitemaps' reads sitemap XML only, 'links'
+         * follows page links only, 'all' does both.
+         */
+        source?: 'all' | 'sitemaps' | 'links';
+      }
+
       export interface ParseOptions {
         /**
          * List of path-to-selector mappings for extracting specific content from crawled
