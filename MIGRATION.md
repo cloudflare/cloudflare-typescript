@@ -250,6 +250,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logs.logExplorer.datasets.create()`
 - `client.logs.logExplorer.datasets.update()`
 - `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.delete()`
 - `client.logs.logExplorer.datasets.get()`
 - `client.logs.logExplorer.datasets.available.list()`
 - `client.logs.RayID.get()`
@@ -1571,6 +1572,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.logpush.jobs.delete()`
 - `client.logpush.jobs.get()`
 - `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.delete()`
 - `client.logs.logExplorer.datasets.get()`
 - `client.logs.logExplorer.datasets.available.list()`
 - `client.waitingRooms.list()`

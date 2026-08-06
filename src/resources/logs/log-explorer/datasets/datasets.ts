@@ -155,6 +155,49 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
+   * Deletes a Log Explorer dataset for the account or zone. Dataset deletion must
+   * not be protected.
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.logs.logExplorer.datasets.delete(
+   *     'dataset_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  delete(
+    datasetID: string,
+    params: DatasetDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Dataset> {
+    const { account_id, zone_id } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.delete(
+        path`/${accountOrZone}/${accountOrZoneId}/logs/explorer/datasets/${datasetID}`,
+        options,
+      ) as APIPromise<{ result: Dataset }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Retrieve a single Log Explorer dataset by ID for the account or zone.
    *
    * @example
@@ -515,6 +558,18 @@ export interface DatasetListParams {
   include_zones?: boolean;
 }
 
+export interface DatasetDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
 export interface DatasetGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
@@ -540,6 +595,7 @@ export declare namespace Datasets {
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetUpdateParams as DatasetUpdateParams,
     type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
     type DatasetGetParams as DatasetGetParams,
   };
 
