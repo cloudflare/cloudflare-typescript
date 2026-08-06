@@ -182,6 +182,13 @@ export interface ServerCreateResponse {
    */
   auth_config_summary?: ServerCreateResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -335,6 +342,13 @@ export interface ServerUpdateResponse {
    * endpoints + client_id for manual servers. Never includes the secret value.
    */
   auth_config_summary?: ServerUpdateResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
   created_at?: string;
 
@@ -490,6 +504,13 @@ export interface ServerListResponse {
    */
   auth_config_summary?: ServerListResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -644,6 +665,13 @@ export interface ServerDeleteResponse {
    */
   auth_config_summary?: ServerDeleteResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -797,6 +825,13 @@ export interface ServerReadResponse {
    * endpoints + client_id for manual servers. Never includes the secret value.
    */
   auth_config_summary?: ServerReadResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
   created_at?: string;
 

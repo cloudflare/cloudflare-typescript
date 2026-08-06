@@ -210,6 +210,13 @@ export namespace PortalCreateResponse {
      */
     auth_config_summary?: Server.AuthConfigSummary;
 
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
     created_at?: string;
 
     created_by?: string;
@@ -429,6 +436,13 @@ export namespace PortalUpdateResponse {
      */
     auth_config_summary?: Server.AuthConfigSummary;
 
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
     created_at?: string;
 
     created_by?: string;
@@ -647,6 +661,13 @@ export namespace PortalListResponse {
      * endpoints + client_id for manual servers. Never includes the secret value.
      */
     auth_config_summary?: Server.AuthConfigSummary;
+
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
     created_at?: string;
 
@@ -910,6 +931,13 @@ export namespace PortalReadResponse {
      * endpoints + client_id for manual servers. Never includes the secret value.
      */
     auth_config_summary?: Server.AuthConfigSummary;
+
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
     created_at?: string;
 
