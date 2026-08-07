@@ -74,6 +74,12 @@ export namespace IndicatorListResponse {
       datasetId: string;
 
       eventId: string;
+
+      /**
+       * ISO 8601 date of the related event. Null for legacy relationships created before
+       * event-date tracking was added.
+       */
+      eventDate?: string | null;
     }
 
     export interface Tag {

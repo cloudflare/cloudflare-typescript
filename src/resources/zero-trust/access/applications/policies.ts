@@ -1276,6 +1276,11 @@ export interface PolicyCreateResponse {
   id?: string;
 
   /**
+   * Identifier.
+   */
+  account_id?: string;
+
+  /**
    * Administrators who can approve a temporary authentication request.
    */
   approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -1420,6 +1425,11 @@ export interface PolicyUpdateResponse {
   id?: string;
 
   /**
+   * Identifier.
+   */
+  account_id?: string;
+
+  /**
    * Administrators who can approve a temporary authentication request.
    */
   approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -1562,6 +1572,11 @@ export interface PolicyListResponse {
    * The UUID of the policy
    */
   id?: string;
+
+  /**
+   * Identifier.
+   */
+  account_id?: string;
 
   /**
    * Administrators who can approve a temporary authentication request.
@@ -1713,6 +1728,11 @@ export interface PolicyGetResponse {
    * The UUID of the policy
    */
   id?: string;
+
+  /**
+   * Identifier.
+   */
+  account_id?: string;
 
   /**
    * Administrators who can approve a temporary authentication request.

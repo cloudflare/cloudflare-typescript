@@ -4034,6 +4034,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -4342,6 +4347,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -5023,6 +5033,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -5702,6 +5717,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6099,6 +6119,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6309,6 +6334,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -6523,6 +6553,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6735,6 +6770,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6924,6 +6964,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -7666,6 +7711,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -8227,6 +8277,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -8796,6 +8851,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -9480,6 +9540,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -9788,6 +9853,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -10469,6 +10539,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11148,6 +11223,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11545,6 +11625,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11755,6 +11840,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -11969,6 +12059,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12181,6 +12276,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12370,6 +12470,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -13112,6 +13217,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -13673,6 +13783,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -14242,6 +14357,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -14926,6 +15046,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -15234,6 +15359,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15915,6 +16045,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -16594,6 +16729,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -16991,6 +17131,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17201,6 +17346,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -17415,6 +17565,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17627,6 +17782,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17816,6 +17976,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -18558,6 +18723,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -19119,6 +19289,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -19688,6 +19863,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -20379,6 +20559,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -20687,6 +20872,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -21368,6 +21558,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22047,6 +22242,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22444,6 +22644,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22654,6 +22859,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -22868,6 +23078,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -23080,6 +23295,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -23269,6 +23489,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -24011,6 +24236,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -24572,6 +24802,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -25141,6 +25376,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -25844,6 +26084,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -26147,6 +26392,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -26825,6 +27075,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -27501,6 +27756,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -27882,6 +28142,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28079,6 +28344,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28274,6 +28544,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -28484,6 +28759,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28664,6 +28944,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -29405,6 +29690,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -29959,6 +30249,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -30523,6 +30818,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -31204,6 +31504,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -31507,6 +31812,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -32185,6 +32495,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -32861,6 +33176,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33242,6 +33562,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33439,6 +33764,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33634,6 +33964,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -33844,6 +34179,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -34024,6 +34364,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -34765,6 +35110,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -35319,6 +35669,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -35883,6 +36238,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
