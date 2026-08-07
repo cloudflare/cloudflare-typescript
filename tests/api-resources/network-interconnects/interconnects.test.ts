@@ -130,6 +130,7 @@ const runTests = (
   test('loa: required and optional params', async () => {
     const response = await client.networkInterconnects.interconnects.loa('icon', {
       account_id: 'account_id',
+      name: 'name',
     });
   });
 
