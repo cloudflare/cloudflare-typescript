@@ -53,7 +53,7 @@ const runTests = (client: PartialCloudflare<{ workers: { observability: { querie
       parameters: {
         calculations: [
           {
-            operator: 'uniq',
+            operator: 'count',
             alias: 'alias',
             key: 'key',
             keyType: 'string',

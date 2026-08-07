@@ -166,7 +166,7 @@ const runTests = (
       parameters: {
         calculations: [
           {
-            operator: 'uniq',
+            operator: 'count',
             alias: 'alias',
             key: 'key',
             keyType: 'string',

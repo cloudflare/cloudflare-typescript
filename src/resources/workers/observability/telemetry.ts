@@ -324,7 +324,7 @@ export namespace TelemetryQueryResponse {
         /**
          * Create Calculations to compute as part of the query.
          */
-        calculations?: Array<Parameters.Calculation>;
+        calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
 
         /**
          * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -369,10 +369,21 @@ export namespace TelemetryQueryResponse {
       }
 
       export namespace Parameters {
-        export interface Calculation {
+        export interface UnionMember0 {
+          operator: 'count' | 'COUNT';
+
+          alias?: string;
+
+          key?: string;
+
+          keyType?: 'string' | 'number' | 'boolean';
+        }
+
+        export interface UnionMember1 {
+          key: string;
+
           operator:
             | 'uniq'
-            | 'count'
             | 'max'
             | 'min'
             | 'sum'
@@ -391,7 +402,6 @@ export namespace TelemetryQueryResponse {
             | 'stddev'
             | 'variance'
             | 'COUNT_DISTINCT'
-            | 'COUNT'
             | 'MAX'
             | 'MIN'
             | 'SUM'
@@ -411,8 +421,6 @@ export namespace TelemetryQueryResponse {
             | 'VARIANCE';
 
           alias?: string;
-
-          key?: string;
 
           keyType?: 'string' | 'number' | 'boolean';
         }
@@ -2259,7 +2267,7 @@ export namespace TelemetryQueryParams {
      * Aggregation calculations to compute (e.g. count, avg, p99). Each calculation
      * produces aggregate values and optional time-series data.
      */
-    calculations?: Array<Parameters.Calculation>;
+    calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
 
     /**
      * Datasets to query. Leave empty to query all available datasets.
@@ -2311,14 +2319,47 @@ export namespace TelemetryQueryParams {
   }
 
   export namespace Parameters {
-    export interface Calculation {
+    export interface UnionMember0 {
+      /**
+       * Aggregation operator to apply. Examples: count, avg, sum, min, max, median, p90,
+       * p95, p99, uniq, stddev, variance.
+       */
+      operator: 'count' | 'COUNT';
+
+      /**
+       * Custom label for this calculation in the results. Useful for distinguishing
+       * multiple calculations.
+       */
+      alias?: string;
+
+      /**
+       * Field name to calculate over. Must exist in the data — verify with the keys
+       * endpoint. Required for every operator except `count`, which aggregates whole
+       * rows and may omit it.
+       */
+      key?: string;
+
+      /**
+       * Data type of the key. Required when key is provided to ensure correct
+       * aggregation.
+       */
+      keyType?: 'string' | 'number' | 'boolean';
+    }
+
+    export interface UnionMember1 {
+      /**
+       * Field name to calculate over. Must exist in the data — verify with the keys
+       * endpoint. Required for every operator except `count`, which aggregates whole
+       * rows and may omit it.
+       */
+      key: string;
+
       /**
        * Aggregation operator to apply. Examples: count, avg, sum, min, max, median, p90,
        * p95, p99, uniq, stddev, variance.
        */
       operator:
         | 'uniq'
-        | 'count'
         | 'max'
         | 'min'
         | 'sum'
@@ -2337,7 +2378,6 @@ export namespace TelemetryQueryParams {
         | 'stddev'
         | 'variance'
         | 'COUNT_DISTINCT'
-        | 'COUNT'
         | 'MAX'
         | 'MIN'
         | 'SUM'
@@ -2361,12 +2401,6 @@ export namespace TelemetryQueryParams {
        * multiple calculations.
        */
       alias?: string;
-
-      /**
-       * Field name to calculate over. Must exist in the data — verify with the keys
-       * endpoint. Omit for operators that don't require a key (e.g. count).
-       */
-      key?: string;
 
       /**
        * Data type of the key. Required when key is provided to ensure correct
