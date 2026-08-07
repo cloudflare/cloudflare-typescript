@@ -42,7 +42,6 @@ const runTests = (client: PartialCloudflare<{ billing: { usage: BaseUsage } }>) 
     const response = await client.billing.usage.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: '2025-05-01',
-      metric_id: ['workers_standard_requests', 'http_transferred_bytes'],
       to: '2025-05-31',
     });
   });
@@ -104,7 +103,6 @@ const runTests = (client: PartialCloudflare<{ billing: { usage: BaseUsage } }>) 
     const response = await client.billing.usage.getAccountUsageV2({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: '2025-05-01',
-      metric_id: ['workers_standard_requests', 'http_transferred_bytes'],
       to: '2025-05-31',
     });
   });

@@ -118,6 +118,12 @@ export namespace UsageGetResponse {
     ServiceProviderName: string;
 
     /**
+     * The unique identifier for the billable metric in the Cloudflare catalog.
+     * Cloudflare extension; replaces FOCUS SkuId.
+     */
+    x_BillableMetricId: string;
+
+    /**
      * The display name of the billable metric. Cloudflare extension; replaces FOCUS
      * SkuMeter.
      */
@@ -217,12 +223,6 @@ export namespace UsageGetResponse {
      * subscription or contract display name.
      */
     SubAccountName?: string;
-
-    /**
-     * The unique identifier for the billable metric in the Cloudflare catalog.
-     * Cloudflare extension; replaces FOCUS SkuId.
-     */
-    x_BillableMetricId?: string;
 
     /**
      * The product category the charge belongs to (e.g., "Developer", "Cloudflare

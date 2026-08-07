@@ -200,6 +200,12 @@ export namespace UsageGetResponse {
     ServiceProviderName: string;
 
     /**
+     * The unique identifier for the billable metric in the Cloudflare catalog.
+     * Cloudflare extension; replaces FOCUS SkuId.
+     */
+    x_BillableMetricId: string;
+
+    /**
      * The display name of the billable metric. Cloudflare extension; replaces FOCUS
      * SkuMeter.
      */
@@ -299,12 +305,6 @@ export namespace UsageGetResponse {
      * subscription or contract display name.
      */
     SubAccountName?: string;
-
-    /**
-     * The unique identifier for the billable metric in the Cloudflare catalog.
-     * Cloudflare extension; replaces FOCUS SkuId.
-     */
-    x_BillableMetricId?: string;
 
     /**
      * The product category the charge belongs to (e.g., "Developer", "Cloudflare
@@ -634,6 +634,12 @@ export namespace UsageGetAccountUsageV2Response {
     ServiceProviderName: string;
 
     /**
+     * The unique identifier for the billable metric in the Cloudflare catalog.
+     * Cloudflare extension; replaces FOCUS SkuId.
+     */
+    x_BillableMetricId: string;
+
+    /**
      * The display name of the billable metric. Cloudflare extension; replaces FOCUS
      * SkuMeter.
      */
@@ -733,12 +739,6 @@ export namespace UsageGetAccountUsageV2Response {
      * subscription or contract display name.
      */
     SubAccountName?: string;
-
-    /**
-     * The unique identifier for the billable metric in the Cloudflare catalog.
-     * Cloudflare extension; replaces FOCUS SkuId.
-     */
-    x_BillableMetricId?: string;
 
     /**
      * The product category the charge belongs to (e.g., "Developer", "Cloudflare
@@ -1006,12 +1006,6 @@ export interface UsageGetParams {
   from?: string;
 
   /**
-   * Query param: Filter results by one or more billable metric ids. Repeat the
-   * parameter to filter by multiple metrics. Maximum 10 values.
-   */
-  metric_id?: Array<string>;
-
-  /**
    * Query param: End date for the usage query (ISO 8601). Required if `from` is set.
    * When omitted along with `from`, defaults to today. Filters by charge period
    * (when consumption happened), not billing period. The maximum date range is 31
@@ -1059,12 +1053,6 @@ export interface UsageGetAccountUsageV2Params {
    * maximum date range is 31 days.
    */
   from?: string;
-
-  /**
-   * Query param: Filter results by one or more billable metric ids. Repeat the
-   * parameter to filter by multiple metrics. Maximum 10 values.
-   */
-  metric_id?: Array<string>;
 
   /**
    * Query param: End date for the usage query (ISO 8601). Required if `from` is set.
