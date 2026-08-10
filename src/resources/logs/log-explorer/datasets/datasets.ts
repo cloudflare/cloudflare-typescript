@@ -310,6 +310,11 @@ export interface Dataset {
   enabled: boolean;
 
   /**
+   * The field configuration for this dataset.
+   */
+  fields: Array<Dataset.Field>;
+
+  /**
    * Public ID of the account or zone that owns this dataset.
    */
   object_id: string;
@@ -323,11 +328,6 @@ export interface Dataset {
    * RFC3339 timestamp recording when the API last updated this dataset.
    */
   updated_at: string;
-
-  /**
-   * The field configuration for this dataset.
-   */
-  fields?: Array<Dataset.Field>;
 
   /**
    * The Logpush filter predicate applied to this dataset. Omitted when no filter is
