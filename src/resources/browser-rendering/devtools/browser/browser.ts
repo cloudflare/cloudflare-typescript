@@ -96,7 +96,10 @@ export class BaseBrowser extends APIResource {
   }
 
   /**
-   * Acquires and establishes a WebSocket connection to a browser session.
+   * Acquires and establishes a WebSocket connection to a browser session. Session
+   * guardrails may be supplied in the `cf-brapi-guardrails` header as
+   * base64url-encoded JSON of the same `guardrails` object the POST body accepts
+   * (for example `{"allowedDomains":["*.example.com"]}`).
    *
    * @example
    * ```ts
@@ -106,11 +109,17 @@ export class BaseBrowser extends APIResource {
    * ```
    */
   launch(params: BrowserLaunchParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, ...query } = params;
+    const { account_id, 'cf-brapi-guardrails': cfBrapiGuardrails, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query,
       ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+      headers: buildHeaders([
+        {
+          Accept: '*/*',
+          ...(cfBrapiGuardrails != null ? { 'cf-brapi-guardrails': cfBrapiGuardrails } : undefined),
+        },
+        options?.headers,
+      ]),
     });
   }
 
@@ -381,6 +390,12 @@ export interface BrowserLaunchParams {
    * Query param
    */
   recording?: boolean;
+
+  /**
+   * Header param: Optional base64url-encoded JSON session guardrails (allowedDomains
+   * and allowedDomainSets)
+   */
+  'cf-brapi-guardrails'?: string;
 }
 
 export interface BrowserProtocolParams {

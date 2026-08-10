@@ -120,6 +120,7 @@ const runTests = (
       keep_alive: 10000,
       lab: true,
       recording: true,
+      'cf-brapi-guardrails': 'eyJhbGxvd2VkRG9tYWlucyI6WyIqLmV4YW1wbGUuY29tIl19',
     });
   });
 
