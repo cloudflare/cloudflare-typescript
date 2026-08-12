@@ -229,14 +229,6 @@ export namespace CloudflareTunnel {
     colo_name?: string;
 
     /**
-     * Cloudflare continues to track connections for several minutes after they
-     * disconnect. This is an optimization to improve latency and reliability of
-     * reconnecting. If `true`, the connection has disconnected but is still being
-     * tracked. If `false`, the connection is actively serving traffic.
-     */
-    is_pending_reconnect?: boolean;
-
-    /**
      * Timestamp of when the connection was established.
      */
     opened_at?: string;
@@ -383,9 +375,9 @@ export namespace Member {
       id: string;
 
       /**
-       * The scope associated to the resource group
+       * A scope is a combination of scope objects which provides additional context.
        */
-      scope: Array<ResourceGroup.Scope>;
+      scope: ResourceGroup.Scope;
 
       /**
        * Attributes associated to the resource group.
@@ -1005,10 +997,10 @@ export type MembersV4PagePaginationArray = V4PagePaginationArray<Member>;
 
 export type RolesV4PagePaginationArray = V4PagePaginationArray<Role>;
 
+export type SubscriptionsSinglePage = SinglePage<Subscription>;
+
 export type TokensV4PagePaginationArray = V4PagePaginationArray<Token>;
 
 export type AuditLogsV4PagePaginationArray = V4PagePaginationArray<AuditLog>;
-
-export type SubscriptionsSinglePage = SinglePage<Subscription>;
 
 export type CloudflareTunnelsV4PagePaginationArray = V4PagePaginationArray<CloudflareTunnel>;

@@ -45,13 +45,13 @@ export class BaseApplications extends APIResource {
    * ```ts
    * const application =
    *   await client.zeroTrust.resourceLibrary.applications.get(
-   *     '0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0',
+   *     498,
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
-    id: string,
+    id: number,
     params: ApplicationGetParams,
     options?: RequestOptions,
   ): APIPromise<ApplicationGetResponse> {
@@ -72,7 +72,7 @@ export interface ApplicationListResponse {
   /**
    * Returns the application ID.
    */
-  id: string;
+  id: number;
 
   /**
    * Confidence score for the application. Returns -1 when no score is available.
@@ -153,18 +153,13 @@ export interface ApplicationListResponse {
    * Returns the score composition breakdown for the application.
    */
   application_score_composition?: unknown | null;
-
-  /**
-   * Returns the Intel API ID for the application.
-   */
-  intel_id?: number | null;
 }
 
 export interface ApplicationGetResponse {
   /**
    * Returns the application ID.
    */
-  id: string;
+  id: number;
 
   /**
    * Confidence score for the application. Returns -1 when no score is available.
@@ -245,11 +240,6 @@ export interface ApplicationGetResponse {
    * Returns the score composition breakdown for the application.
    */
   application_score_composition?: unknown | null;
-
-  /**
-   * Returns the Intel API ID for the application.
-   */
-  intel_id?: number | null;
 }
 
 export interface ApplicationListParams {
@@ -262,7 +252,7 @@ export interface ApplicationListParams {
    * Query param: Filter applications using key:value format. Supported filter keys:
    *
    * - name: Filter by application name (e.g., name:HR)
-   * - id: Filter by application ID (e.g., id:0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0)
+   * - id: Filter by application ID (e.g., id:498)
    * - human_id: Filter by human-readable ID (e.g., human_id:HR)
    * - hostname: Filter by hostname or support domain (e.g.,
    *   hostname:portal.example.com)
@@ -270,8 +260,6 @@ export interface ApplicationListParams {
    * - ip_subnet: Filter by IP subnet using CIDR containment — returns applications
    *   where any stored subnet contains the search value (e.g., ip_subnet:10.0.1.5/32
    *   matches apps with 10.0.0.0/16)
-   * - intel_id: Filter by Intel API ID (e.g., intel_id:498). also supports multiple
-   *   values (e.g., intel_id:498,1001)
    * - category_id: Filter by category ID (e.g.,
    *   category_id:37f8ec03-8766-49d4-9a15-369b044c842c).
    * - category_name: Filter by category name (e.g., category_name:HR).

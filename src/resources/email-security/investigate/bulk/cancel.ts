@@ -14,8 +14,8 @@ export class BaseCancel extends APIResource {
   ] as const);
 
   /**
-   * Marks the job as cancelled and stops any pending message processing. The job
-   * record remains visible in list and detail endpoints.
+   * Cancels the job, marking it as cancelled and stopping any pending message
+   * processing. The job record remains visible in list and detail endpoints.
    *
    * @example
    * ```ts
@@ -118,7 +118,7 @@ export namespace CancelCreateResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -149,7 +149,7 @@ export namespace CancelCreateResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 

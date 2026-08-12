@@ -10,8 +10,9 @@ import {
   TLSDeleteParams,
   TLSDeleteResponse,
   TLSGetParams,
-  TLSGetResponse,
-  TLSGetResponsesSinglePage,
+  TLSListParams,
+  TLSListResponse,
+  TLSListResponsesSinglePage,
   TLSUpdateParams,
 } from './tls';
 
@@ -34,10 +35,11 @@ export declare namespace Settings {
     BaseTLS as BaseTLS,
     type Setting as Setting,
     type SettingValue as SettingValue,
+    type TLSListResponse as TLSListResponse,
     type TLSDeleteResponse as TLSDeleteResponse,
-    type TLSGetResponse as TLSGetResponse,
-    type TLSGetResponsesSinglePage as TLSGetResponsesSinglePage,
+    type TLSListResponsesSinglePage as TLSListResponsesSinglePage,
     type TLSUpdateParams as TLSUpdateParams,
+    type TLSListParams as TLSListParams,
     type TLSDeleteParams as TLSDeleteParams,
     type TLSGetParams as TLSGetParams,
   };

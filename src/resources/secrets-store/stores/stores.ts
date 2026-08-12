@@ -38,7 +38,7 @@ export class BaseStores extends APIResource {
   ] as const);
 
   /**
-   * Creates a store in the account
+   * Creates a store in the account.
    *
    * @example
    * ```ts
@@ -59,7 +59,7 @@ export class BaseStores extends APIResource {
   }
 
   /**
-   * Lists all the stores in an account
+   * Lists all the stores in an account.
    *
    * @example
    * ```ts
@@ -112,7 +112,7 @@ export class BaseStores extends APIResource {
   }
 
   /**
-   * Returns details of a single store
+   * Returns details of a single store.
    *
    * @example
    * ```ts
@@ -139,12 +139,12 @@ export type StoreListResponsesV4PagePaginationArray = V4PagePaginationArray<Stor
 
 export interface StoreCreateResponse {
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -154,24 +154,24 @@ export interface StoreCreateResponse {
   modified: string;
 
   /**
-   * The name of the store
+   * The name of the store.
    */
   name: string;
 
   /**
-   * Account Identifier
+   * Account Identifier.
    */
   account_id?: string;
 }
 
 export interface StoreListResponse {
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -181,12 +181,12 @@ export interface StoreListResponse {
   modified: string;
 
   /**
-   * The name of the store
+   * The name of the store.
    */
   name: string;
 
   /**
-   * Account Identifier
+   * Account Identifier.
    */
   account_id?: string;
 }
@@ -198,12 +198,12 @@ export type StoreDeleteResponse = unknown;
 
 export interface StoreGetResponse {
   /**
-   * Store Identifier
+   * Store Identifier.
    */
   id: string;
 
   /**
-   * Whenthe secret was created.
+   * When the secret was created.
    */
   created: string;
 
@@ -213,48 +213,48 @@ export interface StoreGetResponse {
   modified: string;
 
   /**
-   * The name of the store
+   * The name of the store.
    */
   name: string;
 
   /**
-   * Account Identifier
+   * Account Identifier.
    */
   account_id?: string;
 }
 
 export interface StoreCreateParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
   /**
-   * Body param: The name of the store
+   * Body param: The name of the store.
    */
   name: string;
 }
 
 export interface StoreListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
   /**
-   * Query param: Direction to sort objects
+   * Query param: Direction to sort objects.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Order secrets by values in the given field
+   * Query param: Order stores by values in the given field.
    */
-  order?: 'name' | 'comment' | 'created' | 'modified' | 'status';
+  order?: 'name' | 'created' | 'modified';
 }
 
 export interface StoreDeleteParams {
   /**
-   * Path param: Account Identifier
+   * Path param: Account identifier.
    */
   account_id: string;
 
@@ -268,7 +268,7 @@ export interface StoreDeleteParams {
 
 export interface StoreGetParams {
   /**
-   * Account Identifier
+   * Account identifier.
    */
   account_id: string;
 }

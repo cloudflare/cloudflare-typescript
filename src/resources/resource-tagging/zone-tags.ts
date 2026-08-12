@@ -76,6 +76,7 @@ export type ZoneTagUpdateResponse =
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccessApplicationPolicy
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccessGroup
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccount
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccountRuleset
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAIGateway
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAlertingPolicy
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectAlertingWebhook
@@ -88,17 +89,26 @@ export type ZoneTagUpdateResponse =
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectGatewayList
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectGatewayRule
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectHealthcheck
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectImage
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectInfrastructureTarget
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectKVNamespace
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectLoadBalancer
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectLoadBalancerMonitor
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectLoadBalancerPool
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectManagedClientCertificate
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectPagesProject
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectQueue
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectR2Bucket
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectResourceShare
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectStreamLiveInput
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectStreamVideo
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectVectorizeIndex
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectWorker
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectWorkerRoute
   | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectWorkerVersion
-  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectZone;
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectZone
+  | ZoneTagUpdateResponse.ResourceTaggingTaggedResourceObjectZoneRuleset;
 
 export namespace ZoneTagUpdateResponse {
   /**
@@ -125,7 +135,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -161,7 +172,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -197,7 +209,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -228,11 +241,44 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'account';
+  }
+
+  /**
+   * Response for account_ruleset resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectAccountRuleset {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'account_ruleset';
   }
 
   /**
@@ -259,7 +305,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -290,7 +337,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -321,7 +369,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -352,7 +401,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -388,7 +438,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -419,7 +470,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -455,7 +507,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -491,7 +544,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -522,7 +576,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -558,7 +613,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -589,7 +645,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -620,11 +677,49 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'gateway_rule';
+  }
+
+  /**
+   * Response for healthcheck resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectHealthcheck {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'healthcheck';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
   }
 
   /**
@@ -651,11 +746,44 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'image';
+  }
+
+  /**
+   * Response for infrastructure_target resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectInfrastructureTarget {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'infrastructure_target';
   }
 
   /**
@@ -682,11 +810,113 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'kv_namespace';
+  }
+
+  /**
+   * Response for load_balancer resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectLoadBalancer {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'load_balancer';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
+  }
+
+  /**
+   * Response for load_balancer_monitor resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectLoadBalancerMonitor {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'load_balancer_monitor';
+  }
+
+  /**
+   * Response for load_balancer_pool resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectLoadBalancerPool {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'load_balancer_pool';
   }
 
   /**
@@ -713,7 +943,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -723,6 +954,38 @@ export namespace ZoneTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+  }
+
+  /**
+   * Response for pages_project resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectPagesProject {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'pages_project';
   }
 
   /**
@@ -749,7 +1012,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -780,7 +1044,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -811,7 +1076,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -842,7 +1108,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -873,11 +1140,44 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'stream_video';
+  }
+
+  /**
+   * Response for vectorize_index resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectVectorizeIndex {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'vectorize_index';
   }
 
   /**
@@ -904,11 +1204,49 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'worker';
+  }
+
+  /**
+   * Response for worker_route resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectWorkerRoute {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'worker_route';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
   }
 
   /**
@@ -935,7 +1273,8 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -971,11 +1310,49 @@ export namespace ZoneTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'zone';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
+  }
+
+  /**
+   * Response for zone_ruleset resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectZoneRuleset {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'zone_ruleset';
 
     /**
      * Zone ID is required only for zone-level resources
@@ -992,6 +1369,7 @@ export type ZoneTagGetResponse =
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAccessApplicationPolicy
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAccessGroup
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAccount
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAccountRuleset
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAIGateway
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAlertingPolicy
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectAlertingWebhook
@@ -1004,17 +1382,26 @@ export type ZoneTagGetResponse =
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectGatewayList
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectGatewayRule
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectHealthcheck
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectImage
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectInfrastructureTarget
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectKVNamespace
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectLoadBalancer
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectLoadBalancerMonitor
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectLoadBalancerPool
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectManagedClientCertificate
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectPagesProject
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectQueue
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectR2Bucket
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectResourceShare
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectStreamLiveInput
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectStreamVideo
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectVectorizeIndex
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectWorker
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectWorkerRoute
   | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectWorkerVersion
-  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectZone;
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectZone
+  | ZoneTagGetResponse.ResourceTaggingTaggedResourceObjectZoneRuleset;
 
 export namespace ZoneTagGetResponse {
   /**
@@ -1041,7 +1428,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1077,7 +1465,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1113,7 +1502,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1144,11 +1534,44 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'account';
+  }
+
+  /**
+   * Response for account_ruleset resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectAccountRuleset {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'account_ruleset';
   }
 
   /**
@@ -1175,7 +1598,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1206,7 +1630,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1237,7 +1662,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1268,7 +1694,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1304,7 +1731,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1335,7 +1763,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1371,7 +1800,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1407,7 +1837,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1438,7 +1869,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1474,7 +1906,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1505,7 +1938,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1536,11 +1970,49 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'gateway_rule';
+  }
+
+  /**
+   * Response for healthcheck resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectHealthcheck {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'healthcheck';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
   }
 
   /**
@@ -1567,11 +2039,44 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'image';
+  }
+
+  /**
+   * Response for infrastructure_target resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectInfrastructureTarget {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'infrastructure_target';
   }
 
   /**
@@ -1598,11 +2103,113 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'kv_namespace';
+  }
+
+  /**
+   * Response for load_balancer resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectLoadBalancer {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'load_balancer';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
+  }
+
+  /**
+   * Response for load_balancer_monitor resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectLoadBalancerMonitor {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'load_balancer_monitor';
+  }
+
+  /**
+   * Response for load_balancer_pool resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectLoadBalancerPool {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'load_balancer_pool';
   }
 
   /**
@@ -1629,7 +2236,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1639,6 +2247,38 @@ export namespace ZoneTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
+  }
+
+  /**
+   * Response for pages_project resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectPagesProject {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'pages_project';
   }
 
   /**
@@ -1665,7 +2305,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1696,7 +2337,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1727,7 +2369,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1758,7 +2401,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1789,11 +2433,44 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'stream_video';
+  }
+
+  /**
+   * Response for vectorize_index resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectVectorizeIndex {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'vectorize_index';
   }
 
   /**
@@ -1820,11 +2497,49 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'worker';
+  }
+
+  /**
+   * Response for worker_route resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectWorkerRoute {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'worker_route';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
   }
 
   /**
@@ -1851,7 +2566,8 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
@@ -1887,11 +2603,49 @@ export namespace ZoneTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags.
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
      */
     tags: { [key: string]: string };
 
     type: 'zone';
+
+    /**
+     * Zone ID is required only for zone-level resources
+     */
+    zone_id: string;
+  }
+
+  /**
+   * Response for zone_ruleset resources
+   */
+  export interface ResourceTaggingTaggedResourceObjectZoneRuleset {
+    /**
+     * Identifies the unique resource.
+     */
+    id: string;
+
+    /**
+     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
+     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
+     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
+     * should treat ETags as opaque strings and pass them back via the If-Match header
+     * on write operations.
+     */
+    etag: string;
+
+    /**
+     * Human-readable name of the resource.
+     */
+    name: string;
+
+    /**
+     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
+     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     */
+    tags: { [key: string]: string };
+
+    type: 'zone_ruleset';
 
     /**
      * Zone ID is required only for zone-level resources
@@ -1925,11 +2679,17 @@ export declare namespace ZoneTagUpdateParams {
       | 'custom_certificate'
       | 'custom_hostname'
       | 'dns_record'
+      | 'healthcheck'
+      | 'load_balancer'
       | 'managed_client_certificate'
-      | 'zone';
+      | 'worker_route'
+      | 'zone'
+      | 'zone_ruleset';
 
     /**
-     * Body param: Contains key-value pairs of tags.
+     * Body param: Contains key-value pairs of tags. Keys may contain at most 256
+     * characters. Values may contain at most 1024 characters and may be empty for
+     * key-only tags.
      */
     tags?: { [key: string]: string };
 
@@ -1968,12 +2728,18 @@ export declare namespace ZoneTagUpdateParams {
       | 'custom_certificate'
       | 'custom_hostname'
       | 'dns_record'
+      | 'healthcheck'
+      | 'load_balancer'
       | 'managed_client_certificate'
+      | 'worker_route'
       | 'zone'
+      | 'zone_ruleset'
       | 'access_application_policy';
 
     /**
-     * Body param: Contains key-value pairs of tags.
+     * Body param: Contains key-value pairs of tags. Keys may contain at most 256
+     * characters. Values may contain at most 1024 characters and may be empty for
+     * key-only tags.
      */
     tags?: { [key: string]: string };
 
@@ -2022,8 +2788,12 @@ export interface ZoneTagGetParams {
     | 'custom_certificate'
     | 'custom_hostname'
     | 'dns_record'
+    | 'healthcheck'
+    | 'load_balancer'
     | 'managed_client_certificate'
-    | 'zone';
+    | 'worker_route'
+    | 'zone'
+    | 'zone_ruleset';
 
   /**
    * Query param: Access application ID identifier. Required for

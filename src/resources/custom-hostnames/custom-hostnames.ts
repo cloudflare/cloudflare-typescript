@@ -14,6 +14,8 @@ import {
   FallbackOriginUpdateParams,
   FallbackOriginUpdateResponse,
 } from './fallback-origin';
+import * as QuotaAPI from './quota';
+import { BaseQuota, Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import * as CertificatePackAPI from './certificate-pack/certificate-pack';
 import { BaseCertificatePack, CertificatePack } from './certificate-pack/certificate-pack';
 import { APIPromise } from '../../core/api-promise';
@@ -161,6 +163,7 @@ export class BaseCustomHostnames extends APIResource {
 export class CustomHostnames extends BaseCustomHostnames {
   fallbackOrigin: FallbackOriginAPI.FallbackOrigin = new FallbackOriginAPI.FallbackOrigin(this._client);
   certificatePack: CertificatePackAPI.CertificatePack = new CertificatePackAPI.CertificatePack(this._client);
+  quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
 }
 
 export type CustomHostnameListResponsesV4PagePaginationArray =
@@ -2481,6 +2484,8 @@ CustomHostnames.FallbackOrigin = FallbackOrigin;
 CustomHostnames.BaseFallbackOrigin = BaseFallbackOrigin;
 CustomHostnames.CertificatePack = CertificatePack;
 CustomHostnames.BaseCertificatePack = BaseCertificatePack;
+CustomHostnames.Quota = Quota;
+CustomHostnames.BaseQuota = BaseQuota;
 
 export declare namespace CustomHostnames {
   export {
@@ -2513,4 +2518,11 @@ export declare namespace CustomHostnames {
   };
 
   export { CertificatePack as CertificatePack, BaseCertificatePack as BaseCertificatePack };
+
+  export {
+    Quota as Quota,
+    BaseQuota as BaseQuota,
+    type QuotaGetResponse as QuotaGetResponse,
+    type QuotaGetParams as QuotaGetParams,
+  };
 }

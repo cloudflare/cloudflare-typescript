@@ -99,6 +99,7 @@ TEST_PATHS=(
 	tests/api-resources/custom-hostnames/fallback-origin.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificate-pack.test.ts
 	tests/api-resources/custom-hostnames/certificate-pack/certificates.test.ts
+	tests/api-resources/custom-hostnames/quota.test.ts
 	tests/api-resources/custom-nameservers.test.ts
 	tests/api-resources/tenant-custom-nameservers.test.ts
 	tests/api-resources/dns-firewall/dns-firewall.test.ts
@@ -107,7 +108,8 @@ TEST_PATHS=(
 	tests/api-resources/dns-firewall/analytics/reports/bytimes.test.ts
 	tests/api-resources/dns-firewall/reverse-dns.test.ts
 	tests/api-resources/dns/dns.test.ts
-	tests/api-resources/dns/dnssec.test.ts
+	tests/api-resources/dns/dnssec/dnssec.test.ts
+	tests/api-resources/dns/dnssec/zsk.test.ts
 	tests/api-resources/dns/records.test.ts
 	tests/api-resources/dns/usage/usage.test.ts
 	tests/api-resources/dns/usage/zone.test.ts
@@ -351,10 +353,12 @@ TEST_PATHS=(
 	tests/api-resources/intel/ips.test.ts
 	tests/api-resources/intel/miscategorizations.test.ts
 	tests/api-resources/intel/whois.test.ts
+	tests/api-resources/intel/urls.test.ts
 	tests/api-resources/intel/indicator-feeds/indicator-feeds.test.ts
 	tests/api-resources/intel/indicator-feeds/snapshots.test.ts
 	tests/api-resources/intel/indicator-feeds/permissions.test.ts
-	tests/api-resources/intel/sinkholes.test.ts
+	tests/api-resources/intel/sinkholes/sinkholes.test.ts
+	tests/api-resources/intel/sinkholes/ingresses.test.ts
 	tests/api-resources/intel/attack-surface-report/attack-surface-report.test.ts
 	tests/api-resources/intel/attack-surface-report/issue-types.test.ts
 	tests/api-resources/intel/attack-surface-report/issues.test.ts
@@ -422,16 +426,20 @@ TEST_PATHS=(
 	tests/api-resources/pages/projects/deployments/deployments.test.ts
 	tests/api-resources/pages/projects/deployments/history/history.test.ts
 	tests/api-resources/pages/projects/deployments/history/logs.test.ts
+	tests/api-resources/pages/projects/deployments/tails.test.ts
 	tests/api-resources/pages/projects/domains.test.ts
+	tests/api-resources/pages/assets.test.ts
 	tests/api-resources/registrar/registrar.test.ts
 	tests/api-resources/registrar/domains.test.ts
 	tests/api-resources/registrar/registrations.test.ts
 	tests/api-resources/registrar/registration-status.test.ts
 	tests/api-resources/registrar/update-status.test.ts
+	tests/api-resources/registrar/extensions.test.ts
 	tests/api-resources/registrar-sandbox/registrar-sandbox.test.ts
 	tests/api-resources/registrar-sandbox/registrations.test.ts
 	tests/api-resources/registrar-sandbox/registration-status.test.ts
 	tests/api-resources/registrar-sandbox/update-status.test.ts
+	tests/api-resources/registrar-sandbox/extensions.test.ts
 	tests/api-resources/request-tracers/request-tracers.test.ts
 	tests/api-resources/request-tracers/traces.test.ts
 	tests/api-resources/rules/rules.test.ts
@@ -665,6 +673,7 @@ TEST_PATHS=(
 	tests/api-resources/zero-trust/networks/subnets/subnets.test.ts
 	tests/api-resources/zero-trust/networks/subnets/warp.test.ts
 	tests/api-resources/zero-trust/networks/subnets/cloudflare-source.test.ts
+	tests/api-resources/zero-trust/networks/subnets/initial-resolved-ip.test.ts
 	tests/api-resources/zero-trust/networks/hostname-routes.test.ts
 	tests/api-resources/zero-trust/risk-scoring/risk-scoring.test.ts
 	tests/api-resources/zero-trust/risk-scoring/behaviours.test.ts
@@ -719,7 +728,9 @@ TEST_PATHS=(
 	tests/api-resources/radar/bgp/top/ases.test.ts
 	tests/api-resources/radar/bgp/hijacks/hijacks.test.ts
 	tests/api-resources/radar/bgp/hijacks/events.test.ts
-	tests/api-resources/radar/bgp/routes.test.ts
+	tests/api-resources/radar/bgp/routes/routes.test.ts
+	tests/api-resources/radar/bgp/routes/upstreams.test.ts
+	tests/api-resources/radar/bgp/routes/paths.test.ts
 	tests/api-resources/radar/bgp/ips/ips.test.ts
 	tests/api-resources/radar/bgp/ips/top.test.ts
 	tests/api-resources/radar/bgp/rpki/rpki.test.ts
@@ -812,6 +823,7 @@ TEST_PATHS=(
 	tests/api-resources/radar/leaked-credentials/timeseries-groups.test.ts
 	tests/api-resources/bot-management.test.ts
 	tests/api-resources/fraud.test.ts
+	tests/api-resources/precursor.test.ts
 	tests/api-resources/origin-post-quantum-encryption.test.ts
 	tests/api-resources/origin-tls-compliance-modes.test.ts
 	tests/api-resources/google-tag-gateway/google-tag-gateway.test.ts
@@ -934,6 +946,7 @@ TEST_PATHS=(
 	tests/api-resources/resource-tagging/zone-tags.test.ts
 	tests/api-resources/resource-tagging/keys.test.ts
 	tests/api-resources/resource-tagging/values.test.ts
+	tests/api-resources/resource-tagging/summary.test.ts
 	tests/api-resources/leaked-credential-checks/leaked-credential-checks.test.ts
 	tests/api-resources/leaked-credential-checks/detections.test.ts
 	tests/api-resources/content-scanning/content-scanning.test.ts

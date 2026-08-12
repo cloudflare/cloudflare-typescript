@@ -46,6 +46,16 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { cfInterconnects: B
     const response = await client.magicTransit.cfInterconnects.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       automatic_return_routing: true,
+      bgp: {
+        as_no: 0,
+        cloudflare_endpoint: '192.168.1.1',
+        customer_asn: 0,
+        customer_endpoint: '192.168.1.1',
+        export_filter_id: 'a1b2c3d4e5f647890a1b2c3d4e5f6789',
+        extra_prefixes: ['string'],
+        import_filter_id: 'a1b2c3d4e5f647890a1b2c3d4e5f6789',
+        md5_key: 'md5_key',
+      },
       description: 'Tunnel for Interconnect to ORD',
       gre: { cloudflare_endpoint: '203.0.113.1' },
       health_check: {
@@ -54,7 +64,7 @@ const runTests = (client: PartialCloudflare<{ magicTransit: { cfInterconnects: B
         target: { saved: '203.0.113.1' },
         type: 'request',
       },
-      interface_address: '192.0.2.0/31',
+      interface_address: '192.0.2.3/29',
       interface_address6: '2606:54c1:7:0:a9fe:12d2:1:200/127',
       mtu: 0,
       name: 'pni_ord',

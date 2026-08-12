@@ -7,10 +7,12 @@ export {
   type ApplicationGetResponse,
   type ApplicationListParams,
   type ApplicationGetParams,
+  type ApplicationListResponsesSinglePage,
 } from './applications';
 export {
   AuthMethods,
   BaseAuthMethods,
   type AuthMethodListResponse,
   type AuthMethodListParams,
+  type AuthMethodListResponsesSinglePage,
 } from './auth-methods';

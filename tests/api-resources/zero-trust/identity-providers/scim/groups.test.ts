@@ -52,7 +52,7 @@ const runTests = (
         idp_resource_id: ['all_employees'],
         name: 'ALL_EMPLOYEES',
         page: 0,
-        per_page: 0,
+        per_page: 100,
       },
     );
   });

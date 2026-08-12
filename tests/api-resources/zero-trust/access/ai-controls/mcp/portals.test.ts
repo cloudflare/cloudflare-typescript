@@ -52,6 +52,7 @@ const runTests = (
       hostname: 'exmaple.com',
       name: 'My MCP Portal',
       allow_code_mode: true,
+      code_mode: 'opt_in',
       description: 'This is my custom MCP Portal',
       secure_web_gateway: false,
       servers: [
@@ -97,6 +98,7 @@ const runTests = (
     const response = await client.zeroTrust.access.aiControls.mcp.portals.update('my-mcp-portal', {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
       allow_code_mode: true,
+      code_mode: 'opt_in',
       description: 'This is my custom MCP Portal',
       hostname: 'exmaple.com',
       name: 'My MCP Portal',

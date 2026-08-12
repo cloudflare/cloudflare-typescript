@@ -194,6 +194,29 @@ export interface FindingTypeListParams extends V4PagePaginationArrayParams {
    * Path param: Cloudflare account ID for the user making the request.
    */
   account_id: string;
+
+  /**
+   * Query param: Filter finding types by vendor. Supports multiple comma-separated
+   * values.
+   */
+  vendors?: Array<
+    | 'ANTHROPIC'
+    | 'AWS'
+    | 'BITBUCKET'
+    | 'BOX'
+    | 'CONFLUENCE'
+    | 'DROPBOX'
+    | 'GITHUB'
+    | 'GOOGLE_CLOUD_PLATFORM'
+    | 'GOOGLE_WORKSPACE'
+    | 'JIRA'
+    | 'MICROSOFT'
+    | 'MICROSOFT_INTERNAL'
+    | 'OPENAI'
+    | 'SALESFORCE'
+    | 'SERVICENOW'
+    | 'SLACK'
+  >;
 }
 
 export interface FindingTypeGetParams {

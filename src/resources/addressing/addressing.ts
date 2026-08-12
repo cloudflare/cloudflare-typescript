@@ -43,6 +43,7 @@ import {
   PrefixEditParams,
   PrefixGetParams,
   PrefixListParams,
+  PrefixValidateParams,
   Prefixes,
   PrefixesSinglePage,
 } from './prefixes/prefixes';
@@ -147,5 +148,6 @@ export declare namespace Addressing {
     type PrefixDeleteParams as PrefixDeleteParams,
     type PrefixEditParams as PrefixEditParams,
     type PrefixGetParams as PrefixGetParams,
+    type PrefixValidateParams as PrefixValidateParams,
   };
 }

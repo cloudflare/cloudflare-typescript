@@ -43,9 +43,10 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * Returns metadata for every token in the relay's registry. Secrets are never
-   * returned. The dashboard derives an `expired` flag by comparing each token's
-   * `expires` to the current time.
+   * Returns metadata for every token the relay accepts. Secrets are never returned,
+   * so a token that has been lost cannot be recovered here. There is no expiry
+   * filter: compare each token's `expires` to the current time to tell which ones
+   * have lapsed.
    *
    * @example
    * ```ts
@@ -65,8 +66,10 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * Revokes a token by removing it from the relay's registry. crique rejects the
-   * token within the cache TTL. Idempotent — revoking an unknown token succeeds.
+   * Revokes a token by removing it from the set the relay accepts. Relays cache that
+   * set, so revocation takes effect within seconds rather than instantly, and
+   * connections already established with the token are not closed. Revoking an
+   * unknown token succeeds, so the call is idempotent.
    *
    * @example
    * ```ts

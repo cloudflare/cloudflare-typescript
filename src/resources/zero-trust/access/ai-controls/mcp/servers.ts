@@ -182,6 +182,13 @@ export interface ServerCreateResponse {
    */
   auth_config_summary?: ServerCreateResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -196,8 +203,7 @@ export interface ServerCreateResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -337,6 +343,13 @@ export interface ServerUpdateResponse {
    */
   auth_config_summary?: ServerUpdateResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -351,8 +364,7 @@ export interface ServerUpdateResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -492,6 +504,13 @@ export interface ServerListResponse {
    */
   auth_config_summary?: ServerListResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -506,8 +525,7 @@ export interface ServerListResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -647,6 +665,13 @@ export interface ServerDeleteResponse {
    */
   auth_config_summary?: ServerDeleteResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -661,8 +686,7 @@ export interface ServerDeleteResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -802,6 +826,13 @@ export interface ServerReadResponse {
    */
   auth_config_summary?: ServerReadResponse.AuthConfigSummary;
 
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
@@ -816,8 +847,7 @@ export interface ServerReadResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -1018,8 +1048,7 @@ export interface ServerCreateParams {
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
    * the customer portal hostname. Defaults to false (off); opt in per server by
-   * setting true. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * setting true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -1089,8 +1118,7 @@ export interface ServerUpdateParams {
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
    * the customer portal hostname. Defaults to false (off); opt in per server by
-   * setting true. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * setting true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 

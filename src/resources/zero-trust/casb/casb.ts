@@ -11,6 +11,7 @@ import {
   IntegrationGetResponse,
   IntegrationListParams,
   IntegrationListResponse,
+  IntegrationListResponsesSinglePage,
   IntegrationPauseParams,
   IntegrationPauseResponse,
   IntegrationResumeParams,
@@ -25,6 +26,7 @@ import {
   ApplicationGetResponse,
   ApplicationListParams,
   ApplicationListResponse,
+  ApplicationListResponsesSinglePage,
   Applications,
   BaseApplications,
 } from './applications/applications';
@@ -56,6 +58,7 @@ export declare namespace Casb {
     BaseApplications as BaseApplications,
     type ApplicationListResponse as ApplicationListResponse,
     type ApplicationGetResponse as ApplicationGetResponse,
+    type ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
     type ApplicationListParams as ApplicationListParams,
     type ApplicationGetParams as ApplicationGetParams,
   };
@@ -69,6 +72,7 @@ export declare namespace Casb {
     type IntegrationGetResponse as IntegrationGetResponse,
     type IntegrationPauseResponse as IntegrationPauseResponse,
     type IntegrationResumeResponse as IntegrationResumeResponse,
+    type IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
     type IntegrationCreateParams as IntegrationCreateParams,
     type IntegrationUpdateParams as IntegrationUpdateParams,
     type IntegrationListParams as IntegrationListParams,

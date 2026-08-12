@@ -163,12 +163,12 @@ export interface JobCreateParams {
   account_id: string;
 
   /**
-   * Body param: Array of finding instance IDs to send to the webhooks
+   * Body param: Array of finding instance IDs to send to the webhooks.
    */
   finding_instance_ids: Array<string>;
 
   /**
-   * Body param: Array of webhook IDs to trigger jobs for
+   * Body param: Array of webhook IDs to trigger jobs for.
    */
   webhook_ids: Array<string>;
 }

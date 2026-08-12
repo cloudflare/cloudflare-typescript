@@ -12,3 +12,4 @@ export {
   type FallbackOriginDeleteParams,
   type FallbackOriginGetParams,
 } from './fallback-origin';
+export { Quota, BaseQuota, type QuotaGetResponse, type QuotaGetParams } from './quota';

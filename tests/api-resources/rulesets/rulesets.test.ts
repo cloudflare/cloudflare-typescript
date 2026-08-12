@@ -43,6 +43,7 @@ const runTests = (client: PartialCloudflare<{ rulesets: BaseRulesets }>) => {
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
       account_id: 'account_id',
+      dry_run: true,
       description: 'A description for my ruleset.',
       rules: [
         {

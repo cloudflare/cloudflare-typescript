@@ -67,7 +67,7 @@ export interface MessageListResponse {
   processed_at?: string | null;
 
   /**
-   * When to retry the action if it failed
+   * When to retry the action if it failed.
    */
   retry_after?: string | null;
 

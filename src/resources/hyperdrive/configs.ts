@@ -44,7 +44,11 @@ export class BaseConfigs extends APIResource {
   }
 
   /**
-   * Updates and returns the specified Hyperdrive configuration.
+   * Replaces and returns the specified Hyperdrive configuration. The request must
+   * include the name and complete origin connection details. Omitted caching
+   * settings are reset to their defaults, while omitted mTLS settings and origin
+   * connection limits are preserved. Use the update operation to modify only
+   * selected fields.
    *
    * @example
    * ```ts
@@ -130,8 +134,8 @@ export class BaseConfigs extends APIResource {
   }
 
   /**
-   * Patches and returns the specified Hyperdrive configuration. Custom caching
-   * settings are not kept if caching is disabled.
+   * Updates and returns the specified fields of the Hyperdrive configuration. Custom
+   * caching settings are not kept if caching is disabled.
    *
    * @example
    * ```ts
@@ -222,7 +226,8 @@ export interface ConfigCreateParams {
    * to make to the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
+   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
@@ -418,7 +423,8 @@ export interface ConfigUpdateParams {
    * to make to the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
+   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
@@ -631,7 +637,8 @@ export interface ConfigEditParams {
    * to make to the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
+   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;

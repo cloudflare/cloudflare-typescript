@@ -58,6 +58,11 @@ export interface MatchDownloadParams {
   /**
    * Query param
    */
+  include_dismissed?: boolean;
+
+  /**
+   * Query param
+   */
   include_domain_id?: boolean;
 
   /**
@@ -81,6 +86,11 @@ export interface MatchGetParams {
    * Query param
    */
   id?: string;
+
+  /**
+   * Query param
+   */
+  include_dismissed?: boolean;
 
   /**
    * Query param

@@ -896,6 +896,7 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindAI
       | Metadata.WorkersBindingKindAISearch
       | Metadata.WorkersBindingKindAISearchNamespace
+      | Metadata.WorkersBindingKindMessaging
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
@@ -1160,6 +1161,23 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'ai_search_namespace';
+    }
+
+    export interface WorkersBindingKindMessaging {
+      /**
+       * A JavaScript variable name for the binding.
+       */
+      name: string;
+
+      /**
+       * The Messaging namespace to bind to.
+       */
+      namespace: string;
+
+      /**
+       * The kind of resource that the binding provides.
+       */
+      type: 'messaging';
     }
 
     export interface WorkersBindingKindAnalyticsEngine {

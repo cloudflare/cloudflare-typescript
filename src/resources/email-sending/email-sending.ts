@@ -148,8 +148,8 @@ export interface EmailSendingSendParams {
   >;
 
   /**
-   * Body param: BCC recipient(s). A single email string, a named address object, or
-   * an array of either.
+   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
+   * string, a named address object, or an array of either.
    */
   bcc?:
     | string
@@ -157,8 +157,8 @@ export interface EmailSendingSendParams {
     | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
 
   /**
-   * Body param: CC recipient(s). A single email string, a named address object, or
-   * an array of either.
+   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
+   * string, a named address object, or an array of either.
    */
   cc?:
     | string
@@ -225,7 +225,7 @@ export namespace EmailSendingSendParams {
     content_id: string;
 
     /**
-     * Must be 'inline'. Embeds the attachment in the email body.
+     * Use 'inline' to embed the attachment in the email body.
      */
     disposition: 'inline';
 
@@ -247,7 +247,7 @@ export namespace EmailSendingSendParams {
     content: string;
 
     /**
-     * Must be 'attachment'. Adds a standard file attachment.
+     * Use 'attachment' for a standard file attachment.
      */
     disposition: 'attachment';
 

@@ -88,6 +88,14 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
+          discover_options: {
+            depth: 5,
+            include_external_links: false,
+            include_subdomains: false,
+            limit: 10000,
+            max_age: 86400,
+            source: 'all',
+          },
           parse_options: {
             content_selector: [
               { path: '**/blog/**', selector: 'article div.post-body' },
@@ -168,6 +176,14 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
+          discover_options: {
+            depth: 5,
+            include_external_links: false,
+            include_subdomains: false,
+            limit: 10000,
+            max_age: 86400,
+            source: 'all',
+          },
           parse_options: {
             content_selector: [
               { path: '**/blog/**', selector: 'article div.post-body' },

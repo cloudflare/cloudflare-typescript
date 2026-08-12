@@ -156,11 +156,11 @@ export class BlockSenders extends BaseBlockSenders {}
 export type BlockSenderListResponsesV4PagePaginationArray = V4PagePaginationArray<BlockSenderListResponse>;
 
 /**
- * A blocked sender pattern
+ * A blocked sender pattern.
  */
 export interface BlockSenderCreateResponse {
   /**
-   * Blocked sender pattern identifier
+   * Blocked sender pattern identifier.
    */
   id?: string;
 
@@ -178,13 +178,11 @@ export interface BlockSenderCreateResponse {
   modified_at?: string;
 
   /**
-   * The pattern value to match against. Format depends on `pattern_type`:
-   *
-   * - EMAIL: a valid email address, e.g. `user@example.com`
-   * - DOMAIN: a valid domain name, e.g. `example.com`
-   * - IP: a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted; private,
-   *   loopback, link-local, and unspecified addresses are rejected.
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern?: string;
 
@@ -194,19 +192,19 @@ export interface BlockSenderCreateResponse {
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
    * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted.
-   * - UNKNOWN: deprecated, cannot be used when creating or updating policies, but
-   *   may be returned for existing entries.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
 /**
- * A blocked sender pattern
+ * A blocked sender pattern.
  */
 export interface BlockSenderListResponse {
   /**
-   * Blocked sender pattern identifier
+   * Blocked sender pattern identifier.
    */
   id?: string;
 
@@ -224,13 +222,11 @@ export interface BlockSenderListResponse {
   modified_at?: string;
 
   /**
-   * The pattern value to match against. Format depends on `pattern_type`:
-   *
-   * - EMAIL: a valid email address, e.g. `user@example.com`
-   * - DOMAIN: a valid domain name, e.g. `example.com`
-   * - IP: a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted; private,
-   *   loopback, link-local, and unspecified addresses are rejected.
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern?: string;
 
@@ -240,26 +236,26 @@ export interface BlockSenderListResponse {
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
    * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted.
-   * - UNKNOWN: deprecated, cannot be used when creating or updating policies, but
-   *   may be returned for existing entries.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
 export interface BlockSenderDeleteResponse {
   /**
-   * Blocked sender pattern identifier
+   * Blocked sender pattern identifier.
    */
   id: string;
 }
 
 /**
- * A blocked sender pattern
+ * A blocked sender pattern.
  */
 export interface BlockSenderEditResponse {
   /**
-   * Blocked sender pattern identifier
+   * Blocked sender pattern identifier.
    */
   id?: string;
 
@@ -277,13 +273,11 @@ export interface BlockSenderEditResponse {
   modified_at?: string;
 
   /**
-   * The pattern value to match against. Format depends on `pattern_type`:
-   *
-   * - EMAIL: a valid email address, e.g. `user@example.com`
-   * - DOMAIN: a valid domain name, e.g. `example.com`
-   * - IP: a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted; private,
-   *   loopback, link-local, and unspecified addresses are rejected.
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern?: string;
 
@@ -293,19 +287,19 @@ export interface BlockSenderEditResponse {
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
    * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted.
-   * - UNKNOWN: deprecated, cannot be used when creating or updating policies, but
-   *   may be returned for existing entries.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
 
 /**
- * A blocked sender pattern
+ * A blocked sender pattern.
  */
 export interface BlockSenderGetResponse {
   /**
-   * Blocked sender pattern identifier
+   * Blocked sender pattern identifier.
    */
   id?: string;
 
@@ -323,13 +317,11 @@ export interface BlockSenderGetResponse {
   modified_at?: string;
 
   /**
-   * The pattern value to match against. Format depends on `pattern_type`:
-   *
-   * - EMAIL: a valid email address, e.g. `user@example.com`
-   * - DOMAIN: a valid domain name, e.g. `example.com`
-   * - IP: a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted; private,
-   *   loopback, link-local, and unspecified addresses are rejected.
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern?: string;
 
@@ -339,9 +331,9 @@ export interface BlockSenderGetResponse {
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
    * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted.
-   * - UNKNOWN: deprecated, cannot be used when creating or updating policies, but
-   *   may be returned for existing entries.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }
@@ -358,14 +350,11 @@ export interface BlockSenderCreateParams {
   is_regex: boolean;
 
   /**
-   * Body param: The pattern value to match against. Format depends on
-   * `pattern_type`:
-   *
-   * - EMAIL: a valid email address, e.g. `user@example.com`
-   * - DOMAIN: a valid domain name, e.g. `example.com`
-   * - IP: a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted; private,
-   *   loopback, link-local, and unspecified addresses are rejected.
+   * Body param: The pattern value to match. The format depends on `pattern_type`: a
+   * valid email address for EMAIL (e.g. `user@example.com`), a valid domain name for
+   * DOMAIN (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP
+   * (e.g. `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP
+   * addresses and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern: string;
 
@@ -375,9 +364,9 @@ export interface BlockSenderCreateParams {
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
    * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted.
-   * - UNKNOWN: deprecated, cannot be used when creating or updating policies, but
-   *   may be returned for existing entries.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -443,14 +432,11 @@ export interface BlockSenderEditParams {
   is_regex?: boolean;
 
   /**
-   * Body param: The pattern value to match against. Format depends on
-   * `pattern_type`:
-   *
-   * - EMAIL: a valid email address, e.g. `user@example.com`
-   * - DOMAIN: a valid domain name, e.g. `example.com`
-   * - IP: a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted; private,
-   *   loopback, link-local, and unspecified addresses are rejected.
+   * Body param: The pattern value to match. The format depends on `pattern_type`: a
+   * valid email address for EMAIL (e.g. `user@example.com`), a valid domain name for
+   * DOMAIN (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP
+   * (e.g. `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP
+   * addresses and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern?: string;
 
@@ -460,9 +446,9 @@ export interface BlockSenderEditParams {
    * - EMAIL: matches a full email address (e.g. `user@example.com`)
    * - DOMAIN: matches a domain name (e.g. `example.com`)
    * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
-   *   `1.2.3.0/24`). Only globally reachable addresses are accepted.
-   * - UNKNOWN: deprecated, cannot be used when creating or updating policies, but
-   *   may be returned for existing entries.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 }

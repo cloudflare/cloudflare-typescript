@@ -12,3 +12,11 @@ export {
   type DeploymentRollbackParams,
 } from './deployments';
 export { History, BaseHistory } from './history/index';
+export {
+  Tails,
+  BaseTails,
+  type TailCreateResponse,
+  type TailDeleteResponse,
+  type TailCreateParams,
+  type TailDeleteParams,
+} from './tails';

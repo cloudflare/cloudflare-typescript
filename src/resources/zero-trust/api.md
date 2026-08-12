@@ -866,7 +866,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponse</code>
+- <code title="get /accounts/{account_id}/one/applications">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/one/applications/{application_id}">client.zeroTrust.casb.applications.<a href="./src/resources/zero-trust/casb/applications/applications.ts">get</a>(applicationID, { ...params }) -> ApplicationGetResponse</code>
 
 #### AuthMethods
@@ -877,7 +877,7 @@ Types:
 
 Methods:
 
-- <code title="get /accounts/{account_id}/one/applications/{application_id}/auth-methods">client.zeroTrust.casb.applications.authMethods.<a href="./src/resources/zero-trust/casb/applications/auth-methods.ts">list</a>(applicationID, { ...params }) -> AuthMethodListResponse</code>
+- <code title="get /accounts/{account_id}/one/applications/{application_id}/auth-methods">client.zeroTrust.casb.applications.authMethods.<a href="./src/resources/zero-trust/casb/applications/auth-methods.ts">list</a>(applicationID, { ...params }) -> AuthMethodListResponsesSinglePage</code>
 
 ### Integrations
 
@@ -894,7 +894,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">create</a>({ ...params }) -> IntegrationCreateResponse</code>
 - <code title="patch /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">update</a>(id, { ...params }) -> IntegrationUpdateResponse</code>
-- <code title="get /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">list</a>({ ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/one/integrations">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">list</a>({ ...params }) -> IntegrationListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">delete</a>(id, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/one/integrations/{id}">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">get</a>(id, { ...params }) -> IntegrationGetResponse</code>
 - <code title="post /accounts/{account_id}/one/integrations/{id}/pause">client.zeroTrust.casb.integrations.<a href="./src/resources/zero-trust/casb/integrations.ts">pause</a>(id, { ...params }) -> IntegrationPauseResponse</code>
@@ -2014,6 +2014,13 @@ Methods:
 Methods:
 
 - <code title="patch /accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}">client.zeroTrust.networks.subnets.cloudflareSource.<a href="./src/resources/zero-trust/networks/subnets/cloudflare-source.ts">update</a>(addressFamily, { ...params }) -> Subnet</code>
+
+#### InitialResolvedIP
+
+Methods:
+
+- <code title="put /accounts/{account_id}/zerotrust/subnets/initial_resolved_ip/{address_family}">client.zeroTrust.networks.subnets.initialResolvedIP.<a href="./src/resources/zero-trust/networks/subnets/initial-resolved-ip.ts">update</a>(addressFamily, { ...params }) -> Subnet</code>
+- <code title="get /accounts/{account_id}/zerotrust/subnets/initial_resolved_ip/{address_family}">client.zeroTrust.networks.subnets.initialResolvedIP.<a href="./src/resources/zero-trust/networks/subnets/initial-resolved-ip.ts">get</a>(addressFamily, { ...params }) -> Subnet</code>
 
 ### HostnameRoutes
 

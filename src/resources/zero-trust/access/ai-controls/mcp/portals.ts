@@ -148,9 +148,22 @@ export interface PortalCreateResponse {
   servers: Array<PortalCreateResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
+   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
+   * sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
+   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
+   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -197,6 +210,13 @@ export namespace PortalCreateResponse {
      */
     auth_config_summary?: Server.AuthConfigSummary;
 
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
     created_at?: string;
 
     created_by?: string;
@@ -213,8 +233,7 @@ export namespace PortalCreateResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -355,9 +374,22 @@ export interface PortalUpdateResponse {
   servers: Array<PortalUpdateResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
+   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
+   * sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
+   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
+   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -404,6 +436,13 @@ export namespace PortalUpdateResponse {
      */
     auth_config_summary?: Server.AuthConfigSummary;
 
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
     created_at?: string;
 
     created_by?: string;
@@ -420,8 +459,7 @@ export namespace PortalUpdateResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -562,9 +600,22 @@ export interface PortalListResponse {
   servers: Array<PortalListResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
+   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
+   * sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
+   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
+   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -611,6 +662,13 @@ export namespace PortalListResponse {
      */
     auth_config_summary?: Server.AuthConfigSummary;
 
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
     created_at?: string;
 
     created_by?: string;
@@ -627,8 +685,7 @@ export namespace PortalListResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -767,9 +824,22 @@ export interface PortalDeleteResponse {
   name: string;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
+   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
+   * sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
+   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
+   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -800,9 +870,22 @@ export interface PortalReadResponse {
   servers: Array<PortalReadResponse.Server>;
 
   /**
-   * Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
+   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
+   * sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
+   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
+   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
@@ -849,6 +932,13 @@ export namespace PortalReadResponse {
      */
     auth_config_summary?: Server.AuthConfigSummary;
 
+    /**
+     * Whether administrative authentication is required before capabilities can be
+     * synced. Manual OAuth is user-managed and has no administrative authentication
+     * flow.
+     */
+    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
     created_at?: string;
 
     created_by?: string;
@@ -865,8 +955,7 @@ export namespace PortalReadResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-     * KV key.
+     * true.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -1016,9 +1105,22 @@ export interface PortalCreateParams {
   name: string;
 
   /**
-   * Body param: Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Body param: Deprecated: use `code_mode` for new integrations. `true`
+   * maps to any non-off Code Mode policy; `false` maps to `code_mode: off`. If both
+   * fields are sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Body param: Code Mode policy for this portal. `off`: Code Mode is unavailable;
+   * query parameters are ignored. `opt_in`: Code Mode is off by default; clients
+   * turn it on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   /**
    * Body param
@@ -1082,9 +1184,22 @@ export interface PortalUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Allow remote code execution in Dynamic Workers (beta)
+   * @deprecated Body param: Deprecated: use `code_mode` for new integrations. `true`
+   * maps to any non-off Code Mode policy; `false` maps to `code_mode: off`. If both
+   * fields are sent, they must be consistent or the request returns a 400.
    */
   allow_code_mode?: boolean;
+
+  /**
+   * Body param: Code Mode policy for this portal. `off`: Code Mode is unavailable;
+   * query parameters are ignored. `opt_in`: Code Mode is off by default; clients
+   * turn it on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
+   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
+   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
+   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
+   * consistent or the request returns a 400.
+   */
+  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   /**
    * Body param

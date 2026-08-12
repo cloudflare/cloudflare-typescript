@@ -74,7 +74,8 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * Deprecated. Use the batch endpoint instead.
+   * Removes protection from multiple email domains. Deprecated; use the batch
+   * endpoint instead.
    *
    * @deprecated
    */
@@ -145,7 +146,7 @@ export type DomainBulkDeleteResponsesSinglePage = SinglePage<DomainBulkDeleteRes
 
 export interface DomainListResponse {
   /**
-   * Domain identifier
+   * Domain identifier.
    */
   id?: string;
 
@@ -226,21 +227,21 @@ export namespace DomainListResponse {
 
 export interface DomainDeleteResponse {
   /**
-   * Domain identifier
+   * Domain identifier.
    */
   id: string;
 }
 
 export interface DomainBulkDeleteResponse {
   /**
-   * Domain identifier
+   * Domain identifier.
    */
   id: string;
 }
 
 export interface DomainEditResponse {
   /**
-   * Domain identifier
+   * Domain identifier.
    */
   id?: string;
 
@@ -321,7 +322,7 @@ export namespace DomainEditResponse {
 
 export interface DomainGetResponse {
   /**
-   * Domain identifier
+   * Domain identifier.
    */
   id?: string;
 
@@ -471,11 +472,6 @@ export interface DomainEditParams {
    * Body param
    */
   allowed_delivery_modes?: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
-
-  /**
-   * Body param
-   */
-  domain?: string;
 
   /**
    * Body param

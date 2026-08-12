@@ -91,7 +91,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { users: Base
       email: 'email',
       name: 'name',
       page: 0,
-      per_page: 0,
+      per_page: 1000,
       search: 'search',
     });
   });

@@ -54,7 +54,7 @@ export namespace TraceGetResponse {
   export namespace Inbound {
     export interface Line {
       /**
-       * Line number in the trace log
+       * Line number in the trace log.
        */
       lineno?: number;
 
@@ -78,7 +78,7 @@ export namespace TraceGetResponse {
   export namespace Outbound {
     export interface Line {
       /**
-       * Line number in the trace log
+       * Line number in the trace log.
        */
       lineno?: number;
 

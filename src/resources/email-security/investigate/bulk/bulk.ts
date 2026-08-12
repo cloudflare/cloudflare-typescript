@@ -206,7 +206,7 @@ export namespace BulkCreateResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -237,7 +237,7 @@ export namespace BulkCreateResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 
@@ -323,7 +323,7 @@ export namespace BulkListResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -354,7 +354,7 @@ export namespace BulkListResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 
@@ -444,7 +444,7 @@ export namespace BulkGetResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -475,7 +475,7 @@ export namespace BulkGetResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 
@@ -551,7 +551,7 @@ export namespace BulkCreateParams {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -582,7 +582,7 @@ export namespace BulkCreateParams {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 

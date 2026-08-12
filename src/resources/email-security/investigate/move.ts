@@ -82,12 +82,12 @@ export type MoveBulkResponsesSinglePage = SinglePage<MoveBulkResponse>;
 
 export interface MoveCreateResponse {
   /**
-   * Whether the operation succeeded
+   * Whether the operation succeeded.
    */
   success: boolean;
 
   /**
-   * When the move operation completed (UTC)
+   * When the move operation completed (UTC).
    */
   completed_at?: string | null;
 
@@ -97,7 +97,7 @@ export interface MoveCreateResponse {
   completed_timestamp?: string;
 
   /**
-   * Destination folder for the message
+   * Destination folder for the message.
    */
   destination?: string | null;
 
@@ -107,34 +107,34 @@ export interface MoveCreateResponse {
   item_count?: number;
 
   /**
-   * Message identifier
+   * Message identifier.
    */
   message_id?: string | null;
 
   /**
-   * Type of operation performed
+   * Type of operation performed.
    */
   operation?: string | null;
 
   /**
-   * Recipient email address
+   * Recipient email address.
    */
   recipient?: string | null;
 
   /**
-   * Operation status
+   * Operation status.
    */
   status?: string | null;
 }
 
 export interface MoveBulkResponse {
   /**
-   * Whether the operation succeeded
+   * Whether the operation succeeded.
    */
   success: boolean;
 
   /**
-   * When the move operation completed (UTC)
+   * When the move operation completed (UTC).
    */
   completed_at?: string | null;
 
@@ -144,7 +144,7 @@ export interface MoveBulkResponse {
   completed_timestamp?: string;
 
   /**
-   * Destination folder for the message
+   * Destination folder for the message.
    */
   destination?: string | null;
 
@@ -154,22 +154,22 @@ export interface MoveBulkResponse {
   item_count?: number;
 
   /**
-   * Message identifier
+   * Message identifier.
    */
   message_id?: string | null;
 
   /**
-   * Type of operation performed
+   * Type of operation performed.
    */
   operation?: string | null;
 
   /**
-   * Recipient email address
+   * Recipient email address.
    */
   recipient?: string | null;
 
   /**
-   * Operation status
+   * Operation status.
    */
   status?: string | null;
 }
@@ -238,7 +238,7 @@ export interface MoveBulkParams {
     | 'NONE';
 
   /**
-   * Body param: List of message IDs to move
+   * Body param: List of message IDs to move.
    */
   ids?: Array<string>;
 

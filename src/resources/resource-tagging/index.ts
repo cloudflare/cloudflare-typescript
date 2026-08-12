@@ -17,7 +17,7 @@ export {
   type KeyListResponsesCursorPaginationAfter,
 } from './keys';
 export { ResourceTagging, BaseResourceTagging } from './resource-tagging';
-export { Summary, BaseSummary } from './summary';
+export { Summary, BaseSummary, type SummaryGetResponse, type SummaryGetParams } from './summary';
 export {
   Values,
   BaseValues,

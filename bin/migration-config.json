@@ -1676,6 +1676,117 @@
       ]
     },
     {
+      "base": "intel.sinkholes.ingresses",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sinkhole_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "intel.sinkholes.ingresses",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sinkhole_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "intel.sinkholes.ingresses",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sinkhole_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "magicTransit.sites.acls",
       "name": "update",
       "params": [
@@ -2446,6 +2557,85 @@
         {
           "type": "param",
           "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.tails",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.tails",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "tail_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tail_id",
           "location": "path"
         },
         {
@@ -4999,6 +5189,43 @@
     {
       "base": "hostnames.settings.tls",
       "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "setting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "hostnames.settings.tls",
+      "name": "get",
       "params": [
         {
           "type": "param",

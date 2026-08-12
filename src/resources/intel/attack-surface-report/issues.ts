@@ -48,24 +48,6 @@ export class BaseIssues extends APIResource {
   }
 
   /**
-   * Deprecated endpoint for archiving Security Center insights. Use the newer
-   * archive-security-center-insight endpoint instead.
-   *
-   * @deprecated
-   */
-  dismiss(
-    issueID: string,
-    params: IssueDismissParams,
-    options?: RequestOptions,
-  ): APIPromise<IssueDismissResponse> {
-    const { account_id, ...body } = params;
-    return this._client.put(path`/accounts/${account_id}/intel/attack-surface-report/${issueID}/dismiss`, {
-      body,
-      ...options,
-    });
-  }
-
-  /**
    * Retrieves Security Center issue counts aggregated by severity level.
    *
    * @deprecated
@@ -199,51 +181,6 @@ export namespace IssueClassResponse {
     count?: number;
 
     value?: string;
-  }
-}
-
-export interface IssueDismissResponse {
-  errors: Array<IssueDismissResponse.Error>;
-
-  messages: Array<IssueDismissResponse.Message>;
-
-  /**
-   * Whether the API call was successful.
-   */
-  success: true;
-}
-
-export namespace IssueDismissResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Error.Source;
-  }
-
-  export namespace Error {
-    export interface Source {
-      pointer?: string;
-    }
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-
-    documentation_url?: string;
-
-    source?: Message.Source;
-  }
-
-  export namespace Message {
-    export interface Source {
-      pointer?: string;
-    }
   }
 }
 
@@ -391,18 +328,6 @@ export interface IssueClassParams {
   'subject~neq'?: Array<string>;
 }
 
-export interface IssueDismissParams {
-  /**
-   * Path param: Identifier.
-   */
-  account_id: string;
-
-  /**
-   * Body param
-   */
-  dismiss?: boolean;
-}
-
 export interface IssueSeverityParams {
   /**
    * Path param: Identifier.
@@ -533,13 +458,11 @@ export declare namespace Issues {
     type SeverityQueryParam as SeverityQueryParam,
     type IssueListResponse as IssueListResponse,
     type IssueClassResponse as IssueClassResponse,
-    type IssueDismissResponse as IssueDismissResponse,
     type IssueSeverityResponse as IssueSeverityResponse,
     type IssueTypeResponse as IssueTypeResponse,
     type IssueListResponsesV4PagePagination as IssueListResponsesV4PagePagination,
     type IssueListParams as IssueListParams,
     type IssueClassParams as IssueClassParams,
-    type IssueDismissParams as IssueDismissParams,
     type IssueSeverityParams as IssueSeverityParams,
     type IssueTypeParams as IssueTypeParams,
   };

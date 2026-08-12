@@ -176,10 +176,9 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zones/ct/alerting.ts">AlertingEditResponse</a></code>
-- <code><a href="./src/resources/zones/ct/alerting.ts">AlertingGetResponse</a></code>
+- <code><a href="./src/resources/zones/ct/alerting.ts">CTAlertingSubscription</a></code>
 
 Methods:
 
-- <code title="patch /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">edit</a>({ ...params }) -> AlertingEditResponse</code>
-- <code title="get /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">get</a>({ ...params }) -> AlertingGetResponse</code>
+- <code title="patch /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">edit</a>({ ...params }) -> CTAlertingSubscription</code>
+- <code title="get /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">get</a>({ ...params }) -> CTAlertingSubscription</code>

@@ -116,7 +116,6 @@ const runTests = (client: PartialCloudflare<{ emailSecurity: { settings: { domai
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         allowed_delivery_modes: ['DIRECT'],
-        domain: 'domain',
         drop_dispositions: ['MALICIOUS'],
         folder: 'AllItems',
         integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',

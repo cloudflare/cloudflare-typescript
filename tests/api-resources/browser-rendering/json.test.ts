@@ -88,7 +88,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { json: BaseJson
       rejectResourceTypes: ['document'],
       response_format: {
         type: 'type',
-        json_schema: { foo: 'string' },
+        json_schema: { foo: 'bar' },
       },
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,

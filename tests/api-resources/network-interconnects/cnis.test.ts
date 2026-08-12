@@ -106,6 +106,7 @@ const runTests = (client: PartialCloudflare<{ networkInterconnects: { cnis: Base
         extra_prefixes: ['string'],
         md5_key: 'md5_key',
       },
+      bgp_mode: 'dynamic_route_exchange',
     });
   });
 

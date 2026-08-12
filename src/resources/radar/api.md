@@ -232,19 +232,39 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/radar/bgp/routes.ts">RouteAsesResponse</a></code>
-- <code><a href="./src/resources/radar/bgp/routes.ts">RouteMoasResponse</a></code>
-- <code><a href="./src/resources/radar/bgp/routes.ts">RoutePfx2asResponse</a></code>
-- <code><a href="./src/resources/radar/bgp/routes.ts">RouteRealtimeResponse</a></code>
-- <code><a href="./src/resources/radar/bgp/routes.ts">RouteStatsResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes/routes.ts">RouteAsesResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes/routes.ts">RouteMoasResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes/routes.ts">RoutePfx2asResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes/routes.ts">RouteRealtimeResponse</a></code>
+- <code><a href="./src/resources/radar/bgp/routes/routes.ts">RouteStatsResponse</a></code>
 
 Methods:
 
-- <code title="get /radar/bgp/routes/ases">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">ases</a>({ ...params }) -> RouteAsesResponse</code>
-- <code title="get /radar/bgp/routes/moas">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">moas</a>({ ...params }) -> RouteMoasResponse</code>
-- <code title="get /radar/bgp/routes/pfx2as">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">pfx2as</a>({ ...params }) -> RoutePfx2asResponse</code>
-- <code title="get /radar/bgp/routes/realtime">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">realtime</a>({ ...params }) -> RouteRealtimeResponse</code>
-- <code title="get /radar/bgp/routes/stats">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">stats</a>({ ...params }) -> RouteStatsResponse</code>
+- <code title="get /radar/bgp/routes/ases">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes/routes.ts">ases</a>({ ...params }) -> RouteAsesResponse</code>
+- <code title="get /radar/bgp/routes/moas">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes/routes.ts">moas</a>({ ...params }) -> RouteMoasResponse</code>
+- <code title="get /radar/bgp/routes/pfx2as">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes/routes.ts">pfx2as</a>({ ...params }) -> RoutePfx2asResponse</code>
+- <code title="get /radar/bgp/routes/realtime">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes/routes.ts">realtime</a>({ ...params }) -> RouteRealtimeResponse</code>
+- <code title="get /radar/bgp/routes/stats">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes/routes.ts">stats</a>({ ...params }) -> RouteStatsResponse</code>
+
+#### Upstreams
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/routes/upstreams.ts">UpstreamTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/routes/upstreams/{asn}/timeseries">client.radar.bgp.routes.upstreams.<a href="./src/resources/radar/bgp/routes/upstreams.ts">timeseries</a>(asn, { ...params }) -> UpstreamTimeseriesResponse</code>
+
+#### Paths
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/routes/paths.ts">PathListResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/routes/paths/{asn}">client.radar.bgp.routes.paths.<a href="./src/resources/radar/bgp/routes/paths.ts">list</a>(asn, { ...params }) -> PathListResponse</code>
 
 ### IPs
 

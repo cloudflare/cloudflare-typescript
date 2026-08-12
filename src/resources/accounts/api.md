@@ -43,8 +43,10 @@ Types:
 
 Methods:
 
+- <code title="post /{accounts_or_zones}/{account_or_zone_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">create</a>({ ...params }) -> Subscription</code>
 - <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> Subscription</code>
 - <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="get /{accounts_or_zones}/{account_or_zone_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionsSinglePage</code>
 
 ## Tokens
 

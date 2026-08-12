@@ -222,7 +222,7 @@ export namespace PolicyTestCreateParams {
      * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
      * m, h.
      */
-    session_duration?: string;
+    session_duration?: string | null;
   }
 
   export namespace UnionMember0 {

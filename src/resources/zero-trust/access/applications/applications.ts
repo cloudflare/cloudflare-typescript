@@ -2605,7 +2605,7 @@ export interface ApplicationPolicy {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -4034,6 +4034,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -4114,7 +4119,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -4344,6 +4349,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -4424,7 +4434,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -5023,6 +5033,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -5103,7 +5118,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -5702,6 +5717,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -5782,7 +5802,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6099,6 +6119,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6179,7 +6204,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6311,6 +6336,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6391,7 +6421,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6523,6 +6553,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6603,7 +6638,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6735,6 +6770,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6815,7 +6855,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6926,6 +6966,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -7006,7 +7051,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -7666,6 +7711,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -7746,7 +7796,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -8229,6 +8279,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -8309,7 +8364,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -8798,6 +8853,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -8878,7 +8938,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -9480,6 +9540,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -9560,7 +9625,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -9790,6 +9855,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -9870,7 +9940,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -10469,6 +10539,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -10549,7 +10624,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11148,6 +11223,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11228,7 +11308,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11545,6 +11625,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11625,7 +11710,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11757,6 +11842,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11837,7 +11927,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11969,6 +12059,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12049,7 +12144,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12181,6 +12276,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12261,7 +12361,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12372,6 +12472,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12452,7 +12557,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -13112,6 +13217,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -13192,7 +13302,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -13675,6 +13785,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -13755,7 +13870,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -14244,6 +14359,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -14324,7 +14444,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -14926,6 +15046,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -15006,7 +15131,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15236,6 +15361,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -15316,7 +15446,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15915,6 +16045,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -15995,7 +16130,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -16594,6 +16729,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -16674,7 +16814,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -16991,6 +17131,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17071,7 +17216,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17203,6 +17348,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17283,7 +17433,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17415,6 +17565,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17495,7 +17650,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17627,6 +17782,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17707,7 +17867,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17818,6 +17978,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17898,7 +18063,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -18558,6 +18723,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -18638,7 +18808,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -19121,6 +19291,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -19201,7 +19376,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -19690,6 +19865,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -19770,7 +19950,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -20379,6 +20559,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -20459,7 +20644,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -20689,6 +20874,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -20769,7 +20959,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -21368,6 +21558,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -21448,7 +21643,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22047,6 +22242,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22127,7 +22327,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22444,6 +22644,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22524,7 +22729,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22656,6 +22861,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22736,7 +22946,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22868,6 +23078,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22948,7 +23163,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -23080,6 +23295,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -23160,7 +23380,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -23271,6 +23491,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -23351,7 +23576,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -24011,6 +24236,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -24091,7 +24321,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -24574,6 +24804,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -24654,7 +24889,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -25143,6 +25378,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -25223,7 +25463,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -25844,6 +26084,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -25906,7 +26151,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -26149,6 +26394,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -26211,7 +26461,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -26825,6 +27075,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -26887,7 +27142,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -27501,6 +27756,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -27563,7 +27823,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -27882,6 +28142,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -27944,7 +28209,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28079,6 +28344,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28141,7 +28411,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28276,6 +28546,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28338,7 +28613,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28484,6 +28759,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28546,7 +28826,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28666,6 +28946,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28728,7 +29013,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -29405,6 +29690,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -29467,7 +29757,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -29961,6 +30251,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -30023,7 +30318,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -30525,6 +30820,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -30587,7 +30887,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -31204,6 +31504,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -31266,7 +31571,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -31509,6 +31814,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -31571,7 +31881,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -32185,6 +32495,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -32247,7 +32562,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -32861,6 +33176,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -32923,7 +33243,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33242,6 +33562,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33304,7 +33629,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33439,6 +33764,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33501,7 +33831,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33636,6 +33966,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33698,7 +34033,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33844,6 +34179,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33906,7 +34246,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -34026,6 +34366,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -34088,7 +34433,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -34765,6 +35110,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -34827,7 +35177,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -35321,6 +35671,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -35383,7 +35738,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -35885,6 +36240,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -35947,7 +36307,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {

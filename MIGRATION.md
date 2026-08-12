@@ -60,8 +60,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.accounts.members.delete()`
 - `client.accounts.members.get()`
 - `client.accounts.roles.get()`
+- `client.accounts.subscriptions.create()`
 - `client.accounts.subscriptions.update()`
 - `client.accounts.subscriptions.delete()`
+- `client.accounts.subscriptions.get()`
 - `client.accounts.tokens.update()`
 - `client.accounts.tokens.delete()`
 - `client.accounts.tokens.get()`
@@ -248,6 +250,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logs.logExplorer.datasets.create()`
 - `client.logs.logExplorer.datasets.update()`
 - `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.delete()`
 - `client.logs.logExplorer.datasets.get()`
 - `client.logs.logExplorer.datasets.available.list()`
 - `client.logs.RayID.get()`
@@ -361,7 +364,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.getMetrics()`
 - `client.queues.messages.ack()`
 - `client.queues.messages.bulkPush()`
+- `client.queues.messages.peek()`
 - `client.queues.messages.pull()`
+- `client.queues.messages.purge()`
 - `client.queues.messages.push()`
 - `client.queues.purge.start()`
 - `client.queues.purge.status()`
@@ -431,6 +436,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.prefixes.delete()`
 - `client.addressing.prefixes.edit()`
 - `client.addressing.prefixes.get()`
+- `client.addressing.prefixes.validate()`
 - `client.addressing.prefixes.serviceBindings.create()`
 - `client.addressing.prefixes.serviceBindings.list()`
 - `client.addressing.prefixes.serviceBindings.delete()`
@@ -468,7 +474,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.intel.indicatorFeeds.data()`
 - `client.intel.indicatorFeeds.get()`
 - `client.intel.indicatorFeeds.snapshots.update()`
-- `client.intel.attackSurfaceReport.issues.dismiss()`
+- `client.intel.sinkholes.update()`
+- `client.intel.sinkholes.delete()`
+- `client.intel.sinkholes.get()`
+- `client.intel.sinkholes.ingresses.create()`
+- `client.intel.sinkholes.ingresses.update()`
+- `client.intel.sinkholes.ingresses.delete()`
+- `client.intel.sinkholes.ingresses.get()`
 - `client.magicTransit.apps.update()`
 - `client.magicTransit.apps.delete()`
 - `client.magicTransit.apps.edit()`
@@ -584,6 +596,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.delete()`
 - `client.pages.projects.edit()`
 - `client.pages.projects.get()`
+- `client.pages.projects.getUploadToken()`
 - `client.pages.projects.purgeBuildCache()`
 - `client.pages.projects.deployments.create()`
 - `client.pages.projects.deployments.list()`
@@ -592,6 +605,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.deployments.retry()`
 - `client.pages.projects.deployments.rollback()`
 - `client.pages.projects.deployments.history.logs.get()`
+- `client.pages.projects.deployments.tails.create()`
+- `client.pages.projects.deployments.tails.delete()`
 - `client.pages.projects.domains.create()`
 - `client.pages.projects.domains.list()`
 - `client.pages.projects.domains.delete()`
@@ -603,10 +618,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.registrar.registrations.get()`
 - `client.registrar.registrationStatus.get()`
 - `client.registrar.updateStatus.get()`
+- `client.registrar.extensions.get()`
 - `client.registrarSandbox.registrations.edit()`
 - `client.registrarSandbox.registrations.get()`
 - `client.registrarSandbox.registrationStatus.get()`
 - `client.registrarSandbox.updateStatus.get()`
+- `client.registrarSandbox.extensions.get()`
 - `client.rules.lists.update()`
 - `client.rules.lists.delete()`
 - `client.rules.lists.get()`
@@ -990,6 +1007,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.networks.subnets.warp.edit()`
 - `client.zeroTrust.networks.subnets.warp.get()`
 - `client.zeroTrust.networks.subnets.cloudflareSource.update()`
+- `client.zeroTrust.networks.subnets.initialResolvedIP.update()`
+- `client.zeroTrust.networks.subnets.initialResolvedIP.get()`
 - `client.zeroTrust.networks.hostnameRoutes.delete()`
 - `client.zeroTrust.networks.hostnameRoutes.edit()`
 - `client.zeroTrust.networks.hostnameRoutes.get()`
@@ -1061,6 +1080,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.speed.pages.tests.delete()`
 - `client.speed.pages.tests.get()`
 - `client.hostnames.settings.tls.update()`
+- `client.hostnames.settings.tls.list()`
 - `client.hostnames.settings.tls.delete()`
 - `client.hostnames.settings.tls.get()`
 - `client.snippets.update()`
@@ -1461,6 +1481,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.magicTransit.cf1Sites.ramps.create()`
 - `client.DDoSProtection.advancedTCPProtection.prefixes.bulkCreate()`
 - `client.magicNetworkMonitoring.rules.advertisements.edit()`
+- `client.pages.assets.upload()`
 - `client.rules.lists.items.create()`
 - `client.rules.lists.items.update()`
 - `client.stream.keys.create()`
@@ -1525,6 +1546,7 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
+- `client.accounts.subscriptions.get()`
 - `client.organizations.list()`
 - `client.organizations.billing.usage.get()`
 - `client.ips.list()`
@@ -1552,6 +1574,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.logpush.jobs.delete()`
 - `client.logpush.jobs.get()`
 - `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.delete()`
 - `client.logs.logExplorer.datasets.get()`
 - `client.logs.logExplorer.datasets.available.list()`
 - `client.waitingRooms.list()`
@@ -1623,6 +1646,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bgp.routes.pfx2as()`
 - `client.radar.bgp.routes.realtime()`
 - `client.radar.bgp.routes.stats()`
+- `client.radar.bgp.routes.upstreams.timeseries()`
+- `client.radar.bgp.routes.paths.list()`
 - `client.radar.bgp.ips.timeseries()`
 - `client.radar.bgp.ips.top.ases()`
 - `client.radar.bgp.rpki.aspa.changes()`

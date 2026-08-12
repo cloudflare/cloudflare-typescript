@@ -47,3 +47,15 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/registrar-sandbox/registrations/{domain_name}/update-status">client.registrarSandbox.updateStatus.<a href="./src/resources/registrar-sandbox/update-status.ts">get</a>(domainName, { ...params }) -> UpdateStatusGetResponse</code>
+
+## Extensions
+
+Types:
+
+- <code><a href="./src/resources/registrar-sandbox/extensions.ts">ExtensionListResponse</a></code>
+- <code><a href="./src/resources/registrar-sandbox/extensions.ts">ExtensionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/registrar-sandbox/extensions">client.registrarSandbox.extensions.<a href="./src/resources/registrar-sandbox/extensions.ts">list</a>({ ...params }) -> ExtensionListResponsesCursorPagination</code>
+- <code title="get /accounts/{account_id}/registrar-sandbox/extensions/{extension}">client.registrarSandbox.extensions.<a href="./src/resources/registrar-sandbox/extensions.ts">get</a>(extension, { ...params }) -> ExtensionGetResponse</code>

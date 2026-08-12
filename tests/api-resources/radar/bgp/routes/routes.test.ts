@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { BGP } from 'cloudflare/resources/radar/bgp/bgp';
-import { BaseRoutes } from 'cloudflare/resources/radar/bgp/routes';
+import { BaseRoutes } from 'cloudflare/resources/radar/bgp/routes/routes';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';

@@ -605,6 +605,11 @@ export interface SnapshotGetResponse {
   platform?: string;
 
   /**
+   * Site identifier
+   */
+  site_id?: string;
+
+  /**
    * Number of ICMP Address Mask Reply messages received
    */
   snmp_icmp_in_addr_mask_reps?: number;
@@ -1339,6 +1344,16 @@ export namespace SnapshotGetResponse {
      * Tunnel identifier
      */
     tunnel_id: string;
+
+    /**
+     * Tunnel round-trip latency variation in milliseconds
+     */
+    jitter_ms?: number;
+
+    /**
+     * 50th percentile tunnel round-trip latency in milliseconds
+     */
+    latency_ms?: number;
 
     /**
      * Public socket address returned by the NAT detector

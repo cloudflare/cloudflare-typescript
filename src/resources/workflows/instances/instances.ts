@@ -370,6 +370,8 @@ export namespace InstanceGetResponse {
 
     type: 'waitForEvent';
 
+    event_type?: string;
+
     output?: string;
   }
 
@@ -410,6 +412,12 @@ export interface InstanceStepResponse {
     | 'rollingBack';
 
   /**
+   * The event type the step is waiting on, as supplied to step.waitForEvent. Only
+   * present when type='waitForEvent'.
+   */
+  event_type?: string;
+
+  /**
    * Full step output or waitForEvent payload without truncation. Sensitive outputs
    * are returned as '[REDACTED]'. Populated when status='complete'. May be a
    * ReadableStream when the step returned one from step.do; stream outputs are
@@ -448,7 +456,12 @@ export interface InstanceCreateParams {
   /**
    * Body param
    */
-  params?: unknown;
+  location_hint?: 'wnam' | 'weur' | 'enam' | 'eeur' | 'apac' | 'oc' | 'sam' | 'afr' | 'me';
+
+  /**
+   * Body param: JSON-encoded event payload passed into the new instance.
+   */
+  params?: string;
 }
 
 export namespace InstanceCreateParams {
@@ -525,7 +538,12 @@ export namespace InstanceBulkParams {
 
     instance_retention?: Body.InstanceRetention;
 
-    params?: unknown;
+    location_hint?: 'wnam' | 'weur' | 'enam' | 'eeur' | 'apac' | 'oc' | 'sam' | 'afr' | 'me';
+
+    /**
+     * JSON-encoded event payload passed into the new instance.
+     */
+    params?: string;
   }
 
   export namespace Body {
