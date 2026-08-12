@@ -279,26 +279,39 @@ describe('instantiate client', () => {
     });
 
     test('rejects invalid format', () => {
-      const invalid = ['not-a-version', '2027-02-01', '2027-02-01.', '2027-02-01.1bad', '20270201.air', 'v2027-02-01.air'];
+      const invalid = [
+        'not-a-version',
+        '2027-02-01',
+        '2027-02-01.',
+        '2027-02-01.1bad',
+        '20270201.air',
+        'v2027-02-01.air',
+      ];
       for (const v of invalid) {
-        expect(() => new Cloudflare({
-          baseURL: 'http://localhost:5000/',
-          apiKey: '144c9defac04969c7bfad8efaa8ea194',
-          apiEmail: 'user@example.com',
-          apiVersion: v,
-        })).toThrow(/Invalid apiVersion format/);
+        expect(
+          () =>
+            new Cloudflare({
+              baseURL: 'http://localhost:5000/',
+              apiKey: '144c9defac04969c7bfad8efaa8ea194',
+              apiEmail: 'user@example.com',
+              apiVersion: v,
+            }),
+        ).toThrow(/Invalid apiVersion format/);
       }
     });
 
     test('accepts valid formats', () => {
       const valid = ['2027-02-01.air', '2024-09-01.beta', '2099-12-31.long-train-name'];
       for (const v of valid) {
-        expect(() => new Cloudflare({
-          baseURL: 'http://localhost:5000/',
-          apiKey: '144c9defac04969c7bfad8efaa8ea194',
-          apiEmail: 'user@example.com',
-          apiVersion: v,
-        })).not.toThrow();
+        expect(
+          () =>
+            new Cloudflare({
+              baseURL: 'http://localhost:5000/',
+              apiKey: '144c9defac04969c7bfad8efaa8ea194',
+              apiEmail: 'user@example.com',
+              apiVersion: v,
+            }),
+        ).not.toThrow();
       }
     });
   });
