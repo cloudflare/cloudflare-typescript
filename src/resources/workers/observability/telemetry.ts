@@ -324,7 +324,7 @@ export namespace TelemetryQueryResponse {
         /**
          * Create Calculations to compute as part of the query.
          */
-        calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+        calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
 
         /**
          * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -369,7 +369,7 @@ export namespace TelemetryQueryResponse {
       }
 
       export namespace Parameters {
-        export interface CountCalculation {
+        export interface UnionMember0 {
           operator: 'count' | 'COUNT';
 
           alias?: string;
@@ -379,7 +379,7 @@ export namespace TelemetryQueryResponse {
           keyType?: 'string' | 'number' | 'boolean';
         }
 
-        export interface KeyedCalculation {
+        export interface UnionMember1 {
           key: string;
 
           operator:
@@ -2267,7 +2267,7 @@ export namespace TelemetryQueryParams {
      * Aggregation calculations to compute (e.g. count, avg, p99). Each calculation
      * produces aggregate values and optional time-series data.
      */
-    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+    calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
 
     /**
      * Datasets to query. Leave empty to query all available datasets.
@@ -2319,7 +2319,7 @@ export namespace TelemetryQueryParams {
   }
 
   export namespace Parameters {
-    export interface CountCalculation {
+    export interface UnionMember0 {
       /**
        * Aggregation operator to apply. Examples: count, avg, sum, min, max, median, p90,
        * p95, p99, uniq, stddev, variance.
@@ -2346,7 +2346,7 @@ export namespace TelemetryQueryParams {
       keyType?: 'string' | 'number' | 'boolean';
     }
 
-    export interface KeyedCalculation {
+    export interface UnionMember1 {
       /**
        * Field name to calculate over. Must exist in the data — verify with the keys
        * endpoint. Required for every operator except `count`, which aggregates whole
