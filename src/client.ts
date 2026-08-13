@@ -12,8 +12,7 @@ import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
 import { stringifyQuery } from './internal/utils/query';
-import { VERSION, API_VERSION } from './version';
-const API_VERSION_REGEX = /^\d{4}-\d{2}-\d{2}\.[a-zA-Z][a-zA-Z0-9-]*$/;
+import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
 import {
@@ -266,9 +265,9 @@ export interface ClientOptions {
   logger?: Logger | undefined;
 
   /**
-   * Define the API version to target for the requests, e.g., "2025-01-01.air".
+   * Define the API version to target for the requests, e.g., "2025-01-01".
    *
-   * Defaults to the codegen-injected constant. Omitted when empty.
+   * Defaults to today's date.
    */
   apiVersion?: string | null | undefined;
 }
@@ -313,7 +312,7 @@ export class BaseCloudflare {
    */
   constructor({
     baseURL = readEnv('CLOUDFLARE_BASE_URL'),
-    apiVersion = readEnv('CLOUDFLARE_API_VERSION') ?? null,
+    apiVersion = null,
     apiToken = readEnv('CLOUDFLARE_API_TOKEN') ?? null,
     apiKey = readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = readEnv('CLOUDFLARE_EMAIL') ?? null,
@@ -327,14 +326,8 @@ export class BaseCloudflare {
       userServiceKey,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
-      apiVersion: apiVersion || API_VERSION,
+      apiVersion: apiVersion || new Date().toISOString().slice(0, 10),
     };
-
-    if (options.apiVersion && !API_VERSION_REGEX.test(options.apiVersion)) {
-      throw new Error(
-        `Invalid apiVersion format ${JSON.stringify(options.apiVersion)}, expected YYYY-MM-DD.{train_name}`,
-      );
-    }
 
     this.baseURL = options.baseURL!;
     this.timeout = options.timeout ?? BaseCloudflare.DEFAULT_TIMEOUT /* 1 minute */;
@@ -920,7 +913,7 @@ export class BaseCloudflare {
       {
         Accept: 'application/json',
         'User-Agent': this.getUserAgent(),
-        ...(this.apiVersion ? { 'API-Version': this.apiVersion } : undefined),
+        'api-version': this.apiVersion,
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
