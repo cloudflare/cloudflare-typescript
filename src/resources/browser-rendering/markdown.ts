@@ -75,13 +75,13 @@ export interface MarkdownCreateParams {
 
   /**
    * Body param: Only allow requests that match the provided regex patterns, eg.
-   * '/^.\*\.(css)'.
+   * '/^.\*\.(css)'. Reject rules are applied first.
    */
   allowRequestPattern?: Array<string>;
 
   /**
    * Body param: Only allow requests that match the provided resource types, eg.
-   * 'image' or 'script'.
+   * 'image' or 'script'. Reject rules are applied first.
    */
   allowResourceTypes?: Array<
     | 'document'

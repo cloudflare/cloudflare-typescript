@@ -24,7 +24,7 @@ export class BasePortals extends APIResource {
    *     {
    *       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
    *       id: 'my-mcp-portal',
-   *       hostname: 'exmaple.com',
+   *       hostname: 'example.com',
    *       name: 'My MCP Portal',
    *     },
    *   );
@@ -137,12 +137,18 @@ export type PortalListResponsesV4PagePaginationArray = V4PagePaginationArray<Por
 
 export interface PortalCreateResponse {
   /**
-   * portal id
+   * Unique identifier for the MCP portal.
    */
   id: string;
 
+  /**
+   * Hostname where the MCP portal is available.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP portal.
+   */
   name: string;
 
   servers: Array<PortalCreateResponse.Server>;
@@ -169,6 +175,9 @@ export interface PortalCreateResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP portal.
+   */
   description?: string;
 
   modified_at?: string;
@@ -176,7 +185,7 @@ export interface PortalCreateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 }
@@ -184,20 +193,29 @@ export interface PortalCreateResponse {
 export namespace PortalCreateResponse {
   export interface Server {
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     id: string;
 
+    /**
+     * Authentication method used to connect to the upstream MCP server.
+     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+    /**
+     * URL of the upstream MCP endpoint.
+     */
     hostname: string;
 
+    /**
+     * Display name for the MCP server.
+     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     server_id: string;
 
@@ -223,6 +241,9 @@ export namespace PortalCreateResponse {
 
     default_disabled?: boolean;
 
+    /**
+     * Optional description of the MCP server.
+     */
     description?: string | null;
 
     error?: string;
@@ -248,7 +269,7 @@ export namespace PortalCreateResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
      */
     secure_web_gateway?: boolean;
 
@@ -363,12 +384,18 @@ export namespace PortalCreateResponse {
 
 export interface PortalUpdateResponse {
   /**
-   * portal id
+   * Unique identifier for the MCP portal.
    */
   id: string;
 
+  /**
+   * Hostname where the MCP portal is available.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP portal.
+   */
   name: string;
 
   servers: Array<PortalUpdateResponse.Server>;
@@ -395,6 +422,9 @@ export interface PortalUpdateResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP portal.
+   */
   description?: string;
 
   modified_at?: string;
@@ -402,7 +432,7 @@ export interface PortalUpdateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 }
@@ -410,20 +440,29 @@ export interface PortalUpdateResponse {
 export namespace PortalUpdateResponse {
   export interface Server {
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     id: string;
 
+    /**
+     * Authentication method used to connect to the upstream MCP server.
+     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+    /**
+     * URL of the upstream MCP endpoint.
+     */
     hostname: string;
 
+    /**
+     * Display name for the MCP server.
+     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     server_id: string;
 
@@ -449,6 +488,9 @@ export namespace PortalUpdateResponse {
 
     default_disabled?: boolean;
 
+    /**
+     * Optional description of the MCP server.
+     */
     description?: string | null;
 
     error?: string;
@@ -474,7 +516,7 @@ export namespace PortalUpdateResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
      */
     secure_web_gateway?: boolean;
 
@@ -589,12 +631,18 @@ export namespace PortalUpdateResponse {
 
 export interface PortalListResponse {
   /**
-   * portal id
+   * Unique identifier for the MCP portal.
    */
   id: string;
 
+  /**
+   * Hostname where the MCP portal is available.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP portal.
+   */
   name: string;
 
   servers: Array<PortalListResponse.Server>;
@@ -621,6 +669,9 @@ export interface PortalListResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP portal.
+   */
   description?: string;
 
   modified_at?: string;
@@ -628,7 +679,7 @@ export interface PortalListResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 }
@@ -636,20 +687,29 @@ export interface PortalListResponse {
 export namespace PortalListResponse {
   export interface Server {
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     id: string;
 
+    /**
+     * Authentication method used to connect to the upstream MCP server.
+     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+    /**
+     * URL of the upstream MCP endpoint.
+     */
     hostname: string;
 
+    /**
+     * Display name for the MCP server.
+     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     server_id: string;
 
@@ -675,6 +735,9 @@ export namespace PortalListResponse {
 
     default_disabled?: boolean;
 
+    /**
+     * Optional description of the MCP server.
+     */
     description?: string | null;
 
     error?: string;
@@ -700,7 +763,7 @@ export namespace PortalListResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
      */
     secure_web_gateway?: boolean;
 
@@ -815,12 +878,18 @@ export namespace PortalListResponse {
 
 export interface PortalDeleteResponse {
   /**
-   * portal id
+   * Unique identifier for the MCP portal.
    */
   id: string;
 
+  /**
+   * Hostname where the MCP portal is available.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP portal.
+   */
   name: string;
 
   /**
@@ -845,6 +914,9 @@ export interface PortalDeleteResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP portal.
+   */
   description?: string;
 
   modified_at?: string;
@@ -852,19 +924,25 @@ export interface PortalDeleteResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 }
 
 export interface PortalReadResponse {
   /**
-   * portal id
+   * Unique identifier for the MCP portal.
    */
   id: string;
 
+  /**
+   * Hostname where the MCP portal is available.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP portal.
+   */
   name: string;
 
   servers: Array<PortalReadResponse.Server>;
@@ -891,6 +969,9 @@ export interface PortalReadResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP portal.
+   */
   description?: string;
 
   modified_at?: string;
@@ -898,7 +979,7 @@ export interface PortalReadResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 }
@@ -906,20 +987,29 @@ export interface PortalReadResponse {
 export namespace PortalReadResponse {
   export interface Server {
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     id: string;
 
+    /**
+     * Authentication method used to connect to the upstream MCP server.
+     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+    /**
+     * URL of the upstream MCP endpoint.
+     */
     hostname: string;
 
+    /**
+     * Display name for the MCP server.
+     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     server_id: string;
 
@@ -945,6 +1035,9 @@ export namespace PortalReadResponse {
 
     default_disabled?: boolean;
 
+    /**
+     * Optional description of the MCP server.
+     */
     description?: string | null;
 
     error?: string;
@@ -970,7 +1063,7 @@ export namespace PortalReadResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
      */
     secure_web_gateway?: boolean;
 
@@ -1090,17 +1183,17 @@ export interface PortalCreateParams {
   account_id: string;
 
   /**
-   * Body param: portal id
+   * Body param: Unique identifier for the MCP portal.
    */
   id: string;
 
   /**
-   * Body param
+   * Body param: Hostname where the MCP portal is available.
    */
   hostname: string;
 
   /**
-   * Body param
+   * Body param: Display name for the MCP portal.
    */
   name: string;
 
@@ -1123,17 +1216,18 @@ export interface PortalCreateParams {
   code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   /**
-   * Body param
+   * Body param: Optional description of the MCP portal.
    */
   description?: string;
 
   /**
-   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param
+   * Body param: MCP servers attached to the portal and their portal-specific
+   * settings.
    */
   servers?: Array<PortalCreateParams.Server>;
 }
@@ -1141,37 +1235,73 @@ export interface PortalCreateParams {
 export namespace PortalCreateParams {
   export interface Server {
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     server_id: string;
 
+    /**
+     * Disable this server by default for clients connecting through the portal.
+     */
     default_disabled?: boolean;
 
+    /**
+     * Use end-user OAuth credentials when connecting this server to the portal.
+     */
     on_behalf?: boolean;
 
+    /**
+     * Portal-specific prompt overrides.
+     */
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
+    /**
+     * Portal-specific tool overrides.
+     */
     updated_tools?: Array<Server.UpdatedTool>;
   }
 
   export namespace Server {
     export interface UpdatedPrompt {
+      /**
+       * Name of the tool or prompt capability to override.
+       */
       name: string;
 
+      /**
+       * Custom name exposed for the capability.
+       */
       alias?: string;
 
+      /**
+       * Custom description exposed for the capability.
+       */
       description?: string;
 
+      /**
+       * Whether the capability is available through the MCP server.
+       */
       enabled?: boolean;
     }
 
     export interface UpdatedTool {
+      /**
+       * Name of the tool or prompt capability to override.
+       */
       name: string;
 
+      /**
+       * Custom name exposed for the capability.
+       */
       alias?: string;
 
+      /**
+       * Custom description exposed for the capability.
+       */
       description?: string;
 
+      /**
+       * Whether the capability is available through the MCP server.
+       */
       enabled?: boolean;
     }
   }
@@ -1202,27 +1332,28 @@ export interface PortalUpdateParams {
   code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   /**
-   * Body param
+   * Body param: Optional description of the MCP portal.
    */
   description?: string;
 
   /**
-   * Body param
+   * Body param: Hostname where the MCP portal is available.
    */
   hostname?: string;
 
   /**
-   * Body param
+   * Body param: Display name for the MCP portal.
    */
   name?: string;
 
   /**
-   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param
+   * Body param: MCP servers attached to the portal and their portal-specific
+   * settings.
    */
   servers?: Array<PortalUpdateParams.Server>;
 }
@@ -1230,37 +1361,73 @@ export interface PortalUpdateParams {
 export namespace PortalUpdateParams {
   export interface Server {
     /**
-     * server id
+     * Unique identifier for the MCP server.
      */
     server_id: string;
 
+    /**
+     * Disable this server by default for clients connecting through the portal.
+     */
     default_disabled?: boolean;
 
+    /**
+     * Use end-user OAuth credentials when connecting this server to the portal.
+     */
     on_behalf?: boolean;
 
+    /**
+     * Portal-specific prompt overrides.
+     */
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
+    /**
+     * Portal-specific tool overrides.
+     */
     updated_tools?: Array<Server.UpdatedTool>;
   }
 
   export namespace Server {
     export interface UpdatedPrompt {
+      /**
+       * Name of the tool or prompt capability to override.
+       */
       name: string;
 
+      /**
+       * Custom name exposed for the capability.
+       */
       alias?: string;
 
+      /**
+       * Custom description exposed for the capability.
+       */
       description?: string;
 
+      /**
+       * Whether the capability is available through the MCP server.
+       */
       enabled?: boolean;
     }
 
     export interface UpdatedTool {
+      /**
+       * Name of the tool or prompt capability to override.
+       */
       name: string;
 
+      /**
+       * Custom name exposed for the capability.
+       */
       alias?: string;
 
+      /**
+       * Custom description exposed for the capability.
+       */
       description?: string;
 
+      /**
+       * Whether the capability is available through the MCP server.
+       */
       enabled?: boolean;
     }
   }

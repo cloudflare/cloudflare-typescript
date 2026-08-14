@@ -15,7 +15,8 @@ export class BaseCategories extends APIResource {
   ] as const);
 
   /**
-   * Create a new event category for the account.
+   * Creates a new threat event category in Cloudforce One for organizing and
+   * classifying threat events.
    *
    * @example
    * ```ts
@@ -38,7 +39,8 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * List categories across one or more datasets for the account.
+   * Lists all threat event categories configured for classifying and organizing
+   * threat events.
    *
    * @example
    * ```ts
@@ -57,7 +59,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Delete a category by its identifier.
+   * Removes a threat event category from Cloudforce One.
    *
    * @example
    * ```ts
@@ -81,7 +83,8 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Update an existing category by its identifier.
+   * Partially updates a threat event category in Cloudforce One, modifying specific
+   * fields without replacing the entire category.
    *
    * @example
    * ```ts
@@ -105,7 +108,7 @@ export class BaseCategories extends APIResource {
   }
 
   /**
-   * Retrieve a single category by its identifier.
+   * Retrieves details for a specific threat event category.
    *
    * @example
    * ```ts

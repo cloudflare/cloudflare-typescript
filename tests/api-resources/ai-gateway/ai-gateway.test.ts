@@ -128,6 +128,7 @@ const runTests = (client: PartialCloudflare<{ aiGateway: BaseAIGateway }>) => {
           S9: 'FLAG',
         },
       },
+      log_classification: true,
       log_management: 10000,
       log_management_strategy: 'STOP_INSERTING',
       logpush: true,

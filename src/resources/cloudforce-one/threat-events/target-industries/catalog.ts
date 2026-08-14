@@ -10,7 +10,7 @@ export class BaseCatalog extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'targetIndustries', 'catalog'] as const);
 
   /**
-   * List all predefined target industries from the industry map catalog.
+   * Lists all target industries from industry map catalog
    *
    * @example
    * ```ts

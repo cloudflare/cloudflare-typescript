@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { BaseCategories } from 'cloudflare/resources/zero-trust/resource-library/categories';
-import { ResourceLibrary } from 'cloudflare/resources/zero-trust/resource-library/resource-library';
+import { BaseTransformationsC2paResource } from 'cloudflare/resources/zones/transformations-c2pa';
+import { Zones } from 'cloudflare/resources/zones/zones';
 
 import Cloudflare from 'cloudflare';
 import { createClient, type PartialCloudflare } from 'cloudflare/tree-shakable';
@@ -16,22 +16,23 @@ const partialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [BaseCategories],
+  resources: [BaseTransformationsC2paResource],
 });
 
 const parentPartialClient = createClient({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-  resources: [ResourceLibrary],
+  resources: [Zones],
 });
 
 const runTests = (
-  client: PartialCloudflare<{ zeroTrust: { resourceLibrary: { categories: BaseCategories } } }>,
+  client: PartialCloudflare<{ zones: { transformationsC2pa: BaseTransformationsC2paResource } }>,
 ) => {
-  test('list: only required params', async () => {
-    const responsePromise = client.zeroTrust.resourceLibrary.categories.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+  test('edit: only required params', async () => {
+    const responsePromise = client.zones.transformationsC2pa.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: 'off',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,17 +43,16 @@ const runTests = (
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.zeroTrust.resourceLibrary.categories.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      limit: 0,
-      offset: 0,
+  test('edit: required and optional params', async () => {
+    const response = await client.zones.transformationsC2pa.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      value: 'off',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.resourceLibrary.categories.get(12, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.zones.transformationsC2pa.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,11 +64,11 @@ const runTests = (
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.resourceLibrary.categories.get(12, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.zones.transformationsC2pa.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 };
-describe('resource categories', () => runTests(client));
-describe('resource categories (tree shakable, base)', () => runTests(partialClient));
-describe('resource categories (tree shakable, subresource)', () => runTests(parentPartialClient));
+describe('resource transformationsC2pa', () => runTests(client));
+describe('resource transformationsC2pa (tree shakable, base)', () => runTests(partialClient));
+describe('resource transformationsC2pa (tree shakable, subresource)', () => runTests(parentPartialClient));

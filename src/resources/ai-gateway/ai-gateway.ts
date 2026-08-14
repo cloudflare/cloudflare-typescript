@@ -297,6 +297,8 @@ export interface AIGatewayCreateResponse {
 
   is_default?: boolean;
 
+  log_classification?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -540,6 +542,8 @@ export interface AIGatewayUpdateResponse {
   guardrails?: AIGatewayUpdateResponse.Guardrails | null;
 
   is_default?: boolean;
+
+  log_classification?: boolean;
 
   log_management?: number | null;
 
@@ -785,6 +789,8 @@ export interface AIGatewayListResponse {
 
   is_default?: boolean;
 
+  log_classification?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -1029,6 +1035,8 @@ export interface AIGatewayDeleteResponse {
 
   is_default?: boolean;
 
+  log_classification?: boolean;
+
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -1272,6 +1280,8 @@ export interface AIGatewayGetResponse {
   guardrails?: AIGatewayGetResponse.Guardrails | null;
 
   is_default?: boolean;
+
+  log_classification?: boolean;
 
   log_management?: number | null;
 
@@ -1634,6 +1644,11 @@ export interface AIGatewayUpdateParams {
    * Body param
    */
   guardrails?: AIGatewayUpdateParams.Guardrails | null;
+
+  /**
+   * Body param
+   */
+  log_classification?: boolean;
 
   /**
    * Body param

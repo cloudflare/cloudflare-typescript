@@ -127,6 +127,14 @@ export {
 export {
   TransformationsAllowedOrigins,
   BaseTransformationsAllowedOrigins,
+  type TransformationsAllowedOriginEditParams,
+  type TransformationsAllowedOriginGetParams,
 } from './transformations-allowed-origins';
-export { TransformationsC2pa, BaseTransformationsC2pa } from './transformations-c2pa';
+export {
+  TransformationsC2paResource,
+  BaseTransformationsC2paResource,
+  type TransformationsC2pa,
+  type TransformationsC2paEditParams,
+  type TransformationsC2paGetParams,
+} from './transformations-c2pa';
 export { Zones, BaseZones } from './zones';

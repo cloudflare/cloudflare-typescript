@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
+import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { multipartFormRequestOptions } from '../../../internal/uploads';
 import { path } from '../../../internal/utils/path';
@@ -37,11 +38,25 @@ export class BaseSnapshots extends APIResource {
     params: SnapshotUpdateParams,
     options?: RequestOptions,
   ): APIPromise<SnapshotUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, 'Cf-Async-Upload': cfAsyncUpload, ...body } = params;
     return (
       this._client.put(
         path`/accounts/${account_id}/intel/indicator-feeds/${feedID}/snapshot`,
-        multipartFormRequestOptions({ body, ...options }, this._client),
+        multipartFormRequestOptions(
+          {
+            body,
+            ...options,
+            headers: buildHeaders([
+              {
+                ...(cfAsyncUpload?.toString() != null ?
+                  { 'Cf-Async-Upload': cfAsyncUpload?.toString() }
+                : undefined),
+              },
+              options?.headers,
+            ]),
+          },
+          this._client,
+        ),
       ) as APIPromise<{ result: SnapshotUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,9 +75,26 @@ export interface SnapshotUpdateResponse {
   filename?: string;
 
   /**
-   * Current status of upload, should be unified
+   * Account-relative polling path. Prepend `/accounts/{account_id}` using the same
+   * account identifier and API host as the upload request. The path omits the
+   * account segment because the service does not have your account identifier in
+   * this context.
+   */
+  poll_url?: string;
+
+  /**
+   * Current status of the upload at the moment the request returned. This is NOT a
+   * terminal state: the file is unified inline, but the durable loader has only
+   * accepted it, so the upload is still `Unifying`. Poll `poll_url` until the status
+   * reaches a terminal value (`Unified` or `Error`).
    */
   status?: string;
+
+  /**
+   * Identifier of the upload row, for polling this upload to a terminal state via
+   * `poll_url`.
+   */
+  upload_id?: number;
 }
 
 export interface SnapshotUpdateParams {
@@ -76,6 +108,13 @@ export interface SnapshotUpdateParams {
    * (recognised by `0x1f 0x8b` magic bytes or a `.gz` filename suffix).
    */
   source?: string;
+
+  /**
+   * Header param: Set to the literal value `1` to enqueue the upload and receive a
+   * `202` response with a polling URL. Any other value uses the legacy synchronous
+   * response.
+   */
+  'Cf-Async-Upload'?: '1';
 }
 
 export declare namespace Snapshots {

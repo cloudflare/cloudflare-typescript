@@ -210,6 +210,10 @@ export namespace IndicatorListResponse {
       export interface Properties {
         count: Properties.Count;
 
+        cursor: Properties.Cursor;
+
+        has_more: Properties.HasMore;
+
         page: Properties.Page;
 
         per_page: Properties.PerPage;
@@ -221,6 +225,20 @@ export namespace IndicatorListResponse {
 
       export namespace Properties {
         export interface Count {
+          type: string;
+        }
+
+        export interface Cursor {
+          description: string;
+
+          nullable: boolean;
+
+          type: string;
+        }
+
+        export interface HasMore {
+          description: string;
+
           type: string;
         }
 
@@ -259,7 +277,7 @@ export interface IndicatorListParams {
   /**
    * Query param: Cache strategy. 'from-graph' serves results from the graph-node KV
    * cache when all requested UUIDs are cached; falls back to normal path on
-   * partial/zero hit.
+   * partial/zero hit. Cannot be combined with `cursor`.
    */
   cache?: 'from-graph';
 
@@ -274,6 +292,18 @@ export interface IndicatorListParams {
    * format (e.g., '2024-12-31T23:59:59Z').
    */
   createdBefore?: string;
+
+  /**
+   * Query param: Opaque cursor from a previous response's `pagination.cursor`. When
+   * provided, all filters, datasetIds, page, `pageSize`, `includeTags` and
+   * `relatedEventsLimit` come from the cursor — do not resend them. Sending any
+   * filter, `page`, `pageSize`, `includeTags`, `relatedEventsLimit`,
+   * `includeTotalCount=true`, or `cache=from-graph` alongside a cursor yields a 400
+   * `CursorFilterConflictError`. A cursor issued for a different entity, an
+   * unsupported version, or a dataset that has since been reconfigured as
+   * analytics-only yields a 400 `InvalidCursorError`.
+   */
+  cursor?: string;
 
   /**
    * Query param: Dataset IDs to query indicators from (array of UUIDs), or special
@@ -344,13 +374,6 @@ export interface IndicatorListParams {
    * conditions are AND'd together. Max 10 conditions per request.
    */
   search?: Array<IndicatorListParams.Search>;
-
-  /**
-   * Query param: Read backend. 'do' (default) reads Durable Object storage.
-   * 'r2catalog' reads R2 Data Catalog (admin-only, experimental; supports a subset
-   * of search fields).
-   */
-  source?: 'do' | 'r2catalog';
 
   /**
    * Query param: Filter by tag values or UUIDs. Indicators must have at least one of

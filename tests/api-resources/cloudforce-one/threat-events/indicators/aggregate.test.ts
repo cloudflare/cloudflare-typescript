@@ -49,8 +49,8 @@ const runTests = (
     const response = await client.cloudforceOne.threatEvents.indicators.aggregate.list({
       account_id: 'account_id',
       aggregateBy: 'aggregateBy',
-      createdAfter: 'createdAfter',
-      createdBefore: 'createdBefore',
+      createdAfter: '2019-12-27T18:11:19.117Z',
+      createdBefore: '2019-12-27T18:11:19.117Z',
       datasetIds: ['string'],
       eventDateAfter: 'eventDateAfter',
       eventDateBefore: 'eventDateBefore',

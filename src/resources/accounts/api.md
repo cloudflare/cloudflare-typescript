@@ -102,3 +102,11 @@ Methods:
 ## SpeedSettings
 
 ### Transformations
+
+Types:
+
+- <code><a href="./src/resources/accounts/speed-settings/transformations.ts">TransformationsConfig</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/settings/transformations">client.accounts.speedSettings.transformations.<a href="./src/resources/accounts/speed-settings/transformations.ts">get</a>({ ...params }) -> TransformationsConfigsSinglePage</code>

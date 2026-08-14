@@ -135,10 +135,18 @@ import {
 import * as TransformationsAllowedOriginsAPI from './transformations-allowed-origins';
 import {
   BaseTransformationsAllowedOrigins,
+  TransformationsAllowedOriginEditParams,
+  TransformationsAllowedOriginGetParams,
   TransformationsAllowedOrigins,
 } from './transformations-allowed-origins';
 import * as TransformationsC2paAPI from './transformations-c2pa';
-import { BaseTransformationsC2pa, TransformationsC2pa } from './transformations-c2pa';
+import {
+  BaseTransformationsC2paResource,
+  TransformationsC2pa,
+  TransformationsC2paEditParams,
+  TransformationsC2paGetParams,
+  TransformationsC2paResource,
+} from './transformations-c2pa';
 import * as CTAPI from './ct/ct';
 import { BaseCT, CT } from './ct/ct';
 import { APIPromise } from '../../core/api-promise';
@@ -249,8 +257,8 @@ export class Zones extends BaseZones {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   transformationsAllowedOrigins: TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins =
     new TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins(this._client);
-  transformationsC2pa: TransformationsC2paAPI.TransformationsC2pa =
-    new TransformationsC2paAPI.TransformationsC2pa(this._client);
+  transformationsC2pa: TransformationsC2paAPI.TransformationsC2paResource =
+    new TransformationsC2paAPI.TransformationsC2paResource(this._client);
   environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
@@ -714,10 +722,9 @@ Zones.ActivationCheck = ActivationCheck;
 Zones.BaseActivationCheck = BaseActivationCheck;
 Zones.Settings = Settings;
 Zones.BaseSettings = BaseSettings;
-Zones.TransformationsAllowedOrigins = TransformationsAllowedOrigins;
 Zones.BaseTransformationsAllowedOrigins = BaseTransformationsAllowedOrigins;
-Zones.TransformationsC2pa = TransformationsC2pa;
-Zones.BaseTransformationsC2pa = BaseTransformationsC2pa;
+Zones.TransformationsC2paResource = TransformationsC2paResource;
+Zones.BaseTransformationsC2paResource = BaseTransformationsC2paResource;
 Zones.Environments = Environments;
 Zones.BaseEnvironments = BaseEnvironments;
 Zones.CustomNameservers = CustomNameservers;
@@ -813,11 +820,19 @@ export declare namespace Zones {
   };
 
   export {
-    TransformationsAllowedOrigins as TransformationsAllowedOrigins,
+    type TransformationsAllowedOrigins as TransformationsAllowedOrigins,
     BaseTransformationsAllowedOrigins as BaseTransformationsAllowedOrigins,
+    type TransformationsAllowedOriginEditParams as TransformationsAllowedOriginEditParams,
+    type TransformationsAllowedOriginGetParams as TransformationsAllowedOriginGetParams,
   };
 
-  export { TransformationsC2pa as TransformationsC2pa, BaseTransformationsC2pa as BaseTransformationsC2pa };
+  export {
+    TransformationsC2paResource as TransformationsC2paResource,
+    BaseTransformationsC2paResource as BaseTransformationsC2paResource,
+    type TransformationsC2pa as TransformationsC2pa,
+    type TransformationsC2paEditParams as TransformationsC2paEditParams,
+    type TransformationsC2paGetParams as TransformationsC2paGetParams,
+  };
 
   export {
     Environments as Environments,

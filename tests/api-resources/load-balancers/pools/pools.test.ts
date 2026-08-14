@@ -114,6 +114,7 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools 
       check_regions: ['WEU', 'ENAM'],
       description: 'Primary data center - Provider XYZ',
       enabled: false,
+      health_sources: ['regional', 'global'],
       latitude: 0,
       load_shedding: {
         default_percent: 0,
@@ -214,6 +215,7 @@ const runTests = (client: PartialCloudflare<{ loadBalancers: { pools: BasePools 
       check_regions: ['WEU', 'ENAM'],
       description: 'Primary data center - Provider XYZ',
       enabled: false,
+      health_sources: ['regional', 'global'],
       latitude: 0,
       load_shedding: {
         default_percent: 0,

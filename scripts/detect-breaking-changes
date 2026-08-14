@@ -16,6 +16,8 @@ TEST_PATHS=(
 	tests/api-resources/accounts/tokens/value.test.ts
 	tests/api-resources/accounts/logs/logs.test.ts
 	tests/api-resources/accounts/logs/audit.test.ts
+	tests/api-resources/accounts/speed-settings/speed-settings.test.ts
+	tests/api-resources/accounts/speed-settings/transformations.test.ts
 	tests/api-resources/organizations/organizations.test.ts
 	tests/api-resources/organizations/organization-profile.test.ts
 	tests/api-resources/organizations/logs/logs.test.ts
@@ -45,6 +47,8 @@ TEST_PATHS=(
 	tests/api-resources/zones/zones.test.ts
 	tests/api-resources/zones/activation-check.test.ts
 	tests/api-resources/zones/settings.test.ts
+	tests/api-resources/zones/transformations-allowed-origins.test.ts
+	tests/api-resources/zones/transformations-c2pa.test.ts
 	tests/api-resources/zones/environments.test.ts
 	tests/api-resources/zones/custom-nameservers.test.ts
 	tests/api-resources/zones/holds.test.ts

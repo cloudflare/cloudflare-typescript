@@ -10,7 +10,7 @@ export class BaseTypes extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'indicators', 'types'] as const);
 
   /**
-   * List indicator types across one or more datasets for the account.
+   * Lists indicator types across multiple datasets
    *
    * @example
    * ```ts
