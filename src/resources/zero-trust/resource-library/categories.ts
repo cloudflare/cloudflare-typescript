@@ -45,12 +45,12 @@ export class BaseCategories extends APIResource {
    * ```ts
    * const category =
    *   await client.zeroTrust.resourceLibrary.categories.get(
-   *     '0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0',
+   *     12,
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
-  get(id: string, params: CategoryGetParams, options?: RequestOptions): APIPromise<CategoryGetResponse> {
+  get(id: number, params: CategoryGetParams, options?: RequestOptions): APIPromise<CategoryGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
@@ -68,7 +68,7 @@ export interface CategoryListResponse {
   /**
    * Returns the category ID.
    */
-  id: string;
+  id: number;
 
   /**
    * Returns the category creation time.
@@ -90,7 +90,7 @@ export interface CategoryGetResponse {
   /**
    * Returns the category ID.
    */
-  id: string;
+  id: number;
 
   /**
    * Returns the category creation time.

@@ -46,6 +46,7 @@ const runTests = (
       cache: 'from-graph',
       createdAfter: '2019-12-27T18:11:19.117Z',
       createdBefore: '2019-12-27T18:11:19.117Z',
+      cursor: 'cursor',
       datasetIds: ['string'],
       format: 'json',
       includeTags: true,
@@ -63,7 +64,6 @@ const runTests = (
           value: 'malicious',
         },
       ],
-      source: 'do',
       tags: ['string'],
       tagSearch: [
         {

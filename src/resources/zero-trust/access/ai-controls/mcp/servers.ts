@@ -15,7 +15,7 @@ export class BaseServers extends APIResource {
     Object.freeze(['zeroTrust', 'access', 'aiControls', 'mcp', 'servers'] as const);
 
   /**
-   * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
+   * Creates a new MCP server for connecting to an upstream MCP endpoint.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Updates an MCP portal configuration.
+   * Updates an MCP server's configuration and credentials.
    *
    * @example
    * ```ts
@@ -64,7 +64,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Lists all MCP portals configured for the account.
+   * Lists all MCP servers configured for the account.
    *
    * @example
    * ```ts
@@ -89,7 +89,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Deletes an MCP portal from the account.
+   * Deletes an MCP server from the account.
    *
    * @example
    * ```ts
@@ -111,7 +111,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Retrieves gateway configuration for MCP portals.
+   * Retrieves an MCP server's configuration and capability sync state.
    *
    * @example
    * ```ts
@@ -140,7 +140,7 @@ export class BaseServers extends APIResource {
    * ```ts
    * const response =
    *   await client.zeroTrust.access.aiControls.mcp.servers.sync(
-   *     'my-mcp-portal',
+   *     'my-mcp-server',
    *     { account_id: 'a86a8f5c339544d7bdc89926de14fb8c' },
    *   );
    * ```
@@ -161,14 +161,23 @@ export type ServerListResponsesV4PagePaginationArray = V4PagePaginationArray<Ser
 
 export interface ServerCreateResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
@@ -193,6 +202,9 @@ export interface ServerCreateResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -216,7 +228,7 @@ export interface ServerCreateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
@@ -225,8 +237,14 @@ export interface ServerCreateResponse {
    */
   status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerCreateResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerCreateResponse.UpdatedTool>;
 }
 
@@ -300,36 +318,69 @@ export namespace ServerCreateResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerUpdateResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
@@ -354,6 +405,9 @@ export interface ServerUpdateResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -377,7 +431,7 @@ export interface ServerUpdateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
@@ -386,8 +440,14 @@ export interface ServerUpdateResponse {
    */
   status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerUpdateResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerUpdateResponse.UpdatedTool>;
 }
 
@@ -461,36 +521,69 @@ export namespace ServerUpdateResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerListResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
@@ -515,6 +608,9 @@ export interface ServerListResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -538,7 +634,7 @@ export interface ServerListResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
@@ -547,8 +643,14 @@ export interface ServerListResponse {
    */
   status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerListResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerListResponse.UpdatedTool>;
 }
 
@@ -622,36 +724,69 @@ export namespace ServerListResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerDeleteResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
@@ -676,6 +811,9 @@ export interface ServerDeleteResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -699,7 +837,7 @@ export interface ServerDeleteResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
@@ -708,8 +846,14 @@ export interface ServerDeleteResponse {
    */
   status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerDeleteResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerDeleteResponse.UpdatedTool>;
 }
 
@@ -783,36 +927,69 @@ export namespace ServerDeleteResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerReadResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
@@ -837,6 +1014,9 @@ export interface ServerReadResponse {
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -860,7 +1040,7 @@ export interface ServerReadResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
@@ -869,8 +1049,14 @@ export interface ServerReadResponse {
    */
   status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerReadResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerReadResponse.UpdatedTool>;
 }
 
@@ -944,22 +1130,46 @@ export namespace ServerReadResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
@@ -1008,27 +1218,32 @@ export interface ServerCreateParams {
   account_id: string;
 
   /**
-   * Body param: server id
+   * Body param: Unique identifier for the MCP server.
    */
   id: string;
 
   /**
-   * Body param
+   * Body param: Authentication method used to connect to the upstream MCP server.
    */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
   /**
-   * Body param
+   * Body param: URL of the upstream MCP endpoint.
    */
   hostname: string;
 
   /**
-   * Body param
+   * Body param: Display name for the MCP server.
    */
   name: string;
 
   /**
-   * Body param
+   * Body param: Static credential for the upstream MCP server. For auth_type
+   * "bearer", either a raw token string (e.g. "sk-abc123"), which is wrapped
+   * server-side as `Authorization: Bearer <token>`, or a JSON-encoded object of the
+   * form `{"headers":{"Header-Name":"value",...}}` for custom or multiple static
+   * headers (e.g. Cloudflare Access service tokens:
+   * `{"headers":{"cf-access-client-id":"...","cf-access-client-secret":"..."}}`).
    */
   auth_credentials?: string;
 
@@ -1040,7 +1255,7 @@ export interface ServerCreateParams {
   client_secret?: string;
 
   /**
-   * Body param
+   * Body param: Optional description of the MCP server.
    */
   description?: string | null;
 
@@ -1054,39 +1269,63 @@ export interface ServerCreateParams {
 
   /**
    * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
-   * Web Gateway
+   * Web Gateway.
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param
+   * Body param: Server-wide prompt capability overrides.
    */
   updated_prompts?: Array<ServerCreateParams.UpdatedPrompt>;
 
   /**
-   * Body param
+   * Body param: Server-wide tool capability overrides.
    */
   updated_tools?: Array<ServerCreateParams.UpdatedTool>;
 }
 
 export namespace ServerCreateParams {
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
@@ -1098,7 +1337,12 @@ export interface ServerUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Static credential for the upstream MCP server. For auth_type
+   * "bearer", either a raw token string (e.g. "sk-abc123"), which is wrapped
+   * server-side as `Authorization: Bearer <token>`, or a JSON-encoded object of the
+   * form `{"headers":{"Header-Name":"value",...}}` for custom or multiple static
+   * headers (e.g. Cloudflare Access service tokens:
+   * `{"headers":{"cf-access-client-id":"...","cf-access-client-secret":"..."}}`).
    */
   auth_credentials?: string;
 
@@ -1110,7 +1354,7 @@ export interface ServerUpdateParams {
   client_secret?: string;
 
   /**
-   * Body param
+   * Body param: Optional description of the MCP server.
    */
   description?: string | null;
 
@@ -1123,45 +1367,69 @@ export interface ServerUpdateParams {
   is_shared_oauth_callback_enabled?: boolean;
 
   /**
-   * Body param
+   * Body param: Display name for the MCP server.
    */
   name?: string;
 
   /**
    * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
-   * Web Gateway
+   * Web Gateway.
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param
+   * Body param: Server-wide prompt capability overrides.
    */
   updated_prompts?: Array<ServerUpdateParams.UpdatedPrompt>;
 
   /**
-   * Body param
+   * Body param: Server-wide tool capability overrides.
    */
   updated_tools?: Array<ServerUpdateParams.UpdatedTool>;
 }
 
 export namespace ServerUpdateParams {
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }

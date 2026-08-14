@@ -17,7 +17,8 @@ export class BaseDatasets extends APIResource {
   ] as const);
 
   /**
-   * Create a new dataset in the account.
+   * Creates a new threat event dataset in Cloudforce One for organizing related
+   * threat events.
    *
    * @example
    * ```ts
@@ -38,7 +39,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * List all datasets accessible to the account.
+   * Lists all threat event datasets configured in Cloudforce One.
    *
    * @example
    * ```ts
@@ -81,7 +82,8 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Update an existing dataset by its identifier.
+   * Partially updates a threat event dataset in Cloudforce One, modifying specific
+   * fields without replacing the entire dataset configuration.
    *
    * @example
    * ```ts
@@ -109,7 +111,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Retrieve metadata for a specific dataset.
+   * Retrieves details for a specific threat event dataset.
    *
    * @example
    * ```ts
@@ -155,19 +157,28 @@ export class Datasets extends BaseDatasets {
 }
 
 export interface DatasetCreateResponse {
+  isAnalytics: boolean;
+
   isPublic: boolean;
 
   name: string;
 
   uuid: string;
-
-  deletedAt?: string;
 }
 
 export type DatasetListResponse = Array<DatasetListResponse.DatasetListResponseItem>;
 
 export namespace DatasetListResponse {
   export interface DatasetListResponseItem {
+    /**
+     * Effective indicator mutation capability after account/dataset authorization and
+     * dataset storage capability are applied. API Gateway method permissions are
+     * separate and must also allow the requested operation.
+     */
+    indicatorWriteMode: 'read_only' | 'create_only' | 'full';
+
+    isAnalytics: boolean;
+
     isPublic: boolean;
 
     name: string;
@@ -185,23 +196,23 @@ export interface DatasetDeleteResponse {
 }
 
 export interface DatasetEditResponse {
+  isAnalytics: boolean;
+
   isPublic: boolean;
 
   name: string;
 
   uuid: string;
-
-  deletedAt?: string;
 }
 
 export interface DatasetGetResponse {
+  isAnalytics: boolean;
+
   isPublic: boolean;
 
   name: string;
 
   uuid: string;
-
-  deletedAt?: string;
 }
 
 export interface DatasetRawResponse {

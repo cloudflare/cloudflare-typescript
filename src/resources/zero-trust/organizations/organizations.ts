@@ -288,9 +288,9 @@ export interface Organization {
   /**
    * Determines whether global MFA settings apply to applications by default. The
    * organization must have MFA enabled with at least one authentication method and a
-   * session duration configured. Note: 'allowed_authenticators' cannot only contain
-   * 'piv_key' if the organization has any non-infrastructure applications because
-   * PIV keys are only compatible with infrastructure apps.
+   * session duration configured. Note: 'allowed_authenticators' cannot contain only
+   * the infrastructure SSH authenticators ('piv_key' and 'ssh_fido2_key') if the
+   * organization has any non-infrastructure applications.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -352,9 +352,10 @@ export namespace Organization {
    */
   export interface MfaConfig {
     /**
-     * Lists the MFA methods that users can authenticate with.
+     * Lists the MFA methods that users can authenticate with. The `piv_key` and
+     * `ssh_fido2_key` values are supported only for infrastructure applications.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key' | 'ssh_fido2_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -498,8 +499,8 @@ export interface OrganizationCreateParams {
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured. Note: 'allowed_authenticators' cannot
-   * only contain 'piv_key' if the organization has any non-infrastructure
-   * applications because PIV keys are only compatible with infrastructure apps.
+   * contain only the infrastructure SSH authenticators ('piv_key' and
+   * 'ssh_fido2_key') if the organization has any non-infrastructure applications.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -545,9 +546,10 @@ export namespace OrganizationCreateParams {
    */
   export interface MfaConfig {
     /**
-     * Lists the MFA methods that users can authenticate with.
+     * Lists the MFA methods that users can authenticate with. The `piv_key` and
+     * `ssh_fido2_key` values are supported only for infrastructure applications.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key' | 'ssh_fido2_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -689,8 +691,8 @@ export interface OrganizationUpdateParams {
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured. Note: 'allowed_authenticators' cannot
-   * only contain 'piv_key' if the organization has any non-infrastructure
-   * applications because PIV keys are only compatible with infrastructure apps.
+   * contain only the infrastructure SSH authenticators ('piv_key' and
+   * 'ssh_fido2_key') if the organization has any non-infrastructure applications.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -754,9 +756,10 @@ export namespace OrganizationUpdateParams {
    */
   export interface MfaConfig {
     /**
-     * Lists the MFA methods that users can authenticate with.
+     * Lists the MFA methods that users can authenticate with. The `piv_key` and
+     * `ssh_fido2_key` values are supported only for infrastructure applications.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key' | 'ssh_fido2_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching

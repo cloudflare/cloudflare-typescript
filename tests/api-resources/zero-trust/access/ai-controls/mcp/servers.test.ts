@@ -53,9 +53,9 @@ const runTests = (
       auth_type: 'unauthenticated',
       hostname: 'https://example.com/mcp',
       name: 'My MCP Server',
-      auth_credentials: 'auth_credentials',
+      auth_credentials: 'sk-my-bearer-token',
       client_secret: 'client_secret',
-      description: 'This is one remote mcp server',
+      description: 'This is one remote MCP server',
       is_shared_oauth_callback_enabled: true,
       secure_web_gateway: false,
       updated_prompts: [
@@ -93,9 +93,9 @@ const runTests = (
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.aiControls.mcp.servers.update('my-mcp-server', {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
-      auth_credentials: 'auth_credentials',
+      auth_credentials: 'sk-my-bearer-token',
       client_secret: 'client_secret',
-      description: 'This is one remote mcp server',
+      description: 'This is one remote MCP server',
       is_shared_oauth_callback_enabled: true,
       name: 'My MCP Server',
       secure_web_gateway: false,
@@ -179,7 +179,7 @@ const runTests = (
   });
 
   test('sync: only required params', async () => {
-    const responsePromise = client.zeroTrust.access.aiControls.mcp.servers.sync('my-mcp-portal', {
+    const responsePromise = client.zeroTrust.access.aiControls.mcp.servers.sync('my-mcp-server', {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -192,7 +192,7 @@ const runTests = (
   });
 
   test('sync: required and optional params', async () => {
-    const response = await client.zeroTrust.access.aiControls.mcp.servers.sync('my-mcp-portal', {
+    const response = await client.zeroTrust.access.aiControls.mcp.servers.sync('my-mcp-server', {
       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
     });
   });

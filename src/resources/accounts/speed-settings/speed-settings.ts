@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TransformationsAPI from './transformations';
-import { BaseTransformations, Transformations } from './transformations';
+import {
+  BaseTransformations,
+  TransformationGetParams,
+  Transformations,
+  TransformationsConfig,
+  TransformationsConfigsSinglePage,
+} from './transformations';
 
 export class BaseSpeedSettings extends APIResource {
   static override readonly _key: readonly ['accounts', 'speedSettings'] = Object.freeze([
@@ -18,5 +24,11 @@ SpeedSettings.Transformations = Transformations;
 SpeedSettings.BaseTransformations = BaseTransformations;
 
 export declare namespace SpeedSettings {
-  export { Transformations as Transformations, BaseTransformations as BaseTransformations };
+  export {
+    Transformations as Transformations,
+    BaseTransformations as BaseTransformations,
+    type TransformationsConfig as TransformationsConfig,
+    type TransformationsConfigsSinglePage as TransformationsConfigsSinglePage,
+    type TransformationGetParams as TransformationGetParams,
+  };
 }

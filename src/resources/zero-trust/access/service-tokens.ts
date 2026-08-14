@@ -301,6 +301,14 @@ export interface ServiceToken {
    */
   duration?: string;
 
+  /**
+   * Whether the service token is enabled. A disabled service token cannot be used to
+   * authenticate; both its current and previous `client_secret` stop being accepted,
+   * but the token itself is preserved and can be re-enabled at any time. Defaults to
+   * enabled when omitted on create.
+   */
+  enabled?: boolean;
+
   expires_at?: string;
 
   /**
@@ -336,6 +344,14 @@ export interface ServiceTokenCreateResponse {
   duration?: string;
 
   /**
+   * Whether the service token is enabled. A disabled service token cannot be used to
+   * authenticate; both its current and previous `client_secret` stop being accepted,
+   * but the token itself is preserved and can be re-enabled at any time. Defaults to
+   * enabled when omitted on create.
+   */
+  enabled?: boolean;
+
+  /**
    * The name of the service token.
    */
   name?: string;
@@ -366,6 +382,14 @@ export interface ServiceTokenRotateResponse {
    * hours (8760h).
    */
   duration?: string;
+
+  /**
+   * Whether the service token is enabled. A disabled service token cannot be used to
+   * authenticate; both its current and previous `client_secret` stop being accepted,
+   * but the token itself is preserved and can be re-enabled at any time. Defaults to
+   * enabled when omitted on create.
+   */
+  enabled?: boolean;
 
   /**
    * The name of the service token.
@@ -408,6 +432,14 @@ export interface ServiceTokenCreateParams {
   duration?: string;
 
   /**
+   * Body param: Whether the service token is enabled. A disabled service token
+   * cannot be used to authenticate; both its current and previous `client_secret`
+   * stop being accepted, but the token itself is preserved and can be re-enabled at
+   * any time. Defaults to enabled when omitted on create.
+   */
+  enabled?: boolean;
+
+  /**
    * Body param: The expiration of the previous `client_secret`. This can be modified
    * at any point after a rotation. For example, you may extend it further into the
    * future if you need more time to update services with the new secret; or move it
@@ -445,6 +477,14 @@ export interface ServiceTokenUpdateParams {
    * default is 1 year in hours (8760h).
    */
   duration?: string;
+
+  /**
+   * Body param: Whether the service token is enabled. A disabled service token
+   * cannot be used to authenticate; both its current and previous `client_secret`
+   * stop being accepted, but the token itself is preserved and can be re-enabled at
+   * any time. Defaults to enabled when omitted on create.
+   */
+  enabled?: boolean;
 
   /**
    * Body param: The name of the service token.

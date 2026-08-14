@@ -95,6 +95,11 @@ export interface ApplicationListResponse {
   application_type_description: string;
 
   /**
+   * Returns the category ID.
+   */
+  category_id: number;
+
+  /**
    * Returns the application creation time.
    */
   created_at: string;
@@ -105,7 +110,7 @@ export interface ApplicationListResponse {
   gen_ai_score: number;
 
   /**
-   * Returns the list of hostnames for the application.
+   * Hostnames matched by the application.
    */
   hostnames: Array<string>;
 
@@ -115,7 +120,7 @@ export interface ApplicationListResponse {
   human_id: string;
 
   /**
-   * Returns the list of IP subnets for the application.
+   * IP subnets matched by the application.
    */
   ip_subnets: Array<string>;
 
@@ -125,12 +130,12 @@ export interface ApplicationListResponse {
   name: string;
 
   /**
-   * Returns the list of port protocols for the application.
+   * Port and protocol pairs matched by the application.
    */
   port_protocols: Array<string>;
 
   /**
-   * Returns the list of support domains for the application.
+   * Support domains matched by the application.
    */
   support_domains: Array<string>;
 
@@ -182,6 +187,11 @@ export interface ApplicationGetResponse {
   application_type_description: string;
 
   /**
+   * Returns the category ID.
+   */
+  category_id: number;
+
+  /**
    * Returns the application creation time.
    */
   created_at: string;
@@ -192,7 +202,7 @@ export interface ApplicationGetResponse {
   gen_ai_score: number;
 
   /**
-   * Returns the list of hostnames for the application.
+   * Hostnames matched by the application.
    */
   hostnames: Array<string>;
 
@@ -202,7 +212,7 @@ export interface ApplicationGetResponse {
   human_id: string;
 
   /**
-   * Returns the list of IP subnets for the application.
+   * IP subnets matched by the application.
    */
   ip_subnets: Array<string>;
 
@@ -212,12 +222,12 @@ export interface ApplicationGetResponse {
   name: string;
 
   /**
-   * Returns the list of port protocols for the application.
+   * Port and protocol pairs matched by the application.
    */
   port_protocols: Array<string>;
 
   /**
-   * Returns the list of support domains for the application.
+   * Support domains matched by the application.
    */
   support_domains: Array<string>;
 
@@ -260,8 +270,7 @@ export interface ApplicationListParams {
    * - ip_subnet: Filter by IP subnet using CIDR containment — returns applications
    *   where any stored subnet contains the search value (e.g., ip_subnet:10.0.1.5/32
    *   matches apps with 10.0.0.0/16)
-   * - category_id: Filter by category ID (e.g.,
-   *   category_id:37f8ec03-8766-49d4-9a15-369b044c842c).
+   * - category_id: Filter by category ID (e.g., category_id:12).
    * - category_name: Filter by category name (e.g., category_name:HR).
    * - supported: Filter by supported Cloudflare product (e.g., supported:ACCESS).
    *   Values: GATEWAY, ACCESS, CASB. .

@@ -14,7 +14,8 @@ export class BaseTargetIndustries extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'targetIndustries'] as const);
 
   /**
-   * List target industries referenced in events across one or more datasets.
+   * Retrieves the catalog of industry classifications used in Cloudforce One threat
+   * intelligence.
    *
    * @example
    * ```ts

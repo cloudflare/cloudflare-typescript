@@ -10,7 +10,7 @@ export class BaseCatalog extends APIResource {
     Object.freeze(['cloudforceOne', 'threatEvents', 'categories', 'catalog'] as const);
 
   /**
-   * List all categories stored in the account catalog.
+   * Lists categories
    *
    * @example
    * ```ts

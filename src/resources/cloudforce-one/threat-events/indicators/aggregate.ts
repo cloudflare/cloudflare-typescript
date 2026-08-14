@@ -81,16 +81,16 @@ export interface AggregateListParams {
   aggregateBy: string;
 
   /**
-   * Query param: Filter indicators created after this date (ISO 8601 format, e.g.,
-   * '2024-01-01')
+   * Query param: Filter indicators created after this date/datetime (ISO 8601, e.g.,
+   * '2024-01-01' or '2024-01-01T00:00:00Z')
    */
-  createdAfter?: string;
+  createdAfter?: (string & {}) | string;
 
   /**
-   * Query param: Filter indicators created before this date (ISO 8601 format, e.g.,
-   * '2024-12-31')
+   * Query param: Filter indicators created before this date/datetime (ISO 8601,
+   * e.g., '2024-12-31' or '2024-12-31T23:59:59Z')
    */
-  createdBefore?: string;
+  createdBefore?: (string & {}) | string;
 
   /**
    * Query param: Dataset ID(s) to filter by. Can be a single dataset ID or

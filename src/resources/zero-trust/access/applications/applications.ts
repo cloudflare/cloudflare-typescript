@@ -7128,6 +7128,12 @@ export namespace ApplicationCreateResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -7152,6 +7158,30 @@ export namespace ApplicationCreateResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -7244,9 +7274,9 @@ export namespace ApplicationCreateResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -12634,6 +12664,12 @@ export namespace ApplicationUpdateResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -12658,6 +12694,30 @@ export namespace ApplicationUpdateResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -12750,9 +12810,9 @@ export namespace ApplicationUpdateResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -18140,6 +18200,12 @@ export namespace ApplicationListResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -18164,6 +18230,30 @@ export namespace ApplicationListResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -18256,9 +18346,9 @@ export namespace ApplicationListResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -23653,6 +23743,12 @@ export namespace ApplicationGetResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -23677,6 +23773,30 @@ export namespace ApplicationGetResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -23769,9 +23889,9 @@ export namespace ApplicationGetResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -29093,6 +29213,12 @@ export declare namespace ApplicationCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings for
+     * infrastructure applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
@@ -29120,6 +29246,30 @@ export declare namespace ApplicationCreateParams {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -29203,9 +29353,9 @@ export declare namespace ApplicationCreateParams {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -34513,6 +34663,12 @@ export declare namespace ApplicationUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings for
+     * infrastructure applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
@@ -34540,6 +34696,30 @@ export declare namespace ApplicationUpdateParams {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -34623,9 +34803,9 @@ export declare namespace ApplicationUpdateParams {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at

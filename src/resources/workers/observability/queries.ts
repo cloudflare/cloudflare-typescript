@@ -97,7 +97,7 @@ export namespace QueryCreateResponse {
     /**
      * Create Calculations to compute as part of the query.
      */
-    calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
+    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
 
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -142,7 +142,7 @@ export namespace QueryCreateResponse {
   }
 
   export namespace Parameters {
-    export interface UnionMember0 {
+    export interface CountCalculation {
       operator: 'count' | 'COUNT';
 
       alias?: string;
@@ -152,7 +152,7 @@ export namespace QueryCreateResponse {
       keyType?: 'string' | 'number' | 'boolean';
     }
 
-    export interface UnionMember1 {
+    export interface KeyedCalculation {
       key: string;
 
       operator:
@@ -349,7 +349,7 @@ export namespace QueryListResponse {
     /**
      * Create Calculations to compute as part of the query.
      */
-    calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
+    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
 
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -394,7 +394,7 @@ export namespace QueryListResponse {
   }
 
   export namespace Parameters {
-    export interface UnionMember0 {
+    export interface CountCalculation {
       operator: 'count' | 'COUNT';
 
       alias?: string;
@@ -404,7 +404,7 @@ export namespace QueryListResponse {
       keyType?: 'string' | 'number' | 'boolean';
     }
 
-    export interface UnionMember1 {
+    export interface KeyedCalculation {
       key: string;
 
       operator:
@@ -597,7 +597,7 @@ export namespace QueryCreateParams {
     /**
      * Create Calculations to compute as part of the query.
      */
-    calculations?: Array<Parameters.UnionMember0 | Parameters.UnionMember1>;
+    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
 
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -642,7 +642,7 @@ export namespace QueryCreateParams {
   }
 
   export namespace Parameters {
-    export interface UnionMember0 {
+    export interface CountCalculation {
       operator: 'count' | 'COUNT';
 
       alias?: string;
@@ -652,7 +652,7 @@ export namespace QueryCreateParams {
       keyType?: 'string' | 'number' | 'boolean';
     }
 
-    export interface UnionMember1 {
+    export interface KeyedCalculation {
       key: string;
 
       operator:

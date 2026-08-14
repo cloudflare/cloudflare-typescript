@@ -252,11 +252,6 @@ export interface IntegrationCreateResponse {
   name: string;
 
   /**
-   * Organization ID.
-   */
-  organization_id: number;
-
-  /**
    * Integration status.
    */
   status: string;
@@ -338,11 +333,6 @@ export interface IntegrationUpdateResponse {
    * Name of the integration.
    */
   name: string;
-
-  /**
-   * Organization ID.
-   */
-  organization_id: number;
 
   /**
    * Integration status.
@@ -465,11 +455,6 @@ export interface IntegrationGetResponse {
   name: string;
 
   /**
-   * Organization ID.
-   */
-  organization_id: number;
-
-  /**
    * Integration status.
    */
   status: string;
@@ -553,11 +538,6 @@ export interface IntegrationPauseResponse {
   name: string;
 
   /**
-   * Organization ID.
-   */
-  organization_id: number;
-
-  /**
    * Integration status.
    */
   status: string;
@@ -639,11 +619,6 @@ export interface IntegrationResumeResponse {
    * Name of the integration.
    */
   name: string;
-
-  /**
-   * Organization ID.
-   */
-  organization_id: number;
 
   /**
    * Integration status.

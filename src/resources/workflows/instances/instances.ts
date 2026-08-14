@@ -444,7 +444,8 @@ export interface InstanceCreateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: An id of exactly `cf_` followed by 64 lowercase hex characters is
+   * reserved for system-generated instances.
    */
   instance_id?: string;
 
@@ -534,6 +535,10 @@ export interface InstanceBulkParams {
 
 export namespace InstanceBulkParams {
   export interface Body {
+    /**
+     * An id of exactly `cf_` followed by 64 lowercase hex characters is reserved for
+     * system-generated instances.
+     */
     instance_id?: string;
 
     instance_retention?: Body.InstanceRetention;

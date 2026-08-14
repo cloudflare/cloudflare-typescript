@@ -81,6 +81,14 @@ export interface DOHUpdateResponse {
    */
   duration?: string;
 
+  /**
+   * Whether the service token is enabled. A disabled service token cannot be used to
+   * authenticate; both its current and previous `client_secret` stop being accepted,
+   * but the token itself is preserved and can be re-enabled at any time. Defaults to
+   * enabled when omitted on create.
+   */
+  enabled?: boolean;
+
   expires_at?: string;
 
   /**
@@ -115,6 +123,14 @@ export interface DOHGetResponse {
    * hours (8760h).
    */
   duration?: string;
+
+  /**
+   * Whether the service token is enabled. A disabled service token cannot be used to
+   * authenticate; both its current and previous `client_secret` stop being accepted,
+   * but the token itself is preserved and can be re-enabled at any time. Defaults to
+   * enabled when omitted on create.
+   */
+  enabled?: boolean;
 
   expires_at?: string;
 
