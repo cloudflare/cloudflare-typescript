@@ -54,6 +54,27 @@ export class BaseR2DataCatalog extends APIResource {
   }
 
   /**
+   * Removes the catalog from the control plane without deleting R2 bucket objects.
+   * Set force=true to remove catalog namespaces, tables, views, and maintenance
+   * metadata. Force deletion is limited to a configured catalog object count.
+   *
+   * @example
+   * ```ts
+   * await client.r2DataCatalog.delete('my-data-bucket', {
+   *   account_id: '0123456789abcdef0123456789abcdef',
+   * });
+   * ```
+   */
+  delete(bucketName: string, params: R2DataCatalogDeleteParams, options?: RequestOptions): APIPromise<void> {
+    const { account_id, force } = params;
+    return this._client.post(path`/accounts/${account_id}/r2-catalog/${bucketName}/delete`, {
+      query: { force },
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
    * Disable an R2 bucket as a catalog. This operation deactivates the catalog but
    * preserves existing metadata and data files. The catalog can be re-enabled later.
    *
@@ -354,6 +375,18 @@ export interface R2DataCatalogListParams {
   account_id: string;
 }
 
+export interface R2DataCatalogDeleteParams {
+  /**
+   * Path param: Use this to identify the account.
+   */
+  account_id: string;
+
+  /**
+   * Query param: Remove child metadata before deleting the catalog.
+   */
+  force?: boolean;
+}
+
 export interface R2DataCatalogDisableParams {
   /**
    * Use this to identify the account.
@@ -388,6 +421,7 @@ export declare namespace R2DataCatalog {
     type R2DataCatalogEnableResponse as R2DataCatalogEnableResponse,
     type R2DataCatalogGetResponse as R2DataCatalogGetResponse,
     type R2DataCatalogListParams as R2DataCatalogListParams,
+    type R2DataCatalogDeleteParams as R2DataCatalogDeleteParams,
     type R2DataCatalogDisableParams as R2DataCatalogDisableParams,
     type R2DataCatalogEnableParams as R2DataCatalogEnableParams,
     type R2DataCatalogGetParams as R2DataCatalogGetParams,

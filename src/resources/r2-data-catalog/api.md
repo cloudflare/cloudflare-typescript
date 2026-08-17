@@ -9,6 +9,7 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/r2-catalog">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">list</a>({ ...params }) -> R2DataCatalogListResponse</code>
+- <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/delete">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">delete</a>(bucketName, { ...params }) -> void</code>
 - <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/disable">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">disable</a>(bucketName, { ...params }) -> void</code>
 - <code title="post /accounts/{account_id}/r2-catalog/{bucket_name}/enable">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">enable</a>(bucketName, { ...params }) -> R2DataCatalogEnableResponse</code>
 - <code title="get /accounts/{account_id}/r2-catalog/{bucket_name}">client.r2DataCatalog.<a href="./src/resources/r2-data-catalog/r2-data-catalog.ts">get</a>(bucketName, { ...params }) -> R2DataCatalogGetResponse</code>

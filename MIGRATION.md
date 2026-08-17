@@ -714,6 +714,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.r2.superSlurper.jobs.progress()`
 - `client.r2.superSlurper.jobs.resume()`
 - `client.r2.superSlurper.jobs.logs.list()`
+- `client.r2DataCatalog.delete()`
 - `client.r2DataCatalog.disable()`
 - `client.r2DataCatalog.enable()`
 - `client.r2DataCatalog.get()`
