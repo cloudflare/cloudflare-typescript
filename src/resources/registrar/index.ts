@@ -11,6 +11,15 @@ export {
   type DomainGetParams,
   type DomainsSinglePage,
 } from './domains';
+export {
+  Extensions,
+  BaseExtensions,
+  type ExtensionListResponse,
+  type ExtensionGetResponse,
+  type ExtensionListParams,
+  type ExtensionGetParams,
+  type ExtensionListResponsesCursorPagination,
+} from './extensions';
 export { Registrar, BaseRegistrar } from './registrar';
 export {
   RegistrationStatus,

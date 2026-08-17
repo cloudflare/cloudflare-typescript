@@ -2605,7 +2605,7 @@ export interface ApplicationPolicy {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -2630,12 +2630,12 @@ export namespace ApplicationPolicy {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -3998,7 +3998,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -4031,6 +4032,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -4113,7 +4119,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -4138,12 +4144,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -4343,6 +4349,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -4423,7 +4434,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -4448,12 +4459,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -4986,7 +4997,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -5019,6 +5031,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -5101,7 +5118,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -5126,12 +5143,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -5664,7 +5681,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -5697,6 +5715,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -5779,7 +5802,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -5804,12 +5827,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -6096,6 +6119,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6176,7 +6204,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6201,12 +6229,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -6308,6 +6336,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6388,7 +6421,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6413,12 +6446,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -6520,6 +6553,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6600,7 +6638,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6625,12 +6663,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -6732,6 +6770,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -6812,7 +6855,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -6837,12 +6880,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -6923,6 +6966,11 @@ export namespace ApplicationCreateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -7003,7 +7051,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -7028,12 +7076,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -7080,6 +7128,12 @@ export namespace ApplicationCreateResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -7104,6 +7158,30 @@ export namespace ApplicationCreateResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -7196,9 +7274,9 @@ export namespace ApplicationCreateResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -7627,7 +7705,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -7660,6 +7739,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -7742,7 +7826,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -7767,12 +7851,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -8189,7 +8273,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -8222,6 +8307,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -8304,7 +8394,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -8329,12 +8419,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -8757,7 +8847,8 @@ export namespace ApplicationCreateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -8790,6 +8881,11 @@ export namespace ApplicationCreateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -8872,7 +8968,7 @@ export namespace ApplicationCreateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -8897,12 +8993,12 @@ export namespace ApplicationCreateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -9438,7 +9534,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -9471,6 +9568,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -9553,7 +9655,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -9578,12 +9680,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -9783,6 +9885,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -9863,7 +9970,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -9888,12 +9995,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -10426,7 +10533,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -10459,6 +10567,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -10541,7 +10654,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -10566,12 +10679,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -11104,7 +11217,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -11137,6 +11251,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -11219,7 +11338,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11244,12 +11363,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -11536,6 +11655,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11616,7 +11740,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11641,12 +11765,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -11748,6 +11872,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -11828,7 +11957,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -11853,12 +11982,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -11960,6 +12089,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12040,7 +12174,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12065,12 +12199,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -12172,6 +12306,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12252,7 +12391,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12277,12 +12416,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -12363,6 +12502,11 @@ export namespace ApplicationUpdateResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -12443,7 +12587,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -12468,12 +12612,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -12520,6 +12664,12 @@ export namespace ApplicationUpdateResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -12544,6 +12694,30 @@ export namespace ApplicationUpdateResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -12636,9 +12810,9 @@ export namespace ApplicationUpdateResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -13067,7 +13241,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -13100,6 +13275,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -13182,7 +13362,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -13207,12 +13387,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -13629,7 +13809,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -13662,6 +13843,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -13744,7 +13930,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -13769,12 +13955,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -14197,7 +14383,8 @@ export namespace ApplicationUpdateResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -14230,6 +14417,11 @@ export namespace ApplicationUpdateResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -14312,7 +14504,7 @@ export namespace ApplicationUpdateResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -14337,12 +14529,12 @@ export namespace ApplicationUpdateResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -14878,7 +15070,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -14911,6 +15104,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -14993,7 +15191,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15018,12 +15216,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -15223,6 +15421,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -15303,7 +15506,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -15328,12 +15531,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -15866,7 +16069,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -15899,6 +16103,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15981,7 +16190,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -16006,12 +16215,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -16544,7 +16753,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -16577,6 +16787,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16659,7 +16874,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -16684,12 +16899,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -16976,6 +17191,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17056,7 +17276,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17081,12 +17301,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -17188,6 +17408,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17268,7 +17493,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17293,12 +17518,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -17400,6 +17625,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17480,7 +17710,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17505,12 +17735,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -17612,6 +17842,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17692,7 +17927,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17717,12 +17952,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -17803,6 +18038,11 @@ export namespace ApplicationListResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -17883,7 +18123,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -17908,12 +18148,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -17960,6 +18200,12 @@ export namespace ApplicationListResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -17984,6 +18230,30 @@ export namespace ApplicationListResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -18076,9 +18346,9 @@ export namespace ApplicationListResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -18507,7 +18777,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -18540,6 +18811,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -18622,7 +18898,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -18647,12 +18923,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -19069,7 +19345,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -19102,6 +19379,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -19184,7 +19466,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -19209,12 +19491,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -19637,7 +19919,8 @@ export namespace ApplicationListResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -19670,6 +19953,11 @@ export namespace ApplicationListResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -19752,7 +20040,7 @@ export namespace ApplicationListResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -19777,12 +20065,12 @@ export namespace ApplicationListResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -20325,7 +20613,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -20358,6 +20647,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -20440,7 +20734,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -20465,12 +20759,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -20670,6 +20964,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -20750,7 +21049,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -20775,12 +21074,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -21313,7 +21612,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -21346,6 +21646,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -21428,7 +21733,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -21453,12 +21758,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -21991,7 +22296,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -22024,6 +22330,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -22106,7 +22417,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22131,12 +22442,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -22423,6 +22734,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22503,7 +22819,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22528,12 +22844,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -22635,6 +22951,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22715,7 +23036,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22740,12 +23061,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -22847,6 +23168,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -22927,7 +23253,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -22952,12 +23278,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -23059,6 +23385,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -23139,7 +23470,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -23164,12 +23495,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -23250,6 +23581,11 @@ export namespace ApplicationGetResponse {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * Administrators who can approve a temporary authentication request.
        */
       approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
@@ -23330,7 +23666,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -23355,12 +23691,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -23407,6 +23743,12 @@ export namespace ApplicationGetResponse {
     aud?: string;
 
     /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * The name of the application.
      */
     name?: string;
@@ -23431,6 +23773,30 @@ export namespace ApplicationGetResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -23523,9 +23889,9 @@ export namespace ApplicationGetResponse {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -23954,7 +24320,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -23987,6 +24354,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -24069,7 +24441,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -24094,12 +24466,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -24516,7 +24888,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -24549,6 +24922,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -24631,7 +25009,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -24656,12 +25034,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -25084,7 +25462,8 @@ export namespace ApplicationGetResponse {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -25117,6 +25496,11 @@ export namespace ApplicationGetResponse {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -25199,7 +25583,7 @@ export namespace ApplicationGetResponse {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
 
       updated_at?: string;
     }
@@ -25224,12 +25608,12 @@ export namespace ApplicationGetResponse {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -25781,7 +26165,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -25817,6 +26202,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -25881,7 +26271,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -25904,12 +26294,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -26124,6 +26514,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -26186,7 +26581,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -26209,12 +26604,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -26761,7 +27156,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -26797,6 +27193,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -26861,7 +27262,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -26884,12 +27285,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -27436,7 +27837,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -27472,6 +27874,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -27536,7 +27943,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -27559,12 +27966,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -27855,6 +28262,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -27917,7 +28329,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -27940,12 +28352,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -28052,6 +28464,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28114,7 +28531,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28137,12 +28554,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -28249,6 +28666,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28311,7 +28733,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28334,12 +28756,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -28457,6 +28879,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28519,7 +28946,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28542,12 +28969,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -28639,6 +29066,11 @@ export declare namespace ApplicationCreateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -28701,7 +29133,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -28724,12 +29156,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -28781,6 +29213,12 @@ export declare namespace ApplicationCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings for
+     * infrastructure applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
@@ -28808,6 +29246,30 @@ export declare namespace ApplicationCreateParams {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -28891,9 +29353,9 @@ export declare namespace ApplicationCreateParams {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -29339,7 +29801,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -29375,6 +29838,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -29439,7 +29907,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -29462,12 +29930,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -29894,7 +30362,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -29930,6 +30399,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -29994,7 +30468,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -30017,12 +30491,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -30457,7 +30931,8 @@ export declare namespace ApplicationCreateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -30493,6 +30968,11 @@ export declare namespace ApplicationCreateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -30557,7 +31037,7 @@ export declare namespace ApplicationCreateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -30580,12 +31060,12 @@ export declare namespace ApplicationCreateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -31135,7 +31615,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -31171,6 +31652,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -31235,7 +31721,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -31258,12 +31744,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -31478,6 +31964,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -31540,7 +32031,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -31563,12 +32054,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -32115,7 +32606,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -32151,6 +32643,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -32215,7 +32712,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -32238,12 +32735,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -32790,7 +33287,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -32826,6 +33324,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -32890,7 +33393,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -32913,12 +33416,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -33209,6 +33712,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33271,7 +33779,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33294,12 +33802,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -33406,6 +33914,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33468,7 +33981,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33491,12 +34004,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -33603,6 +34116,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33665,7 +34183,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33688,12 +34206,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -33811,6 +34329,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -33873,7 +34396,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -33896,12 +34419,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -33993,6 +34516,11 @@ export declare namespace ApplicationUpdateParams {
       id?: string;
 
       /**
+       * Identifier.
+       */
+      account_id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -34055,7 +34583,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -34078,12 +34606,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -34135,6 +34663,12 @@ export declare namespace ApplicationUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: Configures multi-factor authentication (MFA) settings for
+     * infrastructure applications.
+     */
+    mfa_config?: InfrastructureApplication.MfaConfig;
+
+    /**
      * Body param: The name of the application.
      */
     name?: string;
@@ -34162,6 +34696,30 @@ export declare namespace ApplicationUpdateParams {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: { [key: string]: Array<string> };
+    }
+
+    /**
+     * Configures multi-factor authentication (MFA) settings for infrastructure
+     * applications.
+     */
+    export interface MfaConfig {
+      /**
+       * Lists the MFA methods that users can authenticate with. For infrastructure
+       * applications, supported values are `piv_key` and `ssh_fido2_key`.
+       */
+      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
+
+      /**
+       * Indicates whether to disable MFA for this resource. This option is available at
+       * the application and policy level.
+       */
+      mfa_disabled?: boolean;
+
+      /**
+       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
+       */
+      session_duration?: string;
     }
 
     export interface Policy {
@@ -34245,9 +34803,9 @@ export declare namespace ApplicationUpdateParams {
       export interface MfaConfig {
         /**
          * Lists the MFA methods that users can authenticate with. For infrastructure
-         * applications, only `piv_key` is supported.
+         * applications, supported values are `piv_key` and `ssh_fido2_key`.
          */
-        allowed_authenticators?: Array<'piv_key'>;
+        allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
 
         /**
          * Indicates whether to disable MFA for this resource. This option is available at
@@ -34693,7 +35251,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -34729,6 +35288,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -34793,7 +35357,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -34816,12 +35380,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -35248,7 +35812,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -35284,6 +35849,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -35348,7 +35918,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -35371,12 +35941,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 
@@ -35811,7 +36381,8 @@ export declare namespace ApplicationUpdateParams {
 
         /**
          * The URIs that are allowed as redirect URIs for dynamically registered clients.
-         * Must use the `https` protocol. Paths may end in `/*` to match all sub-paths.
+         * HTTP and HTTPS paths may end in `/*` to match all sub-paths. Custom-scheme URIs
+         * must be explicitly configured and match exactly.
          */
         allowed_uris?: Array<string>;
 
@@ -35847,6 +36418,11 @@ export declare namespace ApplicationUpdateParams {
        * The UUID of the policy
        */
       id?: string;
+
+      /**
+       * Identifier.
+       */
+      account_id?: string;
 
       /**
        * The order of execution for this policy. Must be unique for each policy within an
@@ -35911,7 +36487,7 @@ export declare namespace ApplicationUpdateParams {
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
-      session_duration?: string;
+      session_duration?: string | null;
     }
 
     export namespace UnionMember2 {
@@ -35934,12 +36510,12 @@ export declare namespace ApplicationUpdateParams {
           /**
            * Clipboard formats allowed when copying from local machine to remote RDP session.
            */
-          allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+          allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
           /**
            * Clipboard formats allowed when copying from remote RDP session to local machine.
            */
-          allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+          allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
         }
       }
 

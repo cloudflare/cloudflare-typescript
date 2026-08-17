@@ -229,14 +229,6 @@ export namespace CloudflareTunnel {
     colo_name?: string;
 
     /**
-     * Cloudflare continues to track connections for several minutes after they
-     * disconnect. This is an optimization to improve latency and reliability of
-     * reconnecting. If `true`, the connection has disconnected but is still being
-     * tracked. If `false`, the connection is actively serving traffic.
-     */
-    is_pending_reconnect?: boolean;
-
-    /**
      * Timestamp of when the connection was established.
      */
     opened_at?: string;
@@ -383,9 +375,9 @@ export namespace Member {
       id: string;
 
       /**
-       * The scope associated to the resource group
+       * A scope is a combination of scope objects which provides additional context.
        */
-      scope: Array<ResourceGroup.Scope>;
+      scope: ResourceGroup.Scope;
 
       /**
        * Attributes associated to the resource group.
@@ -764,6 +756,18 @@ export interface SubscriptionComponent {
    * The default amount assigned.
    */
   default?: number;
+
+  /**
+   * A human-readable version of the component name.
+   */
+  display_name?: string;
+
+  /**
+   * The type of component value. "enum" for discrete values (including boolean
+   * on/off toggles where 0=off and 1=on), "sum" for countable quantities, "usage"
+   * for metered billing components.
+   */
+  kind?: 'enum' | 'sum' | 'usage';
 
   /**
    * The name of the component value.

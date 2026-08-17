@@ -52,7 +52,7 @@ const runTests = (
       idp_resource_id: ['all_employees'],
       limit: 10,
       page: 0,
-      per_page: 0,
+      per_page: 1000,
       request_method: ['DELETE', 'PATCH'],
       resource_group_name: ['ALL_EMPLOYEES'],
       resource_type: ['USER', 'GROUP'],

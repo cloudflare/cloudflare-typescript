@@ -160,68 +160,76 @@ export class AllowPolicies extends BaseAllowPolicies {}
 export type AllowPolicyListResponsesV4PagePaginationArray = V4PagePaginationArray<AllowPolicyListResponse>;
 
 /**
- * An email allow policy
+ * An email allow policy.
  */
 export interface AllowPolicyCreateResponse {
   /**
-   * Allow policy identifier
+   * Allow policy identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
   comments?: string | null;
 
   /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk
-   * dispositions. Note - This will not exempt messages with Malicious or Suspicious
-   * dispositions.
+   * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+   * Malicious and Suspicious dispositions still apply.
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Messages to this recipient will bypass all detections
+   * Bypasses all detections for messages to this recipient.
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
   /**
-   * Messages from this sender will bypass all detections and link following
+   * Bypasses all detections and link following for messages from this sender.
    */
   is_trusted_sender?: boolean;
 
   modified_at?: string;
 
+  /**
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
+   */
   pattern?: string;
 
   /**
-   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
-   * creating or updating policies, but may be returned for existing entries.
+   * Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -233,68 +241,76 @@ export interface AllowPolicyCreateResponse {
 }
 
 /**
- * An email allow policy
+ * An email allow policy.
  */
 export interface AllowPolicyListResponse {
   /**
-   * Allow policy identifier
+   * Allow policy identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
   comments?: string | null;
 
   /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk
-   * dispositions. Note - This will not exempt messages with Malicious or Suspicious
-   * dispositions.
+   * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+   * Malicious and Suspicious dispositions still apply.
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Messages to this recipient will bypass all detections
+   * Bypasses all detections for messages to this recipient.
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
   /**
-   * Messages from this sender will bypass all detections and link following
+   * Bypasses all detections and link following for messages from this sender.
    */
   is_trusted_sender?: boolean;
 
   modified_at?: string;
 
+  /**
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
+   */
   pattern?: string;
 
   /**
-   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
-   * creating or updating policies, but may be returned for existing entries.
+   * Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -307,74 +323,82 @@ export interface AllowPolicyListResponse {
 
 export interface AllowPolicyDeleteResponse {
   /**
-   * Allow policy identifier
+   * Allow policy identifier.
    */
   id: string;
 }
 
 /**
- * An email allow policy
+ * An email allow policy.
  */
 export interface AllowPolicyEditResponse {
   /**
-   * Allow policy identifier
+   * Allow policy identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
   comments?: string | null;
 
   /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk
-   * dispositions. Note - This will not exempt messages with Malicious or Suspicious
-   * dispositions.
+   * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+   * Malicious and Suspicious dispositions still apply.
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Messages to this recipient will bypass all detections
+   * Bypasses all detections for messages to this recipient.
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
   /**
-   * Messages from this sender will bypass all detections and link following
+   * Bypasses all detections and link following for messages from this sender.
    */
   is_trusted_sender?: boolean;
 
   modified_at?: string;
 
+  /**
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
+   */
   pattern?: string;
 
   /**
-   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
-   * creating or updating policies, but may be returned for existing entries.
+   * Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -386,68 +410,76 @@ export interface AllowPolicyEditResponse {
 }
 
 /**
- * An email allow policy
+ * An email allow policy.
  */
 export interface AllowPolicyGetResponse {
   /**
-   * Allow policy identifier
+   * Allow policy identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified: string;
 
   comments?: string | null;
 
   /**
-   * Messages from this sender will be exempted from Spam, Spoof and Bulk
-   * dispositions. Note - This will not exempt messages with Malicious or Suspicious
-   * dispositions.
+   * Exempts messages from this sender from Spam, Spoof and Bulk dispositions only;
+   * Malicious and Suspicious dispositions still apply.
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Messages to this recipient will bypass all detections
+   * Bypasses all detections for messages to this recipient.
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_exempt_recipient` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   is_regex?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_trusted_sender` instead. End
-   * of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Deprecated as of July 1, 2025. Use `is_acceptable_sender` instead.
-   * End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
   /**
-   * Messages from this sender will bypass all detections and link following
+   * Bypasses all detections and link following for messages from this sender.
    */
   is_trusted_sender?: boolean;
 
   modified_at?: string;
 
+  /**
+   * The pattern value to match. The format depends on `pattern_type`: a valid email
+   * address for EMAIL (e.g. `user@example.com`), a valid domain name for DOMAIN
+   * (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP (e.g.
+   * `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP addresses
+   * and rejects private, loopback, link-local, and unspecified addresses.
+   */
   pattern?: string;
 
   /**
-   * Type of pattern matching. Note: UNKNOWN is deprecated and cannot be used when
-   * creating or updating policies, but may be returned for existing entries.
+   * Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -465,14 +497,13 @@ export interface AllowPolicyCreateParams {
   account_id: string;
 
   /**
-   * Body param: Messages from this sender will be exempted from Spam, Spoof and Bulk
-   * dispositions. Note - This will not exempt messages with Malicious or Suspicious
-   * dispositions.
+   * Body param: Exempts messages from this sender from Spam, Spoof and Bulk
+   * dispositions only; Malicious and Suspicious dispositions still apply.
    */
   is_acceptable_sender: boolean;
 
   /**
-   * Body param: Messages to this recipient will bypass all detections
+   * Body param: Bypasses all detections for messages to this recipient.
    */
   is_exempt_recipient: boolean;
 
@@ -482,20 +513,29 @@ export interface AllowPolicyCreateParams {
   is_regex: boolean;
 
   /**
-   * Body param: Messages from this sender will bypass all detections and link
-   * following
+   * Body param: Bypasses all detections and link following for messages from this
+   * sender.
    */
   is_trusted_sender: boolean;
 
   /**
-   * Body param
+   * Body param: The pattern value to match. The format depends on `pattern_type`: a
+   * valid email address for EMAIL (e.g. `user@example.com`), a valid domain name for
+   * DOMAIN (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP
+   * (e.g. `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP
+   * addresses and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern: string;
 
   /**
-   * Body param: Type of pattern matching. Note: UNKNOWN is deprecated and cannot be
-   * used when creating or updating policies, but may be returned for existing
-   * entries.
+   * Body param: Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -511,20 +551,17 @@ export interface AllowPolicyCreateParams {
   comments?: string | null;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_exempt_recipient`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_trusted_sender`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use
-   * `is_acceptable_sender` instead. End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 }
@@ -569,9 +606,14 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   pattern?: string;
 
   /**
-   * Query param: Type of pattern matching. Note: UNKNOWN is deprecated and cannot be
-   * used when creating or updating policies, but may be returned for existing
-   * entries.
+   * Query param: Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 
@@ -606,20 +648,18 @@ export interface AllowPolicyEditParams {
   comments?: string | null;
 
   /**
-   * Body param: Messages from this sender will be exempted from Spam, Spoof and Bulk
-   * dispositions. Note - This will not exempt messages with Malicious or Suspicious
-   * dispositions.
+   * Body param: Exempts messages from this sender from Spam, Spoof and Bulk
+   * dispositions only; Malicious and Suspicious dispositions still apply.
    */
   is_acceptable_sender?: boolean;
 
   /**
-   * Body param: Messages to this recipient will bypass all detections
+   * Body param: Bypasses all detections for messages to this recipient.
    */
   is_exempt_recipient?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_exempt_recipient`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_exempt_recipient` instead.
    */
   is_recipient?: boolean;
 
@@ -629,32 +669,39 @@ export interface AllowPolicyEditParams {
   is_regex?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use `is_trusted_sender`
-   * instead. End of life: July 1, 2026.
+   * @deprecated Use `is_trusted_sender` instead.
    */
   is_sender?: boolean;
 
   /**
-   * @deprecated Body param: Deprecated as of July 1, 2025. Use
-   * `is_acceptable_sender` instead. End of life: July 1, 2026.
+   * @deprecated Use `is_acceptable_sender` instead.
    */
   is_spoof?: boolean;
 
   /**
-   * Body param: Messages from this sender will bypass all detections and link
-   * following
+   * Body param: Bypasses all detections and link following for messages from this
+   * sender.
    */
   is_trusted_sender?: boolean;
 
   /**
-   * Body param
+   * Body param: The pattern value to match. The format depends on `pattern_type`: a
+   * valid email address for EMAIL (e.g. `user@example.com`), a valid domain name for
+   * DOMAIN (e.g. `example.com`), or a plain IPv4 address or IPv4 CIDR block for IP
+   * (e.g. `1.2.3.4` or `1.2.3.0/24`); the API accepts only globally reachable IP
+   * addresses and rejects private, loopback, link-local, and unspecified addresses.
    */
   pattern?: string;
 
   /**
-   * Body param: Type of pattern matching. Note: UNKNOWN is deprecated and cannot be
-   * used when creating or updating policies, but may be returned for existing
-   * entries.
+   * Body param: Type of pattern matching.
+   *
+   * - EMAIL: matches a full email address (e.g. `user@example.com`)
+   * - DOMAIN: matches a domain name (e.g. `example.com`)
+   * - IP: matches a plain IPv4 address (e.g. `1.2.3.4`) or an IPv4 CIDR block (e.g.
+   *   `1.2.3.0/24`). The API accepts only globally reachable addresses.
+   * - UNKNOWN: deprecated; you cannot use this when creating or updating policies,
+   *   but it may appear on existing entries.
    */
   pattern_type?: 'EMAIL' | 'DOMAIN' | 'IP' | 'UNKNOWN';
 

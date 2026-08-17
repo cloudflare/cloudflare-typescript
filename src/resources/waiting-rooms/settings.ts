@@ -12,8 +12,7 @@ export class BaseSettings extends APIResource {
   ] as const);
 
   /**
-   * Fully updates zone-level Waiting Room settings, replacing the existing
-   * configuration.
+   * Replace zone-level Waiting Room settings.
    *
    * @example
    * ```ts
@@ -32,7 +31,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Partially updates zone-level Waiting Room settings using PATCH semantics.
+   * Patch zone-level Waiting Room settings.
    *
    * @example
    * ```ts
@@ -51,8 +50,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Gets the zone-level Waiting Room settings that apply as defaults to all waiting
-   * rooms on the zone.
+   * Get zone-level Waiting Room settings.
    *
    * @example
    * ```ts

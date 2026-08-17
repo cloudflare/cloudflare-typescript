@@ -24,7 +24,8 @@ export class BaseTopup extends APIResource {
   ] as const);
 
   /**
-   * Create a credit top-up via Stripe PaymentIntent for the given account.
+   * Create a credit top-up for the given account, charged to the account's default
+   * payment method.
    *
    * @example
    * ```ts

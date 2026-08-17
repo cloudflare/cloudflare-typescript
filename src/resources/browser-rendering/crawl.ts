@@ -144,8 +144,6 @@ export interface CrawlGetResponse {
 
 export namespace CrawlGetResponse {
   export interface Record {
-    metadata: Record.Metadata;
-
     /**
      * Current status of the crawled URL.
      */
@@ -170,9 +168,17 @@ export namespace CrawlGetResponse {
      * Markdown of the content of the crawled URL.
      */
     markdown?: string;
+
+    /**
+     * Absent for urls that never reached a fetch.
+     */
+    metadata?: Record.Metadata;
   }
 
   export namespace Record {
+    /**
+     * Absent for urls that never reached a fetch.
+     */
     export interface Metadata {
       /**
        * HTTP status code of the crawled page.
@@ -232,13 +238,13 @@ export declare namespace CrawlCreateParams {
 
     /**
      * Body param: Only allow requests that match the provided regex patterns, eg.
-     * '/^.\*\.(css)'.
+     * '/^.\*\.(css)'. Reject rules are applied first.
      */
     allowRequestPattern?: Array<string>;
 
     /**
      * Body param: Only allow requests that match the provided resource types, eg.
-     * 'image' or 'script'.
+     * 'image' or 'script'. Reject rules are applied first.
      */
     allowResourceTypes?: Array<
       | 'document'
@@ -521,7 +527,7 @@ export declare namespace CrawlCreateParams {
          * Schema for the response format. More information here:
          * https://developers.cloudflare.com/workers-ai/json-mode/
          */
-        json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
+        json_schema?: { [key: string]: unknown } | null;
       }
     }
 
@@ -706,7 +712,7 @@ export declare namespace CrawlCreateParams {
          * Schema for the response format. More information here:
          * https://developers.cloudflare.com/workers-ai/json-mode/
          */
-        json_schema?: { [key: string]: string | number | boolean | unknown | Array<string> } | null;
+        json_schema?: { [key: string]: unknown } | null;
       }
     }
 

@@ -42,7 +42,67 @@ const runTests = (client: PartialCloudflare<{ billing: { usage: BaseUsage } }>) 
     const response = await client.billing.usage.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       from: '2025-05-01',
-      metric: 'workers_standard_requests',
+      to: '2025-05-31',
+    });
+  });
+
+  test('getAccountUsageInfoV1: only required params', async () => {
+    const responsePromise = client.billing.usage.getAccountUsageInfoV1({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getAccountUsageInfoV1: required and optional params', async () => {
+    const response = await client.billing.usage.getAccountUsageInfoV1({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('getAccountUsageV1: only required params', async () => {
+    const responsePromise = client.billing.usage.getAccountUsageV1({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getAccountUsageV1: required and optional params', async () => {
+    const response = await client.billing.usage.getAccountUsageV1({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      from: '2025-05-01',
+      to: '2025-05-31',
+    });
+  });
+
+  test('getAccountUsageV2: only required params', async () => {
+    const responsePromise = client.billing.usage.getAccountUsageV2({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('getAccountUsageV2: required and optional params', async () => {
+    const response = await client.billing.usage.getAccountUsageV2({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      from: '2025-05-01',
       to: '2025-05-31',
     });
   });
@@ -64,6 +124,23 @@ const runTests = (client: PartialCloudflare<{ billing: { usage: BaseUsage } }>) 
       from: '2025-05-01',
       to: '2025-05-31',
     });
+  });
+
+  test('paygoInfo: only required params', async () => {
+    const responsePromise = client.billing.usage.paygoInfo({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('paygoInfo: required and optional params', async () => {
+    const response = await client.billing.usage.paygoInfo({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 };
 describe('resource usage', () => runTests(client));

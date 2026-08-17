@@ -18,6 +18,7 @@ export {
   type DatasetCreateParams,
   type DatasetUpdateParams,
   type DatasetListParams,
+  type DatasetDeleteParams,
   type DatasetGetParams,
   type DatasetSummariesSinglePage,
 } from './datasets';

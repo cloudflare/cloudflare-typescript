@@ -13,7 +13,8 @@ export class BaseTokens extends APIResource {
   ] as const);
 
   /**
-   * Create a new token.
+   * Create a stored Cloudflare credential for an AI Search instance to access its
+   * data source.
    *
    * @example
    * ```ts
@@ -35,7 +36,8 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * Update token.
+   * Replace a stored AI Search credential and invalidate cached credentials for
+   * instances that use it.
    *
    * @example
    * ```ts
@@ -61,7 +63,7 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * List tokens.
+   * List stored AI Search credentials in the account without exposing their secrets.
    *
    * @example
    * ```ts
@@ -86,7 +88,8 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * Delete token.
+   * Permanently delete a stored AI Search credential. Credentials in use by an
+   * instance cannot be deleted.
    *
    * @example
    * ```ts
@@ -106,7 +109,7 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * Read token.
+   * Retrieve a stored AI Search credential without exposing its secret.
    *
    * @example
    * ```ts

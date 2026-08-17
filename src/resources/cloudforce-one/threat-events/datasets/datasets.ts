@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
+import * as EventsAPI from './events';
+import { BaseEvents, EventGetParams, EventGetResponse, Events } from './events';
 import * as HealthAPI from './health';
 import { BaseHealth, Health } from './health';
 import { APIPromise } from '../../../../core/api-promise';
@@ -15,7 +17,8 @@ export class BaseDatasets extends APIResource {
   ] as const);
 
   /**
-   * Creates a dataset
+   * Creates a new threat event dataset in Cloudforce One for organizing related
+   * threat events.
    *
    * @example
    * ```ts
@@ -36,7 +39,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Lists all datasets in an account
+   * Lists all threat event datasets configured in Cloudforce One.
    *
    * @example
    * ```ts
@@ -55,7 +58,32 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Updates an existing dataset
+   * Soft-deletes a dataset given a datasetId.
+   *
+   * @example
+   * ```ts
+   * const dataset =
+   *   await client.cloudforceOne.threatEvents.datasets.delete(
+   *     'dataset_id',
+   *     { account_id: 'account_id' },
+   *   );
+   * ```
+   */
+  delete(
+    datasetID: string,
+    params: DatasetDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<DatasetDeleteResponse> {
+    const { account_id } = params;
+    return this._client.delete(
+      path`/accounts/${account_id}/cloudforce-one/events/dataset/${datasetID}`,
+      options,
+    );
+  }
+
+  /**
+   * Partially updates a threat event dataset in Cloudforce One, modifying specific
+   * fields without replacing the entire dataset configuration.
    *
    * @example
    * ```ts
@@ -83,7 +111,7 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Reads a dataset
+   * Retrieves details for a specific threat event dataset.
    *
    * @example
    * ```ts
@@ -125,22 +153,32 @@ export class BaseDatasets extends APIResource {
 }
 export class Datasets extends BaseDatasets {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);
+  events: EventsAPI.Events = new EventsAPI.Events(this._client);
 }
 
 export interface DatasetCreateResponse {
+  isAnalytics: boolean;
+
   isPublic: boolean;
 
   name: string;
 
   uuid: string;
-
-  deletedAt?: string;
 }
 
 export type DatasetListResponse = Array<DatasetListResponse.DatasetListResponseItem>;
 
 export namespace DatasetListResponse {
   export interface DatasetListResponseItem {
+    /**
+     * Effective indicator mutation capability after account/dataset authorization and
+     * dataset storage capability are applied. API Gateway method permissions are
+     * separate and must also allow the requested operation.
+     */
+    indicatorWriteMode: 'read_only' | 'create_only' | 'full';
+
+    isAnalytics: boolean;
+
     isPublic: boolean;
 
     name: string;
@@ -151,24 +189,30 @@ export namespace DatasetListResponse {
   }
 }
 
+export interface DatasetDeleteResponse {
+  name: string;
+
+  uuid: string;
+}
+
 export interface DatasetEditResponse {
+  isAnalytics: boolean;
+
   isPublic: boolean;
 
   name: string;
 
   uuid: string;
-
-  deletedAt?: string;
 }
 
 export interface DatasetGetResponse {
+  isAnalytics: boolean;
+
   isPublic: boolean;
 
   name: string;
 
   uuid: string;
-
-  deletedAt?: string;
 }
 
 export interface DatasetRawResponse {
@@ -216,6 +260,13 @@ export interface DatasetListParams {
   includeDeleted?: boolean;
 }
 
+export interface DatasetDeleteParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 export interface DatasetEditParams {
   /**
    * Path param: Account ID.
@@ -255,20 +306,31 @@ export interface DatasetRawParams {
 
 Datasets.Health = Health;
 Datasets.BaseHealth = BaseHealth;
+Datasets.Events = Events;
+Datasets.BaseEvents = BaseEvents;
 
 export declare namespace Datasets {
   export {
     type DatasetCreateResponse as DatasetCreateResponse,
     type DatasetListResponse as DatasetListResponse,
+    type DatasetDeleteResponse as DatasetDeleteResponse,
     type DatasetEditResponse as DatasetEditResponse,
     type DatasetGetResponse as DatasetGetResponse,
     type DatasetRawResponse as DatasetRawResponse,
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
     type DatasetEditParams as DatasetEditParams,
     type DatasetGetParams as DatasetGetParams,
     type DatasetRawParams as DatasetRawParams,
   };
 
   export { Health as Health, BaseHealth as BaseHealth };
+
+  export {
+    Events as Events,
+    BaseEvents as BaseEvents,
+    type EventGetResponse as EventGetResponse,
+    type EventGetParams as EventGetParams,
+  };
 }

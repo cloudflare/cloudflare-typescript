@@ -86,7 +86,7 @@ export interface PreviewCreateParams {
   account_id: string;
 
   /**
-   * Body param: The identifier of the message
+   * Body param: The identifier of the message.
    */
   postfix_id: string;
 }

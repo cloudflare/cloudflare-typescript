@@ -13,6 +13,16 @@ import {
   Domains,
   DomainsSinglePage,
 } from './domains';
+import * as ExtensionsAPI from './extensions';
+import {
+  BaseExtensions,
+  ExtensionGetParams,
+  ExtensionGetResponse,
+  ExtensionListParams,
+  ExtensionListResponse,
+  ExtensionListResponsesCursorPagination,
+  Extensions,
+} from './extensions';
 import * as RegistrationStatusAPI from './registration-status';
 import {
   BaseRegistrationStatus,
@@ -35,6 +45,100 @@ import { CursorPagination } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Registrar API for searching, checking, registering, and managing domains through Cloudflare Registrar.
+ *
+ * ## Prerequisites
+ *
+ * Before using this API, ensure:
+ *
+ * 1. **Cloudflare account** — the caller must have a valid Cloudflare account.
+ * 2. **Billing profile** — the account must have a billing profile with a valid,
+ *   current default payment method (credit card or other accepted method).
+ *   This cannot be set up via API — the account owner must configure billing
+ *   at `https://dash.cloudflare.com/{account_id}/billing/payment-info` before
+ *   calling `POST /registrations`.
+ * 3. **API authentication** — use an API token or API key with the appropriate
+ *   Registrar permissions for the operations you are calling.
+ *
+ * ## Terminology: domain extension
+ *
+ * Throughout this API, "extension" refers to the domain extension part of a fully
+ * qualified domain name — the portion after the registrable label. For example,
+ * in `example.co.uk`, the extension is `co.uk` (not just `uk`). This covers both
+ * top-level domains like `com` and multi-level extensions like `co.uk`. This is
+ * distinct from other uses of the word "extension" (e.g., EPP extensions).
+ *
+ * ## Supported extensions
+ *
+ * This API supports programmatic registration for all extensions supported by
+ * the dashboard experience, with the following exceptions:
+ *
+ * `giving`, `mom`, `inc`, `lol`, `sh`, `link`, `cc`, `new`
+ *
+ * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
+ * listed above can be registered at `https://dash.cloudflare.com/{account_id}/domains/registrations`.
+ *
+ * ## Typical workflow
+ *
+ * 1. **Search** — call `GET /domain-search?q={keyword}` to discover available domains.
+ * 2. **Check** — call `POST /domain-check` with candidate domains to verify real-time
+ *   availability and pricing.
+ * 3. **Review the response** — if `registrable: false`, inspect `reason` to
+ *   understand whether the domain is unavailable, the extension is not supported
+ *   by this API, the extension is not supported by Cloudflare Registrar at all,
+ *   or the extension's registry has frozen new registrations.
+ * 4. **Handle premium domains** — if `tier: premium`, premium registration is
+ *   not currently supported by this API. Surface the premium pricing to the user,
+ *   but do not proceed to `POST /registrations` for that domain.
+ * 5. **Observe the registration schema** — call `GET /extensions/:extension_name`
+ *   to discover the required values for registering this extension.
+ * 6. **Register** — call `POST /registrations` with the chosen domain name for
+ *   supported non-premium registrations.
+ * 7. **Confirm completion** — if the response is `201 Created`, registration
+ *   completed within the default timeout and no polling is needed.
+ * 8. **Poll when needed** — if the response is `202 Accepted`, poll
+ *   `links.self` from the workflow response.
+ * 9. **Stop for user action** — if `state: action_required`, stop polling and
+ *   surface `context.action` to the user.
+ *   The workflow will not resolve on its own.
+ * 10. **Continue when blocked** — if `state: blocked`, continue polling and
+ *   inform the user that a third party, such as the extension registry or losing
+ *   registrar, is delaying progress.
+ * 11. **Review failures before retrying** — if `state: failed`, review
+ *   `error.code` and `error.message`, then decide whether user action or a new
+ *   Check call is needed.
+ *
+ * **All successful domain registrations are non-refundable.** Once the registration
+ * workflow completes with `state: succeeded`, the charge cannot be reversed.
+ * Confirm pricing and domain choice with the user before calling `POST /registrations`.
+ *
+ * ## Default behavior for mutating operations
+ *
+ * By default, mutating operations such as create and update hold the connection
+ * for a bounded, server-defined amount of time while the operation completes.
+ * In most cases, the response contains a completed workflow status and no
+ * polling is required.
+ *
+ * - **Completed within the synchronous wait window:** Returns `201` (create)
+ * or `200` (update) with a `workflow_status` where `state: succeeded` and
+ * `completed: true`.
+ * - **Still processing after the synchronous wait window:** Returns
+ * `202 Accepted` with a `workflow_status` where `completed: false`. Use
+ * the `links.self` URL to poll for completion.
+ *
+ * ## Non-blocking mode
+ *
+ * To receive an immediate `202 Accepted` response without waiting, send the
+ * `Prefer: respond-async` request header (RFC 7240). The server will acknowledge
+ * it with a `Preference-Applied: respond-async` response header.
+ *
+ * ## Polling
+ *
+ * When the response is `202`, poll the workflow status endpoint indicated by
+ * `links.self` in the response body until the workflow reaches a terminal
+ * state or requires user action.
+ */
 export class BaseRegistrar extends APIResource {
   static override readonly _key: readonly ['registrar'] = Object.freeze(['registrar'] as const);
 
@@ -162,6 +266,100 @@ export class BaseRegistrar extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+/**
+ * Registrar API for searching, checking, registering, and managing domains through Cloudflare Registrar.
+ *
+ * ## Prerequisites
+ *
+ * Before using this API, ensure:
+ *
+ * 1. **Cloudflare account** — the caller must have a valid Cloudflare account.
+ * 2. **Billing profile** — the account must have a billing profile with a valid,
+ *   current default payment method (credit card or other accepted method).
+ *   This cannot be set up via API — the account owner must configure billing
+ *   at `https://dash.cloudflare.com/{account_id}/billing/payment-info` before
+ *   calling `POST /registrations`.
+ * 3. **API authentication** — use an API token or API key with the appropriate
+ *   Registrar permissions for the operations you are calling.
+ *
+ * ## Terminology: domain extension
+ *
+ * Throughout this API, "extension" refers to the domain extension part of a fully
+ * qualified domain name — the portion after the registrable label. For example,
+ * in `example.co.uk`, the extension is `co.uk` (not just `uk`). This covers both
+ * top-level domains like `com` and multi-level extensions like `co.uk`. This is
+ * distinct from other uses of the word "extension" (e.g., EPP extensions).
+ *
+ * ## Supported extensions
+ *
+ * This API supports programmatic registration for all extensions supported by
+ * the dashboard experience, with the following exceptions:
+ *
+ * `giving`, `mom`, `inc`, `lol`, `sh`, `link`, `cc`, `new`
+ *
+ * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
+ * listed above can be registered at `https://dash.cloudflare.com/{account_id}/domains/registrations`.
+ *
+ * ## Typical workflow
+ *
+ * 1. **Search** — call `GET /domain-search?q={keyword}` to discover available domains.
+ * 2. **Check** — call `POST /domain-check` with candidate domains to verify real-time
+ *   availability and pricing.
+ * 3. **Review the response** — if `registrable: false`, inspect `reason` to
+ *   understand whether the domain is unavailable, the extension is not supported
+ *   by this API, the extension is not supported by Cloudflare Registrar at all,
+ *   or the extension's registry has frozen new registrations.
+ * 4. **Handle premium domains** — if `tier: premium`, premium registration is
+ *   not currently supported by this API. Surface the premium pricing to the user,
+ *   but do not proceed to `POST /registrations` for that domain.
+ * 5. **Observe the registration schema** — call `GET /extensions/:extension_name`
+ *   to discover the required values for registering this extension.
+ * 6. **Register** — call `POST /registrations` with the chosen domain name for
+ *   supported non-premium registrations.
+ * 7. **Confirm completion** — if the response is `201 Created`, registration
+ *   completed within the default timeout and no polling is needed.
+ * 8. **Poll when needed** — if the response is `202 Accepted`, poll
+ *   `links.self` from the workflow response.
+ * 9. **Stop for user action** — if `state: action_required`, stop polling and
+ *   surface `context.action` to the user.
+ *   The workflow will not resolve on its own.
+ * 10. **Continue when blocked** — if `state: blocked`, continue polling and
+ *   inform the user that a third party, such as the extension registry or losing
+ *   registrar, is delaying progress.
+ * 11. **Review failures before retrying** — if `state: failed`, review
+ *   `error.code` and `error.message`, then decide whether user action or a new
+ *   Check call is needed.
+ *
+ * **All successful domain registrations are non-refundable.** Once the registration
+ * workflow completes with `state: succeeded`, the charge cannot be reversed.
+ * Confirm pricing and domain choice with the user before calling `POST /registrations`.
+ *
+ * ## Default behavior for mutating operations
+ *
+ * By default, mutating operations such as create and update hold the connection
+ * for a bounded, server-defined amount of time while the operation completes.
+ * In most cases, the response contains a completed workflow status and no
+ * polling is required.
+ *
+ * - **Completed within the synchronous wait window:** Returns `201` (create)
+ * or `200` (update) with a `workflow_status` where `state: succeeded` and
+ * `completed: true`.
+ * - **Still processing after the synchronous wait window:** Returns
+ * `202 Accepted` with a `workflow_status` where `completed: false`. Use
+ * the `links.self` URL to poll for completion.
+ *
+ * ## Non-blocking mode
+ *
+ * To receive an immediate `202 Accepted` response without waiting, send the
+ * `Prefer: respond-async` request header (RFC 7240). The server will acknowledge
+ * it with a `Preference-Applied: respond-async` response header.
+ *
+ * ## Polling
+ *
+ * When the response is `202`, poll the workflow status endpoint indicated by
+ * `links.self` in the response body until the workflow reaches a terminal
+ * state or requires user action.
+ */
 export class Registrar extends BaseRegistrar {
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   registrations: RegistrationsAPI.Registrations = new RegistrationsAPI.Registrations(this._client);
@@ -169,6 +367,7 @@ export class Registrar extends BaseRegistrar {
     this._client,
   );
   updateStatus: UpdateStatusAPI.UpdateStatus = new UpdateStatusAPI.UpdateStatus(this._client);
+  extensions: ExtensionsAPI.Extensions = new ExtensionsAPI.Extensions(this._client);
 }
 
 export type RegistrationsCursorPagination = CursorPagination<Registration>;
@@ -627,6 +826,8 @@ Registrar.RegistrationStatus = RegistrationStatus;
 Registrar.BaseRegistrationStatus = BaseRegistrationStatus;
 Registrar.UpdateStatus = UpdateStatus;
 Registrar.BaseUpdateStatus = BaseUpdateStatus;
+Registrar.Extensions = Extensions;
+Registrar.BaseExtensions = BaseExtensions;
 
 export declare namespace Registrar {
   export {
@@ -669,5 +870,15 @@ export declare namespace Registrar {
     UpdateStatus as UpdateStatus,
     BaseUpdateStatus as BaseUpdateStatus,
     type UpdateStatusGetParams as UpdateStatusGetParams,
+  };
+
+  export {
+    Extensions as Extensions,
+    BaseExtensions as BaseExtensions,
+    type ExtensionListResponse as ExtensionListResponse,
+    type ExtensionGetResponse as ExtensionGetResponse,
+    type ExtensionListResponsesCursorPagination as ExtensionListResponsesCursorPagination,
+    type ExtensionListParams as ExtensionListParams,
+    type ExtensionGetParams as ExtensionGetParams,
   };
 }

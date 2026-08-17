@@ -55,3 +55,11 @@ Methods:
 - <code title="get /accounts/{account_id}/tags/values/{tag_key}">client.resourceTagging.values.<a href="./src/resources/resource-tagging/values.ts">list</a>(tagKey, { ...params }) -> ValueListResponsesCursorPaginationAfter</code>
 
 ## Summary
+
+Types:
+
+- <code><a href="./src/resources/resource-tagging/summary.ts">SummaryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/tags/summary">client.resourceTagging.summary.<a href="./src/resources/resource-tagging/summary.ts">get</a>({ ...params }) -> SummaryGetResponse</code>

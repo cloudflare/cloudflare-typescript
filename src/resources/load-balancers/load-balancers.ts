@@ -64,6 +64,7 @@ import {
   PoolsSinglePage,
 } from './pools/pools';
 import { APIPromise } from '../../core/api-promise';
+import { CloudflareError } from '../../core/error';
 import { PagePromise, SinglePage } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -72,12 +73,11 @@ export class BaseLoadBalancers extends APIResource {
   static override readonly _key: readonly ['loadBalancers'] = Object.freeze(['loadBalancers'] as const);
 
   /**
-   * Create a new load balancer.
+   * Create a new account or zone-scoped load balancer.
    *
    * @example
    * ```ts
    * const loadBalancer = await client.loadBalancers.create({
-   *   zone_id: '699d98642c564d2e855e9661899b7252',
    *   default_pools: [
    *     '17b5962d775c646f3f9725cbc7a53df4',
    *     '9290f38c5d07c2e2f4df57b1f61d4196',
@@ -85,27 +85,44 @@ export class BaseLoadBalancers extends APIResource {
    *   ],
    *   fallback_pool: 'fallback_pool',
    *   name: 'www.example.com',
+   *   account_id: 'account_id',
    * });
    * ```
    */
   create(params: LoadBalancerCreateParams, options?: RequestOptions): APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.post(path`/zones/${zone_id}/load_balancers`, { body, ...options }) as APIPromise<{
-        result: LoadBalancer;
-      }>
+      this._client.post(path`/${accountOrZone}/${accountOrZoneId}/load_balancers`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: LoadBalancer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Update a configured load balancer.
+   * Update a configured account or zone-scoped load balancer.
    *
    * @example
    * ```ts
    * const loadBalancer = await client.loadBalancers.update(
    *   '699d98642c564d2e855e9661899b7252',
    *   {
-   *     zone_id: '699d98642c564d2e855e9661899b7252',
    *     default_pools: [
    *       '17b5962d775c646f3f9725cbc7a53df4',
    *       '9290f38c5d07c2e2f4df57b1f61d4196',
@@ -113,6 +130,7 @@ export class BaseLoadBalancers extends APIResource {
    *     ],
    *     fallback_pool: 'fallback_pool',
    *     name: 'www.example.com',
+   *     account_id: 'account_id',
    *   },
    * );
    * ```
@@ -122,9 +140,25 @@ export class BaseLoadBalancers extends APIResource {
     params: LoadBalancerUpdateParams,
     options?: RequestOptions,
   ): APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.put(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, {
+      this._client.put(path`/${accountOrZone}/${accountOrZoneId}/load_balancers/${loadBalancerID}`, {
         body,
         ...options,
       }) as APIPromise<{ result: LoadBalancer }>
@@ -132,58 +166,96 @@ export class BaseLoadBalancers extends APIResource {
   }
 
   /**
-   * List configured load balancers.
+   * List configured account or zone-scoped load balancers.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const loadBalancer of client.loadBalancers.list({
-   *   zone_id: '699d98642c564d2e855e9661899b7252',
+   *   account_id: 'account_id',
    * })) {
    *   // ...
    * }
    * ```
    */
   list(
-    params: LoadBalancerListParams,
+    params: LoadBalancerListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<LoadBalancersSinglePage, LoadBalancer> {
-    const { zone_id } = params;
-    return this._client.getAPIList(path`/zones/${zone_id}/load_balancers`, SinglePage<LoadBalancer>, options);
+    const { account_id, zone_id } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      path`/${accountOrZone}/${accountOrZoneId}/load_balancers`,
+      SinglePage<LoadBalancer>,
+      options,
+    );
   }
 
   /**
-   * Delete a configured load balancer.
+   * Delete a configured account or zone-scoped load balancer.
    *
    * @example
    * ```ts
    * const loadBalancer = await client.loadBalancers.delete(
    *   '699d98642c564d2e855e9661899b7252',
-   *   { zone_id: '699d98642c564d2e855e9661899b7252' },
+   *   { account_id: 'account_id' },
    * );
    * ```
    */
   delete(
     loadBalancerID: string,
-    params: LoadBalancerDeleteParams,
+    params: LoadBalancerDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LoadBalancerDeleteResponse> {
-    const { zone_id } = params;
+    const { account_id, zone_id } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.delete(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, options) as APIPromise<{
-        result: LoadBalancerDeleteResponse;
-      }>
+      this._client.delete(
+        path`/${accountOrZone}/${accountOrZoneId}/load_balancers/${loadBalancerID}`,
+        options,
+      ) as APIPromise<{ result: LoadBalancerDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Apply changes to an existing load balancer, overwriting the supplied properties.
+   * Apply changes to an existing account or zone-scoped load balancer, overwriting
+   * the supplied properties.
    *
    * @example
    * ```ts
    * const loadBalancer = await client.loadBalancers.edit(
    *   '699d98642c564d2e855e9661899b7252',
-   *   { zone_id: '699d98642c564d2e855e9661899b7252' },
+   *   { account_id: 'account_id' },
    * );
    * ```
    */
@@ -192,9 +264,25 @@ export class BaseLoadBalancers extends APIResource {
     params: LoadBalancerEditParams,
     options?: RequestOptions,
   ): APIPromise<LoadBalancer> {
-    const { zone_id, ...body } = params;
+    const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.patch(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, {
+      this._client.patch(path`/${accountOrZone}/${accountOrZoneId}/load_balancers/${loadBalancerID}`, {
         body,
         ...options,
       }) as APIPromise<{ result: LoadBalancer }>
@@ -202,26 +290,43 @@ export class BaseLoadBalancers extends APIResource {
   }
 
   /**
-   * Fetch a single configured load balancer.
+   * Fetch a single configured account or zone-scoped load balancer.
    *
    * @example
    * ```ts
    * const loadBalancer = await client.loadBalancers.get(
    *   '699d98642c564d2e855e9661899b7252',
-   *   { zone_id: '699d98642c564d2e855e9661899b7252' },
+   *   { account_id: 'account_id' },
    * );
    * ```
    */
   get(
     loadBalancerID: string,
-    params: LoadBalancerGetParams,
+    params: LoadBalancerGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<LoadBalancer> {
-    const { zone_id } = params;
+    const { account_id, zone_id } = params ?? {};
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
     return (
-      this._client.get(path`/zones/${zone_id}/load_balancers/${loadBalancerID}`, options) as APIPromise<{
-        result: LoadBalancer;
-      }>
+      this._client.get(
+        path`/${accountOrZone}/${accountOrZoneId}/load_balancers/${loadBalancerID}`,
+        options,
+      ) as APIPromise<{ result: LoadBalancer }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -459,6 +564,16 @@ export interface LoadBalancer {
   networks?: Array<string>;
 
   /**
+   * An optional list of pool sets, evaluated in array order with first match wins.
+   * Pool sets are independent from the standard steering fields (`region_pools` /
+   * `country_pools` / `pop_pools` / `default_pools` / `steering_policy` /
+   * `random_steering` / `fallback_pool` / `rules`). On a PATCH, an empty array
+   * (`pool_sets: []`) clears all pool sets, while omitting the field leaves existing
+   * pool sets unchanged.
+   */
+  pool_sets?: Array<LoadBalancer.PoolSet>;
+
+  /**
    * Enterprise only: A mapping of Cloudflare PoP identifiers to a list of pool IDs
    * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
    * explicitly defined will fall back to using the corresponding country_pool, then
@@ -571,6 +686,181 @@ export interface LoadBalancer {
   ttl?: number;
 
   zone_name?: string;
+}
+
+export namespace LoadBalancer {
+  /**
+   * One entry in a load balancer's `pool_sets`. Pool sets are evaluated in array
+   * order; the first whose `match` succeeds applies its `overrides` (or
+   * `fixed_response`), and evaluation stops there.
+   */
+  export interface PoolSet {
+    /**
+     * Disable this specific pool set. It will no longer be evaluated.
+     */
+    disabled?: boolean;
+
+    /**
+     * A collection of fields used to directly respond to the client instead of routing
+     * to a pool. When supplied on a rule, that rule stops further rule evaluation.
+     */
+    fixed_response?: PoolSet.FixedResponse;
+
+    /**
+     * Determines which requests a pool set applies to. Set `topology` to match by
+     * location or `default: true` to match all requests; the two are mutually
+     * exclusive. A pool set with no `match` matches all requests.
+     */
+    match?: PoolSet.Match;
+
+    /**
+     * A human-readable name for this pool set.
+     */
+    name?: string;
+
+    /**
+     * The behavior a pool set applies when its `match` succeeds. A strict subset of a
+     * rule's `overrides`: a pool set replaces the topology wholesale with a flat pool
+     * list (`pools`), so only the declarative pool-routing fields plus `fallback_pool`
+     * and `steering_policy` are settable. All fields are optional.
+     */
+    overrides?: PoolSet.Overrides;
+  }
+
+  export namespace PoolSet {
+    /**
+     * A collection of fields used to directly respond to the client instead of routing
+     * to a pool. When supplied on a rule, that rule stops further rule evaluation.
+     */
+    export interface FixedResponse {
+      /**
+       * The http 'Content-Type' header to include in the response.
+       */
+      content_type?: string;
+
+      /**
+       * The http 'Location' header to include in the response.
+       */
+      location?: string;
+
+      /**
+       * Text to include as the http body.
+       */
+      message_body?: string;
+
+      /**
+       * The http status code to respond with.
+       */
+      status_code?: number;
+    }
+
+    /**
+     * Determines which requests a pool set applies to. Set `topology` to match by
+     * location or `default: true` to match all requests; the two are mutually
+     * exclusive. A pool set with no `match` matches all requests.
+     */
+    export interface Match {
+      /**
+       * When true, matches every request. Cannot be combined with `topology`.
+       */
+      default?: boolean;
+
+      /**
+       * Matches requests by location. Set any combination of `pops`, `countries`, and
+       * `regions` (at least one is required); a request matches when its value appears
+       * in any populated list (e.g. `regions: ["WNAM"]` with `countries: ["US"]` matches
+       * a request in either WNAM or the US).
+       */
+      topology?: Match.Topology;
+    }
+
+    export namespace Match {
+      /**
+       * Matches requests by location. Set any combination of `pops`, `countries`, and
+       * `regions` (at least one is required); a request matches when its value appears
+       * in any populated list (e.g. `regions: ["WNAM"]` with `countries: ["US"]` matches
+       * a request in either WNAM or the US).
+       */
+      export interface Topology {
+        /**
+         * A list of ISO 3166-1 alpha-2 country codes. Matches when the request's country
+         * is in this list.
+         */
+        countries?: Array<string>;
+
+        /**
+         * A list of Cloudflare PoP codes. Matches when the request's PoP is in this list.
+         */
+        pops?: Array<string>;
+
+        /**
+         * A list of Cloudflare region codes (e.g. `WNAM`, `ENAM`, `WEU`). Matches when the
+         * request's region is in this list.
+         */
+        regions?: Array<string>;
+      }
+    }
+
+    /**
+     * The behavior a pool set applies when its `match` succeeds. A strict subset of a
+     * rule's `overrides`: a pool set replaces the topology wholesale with a flat pool
+     * list (`pools`), so only the declarative pool-routing fields plus `fallback_pool`
+     * and `steering_policy` are settable. All fields are optional.
+     */
+    export interface Overrides {
+      /**
+       * The pool ID to use when all other pools are detected as unhealthy.
+       */
+      fallback_pool?: string;
+
+      /**
+       * The default weight for pools not listed in `pool_weights`. The declarative
+       * alternative to `random_steering.default_weight`; mutually exclusive with
+       * `random_steering`.
+       */
+      pool_default_weight?: number;
+
+      /**
+       * A mapping of pool IDs to custom weights, relative to the other pools. The
+       * declarative alternative to `random_steering.pool_weights`; mutually exclusive
+       * with `random_steering`.
+       */
+      pool_weights?: { [key: string]: number };
+
+      /**
+       * A flat, ordered list of pool IDs to route the matched audience to. Replaces the
+       * resolved topology with exactly these pools. Mutually exclusive with
+       * `fixed_response`.
+       */
+      pools?: Array<string>;
+
+      /**
+       * Steering Policy for this load balancer.
+       *
+       * - `"off"`: Use `default_pools`.
+       * - `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied
+       *   requests, the country for `country_pools` is determined by
+       *   `location_strategy`.
+       * - `"random"`: Select a pool randomly.
+       * - `"dynamic_latency"`: Use round trip time to select the closest pool in
+       *   default_pools (requires pool health checks).
+       * - `"proximity"`: Use the pools' latitude and longitude to select the closest
+       *   pool using the Cloudflare PoP location for proxied requests or the location
+       *   determined by `location_strategy` for non-proxied requests.
+       * - `"least_outstanding_requests"`: Select a pool by taking into consideration
+       *   `random_steering` weights, as well as each pool's number of outstanding
+       *   requests. Pools with more pending requests are weighted proportionately less
+       *   relative to others.
+       * - `"least_connections"`: Select a pool by taking into consideration
+       *   `random_steering` weights, as well as each pool's number of open connections.
+       *   Pools with more open connections are weighted proportionately less relative to
+       *   others. Supported for HTTP/1 and HTTP/2 connections.
+       * - `""`: Will map to `"geo"` if you use
+       *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
+       */
+      steering_policy?: LoadBalancersAPI.SteeringPolicy;
+    }
+  }
 }
 
 /**
@@ -967,9 +1257,8 @@ export interface Rules {
   disabled?: boolean;
 
   /**
-   * A collection of fields used to directly respond to the eyeball instead of
-   * routing to a pool. If a fixed_response is supplied the rule will be marked as
-   * terminates.
+   * A collection of fields used to directly respond to the client instead of routing
+   * to a pool. When supplied on a rule, that rule stops further rule evaluation.
    */
   fixed_response?: Rules.FixedResponse;
 
@@ -979,8 +1268,8 @@ export interface Rules {
   name?: string;
 
   /**
-   * A collection of overrides to apply to the load balancer when this rule's
-   * condition is true. All fields are optional.
+   * A collection of overrides to apply when this rule's condition (or a pool set's
+   * `match`) is true. All fields are optional.
    */
   overrides?: Rules.Overrides;
 
@@ -1001,9 +1290,8 @@ export interface Rules {
 
 export namespace Rules {
   /**
-   * A collection of fields used to directly respond to the eyeball instead of
-   * routing to a pool. If a fixed_response is supplied the rule will be marked as
-   * terminates.
+   * A collection of fields used to directly respond to the client instead of routing
+   * to a pool. When supplied on a rule, that rule stops further rule evaluation.
    */
   export interface FixedResponse {
     /**
@@ -1028,8 +1316,8 @@ export namespace Rules {
   }
 
   /**
-   * A collection of overrides to apply to the load balancer when this rule's
-   * condition is true. All fields are optional.
+   * A collection of overrides to apply when this rule's condition (or a pool set's
+   * `match`) is true. All fields are optional.
    */
   export interface Overrides {
     /**
@@ -1066,6 +1354,27 @@ export namespace Rules {
      * to learn how steering is affected.
      */
     location_strategy?: LoadBalancersAPI.LocationStrategy;
+
+    /**
+     * The default weight for pools not listed in `pool_weights`. The declarative
+     * alternative to `random_steering.default_weight`; mutually exclusive with
+     * `random_steering`.
+     */
+    pool_default_weight?: number;
+
+    /**
+     * A mapping of pool IDs to custom weights, relative to the other pools. The
+     * declarative alternative to `random_steering.pool_weights`; mutually exclusive
+     * with `random_steering`.
+     */
+    pool_weights?: { [key: string]: number };
+
+    /**
+     * A flat, ordered list of pool IDs to route the matched audience to. Replaces the
+     * resolved topology with exactly these pools. Mutually exclusive with
+     * `fixed_response`.
+     */
+    pools?: Array<string>;
 
     /**
      * Enterprise only: A mapping of Cloudflare PoP identifiers to a list of pool IDs
@@ -1190,9 +1499,8 @@ export interface RulesParam {
   disabled?: boolean;
 
   /**
-   * A collection of fields used to directly respond to the eyeball instead of
-   * routing to a pool. If a fixed_response is supplied the rule will be marked as
-   * terminates.
+   * A collection of fields used to directly respond to the client instead of routing
+   * to a pool. When supplied on a rule, that rule stops further rule evaluation.
    */
   fixed_response?: RulesParam.FixedResponse;
 
@@ -1202,8 +1510,8 @@ export interface RulesParam {
   name?: string;
 
   /**
-   * A collection of overrides to apply to the load balancer when this rule's
-   * condition is true. All fields are optional.
+   * A collection of overrides to apply when this rule's condition (or a pool set's
+   * `match`) is true. All fields are optional.
    */
   overrides?: RulesParam.Overrides;
 
@@ -1224,9 +1532,8 @@ export interface RulesParam {
 
 export namespace RulesParam {
   /**
-   * A collection of fields used to directly respond to the eyeball instead of
-   * routing to a pool. If a fixed_response is supplied the rule will be marked as
-   * terminates.
+   * A collection of fields used to directly respond to the client instead of routing
+   * to a pool. When supplied on a rule, that rule stops further rule evaluation.
    */
   export interface FixedResponse {
     /**
@@ -1251,8 +1558,8 @@ export namespace RulesParam {
   }
 
   /**
-   * A collection of overrides to apply to the load balancer when this rule's
-   * condition is true. All fields are optional.
+   * A collection of overrides to apply when this rule's condition (or a pool set's
+   * `match`) is true. All fields are optional.
    */
   export interface Overrides {
     /**
@@ -1289,6 +1596,27 @@ export namespace RulesParam {
      * to learn how steering is affected.
      */
     location_strategy?: LoadBalancersAPI.LocationStrategyParam;
+
+    /**
+     * The default weight for pools not listed in `pool_weights`. The declarative
+     * alternative to `random_steering.default_weight`; mutually exclusive with
+     * `random_steering`.
+     */
+    pool_default_weight?: number;
+
+    /**
+     * A mapping of pool IDs to custom weights, relative to the other pools. The
+     * declarative alternative to `random_steering.pool_weights`; mutually exclusive
+     * with `random_steering`.
+     */
+    pool_weights?: { [key: string]: number };
+
+    /**
+     * A flat, ordered list of pool IDs to route the matched audience to. Replaces the
+     * resolved topology with exactly these pools. Mutually exclusive with
+     * `fixed_response`.
+     */
+    pools?: Array<string>;
 
     /**
      * Enterprise only: A mapping of Cloudflare PoP identifiers to a list of pool IDs
@@ -1639,11 +1967,6 @@ export interface LoadBalancerDeleteResponse {
 
 export interface LoadBalancerCreateParams {
   /**
-   * Path param
-   */
-  zone_id: string;
-
-  /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
    * here are used by default, or when region_pools are not configured for a given
    * region.
@@ -1661,6 +1984,18 @@ export interface LoadBalancerCreateParams {
    * will take precedence and the DNS record will not be used.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Controls features that modify the routing of requests to pools and
@@ -1684,6 +2019,11 @@ export interface LoadBalancerCreateParams {
    * Body param: Object description.
    */
   description?: string;
+
+  /**
+   * Body param: Whether to enable (the default) this load balancer.
+   */
+  enabled?: boolean;
 
   /**
    * Body param: Controls location-based steering for non-proxied requests. See
@@ -1813,11 +2153,6 @@ export interface LoadBalancerCreateParams {
 
 export interface LoadBalancerUpdateParams {
   /**
-   * Path param
-   */
-  zone_id: string;
-
-  /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
    * here are used by default, or when region_pools are not configured for a given
    * region.
@@ -1835,6 +2170,18 @@ export interface LoadBalancerUpdateParams {
    * will take precedence and the DNS record will not be used.
    */
   name: string;
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Controls features that modify the routing of requests to pools and
@@ -1991,18 +2338,41 @@ export interface LoadBalancerUpdateParams {
 }
 
 export interface LoadBalancerListParams {
-  zone_id: string;
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
 }
 
 export interface LoadBalancerDeleteParams {
-  zone_id: string;
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
 }
 
 export interface LoadBalancerEditParams {
   /**
-   * Path param
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
-  zone_id: string;
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
   /**
    * Body param: Controls features that modify the routing of requests to pools and
@@ -2056,6 +2426,11 @@ export interface LoadBalancerEditParams {
    * will take precedence and the DNS record will not be used.
    */
   name?: string;
+
+  /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * Body param: Enterprise only: A mapping of Cloudflare PoP identifiers to a list
@@ -2173,7 +2548,15 @@ export interface LoadBalancerEditParams {
 }
 
 export interface LoadBalancerGetParams {
-  zone_id: string;
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
 }
 
 LoadBalancers.Monitors = Monitors;

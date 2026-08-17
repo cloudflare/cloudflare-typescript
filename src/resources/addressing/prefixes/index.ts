@@ -37,6 +37,7 @@ export {
   type PrefixDeleteParams,
   type PrefixEditParams,
   type PrefixGetParams,
+  type PrefixValidateParams,
   type PrefixesSinglePage,
 } from './prefixes';
 export {

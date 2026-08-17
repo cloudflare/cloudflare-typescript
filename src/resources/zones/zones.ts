@@ -132,6 +132,21 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
+import * as TransformationsAllowedOriginsAPI from './transformations-allowed-origins';
+import {
+  BaseTransformationsAllowedOrigins,
+  TransformationsAllowedOriginEditParams,
+  TransformationsAllowedOriginGetParams,
+  TransformationsAllowedOrigins,
+} from './transformations-allowed-origins';
+import * as TransformationsC2paAPI from './transformations-c2pa';
+import {
+  BaseTransformationsC2paResource,
+  TransformationsC2pa,
+  TransformationsC2paEditParams,
+  TransformationsC2paGetParams,
+  TransformationsC2paResource,
+} from './transformations-c2pa';
 import * as CTAPI from './ct/ct';
 import { BaseCT, CT } from './ct/ct';
 import { APIPromise } from '../../core/api-promise';
@@ -143,7 +158,11 @@ export class BaseZones extends APIResource {
   static override readonly _key: readonly ['zones'] = Object.freeze(['zones'] as const);
 
   /**
-   * Create Zone
+   * Creates a new zone (domain) in your Cloudflare account.
+   *
+   * The zone is created in a pending state and must be activated by updating your
+   * domain's nameservers to point to Cloudflare, or by completing the verification
+   * process for partial (CNAME) setups.
    *
    * @example
    * ```ts
@@ -215,7 +234,9 @@ export class BaseZones extends APIResource {
   }
 
   /**
-   * Zone Details
+   * Retrieves detailed information about a specific zone identified by its zone ID.
+   *
+   * Returns zone configuration, status, nameservers, and associated metadata.
    *
    * @example
    * ```ts
@@ -234,6 +255,10 @@ export class BaseZones extends APIResource {
 export class Zones extends BaseZones {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
+  transformationsAllowedOrigins: TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins =
+    new TransformationsAllowedOriginsAPI.TransformationsAllowedOrigins(this._client);
+  transformationsC2pa: TransformationsC2paAPI.TransformationsC2paResource =
+    new TransformationsC2paAPI.TransformationsC2paResource(this._client);
   environments: EnvironmentsAPI.Environments = new EnvironmentsAPI.Environments(this._client);
   customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
     this._client,
@@ -697,6 +722,9 @@ Zones.ActivationCheck = ActivationCheck;
 Zones.BaseActivationCheck = BaseActivationCheck;
 Zones.Settings = Settings;
 Zones.BaseSettings = BaseSettings;
+Zones.BaseTransformationsAllowedOrigins = BaseTransformationsAllowedOrigins;
+Zones.TransformationsC2paResource = TransformationsC2paResource;
+Zones.BaseTransformationsC2paResource = BaseTransformationsC2paResource;
 Zones.Environments = Environments;
 Zones.BaseEnvironments = BaseEnvironments;
 Zones.CustomNameservers = CustomNameservers;
@@ -789,6 +817,21 @@ export declare namespace Zones {
     type SettingGetResponse as SettingGetResponse,
     type SettingEditParams as SettingEditParams,
     type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    type TransformationsAllowedOrigins as TransformationsAllowedOrigins,
+    BaseTransformationsAllowedOrigins as BaseTransformationsAllowedOrigins,
+    type TransformationsAllowedOriginEditParams as TransformationsAllowedOriginEditParams,
+    type TransformationsAllowedOriginGetParams as TransformationsAllowedOriginGetParams,
+  };
+
+  export {
+    TransformationsC2paResource as TransformationsC2paResource,
+    BaseTransformationsC2paResource as BaseTransformationsC2paResource,
+    type TransformationsC2pa as TransformationsC2pa,
+    type TransformationsC2paEditParams as TransformationsC2paEditParams,
+    type TransformationsC2paGetParams as TransformationsC2paGetParams,
   };
 
   export {

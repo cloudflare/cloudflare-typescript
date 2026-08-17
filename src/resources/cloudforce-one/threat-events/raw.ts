@@ -13,7 +13,8 @@ export class BaseRaw extends APIResource {
   ] as const);
 
   /**
-   * Updates a raw event
+   * Partially updates raw threat event data in Cloudforce One, modifying specific
+   * fields of the event.
    *
    * @example
    * ```ts
@@ -33,7 +34,7 @@ export class BaseRaw extends APIResource {
   }
 
   /**
-   * Reads data for a raw event
+   * Retrieves raw threat event data for a specific event in Cloudforce One.
    *
    * @example
    * ```ts

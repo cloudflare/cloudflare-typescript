@@ -1,5 +1,125 @@
 # Changelog
 
+## 7.1.0 (2026-08-17)
+
+Full Changelog: [v7.0.0...v7.1.0](https://github.com/cloudflare/cloudflare-typescript/compare/v7.0.0...v7.1.0)
+
+---
+
+### Breaking Changes
+
+#### Resource Restructuring
+
+- `cloudforceOne.threatEvents.indicatorTypes` has been renamed to `cloudforceOne.threatEvents.indicators`
+
+#### Removed Methods
+
+- `intel.attackSurfaceReport.issues.dismiss()` -- removed along with `IssueDismissResponse` type
+- `moq.relays.tokens.rotate()` -- removed along with `TokenRotateResponse` type
+
+#### Return Type Changes
+
+| Resource | Method | Old Return Type | New Return Type |
+|----------|--------|----------------|-----------------|
+| `zones.ct.alerting` | `edit()` | `AlertingEditResponse` | `CTAlertingSubscription` |
+| `zones.ct.alerting` | `get()` | `AlertingGetResponse` | `CTAlertingSubscription` |
+| `mtlsCertificates` | `list()` | `MTLSCertificatesSinglePage` | `MTLSCertificateListResponsesSinglePage` |
+| `mtlsCertificates` | `delete()` | `MTLSCertificate` | `MTLSCertificateDeleteResponse` |
+| `mtlsCertificates` | `get()` | `MTLSCertificate` | `MTLSCertificateGetResponse` |
+| `hostnames.settings.tls` | `get()` | `TLSGetResponsesSinglePage` | `Setting` |
+| `hyperdrive.configs` | `list()` | `HyperdrivesSinglePage` | `HyperdrivesV4PagePaginationArray` |
+
+#### Removed Types
+
+- `AlertingEditResponse`, `AlertingGetResponse` (on `zones.ct.alerting`) -- replaced by `CTAlertingSubscription`
+- `MTLSCertificate`, `MTLSCertificatesSinglePage` (on `mtlsCertificates`) -- replaced by per-method response types
+- `Host`, `Status`, `ValidationMethod` (on `ssl.certificatePacks`)
+- `CertificateAuthority` (on `acm.totalTLS`)
+- `HostnameAssociation` (on `certificateAuthorities.hostnameAssociations`)
+- `Status` (on `customCertificates`)
+- `TLSGetResponse`, `TLSGetResponsesSinglePage` (on `hostnames.settings.tls`)
+
+#### Endpoint Changes
+
+| Resource | Method | Old Endpoint | New Endpoint |
+|----------|--------|-------------|--------------|
+| `accounts.subscriptions` | `create()` | `POST /accounts/{account_id}/subscriptions` | `POST /{accounts_or_zones}/{account_or_zone_id}/subscriptions` |
+| `accounts.subscriptions` | `get()` | `GET /accounts/{account_id}/subscriptions` | `GET /{accounts_or_zones}/{account_or_zone_id}/subscriptions` |
+| `loadBalancers` | `create()`, `update()`, `list()`, `delete()`, `edit()`, `get()` | `/zones/{zone_id}/load_balancers/...` | `/{accounts_or_zones}/{account_or_zone_id}/load_balancers/...` |
+| `billing.usage` | `paygo()` | `GET /accounts/{account_id}/paygo-usage` | `GET /accounts/{account_id}/billable-usage` |
+| `hostnames.settings.tls` | `get()` | `GET /zones/{zone_id}/hostnames/settings/{setting_id}` | `GET /zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}` |
+
+---
+
+### Features
+
+#### New Resources
+
+- **`analyticsQuery`** -- `summary()`, `timeseries()`, `topN()` for analytics queries
+- **`analyticsQuery.dataSecurity.contentFindings`** -- `topN()`
+- **`analyticsQuery.dataSecurity.findings`** -- `summary()`, `timeseries()`
+- **`accounts.speedSettings.transformations`** -- `get()`
+- **`zones.transformationsAllowedOrigins`** -- `edit()`, `get()`
+- **`zones.transformationsC2pa`** -- `edit()`, `get()`
+- **`customHostnames.quota`** -- `get()`
+- **`dns.dnssec.zsk`** -- `list()`
+- **`emailRouting.accountRules`** -- `list()`
+- **`intel.urls`** -- `get()`
+- **`intel.sinkholes.ingresses`** -- `create()`, `update()`, `delete()`, `get()`
+- **`magicTransit.connectors.interrupts`** -- `create()`, `list()`
+- **`pages.projects.deployments.tails`** -- `create()`, `delete()`
+- **`pages.assets`** -- `checkMissing()`, `upload()`, `upsertHashes()`
+- **`precursor`** -- `update()`, `get()`
+- **`registrar.extensions`** -- `list()`, `get()`
+- **`registrarSandbox`** -- `check()`, `search()` with sub-resources for `registrations`, `registrationStatus`, `updateStatus`, and `extensions`
+- **`cloudforceOne.threatEvents.aggregate`** -- `list()`
+- **`cloudforceOne.threatEvents.graphql`** -- `create()`
+- **`cloudforceOne.threatEvents.graph`** -- `list()`
+- **`cloudforceOne.threatEvents.queries`** -- `create()`, `list()`, `delete()`, `edit()`, `get()`
+- **`cloudforceOne.threatEvents.relationships`** -- `list()`
+- **`cloudforceOne.threatEvents.indicators`** -- with sub-resources for `aggregate`, `types`, `byDataset`, and `byDataset.tags`
+- **`cloudforceOne.threatEvents.categories.catalog`** -- `list()`
+- **`cloudforceOne.threatEvents.datasets.events`** -- `get()`
+- **`cloudforceOne.threatEvents.tags`** -- with sub-resources for `categories`, `indicators`, and `indicators.byDataset`
+- **`cloudforceOne.threatEvents.targetIndustries`** -- with sub-resources for `byDataset` and `catalog`
+- **`radar.bgp.routes.upstreams`** -- `timeseries()`
+- **`radar.bgp.routes.paths`** -- `list()`
+- **`zeroTrust.casb.applications.authMethods`** -- `list()`
+- **`zeroTrust.casb.posture`** -- with sub-resources for `findings`, `exports`, `findingTypes`, `findingTypes.remediationTypes`, `content`, `remediations.jobs`, `webhooks`, and `webhooks.jobs`
+- **`zeroTrust.networks.subnets.initialResolvedIP`** -- `update()`, `get()`
+
+#### New Methods on Existing Resources
+
+- **`emailSecurity.settings.domains.bulkDelete()`** -- `DELETE /accounts/{account_id}/email-security/settings/domains`
+- **`emailRouting.update()`** -- `PUT /zones/{zone_id}/email/routing`
+- **`emailRouting.edit()`** -- `PATCH /zones/{zone_id}/email/routing`
+- **`emailRouting.rules.list()`** -- `GET /{accounts_or_zones}/{account_or_zone_id}/email/routing/rules`
+- **`logs.logExplorer.datasets.delete()`** -- `DELETE /{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/{dataset_id}`
+- **`queues.messages.peek()`** -- `POST /accounts/{account_id}/queues/{queue_id}/messages/peek`
+- **`queues.messages.purge()`** -- `POST /accounts/{account_id}/queues/{queue_id}/messages/purge`
+- **`addressing.prefixes.validate()`** -- `POST /accounts/{account_id}/addressing/prefixes/{prefix_id}/validate`
+- **`billing.usage.getAccountUsageInfoV1()`** -- `GET /accounts/{account_id}/billable-usage/info`
+- **`billing.usage.getAccountUsageV1()`** -- `GET /accounts/{account_id}/billable-usage`
+- **`billing.usage.getAccountUsageV2()`** -- `GET /accounts/{account_id}/billable/usage`
+- **`billing.usage.paygoInfo()`** -- `GET /accounts/{account_id}/billable-usage/info`
+- **`intel.sinkholes.create()`**, **`update()`**, **`delete()`**, **`get()`** -- CRUD for sinkholes
+- **`pages.projects.getUploadToken()`** -- `GET /accounts/{account_id}/pages/projects/{project_name}/upload-token`
+- **`zeroTrust.casb.applications.list()`**, **`get()`** -- list and get CASB applications
+- **`zeroTrust.casb.integrations`** -- `create()`, `update()`, `list()`, `delete()`, `get()`, `pause()`, `resume()`
+- **`hostnames.settings.tls.list()`** -- `GET /zones/{zone_id}/hostnames/settings/{setting_id}`
+- **`moq.relays.tokens.create()`**, **`list()`**, **`delete()`** -- token management
+- **`cloudforceOne.threatEvents.bulkCreateRelationships()`** -- bulk create relationships
+- **`cloudforceOne.threatEvents.datasets.delete()`** -- delete datasets
+- **`cloudforceOne.threatEvents.tags.list()`**, **`delete()`**, **`edit()`** -- tag management
+- **`resourceTagging.summary.get()`** -- `GET /accounts/{account_id}/tags/summary`
+- **`aiAudit.robots.bulkGet()`**, **`get()`** -- AI audit robot data
+
+---
+
+### Chores
+
+- Updated `@arethetypeswrong/cli` from ^0.17.0 to ^0.18.0
+- Fixed `repository` field in `package.json`
 
 ## 7.0.0 (2026-07-09)
 
@@ -266,7 +386,6 @@ npx cloudflare migrate ./your/src/folders
 - ESLint upgraded to ^9.39.1 (from ^8.49.0)
 - Node.js minimum version: 20 LTS
 - Internal module restructuring (`src/core.ts` -> `src/core/`, `src/_shims/` -> `src/internal/`)
-
 
 ## 6.5.0 (2026-06-23)
 

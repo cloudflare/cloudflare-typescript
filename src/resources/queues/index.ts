@@ -17,11 +17,15 @@ export {
   BaseMessages,
   type MessageAckResponse,
   type MessageBulkPushResponse,
+  type MessagePeekResponse,
   type MessagePullResponse,
+  type MessagePurgeResponse,
   type MessagePushResponse,
   type MessageAckParams,
   type MessageBulkPushParams,
+  type MessagePeekParams,
   type MessagePullParams,
+  type MessagePurgeParams,
   type MessagePushParams,
 } from './messages';
 export {

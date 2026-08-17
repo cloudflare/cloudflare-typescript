@@ -12,7 +12,9 @@ export class BaseCredentials extends APIResource {
   );
 
   /**
-   * Update Token Configuration credentials
+   * Update Token Configuration credentials with full replacement semantics. Key
+   * identities (`{alg,kid}`) must be unique within the request. Symmetric keys
+   * (`kty: "oct"`) require `k`; `k: null` is invalid.
    *
    * @example
    * ```ts
@@ -23,12 +25,11 @@ export class BaseCredentials extends APIResource {
    *       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       keys: [
    *         {
-   *           alg: 'ES256',
-   *           crv: 'P-256',
-   *           kid: '38013f13-c266-4eec-a72a-92ec92779f21',
-   *           kty: 'EC',
-   *           x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
-   *           y: 'lnkkzIxaveggz-HFhcMWW15nxvOj0Z_uQsXbpK0GFcY',
+   *           alg: 'RS256',
+   *           e: 'e',
+   *           kid: 'kid',
+   *           kty: 'RSA',
+   *           n: 'n',
    *         },
    *       ],
    *     },
@@ -56,6 +57,7 @@ export interface CredentialUpdateResponse {
     | CredentialUpdateResponse.APIShieldCredentialsJWTKeyRSA
     | CredentialUpdateResponse.APIShieldCredentialsJWTKeyEcEs256
     | CredentialUpdateResponse.APIShieldCredentialsJWTKeyEcEs384
+    | CredentialUpdateResponse.APIShieldCredentialsJWTKeyOctResponse
   >;
 
   messages: UserSchemasAPI.Message;
@@ -166,6 +168,27 @@ export namespace CredentialUpdateResponse {
      */
     y: string;
   }
+
+  /**
+   * JSON representation of a symmetric verification key in API responses (secret
+   * material is redacted).
+   */
+  export interface APIShieldCredentialsJWTKeyOctResponse {
+    /**
+     * Algorithm
+     */
+    alg: 'HS256' | 'HS384' | 'HS512';
+
+    /**
+     * Key ID
+     */
+    kid: string;
+
+    /**
+     * Key Type
+     */
+    kty: 'oct';
+  }
 }
 
 export interface CredentialUpdateParams {
@@ -181,6 +204,7 @@ export interface CredentialUpdateParams {
     | CredentialUpdateParams.APIShieldCredentialsJWTKeyRSA
     | CredentialUpdateParams.APIShieldCredentialsJWTKeyEcEs256
     | CredentialUpdateParams.APIShieldCredentialsJWTKeyEcEs384
+    | CredentialUpdateParams.APIShieldCredentialsJWTKeyOctRequest
   >;
 }
 
@@ -283,6 +307,31 @@ export namespace CredentialUpdateParams {
      * Y EC coordinate
      */
     y: string;
+  }
+
+  /**
+   * JSON representation of a symmetric key for create/PUT requests.
+   */
+  export interface APIShieldCredentialsJWTKeyOctRequest {
+    /**
+     * Algorithm
+     */
+    alg: 'HS256' | 'HS384' | 'HS512';
+
+    /**
+     * Symmetric key material. Required for create and PUT update requests.
+     */
+    k: string;
+
+    /**
+     * Key ID
+     */
+    kid: string;
+
+    /**
+     * Key Type
+     */
+    kty: 'oct';
   }
 }
 

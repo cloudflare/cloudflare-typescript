@@ -22,8 +22,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/moq/relays/tokens.ts">TokenRotateResponse</a></code>
+- <code><a href="./src/resources/moq/relays/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/moq/relays/tokens.ts">TokenListResponse</a></code>
+- <code><a href="./src/resources/moq/relays/tokens.ts">TokenDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/moq/relays/{relay_id}/tokens/rotate">client.moq.relays.tokens.<a href="./src/resources/moq/relays/tokens.ts">rotate</a>(relayID, { ...params }) -> TokenRotateResponse</code>
+- <code title="post /accounts/{account_id}/moq/relays/{relay_id}/tokens">client.moq.relays.tokens.<a href="./src/resources/moq/relays/tokens.ts">create</a>(relayID, { ...params }) -> TokenCreateResponse</code>
+- <code title="get /accounts/{account_id}/moq/relays/{relay_id}/tokens">client.moq.relays.tokens.<a href="./src/resources/moq/relays/tokens.ts">list</a>(relayID, { ...params }) -> TokenListResponse</code>
+- <code title="delete /accounts/{account_id}/moq/relays/{relay_id}/tokens/{jti}">client.moq.relays.tokens.<a href="./src/resources/moq/relays/tokens.ts">delete</a>(jti, { ...params }) -> TokenDeleteResponse</code>

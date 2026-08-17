@@ -5,10 +5,9 @@ import * as AlertingAPI from './alerting';
 import {
   Alerting,
   AlertingEditParams,
-  AlertingEditResponse,
   AlertingGetParams,
-  AlertingGetResponse,
   BaseAlerting,
+  CTAlertingSubscription,
 } from './alerting';
 
 export class BaseCT extends APIResource {
@@ -25,8 +24,7 @@ export declare namespace CT {
   export {
     Alerting as Alerting,
     BaseAlerting as BaseAlerting,
-    type AlertingEditResponse as AlertingEditResponse,
-    type AlertingGetResponse as AlertingGetResponse,
+    type CTAlertingSubscription as CTAlertingSubscription,
     type AlertingEditParams as AlertingEditParams,
     type AlertingGetParams as AlertingGetParams,
   };

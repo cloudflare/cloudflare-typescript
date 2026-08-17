@@ -34,12 +34,11 @@ export class BaseConfiguration extends APIResource {
    *     credentials: {
    *       keys: [
    *         {
-   *           alg: 'ES256',
-   *           crv: 'P-256',
-   *           kid: '38013f13-c266-4eec-a72a-92ec92779f21',
-   *           kty: 'EC',
-   *           x: 'KN53JRwN3wCjm2o39bvZUX2VdrsHzS8pxOAGjm8m7EQ',
-   *           y: 'lnkkzIxaveggz-HFhcMWW15nxvOj0Z_uQsXbpK0GFcY',
+   *           alg: 'RS256',
+   *           e: 'e',
+   *           kid: 'kid',
+   *           kty: 'RSA',
+   *           n: 'n',
    *         },
    *       ],
    *     },
@@ -194,6 +193,7 @@ export namespace TokenConfig {
       | Credentials.APIShieldCredentialsJWTKeyRSA
       | Credentials.APIShieldCredentialsJWTKeyEcEs256
       | Credentials.APIShieldCredentialsJWTKeyEcEs384
+      | Credentials.APIShieldCredentialsJWTKeyOctResponse
     >;
   }
 
@@ -296,6 +296,27 @@ export namespace TokenConfig {
        * Y EC coordinate
        */
       y: string;
+    }
+
+    /**
+     * JSON representation of a symmetric verification key in API responses (secret
+     * material is redacted).
+     */
+    export interface APIShieldCredentialsJWTKeyOctResponse {
+      /**
+       * Algorithm
+       */
+      alg: 'HS256' | 'HS384' | 'HS512';
+
+      /**
+       * Key ID
+       */
+      kid: string;
+
+      /**
+       * Key Type
+       */
+      kty: 'oct';
     }
   }
 }
@@ -327,7 +348,9 @@ export interface ConfigurationCreateParams {
   zone_id: string;
 
   /**
-   * Body param
+   * Body param: Request payload for create and PUT credentials operations. Provided
+   * keys define the complete stored key set. Key identities (`{alg,kid}`) must be
+   * unique.
    */
   credentials: ConfigurationCreateParams.Credentials;
 
@@ -353,11 +376,16 @@ export interface ConfigurationCreateParams {
 }
 
 export namespace ConfigurationCreateParams {
+  /**
+   * Request payload for create and PUT credentials operations. Provided keys define
+   * the complete stored key set. Key identities (`{alg,kid}`) must be unique.
+   */
   export interface Credentials {
     keys: Array<
       | Credentials.APIShieldCredentialsJWTKeyRSA
       | Credentials.APIShieldCredentialsJWTKeyEcEs256
       | Credentials.APIShieldCredentialsJWTKeyEcEs384
+      | Credentials.APIShieldCredentialsJWTKeyOctRequest
     >;
   }
 
@@ -460,6 +488,31 @@ export namespace ConfigurationCreateParams {
        * Y EC coordinate
        */
       y: string;
+    }
+
+    /**
+     * JSON representation of a symmetric key for create/PUT requests.
+     */
+    export interface APIShieldCredentialsJWTKeyOctRequest {
+      /**
+       * Algorithm
+       */
+      alg: 'HS256' | 'HS384' | 'HS512';
+
+      /**
+       * Symmetric key material. Required for create and PUT update requests.
+       */
+      k: string;
+
+      /**
+       * Key ID
+       */
+      kid: string;
+
+      /**
+       * Key Type
+       */
+      kty: 'oct';
     }
   }
 }

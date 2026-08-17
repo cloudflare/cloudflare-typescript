@@ -17,7 +17,10 @@ export class BaseSubdomains extends APIResource {
   /**
    * Creates a new sending subdomain or re-enables sending on an existing subdomain
    * that had it disabled. If zone-level Email Sending has not been enabled yet, the
-   * zone flag is automatically set when the entitlement is present.
+   * zone flag is automatically set when the entitlement is present. A leftmost
+   * wildcard such as `*.example.com` is accepted only for accounts with wildcard
+   * Email Sending enabled. Wildcard senders share the base domain's DKIM signing
+   * identity and `cf-bounce.<base>` return path.
    *
    * @example
    * ```ts
@@ -123,7 +126,7 @@ export interface SubdomainCreateResponse {
   enabled: boolean;
 
   /**
-   * The subdomain domain name.
+   * The exact domain name or a leftmost wildcard such as `*.example.com`.
    */
   name: string;
 
@@ -138,7 +141,8 @@ export interface SubdomainCreateResponse {
   created?: string;
 
   /**
-   * The DKIM selector used for email signing.
+   * The DKIM selector used for email signing. Wildcard rows publish the selector and
+   * sign with `d=<base>`.
    */
   dkim_selector?: string;
 
@@ -148,7 +152,13 @@ export interface SubdomainCreateResponse {
   modified?: string;
 
   /**
-   * The return-path domain used for bounce handling.
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
+
+  /**
+   * The return-path domain used for bounce handling. Wildcard rows use
+   * `cf-bounce.<base>`.
    */
   return_path_domain?: string;
 }
@@ -160,7 +170,7 @@ export interface SubdomainListResponse {
   enabled: boolean;
 
   /**
-   * The subdomain domain name.
+   * The exact domain name or a leftmost wildcard such as `*.example.com`.
    */
   name: string;
 
@@ -175,7 +185,8 @@ export interface SubdomainListResponse {
   created?: string;
 
   /**
-   * The DKIM selector used for email signing.
+   * The DKIM selector used for email signing. Wildcard rows publish the selector and
+   * sign with `d=<base>`.
    */
   dkim_selector?: string;
 
@@ -185,7 +196,13 @@ export interface SubdomainListResponse {
   modified?: string;
 
   /**
-   * The return-path domain used for bounce handling.
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
+
+  /**
+   * The return-path domain used for bounce handling. Wildcard rows use
+   * `cf-bounce.<base>`.
    */
   return_path_domain?: string;
 }
@@ -242,7 +259,7 @@ export interface SubdomainGetResponse {
   enabled: boolean;
 
   /**
-   * The subdomain domain name.
+   * The exact domain name or a leftmost wildcard such as `*.example.com`.
    */
   name: string;
 
@@ -257,7 +274,8 @@ export interface SubdomainGetResponse {
   created?: string;
 
   /**
-   * The DKIM selector used for email signing.
+   * The DKIM selector used for email signing. Wildcard rows publish the selector and
+   * sign with `d=<base>`.
    */
   dkim_selector?: string;
 
@@ -267,7 +285,13 @@ export interface SubdomainGetResponse {
   modified?: string;
 
   /**
-   * The return-path domain used for bounce handling.
+   * Whether sent messages from this subdomain can be previewed in the activity log.
+   */
+  preview_enabled?: boolean;
+
+  /**
+   * The return-path domain used for bounce handling. Wildcard rows use
+   * `cf-bounce.<base>`.
    */
   return_path_domain?: string;
 }
@@ -279,7 +303,9 @@ export interface SubdomainCreateParams {
   zone_id: string;
 
   /**
-   * Body param: The subdomain name. Must be within the zone.
+   * Body param: The domain name within the zone. A wildcard is allowed only as the
+   * complete leftmost label (`*.example.com`) and requires the account wildcard
+   * Email Sending entitlement.
    */
   name: string;
 }

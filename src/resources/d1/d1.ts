@@ -51,7 +51,7 @@ export interface D1 {
    * Specify the location to restrict the D1 database to run and store data. If this
    * option is present, the location hint is ignored.
    */
-  jurisdiction?: 'eu' | 'fedramp' | null;
+  jurisdiction?: 'eu' | 'fedramp' | 'us' | null;
 
   /**
    * D1 database name.

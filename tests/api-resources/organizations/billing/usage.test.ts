@@ -43,11 +43,7 @@ const runTests = (client: PartialCloudflare<{ organizations: { billing: { usage:
     await expect(
       client.organizations.billing.usage.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
-        {
-          from: '2025-05-01',
-          metric: 'workers_standard_requests',
-          to: '2025-05-31',
-        },
+        { from: '2025-05-01', to: '2025-05-31' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

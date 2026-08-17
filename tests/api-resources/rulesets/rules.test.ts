@@ -61,6 +61,7 @@ const runTests = (client: PartialCloudflare<{ rulesets: { rules: BaseRules } }>)
     const response = await client.rulesets.rules.delete('3a03d665bac047339bb530ecb439a90d', {
       ruleset_id: '2f2feab2026849078ba485f918791bdc',
       account_id: 'account_id',
+      dry_run: true,
     });
   });
 
@@ -84,6 +85,7 @@ const runTests = (client: PartialCloudflare<{ rulesets: { rules: BaseRules } }>)
     const response = await client.rulesets.rules.edit('3a03d665bac047339bb530ecb439a90d', {
       ruleset_id: '2f2feab2026849078ba485f918791bdc',
       account_id: 'account_id',
+      dry_run: true,
       id: '3a03d665bac047339bb530ecb439a90d',
       action: 'block',
       action_parameters: {

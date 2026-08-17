@@ -161,11 +161,11 @@ export type ImpersonationRegistryListResponsesV4PagePaginationArray =
   V4PagePaginationArray<ImpersonationRegistryListResponse>;
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryCreateResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -180,15 +180,14 @@ export interface ImpersonationRegistryCreateResponse {
   email?: string;
 
   /**
-   * @deprecated
+   * @deprecated This field is deprecated.
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -200,11 +199,11 @@ export interface ImpersonationRegistryCreateResponse {
 }
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryListResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -219,15 +218,14 @@ export interface ImpersonationRegistryListResponse {
   email?: string;
 
   /**
-   * @deprecated
+   * @deprecated This field is deprecated.
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -240,17 +238,17 @@ export interface ImpersonationRegistryListResponse {
 
 export interface ImpersonationRegistryDeleteResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id: string;
 }
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryEditResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -265,15 +263,14 @@ export interface ImpersonationRegistryEditResponse {
   email?: string;
 
   /**
-   * @deprecated
+   * @deprecated This field is deprecated.
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -285,11 +282,11 @@ export interface ImpersonationRegistryEditResponse {
 }
 
 /**
- * An impersonation registry entry
+ * An impersonation registry entry.
  */
 export interface ImpersonationRegistryGetResponse {
   /**
-   * Impersonation registry entry identifier
+   * Impersonation registry entry identifier.
    */
   id?: string;
 
@@ -304,15 +301,14 @@ export interface ImpersonationRegistryGetResponse {
   email?: string;
 
   /**
-   * @deprecated
+   * @deprecated This field is deprecated.
    */
   external_directory_node_id?: string | null;
 
   is_email_regex?: boolean;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -360,7 +356,7 @@ export interface ImpersonationRegistryCreateParams {
   directory_node_id?: number | null;
 
   /**
-   * @deprecated Body param
+   * @deprecated This field is deprecated.
    */
   external_directory_node_id?: string | null;
 
@@ -431,7 +427,7 @@ export interface ImpersonationRegistryEditParams {
   email?: string;
 
   /**
-   * @deprecated Body param
+   * @deprecated This field is deprecated.
    */
   external_directory_node_id?: string | null;
 

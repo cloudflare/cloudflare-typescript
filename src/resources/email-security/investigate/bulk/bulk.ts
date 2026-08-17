@@ -28,7 +28,8 @@ export class BaseBulk extends APIResource {
   ] as const);
 
   /**
-   * Create a bulk action job
+   * Creates a new bulk action job to move or release messages that match the
+   * provided search parameters.
    *
    * @example
    * ```ts
@@ -51,7 +52,7 @@ export class BaseBulk extends APIResource {
   }
 
   /**
-   * List bulk action jobs
+   * Returns a paginated list of bulk action jobs for the account.
    *
    * @example
    * ```ts
@@ -101,7 +102,7 @@ export class BaseBulk extends APIResource {
   }
 
   /**
-   * Get bulk action job details
+   * Returns the status and details of a specific bulk action job.
    *
    * @example
    * ```ts
@@ -189,8 +190,7 @@ export namespace BulkCreateResponse {
 
   export interface SearchParams {
     /**
-     * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-     * instead. End of life: November 1, 2026.
+     * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
      */
     action_log?: boolean;
 
@@ -206,7 +206,7 @@ export namespace BulkCreateResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -237,7 +237,7 @@ export namespace BulkCreateResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 
@@ -307,8 +307,7 @@ export namespace BulkListResponse {
 
   export interface SearchParams {
     /**
-     * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-     * instead. End of life: November 1, 2026.
+     * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
      */
     action_log?: boolean;
 
@@ -324,7 +323,7 @@ export namespace BulkListResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -355,7 +354,7 @@ export namespace BulkListResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 
@@ -429,8 +428,7 @@ export namespace BulkGetResponse {
 
   export interface SearchParams {
     /**
-     * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-     * instead. End of life: November 1, 2026.
+     * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
      */
     action_log?: boolean;
 
@@ -446,7 +444,7 @@ export namespace BulkGetResponse {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -477,7 +475,7 @@ export namespace BulkGetResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 
@@ -537,8 +535,7 @@ export interface BulkCreateParams {
 export namespace BulkCreateParams {
   export interface SearchParams {
     /**
-     * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
-     * instead. End of life: November 1, 2026.
+     * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
      */
     action_log?: boolean;
 
@@ -554,7 +551,7 @@ export namespace BulkCreateParams {
     domain?: string | null;
 
     /**
-     * End of search date range
+     * End of search date range.
      */
     end?: string;
 
@@ -585,7 +582,7 @@ export namespace BulkCreateParams {
     sender?: string | null;
 
     /**
-     * Beginning of search date range
+     * Beginning of search date range.
      */
     start?: string;
 

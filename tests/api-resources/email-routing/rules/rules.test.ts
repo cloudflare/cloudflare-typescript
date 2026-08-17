@@ -55,7 +55,9 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: BaseRules }
       ],
       enabled: true,
       name: 'Send to user@example.net rule.',
+      owner_worker_tag: 'a7e6fb77503c41d8a7f3113c6918f10c',
       priority: 0,
+      source: 'api',
     });
   });
 
@@ -87,8 +89,21 @@ const runTests = (client: PartialCloudflare<{ emailRouting: { rules: BaseRules }
       ],
       enabled: true,
       name: 'Send to user@example.net rule.',
+      owner_worker_tag: 'a7e6fb77503c41d8a7f3113c6918f10c',
       priority: 0,
+      source: 'api',
     });
+  });
+
+  test('list', async () => {
+    const responsePromise = client.emailRouting.rules.list({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   test('delete: only required params', async () => {

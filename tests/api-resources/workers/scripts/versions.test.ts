@@ -60,8 +60,32 @@ const runTests = (client: PartialCloudflare<{ workers: { scripts: { versions: Ba
             type: 'plain_text',
           },
         ],
+        cache_options: { enabled: true, cross_version_cache: true },
         compatibility_date: '2021-01-01',
         compatibility_flags: ['nodejs_compat'],
+        exports: {
+          Admin: {
+            type: 'worker',
+            cache: { enabled: true },
+            state: 'created',
+          },
+          Counter: {
+            storage: 'sqlite',
+            type: 'durable-object',
+            container: 'my-container',
+            state: 'created',
+          },
+          OldCounter: {
+            renamed_to: 'Counter',
+            state: 'renamed',
+            type: 'durable-object',
+          },
+          default: {
+            type: 'worker',
+            cache: { enabled: false },
+            state: 'created',
+          },
+        },
         keep_bindings: ['string'],
         package_dependencies: [
           {

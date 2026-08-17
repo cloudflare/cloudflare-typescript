@@ -74,17 +74,17 @@ export interface DetectionGetResponse {
 export namespace DetectionGetResponse {
   export interface Attachment {
     /**
-     * Size of the attachment in bytes
+     * Size of the attachment in bytes.
      */
     size: number;
 
     /**
-     * MIME type of the attachment
+     * MIME type of the attachment.
      */
     content_type?: string | null;
 
     /**
-     * Detection result for this attachment
+     * Detection result for this attachment.
      */
     detection?:
       | 'MALICIOUS'
@@ -100,32 +100,32 @@ export namespace DetectionGetResponse {
       | null;
 
     /**
-     * Whether the attachment is encrypted
+     * Whether the attachment is encrypted.
      */
     encrypted?: boolean | null;
 
     /**
-     * Name of the attached file
+     * Name of the attached file.
      */
     filename?: string | null;
 
     /**
-     * MD5 hash of the attachment
+     * MD5 hash of the attachment.
      */
     md5?: string | null;
 
     /**
-     * Attachment name (alternative to filename)
+     * Attachment name (alternative to filename).
      */
     name?: string | null;
 
     /**
-     * SHA1 hash of the attachment
+     * SHA1 hash of the attachment.
      */
     sha1?: string | null;
 
     /**
-     * SHA256 hash of the attachment
+     * SHA256 hash of the attachment.
      */
     sha256?: string | null;
   }

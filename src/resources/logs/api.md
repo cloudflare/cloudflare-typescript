@@ -26,6 +26,7 @@ Methods:
 - <code title="post /{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets">client.logs.logExplorer.datasets.<a href="./src/resources/logs/log-explorer/datasets/datasets.ts">create</a>({ ...params }) -> Dataset</code>
 - <code title="put /{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/{dataset_id}">client.logs.logExplorer.datasets.<a href="./src/resources/logs/log-explorer/datasets/datasets.ts">update</a>(datasetID, { ...params }) -> Dataset</code>
 - <code title="get /{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets">client.logs.logExplorer.datasets.<a href="./src/resources/logs/log-explorer/datasets/datasets.ts">list</a>({ ...params }) -> DatasetSummariesSinglePage</code>
+- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/{dataset_id}">client.logs.logExplorer.datasets.<a href="./src/resources/logs/log-explorer/datasets/datasets.ts">delete</a>(datasetID, { ...params }) -> Dataset</code>
 - <code title="get /{accounts_or_zones}/{account_or_zone_id}/logs/explorer/datasets/{dataset_id}">client.logs.logExplorer.datasets.<a href="./src/resources/logs/log-explorer/datasets/datasets.ts">get</a>(datasetID, { ...params }) -> Dataset</code>
 
 #### Available

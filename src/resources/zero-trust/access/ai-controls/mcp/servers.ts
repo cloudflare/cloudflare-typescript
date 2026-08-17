@@ -15,7 +15,7 @@ export class BaseServers extends APIResource {
     Object.freeze(['zeroTrust', 'access', 'aiControls', 'mcp', 'servers'] as const);
 
   /**
-   * Creates a new MCP portal for managing AI tool access through Cloudflare Access.
+   * Creates a new MCP server for connecting to an upstream MCP endpoint.
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Updates an MCP portal configuration.
+   * Updates an MCP server's configuration and credentials.
    *
    * @example
    * ```ts
@@ -64,7 +64,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Lists all MCP portals configured for the account.
+   * Lists all MCP servers configured for the account.
    *
    * @example
    * ```ts
@@ -89,7 +89,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Deletes an MCP portal from the account.
+   * Deletes an MCP server from the account.
    *
    * @example
    * ```ts
@@ -111,7 +111,7 @@ export class BaseServers extends APIResource {
   }
 
   /**
-   * Retrieves gateway configuration for MCP portals.
+   * Retrieves an MCP server's configuration and capability sync state.
    *
    * @example
    * ```ts
@@ -140,7 +140,7 @@ export class BaseServers extends APIResource {
    * ```ts
    * const response =
    *   await client.zeroTrust.access.aiControls.mcp.servers.sync(
-   *     'my-mcp-portal',
+   *     'my-mcp-server',
    *     { account_id: 'a86a8f5c339544d7bdc89926de14fb8c' },
    *   );
    * ```
@@ -161,24 +161,50 @@ export type ServerListResponsesV4PagePaginationArray = V4PagePaginationArray<Ser
 
 export interface ServerCreateResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerCreateResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -189,8 +215,7 @@ export interface ServerCreateResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -203,18 +228,68 @@ export interface ServerCreateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerCreateResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerCreateResponse.UpdatedTool>;
 }
 
 export namespace ServerCreateResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -243,46 +318,96 @@ export namespace ServerCreateResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerUpdateResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerUpdateResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -293,8 +418,7 @@ export interface ServerUpdateResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -307,18 +431,68 @@ export interface ServerUpdateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerUpdateResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerUpdateResponse.UpdatedTool>;
 }
 
 export namespace ServerUpdateResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -347,46 +521,96 @@ export namespace ServerUpdateResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerListResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerListResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -397,8 +621,7 @@ export interface ServerListResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -411,18 +634,68 @@ export interface ServerListResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerListResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerListResponse.UpdatedTool>;
 }
 
 export namespace ServerListResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -451,46 +724,96 @@ export namespace ServerListResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerDeleteResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerDeleteResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -501,8 +824,7 @@ export interface ServerDeleteResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -515,18 +837,68 @@ export interface ServerDeleteResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerDeleteResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerDeleteResponse.UpdatedTool>;
 }
 
 export namespace ServerDeleteResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -555,46 +927,96 @@ export namespace ServerDeleteResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
 
 export interface ServerReadResponse {
   /**
-   * server id
+   * Unique identifier for the MCP server.
    */
   id: string;
 
+  /**
+   * Authentication method used to connect to the upstream MCP server.
+   */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
+  /**
+   * URL of the upstream MCP endpoint.
+   */
   hostname: string;
 
+  /**
+   * Display name for the MCP server.
+   */
   name: string;
 
   prompts: Array<{ [key: string]: unknown }>;
 
   tools: Array<{ [key: string]: unknown }>;
 
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  auth_config_summary?: ServerReadResponse.AuthConfigSummary;
+
+  /**
+   * Whether administrative authentication is required before capabilities can be
+   * synced. Manual OAuth is user-managed and has no administrative authentication
+   * flow.
+   */
+  authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
+
   created_at?: string;
 
   created_by?: string;
 
+  /**
+   * Optional description of the MCP server.
+   */
   description?: string | null;
 
   error?: string;
@@ -605,8 +1027,7 @@ export interface ServerReadResponse {
    * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
    * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
    * customer portal hostname. Defaults to false (off); opt in per server by setting
-   * true. Effective behavior is gated by the gateway worker's per-env rollout mode
-   * KV key.
+   * true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
@@ -619,18 +1040,68 @@ export interface ServerReadResponse {
   modified_by?: string;
 
   /**
-   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
+   * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
    */
   secure_web_gateway?: boolean;
 
-  status?: string;
+  /**
+   * Current sync state of the server
+   */
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 
+  /**
+   * Server-wide prompt capability overrides.
+   */
   updated_prompts?: Array<ServerReadResponse.UpdatedPrompt>;
 
+  /**
+   * Server-wide tool capability overrides.
+   */
   updated_tools?: Array<ServerReadResponse.UpdatedTool>;
 }
 
 export namespace ServerReadResponse {
+  /**
+   * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
+   * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
+   * endpoints + client_id for manual servers. Never includes the secret value.
+   */
+  export interface AuthConfigSummary {
+    auth_mode?: 'dcr' | 'manual';
+
+    client_secret_version?: number;
+
+    config?: AuthConfigSummary.Config;
+
+    has_client_secret?: boolean;
+
+    registration_info?: AuthConfigSummary.RegistrationInfo;
+  }
+
+  export namespace AuthConfigSummary {
+    export interface Config {
+      authorization_endpoint?: string;
+
+      issuer?: string;
+
+      resource?: string;
+
+      revocation_endpoint?: string;
+
+      token_endpoint?: string;
+    }
+
+    export interface RegistrationInfo {
+      client_id?: string;
+
+      redirect_uris?: Array<string>;
+
+      scope?: string;
+
+      token_endpoint_auth_method?: string;
+    }
+  }
+
   export interface ErrorDetails {
     /**
      * Underlying error message
@@ -659,22 +1130,46 @@ export namespace ServerReadResponse {
   }
 
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
@@ -684,7 +1179,7 @@ export interface ServerSyncResponse {
 
   error_details?: ServerSyncResponse.ErrorDetails;
 
-  status?: string;
+  status?: 'waiting' | 'ready' | 'stale' | 'error';
 }
 
 export namespace ServerSyncResponse {
@@ -723,32 +1218,44 @@ export interface ServerCreateParams {
   account_id: string;
 
   /**
-   * Body param: server id
+   * Body param: Unique identifier for the MCP server.
    */
   id: string;
 
   /**
-   * Body param
+   * Body param: Authentication method used to connect to the upstream MCP server.
    */
   auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
   /**
-   * Body param
+   * Body param: URL of the upstream MCP endpoint.
    */
   hostname: string;
 
   /**
-   * Body param
+   * Body param: Display name for the MCP server.
    */
   name: string;
 
   /**
-   * Body param
+   * Body param: Static credential for the upstream MCP server. For auth_type
+   * "bearer", either a raw token string (e.g. "sk-abc123"), which is wrapped
+   * server-side as `Authorization: Bearer <token>`, or a JSON-encoded object of the
+   * form `{"headers":{"Header-Name":"value",...}}` for custom or multiple static
+   * headers (e.g. Cloudflare Access service tokens:
+   * `{"headers":{"cf-access-client-id":"...","cf-access-client-secret":"..."}}`).
    */
   auth_credentials?: string;
 
   /**
-   * Body param
+   * Body param: Pre-registered OAuth client_secret. Write-only - accepted on
+   * create/update when auth_credentials.auth_mode is 'manual'. Stored
+   * AES-GCM-encrypted in server_oauth_secrets; never returned by read endpoints.
+   */
+  client_secret?: string;
+
+  /**
+   * Body param: Optional description of the MCP server.
    */
   description?: string | null;
 
@@ -756,46 +1263,69 @@ export interface ServerCreateParams {
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
    * the customer portal hostname. Defaults to false (off); opt in per server by
-   * setting true. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * setting true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
   /**
    * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
-   * Web Gateway
+   * Web Gateway.
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param
+   * Body param: Server-wide prompt capability overrides.
    */
   updated_prompts?: Array<ServerCreateParams.UpdatedPrompt>;
 
   /**
-   * Body param
+   * Body param: Server-wide tool capability overrides.
    */
   updated_tools?: Array<ServerCreateParams.UpdatedTool>;
 }
 
 export namespace ServerCreateParams {
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }
@@ -807,12 +1337,24 @@ export interface ServerUpdateParams {
   account_id: string;
 
   /**
-   * Body param
+   * Body param: Static credential for the upstream MCP server. For auth_type
+   * "bearer", either a raw token string (e.g. "sk-abc123"), which is wrapped
+   * server-side as `Authorization: Bearer <token>`, or a JSON-encoded object of the
+   * form `{"headers":{"Header-Name":"value",...}}` for custom or multiple static
+   * headers (e.g. Cloudflare Access service tokens:
+   * `{"headers":{"cf-access-client-id":"...","cf-access-client-secret":"..."}}`).
    */
   auth_credentials?: string;
 
   /**
-   * Body param
+   * Body param: Pre-registered OAuth client_secret. Write-only - accepted on
+   * create/update when auth_credentials.auth_mode is 'manual'. Stored
+   * AES-GCM-encrypted in server_oauth_secrets; never returned by read endpoints.
+   */
+  client_secret?: string;
+
+  /**
+   * Body param: Optional description of the MCP server.
    */
   description?: string | null;
 
@@ -820,51 +1362,74 @@ export interface ServerUpdateParams {
    * Body param: When true, the gateway worker uses the shared Cloudflare-owned OAuth
    * callback endpoint as the redirect_uri for upstream on-behalf OAuth, instead of
    * the customer portal hostname. Defaults to false (off); opt in per server by
-   * setting true. Effective behavior is gated by the gateway worker's per-env
-   * rollout mode KV key.
+   * setting true.
    */
   is_shared_oauth_callback_enabled?: boolean;
 
   /**
-   * Body param
+   * Body param: Display name for the MCP server.
    */
   name?: string;
 
   /**
    * Body param: Route outbound traffic to this MCP server through Zero Trust Secure
-   * Web Gateway
+   * Web Gateway.
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param
+   * Body param: Server-wide prompt capability overrides.
    */
   updated_prompts?: Array<ServerUpdateParams.UpdatedPrompt>;
 
   /**
-   * Body param
+   * Body param: Server-wide tool capability overrides.
    */
   updated_tools?: Array<ServerUpdateParams.UpdatedTool>;
 }
 
 export namespace ServerUpdateParams {
   export interface UpdatedPrompt {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 
   export interface UpdatedTool {
+    /**
+     * Name of the tool or prompt capability to override.
+     */
     name: string;
 
+    /**
+     * Custom name exposed for the capability.
+     */
     alias?: string;
 
+    /**
+     * Custom description exposed for the capability.
+     */
     description?: string;
 
+    /**
+     * Whether the capability is available through the MCP server.
+     */
     enabled?: boolean;
   }
 }

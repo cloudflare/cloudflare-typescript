@@ -368,7 +368,7 @@ export interface PolicyCreateResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -393,12 +393,12 @@ export namespace PolicyCreateResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -513,7 +513,7 @@ export interface PolicyUpdateResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -538,12 +538,12 @@ export namespace PolicyUpdateResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -658,7 +658,7 @@ export interface PolicyListResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -683,12 +683,12 @@ export namespace PolicyListResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -810,7 +810,7 @@ export interface PolicyGetResponse {
    * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
    * m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 
   updated_at?: string;
 }
@@ -835,12 +835,12 @@ export namespace PolicyGetResponse {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -948,7 +948,7 @@ export interface PolicyCreateParams {
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 }
 
 export namespace PolicyCreateParams {
@@ -971,12 +971,12 @@ export namespace PolicyCreateParams {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 
@@ -1084,7 +1084,7 @@ export interface PolicyUpdateParams {
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
    */
-  session_duration?: string;
+  session_duration?: string | null;
 }
 
 export namespace PolicyUpdateParams {
@@ -1107,12 +1107,12 @@ export namespace PolicyUpdateParams {
       /**
        * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
 
       /**
        * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
+      allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
     }
   }
 

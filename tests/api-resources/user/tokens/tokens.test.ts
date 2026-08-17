@@ -157,6 +157,7 @@ const runTests = (client: PartialCloudflare<{ user: { tokens: BaseTokens } }>) =
       client.user.tokens.list(
         {
           direction: 'desc',
+          include_expired: true,
           page: 1,
           per_page: 5,
         },

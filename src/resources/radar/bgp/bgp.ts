@@ -1,7 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as RoutesAPI from './routes';
+import * as HijacksAPI from './hijacks/hijacks';
+import { BaseHijacks, Hijacks } from './hijacks/hijacks';
+import * as IPsAPI from './ips/ips';
+import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips/ips';
+import * as LeaksAPI from './leaks/leaks';
+import { BaseLeaks, Leaks } from './leaks/leaks';
+import * as RoutesAPI from './routes/routes';
 import {
   BaseRoutes,
   RouteAsesParams,
@@ -15,13 +21,7 @@ import {
   RouteStatsParams,
   RouteStatsResponse,
   Routes,
-} from './routes';
-import * as HijacksAPI from './hijacks/hijacks';
-import { BaseHijacks, Hijacks } from './hijacks/hijacks';
-import * as IPsAPI from './ips/ips';
-import { BaseIPs, IPTimeseriesParams, IPTimeseriesResponse, IPs } from './ips/ips';
-import * as LeaksAPI from './leaks/leaks';
-import { BaseLeaks, Leaks } from './leaks/leaks';
+} from './routes/routes';
 import * as RPKIAPI from './rpki/rpki';
 import { BaseRPKI, RPKI } from './rpki/rpki';
 import * as TopAPI from './top/top';
@@ -170,6 +170,9 @@ export interface BGPTimeseriesParams {
    * Aggregation interval of the results (e.g., in 15 minutes or 1 hour intervals).
    * Refer to
    * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   * When omitted, the interval is auto-selected from the requested date range; finer
+   * intervals are only available for shorter ranges. If the requested interval is
+   * too granular for the date range, the request is rejected.
    */
   aggInterval?: '15m' | '1h' | '1d' | '1w';
 
@@ -182,19 +185,35 @@ export interface BGPTimeseriesParams {
   asn?: Array<string>;
 
   /**
-   * End of the date range (inclusive).
+   * End of the date range (inclusive). Alternative to `dateRange`; provide together
+   * with `dateStart`. When requesting comparison series, every series must resolve
+   * to the same duration as the main series. Each `dateStart`/`dateEnd` is floored
+   * to the nearest 15 minutes before evaluation, so windows whose durations match
+   * only before alignment may be rejected.
    */
   dateEnd?: Array<string>;
 
   /**
-   * Filters results by date range. For example, use `7d` and `7dcontrol` to compare
-   * this week with the previous week. Use this parameter or set specific start and
-   * end dates (`dateStart` and `dateEnd` parameters).
+   * Filters results by relative date range ending at the current time, with each
+   * value producing a separate series. Use `<n>d` for days (up to `364d`) or `<n>w`
+   * for weeks (up to `52w`). Append `control` to request the equivalent previous
+   * period for comparison: the comparison window is shifted back by the current
+   * window's length rounded up to a whole number of weeks, so it keeps the same
+   * weekday alignment and does not overlap the current window (e.g. `7dcontrol`
+   * covers days -14 to -7, `10dcontrol` covers days -24 to -14). For example, pass
+   * `7d` and `7dcontrol` to compare this week with the previous week. All series
+   * must resolve to the same duration as the main series; relative ranges (including
+   * `control`) satisfy this automatically. Use this parameter or set specific start
+   * and end dates (`dateStart` and `dateEnd` parameters).
    */
   dateRange?: Array<string>;
 
   /**
-   * Start of the date range.
+   * Start of the date range. Alternative to `dateRange`; provide together with
+   * `dateEnd`. When requesting comparison series, every series must resolve to the
+   * same duration as the main series. Each `dateStart`/`dateEnd` is floored to the
+   * nearest 15 minutes before evaluation, so windows whose durations match only
+   * before alignment may be rejected.
    */
   dateStart?: Array<string>;
 

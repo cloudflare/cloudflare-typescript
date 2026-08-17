@@ -65,7 +65,7 @@ export interface DMARCReportEditResponse {
   approved_sources?: Array<DMARCReportEditResponse.ApprovedSource>;
 
   /**
-   * @deprecated Deprecated, use created_at
+   * @deprecated Use `created_at` instead.
    */
   created?: string;
 
@@ -80,7 +80,7 @@ export interface DMARCReportEditResponse {
   enabled?: boolean;
 
   /**
-   * @deprecated Deprecated, use modified_at
+   * @deprecated Use `modified_at` instead.
    */
   modified?: string;
 
@@ -105,12 +105,16 @@ export interface DMARCReportEditResponse {
   skip_wizard?: boolean;
 
   /**
-   * DMARC configuration status
+   * DMARC configuration status. The API omits this field when DMARC is correctly
+   * configured. If the zone lacks a DMARC TXT record of its own, the API resolves
+   * \_dmarc.{zone} recursively and evaluates whatever that lookup returns. A CNAME
+   * at \_dmarc.{zone} that points to a valid DMARC record is therefore healthy; the
+   * cname-on-dmarc-record value means the CNAME resolves to no DMARC record at all.
    */
   status?: 'missing-dmarc-report' | 'multiple-dmarc-reports' | 'missing-dmarc-rua' | 'cname-on-dmarc-record';
 
   /**
-   * @deprecated Use `zone_id` instead
+   * @deprecated Use `zone_id` instead.
    */
   tag?: string;
 
@@ -126,7 +130,7 @@ export namespace DMARCReportEditResponse {
    */
   export interface ApprovedSource {
     /**
-     * @deprecated Deprecated, use created_at
+     * @deprecated Use `created_at` instead.
      */
     created?: string;
 
@@ -146,7 +150,7 @@ export namespace DMARCReportEditResponse {
     ips?: Array<string>;
 
     /**
-     * @deprecated Deprecated, use modified_at
+     * @deprecated Use `modified_at` instead.
      */
     modified?: string;
 
@@ -186,7 +190,8 @@ export namespace DMARCReportEditResponse {
     cname_dkim_records?: Array<Records.CnamedkimRecord>;
 
     /**
-     * CNAME records at \_dmarc (problematic)
+     * CNAME records at \_dmarc. When such a CNAME resolves to a DMARC TXT record, the
+     * API returns that record in resolved_dmarc_records.
      */
     cname_dmarc_records?: Array<Records.CnamedmarcRecord>;
 
@@ -204,6 +209,13 @@ export namespace DMARCReportEditResponse {
      * DMARC TXT records
      */
     dmarc_records?: Array<Records.DMARCRecord>;
+
+    /**
+     * DMARC records that a recursive lookup of \_dmarc.{zone} returned. The API
+     * populates this only when the zone lacks a DMARC TXT record of its own, which
+     * usually means a CNAME delegates DMARC to another zone.
+     */
+    resolved_dmarc_records?: Array<Records.ResolvedDMARCRecord>;
 
     /**
      * SPF TXT records
@@ -390,6 +402,24 @@ export namespace DMARCReportEditResponse {
        * Record type
        */
       type?: string;
+    }
+
+    /**
+     * A DMARC TXT record that a recursive lookup of \_dmarc.{zone} returned. Such a
+     * record usually lives in another zone outside this account's control, so this
+     * schema omits the DNS record ID. The API therefore treats such a record as
+     * read-only.
+     */
+    export interface ResolvedDMARCRecord {
+      /**
+       * The TXT record value. The API joins all character-strings into a single string.
+       */
+      content?: string;
+
+      /**
+       * The name the API queried.
+       */
+      name?: string;
     }
 
     /**
@@ -434,7 +464,7 @@ export interface DMARCReportGetResponse {
   approved_sources?: Array<DMARCReportGetResponse.ApprovedSource>;
 
   /**
-   * @deprecated Deprecated, use created_at
+   * @deprecated Use `created_at` instead.
    */
   created?: string;
 
@@ -449,7 +479,7 @@ export interface DMARCReportGetResponse {
   enabled?: boolean;
 
   /**
-   * @deprecated Deprecated, use modified_at
+   * @deprecated Use `modified_at` instead.
    */
   modified?: string;
 
@@ -474,12 +504,16 @@ export interface DMARCReportGetResponse {
   skip_wizard?: boolean;
 
   /**
-   * DMARC configuration status
+   * DMARC configuration status. The API omits this field when DMARC is correctly
+   * configured. If the zone lacks a DMARC TXT record of its own, the API resolves
+   * \_dmarc.{zone} recursively and evaluates whatever that lookup returns. A CNAME
+   * at \_dmarc.{zone} that points to a valid DMARC record is therefore healthy; the
+   * cname-on-dmarc-record value means the CNAME resolves to no DMARC record at all.
    */
   status?: 'missing-dmarc-report' | 'multiple-dmarc-reports' | 'missing-dmarc-rua' | 'cname-on-dmarc-record';
 
   /**
-   * @deprecated Use `zone_id` instead
+   * @deprecated Use `zone_id` instead.
    */
   tag?: string;
 
@@ -495,7 +529,7 @@ export namespace DMARCReportGetResponse {
    */
   export interface ApprovedSource {
     /**
-     * @deprecated Deprecated, use created_at
+     * @deprecated Use `created_at` instead.
      */
     created?: string;
 
@@ -515,7 +549,7 @@ export namespace DMARCReportGetResponse {
     ips?: Array<string>;
 
     /**
-     * @deprecated Deprecated, use modified_at
+     * @deprecated Use `modified_at` instead.
      */
     modified?: string;
 
@@ -555,7 +589,8 @@ export namespace DMARCReportGetResponse {
     cname_dkim_records?: Array<Records.CnamedkimRecord>;
 
     /**
-     * CNAME records at \_dmarc (problematic)
+     * CNAME records at \_dmarc. When such a CNAME resolves to a DMARC TXT record, the
+     * API returns that record in resolved_dmarc_records.
      */
     cname_dmarc_records?: Array<Records.CnamedmarcRecord>;
 
@@ -573,6 +608,13 @@ export namespace DMARCReportGetResponse {
      * DMARC TXT records
      */
     dmarc_records?: Array<Records.DMARCRecord>;
+
+    /**
+     * DMARC records that a recursive lookup of \_dmarc.{zone} returned. The API
+     * populates this only when the zone lacks a DMARC TXT record of its own, which
+     * usually means a CNAME delegates DMARC to another zone.
+     */
+    resolved_dmarc_records?: Array<Records.ResolvedDMARCRecord>;
 
     /**
      * SPF TXT records
@@ -759,6 +801,24 @@ export namespace DMARCReportGetResponse {
        * Record type
        */
       type?: string;
+    }
+
+    /**
+     * A DMARC TXT record that a recursive lookup of \_dmarc.{zone} returned. Such a
+     * record usually lives in another zone outside this account's control, so this
+     * schema omits the DNS record ID. The API therefore treats such a record as
+     * read-only.
+     */
+    export interface ResolvedDMARCRecord {
+      /**
+       * The TXT record value. The API joins all character-strings into a single string.
+       */
+      content?: string;
+
+      /**
+       * The name the API queried.
+       */
+      name?: string;
     }
 
     /**

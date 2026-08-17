@@ -47,6 +47,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { devices: { devices: B
       active_registrations: 'include',
       cursor: 'cursor',
       include: 'include',
+      last_seen_registration: { policy: '11ffb86f-3f0c-4306-b4a2-e62f872b166a' },
       last_seen_user: { email: 'email' },
       per_page: 0,
       search: 'search',

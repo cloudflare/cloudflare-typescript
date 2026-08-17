@@ -12,7 +12,7 @@ export class BaseSchemas extends APIResource {
   ] as const);
 
   /**
-   * Retrieve operations and features as OpenAPI schemas
+   * Retrieves API operations and their features exported as OpenAPI schemas.
    *
    * @example
    * ```ts
@@ -55,6 +55,11 @@ export interface SchemaListParams {
    * Query param: Receive schema only for the given host(s).
    */
   host?: Array<string>;
+
+  /**
+   * Query param: Schema kinds to include in exported OpenAPI schemas.
+   */
+  include_schema_kind?: Array<'learned'>;
 }
 
 export declare namespace Schemas {

@@ -29,7 +29,8 @@ const parentPartialClient = createClient({
 const runTests = (
   client: PartialCloudflare<{ workers: { observability: { sharedQueries: BaseSharedQueries } } }>,
 ) => {
-  test('create: only required params', async () => {
+  // HTTP 400 error from prism
+  test.skip('create: only required params', async () => {
     const responsePromise = client.workers.observability.sharedQueries.create({
       account_id: 'account_id',
       queryId: 'queryId',
@@ -44,12 +45,14 @@ const runTests = (
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // HTTP 400 error from prism
+  test.skip('create: required and optional params', async () => {
     const response = await client.workers.observability.sharedQueries.create({
       account_id: 'account_id',
       queryId: 'queryId',
       timeframe: { from: 0, to: 0 },
       chart: true,
+      chartType: 'timeseries_and_aggregate',
       compare: true,
       dry: true,
       granularity: 0,
@@ -61,7 +64,7 @@ const runTests = (
       parameters: {
         calculations: [
           {
-            operator: 'uniq',
+            operator: 'count',
             alias: 'alias',
             key: 'key',
             keyType: 'string',

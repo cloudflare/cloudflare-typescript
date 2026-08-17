@@ -157,19 +157,19 @@ export type URLIgnorePatternListResponsesV4PagePaginationArray =
   V4PagePaginationArray<URLIgnorePatternListResponse>;
 
 /**
- * A URL ignore pattern that exempts matching URLs from being rewritten by Email
- * Security.
+ * A URL ignore pattern that exempts matching URLs from Email Security's URL
+ * rewriting.
  */
 export interface URLIgnorePatternCreateResponse {
   /**
-   * URL ignore pattern identifier
+   * URL ignore pattern identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * Regular expression matching URLs that should not be rewritten.
+   * Regular expression identifying URLs to exempt from rewriting.
    */
   pattern: string;
 
@@ -179,8 +179,7 @@ export interface URLIgnorePatternCreateResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -188,19 +187,19 @@ export interface URLIgnorePatternCreateResponse {
 }
 
 /**
- * A URL ignore pattern that exempts matching URLs from being rewritten by Email
- * Security.
+ * A URL ignore pattern that exempts matching URLs from Email Security's URL
+ * rewriting.
  */
 export interface URLIgnorePatternListResponse {
   /**
-   * URL ignore pattern identifier
+   * URL ignore pattern identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * Regular expression matching URLs that should not be rewritten.
+   * Regular expression identifying URLs to exempt from rewriting.
    */
   pattern: string;
 
@@ -210,8 +209,7 @@ export interface URLIgnorePatternListResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -220,25 +218,25 @@ export interface URLIgnorePatternListResponse {
 
 export interface URLIgnorePatternDeleteResponse {
   /**
-   * URL ignore pattern identifier
+   * URL ignore pattern identifier.
    */
   id: string;
 }
 
 /**
- * A URL ignore pattern that exempts matching URLs from being rewritten by Email
- * Security.
+ * A URL ignore pattern that exempts matching URLs from Email Security's URL
+ * rewriting.
  */
 export interface URLIgnorePatternEditResponse {
   /**
-   * URL ignore pattern identifier
+   * URL ignore pattern identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * Regular expression matching URLs that should not be rewritten.
+   * Regular expression identifying URLs to exempt from rewriting.
    */
   pattern: string;
 
@@ -248,8 +246,7 @@ export interface URLIgnorePatternEditResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -257,19 +254,19 @@ export interface URLIgnorePatternEditResponse {
 }
 
 /**
- * A URL ignore pattern that exempts matching URLs from being rewritten by Email
- * Security.
+ * A URL ignore pattern that exempts matching URLs from Email Security's URL
+ * rewriting.
  */
 export interface URLIgnorePatternGetResponse {
   /**
-   * URL ignore pattern identifier
+   * URL ignore pattern identifier.
    */
   id: string;
 
   created_at: string;
 
   /**
-   * Regular expression matching URLs that should not be rewritten.
+   * Regular expression identifying URLs to exempt from rewriting.
    */
   pattern: string;
 
@@ -279,8 +276,7 @@ export interface URLIgnorePatternGetResponse {
   comments?: string | null;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -294,7 +290,7 @@ export interface URLIgnorePatternCreateParams {
   account_id: string;
 
   /**
-   * Body param: Regular expression matching URLs that should not be rewritten.
+   * Body param: Regular expression identifying URLs to exempt from rewriting.
    */
   pattern: string;
 
@@ -330,7 +326,7 @@ export interface URLIgnorePatternEditParams {
   comments?: string | null;
 
   /**
-   * Body param: Regular expression matching URLs that should not be rewritten.
+   * Body param: Regular expression identifying URLs to exempt from rewriting.
    */
   pattern?: string;
 }

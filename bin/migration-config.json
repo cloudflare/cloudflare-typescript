@@ -1,6 +1,6 @@
 {
   "pkg": "cloudflare",
-  "githubRepo": "https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript",
+  "githubRepo": "https://github.com/cloudflare/cloudflare-typescript",
   "clientClass": "Cloudflare",
   "baseClientClass": "BaseCloudflare",
   "methods": [
@@ -1676,6 +1676,117 @@
       ]
     },
     {
+      "base": "intel.sinkholes.ingresses",
+      "name": "update",
+      "params": [
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sinkhole_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "intel.sinkholes.ingresses",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sinkhole_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "intel.sinkholes.ingresses",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "sinkhole_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "ingress_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "magicTransit.sites.acls",
       "name": "update",
       "params": [
@@ -2446,6 +2557,85 @@
         {
           "type": "param",
           "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.tails",
+      "name": "create",
+      "params": [
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "pages.projects.deployments.tails",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "tail_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "project_name",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "deployment_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tail_id",
           "location": "path"
         },
         {
@@ -4195,6 +4385,43 @@
       ]
     },
     {
+      "base": "zeroTrust.casb.posture.findings.instances",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "finding_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "instance_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "zeroTrust.dex.commands.downloads",
       "name": "get",
       "params": [
@@ -4962,6 +5189,43 @@
     {
       "base": "hostnames.settings.tls",
       "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "setting_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "hostname",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "hostnames.settings.tls",
+      "name": "get",
       "params": [
         {
           "type": "param",
@@ -6391,6 +6655,43 @@
       ]
     },
     {
+      "base": "moq.relays.tokens",
+      "name": "delete",
+      "params": [
+        {
+          "type": "param",
+          "key": "jti",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "relay_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "jti",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "cloudforceOne.requests.message",
       "name": "update",
       "params": [
@@ -6576,8 +6877,82 @@
       ]
     },
     {
+      "base": "cloudforceOne.threatEvents.indicators.byDataset",
+      "name": "get",
+      "params": [
+        {
+          "type": "param",
+          "key": "indicator_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "indicator_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
       "base": "cloudforceOne.threatEvents.datasets",
       "name": "raw",
+      "params": [
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "event_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.datasets.events",
+      "name": "get",
       "params": [
         {
           "type": "param",
@@ -6675,6 +7050,43 @@
         {
           "type": "param",
           "key": "raw_id",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ]
+    },
+    {
+      "base": "cloudforceOne.threatEvents.tags.indicators.byDataset",
+      "name": "list",
+      "params": [
+        {
+          "type": "param",
+          "key": "tag_uuid",
+          "location": "path"
+        },
+        {
+          "type": "params",
+          "maybeOverload": false
+        },
+        {
+          "type": "options"
+        }
+      ],
+      "oldParams": [
+        {
+          "type": "param",
+          "key": "dataset_id",
+          "location": "path"
+        },
+        {
+          "type": "param",
+          "key": "tag_uuid",
           "location": "path"
         },
         {

@@ -164,8 +164,8 @@ export type SendingDomainRestrictionListResponsesV4PagePaginationArray =
 
 /**
  * A sending domain restriction that enforces TLS (Transport Layer Security)
- * requirements for emails from specific domains. If TLS is required, mail without
- * TLS from the specified domain will be dropped.
+ * requirements for emails from specific domains. If TLS is required, the system
+ * drops mail without TLS from the specified domain.
  */
 export interface SendingDomainRestrictionCreateResponse {
   /**
@@ -183,13 +183,12 @@ export interface SendingDomainRestrictionCreateResponse {
   domain?: string;
 
   /**
-   * Excluded subdomains that are exempt from TLS requirements.
+   * Subdomains to exempt from TLS requirements.
    */
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -198,8 +197,8 @@ export interface SendingDomainRestrictionCreateResponse {
 
 /**
  * A sending domain restriction that enforces TLS (Transport Layer Security)
- * requirements for emails from specific domains. If TLS is required, mail without
- * TLS from the specified domain will be dropped.
+ * requirements for emails from specific domains. If TLS is required, the system
+ * drops mail without TLS from the specified domain.
  */
 export interface SendingDomainRestrictionListResponse {
   /**
@@ -217,13 +216,12 @@ export interface SendingDomainRestrictionListResponse {
   domain?: string;
 
   /**
-   * Excluded subdomains that are exempt from TLS requirements.
+   * Subdomains to exempt from TLS requirements.
    */
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -239,8 +237,8 @@ export interface SendingDomainRestrictionDeleteResponse {
 
 /**
  * A sending domain restriction that enforces TLS (Transport Layer Security)
- * requirements for emails from specific domains. If TLS is required, mail without
- * TLS from the specified domain will be dropped.
+ * requirements for emails from specific domains. If TLS is required, the system
+ * drops mail without TLS from the specified domain.
  */
 export interface SendingDomainRestrictionEditResponse {
   /**
@@ -258,13 +256,12 @@ export interface SendingDomainRestrictionEditResponse {
   domain?: string;
 
   /**
-   * Excluded subdomains that are exempt from TLS requirements.
+   * Subdomains to exempt from TLS requirements.
    */
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -273,8 +270,8 @@ export interface SendingDomainRestrictionEditResponse {
 
 /**
  * A sending domain restriction that enforces TLS (Transport Layer Security)
- * requirements for emails from specific domains. If TLS is required, mail without
- * TLS from the specified domain will be dropped.
+ * requirements for emails from specific domains. If TLS is required, the system
+ * drops mail without TLS from the specified domain.
  */
 export interface SendingDomainRestrictionGetResponse {
   /**
@@ -292,13 +289,12 @@ export interface SendingDomainRestrictionGetResponse {
   domain?: string;
 
   /**
-   * Excluded subdomains that are exempt from TLS requirements.
+   * Subdomains to exempt from TLS requirements.
    */
   exclude?: Array<string>;
 
   /**
-   * @deprecated Deprecated, use `modified_at` instead. End of life: November
-   * 1, 2026.
+   * @deprecated Use `modified_at` instead.
    */
   last_modified?: string;
 
@@ -317,7 +313,7 @@ export interface SendingDomainRestrictionCreateParams {
   domain: string;
 
   /**
-   * Body param: Excluded subdomains that are exempt from TLS requirements.
+   * Body param: Subdomains to exempt from TLS requirements.
    */
   exclude: Array<string>;
 
@@ -373,7 +369,7 @@ export interface SendingDomainRestrictionEditParams {
   domain?: string;
 
   /**
-   * Body param: Excluded subdomains that are exempt from TLS requirements.
+   * Body param: Subdomains to exempt from TLS requirements.
    */
   exclude?: Array<string>;
 }

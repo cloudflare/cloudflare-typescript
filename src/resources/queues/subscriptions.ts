@@ -186,6 +186,7 @@ export interface SubscriptionCreateResponse {
     | SubscriptionCreateResponse.MqEventSourceVectorize
     | SubscriptionCreateResponse.MqEventSourceWorkersAIModel
     | SubscriptionCreateResponse.MqEventSourceWorkersBuildsWorker
+    | SubscriptionCreateResponse.MqEventSourceWorkersScript
     | SubscriptionCreateResponse.MqEventSourceWorkflowsWorkflow;
 }
 
@@ -264,6 +265,18 @@ export namespace SubscriptionCreateResponse {
     worker_name?: string;
   }
 
+  export interface MqEventSourceWorkersScript {
+    /**
+     * Tag of the Worker script
+     */
+    script_tag?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workers.script';
+  }
+
   export interface MqEventSourceWorkflowsWorkflow {
     /**
      * Type of source
@@ -324,6 +337,7 @@ export interface SubscriptionUpdateResponse {
     | SubscriptionUpdateResponse.MqEventSourceVectorize
     | SubscriptionUpdateResponse.MqEventSourceWorkersAIModel
     | SubscriptionUpdateResponse.MqEventSourceWorkersBuildsWorker
+    | SubscriptionUpdateResponse.MqEventSourceWorkersScript
     | SubscriptionUpdateResponse.MqEventSourceWorkflowsWorkflow;
 }
 
@@ -402,6 +416,18 @@ export namespace SubscriptionUpdateResponse {
     worker_name?: string;
   }
 
+  export interface MqEventSourceWorkersScript {
+    /**
+     * Tag of the Worker script
+     */
+    script_tag?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workers.script';
+  }
+
   export interface MqEventSourceWorkflowsWorkflow {
     /**
      * Type of source
@@ -462,6 +488,7 @@ export interface SubscriptionListResponse {
     | SubscriptionListResponse.MqEventSourceVectorize
     | SubscriptionListResponse.MqEventSourceWorkersAIModel
     | SubscriptionListResponse.MqEventSourceWorkersBuildsWorker
+    | SubscriptionListResponse.MqEventSourceWorkersScript
     | SubscriptionListResponse.MqEventSourceWorkflowsWorkflow;
 }
 
@@ -540,6 +567,18 @@ export namespace SubscriptionListResponse {
     worker_name?: string;
   }
 
+  export interface MqEventSourceWorkersScript {
+    /**
+     * Tag of the Worker script
+     */
+    script_tag?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workers.script';
+  }
+
   export interface MqEventSourceWorkflowsWorkflow {
     /**
      * Type of source
@@ -600,6 +639,7 @@ export interface SubscriptionDeleteResponse {
     | SubscriptionDeleteResponse.MqEventSourceVectorize
     | SubscriptionDeleteResponse.MqEventSourceWorkersAIModel
     | SubscriptionDeleteResponse.MqEventSourceWorkersBuildsWorker
+    | SubscriptionDeleteResponse.MqEventSourceWorkersScript
     | SubscriptionDeleteResponse.MqEventSourceWorkflowsWorkflow;
 }
 
@@ -678,6 +718,18 @@ export namespace SubscriptionDeleteResponse {
     worker_name?: string;
   }
 
+  export interface MqEventSourceWorkersScript {
+    /**
+     * Tag of the Worker script
+     */
+    script_tag?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workers.script';
+  }
+
   export interface MqEventSourceWorkflowsWorkflow {
     /**
      * Type of source
@@ -738,6 +790,7 @@ export interface SubscriptionGetResponse {
     | SubscriptionGetResponse.MqEventSourceVectorize
     | SubscriptionGetResponse.MqEventSourceWorkersAIModel
     | SubscriptionGetResponse.MqEventSourceWorkersBuildsWorker
+    | SubscriptionGetResponse.MqEventSourceWorkersScript
     | SubscriptionGetResponse.MqEventSourceWorkflowsWorkflow;
 }
 
@@ -816,6 +869,18 @@ export namespace SubscriptionGetResponse {
     worker_name?: string;
   }
 
+  export interface MqEventSourceWorkersScript {
+    /**
+     * Tag of the Worker script
+     */
+    script_tag?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workers.script';
+  }
+
   export interface MqEventSourceWorkflowsWorkflow {
     /**
      * Type of source
@@ -866,6 +931,7 @@ export interface SubscriptionCreateParams {
     | SubscriptionCreateParams.MqEventSourceVectorize
     | SubscriptionCreateParams.MqEventSourceWorkersAIModel
     | SubscriptionCreateParams.MqEventSourceWorkersBuildsWorker
+    | SubscriptionCreateParams.MqEventSourceWorkersScript
     | SubscriptionCreateParams.MqEventSourceWorkflowsWorkflow;
 }
 
@@ -942,6 +1008,18 @@ export namespace SubscriptionCreateParams {
      * Name of the worker
      */
     worker_name?: string;
+  }
+
+  export interface MqEventSourceWorkersScript {
+    /**
+     * Tag of the Worker script
+     */
+    script_tag?: string;
+
+    /**
+     * Type of source
+     */
+    type?: 'workers.script';
   }
 
   export interface MqEventSourceWorkflowsWorkflow {

@@ -50,6 +50,7 @@ const runTests = (
       device: { id: 'id' },
       include: 'include',
       per_page: 0,
+      policy: { id: '11ffb86f-3f0c-4306-b4a2-e62f872b166a' },
       search: 'search',
       seen_after: 'seen_after',
       seen_before: 'seen_before',

@@ -12,6 +12,17 @@ export { AbuseReports, BaseAbuseReports } from './abuse-reports/abuse-reports';
 export { Accounts, BaseAccounts } from './accounts/accounts';
 export { Addressing, BaseAddressing } from './addressing/addressing';
 export { Alerting, BaseAlerting } from './alerting/alerting';
+export {
+  AnalyticsQuery,
+  BaseAnalyticsQuery,
+  type AnalyticsQuerySummaryResponse,
+  type AnalyticsQueryTimeseriesResponse,
+  type AnalyticsQueryTopNResponse,
+  type AnalyticsQuerySummaryParams,
+  type AnalyticsQueryTimeseriesParams,
+  type AnalyticsQueryTopNParams,
+  type AnalyticsQueryTopNResponsesSinglePage,
+} from './analytics-query/analytics-query';
 export { Argo, BaseArgo } from './argo/argo';
 export { AuditLogs, BaseAuditLogs } from './audit-logs';
 export { Billing, BaseBilling } from './billing/billing';
@@ -101,6 +112,7 @@ export { PageRules, BasePageRules } from './page-rules';
 export { PageShield, BasePageShield } from './page-shield/page-shield';
 export { Pages, BasePages } from './pages/pages';
 export { Pipelines, BasePipelines } from './pipelines/pipelines';
+export { Precursor, BasePrecursor } from './precursor';
 export { Queues, BaseQueues } from './queues/queues';
 export { R2, BaseR2 } from './r2/r2';
 export { R2DataCatalog, BaseR2DataCatalog } from './r2-data-catalog/r2-data-catalog';
@@ -109,6 +121,7 @@ export { Radar, BaseRadar } from './radar/radar';
 export { RateLimits, BaseRateLimits } from './rate-limits';
 export { RealtimeKit, BaseRealtimeKit } from './realtime-kit/realtime-kit';
 export { Registrar, BaseRegistrar } from './registrar/registrar';
+export { RegistrarSandbox, BaseRegistrarSandbox } from './registrar-sandbox/registrar-sandbox';
 export { RequestTracers, BaseRequestTracers } from './request-tracers/request-tracers';
 export { ResourceSharing, BaseResourceSharing } from './resource-sharing/resource-sharing';
 export { ResourceTagging, BaseResourceTagging } from './resource-tagging/resource-tagging';

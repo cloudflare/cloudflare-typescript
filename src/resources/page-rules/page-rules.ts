@@ -17,15 +17,7 @@ export class BasePageRules extends APIResource {
    * const pageRule = await client.pageRules.create({
    *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *   actions: [{ id: 'browser_check' }],
-   *   targets: [
-   *     {
-   *       constraint: {
-   *         operator: 'matches',
-   *         value: '*example.com/images/*',
-   *       },
-   *       target: 'url',
-   *     },
-   *   ],
+   *   targets: [{}],
    * });
    * ```
    */
@@ -49,15 +41,7 @@ export class BasePageRules extends APIResource {
    *   {
    *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *     actions: [{ id: 'browser_check' }],
-   *     targets: [
-   *       {
-   *         constraint: {
-   *           operator: 'matches',
-   *           value: '*example.com/images/*',
-   *         },
-   *         target: 'url',
-   *       },
-   *     ],
+   *     targets: [{}],
    *   },
    * );
    * ```

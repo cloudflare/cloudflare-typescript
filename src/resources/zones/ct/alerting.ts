@@ -15,47 +15,51 @@ export class BaseAlerting extends APIResource {
   /**
    * Create or update the Certificate Transparency alerting subscription for a zone.
    * Enables or disables email notifications when certificates are issued for the
-   * zone's domains. For Free and Pro zones, the subscription is toggled on or off
-   * using the enabled field. Notification emails are sent to all users with SSL
-   * permissions on the zone. For Business and Enterprise zones, the emails field is
-   * required and controls which addresses receive alerts. Setting emails to an empty
-   * list disables the subscription regardless of the enabled field. A maximum of 10
-   * email addresses may be configured.
+   * zone's domains. The `enabled` field is required on every request and controls
+   * whether the subscription is active. The `emails` field is optional and, when
+   * provided, replaces the stored recipient list for the zone. When `emails` is
+   * omitted, the stored recipient list is preserved and only the enabled state is
+   * toggled. A maximum of 100 email addresses may be configured per zone. Requests
+   * that omit `enabled` are rejected with error code 1008. Subscribe and unsubscribe
+   * notification emails are only sent for recipients whose effective subscription
+   * state changes. Idempotent requests (no state change) send no notification email.
    *
    * @example
    * ```ts
-   * const response = await client.zones.ct.alerting.edit({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *   enabled: true,
-   * });
+   * const ctAlertingSubscription =
+   *   await client.zones.ct.alerting.edit({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *     enabled: true,
+   *   });
    * ```
    */
-  edit(params: AlertingEditParams, options?: RequestOptions): APIPromise<AlertingEditResponse> {
+  edit(params: AlertingEditParams, options?: RequestOptions): APIPromise<CTAlertingSubscription> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(path`/zones/${zone_id}/ct/alerting`, { body, ...options }) as APIPromise<{
-        result: AlertingEditResponse;
+        result: CTAlertingSubscription;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieve the Certificate Transparency alerting subscription settings for a zone.
-   * Returns whether CT monitoring is enabled and, for Business and Enterprise zones,
-   * the list of email addresses that receive alerts.
+   * Returns whether CT monitoring is enabled and the list of email addresses that
+   * receive alerts, if any have been configured.
    *
    * @example
    * ```ts
-   * const alerting = await client.zones.ct.alerting.get({
-   *   zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   * });
+   * const ctAlertingSubscription =
+   *   await client.zones.ct.alerting.get({
+   *     zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *   });
    * ```
    */
-  get(params: AlertingGetParams, options?: RequestOptions): APIPromise<AlertingGetResponse> {
+  get(params: AlertingGetParams, options?: RequestOptions): APIPromise<CTAlertingSubscription> {
     const { zone_id } = params;
     return (
       this._client.get(path`/zones/${zone_id}/ct/alerting`, options) as APIPromise<{
-        result: AlertingGetResponse;
+        result: CTAlertingSubscription;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -65,35 +69,16 @@ export class Alerting extends BaseAlerting {}
 /**
  * Certificate Transparency alerting subscription settings for a zone.
  */
-export interface AlertingEditResponse {
+export interface CTAlertingSubscription {
   /**
    * Whether CT alerting is enabled for the zone.
    */
   enabled: boolean;
 
   /**
-   * Email addresses that receive CT alert notifications. Only present and
-   * configurable for Business and Enterprise zones. Maximum of 10 addresses. For
-   * Free and Pro zones, notifications are sent to all users with SSL permissions on
-   * the zone.
-   */
-  emails?: Array<string>;
-}
-
-/**
- * Certificate Transparency alerting subscription settings for a zone.
- */
-export interface AlertingGetResponse {
-  /**
-   * Whether CT alerting is enabled for the zone.
-   */
-  enabled: boolean;
-
-  /**
-   * Email addresses that receive CT alert notifications. Only present and
-   * configurable for Business and Enterprise zones. Maximum of 10 addresses. For
-   * Free and Pro zones, notifications are sent to all users with SSL permissions on
-   * the zone.
+   * Email addresses that receive CT alert notifications for the zone. A maximum of
+   * 100 addresses may be configured. Each address must be a valid RFC 5322 email
+   * address and must not contain a comma.
    */
   emails?: Array<string>;
 }
@@ -110,10 +95,9 @@ export interface AlertingEditParams {
   enabled: boolean;
 
   /**
-   * Body param: Email addresses that receive CT alert notifications. Only present
-   * and configurable for Business and Enterprise zones. Maximum of 10 addresses. For
-   * Free and Pro zones, notifications are sent to all users with SSL permissions on
-   * the zone.
+   * Body param: Email addresses that receive CT alert notifications for the zone. A
+   * maximum of 100 addresses may be configured. Each address must be a valid RFC
+   * 5322 email address and must not contain a comma.
    */
   emails?: Array<string>;
 }
@@ -127,8 +111,7 @@ export interface AlertingGetParams {
 
 export declare namespace Alerting {
   export {
-    type AlertingEditResponse as AlertingEditResponse,
-    type AlertingGetResponse as AlertingGetResponse,
+    type CTAlertingSubscription as CTAlertingSubscription,
     type AlertingEditParams as AlertingEditParams,
     type AlertingGetParams as AlertingGetParams,
   };

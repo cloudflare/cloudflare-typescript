@@ -65,7 +65,7 @@ export interface SubmissionListResponse {
   original_edf_hash?: string | null;
 
   /**
-   * The postfix ID of the original message that was submitted
+   * The postfix ID of the original message that was submitted.
    */
   original_postfix_id?: string | null;
 
@@ -78,7 +78,7 @@ export interface SubmissionListResponse {
   requested_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE' | null;
 
   /**
-   * @deprecated Deprecated, use `requested_at` instead
+   * @deprecated Use `requested_at` instead.
    */
   requested_ts?: string;
 
@@ -87,7 +87,7 @@ export interface SubmissionListResponse {
   subject?: string | null;
 
   /**
-   * Whether the submission was created by a team member or an end user.
+   * Indicates whether a team member or an end user created the submission.
    */
   type?: 'Team' | 'User' | null;
 }

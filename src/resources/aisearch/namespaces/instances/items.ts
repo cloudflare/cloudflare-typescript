@@ -247,8 +247,7 @@ export class BaseItems extends APIResource {
   }
 
   /**
-   * Uploads a file to a managed AI Search instance via multipart/form-data (max
-   * 4MB).
+   * Uploads a file to a managed AI Search instance via multipart/form-data.
    *
    * @example
    * ```ts
@@ -291,6 +290,11 @@ export interface ItemListResponse {
   key: string;
 
   last_seen_at: string;
+
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
 
   namespace: string;
 
@@ -352,6 +356,11 @@ export interface ItemCreateOrUpdateResponse {
 
   last_seen_at: string;
 
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
+
   namespace: string;
 
   next_action: 'INDEX' | 'DELETE' | null;
@@ -381,6 +390,11 @@ export interface ItemGetResponse {
   key: string;
 
   last_seen_at: string;
+
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
 
   namespace: string;
 
@@ -432,6 +446,11 @@ export interface ItemSyncResponse {
 
   last_seen_at: string;
 
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
+
   namespace: string;
 
   next_action: 'INDEX' | 'DELETE' | null;
@@ -461,6 +480,11 @@ export interface ItemUploadResponse {
   key: string;
 
   last_seen_at: string;
+
+  /**
+   * Built-in, configured filterable, and retained source metadata for the item.
+   */
+  metadata: { [key: string]: string | number | boolean } | null;
 
   namespace: string;
 
@@ -492,6 +516,12 @@ export interface ItemListParams extends V4PagePaginationArrayParams {
    * Query param: Filter items by their unique ID. Returns at most one item.
    */
   item_id?: string;
+
+  /**
+   * Query param: Filter items by their exact key (object key / filename). Keys are
+   * unique per source, so combine with `source` to disambiguate across data sources.
+   */
+  key?: string;
 
   /**
    * Query param: JSON-encoded metadata filter using Vectorize filter syntax.
@@ -705,7 +735,7 @@ export interface ItemUploadParams {
 export namespace ItemUploadParams {
   export interface File {
     /**
-     * The file to upload (max 4MB). Filename must not exceed 128 characters.
+     * The file to upload. Filename must not exceed 128 characters.
      */
     file: Uploadable;
 

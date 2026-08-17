@@ -111,8 +111,7 @@ export interface AppCreateResponse {
   updated_at: string;
 
   /**
-   * Email of the actor who last modified the app, or `edge-gateway` for
-   * gateway-authenticated changes.
+   * Email of the actor who last modified the app, or `unknown` when unavailable.
    */
   updated_by: string;
 }
@@ -127,8 +126,7 @@ export interface AppUpdateResponse {
   updated_at: string;
 
   /**
-   * Email of the actor who last modified the app, or `edge-gateway` for
-   * gateway-authenticated changes.
+   * Email of the actor who last modified the app, or `unknown` when unavailable.
    */
   updated_by: string;
 }
@@ -143,8 +141,7 @@ export interface AppListResponse {
   updated_at: string;
 
   /**
-   * Email of the actor who last modified the app, or `edge-gateway` for
-   * gateway-authenticated changes.
+   * Email of the actor who last modified the app, or `unknown` when unavailable.
    */
   updated_by: string;
 }
@@ -163,8 +160,7 @@ export interface AppGetResponse {
   updated_at: string;
 
   /**
-   * Email of the actor who last modified the app, or `edge-gateway` for
-   * gateway-authenticated changes.
+   * Email of the actor who last modified the app, or `unknown` when unavailable.
    */
   updated_by: string;
 }

@@ -60,8 +60,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.accounts.members.delete()`
 - `client.accounts.members.get()`
 - `client.accounts.roles.get()`
+- `client.accounts.subscriptions.create()`
 - `client.accounts.subscriptions.update()`
 - `client.accounts.subscriptions.delete()`
+- `client.accounts.subscriptions.get()`
 - `client.accounts.tokens.update()`
 - `client.accounts.tokens.delete()`
 - `client.accounts.tokens.get()`
@@ -73,7 +75,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zones.environments.delete()`
 - `client.zones.environments.rollback()`
 - `client.zones.plans.get()`
+- `client.loadBalancers.create()`
 - `client.loadBalancers.update()`
+- `client.loadBalancers.list()`
 - `client.loadBalancers.delete()`
 - `client.loadBalancers.edit()`
 - `client.loadBalancers.get()`
@@ -107,6 +111,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.ssl.verification.edit()`
 - `client.acm.customTrustStore.delete()`
 - `client.acm.customTrustStore.get()`
+- `client.analyticsQuery.summary()`
+- `client.analyticsQuery.timeseries()`
+- `client.analyticsQuery.topN()`
 - `client.clientCertificates.delete()`
 - `client.clientCertificates.edit()`
 - `client.clientCertificates.get()`
@@ -180,8 +187,10 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.emailSecurity.settings.urlIgnorePatterns.edit()`
 - `client.emailSecurity.settings.urlIgnorePatterns.get()`
 - `client.emailRouting.rules.update()`
+- `client.emailRouting.rules.list()`
 - `client.emailRouting.rules.delete()`
 - `client.emailRouting.rules.get()`
+- `client.emailRouting.accountRules.list()`
 - `client.emailRouting.addresses.delete()`
 - `client.emailRouting.addresses.edit()`
 - `client.emailRouting.addresses.get()`
@@ -241,6 +250,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.logs.logExplorer.datasets.create()`
 - `client.logs.logExplorer.datasets.update()`
 - `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.delete()`
 - `client.logs.logExplorer.datasets.get()`
 - `client.logs.logExplorer.datasets.available.list()`
 - `client.logs.RayID.get()`
@@ -354,7 +364,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.queues.getMetrics()`
 - `client.queues.messages.ack()`
 - `client.queues.messages.bulkPush()`
+- `client.queues.messages.peek()`
 - `client.queues.messages.pull()`
+- `client.queues.messages.purge()`
 - `client.queues.messages.push()`
 - `client.queues.purge.start()`
 - `client.queues.purge.status()`
@@ -424,6 +436,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.addressing.prefixes.delete()`
 - `client.addressing.prefixes.edit()`
 - `client.addressing.prefixes.get()`
+- `client.addressing.prefixes.validate()`
 - `client.addressing.prefixes.serviceBindings.create()`
 - `client.addressing.prefixes.serviceBindings.list()`
 - `client.addressing.prefixes.serviceBindings.delete()`
@@ -461,7 +474,13 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.intel.indicatorFeeds.data()`
 - `client.intel.indicatorFeeds.get()`
 - `client.intel.indicatorFeeds.snapshots.update()`
-- `client.intel.attackSurfaceReport.issues.dismiss()`
+- `client.intel.sinkholes.update()`
+- `client.intel.sinkholes.delete()`
+- `client.intel.sinkholes.get()`
+- `client.intel.sinkholes.ingresses.create()`
+- `client.intel.sinkholes.ingresses.update()`
+- `client.intel.sinkholes.ingresses.delete()`
+- `client.intel.sinkholes.ingresses.get()`
 - `client.magicTransit.apps.update()`
 - `client.magicTransit.apps.delete()`
 - `client.magicTransit.apps.edit()`
@@ -503,6 +522,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.magicTransit.connectors.delete()`
 - `client.magicTransit.connectors.edit()`
 - `client.magicTransit.connectors.get()`
+- `client.magicTransit.connectors.interrupts.create()`
+- `client.magicTransit.connectors.interrupts.list()`
 - `client.magicTransit.connectors.events.list()`
 - `client.magicTransit.connectors.events.get()`
 - `client.magicTransit.connectors.events.latest.list()`
@@ -575,6 +596,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.delete()`
 - `client.pages.projects.edit()`
 - `client.pages.projects.get()`
+- `client.pages.projects.getUploadToken()`
 - `client.pages.projects.purgeBuildCache()`
 - `client.pages.projects.deployments.create()`
 - `client.pages.projects.deployments.list()`
@@ -583,6 +605,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.pages.projects.deployments.retry()`
 - `client.pages.projects.deployments.rollback()`
 - `client.pages.projects.deployments.history.logs.get()`
+- `client.pages.projects.deployments.tails.create()`
+- `client.pages.projects.deployments.tails.delete()`
 - `client.pages.projects.domains.create()`
 - `client.pages.projects.domains.list()`
 - `client.pages.projects.domains.delete()`
@@ -594,6 +618,12 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.registrar.registrations.get()`
 - `client.registrar.registrationStatus.get()`
 - `client.registrar.updateStatus.get()`
+- `client.registrar.extensions.get()`
+- `client.registrarSandbox.registrations.edit()`
+- `client.registrarSandbox.registrations.get()`
+- `client.registrarSandbox.registrationStatus.get()`
+- `client.registrarSandbox.updateStatus.get()`
+- `client.registrarSandbox.extensions.get()`
 - `client.rules.lists.update()`
 - `client.rules.lists.delete()`
 - `client.rules.lists.get()`
@@ -836,6 +866,28 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.access.policies.update()`
 - `client.zeroTrust.access.policies.delete()`
 - `client.zeroTrust.access.policies.get()`
+- `client.zeroTrust.casb.applications.get()`
+- `client.zeroTrust.casb.applications.authMethods.list()`
+- `client.zeroTrust.casb.integrations.update()`
+- `client.zeroTrust.casb.integrations.delete()`
+- `client.zeroTrust.casb.integrations.get()`
+- `client.zeroTrust.casb.integrations.pause()`
+- `client.zeroTrust.casb.integrations.resume()`
+- `client.zeroTrust.casb.posture.findings.get()`
+- `client.zeroTrust.casb.posture.findings.resetSeverity()`
+- `client.zeroTrust.casb.posture.findings.tuneSeverity()`
+- `client.zeroTrust.casb.posture.findings.instances.list()`
+- `client.zeroTrust.casb.posture.findings.instances.archive()`
+- `client.zeroTrust.casb.posture.findings.instances.export()`
+- `client.zeroTrust.casb.posture.findings.instances.get()`
+- `client.zeroTrust.casb.posture.findings.instances.unarchive()`
+- `client.zeroTrust.casb.posture.exports.get()`
+- `client.zeroTrust.casb.posture.findingTypes.get()`
+- `client.zeroTrust.casb.posture.findingTypes.remediationTypes.list()`
+- `client.zeroTrust.casb.posture.webhooks.update()`
+- `client.zeroTrust.casb.posture.webhooks.delete()`
+- `client.zeroTrust.casb.posture.webhooks.evaluateExisting()`
+- `client.zeroTrust.casb.posture.webhooks.get()`
 - `client.zeroTrust.dex.commands.downloads.get()`
 - `client.zeroTrust.dex.httpTests.get()`
 - `client.zeroTrust.dex.httpTests.percentiles.get()`
@@ -955,6 +1007,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.networks.subnets.warp.edit()`
 - `client.zeroTrust.networks.subnets.warp.get()`
 - `client.zeroTrust.networks.subnets.cloudflareSource.update()`
+- `client.zeroTrust.networks.subnets.initialResolvedIP.update()`
+- `client.zeroTrust.networks.subnets.initialResolvedIP.get()`
 - `client.zeroTrust.networks.hostnameRoutes.delete()`
 - `client.zeroTrust.networks.hostnameRoutes.edit()`
 - `client.zeroTrust.networks.hostnameRoutes.get()`
@@ -1026,6 +1080,7 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.speed.pages.tests.delete()`
 - `client.speed.pages.tests.get()`
 - `client.hostnames.settings.tls.update()`
+- `client.hostnames.settings.tls.list()`
 - `client.hostnames.settings.tls.delete()`
 - `client.hostnames.settings.tls.get()`
 - `client.snippets.update()`
@@ -1094,7 +1149,9 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.moq.relays.update()`
 - `client.moq.relays.delete()`
 - `client.moq.relays.get()`
-- `client.moq.relays.tokens.rotate()`
+- `client.moq.relays.tokens.create()`
+- `client.moq.relays.tokens.list()`
+- `client.moq.relays.tokens.delete()`
 - `client.cloudforceOne.scans.results.get()`
 - `client.cloudforceOne.scans.config.delete()`
 - `client.cloudforceOne.scans.config.edit()`
@@ -1115,17 +1172,33 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.cloudforceOne.requests.assets.get()`
 - `client.cloudforceOne.threatEvents.edit()`
 - `client.cloudforceOne.threatEvents.get()`
+- `client.cloudforceOne.threatEvents.queries.delete()`
+- `client.cloudforceOne.threatEvents.queries.edit()`
+- `client.cloudforceOne.threatEvents.queries.get()`
+- `client.cloudforceOne.threatEvents.relationships.list()`
+- `client.cloudforceOne.threatEvents.indicators.byDataset.list()`
+- `client.cloudforceOne.threatEvents.indicators.byDataset.get()`
+- `client.cloudforceOne.threatEvents.indicators.byDataset.tags.list()`
 - `client.cloudforceOne.threatEvents.categories.delete()`
 - `client.cloudforceOne.threatEvents.categories.edit()`
 - `client.cloudforceOne.threatEvents.categories.get()`
+- `client.cloudforceOne.threatEvents.datasets.delete()`
 - `client.cloudforceOne.threatEvents.datasets.edit()`
 - `client.cloudforceOne.threatEvents.datasets.get()`
 - `client.cloudforceOne.threatEvents.datasets.raw()`
+- `client.cloudforceOne.threatEvents.datasets.events.get()`
 - `client.cloudforceOne.threatEvents.raw.edit()`
 - `client.cloudforceOne.threatEvents.raw.get()`
 - `client.cloudforceOne.threatEvents.relate.delete()`
+- `client.cloudforceOne.threatEvents.tags.delete()`
+- `client.cloudforceOne.threatEvents.tags.edit()`
+- `client.cloudforceOne.threatEvents.tags.categories.delete()`
+- `client.cloudforceOne.threatEvents.tags.categories.edit()`
+- `client.cloudforceOne.threatEvents.tags.indicators.list()`
+- `client.cloudforceOne.threatEvents.tags.indicators.byDataset.list()`
 - `client.cloudforceOne.threatEvents.eventTags.create()`
 - `client.cloudforceOne.threatEvents.eventTags.delete()`
+- `client.cloudforceOne.threatEvents.targetIndustries.byDataset.list()`
 - `client.aiGateway.update()`
 - `client.aiGateway.delete()`
 - `client.aiGateway.get()`
@@ -1408,6 +1481,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.magicTransit.cf1Sites.ramps.create()`
 - `client.DDoSProtection.advancedTCPProtection.prefixes.bulkCreate()`
 - `client.magicNetworkMonitoring.rules.advertisements.edit()`
+- `client.pages.assets.upload()`
 - `client.rules.lists.items.create()`
 - `client.rules.lists.items.update()`
 - `client.stream.keys.create()`
@@ -1445,6 +1519,7 @@ client.example.create({ items: [{ name: 'name' }, { name: 'name' }] });
 - `client.workflows.instances.events.create()`
 - `client.contentScanning.payloads.create()`
 - `client.ai.toMarkdown.transform()`
+- `client.aiAudit.robots.bulkGet()`
 - `client.aiSearch.namespaces.instances.items.upload()`
 - `client.secretsStore.stores.secrets.create()`
 - `client.schemaValidation.settings.operations.bulkEdit()`
@@ -1471,6 +1546,7 @@ client.example.list(undefined, { headers: { ... } });
 <summary>This affects the following methods</summary>
 
 - `client.accounts.list()`
+- `client.accounts.subscriptions.get()`
 - `client.organizations.list()`
 - `client.organizations.billing.usage.get()`
 - `client.ips.list()`
@@ -1481,9 +1557,14 @@ client.example.list(undefined, { headers: { ... } });
 - `client.user.tokens.list()`
 - `client.user.tokens.permissionGroups.list()`
 - `client.zones.list()`
+- `client.loadBalancers.list()`
+- `client.loadBalancers.delete()`
+- `client.loadBalancers.get()`
 - `client.customCsrs.list()`
 - `client.customCsrs.delete()`
 - `client.customCsrs.get()`
+- `client.emailRouting.rules.list()`
+- `client.emailRouting.accountRules.list()`
 - `client.firewall.accessRules.list()`
 - `client.firewall.accessRules.delete()`
 - `client.firewall.accessRules.get()`
@@ -1493,6 +1574,7 @@ client.example.list(undefined, { headers: { ... } });
 - `client.logpush.jobs.delete()`
 - `client.logpush.jobs.get()`
 - `client.logs.logExplorer.datasets.list()`
+- `client.logs.logExplorer.datasets.delete()`
 - `client.logs.logExplorer.datasets.get()`
 - `client.logs.logExplorer.datasets.available.list()`
 - `client.waitingRooms.list()`
@@ -1564,6 +1646,8 @@ client.example.list(undefined, { headers: { ... } });
 - `client.radar.bgp.routes.pfx2as()`
 - `client.radar.bgp.routes.realtime()`
 - `client.radar.bgp.routes.stats()`
+- `client.radar.bgp.routes.upstreams.timeseries()`
+- `client.radar.bgp.routes.paths.list()`
 - `client.radar.bgp.ips.timeseries()`
 - `client.radar.bgp.ips.top.ases()`
 - `client.radar.bgp.rpki.aspa.changes()`
@@ -1803,10 +1887,10 @@ client.example.list(undefined, { headers: { ... } });
 
 ### Removed `httpAgent` in favor of `fetchOptions`
 
-The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript#fetch-options).
+The `httpAgent` client option has been removed in favor of a [platform-specific `fetchOptions` property](https://github.com/cloudflare/cloudflare-typescript#fetch-options).
 This change was made as `httpAgent` relied on `node:http` agents which are not supported by any runtime's builtin fetch implementation.
 
-If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://gitlab.cfdata.org/cloudflare/sdks/cloudflare-typescript#configuring-proxies).
+If you were using `httpAgent` for proxy support, check out the [new proxy documentation](https://github.com/cloudflare/cloudflare-typescript#configuring-proxies).
 
 Before:
 

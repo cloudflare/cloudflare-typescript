@@ -18,7 +18,7 @@ export class BaseDevices extends APIResource {
   ] as const);
 
   /**
-   * List details for devices using WARP.
+   * List details of devices using WARP.
    *
    * @example
    * ```ts

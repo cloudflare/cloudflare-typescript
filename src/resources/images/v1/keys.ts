@@ -13,7 +13,8 @@ export class BaseKeys extends APIResource {
   ] as const);
 
   /**
-   * Create a new signing key with specified name. Returns all keys available.
+   * Create a new CF Images signing key with specified name. Returns all keys
+   * available.
    *
    * @example
    * ```ts
@@ -37,7 +38,7 @@ export class BaseKeys extends APIResource {
   }
 
   /**
-   * Lists your signing keys. These can be found on your Cloudflare Images dashboard.
+   * List your CF Images signing keys.
    *
    * @example
    * ```ts
@@ -56,8 +57,8 @@ export class BaseKeys extends APIResource {
   }
 
   /**
-   * Delete signing key with specified name. Returns all keys available. When last
-   * key is removed, a new default signing key will be generated.
+   * Delete a CF Images signing key with specified name. Returns all keys available.
+   * When the last key is removed, a new default signing key will be generated.
    *
    * @example
    * ```ts

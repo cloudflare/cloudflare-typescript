@@ -13,7 +13,7 @@ export class BaseAttackers extends APIResource {
   ] as const);
 
   /**
-   * Lists attackers across multiple datasets
+   * Lists known threat attackers tracked in Cloudforce One threat intelligence.
    *
    * @example
    * ```ts

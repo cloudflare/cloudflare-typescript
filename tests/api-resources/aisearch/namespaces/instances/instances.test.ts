@@ -64,6 +64,8 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
+        custom_domains: ['search.example.com'],
+        default_domain_enabled: true,
         enabled: true,
         mcp: { description: 'description', disabled: true },
         rate_limit: {
@@ -86,6 +88,14 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
+          discover_options: {
+            depth: 5,
+            include_external_links: false,
+            include_subdomains: false,
+            limit: 10000,
+            max_age: 86400,
+            source: 'all',
+          },
           parse_options: {
             content_selector: [
               { path: '**/blog/**', selector: 'article div.post-body' },
@@ -142,6 +152,8 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
       public_endpoint_params: {
         authorized_hosts: ['string'],
         chat_completions_endpoint: { disabled: true },
+        custom_domains: ['search.example.com'],
+        default_domain_enabled: true,
         enabled: true,
         mcp: { description: 'description', disabled: true },
         rate_limit: {
@@ -164,6 +176,14 @@ const runTests = (client: PartialCloudflare<{ aiSearch: { namespaces: { instance
         prefix: 'prefix',
         r2_jurisdiction: 'r2_jurisdiction',
         web_crawler: {
+          discover_options: {
+            depth: 5,
+            include_external_links: false,
+            include_subdomains: false,
+            limit: 10000,
+            max_age: 86400,
+            source: 'all',
+          },
           parse_options: {
             content_selector: [
               { path: '**/blog/**', selector: 'article div.post-body' },

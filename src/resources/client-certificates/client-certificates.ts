@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as CustomCertificatesAPI from '../custom-certificates/custom-certificates';
 import { APIPromise } from '../../core/api-promise';
 import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -229,7 +228,7 @@ export interface ClientCertificate {
    * Client Certificates may be active or revoked, and the pending_reactivation or
    * pending_revocation represent in-progress asynchronous transitions.
    */
-  status?: CustomCertificatesAPI.Status;
+  status?: 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
 
   /**
    * The number of days the Client Certificate will be valid after the issued_on

@@ -39,12 +39,12 @@ export interface QuotaGetResponse {
 export namespace QuotaGetResponse {
   export interface Secrets {
     /**
-     * The number of secrets the account is entitlted to use
+     * The number of secrets the account is entitled to use.
      */
     quota: number;
 
     /**
-     * The number of secrets the account is currently using
+     * The number of secrets the account is currently using.
      */
     usage: number;
   }
@@ -52,7 +52,7 @@ export namespace QuotaGetResponse {
 
 export interface QuotaGetParams {
   /**
-   * Account Identifier
+   * Account identifier.
    */
   account_id: string;
 }

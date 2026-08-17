@@ -2,6 +2,10 @@
 
 errors=()
 
+if [ -z "${RELEASE_PLEASE_TOKEN}" ]; then
+  errors+=("The RELEASE_PLEASE_TOKEN secret has not been set. Create a fine-grained GitHub PAT and add it as a repository secret.")
+fi
+
 lenErrors=${#errors[@]}
 
 if [[ lenErrors -gt 0 ]]; then

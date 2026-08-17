@@ -2,7 +2,16 @@
 
 import { APIResource } from '../../../core/resource';
 import * as TokensAPI from './tokens';
-import { BaseTokens, TokenRotateParams, TokenRotateResponse, Tokens } from './tokens';
+import {
+  BaseTokens,
+  TokenCreateParams,
+  TokenCreateResponse,
+  TokenDeleteParams,
+  TokenDeleteResponse,
+  TokenListParams,
+  TokenListResponse,
+  Tokens,
+} from './tokens';
 import { APIPromise } from '../../../core/api-promise';
 import { PagePromise, SinglePage } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -14,8 +23,9 @@ export class BaseRelays extends APIResource {
   /**
    * Provisions a new MoQ relay instance. Auto-creates a publish+subscribe token and
    * a subscribe-only token. Token values are included in the response (shown once).
-   * Config is set to defaults (lingering subscribe enabled, 30s ceiling, origin
-   * fallback off). Use PUT to modify.
+   * Config is always set to defaults (upstreams off) and cannot be supplied here —
+   * sending a non-empty `config` is rejected (21014); `null` or `{}` is accepted as
+   * absent. Use PUT to configure the relay after it exists.
    *
    * @example
    * ```ts
@@ -35,9 +45,11 @@ export class BaseRelays extends APIResource {
   }
 
   /**
-   * Updates a relay's name and/or configuration. Partial updates: omitted fields are
-   * preserved. Config sub-objects replace as whole objects when present.
-   * origin_fallback and lingering_subscribe are mutually exclusive.
+   * Updates a relay's name and/or configuration. The relay ID goes in the URL path —
+   * `PUT /accounts/{account_id}/moq/relays/{relay_id}` — not the request body; there
+   * is no collection-level update endpoint. This is also the only way to set a
+   * relay's config (config cannot be set at create time). Partial updates: omitted
+   * fields are preserved; config sub-objects replace as whole objects when present.
    *
    * @example
    * ```ts
@@ -92,7 +104,9 @@ export class BaseRelays extends APIResource {
   }
 
   /**
-   * Soft-deletes a MoQ relay.
+   * Soft-deletes a MoQ relay. The relay ID goes in the URL path —
+   * `DELETE /accounts/{account_id}/moq/relays/{relay_id}` — not the request body;
+   * there is no collection-level delete endpoint.
    *
    * @example
    * ```ts
@@ -143,29 +157,24 @@ export class Relays extends BaseRelays {
 export type RelayListResponsesSinglePage = SinglePage<RelayListResponse>;
 
 /**
- * Relay with auto-generated tokens (shown once).
+ * Relay with its auto-created default token pair (one full-access [publish,
+ * subscribe] and one [subscribe]-only), each with its one-time secret, wrapped in
+ * the issuers envelope.
  */
 export interface RelayCreateResponse {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   config: RelayCreateResponse.Config;
 
   created: string;
 
+  /**
+   * Token collection (discriminated union on `type`). On create this holds the
+   * auto-created default pair, each including its one-time secret.
+   */
+  issuers: Array<RelayCreateResponse.Issuer>;
+
   modified: string;
 
   name: string;
-
-  /**
-   * Full access token (publish + subscribe). Treat as sensitive.
-   */
-  token_publish_subscribe: string;
-
-  /**
-   * Subscribe-only token. Treat as sensitive.
-   */
-  token_subscribe: string;
 
   /**
    * Server-generated unique identifier (32 hex chars).
@@ -174,46 +183,89 @@ export interface RelayCreateResponse {
 }
 
 export namespace RelayCreateResponse {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
-    origin_fallback?: Config.OriginFallback;
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    upstreams?: Config.Upstreams;
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    export interface Upstreams {
       enabled?: boolean;
 
       /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
+       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
+       * bare string) so per-upstream configuration can be added in the future without
+       * another breaking change.
        */
-      max_timeout_ms?: number;
+      upstreams?: Array<Upstreams.Upstream>;
     }
 
-    export interface OriginFallback {
-      enabled?: boolean;
-
+    export namespace Upstreams {
       /**
-       * Ordered list of upstream origin relays. Each entry is an object (not a bare
-       * string) so per-origin configuration can be added in the future without another
-       * breaking change.
+       * A single upstream MOQT server publisher.
        */
-      origins?: Array<OriginFallback.Origin>;
-    }
-
-    export namespace OriginFallback {
-      /**
-       * A single upstream origin relay.
-       */
-      export interface Origin {
+      export interface Upstream {
         /**
-         * Upstream origin relay URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
+    }
+  }
+
+  /**
+   * One arm of the discriminated-union token collection.
+   */
+  export interface Issuer {
+    /**
+     * Always present ([] when empty).
+     */
+    cloudflare_tokens: Array<Issuer.CloudflareToken>;
+
+    issuer: 'cloudflare';
+
+    type: 'cloudflare_jwt';
+  }
+
+  export namespace Issuer {
+    export interface CloudflareToken {
+      created: string;
+
+      /**
+       * Mandatory; no more than 1 year after `created`.
+       */
+      expires: string;
+
+      /**
+       * Token identity and registry key (32 hex chars).
+       */
+      jti: string;
+
+      /**
+       * Signed allowlist of what the token may do. V1 coarse roles; the array form
+       * extends to fine-grained MoQT message names later without a breaking change.
+       */
+      operations: Array<'publish' | 'subscribe'>;
+
+      /**
+       * Optional, customer-set.
+       */
+      label?: string;
+
+      /**
+       * The signed JWT. Present ONLY in create / auto-create responses (shown once);
+       * never returned by list, never stored.
+       */
+      secret?: string;
     }
   }
 }
@@ -222,9 +274,6 @@ export namespace RelayCreateResponse {
  * Full relay details (no tokens).
  */
 export interface RelayUpdateResponse {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   config: RelayUpdateResponse.Config;
 
   created: string;
@@ -242,45 +291,41 @@ export interface RelayUpdateResponse {
 }
 
 export namespace RelayUpdateResponse {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
-    origin_fallback?: Config.OriginFallback;
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    upstreams?: Config.Upstreams;
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    export interface Upstreams {
       enabled?: boolean;
 
       /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
+       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
+       * bare string) so per-upstream configuration can be added in the future without
+       * another breaking change.
        */
-      max_timeout_ms?: number;
+      upstreams?: Array<Upstreams.Upstream>;
     }
 
-    export interface OriginFallback {
-      enabled?: boolean;
-
+    export namespace Upstreams {
       /**
-       * Ordered list of upstream origin relays. Each entry is an object (not a bare
-       * string) so per-origin configuration can be added in the future without another
-       * breaking change.
+       * A single upstream MOQT server publisher.
        */
-      origins?: Array<OriginFallback.Origin>;
-    }
-
-    export namespace OriginFallback {
-      /**
-       * A single upstream origin relay.
-       */
-      export interface Origin {
+      export interface Upstream {
         /**
-         * Upstream origin relay URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
@@ -305,9 +350,6 @@ export type RelayDeleteResponse = unknown;
  * Full relay details (no tokens).
  */
 export interface RelayGetResponse {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   config: RelayGetResponse.Config;
 
   created: string;
@@ -325,45 +367,41 @@ export interface RelayGetResponse {
 }
 
 export namespace RelayGetResponse {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
-    origin_fallback?: Config.OriginFallback;
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    upstreams?: Config.Upstreams;
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    export interface Upstreams {
       enabled?: boolean;
 
       /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
+       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
+       * bare string) so per-upstream configuration can be added in the future without
+       * another breaking change.
        */
-      max_timeout_ms?: number;
+      upstreams?: Array<Upstreams.Upstream>;
     }
 
-    export interface OriginFallback {
-      enabled?: boolean;
-
+    export namespace Upstreams {
       /**
-       * Ordered list of upstream origin relays. Each entry is an object (not a bare
-       * string) so per-origin configuration can be added in the future without another
-       * breaking change.
+       * A single upstream MOQT server publisher.
        */
-      origins?: Array<OriginFallback.Origin>;
-    }
-
-    export namespace OriginFallback {
-      /**
-       * A single upstream origin relay.
-       */
-      export interface Origin {
+      export interface Upstream {
         /**
-         * Upstream origin relay URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
@@ -388,7 +426,7 @@ export interface RelayUpdateParams {
   account_id: string;
 
   /**
-   * Body param: origin_fallback and lingering_subscribe are mutually exclusive.
+   * Body param
    */
   config?: RelayUpdateParams.Config;
 
@@ -399,45 +437,41 @@ export interface RelayUpdateParams {
 }
 
 export namespace RelayUpdateParams {
-  /**
-   * origin_fallback and lingering_subscribe are mutually exclusive.
-   */
   export interface Config {
-    lingering_subscribe?: Config.LingeringSubscribe;
-
-    origin_fallback?: Config.OriginFallback;
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    upstreams?: Config.Upstreams;
   }
 
   export namespace Config {
-    export interface LingeringSubscribe {
+    /**
+     * Upstreams are external MOQT server publishers that a relay falls back to when it
+     * has no local publisher for a requested namespace/track.
+     */
+    export interface Upstreams {
       enabled?: boolean;
 
       /**
-       * Relay-level ceiling on lingering subscribe timeout (ms). Default 30000.
+       * Ordered list of upstream MOQT server publishers. Each entry is an object (not a
+       * bare string) so per-upstream configuration can be added in the future without
+       * another breaking change.
        */
-      max_timeout_ms?: number;
+      upstreams?: Array<Upstreams.Upstream>;
     }
 
-    export interface OriginFallback {
-      enabled?: boolean;
-
+    export namespace Upstreams {
       /**
-       * Ordered list of upstream origin relays. Each entry is an object (not a bare
-       * string) so per-origin configuration can be added in the future without another
-       * breaking change.
+       * A single upstream MOQT server publisher.
        */
-      origins?: Array<OriginFallback.Origin>;
-    }
-
-    export namespace OriginFallback {
-      /**
-       * A single upstream origin relay.
-       */
-      export interface Origin {
+      export interface Upstream {
         /**
-         * Upstream origin relay URL.
+         * Upstream MOQT server publisher URL. Must be an absolute URL with a host and a
+         * scheme the relay can dial: moqt:// (raw QUIC) or https:// (WebTransport).
+         * Validated on update (PUT); rejected with 21013.
          */
-        url?: string;
+        url: string;
       }
     }
   }
@@ -470,7 +504,8 @@ export interface RelayListParams {
   created_before?: string;
 
   /**
-   * Query param: Maximum number of relays to return per page.
+   * Query param: Maximum number of relays to return per page. Values above the
+   * maximum are clamped to it rather than rejected.
    */
   per_page?: number;
 }
@@ -510,7 +545,11 @@ export declare namespace Relays {
   export {
     Tokens as Tokens,
     BaseTokens as BaseTokens,
-    type TokenRotateResponse as TokenRotateResponse,
-    type TokenRotateParams as TokenRotateParams,
+    type TokenCreateResponse as TokenCreateResponse,
+    type TokenListResponse as TokenListResponse,
+    type TokenDeleteResponse as TokenDeleteResponse,
+    type TokenCreateParams as TokenCreateParams,
+    type TokenListParams as TokenListParams,
+    type TokenDeleteParams as TokenDeleteParams,
   };
 }

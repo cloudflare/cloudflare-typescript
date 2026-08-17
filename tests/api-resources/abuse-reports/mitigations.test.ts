@@ -60,7 +60,6 @@ const runTests = (client: PartialCloudflare<{ abuseReports: { mitigations: BaseM
   test.skip('review: only required params', async () => {
     const responsePromise = client.abuseReports.mitigations.review('report_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      appeals: [{ id: 'id', reason: 'misclassified' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -76,6 +75,23 @@ const runTests = (client: PartialCloudflare<{ abuseReports: { mitigations: BaseM
     const response = await client.abuseReports.mitigations.review('report_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       appeals: [{ id: 'id', reason: 'misclassified' }],
+      data: {
+        city: 'city',
+        country: 'country',
+        email: 'dev@stainless.com',
+        full_name: 'full_name',
+        jurisdiction_consent: true,
+        perjury_attestation: true,
+        phone_number: 'phone_number',
+        signature: 'signature',
+        state: 'state',
+        street_address: 'street_address',
+        urls: ['https://example.com'],
+        zip_code: 'zip_code',
+        company: 'company',
+        counter_notice_response: 'counter_notice_response',
+      },
+      type: 'counter_notice',
     });
   });
 };

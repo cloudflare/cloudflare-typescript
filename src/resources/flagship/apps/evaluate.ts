@@ -14,9 +14,8 @@ export class BaseEvaluate extends APIResource {
 
   /**
    * Evaluates a flag against the provided context. Pass context attributes as query
-   * parameters; boolean and numeric strings are coerced automatically. For
-   * low-latency in-Worker evaluation, prefer the Flagship binding over this
-   * endpoint.
+   * parameters; values are forwarded as strings. For low-latency in-Worker
+   * evaluation, prefer the Flagship binding over this endpoint.
    */
   get(appID: string, params: EvaluateGetParams, options?: RequestOptions): APIPromise<EvaluateGetResponse> {
     const { account_id, ...query } = params;

@@ -159,6 +159,7 @@ const runTests = (client: PartialCloudflare<{ accounts: { tokens: BaseTokens } }
     const response = await client.accounts.tokens.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'desc',
+      include_expired: true,
       page: 1,
       per_page: 5,
     });
