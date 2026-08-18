@@ -1,0 +1,25 @@
+src/resources/workers/observability/queries.ts
+  s_98344e4d74a5ff::t_171ebdad508783 100,145,155,352,397,407,600,645,655
+src/resources/workers/observability/shared-queries.ts
+  s_98344e4d74a5ff::t_171ebdad508783 239,284,294,1781,1808
+  s_98344e4d74a5ff::t_d79e47f4cc6382 1729
+src/resources/workers/observability/telemetry.ts
+  s_98344e4d74a5ff::t_171ebdad508783 327,372,382,2322,2349
+  s_98344e4d74a5ff::t_d79e47f4cc6382 2270
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c6fe1f89a5cef7957b8f60e60f45bda18bc39f01",
+  "prompts": {},
+  "sessions": {
+    "s_98344e4d74a5ff": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0036d20fcffeLkIJmqdVEa1EYK",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}
