@@ -19,7 +19,7 @@ export class BaseServices extends APIResource {
   ] as const);
 
   /**
-   * Creates a new Workers VPC connectivity service in the account.
+   * Create Workers VPC connectivity service
    *
    * @example
    * ```ts
@@ -48,7 +48,7 @@ export class BaseServices extends APIResource {
   }
 
   /**
-   * Updates an existing Workers VPC connectivity service by its ID.
+   * Update Workers VPC connectivity service
    *
    * @example
    * ```ts
@@ -84,7 +84,7 @@ export class BaseServices extends APIResource {
   }
 
   /**
-   * Lists the Workers VPC connectivity services in the account.
+   * List Workers VPC connectivity services
    *
    * @example
    * ```ts
@@ -109,7 +109,7 @@ export class BaseServices extends APIResource {
   }
 
   /**
-   * Removes a single Workers VPC connectivity service by its ID.
+   * Delete Workers VPC connectivity service
    *
    * @example
    * ```ts
@@ -128,7 +128,7 @@ export class BaseServices extends APIResource {
   }
 
   /**
-   * Fetches a single Workers VPC connectivity service by its ID.
+   * Get Workers VPC connectivity service
    *
    * @example
    * ```ts

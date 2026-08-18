@@ -13,8 +13,7 @@ export class BaseLogs extends APIResource {
   ] as const);
 
   /**
-   * Lists request/response log entries for the AI gateway with filtering and
-   * pagination.
+   * List Gateway Logs
    *
    * @example
    * ```ts
@@ -41,7 +40,7 @@ export class BaseLogs extends APIResource {
   }
 
   /**
-   * Deletes gateway log entries matching the specified criteria.
+   * Delete Gateway Logs
    *
    * @example
    * ```ts

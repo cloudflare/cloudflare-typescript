@@ -26,11 +26,15 @@ export class BaseDatasets extends APIResource {
   /**
    * Create a new Log Explorer dataset for the account or zone.
    *
-   * List available account or zone datasets to see the dataset types and fields you
-   * can use.
+   * Use the
+   * `/account or zones/{account or zone_id}/logs/explorer/datasets/available`
+   * endpoint to list dataset types you can create along with their available fields.
    *
    * The `fields` property is optional. If not specified, all available fields will
    * be enabled.
+   *
+   * For zone-level datasets use the zone-scoped endpoint: POST
+   * /zones/{zone_id}/logs/explorer/datasets
    *
    * For dataset field definitions, see:
    * https://developers.cloudflare.com/logs/logpush/logpush-job/datasets/
@@ -155,49 +159,6 @@ export class BaseDatasets extends APIResource {
   }
 
   /**
-   * Deletes a Log Explorer dataset for the account or zone. Dataset deletion must
-   * not be protected.
-   *
-   * @example
-   * ```ts
-   * const dataset =
-   *   await client.logs.logExplorer.datasets.delete(
-   *     'dataset_id',
-   *     { account_id: 'account_id' },
-   *   );
-   * ```
-   */
-  delete(
-    datasetID: string,
-    params: DatasetDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Dataset> {
-    const { account_id, zone_id } = params ?? {};
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        path`/${accountOrZone}/${accountOrZoneId}/logs/explorer/datasets/${datasetID}`,
-        options,
-      ) as APIPromise<{ result: Dataset }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Retrieve a single Log Explorer dataset by ID for the account or zone.
    *
    * @example
@@ -255,14 +216,6 @@ export interface CreateRequest {
    * absent.
    */
   fields?: Array<CreateRequest.Field>;
-
-  /**
-   * Optional Logpush filter predicate to restrict which events are ingested. If
-   * provided, replaces the dataset's default filter entirely. See
-   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
-   * syntax and examples.
-   */
-  filter?: string;
 }
 
 export namespace CreateRequest {
@@ -300,19 +253,9 @@ export interface Dataset {
   dataset_id: string;
 
   /**
-   * Whether deletion is blocked. Set to `false` before deleting the dataset.
-   */
-  deletion_protection: boolean;
-
-  /**
    * Whether log ingest is currently active for this dataset.
    */
   enabled: boolean;
-
-  /**
-   * The field configuration for this dataset.
-   */
-  fields: Array<Dataset.Field>;
 
   /**
    * Public ID of the account or zone that owns this dataset.
@@ -330,10 +273,9 @@ export interface Dataset {
   updated_at: string;
 
   /**
-   * The Logpush filter predicate applied to this dataset. Omitted when no filter is
-   * set.
+   * The field configuration for this dataset.
    */
-  filter?: string;
+  fields?: Array<Dataset.Field>;
 }
 
 export namespace Dataset {
@@ -371,11 +313,6 @@ export interface DatasetSummary {
   dataset_id: string;
 
   /**
-   * Whether deletion is blocked. Set to `false` before deleting the dataset.
-   */
-  deletion_protection: boolean;
-
-  /**
    * Whether log ingest is currently active for this dataset.
    */
   enabled: boolean;
@@ -403,24 +340,10 @@ export interface UpdateRequest {
   enabled: boolean;
 
   /**
-   * Set to `false` to allow deletion of this dataset.
-   */
-  deletion_protection?: boolean;
-
-  /**
    * Controls which fields the API ingests after the update. Defaults to all
    * available fields when absent.
    */
   fields?: Array<UpdateRequest.Field>;
-
-  /**
-   * Optional Logpush filter predicate to restrict which events are ingested. If
-   * omitted, the existing filter is left unchanged. Set to an empty string (`""`) to
-   * clear the filter. Otherwise, replaces the dataset's filter entirely. See
-   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
-   * syntax and examples.
-   */
-  filter?: string | null;
 }
 
 export namespace UpdateRequest {
@@ -460,14 +383,6 @@ export interface DatasetCreateParams {
    * fields when absent.
    */
   fields?: Array<DatasetCreateParams.Field>;
-
-  /**
-   * Body param: Optional Logpush filter predicate to restrict which events are
-   * ingested. If provided, replaces the dataset's default filter entirely. See
-   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
-   * syntax and examples.
-   */
-  filter?: string;
 }
 
 export namespace DatasetCreateParams {
@@ -503,25 +418,10 @@ export interface DatasetUpdateParams {
   zone_id?: string;
 
   /**
-   * Body param: Set to `false` to allow deletion of this dataset.
-   */
-  deletion_protection?: boolean;
-
-  /**
    * Body param: Controls which fields the API ingests after the update. Defaults to
    * all available fields when absent.
    */
   fields?: Array<DatasetUpdateParams.Field>;
-
-  /**
-   * Body param: Optional Logpush filter predicate to restrict which events are
-   * ingested. If omitted, the existing filter is left unchanged. Set to an empty
-   * string (`""`) to clear the filter. Otherwise, replaces the dataset's filter
-   * entirely. See
-   * [Logpush filters](https://developers.cloudflare.com/logs/reference/filters/) for
-   * syntax and examples.
-   */
-  filter?: string | null;
 }
 
 export namespace DatasetUpdateParams {
@@ -558,18 +458,6 @@ export interface DatasetListParams {
   include_zones?: boolean;
 }
 
-export interface DatasetDeleteParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
 export interface DatasetGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
@@ -595,7 +483,6 @@ export declare namespace Datasets {
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetUpdateParams as DatasetUpdateParams,
     type DatasetListParams as DatasetListParams,
-    type DatasetDeleteParams as DatasetDeleteParams,
     type DatasetGetParams as DatasetGetParams,
   };
 

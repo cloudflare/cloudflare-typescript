@@ -21,37 +21,7 @@ export class BaseAbuseReports extends APIResource {
   static override readonly _key: readonly ['abuseReports'] = Object.freeze(['abuseReports'] as const);
 
   /**
-   * Submit an abuse report of a particular type.
-   *
-   * Requires the abuse-reports entitlement on the account (Enterprise accounts have
-   * it by default; other accounts must request access) and an API token with the
-   * `Account > Abuse Reports > Edit` permission. If the account is not entitled, the
-   * request is rejected with an HTTP `401` response (see below).
-   *
-   * @example
-   * ```ts
-   * const abuseReport = await client.abuseReports.create(
-   *   'report_param',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     act: 'abuse_dmca',
-   *     address1: 'x',
-   *     agent_name: 'x',
-   *     agree: 1,
-   *     city: 'x',
-   *     country: 'x',
-   *     email: 'email',
-   *     email2: 'email2',
-   *     host_notification: 'send',
-   *     name: 'x',
-   *     original_work: 'x',
-   *     owner_notification: 'send',
-   *     signature: 'signature',
-   *     state: 'x',
-   *     urls: 'urls',
-   *   },
-   * );
-   * ```
+   * Submit the Abuse Report of a particular type
    */
   create(
     reportParam: string,
@@ -69,16 +39,6 @@ export class BaseAbuseReports extends APIResource {
 
   /**
    * List the abuse reports for a given account
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const abuseReportListResponse of client.abuseReports.list(
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     params: AbuseReportListParams,
@@ -94,14 +54,6 @@ export class BaseAbuseReports extends APIResource {
 
   /**
    * Retrieve the details of an abuse report.
-   *
-   * @example
-   * ```ts
-   * const abuseReport = await client.abuseReports.get(
-   *   'report_param',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
    */
   get(
     reportParam: string,

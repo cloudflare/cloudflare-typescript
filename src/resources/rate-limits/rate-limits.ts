@@ -13,8 +13,8 @@ export class BaseRateLimits extends APIResource {
   static override readonly _key: readonly ['rateLimits'] = Object.freeze(['rateLimits'] as const);
 
   /**
-   * **Deprecated**: This endpoint returns 410 Gone. Please use the Rulesets API
-   * instead.
+   * Creates a new rate limit for a zone. Refer to the object definition for a list
+   * of required attributes.
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
@@ -28,8 +28,7 @@ export class BaseRateLimits extends APIResource {
   }
 
   /**
-   * **Deprecated**: This endpoint returns 410 Gone. Please use the Rulesets API
-   * instead.
+   * Fetches the rate limits for a zone.
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
@@ -45,8 +44,7 @@ export class BaseRateLimits extends APIResource {
   }
 
   /**
-   * **Deprecated**: This endpoint returns 410 Gone. Please use the Rulesets API
-   * instead.
+   * Deletes an existing rate limit.
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
@@ -64,8 +62,7 @@ export class BaseRateLimits extends APIResource {
   }
 
   /**
-   * **Deprecated**: This endpoint returns 410 Gone. Please use the Rulesets API
-   * instead.
+   * Updates an existing rate limit.
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
@@ -80,8 +77,7 @@ export class BaseRateLimits extends APIResource {
   }
 
   /**
-   * **Deprecated**: This endpoint returns 410 Gone. Please use the Rulesets API
-   * instead.
+   * Fetches the details of a rate limit.
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */

@@ -9,7 +9,6 @@ import {
   CreateRequest,
   Dataset,
   DatasetCreateParams,
-  DatasetDeleteParams,
   DatasetGetParams,
   DatasetListParams,
   DatasetSummariesSinglePage,
@@ -55,7 +54,6 @@ export declare namespace LogExplorer {
     type DatasetCreateParams as DatasetCreateParams,
     type DatasetUpdateParams as DatasetUpdateParams,
     type DatasetListParams as DatasetListParams,
-    type DatasetDeleteParams as DatasetDeleteParams,
     type DatasetGetParams as DatasetGetParams,
   };
 }

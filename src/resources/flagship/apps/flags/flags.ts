@@ -75,7 +75,7 @@ export class BaseFlags extends APIResource {
   }
 
   /**
-   * Deletes a flag permanently. Subsequent evaluations fall back to the
+   * Permanently deletes a flag. Subsequent evaluations fall back to the
    * caller-supplied default. Cannot be undone.
    */
   delete(
@@ -113,8 +113,8 @@ export type FlagListResponsesCursorPaginationAfter = CursorPaginationAfter<FlagL
 
 export interface FlagCreateResponse {
   /**
-   * Variation the API serves when the flag is off, or when it's on but no rule
-   * matches the context. Must be a key in `variations`.
+   * Variation served when no rule matches or the flag is disabled. Must be a key in
+   * `variations`.
    */
   default_variation: string;
 
@@ -136,8 +136,9 @@ export interface FlagCreateResponse {
   rules: Array<FlagCreateResponse.Rule>;
 
   /**
-   * Map of variation name to value. All values share the same type (boolean, string,
-   * number, or JSON object/array), and each serialized value stays within 10KB.
+   * Map of variation name to value. All values must be the same type (boolean,
+   * string, number, or JSON object/array). Each serialized value must be 10KB or
+   * smaller.
    */
   variations: {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -146,8 +147,8 @@ export interface FlagCreateResponse {
   description?: string | null;
 
   /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
+   * Value type of the flag's variations. Inferred from the variation values on
+   * write, so it may be omitted in requests.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -165,13 +166,13 @@ export namespace FlagCreateResponse {
     conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
     /**
-     * Evaluation order: the API evaluates rules with lower numbers first. Must be
-     * unique across the flag's rules.
+     * Evaluation order; lower numbers are evaluated first. Must be unique across the
+     * flag's rules.
      */
     priority: number;
 
     /**
-     * Variation the API serves when this rule matches. Must be a key in `variations`.
+     * Variation served when this rule matches. Must be a key in `variations`.
      */
     serve_variation: string;
 
@@ -195,7 +196,12 @@ export namespace FlagCreateResponse {
         | 'in'
         | 'not_in';
 
-      value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+      /**
+       * Value to compare against the context attribute. Must be an array for `in` and
+       * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+       * operators.
+       */
+      value: unknown;
     }
 
     export interface UnionMember1 {
@@ -221,7 +227,12 @@ export namespace FlagCreateResponse {
           | 'in'
           | 'not_in';
 
-        value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+        /**
+         * Value to compare against the context attribute. Must be an array for `in` and
+         * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+         * operators.
+         */
+        value: unknown;
       }
 
       export interface UnionMember1 {
@@ -247,7 +258,12 @@ export namespace FlagCreateResponse {
             | 'in'
             | 'not_in';
 
-          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+          /**
+           * Value to compare against the context attribute. Must be an array for `in` and
+           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+           * operators.
+           */
+          value: unknown;
         }
 
         export interface UnionMember1 {
@@ -273,7 +289,12 @@ export namespace FlagCreateResponse {
               | 'in'
               | 'not_in';
 
-            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+            /**
+             * Value to compare against the context attribute. Must be an array for `in` and
+             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+             * operators.
+             */
+            value: unknown;
           }
 
           export interface UnionMember1 {
@@ -299,7 +320,12 @@ export namespace FlagCreateResponse {
                 | 'in'
                 | 'not_in';
 
-              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+              /**
+               * Value to compare against the context attribute. Must be an array for `in` and
+               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+               * operators.
+               */
+              value: unknown;
             }
 
             export interface UnionMember1 {
@@ -325,7 +351,12 @@ export namespace FlagCreateResponse {
                   | 'in'
                   | 'not_in';
 
-                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+                /**
+                 * Value to compare against the context attribute. Must be an array for `in` and
+                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+                 * operators.
+                 */
+                value: unknown;
               }
 
               export interface UnionMember1 {
@@ -359,8 +390,8 @@ export namespace FlagCreateResponse {
 
 export interface FlagUpdateResponse {
   /**
-   * Variation the API serves when the flag is off, or when it's on but no rule
-   * matches the context. Must be a key in `variations`.
+   * Variation served when no rule matches or the flag is disabled. Must be a key in
+   * `variations`.
    */
   default_variation: string;
 
@@ -382,8 +413,9 @@ export interface FlagUpdateResponse {
   rules: Array<FlagUpdateResponse.Rule>;
 
   /**
-   * Map of variation name to value. All values share the same type (boolean, string,
-   * number, or JSON object/array), and each serialized value stays within 10KB.
+   * Map of variation name to value. All values must be the same type (boolean,
+   * string, number, or JSON object/array). Each serialized value must be 10KB or
+   * smaller.
    */
   variations: {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -392,8 +424,8 @@ export interface FlagUpdateResponse {
   description?: string | null;
 
   /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
+   * Value type of the flag's variations. Inferred from the variation values on
+   * write, so it may be omitted in requests.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -411,13 +443,13 @@ export namespace FlagUpdateResponse {
     conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
     /**
-     * Evaluation order: the API evaluates rules with lower numbers first. Must be
-     * unique across the flag's rules.
+     * Evaluation order; lower numbers are evaluated first. Must be unique across the
+     * flag's rules.
      */
     priority: number;
 
     /**
-     * Variation the API serves when this rule matches. Must be a key in `variations`.
+     * Variation served when this rule matches. Must be a key in `variations`.
      */
     serve_variation: string;
 
@@ -441,7 +473,12 @@ export namespace FlagUpdateResponse {
         | 'in'
         | 'not_in';
 
-      value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+      /**
+       * Value to compare against the context attribute. Must be an array for `in` and
+       * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+       * operators.
+       */
+      value: unknown;
     }
 
     export interface UnionMember1 {
@@ -467,7 +504,12 @@ export namespace FlagUpdateResponse {
           | 'in'
           | 'not_in';
 
-        value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+        /**
+         * Value to compare against the context attribute. Must be an array for `in` and
+         * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+         * operators.
+         */
+        value: unknown;
       }
 
       export interface UnionMember1 {
@@ -493,7 +535,12 @@ export namespace FlagUpdateResponse {
             | 'in'
             | 'not_in';
 
-          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+          /**
+           * Value to compare against the context attribute. Must be an array for `in` and
+           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+           * operators.
+           */
+          value: unknown;
         }
 
         export interface UnionMember1 {
@@ -519,7 +566,12 @@ export namespace FlagUpdateResponse {
               | 'in'
               | 'not_in';
 
-            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+            /**
+             * Value to compare against the context attribute. Must be an array for `in` and
+             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+             * operators.
+             */
+            value: unknown;
           }
 
           export interface UnionMember1 {
@@ -545,7 +597,12 @@ export namespace FlagUpdateResponse {
                 | 'in'
                 | 'not_in';
 
-              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+              /**
+               * Value to compare against the context attribute. Must be an array for `in` and
+               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+               * operators.
+               */
+              value: unknown;
             }
 
             export interface UnionMember1 {
@@ -571,7 +628,12 @@ export namespace FlagUpdateResponse {
                   | 'in'
                   | 'not_in';
 
-                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+                /**
+                 * Value to compare against the context attribute. Must be an array for `in` and
+                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+                 * operators.
+                 */
+                value: unknown;
               }
 
               export interface UnionMember1 {
@@ -605,8 +667,8 @@ export namespace FlagUpdateResponse {
 
 export interface FlagListResponse {
   /**
-   * Variation the API serves when the flag is off, or when it's on but no rule
-   * matches the context. Must be a key in `variations`.
+   * Variation served when no rule matches or the flag is disabled. Must be a key in
+   * `variations`.
    */
   default_variation: string;
 
@@ -628,8 +690,9 @@ export interface FlagListResponse {
   rules: Array<FlagListResponse.Rule>;
 
   /**
-   * Map of variation name to value. All values share the same type (boolean, string,
-   * number, or JSON object/array), and each serialized value stays within 10KB.
+   * Map of variation name to value. All values must be the same type (boolean,
+   * string, number, or JSON object/array). Each serialized value must be 10KB or
+   * smaller.
    */
   variations: {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -638,8 +701,8 @@ export interface FlagListResponse {
   description?: string | null;
 
   /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
+   * Value type of the flag's variations. Inferred from the variation values on
+   * write, so it may be omitted in requests.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -657,13 +720,13 @@ export namespace FlagListResponse {
     conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
     /**
-     * Evaluation order: the API evaluates rules with lower numbers first. Must be
-     * unique across the flag's rules.
+     * Evaluation order; lower numbers are evaluated first. Must be unique across the
+     * flag's rules.
      */
     priority: number;
 
     /**
-     * Variation the API serves when this rule matches. Must be a key in `variations`.
+     * Variation served when this rule matches. Must be a key in `variations`.
      */
     serve_variation: string;
 
@@ -687,7 +750,12 @@ export namespace FlagListResponse {
         | 'in'
         | 'not_in';
 
-      value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+      /**
+       * Value to compare against the context attribute. Must be an array for `in` and
+       * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+       * operators.
+       */
+      value: unknown;
     }
 
     export interface UnionMember1 {
@@ -713,7 +781,12 @@ export namespace FlagListResponse {
           | 'in'
           | 'not_in';
 
-        value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+        /**
+         * Value to compare against the context attribute. Must be an array for `in` and
+         * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+         * operators.
+         */
+        value: unknown;
       }
 
       export interface UnionMember1 {
@@ -739,7 +812,12 @@ export namespace FlagListResponse {
             | 'in'
             | 'not_in';
 
-          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+          /**
+           * Value to compare against the context attribute. Must be an array for `in` and
+           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+           * operators.
+           */
+          value: unknown;
         }
 
         export interface UnionMember1 {
@@ -765,7 +843,12 @@ export namespace FlagListResponse {
               | 'in'
               | 'not_in';
 
-            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+            /**
+             * Value to compare against the context attribute. Must be an array for `in` and
+             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+             * operators.
+             */
+            value: unknown;
           }
 
           export interface UnionMember1 {
@@ -791,7 +874,12 @@ export namespace FlagListResponse {
                 | 'in'
                 | 'not_in';
 
-              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+              /**
+               * Value to compare against the context attribute. Must be an array for `in` and
+               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+               * operators.
+               */
+              value: unknown;
             }
 
             export interface UnionMember1 {
@@ -817,7 +905,12 @@ export namespace FlagListResponse {
                   | 'in'
                   | 'not_in';
 
-                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+                /**
+                 * Value to compare against the context attribute. Must be an array for `in` and
+                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+                 * operators.
+                 */
+                value: unknown;
               }
 
               export interface UnionMember1 {
@@ -855,8 +948,8 @@ export interface FlagDeleteResponse {
 
 export interface FlagGetResponse {
   /**
-   * Variation the API serves when the flag is off, or when it's on but no rule
-   * matches the context. Must be a key in `variations`.
+   * Variation served when no rule matches or the flag is disabled. Must be a key in
+   * `variations`.
    */
   default_variation: string;
 
@@ -878,8 +971,9 @@ export interface FlagGetResponse {
   rules: Array<FlagGetResponse.Rule>;
 
   /**
-   * Map of variation name to value. All values share the same type (boolean, string,
-   * number, or JSON object/array), and each serialized value stays within 10KB.
+   * Map of variation name to value. All values must be the same type (boolean,
+   * string, number, or JSON object/array). Each serialized value must be 10KB or
+   * smaller.
    */
   variations: {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -888,8 +982,8 @@ export interface FlagGetResponse {
   description?: string | null;
 
   /**
-   * Value type of the flag's variations. The API infers this from the variation
-   * values on write, so you can omit it in requests.
+   * Value type of the flag's variations. Inferred from the variation values on
+   * write, so it may be omitted in requests.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 
@@ -907,13 +1001,13 @@ export namespace FlagGetResponse {
     conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
     /**
-     * Evaluation order: the API evaluates rules with lower numbers first. Must be
-     * unique across the flag's rules.
+     * Evaluation order; lower numbers are evaluated first. Must be unique across the
+     * flag's rules.
      */
     priority: number;
 
     /**
-     * Variation the API serves when this rule matches. Must be a key in `variations`.
+     * Variation served when this rule matches. Must be a key in `variations`.
      */
     serve_variation: string;
 
@@ -937,7 +1031,12 @@ export namespace FlagGetResponse {
         | 'in'
         | 'not_in';
 
-      value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+      /**
+       * Value to compare against the context attribute. Must be an array for `in` and
+       * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+       * operators.
+       */
+      value: unknown;
     }
 
     export interface UnionMember1 {
@@ -963,7 +1062,12 @@ export namespace FlagGetResponse {
           | 'in'
           | 'not_in';
 
-        value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+        /**
+         * Value to compare against the context attribute. Must be an array for `in` and
+         * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+         * operators.
+         */
+        value: unknown;
       }
 
       export interface UnionMember1 {
@@ -989,7 +1093,12 @@ export namespace FlagGetResponse {
             | 'in'
             | 'not_in';
 
-          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+          /**
+           * Value to compare against the context attribute. Must be an array for `in` and
+           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+           * operators.
+           */
+          value: unknown;
         }
 
         export interface UnionMember1 {
@@ -1015,7 +1124,12 @@ export namespace FlagGetResponse {
               | 'in'
               | 'not_in';
 
-            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+            /**
+             * Value to compare against the context attribute. Must be an array for `in` and
+             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+             * operators.
+             */
+            value: unknown;
           }
 
           export interface UnionMember1 {
@@ -1041,7 +1155,12 @@ export namespace FlagGetResponse {
                 | 'in'
                 | 'not_in';
 
-              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+              /**
+               * Value to compare against the context attribute. Must be an array for `in` and
+               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+               * operators.
+               */
+              value: unknown;
             }
 
             export interface UnionMember1 {
@@ -1067,7 +1186,12 @@ export namespace FlagGetResponse {
                   | 'in'
                   | 'not_in';
 
-                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+                /**
+                 * Value to compare against the context attribute. Must be an array for `in` and
+                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+                 * operators.
+                 */
+                value: unknown;
               }
 
               export interface UnionMember1 {
@@ -1106,8 +1230,8 @@ export interface FlagCreateParams {
   account_id: string;
 
   /**
-   * Body param: Variation the API serves when the flag is off, or when it's on but
-   * no rule matches the context. Must be a key in `variations`.
+   * Body param: Variation served when no rule matches or the flag is disabled. Must
+   * be a key in `variations`.
    */
   default_variation: string;
 
@@ -1131,9 +1255,9 @@ export interface FlagCreateParams {
   rules: Array<FlagCreateParams.Rule>;
 
   /**
-   * Body param: Map of variation name to value. All values share the same type
-   * (boolean, string, number, or JSON object/array), and each serialized value stays
-   * within 10KB.
+   * Body param: Map of variation name to value. All values must be the same type
+   * (boolean, string, number, or JSON object/array). Each serialized value must be
+   * 10KB or smaller.
    */
   variations: {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -1145,8 +1269,8 @@ export interface FlagCreateParams {
   description?: string | null;
 
   /**
-   * Body param: Value type of the flag's variations. The API infers this from the
-   * variation values on write, so you can omit it in requests.
+   * Body param: Value type of the flag's variations. Inferred from the variation
+   * values on write, so it may be omitted in requests.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 }
@@ -1160,13 +1284,13 @@ export namespace FlagCreateParams {
     conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
     /**
-     * Evaluation order: the API evaluates rules with lower numbers first. Must be
-     * unique across the flag's rules.
+     * Evaluation order; lower numbers are evaluated first. Must be unique across the
+     * flag's rules.
      */
     priority: number;
 
     /**
-     * Variation the API serves when this rule matches. Must be a key in `variations`.
+     * Variation served when this rule matches. Must be a key in `variations`.
      */
     serve_variation: string;
 
@@ -1190,7 +1314,12 @@ export namespace FlagCreateParams {
         | 'in'
         | 'not_in';
 
-      value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+      /**
+       * Value to compare against the context attribute. Must be an array for `in` and
+       * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+       * operators.
+       */
+      value: unknown;
     }
 
     export interface UnionMember1 {
@@ -1216,7 +1345,12 @@ export namespace FlagCreateParams {
           | 'in'
           | 'not_in';
 
-        value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+        /**
+         * Value to compare against the context attribute. Must be an array for `in` and
+         * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+         * operators.
+         */
+        value: unknown;
       }
 
       export interface UnionMember1 {
@@ -1242,7 +1376,12 @@ export namespace FlagCreateParams {
             | 'in'
             | 'not_in';
 
-          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+          /**
+           * Value to compare against the context attribute. Must be an array for `in` and
+           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+           * operators.
+           */
+          value: unknown;
         }
 
         export interface UnionMember1 {
@@ -1268,7 +1407,12 @@ export namespace FlagCreateParams {
               | 'in'
               | 'not_in';
 
-            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+            /**
+             * Value to compare against the context attribute. Must be an array for `in` and
+             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+             * operators.
+             */
+            value: unknown;
           }
 
           export interface UnionMember1 {
@@ -1294,7 +1438,12 @@ export namespace FlagCreateParams {
                 | 'in'
                 | 'not_in';
 
-              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+              /**
+               * Value to compare against the context attribute. Must be an array for `in` and
+               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+               * operators.
+               */
+              value: unknown;
             }
 
             export interface UnionMember1 {
@@ -1320,7 +1469,12 @@ export namespace FlagCreateParams {
                   | 'in'
                   | 'not_in';
 
-                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+                /**
+                 * Value to compare against the context attribute. Must be an array for `in` and
+                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+                 * operators.
+                 */
+                value: unknown;
               }
 
               export interface UnionMember1 {
@@ -1364,8 +1518,8 @@ export interface FlagUpdateParams {
   app_id: string;
 
   /**
-   * Body param: Variation the API serves when the flag is off, or when it's on but
-   * no rule matches the context. Must be a key in `variations`.
+   * Body param: Variation served when no rule matches or the flag is disabled. Must
+   * be a key in `variations`.
    */
   default_variation: string;
 
@@ -1389,9 +1543,9 @@ export interface FlagUpdateParams {
   rules: Array<FlagUpdateParams.Rule>;
 
   /**
-   * Body param: Map of variation name to value. All values share the same type
-   * (boolean, string, number, or JSON object/array), and each serialized value stays
-   * within 10KB.
+   * Body param: Map of variation name to value. All values must be the same type
+   * (boolean, string, number, or JSON object/array). Each serialized value must be
+   * 10KB or smaller.
    */
   variations: {
     [key: string]: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
@@ -1403,8 +1557,8 @@ export interface FlagUpdateParams {
   description?: string | null;
 
   /**
-   * Body param: Value type of the flag's variations. The API infers this from the
-   * variation values on write, so you can omit it in requests.
+   * Body param: Value type of the flag's variations. Inferred from the variation
+   * values on write, so it may be omitted in requests.
    */
   type?: 'boolean' | 'string' | 'number' | 'json';
 }
@@ -1418,13 +1572,13 @@ export namespace FlagUpdateParams {
     conditions: Array<Rule.UnionMember0 | Rule.UnionMember1>;
 
     /**
-     * Evaluation order: the API evaluates rules with lower numbers first. Must be
-     * unique across the flag's rules.
+     * Evaluation order; lower numbers are evaluated first. Must be unique across the
+     * flag's rules.
      */
     priority: number;
 
     /**
-     * Variation the API serves when this rule matches. Must be a key in `variations`.
+     * Variation served when this rule matches. Must be a key in `variations`.
      */
     serve_variation: string;
 
@@ -1448,7 +1602,12 @@ export namespace FlagUpdateParams {
         | 'in'
         | 'not_in';
 
-      value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+      /**
+       * Value to compare against the context attribute. Must be an array for `in` and
+       * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+       * operators.
+       */
+      value: unknown;
     }
 
     export interface UnionMember1 {
@@ -1474,7 +1633,12 @@ export namespace FlagUpdateParams {
           | 'in'
           | 'not_in';
 
-        value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+        /**
+         * Value to compare against the context attribute. Must be an array for `in` and
+         * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+         * operators.
+         */
+        value: unknown;
       }
 
       export interface UnionMember1 {
@@ -1500,7 +1664,12 @@ export namespace FlagUpdateParams {
             | 'in'
             | 'not_in';
 
-          value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+          /**
+           * Value to compare against the context attribute. Must be an array for `in` and
+           * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+           * operators.
+           */
+          value: unknown;
         }
 
         export interface UnionMember1 {
@@ -1526,7 +1695,12 @@ export namespace FlagUpdateParams {
               | 'in'
               | 'not_in';
 
-            value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+            /**
+             * Value to compare against the context attribute. Must be an array for `in` and
+             * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+             * operators.
+             */
+            value: unknown;
           }
 
           export interface UnionMember1 {
@@ -1552,7 +1726,12 @@ export namespace FlagUpdateParams {
                 | 'in'
                 | 'not_in';
 
-              value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+              /**
+               * Value to compare against the context attribute. Must be an array for `in` and
+               * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+               * operators.
+               */
+              value: unknown;
             }
 
             export interface UnionMember1 {
@@ -1578,7 +1757,12 @@ export namespace FlagUpdateParams {
                   | 'in'
                   | 'not_in';
 
-                value: string | null | number | boolean | { [key: string]: unknown } | Array<unknown>;
+                /**
+                 * Value to compare against the context attribute. Must be an array for `in` and
+                 * `not_in`; numeric and ISO-8601 datetime strings are accepted by the ordering
+                 * operators.
+                 */
+                value: unknown;
               }
 
               export interface UnionMember1 {

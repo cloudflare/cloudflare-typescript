@@ -50,25 +50,6 @@ const runTests = (client: PartialCloudflare<{ hostnames: { settings: { tls: Base
     });
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.hostnames.settings.tls.list('ciphers', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: required and optional params', async () => {
-    const response = await client.hostnames.settings.tls.list('ciphers', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
   test('delete: only required params', async () => {
     const responsePromise = client.hostnames.settings.tls.delete('app.example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -91,9 +72,8 @@ const runTests = (client: PartialCloudflare<{ hostnames: { settings: { tls: Base
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.hostnames.settings.tls.get('app.example.com', {
+    const responsePromise = client.hostnames.settings.tls.get('ciphers', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      setting_id: 'ciphers',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -105,9 +85,8 @@ const runTests = (client: PartialCloudflare<{ hostnames: { settings: { tls: Base
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.hostnames.settings.tls.get('app.example.com', {
+    const response = await client.hostnames.settings.tls.get('ciphers', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      setting_id: 'ciphers',
     });
   });
 };

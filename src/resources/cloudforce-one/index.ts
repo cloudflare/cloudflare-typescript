@@ -36,13 +36,11 @@ export {
   type ThreatEventCreateResponse,
   type ThreatEventListResponse,
   type ThreatEventBulkCreateResponse,
-  type ThreatEventBulkCreateRelationshipsResponse,
   type ThreatEventEditResponse,
   type ThreatEventGetResponse,
   type ThreatEventCreateParams,
   type ThreatEventListParams,
   type ThreatEventBulkCreateParams,
-  type ThreatEventBulkCreateRelationshipsParams,
   type ThreatEventEditParams,
   type ThreatEventGetParams,
 } from './threat-events/index';

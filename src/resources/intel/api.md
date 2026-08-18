@@ -95,16 +95,6 @@ Methods:
 
 - <code title="get /accounts/{account_id}/intel/whois">client.intel.whois.<a href="./src/resources/intel/whois.ts">get</a>({ ...params }) -> WhoisGetResponse</code>
 
-## URLs
-
-Types:
-
-- <code><a href="./src/resources/intel/urls.ts">URL</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/intel/url">client.intel.urls.<a href="./src/resources/intel/urls.ts">get</a>({ ...params }) -> URL</code>
-
 ## IndicatorFeeds
 
 Types:
@@ -153,33 +143,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/intel/sinkholes/sinkholes.ts">Sinkhole</a></code>
-- <code><a href="./src/resources/intel/sinkholes/sinkholes.ts">SinkholeUpdateResponse</a></code>
-- <code><a href="./src/resources/intel/sinkholes/sinkholes.ts">SinkholeDeleteResponse</a></code>
+- <code><a href="./src/resources/intel/sinkholes.ts">Sinkhole</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">create</a>({ ...params }) -> Sinkhole</code>
-- <code title="put /accounts/{account_id}/intel/sinkholes/{sinkhole_id}">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">update</a>(sinkholeID, { ...params }) -> SinkholeUpdateResponse</code>
-- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">list</a>({ ...params }) -> SinkholesSinglePage</code>
-- <code title="delete /accounts/{account_id}/intel/sinkholes/{sinkhole_id}">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">delete</a>(sinkholeID, { ...params }) -> SinkholeDeleteResponse</code>
-- <code title="get /accounts/{account_id}/intel/sinkholes/{sinkhole_id}">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes/sinkholes.ts">get</a>(sinkholeID, { ...params }) -> Sinkhole</code>
-
-### Ingresses
-
-Types:
-
-- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressCreateResponse</a></code>
-- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressUpdateResponse</a></code>
-- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressDeleteResponse</a></code>
-- <code><a href="./src/resources/intel/sinkholes/ingresses.ts">IngressGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">create</a>(sinkholeID, { ...params }) -> IngressCreateResponse</code>
-- <code title="put /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses/{ingress_id}">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">update</a>(ingressID, { ...params }) -> IngressUpdateResponse</code>
-- <code title="delete /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses/{ingress_id}">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">delete</a>(ingressID, { ...params }) -> IngressDeleteResponse</code>
-- <code title="get /zones/{zone_id}/intel/sinkholes/{sinkhole_id}/ingresses/{ingress_id}">client.intel.sinkholes.ingresses.<a href="./src/resources/intel/sinkholes/ingresses.ts">get</a>(ingressID, { ...params }) -> IngressGetResponse</code>
+- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>({ ...params }) -> SinkholesSinglePage</code>
 
 ## AttackSurfaceReport
 
@@ -201,6 +169,7 @@ Types:
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">SeverityQueryParam</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueListResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClassResponse</a></code>
+- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueDismissResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueSeverityResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueTypeResponse</a></code>
 
@@ -208,5 +177,6 @@ Methods:
 
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">list</a>({ ...params }) -> IssueListResponsesV4PagePagination</code>
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/class">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">class</a>({ ...params }) -> IssueClassResponse</code>
+- <code title="put /accounts/{account_id}/intel/attack-surface-report/{issue_id}/dismiss">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">dismiss</a>(issueID, { ...params }) -> IssueDismissResponse</code>
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/severity">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">severity</a>({ ...params }) -> IssueSeverityResponse</code>
 - <code title="get /accounts/{account_id}/intel/attack-surface-report/issues/type">client.intel.attackSurfaceReport.issues.<a href="./src/resources/intel/attack-surface-report/issues.ts">type</a>({ ...params }) -> IssueTypeResponse</code>

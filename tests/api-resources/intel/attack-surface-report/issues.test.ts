@@ -89,6 +89,26 @@ const runTests = (client: PartialCloudflare<{ intel: { attackSurfaceReport: { is
     });
   });
 
+  test('dismiss: only required params', async () => {
+    const responsePromise = client.intel.attackSurfaceReport.issues.dismiss('issue_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('dismiss: required and optional params', async () => {
+    const response = await client.intel.attackSurfaceReport.issues.dismiss('issue_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      dismiss: true,
+    });
+  });
+
   test('severity: only required params', async () => {
     const responsePromise = client.intel.attackSurfaceReport.issues.severity({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

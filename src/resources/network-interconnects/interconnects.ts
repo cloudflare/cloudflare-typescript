@@ -13,9 +13,7 @@ export class BaseInterconnects extends APIResource {
   ] as const);
 
   /**
-   * Creates a new network interconnect for connecting Cloudflare's network to
-   * external networks. Interconnects provide dedicated bandwidth and reduced latency
-   * for traffic exchange.
+   * Create a new interconnect
    *
    * @example
    * ```ts
@@ -34,8 +32,7 @@ export class BaseInterconnects extends APIResource {
   }
 
   /**
-   * Lists all network interconnects configured for the account, including physical
-   * and virtual connections.
+   * List existing interconnects
    *
    * @example
    * ```ts
@@ -51,8 +48,7 @@ export class BaseInterconnects extends APIResource {
   }
 
   /**
-   * Permanently removes a network interconnect configuration. The physical or
-   * virtual connection will be terminated.
+   * Delete an interconnect object
    *
    * @example
    * ```ts
@@ -71,7 +67,7 @@ export class BaseInterconnects extends APIResource {
   }
 
   /**
-   * Retrieves configuration and status details for a specific network interconnect.
+   * Get information about an interconnect object
    *
    * @example
    * ```ts
@@ -92,8 +88,7 @@ export class BaseInterconnects extends APIResource {
   }
 
   /**
-   * Downloads the Letter of Authorization (LOA) for a network interconnect, required
-   * for physical cross-connect provisioning.
+   * Generate the Letter of Authorization (LOA) for a given interconnect
    *
    * @example
    * ```ts
@@ -104,17 +99,15 @@ export class BaseInterconnects extends APIResource {
    * ```
    */
   loa(icon: string, params: InterconnectLOAParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, ...query } = params;
+    const { account_id } = params;
     return this._client.get(path`/accounts/${account_id}/cni/interconnects/${icon}/loa`, {
-      query,
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 
   /**
-   * Gets the current operational status of a network interconnect, including link
-   * state and traffic metrics.
+   * Get the current status of an interconnect object
    *
    * @example
    * ```ts
@@ -159,10 +152,6 @@ export namespace InterconnectCreateResponse {
 
     type: string;
 
-    virtual_port_reservation_id: string;
-
-    ccr_device_name?: string | null;
-
     owner?: string;
   }
 
@@ -182,8 +171,6 @@ export namespace InterconnectCreateResponse {
     region: string;
 
     type: string;
-
-    virtual_port_reservation_id: string;
 
     owner?: string;
 
@@ -222,10 +209,6 @@ export namespace InterconnectListResponse {
 
     type: string;
 
-    virtual_port_reservation_id: string;
-
-    ccr_device_name?: string | null;
-
     owner?: string;
   }
 
@@ -245,8 +228,6 @@ export namespace InterconnectListResponse {
     region: string;
 
     type: string;
-
-    virtual_port_reservation_id: string;
 
     owner?: string;
 
@@ -280,10 +261,6 @@ export namespace InterconnectGetResponse {
 
     type: string;
 
-    virtual_port_reservation_id: string;
-
-    ccr_device_name?: string | null;
-
     owner?: string;
   }
 
@@ -303,8 +280,6 @@ export namespace InterconnectGetResponse {
     region: string;
 
     type: string;
-
-    virtual_port_reservation_id: string;
 
     owner?: string;
 
@@ -464,15 +439,9 @@ export interface InterconnectGetParams {
 
 export interface InterconnectLOAParams {
   /**
-   * Path param: Customer account tag
+   * Customer account tag
    */
   account_id: string;
-
-  /**
-   * Query param: Custom name to use in the LOA instead of the account name (200
-   * Character limit)
-   */
-  name?: string | null;
 }
 
 export interface InterconnectStatusParams {

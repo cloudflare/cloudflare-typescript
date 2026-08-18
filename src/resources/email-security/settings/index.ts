@@ -35,16 +35,13 @@ export {
   BaseDomains,
   type DomainListResponse,
   type DomainDeleteResponse,
-  type DomainBulkDeleteResponse,
   type DomainEditResponse,
   type DomainGetResponse,
   type DomainListParams,
   type DomainDeleteParams,
-  type DomainBulkDeleteParams,
   type DomainEditParams,
   type DomainGetParams,
   type DomainListResponsesV4PagePaginationArray,
-  type DomainBulkDeleteResponsesSinglePage,
 } from './domains';
 export {
   ImpersonationRegistry,

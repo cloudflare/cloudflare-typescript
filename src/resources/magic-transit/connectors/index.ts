@@ -26,15 +26,6 @@ export {
   type EventGetParams,
 } from './events/index';
 export {
-  Interrupts,
-  BaseInterrupts,
-  type InterruptCreateResponse,
-  type InterruptListResponse,
-  type InterruptCreateParams,
-  type InterruptListParams,
-  type InterruptListResponsesSinglePage,
-} from './interrupts';
-export {
   Snapshots,
   BaseSnapshots,
   type SnapshotListResponse,

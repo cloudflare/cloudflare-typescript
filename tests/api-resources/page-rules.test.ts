@@ -24,7 +24,12 @@ const runTests = (client: PartialCloudflare<{ pageRules: BasePageRules }>) => {
     const responsePromise = client.pageRules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check' }],
-      targets: [{}],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,7 +61,12 @@ const runTests = (client: PartialCloudflare<{ pageRules: BasePageRules }>) => {
     const responsePromise = client.pageRules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{ id: 'browser_check' }],
-      targets: [{}],
+      targets: [
+        {
+          constraint: { operator: 'matches', value: '*example.com/images/*' },
+          target: 'url',
+        },
+      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

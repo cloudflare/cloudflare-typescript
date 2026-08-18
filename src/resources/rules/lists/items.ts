@@ -240,8 +240,8 @@ export namespace ItemListResponse {
     created_on: string;
 
     /**
-     * Hostnames support ASCII(7) letters from a to z, the digits from 0 to 9,
-     * wildcards (\*), and the hyphen (-).
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
      */
     hostname: ListsAPI.Hostname;
 
@@ -364,8 +364,8 @@ export namespace ItemGetResponse {
     created_on: string;
 
     /**
-     * Hostnames support ASCII(7) letters from a to z, the digits from 0 to 9,
-     * wildcards (\*), and the hyphen (-).
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
      */
     hostname: ListsAPI.Hostname;
 
@@ -479,8 +479,8 @@ export namespace ItemCreateParams {
 
   export interface ListsListItemHostnameComment {
     /**
-     * Hostnames support ASCII(7) letters from a to z, the digits from 0 to 9,
-     * wildcards (\*), and the hyphen (-).
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
      */
     hostname: ListsAPI.HostnameParam;
 
@@ -547,8 +547,8 @@ export namespace ItemUpdateParams {
 
   export interface ListsListItemHostnameComment {
     /**
-     * Hostnames support ASCII(7) letters from a to z, the digits from 0 to 9,
-     * wildcards (\*), and the hyphen (-).
+     * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+     * 0 to 9, wildcards (\*), and the hyphen (-).
      */
     hostname: ListsAPI.HostnameParam;
 

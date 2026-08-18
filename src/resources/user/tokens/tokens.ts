@@ -83,8 +83,7 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * List all access tokens you created. Results include active, disabled, and
-   * recently-expired tokens when include_expired is set to true.
+   * List all access tokens you created.
    *
    * @example
    * ```ts
@@ -382,11 +381,6 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
    * Direction to order results.
    */
   direction?: 'asc' | 'desc';
-
-  /**
-   * When true, includes recently-expired tokens in the response.
-   */
-  include_expired?: boolean;
 }
 
 Tokens.PermissionGroups = PermissionGroups;

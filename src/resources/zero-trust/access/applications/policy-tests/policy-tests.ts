@@ -222,7 +222,7 @@ export namespace PolicyTestCreateParams {
      * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
      * m, h.
      */
-    session_duration?: string | null;
+    session_duration?: string;
   }
 
   export namespace UnionMember0 {
@@ -245,12 +245,12 @@ export namespace PolicyTestCreateParams {
         /**
          * Clipboard formats allowed when copying from local machine to remote RDP session.
          */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
+        allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
         /**
          * Clipboard formats allowed when copying from remote RDP session to local machine.
          */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
+        allowed_clipboard_remote_to_local_formats?: Array<'text'>;
       }
     }
 

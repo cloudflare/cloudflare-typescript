@@ -23,12 +23,12 @@ Types:
 
 Methods:
 
-- <code title="post /{accounts_or_zones}/{account_or_zone_id}/load_balancers">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">create</a>({ ...params }) -> LoadBalancer</code>
-- <code title="put /{accounts_or_zones}/{account_or_zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">update</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/load_balancers">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">list</a>({ ...params }) -> LoadBalancersSinglePage</code>
-- <code title="delete /{accounts_or_zones}/{account_or_zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">delete</a>(loadBalancerID, { ...params }) -> LoadBalancerDeleteResponse</code>
-- <code title="patch /{accounts_or_zones}/{account_or_zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">edit</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
-- <code title="get /{accounts_or_zones}/{account_or_zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">get</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
+- <code title="post /zones/{zone_id}/load_balancers">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">create</a>({ ...params }) -> LoadBalancer</code>
+- <code title="put /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">update</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
+- <code title="get /zones/{zone_id}/load_balancers">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">list</a>({ ...params }) -> LoadBalancersSinglePage</code>
+- <code title="delete /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">delete</a>(loadBalancerID, { ...params }) -> LoadBalancerDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">edit</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
+- <code title="get /zones/{zone_id}/load_balancers/{load_balancer_id}">client.loadBalancers.<a href="./src/resources/load-balancers/load-balancers.ts">get</a>(loadBalancerID, { ...params }) -> LoadBalancer</code>
 
 ## Monitors
 

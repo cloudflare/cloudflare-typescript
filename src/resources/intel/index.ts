@@ -39,14 +39,7 @@ export {
   Sinkholes,
   BaseSinkholes,
   type Sinkhole,
-  type SinkholeUpdateResponse,
-  type SinkholeDeleteResponse,
-  type SinkholeCreateParams,
-  type SinkholeUpdateParams,
   type SinkholeListParams,
-  type SinkholeDeleteParams,
-  type SinkholeGetParams,
   type SinkholesSinglePage,
-} from './sinkholes/index';
-export { URLs, BaseURLs, type URL, type URLGetParams } from './urls';
+} from './sinkholes';
 export { Whois, BaseWhois, type WhoisGetResponse, type WhoisGetParams } from './whois';

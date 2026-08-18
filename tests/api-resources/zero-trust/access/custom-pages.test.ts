@@ -49,7 +49,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { customPages
       custom_html: '<html><body><h1>Access Denied</h1></body></html>',
       name: 'name',
       type: 'identity_denied',
-      contract_version: 0,
     });
   });
 
@@ -80,7 +79,6 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { customPages
         custom_html: '<html><body><h1>Access Denied</h1></body></html>',
         name: 'name',
         type: 'identity_denied',
-        contract_version: 0,
       },
     );
   });
@@ -102,7 +100,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { customPages
     const response = await client.zeroTrust.access.customPages.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 0,
-      per_page: 1000,
+      per_page: 0,
     });
   });
 

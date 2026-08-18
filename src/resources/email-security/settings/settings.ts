@@ -36,9 +36,6 @@ import {
 import * as DomainsAPI from './domains';
 import {
   BaseDomains,
-  DomainBulkDeleteParams,
-  DomainBulkDeleteResponse,
-  DomainBulkDeleteResponsesSinglePage,
   DomainDeleteParams,
   DomainDeleteResponse,
   DomainEditParams,
@@ -188,14 +185,11 @@ export declare namespace Settings {
     BaseDomains as BaseDomains,
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
-    type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     type DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
-    type DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
-    type DomainBulkDeleteParams as DomainBulkDeleteParams,
     type DomainEditParams as DomainEditParams,
     type DomainGetParams as DomainGetParams,
   };

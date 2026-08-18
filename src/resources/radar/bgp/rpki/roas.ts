@@ -72,14 +72,12 @@ export interface RoaTimeseriesParams {
   asn?: Array<string>;
 
   /**
-   * End of the date range (inclusive). Alternative to `dateRange`; provide together
-   * with `dateStart`.
+   * End of the date range (inclusive).
    */
   dateEnd?: string;
 
   /**
-   * Start of the date range (inclusive). Alternative to `dateRange`; provide
-   * together with `dateEnd`.
+   * Start of the date range (inclusive).
    */
   dateStart?: string;
 

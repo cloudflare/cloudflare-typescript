@@ -27,8 +27,7 @@ const parentPartialClient = createClient({
 });
 
 const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: BaseDatasets } } }>) => {
-  // HTTP 400 error from prism
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = client.logs.logExplorer.datasets.create({
       dataset: 'dataset',
       account_id: 'account_id',
@@ -42,18 +41,15 @@ const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: B
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // HTTP 400 error from prism
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await client.logs.logExplorer.datasets.create({
       dataset: 'dataset',
       account_id: 'account_id',
       fields: [{ enabled: true, name: 'name' }],
-      filter: 'filter',
     });
   });
 
-  // HTTP 400 error from prism
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = client.logs.logExplorer.datasets.update('dataset_id', {
       enabled: true,
       account_id: 'account_id',
@@ -67,19 +63,15 @@ const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: B
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // HTTP 400 error from prism
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await client.logs.logExplorer.datasets.update('dataset_id', {
       enabled: true,
       account_id: 'account_id',
-      deletion_protection: true,
       fields: [{ enabled: true, name: 'name' }],
-      filter: 'filter',
     });
   });
 
-  // HTTP 400 error from prism
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = client.logs.logExplorer.datasets.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -90,22 +82,7 @@ const runTests = (client: PartialCloudflare<{ logs: { logExplorer: { datasets: B
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // HTTP 400 error from prism
-  test.skip('delete', async () => {
-    const responsePromise = client.logs.logExplorer.datasets.delete('dataset_id', {
-      account_id: 'account_id',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // HTTP 400 error from prism
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = client.logs.logExplorer.datasets.get('dataset_id', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Aggregate, BaseAggregate, type AggregateListResponse, type AggregateListParams } from './aggregate';
 export { Attackers, BaseAttackers, type AttackerListResponse, type AttackerListParams } from './attackers';
 export {
   Categories,
@@ -15,7 +14,7 @@ export {
   type CategoryDeleteParams,
   type CategoryEditParams,
   type CategoryGetParams,
-} from './categories/index';
+} from './categories';
 export { Countries, BaseCountries, type CountryListResponse, type CountryListParams } from './countries';
 export { Crons, BaseCrons } from './crons';
 export {
@@ -23,13 +22,11 @@ export {
   BaseDatasets,
   type DatasetCreateResponse,
   type DatasetListResponse,
-  type DatasetDeleteResponse,
   type DatasetEditResponse,
   type DatasetGetResponse,
   type DatasetRawResponse,
   type DatasetCreateParams,
   type DatasetListParams,
-  type DatasetDeleteParams,
   type DatasetEditParams,
   type DatasetGetParams,
   type DatasetRawParams,
@@ -42,28 +39,13 @@ export {
   type EventTagCreateParams,
   type EventTagDeleteParams,
 } from './event-tags';
-export { Graph, BaseGraph, type GraphListResponse, type GraphListParams } from './graph';
-export { Graphql, BaseGraphql, type GraphqlCreateResponse, type GraphqlCreateParams } from './graphql';
 export {
-  Indicators,
-  BaseIndicators,
-  type IndicatorListResponse,
-  type IndicatorListParams,
-} from './indicators/index';
+  IndicatorTypes,
+  BaseIndicatorTypes,
+  type IndicatorTypeListResponse,
+  type IndicatorTypeListParams,
+} from './indicator-types';
 export { Insights, BaseInsights } from './insights';
-export {
-  Queries,
-  BaseQueries,
-  type QueryCreateResponse,
-  type QueryListResponse,
-  type QueryEditResponse,
-  type QueryGetResponse,
-  type QueryCreateParams,
-  type QueryListParams,
-  type QueryDeleteParams,
-  type QueryEditParams,
-  type QueryGetParams,
-} from './queries';
 export {
   Raw,
   BaseRaw,
@@ -73,43 +55,24 @@ export {
   type RawGetParams,
 } from './raw';
 export { Relate, BaseRelate, type RelateDeleteResponse, type RelateDeleteParams } from './relate';
-export {
-  Relationships,
-  BaseRelationships,
-  type RelationshipListResponse,
-  type RelationshipListParams,
-} from './relationships';
-export {
-  Tags,
-  BaseTags,
-  type TagCreateResponse,
-  type TagListResponse,
-  type TagDeleteResponse,
-  type TagEditResponse,
-  type TagCreateParams,
-  type TagListParams,
-  type TagDeleteParams,
-  type TagEditParams,
-} from './tags/index';
+export { Tags, BaseTags, type TagCreateResponse, type TagCreateParams } from './tags';
 export {
   TargetIndustries,
   BaseTargetIndustries,
   type TargetIndustryListResponse,
   type TargetIndustryListParams,
-} from './target-industries/index';
+} from './target-industries';
 export {
   ThreatEvents,
   BaseThreatEvents,
   type ThreatEventCreateResponse,
   type ThreatEventListResponse,
   type ThreatEventBulkCreateResponse,
-  type ThreatEventBulkCreateRelationshipsResponse,
   type ThreatEventEditResponse,
   type ThreatEventGetResponse,
   type ThreatEventCreateParams,
   type ThreatEventListParams,
   type ThreatEventBulkCreateParams,
-  type ThreatEventBulkCreateRelationshipsParams,
   type ThreatEventEditParams,
   type ThreatEventGetParams,
 } from './threat-events';

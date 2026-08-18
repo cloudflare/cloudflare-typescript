@@ -12,7 +12,7 @@ export class BaseEvaluationTypes extends APIResource {
   ] as const);
 
   /**
-   * Lists all available evaluator types for scoring AI gateway responses.
+   * List Evaluators
    *
    * @example
    * ```ts

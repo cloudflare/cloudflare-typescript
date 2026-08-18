@@ -75,32 +75,8 @@ const runTests = (
             },
           ],
           body_part: 'worker.js',
-          cache_options: { enabled: true, cross_version_cache: true },
           compatibility_date: '2021-01-01',
           compatibility_flags: ['nodejs_compat'],
-          exports: {
-            Admin: {
-              type: 'worker',
-              cache: { enabled: true },
-              state: 'created',
-            },
-            Counter: {
-              storage: 'sqlite',
-              type: 'durable-object',
-              container: 'my-container',
-              state: 'created',
-            },
-            OldCounter: {
-              renamed_to: 'Counter',
-              state: 'renamed',
-              type: 'durable-object',
-            },
-            default: {
-              type: 'worker',
-              cache: { enabled: false },
-              state: 'created',
-            },
-          },
           keep_assets: false,
           keep_bindings: ['string'],
           limits: { cpu_ms: 50, subrequests: 1000 },
@@ -139,13 +115,6 @@ const runTests = (
               propagation_policy: 'authenticated',
             },
           },
-          package_dependencies: [
-            {
-              installedVersion: '4.17.22',
-              name: 'lodash',
-              packageJsonVersion: '^4.17.21',
-            },
-          ],
           placement: { mode: 'smart' },
           tags: ['string'],
           tail_consumers: [

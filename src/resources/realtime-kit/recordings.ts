@@ -45,7 +45,7 @@ export class BaseRecordings extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.recordings.getOneRecording(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'recording_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       app_id: 'app_id',
@@ -97,7 +97,7 @@ export class BaseRecordings extends APIResource {
    * ```ts
    * const response =
    *   await client.realtimeKit.recordings.pauseResumeStopRecording(
-   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *     'recording_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
    *       app_id: '2a95132c15732412d22c1476fa83f27a',
@@ -130,7 +130,6 @@ export class BaseRecordings extends APIResource {
    *     'app_id',
    *     {
    *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *       meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
    *       audio_config: {
    *         channel: 'stereo',
    *         codec: 'AAC',
@@ -139,6 +138,7 @@ export class BaseRecordings extends APIResource {
    *       file_name_prefix: 'string',
    *       interactive_config: { type: 'ID3' },
    *       max_seconds: 60,
+   *       meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
    *       realtimekit_bucket_config: { enabled: true },
    *       video_config: {
    *         codec: 'H264',
@@ -1510,7 +1510,7 @@ export interface RecordingGetRecordingsParams {
   /**
    * Query param: Filter by one or more recording status
    */
-  status?: Array<'INVOKED' | 'RECORDING' | 'UPLOADING' | 'UPLOADED' | 'ERRORED' | 'PAUSED'>;
+  status?: Array<'INVOKED' | 'RECORDING' | 'UPLOADING' | 'UPLOADED'>;
 }
 
 export interface RecordingPauseResumeStopRecordingParams {
@@ -1535,11 +1535,6 @@ export interface RecordingStartRecordingsParams {
    * Path param: The account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Body param: ID of the meeting to record.
-   */
-  meeting_id: string;
 
   /**
    * Body param: By default, a meeting allows only one recording to run at a time.
@@ -1575,6 +1570,11 @@ export interface RecordingStartRecordingsParams {
    * from a minimum of 60 seconds to a maximum of 24 hours.
    */
   max_seconds?: number;
+
+  /**
+   * Body param: ID of the meeting to record.
+   */
+  meeting_id?: string;
 
   /**
    * Body param

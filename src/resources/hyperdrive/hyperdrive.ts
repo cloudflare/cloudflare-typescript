@@ -13,7 +13,7 @@ import {
   ConfigUpdateParams,
   Configs,
 } from './configs';
-import { V4PagePaginationArray } from '../../core/pagination';
+import { SinglePage } from '../../core/pagination';
 
 export class BaseHyperdriveResource extends APIResource {
   static override readonly _key: readonly ['hyperdrive'] = Object.freeze(['hyperdrive'] as const);
@@ -22,7 +22,7 @@ export class HyperdriveResource extends BaseHyperdriveResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
 
-export type HyperdrivesV4PagePaginationArray = V4PagePaginationArray<Hyperdrive>;
+export type HyperdrivesSinglePage = SinglePage<Hyperdrive>;
 
 /**
  * Connect to a database through a Workers VPC Service. TLS settings (mTLS,
@@ -160,18 +160,10 @@ export interface Hyperdrive {
    * the origin database.
    *
    * Maximum allowed: 20 for free tier accounts, 100 for paid tier accounts. If not
-   * specified, defaults to 20 for free tier and 60 for paid tier. Certain
-   * Cloudflare-managed origins may be permitted a higher limit. Contact Cloudflare
+   * specified, defaults to 20 for free tier and 60 for paid tier. Contact Cloudflare
    * if you need a higher limit.
    */
   origin_connection_limit?: number;
-
-  /**
-   * Defines the last time the Hyperdrive connection pool was explicitly restarted
-   * via the restart endpoint. Omitted if the pool has never been explicitly
-   * restarted.
-   */
-  restarted_on?: string | null;
 }
 
 export namespace Hyperdrive {

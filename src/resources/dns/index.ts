@@ -10,7 +10,7 @@ export {
   type DNSSECDeleteParams,
   type DNSSECEditParams,
   type DNSSECGetParams,
-} from './dnssec/index';
+} from './dnssec';
 export {
   Records,
   BaseRecords,

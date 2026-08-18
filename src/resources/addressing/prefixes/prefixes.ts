@@ -161,28 +161,6 @@ export class BasePrefixes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Triggers a new prefix validation. The checks are run asynchronously and include
-   * IRR, RPKI, and prefix ownership.
-   *
-   * @example
-   * ```ts
-   * const prefix = await client.addressing.prefixes.validate(
-   *   '2af39739cc4e3b5910c918468bb89828',
-   *   { account_id: '258def64c72dae45f3e4c8516e2111f2' },
-   * );
-   * ```
-   */
-  validate(prefixID: string, params: PrefixValidateParams, options?: RequestOptions): APIPromise<Prefix> {
-    const { account_id } = params;
-    return (
-      this._client.post(
-        path`/accounts/${account_id}/addressing/prefixes/${prefixID}/validate`,
-        options,
-      ) as APIPromise<{ result: Prefix }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 export class Prefixes extends BasePrefixes {
   serviceBindings: ServiceBindingsAPI.ServiceBindings = new ServiceBindingsAPI.ServiceBindings(this._client);
@@ -404,13 +382,6 @@ export interface PrefixGetParams {
   account_id: string;
 }
 
-export interface PrefixValidateParams {
-  /**
-   * Identifier of a Cloudflare account.
-   */
-  account_id: string;
-}
-
 Prefixes.ServiceBindings = ServiceBindings;
 Prefixes.BaseServiceBindings = BaseServiceBindings;
 Prefixes.BGPPrefixes = BGPPrefixes;
@@ -429,7 +400,6 @@ export declare namespace Prefixes {
     type PrefixDeleteParams as PrefixDeleteParams,
     type PrefixEditParams as PrefixEditParams,
     type PrefixGetParams as PrefixGetParams,
-    type PrefixValidateParams as PrefixValidateParams,
   };
 
   export {

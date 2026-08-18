@@ -14,6 +14,7 @@ export {
 export {
   TotalTLS,
   BaseTotalTLS,
+  type CertificateAuthority,
   type TotalTLSUpdateResponse,
   type TotalTLSEditResponse,
   type TotalTLSGetResponse,

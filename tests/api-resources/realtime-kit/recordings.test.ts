@@ -52,10 +52,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { recordings: BaseRec
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getOneRecording: only required params', async () => {
-    const responsePromise = client.realtimeKit.recordings.getOneRecording(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
-    );
+    const responsePromise = client.realtimeKit.recordings.getOneRecording('recording_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,10 +67,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { recordings: BaseRec
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getOneRecording: required and optional params', async () => {
-    const response = await client.realtimeKit.recordings.getOneRecording(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
-    );
+    const response = await client.realtimeKit.recordings.getOneRecording('recording_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+    });
   });
 
   // TODO: HTTP 401 from prism, support api tokens
@@ -106,14 +106,11 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { recordings: BaseRec
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('pauseResumeStopRecording: only required params', async () => {
-    const responsePromise = client.realtimeKit.recordings.pauseResumeStopRecording(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: '2a95132c15732412d22c1476fa83f27a',
-        action: 'stop',
-      },
-    );
+    const responsePromise = client.realtimeKit.recordings.pauseResumeStopRecording('recording_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: '2a95132c15732412d22c1476fa83f27a',
+      action: 'stop',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -125,21 +122,17 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { recordings: BaseRec
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('pauseResumeStopRecording: required and optional params', async () => {
-    const response = await client.realtimeKit.recordings.pauseResumeStopRecording(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: '2a95132c15732412d22c1476fa83f27a',
-        action: 'stop',
-      },
-    );
+    const response = await client.realtimeKit.recordings.pauseResumeStopRecording('recording_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: '2a95132c15732412d22c1476fa83f27a',
+      action: 'stop',
+    });
   });
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('startRecordings: only required params', async () => {
     const responsePromise = client.realtimeKit.recordings.startRecordings('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -154,7 +147,6 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { recordings: BaseRec
   test.skip('startRecordings: required and optional params', async () => {
     const response = await client.realtimeKit.recordings.startRecordings('app_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
       allow_multiple_recordings: false,
       audio_config: {
         channel: 'stereo',
@@ -164,6 +156,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { recordings: BaseRec
       file_name_prefix: 'string',
       interactive_config: { type: 'ID3' },
       max_seconds: 60,
+      meeting_id: '97440c6a-140b-40a9-9499-b23fd7a3868a',
       realtimekit_bucket_config: { enabled: true },
       rtmp_out_config: { rtmp_url: 'rtmp://a.rtmp.youtube.com/live2' },
       storage_config: {

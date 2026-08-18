@@ -4,24 +4,14 @@
 
 Types:
 
-- <code><a href="./src/resources/dns/dnssec/dnssec.ts">DNSSEC</a></code>
-- <code><a href="./src/resources/dns/dnssec/dnssec.ts">DNSSECDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/dnssec.ts">DNSSEC</a></code>
+- <code><a href="./src/resources/dns/dnssec.ts">DNSSECDeleteResponse</a></code>
 
 Methods:
 
-- <code title="delete /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec/dnssec.ts">delete</a>({ ...params }) -> DNSSECDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec/dnssec.ts">edit</a>({ ...params }) -> DNSSEC</code>
-- <code title="get /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec/dnssec.ts">get</a>({ ...params }) -> DNSSEC</code>
-
-### Zsk
-
-Types:
-
-- <code><a href="./src/resources/dns/dnssec/zsk.ts">ZskListResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_id}/dnssec/zsk">client.dns.dnssec.zsk.<a href="./src/resources/dns/dnssec/zsk.ts">list</a>({ ...params }) -> ZskListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">delete</a>({ ...params }) -> DNSSECDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">edit</a>({ ...params }) -> DNSSEC</code>
+- <code title="get /zones/{zone_id}/dnssec">client.dns.dnssec.<a href="./src/resources/dns/dnssec.ts">get</a>({ ...params }) -> DNSSEC</code>
 
 ## Records
 

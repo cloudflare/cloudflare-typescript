@@ -17,7 +17,7 @@ export class BaseTargets extends APIResource {
     Object.freeze(['zeroTrust', 'access', 'infrastructure', 'targets'] as const);
 
   /**
-   * Creates a new infrastructure access target in the account.
+   * Create new target
    *
    * @example
    * ```ts
@@ -42,7 +42,7 @@ export class BaseTargets extends APIResource {
   }
 
   /**
-   * Updates an existing infrastructure access target by its ID.
+   * Update target
    *
    * @example
    * ```ts
@@ -72,7 +72,7 @@ export class BaseTargets extends APIResource {
   }
 
   /**
-   * Lists and sorts an account's targets. Filters are optional and are ANDed
+   * Lists and sorts an account’s targets. Filters are optional and are ANDed
    * together.
    *
    * @example
@@ -98,7 +98,7 @@ export class BaseTargets extends APIResource {
   }
 
   /**
-   * Removes a single infrastructure access target by its ID.
+   * Delete target
    *
    * @example
    * ```ts
@@ -185,7 +185,7 @@ export class BaseTargets extends APIResource {
   }
 
   /**
-   * Fetches a single infrastructure access target by its ID.
+   * Get target
    *
    * @example
    * ```ts

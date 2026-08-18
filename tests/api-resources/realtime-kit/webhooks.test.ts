@@ -77,10 +77,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('deleteWebhook: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.deleteWebhook(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
-    );
+    const responsePromise = client.realtimeKit.webhooks.deleteWebhook('webhook_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,7 +92,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('deleteWebhook: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.deleteWebhook('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await client.realtimeKit.webhooks.deleteWebhook('webhook_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       app_id: 'app_id',
     });
@@ -100,7 +100,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('editWebhook: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.editWebhook('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const responsePromise = client.realtimeKit.webhooks.editWebhook('webhook_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       app_id: 'app_id',
     });
@@ -115,7 +115,7 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('editWebhook: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.editWebhook('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await client.realtimeKit.webhooks.editWebhook('webhook_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       app_id: 'app_id',
       enabled: true,
@@ -127,10 +127,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getWebhookByID: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.getWebhookByID(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
-    );
+    const responsePromise = client.realtimeKit.webhooks.getWebhookByID('webhook_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -142,10 +142,10 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('getWebhookByID: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.getWebhookByID(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', app_id: 'app_id' },
-    );
+    const response = await client.realtimeKit.webhooks.getWebhookByID('webhook_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+    });
   });
 
   // TODO: HTTP 401 from prism, support api tokens
@@ -171,26 +171,23 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('replaceWebhook: only required params', async () => {
-    const responsePromise = client.realtimeKit.webhooks.replaceWebhook(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
-        events: [
-          'meeting.started',
-          'meeting.ended',
-          'meeting.participantJoined',
-          'meeting.participantLeft',
-          'meeting.chatSynced',
-          'recording.statusUpdate',
-          'livestreaming.statusUpdate',
-          'meeting.transcript',
-          'meeting.summary',
-        ],
-        name: 'All events webhook',
-        url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
-      },
-    );
+    const responsePromise = client.realtimeKit.webhooks.replaceWebhook('webhook_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+      events: [
+        'meeting.started',
+        'meeting.ended',
+        'meeting.participantJoined',
+        'meeting.participantLeft',
+        'meeting.chatSynced',
+        'recording.statusUpdate',
+        'livestreaming.statusUpdate',
+        'meeting.transcript',
+        'meeting.summary',
+      ],
+      name: 'All events webhook',
+      url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -202,27 +199,24 @@ const runTests = (client: PartialCloudflare<{ realtimeKit: { webhooks: BaseWebho
 
   // TODO: HTTP 401 from prism, support api tokens
   test.skip('replaceWebhook: required and optional params', async () => {
-    const response = await client.realtimeKit.webhooks.replaceWebhook(
-      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        app_id: 'app_id',
-        events: [
-          'meeting.started',
-          'meeting.ended',
-          'meeting.participantJoined',
-          'meeting.participantLeft',
-          'meeting.chatSynced',
-          'recording.statusUpdate',
-          'livestreaming.statusUpdate',
-          'meeting.transcript',
-          'meeting.summary',
-        ],
-        name: 'All events webhook',
-        url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
-        enabled: true,
-      },
-    );
+    const response = await client.realtimeKit.webhooks.replaceWebhook('webhook_id', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      app_id: 'app_id',
+      events: [
+        'meeting.started',
+        'meeting.ended',
+        'meeting.participantJoined',
+        'meeting.participantLeft',
+        'meeting.chatSynced',
+        'recording.statusUpdate',
+        'livestreaming.statusUpdate',
+        'meeting.transcript',
+        'meeting.summary',
+      ],
+      name: 'All events webhook',
+      url: 'https://webhook.site/b23a5bbd-c7b0-4ced-a9e2-78ae7889897e',
+      enabled: true,
+    });
   });
 };
 describe('resource webhooks', () => runTests(client));

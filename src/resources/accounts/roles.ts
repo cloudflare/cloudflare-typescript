@@ -8,9 +8,6 @@ import { PagePromise, V4PagePaginationArray, type V4PagePaginationArrayParams } 
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-/**
- * @deprecated Please use the [Account Permission Groups](https://developers.cloudflare.com/api/resources/iam/subresources/permission_groups/) API instead
- */
 export class BaseRoles extends APIResource {
   static override readonly _key: readonly ['accounts', 'roles'] = Object.freeze([
     'accounts',
@@ -20,7 +17,15 @@ export class BaseRoles extends APIResource {
   /**
    * Get all available roles for an account.
    *
-   * @deprecated Use /accounts/{account_id}/iam/permission_groups instead.
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const role of client.accounts.roles.list({
+   *   account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     params: RoleListParams,
@@ -36,7 +41,13 @@ export class BaseRoles extends APIResource {
   /**
    * Get information about a specific role for an account.
    *
-   * @deprecated Use /accounts/{account_id}/iam/permission_groups/{permission_group_id} instead.
+   * @example
+   * ```ts
+   * const role = await client.accounts.roles.get(
+   *   '3536bcfad5faccb999b47003c79917fb',
+   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   * );
+   * ```
    */
   get(roleID: string, params: RoleGetParams, options?: RequestOptions): APIPromise<Shared.Role> {
     const { account_id } = params;
@@ -47,9 +58,6 @@ export class BaseRoles extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-/**
- * @deprecated Please use the [Account Permission Groups](https://developers.cloudflare.com/api/resources/iam/subresources/permission_groups/) API instead
- */
 export class Roles extends BaseRoles {}
 
 export interface RoleListParams extends V4PagePaginationArrayParams {

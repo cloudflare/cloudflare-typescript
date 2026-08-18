@@ -39,7 +39,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
             {
               attribute: 'x',
               operator: 'equals',
-              value: 'string',
+              value: {},
             },
           ],
           priority: 1,
@@ -69,7 +69,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
             {
               attribute: 'x',
               operator: 'equals',
-              value: 'string',
+              value: {},
             },
           ],
           priority: 1,
@@ -96,7 +96,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
             {
               attribute: 'x',
               operator: 'equals',
-              value: 'string',
+              value: {},
             },
           ],
           priority: 1,
@@ -127,7 +127,7 @@ const runTests = (client: PartialCloudflare<{ flagship: { apps: { flags: BaseFla
             {
               attribute: 'x',
               operator: 'equals',
-              value: 'string',
+              value: {},
             },
           ],
           priority: 1,

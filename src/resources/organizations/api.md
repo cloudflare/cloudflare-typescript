@@ -31,12 +31,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/organizations/logs/audit.ts">AuditListResponse</a></code>
-- <code><a href="./src/resources/organizations/logs/audit.ts">AuditHistoryResponse</a></code>
 
 Methods:
 
 - <code title="get /organizations/{organization_id}/logs/audit">client.organizations.logs.audit.<a href="./src/resources/organizations/logs/audit.ts">list</a>(organizationID, { ...params }) -> AuditListResponsesCursorPaginationAfter</code>
-- <code title="get /organizations/{organization_id}/logs/audit/{id}/history">client.organizations.logs.audit.<a href="./src/resources/organizations/logs/audit.ts">history</a>(id, { ...params }) -> AuditHistoryResponse</code>
 
 ## Billing
 

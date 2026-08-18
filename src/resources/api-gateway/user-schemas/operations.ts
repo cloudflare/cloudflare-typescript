@@ -284,7 +284,7 @@ export namespace OperationListResponse {
         active_schema?: SchemaInfo.ActiveSchema;
 
         /**
-         * Deprecated. Always false.
+         * True if a Cloudflare-provided learned schema is available for this endpoint.
          */
         learned_available?: boolean;
 

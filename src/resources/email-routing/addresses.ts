@@ -85,34 +85,6 @@ export class BaseAddresses extends APIResource {
   }
 
   /**
-   * Updates the status of a specific destination address.
-   *
-   * @example
-   * ```ts
-   * const address = await client.emailRouting.addresses.edit(
-   *   'ea95132c15732412d22c1476fa83f27a',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     status: 'verified',
-   *   },
-   * );
-   * ```
-   */
-  edit(
-    destinationAddressIdentifier: string,
-    params: AddressEditParams,
-    options?: RequestOptions,
-  ): APIPromise<Address> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.patch(
-        path`/accounts/${account_id}/email/routing/addresses/${destinationAddressIdentifier}`,
-        { body, ...options },
-      ) as APIPromise<{ result: Address }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Gets information for a specific destination email already created.
    *
    * @example
@@ -211,19 +183,6 @@ export interface AddressDeleteParams {
   account_id: string;
 }
 
-export interface AddressEditParams {
-  /**
-   * Path param: Identifier.
-   */
-  account_id: string;
-
-  /**
-   * Body param: Destination address status. Non-admin callers may only set verified
-   * addresses back to unverified; setting to verified requires admin privileges.
-   */
-  status: 'unverified' | 'verified';
-}
-
 export interface AddressGetParams {
   /**
    * Identifier.
@@ -238,7 +197,6 @@ export declare namespace Addresses {
     type AddressCreateParams as AddressCreateParams,
     type AddressListParams as AddressListParams,
     type AddressDeleteParams as AddressDeleteParams,
-    type AddressEditParams as AddressEditParams,
     type AddressGetParams as AddressGetParams,
   };
 }

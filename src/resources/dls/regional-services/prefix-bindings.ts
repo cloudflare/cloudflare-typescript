@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as Shared from '../../shared';
 import { APIPromise } from '../../../core/api-promise';
 import { CursorPagination, type CursorPaginationParams, PagePromise } from '../../../core/pagination';
 import { RequestOptions } from '../../../internal/request-options';
@@ -14,10 +15,7 @@ export class BasePrefixBindings extends APIResource {
   ] as const);
 
   /**
-   * Bind a CIDR from a BYOIP prefix to a region.
-   *
-   * This requires the **IP Prefixes Write** permission in addition to **DLS Write**,
-   * because the binding is created against a BYOIP prefix in Addressing.
+   * Create a DLS prefix binding
    *
    * @example
    * ```ts
@@ -44,7 +42,7 @@ export class BasePrefixBindings extends APIResource {
   }
 
   /**
-   * List the BYOIP prefix bindings configured for an account.
+   * List DLS prefix bindings for an account
    *
    * @example
    * ```ts
@@ -69,10 +67,7 @@ export class BasePrefixBindings extends APIResource {
   }
 
   /**
-   * Delete a BYOIP prefix binding.
-   *
-   * Like creating a binding, this requires **IP Prefixes Write** in addition to
-   * **DLS Write**.
+   * Delete a DLS prefix binding
    *
    * @example
    * ```ts
@@ -96,10 +91,7 @@ export class BasePrefixBindings extends APIResource {
   }
 
   /**
-   * Update the region of an existing BYOIP prefix binding.
-   *
-   * Like creating a binding, this requires **IP Prefixes Write** in addition to
-   * **DLS Write**.
+   * Update a DLS prefix binding
    *
    * @example
    * ```ts
@@ -128,7 +120,7 @@ export class BasePrefixBindings extends APIResource {
   }
 
   /**
-   * Retrieve a single BYOIP prefix binding by ID.
+   * Get a DLS prefix binding
    *
    * @example
    * ```ts
@@ -202,37 +194,11 @@ export interface PrefixBindingListResponse {
 }
 
 export interface PrefixBindingDeleteResponse {
-  messages: Array<PrefixBindingDeleteResponse.Message>;
+  messages: Array<Shared.ResponseInfo>;
 
   success: boolean;
 
-  errors?: Array<PrefixBindingDeleteResponse.Error>;
-}
-
-export namespace PrefixBindingDeleteResponse {
-  export interface Message {
-    code: number;
-
-    message: string;
-
-    /**
-     * Optional upstream error context for APIv4 errors that wrap downstream service
-     * failures.
-     */
-    error_chain?: Array<unknown>;
-  }
-
-  export interface Error {
-    code: number;
-
-    message: string;
-
-    /**
-     * Optional upstream error context for APIv4 errors that wrap downstream service
-     * failures.
-     */
-    error_chain?: Array<unknown>;
-  }
+  errors?: Array<Shared.ResponseInfo>;
 }
 
 export interface PrefixBindingEditResponse {

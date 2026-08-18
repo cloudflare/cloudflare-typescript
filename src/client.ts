@@ -42,16 +42,6 @@ import { AISecurity } from './resources/ai-security/ai-security';
 import { AI } from './resources/ai/ai';
 import { AISearch } from './resources/aisearch/aisearch';
 import { Alerting } from './resources/alerting/alerting';
-import {
-  AnalyticsQuery,
-  AnalyticsQuerySummaryParams,
-  AnalyticsQuerySummaryResponse,
-  AnalyticsQueryTimeseriesParams,
-  AnalyticsQueryTimeseriesResponse,
-  AnalyticsQueryTopNParams,
-  AnalyticsQueryTopNResponse,
-  AnalyticsQueryTopNResponsesSinglePage,
-} from './resources/analytics-query/analytics-query';
 import { APIGateway } from './resources/api-gateway/api-gateway';
 import { Argo } from './resources/argo/argo';
 import { AuditLogs } from './resources/audit-logs/audit-logs';
@@ -121,14 +111,12 @@ import { PageRules } from './resources/page-rules/page-rules';
 import { PageShield } from './resources/page-shield/page-shield';
 import { Pages } from './resources/pages/pages';
 import { Pipelines } from './resources/pipelines/pipelines';
-import { Precursor } from './resources/precursor/precursor';
 import { Queues } from './resources/queues/queues';
 import { R2DataCatalog } from './resources/r2-data-catalog/r2-data-catalog';
 import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
 import { RateLimits } from './resources/rate-limits/rate-limits';
 import { RealtimeKit } from './resources/realtime-kit/realtime-kit';
-import { RegistrarSandbox } from './resources/registrar-sandbox/registrar-sandbox';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
 import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
@@ -263,13 +251,6 @@ export interface ClientOptions {
    * Defaults to globalThis.console.
    */
   logger?: Logger | undefined;
-
-  /**
-   * Define the API version to target for the requests, e.g., "2025-01-01".
-   *
-   * Defaults to today's date.
-   */
-  apiVersion?: string | null | undefined;
 }
 
 /**
@@ -287,7 +268,6 @@ export class BaseCloudflare {
   logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
-  apiVersion: string;
 
   private fetch: Fetch;
   #encoder: Opts.RequestEncoder;
@@ -308,11 +288,9 @@ export class BaseCloudflare {
    * @param {number} [opts.maxRetries=2] - The maximum number of times the client will retry a request.
    * @param {HeadersLike} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
-   * @param {string | null} [opts.apiVersion] - Define the version to target for the API.
    */
   constructor({
     baseURL = readEnv('CLOUDFLARE_BASE_URL'),
-    apiVersion = null,
     apiToken = readEnv('CLOUDFLARE_API_TOKEN') ?? null,
     apiKey = readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = readEnv('CLOUDFLARE_EMAIL') ?? null,
@@ -326,7 +304,6 @@ export class BaseCloudflare {
       userServiceKey,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
-      apiVersion: apiVersion || new Date().toISOString().slice(0, 10),
     };
 
     this.baseURL = options.baseURL!;
@@ -362,7 +339,6 @@ export class BaseCloudflare {
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
     this.userServiceKey = userServiceKey;
-    this.apiVersion = options.apiVersion!;
   }
 
   /**
@@ -382,7 +358,6 @@ export class BaseCloudflare {
       apiKey: this.apiKey,
       apiEmail: this.apiEmail,
       userServiceKey: this.userServiceKey,
-      apiVersion: this.apiVersion,
       ...options,
     });
     return client;
@@ -913,7 +888,6 @@ export class BaseCloudflare {
       {
         Accept: 'application/json',
         'User-Agent': this.getUserAgent(),
-        'api-version': this.apiVersion,
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
@@ -1027,7 +1001,6 @@ export class Cloudflare extends BaseCloudflare {
   cache: API.Cache = new API.Cache(this);
   ssl: API.SSL = new API.SSL(this);
   acm: API.ACM = new API.ACM(this);
-  analyticsQuery: API.AnalyticsQuery = new API.AnalyticsQuery(this);
   argo: API.Argo = new API.Argo(this);
   certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
   clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
@@ -1078,208 +1051,7 @@ export class Cloudflare extends BaseCloudflare {
   networkInterconnects: API.NetworkInterconnects = new API.NetworkInterconnects(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
-  /**
-   * Registrar API for searching, checking, registering, and managing domains through Cloudflare Registrar.
-   *
-   * ## Prerequisites
-   *
-   * Before using this API, ensure:
-   *
-   * 1. **Cloudflare account** — the caller must have a valid Cloudflare account.
-   * 2. **Billing profile** — the account must have a billing profile with a valid,
-   *   current default payment method (credit card or other accepted method).
-   *   This cannot be set up via API — the account owner must configure billing
-   *   at `https://dash.cloudflare.com/{account_id}/billing/payment-info` before
-   *   calling `POST /registrations`.
-   * 3. **API authentication** — use an API token or API key with the appropriate
-   *   Registrar permissions for the operations you are calling.
-   *
-   * ## Terminology: domain extension
-   *
-   * Throughout this API, "extension" refers to the domain extension part of a fully
-   * qualified domain name — the portion after the registrable label. For example,
-   * in `example.co.uk`, the extension is `co.uk` (not just `uk`). This covers both
-   * top-level domains like `com` and multi-level extensions like `co.uk`. This is
-   * distinct from other uses of the word "extension" (e.g., EPP extensions).
-   *
-   * ## Supported extensions
-   *
-   * This API supports programmatic registration for all extensions supported by
-   * the dashboard experience, with the following exceptions:
-   *
-   * `giving`, `mom`, `inc`, `lol`, `sh`, `link`, `cc`, `new`
-   *
-   * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
-   * listed above can be registered at `https://dash.cloudflare.com/{account_id}/domains/registrations`.
-   *
-   * ## Typical workflow
-   *
-   * 1. **Search** — call `GET /domain-search?q={keyword}` to discover available domains.
-   * 2. **Check** — call `POST /domain-check` with candidate domains to verify real-time
-   *   availability and pricing.
-   * 3. **Review the response** — if `registrable: false`, inspect `reason` to
-   *   understand whether the domain is unavailable, the extension is not supported
-   *   by this API, the extension is not supported by Cloudflare Registrar at all,
-   *   or the extension's registry has frozen new registrations.
-   * 4. **Handle premium domains** — if `tier: premium`, premium registration is
-   *   not currently supported by this API. Surface the premium pricing to the user,
-   *   but do not proceed to `POST /registrations` for that domain.
-   * 5. **Observe the registration schema** — call `GET /extensions/:extension_name`
-   *   to discover the required values for registering this extension.
-   * 6. **Register** — call `POST /registrations` with the chosen domain name for
-   *   supported non-premium registrations.
-   * 7. **Confirm completion** — if the response is `201 Created`, registration
-   *   completed within the default timeout and no polling is needed.
-   * 8. **Poll when needed** — if the response is `202 Accepted`, poll
-   *   `links.self` from the workflow response.
-   * 9. **Stop for user action** — if `state: action_required`, stop polling and
-   *   surface `context.action` to the user.
-   *   The workflow will not resolve on its own.
-   * 10. **Continue when blocked** — if `state: blocked`, continue polling and
-   *   inform the user that a third party, such as the extension registry or losing
-   *   registrar, is delaying progress.
-   * 11. **Review failures before retrying** — if `state: failed`, review
-   *   `error.code` and `error.message`, then decide whether user action or a new
-   *   Check call is needed.
-   *
-   * **All successful domain registrations are non-refundable.** Once the registration
-   * workflow completes with `state: succeeded`, the charge cannot be reversed.
-   * Confirm pricing and domain choice with the user before calling `POST /registrations`.
-   *
-   * ## Default behavior for mutating operations
-   *
-   * By default, mutating operations such as create and update hold the connection
-   * for a bounded, server-defined amount of time while the operation completes.
-   * In most cases, the response contains a completed workflow status and no
-   * polling is required.
-   *
-   * - **Completed within the synchronous wait window:** Returns `201` (create)
-   * or `200` (update) with a `workflow_status` where `state: succeeded` and
-   * `completed: true`.
-   * - **Still processing after the synchronous wait window:** Returns
-   * `202 Accepted` with a `workflow_status` where `completed: false`. Use
-   * the `links.self` URL to poll for completion.
-   *
-   * ## Non-blocking mode
-   *
-   * To receive an immediate `202 Accepted` response without waiting, send the
-   * `Prefer: respond-async` request header (RFC 7240). The server will acknowledge
-   * it with a `Preference-Applied: respond-async` response header.
-   *
-   * ## Polling
-   *
-   * When the response is `202`, poll the workflow status endpoint indicated by
-   * `links.self` in the response body until the workflow reaches a terminal
-   * state or requires user action.
-   */
   registrar: API.Registrar = new API.Registrar(this);
-  /**
-   * Use the Registrar Sandbox API to test domain search, availability checks,
-   * registration, and domain management flows without buying real domains.
-   *
-   * **This API is a test environment for the production Registrar API.**
-   *
-   * ## Prerequisites
-   *
-   * Before using this API, make sure you have:
-   *
-   * 1. **Cloudflare account** — the caller must have a valid Cloudflare account.
-   * 2. **API authentication** — create an API token with Registrar Sandbox permissions.
-   *
-   * ## How the Sandbox API differs from the production Registrar API
-   *
-   * Because the Sandbox API is intended for testing, it behaves differently from
-   * the production Registrar API in a few important ways:
-   *
-   * 1. **No billing** — you will not be charged real money for purchasing a domain.
-   * 2. **No real domains** — purchased domains are test records and will not be
-   *   reachable on the Internet.
-   * 3. **No DNS zones** — purchasing a domain does not create a zone resource.
-   * 4. **No Registration Express Mode** — you must provide full contact data.
-   *
-   * Sandbox purchases are still persisted. If you purchase a domain in the sandbox,
-   * that domain will not be available for others to purchase in the sandbox.
-   *
-   * ## Terminology: domain extension
-   *
-   * Throughout this API, "extension" refers to the domain extension part of a fully
-   * qualified domain name — the portion after the registrable label. For example,
-   * in `example.co.uk`, the extension is `co.uk` (not just `uk`). This covers both
-   * top-level domains like `com` and multi-level extensions like `co.uk`. This is
-   * distinct from other uses of the word "extension" (e.g., EPP extensions).
-   *
-   * ## Supported extensions
-   *
-   * The Sandbox API currently supports programmatic registration for these
-   * extensions:
-   *
-   * `com`, `net`
-   *
-   * The production Registrar API supports 40+ extensions.
-   *
-   * Cloudflare Registrar supports 400+ extensions in the dashboard. Extensions
-   * not listed above can be registered at `https://dash.cloudflare.com/{account_id}/domains/registrations`.
-   *
-   * ## Typical workflow
-   *
-   * 1. **Search** — call `GET /domain-search?q={keyword}` to discover available domains.
-   * 2. **Check** — call `POST /domain-check` with candidate domains to verify real-time
-   *   availability and pricing.
-   * 3. **Review the response** — if `registrable: false`, inspect `reason` to
-   *   understand whether the domain is unavailable, the extension is not supported
-   *   by this API, the extension is not supported by Cloudflare Registrar at all,
-   *   or the extension's registry has frozen new registrations.
-   * 4. **Handle premium domains** — if `tier: premium`, premium registration is
-   *   not currently supported by this API. The Sandbox API currently supports
-   *   only `com` and `net`, which do not have premium registrations, but clients
-   *   should still handle this response for consistency with the production
-   *   Registrar API. Surface the premium pricing to the user, but do not proceed
-   *   to `POST /registrations` for that domain.
-   * 5. **Observe the registration schema** — call `GET /extensions/:extension_name`
-   *   to discover the required values for registering this extension.
-   * 6. **Register** — call `POST /registrations` with the chosen domain name for
-   *   supported non-premium registrations.
-   * 7. **Confirm completion** — if the response is `201 Created`, registration
-   *   completed within the default timeout and no polling is needed.
-   * 8. **Poll when needed** — if the response is `202 Accepted`, poll
-   *   `links.self` from the workflow response.
-   * 9. **Stop for user action** — if `state: action_required`, stop polling and
-   *   surface `context.action` to the user.
-   *   The workflow will not resolve on its own.
-   * 10. **Continue when blocked** — if `state: blocked`, continue polling and
-   *   inform the user that a third party, such as the extension registry or losing
-   *   registrar, is delaying progress.
-   * 11. **Review failures before retrying** — if `state: failed`, review
-   *   `error.code` and `error.message`, then decide whether user action or a new
-   *   Check call is needed.
-   *
-   * ## Default behavior for mutating operations
-   *
-   * By default, mutating operations such as create and update hold the connection
-   * for a bounded, server-defined amount of time while the operation completes.
-   * In most cases, the response contains a completed workflow status and no
-   * polling is required.
-   *
-   * - **Completed within the synchronous wait window:** Returns `201` (create)
-   * or `200` (update) with a `workflow_status` where `state: succeeded` and
-   * `completed: true`.
-   * - **Still processing after the synchronous wait window:** Returns
-   * `202 Accepted` with a `workflow_status` where `completed: false`. Use
-   * the `links.self` URL to poll for completion.
-   *
-   * ## Non-blocking mode
-   *
-   * To receive an immediate `202 Accepted` response without waiting, send the
-   * `Prefer: respond-async` request header (RFC 7240). The server will acknowledge
-   * it with a `Preference-Applied: respond-async` response header.
-   *
-   * ## Polling
-   *
-   * When the response is `202`, poll the workflow status endpoint indicated by
-   * `links.self` in the response body until the workflow reaches a terminal
-   * state or requires user action.
-   */
-  registrarSandbox: API.RegistrarSandbox = new API.RegistrarSandbox(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
   rules: API.Rules = new API.Rules(this);
   stream: API.Stream = new API.Stream(this);
@@ -1299,7 +1071,6 @@ export class Cloudflare extends BaseCloudflare {
   radar: API.Radar = new API.Radar(this);
   botManagement: API.BotManagement = new API.BotManagement(this);
   fraud: API.Fraud = new API.Fraud(this);
-  precursor: API.Precursor = new API.Precursor(this);
   originPostQuantumEncryption: API.OriginPostQuantumEncryption = new API.OriginPostQuantumEncryption(this);
   originTLSComplianceModes: API.OriginTLSComplianceModes = new API.OriginTLSComplianceModes(this);
   googleTagGateway: API.GoogleTagGateway = new API.GoogleTagGateway(this);
@@ -1350,7 +1121,6 @@ Cloudflare.LoadBalancers = LoadBalancers;
 Cloudflare.Cache = Cache;
 Cloudflare.SSL = SSL;
 Cloudflare.ACM = ACM;
-Cloudflare.AnalyticsQuery = AnalyticsQuery;
 Cloudflare.Argo = Argo;
 Cloudflare.CertificateAuthorities = CertificateAuthorities;
 Cloudflare.ClientCertificates = ClientCertificates;
@@ -1402,7 +1172,6 @@ Cloudflare.NetworkInterconnects = NetworkInterconnects;
 Cloudflare.MTLSCertificates = MTLSCertificates;
 Cloudflare.Pages = Pages;
 Cloudflare.Registrar = Registrar;
-Cloudflare.RegistrarSandbox = RegistrarSandbox;
 Cloudflare.RequestTracers = RequestTracers;
 Cloudflare.Rules = Rules;
 Cloudflare.Stream = Stream;
@@ -1422,7 +1191,6 @@ Cloudflare.VulnerabilityScanner = VulnerabilityScanner;
 Cloudflare.Radar = Radar;
 Cloudflare.BotManagement = BotManagement;
 Cloudflare.Fraud = Fraud;
-Cloudflare.Precursor = Precursor;
 Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
 Cloudflare.OriginTLSComplianceModes = OriginTLSComplianceModes;
 Cloudflare.GoogleTagGateway = GoogleTagGateway;
@@ -1519,17 +1287,6 @@ export declare namespace Cloudflare {
   export { SSL as SSL };
 
   export { ACM as ACM };
-
-  export {
-    AnalyticsQuery as AnalyticsQuery,
-    type AnalyticsQuerySummaryResponse as AnalyticsQuerySummaryResponse,
-    type AnalyticsQueryTimeseriesResponse as AnalyticsQueryTimeseriesResponse,
-    type AnalyticsQueryTopNResponse as AnalyticsQueryTopNResponse,
-    type AnalyticsQueryTopNResponsesSinglePage as AnalyticsQueryTopNResponsesSinglePage,
-    type AnalyticsQuerySummaryParams as AnalyticsQuerySummaryParams,
-    type AnalyticsQueryTimeseriesParams as AnalyticsQueryTimeseriesParams,
-    type AnalyticsQueryTopNParams as AnalyticsQueryTopNParams,
-  };
 
   export { Argo as Argo };
 
@@ -1633,8 +1390,6 @@ export declare namespace Cloudflare {
 
   export { Registrar as Registrar };
 
-  export { RegistrarSandbox as RegistrarSandbox };
-
   export { RequestTracers as RequestTracers };
 
   export { Rules as Rules };
@@ -1672,8 +1427,6 @@ export declare namespace Cloudflare {
   export { BotManagement as BotManagement };
 
   export { Fraud as Fraud };
-
-  export { Precursor as Precursor };
 
   export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
 

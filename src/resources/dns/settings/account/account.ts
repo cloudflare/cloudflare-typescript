@@ -92,9 +92,7 @@ export namespace AccountEditResponse {
     flatten_all_cnames: boolean;
 
     /**
-     * @deprecated foundation_dns is deprecated. Use nameservers.type:
-     * cloudflare.advanced to turn on Advanced Nameservers and cloudflare.standard to
-     * turn it off. This field will be removed in a future API version.
+     * Whether to enable Foundation DNS Advanced Nameservers on the zone.
      */
     foundation_dns: boolean;
 
@@ -155,12 +153,7 @@ export namespace AccountEditResponse {
       /**
        * Nameserver type
        */
-      type:
-        | 'cloudflare.standard'
-        | 'cloudflare.advanced'
-        | 'cloudflare.standard.random'
-        | 'custom.account'
-        | 'custom.tenant';
+      type: 'cloudflare.standard' | 'cloudflare.standard.random' | 'custom.account' | 'custom.tenant';
     }
 
     /**
@@ -232,9 +225,7 @@ export namespace AccountGetResponse {
     flatten_all_cnames: boolean;
 
     /**
-     * @deprecated foundation_dns is deprecated. Use nameservers.type:
-     * cloudflare.advanced to turn on Advanced Nameservers and cloudflare.standard to
-     * turn it off. This field will be removed in a future API version.
+     * Whether to enable Foundation DNS Advanced Nameservers on the zone.
      */
     foundation_dns: boolean;
 
@@ -295,12 +286,7 @@ export namespace AccountGetResponse {
       /**
        * Nameserver type
        */
-      type:
-        | 'cloudflare.standard'
-        | 'cloudflare.advanced'
-        | 'cloudflare.standard.random'
-        | 'custom.account'
-        | 'custom.tenant';
+      type: 'cloudflare.standard' | 'cloudflare.standard.random' | 'custom.account' | 'custom.tenant';
     }
 
     /**
@@ -380,9 +366,7 @@ export namespace AccountEditParams {
     flatten_all_cnames?: boolean;
 
     /**
-     * @deprecated foundation_dns is deprecated. Use nameservers.type:
-     * cloudflare.advanced to turn on Advanced Nameservers and cloudflare.standard to
-     * turn it off. This field will be removed in a future API version.
+     * Whether to enable Foundation DNS Advanced Nameservers on the zone.
      */
     foundation_dns?: boolean;
 
@@ -443,12 +427,7 @@ export namespace AccountEditParams {
       /**
        * Nameserver type
        */
-      type?:
-        | 'cloudflare.standard'
-        | 'cloudflare.advanced'
-        | 'cloudflare.standard.random'
-        | 'custom.account'
-        | 'custom.tenant';
+      type?: 'cloudflare.standard' | 'cloudflare.standard.random' | 'custom.account' | 'custom.tenant';
     }
 
     /**

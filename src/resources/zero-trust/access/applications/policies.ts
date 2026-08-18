@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../core/resource';
-import * as ApplicationsPoliciesAPI from './policies';
 import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
 import { APIPromise } from '../../../../core/api-promise';
@@ -76,9 +75,6 @@ export class BasePolicies extends APIResource {
    *     {
    *       app_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
    *       account_id: 'account_id',
-   *       mfa_config: {
-   *         allowed_authenticators: ['ssh_fido2_key'],
-   *       },
    *     },
    *   );
    * ```
@@ -1273,786 +1269,435 @@ export namespace ServiceTokenRuleParam {
   }
 }
 
-export type PolicyCreateResponse = PolicyCreateResponse.UnionMember0 | PolicyCreateResponse.UnionMember1;
+export interface PolicyCreateResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyCreateResponse.ConnectionRules;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateResponse.MfaConfig;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
+}
 
 export namespace PolicyCreateResponse {
-  export interface UnionMember0 {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
     /**
-     * The UUID of the policy
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    id?: string;
-
-    /**
-     * Identifier.
-     */
-    account_id?: string;
-
-    /**
-     * Administrators who can approve a temporary authentication request.
-     */
-    approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
-
-    /**
-     * Requires the user to request access from an administrator at the start of each
-     * session.
-     */
-    approval_required?: boolean;
-
-    /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember0.ConnectionRules;
-
-    created_at?: string;
-
-    /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
-     */
-    decision?: ApplicationsAPI.Decision;
-
-    /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
-     */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Require this application to be served in an isolated browser for users matching
-     * this policy. 'Client Web Isolation' must be on for the account in order to use
-     * this feature.
-     */
-    isolation_required?: boolean;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    mfa_config?: UnionMember0.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * The order of execution for this policy. Must be unique for each policy within an
-     * app.
-     */
-    precedence?: number;
-
-    /**
-     * A custom message that will appear on the purpose justification screen.
-     */
-    purpose_justification_prompt?: string;
-
-    /**
-     * Require users to enter a justification when they log in to the application.
-     */
-    purpose_justification_required?: boolean;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * The amount of time that tokens issued for the application will be valid. Must be
-     * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-     * m, h.
-     */
-    session_duration?: string | null;
-
-    updated_at?: string;
+    rdp?: ConnectionRules.RDP;
   }
 
-  export namespace UnionMember0 {
+  export namespace ConnectionRules {
     /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface ConnectionRules {
+    export interface RDP {
       /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      rdp?: ConnectionRules.RDP;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
-       */
-      export interface RDP {
-        /**
-         * Clipboard formats allowed when copying from local machine to remote RDP session.
-         */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
-
-        /**
-         * Clipboard formats allowed when copying from remote RDP session to local machine.
-         */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with.
-       */
-      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
       /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
-       */
-      session_duration?: string;
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
     }
   }
 
-  export interface UnionMember1 {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
     /**
-     * The UUID of the policy
+     * Lists the MFA methods that users can authenticate with.
      */
-    id?: string;
-
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember1.ConnectionRules;
-
-    created_at?: string;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
      */
-    decision?: ApplicationsAPI.Decision;
+    mfa_disabled?: boolean;
 
     /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    mfa_config?: UnionMember1.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    updated_at?: string;
-  }
-
-  export namespace UnionMember1 {
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    export interface ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      ssh?: ConnectionRules.SSH;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      export interface SSH {
-        /**
-         * Contains the Unix usernames that may be used when connecting over SSH.
-         */
-        usernames: Array<string>;
-
-        /**
-         * Enables using Identity Provider email alias as SSH username.
-         */
-        allow_email_alias?: boolean;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with. For infrastructure
-       * applications, supported values are `piv_key` and `ssh_fido2_key`.
-       */
-      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
-
-      /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
-       */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
-       */
-      session_duration?: string;
-    }
+    session_duration?: string;
   }
 }
 
-export type PolicyUpdateResponse = PolicyUpdateResponse.UnionMember0 | PolicyUpdateResponse.UnionMember1;
+export interface PolicyUpdateResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyUpdateResponse.ConnectionRules;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateResponse.MfaConfig;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
+}
 
 export namespace PolicyUpdateResponse {
-  export interface UnionMember0 {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
     /**
-     * The UUID of the policy
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    id?: string;
-
-    /**
-     * Identifier.
-     */
-    account_id?: string;
-
-    /**
-     * Administrators who can approve a temporary authentication request.
-     */
-    approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
-
-    /**
-     * Requires the user to request access from an administrator at the start of each
-     * session.
-     */
-    approval_required?: boolean;
-
-    /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember0.ConnectionRules;
-
-    created_at?: string;
-
-    /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
-     */
-    decision?: ApplicationsAPI.Decision;
-
-    /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
-     */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Require this application to be served in an isolated browser for users matching
-     * this policy. 'Client Web Isolation' must be on for the account in order to use
-     * this feature.
-     */
-    isolation_required?: boolean;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    mfa_config?: UnionMember0.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * The order of execution for this policy. Must be unique for each policy within an
-     * app.
-     */
-    precedence?: number;
-
-    /**
-     * A custom message that will appear on the purpose justification screen.
-     */
-    purpose_justification_prompt?: string;
-
-    /**
-     * Require users to enter a justification when they log in to the application.
-     */
-    purpose_justification_required?: boolean;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * The amount of time that tokens issued for the application will be valid. Must be
-     * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-     * m, h.
-     */
-    session_duration?: string | null;
-
-    updated_at?: string;
+    rdp?: ConnectionRules.RDP;
   }
 
-  export namespace UnionMember0 {
+  export namespace ConnectionRules {
     /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface ConnectionRules {
+    export interface RDP {
       /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      rdp?: ConnectionRules.RDP;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
-       */
-      export interface RDP {
-        /**
-         * Clipboard formats allowed when copying from local machine to remote RDP session.
-         */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
-
-        /**
-         * Clipboard formats allowed when copying from remote RDP session to local machine.
-         */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with.
-       */
-      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
       /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
-       */
-      session_duration?: string;
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
     }
   }
 
-  export interface UnionMember1 {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
     /**
-     * The UUID of the policy
+     * Lists the MFA methods that users can authenticate with.
      */
-    id?: string;
-
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember1.ConnectionRules;
-
-    created_at?: string;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
      */
-    decision?: ApplicationsAPI.Decision;
+    mfa_disabled?: boolean;
 
     /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    mfa_config?: UnionMember1.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    updated_at?: string;
-  }
-
-  export namespace UnionMember1 {
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    export interface ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      ssh?: ConnectionRules.SSH;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      export interface SSH {
-        /**
-         * Contains the Unix usernames that may be used when connecting over SSH.
-         */
-        usernames: Array<string>;
-
-        /**
-         * Enables using Identity Provider email alias as SSH username.
-         */
-        allow_email_alias?: boolean;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with. For infrastructure
-       * applications, supported values are `piv_key` and `ssh_fido2_key`.
-       */
-      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
-
-      /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
-       */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
-       */
-      session_duration?: string;
-    }
+    session_duration?: string;
   }
 }
 
-export type PolicyListResponse = PolicyListResponse.UnionMember0 | PolicyListResponse.UnionMember1;
+export interface PolicyListResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyListResponse.ConnectionRules;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyListResponse.MfaConfig;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
+}
 
 export namespace PolicyListResponse {
-  export interface UnionMember0 {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
     /**
-     * The UUID of the policy
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    id?: string;
-
-    /**
-     * Identifier.
-     */
-    account_id?: string;
-
-    /**
-     * Administrators who can approve a temporary authentication request.
-     */
-    approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
-
-    /**
-     * Requires the user to request access from an administrator at the start of each
-     * session.
-     */
-    approval_required?: boolean;
-
-    /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember0.ConnectionRules;
-
-    created_at?: string;
-
-    /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
-     */
-    decision?: ApplicationsAPI.Decision;
-
-    /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
-     */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Require this application to be served in an isolated browser for users matching
-     * this policy. 'Client Web Isolation' must be on for the account in order to use
-     * this feature.
-     */
-    isolation_required?: boolean;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    mfa_config?: UnionMember0.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * The order of execution for this policy. Must be unique for each policy within an
-     * app.
-     */
-    precedence?: number;
-
-    /**
-     * A custom message that will appear on the purpose justification screen.
-     */
-    purpose_justification_prompt?: string;
-
-    /**
-     * Require users to enter a justification when they log in to the application.
-     */
-    purpose_justification_required?: boolean;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * The amount of time that tokens issued for the application will be valid. Must be
-     * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-     * m, h.
-     */
-    session_duration?: string | null;
-
-    updated_at?: string;
+    rdp?: ConnectionRules.RDP;
   }
 
-  export namespace UnionMember0 {
+  export namespace ConnectionRules {
     /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface ConnectionRules {
+    export interface RDP {
       /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      rdp?: ConnectionRules.RDP;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
-       */
-      export interface RDP {
-        /**
-         * Clipboard formats allowed when copying from local machine to remote RDP session.
-         */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
-
-        /**
-         * Clipboard formats allowed when copying from remote RDP session to local machine.
-         */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with.
-       */
-      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
       /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
-       */
-      session_duration?: string;
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
     }
   }
 
-  export interface UnionMember1 {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
     /**
-     * The UUID of the policy
+     * Lists the MFA methods that users can authenticate with.
      */
-    id?: string;
-
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember1.ConnectionRules;
-
-    created_at?: string;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
      */
-    decision?: ApplicationsAPI.Decision;
+    mfa_disabled?: boolean;
 
     /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    mfa_config?: UnionMember1.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    updated_at?: string;
-  }
-
-  export namespace UnionMember1 {
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    export interface ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      ssh?: ConnectionRules.SSH;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      export interface SSH {
-        /**
-         * Contains the Unix usernames that may be used when connecting over SSH.
-         */
-        usernames: Array<string>;
-
-        /**
-         * Enables using Identity Provider email alias as SSH username.
-         */
-        allow_email_alias?: boolean;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with. For infrastructure
-       * applications, supported values are `piv_key` and `ssh_fido2_key`.
-       */
-      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
-
-      /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
-       */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
-       */
-      session_duration?: string;
-    }
+    session_duration?: string;
   }
 }
 
@@ -2063,748 +1708,392 @@ export interface PolicyDeleteResponse {
   id?: string;
 }
 
-export type PolicyGetResponse = PolicyGetResponse.UnionMember0 | PolicyGetResponse.UnionMember1;
+export interface PolicyGetResponse {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyGetResponse.ConnectionRules;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyGetResponse.MfaConfig;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
+  /**
+   * The order of execution for this policy. Must be unique for each policy within an
+   * app.
+   */
+  precedence?: number;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
+}
 
 export namespace PolicyGetResponse {
-  export interface UnionMember0 {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
     /**
-     * The UUID of the policy
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    id?: string;
-
-    /**
-     * Identifier.
-     */
-    account_id?: string;
-
-    /**
-     * Administrators who can approve a temporary authentication request.
-     */
-    approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
-
-    /**
-     * Requires the user to request access from an administrator at the start of each
-     * session.
-     */
-    approval_required?: boolean;
-
-    /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember0.ConnectionRules;
-
-    created_at?: string;
-
-    /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
-     */
-    decision?: ApplicationsAPI.Decision;
-
-    /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
-     */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Require this application to be served in an isolated browser for users matching
-     * this policy. 'Client Web Isolation' must be on for the account in order to use
-     * this feature.
-     */
-    isolation_required?: boolean;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    mfa_config?: UnionMember0.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * The order of execution for this policy. Must be unique for each policy within an
-     * app.
-     */
-    precedence?: number;
-
-    /**
-     * A custom message that will appear on the purpose justification screen.
-     */
-    purpose_justification_prompt?: string;
-
-    /**
-     * Require users to enter a justification when they log in to the application.
-     */
-    purpose_justification_required?: boolean;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * The amount of time that tokens issued for the application will be valid. Must be
-     * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-     * m, h.
-     */
-    session_duration?: string | null;
-
-    updated_at?: string;
+    rdp?: ConnectionRules.RDP;
   }
 
-  export namespace UnionMember0 {
+  export namespace ConnectionRules {
     /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface ConnectionRules {
+    export interface RDP {
       /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      rdp?: ConnectionRules.RDP;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
-       */
-      export interface RDP {
-        /**
-         * Clipboard formats allowed when copying from local machine to remote RDP session.
-         */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
-
-        /**
-         * Clipboard formats allowed when copying from remote RDP session to local machine.
-         */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with.
-       */
-      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
       /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
-       */
-      session_duration?: string;
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
     }
   }
 
-  export interface UnionMember1 {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
     /**
-     * The UUID of the policy
+     * Lists the MFA methods that users can authenticate with.
      */
-    id?: string;
-
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    connection_rules?: UnionMember1.ConnectionRules;
-
-    created_at?: string;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * The action Access will take if a user matches this policy. Infrastructure
-     * application policies can only use the Allow action.
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
      */
-    decision?: ApplicationsAPI.Decision;
+    mfa_disabled?: boolean;
 
     /**
-     * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-     * meet any of the Exclude rules.
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
-    exclude?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Rules evaluated with an OR logical operator. A user needs to meet only one of
-     * the Include rules.
-     */
-    include?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    mfa_config?: UnionMember1.MfaConfig;
-
-    /**
-     * The name of the Access policy.
-     */
-    name?: string;
-
-    /**
-     * Rules evaluated with an AND logical operator. To match the policy, a user must
-     * meet all of the Require rules.
-     */
-    require?: Array<ApplicationsPoliciesAPI.AccessRule>;
-
-    updated_at?: string;
-  }
-
-  export namespace UnionMember1 {
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    export interface ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      ssh?: ConnectionRules.SSH;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      export interface SSH {
-        /**
-         * Contains the Unix usernames that may be used when connecting over SSH.
-         */
-        usernames: Array<string>;
-
-        /**
-         * Enables using Identity Provider email alias as SSH username.
-         */
-        allow_email_alias?: boolean;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with. For infrastructure
-       * applications, supported values are `piv_key` and `ssh_fido2_key`.
-       */
-      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
-
-      /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
-       */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
-       */
-      session_duration?: string;
-    }
+    session_duration?: string;
   }
 }
 
-export type PolicyCreateParams =
-  | PolicyCreateParams.AccessAppPolicyRequest
-  | PolicyCreateParams.AccessInfraPolicyReq;
+export interface PolicyCreateParams {
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
 
-export declare namespace PolicyCreateParams {
-  export interface AccessAppPolicyRequest {
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
+  /**
+   * Body param: Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
-    /**
-     * Body param: Administrators who can approve a temporary authentication request.
-     */
-    approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+  /**
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
+   */
+  approval_required?: boolean;
 
-    /**
-     * Body param: Requires the user to request access from an administrator at the
-     * start of each session.
-     */
-    approval_required?: boolean;
+  /**
+   * Body param: The rules that define how users may connect to targets secured by
+   * your application.
+   */
+  connection_rules?: PolicyCreateParams.ConnectionRules;
 
-    /**
-     * Body param: The rules that define how users may connect to targets secured by
-     * your application.
-     */
-    connection_rules?: AccessAppPolicyRequest.ConnectionRules;
+  /**
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
+   */
+  isolation_required?: boolean;
 
-    /**
-     * Body param: Require this application to be served in an isolated browser for
-     * users matching this policy. 'Client Web Isolation' must be on for the account in
-     * order to use this feature.
-     */
-    isolation_required?: boolean;
+  /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyCreateParams.MfaConfig;
 
-    /**
-     * Body param: Configures multi-factor authentication (MFA) settings.
-     */
-    mfa_config?: AccessAppPolicyRequest.MfaConfig;
+  /**
+   * Body param: The order of execution for this policy. Must be unique for each
+   * policy within an app.
+   */
+  precedence?: number;
 
-    /**
-     * Body param: The order of execution for this policy. Must be unique for each
-     * policy within an app.
-     */
-    precedence?: number;
+  /**
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
+   */
+  purpose_justification_prompt?: string;
 
-    /**
-     * Body param: A custom message that will appear on the purpose justification
-     * screen.
-     */
-    purpose_justification_prompt?: string;
+  /**
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
+   */
+  purpose_justification_required?: boolean;
 
-    /**
-     * Body param: Require users to enter a justification when they log in to the
-     * application.
-     */
-    purpose_justification_required?: boolean;
+  /**
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
+   */
+  session_duration?: string;
+}
 
+export namespace PolicyCreateParams {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
     /**
-     * Body param: The amount of time that tokens issued for the application will be
-     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    session_duration?: string | null;
+    rdp?: ConnectionRules.RDP;
   }
 
-  export namespace AccessAppPolicyRequest {
+  export namespace ConnectionRules {
     /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface ConnectionRules {
+    export interface RDP {
       /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      rdp?: ConnectionRules.RDP;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
-       */
-      export interface RDP {
-        /**
-         * Clipboard formats allowed when copying from local machine to remote RDP session.
-         */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
-
-        /**
-         * Clipboard formats allowed when copying from remote RDP session to local machine.
-         */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with.
-       */
-      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
       /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
-       */
-      session_duration?: string;
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
     }
   }
 
-  export interface AccessInfraPolicyReq {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
     /**
-     * Body param: The action Access will take if a user matches this policy.
-     * Infrastructure application policies can only use the Allow action.
+     * Lists the MFA methods that users can authenticate with.
      */
-    decision: ApplicationsAPI.DecisionParam;
-
-    /**
-     * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-     * only one of the Include rules.
-     */
-    include: Array<AccessRuleParam>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Body param: The name of the Access policy.
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
      */
-    name: string;
+    mfa_disabled?: boolean;
 
     /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    connection_rules?: AccessInfraPolicyReq.ConnectionRules;
-
-    /**
-     * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-     * user cannot meet any of the Exclude rules.
-     */
-    exclude?: Array<AccessRuleParam>;
-
-    /**
-     * Body param: Configures multi-factor authentication (MFA) settings for
-     * infrastructure applications.
-     */
-    mfa_config?: AccessInfraPolicyReq.MfaConfig;
-
-    /**
-     * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-     * user must meet all of the Require rules.
-     */
-    require?: Array<AccessRuleParam>;
-  }
-
-  export namespace AccessInfraPolicyReq {
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    export interface ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      ssh?: ConnectionRules.SSH;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      export interface SSH {
-        /**
-         * Contains the Unix usernames that may be used when connecting over SSH.
-         */
-        usernames: Array<string>;
-
-        /**
-         * Enables using Identity Provider email alias as SSH username.
-         */
-        allow_email_alias?: boolean;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with. For infrastructure
-       * applications, supported values are `piv_key` and `ssh_fido2_key`.
-       */
-      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
-
-      /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
-       */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
-       */
-      session_duration?: string;
-    }
+    session_duration?: string;
   }
 }
 
-export type PolicyUpdateParams =
-  | PolicyUpdateParams.AccessAppPolicyRequest
-  | PolicyUpdateParams.AccessInfraPolicyReq;
+export interface PolicyUpdateParams {
+  /**
+   * Path param: UUID.
+   */
+  app_id: string;
 
-export declare namespace PolicyUpdateParams {
-  export interface AccessAppPolicyRequest {
-    /**
-     * Path param: UUID.
-     */
-    app_id: string;
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
 
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
 
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
+  /**
+   * Body param: Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
-    /**
-     * Body param: Administrators who can approve a temporary authentication request.
-     */
-    approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+  /**
+   * Body param: Requires the user to request access from an administrator at the
+   * start of each session.
+   */
+  approval_required?: boolean;
 
-    /**
-     * Body param: Requires the user to request access from an administrator at the
-     * start of each session.
-     */
-    approval_required?: boolean;
+  /**
+   * Body param: The rules that define how users may connect to targets secured by
+   * your application.
+   */
+  connection_rules?: PolicyUpdateParams.ConnectionRules;
 
-    /**
-     * Body param: The rules that define how users may connect to targets secured by
-     * your application.
-     */
-    connection_rules?: AccessAppPolicyRequest.ConnectionRules;
+  /**
+   * Body param: Require this application to be served in an isolated browser for
+   * users matching this policy. 'Client Web Isolation' must be on for the account in
+   * order to use this feature.
+   */
+  isolation_required?: boolean;
 
-    /**
-     * Body param: Require this application to be served in an isolated browser for
-     * users matching this policy. 'Client Web Isolation' must be on for the account in
-     * order to use this feature.
-     */
-    isolation_required?: boolean;
+  /**
+   * Body param: Configures multi-factor authentication (MFA) settings.
+   */
+  mfa_config?: PolicyUpdateParams.MfaConfig;
 
-    /**
-     * Body param: Configures multi-factor authentication (MFA) settings.
-     */
-    mfa_config?: AccessAppPolicyRequest.MfaConfig;
+  /**
+   * Body param: The order of execution for this policy. Must be unique for each
+   * policy within an app.
+   */
+  precedence?: number;
 
-    /**
-     * Body param: The order of execution for this policy. Must be unique for each
-     * policy within an app.
-     */
-    precedence?: number;
+  /**
+   * Body param: A custom message that will appear on the purpose justification
+   * screen.
+   */
+  purpose_justification_prompt?: string;
 
-    /**
-     * Body param: A custom message that will appear on the purpose justification
-     * screen.
-     */
-    purpose_justification_prompt?: string;
+  /**
+   * Body param: Require users to enter a justification when they log in to the
+   * application.
+   */
+  purpose_justification_required?: boolean;
 
-    /**
-     * Body param: Require users to enter a justification when they log in to the
-     * application.
-     */
-    purpose_justification_required?: boolean;
+  /**
+   * Body param: The amount of time that tokens issued for the application will be
+   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
+   * (or µs), ms, s, m, h.
+   */
+  session_duration?: string;
+}
 
+export namespace PolicyUpdateParams {
+  /**
+   * The rules that define how users may connect to targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
     /**
-     * Body param: The amount of time that tokens issued for the application will be
-     * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-     * (or µs), ms, s, m, h.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    session_duration?: string | null;
+    rdp?: ConnectionRules.RDP;
   }
 
-  export namespace AccessAppPolicyRequest {
+  export namespace ConnectionRules {
     /**
-     * The rules that define how users may connect to targets secured by your
-     * application.
+     * The RDP-specific rules that define clipboard behavior for RDP connections.
      */
-    export interface ConnectionRules {
+    export interface RDP {
       /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
+       * Clipboard formats allowed when copying from local machine to remote RDP session.
        */
-      rdp?: ConnectionRules.RDP;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The RDP-specific rules that define clipboard behavior for RDP connections.
-       */
-      export interface RDP {
-        /**
-         * Clipboard formats allowed when copying from local machine to remote RDP session.
-         */
-        allowed_clipboard_local_to_remote_formats?: Array<'text' | 'file'>;
-
-        /**
-         * Clipboard formats allowed when copying from remote RDP session to local machine.
-         */
-        allowed_clipboard_remote_to_local_formats?: Array<'text' | 'file'>;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with.
-       */
-      allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
+      allowed_clipboard_local_to_remote_formats?: Array<'text'>;
 
       /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
+       * Clipboard formats allowed when copying from remote RDP session to local machine.
        */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
-       */
-      session_duration?: string;
+      allowed_clipboard_remote_to_local_formats?: Array<'text'>;
     }
   }
 
-  export interface AccessInfraPolicyReq {
+  /**
+   * Configures multi-factor authentication (MFA) settings.
+   */
+  export interface MfaConfig {
     /**
-     * Path param: UUID.
+     * Lists the MFA methods that users can authenticate with.
      */
-    app_id: string;
-
-    /**
-     * Body param: The action Access will take if a user matches this policy.
-     * Infrastructure application policies can only use the Allow action.
-     */
-    decision: ApplicationsAPI.DecisionParam;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key'>;
 
     /**
-     * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-     * only one of the Include rules.
+     * Indicates whether to disable MFA for this resource. This option is available at
+     * the application and policy level.
      */
-    include: Array<AccessRuleParam>;
+    mfa_disabled?: boolean;
 
     /**
-     * Body param: The name of the Access policy.
+     * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
+     * Minimum: 0m. Maximum: 720h (30 days). Examples:`5m` or `24h`.
      */
-    name: string;
-
-    /**
-     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-     * Zone ID.
-     */
-    account_id?: string;
-
-    /**
-     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-     * Account ID.
-     */
-    zone_id?: string;
-
-    /**
-     * Body param: The rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    connection_rules?: AccessInfraPolicyReq.ConnectionRules;
-
-    /**
-     * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-     * user cannot meet any of the Exclude rules.
-     */
-    exclude?: Array<AccessRuleParam>;
-
-    /**
-     * Body param: Configures multi-factor authentication (MFA) settings for
-     * infrastructure applications.
-     */
-    mfa_config?: AccessInfraPolicyReq.MfaConfig;
-
-    /**
-     * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-     * user must meet all of the Require rules.
-     */
-    require?: Array<AccessRuleParam>;
-  }
-
-  export namespace AccessInfraPolicyReq {
-    /**
-     * The rules that define how users may connect to the targets secured by your
-     * application.
-     */
-    export interface ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      ssh?: ConnectionRules.SSH;
-    }
-
-    export namespace ConnectionRules {
-      /**
-       * The SSH-specific rules that define how users may connect to the targets secured
-       * by your application.
-       */
-      export interface SSH {
-        /**
-         * Contains the Unix usernames that may be used when connecting over SSH.
-         */
-        usernames: Array<string>;
-
-        /**
-         * Enables using Identity Provider email alias as SSH username.
-         */
-        allow_email_alias?: boolean;
-      }
-    }
-
-    /**
-     * Configures multi-factor authentication (MFA) settings for infrastructure
-     * applications.
-     */
-    export interface MfaConfig {
-      /**
-       * Lists the MFA methods that users can authenticate with. For infrastructure
-       * applications, supported values are `piv_key` and `ssh_fido2_key`.
-       */
-      allowed_authenticators?: Array<'piv_key' | 'ssh_fido2_key'>;
-
-      /**
-       * Indicates whether to disable MFA for this resource. This option is available at
-       * the application and policy level.
-       */
-      mfa_disabled?: boolean;
-
-      /**
-       * Defines the duration of an MFA session. Must be in minutes (m) or hours (h).
-       * Minimum: 0m. Maximum: 720h (30 days). Examples: `5m` or `24h`.
-       */
-      session_duration?: string;
-    }
+    session_duration?: string;
   }
 }
 

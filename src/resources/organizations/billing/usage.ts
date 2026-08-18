@@ -118,12 +118,6 @@ export namespace UsageGetResponse {
     ServiceProviderName: string;
 
     /**
-     * The unique identifier for the billable metric in the Cloudflare catalog.
-     * Cloudflare extension; replaces FOCUS SkuId.
-     */
-    x_BillableMetricId: string;
-
-    /**
      * The display name of the billable metric. Cloudflare extension; replaces FOCUS
      * SkuMeter.
      */
@@ -225,16 +219,10 @@ export namespace UsageGetResponse {
     SubAccountName?: string;
 
     /**
-     * The product category the charge belongs to (e.g., "Developer", "Cloudflare
-     * One"). Cloudflare extension; replaces FOCUS ServiceCategory.
+     * The unique identifier for the billable metric in the Cloudflare catalog.
+     * Cloudflare extension; replaces FOCUS SkuId.
      */
-    x_ProductCategoryName?: string;
-
-    /**
-     * The unique identifier for the product family in the Cloudflare catalog.
-     * Cloudflare extension; replaces FOCUS ServiceId.
-     */
-    x_ProductFamilyId?: string;
+    x_BillableMetricId?: string;
 
     /**
      * The product family the charge belongs to (e.g., "R2", "Workers"). Cloudflare
@@ -262,6 +250,11 @@ export interface UsageGetParams {
    * is 31 days.
    */
   from?: string;
+
+  /**
+   * Filter results by billable metric id (e.g., workers_standard_requests).
+   */
+  metric?: string;
 
   /**
    * End date for the usage query (ISO 8601). Required if `from` is set. When omitted

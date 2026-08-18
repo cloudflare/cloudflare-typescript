@@ -386,7 +386,7 @@ export interface DatabaseListResponse {
    * Specify the location to restrict the D1 database to run and store data. If this
    * option is present, the location hint is ignored.
    */
-  jurisdiction?: 'eu' | 'fedramp' | 'us' | null;
+  jurisdiction?: 'eu' | 'fedramp' | null;
 
   /**
    * D1 database name.
@@ -693,7 +693,7 @@ export interface DatabaseCreateParams {
    * Body param: Specify the location to restrict the D1 database to run and store
    * data. If this option is present, the location hint is ignored.
    */
-  jurisdiction?: 'eu' | 'fedramp' | 'us';
+  jurisdiction?: 'eu' | 'fedramp';
 
   /**
    * Body param: Specify the region to create the D1 primary, if available. If this

@@ -69,11 +69,21 @@ export class BaseTotalTLS extends APIResource {
 }
 export class TotalTLS extends BaseTotalTLS {}
 
+/**
+ * The Certificate Authority that Total TLS certificates will be issued through.
+ */
+export type CertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
+
+/**
+ * The Certificate Authority that Total TLS certificates will be issued through.
+ */
+export type CertificateAuthorityParam = 'google' | 'lets_encrypt' | 'ssl_com';
+
 export interface TotalTLSUpdateResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
-  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+  certificate_authority?: CertificateAuthority;
 
   /**
    * If enabled, Total TLS will order a hostname specific TLS certificate for any
@@ -91,7 +101,7 @@ export interface TotalTLSEditResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
-  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+  certificate_authority?: CertificateAuthority;
 
   /**
    * If enabled, Total TLS will order a hostname specific TLS certificate for any
@@ -109,7 +119,7 @@ export interface TotalTLSGetResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
-  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+  certificate_authority?: CertificateAuthority;
 
   /**
    * If enabled, Total TLS will order a hostname specific TLS certificate for any
@@ -139,7 +149,7 @@ export interface TotalTLSUpdateParams {
    * Body param: The Certificate Authority that Total TLS certificates will be issued
    * through.
    */
-  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+  certificate_authority?: CertificateAuthorityParam;
 }
 
 export interface TotalTLSEditParams {
@@ -158,7 +168,7 @@ export interface TotalTLSEditParams {
    * Body param: The Certificate Authority that Total TLS certificates will be issued
    * through.
    */
-  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+  certificate_authority?: CertificateAuthorityParam;
 }
 
 export interface TotalTLSGetParams {
@@ -170,6 +180,7 @@ export interface TotalTLSGetParams {
 
 export declare namespace TotalTLS {
   export {
+    type CertificateAuthority as CertificateAuthority,
     type TotalTLSUpdateResponse as TotalTLSUpdateResponse,
     type TotalTLSEditResponse as TotalTLSEditResponse,
     type TotalTLSGetResponse as TotalTLSGetResponse,

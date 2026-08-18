@@ -167,12 +167,6 @@ export interface LiveInput {
   enabled?: boolean;
 
   /**
-   * The date and time the live input keys were last rotated. Omitted for live inputs
-   * that have never had their keys rotated.
-   */
-  keysRotatedAt?: string | null;
-
-  /**
    * A user modifiable key-value store used to reference other systems of record for
    * managing live inputs.
    */

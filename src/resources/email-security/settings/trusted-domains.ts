@@ -163,11 +163,11 @@ export type TrustedDomainListResponsesV4PagePaginationArray =
   V4PagePaginationArray<TrustedDomainListResponse>;
 
 /**
- * A trusted email domain.
+ * A trusted email domain
  */
 export interface TrustedDomainCreateResponse {
   /**
-   * Trusted domain identifier.
+   * Trusted domain identifier
    */
   id?: string;
 
@@ -190,7 +190,8 @@ export interface TrustedDomainCreateResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -200,11 +201,11 @@ export interface TrustedDomainCreateResponse {
 }
 
 /**
- * A trusted email domain.
+ * A trusted email domain
  */
 export interface TrustedDomainListResponse {
   /**
-   * Trusted domain identifier.
+   * Trusted domain identifier
    */
   id?: string;
 
@@ -227,7 +228,8 @@ export interface TrustedDomainListResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -238,17 +240,17 @@ export interface TrustedDomainListResponse {
 
 export interface TrustedDomainDeleteResponse {
   /**
-   * Trusted domain identifier.
+   * Trusted domain identifier
    */
   id: string;
 }
 
 /**
- * A trusted email domain.
+ * A trusted email domain
  */
 export interface TrustedDomainEditResponse {
   /**
-   * Trusted domain identifier.
+   * Trusted domain identifier
    */
   id?: string;
 
@@ -271,7 +273,8 @@ export interface TrustedDomainEditResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -281,11 +284,11 @@ export interface TrustedDomainEditResponse {
 }
 
 /**
- * A trusted email domain.
+ * A trusted email domain
  */
 export interface TrustedDomainGetResponse {
   /**
-   * Trusted domain identifier.
+   * Trusted domain identifier
    */
   id?: string;
 
@@ -308,7 +311,8 @@ export interface TrustedDomainGetResponse {
   is_similarity?: boolean;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 

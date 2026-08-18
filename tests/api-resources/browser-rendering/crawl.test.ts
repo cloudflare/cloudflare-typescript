@@ -93,7 +93,7 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { crawl: BaseCra
         prompt: 'prompt',
         response_format: {
           type: 'type',
-          json_schema: { foo: 'bar' },
+          json_schema: { foo: 'string' },
         },
       },
       limit: 1,

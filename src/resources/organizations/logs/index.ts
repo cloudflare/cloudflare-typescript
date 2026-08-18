@@ -4,9 +4,7 @@ export {
   Audit,
   BaseAudit,
   type AuditListResponse,
-  type AuditHistoryResponse,
   type AuditListParams,
-  type AuditHistoryParams,
   type AuditListResponsesCursorPaginationAfter,
 } from './audit';
 export { Logs, BaseLogs } from './logs';

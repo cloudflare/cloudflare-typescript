@@ -60,9 +60,7 @@ export interface ZoneEditResponse {
   flatten_all_cnames: boolean;
 
   /**
-   * @deprecated foundation_dns is deprecated. Use nameservers.type:
-   * cloudflare.advanced to turn on Advanced Nameservers and cloudflare.standard to
-   * turn it off. This field will be removed in a future API version.
+   * Whether to enable Foundation DNS Advanced Nameservers on the zone.
    */
   foundation_dns: boolean;
 
@@ -123,7 +121,7 @@ export namespace ZoneEditResponse {
     /**
      * Nameserver type
      */
-    type: 'cloudflare.standard' | 'cloudflare.advanced' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    type: 'cloudflare.standard' | 'custom.account' | 'custom.tenant' | 'custom.zone';
 
     /**
      * Configured nameserver set to be used for this zone
@@ -185,9 +183,7 @@ export interface ZoneGetResponse {
   flatten_all_cnames: boolean;
 
   /**
-   * @deprecated foundation_dns is deprecated. Use nameservers.type:
-   * cloudflare.advanced to turn on Advanced Nameservers and cloudflare.standard to
-   * turn it off. This field will be removed in a future API version.
+   * Whether to enable Foundation DNS Advanced Nameservers on the zone.
    */
   foundation_dns: boolean;
 
@@ -248,7 +244,7 @@ export namespace ZoneGetResponse {
     /**
      * Nameserver type
      */
-    type: 'cloudflare.standard' | 'cloudflare.advanced' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    type: 'cloudflare.standard' | 'custom.account' | 'custom.tenant' | 'custom.zone';
 
     /**
      * Configured nameserver set to be used for this zone
@@ -315,9 +311,7 @@ export interface ZoneEditParams {
   flatten_all_cnames?: boolean;
 
   /**
-   * @deprecated foundation_dns is deprecated. Use nameservers.type:
-   * cloudflare.advanced to turn on Advanced Nameservers and cloudflare.standard to
-   * turn it off. This field will be removed in a future API version.
+   * Body param: Whether to enable Foundation DNS Advanced Nameservers on the zone.
    */
   foundation_dns?: boolean;
 
@@ -384,7 +378,7 @@ export namespace ZoneEditParams {
     /**
      * Nameserver type
      */
-    type?: 'cloudflare.standard' | 'cloudflare.advanced' | 'custom.account' | 'custom.tenant' | 'custom.zone';
+    type?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant' | 'custom.zone';
   }
 
   /**

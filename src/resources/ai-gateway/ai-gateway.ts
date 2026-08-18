@@ -297,8 +297,6 @@ export interface AIGatewayCreateResponse {
 
   is_default?: boolean;
 
-  log_classification?: boolean;
-
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -334,11 +332,9 @@ export interface AIGatewayCreateResponse {
 
   /**
    * Controls how Workers AI inference calls routed through this gateway are billed.
-   * 'postpaid' bills the account directly through Workers AI; 'unified' deducts
-   * credits via AI Gateway using neuron-based pricing and delegates billing to AI
-   * Gateway.
+   * Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -543,8 +539,6 @@ export interface AIGatewayUpdateResponse {
 
   is_default?: boolean;
 
-  log_classification?: boolean;
-
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -580,11 +574,9 @@ export interface AIGatewayUpdateResponse {
 
   /**
    * Controls how Workers AI inference calls routed through this gateway are billed.
-   * 'postpaid' bills the account directly through Workers AI; 'unified' deducts
-   * credits via AI Gateway using neuron-based pricing and delegates billing to AI
-   * Gateway.
+   * Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -789,8 +781,6 @@ export interface AIGatewayListResponse {
 
   is_default?: boolean;
 
-  log_classification?: boolean;
-
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -826,11 +816,9 @@ export interface AIGatewayListResponse {
 
   /**
    * Controls how Workers AI inference calls routed through this gateway are billed.
-   * 'postpaid' bills the account directly through Workers AI; 'unified' deducts
-   * credits via AI Gateway using neuron-based pricing and delegates billing to AI
-   * Gateway.
+   * Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -1035,8 +1023,6 @@ export interface AIGatewayDeleteResponse {
 
   is_default?: boolean;
 
-  log_classification?: boolean;
-
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -1072,11 +1058,9 @@ export interface AIGatewayDeleteResponse {
 
   /**
    * Controls how Workers AI inference calls routed through this gateway are billed.
-   * 'postpaid' bills the account directly through Workers AI; 'unified' deducts
-   * credits via AI Gateway using neuron-based pricing and delegates billing to AI
-   * Gateway.
+   * Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -1281,8 +1265,6 @@ export interface AIGatewayGetResponse {
 
   is_default?: boolean;
 
-  log_classification?: boolean;
-
   log_management?: number | null;
 
   log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
@@ -1318,11 +1300,9 @@ export interface AIGatewayGetResponse {
 
   /**
    * Controls how Workers AI inference calls routed through this gateway are billed.
-   * 'postpaid' bills the account directly through Workers AI; 'unified' deducts
-   * credits via AI Gateway using neuron-based pricing and delegates billing to AI
-   * Gateway.
+   * Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   zdr?: boolean;
 }
@@ -1581,17 +1561,10 @@ export interface AIGatewayCreateParams {
   retry_max_attempts?: number | null;
 
   /**
-   * Body param
-   */
-  store_id?: string | null;
-
-  /**
    * Body param: Controls how Workers AI inference calls routed through this gateway
-   * are billed. 'postpaid' bills the account directly through Workers AI; 'unified'
-   * deducts credits via AI Gateway using neuron-based pricing and delegates billing
-   * to AI Gateway.
+   * are billed. Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   /**
    * Body param
@@ -1644,11 +1617,6 @@ export interface AIGatewayUpdateParams {
    * Body param
    */
   guardrails?: AIGatewayUpdateParams.Guardrails | null;
-
-  /**
-   * Body param
-   */
-  log_classification?: boolean;
 
   /**
    * Body param
@@ -1712,11 +1680,9 @@ export interface AIGatewayUpdateParams {
 
   /**
    * Body param: Controls how Workers AI inference calls routed through this gateway
-   * are billed. 'postpaid' bills the account directly through Workers AI; 'unified'
-   * deducts credits via AI Gateway using neuron-based pricing and delegates billing
-   * to AI Gateway.
+   * are billed. Only 'postpaid' is currently supported.
    */
-  workers_ai_billing_mode?: 'postpaid' | 'unified';
+  workers_ai_billing_mode?: 'postpaid';
 
   /**
    * Body param

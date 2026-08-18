@@ -13,9 +13,7 @@ export class BaseCNIs extends APIResource {
   ] as const);
 
   /**
-   * Creates a new Cloud Network Interconnect (CNI) for private network connectivity
-   * between Cloudflare and your infrastructure. CNIs enable dedicated,
-   * high-performance network links.
+   * Create a new CNI object
    *
    * @example
    * ```ts
@@ -37,8 +35,7 @@ export class BaseCNIs extends APIResource {
   }
 
   /**
-   * Updates the configuration of an existing Cloud Network Interconnect (CNI),
-   * including connection parameters and routing settings.
+   * Modify stored information about a CNI object
    *
    * @example
    * ```ts
@@ -66,8 +63,7 @@ export class BaseCNIs extends APIResource {
   }
 
   /**
-   * Lists all Cloud Network Interconnects (CNIs) configured for the account, showing
-   * connection status and parameters.
+   * List existing CNI objects
    *
    * @example
    * ```ts
@@ -82,8 +78,7 @@ export class BaseCNIs extends APIResource {
   }
 
   /**
-   * Permanently removes a Cloud Network Interconnect (CNI) configuration. The
-   * private network connection will be terminated.
+   * Delete a specified CNI object
    *
    * @example
    * ```ts
@@ -102,8 +97,7 @@ export class BaseCNIs extends APIResource {
   }
 
   /**
-   * Retrieves configuration details for a specific Cloud Network Interconnect (CNI),
-   * including connection status and parameters.
+   * Get information about a CNI object
    *
    * @example
    * ```ts
@@ -148,18 +142,6 @@ export interface CNICreateResponse {
   p2p_ip: string;
 
   bgp?: CNICreateResponse.BGP;
-
-  /**
-   * The BGP mode for a CNI.
-   *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
-   */
-  bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
 
 export namespace CNICreateResponse {
@@ -234,18 +216,6 @@ export interface CNIUpdateResponse {
   p2p_ip: string;
 
   bgp?: CNIUpdateResponse.BGP;
-
-  /**
-   * The BGP mode for a CNI.
-   *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
-   */
-  bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
 
 export namespace CNIUpdateResponse {
@@ -327,18 +297,6 @@ export namespace CNIListResponse {
     p2p_ip: string;
 
     bgp?: Item.BGP;
-
-    /**
-     * The BGP mode for a CNI.
-     *
-     * Controls the customer-facing data path:
-     *
-     * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-     *   bgp-bridge / bgp-bridge-receiver.
-     * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-     *   Conduit
-     */
-    bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
   }
 
   export namespace Item {
@@ -414,18 +372,6 @@ export interface CNIGetResponse {
   p2p_ip: string;
 
   bgp?: CNIGetResponse.BGP;
-
-  /**
-   * The BGP mode for a CNI.
-   *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
-   */
-  bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
 
 export namespace CNIGetResponse {
@@ -585,18 +531,6 @@ export interface CNIUpdateParams {
    * Body param
    */
   bgp?: CNIUpdateParams.BGP;
-
-  /**
-   * Body param: The BGP mode for a CNI.
-   *
-   * Controls the customer-facing data path:
-   *
-   * - `DynamicRouteExchange` — Full BGP: routes flow through to conduit via CRE /
-   *   bgp-bridge / bgp-bridge-receiver.
-   * - `AdvertiseOnly` — static advertisement via taserver, no routes exchanged with
-   *   Conduit
-   */
-  bgp_mode?: 'dynamic_route_exchange' | 'advertise_only';
 }
 
 export namespace CNIUpdateParams {

@@ -62,33 +62,9 @@ const runTests = (
           type: 'plain_text',
         },
       ],
-      cache_options: { enabled: true, cross_version_cache: true },
       compatibility_date: '2021-01-01',
       compatibility_flags: ['nodejs_compat'],
       containers: [{ class_name: 'MyDurableObject' }],
-      exports: {
-        Admin: {
-          type: 'worker',
-          cache: { enabled: true },
-          state: 'created',
-        },
-        Counter: {
-          storage: 'sqlite',
-          type: 'durable-object',
-          container: 'my-container',
-          state: 'created',
-        },
-        OldCounter: {
-          renamed_to: 'Counter',
-          state: 'renamed',
-          type: 'durable-object',
-        },
-        default: {
-          type: 'worker',
-          cache: { enabled: false },
-          state: 'created',
-        },
-      },
       limits: { cpu_ms: 50, subrequests: 1000 },
       main_module: 'index.js',
       migrations: {
@@ -112,13 +88,6 @@ const runTests = (
             'ZXhwb3J0IGRlZmF1bHQgewogIGFzeW5jIGZldGNoKHJlcXVlc3QsIGVudiwgY3R4KSB7CiAgICByZXR1cm4gbmV3IFJlc3BvbnNlKCdIZWxsbyBXb3JsZCEnKQogIH0KfQ==',
           content_type: 'application/javascript+module',
           name: 'index.js',
-        },
-      ],
-      package_dependencies: [
-        {
-          installedVersion: '4.17.22',
-          name: 'lodash',
-          packageJsonVersion: '^4.17.21',
         },
       ],
       placement: { mode: 'smart' },

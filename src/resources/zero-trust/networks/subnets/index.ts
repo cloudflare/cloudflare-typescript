@@ -5,12 +5,6 @@ export {
   BaseCloudflareSource,
   type CloudflareSourceUpdateParams,
 } from './cloudflare-source';
-export {
-  InitialResolvedIP,
-  BaseInitialResolvedIP,
-  type InitialResolvedIPUpdateParams,
-  type InitialResolvedIPGetParams,
-} from './initial-resolved-ip';
 export { Subnets, BaseSubnets, type SubnetListParams } from './subnets';
 export {
   WARP,

@@ -167,7 +167,7 @@ export class BasePipelines extends APIResource {
   }
 
   /**
-   * Get Pipeline details.
+   * Get Pipelines Details.
    *
    * @example
    * ```ts
@@ -217,7 +217,7 @@ export class BasePipelines extends APIResource {
   }
 
   /**
-   * Validates that the Pipelines SQL is correct.
+   * Validate Arroyo SQL.
    *
    * @example
    * ```ts

@@ -43,9 +43,9 @@ export class BaseV1 extends APIResource {
   static override readonly _key: readonly ['images', 'v1'] = Object.freeze(['images', 'v1'] as const);
 
   /**
-   * Upload an image to CF Images. Images up to 10 Megabytes can be uploaded using a
-   * single HTTP POST (multipart/form-data) request by sending an image file or
-   * passing a URL accessible to the API.
+   * Upload an image with up to 10 Megabytes using a single HTTP POST
+   * (multipart/form-data) request. An image can be uploaded by sending an image file
+   * or passing an accessible to an API url.
    *
    * @example
    * ```ts
@@ -103,8 +103,8 @@ export class BaseV1 extends APIResource {
   }
 
   /**
-   * Update a CF Images image's metadata, creator, or access control. On access
-   * control change, all copies of the image are purged from cache.
+   * Update image access control. On access control change, all copies of the image
+   * are purged from cache.
    *
    * @example
    * ```ts
@@ -124,7 +124,7 @@ export class BaseV1 extends APIResource {
   }
 
   /**
-   * Fetch details for a CF Images image.
+   * Fetch details for a single image.
    *
    * @example
    * ```ts

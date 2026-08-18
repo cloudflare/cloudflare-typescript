@@ -15,7 +15,7 @@ export class BaseSnapshots extends APIResource {
   ] as const);
 
   /**
-   * Lists Magic WAN Connector Telemetry Snapshots
+   * List Snapshots
    *
    * @example
    * ```ts
@@ -45,7 +45,7 @@ export class BaseSnapshots extends APIResource {
   }
 
   /**
-   * Gets Magic WAN Connector Telemetry Snapshot
+   * Get Snapshot
    *
    * @example
    * ```ts
@@ -603,11 +603,6 @@ export interface SnapshotGetResponse {
    * Platform identifier
    */
   platform?: string;
-
-  /**
-   * Site identifier
-   */
-  site_id?: string;
 
   /**
    * Number of ICMP Address Mask Reply messages received
@@ -1344,31 +1339,6 @@ export namespace SnapshotGetResponse {
      * Tunnel identifier
      */
     tunnel_id: string;
-
-    /**
-     * Tunnel round-trip latency variation in milliseconds
-     */
-    jitter_ms?: number;
-
-    /**
-     * 50th percentile tunnel round-trip latency in milliseconds
-     */
-    latency_ms?: number;
-
-    /**
-     * Public socket address returned by the NAT detector
-     */
-    natd_result?: string;
-
-    /**
-     * Numeric NAT detector state (0 = detected, 1 = missing result, 2 = stale result)
-     */
-    natd_state?: number;
-
-    /**
-     * Target socket address probed by the NAT detector, using the detector source port
-     */
-    natd_target?: string;
 
     /**
      * MTU as measured between the two ends of the tunnel

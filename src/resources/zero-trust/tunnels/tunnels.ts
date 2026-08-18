@@ -81,6 +81,14 @@ export interface Connection {
   colo_name?: string;
 
   /**
+   * Cloudflare continues to track connections for several minutes after they
+   * disconnect. This is an optimization to improve latency and reliability of
+   * reconnecting. If `true`, the connection has disconnected but is still being
+   * tracked. If `false`, the connection is actively serving traffic.
+   */
+  is_pending_reconnect?: boolean;
+
+  /**
    * UUID of the Cloudflare Tunnel connection.
    */
   uuid?: string;
@@ -181,6 +189,14 @@ export namespace TunnelListResponse {
        * The Cloudflare data center used for this connection.
        */
       colo_name?: string;
+
+      /**
+       * Cloudflare continues to track connections for several minutes after they
+       * disconnect. This is an optimization to improve latency and reliability of
+       * reconnecting. If `true`, the connection has disconnected but is still being
+       * tracked. If `false`, the connection is actively serving traffic.
+       */
+      is_pending_reconnect?: boolean;
 
       /**
        * Timestamp of when the connection was established.

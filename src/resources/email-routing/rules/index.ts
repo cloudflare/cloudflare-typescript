@@ -18,7 +18,6 @@ export {
   type Matcher,
   type RuleCreateParams,
   type RuleUpdateParams,
-  type RuleListParams,
   type RuleDeleteParams,
   type RuleGetParams,
 } from './rules';

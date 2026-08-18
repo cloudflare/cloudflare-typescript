@@ -283,9 +283,9 @@ export namespace MembershipUpdateResponse {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
-      scope: ResourceGroup.Scope;
+      scope: Array<ResourceGroup.Scope>;
 
       /**
        * Attributes associated to the resource group.
@@ -478,9 +478,9 @@ export namespace MembershipGetResponse {
       id: string;
 
       /**
-       * A scope is a combination of scope objects which provides additional context.
+       * The scope associated to the resource group
        */
-      scope: ResourceGroup.Scope;
+      scope: Array<ResourceGroup.Scope>;
 
       /**
        * Attributes associated to the resource group.

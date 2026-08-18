@@ -4,6 +4,7 @@
 
 Types:
 
+- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociation</a></code>
 - <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">TLSHostnameAssociation</a></code>
 - <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationUpdateResponse</a></code>
 - <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationGetResponse</a></code>

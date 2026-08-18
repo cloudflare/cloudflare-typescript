@@ -135,11 +135,6 @@ export interface Subnet {
   id?: string;
 
   /**
-   * IP capacity information for the subnet.
-   */
-  capacity?: Subnet.Capacity;
-
-  /**
    * An optional description of the subnet.
    */
   comment?: string;
@@ -174,24 +169,7 @@ export interface Subnet {
   /**
    * The type of subnet.
    */
-  subnet_type?: 'cloudflare_source' | 'initial_resolved_ip' | 'warp';
-}
-
-export namespace Subnet {
-  /**
-   * IP capacity information for the subnet.
-   */
-  export interface Capacity {
-    /**
-     * Total number of assignable IPs in the subnet.
-     */
-    total?: number;
-
-    /**
-     * Number of assigned IPs in the subnet.
-     */
-    used?: number;
-  }
+  subnet_type?: 'cloudflare_source' | 'warp';
 }
 
 export interface WARPDeleteResponse {
@@ -201,11 +179,6 @@ export interface WARPDeleteResponse {
   id?: string;
 
   /**
-   * IP capacity information for the subnet.
-   */
-  capacity?: WARPDeleteResponse.Capacity;
-
-  /**
    * An optional description of the subnet.
    */
   comment?: string;
@@ -240,24 +213,7 @@ export interface WARPDeleteResponse {
   /**
    * The type of subnet.
    */
-  subnet_type?: 'cloudflare_source' | 'initial_resolved_ip' | 'warp';
-}
-
-export namespace WARPDeleteResponse {
-  /**
-   * IP capacity information for the subnet.
-   */
-  export interface Capacity {
-    /**
-     * Total number of assignable IPs in the subnet.
-     */
-    total?: number;
-
-    /**
-     * Number of assigned IPs in the subnet.
-     */
-    used?: number;
-  }
+  subnet_type?: 'cloudflare_source' | 'warp';
 }
 
 export interface WARPCreateParams {

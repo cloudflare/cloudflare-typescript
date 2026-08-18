@@ -56,7 +56,6 @@ export type BindingGetResponse =
   | BindingGetResponse.WorkersBindingKindAI
   | BindingGetResponse.WorkersBindingKindAISearch
   | BindingGetResponse.WorkersBindingKindAISearchNamespace
-  | BindingGetResponse.WorkersBindingKindMessaging
   | BindingGetResponse.WorkersBindingKindAnalyticsEngine
   | BindingGetResponse.WorkersBindingKindAssets
   | BindingGetResponse.WorkersBindingKindBrowser
@@ -145,23 +144,6 @@ export namespace BindingGetResponse {
      * The kind of resource that the binding provides.
      */
     type: 'ai_search_namespace';
-  }
-
-  export interface WorkersBindingKindMessaging {
-    /**
-     * A JavaScript variable name for the binding.
-     */
-    name: string;
-
-    /**
-     * The Messaging namespace to bind to.
-     */
-    namespace: string;
-
-    /**
-     * The kind of resource that the binding provides.
-     */
-    type: 'messaging';
   }
 
   export interface WorkersBindingKindAnalyticsEngine {

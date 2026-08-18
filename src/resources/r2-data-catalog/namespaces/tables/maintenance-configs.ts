@@ -222,7 +222,7 @@ export interface MaintenanceConfigUpdateParams {
   namespace: string;
 
   /**
-   * Body param: Updates table compaction configuration; all fields are optional.
+   * Body param: Updates compaction configuration (all fields optional).
    */
   compaction?: MaintenanceConfigUpdateParams.Compaction;
 
@@ -234,16 +234,16 @@ export interface MaintenanceConfigUpdateParams {
 
 export namespace MaintenanceConfigUpdateParams {
   /**
-   * Updates table compaction configuration; all fields are optional.
+   * Updates compaction configuration (all fields optional).
    */
   export interface Compaction {
     /**
-     * Specifies the state of maintenance operations.
+     * Updates the state optionally.
      */
     state?: 'enabled' | 'disabled';
 
     /**
-     * Sets the target file size for compaction in megabytes. Defaults to "128".
+     * Updates the target file size optionally.
      */
     target_size_mb?: '64' | '128' | '256' | '512';
   }

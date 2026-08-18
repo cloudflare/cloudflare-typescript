@@ -89,7 +89,6 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
   test.skip('list: required and optional params', async () => {
     const response = await client.cloudforceOne.threatEvents.list({
       account_id: 'account_id',
-      cache: 'from-graph',
       cursor:
         'eyJ2ZXJzaW9uIjoxLCJwb3NpdGlvbiI6eyJkYXRlIjoiMjAyNC0wMS0xMlQxMDowMDowMFoiLCJ1dWlkIjoiYWJjMTIzIn19',
       datasetId: ['string'],
@@ -163,60 +162,6 @@ const runTests = (client: PartialCloudflare<{ cloudforceOne: { threatEvents: Bas
       ],
       datasetId: 'durableObjectName',
       includeCreatedEvents: true,
-    });
-  });
-
-  test('bulkCreateRelationships: only required params', async () => {
-    const responsePromise = client.cloudforceOne.threatEvents.bulkCreateRelationships({
-      account_id: 'account_id',
-      data: [
-        {
-          category: 'Domain Resolution',
-          date: '2022-04-01T00:00:00Z',
-          event: 'An attacker registered the domain domain.com',
-          raw: { data: { foo: 'bar' } },
-          tlp: 'amber',
-        },
-      ],
-      datasetId: 'durableObjectName',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('bulkCreateRelationships: required and optional params', async () => {
-    const response = await client.cloudforceOne.threatEvents.bulkCreateRelationships({
-      account_id: 'account_id',
-      data: [
-        {
-          category: 'Domain Resolution',
-          date: '2022-04-01T00:00:00Z',
-          event: 'An attacker registered the domain domain.com',
-          raw: {
-            data: { foo: 'bar' },
-            source: 'example.com',
-            tlp: 'amber',
-          },
-          tlp: 'amber',
-          accountId: 123456,
-          attacker: 'Flying Yeti',
-          attackerCountry: 'CN',
-          datasetId: 'durableObjectName',
-          indicator: 'domain.com',
-          indicators: [{ indicatorType: 'domain', value: 'malicious.com' }],
-          indicatorType: 'domain',
-          insight: 'This domain was likely registered for phishing purposes',
-          tags: ['malware'],
-          targetCountry: 'US',
-          targetIndustry: 'Agriculture',
-        },
-      ],
-      datasetId: 'durableObjectName',
     });
   });
 

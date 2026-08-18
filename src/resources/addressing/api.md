@@ -117,7 +117,6 @@ Methods:
 - <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">delete</a>(prefixID, { ...params }) -> PrefixDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">edit</a>(prefixID, { ...params }) -> Prefix</code>
 - <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">get</a>(prefixID, { ...params }) -> Prefix</code>
-- <code title="post /accounts/{account_id}/addressing/prefixes/{prefix_id}/validate">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">validate</a>(prefixID, { ...params }) -> Prefix</code>
 
 ### ServiceBindings
 

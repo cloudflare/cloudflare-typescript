@@ -156,12 +156,6 @@ export interface PredefinedCreateResponse {
   name: string;
 
   /**
-   * Whether this entry is deprecated for new use. This is computed from the static
-   * catalog and emitted only when true.
-   */
-  deprecated?: boolean;
-
-  /**
    * @deprecated
    */
   profile_id?: string | null;
@@ -222,12 +216,6 @@ export interface PredefinedUpdateResponse {
   enabled: boolean;
 
   name: string;
-
-  /**
-   * Whether this entry is deprecated for new use. This is computed from the static
-   * catalog and emitted only when true.
-   */
-  deprecated?: boolean;
 
   /**
    * @deprecated
@@ -354,12 +342,6 @@ export namespace PredefinedListResponse {
     name: string;
 
     type: 'predefined';
-
-    /**
-     * Whether this entry is deprecated for new use. This is computed from the static
-     * catalog and emitted only when true.
-     */
-    deprecated?: boolean;
 
     /**
      * @deprecated
@@ -605,12 +587,6 @@ export namespace PredefinedGetResponse {
     name: string;
 
     type: 'predefined';
-
-    /**
-     * Whether this entry is deprecated for new use. This is computed from the static
-     * catalog and emitted only when true.
-     */
-    deprecated?: boolean;
 
     /**
      * @deprecated

@@ -22,8 +22,8 @@ import {
   MiscategorizationCreateResponse,
   Miscategorizations,
 } from './miscategorizations';
-import * as URLsAPI from './urls';
-import { BaseURLs, URL, URLGetParams, URLs } from './urls';
+import * as SinkholesAPI from './sinkholes';
+import { BaseSinkholes, Sinkhole, SinkholeListParams, Sinkholes, SinkholesSinglePage } from './sinkholes';
 import * as WhoisAPI from './whois';
 import { BaseWhois, Whois, WhoisGetParams, WhoisGetResponse } from './whois';
 import * as ASNAPI from './asn/asn';
@@ -48,20 +48,6 @@ import {
   IndicatorFeedUpdateResponse,
   IndicatorFeeds,
 } from './indicator-feeds/indicator-feeds';
-import * as SinkholesAPI from './sinkholes/sinkholes';
-import {
-  BaseSinkholes,
-  Sinkhole,
-  SinkholeCreateParams,
-  SinkholeDeleteParams,
-  SinkholeDeleteResponse,
-  SinkholeGetParams,
-  SinkholeListParams,
-  SinkholeUpdateParams,
-  SinkholeUpdateResponse,
-  Sinkholes,
-  SinkholesSinglePage,
-} from './sinkholes/sinkholes';
 
 export class BaseIntel extends APIResource {
   static override readonly _key: readonly ['intel'] = Object.freeze(['intel'] as const);
@@ -79,7 +65,6 @@ export class Intel extends BaseIntel {
     this._client,
   );
   whois: WhoisAPI.Whois = new WhoisAPI.Whois(this._client);
-  urls: URLsAPI.URLs = new URLsAPI.URLs(this._client);
   indicatorFeeds: IndicatorFeedsAPI.IndicatorFeeds = new IndicatorFeedsAPI.IndicatorFeeds(this._client);
   sinkholes: SinkholesAPI.Sinkholes = new SinkholesAPI.Sinkholes(this._client);
   attackSurfaceReport: AttackSurfaceReportAPI.AttackSurfaceReport =
@@ -100,8 +85,6 @@ Intel.BaseIPLists = BaseIPLists;
 Intel.Miscategorizations = Miscategorizations;
 Intel.BaseMiscategorizations = BaseMiscategorizations;
 Intel.BaseWhois = BaseWhois;
-Intel.URLs = URLs;
-Intel.BaseURLs = BaseURLs;
 Intel.IndicatorFeeds = IndicatorFeeds;
 Intel.BaseIndicatorFeeds = BaseIndicatorFeeds;
 Intel.Sinkholes = Sinkholes;
@@ -158,8 +141,6 @@ export declare namespace Intel {
     type WhoisGetParams as WhoisGetParams,
   };
 
-  export { URLs as URLs, BaseURLs as BaseURLs, type URL as URL, type URLGetParams as URLGetParams };
-
   export {
     IndicatorFeeds as IndicatorFeeds,
     BaseIndicatorFeeds as BaseIndicatorFeeds,
@@ -180,14 +161,8 @@ export declare namespace Intel {
     Sinkholes as Sinkholes,
     BaseSinkholes as BaseSinkholes,
     type Sinkhole as Sinkhole,
-    type SinkholeUpdateResponse as SinkholeUpdateResponse,
-    type SinkholeDeleteResponse as SinkholeDeleteResponse,
     type SinkholesSinglePage as SinkholesSinglePage,
-    type SinkholeCreateParams as SinkholeCreateParams,
-    type SinkholeUpdateParams as SinkholeUpdateParams,
     type SinkholeListParams as SinkholeListParams,
-    type SinkholeDeleteParams as SinkholeDeleteParams,
-    type SinkholeGetParams as SinkholeGetParams,
   };
 
   export { AttackSurfaceReport as AttackSurfaceReport, BaseAttackSurfaceReport as BaseAttackSurfaceReport };

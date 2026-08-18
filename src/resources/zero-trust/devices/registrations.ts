@@ -492,11 +492,6 @@ export interface RegistrationListParams extends CursorPaginationParams {
   include?: string;
 
   /**
-   * Query param
-   */
-  policy?: RegistrationListParams.Policy;
-
-  /**
    * Query param: Filter by registration details.
    */
   search?: string;
@@ -538,13 +533,6 @@ export namespace RegistrationListParams {
   export interface Device {
     /**
      * Filter by WARP device ID.
-     */
-    id?: string;
-  }
-
-  export interface Policy {
-    /**
-     * Filter by the ID of the device settings profile assigned to the registration.
      */
     id?: string;
   }

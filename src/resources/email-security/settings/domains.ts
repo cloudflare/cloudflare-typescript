@@ -4,7 +4,6 @@ import { APIResource } from '../../../core/resource';
 import { APIPromise } from '../../../core/api-promise';
 import {
   PagePromise,
-  SinglePage,
   V4PagePaginationArray,
   type V4PagePaginationArrayParams,
 } from '../../../core/pagination';
@@ -74,24 +73,6 @@ export class BaseDomains extends APIResource {
   }
 
   /**
-   * Removes protection from multiple email domains. Deprecated; use the batch
-   * endpoint instead.
-   *
-   * @deprecated
-   */
-  bulkDelete(
-    params: DomainBulkDeleteParams,
-    options?: RequestOptions,
-  ): PagePromise<DomainBulkDeleteResponsesSinglePage, DomainBulkDeleteResponse> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      path`/accounts/${account_id}/email-security/settings/domains`,
-      SinglePage<DomainBulkDeleteResponse>,
-      { method: 'delete', ...options },
-    );
-  }
-
-  /**
    * Updates configuration for a protected email domain. Only provided fields will be
    * modified. Changes affect delivery mode, security settings, and regional
    * processing.
@@ -142,11 +123,9 @@ export class Domains extends BaseDomains {}
 
 export type DomainListResponsesV4PagePaginationArray = V4PagePaginationArray<DomainListResponse>;
 
-export type DomainBulkDeleteResponsesSinglePage = SinglePage<DomainBulkDeleteResponse>;
-
 export interface DomainListResponse {
   /**
-   * Domain identifier.
+   * Domain identifier
    */
   id?: string;
 
@@ -156,7 +135,7 @@ export interface DomainListResponse {
 
   created_at?: string;
 
-  dmarc_status?: 'none' | 'good' | 'invalid' | null;
+  dmarc_status?: 'none' | 'good' | 'invalid';
 
   domain?: string;
 
@@ -175,7 +154,7 @@ export interface DomainListResponse {
 
   emails_processed?: DomainListResponse.EmailsProcessed;
 
-  folder?: 'AllItems' | 'Inbox' | null;
+  folder?: 'AllItems' | 'Inbox';
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
 
@@ -184,7 +163,8 @@ export interface DomainListResponse {
   ip_restrictions?: Array<string>;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -200,9 +180,9 @@ export interface DomainListResponse {
 
   require_tls_outbound?: boolean | null;
 
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
+  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid';
 
-  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
+  status?: 'pending' | 'active' | 'failed' | 'timeout';
 
   transport?: string;
 }
@@ -227,21 +207,14 @@ export namespace DomainListResponse {
 
 export interface DomainDeleteResponse {
   /**
-   * Domain identifier.
-   */
-  id: string;
-}
-
-export interface DomainBulkDeleteResponse {
-  /**
-   * Domain identifier.
+   * Domain identifier
    */
   id: string;
 }
 
 export interface DomainEditResponse {
   /**
-   * Domain identifier.
+   * Domain identifier
    */
   id?: string;
 
@@ -251,7 +224,7 @@ export interface DomainEditResponse {
 
   created_at?: string;
 
-  dmarc_status?: 'none' | 'good' | 'invalid' | null;
+  dmarc_status?: 'none' | 'good' | 'invalid';
 
   domain?: string;
 
@@ -270,7 +243,7 @@ export interface DomainEditResponse {
 
   emails_processed?: DomainEditResponse.EmailsProcessed;
 
-  folder?: 'AllItems' | 'Inbox' | null;
+  folder?: 'AllItems' | 'Inbox';
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
 
@@ -279,7 +252,8 @@ export interface DomainEditResponse {
   ip_restrictions?: Array<string>;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -295,9 +269,9 @@ export interface DomainEditResponse {
 
   require_tls_outbound?: boolean | null;
 
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
+  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid';
 
-  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
+  status?: 'pending' | 'active' | 'failed' | 'timeout';
 
   transport?: string;
 }
@@ -322,7 +296,7 @@ export namespace DomainEditResponse {
 
 export interface DomainGetResponse {
   /**
-   * Domain identifier.
+   * Domain identifier
    */
   id?: string;
 
@@ -332,7 +306,7 @@ export interface DomainGetResponse {
 
   created_at?: string;
 
-  dmarc_status?: 'none' | 'good' | 'invalid' | null;
+  dmarc_status?: 'none' | 'good' | 'invalid';
 
   domain?: string;
 
@@ -351,7 +325,7 @@ export interface DomainGetResponse {
 
   emails_processed?: DomainGetResponse.EmailsProcessed;
 
-  folder?: 'AllItems' | 'Inbox' | null;
+  folder?: 'AllItems' | 'Inbox';
 
   inbox_provider?: 'Microsoft' | 'Google' | null;
 
@@ -360,7 +334,8 @@ export interface DomainGetResponse {
   ip_restrictions?: Array<string>;
 
   /**
-   * @deprecated Use `modified_at` instead.
+   * @deprecated Deprecated, use `modified_at` instead. End of life: November
+   * 1, 2026.
    */
   last_modified?: string;
 
@@ -376,9 +351,9 @@ export interface DomainGetResponse {
 
   require_tls_outbound?: boolean | null;
 
-  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid' | null;
+  spf_status?: 'none' | 'good' | 'neutral' | 'open' | 'invalid';
 
-  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
+  status?: 'pending' | 'active' | 'failed' | 'timeout';
 
   transport?: string;
 }
@@ -445,17 +420,10 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Filters response to domains with the provided status.
    */
-  status?: 'pending' | 'active' | 'failed' | 'timeout' | null;
+  status?: 'pending' | 'active' | 'failed' | 'timeout';
 }
 
 export interface DomainDeleteParams {
-  /**
-   * Identifier.
-   */
-  account_id: string;
-}
-
-export interface DomainBulkDeleteParams {
   /**
    * Identifier.
    */
@@ -476,6 +444,11 @@ export interface DomainEditParams {
   /**
    * Body param
    */
+  domain?: string;
+
+  /**
+   * Body param
+   */
   drop_dispositions?: Array<
     | 'MALICIOUS'
     | 'MALICIOUS-BEC'
@@ -492,7 +465,7 @@ export interface DomainEditParams {
   /**
    * Body param
    */
-  folder?: 'AllItems' | 'Inbox' | null;
+  folder?: 'AllItems' | 'Inbox';
 
   /**
    * Body param
@@ -541,14 +514,11 @@ export declare namespace Domains {
   export {
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
-    type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     type DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
-    type DomainBulkDeleteResponsesSinglePage as DomainBulkDeleteResponsesSinglePage,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
-    type DomainBulkDeleteParams as DomainBulkDeleteParams,
     type DomainEditParams as DomainEditParams,
     type DomainGetParams as DomainGetParams,
   };

@@ -47,13 +47,3 @@ Methods:
 
 - <code title="put /zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}">client.customHostnames.certificatePack.certificates.<a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">update</a>(certificateID, { ...params }) -> CertificateUpdateResponse</code>
 - <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}">client.customHostnames.certificatePack.certificates.<a href="./src/resources/custom-hostnames/certificate-pack/certificates.ts">delete</a>(certificateID, { ...params }) -> CertificateDeleteResponse</code>
-
-## Quota
-
-Types:
-
-- <code><a href="./src/resources/custom-hostnames/quota.ts">QuotaGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_id}/custom_hostnames/quota">client.customHostnames.quota.<a href="./src/resources/custom-hostnames/quota.ts">get</a>({ ...params }) -> QuotaGetResponse</code>

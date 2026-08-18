@@ -86,28 +86,6 @@ Methods:
 - <code title="patch /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">edit</a>(settingID, { ...params }) -> SettingEditResponse</code>
 - <code title="get /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">get</a>(settingID, { ...params }) -> SettingGetResponse</code>
 
-## TransformationsAllowedOrigins
-
-Types:
-
-- <code><a href="./src/resources/zones/transformations-allowed-origins.ts">TransformationsAllowedOrigins</a></code>
-
-Methods:
-
-- <code title="patch /zones/{zone_id}/settings/transformations_allowed_origins">client.zones.transformationsAllowedOrigins.<a href="./src/resources/zones/transformations-allowed-origins.ts">edit</a>({ ...params }) -> TransformationsAllowedOrigins</code>
-- <code title="get /zones/{zone_id}/settings/transformations_allowed_origins">client.zones.transformationsAllowedOrigins.<a href="./src/resources/zones/transformations-allowed-origins.ts">get</a>({ ...params }) -> TransformationsAllowedOrigins</code>
-
-## TransformationsC2pa
-
-Types:
-
-- <code><a href="./src/resources/zones/transformations-c2pa.ts">TransformationsC2pa</a></code>
-
-Methods:
-
-- <code title="patch /zones/{zone_id}/settings/transformations_c2pa">client.zones.transformationsC2pa.<a href="./src/resources/zones/transformations-c2pa.ts">edit</a>({ ...params }) -> TransformationsC2pa</code>
-- <code title="get /zones/{zone_id}/settings/transformations_c2pa">client.zones.transformationsC2pa.<a href="./src/resources/zones/transformations-c2pa.ts">get</a>({ ...params }) -> TransformationsC2pa</code>
-
 ## Environments
 
 Types:
@@ -194,9 +172,10 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zones/ct/alerting.ts">CTAlertingSubscription</a></code>
+- <code><a href="./src/resources/zones/ct/alerting.ts">AlertingEditResponse</a></code>
+- <code><a href="./src/resources/zones/ct/alerting.ts">AlertingGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">edit</a>({ ...params }) -> CTAlertingSubscription</code>
-- <code title="get /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">get</a>({ ...params }) -> CTAlertingSubscription</code>
+- <code title="patch /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">edit</a>({ ...params }) -> AlertingEditResponse</code>
+- <code title="get /zones/{zone_id}/ct/alerting">client.zones.ct.alerting.<a href="./src/resources/zones/ct/alerting.ts">get</a>({ ...params }) -> AlertingGetResponse</code>

@@ -80,24 +80,10 @@ export interface VersionListResponse {
 
   workflow_id: string;
 
-  default_retention?: VersionListResponse.DefaultRetention;
-
   limits?: VersionListResponse.Limits;
 }
 
 export namespace VersionListResponse {
-  export interface DefaultRetention {
-    /**
-     * Default error retention in milliseconds.
-     */
-    error_retention?: number;
-
-    /**
-     * Default success retention in milliseconds.
-     */
-    success_retention?: number;
-  }
-
   export interface Limits {
     steps?: number;
   }
@@ -121,24 +107,10 @@ export interface VersionGetResponse {
 
   workflow_id: string;
 
-  default_retention?: VersionGetResponse.DefaultRetention;
-
   limits?: VersionGetResponse.Limits;
 }
 
 export namespace VersionGetResponse {
-  export interface DefaultRetention {
-    /**
-     * Default error retention in milliseconds.
-     */
-    error_retention?: number;
-
-    /**
-     * Default success retention in milliseconds.
-     */
-    success_retention?: number;
-  }
-
   export interface Limits {
     steps?: number;
   }
@@ -203,7 +175,7 @@ export namespace VersionGraphResponse {
       /**
        * Shape descriptor for JSON payloads.
        */
-      payload?: Workflow.Payload.Type | Workflow.Payload.UnionMember1;
+      payload?: Workflow.Type | Workflow.UnionMember1;
     }
 
     export namespace Workflow {
@@ -529,19 +501,17 @@ export namespace VersionGraphResponse {
         type: 'break';
       }
 
-      export namespace Payload {
-        export interface Type {
-          type: 'unknown';
-        }
+      export interface Type {
+        type: 'unknown';
+      }
 
-        export interface UnionMember1 {
-          /**
-           * Nested JsonShape fields (recursive structure).
-           */
-          fields: { [key: string]: unknown };
+      export interface UnionMember1 {
+        /**
+         * Nested JsonShape fields (recursive structure).
+         */
+        fields: { [key: string]: unknown };
 
-          type: 'object';
-        }
+        type: 'object';
       }
     }
   }

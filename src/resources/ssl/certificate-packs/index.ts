@@ -3,7 +3,10 @@
 export {
   CertificatePacks,
   BaseCertificatePacks,
+  type Host,
   type RequestValidity,
+  type Status,
+  type ValidationMethod,
   type CertificatePackCreateResponse,
   type CertificatePackListResponse,
   type CertificatePackDeleteResponse,

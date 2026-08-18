@@ -178,8 +178,8 @@ export interface TelemetryQueryResponse {
   statistics: TelemetryQueryResponse.Statistics;
 
   /**
-   * Agent run summaries. Present when the query view is 'agents'. Each entry
-   * represents one trace containing at least one agent invocation.
+   * Durable Object agent summaries. Present when the query view is 'agents'. Each
+   * entry represents an agent with its event counts and status.
    */
   agents?: Array<TelemetryQueryResponse.Agent>;
 
@@ -195,12 +195,6 @@ export interface TelemetryQueryResponse {
    * compare option is enabled. Same structure as calculations.
    */
   compare?: Array<TelemetryQueryResponse.Compare>;
-
-  /**
-   * Bucketed 2D histogram of a numeric field over time. Present when chartType is
-   * 'distribution'.
-   */
-  distribution?: TelemetryQueryResponse.Distribution;
 
   /**
    * Individual event results. Present when the query view is 'events'. Contains the
@@ -324,7 +318,7 @@ export namespace TelemetryQueryResponse {
         /**
          * Create Calculations to compute as part of the query.
          */
-        calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+        calculations?: Array<Parameters.Calculation>;
 
         /**
          * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -369,21 +363,10 @@ export namespace TelemetryQueryResponse {
       }
 
       export namespace Parameters {
-        export interface CountCalculation {
-          operator: 'count' | 'COUNT';
-
-          alias?: string;
-
-          key?: string;
-
-          keyType?: 'string' | 'number' | 'boolean';
-        }
-
-        export interface KeyedCalculation {
-          key: string;
-
+        export interface Calculation {
           operator:
             | 'uniq'
+            | 'count'
             | 'max'
             | 'min'
             | 'sum'
@@ -402,6 +385,7 @@ export namespace TelemetryQueryResponse {
             | 'stddev'
             | 'variance'
             | 'COUNT_DISTINCT'
+            | 'COUNT'
             | 'MAX'
             | 'MIN'
             | 'SUM'
@@ -421,6 +405,8 @@ export namespace TelemetryQueryResponse {
             | 'VARIANCE';
 
           alias?: string;
+
+          key?: string;
 
           keyType?: 'string' | 'number' | 'boolean';
         }
@@ -621,86 +607,45 @@ export namespace TelemetryQueryResponse {
 
   export interface Agent {
     /**
-     * Pagination cursor derived from the first agent invocation in the run.
+     * Class name of the Durable Object agent.
      */
-    id: string;
+    agentClass: string;
 
     /**
-     * Distinct errors reported by spans in the run.
+     * Breakdown of event counts by event type.
      */
-    errors: Array<string>;
+    eventTypeCounts: { [key: string]: number };
 
     /**
-     * Distinct models reported by chat spans across the run's trace.
+     * Timestamp of the earliest event from this agent in the queried window (Unix
+     * epoch ms).
      */
-    models: Array<string>;
+    firstEventMs: number;
 
     /**
-     * Distinct GenAI providers reported by chat spans in the run.
+     * Whether the agent emitted any error events in the queried window.
      */
-    providers: Array<string>;
+    hasErrors: boolean;
 
     /**
-     * Worker services represented in the run's trace.
+     * Timestamp of the most recent event from this agent (Unix epoch ms).
      */
-    services: Array<string>;
+    lastEventMs: number;
 
     /**
-     * Number of spans in the run's trace.
+     * Durable Object namespace the agent belongs to.
      */
-    spans: number;
+    namespace: string;
 
     /**
-     * Observed run status.
+     * Worker service name that hosts this agent.
      */
-    status: 'completed' | 'error';
+    service: string;
 
     /**
-     * Total trace duration in milliseconds.
+     * Total number of events emitted by this agent in the queried window.
      */
-    traceDurationMs: number;
-
-    /**
-     * End of the run's trace as a Unix epoch in milliseconds.
-     */
-    traceEndMs: number;
-
-    /**
-     * Trace identifier for this agent run.
-     */
-    traceId: string;
-
-    /**
-     * Start of the run's trace as a Unix epoch in milliseconds.
-     */
-    traceStartMs: number;
-
-    /**
-     * ID from the earliest agent invocation that provides one.
-     */
-    agentId?: string;
-
-    /**
-     * Name from the earliest agent invocation that provides one.
-     */
-    agentName?: string;
-
-    /**
-     * Conversation ID from the earliest invocation that provides one.
-     */
-    conversationId?: string;
-
-    /**
-     * Input tokens summed across chat spans in the run's trace; informational, not
-     * billing data.
-     */
-    inputTokens?: number;
-
-    /**
-     * Output tokens summed across chat spans in the run's trace; informational, not
-     * billing data.
-     */
-    outputTokens?: number;
+    totalEvents: number;
   }
 
   export interface Calculation {
@@ -829,40 +774,6 @@ export namespace TelemetryQueryResponse {
         }
       }
     }
-  }
-
-  /**
-   * Bucketed 2D histogram of a numeric field over time. Present when chartType is
-   * 'distribution'.
-   */
-  export interface Distribution {
-    /**
-     * Time-bucket labels (ISO-8601 strings), one per matrix column.
-     */
-    bins: Array<string>;
-
-    /**
-     * Raw bucket edges in the value's native unit, length buckets.length + 1. Used for
-     * the colour scale and percentile mapping.
-     */
-    bucketBoundaries: Array<number>;
-
-    /**
-     * Bucketing scheme used to derive the boundaries. 'log' produces geometric edges;
-     * 'linear' produces fixed-width edges.
-     */
-    bucketMode: 'log' | 'linear';
-
-    /**
-     * Value-range labels, one per matrix row (e.g. '50–100ms').
-     */
-    buckets: Array<string>;
-
-    /**
-     * Sampling-corrected counts. matrix[bucketIdx][binIdx] is the estimated number of
-     * events in value-bucket 'bucketIdx' during time-bin 'binIdx'.
-     */
-    matrix: Array<Array<number>>;
   }
 
   /**
@@ -1023,12 +934,6 @@ export namespace TelemetryQueryResponse {
         provider?: string;
 
         /**
-         * Cloudflare Ray ID from the `cf-ray` header of the request that triggered the
-         * invocation.
-         */
-        rayId?: string;
-
-        /**
          * Cloudflare data center / region that handled the request.
          */
         region?: string;
@@ -1109,7 +1014,6 @@ export namespace TelemetryQueryResponse {
           | 'email'
           | 'tail'
           | 'rpc'
-          | 'jsrpc'
           | 'websocket'
           | 'workflow'
           | 'unknown';
@@ -1169,7 +1073,6 @@ export namespace TelemetryQueryResponse {
           | 'email'
           | 'tail'
           | 'rpc'
-          | 'jsrpc'
           | 'websocket'
           | 'workflow'
           | 'unknown';
@@ -1428,12 +1331,6 @@ export namespace TelemetryQueryResponse {
       provider?: string;
 
       /**
-       * Cloudflare Ray ID from the `cf-ray` header of the request that triggered the
-       * invocation.
-       */
-      rayId?: string;
-
-      /**
        * Cloudflare data center / region that handled the request.
        */
       region?: string;
@@ -1514,7 +1411,6 @@ export namespace TelemetryQueryResponse {
         | 'email'
         | 'tail'
         | 'rpc'
-        | 'jsrpc'
         | 'websocket'
         | 'workflow'
         | 'unknown';
@@ -1574,7 +1470,6 @@ export namespace TelemetryQueryResponse {
         | 'email'
         | 'tail'
         | 'rpc'
-        | 'jsrpc'
         | 'websocket'
         | 'workflow'
         | 'unknown';
@@ -2163,16 +2058,6 @@ export interface TelemetryQueryParams {
   chart?: boolean;
 
   /**
-   * Body param: Controls the SQL shape and response payload for the 'calculations'
-   * view. Omitted or 'timeseries_and_aggregate': current behaviour — both the
-   * time-series and aggregate queries. 'timeseries': time-series only. 'aggregate':
-   * aggregate only. 'distribution': a bucketed 2D histogram (time × value buckets)
-   * returned in 'distribution' instead of 'calculations'. 'distribution' is not
-   * compatible with 'compare' — combining them returns a 400.
-   */
-  chartType?: 'timeseries_and_aggregate' | 'timeseries' | 'aggregate' | 'distribution';
-
-  /**
    * Body param: When true, includes a comparison dataset from the previous time
    * period of equal length.
    */
@@ -2203,9 +2088,8 @@ export interface TelemetryQueryParams {
   limit?: number;
 
   /**
-   * Body param: Cursor for pagination in event, trace, invocation, and agent views.
-   * Pass the $metadata.id of the last event, the trace cursor, or AgentRun.id to
-   * fetch the next page.
+   * Body param: Cursor for pagination in event, trace, and invocation views. Pass
+   * the $metadata.id of the last returned item to fetch the next page.
    */
   offset?: string;
 
@@ -2233,8 +2117,8 @@ export interface TelemetryQueryParams {
    * Body param: Controls the shape of the response. 'events': individual log lines
    * matching the query. 'calculations': aggregated metrics (count, avg, p99, etc.)
    * with optional group-by breakdowns and time-series. 'invocations': events grouped
-   * by request ID. 'traces': distributed trace summaries. 'agents': agent-specific
-   * trace summaries.
+   * by request ID. 'traces': distributed trace summaries. 'agents': Durable Object
+   * agent summaries.
    */
   view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'agents';
 }
@@ -2267,7 +2151,7 @@ export namespace TelemetryQueryParams {
      * Aggregation calculations to compute (e.g. count, avg, p99). Each calculation
      * produces aggregate values and optional time-series data.
      */
-    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+    calculations?: Array<Parameters.Calculation>;
 
     /**
      * Datasets to query. Leave empty to query all available datasets.
@@ -2319,47 +2203,14 @@ export namespace TelemetryQueryParams {
   }
 
   export namespace Parameters {
-    export interface CountCalculation {
-      /**
-       * Aggregation operator to apply. Examples: count, avg, sum, min, max, median, p90,
-       * p95, p99, uniq, stddev, variance.
-       */
-      operator: 'count' | 'COUNT';
-
-      /**
-       * Custom label for this calculation in the results. Useful for distinguishing
-       * multiple calculations.
-       */
-      alias?: string;
-
-      /**
-       * Field name to calculate over. Must exist in the data — verify with the keys
-       * endpoint. Required for every operator except `count`, which aggregates whole
-       * rows and may omit it.
-       */
-      key?: string;
-
-      /**
-       * Data type of the key. Required when key is provided to ensure correct
-       * aggregation.
-       */
-      keyType?: 'string' | 'number' | 'boolean';
-    }
-
-    export interface KeyedCalculation {
-      /**
-       * Field name to calculate over. Must exist in the data — verify with the keys
-       * endpoint. Required for every operator except `count`, which aggregates whole
-       * rows and may omit it.
-       */
-      key: string;
-
+    export interface Calculation {
       /**
        * Aggregation operator to apply. Examples: count, avg, sum, min, max, median, p90,
        * p95, p99, uniq, stddev, variance.
        */
       operator:
         | 'uniq'
+        | 'count'
         | 'max'
         | 'min'
         | 'sum'
@@ -2378,6 +2229,7 @@ export namespace TelemetryQueryParams {
         | 'stddev'
         | 'variance'
         | 'COUNT_DISTINCT'
+        | 'COUNT'
         | 'MAX'
         | 'MIN'
         | 'SUM'
@@ -2401,6 +2253,12 @@ export namespace TelemetryQueryParams {
        * multiple calculations.
        */
       alias?: string;
+
+      /**
+       * Field name to calculate over. Must exist in the data — verify with the keys
+       * endpoint. Omit for operators that don't require a key (e.g. count).
+       */
+      key?: string;
 
       /**
        * Data type of the key. Required when key is provided to ensure correct

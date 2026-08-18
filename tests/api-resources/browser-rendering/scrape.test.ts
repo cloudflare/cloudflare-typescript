@@ -30,7 +30,8 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
   test('create: only required params', async () => {
     const responsePromise = client.browserRendering.scrape.create({
       account_id: 'account_id',
-      elements: [{ selector: 'h1' }],
+      elements: [{ selector: 'selector' }],
+      html: '<h1>Hello World!</h1>',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -44,7 +45,8 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
   test('create: required and optional params', async () => {
     const response = await client.browserRendering.scrape.create({
       account_id: 'account_id',
-      elements: [{ selector: 'h1' }],
+      elements: [{ selector: 'selector' }],
+      html: '<h1>Hello World!</h1>',
       cacheTTL: 0,
       actionTimeout: 120000,
       addScriptTag: [
@@ -85,12 +87,10 @@ const runTests = (client: PartialCloudflare<{ browserRendering: { scrape: BaseSc
         timeout: 60000,
         waitUntil: 'load',
       },
-      html: '<h1>Hello World!</h1>',
       rejectRequestPattern: ['string'],
       rejectResourceTypes: ['document'],
       setExtraHTTPHeaders: { foo: 'string' },
       setJavaScriptEnabled: true,
-      url: 'https://www.example.com/',
       userAgent: 'userAgent',
       viewport: {
         height: 0,

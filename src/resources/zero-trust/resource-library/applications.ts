@@ -45,13 +45,13 @@ export class BaseApplications extends APIResource {
    * ```ts
    * const application =
    *   await client.zeroTrust.resourceLibrary.applications.get(
-   *     498,
+   *     '0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0',
    *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
    *   );
    * ```
    */
   get(
-    id: number,
+    id: string,
     params: ApplicationGetParams,
     options?: RequestOptions,
   ): APIPromise<ApplicationGetResponse> {
@@ -72,7 +72,7 @@ export interface ApplicationListResponse {
   /**
    * Returns the application ID.
    */
-  id: number;
+  id: string;
 
   /**
    * Confidence score for the application. Returns -1 when no score is available.
@@ -95,11 +95,6 @@ export interface ApplicationListResponse {
   application_type_description: string;
 
   /**
-   * Returns the category ID.
-   */
-  category_id: number;
-
-  /**
    * Returns the application creation time.
    */
   created_at: string;
@@ -110,7 +105,7 @@ export interface ApplicationListResponse {
   gen_ai_score: number;
 
   /**
-   * Hostnames matched by the application.
+   * Returns the list of hostnames for the application.
    */
   hostnames: Array<string>;
 
@@ -120,7 +115,7 @@ export interface ApplicationListResponse {
   human_id: string;
 
   /**
-   * IP subnets matched by the application.
+   * Returns the list of IP subnets for the application.
    */
   ip_subnets: Array<string>;
 
@@ -130,12 +125,12 @@ export interface ApplicationListResponse {
   name: string;
 
   /**
-   * Port and protocol pairs matched by the application.
+   * Returns the list of port protocols for the application.
    */
   port_protocols: Array<string>;
 
   /**
-   * Support domains matched by the application.
+   * Returns the list of support domains for the application.
    */
   support_domains: Array<string>;
 
@@ -158,13 +153,18 @@ export interface ApplicationListResponse {
    * Returns the score composition breakdown for the application.
    */
   application_score_composition?: unknown | null;
+
+  /**
+   * Returns the Intel API ID for the application.
+   */
+  intel_id?: number | null;
 }
 
 export interface ApplicationGetResponse {
   /**
    * Returns the application ID.
    */
-  id: number;
+  id: string;
 
   /**
    * Confidence score for the application. Returns -1 when no score is available.
@@ -187,11 +187,6 @@ export interface ApplicationGetResponse {
   application_type_description: string;
 
   /**
-   * Returns the category ID.
-   */
-  category_id: number;
-
-  /**
    * Returns the application creation time.
    */
   created_at: string;
@@ -202,7 +197,7 @@ export interface ApplicationGetResponse {
   gen_ai_score: number;
 
   /**
-   * Hostnames matched by the application.
+   * Returns the list of hostnames for the application.
    */
   hostnames: Array<string>;
 
@@ -212,7 +207,7 @@ export interface ApplicationGetResponse {
   human_id: string;
 
   /**
-   * IP subnets matched by the application.
+   * Returns the list of IP subnets for the application.
    */
   ip_subnets: Array<string>;
 
@@ -222,12 +217,12 @@ export interface ApplicationGetResponse {
   name: string;
 
   /**
-   * Port and protocol pairs matched by the application.
+   * Returns the list of port protocols for the application.
    */
   port_protocols: Array<string>;
 
   /**
-   * Support domains matched by the application.
+   * Returns the list of support domains for the application.
    */
   support_domains: Array<string>;
 
@@ -250,6 +245,11 @@ export interface ApplicationGetResponse {
    * Returns the score composition breakdown for the application.
    */
   application_score_composition?: unknown | null;
+
+  /**
+   * Returns the Intel API ID for the application.
+   */
+  intel_id?: number | null;
 }
 
 export interface ApplicationListParams {
@@ -262,7 +262,7 @@ export interface ApplicationListParams {
    * Query param: Filter applications using key:value format. Supported filter keys:
    *
    * - name: Filter by application name (e.g., name:HR)
-   * - id: Filter by application ID (e.g., id:498)
+   * - id: Filter by application ID (e.g., id:0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0)
    * - human_id: Filter by human-readable ID (e.g., human_id:HR)
    * - hostname: Filter by hostname or support domain (e.g.,
    *   hostname:portal.example.com)
@@ -270,7 +270,10 @@ export interface ApplicationListParams {
    * - ip_subnet: Filter by IP subnet using CIDR containment — returns applications
    *   where any stored subnet contains the search value (e.g., ip_subnet:10.0.1.5/32
    *   matches apps with 10.0.0.0/16)
-   * - category_id: Filter by category ID (e.g., category_id:12).
+   * - intel_id: Filter by Intel API ID (e.g., intel_id:498). also supports multiple
+   *   values (e.g., intel_id:498,1001)
+   * - category_id: Filter by category ID (e.g.,
+   *   category_id:37f8ec03-8766-49d4-9a15-369b044c842c).
    * - category_name: Filter by category name (e.g., category_name:HR).
    * - supported: Filter by supported Cloudflare product (e.g., supported:ACCESS).
    *   Values: GATEWAY, ACCESS, CASB. .

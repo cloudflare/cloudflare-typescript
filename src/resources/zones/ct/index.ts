@@ -3,7 +3,8 @@
 export {
   Alerting,
   BaseAlerting,
-  type CTAlertingSubscription,
+  type AlertingEditResponse,
+  type AlertingGetResponse,
   type AlertingEditParams,
   type AlertingGetParams,
 } from './alerting';

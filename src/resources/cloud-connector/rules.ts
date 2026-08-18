@@ -12,8 +12,7 @@ export class BaseRules extends APIResource {
   ] as const);
 
   /**
-   * Updates Cloud Connector rules for a zone, replacing the existing rule
-   * configuration.
+   * Put Rules
    */
   update(
     params: RuleUpdateParams,
@@ -28,8 +27,7 @@ export class BaseRules extends APIResource {
   }
 
   /**
-   * Retrieves the Cloud Connector rules configured for a zone. Rules define how
-   * traffic is routed to cloud services.
+   * Rules
    */
   list(
     params: RuleListParams,
@@ -66,7 +64,7 @@ export interface RuleUpdateResponse {
   /**
    * Cloud Provider type
    */
-  provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage' | 'oci_storage';
+  provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
 }
 
 export namespace RuleUpdateResponse {
@@ -98,7 +96,7 @@ export interface RuleListResponse {
   /**
    * Cloud Provider type
    */
-  provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage' | 'oci_storage';
+  provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
 }
 
 export namespace RuleListResponse {
@@ -143,7 +141,7 @@ export namespace RuleUpdateParams {
     /**
      * Cloud Provider type
      */
-    provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage' | 'oci_storage';
+    provider?: 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
   }
 
   export namespace Rule {

@@ -29,8 +29,7 @@ const parentPartialClient = createClient({
 const runTests = (
   client: PartialCloudflare<{ logs: { logExplorer: { datasets: { available: BaseAvailable } } } }>,
 ) => {
-  // HTTP 400 error from prism
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = client.logs.logExplorer.datasets.available.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

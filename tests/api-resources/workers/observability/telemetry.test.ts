@@ -154,7 +154,6 @@ const runTests = (
       queryId: 'queryId',
       timeframe: { from: 0, to: 0 },
       chart: true,
-      chartType: 'timeseries_and_aggregate',
       compare: true,
       dry: true,
       granularity: 0,
@@ -166,7 +165,7 @@ const runTests = (
       parameters: {
         calculations: [
           {
-            operator: 'count',
+            operator: 'uniq',
             alias: 'alias',
             key: 'key',
             keyType: 'string',

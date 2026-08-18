@@ -76,16 +76,6 @@ Methods:
 
 - <code title="post /accounts/{account_id}/browser-rendering/markdown">client.browserRendering.markdown.<a href="./src/resources/browser-rendering/markdown.ts">create</a>({ ...params }) -> MarkdownCreateResponse</code>
 
-## AccessibilityTree
-
-Types:
-
-- <code><a href="./src/resources/browser-rendering/accessibility-tree.ts">AccessibilityTreeCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/browser-rendering/accessibilityTree">client.browserRendering.accessibilityTree.<a href="./src/resources/browser-rendering/accessibility-tree.ts">create</a>({ ...params }) -> AccessibilityTreeCreateResponse</code>
-
 ## Crawl
 
 Types:

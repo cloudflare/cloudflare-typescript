@@ -1,16 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
-import * as InterruptsAPI from './interrupts';
-import {
-  BaseInterrupts,
-  InterruptCreateParams,
-  InterruptCreateResponse,
-  InterruptListParams,
-  InterruptListResponse,
-  InterruptListResponsesSinglePage,
-  Interrupts,
-} from './interrupts';
 import * as EventsAPI from './events/events';
 import {
   BaseEvents,
@@ -41,7 +31,7 @@ export class BaseConnectors extends APIResource {
   ] as const);
 
   /**
-   * Creates a Magic WAN Connector.
+   * Add a connector to your account
    *
    * @example
    * ```ts
@@ -62,8 +52,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Updates properties of a Magic WAN Connector. May be used to re-provision a
-   * license key.
+   * Replace Connector or Re-provision License Key
    *
    * @example
    * ```ts
@@ -89,7 +78,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Lists Magic WAN Connectors.
+   * List Connectors
    *
    * @example
    * ```ts
@@ -114,7 +103,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Deletes a Magic WAN Connector.
+   * Remove a connector from your account
    *
    * @example
    * ```ts
@@ -140,8 +129,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Edits properties of a Magic WAN Connector. May be used to re-provision a license
-   * key.
+   * Edit Connector to update specific properties or Re-provision License Key
    *
    * @example
    * ```ts
@@ -166,7 +154,7 @@ export class BaseConnectors extends APIResource {
   }
 
   /**
-   * Gets a Magic WAN Connector.
+   * Fetch Connector
    *
    * @example
    * ```ts
@@ -190,7 +178,6 @@ export class BaseConnectors extends APIResource {
   }
 }
 export class Connectors extends BaseConnectors {
-  interrupts: InterruptsAPI.Interrupts = new InterruptsAPI.Interrupts(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
 }
@@ -717,8 +704,6 @@ export interface ConnectorGetParams {
   account_id: string;
 }
 
-Connectors.Interrupts = Interrupts;
-Connectors.BaseInterrupts = BaseInterrupts;
 Connectors.Events = Events;
 Connectors.BaseEvents = BaseEvents;
 Connectors.Snapshots = Snapshots;
@@ -739,16 +724,6 @@ export declare namespace Connectors {
     type ConnectorDeleteParams as ConnectorDeleteParams,
     type ConnectorEditParams as ConnectorEditParams,
     type ConnectorGetParams as ConnectorGetParams,
-  };
-
-  export {
-    Interrupts as Interrupts,
-    BaseInterrupts as BaseInterrupts,
-    type InterruptCreateResponse as InterruptCreateResponse,
-    type InterruptListResponse as InterruptListResponse,
-    type InterruptListResponsesSinglePage as InterruptListResponsesSinglePage,
-    type InterruptCreateParams as InterruptCreateParams,
-    type InterruptListParams as InterruptListParams,
   };
 
   export {

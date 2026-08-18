@@ -54,7 +54,7 @@ export namespace TraceGetResponse {
   export namespace Inbound {
     export interface Line {
       /**
-       * Line number in the trace log.
+       * Line number in the trace log
        */
       lineno?: number;
 
@@ -63,7 +63,7 @@ export namespace TraceGetResponse {
       message?: string;
 
       /**
-       * @deprecated Use `logged_at` instead.
+       * @deprecated Deprecated, use `logged_at` instead. End of life: November 1, 2026.
        */
       ts?: string;
     }
@@ -78,7 +78,7 @@ export namespace TraceGetResponse {
   export namespace Outbound {
     export interface Line {
       /**
-       * Line number in the trace log.
+       * Line number in the trace log
        */
       lineno?: number;
 
@@ -87,7 +87,7 @@ export namespace TraceGetResponse {
       message?: string;
 
       /**
-       * @deprecated Use `logged_at` instead.
+       * @deprecated Deprecated, use `logged_at` instead. End of life: November 1, 2026.
        */
       ts?: string;
     }

@@ -14,8 +14,8 @@ export class BaseCancel extends APIResource {
   ] as const);
 
   /**
-   * Cancels the job, marking it as cancelled and stopping any pending message
-   * processing. The job record remains visible in list and detail endpoints.
+   * Marks the job as cancelled and stops any pending message processing. The job
+   * record remains visible in list and detail endpoints.
    *
    * @example
    * ```ts
@@ -102,7 +102,8 @@ export namespace CancelCreateResponse {
 
   export interface SearchParams {
     /**
-     * @deprecated Use GET /investigate/{investigate_id}/action_log instead.
+     * @deprecated Deprecated, use `GET /investigate/{investigate_id}/action_log`
+     * instead. End of life: November 1, 2026.
      */
     action_log?: boolean;
 
@@ -118,7 +119,7 @@ export namespace CancelCreateResponse {
     domain?: string | null;
 
     /**
-     * End of search date range.
+     * End of search date range
      */
     end?: string;
 
@@ -149,7 +150,7 @@ export namespace CancelCreateResponse {
     sender?: string | null;
 
     /**
-     * Beginning of search date range.
+     * Beginning of search date range
      */
     start?: string;
 

@@ -23,9 +23,7 @@ export class BaseEmailSending extends APIResource {
   static override readonly _key: readonly ['emailSending'] = Object.freeze(['emailSending'] as const);
 
   /**
-   * Send an email for the specified account using the structured builder. Provide
-   * the sender, recipients, subject, and at least one of text or html; attachments
-   * are optional.
+   * Send an email
    *
    * @example
    * ```ts
@@ -47,8 +45,7 @@ export class BaseEmailSending extends APIResource {
   }
 
   /**
-   * Send a raw RFC 5322 (MIME) email for the specified account. Provide the full
-   * MIME message plus the SMTP envelope (from and recipients).
+   * Send a raw MIME email
    *
    * @example
    * ```ts
@@ -148,22 +145,15 @@ export interface EmailSendingSendParams {
   >;
 
   /**
-   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
-   * string, a named address object, or an array of either.
+   * Body param: BCC recipient(s). A single email string or an array of email
+   * strings.
    */
-  bcc?:
-    | string
-    | EmailSendingSendParams.EmailSendingEmailAddressObject
-    | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
+  bcc?: string | Array<string>;
 
   /**
-   * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
-   * string, a named address object, or an array of either.
+   * Body param: CC recipient(s). A single email string or an array of email strings.
    */
-  cc?:
-    | string
-    | EmailSendingSendParams.EmailSendingEmailAddressObject
-    | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
+  cc?: string | Array<string>;
 
   /**
    * Body param: Custom email headers as key-value pairs.
@@ -171,8 +161,8 @@ export interface EmailSendingSendParams {
   headers?: { [key: string]: string };
 
   /**
-   * Body param: HTML body of the email. Provide at least one of text or html
-   * (non-empty).
+   * Body param: HTML body of the email. At least one of text or html must be
+   * provided (non-empty).
    */
   html?: string;
 
@@ -183,19 +173,16 @@ export interface EmailSendingSendParams {
   reply_to?: string | EmailSendingSendParams.EmailSendingEmailAddressObject;
 
   /**
-   * Body param: Plain text body of the email. Provide at least one of text or html
-   * (non-empty).
+   * Body param: Plain text body of the email. At least one of text or html must be
+   * provided (non-empty).
    */
   text?: string;
 
   /**
    * Body param: Recipient(s). Optional if cc or bcc is provided. A single email
-   * string, a named address object, or an array of either.
+   * string or an array of email strings.
    */
-  to?:
-    | string
-    | EmailSendingSendParams.EmailSendingEmailAddressObject
-    | Array<string | EmailSendingSendParams.EmailSendingEmailAddressObject>;
+  to?: string | Array<string>;
 }
 
 export namespace EmailSendingSendParams {
@@ -206,10 +193,9 @@ export namespace EmailSendingSendParams {
     address: string;
 
     /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
+     * Display name for the email address (e.g., 'John Doe').
      */
-    name?: string | null;
+    name: string;
   }
 
   export interface EmailSendingEmailInlineAttachment {
@@ -225,7 +211,7 @@ export namespace EmailSendingSendParams {
     content_id: string;
 
     /**
-     * Use 'inline' to embed the attachment in the email body.
+     * Must be 'inline'. Indicates the attachment is embedded in the email body.
      */
     disposition: 'inline';
 
@@ -247,7 +233,7 @@ export namespace EmailSendingSendParams {
     content: string;
 
     /**
-     * Use 'attachment' for a standard file attachment.
+     * Must be 'attachment'. Indicates a standard file attachment.
      */
     disposition: 'attachment';
 
@@ -269,88 +255,9 @@ export namespace EmailSendingSendParams {
     address: string;
 
     /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
+     * Display name for the email address (e.g., 'John Doe').
      */
-    name?: string | null;
-  }
-
-  export interface EmailSendingEmailAddressObject {
-    /**
-     * Email address (e.g., 'user@example.com').
-     */
-    address: string;
-
-    /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
-     */
-    name?: string | null;
-  }
-
-  export interface EmailSendingEmailAddressObject {
-    /**
-     * Email address (e.g., 'user@example.com').
-     */
-    address: string;
-
-    /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
-     */
-    name?: string | null;
-  }
-
-  export interface EmailSendingEmailAddressObject {
-    /**
-     * Email address (e.g., 'user@example.com').
-     */
-    address: string;
-
-    /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
-     */
-    name?: string | null;
-  }
-
-  export interface EmailSendingEmailAddressObject {
-    /**
-     * Email address (e.g., 'user@example.com').
-     */
-    address: string;
-
-    /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
-     */
-    name?: string | null;
-  }
-
-  export interface EmailSendingEmailAddressObject {
-    /**
-     * Email address (e.g., 'user@example.com').
-     */
-    address: string;
-
-    /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
-     */
-    name?: string | null;
-  }
-
-  export interface EmailSendingEmailAddressObject {
-    /**
-     * Email address (e.g., 'user@example.com').
-     */
-    address: string;
-
-    /**
-     * Display name for the email address (e.g., 'John Doe'). Optional; set to null or
-     * leave it unset to send the address on its own.
-     */
-    name?: string | null;
+    name: string;
   }
 }
 

@@ -51,44 +51,6 @@ Types:
 
 # [ACM](src/resources/acm/api.md)
 
-# AnalyticsQuery
-
-Types:
-
-- <code><a href="./src/resources/analytics-query/analytics-query.ts">AnalyticsQuerySummaryResponse</a></code>
-- <code><a href="./src/resources/analytics-query/analytics-query.ts">AnalyticsQueryTimeseriesResponse</a></code>
-- <code><a href="./src/resources/analytics-query/analytics-query.ts">AnalyticsQueryTopNResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/analytics/query/{dataset}/summary">client.analyticsQuery.<a href="./src/resources/analytics-query/analytics-query.ts">summary</a>(dataset, { ...params }) -> AnalyticsQuerySummaryResponse</code>
-- <code title="post /accounts/{account_id}/analytics/query/{dataset}/timeseries">client.analyticsQuery.<a href="./src/resources/analytics-query/analytics-query.ts">timeseries</a>(dataset, { ...params }) -> AnalyticsQueryTimeseriesResponse</code>
-- <code title="post /accounts/{account_id}/analytics/query/{dataset}/top-n">client.analyticsQuery.<a href="./src/resources/analytics-query/analytics-query.ts">topN</a>(dataset, { ...params }) -> AnalyticsQueryTopNResponsesSinglePage</code>
-
-## DataSecurity
-
-### ContentFindings
-
-Types:
-
-- <code><a href="./src/resources/analytics-query/data-security/content-findings.ts">ContentFindingTopNResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/analytics/query/data-security/content-findings/top-n">client.analyticsQuery.dataSecurity.contentFindings.<a href="./src/resources/analytics-query/data-security/content-findings.ts">topN</a>({ ...params }) -> ContentFindingTopNResponsesSinglePage</code>
-
-### Findings
-
-Types:
-
-- <code><a href="./src/resources/analytics-query/data-security/findings.ts">FindingSummaryResponse</a></code>
-- <code><a href="./src/resources/analytics-query/data-security/findings.ts">FindingTimeseriesResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/analytics/query/data-security/findings/summary">client.analyticsQuery.dataSecurity.findings.<a href="./src/resources/analytics-query/data-security/findings.ts">summary</a>({ ...params }) -> FindingSummaryResponse</code>
-- <code title="post /accounts/{account_id}/analytics/query/data-security/findings/timeseries">client.analyticsQuery.dataSecurity.findings.<a href="./src/resources/analytics-query/data-security/findings.ts">timeseries</a>({ ...params }) -> FindingTimeseriesResponse</code>
-
 # [Argo](src/resources/argo/api.md)
 
 # [CertificateAuthorities](src/resources/certificate-authorities/api.md)
@@ -191,8 +153,6 @@ Methods:
 
 # [Registrar](src/resources/registrar/api.md)
 
-# [RegistrarSandbox](src/resources/registrar-sandbox/api.md)
-
 # [RequestTracers](src/resources/request-tracers/api.md)
 
 # [Rules](src/resources/rules/api.md)
@@ -230,8 +190,6 @@ Methods:
 # [BotManagement](src/resources/bot-management/api.md)
 
 # [Fraud](src/resources/fraud/api.md)
-
-# [Precursor](src/resources/precursor/api.md)
 
 # [OriginPostQuantumEncryption](src/resources/origin-post-quantum-encryption/api.md)
 

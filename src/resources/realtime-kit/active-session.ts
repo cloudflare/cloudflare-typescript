@@ -264,6 +264,11 @@ export namespace ActiveSessionGetActiveSessionResponse {
      * timestamp when session ended
      */
     ended_at?: string;
+
+    /**
+     * Any meta data about session.
+     */
+    meta?: unknown;
   }
 }
 

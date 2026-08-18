@@ -10,7 +10,7 @@ export class BaseOrder extends APIResource {
     Object.freeze(['zeroTrust', 'dlp', 'sensitivityGroups', 'levels', 'order'] as const);
 
   /**
-   * Updates the order of sensitivity levels in a group.
+   * Set the ordering of levels within a sensitivity group.
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseOrder extends APIResource {
   }
 
   /**
-   * Gets the current order of sensitivity levels in a group.
+   * Retrieve the ordered list of level IDs for a sensitivity group.
    *
    * @example
    * ```ts

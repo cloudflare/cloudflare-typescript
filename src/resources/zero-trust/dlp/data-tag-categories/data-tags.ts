@@ -11,7 +11,7 @@ export class BaseDataTags extends APIResource {
     Object.freeze(['zeroTrust', 'dlp', 'dataTagCategories', 'dataTags'] as const);
 
   /**
-   * Creates a data tag in a category.
+   * Creates a new data tag.
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export class BaseDataTags extends APIResource {
   }
 
   /**
-   * Updates a data tag in a category.
+   * Update the attributes of a single data tag.
    *
    * @example
    * ```ts
@@ -66,7 +66,7 @@ export class BaseDataTags extends APIResource {
   }
 
   /**
-   * Lists data tags in a category.
+   * Retrieve all data tags in a data tag category
    *
    * @example
    * ```ts
@@ -93,7 +93,7 @@ export class BaseDataTags extends APIResource {
   }
 
   /**
-   * Deletes a data tag from a category.
+   * Delete a single data tag.
    *
    * @example
    * ```ts
@@ -122,7 +122,7 @@ export class BaseDataTags extends APIResource {
   }
 
   /**
-   * Gets a data tag from a category.
+   * Retrieve a specific data tag.
    *
    * @example
    * ```ts

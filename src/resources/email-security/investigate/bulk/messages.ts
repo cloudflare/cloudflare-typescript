@@ -14,8 +14,7 @@ export class BaseMessages extends APIResource {
     Object.freeze(['emailSecurity', 'investigate', 'bulk', 'messages'] as const);
 
   /**
-   * Returns the individual messages associated with a bulk action job, including
-   * their processing status.
+   * List messages for a bulk action job
    *
    * @example
    * ```ts
@@ -67,7 +66,7 @@ export interface MessageListResponse {
   processed_at?: string | null;
 
   /**
-   * When to retry the action if it failed.
+   * When to retry the action if it failed
    */
   retry_after?: string | null;
 

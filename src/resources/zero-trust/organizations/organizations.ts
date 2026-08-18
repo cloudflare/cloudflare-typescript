@@ -288,9 +288,9 @@ export interface Organization {
   /**
    * Determines whether global MFA settings apply to applications by default. The
    * organization must have MFA enabled with at least one authentication method and a
-   * session duration configured. Note: 'allowed_authenticators' cannot contain only
-   * the infrastructure SSH authenticators ('piv_key' and 'ssh_fido2_key') if the
-   * organization has any non-infrastructure applications.
+   * session duration configured. Note: 'allowed_authenticators' cannot only contain
+   * 'piv_key' if the organization has any non-infrastructure applications because
+   * PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -321,12 +321,6 @@ export interface Organization {
   user_seat_expiration_inactive_time?: string;
 
   /**
-   * When enabled, unsuccessful WARP authentication requests with a non-HTML Accept
-   * header return a 401 response instead of redirecting to the login page.
-   */
-  warp_auth_non_browser_401?: boolean;
-
-  /**
    * The amount of time that tokens issued for applications will be valid. Must be in
    * the format `30m` or `2h45m`. Valid time units are: m, h.
    */
@@ -352,10 +346,9 @@ export namespace Organization {
    */
   export interface MfaConfig {
     /**
-     * Lists the MFA methods that users can authenticate with. The `piv_key` and
-     * `ssh_fido2_key` values are supported only for infrastructure applications.
+     * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key' | 'ssh_fido2_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -499,8 +492,8 @@ export interface OrganizationCreateParams {
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured. Note: 'allowed_authenticators' cannot
-   * contain only the infrastructure SSH authenticators ('piv_key' and
-   * 'ssh_fido2_key') if the organization has any non-infrastructure applications.
+   * only contain 'piv_key' if the organization has any non-infrastructure
+   * applications because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -527,13 +520,6 @@ export interface OrganizationCreateParams {
   user_seat_expiration_inactive_time?: string;
 
   /**
-   * Body param: When enabled, unsuccessful WARP authentication requests with a
-   * non-HTML Accept header return a 401 response instead of redirecting to the login
-   * page.
-   */
-  warp_auth_non_browser_401?: boolean;
-
-  /**
    * Body param: The amount of time that tokens issued for applications will be
    * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
@@ -546,10 +532,9 @@ export namespace OrganizationCreateParams {
    */
   export interface MfaConfig {
     /**
-     * Lists the MFA methods that users can authenticate with. The `piv_key` and
-     * `ssh_fido2_key` values are supported only for infrastructure applications.
+     * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key' | 'ssh_fido2_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching
@@ -691,8 +676,8 @@ export interface OrganizationUpdateParams {
    * Body param: Determines whether global MFA settings apply to applications by
    * default. The organization must have MFA enabled with at least one authentication
    * method and a session duration configured. Note: 'allowed_authenticators' cannot
-   * contain only the infrastructure SSH authenticators ('piv_key' and
-   * 'ssh_fido2_key') if the organization has any non-infrastructure applications.
+   * only contain 'piv_key' if the organization has any non-infrastructure
+   * applications because PIV keys are only compatible with infrastructure apps.
    */
   mfa_required_for_all_apps?: boolean;
 
@@ -724,13 +709,6 @@ export interface OrganizationUpdateParams {
   user_seat_expiration_inactive_time?: string;
 
   /**
-   * Body param: When enabled, unsuccessful WARP authentication requests with a
-   * non-HTML Accept header return a 401 response instead of redirecting to the login
-   * page.
-   */
-  warp_auth_non_browser_401?: boolean;
-
-  /**
    * Body param: The amount of time that tokens issued for applications will be
    * valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
    */
@@ -756,10 +734,9 @@ export namespace OrganizationUpdateParams {
    */
   export interface MfaConfig {
     /**
-     * Lists the MFA methods that users can authenticate with. The `piv_key` and
-     * `ssh_fido2_key` values are supported only for infrastructure applications.
+     * Lists the MFA methods that users can authenticate with.
      */
-    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key' | 'ssh_fido2_key'>;
+    allowed_authenticators?: Array<'totp' | 'biometrics' | 'security_key' | 'piv_key'>;
 
     /**
      * Allows a user to skip MFA via Authentication Method Reference (AMR) matching

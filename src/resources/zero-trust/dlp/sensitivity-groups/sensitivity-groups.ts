@@ -30,7 +30,7 @@ export class BaseSensitivityGroups extends APIResource {
   ] as const);
 
   /**
-   * Creates a sensitivity group, optionally from a template.
+   * Creates a new sensitivity group.
    *
    * @example
    * ```ts
@@ -55,7 +55,7 @@ export class BaseSensitivityGroups extends APIResource {
   }
 
   /**
-   * Updates a sensitivity group and its levels.
+   * Update the attributes of a single sensitivity group.
    *
    * @example
    * ```ts
@@ -81,7 +81,7 @@ export class BaseSensitivityGroups extends APIResource {
   }
 
   /**
-   * Lists sensitivity groups configured for the account.
+   * Retrieve all sensitivity groups in an account
    *
    * @example
    * ```ts
@@ -106,7 +106,7 @@ export class BaseSensitivityGroups extends APIResource {
   }
 
   /**
-   * Deletes a sensitivity group and its levels.
+   * Delete a single sensitivity group.
    *
    * @example
    * ```ts
@@ -132,7 +132,7 @@ export class BaseSensitivityGroups extends APIResource {
   }
 
   /**
-   * Gets a sensitivity group and its levels.
+   * Retrieve a specific sensitivity group.
    *
    * @example
    * ```ts

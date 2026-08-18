@@ -94,9 +94,7 @@ export class BaseTokens extends APIResource {
   }
 
   /**
-   * List all Account Owned API tokens created for this account. Results include
-   * active, disabled, and recently-expired tokens when include_expired is set to
-   * true.
+   * List all Account Owned API tokens created for this account.
    *
    * @example
    * ```ts
@@ -434,11 +432,6 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
    * Query param: Direction to order results.
    */
   direction?: 'asc' | 'desc';
-
-  /**
-   * Query param: When true, includes recently-expired tokens in the response.
-   */
-  include_expired?: boolean;
 }
 
 export interface TokenDeleteParams {

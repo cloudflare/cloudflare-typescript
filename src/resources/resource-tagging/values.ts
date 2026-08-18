@@ -48,7 +48,6 @@ export interface ValueListParams extends CursorPaginationAfterParams {
     | 'access_application_policy'
     | 'access_group'
     | 'account'
-    | 'account_ruleset'
     | 'ai_gateway'
     | 'alerting_policy'
     | 'alerting_webhook'
@@ -61,26 +60,17 @@ export interface ValueListParams extends CursorPaginationAfterParams {
     | 'durable_object_namespace'
     | 'gateway_list'
     | 'gateway_rule'
-    | 'healthcheck'
     | 'image'
-    | 'infrastructure_target'
     | 'kv_namespace'
-    | 'load_balancer'
-    | 'load_balancer_monitor'
-    | 'load_balancer_pool'
     | 'managed_client_certificate'
-    | 'pages_project'
     | 'queue'
     | 'r2_bucket'
     | 'resource_share'
     | 'stream_live_input'
     | 'stream_video'
-    | 'vectorize_index'
     | 'worker'
-    | 'worker_route'
     | 'worker_version'
-    | 'zone'
-    | 'zone_ruleset';
+    | 'zone';
 }
 
 export declare namespace Values {

@@ -12,8 +12,7 @@ export class BaseSlots extends APIResource {
   ] as const);
 
   /**
-   * Lists all available infrastructure slots for the account, showing allocation
-   * status and capacity.
+   * Retrieve a list of all slots matching the specified parameters
    *
    * @example
    * ```ts
@@ -28,7 +27,7 @@ export class BaseSlots extends APIResource {
   }
 
   /**
-   * Gets information about a specific infrastructure slot allocation.
+   * Get information about the specified slot
    *
    * @example
    * ```ts
@@ -73,8 +72,6 @@ export namespace SlotListResponse {
      * Customer account tag
      */
     account?: string;
-
-    ccr_device_name?: string | null;
   }
 
   export namespace Item {
@@ -107,8 +104,6 @@ export interface SlotGetResponse {
    * Customer account tag
    */
   account?: string;
-
-  ccr_device_name?: string | null;
 }
 
 export namespace SlotGetResponse {

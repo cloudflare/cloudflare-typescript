@@ -14,7 +14,7 @@ export class BaseDataClasses extends APIResource {
   ] as const);
 
   /**
-   * Creates a data class for use in DLP profiles.
+   * Creates a new data class
    *
    * @example
    * ```ts
@@ -43,7 +43,7 @@ export class BaseDataClasses extends APIResource {
   }
 
   /**
-   * Updates the configuration for a data class.
+   * Update the attributes of a single data class
    *
    * @example
    * ```ts
@@ -69,7 +69,7 @@ export class BaseDataClasses extends APIResource {
   }
 
   /**
-   * Lists data classes configured for the account.
+   * Retrieve all data classes in an account
    *
    * @example
    * ```ts
@@ -94,7 +94,7 @@ export class BaseDataClasses extends APIResource {
   }
 
   /**
-   * Deletes a data class from the account.
+   * Delete a single data class
    *
    * @example
    * ```ts
@@ -120,7 +120,7 @@ export class BaseDataClasses extends APIResource {
   }
 
   /**
-   * Gets the configuration for a data class.
+   * Retrieve a specific data class
    *
    * @example
    * ```ts

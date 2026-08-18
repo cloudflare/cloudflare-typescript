@@ -13,7 +13,7 @@ export class BaseRelate extends APIResource {
   ] as const);
 
   /**
-   * Removes a reference link between related threat events in Cloudforce One.
+   * Removes an event reference
    *
    * @example
    * ```ts

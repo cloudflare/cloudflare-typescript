@@ -12,7 +12,7 @@ export class BaseSettings extends APIResource {
   ] as const);
 
   /**
-   * Updates configuration settings for the specified resource or service.
+   * Update the current settings for the active account
    *
    * @example
    * ```ts
@@ -28,7 +28,7 @@ export class BaseSettings extends APIResource {
   }
 
   /**
-   * Retrieves current settings configuration for the specified resource or service.
+   * Get the current settings for the active account
    *
    * @example
    * ```ts

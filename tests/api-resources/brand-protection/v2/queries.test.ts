@@ -41,12 +41,7 @@ const runTests = (client: PartialCloudflare<{ brandProtection: { v2: { queries: 
 
   // HTTP 401 error from prism
   test.skip('get: required and optional params', async () => {
-    const response = await client.brandProtection.v2.queries.get({
-      account_id: 'x',
-      id: 'id',
-      page: 1,
-      per_page: 1,
-    });
+    const response = await client.brandProtection.v2.queries.get({ account_id: 'x', id: 'id' });
   });
 };
 describe('resource queries', () => runTests(client));

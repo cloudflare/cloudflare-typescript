@@ -97,7 +97,7 @@ export namespace QueryCreateResponse {
     /**
      * Create Calculations to compute as part of the query.
      */
-    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+    calculations?: Array<Parameters.Calculation>;
 
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -142,21 +142,10 @@ export namespace QueryCreateResponse {
   }
 
   export namespace Parameters {
-    export interface CountCalculation {
-      operator: 'count' | 'COUNT';
-
-      alias?: string;
-
-      key?: string;
-
-      keyType?: 'string' | 'number' | 'boolean';
-    }
-
-    export interface KeyedCalculation {
-      key: string;
-
+    export interface Calculation {
       operator:
         | 'uniq'
+        | 'count'
         | 'max'
         | 'min'
         | 'sum'
@@ -175,6 +164,7 @@ export namespace QueryCreateResponse {
         | 'stddev'
         | 'variance'
         | 'COUNT_DISTINCT'
+        | 'COUNT'
         | 'MAX'
         | 'MIN'
         | 'SUM'
@@ -194,6 +184,8 @@ export namespace QueryCreateResponse {
         | 'VARIANCE';
 
       alias?: string;
+
+      key?: string;
 
       keyType?: 'string' | 'number' | 'boolean';
     }
@@ -349,7 +341,7 @@ export namespace QueryListResponse {
     /**
      * Create Calculations to compute as part of the query.
      */
-    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+    calculations?: Array<Parameters.Calculation>;
 
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -394,21 +386,10 @@ export namespace QueryListResponse {
   }
 
   export namespace Parameters {
-    export interface CountCalculation {
-      operator: 'count' | 'COUNT';
-
-      alias?: string;
-
-      key?: string;
-
-      keyType?: 'string' | 'number' | 'boolean';
-    }
-
-    export interface KeyedCalculation {
-      key: string;
-
+    export interface Calculation {
       operator:
         | 'uniq'
+        | 'count'
         | 'max'
         | 'min'
         | 'sum'
@@ -427,6 +408,7 @@ export namespace QueryListResponse {
         | 'stddev'
         | 'variance'
         | 'COUNT_DISTINCT'
+        | 'COUNT'
         | 'MAX'
         | 'MIN'
         | 'SUM'
@@ -446,6 +428,8 @@ export namespace QueryListResponse {
         | 'VARIANCE';
 
       alias?: string;
+
+      key?: string;
 
       keyType?: 'string' | 'number' | 'boolean';
     }
@@ -597,7 +581,7 @@ export namespace QueryCreateParams {
     /**
      * Create Calculations to compute as part of the query.
      */
-    calculations?: Array<Parameters.CountCalculation | Parameters.KeyedCalculation>;
+    calculations?: Array<Parameters.Calculation>;
 
     /**
      * Set the Datasets to query. Leave it empty to query all the datasets.
@@ -642,21 +626,10 @@ export namespace QueryCreateParams {
   }
 
   export namespace Parameters {
-    export interface CountCalculation {
-      operator: 'count' | 'COUNT';
-
-      alias?: string;
-
-      key?: string;
-
-      keyType?: 'string' | 'number' | 'boolean';
-    }
-
-    export interface KeyedCalculation {
-      key: string;
-
+    export interface Calculation {
       operator:
         | 'uniq'
+        | 'count'
         | 'max'
         | 'min'
         | 'sum'
@@ -675,6 +648,7 @@ export namespace QueryCreateParams {
         | 'stddev'
         | 'variance'
         | 'COUNT_DISTINCT'
+        | 'COUNT'
         | 'MAX'
         | 'MIN'
         | 'SUM'
@@ -694,6 +668,8 @@ export namespace QueryCreateParams {
         | 'VARIANCE';
 
       alias?: string;
+
+      key?: string;
 
       keyType?: 'string' | 'number' | 'boolean';
     }

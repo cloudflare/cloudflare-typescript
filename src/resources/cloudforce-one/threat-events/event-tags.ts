@@ -13,7 +13,7 @@ export class BaseEventTags extends APIResource {
   ] as const);
 
   /**
-   * Adds a tag to a threat event in Cloudforce One for classification and filtering.
+   * Adds a tag to an event
    *
    * @example
    * ```ts
@@ -39,7 +39,7 @@ export class BaseEventTags extends APIResource {
   }
 
   /**
-   * Removes a tag from a threat event in Cloudforce One.
+   * Removes a tag from an event
    *
    * @example
    * ```ts

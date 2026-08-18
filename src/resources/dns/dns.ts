@@ -1,6 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as DNSSECAPI from './dnssec';
+import {
+  BaseDNSSECResource,
+  DNSSEC,
+  DNSSECDeleteParams,
+  DNSSECDeleteResponse,
+  DNSSECEditParams,
+  DNSSECGetParams,
+  DNSSECResource,
+} from './dnssec';
 import * as RecordsAPI from './records';
 import {
   AAAARecord,
@@ -56,16 +66,6 @@ import {
 } from './records';
 import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics, BaseAnalytics } from './analytics/analytics';
-import * as DNSSECAPI from './dnssec/dnssec';
-import {
-  BaseDNSSECResource,
-  DNSSEC,
-  DNSSECDeleteParams,
-  DNSSECDeleteResponse,
-  DNSSECEditParams,
-  DNSSECGetParams,
-  DNSSECResource,
-} from './dnssec/dnssec';
 import * as SettingsAPI from './settings/settings';
 import { BaseSettings, Settings } from './settings/settings';
 import * as UsageAPI from './usage/usage';

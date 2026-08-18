@@ -45,10 +45,8 @@ const runTests = (
       account_id: 'account_id',
       keep_alive: 10000,
       lab: true,
-      liveViewUrlExpiresInMs: 60000,
       recording: true,
       targets: true,
-      guardrails: { allowedDomains: ['string'], allowedDomainSets: ['string'] },
     });
   });
 
@@ -120,7 +118,6 @@ const runTests = (
       keep_alive: 10000,
       lab: true,
       recording: true,
-      'cf-brapi-guardrails': 'eyJhbGxvd2VkRG9tYWlucyI6WyIqLmV4YW1wbGUuY29tIl19',
     });
   });
 

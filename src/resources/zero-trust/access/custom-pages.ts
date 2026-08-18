@@ -165,13 +165,7 @@ export interface CustomPage {
   /**
    * Custom page type.
    */
-  type: 'identity_denied' | 'forbidden' | 'login' | 'interstitial';
-
-  /**
-   * Contract version of the page's Liquid template. Present (>= 1) marks a sanitized
-   * template; absent or 0 marks a legacy page served verbatim.
-   */
-  contract_version?: number;
+  type: 'identity_denied' | 'forbidden';
 
   /**
    * UUID.
@@ -188,46 +182,12 @@ export interface CustomPageWithoutHTML {
   /**
    * Custom page type.
    */
-  type: 'identity_denied' | 'forbidden' | 'login' | 'interstitial';
-
-  /**
-   * Contract version of the page's Liquid template. Present (>= 1) marks a sanitized
-   * template; absent or 0 marks a legacy page served verbatim.
-   */
-  contract_version?: number;
+  type: 'identity_denied' | 'forbidden';
 
   /**
    * UUID.
    */
   uid?: string;
-
-  /**
-   * Advisory validation findings returned when creating or updating a template.
-   * Omitted when empty.
-   */
-  warnings?: Array<CustomPageWithoutHTML.Warning>;
-}
-
-export namespace CustomPageWithoutHTML {
-  /**
-   * A single validation finding for a template.
-   */
-  export interface Warning {
-    /**
-     * Human-readable description of the finding.
-     */
-    message: string;
-
-    /**
-     * The validation tier that produced the finding (e.g. html, liquid).
-     */
-    tier: string;
-
-    /**
-     * Optional pointer to the part of the template the finding refers to.
-     */
-    ref?: string;
-  }
 }
 
 export interface CustomPageDeleteResponse {
@@ -256,13 +216,7 @@ export interface CustomPageCreateParams {
   /**
    * Body param: Custom page type.
    */
-  type: 'identity_denied' | 'forbidden' | 'login' | 'interstitial';
-
-  /**
-   * Body param: Contract version of the page's Liquid template. Present (>= 1) marks
-   * a sanitized template; absent or 0 marks a legacy page served verbatim.
-   */
-  contract_version?: number;
+  type: 'identity_denied' | 'forbidden';
 }
 
 export interface CustomPageUpdateParams {
@@ -284,13 +238,7 @@ export interface CustomPageUpdateParams {
   /**
    * Body param: Custom page type.
    */
-  type: 'identity_denied' | 'forbidden' | 'login' | 'interstitial';
-
-  /**
-   * Body param: Contract version of the page's Liquid template. Present (>= 1) marks
-   * a sanitized template; absent or 0 marks a legacy page served verbatim.
-   */
-  contract_version?: number;
+  type: 'identity_denied' | 'forbidden';
 }
 
 export interface CustomPageListParams extends V4PagePaginationArrayParams {

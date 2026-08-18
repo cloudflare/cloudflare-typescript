@@ -30,7 +30,7 @@ export class BaseDataTagCategories extends APIResource {
   ] as const);
 
   /**
-   * Creates a data tag category, optionally from a template.
+   * Creates a new data tag category.
    *
    * @example
    * ```ts
@@ -55,7 +55,7 @@ export class BaseDataTagCategories extends APIResource {
   }
 
   /**
-   * Updates a data tag category and its tags.
+   * Update the attributes of a single data tag category.
    *
    * @example
    * ```ts
@@ -81,7 +81,7 @@ export class BaseDataTagCategories extends APIResource {
   }
 
   /**
-   * Lists data tag categories configured for the account.
+   * Retrieve all data tag categories in an account
    *
    * @example
    * ```ts
@@ -106,7 +106,7 @@ export class BaseDataTagCategories extends APIResource {
   }
 
   /**
-   * Deletes a data tag category and its tags.
+   * Delete a single data tag category.
    *
    * @example
    * ```ts
@@ -132,7 +132,7 @@ export class BaseDataTagCategories extends APIResource {
   }
 
   /**
-   * Gets a data tag category and its tags.
+   * Retrieve a specific data tag category.
    *
    * @example
    * ```ts

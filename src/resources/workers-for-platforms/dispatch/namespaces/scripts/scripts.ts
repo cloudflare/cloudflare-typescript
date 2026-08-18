@@ -205,13 +205,6 @@ export interface ScriptUpdateResponse {
   id?: string;
 
   /**
-   * Global CacheW configuration for the Worker. When caching is on, the platform
-   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
-   * `exports` map can override this value for a single entrypoint.
-   */
-  cache_options?: ScriptUpdateResponse.CacheOptions;
-
-  /**
    * Date indicating targeted support in the Workers runtime. Backwards incompatible
    * fixes to the runtime following this date will not affect this Worker.
    */
@@ -238,22 +231,6 @@ export interface ScriptUpdateResponse {
    * Hashed script content, can be used in a If-None-Match header when updating.
    */
   etag?: string;
-
-  /**
-   * Declarative exports for the Worker's most recent version, including Durable
-   * Object classes (with their `storage` backend) and named Worker entrypoints.
-   * Tombstoned lifecycle entries are omitted, so only live exports (`created` and
-   * `expecting-transfer`) are returned.
-   */
-  exports?: {
-    [key: string]:
-      | ScriptUpdateResponse.WorkersWorkerExport
-      | ScriptUpdateResponse.WorkersDurableObjectExport
-      | ScriptUpdateResponse.WorkersDurableObjectDeletedExport
-      | ScriptUpdateResponse.WorkersDurableObjectRenamedExport
-      | ScriptUpdateResponse.WorkersDurableObjectTransferredExport
-      | ScriptUpdateResponse.WorkersDurableObjectExpectingTransferExport;
-  };
 
   /**
    * The names of handlers exported as part of the default export.
@@ -349,193 +326,6 @@ export interface ScriptUpdateResponse {
 }
 
 export namespace ScriptUpdateResponse {
-  /**
-   * Global CacheW configuration for the Worker. When caching is on, the platform
-   * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
-   * `exports` map can override this value for a single entrypoint.
-   */
-  export interface CacheOptions {
-    /**
-     * Whether caching is enabled for this Worker.
-     */
-    enabled: boolean;
-
-    /**
-     * Whether cached responses are shared across Worker version uploads. This is
-     * independent of `enabled`. It can stay true while caching is off, so the
-     * preference survives turning caching off and back on.
-     */
-    cross_version_cache?: boolean;
-  }
-
-  /**
-   * A named Worker entrypoint export (`type: worker`). Worker entrypoints are always
-   * live (`state: created`) and carry no storage or lifecycle fields. The optional
-   * `cache` block overrides the Worker's global `cache_options.enabled` for this
-   * entrypoint.
-   */
-  export interface WorkersWorkerExport {
-    /**
-     * Marks this entry as a Worker entrypoint export.
-     */
-    type: 'worker';
-
-    /**
-     * Cache override for this entrypoint. Overrides the Worker's global
-     * `cache_options.enabled` for this entrypoint only.
-     */
-    cache?: WorkersWorkerExport.Cache;
-
-    /**
-     * Live export. May be omitted; defaults to `created`.
-     */
-    state?: 'created';
-  }
-
-  export namespace WorkersWorkerExport {
-    /**
-     * Cache override for this entrypoint. Overrides the Worker's global
-     * `cache_options.enabled` for this entrypoint only.
-     */
-    export interface Cache {
-      /**
-       * Whether caching is enabled for this entrypoint.
-       */
-      enabled: boolean;
-    }
-  }
-
-  /**
-   * A live Durable Object export (`state: created`, the default). The platform
-   * auto-provisions the namespace on first deploy, matches it on subsequent deploys,
-   * and never mutates or deletes it as a side effect of a code-only change.
-   * `storage` is required; `renamed_to`, `transferred_to` and `transfer_from` are
-   * not allowed on a live entry.
-   */
-  export interface WorkersDurableObjectExport {
-    /**
-     * Durable Object storage backend. `sqlite` is the recommended (and only) backend
-     * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
-     * already exists as KV-backed; the `exports` flow never provisions a new
-     * `legacy-kv` namespace.
-     */
-    storage: 'sqlite' | 'legacy-kv';
-
-    /**
-     * Marks this entry as a Durable Object export.
-     */
-    type: 'durable-object';
-
-    /**
-     * Name of the container (declared in the upload's `metadata.containers`) that
-     * backs this Durable Object. When set, the namespace is container-enabled. Valid
-     * only on live entries.
-     */
-    container?: string;
-
-    /**
-     * Live export. May be omitted; defaults to `created`.
-     */
-    state?: 'created';
-  }
-
-  /**
-   * A `deleted` tombstone: retires the provisioned namespace for this class and all
-   * of its data. The class must be absent from the uploaded code and no other Worker
-   * in the account may bind to the namespace, otherwise the deploy is rejected. No
-   * other fields are allowed. Deletion is irreversible.
-   */
-  export interface WorkersDurableObjectDeletedExport {
-    /**
-     * Tombstone that deletes the namespace.
-     */
-    state: 'deleted';
-
-    /**
-     * Marks this entry as a Durable Object export.
-     */
-    type: 'durable-object';
-  }
-
-  /**
-   * A `renamed` tombstone: rewrites the provisioned namespace's class name from this
-   * map key to `renamed_to`. The source class may stay in code during the rollout
-   * window (an info notice is emitted). `storage`, `transferred_to` and
-   * `transfer_from` are not allowed.
-   */
-  export interface WorkersDurableObjectRenamedExport {
-    /**
-     * Tombstone that renames the namespace's class.
-     */
-    state: 'renamed';
-
-    /**
-     * Marks this entry as a Durable Object export.
-     */
-    type: 'durable-object';
-  }
-
-  /**
-   * A `transferred` tombstone (source side of a two-phase transfer): hands ownership
-   * of the provisioned namespace to another script in the same account, named by
-   * `transferred_to`. The target must have already deployed a matching
-   * `expecting-transfer` entry. The source class may stay in code during the rollout
-   * window (an info notice is emitted). `storage`, `renamed_to` and `transfer_from`
-   * are not allowed.
-   */
-  export interface WorkersDurableObjectTransferredExport {
-    /**
-     * Tombstone that transfers the namespace to another script.
-     */
-    state: 'transferred';
-
-    /**
-     * Marks this entry as a Durable Object export.
-     */
-    type: 'durable-object';
-  }
-
-  /**
-   * The target side of a two-phase transfer (`state: expecting-transfer`). Declares
-   * that this script expects to receive a namespace for this class from the
-   * `transfer_from` script. This is a live entry, not a tombstone: bindings resolve
-   * through the source's namespace until the source commits with a `transferred`
-   * tombstone. `storage` and `transfer_from` are required; `renamed_to` and
-   * `transferred_to` are not allowed.
-   */
-  export interface WorkersDurableObjectExpectingTransferExport {
-    /**
-     * Target side of a two-phase transfer.
-     */
-    state: 'expecting-transfer';
-
-    /**
-     * Durable Object storage backend. `sqlite` is the recommended (and only) backend
-     * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
-     * already exists as KV-backed; the `exports` flow never provisions a new
-     * `legacy-kv` namespace.
-     */
-    storage: 'sqlite' | 'legacy-kv';
-
-    /**
-     * The source script name to receive the namespace from. Must be in the same
-     * account and dispatch-namespace context. Present on reads for
-     * `expecting-transfer` entries.
-     */
-    transfer_from: string;
-
-    /**
-     * Marks this entry as a Durable Object export.
-     */
-    type: 'durable-object';
-
-    /**
-     * Name of the container (declared in the upload's `metadata.containers`) that
-     * backs this Durable Object once the transfer settles. Valid only on live entries.
-     */
-    container?: string;
-  }
-
   export interface NamedHandler {
     /**
      * The names of handlers exported as part of the named export.
@@ -896,7 +686,6 @@ export namespace ScriptUpdateParams {
       | Metadata.WorkersBindingKindAI
       | Metadata.WorkersBindingKindAISearch
       | Metadata.WorkersBindingKindAISearchNamespace
-      | Metadata.WorkersBindingKindMessaging
       | Metadata.WorkersBindingKindAnalyticsEngine
       | Metadata.WorkersBindingKindAssets
       | Metadata.WorkersBindingKindBrowser
@@ -938,13 +727,6 @@ export namespace ScriptUpdateParams {
     body_part?: string;
 
     /**
-     * Global CacheW configuration for the Worker. When caching is on, the platform
-     * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
-     * `exports` map can override this value for a single entrypoint.
-     */
-    cache_options?: Metadata.CacheOptions;
-
-    /**
      * Date indicating targeted support in the Workers runtime. Backwards incompatible
      * fixes to the runtime following this date will not affect this Worker.
      */
@@ -956,20 +738,6 @@ export namespace ScriptUpdateParams {
      * `compatibility_date`.
      */
     compatibility_flags?: Array<string>;
-
-    /**
-     * Declarative exports for the Worker. Worker entrypoint entries (`type: worker`)
-     * carry cache configuration for that entrypoint.
-     */
-    exports?: {
-      [key: string]:
-        | Metadata.WorkersWorkerExport
-        | Metadata.WorkersDurableObjectExport
-        | Metadata.WorkersDurableObjectDeletedExport
-        | Metadata.WorkersDurableObjectRenamedExport
-        | Metadata.WorkersDurableObjectTransferredExport
-        | Metadata.WorkersDurableObjectExpectingTransferExport;
-    };
 
     /**
      * Retain assets which exist for a previously uploaded Worker version; used in lieu
@@ -1008,12 +776,6 @@ export namespace ScriptUpdateParams {
      * Observability settings for the Worker.
      */
     observability?: Metadata.Observability;
-
-    /**
-     * The list of npm packages that were installed and used when this Worker version
-     * was built.
-     */
-    package_dependencies?: Array<Metadata.PackageDependency>;
 
     /**
      * Configuration for
@@ -1161,23 +923,6 @@ export namespace ScriptUpdateParams {
        * The kind of resource that the binding provides.
        */
       type: 'ai_search_namespace';
-    }
-
-    export interface WorkersBindingKindMessaging {
-      /**
-       * A JavaScript variable name for the binding.
-       */
-      name: string;
-
-      /**
-       * The Messaging namespace to bind to.
-       */
-      namespace: string;
-
-      /**
-       * The kind of resource that the binding provides.
-       */
-      type: 'messaging';
     }
 
     export interface WorkersBindingKindAnalyticsEngine {
@@ -1896,207 +1641,6 @@ export namespace ScriptUpdateParams {
     }
 
     /**
-     * Global CacheW configuration for the Worker. When caching is on, the platform
-     * provisions a `cloudflare.app` zone for the Worker. A `type: worker` entry in the
-     * `exports` map can override this value for a single entrypoint.
-     */
-    export interface CacheOptions {
-      /**
-       * Whether caching is enabled for this Worker.
-       */
-      enabled: boolean;
-
-      /**
-       * Whether cached responses are shared across Worker version uploads. This is
-       * independent of `enabled`. It can stay true while caching is off, so the
-       * preference survives turning caching off and back on.
-       */
-      cross_version_cache?: boolean;
-    }
-
-    /**
-     * A named Worker entrypoint export (`type: worker`). Worker entrypoints are always
-     * live (`state: created`) and carry no storage or lifecycle fields. The optional
-     * `cache` block overrides the Worker's global `cache_options.enabled` for this
-     * entrypoint.
-     */
-    export interface WorkersWorkerExport {
-      /**
-       * Marks this entry as a Worker entrypoint export.
-       */
-      type: 'worker';
-
-      /**
-       * Cache override for this entrypoint. Overrides the Worker's global
-       * `cache_options.enabled` for this entrypoint only.
-       */
-      cache?: WorkersWorkerExport.Cache;
-
-      /**
-       * Live export. May be omitted; defaults to `created`.
-       */
-      state?: 'created';
-    }
-
-    export namespace WorkersWorkerExport {
-      /**
-       * Cache override for this entrypoint. Overrides the Worker's global
-       * `cache_options.enabled` for this entrypoint only.
-       */
-      export interface Cache {
-        /**
-         * Whether caching is enabled for this entrypoint.
-         */
-        enabled: boolean;
-      }
-    }
-
-    /**
-     * A live Durable Object export (`state: created`, the default). The platform
-     * auto-provisions the namespace on first deploy, matches it on subsequent deploys,
-     * and never mutates or deletes it as a side effect of a code-only change.
-     * `storage` is required; `renamed_to`, `transferred_to` and `transfer_from` are
-     * not allowed on a live entry.
-     */
-    export interface WorkersDurableObjectExport {
-      /**
-       * Durable Object storage backend. `sqlite` is the recommended (and only) backend
-       * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
-       * already exists as KV-backed; the `exports` flow never provisions a new
-       * `legacy-kv` namespace.
-       */
-      storage: 'sqlite' | 'legacy-kv';
-
-      /**
-       * Marks this entry as a Durable Object export.
-       */
-      type: 'durable-object';
-
-      /**
-       * Name of the container (declared in the upload's `metadata.containers`) that
-       * backs this Durable Object. When set, the namespace is container-enabled. Valid
-       * only on live entries.
-       */
-      container?: string;
-
-      /**
-       * Live export. May be omitted; defaults to `created`.
-       */
-      state?: 'created';
-    }
-
-    /**
-     * A `deleted` tombstone: retires the provisioned namespace for this class and all
-     * of its data. The class must be absent from the uploaded code and no other Worker
-     * in the account may bind to the namespace, otherwise the deploy is rejected. No
-     * other fields are allowed. Deletion is irreversible.
-     */
-    export interface WorkersDurableObjectDeletedExport {
-      /**
-       * Tombstone that deletes the namespace.
-       */
-      state: 'deleted';
-
-      /**
-       * Marks this entry as a Durable Object export.
-       */
-      type: 'durable-object';
-    }
-
-    /**
-     * A `renamed` tombstone: rewrites the provisioned namespace's class name from this
-     * map key to `renamed_to`. The source class may stay in code during the rollout
-     * window (an info notice is emitted). `storage`, `transferred_to` and
-     * `transfer_from` are not allowed.
-     */
-    export interface WorkersDurableObjectRenamedExport {
-      /**
-       * The destination class name. Must differ from the source class (the map key) and
-       * must be declared as a live (`created`) entry in the same `exports` map.
-       * Write-only: never present in GET responses.
-       */
-      renamed_to: string;
-
-      /**
-       * Tombstone that renames the namespace's class.
-       */
-      state: 'renamed';
-
-      /**
-       * Marks this entry as a Durable Object export.
-       */
-      type: 'durable-object';
-    }
-
-    /**
-     * A `transferred` tombstone (source side of a two-phase transfer): hands ownership
-     * of the provisioned namespace to another script in the same account, named by
-     * `transferred_to`. The target must have already deployed a matching
-     * `expecting-transfer` entry. The source class may stay in code during the rollout
-     * window (an info notice is emitted). `storage`, `renamed_to` and `transfer_from`
-     * are not allowed.
-     */
-    export interface WorkersDurableObjectTransferredExport {
-      /**
-       * Tombstone that transfers the namespace to another script.
-       */
-      state: 'transferred';
-
-      /**
-       * The destination script name. Must be in the same account and the same
-       * dispatch-namespace context (or both non-dispatch). Cross-dispatch-namespace
-       * transfers are rejected. Write-only: never present in GET responses.
-       */
-      transferred_to: string;
-
-      /**
-       * Marks this entry as a Durable Object export.
-       */
-      type: 'durable-object';
-    }
-
-    /**
-     * The target side of a two-phase transfer (`state: expecting-transfer`). Declares
-     * that this script expects to receive a namespace for this class from the
-     * `transfer_from` script. This is a live entry, not a tombstone: bindings resolve
-     * through the source's namespace until the source commits with a `transferred`
-     * tombstone. `storage` and `transfer_from` are required; `renamed_to` and
-     * `transferred_to` are not allowed.
-     */
-    export interface WorkersDurableObjectExpectingTransferExport {
-      /**
-       * Target side of a two-phase transfer.
-       */
-      state: 'expecting-transfer';
-
-      /**
-       * Durable Object storage backend. `sqlite` is the recommended (and only) backend
-       * for new namespaces. `legacy-kv` is accepted only for a class whose namespace
-       * already exists as KV-backed; the `exports` flow never provisions a new
-       * `legacy-kv` namespace.
-       */
-      storage: 'sqlite' | 'legacy-kv';
-
-      /**
-       * The source script name to receive the namespace from. Must be in the same
-       * account and dispatch-namespace context. Present on reads for
-       * `expecting-transfer` entries.
-       */
-      transfer_from: string;
-
-      /**
-       * Marks this entry as a Durable Object export.
-       */
-      type: 'durable-object';
-
-      /**
-       * Name of the container (declared in the upload's `metadata.containers`) that
-       * backs this Durable Object once the transfer settles. Valid only on live entries.
-       */
-      container?: string;
-    }
-
-    /**
      * Limits to apply for this Worker.
      */
     export interface Limits {
@@ -2221,23 +1765,6 @@ export namespace ScriptUpdateParams {
          */
         propagation_policy?: 'authenticated' | 'accept';
       }
-    }
-
-    export interface PackageDependency {
-      /**
-       * The exact version that was resolved and installed by the package manager.
-       */
-      installedVersion: string;
-
-      /**
-       * The npm package name.
-       */
-      name: string;
-
-      /**
-       * The version constraint as written in package.json.
-       */
-      packageJsonVersion: string;
     }
 
     export interface UnionMember0 {

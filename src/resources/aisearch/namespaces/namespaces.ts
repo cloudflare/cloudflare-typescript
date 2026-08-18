@@ -39,7 +39,7 @@ export class BaseNamespaces extends APIResource {
   ] as const);
 
   /**
-   * Create a namespace for organizing AI Search instances.
+   * Create a new namespace.
    *
    * @example
    * ```ts
@@ -60,9 +60,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Update the description and/or the public endpoint configuration of an existing
-   * namespace. The default namespace's description cannot be modified, but its
-   * public endpoint can.
+   * Update namespace.
    *
    * @example
    * ```ts
@@ -87,7 +85,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * List namespaces in the account, including their descriptions and creation times.
+   * List namespaces.
    *
    * @example
    * ```ts
@@ -112,8 +110,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Permanently delete a namespace. The namespace must be empty (no instances), and
-   * the default namespace cannot be deleted.
+   * Delete namespace.
    *
    * @example
    * ```ts
@@ -166,7 +163,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Retrieve a namespace and its description.
+   * Read namespace.
    *
    * @example
    * ```ts
@@ -190,8 +187,7 @@ export class BaseNamespaces extends APIResource {
   }
 
   /**
-   * Performs a semantic search query against multiple AI Search instances in
-   * parallel, merging the retrieved results into a single ranked response.
+   * Multi-Instance Search
    *
    * @example
    * ```ts
@@ -233,83 +229,6 @@ export interface NamespaceCreateResponse {
    * Optional description for the namespace. Max 256 characters.
    */
   description?: string | null;
-
-  public_endpoint_id?: string | null;
-
-  public_endpoint_params?: NamespaceCreateResponse.PublicEndpointParams | null;
-}
-
-export namespace NamespaceCreateResponse {
-  export interface PublicEndpointParams {
-    authorized_hosts?: Array<string>;
-
-    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
-
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
-    default_domain_enabled?: boolean;
-
-    enabled?: boolean;
-
-    /**
-     * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
-     */
-    instances_allowed?: Array<string>;
-
-    mcp?: PublicEndpointParams.Mcp;
-
-    rate_limit?: PublicEndpointParams.RateLimit;
-
-    search_endpoint?: PublicEndpointParams.SearchEndpoint;
-  }
-
-  export namespace PublicEndpointParams {
-    export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface Mcp {
-      description?: string;
-
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface RateLimit {
-      period_ms?: number;
-
-      requests?: number;
-
-      technique?: 'fixed' | 'sliding';
-    }
-
-    export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-  }
 }
 
 export interface NamespaceUpdateResponse {
@@ -321,83 +240,6 @@ export interface NamespaceUpdateResponse {
    * Optional description for the namespace. Max 256 characters.
    */
   description?: string | null;
-
-  public_endpoint_id?: string | null;
-
-  public_endpoint_params?: NamespaceUpdateResponse.PublicEndpointParams | null;
-}
-
-export namespace NamespaceUpdateResponse {
-  export interface PublicEndpointParams {
-    authorized_hosts?: Array<string>;
-
-    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
-
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
-    default_domain_enabled?: boolean;
-
-    enabled?: boolean;
-
-    /**
-     * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
-     */
-    instances_allowed?: Array<string>;
-
-    mcp?: PublicEndpointParams.Mcp;
-
-    rate_limit?: PublicEndpointParams.RateLimit;
-
-    search_endpoint?: PublicEndpointParams.SearchEndpoint;
-  }
-
-  export namespace PublicEndpointParams {
-    export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface Mcp {
-      description?: string;
-
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface RateLimit {
-      period_ms?: number;
-
-      requests?: number;
-
-      technique?: 'fixed' | 'sliding';
-    }
-
-    export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-  }
 }
 
 export interface NamespaceListResponse {
@@ -409,83 +251,6 @@ export interface NamespaceListResponse {
    * Optional description for the namespace. Max 256 characters.
    */
   description?: string | null;
-
-  public_endpoint_id?: string | null;
-
-  public_endpoint_params?: NamespaceListResponse.PublicEndpointParams | null;
-}
-
-export namespace NamespaceListResponse {
-  export interface PublicEndpointParams {
-    authorized_hosts?: Array<string>;
-
-    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
-
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
-    default_domain_enabled?: boolean;
-
-    enabled?: boolean;
-
-    /**
-     * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
-     */
-    instances_allowed?: Array<string>;
-
-    mcp?: PublicEndpointParams.Mcp;
-
-    rate_limit?: PublicEndpointParams.RateLimit;
-
-    search_endpoint?: PublicEndpointParams.SearchEndpoint;
-  }
-
-  export namespace PublicEndpointParams {
-    export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface Mcp {
-      description?: string;
-
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface RateLimit {
-      period_ms?: number;
-
-      requests?: number;
-
-      technique?: 'fixed' | 'sliding';
-    }
-
-    export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-  }
 }
 
 export type NamespaceDeleteResponse = unknown;
@@ -515,7 +280,7 @@ export namespace NamespaceChatCompletionsResponse {
 
   export namespace Choice {
     export interface Message {
-      content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+      content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
       role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -538,22 +303,6 @@ export namespace NamespaceChatCompletionsResponse {
       export namespace UnionMember1 {
         export interface ImageURL {
           url: string;
-        }
-      }
-
-      export interface UnionMember2 {
-        file: UnionMember2.File;
-
-        type: 'file';
-      }
-
-      export namespace UnionMember2 {
-        export interface File {
-          filename: string;
-
-          file_data?: string;
-
-          file_id?: string;
         }
       }
     }
@@ -615,83 +364,6 @@ export interface NamespaceReadResponse {
    * Optional description for the namespace. Max 256 characters.
    */
   description?: string | null;
-
-  public_endpoint_id?: string | null;
-
-  public_endpoint_params?: NamespaceReadResponse.PublicEndpointParams | null;
-}
-
-export namespace NamespaceReadResponse {
-  export interface PublicEndpointParams {
-    authorized_hosts?: Array<string>;
-
-    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
-
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
-    default_domain_enabled?: boolean;
-
-    enabled?: boolean;
-
-    /**
-     * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
-     */
-    instances_allowed?: Array<string>;
-
-    mcp?: PublicEndpointParams.Mcp;
-
-    rate_limit?: PublicEndpointParams.RateLimit;
-
-    search_endpoint?: PublicEndpointParams.SearchEndpoint;
-  }
-
-  export namespace PublicEndpointParams {
-    export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface Mcp {
-      description?: string;
-
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface RateLimit {
-      period_ms?: number;
-
-      requests?: number;
-
-      technique?: 'fixed' | 'sliding';
-    }
-
-    export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-  }
 }
 
 export interface NamespaceSearchResponse {
@@ -767,84 +439,6 @@ export interface NamespaceCreateParams {
    * Body param: Optional description for the namespace. Max 256 characters.
    */
   description?: string | null;
-
-  /**
-   * Body param
-   */
-  public_endpoint_params?: NamespaceCreateParams.PublicEndpointParams;
-}
-
-export namespace NamespaceCreateParams {
-  export interface PublicEndpointParams {
-    authorized_hosts?: Array<string>;
-
-    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
-
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
-    default_domain_enabled?: boolean;
-
-    enabled?: boolean;
-
-    /**
-     * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
-     */
-    instances_allowed?: Array<string>;
-
-    mcp?: PublicEndpointParams.Mcp;
-
-    rate_limit?: PublicEndpointParams.RateLimit;
-
-    search_endpoint?: PublicEndpointParams.SearchEndpoint;
-  }
-
-  export namespace PublicEndpointParams {
-    export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface Mcp {
-      description?: string;
-
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface RateLimit {
-      period_ms?: number;
-
-      requests?: number;
-
-      technique?: 'fixed' | 'sliding';
-    }
-
-    export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-  }
 }
 
 export interface NamespaceUpdateParams {
@@ -857,84 +451,6 @@ export interface NamespaceUpdateParams {
    * Body param: Optional description for the namespace. Max 256 characters.
    */
   description?: string | null;
-
-  /**
-   * Body param
-   */
-  public_endpoint_params?: NamespaceUpdateParams.PublicEndpointParams | null;
-}
-
-export namespace NamespaceUpdateParams {
-  export interface PublicEndpointParams {
-    authorized_hosts?: Array<string>;
-
-    chat_completions_endpoint?: PublicEndpointParams.ChatCompletionsEndpoint;
-
-    /**
-     * Custom domain hostnames that alias this public endpoint. GET and create
-     * responses return the current set; on update (PUT) this field is only echoed back
-     * when supplied in the request body, otherwise it is null (omit it to leave
-     * domains unchanged).
-     */
-    custom_domains?: Array<string> | null;
-
-    /**
-     * When false, the instance is reachable only via a registered custom domain and
-     * the default <public_endpoint_id>.search.ai.cloudflare.com host returns 404.
-     * Requires at least one custom domain. Defaults to true. public_endpoint_params is
-     * replaced wholesale on update, so resend default_domain_enabled on every update
-     * to keep the default host off — omitting it resets to true.
-     */
-    default_domain_enabled?: boolean;
-
-    enabled?: boolean;
-
-    /**
-     * Instance IDs exposed through the namespace public endpoint. Empty means nothing
-     * is searchable. Every ID must be an existing instance in this namespace, and the
-     * list cannot exceed the account's multi-instance search limit.
-     */
-    instances_allowed?: Array<string>;
-
-    mcp?: PublicEndpointParams.Mcp;
-
-    rate_limit?: PublicEndpointParams.RateLimit;
-
-    search_endpoint?: PublicEndpointParams.SearchEndpoint;
-  }
-
-  export namespace PublicEndpointParams {
-    export interface ChatCompletionsEndpoint {
-      /**
-       * Disable chat completions endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface Mcp {
-      description?: string;
-
-      /**
-       * Disable MCP endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-
-    export interface RateLimit {
-      period_ms?: number;
-
-      requests?: number;
-
-      technique?: 'fixed' | 'sliding';
-    }
-
-    export interface SearchEndpoint {
-      /**
-       * Disable search endpoint for this public endpoint
-       */
-      disabled?: boolean;
-    }
-  }
 }
 
 export interface NamespaceListParams extends V4PagePaginationArrayParams {
@@ -1133,7 +649,7 @@ export namespace NamespaceChatCompletionsParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -1156,22 +672,6 @@ export namespace NamespaceChatCompletionsParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
-      }
-    }
-
-    export interface UnionMember2 {
-      file: UnionMember2.File;
-
-      type: 'file';
-    }
-
-    export namespace UnionMember2 {
-      export interface File {
-        filename: string;
-
-        file_data?: string;
-
-        file_id?: string;
       }
     }
   }
@@ -1328,7 +828,7 @@ export namespace NamespaceSearchParams {
   }
 
   export interface Message {
-    content: string | Array<Message.UnionMember0 | Message.UnionMember1 | Message.UnionMember2> | null;
+    content: string | Array<Message.UnionMember0 | Message.UnionMember1> | null;
 
     role: 'system' | 'developer' | 'user' | 'assistant' | 'tool';
 
@@ -1351,22 +851,6 @@ export namespace NamespaceSearchParams {
     export namespace UnionMember1 {
       export interface ImageURL {
         url: string;
-      }
-    }
-
-    export interface UnionMember2 {
-      file: UnionMember2.File;
-
-      type: 'file';
-    }
-
-    export namespace UnionMember2 {
-      export interface File {
-        filename: string;
-
-        file_data?: string;
-
-        file_id?: string;
       }
     }
   }

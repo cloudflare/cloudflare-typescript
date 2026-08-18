@@ -130,25 +130,6 @@ const runTests = (client: PartialCloudflare<{ addressing: { prefixes: BasePrefix
       account_id: '258def64c72dae45f3e4c8516e2111f2',
     });
   });
-
-  test('validate: only required params', async () => {
-    const responsePromise = client.addressing.prefixes.validate('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('validate: required and optional params', async () => {
-    const response = await client.addressing.prefixes.validate('2af39739cc4e3b5910c918468bb89828', {
-      account_id: '258def64c72dae45f3e4c8516e2111f2',
-    });
-  });
 };
 describe('resource prefixes', () => runTests(client));
 describe('resource prefixes (tree shakable, base)', () => runTests(partialClient));

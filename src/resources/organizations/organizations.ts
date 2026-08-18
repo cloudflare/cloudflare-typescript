@@ -113,6 +113,11 @@ export interface Organization {
 export namespace Organization {
   export interface Meta {
     /**
+     * Enable features for Organizations.
+     */
+    flags?: Meta.Flags;
+
+    /**
      * Ordered chain of organization tags from the root organization down to (and
      * including) this organization itself. Root organizations return a single-element
      * array containing their own tag; sub-organizations return
@@ -123,11 +128,6 @@ export namespace Organization {
 
     managed_by?: string;
 
-    /**
-     * Enable features for Organizations.
-     */
-    tenant_flags?: Meta.TenantFlags;
-
     [k: string]: unknown;
   }
 
@@ -135,7 +135,7 @@ export namespace Organization {
     /**
      * Enable features for Organizations.
      */
-    export interface TenantFlags {
+    export interface Flags {
       account_creation: string;
 
       account_deletion: string;
@@ -143,10 +143,6 @@ export namespace Organization {
       account_migration: string;
 
       account_mobility: string;
-
-      enterprise_capability: string;
-
-      member_management: string;
 
       sub_org_creation: string;
     }

@@ -4,6 +4,7 @@ export { CertificateAuthorities, BaseCertificateAuthorities } from './certificat
 export {
   HostnameAssociations,
   BaseHostnameAssociations,
+  type HostnameAssociation,
   type TLSHostnameAssociation,
   type HostnameAssociationUpdateResponse,
   type HostnameAssociationGetResponse,

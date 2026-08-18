@@ -33,7 +33,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       body: [
         {
           name: 'MY_API_KEY',
-          scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
+          scopes: ['workers', 'ai_gateway', 'dex', 'access'],
           value: 'api-token-secret-123',
         },
       ],
@@ -53,7 +53,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       body: [
         {
           name: 'MY_API_KEY',
-          scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
+          scopes: ['workers', 'ai_gateway', 'dex', 'access'],
           value: 'api-token-secret-123',
           comment: 'info about my secret',
         },
@@ -83,7 +83,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       order: 'name',
       page: 2,
       per_page: 20,
-      scopes: ['workers'],
+      scopes: [['workers', 'ai_gateway', 'dex', 'access']],
       search: 'search',
     });
   });
@@ -135,7 +135,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'MY_API_KEY',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
+      scopes: ['workers', 'ai_gateway', 'dex', 'access'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -152,7 +152,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'MY_API_KEY',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
+      scopes: ['workers', 'ai_gateway', 'dex', 'access'],
       comment: 'info about my secret',
     });
   });
@@ -178,7 +178,7 @@ const runTests = (client: PartialCloudflare<{ secretsStore: { stores: { secrets:
       account_id: '985e105f4ecef8ad9ca31a8372d0c353',
       store_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: 'info about my secret',
-      scopes: ['workers', 'ai_gateway', 'dex', 'access', 'websearch'],
+      scopes: ['workers', 'ai_gateway', 'dex', 'access'],
       value: 'api-token-secret-123',
     });
   });

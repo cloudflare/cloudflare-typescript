@@ -5,13 +5,17 @@ export {
   BaseDEXTests,
   type SchemaData,
   type SchemaHTTP,
+  type DEXTestCreateResponse,
+  type DEXTestUpdateResponse,
+  type DEXTestListResponse,
   type DEXTestDeleteResponse,
+  type DEXTestGetResponse,
   type DEXTestCreateParams,
   type DEXTestUpdateParams,
   type DEXTestListParams,
   type DEXTestDeleteParams,
   type DEXTestGetParams,
-  type SchemaHTTPSV4PagePaginationArray,
+  type DEXTestListResponsesV4PagePaginationArray,
 } from './dex-tests';
 export {
   DeploymentGroups,

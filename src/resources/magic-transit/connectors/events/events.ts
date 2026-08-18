@@ -15,7 +15,7 @@ export class BaseEvents extends APIResource {
   ] as const);
 
   /**
-   * Lists Magic WAN Connector Telemetry Events
+   * List Events
    *
    * @example
    * ```ts
@@ -45,7 +45,7 @@ export class BaseEvents extends APIResource {
   }
 
   /**
-   * Gets Magic WAN Connector Telemetry Event
+   * Get Event
    *
    * @example
    * ```ts
@@ -107,42 +107,28 @@ export namespace EventListResponse {
  * Recorded Event
  */
 export interface EventGetResponse {
-  /**
-   * Event kind plus event-specific payload fields.
-   *
-   * Event kinds:
-   *
-   * - `Init`: Initialized process
-   * - `Leave`: Stopped process
-   * - `StartAttestation`: Started attestation
-   * - `FinishAttestationSuccess`: Finished attestation
-   * - `FinishAttestationFailure`: Failed attestation
-   * - `StartRotateCryptKey`: Started crypt key rotation
-   * - `FinishRotateCryptKeySuccess`: Finished crypt key rotation
-   * - `FinishRotateCryptKeyFailure`: Failed crypt key rotation
-   * - `StartRotatePki`: Started PKI rotation
-   * - `FinishRotatePkiSuccess`: Finished PKI rotation
-   * - `FinishRotatePkiFailure`: Failed PKI rotation
-   * - `StartUpgrade`: Started upgrade
-   * - `FinishUpgradeSuccess`: Finished upgrade
-   * - `FinishUpgradeFailure`: Failed upgrade
-   * - `BlessSlotSuccess`: Blessed boot entry slot
-   * - `BlessSlotPending`: Boot entry slot is not yet blessed
-   * - `BlessSlotFailure`: Failed to bless boot entry slot
-   * - `Reconcile`: Reconciled
-   * - `ConfigureCloudflaredTunnel`: Configured Cloudflared tunnel
-   * - `RekeyInstallBoth`: Installed initial inbound and outbound keys
-   * - `RekeyStart`: Installed new inbound key, kept old outbound
-   * - `RekeyRestart`: Restarted in-progress rekey with newer key material
-   * - `RekeyAdvance`: Confirmed traffic on new inbound key, swapped outbound to new
-   * - `RekeyComplete`: Deleted old keys
-   * - `RekeyReset`: Deleted all keys after receiving an unexpected key
-   * - `HaTransition`: Completed HA state transition
-   * - `HaError`: Received unexpected HA error
-   * - `HaInit`: Initialized HA subsystem
-   * - `HaLeave`: Stopped HA subsystem
-   */
-  e: EventGetResponse.E;
+  e:
+    | EventGetResponse.Init
+    | EventGetResponse.Leave
+    | EventGetResponse.StartAttestation
+    | EventGetResponse.FinishAttestationSuccess
+    | EventGetResponse.FinishAttestationFailure
+    | EventGetResponse.StartRotateCryptKey
+    | EventGetResponse.FinishRotateCryptKeySuccess
+    | EventGetResponse.FinishRotateCryptKeyFailure
+    | EventGetResponse.StartRotatePki
+    | EventGetResponse.FinishRotatePkiSuccess
+    | EventGetResponse.FinishRotatePkiFailure
+    | EventGetResponse.StartUpgrade
+    | EventGetResponse.FinishUpgradeSuccess
+    | EventGetResponse.FinishUpgradeFailure
+    | EventGetResponse.Reconcile
+    | EventGetResponse.ConfigureCloudflaredTunnel
+    | EventGetResponse.RekeyInstallBoth
+    | EventGetResponse.RekeyStart
+    | EventGetResponse.RekeyAdvance
+    | EventGetResponse.RekeyComplete
+    | EventGetResponse.RekeyReset;
 
   /**
    * Sequence number, used to order events with the same timestamp
@@ -161,77 +147,181 @@ export interface EventGetResponse {
 }
 
 export namespace EventGetResponse {
-  /**
-   * Event kind plus event-specific payload fields.
-   *
-   * Event kinds:
-   *
-   * - `Init`: Initialized process
-   * - `Leave`: Stopped process
-   * - `StartAttestation`: Started attestation
-   * - `FinishAttestationSuccess`: Finished attestation
-   * - `FinishAttestationFailure`: Failed attestation
-   * - `StartRotateCryptKey`: Started crypt key rotation
-   * - `FinishRotateCryptKeySuccess`: Finished crypt key rotation
-   * - `FinishRotateCryptKeyFailure`: Failed crypt key rotation
-   * - `StartRotatePki`: Started PKI rotation
-   * - `FinishRotatePkiSuccess`: Finished PKI rotation
-   * - `FinishRotatePkiFailure`: Failed PKI rotation
-   * - `StartUpgrade`: Started upgrade
-   * - `FinishUpgradeSuccess`: Finished upgrade
-   * - `FinishUpgradeFailure`: Failed upgrade
-   * - `BlessSlotSuccess`: Blessed boot entry slot
-   * - `BlessSlotPending`: Boot entry slot is not yet blessed
-   * - `BlessSlotFailure`: Failed to bless boot entry slot
-   * - `Reconcile`: Reconciled
-   * - `ConfigureCloudflaredTunnel`: Configured Cloudflared tunnel
-   * - `RekeyInstallBoth`: Installed initial inbound and outbound keys
-   * - `RekeyStart`: Installed new inbound key, kept old outbound
-   * - `RekeyRestart`: Restarted in-progress rekey with newer key material
-   * - `RekeyAdvance`: Confirmed traffic on new inbound key, swapped outbound to new
-   * - `RekeyComplete`: Deleted old keys
-   * - `RekeyReset`: Deleted all keys after receiving an unexpected key
-   * - `HaTransition`: Completed HA state transition
-   * - `HaError`: Received unexpected HA error
-   * - `HaInit`: Initialized HA subsystem
-   * - `HaLeave`: Stopped HA subsystem
-   */
-  export interface E {
+  export interface Init {
     /**
-     * Event kind
+     * Initialized process
      */
-    k:
-      | 'Init'
-      | 'Leave'
-      | 'StartAttestation'
-      | 'FinishAttestationSuccess'
-      | 'FinishAttestationFailure'
-      | 'StartRotateCryptKey'
-      | 'FinishRotateCryptKeySuccess'
-      | 'FinishRotateCryptKeyFailure'
-      | 'StartRotatePki'
-      | 'FinishRotatePkiSuccess'
-      | 'FinishRotatePkiFailure'
-      | 'StartUpgrade'
-      | 'FinishUpgradeSuccess'
-      | 'FinishUpgradeFailure'
-      | 'BlessSlotSuccess'
-      | 'BlessSlotPending'
-      | 'BlessSlotFailure'
-      | 'Reconcile'
-      | 'ConfigureCloudflaredTunnel'
-      | 'RekeyInstallBoth'
-      | 'RekeyStart'
-      | 'RekeyRestart'
-      | 'RekeyAdvance'
-      | 'RekeyComplete'
-      | 'RekeyReset'
-      | 'HaTransition'
-      | 'HaError'
-      | 'HaInit'
-      | 'HaLeave';
+    k: 'Init';
+  }
 
-    [k: string]: unknown;
+  export interface Leave {
+    /**
+     * Stopped process
+     */
+    k: 'Leave';
+  }
+
+  export interface StartAttestation {
+    /**
+     * Started attestation
+     */
+    k: 'StartAttestation';
+  }
+
+  export interface FinishAttestationSuccess {
+    /**
+     * Finished attestation
+     */
+    k: 'FinishAttestationSuccess';
+  }
+
+  export interface FinishAttestationFailure {
+    /**
+     * Failed attestation
+     */
+    k: 'FinishAttestationFailure';
+  }
+
+  export interface StartRotateCryptKey {
+    /**
+     * Started crypt key rotation
+     */
+    k: 'StartRotateCryptKey';
+  }
+
+  export interface FinishRotateCryptKeySuccess {
+    /**
+     * Finished crypt key rotation
+     */
+    k: 'FinishRotateCryptKeySuccess';
+  }
+
+  export interface FinishRotateCryptKeyFailure {
+    /**
+     * Failed crypt key rotation
+     */
+    k: 'FinishRotateCryptKeyFailure';
+  }
+
+  export interface StartRotatePki {
+    /**
+     * Started PKI rotation
+     */
+    k: 'StartRotatePki';
+  }
+
+  export interface FinishRotatePkiSuccess {
+    /**
+     * Finished PKI rotation
+     */
+    k: 'FinishRotatePkiSuccess';
+  }
+
+  export interface FinishRotatePkiFailure {
+    /**
+     * Failed PKI rotation
+     */
+    k: 'FinishRotatePkiFailure';
+  }
+
+  export interface StartUpgrade {
+    /**
+     * Started upgrade
+     */
+    k: 'StartUpgrade';
+
+    /**
+     * Location of upgrade bundle
+     */
+    url: string;
+  }
+
+  export interface FinishUpgradeSuccess {
+    /**
+     * Finished upgrade
+     */
+    k: 'FinishUpgradeSuccess';
+  }
+
+  export interface FinishUpgradeFailure {
+    /**
+     * Failed upgrade
+     */
+    k: 'FinishUpgradeFailure';
+  }
+
+  export interface Reconcile {
+    /**
+     * Reconciled
+     */
+    k: 'Reconcile';
+  }
+
+  export interface ConfigureCloudflaredTunnel {
+    /**
+     * Configured Cloudflared tunnel
+     */
+    k: 'ConfigureCloudflaredTunnel';
+  }
+
+  export interface RekeyInstallBoth {
+    /**
+     * Installed initial inbound and outbound keys
+     */
+    k: 'RekeyInstallBoth';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyStart {
+    /**
+     * Installed new inbound key, kept old outbound
+     */
+    k: 'RekeyStart';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyAdvance {
+    /**
+     * Confirmed traffic on new inbound key, swapped outbound to new
+     */
+    k: 'RekeyAdvance';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyComplete {
+    /**
+     * Deleted old keys
+     */
+    k: 'RekeyComplete';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
+  }
+
+  export interface RekeyReset {
+    /**
+     * Deleted all keys after receiving an unexpected key
+     */
+    k: 'RekeyReset';
+
+    /**
+     * Tunnel identifier
+     */
+    tunnel_id: string;
   }
 }
 

@@ -13,9 +13,9 @@ export class BaseRelease extends APIResource {
   ] as const);
 
   /**
-   * Delivers one or more quarantined messages to their intended recipients, for
-   * cases where a message was incorrectly quarantined. The response includes
-   * delivery status for each recipient.
+   * Releases one or more quarantined messages, delivering them to the intended
+   * recipients. Use when a message was incorrectly quarantined. Returns delivery
+   * status for each recipient.
    *
    * @example
    * ```ts
@@ -48,7 +48,7 @@ export type ReleaseBulkResponsesSinglePage = SinglePage<ReleaseBulkResponse>;
 
 export interface ReleaseBulkResponse {
   /**
-   * Unique identifier for a message retrieved from investigation.
+   * Unique identifier for a message retrieved from investigation
    */
   id: string;
 
@@ -57,7 +57,7 @@ export interface ReleaseBulkResponse {
   failed?: Array<string> | null;
 
   /**
-   * @deprecated Use `id` instead.
+   * @deprecated Deprecated, use `id` instead. End of life: November 1, 2026.
    */
   postfix_id?: string;
 

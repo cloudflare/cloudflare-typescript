@@ -60,7 +60,7 @@ export class BaseSinks extends APIResource {
   }
 
   /**
-   * Delete Sink in Account.
+   * Delete Pipeline in Account.
    *
    * @example
    * ```ts

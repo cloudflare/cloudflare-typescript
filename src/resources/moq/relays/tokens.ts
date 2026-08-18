@@ -13,272 +13,57 @@ export class BaseTokens extends APIResource {
   ] as const);
 
   /**
-   * Mints a new relay-scoped token and adds it to the relay's accepted-auth
-   * registry. The token value (secret) is shown once in the response. A relay may
-   * hold up to 10 tokens; creating an 11th is rejected.
+   * Generates a new token for the specified type. The old token is immediately
+   * invalidated. Token value is shown once in the response.
    *
    * @example
    * ```ts
-   * const token = await client.moq.relays.tokens.create(
+   * const response = await client.moq.relays.tokens.rotate(
    *   'a1b2c3d4e5f67890a1b2c3d4e5f67890',
    *   {
    *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     operations: ['publish', 'subscribe'],
+   *     type: 'publish_subscribe',
    *   },
    * );
    * ```
    */
-  create(
+  rotate(
     relayID: string,
-    params: TokenCreateParams,
+    params: TokenRotateParams,
     options?: RequestOptions,
-  ): APIPromise<TokenCreateResponse> {
+  ): APIPromise<TokenRotateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(path`/accounts/${account_id}/moq/relays/${relayID}/tokens`, {
+      this._client.post(path`/accounts/${account_id}/moq/relays/${relayID}/tokens/rotate`, {
         body,
         ...options,
-      }) as APIPromise<{ result: TokenCreateResponse }>
+      }) as APIPromise<{ result: TokenRotateResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns metadata for every token the relay accepts. Secrets are never returned,
-   * so a token that has been lost cannot be recovered here. There is no expiry
-   * filter: compare each token's `expires` to the current time to tell which ones
-   * have lapsed.
-   *
-   * @example
-   * ```ts
-   * const tokens = await client.moq.relays.tokens.list(
-   *   'a1b2c3d4e5f67890a1b2c3d4e5f67890',
-   *   { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-   * );
-   * ```
-   */
-  list(relayID: string, params: TokenListParams, options?: RequestOptions): APIPromise<TokenListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(path`/accounts/${account_id}/moq/relays/${relayID}/tokens`, options) as APIPromise<{
-        result: TokenListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Revokes a token by removing it from the set the relay accepts. Relays cache that
-   * set, so revocation takes effect within seconds rather than instantly, and
-   * connections already established with the token are not closed. Revoking an
-   * unknown token succeeds, so the call is idempotent.
-   *
-   * @example
-   * ```ts
-   * const token = await client.moq.relays.tokens.delete(
-   *   'f3a1b2c3d4e5f67890a1b2c3d4e5f678',
-   *   {
-   *     account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-   *     relay_id: 'a1b2c3d4e5f67890a1b2c3d4e5f67890',
-   *   },
-   * );
-   * ```
-   */
-  delete(jti: string, params: TokenDeleteParams, options?: RequestOptions): APIPromise<TokenDeleteResponse> {
-    const { account_id, relay_id } = params;
-    return this._client.delete(path`/accounts/${account_id}/moq/relays/${relay_id}/tokens/${jti}`, options);
   }
 }
 export class Tokens extends BaseTokens {}
 
-/**
- * A relay's token collection, keyed on issuer `type` (a discriminated union). V1
- * ships exactly one arm (`cloudflare_jwt`). Clients iterate `issuers`, switch on
- * `type`, and ignore unknown types — that contract is what makes adding or
- * removing an arm non-breaking.
- */
-export interface TokenCreateResponse {
-  issuers: Array<TokenCreateResponse.Issuer>;
-}
-
-export namespace TokenCreateResponse {
+export interface TokenRotateResponse {
   /**
-   * One arm of the discriminated-union token collection.
+   * New token value (shown once). Treat as sensitive.
    */
-  export interface Issuer {
-    /**
-     * Always present ([] when empty).
-     */
-    cloudflare_tokens: Array<Issuer.CloudflareToken>;
+  token: string;
 
-    issuer: 'cloudflare';
-
-    type: 'cloudflare_jwt';
-  }
-
-  export namespace Issuer {
-    export interface CloudflareToken {
-      created: string;
-
-      /**
-       * Mandatory; no more than 1 year after `created`.
-       */
-      expires: string;
-
-      /**
-       * Token identity and registry key (32 hex chars).
-       */
-      jti: string;
-
-      /**
-       * Signed allowlist of what the token may do. V1 coarse roles; the array form
-       * extends to fine-grained MoQT message names later without a breaking change.
-       */
-      operations: Array<'publish' | 'subscribe'>;
-
-      /**
-       * Optional, customer-set.
-       */
-      label?: string;
-
-      /**
-       * The signed JWT. Present ONLY in create / auto-create responses (shown once);
-       * never returned by list, never stored.
-       */
-      secret?: string;
-    }
-  }
+  type: 'publish_subscribe' | 'subscribe';
 }
 
-/**
- * A relay's token collection, keyed on issuer `type` (a discriminated union). V1
- * ships exactly one arm (`cloudflare_jwt`). Clients iterate `issuers`, switch on
- * `type`, and ignore unknown types — that contract is what makes adding or
- * removing an arm non-breaking.
- */
-export interface TokenListResponse {
-  issuers: Array<TokenListResponse.Issuer>;
-}
-
-export namespace TokenListResponse {
-  /**
-   * One arm of the discriminated-union token collection.
-   */
-  export interface Issuer {
-    /**
-     * Always present ([] when empty).
-     */
-    cloudflare_tokens: Array<Issuer.CloudflareToken>;
-
-    issuer: 'cloudflare';
-
-    type: 'cloudflare_jwt';
-  }
-
-  export namespace Issuer {
-    export interface CloudflareToken {
-      created: string;
-
-      /**
-       * Mandatory; no more than 1 year after `created`.
-       */
-      expires: string;
-
-      /**
-       * Token identity and registry key (32 hex chars).
-       */
-      jti: string;
-
-      /**
-       * Signed allowlist of what the token may do. V1 coarse roles; the array form
-       * extends to fine-grained MoQT message names later without a breaking change.
-       */
-      operations: Array<'publish' | 'subscribe'>;
-
-      /**
-       * Optional, customer-set.
-       */
-      label?: string;
-
-      /**
-       * The signed JWT. Present ONLY in create / auto-create responses (shown once);
-       * never returned by list, never stored.
-       */
-      secret?: string;
-    }
-  }
-}
-
-export interface TokenDeleteResponse {
-  errors: Array<TokenDeleteResponse.Error>;
-
-  messages: Array<TokenDeleteResponse.Message>;
-
-  success: boolean;
-}
-
-export namespace TokenDeleteResponse {
-  export interface Error {
-    code?: number;
-
-    message?: string;
-  }
-
-  export interface Message {
-    code?: number;
-
-    message?: string;
-  }
-}
-
-export interface TokenCreateParams {
+export interface TokenRotateParams {
   /**
    * Path param: Cloudflare account identifier.
    */
   account_id: string;
 
   /**
-   * Body param: Non-empty subset of the V1 roles the token is allowed to perform.
-   * Signed into the token.
+   * Body param: Which token type to rotate.
    */
-  operations: Array<'publish' | 'subscribe'>;
-
-  /**
-   * Body param: Optional expiry (RFC 3339). Defaults to 1 year from creation;
-   * rejected if more than 1 year in the future.
-   */
-  expires?: string;
-
-  /**
-   * Body param: Optional, customer-set label.
-   */
-  label?: string;
-}
-
-export interface TokenListParams {
-  /**
-   * Cloudflare account identifier.
-   */
-  account_id: string;
-}
-
-export interface TokenDeleteParams {
-  /**
-   * Cloudflare account identifier.
-   */
-  account_id: string;
-
-  /**
-   * Relay unique identifier (32 hex characters).
-   */
-  relay_id: string;
+  type: 'publish_subscribe' | 'subscribe';
 }
 
 export declare namespace Tokens {
-  export {
-    type TokenCreateResponse as TokenCreateResponse,
-    type TokenListResponse as TokenListResponse,
-    type TokenDeleteResponse as TokenDeleteResponse,
-    type TokenCreateParams as TokenCreateParams,
-    type TokenListParams as TokenListParams,
-    type TokenDeleteParams as TokenDeleteParams,
-  };
+  export { type TokenRotateResponse as TokenRotateResponse, type TokenRotateParams as TokenRotateParams };
 }

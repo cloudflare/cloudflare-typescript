@@ -10,7 +10,7 @@ export class BaseRegions extends APIResource {
   static override readonly _key: readonly ['dls', 'regions'] = Object.freeze(['dls', 'regions'] as const);
 
   /**
-   * List the DLS regions (managed and custom) available to an account.
+   * List DLS regions for an account
    *
    * @example
    * ```ts
@@ -35,7 +35,7 @@ export class BaseRegions extends APIResource {
   }
 
   /**
-   * Retrieve a single DLS region (managed or custom) by ID or region key.
+   * Get a DLS region
    *
    * @example
    * ```ts

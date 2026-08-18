@@ -24,7 +24,7 @@ export class BasePortals extends APIResource {
    *     {
    *       account_id: 'a86a8f5c339544d7bdc89926de14fb8c',
    *       id: 'my-mcp-portal',
-   *       hostname: 'example.com',
+   *       hostname: 'exmaple.com',
    *       name: 'My MCP Portal',
    *     },
    *   );
@@ -110,7 +110,7 @@ export class BasePortals extends APIResource {
   }
 
   /**
-   * Read the details of a single MCP Portal, including its configured servers.
+   * Read details of an MCP Portal
    *
    * @example
    * ```ts
@@ -137,47 +137,25 @@ export type PortalListResponsesV4PagePaginationArray = V4PagePaginationArray<Por
 
 export interface PortalCreateResponse {
   /**
-   * Unique identifier for the MCP portal.
+   * portal id
    */
   id: string;
 
-  /**
-   * Hostname where the MCP portal is available.
-   */
   hostname: string;
 
-  /**
-   * Display name for the MCP portal.
-   */
   name: string;
 
   servers: Array<PortalCreateResponse.Server>;
 
   /**
-   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
-   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
-   * sent, they must be consistent or the request returns a 400.
+   * Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
-
-  /**
-   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
-   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
-   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
   created_by?: string;
 
-  /**
-   * Optional description of the MCP portal.
-   */
   description?: string;
 
   modified_at?: string;
@@ -185,7 +163,7 @@ export interface PortalCreateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 }
@@ -193,47 +171,19 @@ export interface PortalCreateResponse {
 export namespace PortalCreateResponse {
   export interface Server {
     /**
-     * Unique identifier for the MCP server.
+     * server id
      */
     id: string;
 
-    /**
-     * Authentication method used to connect to the upstream MCP server.
-     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
-    /**
-     * URL of the upstream MCP endpoint.
-     */
     hostname: string;
 
-    /**
-     * Display name for the MCP server.
-     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
-    /**
-     * Unique identifier for the MCP server.
-     */
-    server_id: string;
-
     tools: Array<{ [key: string]: unknown }>;
-
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    auth_config_summary?: Server.AuthConfigSummary;
-
-    /**
-     * Whether administrative authentication is required before capabilities can be
-     * synced. Manual OAuth is user-managed and has no administrative authentication
-     * flow.
-     */
-    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
     created_at?: string;
 
@@ -241,9 +191,6 @@ export namespace PortalCreateResponse {
 
     default_disabled?: boolean;
 
-    /**
-     * Optional description of the MCP server.
-     */
     description?: string | null;
 
     error?: string;
@@ -254,7 +201,8 @@ export namespace PortalCreateResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -269,14 +217,11 @@ export namespace PortalCreateResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
      */
     secure_web_gateway?: boolean;
 
-    /**
-     * Current sync state of the server
-     */
-    status?: 'waiting' | 'ready' | 'stale' | 'error';
+    status?: string;
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -284,47 +229,6 @@ export namespace PortalCreateResponse {
   }
 
   export namespace Server {
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    export interface AuthConfigSummary {
-      auth_mode?: 'dcr' | 'manual';
-
-      client_secret_version?: number;
-
-      config?: AuthConfigSummary.Config;
-
-      has_client_secret?: boolean;
-
-      registration_info?: AuthConfigSummary.RegistrationInfo;
-    }
-
-    export namespace AuthConfigSummary {
-      export interface Config {
-        authorization_endpoint?: string;
-
-        issuer?: string;
-
-        resource?: string;
-
-        revocation_endpoint?: string;
-
-        token_endpoint?: string;
-      }
-
-      export interface RegistrationInfo {
-        client_id?: string;
-
-        redirect_uris?: Array<string>;
-
-        scope?: string;
-
-        token_endpoint_auth_method?: string;
-      }
-    }
-
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -384,47 +288,25 @@ export namespace PortalCreateResponse {
 
 export interface PortalUpdateResponse {
   /**
-   * Unique identifier for the MCP portal.
+   * portal id
    */
   id: string;
 
-  /**
-   * Hostname where the MCP portal is available.
-   */
   hostname: string;
 
-  /**
-   * Display name for the MCP portal.
-   */
   name: string;
 
   servers: Array<PortalUpdateResponse.Server>;
 
   /**
-   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
-   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
-   * sent, they must be consistent or the request returns a 400.
+   * Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
-
-  /**
-   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
-   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
-   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
   created_by?: string;
 
-  /**
-   * Optional description of the MCP portal.
-   */
   description?: string;
 
   modified_at?: string;
@@ -432,7 +314,7 @@ export interface PortalUpdateResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 }
@@ -440,47 +322,19 @@ export interface PortalUpdateResponse {
 export namespace PortalUpdateResponse {
   export interface Server {
     /**
-     * Unique identifier for the MCP server.
+     * server id
      */
     id: string;
 
-    /**
-     * Authentication method used to connect to the upstream MCP server.
-     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
-    /**
-     * URL of the upstream MCP endpoint.
-     */
     hostname: string;
 
-    /**
-     * Display name for the MCP server.
-     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
-    /**
-     * Unique identifier for the MCP server.
-     */
-    server_id: string;
-
     tools: Array<{ [key: string]: unknown }>;
-
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    auth_config_summary?: Server.AuthConfigSummary;
-
-    /**
-     * Whether administrative authentication is required before capabilities can be
-     * synced. Manual OAuth is user-managed and has no administrative authentication
-     * flow.
-     */
-    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
     created_at?: string;
 
@@ -488,9 +342,6 @@ export namespace PortalUpdateResponse {
 
     default_disabled?: boolean;
 
-    /**
-     * Optional description of the MCP server.
-     */
     description?: string | null;
 
     error?: string;
@@ -501,7 +352,8 @@ export namespace PortalUpdateResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -516,14 +368,11 @@ export namespace PortalUpdateResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
      */
     secure_web_gateway?: boolean;
 
-    /**
-     * Current sync state of the server
-     */
-    status?: 'waiting' | 'ready' | 'stale' | 'error';
+    status?: string;
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -531,47 +380,6 @@ export namespace PortalUpdateResponse {
   }
 
   export namespace Server {
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    export interface AuthConfigSummary {
-      auth_mode?: 'dcr' | 'manual';
-
-      client_secret_version?: number;
-
-      config?: AuthConfigSummary.Config;
-
-      has_client_secret?: boolean;
-
-      registration_info?: AuthConfigSummary.RegistrationInfo;
-    }
-
-    export namespace AuthConfigSummary {
-      export interface Config {
-        authorization_endpoint?: string;
-
-        issuer?: string;
-
-        resource?: string;
-
-        revocation_endpoint?: string;
-
-        token_endpoint?: string;
-      }
-
-      export interface RegistrationInfo {
-        client_id?: string;
-
-        redirect_uris?: Array<string>;
-
-        scope?: string;
-
-        token_endpoint_auth_method?: string;
-      }
-    }
-
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -631,47 +439,25 @@ export namespace PortalUpdateResponse {
 
 export interface PortalListResponse {
   /**
-   * Unique identifier for the MCP portal.
+   * portal id
    */
   id: string;
 
-  /**
-   * Hostname where the MCP portal is available.
-   */
   hostname: string;
 
-  /**
-   * Display name for the MCP portal.
-   */
   name: string;
 
   servers: Array<PortalListResponse.Server>;
 
   /**
-   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
-   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
-   * sent, they must be consistent or the request returns a 400.
+   * Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
-
-  /**
-   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
-   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
-   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
   created_by?: string;
 
-  /**
-   * Optional description of the MCP portal.
-   */
   description?: string;
 
   modified_at?: string;
@@ -679,7 +465,7 @@ export interface PortalListResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 }
@@ -687,47 +473,19 @@ export interface PortalListResponse {
 export namespace PortalListResponse {
   export interface Server {
     /**
-     * Unique identifier for the MCP server.
+     * server id
      */
     id: string;
 
-    /**
-     * Authentication method used to connect to the upstream MCP server.
-     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
-    /**
-     * URL of the upstream MCP endpoint.
-     */
     hostname: string;
 
-    /**
-     * Display name for the MCP server.
-     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
-    /**
-     * Unique identifier for the MCP server.
-     */
-    server_id: string;
-
     tools: Array<{ [key: string]: unknown }>;
-
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    auth_config_summary?: Server.AuthConfigSummary;
-
-    /**
-     * Whether administrative authentication is required before capabilities can be
-     * synced. Manual OAuth is user-managed and has no administrative authentication
-     * flow.
-     */
-    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
     created_at?: string;
 
@@ -735,9 +493,6 @@ export namespace PortalListResponse {
 
     default_disabled?: boolean;
 
-    /**
-     * Optional description of the MCP server.
-     */
     description?: string | null;
 
     error?: string;
@@ -748,7 +503,8 @@ export namespace PortalListResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -763,14 +519,11 @@ export namespace PortalListResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
      */
     secure_web_gateway?: boolean;
 
-    /**
-     * Current sync state of the server
-     */
-    status?: 'waiting' | 'ready' | 'stale' | 'error';
+    status?: string;
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -778,47 +531,6 @@ export namespace PortalListResponse {
   }
 
   export namespace Server {
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    export interface AuthConfigSummary {
-      auth_mode?: 'dcr' | 'manual';
-
-      client_secret_version?: number;
-
-      config?: AuthConfigSummary.Config;
-
-      has_client_secret?: boolean;
-
-      registration_info?: AuthConfigSummary.RegistrationInfo;
-    }
-
-    export namespace AuthConfigSummary {
-      export interface Config {
-        authorization_endpoint?: string;
-
-        issuer?: string;
-
-        resource?: string;
-
-        revocation_endpoint?: string;
-
-        token_endpoint?: string;
-      }
-
-      export interface RegistrationInfo {
-        client_id?: string;
-
-        redirect_uris?: Array<string>;
-
-        scope?: string;
-
-        token_endpoint_auth_method?: string;
-      }
-    }
-
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -878,45 +590,23 @@ export namespace PortalListResponse {
 
 export interface PortalDeleteResponse {
   /**
-   * Unique identifier for the MCP portal.
+   * portal id
    */
   id: string;
 
-  /**
-   * Hostname where the MCP portal is available.
-   */
   hostname: string;
 
-  /**
-   * Display name for the MCP portal.
-   */
   name: string;
 
   /**
-   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
-   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
-   * sent, they must be consistent or the request returns a 400.
+   * Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
-
-  /**
-   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
-   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
-   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
   created_by?: string;
 
-  /**
-   * Optional description of the MCP portal.
-   */
   description?: string;
 
   modified_at?: string;
@@ -924,54 +614,32 @@ export interface PortalDeleteResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 }
 
 export interface PortalReadResponse {
   /**
-   * Unique identifier for the MCP portal.
+   * portal id
    */
   id: string;
 
-  /**
-   * Hostname where the MCP portal is available.
-   */
   hostname: string;
 
-  /**
-   * Display name for the MCP portal.
-   */
   name: string;
 
   servers: Array<PortalReadResponse.Server>;
 
   /**
-   * @deprecated Deprecated: use `code_mode` for new integrations. `true` maps to any
-   * non-off Code Mode policy; `false` maps to `code_mode: off`. If both fields are
-   * sent, they must be consistent or the request returns a 400.
+   * Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
-
-  /**
-   * Code Mode policy for this portal. `off`: Code Mode is unavailable; query
-   * parameters are ignored. `opt_in`: Code Mode is off by default; clients turn it
-   * on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
 
   created_at?: string;
 
   created_by?: string;
 
-  /**
-   * Optional description of the MCP portal.
-   */
   description?: string;
 
   modified_at?: string;
@@ -979,7 +647,7 @@ export interface PortalReadResponse {
   modified_by?: string;
 
   /**
-   * Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 }
@@ -987,47 +655,19 @@ export interface PortalReadResponse {
 export namespace PortalReadResponse {
   export interface Server {
     /**
-     * Unique identifier for the MCP server.
+     * server id
      */
     id: string;
 
-    /**
-     * Authentication method used to connect to the upstream MCP server.
-     */
     auth_type: 'oauth' | 'bearer' | 'unauthenticated';
 
-    /**
-     * URL of the upstream MCP endpoint.
-     */
     hostname: string;
 
-    /**
-     * Display name for the MCP server.
-     */
     name: string;
 
     prompts: Array<{ [key: string]: unknown }>;
 
-    /**
-     * Unique identifier for the MCP server.
-     */
-    server_id: string;
-
     tools: Array<{ [key: string]: unknown }>;
-
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    auth_config_summary?: Server.AuthConfigSummary;
-
-    /**
-     * Whether administrative authentication is required before capabilities can be
-     * synced. Manual OAuth is user-managed and has no administrative authentication
-     * flow.
-     */
-    authentication_status?: 'not_required' | 'required' | 'connected' | 'stale' | 'manual';
 
     created_at?: string;
 
@@ -1035,9 +675,6 @@ export namespace PortalReadResponse {
 
     default_disabled?: boolean;
 
-    /**
-     * Optional description of the MCP server.
-     */
     description?: string | null;
 
     error?: string;
@@ -1048,7 +685,8 @@ export namespace PortalReadResponse {
      * When true, the gateway worker uses the shared Cloudflare-owned OAuth callback
      * endpoint as the redirect_uri for upstream on-behalf OAuth, instead of the
      * customer portal hostname. Defaults to false (off); opt in per server by setting
-     * true.
+     * true. Effective behavior is gated by the gateway worker's per-env rollout mode
+     * KV key.
      */
     is_shared_oauth_callback_enabled?: boolean;
 
@@ -1063,14 +701,11 @@ export namespace PortalReadResponse {
     on_behalf?: boolean;
 
     /**
-     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway.
+     * Route outbound traffic to this MCP server through Zero Trust Secure Web Gateway
      */
     secure_web_gateway?: boolean;
 
-    /**
-     * Current sync state of the server
-     */
-    status?: 'waiting' | 'ready' | 'stale' | 'error';
+    status?: string;
 
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
@@ -1078,47 +713,6 @@ export namespace PortalReadResponse {
   }
 
   export namespace Server {
-    /**
-     * Safe subset of auth_credentials surfaced to the dashboard. Includes auth_mode
-     * (dcr|manual), has_client_secret, client_secret_version, and the OAuth
-     * endpoints + client_id for manual servers. Never includes the secret value.
-     */
-    export interface AuthConfigSummary {
-      auth_mode?: 'dcr' | 'manual';
-
-      client_secret_version?: number;
-
-      config?: AuthConfigSummary.Config;
-
-      has_client_secret?: boolean;
-
-      registration_info?: AuthConfigSummary.RegistrationInfo;
-    }
-
-    export namespace AuthConfigSummary {
-      export interface Config {
-        authorization_endpoint?: string;
-
-        issuer?: string;
-
-        resource?: string;
-
-        revocation_endpoint?: string;
-
-        token_endpoint?: string;
-      }
-
-      export interface RegistrationInfo {
-        client_id?: string;
-
-        redirect_uris?: Array<string>;
-
-        scope?: string;
-
-        token_endpoint_auth_method?: string;
-      }
-    }
-
     export interface ErrorDetails {
       /**
        * Underlying error message
@@ -1183,51 +777,37 @@ export interface PortalCreateParams {
   account_id: string;
 
   /**
-   * Body param: Unique identifier for the MCP portal.
+   * Body param: portal id
    */
   id: string;
 
   /**
-   * Body param: Hostname where the MCP portal is available.
+   * Body param
    */
   hostname: string;
 
   /**
-   * Body param: Display name for the MCP portal.
+   * Body param
    */
   name: string;
 
   /**
-   * @deprecated Body param: Deprecated: use `code_mode` for new integrations. `true`
-   * maps to any non-off Code Mode policy; `false` maps to `code_mode: off`. If both
-   * fields are sent, they must be consistent or the request returns a 400.
+   * Body param: Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
 
   /**
-   * Body param: Code Mode policy for this portal. `off`: Code Mode is unavailable;
-   * query parameters are ignored. `opt_in`: Code Mode is off by default; clients
-   * turn it on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
-
-  /**
-   * Body param: Optional description of the MCP portal.
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param: MCP servers attached to the portal and their portal-specific
-   * settings.
+   * Body param
    */
   servers?: Array<PortalCreateParams.Server>;
 }
@@ -1235,73 +815,37 @@ export interface PortalCreateParams {
 export namespace PortalCreateParams {
   export interface Server {
     /**
-     * Unique identifier for the MCP server.
+     * server id
      */
     server_id: string;
 
-    /**
-     * Disable this server by default for clients connecting through the portal.
-     */
     default_disabled?: boolean;
 
-    /**
-     * Use end-user OAuth credentials when connecting this server to the portal.
-     */
     on_behalf?: boolean;
 
-    /**
-     * Portal-specific prompt overrides.
-     */
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
-    /**
-     * Portal-specific tool overrides.
-     */
     updated_tools?: Array<Server.UpdatedTool>;
   }
 
   export namespace Server {
     export interface UpdatedPrompt {
-      /**
-       * Name of the tool or prompt capability to override.
-       */
       name: string;
 
-      /**
-       * Custom name exposed for the capability.
-       */
       alias?: string;
 
-      /**
-       * Custom description exposed for the capability.
-       */
       description?: string;
 
-      /**
-       * Whether the capability is available through the MCP server.
-       */
       enabled?: boolean;
     }
 
     export interface UpdatedTool {
-      /**
-       * Name of the tool or prompt capability to override.
-       */
       name: string;
 
-      /**
-       * Custom name exposed for the capability.
-       */
       alias?: string;
 
-      /**
-       * Custom description exposed for the capability.
-       */
       description?: string;
 
-      /**
-       * Whether the capability is available through the MCP server.
-       */
       enabled?: boolean;
     }
   }
@@ -1314,46 +858,32 @@ export interface PortalUpdateParams {
   account_id: string;
 
   /**
-   * @deprecated Body param: Deprecated: use `code_mode` for new integrations. `true`
-   * maps to any non-off Code Mode policy; `false` maps to `code_mode: off`. If both
-   * fields are sent, they must be consistent or the request returns a 400.
+   * Body param: Allow remote code execution in Dynamic Workers (beta)
    */
   allow_code_mode?: boolean;
 
   /**
-   * Body param: Code Mode policy for this portal. `off`: Code Mode is unavailable;
-   * query parameters are ignored. `opt_in`: Code Mode is off by default; clients
-   * turn it on with `?codemode=search_and_execute`. `default_on`: Code Mode is on by
-   * default; clients can opt out with `?codemode=off`. `enforced`: Code Mode is
-   * always on; query parameters are ignored. Defaults to `opt_in` when omitted on
-   * create. If both `code_mode` and `allow_code_mode` are sent, they must be
-   * consistent or the request returns a 400.
-   */
-  code_mode?: 'off' | 'opt_in' | 'default_on' | 'enforced';
-
-  /**
-   * Body param: Optional description of the MCP portal.
+   * Body param
    */
   description?: string;
 
   /**
-   * Body param: Hostname where the MCP portal is available.
+   * Body param
    */
   hostname?: string;
 
   /**
-   * Body param: Display name for the MCP portal.
+   * Body param
    */
   name?: string;
 
   /**
-   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway.
+   * Body param: Route outbound MCP traffic through Zero Trust Secure Web Gateway
    */
   secure_web_gateway?: boolean;
 
   /**
-   * Body param: MCP servers attached to the portal and their portal-specific
-   * settings.
+   * Body param
    */
   servers?: Array<PortalUpdateParams.Server>;
 }
@@ -1361,73 +891,37 @@ export interface PortalUpdateParams {
 export namespace PortalUpdateParams {
   export interface Server {
     /**
-     * Unique identifier for the MCP server.
+     * server id
      */
     server_id: string;
 
-    /**
-     * Disable this server by default for clients connecting through the portal.
-     */
     default_disabled?: boolean;
 
-    /**
-     * Use end-user OAuth credentials when connecting this server to the portal.
-     */
     on_behalf?: boolean;
 
-    /**
-     * Portal-specific prompt overrides.
-     */
     updated_prompts?: Array<Server.UpdatedPrompt>;
 
-    /**
-     * Portal-specific tool overrides.
-     */
     updated_tools?: Array<Server.UpdatedTool>;
   }
 
   export namespace Server {
     export interface UpdatedPrompt {
-      /**
-       * Name of the tool or prompt capability to override.
-       */
       name: string;
 
-      /**
-       * Custom name exposed for the capability.
-       */
       alias?: string;
 
-      /**
-       * Custom description exposed for the capability.
-       */
       description?: string;
 
-      /**
-       * Whether the capability is available through the MCP server.
-       */
       enabled?: boolean;
     }
 
     export interface UpdatedTool {
-      /**
-       * Name of the tool or prompt capability to override.
-       */
       name: string;
 
-      /**
-       * Custom name exposed for the capability.
-       */
       alias?: string;
 
-      /**
-       * Custom description exposed for the capability.
-       */
       description?: string;
 
-      /**
-       * Whether the capability is available through the MCP server.
-       */
       enabled?: boolean;
     }
   }

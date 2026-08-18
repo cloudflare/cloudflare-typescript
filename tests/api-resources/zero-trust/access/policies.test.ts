@@ -64,8 +64,8 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { policies: B
       approval_required: true,
       connection_rules: {
         rdp: {
-          allowed_clipboard_local_to_remote_formats: ['text', 'file'],
-          allowed_clipboard_remote_to_local_formats: ['text', 'file'],
+          allowed_clipboard_local_to_remote_formats: ['text'],
+          allowed_clipboard_remote_to_local_formats: ['text'],
         },
       },
       exclude: [{ certificate: {} }],
@@ -119,8 +119,8 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { policies: B
       approval_required: true,
       connection_rules: {
         rdp: {
-          allowed_clipboard_local_to_remote_formats: ['text', 'file'],
-          allowed_clipboard_remote_to_local_formats: ['text', 'file'],
+          allowed_clipboard_local_to_remote_formats: ['text'],
+          allowed_clipboard_remote_to_local_formats: ['text'],
         },
       },
       exclude: [{ certificate: {} }],
@@ -154,7 +154,7 @@ const runTests = (client: PartialCloudflare<{ zeroTrust: { access: { policies: B
     const response = await client.zeroTrust.access.policies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 0,
-      per_page: 1000,
+      per_page: 0,
     });
   });
 

@@ -44,7 +44,6 @@ const runTests = (client: PartialCloudflare<{ brandProtection: { matches: BaseMa
     const response = await client.brandProtection.matches.download({
       account_id: 'x',
       id: 'id',
-      include_dismissed: true,
       include_domain_id: true,
       limit: 0,
       offset: 0,
@@ -68,7 +67,6 @@ const runTests = (client: PartialCloudflare<{ brandProtection: { matches: BaseMa
     const response = await client.brandProtection.matches.get({
       account_id: 'x',
       id: 'id',
-      include_dismissed: true,
       include_domain_id: true,
       limit: 0,
       offset: 0,

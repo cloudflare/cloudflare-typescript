@@ -3,15 +3,6 @@
 import { APIResource } from '../../../../core/resource';
 import * as ProjectsAPI from '../projects';
 import { DeploymentsV4PagePaginationArray } from '../projects';
-import * as TailsAPI from './tails';
-import {
-  BaseTails,
-  TailCreateParams,
-  TailCreateResponse,
-  TailDeleteParams,
-  TailDeleteResponse,
-  Tails,
-} from './tails';
 import * as HistoryAPI from './history/history';
 import { BaseHistory, History } from './history/history';
 import { APIPromise } from '../../../../core/api-promise';
@@ -205,7 +196,6 @@ export class BaseDeployments extends APIResource {
 }
 export class Deployments extends BaseDeployments {
   history: HistoryAPI.History = new HistoryAPI.History(this._client);
-  tails: TailsAPI.Tails = new TailsAPI.Tails(this._client);
 }
 
 export type DeploymentDeleteResponse = unknown;
@@ -357,8 +347,6 @@ export interface DeploymentRollbackParams {
 
 Deployments.History = History;
 Deployments.BaseHistory = BaseHistory;
-Deployments.Tails = Tails;
-Deployments.BaseTails = BaseTails;
 
 export declare namespace Deployments {
   export {
@@ -372,15 +360,6 @@ export declare namespace Deployments {
   };
 
   export { History as History, BaseHistory as BaseHistory };
-
-  export {
-    Tails as Tails,
-    BaseTails as BaseTails,
-    type TailCreateResponse as TailCreateResponse,
-    type TailDeleteResponse as TailDeleteResponse,
-    type TailCreateParams as TailCreateParams,
-    type TailDeleteParams as TailDeleteParams,
-  };
 }
 
 export { type DeploymentsV4PagePaginationArray };

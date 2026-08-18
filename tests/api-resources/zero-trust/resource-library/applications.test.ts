@@ -54,9 +54,10 @@ const runTests = (
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.resourceLibrary.applications.get(498, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.zeroTrust.resourceLibrary.applications.get(
+      '0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,9 +68,10 @@ const runTests = (
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.resourceLibrary.applications.get(498, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.zeroTrust.resourceLibrary.applications.get(
+      '0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 };
 describe('resource applications', () => runTests(client));

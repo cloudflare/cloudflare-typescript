@@ -31,8 +31,7 @@ export class BaseBrowser extends APIResource {
   ] as const);
 
   /**
-   * Acquires a browser and returns its session ID and websocket URL. Optionally
-   * accepts a JSON body with session guardrails to restrict outbound HTTP/S traffic.
+   * Acquire a new browser DevTools session
    *
    * @example
    * ```ts
@@ -43,10 +42,9 @@ export class BaseBrowser extends APIResource {
    * ```
    */
   create(params: BrowserCreateParams, options?: RequestOptions): APIPromise<BrowserCreateResponse> {
-    const { account_id, keep_alive, lab, liveViewUrlExpiresInMs, recording, targets, ...body } = params;
+    const { account_id, keep_alive, lab, recording, targets } = params;
     return this._client.post(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
-      query: { keep_alive, lab, liveViewUrlExpiresInMs, recording, targets },
-      body,
+      query: { keep_alive, lab, recording, targets },
       ...options,
     });
   }
@@ -96,10 +94,7 @@ export class BaseBrowser extends APIResource {
   }
 
   /**
-   * Acquires and establishes a WebSocket connection to a browser session. Session
-   * guardrails may be supplied in the `cf-brapi-guardrails` header as
-   * base64url-encoded JSON of the same `guardrails` object the POST body accepts
-   * (for example `{"allowedDomains":["*.example.com"]}`).
+   * Acquires and establishes a WebSocket connection to a browser session.
    *
    * @example
    * ```ts
@@ -109,17 +104,11 @@ export class BaseBrowser extends APIResource {
    * ```
    */
   launch(params: BrowserLaunchParams, options?: RequestOptions): APIPromise<void> {
-    const { account_id, 'cf-brapi-guardrails': cfBrapiGuardrails, ...query } = params;
+    const { account_id, ...query } = params;
     return this._client.get(path`/accounts/${account_id}/browser-rendering/devtools/browser`, {
       query,
       ...options,
-      headers: buildHeaders([
-        {
-          Accept: '*/*',
-          ...(cfBrapiGuardrails != null ? { 'cf-brapi-guardrails': cfBrapiGuardrails } : undefined),
-        },
-        options?.headers,
-      ]),
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
   }
 
@@ -303,12 +292,6 @@ export interface BrowserCreateParams {
   lab?: boolean;
 
   /**
-   * Query param: How long the live view URL remains valid, in milliseconds (max 60
-   * minutes). Only used when targets is true.
-   */
-  liveViewUrlExpiresInMs?: number;
-
-  /**
    * Query param
    */
   recording?: boolean;
@@ -317,28 +300,6 @@ export interface BrowserCreateParams {
    * Query param: Include browser targets in response.
    */
   targets?: boolean;
-
-  /**
-   * Body param
-   */
-  guardrails?: BrowserCreateParams.Guardrails;
-}
-
-export namespace BrowserCreateParams {
-  export interface Guardrails {
-    /**
-     * Hostname patterns, max 50. Supports exact hosts (example.com) or a single _
-     * wildcard anywhere. Prefer _.example.com (subdomain wildcard) over \*example.com
-     * (prefix wildcard) to avoid matching overbroad lookalikes like evilexample.com.
-     */
-    allowedDomains?: Array<string>;
-
-    /**
-     * Max 4 entries: curated preset names (common-cdns) and/or https URLs of
-     * newline-separated hostname lists.
-     */
-    allowedDomainSets?: Array<string>;
-  }
 }
 
 export interface BrowserDeleteParams {
@@ -390,12 +351,6 @@ export interface BrowserLaunchParams {
    * Query param
    */
   recording?: boolean;
-
-  /**
-   * Header param: Optional base64url-encoded JSON session guardrails (allowedDomains
-   * and allowedDomainSets)
-   */
-  'cf-brapi-guardrails'?: string;
 }
 
 export interface BrowserProtocolParams {

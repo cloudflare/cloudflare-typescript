@@ -76,7 +76,6 @@ export type AccountTagUpdateResponse =
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccessApplicationPolicy
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccessGroup
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccount
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAccountRuleset
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAIGateway
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAlertingPolicy
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectAlertingWebhook
@@ -89,26 +88,17 @@ export type AccountTagUpdateResponse =
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectGatewayList
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectGatewayRule
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectHealthcheck
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectImage
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectInfrastructureTarget
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectKVNamespace
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectLoadBalancer
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectLoadBalancerMonitor
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectLoadBalancerPool
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectManagedClientCertificate
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectPagesProject
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectQueue
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectR2Bucket
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectResourceShare
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectStreamLiveInput
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectStreamVideo
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectVectorizeIndex
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectWorker
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectWorkerRoute
   | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectWorkerVersion
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectZone
-  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectZoneRuleset;
+  | AccountTagUpdateResponse.ResourceTaggingTaggedResourceObjectZone;
 
 export namespace AccountTagUpdateResponse {
   /**
@@ -135,8 +125,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -172,8 +161,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -209,8 +197,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -241,44 +228,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'account';
-  }
-
-  /**
-   * Response for account_ruleset resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectAccountRuleset {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'account_ruleset';
   }
 
   /**
@@ -305,8 +259,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -337,8 +290,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -369,8 +321,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -401,8 +352,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -438,8 +388,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -470,8 +419,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -507,8 +455,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -544,8 +491,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -576,8 +522,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -613,8 +558,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -645,8 +589,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -677,49 +620,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'gateway_rule';
-  }
-
-  /**
-   * Response for healthcheck resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectHealthcheck {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'healthcheck';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
   }
 
   /**
@@ -746,44 +651,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'image';
-  }
-
-  /**
-   * Response for infrastructure_target resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectInfrastructureTarget {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'infrastructure_target';
   }
 
   /**
@@ -810,113 +682,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'kv_namespace';
-  }
-
-  /**
-   * Response for load_balancer resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectLoadBalancer {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'load_balancer';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
-  }
-
-  /**
-   * Response for load_balancer_monitor resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectLoadBalancerMonitor {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'load_balancer_monitor';
-  }
-
-  /**
-   * Response for load_balancer_pool resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectLoadBalancerPool {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'load_balancer_pool';
   }
 
   /**
@@ -943,8 +713,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -954,38 +723,6 @@ export namespace AccountTagUpdateResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
-  }
-
-  /**
-   * Response for pages_project resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectPagesProject {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'pages_project';
   }
 
   /**
@@ -1012,8 +749,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1044,8 +780,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1076,8 +811,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1108,8 +842,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1140,44 +873,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'stream_video';
-  }
-
-  /**
-   * Response for vectorize_index resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectVectorizeIndex {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'vectorize_index';
   }
 
   /**
@@ -1204,49 +904,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'worker';
-  }
-
-  /**
-   * Response for worker_route resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectWorkerRoute {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'worker_route';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
   }
 
   /**
@@ -1273,8 +935,7 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1310,49 +971,11 @@ export namespace AccountTagUpdateResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'zone';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
-  }
-
-  /**
-   * Response for zone_ruleset resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectZoneRuleset {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'zone_ruleset';
 
     /**
      * Zone ID is required only for zone-level resources
@@ -1369,7 +992,6 @@ export type AccountTagGetResponse =
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAccessApplicationPolicy
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAccessGroup
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAccount
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAccountRuleset
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAIGateway
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAlertingPolicy
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectAlertingWebhook
@@ -1382,26 +1004,17 @@ export type AccountTagGetResponse =
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectDurableObjectNamespace
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectGatewayList
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectGatewayRule
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectHealthcheck
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectImage
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectInfrastructureTarget
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectKVNamespace
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectLoadBalancer
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectLoadBalancerMonitor
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectLoadBalancerPool
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectManagedClientCertificate
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectPagesProject
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectQueue
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectR2Bucket
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectResourceShare
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectStreamLiveInput
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectStreamVideo
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectVectorizeIndex
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectWorker
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectWorkerRoute
   | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectWorkerVersion
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectZone
-  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectZoneRuleset;
+  | AccountTagGetResponse.ResourceTaggingTaggedResourceObjectZone;
 
 export namespace AccountTagGetResponse {
   /**
@@ -1428,8 +1041,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1465,8 +1077,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1502,8 +1113,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1534,44 +1144,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'account';
-  }
-
-  /**
-   * Response for account_ruleset resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectAccountRuleset {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'account_ruleset';
   }
 
   /**
@@ -1598,8 +1175,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1630,8 +1206,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1662,8 +1237,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1694,8 +1268,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1731,8 +1304,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1763,8 +1335,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1800,8 +1371,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1837,8 +1407,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1869,8 +1438,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1906,8 +1474,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1938,8 +1505,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -1970,49 +1536,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'gateway_rule';
-  }
-
-  /**
-   * Response for healthcheck resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectHealthcheck {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'healthcheck';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
   }
 
   /**
@@ -2039,44 +1567,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'image';
-  }
-
-  /**
-   * Response for infrastructure_target resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectInfrastructureTarget {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'infrastructure_target';
   }
 
   /**
@@ -2103,113 +1598,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'kv_namespace';
-  }
-
-  /**
-   * Response for load_balancer resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectLoadBalancer {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'load_balancer';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
-  }
-
-  /**
-   * Response for load_balancer_monitor resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectLoadBalancerMonitor {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'load_balancer_monitor';
-  }
-
-  /**
-   * Response for load_balancer_pool resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectLoadBalancerPool {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'load_balancer_pool';
   }
 
   /**
@@ -2236,8 +1629,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -2247,38 +1639,6 @@ export namespace AccountTagGetResponse {
      * Zone ID is required only for zone-level resources
      */
     zone_id: string;
-  }
-
-  /**
-   * Response for pages_project resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectPagesProject {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'pages_project';
   }
 
   /**
@@ -2305,8 +1665,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -2337,8 +1696,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -2369,8 +1727,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -2401,8 +1758,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -2433,44 +1789,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'stream_video';
-  }
-
-  /**
-   * Response for vectorize_index resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectVectorizeIndex {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'vectorize_index';
   }
 
   /**
@@ -2497,49 +1820,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'worker';
-  }
-
-  /**
-   * Response for worker_route resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectWorkerRoute {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'worker_route';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
   }
 
   /**
@@ -2566,8 +1851,7 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
@@ -2603,49 +1887,11 @@ export namespace AccountTagGetResponse {
     name: string;
 
     /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
+     * Contains key-value pairs of tags.
      */
     tags: { [key: string]: string };
 
     type: 'zone';
-
-    /**
-     * Zone ID is required only for zone-level resources
-     */
-    zone_id: string;
-  }
-
-  /**
-   * Response for zone_ruleset resources
-   */
-  export interface ResourceTaggingTaggedResourceObjectZoneRuleset {
-    /**
-     * Identifies the unique resource.
-     */
-    id: string;
-
-    /**
-     * ETag identifier for optimistic concurrency control. Formatted as "v1:<hash>"
-     * where the hash is the base64url-encoded SHA-256 (truncated to 128 bits) of the
-     * tags map canonicalized using RFC 8785 (JSON Canonicalization Scheme). Clients
-     * should treat ETags as opaque strings and pass them back via the If-Match header
-     * on write operations.
-     */
-    etag: string;
-
-    /**
-     * Human-readable name of the resource.
-     */
-    name: string;
-
-    /**
-     * Contains key-value pairs of tags. Keys may contain at most 256 characters.
-     * Values may contain at most 1024 characters and may be empty for key-only tags.
-     */
-    tags: { [key: string]: string };
-
-    type: 'zone_ruleset';
 
     /**
      * Zone ID is required only for zone-level resources
@@ -2678,7 +1924,6 @@ export declare namespace AccountTagUpdateParams {
       | 'access_application'
       | 'access_group'
       | 'account'
-      | 'account_ruleset'
       | 'ai_gateway'
       | 'alerting_policy'
       | 'alerting_webhook'
@@ -2688,17 +1933,12 @@ export declare namespace AccountTagUpdateParams {
       | 'gateway_list'
       | 'gateway_rule'
       | 'image'
-      | 'infrastructure_target'
       | 'kv_namespace'
-      | 'load_balancer_monitor'
-      | 'load_balancer_pool'
-      | 'pages_project'
       | 'queue'
       | 'r2_bucket'
       | 'resource_share'
       | 'stream_live_input'
       | 'stream_video'
-      | 'vectorize_index'
       | 'worker'
       | 'worker_version';
 
@@ -2708,9 +1948,7 @@ export declare namespace AccountTagUpdateParams {
     worker_id: string;
 
     /**
-     * Body param: Contains key-value pairs of tags. Keys may contain at most 256
-     * characters. Values may contain at most 1024 characters and may be empty for
-     * key-only tags.
+     * Body param: Contains key-value pairs of tags.
      */
     tags?: { [key: string]: string };
 
@@ -2742,7 +1980,6 @@ export declare namespace AccountTagUpdateParams {
       | 'access_application'
       | 'access_group'
       | 'account'
-      | 'account_ruleset'
       | 'ai_gateway'
       | 'alerting_policy'
       | 'alerting_webhook'
@@ -2752,23 +1989,16 @@ export declare namespace AccountTagUpdateParams {
       | 'gateway_list'
       | 'gateway_rule'
       | 'image'
-      | 'infrastructure_target'
       | 'kv_namespace'
-      | 'load_balancer_monitor'
-      | 'load_balancer_pool'
-      | 'pages_project'
       | 'queue'
       | 'r2_bucket'
       | 'resource_share'
       | 'stream_live_input'
       | 'stream_video'
-      | 'vectorize_index'
       | 'worker';
 
     /**
-     * Body param: Contains key-value pairs of tags. Keys may contain at most 256
-     * characters. Values may contain at most 1024 characters and may be empty for
-     * key-only tags.
+     * Body param: Contains key-value pairs of tags.
      */
     tags?: { [key: string]: string };
 
@@ -2815,7 +2045,6 @@ export interface AccountTagGetParams {
     | 'access_application'
     | 'access_group'
     | 'account'
-    | 'account_ruleset'
     | 'ai_gateway'
     | 'alerting_policy'
     | 'alerting_webhook'
@@ -2825,17 +2054,12 @@ export interface AccountTagGetParams {
     | 'gateway_list'
     | 'gateway_rule'
     | 'image'
-    | 'infrastructure_target'
     | 'kv_namespace'
-    | 'load_balancer_monitor'
-    | 'load_balancer_pool'
-    | 'pages_project'
     | 'queue'
     | 'r2_bucket'
     | 'resource_share'
     | 'stream_live_input'
     | 'stream_video'
-    | 'vectorize_index'
     | 'worker'
     | 'worker_version';
 
