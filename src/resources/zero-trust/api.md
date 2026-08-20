@@ -2104,12 +2104,18 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationDeleteResponse</a></code>
 - <code><a href="./src/resources/zero-trust/resource-library/applications.ts">ApplicationGetResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts/{account_id}/resource-library/applications">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">create</a>({ ...params }) -> ApplicationCreateResponse</code>
+- <code title="patch /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">update</a>(id, { ...params }) -> ApplicationUpdateResponse</code>
 - <code title="get /accounts/{account_id}/resource-library/applications">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">delete</a>(id, { ...params }) -> ApplicationDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/resource-library/applications/{id}">client.zeroTrust.resourceLibrary.applications.<a href="./src/resources/zero-trust/resource-library/applications.ts">get</a>(id, { ...params }) -> ApplicationGetResponse</code>
 
 ### Categories

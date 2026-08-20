@@ -29,6 +29,58 @@ const parentPartialClient = createClient({
 const runTests = (
   client: PartialCloudflare<{ zeroTrust: { resourceLibrary: { applications: BaseApplications } } }>,
 ) => {
+  test('create: only required params', async () => {
+    const responsePromise = client.zeroTrust.resourceLibrary.applications.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      category_id: 12,
+      human_id: 'HR',
+      name: 'HR',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.zeroTrust.resourceLibrary.applications.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      category_id: 12,
+      human_id: 'HR',
+      name: 'HR',
+      hostnames: ['example.com', 'foo.com'],
+      ip_subnets: ['192.168.1.0/24', '10.0.0.0/8'],
+      port_protocols: ['tcp/80', 'tcp/443'],
+      support_domains: ['example.com', 'foo.com'],
+    });
+  });
+
+  test('update: only required params', async () => {
+    const responsePromise = client.zeroTrust.resourceLibrary.applications.update(498, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await client.zeroTrust.resourceLibrary.applications.update(498, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      hostnames: ['example.com', 'foo.com'],
+      ip_subnets: ['192.168.1.0/24', '10.0.0.0/8'],
+      port_protocols: ['tcp/80', 'tcp/443'],
+      support_domains: ['example.com', 'foo.com'],
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = client.zeroTrust.resourceLibrary.applications.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -50,6 +102,25 @@ const runTests = (
       offset: 0,
       order_by: 'order_by',
       search: 'xx',
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.zeroTrust.resourceLibrary.applications.delete(498, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.zeroTrust.resourceLibrary.applications.delete(498, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 

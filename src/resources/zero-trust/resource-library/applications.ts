@@ -14,6 +14,58 @@ export class BaseApplications extends APIResource {
   ] as const);
 
   /**
+   * Create a custom application for an account.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.resourceLibrary.applications.create(
+   *     {
+   *       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+   *       category_id: 12,
+   *       human_id: 'HR',
+   *       name: 'HR',
+   *     },
+   *   );
+   * ```
+   */
+  create(params: ApplicationCreateParams, options?: RequestOptions): APIPromise<ApplicationCreateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(path`/accounts/${account_id}/resource-library/applications`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ApplicationCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Replace the network matchers for a custom application and create a new version.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.resourceLibrary.applications.update(
+   *     498,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  update(
+    id: number,
+    params: ApplicationUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<ApplicationUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(path`/accounts/${account_id}/resource-library/applications/${id}`, {
+        body,
+        ...options,
+      }) as APIPromise<{ result: ApplicationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List applications with different filters.
    *
    * @example
@@ -36,6 +88,32 @@ export class BaseApplications extends APIResource {
       SinglePage<ApplicationListResponse>,
       { query, ...options },
     );
+  }
+
+  /**
+   * Delete a custom application and all of its versions.
+   *
+   * @example
+   * ```ts
+   * const application =
+   *   await client.zeroTrust.resourceLibrary.applications.delete(
+   *     498,
+   *     { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+   *   );
+   * ```
+   */
+  delete(
+    id: number,
+    params: ApplicationDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ApplicationDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        path`/accounts/${account_id}/resource-library/applications/${id}`,
+        options,
+      ) as APIPromise<{ result: ApplicationDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -67,6 +145,190 @@ export class BaseApplications extends APIResource {
 export class Applications extends BaseApplications {}
 
 export type ApplicationListResponsesSinglePage = SinglePage<ApplicationListResponse>;
+
+export interface ApplicationCreateResponse {
+  /**
+   * Returns the application ID.
+   */
+  id: number;
+
+  /**
+   * Confidence score for the application. Returns -1 when no score is available.
+   */
+  application_confidence_score: number;
+
+  /**
+   * Returns the application source.
+   */
+  application_source: string;
+
+  /**
+   * Returns the application type.
+   */
+  application_type: string;
+
+  /**
+   * Returns the application type description.
+   */
+  application_type_description: string;
+
+  /**
+   * Returns the category ID.
+   */
+  category_id: number;
+
+  /**
+   * Returns the application creation time.
+   */
+  created_at: string;
+
+  /**
+   * GenAI score for the application. Returns -1 when no score is available.
+   */
+  gen_ai_score: number;
+
+  /**
+   * Hostnames matched by the application.
+   */
+  hostnames: Array<string>;
+
+  /**
+   * Returns the human readable ID.
+   */
+  human_id: string;
+
+  /**
+   * IP subnets matched by the application.
+   */
+  ip_subnets: Array<string>;
+
+  /**
+   * Returns the application name.
+   */
+  name: string;
+
+  /**
+   * Port and protocol pairs matched by the application.
+   */
+  port_protocols: Array<string>;
+
+  /**
+   * Support domains matched by the application.
+   */
+  support_domains: Array<string>;
+
+  /**
+   * Cloudflare products that support this application.
+   */
+  supported: Array<'GATEWAY' | 'ACCESS' | 'CASB'>;
+
+  /**
+   * Returns the application update time.
+   */
+  updated_at: string;
+
+  /**
+   * Returns the application version.
+   */
+  version: string;
+
+  /**
+   * Returns the score composition breakdown for the application.
+   */
+  application_score_composition?: unknown | null;
+}
+
+export interface ApplicationUpdateResponse {
+  /**
+   * Returns the application ID.
+   */
+  id: number;
+
+  /**
+   * Confidence score for the application. Returns -1 when no score is available.
+   */
+  application_confidence_score: number;
+
+  /**
+   * Returns the application source.
+   */
+  application_source: string;
+
+  /**
+   * Returns the application type.
+   */
+  application_type: string;
+
+  /**
+   * Returns the application type description.
+   */
+  application_type_description: string;
+
+  /**
+   * Returns the category ID.
+   */
+  category_id: number;
+
+  /**
+   * Returns the application creation time.
+   */
+  created_at: string;
+
+  /**
+   * GenAI score for the application. Returns -1 when no score is available.
+   */
+  gen_ai_score: number;
+
+  /**
+   * Hostnames matched by the application.
+   */
+  hostnames: Array<string>;
+
+  /**
+   * Returns the human readable ID.
+   */
+  human_id: string;
+
+  /**
+   * IP subnets matched by the application.
+   */
+  ip_subnets: Array<string>;
+
+  /**
+   * Returns the application name.
+   */
+  name: string;
+
+  /**
+   * Port and protocol pairs matched by the application.
+   */
+  port_protocols: Array<string>;
+
+  /**
+   * Support domains matched by the application.
+   */
+  support_domains: Array<string>;
+
+  /**
+   * Cloudflare products that support this application.
+   */
+  supported: Array<'GATEWAY' | 'ACCESS' | 'CASB'>;
+
+  /**
+   * Returns the application update time.
+   */
+  updated_at: string;
+
+  /**
+   * Returns the application version.
+   */
+  version: string;
+
+  /**
+   * Returns the score composition breakdown for the application.
+   */
+  application_score_composition?: unknown | null;
+}
 
 export interface ApplicationListResponse {
   /**
@@ -160,6 +422,8 @@ export interface ApplicationListResponse {
   application_score_composition?: unknown | null;
 }
 
+export type ApplicationDeleteResponse = unknown;
+
 export interface ApplicationGetResponse {
   /**
    * Returns the application ID.
@@ -252,6 +516,75 @@ export interface ApplicationGetResponse {
   application_score_composition?: unknown | null;
 }
 
+export interface ApplicationCreateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Returns the category ID.
+   */
+  category_id: number;
+
+  /**
+   * Body param: Returns the human readable ID.
+   */
+  human_id: string;
+
+  /**
+   * Body param: Returns the application name.
+   */
+  name: string;
+
+  /**
+   * Body param: Hostnames matched by the application.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * Body param: IP subnets matched by the application.
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Body param: Port and protocol pairs matched by the application.
+   */
+  port_protocols?: Array<string>;
+
+  /**
+   * Body param: Support domains matched by the application.
+   */
+  support_domains?: Array<string>;
+}
+
+export interface ApplicationUpdateParams {
+  /**
+   * Path param: Account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: Hostnames matched by the application.
+   */
+  hostnames?: Array<string>;
+
+  /**
+   * Body param: IP subnets matched by the application.
+   */
+  ip_subnets?: Array<string>;
+
+  /**
+   * Body param: Port and protocol pairs matched by the application.
+   */
+  port_protocols?: Array<string>;
+
+  /**
+   * Body param: Support domains matched by the application.
+   */
+  support_domains?: Array<string>;
+}
+
 export interface ApplicationListParams {
   /**
    * Path param: Account ID.
@@ -301,6 +634,13 @@ export interface ApplicationListParams {
   search?: string;
 }
 
+export interface ApplicationDeleteParams {
+  /**
+   * Account ID.
+   */
+  account_id: string;
+}
+
 export interface ApplicationGetParams {
   /**
    * Account ID.
@@ -310,10 +650,16 @@ export interface ApplicationGetParams {
 
 export declare namespace Applications {
   export {
+    type ApplicationCreateResponse as ApplicationCreateResponse,
+    type ApplicationUpdateResponse as ApplicationUpdateResponse,
     type ApplicationListResponse as ApplicationListResponse,
+    type ApplicationDeleteResponse as ApplicationDeleteResponse,
     type ApplicationGetResponse as ApplicationGetResponse,
     type ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
+    type ApplicationCreateParams as ApplicationCreateParams,
+    type ApplicationUpdateParams as ApplicationUpdateParams,
     type ApplicationListParams as ApplicationListParams,
+    type ApplicationDeleteParams as ApplicationDeleteParams,
     type ApplicationGetParams as ApplicationGetParams,
   };
 }

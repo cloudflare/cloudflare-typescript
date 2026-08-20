@@ -1019,6 +1019,8 @@ client.parents.children.retrieve('c_456', { parent_id: 'p_123' });
 - `client.zeroTrust.riskScoring.integrations.delete()`
 - `client.zeroTrust.riskScoring.integrations.get()`
 - `client.zeroTrust.riskScoring.integrations.references.get()`
+- `client.zeroTrust.resourceLibrary.applications.update()`
+- `client.zeroTrust.resourceLibrary.applications.delete()`
 - `client.zeroTrust.resourceLibrary.applications.get()`
 - `client.zeroTrust.resourceLibrary.categories.get()`
 - `client.turnstile.widgets.update()`

@@ -3,11 +3,17 @@
 import { APIResource } from '../../../core/resource';
 import * as ApplicationsAPI from './applications';
 import {
+  ApplicationCreateParams,
+  ApplicationCreateResponse,
+  ApplicationDeleteParams,
+  ApplicationDeleteResponse,
   ApplicationGetParams,
   ApplicationGetResponse,
   ApplicationListParams,
   ApplicationListResponse,
   ApplicationListResponsesSinglePage,
+  ApplicationUpdateParams,
+  ApplicationUpdateResponse,
   Applications,
   BaseApplications,
 } from './applications';
@@ -42,10 +48,16 @@ export declare namespace ResourceLibrary {
   export {
     Applications as Applications,
     BaseApplications as BaseApplications,
+    type ApplicationCreateResponse as ApplicationCreateResponse,
+    type ApplicationUpdateResponse as ApplicationUpdateResponse,
     type ApplicationListResponse as ApplicationListResponse,
+    type ApplicationDeleteResponse as ApplicationDeleteResponse,
     type ApplicationGetResponse as ApplicationGetResponse,
     type ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
+    type ApplicationCreateParams as ApplicationCreateParams,
+    type ApplicationUpdateParams as ApplicationUpdateParams,
     type ApplicationListParams as ApplicationListParams,
+    type ApplicationDeleteParams as ApplicationDeleteParams,
     type ApplicationGetParams as ApplicationGetParams,
   };
 
