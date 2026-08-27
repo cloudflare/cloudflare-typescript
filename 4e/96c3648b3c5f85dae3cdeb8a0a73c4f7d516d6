@@ -1,0 +1,33 @@
+.gitlab-ci.yml
+  s_7fb3048ded12b4::t_c085adf59b596f 5-10,13,23,44-68
+bin/publish-npm
+  s_7fb3048ded12b4::t_e17a95b2807c83 59
+package-lock.json
+  s_7fb3048ded12b4::t_d1c4512c12f712 1-6235
+src/client.ts
+  s_7fb3048ded12b4::t_e22d7ba819cc0e 266-272,290,311,315,329,365,385,916
+src/resources/workers/observability/queries.ts
+  s_7fb3048ded12b4::t_df891f303d3b10 100,145,155,352,397,407,600,645,655
+src/resources/workers/observability/shared-queries.ts
+  s_7fb3048ded12b4::t_45b4041b697324 240,285,295,1741,1793,1820
+src/resources/workers/observability/telemetry.ts
+  s_7fb3048ded12b4::t_e03ab95af3bf06 328,373,383,2282,2334,2361
+src/resources/workflows/versions.ts
+  s_7fb3048ded12b4::t_9ba3d5135dc7e1 228,554-557,559-563,565-566
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4e96c3648b3c5f85dae3cdeb8a0a73c4f7d516d6",
+  "prompts": {},
+  "sessions": {
+    "s_7fb3048ded12b4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc5c6f082ffesJ9KoPP8x4k36E",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Vaishak Dinesh <vaishak@cloudflare.com>"
+    }
+  }
+}
