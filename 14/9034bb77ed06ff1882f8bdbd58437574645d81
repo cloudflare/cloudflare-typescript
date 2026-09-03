@@ -1,0 +1,23 @@
+src/client.ts
+  s_98344e4d74a5ff::t_90c05921c2f5af 329
+  s_98344e4d74a5ff::t_2440dd2833a024 15
+  s_98344e4d74a5ff::t_2e6564c53a433e 916
+  s_98344e4d74a5ff::t_a11ec8cb1ea4de 315
+  s_98344e4d74a5ff::t_32dce9fe7456f6 268,270
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "149034bb77ed06ff1882f8bdbd58437574645d81",
+  "prompts": {},
+  "sessions": {
+    "s_98344e4d74a5ff": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0036d20fcffeLkIJmqdVEa1EYK",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}

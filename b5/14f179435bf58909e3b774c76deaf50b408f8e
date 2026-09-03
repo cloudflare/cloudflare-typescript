@@ -1,0 +1,269 @@
+.stats.yml
+  s_7fb3048ded12b4::t_63fe569341870b 1
+MIGRATION.md
+  s_7fb3048ded12b4::t_6ef3ca69326536 360
+package-lock.json
+  s_7fb3048ded12b4::t_3ccc2e664814aa 1-6235
+package.json
+  s_7fb3048ded12b4::t_063c3f73b9f903 31
+scripts/detect-breaking-changes
+  s_7fb3048ded12b4::t_6637919e6cd12b 13,257,327
+scripts/mock
+  s_7fb3048ded12b4::t_7840913f887299 14,28,33,52
+scripts/test
+  s_7fb3048ded12b4::t_630ee3f23de9d9 13,30,46
+src/resources/abuse-reports/mitigations.ts
+  s_7fb3048ded12b4::t_2a3f7bb9e1860a 105-125,156-176,221,223-243
+src/resources/accounts/api.md
+  s_7fb3048ded12b4::t_6259316ae540db 42,46-47
+src/resources/accounts/logs/audit.ts
+  s_7fb3048ded12b4::t_e70e52a52b73e7 208,402,727-728
+src/resources/accounts/subscriptions.ts
+  s_7fb3048ded12b4::t_a7ec5aa0f6d67d 3-100
+src/resources/ai-gateway/billing/billing.ts
+  s_7fb3048ded12b4::t_23df817d11bcfa 151,153,155,157
+src/resources/ai-gateway/billing/topup/config.ts
+  s_7fb3048ded12b4::t_b21a222de595d5 85,87,89,91
+src/resources/ai-security/ai-security.ts
+  s_7fb3048ded12b4::t_05aff24519ea20 20-22,41
+src/resources/ai-security/custom-topics.ts
+  s_7fb3048ded12b4::t_0e592ac7b480a3 10,12-14,16,37
+src/resources/billing/api.md
+  s_7fb3048ded12b4::t_82795928a28e15 7,11,17-19,23-25
+src/resources/billing/profiles.ts
+  s_7fb3048ded12b4::t_284cf09259ea2d 3-106
+src/resources/cloudforce-one/threat-events/tags/tags.ts
+  s_7fb3048ded12b4::t_2d38740b09106f 118-119,198,209,217,225,233,245,253,261,269,277,283,291,326-327,406,417,425,433,441,453,461,469,477,485,491,499,522-523,602,613,621,629,637,649,657,665,673,681,687,695,721-722,824,826,835,843,851,859,873,881,889,897,905,913,1042-1043,1149,1163,1171,1179,1187,1201,1209,1217,1225,1233,1241
+src/resources/connectivity/directory/services.ts
+  s_7fb3048ded12b4::t_8ccb9ce0d6fb1d 106
+src/resources/containers/api.md
+  s_7fb3048ded12b4::t_cf452bcefc9ab3 43-50
+src/resources/containers/applications/rollouts.ts
+  s_7fb3048ded12b4::t_8661d74e1cc337 158-167,202-208,227-250,284-307,454-463,498-504,523-546,580-603,765,771-773,816-825,860-866,885-908,942-965
+src/resources/containers/applications/versions.ts
+  s_7fb3048ded12b4::t_d793db34e48df7 67-76,111-117,136-159,193-216
+src/resources/containers/registries/credentials.ts
+  s_7fb3048ded12b4::t_d8befdc306cbb8 17-21,73-76,78,81,83
+src/resources/content-scanning/content-scanning.ts
+  s_7fb3048ded12b4::t_a9ab1664e5aa42 28,54,80,102,124
+src/resources/content-scanning/payloads.ts
+  s_7fb3048ded12b4::t_516acd24996ae1 10,43,68,102,106,111,117,121,126,132,136,141,161
+src/resources/content-scanning/settings.ts
+  s_7fb3048ded12b4::t_05d3e9fe842e13 10
+src/resources/dns-firewall/analytics/reports/bytimes.ts
+  s_7fb3048ded12b4::t_1c515195797439 17-24
+src/resources/dns-firewall/analytics/reports/reports.ts
+  s_7fb3048ded12b4::t_a6a02bcf2802d6 21-28
+src/resources/dns/analytics/reports/bytimes.ts
+  s_7fb3048ded12b4::t_5787e7bbb0e1e6 16-22
+src/resources/dns/analytics/reports/reports.ts
+  s_7fb3048ded12b4::t_fa397fc4e215f1 20-25
+src/resources/dns/records.ts
+  s_7fb3048ded12b4::t_3cf20ffc29ada1 3024-3028,3054-3070,3122-3126,3152-3168,6521-6527,6619-6625,7085-7089,7117-7133,8878-8884,9248-9252,9280-9296,11041-11047,11792-11796,11824-11840,13585-13591
+src/resources/iam/user-groups/user-groups.ts
+  s_7fb3048ded12b4::t_7581ac8fda3d70 249,251,254,256,259,264,301,406,408,411,413,416,421,458,563,565,568,570,573,578,615,727,729,732,734,737,742,779,820,844,884,908
+src/resources/leaked-credential-checks/detections.ts
+  s_7fb3048ded12b4::t_659147a9d0b9dc 11,32,58,83,109
+src/resources/leaked-credential-checks/leaked-credential-checks.ts
+  s_7fb3048ded12b4::t_efad8a691aead1 27,51
+src/resources/magic-transit/cf-interconnects.ts
+  s_7fb3048ded12b4::t_89034d54833998 186,351,518,683,840
+src/resources/organizations/logs/audit.ts
+  s_7fb3048ded12b4::t_8ac0c201519f99 131,300,487-488
+src/resources/radar/ai/bots/bots.ts
+  s_7fb3048ded12b4::t_69040170c010c2 188,328,471
+src/resources/radar/ai/bots/summary.ts
+  s_7fb3048ded12b4::t_a0c05f31a3a4fd 120
+src/resources/radar/ai/inference/inference.ts
+  s_7fb3048ded12b4::t_70993e8acdfee9 168,305
+src/resources/radar/ai/inference/summary.ts
+  s_7fb3048ded12b4::t_73a5d112e9e3bc 136,266
+src/resources/radar/ai/inference/timeseries-groups/summary.ts
+  s_7fb3048ded12b4::t_f865286432e2db 143,286
+src/resources/radar/ai/markdown-for-agents.ts
+  s_7fb3048ded12b4::t_73c63cb3a44867 146,293
+src/resources/radar/ai/timeseries-groups.ts
+  s_7fb3048ded12b4::t_49d3fbadcf469e 204,344,487,630
+src/resources/radar/as112/as112.ts
+  s_7fb3048ded12b4::t_22445b7fa8e6c2 218,358,501
+src/resources/radar/as112/summary.ts
+  s_7fb3048ded12b4::t_d24c7ec2674bee 202,344,486,628,780,910
+src/resources/radar/as112/timeseries-groups.ts
+  s_7fb3048ded12b4::t_e38135937229c5 211,354,497,640,787,930
+src/resources/radar/as112/top.ts
+  s_7fb3048ded12b4::t_7bf9cd5a387d61 194,335,476,617
+src/resources/radar/attacks/layer3/layer3.ts
+  s_7fb3048ded12b4::t_9d3cab6e42da4f 223,363,506
+src/resources/radar/attacks/layer3/summary.ts
+  s_7fb3048ded12b4::t_d6eeab2b03603d 216,373,535,665,807,959,1089
+src/resources/radar/attacks/layer3/timeseries-groups.ts
+  s_7fb3048ded12b4::t_10069f2c8d0b3c 230,381,534,677,822,971,1114
+src/resources/radar/attacks/layer3/top/locations.ts
+  s_7fb3048ded12b4::t_4cf1ed1ee0a791 144,284
+src/resources/radar/attacks/layer3/top/top.ts
+  s_7fb3048ded12b4::t_3d67224013f853 171,309,445
+src/resources/radar/attacks/layer7/layer7.ts
+  s_7fb3048ded12b4::t_9367c1dabd9bd2 239,376,519
+src/resources/radar/attacks/layer7/summary.ts
+  s_7fb3048ded12b4::t_744087bef6d44c 217,347,485,615,751,881,1011
+src/resources/radar/attacks/layer7/timeseries-groups.ts
+  s_7fb3048ded12b4::t_2d76511ee146c5 230,373,520,663,808,951,1094
+src/resources/radar/attacks/layer7/top/ases.ts
+  s_7fb3048ded12b4::t_77820ad02ce16b 126
+src/resources/radar/attacks/layer7/top/locations.ts
+  s_7fb3048ded12b4::t_f142ace5934d1b 148,288
+src/resources/radar/attacks/layer7/top/top.ts
+  s_7fb3048ded12b4::t_768d236eac0b3f 175,317,453
+src/resources/radar/bgp/bgp.ts
+  s_7fb3048ded12b4::t_076e74f775fb50 129
+src/resources/radar/bgp/ips/ips.ts
+  s_7fb3048ded12b4::t_46115fe5ba3387 137
+src/resources/radar/bots/bots.ts
+  s_7fb3048ded12b4::t_222c0caf9f99e6 306,446,589
+src/resources/radar/bots/web-crawlers.ts
+  s_7fb3048ded12b4::t_08695368367fbe 170,307
+src/resources/radar/ct/ct.ts
+  s_7fb3048ded12b4::t_4e6f38d34f5d03 217,413,564
+src/resources/radar/dns/dns.ts
+  s_7fb3048ded12b4::t_bfb25aef601407 250,390,533
+src/resources/radar/dns/summary.ts
+  s_7fb3048ded12b4::t_7c131cd481ae33 267,409,561,703,845,987,1129,1281,1411,1541
+src/resources/radar/dns/timeseries-groups.ts
+  s_7fb3048ded12b4::t_019c3f6836c55d 274,417,564,707,850,993,1136,1283,1426,1569
+src/resources/radar/dns/top.ts
+  s_7fb3048ded12b4::t_dbe083795a0e5d 140,281
+src/resources/radar/email/routing/routing.ts
+  s_7fb3048ded12b4::t_ae71bae2e79159 189,326
+src/resources/radar/email/routing/summary.ts
+  s_7fb3048ded12b4::t_5fd980853ef20b 206,336,466,596,738,880
+src/resources/radar/email/routing/timeseries-groups.ts
+  s_7fb3048ded12b4::t_2c57f5ab107f06 215,352,489,626,769,912
+src/resources/radar/email/security/security.ts
+  s_7fb3048ded12b4::t_5e23a29f51bf00 222,359
+src/resources/radar/email/security/summary.ts
+  s_7fb3048ded12b4::t_969fe3aadb63ce 254,384,514,644,786,928,1058,1200,1352
+src/resources/radar/email/security/timeseries-groups.ts
+  s_7fb3048ded12b4::t_9739bcad539d96 265,402,539,676,819,962,1099,1242,1389
+src/resources/radar/email/security/top/tlds/malicious.ts
+  s_7fb3048ded12b4::t_b65431d0fe60ee 129
+src/resources/radar/email/security/top/tlds/spam.ts
+  s_7fb3048ded12b4::t_044e580e821adc 129
+src/resources/radar/email/security/top/tlds/spoof.ts
+  s_7fb3048ded12b4::t_0e4cf83167e076 129
+src/resources/radar/email/security/top/tlds/tlds.ts
+  s_7fb3048ded12b4::t_14a609e5f989ff 131
+src/resources/radar/http/ases/ases.ts
+  s_7fb3048ded12b4::t_c95584dc022628 145
+src/resources/radar/http/ases/bot-class.ts
+  s_7fb3048ded12b4::t_3234428ba7f2f8 129
+src/resources/radar/http/ases/browser-family.ts
+  s_7fb3048ded12b4::t_3fdfd4e148ae26 128
+src/resources/radar/http/ases/device-type.ts
+  s_7fb3048ded12b4::t_6fd3d784a3bd68 128
+src/resources/radar/http/ases/http-method.ts
+  s_7fb3048ded12b4::t_f281a2d7f2fbd0 128
+src/resources/radar/http/ases/http-protocol.ts
+  s_7fb3048ded12b4::t_c95f31d54678d8 128
+src/resources/radar/http/ases/ip-version.ts
+  s_7fb3048ded12b4::t_ec6786e1235336 128
+src/resources/radar/http/ases/os.ts
+  s_7fb3048ded12b4::t_ce5453b693327d 126
+src/resources/radar/http/ases/tls-version.ts
+  s_7fb3048ded12b4::t_7d013a76769239 128
+src/resources/radar/http/http.ts
+  s_7fb3048ded12b4::t_5f97c4279fc417 261,401,544
+src/resources/radar/http/locations/bot-class.ts
+  s_7fb3048ded12b4::t_e35b811b336cdb 129
+src/resources/radar/http/locations/browser-family.ts
+  s_7fb3048ded12b4::t_d95878f34da4bb 129
+src/resources/radar/http/locations/device-type.ts
+  s_7fb3048ded12b4::t_2f569f32951e18 129
+src/resources/radar/http/locations/http-method.ts
+  s_7fb3048ded12b4::t_4b3c610c649036 129
+src/resources/radar/http/locations/http-protocol.ts
+  s_7fb3048ded12b4::t_38bb926c3b8603 129
+src/resources/radar/http/locations/ip-version.ts
+  s_7fb3048ded12b4::t_f9158ba8aafeed 127
+src/resources/radar/http/locations/locations.ts
+  s_7fb3048ded12b4::t_dc0ead063a1009 148
+src/resources/radar/http/locations/os.ts
+  s_7fb3048ded12b4::t_f3d462b84be75f 128
+src/resources/radar/http/locations/tls-version.ts
+  s_7fb3048ded12b4::t_f132318dbd85fa 130
+src/resources/radar/http/summary.ts
+  s_7fb3048ded12b4::t_afcbd7aa909b53 237,379,526,668,815,957,1099,1241
+src/resources/radar/http/timeseries-groups.ts
+  s_7fb3048ded12b4::t_52343b0fde516b 274,419,562,705,852,997,1144,1289,1432,1577
+src/resources/radar/http/top.ts
+  s_7fb3048ded12b4::t_92b53cf637dd05 136,272
+src/resources/radar/leaked-credentials/leaked-credentials.ts
+  s_7fb3048ded12b4::t_2b69a4a99904e8 176,313
+src/resources/radar/leaked-credentials/summary.ts
+  s_7fb3048ded12b4::t_61d5bedac93903 139,281
+src/resources/radar/leaked-credentials/timeseries-groups.ts
+  s_7fb3048ded12b4::t_cfd9ccbbdbb4f2 147,292
+src/resources/radar/netflows/netflows.ts
+  s_7fb3048ded12b4::t_ba15ebc4771299 191,333,470,613
+src/resources/radar/netflows/top.ts
+  s_7fb3048ded12b4::t_9f069473ae1253 140,281
+src/resources/radar/post-quantum/origin.ts
+  s_7fb3048ded12b4::t_4ba04cf6cb136a 155,292
+src/resources/radar/quality/iqi.ts
+  s_7fb3048ded12b4::t_4d2f2cebf5e6cd 146,291
+src/resources/radar/quality/speed/speed.ts
+  s_7fb3048ded12b4::t_d163a731800a8a 164,294
+src/resources/radar/quality/speed/top.ts
+  s_7fb3048ded12b4::t_6f1089b7f548cc 143,295
+src/resources/radar/ranking/internet-services.ts
+  s_7fb3048ded12b4::t_1f8c6debec7cfb 182,312
+src/resources/radar/ranking/ranking.ts
+  s_7fb3048ded12b4::t_1479dffd9bb4ad 170,300
+src/resources/radar/robots-txt/top/top.ts
+  s_7fb3048ded12b4::t_d0a1d506c2165a 128
+src/resources/radar/robots-txt/top/user-agents.ts
+  s_7fb3048ded12b4::t_ea347b785efbeb 124
+src/resources/radar/tcp-resets-timeouts.ts
+  s_7fb3048ded12b4::t_7df75906811a58 146,314
+src/resources/radar/verified-bots/top.ts
+  s_7fb3048ded12b4::t_9b1975940f3ac5 134,277
+src/resources/schema-validation/settings/settings.ts
+  s_7fb3048ded12b4::t_1649bc1079cdcd 110,132,154
+src/resources/snippets/snippets.ts
+  s_7fb3048ded12b4::t_78d4675ff0824f 62
+src/resources/spectrum/analytics/aggregates/currents.ts
+  s_7fb3048ded12b4::t_cace3194049931 34,39,44,49
+src/resources/spectrum/analytics/events/bytimes.ts
+  s_7fb3048ded12b4::t_6f54214c7185b6 59
+src/resources/spectrum/analytics/events/summaries.ts
+  s_7fb3048ded12b4::t_17e8b87d780ea0 59
+src/resources/waiting-rooms/events/events.ts
+  s_7fb3048ded12b4::t_b9db7a8152c419 32-33,59-60,141-142
+src/resources/workflows/versions.ts
+  s_7fb3048ded12b4::t_9c0de91b543d2f 69,110
+src/resources/zero-trust/resource-library/applications.ts
+  s_7fb3048ded12b4::t_a155a79ff4b1a0 656-657
+tests/api-resources/accounts/subscriptions.test.ts
+  s_7fb3048ded12b4::t_a969652256dd84 1-59
+tests/api-resources/billing/profiles.test.ts
+  s_7fb3048ded12b4::t_991c864372189d 11,13,24
+tests/api-resources/containers/instances.test.ts
+  s_7fb3048ded12b4::t_23c1e986e10eb3 11-13,23-24
+yarn.lock
+  s_7fb3048ded12b4::t_6519b97530dfc6 7,12,15-18,20,28-31,35-36,43,52,55,57,78,89,100,105,113,122,127,132,137,142,150,157,164,171,178,185,192,199,206,213,220,227,234,241,248,255,262,269,276,285,298,306,311,316,321,326,328,335,340,349,356,363,378,383,388,396,401,409,414,419,424,435,440,452,486,493,503,510,518,530,540,570,577,586,596,606,625,627,639,647,655,658,660,663,665,673,679,681,686,694,699,704,711,718,723,728,733,738,743,748,753,758,763,766,768,787,792,801,808,813,818,823,828,839,846,854,861,866,873,878,885,892,900,903,905,912,917,922,927,929,942,944,955,963,973,978,992,1002,1010,1015,1018,1020,1025,1033,1043,1050,1057,1062,1067,1074,1079,1084,1092,1097,1104,1107,1109,1122,1133,1143,1164,1172,1177,1181-1183,1189,1194,1196,1207,1214,1221,1226,1231,1236,1241,1246,1254,1259,1264,1267,1269,1274,1279,1291,1300,1309,1318,1323,1328,1335,1340,1345,1350,1363,1368,1375,1377,1384,1389,1394,1399,1404,1409,1414,1419,1424,1429,1434,1439,1444,1446,1451,1456,1461,1466,1472,1474,1479,1484,1487,1489,1527,1529,1538,1543,1550,1557,1562,1567,1582,1587,1598,1603,1612,1614,1619,1624,1631,1636-1639,1643,1650,1655-1663,1665,1673,1681,1689,1694,1699,1704,1709,1714,1719,1724,1729,1734,1741,1748,1760,1771,1776,1781,1786,1791,1798,1803,1808,1813,1820,1827,1832,1840,1848,1853,1858,1864,1866,1871,1876,1883,1888,1893,1898,1905,1910,1915,1920,1925,1936,1947,1956,1965,1973,1982,2008,2025,2053,2063,2070,2081,2093,2098,2117,2125,2135,2150,2159,2164,2169,2175,2177,2192,2219,2247,2273,2285,2297,2311,2319,2321,2331,2336,2344,2351,2356,2361,2366,2371,2376,2381,2386,2393,2398,2403,2411,2416,2423,2430,2435,2438-2441,2445,2452,2457,2459,2464,2471,2482,2484,2489,2494,2499,2507,2510,2512,2519,2524,2529,2534,2543,2548,2558,2563,2568,2573,2580,2585,2595,2602,2607,2614,2621,2633,2640,2647,2654,2661,2668,2675,2680,2687,2697,2704,2709,2714,2719,2724,2729,2734,2739,2744,2749,2756,2761,2766,2775,2783,2792,2797,2802,2807,2812,2821,2826,2833,2838,2843,2848,2857,2862,2869,2876,2881,2884,2886,2889-2892,2894,2896,2901,2908,2913,2918,2923,2930,2935,2943,2948,2953,2958-2964,2967,2975,2982,2991,2998,3003,3008,3013,3018,3023,3030,3037,3045,3050,3059,3066,3073,3078,3085,3090,3102,3104,3123-3124,3139,3148,3153,3160,3165,3170,3177,3179,3182-3185,3189,3194,3199,3207,3214,3219,3224,3233,3238,3245,3252,3261,3266,3274,3279,3284,3289,3294,3307,3320,3325
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b514f179435bf58909e3b774c76deaf50b408f8e",
+  "prompts": {},
+  "sessions": {
+    "s_7fb3048ded12b4": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fc5c6f082ffesJ9KoPP8x4k36E",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Vaishak Dinesh <vaishak@cloudflare.com>"
+    }
+  }
+}
