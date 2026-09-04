@@ -1,0 +1,27 @@
+src/client.ts
+  s_f94aacad13a913::t_52fd86b2835c70 16
+  s_f94aacad13a913::t_df8ca30c6bfbac 268,270
+  s_f94aacad13a913::t_b8f2141e3fd68b 332-337
+  s_f94aacad13a913::t_d73191c4dab636 15,315,329,922
+src/version.ts
+  s_f94aacad13a913::t_d73191c4dab636 2-4
+tests/index.test.ts
+  s_f94aacad13a913::t_976346c9c7d197 246-279,304-305
+  s_f94aacad13a913::t_9bd946b5e4413a 280-303
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "376fb11cfaedab6b1ff249036403dc59e1fa1ded",
+  "prompts": {},
+  "sessions": {
+    "s_f94aacad13a913": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_06ebb99a7ffevAE92M56IYSF4c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": null
+    }
+  }
+}

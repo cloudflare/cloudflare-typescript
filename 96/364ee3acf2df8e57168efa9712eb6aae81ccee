@@ -1,0 +1,21 @@
+src/version.ts
+  s_f94aacad13a913::t_d73191c4dab636 2-4
+src/client.ts
+  s_f94aacad13a913::t_d73191c4dab636 15,314,328,915
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "96364ee3acf2df8e57168efa9712eb6aae81ccee",
+  "prompts": {},
+  "sessions": {
+    "s_f94aacad13a913": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_06ebb99a7ffevAE92M56IYSF4c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Musa Jundi <musa@cloudflare.com>"
+    }
+  }
+}

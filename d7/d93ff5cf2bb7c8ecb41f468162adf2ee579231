@@ -1,0 +1,29 @@
+tests/index.test.ts
+  s_f94aacad13a913::t_c89caab4e1e0ba 246-305
+src/client.ts
+  s_f94aacad13a913::t_6113d005dbce1a 15-16
+  s_f94aacad13a913::t_e580e96d3487b1 376
+  s_f94aacad13a913::t_b6e165973cedb1 396
+  s_f94aacad13a913::t_4017c9bbf37543 272-278,289
+  s_f94aacad13a913::t_22ef0153cf8e83 927
+  s_f94aacad13a913::t_da9b2b035cd33a 320,334,337-341
+  s_f94aacad13a913::t_97ec49b01fcc36 342
+src/version.ts
+  s_f94aacad13a913::t_f431091caa0319 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d7d93ff5cf2bb7c8ecb41f468162adf2ee579231",
+  "prompts": {},
+  "sessions": {
+    "s_f94aacad13a913": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_06ebb99a7ffevAE92M56IYSF4c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Musa Jundi <musa@cloudflare.com>"
+    }
+  }
+}

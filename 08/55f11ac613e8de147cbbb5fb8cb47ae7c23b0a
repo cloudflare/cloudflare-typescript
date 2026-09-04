@@ -1,0 +1,109 @@
+.gitlab-ci.yml
+  s_9ac76fe9a777ec::t_30bfced5d91e67 5-10,13,23,44-68
+bin/publish-npm
+  s_9ac76fe9a777ec::t_5287d4b72f7f4c 59
+package-lock.json
+  s_9ac76fe9a777ec::t_0d1e5a4288ed3a 1-6235
+src/client.ts
+  s_9ac76fe9a777ec::t_e3a529b8f51663 265-271,289,310,314,328,364,384,915
+src/resources/aisearch/namespaces/namespaces.ts
+  s_9ac76fe9a777ec::t_1d8b821fb06c87 192
+src/resources/api-gateway/schemas.ts
+  s_9ac76fe9a777ec::t_bc5558bf6a9ead 15
+src/resources/api-gateway/user-schemas/user-schemas.ts
+  s_9ac76fe9a777ec::t_7ba75650364ab7 41
+src/resources/browser-rendering/devtools/browser/browser.ts
+  s_9ac76fe9a777ec::t_d08b88c7fa2f0d 34,45,47
+src/resources/browser-rendering/devtools/browser/targets.ts
+  s_9ac76fe9a777ec::t_9bc4e275d2ce82 29,32,54,57,284
+src/resources/cloud-connector/rules.ts
+  s_9ac76fe9a777ec::t_56fd874d534e33 15,30
+src/resources/dns/records.ts
+  s_9ac76fe9a777ec::t_49b84aafbfd798 42,44-46,78,163,165-167,195,240,242-244,3727-3747,3750,3762,3764,3787,3799,3801,3824,3836,3838,3861,3873,3875,3898,3910,3912,3935,3958,3960,3986,4016,4039,4051,4053,4076,4088,4090,4113,4125,4127,4150,4162,4164,4187,4199,4201,4224,4236,4238,4261,4273,4275,4298,4310,4312,4335,4347,4349,4372,4384,4386,4409,4421,4423,4446,4458,4460,4483,4495,4497,4509-4512,4514-4517,4520,4532,4534,4557,4569,4571,12322
+src/resources/email-auth/dmarc-reports.ts
+  s_9ac76fe9a777ec::t_7f9ceba263a424 68,83,113,129,149,437,452,482,498,518
+src/resources/email-routing/rules/rules.ts
+  s_9ac76fe9a777ec::t_b314d146e2b46c 341-349,351,354-355,357,360,362
+src/resources/email-security/investigate/bulk/bulk.ts
+  s_9ac76fe9a777ec::t_b885d6b4a752ac 193-194,311-312,433-434,541-542
+src/resources/email-security/investigate/bulk/cancel.ts
+  s_9ac76fe9a777ec::t_75939a0be584be 105-106
+src/resources/email-security/investigate/investigate.ts
+  s_9ac76fe9a777ec::t_cbfdf21f0bca09 142-143,166,208-210,273-274,402-403,426,468-470,533-534
+src/resources/email-security/investigate/move.ts
+  s_9ac76fe9a777ec::t_aa2f967b7fb861 95-96,106,143-144,154,248-249
+src/resources/email-security/investigate/release.ts
+  s_9ac76fe9a777ec::t_d389ae83599383 60
+src/resources/email-security/investigate/trace.ts
+  s_9ac76fe9a777ec::t_99e3e93c3f320a 66,90
+src/resources/email-security/phishguard/reports.ts
+  s_9ac76fe9a777ec::t_6347402ccd40ac 74,92
+src/resources/email-security/settings/allow-policies.ts
+  s_9ac76fe9a777ec::t_e8bbe1e66f22ca 174-175,194-195,202-203,208-209,262-263,282-283,290-291,296-297,357-358,377-378,385-386,391-392,445-446,465-466,473-474,479-480,586-587,592-593,598-599,698-699,709-710,715-716
+src/resources/email-security/settings/block-senders.ts
+  s_9ac76fe9a777ec::t_b329a4cea17304 174-175,221-222,275-276,322-323
+src/resources/email-security/settings/domains.ts
+  s_9ac76fe9a777ec::t_37ef80de37f47c 186-187,282-283,364-365
+src/resources/email-security/settings/impersonation-registry.ts
+  s_9ac76fe9a777ec::t_27b78e99324044 183,190-191,222,229-230,268,275-276,307,314-315,363,434
+src/resources/email-security/settings/sending-domain-restrictions.ts
+  s_9ac76fe9a777ec::t_159d7bb8febc2b 191-192,225-226,266-267,300-301
+src/resources/email-security/settings/trusted-domains.ts
+  s_9ac76fe9a777ec::t_3cb0b9253c0735 193-194,231-232,276-277,314-315
+src/resources/email-security/settings/url-ignore-patterns.ts
+  s_9ac76fe9a777ec::t_91c602780f6e99 182-183,213-214,251-252,282-283
+src/resources/email-security/submissions.ts
+  s_9ac76fe9a777ec::t_1270f8ffcc71cb 81
+src/resources/images/v1/blobs.ts
+  s_9ac76fe9a777ec::t_d8b45555bf18bb 17-18
+src/resources/images/v1/keys.ts
+  s_9ac76fe9a777ec::t_a2878544cf698c 16,40,59-60
+src/resources/images/v1/v1.ts
+  s_9ac76fe9a777ec::t_7db0b2582db484 46-48,106-107,127
+src/resources/images/v1/variants.ts
+  s_9ac76fe9a777ec::t_cc3ec42ae8d72b 16,43,62,87,120
+src/resources/images/v2/v2.ts
+  s_9ac76fe9a777ec::t_11c8535b93bfc4 20-22
+src/resources/rulesets/rules.ts
+  s_9ac76fe9a777ec::t_4f2acdd6d5ce56 10319,10321-10325,10327-10331,10334,10336-10340,10343,10345,10436,15300-15301,15303,15306,15308,15311,15313,15316,15318-15319,15321,15323,15325-15340,15442,15463,15468,15483,15498,15503,15511,15517-15547,15549,15689
+src/resources/rulesets/rulesets.ts
+  s_9ac76fe9a777ec::t_a98d03efe204ee 3937,3940,3942-3947,3949,3951
+src/resources/spectrum/analytics/aggregates/currents.ts
+  s_9ac76fe9a777ec::t_b36c3b36e2da7b 39,44,49,54
+src/resources/spectrum/analytics/events/bytimes.ts
+  s_9ac76fe9a777ec::t_f724890e27888a 67
+src/resources/spectrum/analytics/events/summaries.ts
+  s_9ac76fe9a777ec::t_a08431b37dc04c 67
+src/resources/workflows/versions.ts
+  s_9ac76fe9a777ec::t_459b17d9ef4c56 178,504-507,509-513,515-516
+src/resources/zero-trust/devices/fleet-status.ts
+  s_9ac76fe9a777ec::t_b1f84136709e6f 16-17
+src/resources/zero-trust/dex/fleet-status/devices.ts
+  s_9ac76fe9a777ec::t_c3f5c7ce9d9aa4 21
+src/resources/zero-trust/dex/fleet-status/fleet-status.ts
+  s_9ac76fe9a777ec::t_3471868c03c908 25,47
+src/resources/zero-trust/gateway/configurations/configurations.ts
+  s_9ac76fe9a777ec::t_8d32b063359dc6 543-545,685-687
+src/resources/zero-trust/gateway/locations.ts
+  s_9ac76fe9a777ec::t_ae154d7927b7f4 355-357,378-380,384-385,390,442-444,458-460,464-465,470,520-522,536-538,542-543,548
+tests/api-resources/browser-rendering/devtools/browser/targets.test.ts
+  s_9ac76fe9a777ec::t_bd2cbc681da8fa 49,70
+tests/api-resources/email-sending/email-sending.test.ts
+  s_9ac76fe9a777ec::t_3703cf94fb6479 50-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0855f11ac613e8de147cbbb5fb8cb47ae7c23b0a",
+  "prompts": {},
+  "sessions": {
+    "s_9ac76fe9a777ec": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0748e9747ffeqUK4ZhSMq4HYSm",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}

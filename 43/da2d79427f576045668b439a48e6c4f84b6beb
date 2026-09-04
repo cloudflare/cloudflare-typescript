@@ -1,0 +1,17 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "43da2d79427f576045668b439a48e6c4f84b6beb",
+  "prompts": {},
+  "sessions": {
+    "s_98344e4d74a5ff": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0036d20fcffeLkIJmqdVEa1EYK",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+package.json
+  s_568b99051dcfa0::t_4802638b28f4f9 9-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "8e77031223616160dc3f40d06b3c704ebe3a287b",
+  "prompts": {},
+  "sessions": {
+    "s_568b99051dcfa0": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fea6ffd8fffeCHDQ5jbwgwkGxE",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}

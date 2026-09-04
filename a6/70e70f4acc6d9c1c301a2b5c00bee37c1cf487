@@ -1,0 +1,40 @@
+CHANGELOG.md
+  s_7620dca64d2bfe::t_0e63b475f52126 88
+  s_55124b6bd372ea::t_86551f7fa30253 3-87,89-122
+src/version.ts
+  s_4fec3ba11ea903::t_b46dfee00de054 1
+package.json
+  s_4fec3ba11ea903::t_8d7c0fd0192abf 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a670e70f4acc6d9c1c301a2b5c00bee37c1cf487",
+  "prompts": {},
+  "sessions": {
+    "s_4fec3ba11ea903": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fef62014effem5olWJ2xEBjXGH",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    },
+    "s_55124b6bd372ea": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fefa76fbeffeF1LOmBtPmfqroL",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": null
+    },
+    "s_7620dca64d2bfe": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fef9117fcffejwnzKPnvIXjpxG",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null
+    }
+  }
+}

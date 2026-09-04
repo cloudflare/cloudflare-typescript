@@ -1,0 +1,19 @@
+.gitlab-ci.yml
+  s_6ac2f58561d27a::t_154558e8e85e80 23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "63bfaa5ca8832dc43094c67e4d4e1b193e3a5129",
+  "prompts": {},
+  "sessions": {
+    "s_6ac2f58561d27a": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_079915ecaffe7RGdrh718lIDhJ",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "rotem <rotem@cloudflare.com>"
+    }
+  }
+}
