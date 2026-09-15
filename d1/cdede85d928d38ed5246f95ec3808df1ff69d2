@@ -1,0 +1,14 @@
+src/resources/containers/api.md
+  h_5f12c8df3da73f 63-70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d1cdede85d928d38ed5246f95ec3808df1ff69d2",
+  "prompts": {},
+  "humans": {
+    "h_5f12c8df3da73f": {
+      "author": "Vaishak Dinesh <vaishak@cloudflare.com>"
+    }
+  }
+}
