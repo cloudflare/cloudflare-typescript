@@ -1,12 +1,40 @@
 #!/usr/bin/env node
 
 const { spawnSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
 
-// npx is a .cmd shim on Windows, which Node can only spawn through a shell.
-const shell = process.platform === 'win32';
+const commands = {
+  migrate: {
+    description: 'Run migrations to update to the latest major SDK version',
+    fn: (args) =>
+      npx([
+        '-y',
+        'https://github.com/stainless-api/migrate-ts/releases/download/0.0.2/stainless-api-migrate-0.0.2-6.tgz',
+        '--migrationConfig',
+        require.resolve('./migration-config.json'),
+        ...args,
+      ]),
+  },
+};
 
-function run(command, args) {
-  const result = spawnSync(command, args, { stdio: 'inherit', shell });
+// On Windows `npx` is a .cmd shim that Node can only spawn through a shell,
+// which does not quote arguments. Run npm's npx-cli.js with Node instead so
+// paths containing spaces survive.
+function findNpxCli() {
+  const candidates = [
+    process.env.npm_execpath && path.join(path.dirname(process.env.npm_execpath), 'npx-cli.js'),
+    path.join(path.dirname(process.execPath), 'node_modules', 'npm', 'bin', 'npx-cli.js'),
+  ];
+  return candidates.find((candidate) => candidate && fs.existsSync(candidate));
+}
+
+function npx(args) {
+  const npxCli = process.platform === 'win32' ? findNpxCli() : undefined;
+  const result =
+    npxCli ?
+      spawnSync(process.execPath, [npxCli, ...args], { stdio: 'inherit' })
+    : spawnSync('npx', args, { stdio: 'inherit', shell: process.platform === 'win32' });
   if (result.error) {
     console.error(result.error.message);
     process.exit(1);
@@ -14,22 +42,21 @@ function run(command, args) {
   process.exit(result.status ?? 1);
 }
 
-const commands = {
-  migrate: () =>
-    run('npx', [
-      '-y',
-      'https://github.com/stainless-api/migrate-ts/releases/download/0.0.2/stainless-api-migrate-0.0.2-6.tgz',
-      '--migrationConfig',
-      require.resolve('./migration-config.json'),
-      ...process.argv.slice(3),
-    ]),
-};
+const [commandName, ...args] = process.argv.slice(2);
 
-const command = commands[process.argv[2]];
+const command = commands[commandName];
 if (command) {
-  command();
-} else {
-  // Everything else is the Cloudflare CLI, so `npx cloudflare <args>` behaves
-  // like `npx cf <args>`. npx uses a project-local or cached cf when present.
-  run('npx', ['--yes', 'cf', ...process.argv.slice(2)]);
+  command.fn(args);
 }
+
+if (commandName === undefined || commandName === '--help' || commandName === '-h') {
+  console.log('SDK subcommands:');
+  for (const [name, info] of Object.entries(commands)) {
+    console.log(`  cloudflare ${name}  ${info.description}`);
+  }
+  console.log();
+}
+
+// Everything else is the Cloudflare CLI, so `npx cloudflare <args>` behaves
+// like `npx cf <args>`. npx uses a project-local or cached cf when present.
+npx(['--yes', 'cf', ...process.argv.slice(2)]);
