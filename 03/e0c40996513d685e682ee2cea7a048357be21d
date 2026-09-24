@@ -1,0 +1,20 @@
+src/resources/stream/live-inputs/live-inputs.ts
+  s_2dd47d1cfb1ed7::t_76573a54ed24b7 493-499,590-595
+  s_2dd47d1cfb1ed7::t_e7cfaf2af88482 596
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "03e0c40996513d685e682ee2cea7a048357be21d",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
