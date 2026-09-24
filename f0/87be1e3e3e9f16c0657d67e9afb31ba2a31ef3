@@ -1,0 +1,20 @@
+CHANGELOG.md
+  s_2dd47d1cfb1ed7::t_db6dead5a76d1a 3,15-110,120-153,165-191,199-218,221-223,230-235,240-242,250,257-269
+  s_2dd47d1cfb1ed7::t_0821d59eadc5f0 270
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f087be1e3e3e9f16c0657d67e9afb31ba2a31ef3",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
