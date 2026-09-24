@@ -1,0 +1,63 @@
+tests/api-resources/zero-trust/resource-library/applications.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 36
+tests/api-resources/browser-rendering/markdown.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 31-34
+tests/api-resources/r2/buckets/cors.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 60,82,104
+tests/api-resources/r2/buckets/buckets.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 52,78,100,124,146
+tests/api-resources/r2/buckets/locks.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 56,78
+tests/api-resources/r2/buckets/objects.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 53,77,86,116
+tests/api-resources/browser-rendering/content.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 31-34
+tests/api-resources/r2/buckets/domains/managed.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 50,72
+tests/api-resources/r2/buckets/event-notifications.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 61,83,107,131
+tests/api-resources/browser-rendering/json.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 31-34
+tests/api-resources/firewall/rules.test.ts
+  s_2dd47d1cfb1ed7::t_785768fb6dd5e7 163,178,186,201
+tests/api-resources/stream/clip.test.ts
+  s_2dd47d1cfb1ed7::t_b4c6c2eade2a41 3,19,29
+tests/api-resources/addressing/address-maps/accounts.test.ts
+  s_2dd47d1cfb1ed7::t_b4c6c2eade2a41 48,50,72,74
+  s_2dd47d1cfb1ed7::t_f45130973f1826 32,35,56-60
+tests/api-resources/r2/buckets/domains/custom.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 56,83,105,129,153
+tests/api-resources/r2/buckets/lifecycle.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 63,85
+tests/api-resources/browser-rendering/accessibility-tree.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 33-36
+tests/api-resources/r2/buckets/sippy.test.ts
+  s_2dd47d1cfb1ed7::t_59256a0cc40797 60,82,104
+tests/api-resources/browser-rendering/links.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 31-34
+tests/api-resources/browser-rendering/scrape.test.ts
+  s_2dd47d1cfb1ed7::t_eba9cacf54f2c4 33
+tests/api-resources/browser-rendering/snapshot.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 31-34
+tests/api-resources/browser-rendering/screenshot.test.ts
+  s_2dd47d1cfb1ed7::t_f45130973f1826 31-34
+tests/api-resources/email-sending/email-sending.test.ts
+  s_2dd47d1cfb1ed7::t_9524fe7acb823e 22-23,37-38
+  s_2dd47d1cfb1ed7::t_f45130973f1826 26,41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ff3d0db9ceb766fda1627067077870f493d57b9c",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
