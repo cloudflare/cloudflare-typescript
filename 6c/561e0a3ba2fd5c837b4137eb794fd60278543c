@@ -1,0 +1,25 @@
+src/resources/zones/zones.ts
+  s_2dd47d1cfb1ed7::t_10bc4482cf32fc 57
+  s_2dd47d1cfb1ed7::t_779439c87b30df 744
+  s_2dd47d1cfb1ed7::t_ed0087c4a9599c 859
+src/resources/cloudforce-one/threat-events/tags/tags.ts
+  s_2dd47d1cfb1ed7::t_b9c357ae91189c 1147
+  s_2dd47d1cfb1ed7::t_d9ae6ebc4a9add 917,1246
+  s_2dd47d1cfb1ed7::t_e451c42902091d 825
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "6c561e0a3ba2fd5c837b4137eb794fd60278543c",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
