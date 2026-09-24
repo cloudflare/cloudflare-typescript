@@ -1,0 +1,22 @@
+src/resources/email-sending/email-sending.ts
+  s_2dd47d1cfb1ed7::t_ad3b04fc027aac 54-55,60,63,167-216,218-233,237-389
+tests/api-resources/email-sending/email-sending.test.ts
+  s_2dd47d1cfb1ed7::t_ad3b04fc027aac 25-26,42-58
+  s_2dd47d1cfb1ed7::t_9a55c887d049cb 27-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "21f137cc81c6616a4ea64804f0c480f17c683164",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
