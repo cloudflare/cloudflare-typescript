@@ -2,51 +2,34 @@
 
 const { spawnSync } = require('child_process');
 
+// npx is a .cmd shim on Windows, which Node can only spawn through a shell.
+const shell = process.platform === 'win32';
+
+function run(command, args) {
+  const result = spawnSync(command, args, { stdio: 'inherit', shell });
+  if (result.error) {
+    console.error(result.error.message);
+    process.exit(1);
+  }
+  process.exit(result.status ?? 1);
+}
+
 const commands = {
-  migrate: {
-    description: 'Run migrations to update to the latest major SDK version',
-    fn: () => {
-      const result = spawnSync(
-        'npx',
-        [
-          '-y',
-          'https://github.com/stainless-api/migrate-ts/releases/download/0.0.2/stainless-api-migrate-0.0.2-6.tgz',
-          '--migrationConfig',
-          require.resolve('./migration-config.json'),
-          ...process.argv.slice(3),
-        ],
-        { stdio: 'inherit' },
-      );
-      if (result.status !== 0) {
-        process.exit(result.status);
-      }
-    },
-  },
+  migrate: () =>
+    run('npx', [
+      '-y',
+      'https://github.com/stainless-api/migrate-ts/releases/download/0.0.2/stainless-api-migrate-0.0.2-6.tgz',
+      '--migrationConfig',
+      require.resolve('./migration-config.json'),
+      ...process.argv.slice(3),
+    ]),
 };
 
-function exitWithHelp() {
-  console.log(`Usage: cloudflare <subcommand>`);
-  console.log();
-  console.log('Subcommands:');
-
-  for (const [name, info] of Object.entries(commands)) {
-    console.log(`  ${name}  ${info.description}`);
-  }
-
-  console.log();
-  process.exit(1);
+const command = commands[process.argv[2]];
+if (command) {
+  command();
+} else {
+  // Everything else is the Cloudflare CLI, so `npx cloudflare <args>` behaves
+  // like `npx cf <args>`. npx uses a project-local or cached cf when present.
+  run('npx', ['--yes', 'cf', ...process.argv.slice(2)]);
 }
-
-if (process.argv.length < 3) {
-  exitWithHelp();
-}
-
-const commandName = process.argv[2];
-
-const command = commands[commandName];
-if (!command) {
-  console.log(`Unknown subcommand ${commandName}.`);
-  exitWithHelp();
-}
-
-command.fn();
