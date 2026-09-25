@@ -1,0 +1,21 @@
+package.json
+  s_2dd47d1cfb1ed7::t_35df21072ff62a 3
+src/version.ts
+  s_2dd47d1cfb1ed7::t_ec5bd7f7dc7a9c 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f78d59f8a167a7f704e42487d5b5bba15e3a0edf",
+  "prompts": {},
+  "sessions": {
+    "s_2dd47d1cfb1ed7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f2bb53a71ffe0VzQFUUI7KuNUZ",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Sarah Sicard <ssicard@cloudflare.com>"
+    }
+  }
+}
